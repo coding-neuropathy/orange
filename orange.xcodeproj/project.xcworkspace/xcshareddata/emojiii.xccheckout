@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>89F38BBB-2B64-42AD-B87D-E41E9F787A65</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>914583905FE042BD519EB418D93B770B00179A33</key>
+		<string>github.com:huiter/emojiii.git</string>
+	</dict>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>914583905FE042BD519EB418D93B770B00179A33</key>
+		<string>emojiii/</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:huiter/emojiii.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>914583905FE042BD519EB418D93B770B00179A33</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>914583905FE042BD519EB418D93B770B00179A33</string>
+			<key>IDESourceControlWCCName</key>
+			<string>emojiii</string>
+		</dict>
+	</array>
+</dict>
+</plist>
