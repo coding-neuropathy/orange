@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "EmojiOne.h"
 #import "WXApi.h"
+#import "TabBarViewController.h"
 
 
 @interface AppDelegate ()<WXApiDelegate>
@@ -24,7 +25,7 @@
     [AVPush setProductionMode:YES];
     [WXApi registerApp:@"wxf9d896f11987407d"];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self customizeAppearance];
     
 
@@ -50,6 +51,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [[TabBarViewcontroller alloc]init];
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -100,14 +102,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    if ([[userInfo objectForKey:@"type"] isEqualToString:@"follow"]) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"RemoteFollow" object:nil];
-        [SVProgressHUD showImage:nil status:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]];
-    }
-    if ([[userInfo objectForKey:@"type"] isEqualToString:@"unfollow"]) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"RemoteFollow" object:nil];
-        [SVProgressHUD showImage:nil status:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]];
-    }
+
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
@@ -144,11 +139,18 @@
 
 -(void)customizeAppearance
 {
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0x2b2b2b) andSize:CGSizeMake(2, 2)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(2, 2)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(1, 1)] stretchableImageWithLeftCapWidth:1 topCapHeight:1]];
-    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x2b2b2b)];
     [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0xcacaca)];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x2b2b2b)}];
+    
+    
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x535353) andSize:CGSizeMake(kScreenWidth, 49)]];
+    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
+    [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
+    [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
+    [[UITabBar appearance] setAlpha:1];
 }
 
 

@@ -17,7 +17,7 @@
  *  @return UIStatusBarStyle
  */
 - (UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 @end

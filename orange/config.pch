@@ -22,6 +22,9 @@
 #import <AVOSCloudSNS/AVOSCloudSNS.h>
 #import <AVOSCloudSNS/AVUser+SNS.h>
 
+//Emoji
+#import "EmojiOne.h"
+
 // Category
 #import "UIImage+App.h"
 #import "UIView+DEFrameAdditions.h"
@@ -29,6 +32,7 @@
 #import "NSString+App.h"
 #import "NSDate+App.h"
 #import "NSObject+App.h"
+#import "UINavigationController+statusbar.h"
 
 // FontAwesome
 #import "NSString+FontAwesome.h"

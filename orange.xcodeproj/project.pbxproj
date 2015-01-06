@@ -77,6 +77,10 @@
 		4E1D312D1A1A46AD00740C17 /* AGEmojiKeyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D312A1A1A46AD00740C17 /* AGEmojiKeyBoardView.m */; };
 		4E1D312E1A1A46AD00740C17 /* AGEmojiPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D312C1A1A46AD00740C17 /* AGEmojiPageView.m */; };
 		4E1D31311A1A4C9D00740C17 /* EmojisList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E1D31301A1A4C9D00740C17 /* EmojisList.plist */; };
+		4E1D701F1A5ADB9A0032719E /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D701E1A5ADB9A0032719E /* DiscoverViewController.m */; };
+		4E1D70221A5ADBA50032719E /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70211A5ADBA50032719E /* MeViewController.m */; };
+		4E1D70251A5ADC100032719E /* NotifactionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70241A5ADC100032719E /* NotifactionViewController.m */; };
+		4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70271A5ADC260032719E /* SelectionViewController.m */; };
 		4E216A8D1A1CF692009FF11D /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A8C1A1CF692009FF11D /* UIView+Shake.m */; };
 		4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A901A1FA37D009FF11D /* AKSegmentedControl.m */; };
 		4E216A951A2392F2009FF11D /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A941A2392F2009FF11D /* JSBadgeView.m */; };
@@ -1152,6 +1156,14 @@
 		4E1D312B1A1A46AD00740C17 /* AGEmojiPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGEmojiPageView.h; sourceTree = "<group>"; };
 		4E1D312C1A1A46AD00740C17 /* AGEmojiPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGEmojiPageView.m; sourceTree = "<group>"; };
 		4E1D31301A1A4C9D00740C17 /* EmojisList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EmojisList.plist; sourceTree = "<group>"; };
+		4E1D701D1A5ADB9A0032719E /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
+		4E1D701E1A5ADB9A0032719E /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
+		4E1D70201A5ADBA50032719E /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
+		4E1D70211A5ADBA50032719E /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
+		4E1D70231A5ADC100032719E /* NotifactionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifactionViewController.h; sourceTree = "<group>"; };
+		4E1D70241A5ADC100032719E /* NotifactionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifactionViewController.m; sourceTree = "<group>"; };
+		4E1D70261A5ADC260032719E /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
+		4E1D70271A5ADC260032719E /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewController.m; sourceTree = "<group>"; };
 		4E216A8B1A1CF692009FF11D /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
 		4E216A8C1A1CF692009FF11D /* UIView+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shake.m"; sourceTree = "<group>"; };
 		4E216A8F1A1FA37D009FF11D /* AKSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSegmentedControl.h; sourceTree = "<group>"; };
@@ -2444,6 +2456,42 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		4E1D70191A5ADB890032719E /* DiscoverViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E1D701D1A5ADB9A0032719E /* DiscoverViewController.h */,
+				4E1D701E1A5ADB9A0032719E /* DiscoverViewController.m */,
+			);
+			path = DiscoverViewController;
+			sourceTree = "<group>";
+		};
+		4E1D701A1A5ADB890032719E /* MeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E1D70201A5ADBA50032719E /* MeViewController.h */,
+				4E1D70211A5ADBA50032719E /* MeViewController.m */,
+			);
+			path = MeViewController;
+			sourceTree = "<group>";
+		};
+		4E1D701B1A5ADB890032719E /* NotifactionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E1D70231A5ADC100032719E /* NotifactionViewController.h */,
+				4E1D70241A5ADC100032719E /* NotifactionViewController.m */,
+			);
+			path = NotifactionViewController;
+			sourceTree = "<group>";
+		};
+		4E1D701C1A5ADB890032719E /* SelectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E1D70261A5ADC260032719E /* SelectionViewController.h */,
+				4E1D70271A5ADC260032719E /* SelectionViewController.m */,
+			);
+			path = SelectionViewController;
+			sourceTree = "<group>";
+		};
 		4E216A8A1A1CF692009FF11D /* UIView-Shake */ = {
 			isa = PBXGroup;
 			children = (
@@ -2814,6 +2862,10 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4E1D70191A5ADB890032719E /* DiscoverViewController */,
+				4E1D701A1A5ADB890032719E /* MeViewController */,
+				4E1D701B1A5ADB890032719E /* NotifactionViewController */,
+				4E1D701C1A5ADB890032719E /* SelectionViewController */,
 				4E3A238A1A52F21800037F9C /* TabBarViewcontroller */,
 			);
 			path = Class;
@@ -4752,6 +4804,7 @@
 				4E3A23451A51A7C500037F9C /* GKEntity.m in Sources */,
 				4E3A23421A51A7C500037F9C /* GKNote+ImageURLFixes.m in Sources */,
 				4E8D6A9C1A38B59F00156C17 /* UIFont+FontDiao.m in Sources */,
+				4E1D70251A5ADC100032719E /* NotifactionViewController.m in Sources */,
 				4E5251F31A2D43910058C6D6 /* URBMediaFocusViewController.m in Sources */,
 				4EFCBCBB19D5CF650071F7A0 /* UIView+DEFrameAdditions.m in Sources */,
 				4E1D28E21A125B9300740C17 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
@@ -4766,6 +4819,7 @@
 				4E56DF8319D56EF500263B17 /* SDWebImageDecoder.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				4E1D28BC1A125B9300740C17 /* NSString+JSQMessages.m in Sources */,
+				4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */,
 				4E3A234A1A51A7C500037F9C /* GKBaseHTTPClient.m in Sources */,
 				4E1D28C91A125B9300740C17 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				4E216AB61A261395009FF11D /* JDDateCountdownFlipView.m in Sources */,
@@ -4776,6 +4830,7 @@
 				4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */,
 				4E1D28CF1A125B9300740C17 /* JSQMessagesAvatarImage.m in Sources */,
 				4E1D28D31A125B9300740C17 /* JSQMessagesCellTextView.m in Sources */,
+				4E1D701F1A5ADB9A0032719E /* DiscoverViewController.m in Sources */,
 				4E56DF7F19D56EF500263B17 /* MKAnnotationView+WebCache.m in Sources */,
 				4E56DF8219D56EF500263B17 /* SDWebImageCompat.m in Sources */,
 				4E1D28391A11CC4F00740C17 /* EarthLoadingView.m in Sources */,
@@ -4809,6 +4864,7 @@
 				4E3A23401A51A7C500037F9C /* GKEntity+ImageURLFixes.m in Sources */,
 				4E56DF8C19D56EF500263B17 /* UIImageView+HighlightedWebCache.m in Sources */,
 				4E1D28D61A125B9300740C17 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
+				4E1D70221A5ADBA50032719E /* MeViewController.m in Sources */,
 				4E3A23651A51AE8300037F9C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				4E216ABD1A261395009FF11D /* UIView+JDFlipImageView.m in Sources */,
 				4E3A23781A51B12300037F9C /* NSString+App.m in Sources */,

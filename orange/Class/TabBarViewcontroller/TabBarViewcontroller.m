@@ -7,6 +7,10 @@
 //
 
 #import "TabBarViewcontroller.h"
+#import "SelectionViewController.h"
+#import "DiscoverViewController.h"
+#import "NotifactionViewController.h"
+#import "MeViewController.h"
 
 @interface TabBarViewcontroller ()<UITabBarControllerDelegate>
 
@@ -30,7 +34,15 @@
 
     self.tabBar.translucent = NO;
     self.delegate = self;
-    [self.tabBar setItemPositioning:UITabBarItemPositioningFill];
+    [self.tabBar setItemPositioning:UITabBarItemPositioningAutomatic];
+    
+    
+    UINavigationController * first = [[UINavigationController alloc]initWithRootViewController:[[SelectionViewController alloc] init]];
+    UINavigationController * second = [[UINavigationController alloc]initWithRootViewController:[[DiscoverViewController alloc] init]];
+    UINavigationController * third = [[UINavigationController alloc]initWithRootViewController:[[NotifactionViewController alloc] init]];
+    UINavigationController * fourth = [[UINavigationController alloc]initWithRootViewController:[[MeViewController alloc] init]];
+    
+    self.viewControllers = @[first,second,third,fourth];
 }
 
 - (void)viewWillAppear:(BOOL)animated
