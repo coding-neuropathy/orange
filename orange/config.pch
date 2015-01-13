@@ -59,6 +59,12 @@
 
 #import "AppDelegate.h"
 
+#import "GKEntity.h"
+#import "GKNote.h"
+#import "GKPurchase.h"
+#import "GKUser.h"
+#import "GKComment.h"
+#import "GKEntityCategory.h"
 
 
 

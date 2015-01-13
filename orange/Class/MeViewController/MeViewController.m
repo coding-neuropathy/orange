@@ -19,7 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"我" image:[UIImage imageNamed:@"menu_icon_me"] selectedImage:[UIImage imageNamed:@"menu_icon_me"]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"我" image:[UIImage imageNamed:@"tabbar_icon_me"] selectedImage:[UIImage imageNamed:@"tabbar_icon_me"]];
         
         self.tabBarItem = item;
         
