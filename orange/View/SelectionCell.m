@@ -15,6 +15,8 @@
 @property (nonatomic, strong) UIImageView *tmp;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) MLEmojiLabel *emojiLabel;
+@property (nonatomic, strong) UIButton *likeButton;
+@property (nonatomic, strong) UIButton *timeButton;
 
 @end
 
@@ -57,19 +59,21 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.backgroundColor = UIColorFromRGB(0xf7f7f7);
+    self.backgroundColor = UIColorFromRGB(0xffffff);
     
     if (!self.image) {
-        _image = [[UIImageView alloc] initWithFrame:CGRectMake(15.0f, 17.0f,kScreenWidth -30, 290)];
+        _image = [[UIImageView alloc] initWithFrame:CGRectMake(15.0f, 17.0f,kScreenWidth -30, 280)];
         self.image.contentMode = UIViewContentModeScaleAspectFit;
         self.image.backgroundColor = [UIColor whiteColor];
+        self.image.layer.borderColor = UIColorFromRGB(0xeeeeee).CGColor;
+        self.image.layer.borderWidth = 1;
         [self.contentView addSubview:self.image];
     }
     __block UIImageView *block_img = self.image;
     __block UIImageView *tmp_img = self.tmp;
     __weak __typeof(&*self)weakSelf = self;
     {
-        [self.image sd_setImageWithURL:self.entity.imageURL_310x310 placeholderImage:nil options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
+        [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth-30, 280)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             tmp_img = [[UIImageView alloc]initWithImage:image];
             if (tmp_img.frame.size.width<280&&tmp_img.frame.size.height<280) {
                 block_img.contentMode = UIViewContentModeCenter;
@@ -90,20 +94,47 @@
         }];
     }
     
-
     [self.emojiLabel setText:self.note.text];
-    self.emojiLabel.frame = CGRectMake(10.0f, 400.0f, kWidth, 200);
-    self.emojiLabel.backgroundColor = UIColorFromRGB(0x000000);
+    self.emojiLabel.frame = CGRectMake(15.0f, self.image.deFrameBottom +15, kScreenWidth - 30, [[self class] heightForEmojiText:self.note.text]);
+    self.emojiLabel.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:self.emojiLabel];
     
     
+    if (!self.likeButton) {
+        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
+        self.likeButton.layer.masksToBounds = YES;
+        self.likeButton.layer.cornerRadius = 2;
+        self.likeButton.backgroundColor = [UIColor clearColor];
+        self.likeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        self.likeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+        [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [self.likeButton setTitleColor:UIColorFromRGB(0x4d4d4f) forState:UIControlStateNormal];
+        [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],self.entity.likeCount] forState:UIControlStateNormal];
+        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,3, 0, 0)];
+        [self.contentView addSubview:self.likeButton];        
+    }
+    self.likeButton.deFrameLeft = self.emojiLabel.deFrameLeft;
+    self.likeButton.deFrameTop = self.emojiLabel.deFrameBottom;
+    [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    if (!self.timeButton) {
+        _timeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
+        self.timeButton.layer.masksToBounds = YES;
+        self.timeButton.layer.cornerRadius = 2;
+        self.timeButton.backgroundColor = [UIColor clearColor];
+        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
+        [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        [self.timeButton setTitleColor:UIColorFromRGB(0x4d4d4f) forState:UIControlStateNormal];
+        [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.date stringWithDefaultFormat]] forState:UIControlStateNormal];
+        [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+        [self.contentView addSubview:self.timeButton];
+    }
+    self.timeButton.deFrameRight = self.emojiLabel.deFrameRight;
+    self.timeButton.deFrameTop = self.emojiLabel.deFrameBottom;
+    [self.timeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
 }
-
-+ (CGFloat)heightWithNote:(GKNote *)note Entity:(GKEntity *)entity
-{
-    return 600;
-}
-
 
 #pragma mark - getter
 - (MLEmojiLabel *)emojiLabel
@@ -115,10 +146,10 @@
         _emojiLabel.delegate = self;
         _emojiLabel.backgroundColor = [UIColor clearColor];
         _emojiLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        _emojiLabel.textColor = [UIColor whiteColor];
+        _emojiLabel.textColor = [UIColor blackColor];
         _emojiLabel.backgroundColor = [UIColor colorWithRed:0.218 green:0.809 blue:0.304 alpha:1.000];
         
-        _emojiLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+        _emojiLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         
         _emojiLabel.isNeedAtAndPoundSign = YES;
         _emojiLabel.disableEmoji = NO;
@@ -142,7 +173,7 @@
         protypeLabel.numberOfLines = 0;
         protypeLabel.font = [UIFont systemFontOfSize:14.0f];
         protypeLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        protypeLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+        protypeLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         protypeLabel.isNeedAtAndPoundSign = YES;
         protypeLabel.disableEmoji = NO;
         protypeLabel.lineSpacing = 3.0f;
@@ -181,6 +212,12 @@
             break;
     }
     
+}
+
+#pragma mark - Action
+- (void)likeButtonAction
+{
+
 }
 
 

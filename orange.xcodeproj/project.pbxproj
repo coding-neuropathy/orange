@@ -120,6 +120,8 @@
 		4E066B841A5CC02400DFEF65 /* expressionImage_custom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E066B121A5CC02400DFEF65 /* expressionImage_custom.plist */; };
 		4E066B851A5CC02400DFEF65 /* MLEmojiLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066B141A5CC02400DFEF65 /* MLEmojiLabel.m */; };
 		4E066B861A5CC02400DFEF65 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066B171A5CC02400DFEF65 /* TTTAttributedLabel.m */; };
+		4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */; };
+		4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */; };
 		4E1D280E1A0FB19400740C17 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E1D280D1A0FB19400740C17 /* Launch Screen.xib */; };
 		4E1D28141A0FBC2B00740C17 /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1D28131A0FBC2B00740C17 /* AVOSCloudSNS.framework */; };
 		4E1D28211A11C97D00740C17 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D281E1A11C97D00740C17 /* UIScrollView+SVInfiniteScrolling.m */; };
@@ -1253,6 +1255,10 @@
 		4E066B141A5CC02400DFEF65 /* MLEmojiLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLEmojiLabel.m; sourceTree = "<group>"; };
 		4E066B161A5CC02400DFEF65 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		4E066B171A5CC02400DFEF65 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		4E198C3D1A65FE6E004C59C4 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
+		4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
+		4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityTwoGridCell.h; sourceTree = "<group>"; };
+		4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityTwoGridCell.m; sourceTree = "<group>"; };
 		4E1D280D1A0FB19400740C17 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		4E1D28131A0FBC2B00740C17 /* AVOSCloudSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudSNS.framework; sourceTree = "<group>"; };
 		4E1D281C1A11C97D00740C17 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
@@ -2458,6 +2464,10 @@
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4E198C3D1A65FE6E004C59C4 /* EntityThreeGridCell.h */,
+				4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */,
+				4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */,
+				4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */,
 				4E066AA11A5C56C600DFEF65 /* SelectionCell.h */,
 				4E066AA21A5C56C600DFEF65 /* SelectionCell.m */,
 			);
@@ -5313,6 +5323,7 @@
 				4E3A23411A51A7C500037F9C /* GKHTTPClient.m in Sources */,
 				4E066B851A5CC02400DFEF65 /* MLEmojiLabel.m in Sources */,
 				4E216ABC1A261395009FF11D /* JDFlipNumberViewImageFactory.m in Sources */,
+				4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */,
 				4E1D28BD1A125B9300740C17 /* UIColor+JSQMessages.m in Sources */,
 				4E56DF8319D56EF500263B17 /* SDWebImageDecoder.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
@@ -5344,6 +5355,7 @@
 				4E216AB71A261395009FF11D /* JDFlipClockView.m in Sources */,
 				4E56DF1B19D552C000263B17 /* main.m in Sources */,
 				4E56DF7D19D56EF500263B17 /* UIFont+FontAwesome.m in Sources */,
+				4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */,
 				4E216ABB1A261395009FF11D /* JDFlipNumberView.m in Sources */,
 				4E1D28CE1A125B9300740C17 /* JSQMessage.m in Sources */,
 				4E1D28C11A125B9300740C17 /* JSQMessagesKeyboardController.m in Sources */,

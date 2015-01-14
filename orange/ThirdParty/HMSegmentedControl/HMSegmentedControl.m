@@ -40,8 +40,8 @@
 }
 
 - (void)setDefaults {
-    self.font = [UIFont systemFontOfSize:16];
-    self.textColor = [UIColor blackColor];
+    self.font = [UIFont systemFontOfSize:12];
+    self.textColor = UIColorFromRGB(0x4d4d4f);
     self.backgroundColor = [UIColor whiteColor];
     self.selectionIndicatorColor = [UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:1.0f];
     

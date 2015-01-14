@@ -40,8 +40,10 @@
         [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x999999)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [segmentedControl setTag:2];
-        self.navigationItem.titleView = segmentedControl;
+        //self.navigationItem.titleView = segmentedControl;
         self.index = 0;
+        
+        [self logo];
         
     }
     return self;
@@ -52,7 +54,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight -kTabBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -66,9 +68,15 @@
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
+    
+    /*
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
+     */
+    
+    [self.tableView.pullToRefreshView startAnimating];
+    [self refresh];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -157,7 +165,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.index == 0) {
-        return 700;
+        GKNote * note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
+        return [SelectionCell heightForEmojiText:note.text]+350;
     }
     else if (self.index == 1)
     {
@@ -196,6 +205,15 @@
         default:
             break;
     }
+}
+
+- (void)logo
+{
+    UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 60, 30)];
+    icon.image = [UIImage imageNamed:@"logo"];
+    icon.contentMode = UIViewContentModeScaleAspectFit;
+    icon.userInteractionEnabled = YES;
+    self.navigationItem.titleView = icon;
 }
 
 @end
