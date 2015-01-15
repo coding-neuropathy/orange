@@ -28,7 +28,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.contentView.backgroundColor = UIColorFromRGB(0xf6f6f6);
+        self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
     }
     return self;
 }
@@ -46,7 +46,7 @@
     if (!self.itemArray) {
         _itemArray = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < 3; i++) {
-                UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(5+i*(kScreenWidth/3), 5, kScreenWidth/3-10, kScreenWidth/3-10)];
+                UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(6+i*(kScreenWidth/3), 6, kScreenWidth/3-12, kScreenWidth/3-12)];
                 [self.itemArray addObject:button];
                 [self addSubview:button];
             }

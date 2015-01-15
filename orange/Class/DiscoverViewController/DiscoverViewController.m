@@ -10,6 +10,7 @@
 #import "HMSegmentedControl.h"
 #import "GKAPI.h"
 #import "EntityThreeGridCell.h"
+#import "CategoryGridCell.h"
 
 @interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (strong, nonatomic) UISearchBar *searchBar;
@@ -35,13 +36,15 @@
         self.title = @"发现";
         
         
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(20, 0, kScreenWidth-40, 45)];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
         [segmentedControl setSectionTitles:@[@"热门商品", @"推荐分类",@"人气图文"]];
-        [segmentedControl setSelectedIndex:0];
-        [segmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [segmentedControl setTextColor:UIColorFromRGB(0x999999)];
-        [segmentedControl setSelectionIndicatorColor:[UIColor clearColor]];
+        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
+        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
+        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
+        [segmentedControl setTextColor:UIColorFromRGB(0x343434)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x2b2b2b)];
+        [segmentedControl setBackgroundColor:UIColorFromRGB(0xf7f7f7)];
+        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x999999)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:segmentedControl];
         
@@ -55,7 +58,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 45.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight -kTabBarHeight-45) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 32.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight -kTabBarHeight-32) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -63,6 +66,7 @@
     self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.view addSubview:self.tableView];
     
     __weak __typeof(&*self)weakSelf = self;
@@ -105,12 +109,48 @@
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"失败"];
+            [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
     else if (self.index == 1)
     {
+        [GKAPI getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
         
+                NSMutableArray *categoryGroupArray = [NSMutableArray array];
+                NSMutableArray *allCategoryArray = [NSMutableArray array];
+                
+                for (NSDictionary *groupDict in fullCategoryGroupArray) {
+                    NSArray *categoryArray = groupDict[@"CategoryArray"];
+                    
+                    NSMutableArray *filteredCategoryArray = [NSMutableArray array];
+                    for (GKEntityCategory *category in categoryArray) {
+                        [allCategoryArray addObject:category];
+                        
+                        if (category.status) {
+                            [filteredCategoryArray addObject:category];
+                        }
+                    }
+                    NSDictionary *filteredGroupDict = @{@"GroupId"       : groupDict[@"GroupId"],
+                                                        @"GroupName"     : groupDict[@"GroupName"],
+                                                        @"Status"        : groupDict[@"Status"],
+                                                        @"Count"         : @(categoryArray.count),
+                                                        @"CategoryArray" : filteredCategoryArray};
+                    if ([groupDict[@"Status"] integerValue] > 0) {
+                        [categoryGroupArray addObject:filteredGroupDict];
+                    }
+                }
+            
+            self.dataArrayForCategory = categoryGroupArray;
+            [self.tableView reloadData];
+            [self.tableView.pullToRefreshView stopAnimating];
+    
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:@"失败"];
+            [self.tableView reloadData];
+            [self.tableView.pullToRefreshView stopAnimating];
+            
+        }];
     }
     return;
 }
@@ -123,7 +163,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (self.index == 0) {
+        return 1;
+    }
+    else if (self.index == 1)
+    {
+        return ceil(self.dataArrayForCategory.count / (CGFloat)1);
+    }
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -133,7 +180,7 @@
     }
     else if (self.index == 1)
     {
-        return ceil(self.dataArrayForArticle.count / (CGFloat)1);
+        return (((NSMutableArray *)[[self.dataArrayForCategory objectAtIndex:section] objectForKey:@"CategoryArray"]).count /(CGFloat)4);
     }
     return 0;
 }
@@ -141,7 +188,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.index == 0) {
-        static NSString *CellIdentifier = @"Cell";
+        static NSString *CellIdentifier = @"EntityCell";
         EntityThreeGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
             cell = [[EntityThreeGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -160,7 +207,28 @@
     }
     else if (self.index == 1)
     {
-        return [[UITableViewCell alloc] init];
+        static NSString *CellIdentifier = @"CategoryCell";
+        CategoryGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[CategoryGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        NSDictionary *groupDict = self.dataArrayForCategory[indexPath.section];
+        NSArray *categoryDictArray = [groupDict objectForKey:@"CategoryArray"];
+        
+        NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+        
+        NSUInteger offset = indexPath.row * 4;
+        int i = 0;
+        for (; offset < categoryDictArray.count ; offset++) {
+            [categoryArray addObject:categoryDictArray[offset]];
+            i++;
+            if (i>=4) {
+                break;
+            }
+        }
+        cell.categoryArray = categoryArray;
+        return cell;
     }
     return [[UITableViewCell alloc] init];
     
@@ -175,35 +243,70 @@
     }
     else if (self.index == 1)
     {
-        return 100;
+        return [CategoryGridCell height];
     }
     return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.f;
+    if(tableView == self.tableView)
+    {
+        if(self.index == 1)
+        {
+            return 32;
+        }
+    }
+    return 0.01f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [UIView new];
+    if(tableView == self.tableView)
+    {
+        
+        if(self.index == 1)
+        {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 6.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
+            label.text = [self.dataArrayForCategory[section] valueForKey:@"GroupName"];
+            label.textAlignment = NSTextAlignmentLeft;
+            label.textColor = UIColorFromRGB(0x666666);
+            label.font = [UIFont boldSystemFontOfSize:14];
+            [label sizeToFit];
+            UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 32)];
+            view.backgroundColor = [UIColor whiteColor];
+            [view addSubview:label];
+            
+            return view;
+        }
+    }
+    
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01f;
 }
 
 
 #pragma mark - HMSegmentedControl
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-    NSUInteger index = segmentedControl.selectedIndex;
+    NSUInteger index = segmentedControl.selectedSegmentIndex;
     self.index = index;
+    [self.tableView reloadData];
     switch (index) {
         case 0:
         {
-            
+
         }
             break;
         case 1:
         {
-            
+            if (self.dataArrayForCategory.count == 0) {
+                [self.tableView.pullToRefreshView startAnimating];
+                [self refresh];
+            }
         }
             break;
         case 2:
@@ -215,6 +318,7 @@
         default:
             break;
     }
+    
 }
 
 #pragma mark - ConfigSearchBar

@@ -122,6 +122,8 @@
 		4E066B861A5CC02400DFEF65 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066B171A5CC02400DFEF65 /* TTTAttributedLabel.m */; };
 		4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */; };
 		4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */; };
+		4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C441A66B86F004C59C4 /* CategoryGridCell.m */; };
+		4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C461A66B86F004C59C4 /* CategoryGridItem.m */; };
 		4E1D280E1A0FB19400740C17 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E1D280D1A0FB19400740C17 /* Launch Screen.xib */; };
 		4E1D28141A0FBC2B00740C17 /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1D28131A0FBC2B00740C17 /* AVOSCloudSNS.framework */; };
 		4E1D28211A11C97D00740C17 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D281E1A11C97D00740C17 /* UIScrollView+SVInfiniteScrolling.m */; };
@@ -1259,6 +1261,10 @@
 		4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
 		4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityTwoGridCell.h; sourceTree = "<group>"; };
 		4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityTwoGridCell.m; sourceTree = "<group>"; };
+		4E198C431A66B86F004C59C4 /* CategoryGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGridCell.h; sourceTree = "<group>"; };
+		4E198C441A66B86F004C59C4 /* CategoryGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryGridCell.m; sourceTree = "<group>"; };
+		4E198C451A66B86F004C59C4 /* CategoryGridItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGridItem.h; sourceTree = "<group>"; };
+		4E198C461A66B86F004C59C4 /* CategoryGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryGridItem.m; sourceTree = "<group>"; };
 		4E1D280D1A0FB19400740C17 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		4E1D28131A0FBC2B00740C17 /* AVOSCloudSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudSNS.framework; sourceTree = "<group>"; };
 		4E1D281C1A11C97D00740C17 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
@@ -2464,6 +2470,10 @@
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4E198C431A66B86F004C59C4 /* CategoryGridCell.h */,
+				4E198C441A66B86F004C59C4 /* CategoryGridCell.m */,
+				4E198C451A66B86F004C59C4 /* CategoryGridItem.h */,
+				4E198C461A66B86F004C59C4 /* CategoryGridItem.m */,
 				4E198C3D1A65FE6E004C59C4 /* EntityThreeGridCell.h */,
 				4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */,
 				4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */,
@@ -5331,6 +5341,8 @@
 				4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */,
 				4E3A234A1A51A7C500037F9C /* GKBaseHTTPClient.m in Sources */,
 				4E1D28C91A125B9300740C17 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
+				4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */,
+				4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */,
 				4E216AB61A261395009FF11D /* JDDateCountdownFlipView.m in Sources */,
 				4E216AB81A261395009FF11D /* JDFlipImageView.m in Sources */,
 				4E1D28D01A125B9300740C17 /* JSQMessagesBubbleImage.m in Sources */,

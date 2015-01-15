@@ -31,12 +31,14 @@
         
         self.title = @"精选";
         
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 180, 45)];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 180, 32)];
         [segmentedControl setSectionTitles:@[@"商品", @"图文"]];
-        [segmentedControl setSelectedIndex:0];
-        [segmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xf7f7f7)];
+        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
+        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
+        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
         [segmentedControl setTextColor:UIColorFromRGB(0x343434)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x2b2b2b)];
+        [segmentedControl setBackgroundColor:UIColorFromRGB(0xf7f7f7)];
         [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x999999)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [segmentedControl setTag:2];
@@ -188,7 +190,7 @@
 
 #pragma mark - HMSegmentedControl
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-    NSUInteger index = segmentedControl.selectedIndex;
+    NSUInteger index = segmentedControl.selectedSegmentIndex;
     self.index = index;
     switch (index) {
         case 0:
