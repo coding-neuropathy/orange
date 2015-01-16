@@ -175,62 +175,76 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.index == 0) {
-        return ceil(self.dataArrayForEntity.count / (CGFloat)3);
-    }
-    else if (self.index == 1)
+    if(tableView == self.tableView)
     {
-        return (((NSMutableArray *)[[self.dataArrayForCategory objectAtIndex:section] objectForKey:@"CategoryArray"]).count /(CGFloat)4);
+        if (self.index == 0) {
+            return ceil(self.dataArrayForEntity.count / (CGFloat)3);
+        }
+        else if (self.index == 1)
+        {
+            return (((NSMutableArray *)[[self.dataArrayForCategory objectAtIndex:section] objectForKey:@"CategoryArray"]).count /(CGFloat)4);
+        }
+        return 0;
     }
-    return 0;
+    else
+    {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.index == 0) {
-        static NSString *CellIdentifier = @"EntityCell";
-        EntityThreeGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            cell = [[EntityThreeGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        NSArray *entityArray = self.dataArrayForEntity;
-        NSMutableArray *array = [[NSMutableArray alloc] init];
-        NSUInteger offset = indexPath.row * 3;
-        for (NSUInteger i = 0; i < 3 && offset < entityArray.count; i++) {
-            [array addObject:entityArray[offset++]];
-        }
-        
-        cell.entityArray = array;
-        
-        return cell;
-    }
-    else if (self.index == 1)
+    if(tableView == self.tableView)
     {
-        static NSString *CellIdentifier = @"CategoryCell";
-        CategoryGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            cell = [[CategoryGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        NSDictionary *groupDict = self.dataArrayForCategory[indexPath.section];
-        NSArray *categoryDictArray = [groupDict objectForKey:@"CategoryArray"];
-        
-        NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
-        
-        NSUInteger offset = indexPath.row * 4;
-        int i = 0;
-        for (; offset < categoryDictArray.count ; offset++) {
-            [categoryArray addObject:categoryDictArray[offset]];
-            i++;
-            if (i>=4) {
-                break;
+        if (self.index == 0) {
+            static NSString *CellIdentifier = @"EntityCell";
+            EntityThreeGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[EntityThreeGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
+            
+            NSArray *entityArray = self.dataArrayForEntity;
+            NSMutableArray *array = [[NSMutableArray alloc] init];
+            NSUInteger offset = indexPath.row * 3;
+            for (NSUInteger i = 0; i < 3 && offset < entityArray.count; i++) {
+                [array addObject:entityArray[offset++]];
+            }
+            
+            cell.entityArray = array;
+            
+            return cell;
         }
-        cell.categoryArray = categoryArray;
-        return cell;
+        else if (self.index == 1)
+        {
+            static NSString *CellIdentifier = @"CategoryCell";
+            CategoryGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[CategoryGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            
+            NSDictionary *groupDict = self.dataArrayForCategory[indexPath.section];
+            NSArray *categoryDictArray = [groupDict objectForKey:@"CategoryArray"];
+            
+            NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+            
+            NSUInteger offset = indexPath.row * 4;
+            int i = 0;
+            for (; offset < categoryDictArray.count ; offset++) {
+                [categoryArray addObject:categoryDictArray[offset]];
+                i++;
+                if (i>=4) {
+                    break;
+                }
+            }
+            cell.categoryArray = categoryArray;
+            return cell;
+        }
+        return [[UITableViewCell alloc] init];
     }
-    return [[UITableViewCell alloc] init];
+    else
+    {
+        return [[UITableViewCell alloc] init];
+    }
     
 }
 
@@ -238,14 +252,21 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.index == 0) {
-        return [EntityThreeGridCell height];
-    }
-    else if (self.index == 1)
+    if(tableView == self.tableView)
     {
-        return [CategoryGridCell height];
+        if (self.index == 0) {
+            return [EntityThreeGridCell height];
+        }
+        else if (self.index == 1)
+        {
+            return [CategoryGridCell height];
+        }
+        return 0;
     }
-    return 0;
+    else
+    {
+        return 0;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -328,12 +349,12 @@
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 48.0f)];
     self.searchBar.tintColor = UIColorFromRGB(0x666666);
     
-    [self.searchBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xe3e3e3) andSize:CGSizeMake(10, 48)] stretchableImageWithLeftCapWidth:5 topCapHeight:5]  forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [self.searchBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 48)] stretchableImageWithLeftCapWidth:5 topCapHeight:5]  forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [self.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(10, 28)]  forState:UIControlStateNormal];
     self.searchBar.searchTextPositionAdjustment = UIOffsetMake(2.f, 0.f);
     self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.searchBar.keyboardType = UIKeyboardTypeDefault;
-    self.searchBar.showsSearchResultsButton = NO;
     self.searchBar.delegate = self;
     self.searchBar.placeholder = @"搜索";
     self.navigationItem.titleView = self.searchBar;
@@ -341,10 +362,23 @@
     _searchDC = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
     self.searchDC.searchResultsDataSource = self;
     self.searchDC.searchResultsDelegate = self;
-    self.searchDC.searchResultsTableView.backgroundColor = UIColorFromRGB(0xffffff);
+    self.searchDC.searchResultsTableView.backgroundColor = UIColorFromRGB(0xf7f7f7);
     self.searchDC.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.searchDC.searchResultsTableView.separatorColor = UIColorFromRGB(0xffffff);
     
 }
 
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    [self.searchBar setShowsCancelButton:YES animated:YES];
+    [self.searchDC setActive:YES];
+    return YES;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
+{
+    [self.searchBar setShowsCancelButton:NO animated:YES];
+    [self.searchDC setActive:NO];
+    return YES;
+}
 @end

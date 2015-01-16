@@ -49,6 +49,7 @@
 #import "JSONKit.h"
 
 // SVProgressHUD
+#import "SVProgressHUD-Prefix.pch"
 #import "SVProgressHUD.h"
 
 // SVPullToRefresh

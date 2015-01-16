@@ -9,7 +9,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIScrollView+SVInfiniteScrolling.h"
-#import "EarthLoadingView.h"
 
 
 static CGFloat const SVInfiniteScrollingViewHeight = 60;
@@ -26,7 +25,7 @@ static CGFloat const SVInfiniteScrollingViewHeight = 60;
 
 @property (nonatomic, copy) void (^infiniteScrollingHandler)(void);
 
-@property (nonatomic, strong) EarthLoadingView *activityIndicatorView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, readwrite) SVInfiniteScrollingState state;
 @property (nonatomic, strong) NSMutableArray *viewForState;
 @property (nonatomic, weak) UIScrollView *scrollView;
@@ -208,20 +207,18 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 
 #pragma mark - Getters
 
-- (EarthLoadingView *)activityIndicatorView {
+- (UIActivityIndicatorView *)activityIndicatorView {
     if(!_activityIndicatorView) {
-        _activityIndicatorView = [[EarthLoadingView alloc] init];
-        _activityIndicatorView.hidesWhenStopped = YES;
+        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        _activityIndicatorView.hidesWhenStopped = NO;
         [self addSubview:_activityIndicatorView];
     }
     return _activityIndicatorView;
 }
 
-/*
 - (UIActivityIndicatorViewStyle)activityIndicatorViewStyle {
     return self.activityIndicatorView.activityIndicatorViewStyle;
 }
-*/
 
 #pragma mark - Setters
 
@@ -238,11 +235,11 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     
     self.state = self.state;
 }
-/*
+
 - (void)setActivityIndicatorViewStyle:(UIActivityIndicatorViewStyle)viewStyle {
     self.activityIndicatorView.activityIndicatorViewStyle = viewStyle;
 }
-*/
+
 #pragma mark -
 
 - (void)triggerRefresh {

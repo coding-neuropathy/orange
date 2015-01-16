@@ -9,7 +9,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIScrollView+SVPullToRefresh.h"
-#import "EarthLoadingView.h"
+#import "GKRotateLoadingView.h"
 
 //fequal() and fequalzro() from http://stackoverflow.com/a/1614761/184130
 #define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
@@ -29,7 +29,7 @@ static CGFloat const SVPullToRefreshViewHeight = 60;
 @property (nonatomic, copy) void (^pullToRefreshActionHandler)(void);
 
 @property (nonatomic, strong) SVPullToRefreshArrow *arrow;
-@property (nonatomic, strong) EarthLoadingView *activityIndicatorView;
+@property (nonatomic, strong) GKRotateLoadingView *activityIndicatorView;
 @property (nonatomic, strong, readwrite) UILabel *titleLabel;
 @property (nonatomic, strong, readwrite) UILabel *subtitleLabel;
 @property (nonatomic, readwrite) SVPullToRefreshState state;
@@ -220,9 +220,9 @@ static char UIScrollViewPullToRefreshView;
     id customView = [self.viewForState objectAtIndex:self.state];
     BOOL hasCustomView = [customView isKindOfClass:[UIView class]];
     
-    self.titleLabel.hidden = hasCustomView;
-    self.subtitleLabel.hidden = hasCustomView;
-    self.arrow.hidden = hasCustomView;
+    self.titleLabel.hidden = YES;
+    self.subtitleLabel.hidden = YES;
+    self.arrow.hidden = YES;
     
     if(hasCustomView) {
         [self addSubview:customView];
@@ -323,7 +323,7 @@ static char UIScrollViewPullToRefreshView;
                                       (self.bounds.size.height / 2) - (self.arrow.bounds.size.height / 2),
                                       self.arrow.bounds.size.width,
                                       self.arrow.bounds.size.height);
-        self.activityIndicatorView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+        self.activityIndicatorView.center = CGPointMake(kScreenWidth/2, (self.bounds.size.height / 2));
     }
 }
 
@@ -445,14 +445,14 @@ static char UIScrollViewPullToRefreshView;
     if(!_arrow) {
 		_arrow = [[SVPullToRefreshArrow alloc]initWithFrame:CGRectMake(0, self.bounds.size.height-54, 22, 48)];
         _arrow.backgroundColor = [UIColor clearColor];
-		//[self addSubview:_arrow];
+		[self addSubview:_arrow];
     }
     return _arrow;
 }
 
-- (EarthLoadingView *)activityIndicatorView {
+- (GKRotateLoadingView *)activityIndicatorView {
     if(!_activityIndicatorView) {
-        _activityIndicatorView = [[EarthLoadingView alloc] init];
+        _activityIndicatorView = [[GKRotateLoadingView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
         _activityIndicatorView.hidesWhenStopped = NO;
         [self addSubview:_activityIndicatorView];
     }
@@ -466,7 +466,7 @@ static char UIScrollViewPullToRefreshView;
         _titleLabel.font = [UIFont boldSystemFontOfSize:14];
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.textColor = textColor;
-        //[self addSubview:_titleLabel];
+        [self addSubview:_titleLabel];
     }
     return _titleLabel;
 }
@@ -477,7 +477,7 @@ static char UIScrollViewPullToRefreshView;
         _subtitleLabel.font = [UIFont systemFontOfSize:12];
         _subtitleLabel.backgroundColor = [UIColor clearColor];
         _subtitleLabel.textColor = textColor;
-        //[self addSubview:_subtitleLabel];
+        [self addSubview:_subtitleLabel];
     }
     return _subtitleLabel;
 }
@@ -503,7 +503,6 @@ static char UIScrollViewPullToRefreshView;
 - (UIColor *)textColor {
     return self.titleLabel.textColor;
 }
-
 /*
 - (UIColor *)activityIndicatorViewColor {
     return self.activityIndicatorView.color;
@@ -513,6 +512,7 @@ static char UIScrollViewPullToRefreshView;
     return self.activityIndicatorView.activityIndicatorViewStyle;
 }
 */
+
 #pragma mark - Setters
 
 - (void)setArrowColor:(UIColor *)newArrowColor {
@@ -570,8 +570,8 @@ static char UIScrollViewPullToRefreshView;
 
 - (void)setActivityIndicatorViewStyle:(UIActivityIndicatorViewStyle)viewStyle {
     self.activityIndicatorView.activityIndicatorViewStyle = viewStyle;
-}*/
-
+}
+*/
 - (void)setLastUpdatedDate:(NSDate *)newLastUpdatedDate {
     self.showsDateLabel = YES;
     self.dateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Last Updated: %@",), newLastUpdatedDate?[self.dateFormatter stringFromDate:newLastUpdatedDate]:NSLocalizedString(@"Never",)];

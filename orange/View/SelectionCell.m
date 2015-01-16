@@ -13,6 +13,7 @@
 @interface SelectionCell()<MLEmojiLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIImageView *tmp;
+@property (nonatomic, strong) UIView *box;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) MLEmojiLabel *emojiLabel;
 @property (nonatomic, strong) UIButton *likeButton;
@@ -61,12 +62,19 @@
     [super layoutSubviews];
     self.backgroundColor = UIColorFromRGB(0xffffff);
     
+    if (!self.box) {
+        _box = [[UIView alloc] initWithFrame:CGRectMake(15.0f, 7.0f,kScreenWidth -30, 300)];
+        self.box.contentMode = UIViewContentModeScaleAspectFit;
+        self.box.backgroundColor = [UIColor whiteColor];
+        self.box.layer.borderColor = UIColorFromRGB(0xeeeeee).CGColor;
+        self.box.layer.borderWidth = 1;
+        [self.contentView addSubview:self.box];
+    }
+    
     if (!self.image) {
-        _image = [[UIImageView alloc] initWithFrame:CGRectMake(15.0f, 17.0f,kScreenWidth -30, 280)];
+        _image = [[UIImageView alloc] initWithFrame:CGRectMake(25.0f, 17.0f,kScreenWidth -50, 280)];
         self.image.contentMode = UIViewContentModeScaleAspectFit;
         self.image.backgroundColor = [UIColor whiteColor];
-        self.image.layer.borderColor = UIColorFromRGB(0xeeeeee).CGColor;
-        self.image.layer.borderWidth = 1;
         [self.contentView addSubview:self.image];
     }
     __block UIImageView *block_img = self.image;
@@ -95,7 +103,7 @@
     }
     
     [self.emojiLabel setText:self.note.text];
-    self.emojiLabel.frame = CGRectMake(15.0f, self.image.deFrameBottom +15, kScreenWidth - 30, [[self class] heightForEmojiText:self.note.text]);
+    self.emojiLabel.frame = CGRectMake(15.0f, self.box.deFrameBottom +15, kScreenWidth - 30, [[self class] heightForEmojiText:self.note.text]);
     self.emojiLabel.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:self.emojiLabel];
     
@@ -123,7 +131,7 @@
         self.timeButton.layer.masksToBounds = YES;
         self.timeButton.layer.cornerRadius = 2;
         self.timeButton.backgroundColor = [UIColor clearColor];
-        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [self.timeButton setTitleColor:UIColorFromRGB(0x4d4d4f) forState:UIControlStateNormal];

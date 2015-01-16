@@ -12,6 +12,7 @@
 #import "TabBarViewController.h"
 
 
+
 @interface AppDelegate ()<WXApiDelegate>
 
 @end
@@ -139,14 +140,14 @@
 
 -(void)customizeAppearance
 {
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xf0f0f0) andSize:CGSizeMake(2, 2)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setShadowImage:[[UIImage imageWithColor:UIColorFromRGB(0xf0f0f0) andSize:CGSizeMake(1, 1)] stretchableImageWithLeftCapWidth:1 topCapHeight:1]];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(2, 2)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(1, 1)] stretchableImageWithLeftCapWidth:1 topCapHeight:1]];
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x2b2b2b)];
     [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0xcacaca)];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x2b2b2b)}];
     
     
-    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x25292c) andSize:CGSizeMake(kScreenWidth, 49)]];
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x545454) andSize:CGSizeMake(kScreenWidth, 49)]];
     [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
