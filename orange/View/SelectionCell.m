@@ -66,7 +66,7 @@
         _box = [[UIView alloc] initWithFrame:CGRectMake(15.0f, 7.0f,kScreenWidth -30, 300)];
         self.box.contentMode = UIViewContentModeScaleAspectFit;
         self.box.backgroundColor = [UIColor whiteColor];
-        self.box.layer.borderColor = UIColorFromRGB(0xeeeeee).CGColor;
+        self.box.layer.borderColor = UIColorFromRGB(0xf1f1f1).CGColor;
         self.box.layer.borderWidth = 1;
         [self.contentView addSubview:self.box];
     }
@@ -116,13 +116,13 @@
         self.likeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         self.likeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [self.likeButton setTitleColor:UIColorFromRGB(0x4d4d4f) forState:UIControlStateNormal];
-        [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],self.entity.likeCount] forState:UIControlStateNormal];
+        [self.likeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,3, 0, 0)];
         [self.contentView addSubview:self.likeButton];        
     }
+    [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],self.entity.likeCount] forState:UIControlStateNormal];
     self.likeButton.deFrameLeft = self.emojiLabel.deFrameLeft;
-    self.likeButton.deFrameTop = self.emojiLabel.deFrameBottom;
+    self.likeButton.deFrameTop = self.emojiLabel.deFrameBottom+10;
     [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -134,13 +134,13 @@
         self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-        [self.timeButton setTitleColor:UIColorFromRGB(0x4d4d4f) forState:UIControlStateNormal];
-        [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.date stringWithDefaultFormat]] forState:UIControlStateNormal];
+        [self.timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [self.contentView addSubview:self.timeButton];
     }
+    [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.date stringWithDefaultFormat]] forState:UIControlStateNormal];
     self.timeButton.deFrameRight = self.emojiLabel.deFrameRight;
-    self.timeButton.deFrameTop = self.emojiLabel.deFrameBottom;
+    self.timeButton.deFrameTop = self.emojiLabel.deFrameBottom+10;
     [self.timeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -150,11 +150,11 @@
     if (!_emojiLabel) {
         _emojiLabel = [MLEmojiLabel new];
         _emojiLabel.numberOfLines = 0;
-        _emojiLabel.font = [UIFont systemFontOfSize:14.0f];
+        _emojiLabel.font = [UIFont systemFontOfSize:16.0f];
         _emojiLabel.delegate = self;
         _emojiLabel.backgroundColor = [UIColor clearColor];
         _emojiLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        _emojiLabel.textColor = [UIColor blackColor];
+        _emojiLabel.textColor = UIColorFromRGB(0x666666);
         _emojiLabel.backgroundColor = [UIColor colorWithRed:0.218 green:0.809 blue:0.304 alpha:1.000];
         
         _emojiLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -179,7 +179,7 @@
     if (!protypeLabel) {
         protypeLabel = [MLEmojiLabel new];
         protypeLabel.numberOfLines = 0;
-        protypeLabel.font = [UIFont systemFontOfSize:14.0f];
+        protypeLabel.font = [UIFont systemFontOfSize:16.0f];
         protypeLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         protypeLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         protypeLabel.isNeedAtAndPoundSign = YES;

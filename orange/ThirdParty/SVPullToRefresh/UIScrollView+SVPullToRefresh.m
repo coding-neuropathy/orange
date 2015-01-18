@@ -9,7 +9,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIScrollView+SVPullToRefresh.h"
-#import "GKRotateLoadingView.h"
+
 
 //fequal() and fequalzro() from http://stackoverflow.com/a/1614761/184130
 #define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
@@ -29,7 +29,7 @@ static CGFloat const SVPullToRefreshViewHeight = 60;
 @property (nonatomic, copy) void (^pullToRefreshActionHandler)(void);
 
 @property (nonatomic, strong) SVPullToRefreshArrow *arrow;
-@property (nonatomic, strong) GKRotateLoadingView *activityIndicatorView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, strong, readwrite) UILabel *titleLabel;
 @property (nonatomic, strong, readwrite) UILabel *subtitleLabel;
 @property (nonatomic, readwrite) SVPullToRefreshState state;
@@ -450,10 +450,12 @@ static char UIScrollViewPullToRefreshView;
     return _arrow;
 }
 
-- (GKRotateLoadingView *)activityIndicatorView {
+- (UIActivityIndicatorView *)activityIndicatorView {
     if(!_activityIndicatorView) {
-        _activityIndicatorView = [[GKRotateLoadingView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         _activityIndicatorView.hidesWhenStopped = NO;
+        _activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+        _activityIndicatorView.color = UIColorFromRGB(0x427ec0);
         [self addSubview:_activityIndicatorView];
     }
     return _activityIndicatorView;

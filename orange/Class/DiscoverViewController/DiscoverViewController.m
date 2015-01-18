@@ -29,7 +29,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"tabbar_icon_eye"] selectedImage:[UIImage imageNamed:@"tabbar_icon_eye"]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"discover"] selectedImage:[UIImage imageNamed:@"discover"]];
         
         self.tabBarItem = item;
         
@@ -41,10 +41,10 @@
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
         [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
-        [segmentedControl setTextColor:UIColorFromRGB(0x343434)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x2b2b2b)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xf7f7f7)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x999999)];
+        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
+        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
+        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:segmentedControl];
         

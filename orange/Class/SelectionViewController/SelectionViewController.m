@@ -10,6 +10,8 @@
 #import "HMSegmentedControl.h"
 #import "GKAPI.h"
 #import "SelectionCell.h"
+#import "EntitySingleListCell.h"
+
 
 @interface SelectionViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -25,27 +27,44 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"精选" image:[UIImage imageNamed:@"tabbar_icon_star"] selectedImage:[UIImage imageNamed:@"tabbar_icon_star"]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"精选" image:[UIImage imageNamed:@"selection"] selectedImage:[UIImage imageNamed:@"selection"]];
         
         self.tabBarItem = item;
         
         self.title = @"精选";
         
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 180, 32)];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 200, 28)];
         [segmentedControl setSectionTitles:@[@"商品", @"图文"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
         [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
-        [segmentedControl setTextColor:UIColorFromRGB(0x343434)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x2b2b2b)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xf7f7f7)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x999999)];
+        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
+        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
+        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [segmentedControl setTag:2];
-        //self.navigationItem.titleView = segmentedControl;
+        //self.navigationItem.titleView =  segmentedControl;
         self.index = 0;
+
         
         [self logo];
+        
+        NSMutableArray * array = [NSMutableArray array];
+        
+        {
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+            button.titleLabel.textAlignment = NSTextAlignmentCenter;
+            [button setTitleColor:UIColorFromRGB(0xcacaca) forState:UIControlStateNormal];
+            [button setTitle:[NSString fontAwesomeIconStringForEnum:FARefresh] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
+            button.backgroundColor = [UIColor clearColor];
+            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+            [array addObject:item];
+        }
+        
+        self.navigationItem.rightBarButtonItems = array;
         
     }
     return self;
@@ -68,16 +87,18 @@
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     
+
+    
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
     
-    /*
+
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
-     */
+     
     
     [self.tableView.pullToRefreshView startAnimating];
     [self refresh];
@@ -113,13 +134,30 @@
     }
     else if (self.index == 1)
     {
-       
+        [SVProgressHUD showImage:nil status:@"失败"];
+        [self.tableView.pullToRefreshView stopAnimating];
     }
     return;
 }
 - (void)loadMore
 {
-
+    if (self.index == 0) {
+        NSTimeInterval timestamp = (NSTimeInterval)[self.dataArrayForEntity.lastObject[@"time"] doubleValue];
+        [GKAPI getSelectionListWithTimestamp:timestamp cateId:0 count:30 success:^(NSArray *dataArray) {
+            [self.dataArrayForEntity addObjectsFromArray:[NSMutableArray arrayWithArray:dataArray]];
+            [self.tableView reloadData];
+            [self.tableView.infiniteScrollingView stopAnimating];
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:@"失败"];
+            [self.tableView.infiniteScrollingView stopAnimating];
+        }];
+    }
+    else if (self.index == 1)
+    {
+        [SVProgressHUD showImage:nil status:@"失败"];
+        [self.tableView.infiniteScrollingView stopAnimating];
+    }
+    return;
 }
 
 #pragma mark - UITableViewDataSource
@@ -144,17 +182,34 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.index == 0) {
-        static NSString *CellIdentifier = @"SelectionCell";
-        SelectionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            cell = [[SelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        cell.note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
-        cell.entity = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"entity"];
-        NSTimeInterval timestamp = [self.dataArrayForEntity[indexPath.row][@"time"] doubleValue];
-        cell.date = [NSDate dateWithTimeIntervalSince1970:timestamp];
         
-        return cell;
+        if (1) {
+            static NSString *CellIdentifier = @"SelectionCell";
+            SelectionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[SelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            cell.note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
+            cell.entity = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"entity"];
+            NSTimeInterval timestamp = [self.dataArrayForEntity[indexPath.row][@"time"] doubleValue];
+            cell.date = [NSDate dateWithTimeIntervalSince1970:timestamp];
+            
+            return cell;
+        }
+        else
+        {
+            static NSString *CellIdentifier = @"EntitySingleListCell";
+            EntitySingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[EntitySingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            cell.entity = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"entity"];
+            NSTimeInterval timestamp = [self.dataArrayForEntity[indexPath.row][@"time"] doubleValue];
+
+            
+            return cell;
+        }
+
     }
     else if (self.index == 1)
     {
@@ -169,8 +224,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.index == 0) {
-        GKNote * note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
-        return [SelectionCell heightForEmojiText:note.text]+350;
+        if (1) {
+            GKNote * note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
+            return [SelectionCell heightForEmojiText:note.text]+380;
+        }
+        else
+        {
+            return [EntitySingleListCell height];
+        }
+
     }
     else if (self.index == 1)
     {
@@ -190,10 +252,14 @@
 }
 
 
+
+
+
 #pragma mark - HMSegmentedControl
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSUInteger index = segmentedControl.selectedSegmentIndex;
     self.index = index;
+    [self.tableView reloadData];
     switch (index) {
         case 0:
         {
@@ -214,7 +280,8 @@
 - (void)logo
 {
     UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 60, 30)];
-    icon.image = [UIImage imageNamed:@"logo"];
+    icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    icon.tintColor = UIColorFromRGB(0x878787);
     icon.contentMode = UIViewContentModeScaleAspectFit;
     icon.userInteractionEnabled = YES;
     self.navigationItem.titleView = icon;
