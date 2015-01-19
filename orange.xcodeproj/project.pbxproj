@@ -216,6 +216,8 @@
 		4E2D6D471A69610B009E4A17 /* GKRotateLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D461A69610B009E4A17 /* GKRotateLoadingView.m */; };
 		4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D4A1A697B82009E4A17 /* EntitySingleListCell.m */; };
 		4E2D6D4F1A6AC261009E4A17 /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D4E1A6AC261009E4A17 /* UIViewController+ScrollingNavbar.m */; };
+		4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */; };
+		4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D551A6BFD77009E4A17 /* RTLabel.m */; };
 		4E3A233F1A51A7C500037F9C /* GKAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23241A51A7C500037F9C /* GKAPI.m */; };
 		4E3A23401A51A7C500037F9C /* GKEntity+ImageURLFixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23261A51A7C500037F9C /* GKEntity+ImageURLFixes.m */; };
 		4E3A23411A51A7C500037F9C /* GKHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23281A51A7C500037F9C /* GKHTTPClient.m */; };
@@ -1445,6 +1447,10 @@
 		4E2D6D4A1A697B82009E4A17 /* EntitySingleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySingleListCell.m; sourceTree = "<group>"; };
 		4E2D6D4D1A6AC261009E4A17 /* UIViewController+ScrollingNavbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScrollingNavbar.h"; sourceTree = "<group>"; };
 		4E2D6D4E1A6AC261009E4A17 /* UIViewController+ScrollingNavbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ScrollingNavbar.m"; sourceTree = "<group>"; };
+		4E2D6D501A6BF8E0009E4A17 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		4E2D6D541A6BFD77009E4A17 /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
+		4E2D6D551A6BFD77009E4A17 /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
 		4E3A23231A51A7C500037F9C /* GKAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKAPI.h; sourceTree = "<group>"; };
 		4E3A23241A51A7C500037F9C /* GKAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKAPI.m; sourceTree = "<group>"; };
 		4E3A23251A51A7C500037F9C /* GKEntity+ImageURLFixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GKEntity+ImageURLFixes.h"; sourceTree = "<group>"; };
@@ -2494,6 +2500,8 @@
 				4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */,
 				4E066AA11A5C56C600DFEF65 /* SelectionCell.h */,
 				4E066AA21A5C56C600DFEF65 /* SelectionCell.m */,
+				4E2D6D501A6BF8E0009E4A17 /* MessageCell.h */,
+				4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2990,6 +2998,15 @@
 			path = AMScrollingNavbar;
 			sourceTree = "<group>";
 		};
+		4E2D6D531A6BFD77009E4A17 /* RTLabel */ = {
+			isa = PBXGroup;
+			children = (
+				4E2D6D541A6BFD77009E4A17 /* RTLabel.h */,
+				4E2D6D551A6BFD77009E4A17 /* RTLabel.m */,
+			);
+			path = RTLabel;
+			sourceTree = "<group>";
+		};
 		4E3A23221A51A7C500037F9C /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -3161,6 +3178,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				4E2D6D531A6BFD77009E4A17 /* RTLabel */,
 				4E2D6D4C1A6AC261009E4A17 /* AMScrollingNavbar */,
 				4E2D6D441A69610B009E4A17 /* GKRotateLoadingView */,
 				4E2D6D321A69601F009E4A17 /* SVProgressHUD */,
@@ -5366,6 +5384,7 @@
 				4E1D28C61A125B9300740C17 /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
 				4E1D28D41A125B9300740C17 /* JSQMessagesCollectionView.m in Sources */,
 				4E066B861A5CC02400DFEF65 /* TTTAttributedLabel.m in Sources */,
+				4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */,
 				4E3A23411A51A7C500037F9C /* GKHTTPClient.m in Sources */,
 				4E066B851A5CC02400DFEF65 /* MLEmojiLabel.m in Sources */,
 				4E216ABC1A261395009FF11D /* JDFlipNumberViewImageFactory.m in Sources */,
@@ -5432,6 +5451,7 @@
 				4E216ABD1A261395009FF11D /* UIView+JDFlipImageView.m in Sources */,
 				4E2D6D4F1A6AC261009E4A17 /* UIViewController+ScrollingNavbar.m in Sources */,
 				4E3A23781A51B12300037F9C /* NSString+App.m in Sources */,
+				4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */,
 				4E56DF8919D56EF500263B17 /* UIImage+GIF.m in Sources */,
 				4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */,
 			);
