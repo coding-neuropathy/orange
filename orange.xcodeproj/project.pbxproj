@@ -218,6 +218,7 @@
 		4E2D6D4F1A6AC261009E4A17 /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D4E1A6AC261009E4A17 /* UIViewController+ScrollingNavbar.m */; };
 		4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */; };
 		4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D551A6BFD77009E4A17 /* RTLabel.m */; };
+		4E2D6D5B1A6D49F0009E4A17 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D581A6D49F0009E4A17 /* LoginView.m */; };
 		4E3A233F1A51A7C500037F9C /* GKAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23241A51A7C500037F9C /* GKAPI.m */; };
 		4E3A23401A51A7C500037F9C /* GKEntity+ImageURLFixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23261A51A7C500037F9C /* GKEntity+ImageURLFixes.m */; };
 		4E3A23411A51A7C500037F9C /* GKHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23281A51A7C500037F9C /* GKHTTPClient.m */; };
@@ -1451,6 +1452,8 @@
 		4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		4E2D6D541A6BFD77009E4A17 /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
 		4E2D6D551A6BFD77009E4A17 /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
+		4E2D6D571A6D49F0009E4A17 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		4E2D6D581A6D49F0009E4A17 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		4E3A23231A51A7C500037F9C /* GKAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKAPI.h; sourceTree = "<group>"; };
 		4E3A23241A51A7C500037F9C /* GKAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKAPI.m; sourceTree = "<group>"; };
 		4E3A23251A51A7C500037F9C /* GKEntity+ImageURLFixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GKEntity+ImageURLFixes.h"; sourceTree = "<group>"; };
@@ -2488,6 +2491,8 @@
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4E2D6D571A6D49F0009E4A17 /* LoginView.h */,
+				4E2D6D581A6D49F0009E4A17 /* LoginView.m */,
 				4E2D6D491A697B82009E4A17 /* EntitySingleListCell.h */,
 				4E2D6D4A1A697B82009E4A17 /* EntitySingleListCell.m */,
 				4E198C431A66B86F004C59C4 /* CategoryGridCell.h */,
@@ -5434,6 +5439,7 @@
 				4E1D28DC1A125B9300740C17 /* JSQMessagesLabel.m in Sources */,
 				4E1D28D11A125B9300740C17 /* JSQPhotoMediaItem.m in Sources */,
 				4E3A23481A51A7C500037F9C /* GKPurchase.m in Sources */,
+				4E2D6D5B1A6D49F0009E4A17 /* LoginView.m in Sources */,
 				4E3A23631A51AE8300037F9C /* AFImageRequestOperation.m in Sources */,
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				4E3A233F1A51A7C500037F9C /* GKAPI.m in Sources */,

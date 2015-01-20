@@ -210,7 +210,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 - (UIActivityIndicatorView *)activityIndicatorView {
     if(!_activityIndicatorView) {
         _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        _activityIndicatorView.hidesWhenStopped = NO;
+        _activityIndicatorView.hidesWhenStopped = YES;
         [self addSubview:_activityIndicatorView];
     }
     return _activityIndicatorView;

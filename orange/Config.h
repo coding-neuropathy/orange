@@ -43,6 +43,9 @@
 #define kTabBarHeight 49.f
 #endif
 
+#ifndef k_isLogin
+#define k_isLogin [Passport sharedInstance].user
+#endif
 
 #ifndef iOS8
 #define iOS8 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)

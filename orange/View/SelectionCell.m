@@ -150,7 +150,7 @@
     if (!_emojiLabel) {
         _emojiLabel = [MLEmojiLabel new];
         _emojiLabel.numberOfLines = 0;
-        _emojiLabel.font = [UIFont systemFontOfSize:16.0f];
+        _emojiLabel.font = [UIFont systemFontOfSize:15.0f];
         _emojiLabel.delegate = self;
         _emojiLabel.backgroundColor = [UIColor clearColor];
         _emojiLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -179,7 +179,7 @@
     if (!protypeLabel) {
         protypeLabel = [MLEmojiLabel new];
         protypeLabel.numberOfLines = 0;
-        protypeLabel.font = [UIFont systemFontOfSize:16.0f];
+        protypeLabel.font = [UIFont systemFontOfSize:15.0f];
         protypeLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         protypeLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         protypeLabel.isNeedAtAndPoundSign = YES;

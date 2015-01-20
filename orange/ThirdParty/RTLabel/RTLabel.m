@@ -28,7 +28,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
  * IN CONNECTION WITH THE SOFTWARE OR 
  * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * @author 		Muh Hon Cheng <honcheng@gmail.com>
  * @copyright	2011	Muh Hon Cheng
  * @version
@@ -38,7 +38,7 @@
 #import "RTLabel.h"
 
 @interface RTLabelButton : UIButton
-@property (nonatomic, assign) int componentIndex;
+@property (nonatomic, assign) NSUInteger componentIndex;
 @property (nonatomic) NSURL *url;
 @end
 
@@ -63,7 +63,7 @@
 	return [[self alloc] initWithString:aText tag:aTagLabel attributes:theAttributes];
 }
 
-- (id)initWithTag:(NSString*)aTagLabel position:(int)aPosition attributes:(NSMutableDictionary*)theAttributes 
+- (id)initWithTag:(NSString*)aTagLabel position:(NSUInteger)aPosition attributes:(NSMutableDictionary*)theAttributes
 {
     self = [super init];
     if (self) {
@@ -74,7 +74,7 @@
     return self;
 }
 
-+(id)componentWithTag:(NSString*)aTagLabel position:(int)aPosition attributes:(NSMutableDictionary*)theAttributes
++(id)componentWithTag:(NSString*)aTagLabel position:(NSUInteger)aPosition attributes:(NSMutableDictionary*)theAttributes
 {
 	return [[self alloc] initWithTag:aTagLabel position:aPosition attributes:theAttributes];
 }
@@ -83,7 +83,7 @@
 {
 	NSMutableString *desc = [NSMutableString string];
 	[desc appendFormat:@"text: %@", self.text];
-	[desc appendFormat:@", position: %i", self.position];
+	[desc appendFormat:@", position: %ld", self.position];
 	if (self.tagLabel) [desc appendFormat:@", tag: %@", self.tagLabel];
 	if (self.attributes) [desc appendFormat:@", attributes: %@", self.attributes];
 	return desc;
@@ -232,7 +232,7 @@
     
 	for (RTLabelComponent *component in textComponents)
 	{
-		int index = [textComponents indexOfObject:component];
+		NSUInteger index = [textComponents indexOfObject:component];
 		component.componentIndex = index;
 		
 		if ([component.tagLabel caseInsensitiveCompare:@"i"] == NSOrderedSame)
@@ -393,7 +393,7 @@
 #pragma mark -
 #pragma mark styling
 
-- (void)applyParagraphStyleToText:(CFMutableAttributedStringRef)text attributes:(NSMutableDictionary*)attributes atPosition:(int)position withLength:(int)length
+- (void)applyParagraphStyleToText:(CFMutableAttributedStringRef)text attributes:(NSMutableDictionary*)attributes atPosition:(NSUInteger)position withLength:(NSUInteger)length
 {
 	CFMutableDictionaryRef styleDict = ( CFDictionaryCreateMutable( (0), 0, (0), (0) ) );
 	
@@ -494,7 +494,7 @@
     CFRelease(styleDict);
 }
 
-- (void)applyCenterStyleToText:(CFMutableAttributedStringRef)text attributes:(NSMutableDictionary*)attributes atPosition:(int)position withLength:(int)length
+- (void)applyCenterStyleToText:(CFMutableAttributedStringRef)text attributes:(NSMutableDictionary*)attributes atPosition:(NSUInteger)position withLength:(NSUInteger)length
 {
 	CFMutableDictionaryRef styleDict = ( CFDictionaryCreateMutable( (0), 0, (0), (0) ) );
 	
@@ -873,7 +873,7 @@
 		[scanner scanUpToString:@">" intoString:&text];
 		
 		NSString *delimiter = [NSString stringWithFormat:@"%@>", text];
-		int position = [data rangeOfString:delimiter].location;
+		NSUInteger position = [data rangeOfString:delimiter].location;
 		if (position!=NSNotFound)
 		{
 			if ([delimiter rangeOfString:@"<p"].location==0)
@@ -895,7 +895,7 @@
 			tag = [text substringFromIndex:2];
 			if (position!=NSNotFound)
 			{
-				for (int i=[components count]-1; i>=0; i--)
+				for (NSInteger i=[components count]-1; i>=0; i--)
 				{
 					RTLabelComponent *component = [components objectAtIndex:i];
 					if (component.text==nil && [component.tagLabel isEqualToString:tag])
@@ -995,7 +995,7 @@
 		if([valid_tags containsObject:tag] == NO)
 		{
 			NSString *delimiter = [NSString stringWithFormat:@"%@>", text];
-			int position = [data rangeOfString:delimiter].location;
+			NSUInteger position = [data rangeOfString:delimiter].location;
 			BOOL isEnd = [delimiter rangeOfString:@"</"].location!=NSNotFound;
 			if (position!=NSNotFound)
 			{

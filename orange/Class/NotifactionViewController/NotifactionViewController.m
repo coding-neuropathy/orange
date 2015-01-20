@@ -9,6 +9,7 @@
 #import "NotifactionViewController.h"
 #import "HMSegmentedControl.h"
 #import "GKAPI.h"
+#import "MessageCell.h"
 
 @interface NotifactionViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -101,24 +102,37 @@
 - (void)refresh
 {
     if (self.index == 0) {
-
+        [SVProgressHUD showImage:nil status:@"失败"];
+        [self.tableView.pullToRefreshView stopAnimating];
     }
     else if (self.index == 1)
     {
-        [SVProgressHUD showImage:nil status:@"失败"];
-        [self.tableView.pullToRefreshView stopAnimating];
+        [GKAPI getMessageListWithTimestamp:[[NSDate date] timeIntervalSince1970]  count:30 success:^(NSArray *messageArray) {
+            self.dataArrayForMessage = [NSMutableArray arrayWithArray:messageArray];
+            [self.tableView reloadData];
+            [self.tableView.pullToRefreshView stopAnimating];
+        } failure:^(NSInteger stateCode) {
+            
+        }];
     }
     return;
 }
 - (void)loadMore
 {
     if (self.index == 0) {
-
+        [SVProgressHUD showImage:nil status:@"失败"];
+        [self.tableView.infiniteScrollingView stopAnimating];
     }
     else if (self.index == 1)
     {
-        [SVProgressHUD showImage:nil status:@"失败"];
-        [self.tableView.infiniteScrollingView stopAnimating];
+        NSTimeInterval timestamp = [self.dataArrayForMessage.lastObject[@"time"] doubleValue];
+        [GKAPI getMessageListWithTimestamp:timestamp count:30 success:^(NSArray *messageArray) {
+            [self.dataArrayForMessage addObjectsFromArray:messageArray];
+            [self.tableView reloadData];
+            [self.tableView.infiniteScrollingView stopAnimating];
+        } failure:^(NSInteger stateCode) {
+            [self.tableView.infiniteScrollingView stopAnimating];
+        }];
     }
     return;
 }
@@ -157,7 +171,13 @@
     }
     else if (self.index == 1)
     {
-        return [[UITableViewCell alloc] init];
+        static NSString *CellIdentifier = @"MessageCell";
+        MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        cell.message = self.dataArrayForMessage[indexPath.row];
+        return cell;
     }
     return [[UITableViewCell alloc] init];
     
@@ -179,7 +199,7 @@
     }
     else if (self.index == 1)
     {
-        return 100;
+        return [MessageCell height:self.dataArrayForMessage[indexPath.row]];
     }
     return 0;
 }
@@ -207,7 +227,9 @@
             break;
         case 1:
         {
-            
+            if (self.dataArrayForMessage.count == 0) {
+                [self refresh];
+            }
         }
             break;
             

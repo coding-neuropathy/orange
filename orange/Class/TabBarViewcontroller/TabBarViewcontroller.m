@@ -11,6 +11,7 @@
 #import "DiscoverViewController.h"
 #import "NotifactionViewController.h"
 #import "MeViewController.h"
+#import "LoginView.h"
 
 @interface TabBarViewcontroller ()<UITabBarControllerDelegate>
 
@@ -63,6 +64,20 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
+    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[NotifactionViewController class]]) {
+        if (!k_isLogin) {
+            LoginView * view = [[LoginView alloc]init];
+            [view show];
+            return NO;
+        }
+    }
+    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[MeViewController class]]) {
+        if (!k_isLogin) {
+            LoginView * view = [[LoginView alloc]init];
+            [view show];
+            return NO;
+        }
+    }
     return YES;
 }
 
