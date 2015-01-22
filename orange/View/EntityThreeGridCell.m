@@ -46,7 +46,7 @@
     if (!self.itemArray) {
         _itemArray = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < 3; i++) {
-                UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(6+i*(kScreenWidth/3), 6, kScreenWidth/3-12, kScreenWidth/3-12)];
+                UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(8+i*(kScreenWidth/3), 16, kScreenWidth/3-16, kScreenWidth/3-16)];
                 [self.itemArray addObject:button];
                 [self addSubview:button];
             }

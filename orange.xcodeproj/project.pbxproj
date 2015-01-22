@@ -219,6 +219,7 @@
 		4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */; };
 		4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D551A6BFD77009E4A17 /* RTLabel.m */; };
 		4E2D6D5B1A6D49F0009E4A17 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D581A6D49F0009E4A17 /* LoginView.m */; };
+		4E2D6D5F1A6FF7DE009E4A17 /* NoteSingleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D5E1A6FF7DE009E4A17 /* NoteSingleListCell.m */; };
 		4E3A233F1A51A7C500037F9C /* GKAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23241A51A7C500037F9C /* GKAPI.m */; };
 		4E3A23401A51A7C500037F9C /* GKEntity+ImageURLFixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23261A51A7C500037F9C /* GKEntity+ImageURLFixes.m */; };
 		4E3A23411A51A7C500037F9C /* GKHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23281A51A7C500037F9C /* GKHTTPClient.m */; };
@@ -1454,6 +1455,8 @@
 		4E2D6D551A6BFD77009E4A17 /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
 		4E2D6D571A6D49F0009E4A17 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		4E2D6D581A6D49F0009E4A17 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		4E2D6D5D1A6FF7DE009E4A17 /* NoteSingleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteSingleListCell.h; sourceTree = "<group>"; };
+		4E2D6D5E1A6FF7DE009E4A17 /* NoteSingleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteSingleListCell.m; sourceTree = "<group>"; };
 		4E3A23231A51A7C500037F9C /* GKAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKAPI.h; sourceTree = "<group>"; };
 		4E3A23241A51A7C500037F9C /* GKAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKAPI.m; sourceTree = "<group>"; };
 		4E3A23251A51A7C500037F9C /* GKEntity+ImageURLFixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GKEntity+ImageURLFixes.h"; sourceTree = "<group>"; };
@@ -2491,6 +2494,8 @@
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4E2D6D5D1A6FF7DE009E4A17 /* NoteSingleListCell.h */,
+				4E2D6D5E1A6FF7DE009E4A17 /* NoteSingleListCell.m */,
 				4E2D6D571A6D49F0009E4A17 /* LoginView.h */,
 				4E2D6D581A6D49F0009E4A17 /* LoginView.m */,
 				4E2D6D491A697B82009E4A17 /* EntitySingleListCell.h */,
@@ -5332,6 +5337,7 @@
 				4E3A23471A51A7C500037F9C /* GKNote.m in Sources */,
 				4E1D28D21A125B9300740C17 /* JSQVideoMediaItem.m in Sources */,
 				4E1D28BF1A125B9300740C17 /* UIImage+JSQMessages.m in Sources */,
+				4E2D6D5F1A6FF7DE009E4A17 /* NoteSingleListCell.m in Sources */,
 				4E56DF7B19D56EF500263B17 /* NSString+FontAwesome.m in Sources */,
 				4E1D28C81A125B9300740C17 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */,

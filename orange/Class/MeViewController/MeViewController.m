@@ -10,6 +10,7 @@
 #import "GKAPI.h"
 #import "HMSegmentedControl.h"
 #import "EntityThreeGridCell.h"
+#import "NoteSingleListCell.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -18,7 +19,8 @@
 @property(nonatomic, strong) NSMutableArray * dataArrayForTag;
 @property(nonatomic, strong) GKUser *user;
 @property(nonatomic, assign) NSUInteger index;
-
+@property(nonatomic, strong) HMSegmentedControl *segmentedControl;
+@property (nonatomic, assign) NSTimeInterval likeTimestamp;
 
 @end
 
@@ -60,21 +62,30 @@
         [weakSelf refresh];
     }];
     
-    /*
+
      [self.tableView addInfiniteScrollingWithActionHandler:^{
-     [weakSelf loadMore];
+         [weakSelf loadMore];
      }];
-     */
     
+    if (k_isLogin) {
+        self.user = [Passport sharedInstance].user;
+        [self refresh];
+    }
     
     [self.tableView.pullToRefreshView startAnimating];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.user = [Passport sharedInstance].user;
     [self refresh];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.user = [Passport sharedInstance].user;
     [self configHeaderView];
     [self.tableView reloadData];
     
@@ -99,8 +110,9 @@
 - (void)refresh
 {
     if (self.index == 0) {
-        [GKAPI getHotEntityListWithType:@"weekly" success:^(NSArray *dataArray) {
+        [GKAPI getUserLikeEntityListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
+            self.likeTimestamp = timestamp;
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -111,13 +123,49 @@
     }
     else if (self.index == 1)
     {
-
+        [GKAPI getUserNoteListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSArray *dataArray) {
+            self.dataArrayForNote = [NSMutableArray arrayWithArray:dataArray];
+            [self.tableView reloadData];
+            [self.tableView.pullToRefreshView stopAnimating];
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:@"失败"];
+            [self.tableView reloadData];
+            [self.tableView.pullToRefreshView stopAnimating];
+        }];
     }
     return;
 }
 - (void)loadMore
 {
-    
+    if (self.index == 0) {
+        GKEntity *entity = self.dataArrayForEntity.lastObject;
+        NSTimeInterval likeTimestamp = entity ? self.likeTimestamp : [[NSDate date] timeIntervalSince1970];
+        [GKAPI getUserLikeEntityListWithUserId:self.user.userId timestamp:likeTimestamp count:30 success:^(NSTimeInterval timestamp, NSArray *dataArray) {
+            [self.dataArrayForEntity addObjectsFromArray:dataArray];
+            self.likeTimestamp = timestamp;
+            [self.tableView reloadData];
+            [self.tableView.infiniteScrollingView stopAnimating];
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:@"失败"];
+            [self.tableView reloadData];
+            [self.tableView.infiniteScrollingView stopAnimating];
+        }];
+    }
+    else if (self.index == 1)
+    {
+        GKNote *note = [self.dataArrayForNote.lastObject objectForKey:@"note"];
+        NSTimeInterval timestamp = note ? note.createdTime : [[NSDate date] timeIntervalSince1970];
+        [GKAPI getUserNoteListWithUserId:self.user.userId timestamp:timestamp count:30 success:^(NSArray *dataArray) {
+            [self.dataArrayForNote addObjectsFromArray:dataArray];
+            [self.tableView reloadData];
+            [self.tableView.infiniteScrollingView stopAnimating];
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:@"失败"];
+            [self.tableView reloadData];
+            [self.tableView.infiniteScrollingView stopAnimating];
+        }];
+    }
+    return;
 }
 
 #pragma mark - UITableViewDataSource
@@ -131,7 +179,7 @@
     {
         return 1;
     }
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -177,7 +225,14 @@
         }
         else if (self.index == 1)
         {
-            return [[UITableViewCell alloc] init];
+            static NSString *CellIdentifier = @"NoteCell";
+            NoteSingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[NoteSingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            cell.note = [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"note"];
+            
+            return cell;
         }
         return [[UITableViewCell alloc] init];
     }
@@ -199,7 +254,15 @@
         }
         else if (self.index == 1)
         {
-            return 80;
+            GKNote * note =  [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"note"];
+            CGFloat h = [NoteSingleListCell heightForEmojiText:note.text];
+            if (h<100) {
+                return 100;
+            }
+            else
+            {
+                return h;
+            }
         }
         return 0;
     }
@@ -222,17 +285,25 @@
 {
     if(tableView == self.tableView)
     {
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
-        [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %ld",self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
-        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
-        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
-        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        return segmentedControl;
+        if (!self.segmentedControl) {
+            HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
+            [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %ld",self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
+            [segmentedControl setSelectedSegmentIndex:0 animated:NO];
+            [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
+            [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
+            [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
+            [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
+            [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
+            [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
+            [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+            
+            self.segmentedControl = segmentedControl;
+        }
+        
+        [self.segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %ld",self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
+
+        
+        return self.segmentedControl;
     }
     
     return nil;
@@ -252,7 +323,10 @@
     switch (index) {
         case 0:
         {
-            
+            if (self.dataArrayForEntity.count == 0) {
+                [self.tableView.pullToRefreshView startAnimating];
+                [self refresh];
+            }
         }
             break;
         case 1:

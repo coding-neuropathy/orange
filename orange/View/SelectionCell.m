@@ -66,8 +66,8 @@
         _box = [[UIView alloc] initWithFrame:CGRectMake(15.0f, 7.0f,kScreenWidth -30, 300)];
         self.box.contentMode = UIViewContentModeScaleAspectFit;
         self.box.backgroundColor = [UIColor whiteColor];
-        self.box.layer.borderColor = UIColorFromRGB(0xf1f1f1).CGColor;
-        self.box.layer.borderWidth = 1;
+        self.box.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
+        self.box.layer.borderWidth = 0.5;
         [self.contentView addSubview:self.box];
     }
     
@@ -116,11 +116,11 @@
         self.likeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         self.likeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [self.likeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,3, 0, 0)];
         [self.contentView addSubview:self.likeButton];        
     }
-    [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],self.entity.likeCount] forState:UIControlStateNormal];
+    [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeartO],self.entity.likeCount] forState:UIControlStateNormal];
     self.likeButton.deFrameLeft = self.emojiLabel.deFrameLeft;
     self.likeButton.deFrameTop = self.emojiLabel.deFrameBottom+10;
     [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -134,7 +134,7 @@
         self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-        [self.timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.timeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [self.contentView addSubview:self.timeButton];
     }
@@ -154,7 +154,7 @@
         _emojiLabel.delegate = self;
         _emojiLabel.backgroundColor = [UIColor clearColor];
         _emojiLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        _emojiLabel.textColor = UIColorFromRGB(0x666666);
+        _emojiLabel.textColor = UIColorFromRGB(0x414243);
         _emojiLabel.backgroundColor = [UIColor colorWithRed:0.218 green:0.809 blue:0.304 alpha:1.000];
         
         _emojiLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);
