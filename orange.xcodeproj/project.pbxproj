@@ -1143,6 +1143,7 @@
 		4EAA48CD19E03BA80098C9E0 /* 3297.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA457F19E03BA60098C9E0 /* 3297.png */; };
 		4EAA48CE19E03BA80098C9E0 /* 3299.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA458019E03BA60098C9E0 /* 3299.png */; };
 		4EAA48D319E03C870098C9E0 /* EmojiOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA48D219E03C870098C9E0 /* EmojiOne.m */; };
+		4ECCD0D91A714A7D009D5A42 /* TagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0D81A714A7D009D5A42 /* TagCell.m */; };
 		4EE0A8961A4CEB8C0092F884 /* DWBubbleMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0A8951A4CEB8C0092F884 /* DWBubbleMenuButton.m */; };
 		4EFCBCBB19D5CF650071F7A0 /* UIView+DEFrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCBCBA19D5CF650071F7A0 /* UIView+DEFrameAdditions.m */; };
 /* End PBXBuildFile section */
@@ -2448,6 +2449,8 @@
 		4EAA458019E03BA60098C9E0 /* 3299.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3299.png; sourceTree = "<group>"; };
 		4EAA48D119E03C870098C9E0 /* EmojiOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiOne.h; sourceTree = "<group>"; };
 		4EAA48D219E03C870098C9E0 /* EmojiOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiOne.m; sourceTree = "<group>"; };
+		4ECCD0D71A714A7D009D5A42 /* TagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagCell.h; sourceTree = "<group>"; };
+		4ECCD0D81A714A7D009D5A42 /* TagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagCell.m; sourceTree = "<group>"; };
 		4EE0A8941A4CEB8C0092F884 /* DWBubbleMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWBubbleMenuButton.h; sourceTree = "<group>"; };
 		4EE0A8951A4CEB8C0092F884 /* DWBubbleMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWBubbleMenuButton.m; sourceTree = "<group>"; };
 		4EFCBCB919D5CF650071F7A0 /* UIView+DEFrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DEFrameAdditions.h"; sourceTree = "<group>"; };
@@ -2494,6 +2497,8 @@
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4ECCD0D71A714A7D009D5A42 /* TagCell.h */,
+				4ECCD0D81A714A7D009D5A42 /* TagCell.m */,
 				4E2D6D5D1A6FF7DE009E4A17 /* NoteSingleListCell.h */,
 				4E2D6D5E1A6FF7DE009E4A17 /* NoteSingleListCell.m */,
 				4E2D6D571A6D49F0009E4A17 /* LoginView.h */,
@@ -5383,6 +5388,7 @@
 				4E56DF8D19D56EF500263B17 /* UIImageView+WebCache.m in Sources */,
 				4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */,
 				4E3A23451A51A7C500037F9C /* GKEntity.m in Sources */,
+				4ECCD0D91A714A7D009D5A42 /* TagCell.m in Sources */,
 				4E3A23421A51A7C500037F9C /* GKNote+ImageURLFixes.m in Sources */,
 				4E8D6A9C1A38B59F00156C17 /* UIFont+FontDiao.m in Sources */,
 				4E1D70251A5ADC100032719E /* NotifactionViewController.m in Sources */,

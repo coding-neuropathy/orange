@@ -8,6 +8,7 @@
 
 #import "SelectionCell.h"
 #import "MLEmojiLabel.h"
+#import "GKAPI.h"
 
 #define kWidth (kScreenWidth - 20)
 @interface SelectionCell()<MLEmojiLabelDelegate>
@@ -81,7 +82,7 @@
     __block UIImageView *tmp_img = self.tmp;
     __weak __typeof(&*self)weakSelf = self;
     {
-        [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth-30, 280)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
+        [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -50, 280)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             tmp_img = [[UIImageView alloc]initWithImage:image];
             if (tmp_img.frame.size.width<280&&tmp_img.frame.size.height<280) {
                 block_img.contentMode = UIViewContentModeCenter;
@@ -113,14 +114,19 @@
         self.likeButton.layer.masksToBounds = YES;
         self.likeButton.layer.cornerRadius = 2;
         self.likeButton.backgroundColor = [UIColor clearColor];
-        self.likeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        self.likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
         self.likeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,3, 0, 0)];
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
+        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
         [self.contentView addSubview:self.likeButton];        
     }
-    [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeartO],self.entity.likeCount] forState:UIControlStateNormal];
+    [self.likeButton setTitle:[NSString stringWithFormat:@"%ld",self.entity.likeCount] forState:UIControlStateNormal];
+    self.likeButton.selected = self.entity.liked;
     self.likeButton.deFrameLeft = self.emojiLabel.deFrameLeft;
     self.likeButton.deFrameTop = self.emojiLabel.deFrameBottom+10;
     [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -225,7 +231,27 @@
 #pragma mark - Action
 - (void)likeButtonAction
 {
+    [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
+        if (liked == self.likeButton.selected) {
+            [SVProgressHUD showImage:nil status:@"喜爱成功"];
+        }
+        self.likeButton.selected = liked;
+        self.entity.liked = liked;
+        if (liked) {
+            [SVProgressHUD showImage:nil status:@"喜爱成功"];
+            self.entity.likeCount = self.entity.likeCount+1;
+        } else {
+            self.entity.likeCount = self.entity.likeCount-1;
+            [SVProgressHUD dismiss];
+        }
+        [self.likeButton setTitle:[NSString stringWithFormat:@"%ld",self.entity.likeCount] forState:UIControlStateNormal];
 
+
+
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:@"喜爱失败"];
+  
+    }];
 }
 
 

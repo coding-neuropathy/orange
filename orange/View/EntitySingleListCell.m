@@ -185,6 +185,7 @@
         [self.contentView addSubview:self.likeButton];
     }
     [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],self.entity.likeCount] forState:UIControlStateNormal];
+    [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     self.likeButton.deFrameSize = CGSizeMake(50.f, 30.f);
     self.likeButton.deFrameRight = self.deFrameWidth - 5;
     self.likeButton.deFrameTop = 5;

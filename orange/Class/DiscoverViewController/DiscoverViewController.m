@@ -20,6 +20,13 @@
 @property(nonatomic, strong) NSMutableArray * dataArrayForCategory;
 @property(nonatomic, strong) NSMutableArray * dataArrayForArticle;
 @property(nonatomic, assign) NSUInteger index;
+@property(nonatomic, strong) HMSegmentedControl *segmentedControl;
+
+@property (nonatomic, strong) NSArray *bannerArray;
+@property (nonatomic, strong) UIScrollView *bannerScrollView;
+@property (nonatomic, strong) UIPageControl *bannerPageControl;
+@property (nonatomic, strong) NSTimer *bannerTimer;
+
 @end
 
 @implementation DiscoverViewController
@@ -36,18 +43,6 @@
         self.title = @"发现";
         
         
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
-        [segmentedControl setSectionTitles:@[@"热门商品", @"推荐分类",@"人气图文"]];
-        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
-        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
-        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        [self.view addSubview:segmentedControl];
-        
         [self configSearchBar];
     }
     return self;
@@ -58,7 +53,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 32.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight -kTabBarHeight-32) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight -kTabBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -68,6 +63,55 @@
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.view addSubview:self.tableView];
+    
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 150.f*kScreenWidth/320+32)];
+    headerView.backgroundColor = [UIColor whiteColor];
+    
+    // Banner
+    _bannerScrollView = [[UIScrollView alloc] init];
+    _bannerPageControl = [[UIPageControl alloc] init];
+    self.bannerScrollView.frame = CGRectMake(0, 0, headerView.bounds.size.width, headerView.bounds.size.height-32);
+    self.bannerScrollView.backgroundColor = [UIColor whiteColor];
+    self.bannerScrollView.delegate = self;
+    self.bannerScrollView.showsHorizontalScrollIndicator = NO;
+    self.bannerScrollView.pagingEnabled = YES;
+    [headerView addSubview:self.bannerScrollView];
+    
+    
+    if (!self.segmentedControl) {
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
+        [segmentedControl setSectionTitles:@[@"热门商品", @"推荐分类",@"人气图文"]];
+        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
+        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
+        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
+        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
+        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
+        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
+        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+        segmentedControl.deFrameBottom = headerView.deFrameHeight;
+        self.segmentedControl = segmentedControl;
+        [headerView addSubview:self.segmentedControl];
+    }
+
+    
+    self.tableView.tableHeaderView = headerView;
+    
+    [GKAPI getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
+        // 过滤可处理的banner类型
+        NSMutableArray *showBannerArray = [NSMutableArray array];
+        for (NSDictionary *itemDict in bannerArray) {
+            NSString *url = [[itemDict objectForKey:@"url"] lowercaseString];
+            if ([url hasPrefix:@"guoku://entity"] ||
+                [url hasPrefix:@"guoku://category"] ||
+                [url hasPrefix:@"guoku://user"] ||
+                [url hasPrefix:@"http://"]) {
+                [showBannerArray addObject:itemDict];
+            }
+        }
+        self.bannerArray = showBannerArray;
+    } failure:nil];
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -273,8 +317,7 @@
 {
     if(tableView == self.tableView)
     {
-        if(self.index == 1)
-        {
+        if (self.index == 1) {
             return 32;
         }
     }
@@ -285,7 +328,6 @@
 {
     if(tableView == self.tableView)
     {
-        
         if(self.index == 1)
         {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 6.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
@@ -381,4 +423,76 @@
     [self.searchDC setActive:NO];
     return YES;
 }
+
+#pragma mark - Getter And Setter
+- (void)setBannerArray:(NSArray *)bannerArray
+{
+    _bannerArray = bannerArray;
+    
+    for (UIView *view in self.bannerScrollView.subviews) {
+        if ([view isKindOfClass:[UIImageView class]] && view.tag == 100) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    self.bannerScrollView.frame = CGRectMake(7, 7, kScreenWidth-14, 149*kScreenWidth/320-15);
+    
+    [self.bannerArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dict = (NSDictionary *)obj;
+        NSURL *imageURL = [NSURL URLWithString:[dict valueForKey:@"img"]];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.bannerScrollView.frame) * idx, 0.f, CGRectGetWidth(self.bannerScrollView.frame), CGRectGetHeight(self.bannerScrollView.frame))];
+        imageView.tag = 100;
+        imageView.backgroundColor = UIColorFromRGB(0xffffff);
+        [imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [imageView sd_setImageWithURL:imageURL placeholderImage:nil options:SDWebImageRetryFailed];
+        [self.bannerScrollView addSubview:imageView];
+    }];
+    
+    self.bannerScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.bannerScrollView.frame) * self.bannerArray.count, CGRectGetHeight(self.bannerScrollView.frame));
+    self.bannerPageControl.currentPage = 0;
+    self.bannerPageControl.numberOfPages = self.bannerArray.count;
+}
+
+- (void)changeBanner
+{
+    NSInteger index = fabs(self.bannerScrollView.contentOffset.x) / CGRectGetWidth(self.bannerScrollView.bounds);
+    self.bannerPageControl.currentPage = (index + 1) % self.bannerArray.count;
+    [self.bannerScrollView setContentOffset:CGPointMake(self.bannerPageControl.currentPage * CGRectGetWidth(self.bannerScrollView.bounds), 0.f) animated:YES];
+}
+
+- (void)tapBanner
+{
+    
+    NSInteger index = self.bannerPageControl.currentPage;
+    NSDictionary *dict = (NSDictionary *)self.bannerArray[index];
+    NSString *url = [dict valueForKey:@"url"];
+    if ([url hasPrefix:@"http://"]) {
+        if (k_isLogin) {
+            NSRange range = [url rangeOfString:@"?"];
+            if (range.location != NSNotFound) {
+                url = [url stringByAppendingString:[NSString stringWithFormat:@"&session=%@",[Passport sharedInstance].session]];
+            }
+            else
+            {
+                url = [url stringByAppendingString:[NSString stringWithFormat:@"?session=%@",[Passport sharedInstance].session]];
+            }
+        }
+        NSRange range = [url rangeOfString:@"innerApp"];
+        if (range.location != NSNotFound) {
+            return;
+        }
+    }
+    
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView == self.bannerScrollView) {
+        // 获取当前页码
+        NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
+        // 设置当前页码
+        self.bannerPageControl.currentPage = index;
+    }
+}
+
 @end

@@ -28,6 +28,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, self.frame.size.width, 0.5)];
         self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
         [self.contentView addSubview:self.H];

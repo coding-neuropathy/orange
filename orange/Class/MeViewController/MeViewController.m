@@ -11,6 +11,7 @@
 #import "HMSegmentedControl.h"
 #import "EntityThreeGridCell.h"
 #import "NoteSingleListCell.h"
+#import "TagCell.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -133,6 +134,18 @@
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
+    else if (self.index == 2)
+    {
+        [GKAPI getTagListWithUserId:self.user.userId offset:0 count:30 success:^(GKUser *user, NSArray *tagArray) {
+            self.dataArrayForTag = [NSMutableArray arrayWithArray:tagArray];
+            [self.tableView reloadData];
+            [self.tableView.pullToRefreshView stopAnimating];
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:@"失败"];
+            [self.tableView reloadData];
+            [self.tableView.pullToRefreshView stopAnimating];
+        }];
+    }
     return;
 }
 - (void)loadMore
@@ -165,6 +178,11 @@
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
+    else if (self.index == 2)
+    {
+        [self.tableView reloadData];
+        [self.tableView.infiniteScrollingView stopAnimating];
+    }
     return;
 }
 
@@ -176,6 +194,10 @@
         return 1;
     }
     else if (self.index == 1)
+    {
+        return 1;
+    }
+    else if (self.index == 2)
     {
         return 1;
     }
@@ -191,7 +213,11 @@
         }
         else if (self.index == 1)
         {
-            return ceil(self.dataArrayForNote.count / (CGFloat)3);
+            return ceil(self.dataArrayForNote.count / (CGFloat)1);
+        }
+        else if (self.index == 2)
+        {
+            return ceil(self.dataArrayForTag.count / (CGFloat)1);
         }
         return 0;
     }
@@ -225,12 +251,25 @@
         }
         else if (self.index == 1)
         {
-            static NSString *CellIdentifier = @"NoteCell";
-            NoteSingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            static NSString *NoteCellIdentifier = @"NoteCell";
+            NoteSingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:NoteCellIdentifier];
             if (!cell) {
-                cell = [[NoteSingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell = [[NoteSingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NoteCellIdentifier];
             }
             cell.note = [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"note"];
+            
+            return cell;
+        }
+        else if (self.index == 2)
+        {
+            static NSString *TagCellIdentifier = @"TagCell";
+            TagCell *cell = [tableView dequeueReusableCellWithIdentifier:TagCellIdentifier];
+            if (!cell) {
+                cell = [[TagCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TagCellIdentifier];
+            }
+
+            cell.tagName = [[self.dataArrayForTag objectAtIndex:indexPath.row] objectForKey:@"tag"];
+            cell.entityCount = [[[self.dataArrayForTag objectAtIndex:indexPath.row] objectForKey:@"entity_count"] integerValue];
             
             return cell;
         }
@@ -264,6 +303,11 @@
                 return h;
             }
         }
+        else if(self.index ==2)
+        {
+            return [TagCell height];
+        }
+        
         return 0;
     }
     else
@@ -339,7 +383,10 @@
             break;
         case 2:
         {
-            
+            if (self.dataArrayForTag.count == 0) {
+                [self.tableView.pullToRefreshView startAnimating];
+                [self refresh];
+            }
         }
             break;
             
