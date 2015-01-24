@@ -10,6 +10,7 @@
 #import "HMSegmentedControl.h"
 #import "GKAPI.h"
 #import "MessageCell.h"
+#import "FeedCell.h"
 
 @interface NotifactionViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -102,8 +103,14 @@
 - (void)refresh
 {
     if (self.index == 0) {
-        [SVProgressHUD showImage:nil status:@"失败"];
-        [self.tableView.pullToRefreshView stopAnimating];
+        
+        [GKAPI getFeedWithTimestamp:[[NSDate date] timeIntervalSince1970] type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
+            self.dataArrayForFeed = [NSMutableArray arrayWithArray:feedArray];
+            [self.tableView reloadData];
+            [self.tableView.pullToRefreshView stopAnimating];
+        } failure:^(NSInteger stateCode) {
+            [self.tableView.pullToRefreshView stopAnimating];
+        }];
     }
     else if (self.index == 1)
     {
@@ -112,7 +119,7 @@
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            
+            [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
     return;
@@ -120,8 +127,14 @@
 - (void)loadMore
 {
     if (self.index == 0) {
-        [SVProgressHUD showImage:nil status:@"失败"];
-        [self.tableView.infiniteScrollingView stopAnimating];
+        GKNote *note = self.dataArrayForFeed.lastObject[@"object"][@"note"];
+        [GKAPI getFeedWithTimestamp:note.updatedTime type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
+            [self.dataArrayForFeed addObjectsFromArray:feedArray];
+            [self.tableView reloadData];
+            [self.tableView.pullToRefreshView stopAnimating];
+        } failure:^(NSInteger stateCode) {
+            [self.tableView.infiniteScrollingView stopAnimating];
+        }];
     }
     else if (self.index == 1)
     {
@@ -159,15 +172,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.index == 0) {
-        
-        if (1) {
-            return [[UITableViewCell alloc]init];
+        static NSString *CellIdentifier = @"FeedCell";
+        FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        else
-        {
-            return [[UITableViewCell alloc]init];
-        }
-        
+    
+        cell.feed = self.dataArrayForFeed[indexPath.row];
+        return cell;
     }
     else if (self.index == 1)
     {
@@ -188,13 +200,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.index == 0) {
-        if (1) {
-            return 100;
-        }
-        else
-        {
-            return 100;
-        }
+        return [FeedCell height:self.dataArrayForFeed[indexPath.row]];
         
     }
     else if (self.index == 1)
@@ -222,7 +228,9 @@
     switch (index) {
         case 0:
         {
-            
+            if (self.dataArrayForFeed.count == 0) {
+                [self refresh];
+            }
         }
             break;
         case 1:

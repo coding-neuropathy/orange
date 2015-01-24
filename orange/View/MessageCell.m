@@ -53,6 +53,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) RTLabel *label;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UIView *H;
 
 @end
 
@@ -65,6 +66,9 @@ typedef NS_ENUM(NSInteger, MessageType) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
+        self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
+        [self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -138,10 +142,13 @@ typedef NS_ENUM(NSInteger, MessageType) {
     
     [self configContent];
     
-    self.timeLabel.deFrameBottom = self.deFrameHeight - 5.f;
+    self.timeLabel.deFrameBottom = self.deFrameHeight - 10.f;
     self.timeLabel.deFrameLeft = 50;
     NSTimeInterval timestamp = [self.message[@"time"] doubleValue];
     self.timeLabel.text = [[NSDate dateWithTimeIntervalSince1970:timestamp] stringWithDefaultFormat];
+    
+    [self bringSubviewToFront:self.H];
+    _H.deFrameBottom = self.frame.size.height;
     
 }
 

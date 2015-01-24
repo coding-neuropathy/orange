@@ -36,7 +36,7 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonAction)];
         [self addGestureRecognizer:tap];
     
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, self.frame.size.width, 0.5)];
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
         self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
         [self.contentView addSubview:self.H];
     }
@@ -260,7 +260,7 @@
 }
 
 #pragma mark - Action
-- (void)buttonAction
+- (void)likeButtonAction
 {
 
 }

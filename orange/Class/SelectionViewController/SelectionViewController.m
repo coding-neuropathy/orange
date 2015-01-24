@@ -226,7 +226,7 @@
     if (self.index == 0) {
         if (1) {
             GKNote * note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
-            return [SelectionCell heightForEmojiText:note.text]+380;
+            return [SelectionCell heightForEmojiText:note.text]+370;
         }
         else
         {

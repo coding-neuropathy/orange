@@ -19,6 +19,7 @@
 @property (nonatomic, strong) MLEmojiLabel *emojiLabel;
 @property (nonatomic, strong) UIButton *likeButton;
 @property (nonatomic, strong) UIButton *timeButton;
+@property (nonatomic, strong) UIView *H;
 
 @end
 
@@ -32,6 +33,9 @@
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
+        self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
+        [self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -148,6 +152,9 @@
     self.timeButton.deFrameRight = self.emojiLabel.deFrameRight;
     self.timeButton.deFrameTop = self.emojiLabel.deFrameBottom+10;
     [self.timeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self bringSubviewToFront:self.H];
+    _H.deFrameBottom = self.frame.size.height-5;
 }
 
 #pragma mark - getter
@@ -160,7 +167,7 @@
         _emojiLabel.delegate = self;
         _emojiLabel.backgroundColor = [UIColor clearColor];
         _emojiLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        _emojiLabel.textColor = UIColorFromRGB(0x414243);
+        _emojiLabel.textColor = [UIColor darkGrayColor];
         _emojiLabel.backgroundColor = [UIColor colorWithRed:0.218 green:0.809 blue:0.304 alpha:1.000];
         
         _emojiLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);

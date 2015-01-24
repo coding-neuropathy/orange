@@ -442,7 +442,7 @@
         NSURL *imageURL = [NSURL URLWithString:[dict valueForKey:@"img"]];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.bannerScrollView.frame) * idx, 0.f, CGRectGetWidth(self.bannerScrollView.frame), CGRectGetHeight(self.bannerScrollView.frame))];
         imageView.tag = 100;
-        imageView.backgroundColor = UIColorFromRGB(0xffffff);
+        imageView.backgroundColor = UIColorFromRGB(0xf1f1f1);
         [imageView setContentMode:UIViewContentModeScaleAspectFill];
         [imageView sd_setImageWithURL:imageURL placeholderImage:nil options:SDWebImageRetryFailed];
         [self.bannerScrollView addSubview:imageView];

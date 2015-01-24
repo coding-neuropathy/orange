@@ -29,7 +29,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, self.frame.size.width, 0.5)];
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
         self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
         [self.contentView addSubview:self.H];
     }
@@ -81,14 +81,14 @@
         self.timeButton.layer.masksToBounds = YES;
         self.timeButton.layer.cornerRadius = 2;
         self.timeButton.backgroundColor = [UIColor clearColor];
-        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+        self.timeButton.titleLabel.font = [UIFont systemFontOfSize:10];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [self.timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [self.contentView addSubview:self.timeButton];
     }
-    [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
+    [self.timeButton setTitle:[NSString stringWithFormat:@"%@",[self.note.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
     self.timeButton.deFrameRight = self.emojiLabel.deFrameRight;
     self.timeButton.deFrameBottom = self.frame.size.height-10;
     //[self.timeButton addTarget:self action:@selector() forControlEvents:UIControlEventTouchUpInside];
@@ -104,11 +104,11 @@
     if (!_emojiLabel) {
         _emojiLabel = [MLEmojiLabel new];
         _emojiLabel.numberOfLines = 0;
-        _emojiLabel.font = [UIFont systemFontOfSize:15.0f];
+        _emojiLabel.font = [UIFont systemFontOfSize:14.0f];
         _emojiLabel.delegate = self;
         _emojiLabel.backgroundColor = [UIColor clearColor];
         _emojiLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        _emojiLabel.textColor = UIColorFromRGB(0x666666);
+        _emojiLabel.textColor = [UIColor darkGrayColor];
         _emojiLabel.backgroundColor = [UIColor colorWithRed:0.218 green:0.809 blue:0.304 alpha:1.000];
         
         _emojiLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);

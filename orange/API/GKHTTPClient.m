@@ -113,8 +113,8 @@
 
 - (void)successLogWithOperation:(AFHTTPRequestOperation *)operation responseObject:(id)responseObject
 {
-    NSInteger stateCode = operation.response.statusCode;
-    NSString *urlString = operation.response.URL.absoluteString;
+   // NSInteger stateCode = operation.response.statusCode;
+   // NSString *urlString = operation.response.URL.absoluteString;
 }
 
 - (void)failureLogWithOperation:(AFHTTPRequestOperation *)operation responseObject:(NSError *)error
@@ -124,7 +124,7 @@
     if (!urlString) {
         urlString = operation.response.URL.absoluteString;
     }
-    NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
+   // NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
 
     
     if (stateCode == 0) {
