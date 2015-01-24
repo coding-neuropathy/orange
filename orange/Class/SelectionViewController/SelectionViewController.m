@@ -281,7 +281,7 @@
 {
     UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 60, 30)];
     icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    icon.tintColor = UIColorFromRGB(0x696969);
+    icon.tintColor = [UIColor darkGrayColor];
     icon.contentMode = UIViewContentModeScaleAspectFit;
     icon.userInteractionEnabled = YES;
     self.navigationItem.titleView = icon;
