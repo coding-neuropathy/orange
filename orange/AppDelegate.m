@@ -143,7 +143,8 @@
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(2, 2)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[[UIImage imageWithColor:UIColorFromRGB(0xeeeeee) andSize:CGSizeMake(1, 1)] stretchableImageWithLeftCapWidth:1 topCapHeight:1]];
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x2b2b2b)];
-    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0xcacaca)];
+    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x427ec0)];
+    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x2b2b2b)}];
     
     
@@ -195,7 +196,7 @@
 
 - (UINavigationController *)activityNavController
 {
-    return [self activityNavController].navigationController;
+    return [self activityViewController].navigationController;
 }
 
 

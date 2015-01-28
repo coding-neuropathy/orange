@@ -1143,6 +1143,8 @@
 		4EAA48CD19E03BA80098C9E0 /* 3297.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA457F19E03BA60098C9E0 /* 3297.png */; };
 		4EAA48CE19E03BA80098C9E0 /* 3299.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA458019E03BA60098C9E0 /* 3299.png */; };
 		4EAA48D319E03C870098C9E0 /* EmojiOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA48D219E03C870098C9E0 /* EmojiOne.m */; };
+		4EB6ADAB1A771CCA0089797A /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6ADAA1A771CCA0089797A /* NoteCell.m */; };
+		4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6ADAE1A77D7220089797A /* BaseViewController.m */; };
 		4ECCD0D91A714A7D009D5A42 /* TagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0D81A714A7D009D5A42 /* TagCell.m */; };
 		4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */; };
 		4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */; };
@@ -2451,6 +2453,10 @@
 		4EAA458019E03BA60098C9E0 /* 3299.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3299.png; sourceTree = "<group>"; };
 		4EAA48D119E03C870098C9E0 /* EmojiOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiOne.h; sourceTree = "<group>"; };
 		4EAA48D219E03C870098C9E0 /* EmojiOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiOne.m; sourceTree = "<group>"; };
+		4EB6ADA91A771CCA0089797A /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
+		4EB6ADAA1A771CCA0089797A /* NoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteCell.m; sourceTree = "<group>"; };
+		4EB6ADAD1A77D7220089797A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		4EB6ADAE1A77D7220089797A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		4ECCD0D71A714A7D009D5A42 /* TagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagCell.h; sourceTree = "<group>"; };
 		4ECCD0D81A714A7D009D5A42 /* TagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagCell.m; sourceTree = "<group>"; };
 		4ECCD0DA1A7297A7009D5A42 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
@@ -2525,6 +2531,8 @@
 				4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */,
 				4ECCD0DA1A7297A7009D5A42 /* FeedCell.h */,
 				4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */,
+				4EB6ADA91A771CCA0089797A /* NoteCell.h */,
+				4EB6ADAA1A771CCA0089797A /* NoteCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3346,6 +3354,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4EB6ADAC1A77D70E0089797A /* BaseViewController */,
 				4ECCD0DD1A7348AF009D5A42 /* EntityViewController */,
 				4E1D70191A5ADB890032719E /* DiscoverViewController */,
 				4E1D701A1A5ADB890032719E /* MeViewController */,
@@ -4262,6 +4271,15 @@
 				4EAA458019E03BA60098C9E0 /* 3299.png */,
 			);
 			path = png;
+			sourceTree = "<group>";
+		};
+		4EB6ADAC1A77D70E0089797A /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4EB6ADAD1A77D7220089797A /* BaseViewController.h */,
+				4EB6ADAE1A77D7220089797A /* BaseViewController.m */,
+			);
+			path = BaseViewController;
 			sourceTree = "<group>";
 		};
 		4ECCD0DD1A7348AF009D5A42 /* EntityViewController */ = {
@@ -5368,6 +5386,7 @@
 				4E56DF8619D56EF500263B17 /* SDWebImageManager.m in Sources */,
 				4E3A23661A51AE8300037F9C /* AFPropertyListRequestOperation.m in Sources */,
 				4E1D28E01A125B9300740C17 /* JSQMessagesToolbarContentView.m in Sources */,
+				4EB6ADAB1A771CCA0089797A /* NoteCell.m in Sources */,
 				4E1D28DA1A125B9300740C17 /* JSQMessagesComposerTextView.m in Sources */,
 				4E2D6D3F1A69601F009E4A17 /* SVIndefiniteAnimatedView.m in Sources */,
 				4E2D6D411A69601F009E4A17 /* SVProgressHUD.m in Sources */,
@@ -5410,6 +5429,7 @@
 				4E3A23451A51A7C500037F9C /* GKEntity.m in Sources */,
 				4ECCD0D91A714A7D009D5A42 /* TagCell.m in Sources */,
 				4E3A23421A51A7C500037F9C /* GKNote+ImageURLFixes.m in Sources */,
+				4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */,
 				4E8D6A9C1A38B59F00156C17 /* UIFont+FontDiao.m in Sources */,
 				4E1D70251A5ADC100032719E /* NotifactionViewController.m in Sources */,
 				4E5251F31A2D43910058C6D6 /* URBMediaFocusViewController.m in Sources */,

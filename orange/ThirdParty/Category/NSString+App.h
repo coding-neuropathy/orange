@@ -18,4 +18,6 @@
 
 - (NSUInteger)unsignedIntValue;
 
+- (unsigned long long)unsignedLongLongValue;
+
 @end

@@ -1,13 +1,13 @@
 //
-//  MeViewController.h
+//  BaseViewController.h
 //  orange
 //
-//  Created by huiter on 15/1/5.
+//  Created by huiter on 15/1/27.
 //  Copyright (c) 2015年 sensoro. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface MeViewController : BaseViewController
+@interface BaseViewController : UIViewController
 
 @end

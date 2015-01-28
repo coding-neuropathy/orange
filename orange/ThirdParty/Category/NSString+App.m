@@ -44,4 +44,8 @@
     return [self integerValue];
 }
 
+- (unsigned long long)unsignedLongLongValue {
+    return self.longLongValue;
+}
+
 @end

@@ -294,14 +294,9 @@
         else if (self.index == 1)
         {
             GKNote * note =  [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"note"];
+            GKEntity * entity =  [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"entity"];
+            note.entityChiefImage = entity.imageURL_640x640;
             CGFloat h = [NoteSingleListCell heightForEmojiText:note.text];
-            if (h<100) {
-                return 100;
-            }
-            else
-            {
-                return h;
-            }
         }
         else if(self.index ==2)
         {

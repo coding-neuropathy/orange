@@ -56,7 +56,7 @@
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [button setTitleColor:UIColorFromRGB(0xcacaca) forState:UIControlStateNormal];
+            [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
             [button setTitle:[NSString fontAwesomeIconStringForEnum:FARefresh] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
             button.backgroundColor = [UIColor clearColor];
@@ -86,9 +86,7 @@
     [self.view addSubview:self.tableView];
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
-    
 
-    
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];

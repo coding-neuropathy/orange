@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NotifactionViewController : UIViewController
+@interface NotifactionViewController : BaseViewController
 
 @end

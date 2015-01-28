@@ -12,7 +12,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UINavigationController * root;
-- (UIViewController *)activityViewController;
-- (UINavigationController *)activityNavController;
+@property (strong, nonatomic) UIViewController * activeVC;
 @end
 

@@ -260,7 +260,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@ </font></a><font face='Helvetica' color='^777777' size=14>喜爱了你推荐的商品</font>", user.userId, user.nickname];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = CGRectMake(self.label.deFrameLeft, self.label.deFrameBottom+15, 80, 80);
+            self.image.frame = CGRectMake(self.label.deFrameLeft, self.label.deFrameBottom+10, 80, 80);
             __block UIImageView *block_img = self.image;
             [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {
@@ -419,7 +419,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser * user = message[@"content"][@"user"];
             label.text =  [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@ </font></a><font face='Helvetica' color='^777777' size=14>赞了你对 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^555555' size=14>%@</font></a><font face='Helvetica' color='^777777' size=14> 的点评</font>", user.userId, user.nickname ,note.entityId,note.title];
             CGFloat y = label.optimumSize.height + 5.f;
-            height = 150 + y;
+            height = 160 + y;
             break;
         }
             //商品被点评
@@ -428,13 +428,13 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKNote *note = message[@"content"][@"note"];
             label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
             CGFloat y = label.optimumSize.height + 5.f;
-            height = 150 + y;
+            height = 160 + y;
             break;
         }
             
         case MessageEntityLike:
         {
-            height = 150;
+            height = 160;
             break;
         }
             

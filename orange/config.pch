@@ -61,6 +61,7 @@
 #import "Config.h"
 
 #import "AppDelegate.h"
+#import "BaseViewController.h"
 
 #import "GKEntity.h"
 #import "GKNote.h"

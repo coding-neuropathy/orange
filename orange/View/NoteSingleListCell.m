@@ -108,7 +108,7 @@
         _emojiLabel.delegate = self;
         _emojiLabel.backgroundColor = [UIColor clearColor];
         _emojiLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        _emojiLabel.textColor = [UIColor darkGrayColor];
+        _emojiLabel.textColor = UIColorFromRGB(0x777777);
         _emojiLabel.backgroundColor = [UIColor colorWithRed:0.218 green:0.809 blue:0.304 alpha:1.000];
         
         _emojiLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -148,7 +148,15 @@
     
     [protypeLabel setText:emojiText];
     
-    return [protypeLabel preferredSizeWithMaxWidth: kScreenWidth - 110].height+5.0f*2;
+    CGFloat h = [protypeLabel preferredSizeWithMaxWidth: kScreenWidth - 110].height+5.0f + 30;
+    
+    if (h<100) {
+        return 100;
+    }
+    else
+    {
+        return h;
+    }
 }
 
 - (void)mlEmojiLabel:(MLEmojiLabel*)emojiLabel didSelectLink:(NSString*)link withType:(MLEmojiLabelLinkType)type

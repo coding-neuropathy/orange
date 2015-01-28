@@ -9,7 +9,7 @@
 #import "SelectionCell.h"
 #import "MLEmojiLabel.h"
 #import "GKAPI.h"
-
+#import "EntityViewController.h"
 #define kWidth (kScreenWidth - 20)
 @interface SelectionCell()<MLEmojiLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;
@@ -80,6 +80,7 @@
         _image = [[UIImageView alloc] initWithFrame:CGRectMake(25.0f, 17.0f,kScreenWidth -50, 280)];
         self.image.contentMode = UIViewContentModeScaleAspectFit;
         self.image.backgroundColor = [UIColor whiteColor];
+        self.image.userInteractionEnabled = YES;
         [self.contentView addSubview:self.image];
     }
     __block UIImageView *block_img = self.image;
@@ -96,10 +97,7 @@
                 block_img.contentMode = UIViewContentModeScaleAspectFit;
             }
             if (image && cacheType == SDImageCacheTypeNone) {
-                block_img.alpha = 0.0;
-                [UIView animateWithDuration:0.25 animations:^{
-                    block_img.alpha = 1.0;
-                }];
+
             }
             [weakSelf.activityIndicator stopAnimating];
             weakSelf.activityIndicator.hidden = YES;
@@ -129,7 +127,7 @@
         [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
         [self.contentView addSubview:self.likeButton];        
     }
-    [self.likeButton setTitle:[NSString stringWithFormat:@"%ld",self.entity.likeCount] forState:UIControlStateNormal];
+    [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
     self.likeButton.selected = self.entity.liked;
     self.likeButton.deFrameLeft = self.emojiLabel.deFrameLeft;
     self.likeButton.deFrameTop = self.emojiLabel.deFrameBottom+10;
@@ -155,6 +153,10 @@
     
     [self bringSubviewToFront:self.H];
     _H.deFrameBottom = self.frame.size.height-5;
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                     initWithTarget:self action:@selector(imageButtonAction)];
+    [self.image addGestureRecognizer:tap];
 }
 
 #pragma mark - getter
@@ -251,7 +253,7 @@
             self.entity.likeCount = self.entity.likeCount-1;
             [SVProgressHUD dismiss];
         }
-        [self.likeButton setTitle:[NSString stringWithFormat:@"%ld",self.entity.likeCount] forState:UIControlStateNormal];
+        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
 
 
 
@@ -260,6 +262,16 @@
   
     }];
 }
+
+- (void)imageButtonAction
+{
+    EntityViewController * VC = [[EntityViewController alloc]init];
+    VC.hidesBottomBarWhenPushed = YES;
+    VC.entity = self.entity;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
+
 
 
 @end
