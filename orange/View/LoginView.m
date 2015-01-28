@@ -181,7 +181,6 @@
     }
     
     [GKAPI loginWithEmail:email password:password success:^(GKUser *user, NSString *session) {
-        [Passport sharedInstance].user = user;
         if (self.successBlock) {
             self.successBlock();
         }

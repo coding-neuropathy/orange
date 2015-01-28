@@ -1,0 +1,21 @@
+//
+//  UserSingleListCell.h
+//  orange
+//
+//  Created by huiter on 15/1/28.
+//  Copyright (c) 2015年 sensoro. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "RTLabel.h"
+
+@interface UserSingleListCell : UITableViewCell<RTLabelDelegate>
+@property(strong, nonatomic) GKUser * user;
+@property (nonatomic, strong) UIImageView *avatar;
+@property (nonatomic, strong) RTLabel *label;
+@property (nonatomic, strong) RTLabel *contentLabel;
+@property (nonatomic, strong) UIButton *followButton;
+@property (nonatomic, strong) UIView *H;
+
++ (CGFloat)height;
+@end

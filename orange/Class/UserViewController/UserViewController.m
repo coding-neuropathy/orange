@@ -1,12 +1,12 @@
 //
-//  MeViewController.m
+//  UserViewController.m
 //  orange
 //
 //  Created by huiter on 15/1/5.
 //  Copyright (c) 2015年 sensoro. All rights reserved.
 //
 
-#import "MeViewController.h"
+#import "UserViewController.h"
 #import "GKAPI.h"
 #import "HMSegmentedControl.h"
 #import "EntityThreeGridCell.h"
@@ -15,30 +15,25 @@
 #import "FanViewController.h"
 #import "FriendViewController.h"
 
-@interface MeViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
+@interface UserViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property(nonatomic, strong) NSMutableArray * dataArrayForNote;
 @property(nonatomic, strong) NSMutableArray * dataArrayForTag;
-@property(nonatomic, strong) GKUser *user;
+
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
 
 @end
 
-@implementation MeViewController
+@implementation UserViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"我" image:[UIImage imageNamed:@"me"] selectedImage:[UIImage imageNamed:@"me"]];
-        
-        self.tabBarItem = item;
-        
-        self.title = @"我";
     }
     return self;
 }
@@ -50,7 +45,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight -kTabBarHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -69,21 +64,18 @@
      [self.tableView addInfiniteScrollingWithActionHandler:^{
          [weakSelf loadMore];
      }];
-    
-    if (k_isLogin) {
-        self.user = [Passport sharedInstance].user;
-        [self refresh];
-    }
-    
-    [self.tableView.pullToRefreshView startAnimating];
-
+}
+- (void)setUser:(GKUser *)user
+{
+    _user = user;
+    self.title = _user.nickname;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.user = [Passport sharedInstance].user;
-
+    [self configHeaderView];
+    [self.tableView reloadData];
     if (self.dataArrayForEntity.count == 0) {
         [self refresh];
     }
@@ -92,8 +84,8 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self configHeaderView];
-    [self.tableView reloadData];
+
+ 
     
 }
 

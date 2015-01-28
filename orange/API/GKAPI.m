@@ -571,7 +571,8 @@
         
         NSString *session = objectDict[@"session"];
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
-        
+        [Passport sharedInstance].user = user;
+        [Passport sharedInstance].session = session;
         if (success) {
             success(user, session);
         }
