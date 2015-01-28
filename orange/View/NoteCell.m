@@ -100,7 +100,7 @@
     }
     [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
     self.pokeButton.deFrameLeft = self.contentLabel.deFrameLeft;
-    self.pokeButton.deFrameBottom = self.contentView.deFrameHeight -5;
+    self.pokeButton.deFrameBottom = self.contentView.deFrameHeight -10;
     [self.pokeButton addTarget:self action:@selector(pokeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     if (!self.commentButton) {
@@ -123,8 +123,31 @@
     }
     [self.commentButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FACommentO],self.note.commentCount] forState:UIControlStateNormal];
     self.commentButton.deFrameLeft = self.pokeButton.deFrameRight +10;
-    self.commentButton.deFrameBottom = self.contentView.deFrameHeight -5;
+    self.commentButton.deFrameBottom = self.contentView.deFrameHeight -10;
     [self.commentButton addTarget:self action:@selector(commentButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (!self.timeButton) {
+        _timeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
+        self.timeButton.layer.masksToBounds = YES;
+        self.timeButton.layer.cornerRadius = 2;
+        self.timeButton.backgroundColor = [UIColor clearColor];
+        self.timeButton.titleLabel.font = [UIFont systemFontOfSize:10];
+        self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
+        [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        [self.timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+        [self.contentView addSubview:self.timeButton];
+    }
+    if (self.note.marked) {
+        [self.timeButton setImage:[UIImage imageNamed:@"icon_star"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.timeButton setImage:nil forState:UIControlStateNormal];
+    }
+    [self.timeButton setTitle:[NSString stringWithFormat:@"%@",[self.note.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
+    self.timeButton.deFrameRight = kScreenWidth - 15;
+    self.timeButton.deFrameBottom =  self.contentView.deFrameHeight -10;
     
     [self bringSubviewToFront:self.H];
     _H.deFrameBottom = self.frame.size.height;
@@ -136,7 +159,7 @@
     label.paragraphReplacement = @"";
     label.lineSpacing = 4.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>“ %@ ”</font>", note.text];
-    return label.optimumSize.height + 75.f;
+    return label.optimumSize.height + 80.f;
     
     
 }

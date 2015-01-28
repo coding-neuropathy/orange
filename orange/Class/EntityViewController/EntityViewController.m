@@ -17,8 +17,8 @@
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIButton *likeButton;
 @property (nonatomic, strong) UIButton *buyButton;
-@property (nonatomic, strong) UIButton *categoryButton;
 
+@property (nonatomic, strong) UIButton *categoryButton;
 @property (nonatomic, strong) UIView *likeUserView;
 
 @property (nonatomic, strong) NSMutableArray *dataArrayForlikeUser;
@@ -181,13 +181,7 @@
         }
     }
     else if (section == 2) {
-        if (self.dataArrayForNote.count) {
-            return 0.01;
-        }
-        else
-        {
-            return 0.01;
-        }
+        return 50;
     }
     else if (section == 3) {
         return 40;
@@ -291,7 +285,6 @@
         if(!self.likeUserView)
         {
             self.likeUserView  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
-            self.likeUserView.backgroundColor = UIColorFromRGB(0xf1f1f1);
         }
         
         for (UIView * view in self.likeUserView.subviews) {
@@ -326,6 +319,25 @@
         }
         
         return self.likeUserView;
+    }
+    
+    else if (section == 2) {
+        if(!self.categoryButton)
+        {
+            self.categoryButton  = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+            
+        }
+        
+        GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
+        [self.categoryButton setTitle:[NSString stringWithFormat:@"来自「%@」",[category.categoryName componentsSeparatedByString:@"-"][0]] forState:UIControlStateNormal];
+        [self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [self.categoryButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
+        [self.categoryButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
+        self.categoryButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.categoryButton setTitleColor:UIColorFromRGB(0x555555) forState:UIControlStateNormal];
+        
+        
+        return self.categoryButton;
     }
     if (section == 3) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 20.f, CGRectGetWidth(tableView.frame)-20, 20.f)];

@@ -10,6 +10,7 @@
 #import "EmojiOne.h"
 #import "WXApi.h"
 #import "TabBarViewController.h"
+#import "GKAPI.h"
 
 
 
@@ -54,6 +55,39 @@
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[TabBarViewcontroller alloc]init];
     [self.window makeKeyAndVisible];
+    
+    
+    [GKAPI getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
+        
+        NSMutableArray *categoryGroupArray = [NSMutableArray array];
+        NSMutableArray *allCategoryArray = [NSMutableArray array];
+        
+        for (NSDictionary *groupDict in fullCategoryGroupArray) {
+            NSArray *categoryArray = groupDict[@"CategoryArray"];
+            
+            NSMutableArray *filteredCategoryArray = [NSMutableArray array];
+            for (GKEntityCategory *category in categoryArray) {
+                [allCategoryArray addObject:category];
+                
+                if (category.status) {
+                    [filteredCategoryArray addObject:category];
+                }
+            }
+            NSDictionary *filteredGroupDict = @{@"GroupId"       : groupDict[@"GroupId"],
+                                                @"GroupName"     : groupDict[@"GroupName"],
+                                                @"Status"        : groupDict[@"Status"],
+                                                @"Count"         : @(categoryArray.count),
+                                                @"CategoryArray" : filteredCategoryArray};
+            if ([groupDict[@"Status"] integerValue] > 0) {
+                [categoryGroupArray addObject:filteredGroupDict];
+            }
+        }
+
+        
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:@"失败"];
+        
+    }];
     
     return YES;
 }
