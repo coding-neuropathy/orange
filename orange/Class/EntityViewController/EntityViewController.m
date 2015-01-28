@@ -269,7 +269,7 @@
             self.buyButton.selected = self.entity.liked;
             self.buyButton.deFrameRight= kScreenWidth - 15;
             self.buyButton.deFrameTop = self.image.deFrameBottom+15;
-            [self.buyButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
+            [self.buyButton addTarget:self action:@selector(buyButtonAction) forControlEvents:UIControlEventTouchUpInside];
         }
         
         return self.header;
@@ -326,6 +326,15 @@
         {
             self.categoryButton  = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
             
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 50)];
+            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+            button.titleLabel.textAlignment = NSTextAlignmentCenter;
+            [button setTitleColor:UIColorFromRGB(0xcacaca) forState:UIControlStateNormal];
+            [button setTitle:[NSString fontAwesomeIconStringForEnum:FAAngleRight] forState:UIControlStateNormal];
+            button.deFrameRight = kScreenWidth -20;
+            
+            button.backgroundColor = [UIColor clearColor];
+            [self.categoryButton addSubview:button];
         }
         
         GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
@@ -335,6 +344,8 @@
         [self.categoryButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
         self.categoryButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.categoryButton setTitleColor:UIColorFromRGB(0x555555) forState:UIControlStateNormal];
+        
+
         
         
         return self.categoryButton;
