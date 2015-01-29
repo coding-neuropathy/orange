@@ -141,7 +141,7 @@
 {
     NSParameterAssert(categoryId > 0);
     
-    NSString *path = [NSString stringWithFormat:@"category/%u/stat", categoryId];
+    NSString *path = [NSString stringWithFormat:@"category/%ld/stat", categoryId];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"GET" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
@@ -228,7 +228,7 @@
     NSParameterAssert(offset >= 0);
     NSParameterAssert(count > 0);
     
-    NSString *path = [NSString stringWithFormat:@"category/%u/entity/", categoryId];
+    NSString *path = [NSString stringWithFormat:@"category/%ld/entity/", categoryId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:sort forKey:@"sort"];
@@ -277,7 +277,7 @@
                                 success:(void (^)(NSArray *entityArray))success
                                 failure:(void (^)(NSInteger stateCode))failure
 {
-    NSString *path = [NSString stringWithFormat:@"category/%u/user/%u/like/", categoryId, userId];
+    NSString *path = [NSString stringWithFormat:@"category/%ld/user/%ld/like/", categoryId, userId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:sort forKey:@"sort"];
@@ -328,7 +328,7 @@
     NSParameterAssert(offset >= 0);
     NSParameterAssert(count > 0);
     
-    NSString *path = [NSString stringWithFormat:@"category/%u/entity/note/", categoryId];
+    NSString *path = [NSString stringWithFormat:@"category/%ld/entity/note/", categoryId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:sort forKey:@"sort"];
@@ -384,7 +384,7 @@
     NSParameterAssert(offset >= 0);
     NSParameterAssert(count > 0);
     
-    NSString *path = [NSString stringWithFormat:@"category/%u/candidate/", categoryId];
+    NSString *path = [NSString stringWithFormat:@"category/%ld/candidate/", categoryId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@(offset) forKey:@"offset"];
@@ -900,7 +900,7 @@
     NSParameterAssert(content);
     NSParameterAssert(score >= 0);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%u/update/", noteId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/update/", noteId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:content forKey:@"note"];
@@ -940,7 +940,7 @@
 {
     NSParameterAssert(noteId > 0);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%u/del/", noteId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/del/", noteId];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
@@ -972,7 +972,7 @@
     NSParameterAssert(userId > 0);
     NSParameterAssert(count > 0);
     
-    NSString *path = [NSString stringWithFormat:@"user/%u/like/", userId];
+    NSString *path = [NSString stringWithFormat:@"user/%ld/like/", userId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@(timestamp) forKey:@"timestamp"];
@@ -1018,7 +1018,7 @@
     NSParameterAssert(offset >= 0);
     NSParameterAssert(count > 0);
     
-    NSString *path = [NSString stringWithFormat:@"user/%u/following/", userId];
+    NSString *path = [NSString stringWithFormat:@"user/%ld/following/", userId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@(offset) forKey:@"offset"];
@@ -1063,7 +1063,7 @@
     NSParameterAssert(offset >= 0);
     NSParameterAssert(count > 0);
     
-    NSString *path = [NSString stringWithFormat:@"user/%u/fan/", userId];
+    NSString *path = [NSString stringWithFormat:@"user/%ld/fan/", userId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@(offset) forKey:@"offset"];
@@ -1145,7 +1145,7 @@
     NSParameterAssert(userId > 0);
     NSParameterAssert(count > 0);
     
-    NSString *path = [NSString stringWithFormat:@"user/%u/entity/note/", userId];
+    NSString *path = [NSString stringWithFormat:@"user/%ld/entity/note/", userId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@(timestamp) forKey:@"timestamp"];
@@ -1194,7 +1194,7 @@
 {
     NSParameterAssert(userId > 0);
     
-    NSString *path = [NSString stringWithFormat:@"user/%u/tag/", userId];
+    NSString *path = [NSString stringWithFormat:@"user/%ld/tag/", userId];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"GET" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
@@ -1235,7 +1235,7 @@
     NSParameterAssert(userId > 0);
     NSParameterAssert(tag);
     
-    NSString *path = [NSString stringWithFormat:@"user/%u/tag/%@/", userId, tag];
+    NSString *path = [NSString stringWithFormat:@"user/%ld/tag/%@/", userId, tag];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@(offset) forKey:@"offset"];
@@ -1413,7 +1413,7 @@
 {
     NSParameterAssert(userId > 0);
     
-    NSString *path = [NSString stringWithFormat:@"user/%u/follow/%d/", userId, state];
+    NSString *path = [NSString stringWithFormat:@"user/%ld/follow/%d/", userId, state];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
@@ -1496,7 +1496,7 @@
 {
     NSParameterAssert(noteId > 0);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%u/", noteId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/", noteId];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"GET" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
@@ -1544,7 +1544,7 @@
 {
     NSParameterAssert(noteId > 0);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%u/poke/%d/", noteId, state];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/poke/%d/", noteId, state];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
@@ -1577,7 +1577,7 @@
 {
     NSParameterAssert(userId > 0);
     
-    NSString *path = [NSString stringWithFormat:@"user/%u/", userId];
+    NSString *path = [NSString stringWithFormat:@"user/%ld/", userId];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"GET" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
@@ -1708,7 +1708,7 @@
     NSParameterAssert(noteId > 0);
     NSParameterAssert(content);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%u/add/comment/", noteId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/add/comment/", noteId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:content forKey:@"comment"];
@@ -1751,7 +1751,7 @@
     NSParameterAssert(commentCreatorId >= 0);
     NSParameterAssert(content);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%u/add/comment/", noteId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/add/comment/", noteId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:content forKey:@"comment"];
@@ -1792,7 +1792,7 @@
     NSParameterAssert(noteId > 0);
     NSParameterAssert(commentId >= 0);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%u/comment/%u/del/", noteId, commentId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/comment/%ld/del/", noteId, commentId];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
@@ -2111,7 +2111,7 @@
     NSParameterAssert(noteId > 0);
     NSParameterAssert(comment);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%u/report/", noteId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/report/", noteId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:comment forKey:@"comment"];

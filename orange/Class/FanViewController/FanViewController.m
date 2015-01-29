@@ -69,7 +69,7 @@
 - (void)refresh
 {
     
-    [GKAPI getUserFollowingListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
+    [GKAPI getUserFanListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
         self.dataArrayForUser = [NSMutableArray arrayWithArray:userArray];
         [self.tableView reloadData];
         [self.tableView.pullToRefreshView stopAnimating];
@@ -81,7 +81,7 @@
 }
 - (void)loadMore
 {
-    [GKAPI getUserFollowingListWithUserId:self.user.userId offset:self.dataArrayForUser.count count:30 success:^(NSArray *userArray) {
+    [GKAPI getUserFanListWithUserId:self.user.userId offset:self.dataArrayForUser.count count:30 success:^(NSArray *userArray) {
         [self.dataArrayForUser addObjectsFromArray:userArray];
         [self.tableView reloadData];
         [self.tableView.infiniteScrollingView stopAnimating];

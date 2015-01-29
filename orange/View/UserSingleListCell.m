@@ -8,6 +8,7 @@
 
 #import "UserSingleListCell.h"
 #import "UserViewController.h"
+#import "GKAPI.h"
 
 @implementation UserSingleListCell
 
@@ -93,6 +94,17 @@
         [self.contentView addSubview:button];
         self.followButton = button;
     }
+    [self configFollowButton];
+    
+    [self bringSubviewToFront:self.H];
+    _H.deFrameBottom = self.frame.size.height;
+}
+
+-(void)configFollowButton
+{
+    for (id target in [self.followButton allTargets]) {
+        [self.followButton removeTarget:target action:NULL forControlEvents:UIControlEventAllEvents];
+    }
     self.followButton.hidden = NO;
     if (self.user.relation == GKUserRelationTypeNone) {
         [self.followButton setTitle:[NSString stringWithFormat:@"+"] forState:UIControlStateNormal];
@@ -108,31 +120,39 @@
     }
     if (self.user.relation == GKUserRelationTypeFollowing) {
         [self.followButton setTitle:[NSString stringWithFormat:@"-"] forState:UIControlStateNormal];
-        [self.followButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
-        [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
+        [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeBoth) {
         [self.followButton setTitle:[NSString stringWithFormat:@"－"] forState:UIControlStateNormal];
-        [self.followButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
-        [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
+        [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeSelf) {
         self.followButton.hidden = YES;
     }
-    
-    [self bringSubviewToFront:self.H];
-    _H.deFrameBottom = self.frame.size.height;
 }
-
 - (void)followButtonAction
 {
-
+    [GKAPI followUserId:self.user.userId state:YES success:^(GKUserRelationType relation) {
+        self.user.relation = relation;
+        [self configFollowButton];
+        [SVProgressHUD showImage:nil status:@"关注成功"];
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:@"关注失败"];
+    }];
 }
 - (void)unfollowButtonAction
 {
-    
+    [GKAPI followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
+        self.user.relation = relation;
+        [self configFollowButton];
+        [SVProgressHUD showImage:nil status:@"取关成功"];
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:@"取关失败"];
+    }];
 }
 - (void)avatarButtonAction
 {
