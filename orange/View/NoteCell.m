@@ -7,7 +7,7 @@
 //
 
 #import "NoteCell.h"
-
+#import "UserViewController.h"
 @implementation NoteCell
 
 
@@ -50,8 +50,13 @@
         _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 13.f, 36.f, 36.f)];
         [self.contentView addSubview:self.avatar];
         self.avatar.layer.cornerRadius = 18;
+        self.avatar.userInteractionEnabled = YES;
         self.avatar.layer.masksToBounds = YES;
     }
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self action:@selector(avatarButtonAction)];
+    [self.avatar addGestureRecognizer:tap];
     
     [self.avatar sd_setImageWithURL:self.note.creator.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
     self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
@@ -169,5 +174,11 @@
 }
 - (void)commentButtonAction
 {
+}
+- (void)avatarButtonAction
+{
+    UserViewController * VC = [[UserViewController alloc]init];
+    VC.user = self.note.creator;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 @end

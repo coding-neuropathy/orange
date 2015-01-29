@@ -10,6 +10,7 @@
 #import "GKAPI.h"
 #import "NoteCell.h"
 #import "EntityThreeGridCell.h"
+#import "UserViewController.h"
 
 @interface EntityViewController ()
 @property (nonatomic, strong) UIView *header;
@@ -314,6 +315,8 @@
             avatar.layer.cornerRadius = 15;
             avatar.layer.masksToBounds = YES;
             [avatar sd_setImageWithURL:user.avatarURL forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
+            avatar.tag = i;
+            [avatar addTarget:self action:@selector(avatarButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.likeUserView addSubview:avatar];
             i++;
         }
@@ -423,5 +426,11 @@
         [SVProgressHUD showImage:nil status:@"喜爱失败"];
         
     }];
+}
+- (void)avatarButtonAction:(UIButton *)button;
+{
+    UserViewController * VC = [[UserViewController alloc]init];
+    VC.user = [self.dataArrayForlikeUser objectAtIndex:button.tag];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 @end

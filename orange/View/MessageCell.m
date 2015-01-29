@@ -8,6 +8,8 @@
 
 #import "MessageCell.h"
 #import "RTLabel.h"
+#import "UserViewController.h"
+#import "EntityViewController.h"
 /**
  *  消息类型
  */
@@ -138,6 +140,10 @@ typedef NS_ENUM(NSInteger, MessageType) {
         _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.f, 13.f, 21.f, 21.f)];
         [self.contentView addSubview:self.image];
         [self.image addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        self.image.userInteractionEnabled = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(avatarButtonAction)];
+        [self.image addGestureRecognizer:tap];
     }
     
     [self configContent];
@@ -322,13 +328,18 @@ typedef NS_ENUM(NSInteger, MessageType) {
     NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
     if([array[0] isEqualToString:@"user"])
     {
-        
+        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
+        UserViewController * VC = [[UserViewController alloc]init];
+        VC.user = user;
+        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
     if([array[0] isEqualToString:@"entity"])
     {
         GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
-
-        
+        EntityViewController * VC = [[EntityViewController alloc]init];
+        VC.hidesBottomBarWhenPushed = YES;
+        VC.entity = entity;
+        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
 }
 
@@ -453,4 +464,24 @@ typedef NS_ENUM(NSInteger, MessageType) {
     return height;
 }
 
+- (void)avatarButtonAction
+{
+    NSDictionary * message = self.message;
+    GKNote *note = message[@"content"][@"note"];
+    //GKEntity *entity = feed[@"content"][@"entity"];
+    UserViewController * VC = [[UserViewController alloc]init];
+    VC.user = note.creator;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)imageButtonAction
+{
+    NSDictionary * message = self.message;
+    //GKNote *note = message[@"content"][@"note"];
+    GKEntity *entity = message[@"content"][@"entity"];
+    EntityViewController * VC = [[EntityViewController alloc]init];
+    VC.hidesBottomBarWhenPushed = YES;
+    VC.entity = entity;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
 @end

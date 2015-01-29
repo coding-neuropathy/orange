@@ -8,6 +8,8 @@
 
 #import "FeedCell.h"
 #import "RTLabel.h"
+#import "EntityViewController.h"
+#import "UserViewController.h"
 
 typedef NS_ENUM(NSInteger, FeedType) {
     /**
@@ -85,6 +87,10 @@ typedef NS_ENUM(NSInteger, FeedType) {
         self.avatar.layer.cornerRadius = 18;
         self.avatar.layer.masksToBounds = YES;
         [self.avatar addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        self.avatar.userInteractionEnabled = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(avatarButtonAction)];
+        [self.avatar addGestureRecognizer:tap];
     }
     
     if(!self.label) {
@@ -122,6 +128,10 @@ typedef NS_ENUM(NSInteger, FeedType) {
         _image = [[UIImageView alloc] initWithFrame:CGRectMake(60.f, 0.f, 100, 100)];
         [self.contentView addSubview:self.image];
         [self.image addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        self.image.userInteractionEnabled = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(imageButtonAction)];
+        [self.avatar addGestureRecognizer:tap];
     }
     
     [self configContent];
@@ -233,6 +243,46 @@ typedef NS_ENUM(NSInteger, FeedType) {
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     ((UIView *)object).hidden = NO;
+}
+- (void)avatarButtonAction
+{
+    NSDictionary * feed = self.feed;
+    GKNote *note = feed[@"object"][@"note"];
+    //GKEntity *entity = feed[@"object"][@"entity"];
+    UserViewController * VC = [[UserViewController alloc]init];
+    VC.user = note.creator;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)imageButtonAction
+{
+    NSDictionary * feed = self.feed;
+    //GKNote *note = feed[@"object"][@"note"];
+    GKEntity *entity = feed[@"object"][@"entity"];
+    EntityViewController * VC = [[EntityViewController alloc]init];
+    VC.hidesBottomBarWhenPushed = YES;
+    VC.entity = entity;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url
+{
+    NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
+    if([array[0] isEqualToString:@"user"])
+    {
+        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
+        UserViewController * VC = [[UserViewController alloc]init];
+        VC.user = user;
+        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    }
+    if([array[0] isEqualToString:@"entity"])
+    {
+        GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
+        EntityViewController * VC = [[EntityViewController alloc]init];
+        VC.hidesBottomBarWhenPushed = YES;
+        VC.entity = entity;
+        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    }
 }
 
 @end
