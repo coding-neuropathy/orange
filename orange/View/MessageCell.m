@@ -142,7 +142,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         [self.image addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
         self.image.userInteractionEnabled = YES;
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self action:@selector(avatarButtonAction)];
+                                       initWithTarget:self action:@selector(imageButtonAction)];
         [self.image addGestureRecognizer:tap];
     }
     
@@ -477,11 +477,18 @@ typedef NS_ENUM(NSInteger, MessageType) {
 - (void)imageButtonAction
 {
     NSDictionary * message = self.message;
-    //GKNote *note = message[@"content"][@"note"];
+    GKNote *note = message[@"content"][@"note"];
     GKEntity *entity = message[@"content"][@"entity"];
     EntityViewController * VC = [[EntityViewController alloc]init];
     VC.hidesBottomBarWhenPushed = YES;
-    VC.entity = entity;
+    if(entity)
+    {
+        VC.entity = entity;
+    }
+    else
+    {
+        VC.entity = [GKEntity modelFromDictionary:@{@"entityId":@([note.entityId integerValue])}];
+    }
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 @end

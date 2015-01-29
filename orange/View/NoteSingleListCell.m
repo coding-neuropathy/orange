@@ -9,6 +9,7 @@
 #import "NoteSingleListCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "MLEmojiLabel.h"
+#import "EntityViewController.h"
 
 
 #define kWidth (kScreenWidth - 20)
@@ -64,6 +65,10 @@
         self.image.contentMode = UIViewContentModeScaleAspectFit;
         self.image.backgroundColor = UIColorFromRGB(0xffffff);
         [self.contentView addSubview:self.image];
+        self.image.userInteractionEnabled = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(imageButtonAction)];
+        [self.image addGestureRecognizer:tap];
     }
 
     {
@@ -213,5 +218,12 @@
 
 }
 
+- (void)imageButtonAction
+{
+    EntityViewController * VC = [[EntityViewController alloc]init];
+    VC.hidesBottomBarWhenPushed = YES;
+    VC.entity = [GKEntity modelFromDictionary:@{@"entityId":@([self.note.entityId integerValue])}];
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
 
 @end

@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         self.image.userInteractionEnabled = YES;
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
                                        initWithTarget:self action:@selector(imageButtonAction)];
-        [self.avatar addGestureRecognizer:tap];
+        [self.image addGestureRecognizer:tap];
     }
     
     [self configContent];

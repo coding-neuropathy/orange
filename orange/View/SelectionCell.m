@@ -48,7 +48,11 @@
 }
 - (void)setEntity:(GKEntity *)entity
 {
+    if (_entity) {
+        [self removeObserver];
+    }
     _entity = entity;
+    [self addObserver];
     [self setNeedsLayout];
 }
 - (void)setNote:(GKNote *)note
@@ -235,6 +239,34 @@
             break;
     }
     
+}
+#pragma mark - KVO
+- (void)addObserver
+{
+    [self.entity addObserver:self forKeyPath:@"likeCount" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    [self.entity addObserver:self forKeyPath:@"liked" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)removeObserver
+{
+    [self.entity removeObserver:self forKeyPath:@"likeCount"];
+    [self.entity removeObserver:self forKeyPath:@"liked"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"likeCount"]) {
+        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+    }
+    else if ([keyPath isEqualToString:@"liked"]) {
+        self.likeButton.selected = self.entity.liked;
+    }
+        
+}
+
+- (void)dealloc
+{
+    [self removeObserver];
 }
 
 #pragma mark - Action

@@ -5690,7 +5690,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "16d18dd0-16d0-49ea-a74e-4434192b0fea";
+				PROVISIONING_PROFILE = "ce37bf43-8112-4a0c-9d8e-1a9e7857de31";
 			};
 			name = Debug;
 		};
@@ -5717,7 +5717,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "16d18dd0-16d0-49ea-a74e-4434192b0fea";
+				PROVISIONING_PROFILE = "ce37bf43-8112-4a0c-9d8e-1a9e7857de31";
 			};
 			name = Release;
 		};
