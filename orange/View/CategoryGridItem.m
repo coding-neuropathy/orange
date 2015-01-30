@@ -7,6 +7,7 @@
 //
 
 #import "CategoryGridItem.h"
+#import "CategoryViewController.h"
 
 
 @interface CategoryGridItem()
@@ -136,7 +137,9 @@
 }
 - (void)buttonAction
 {
-
+    CategoryViewController * VC = [[CategoryViewController alloc]init];
+    VC.category = self.category;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
 @end

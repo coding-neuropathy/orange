@@ -8,6 +8,7 @@
 
 #import "NoteCell.h"
 #import "UserViewController.h"
+#import "GKAPI.h"
 @implementation NoteCell
 
 
@@ -94,6 +95,7 @@
         self.pokeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.pokeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [self.pokeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [self.pokeButton setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateSelected];
         /*
         [self.pokeButton setImage:[UIImage imageNamed:@"icon_poke"] forState:UIControlStateNormal];
         [self.pokeButton setImage:[UIImage imageNamed:@"icon_poke"] forState:UIControlStateHighlighted|UIControlStateNormal];
@@ -103,6 +105,7 @@
         [self.pokeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [self.contentView addSubview:self.pokeButton];
     }
+    self.pokeButton.selected = self.note.poked;
     [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
     self.pokeButton.deFrameLeft = self.contentLabel.deFrameLeft;
     self.pokeButton.deFrameBottom = self.contentView.deFrameHeight -10;
@@ -171,6 +174,21 @@
 #pragma mark - Action
 - (void)pokeButtonAction
 {
+    [GKAPI pokeWithNoteId:self.note.noteId state:!self.pokeButton.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
+        if (poked == self.pokeButton.selected) {
+            
+        }
+        else if (poked) {
+            self.note.pokeCount = self.note.pokeCount+1;
+        } else {
+            self.note.pokeCount = self.note.pokeCount-1;
+        }
+        self.note.poked = poked;
+        [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+        self.pokeButton.selected = self.note.poked;
+    } failure:^(NSInteger stateCode) {
+        
+    }];
 }
 - (void)commentButtonAction
 {

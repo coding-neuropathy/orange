@@ -131,7 +131,7 @@
         [GKAPI getFeedWithTimestamp:note.updatedTime type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
             [self.dataArrayForFeed addObjectsFromArray:feedArray];
             [self.tableView reloadData];
-            [self.tableView.pullToRefreshView stopAnimating];
+            [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
             [self.tableView.infiniteScrollingView stopAnimating];
         }];

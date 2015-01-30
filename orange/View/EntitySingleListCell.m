@@ -8,6 +8,8 @@
 
 #import "EntitySingleListCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GKAPI.h"
+#import "EntityViewController.h"
 
 
 
@@ -134,10 +136,10 @@
         self.tipLabel.textAlignment = NSTextAlignmentRight;
         self.tipLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         [self.tipLabel setBackgroundColor:[UIColor clearColor]];
-        self.tipLabel.textColor = UIColorFromRGB(0xbfbfbf);
+        self.tipLabel.textColor = UIColorFromRGB(0xcacaca);
        [self.contentView addSubview:self.tipLabel];
     }
-    [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld %@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],self.entity.likeCount,[NSString fontAwesomeIconStringForEnum:FAComment],self.entity.noteCount]];
+    [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],self.entity.likeCount,[NSString fontAwesomeIconStringForEnum:FAComment],self.entity.noteCount]];
     self.tipLabel.deFrameTop = self.frame.size.height - 20;
     self.tipLabel.deFrameRight = self.frame.size.width - 10;
     
@@ -173,21 +175,25 @@
     }];
     
     if (!self.likeButton) {
-        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 20)];
         self.likeButton.layer.masksToBounds = YES;
         self.likeButton.layer.cornerRadius = 2;
         self.likeButton.backgroundColor = [UIColor clearColor];
-        self.likeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
-        self.likeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-        [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [self.likeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
-        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,3, 0, 0)];
+        self.likeButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        self.likeButton.titleLabel.textAlignment = NSTextAlignmentRight;
+        [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
+        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [self.contentView addSubview:self.likeButton];
     }
-    [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],self.entity.likeCount] forState:UIControlStateNormal];
+    [self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
+    self.likeButton.selected = self.entity.liked;
     [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    self.likeButton.deFrameSize = CGSizeMake(50.f, 30.f);
-    self.likeButton.deFrameRight = self.deFrameWidth - 5;
+    self.likeButton.deFrameRight = self.deFrameWidth - 10;
     self.likeButton.deFrameTop = 5;
     
     if (!self.entity_mark) {
@@ -238,20 +244,27 @@
 }
 
 #pragma mark - KVO
-
 - (void)addObserver
 {
-
+    [self.entity addObserver:self forKeyPath:@"likeCount" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    [self.entity addObserver:self forKeyPath:@"liked" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)removeObserver
 {
-
+    [self.entity removeObserver:self forKeyPath:@"likeCount"];
+    [self.entity removeObserver:self forKeyPath:@"liked"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-
+    if ([keyPath isEqualToString:@"likeCount"]) {
+        [self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
+    }
+    else if ([keyPath isEqualToString:@"liked"]) {
+        self.likeButton.selected = self.entity.liked;
+    }
+    
 }
 
 - (void)dealloc
@@ -262,7 +275,34 @@
 #pragma mark - Action
 - (void)likeButtonAction
 {
+    [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
+        if (liked == self.likeButton.selected) {
+            [SVProgressHUD showImage:nil status:@"喜爱成功"];
+        }
+        self.likeButton.selected = liked;
+        self.entity.liked = liked;
+        if (liked) {
+            [SVProgressHUD showImage:nil status:@"喜爱成功"];
+            self.entity.likeCount = self.entity.likeCount+1;
+        } else {
+            self.entity.likeCount = self.entity.likeCount-1;
+            [SVProgressHUD dismiss];
+        }
+        [self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        
+        
+        
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:@"喜爱失败"];
+        
+    }];
+}
 
+- (void)buttonAction
+{
+    EntityViewController * VC = [[EntityViewController alloc]init];
+    VC.entity = self.entity;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
 + (CGFloat)height

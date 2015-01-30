@@ -1149,6 +1149,7 @@
 		4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7931A79286A0057D736 /* FriendViewController.m */; };
 		4EC9F7971A7928C70057D736 /* UserSingleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7961A7928C70057D736 /* UserSingleListCell.m */; };
 		4EC9F79B1A7937AE0057D736 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F79A1A7937AE0057D736 /* UserViewController.m */; };
+		4EC9F79F1A7A79800057D736 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F79E1A7A79800057D736 /* CategoryViewController.m */; };
 		4ECCD0D91A714A7D009D5A42 /* TagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0D81A714A7D009D5A42 /* TagCell.m */; };
 		4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */; };
 		4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */; };
@@ -2469,6 +2470,8 @@
 		4EC9F7961A7928C70057D736 /* UserSingleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSingleListCell.m; sourceTree = "<group>"; };
 		4EC9F7991A7937AE0057D736 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		4EC9F79A1A7937AE0057D736 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		4EC9F79D1A7A79800057D736 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
+		4EC9F79E1A7A79800057D736 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		4ECCD0D71A714A7D009D5A42 /* TagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagCell.h; sourceTree = "<group>"; };
 		4ECCD0D81A714A7D009D5A42 /* TagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagCell.m; sourceTree = "<group>"; };
 		4ECCD0DA1A7297A7009D5A42 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
@@ -3368,6 +3371,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4EC9F79C1A7A79670057D736 /* CategoryViewController */,
 				4EC9F7981A7937AE0057D736 /* UserViewController */,
 				4EC9F78D1A7928300057D736 /* FanViewController */,
 				4EC9F78E1A7928300057D736 /* FriendViewController */,
@@ -4324,6 +4328,15 @@
 				4EC9F79A1A7937AE0057D736 /* UserViewController.m */,
 			);
 			path = UserViewController;
+			sourceTree = "<group>";
+		};
+		4EC9F79C1A7A79670057D736 /* CategoryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4EC9F79D1A7A79800057D736 /* CategoryViewController.h */,
+				4EC9F79E1A7A79800057D736 /* CategoryViewController.m */,
+			);
+			path = CategoryViewController;
 			sourceTree = "<group>";
 		};
 		4ECCD0DD1A7348AF009D5A42 /* EntityViewController */ = {
@@ -5473,6 +5486,7 @@
 				4E56DF8B19D56EF500263B17 /* UIImage+WebP.m in Sources */,
 				4E56DF8D19D56EF500263B17 /* UIImageView+WebCache.m in Sources */,
 				4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */,
+				4EC9F79F1A7A79800057D736 /* CategoryViewController.m in Sources */,
 				4E3A23451A51A7C500037F9C /* GKEntity.m in Sources */,
 				4ECCD0D91A714A7D009D5A42 /* TagCell.m in Sources */,
 				4E3A23421A51A7C500037F9C /* GKNote+ImageURLFixes.m in Sources */,
