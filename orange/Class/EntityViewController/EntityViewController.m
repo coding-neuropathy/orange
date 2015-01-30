@@ -11,8 +11,10 @@
 #import "NoteCell.h"
 #import "EntityThreeGridCell.h"
 #import "UserViewController.h"
+#import "NotePostViewController.h"
 
 @interface EntityViewController ()
+@property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UIView *header;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *image;
@@ -34,6 +36,23 @@
     // Do any additional setup after loading the view.
     // Do any additional setup after loading the view.
     
+    NSMutableArray * array = [NSMutableArray array];
+    
+    {
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:24];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAPencilSquareO] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor = [UIColor clearColor];
+        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+        [array addObject:item];
+    }
+    
+    self.navigationItem.rightBarButtonItems = array;
+    
+    
     self.title = @"商品";
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
     
@@ -48,6 +67,8 @@
     [self.view addSubview:self.tableView];
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,6 +99,12 @@
     [GKAPI getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray) {
         self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
         self.dataArrayForNote = [NSMutableArray arrayWithArray:noteArray];
+        for (GKNote *note in self.dataArrayForNote) {
+            if (note.creator.userId == [Passport sharedInstance].user.userId) {
+                self.note = note;
+                break;
+            }
+        }
         [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
         
@@ -427,6 +454,25 @@
         
     }];
 }
+
+- (void)noteButtonAction
+{
+    NotePostViewController * VC = [[NotePostViewController alloc]init];
+    VC.entity = self.entity;
+    VC.note = self.note;
+    VC.successBlock = ^(GKNote *note) {
+        if (![self.dataArrayForNote containsObject:note]) {
+            [self.dataArrayForNote insertObject:note atIndex:self.dataArrayForNote.count];
+        }
+        
+        //[self.noteButton setTitle:@"修改" forState:UIControlStateNormal];
+        self.note = note;
+        [self.tableView reloadData];
+    };
+    [self.navigationController pushViewController:VC animated:YES];
+
+}
+
 - (void)avatarButtonAction:(UIButton *)button;
 {
     UserViewController * VC = [[UserViewController alloc]init];

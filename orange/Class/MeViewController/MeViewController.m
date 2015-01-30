@@ -14,6 +14,7 @@
 #import "TagCell.h"
 #import "FanViewController.h"
 #import "FriendViewController.h"
+#import "TagViewController.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -358,6 +359,16 @@
     return 0.01f;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.index == 2) {
+        TagViewController * VC = [[TagViewController alloc]init];
+        VC.tagName = [[self.dataArrayForTag objectAtIndex:indexPath.row] objectForKey:@"tag"];
+        VC.user = self.user;
+        VC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:VC animated:YES];
+    }
+}
 
 #pragma mark - HMSegmentedControl
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
