@@ -11,7 +11,10 @@
 #import "WXApi.h"
 #import "TabBarViewController.h"
 #import "GKAPI.h"
-
+#import "EntityViewController.h"
+#import "UserViewController.h"
+#import "CategoryViewController.h"
+#import "TagViewController.h"
 
 
 @interface AppDelegate ()<WXApiDelegate>
@@ -25,7 +28,7 @@
     
     [AVOSCloud setApplicationId:@"qrvkrm5k86ljg3jrj3ri08sr0dyetgpevd31mul1ffrrxzqd" clientKey:@"bmdnkhha3cbb46sfuyta68e2va7ny3p678p6y3soi8hgdjc1"];
     [AVPush setProductionMode:YES];
-    [WXApi registerApp:@"wxf9d896f11987407d"];
+    [WXApi registerApp:kGK_WeixinShareKey];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self customizeAppearance];
@@ -233,5 +236,67 @@
     return [self activityViewController].navigationController;
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if([[url absoluteString]hasPrefix:@"guoku"])
+    {
+        NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSRange range = [absoluteString rangeOfString:@"entity/"];
+        if (range.location != NSNotFound) {
+            NSString *entityId = [absoluteString substringFromIndex:range.location+range.length];
+            EntityViewController *vc = [[EntityViewController alloc]init];
+            vc.entity = [GKEntity modelFromDictionary:@{@"entityId":entityId}];
+            if (self.activeVC.navigationController) {
+                [self.activeVC.navigationController pushViewController:vc animated:YES];
+            }
+        }
+        else
+        {
+            NSRange range = [absoluteString rangeOfString:@"category/"];
+            if (range.location != NSNotFound) {
+                NSString *categoryId = [absoluteString substringFromIndex:range.location+range.length];
+                CategoryViewController * vc = [[CategoryViewController alloc]init];
+                vc.category = [GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}];
+                if (self.activeVC.navigationController) {
+                    [self.activeVC.navigationController pushViewController:vc animated:YES];
+                }
+            }
+            else{
+                NSRange range = [absoluteString rangeOfString:@"tag/"];
+                if (range.location != NSNotFound) {
+                    NSString * tag = [[absoluteString substringFromIndex:range.location+range.length] stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                    NSString *otherString = [absoluteString substringToIndex:range.location];
+                    NSRange otherRange = [otherString rangeOfString:@"user"];
+                    if (otherRange.location != NSNotFound) {
+                        NSString *userId = [[otherString substringFromIndex:otherRange.location+otherRange.length]stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
+                        TagViewController * vc = [[TagViewController alloc]init];
+                        vc.tagName = tag;
+                        vc.user = user;
+                        if (self.activeVC.navigationController) {
+                            [self.activeVC.navigationController pushViewController:vc animated:YES];
+                        }
+                    }
+                }
+                else
+                {
+                    NSRange range = [absoluteString rangeOfString:@"user/"];
+                    if (range.location != NSNotFound) {
+                        NSString *userId = [absoluteString substringFromIndex:range.location+range.length];
+                        UserViewController * vc = [[UserViewController alloc]init];
+                        vc.user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
+                        if (self.activeVC.navigationController) {
+                            [self.activeVC.navigationController pushViewController:vc animated:YES];
+                        }
+                    }
+                }
 
+            }
+        }
+        
+    }
+    
+    return YES;
+}
 @end

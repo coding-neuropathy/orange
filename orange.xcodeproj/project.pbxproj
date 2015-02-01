@@ -284,6 +284,9 @@
 		4E56DFCB19D5B83B00263B17 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFC919D5B83B00263B17 /* CoreFoundation.framework */; };
 		4E56DFCC19D5B83B00263B17 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFCA19D5B83B00263B17 /* CoreGraphics.framework */; };
 		4E56DFCE19D5B84300263B17 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFCD19D5B84300263B17 /* QuartzCore.framework */; };
+		4E66C1DC1A7C8B2500F31A90 /* AVOSCloud.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4E66C1D91A7C8B2500F31A90 /* AVOSCloud.bundle */; };
+		4E66C1DD1A7C8B2500F31A90 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1DB1A7C8B2500F31A90 /* SettingViewController.m */; };
+		4E66C1E11A7CBD2F00F31A90 /* GKWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E01A7CBD2F00F31A90 /* GKWebVC.m */; };
 		4E8D6A991A38B59F00156C17 /* fontdiao.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */; };
 		4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A921A38B59F00156C17 /* NSString+FontDiao.m */; };
 		4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A941A38B59F00156C17 /* UIButton+FontDiao.m */; };
@@ -1591,6 +1594,11 @@
 		4E56DFC919D5B83B00263B17 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		4E56DFCA19D5B83B00263B17 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4E56DFCD19D5B84300263B17 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4E66C1D91A7C8B2500F31A90 /* AVOSCloud.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AVOSCloud.bundle; sourceTree = "<group>"; };
+		4E66C1DA1A7C8B2500F31A90 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		4E66C1DB1A7C8B2500F31A90 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		4E66C1DF1A7CBD2F00F31A90 /* GKWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKWebVC.h; sourceTree = "<group>"; };
+		4E66C1E01A7CBD2F00F31A90 /* GKWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKWebVC.m; sourceTree = "<group>"; };
 		4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontdiao.ttf; sourceTree = "<group>"; };
 		4E8D6A901A38B59F00156C17 /* FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontDiao.h; sourceTree = "<group>"; };
 		4E8D6A911A38B59F00156C17 /* NSString+FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontDiao.h"; sourceTree = "<group>"; };
@@ -3377,6 +3385,8 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4E66C1DE1A7CBD2F00F31A90 /* GKWebViewVC */,
+				4E66C1D81A7C8B2500F31A90 /* SettingViewController */,
 				4EC9F7A41A7BD0EE0057D736 /* NotePostViewController */,
 				4EC9F7A01A7BBED20057D736 /* TagViewController */,
 				4EC9F79C1A7A79670057D736 /* CategoryViewController */,
@@ -3392,6 +3402,25 @@
 				4E3A238A1A52F21800037F9C /* TabBarViewcontroller */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		4E66C1D81A7C8B2500F31A90 /* SettingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E66C1D91A7C8B2500F31A90 /* AVOSCloud.bundle */,
+				4E66C1DA1A7C8B2500F31A90 /* SettingViewController.h */,
+				4E66C1DB1A7C8B2500F31A90 /* SettingViewController.m */,
+			);
+			path = SettingViewController;
+			sourceTree = "<group>";
+		};
+		4E66C1DE1A7CBD2F00F31A90 /* GKWebViewVC */ = {
+			isa = PBXGroup;
+			children = (
+				4E66C1DF1A7CBD2F00F31A90 /* GKWebVC.h */,
+				4E66C1E01A7CBD2F00F31A90 /* GKWebVC.m */,
+			);
+			path = GKWebViewVC;
 			sourceTree = "<group>";
 		};
 		4E8D6A8D1A38B59F00156C17 /* FontDiao */ = {
@@ -5001,6 +5030,7 @@
 				4EAA474D19E03BA70098C9E0 /* 1F4DA.png in Resources */,
 				4E066B581A5CC02400DFEF65 /* Expression_63@2x.png in Resources */,
 				4EAA480619E03BA70098C9E0 /* 1F63C.png in Resources */,
+				4E66C1DC1A7C8B2500F31A90 /* AVOSCloud.bundle in Resources */,
 				4EAA45E619E03BA60098C9E0 /* 1F33D.png in Resources */,
 				4EAA472719E03BA70098C9E0 /* 1F4B4.png in Resources */,
 				4EAA467D19E03BA60098C9E0 /* 1F408.png in Resources */,
@@ -5552,6 +5582,7 @@
 				4E1D28C01A125B9300740C17 /* UIView+JSQMessages.m in Sources */,
 				4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */,
 				4E1D28CF1A125B9300740C17 /* JSQMessagesAvatarImage.m in Sources */,
+				4E66C1DD1A7C8B2500F31A90 /* SettingViewController.m in Sources */,
 				4E1D28D31A125B9300740C17 /* JSQMessagesCellTextView.m in Sources */,
 				4E2D6D471A69610B009E4A17 /* GKRotateLoadingView.m in Sources */,
 				4E1D701F1A5ADB9A0032719E /* DiscoverViewController.m in Sources */,
@@ -5596,6 +5627,7 @@
 				4E2D6D431A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				4E1D70221A5ADBA50032719E /* MeViewController.m in Sources */,
 				4E3A23651A51AE8300037F9C /* AFNetworkActivityIndicatorManager.m in Sources */,
+				4E66C1E11A7CBD2F00F31A90 /* GKWebVC.m in Sources */,
 				4E216ABD1A261395009FF11D /* UIView+JDFlipImageView.m in Sources */,
 				4E2D6D4F1A6AC261009E4A17 /* UIViewController+ScrollingNavbar.m in Sources */,
 				4E3A23781A51B12300037F9C /* NSString+App.m in Sources */,

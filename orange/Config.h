@@ -12,6 +12,38 @@
 #ifndef kAppID_iPhone
 #define kAppID_iPhone @"939493680"
 #endif
+
+#ifndef kTTID_IPHONE
+#define kTTID_IPHONE @"400000_12313170@guoku_iphone"
+#endif
+
+#ifndef kGK_AppID_iPhone
+#define kGK_AppID_iPhone @"477652209"
+#endif
+
+
+// weibo
+#ifndef kGK_WeiboAPPKey
+#define kGK_WeiboAPPKey @"1459383851"
+#endif
+
+#ifndef kGK_WeiboSecret
+#define kGK_WeiboSecret @"bfb2e43c3fa636f102b304c485fa2110"
+#endif
+
+#ifndef kGK_WeiboRedirectURL
+#define kGK_WeiboRedirectURL @"http://www.guoku.com/sina/auth"
+#endif
+
+//weixin
+#ifndef kGK_WeixinShareKey
+#define kGK_WeixinShareKey			@"wx59118ccde8270caa"		//REPLACE ME
+#endif
+
+#ifndef kGK_WeixinShareURL
+#define kGK_WeixinShareURL @"http://www.guoku.com/detail/"  //apisent
+#endif
+
 // Display
 // Screen Height
 #ifndef kScreenHeight

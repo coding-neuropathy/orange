@@ -12,6 +12,9 @@
 #import "EntityThreeGridCell.h"
 #import "UserViewController.h"
 #import "NotePostViewController.h"
+#import "CategoryViewController.h"
+#import "WXApi.h"
+#import "GKWebVC.h"
 
 @interface EntityViewController ()
 @property (nonatomic, strong) GKNote *note;
@@ -38,17 +41,35 @@
     
     NSMutableArray * array = [NSMutableArray array];
     
+    
+
+    
     {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
-        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:24];
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
         [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
-        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAPencilSquareO] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAShareSquareO] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(shareButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
         button.backgroundColor = [UIColor clearColor];
         UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
         [array addObject:item];
     }
+    
+    {
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAPencilSquareO] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
+        button.backgroundColor = [UIColor clearColor];
+        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+        [array addObject:item];
+    }
+    
     
     self.navigationItem.rightBarButtonItems = array;
     
@@ -357,16 +378,17 @@
             self.categoryButton  = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
             
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 50)];
-            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
             [button setTitleColor:UIColorFromRGB(0xcacaca) forState:UIControlStateNormal];
             [button setTitle:[NSString fontAwesomeIconStringForEnum:FAAngleRight] forState:UIControlStateNormal];
             button.deFrameRight = kScreenWidth -20;
-            
             button.backgroundColor = [UIColor clearColor];
             [self.categoryButton addSubview:button];
+            
+            [self.categoryButton addTarget:self action:@selector(categoryButtonAction) forControlEvents:UIControlEventTouchUpInside];
         }
-        
+    
         GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
         [self.categoryButton setTitle:[NSString stringWithFormat:@"来自「%@」",[category.categoryName componentsSeparatedByString:@"-"][0]] forState:UIControlStateNormal];
         [self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
@@ -473,10 +495,182 @@
 
 }
 
+- (void)shareButtonAction
+{
+    if (!self.note) {
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博",@"写点评", @"举报商品", nil];
+        [actionSheet showInView:self.view];
+    }
+    else
+    {
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博",@"修改点评", @"删除点评", @"举报商品", nil];
+        [actionSheet showInView:self.view];
+    }
+
+}
+
+- (void)buyButtonAction
+{
+    if (self.entity.purchaseArray.count >0) {
+        GKPurchase * purchase = self.entity.purchaseArray[0];
+        [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
+    }
+}
+
+- (void)showWebViewWithTaobaoUrl:(NSString *)taobao_url
+{
+    
+    [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:NO];
+    NSString * TTID = [NSString stringWithFormat:@"%@_%@",kTTID_IPHONE,[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    NSString *sid = @"";
+    taobao_url = [taobao_url stringByReplacingOccurrencesOfString:@"&type=mobile" withString:@""];
+    NSString *url = [NSString stringWithFormat:@"%@&sche=com.guoku.iphone&ttid=%@&sid=%@&type=mobile&outer_code=IPE",taobao_url, TTID,sid];
+    GKUser *user = [Passport sharedInstance].user;
+    if(user)
+    {
+        url = [NSString stringWithFormat:@"%@%ld",url,user.userId];
+    }
+    GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+    VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:VC animated:YES];
+    
+}
+
+- (void)categoryButtonAction
+{
+    CategoryViewController * VC = [[CategoryViewController alloc]init];
+    VC.category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
 - (void)avatarButtonAction:(UIButton *)button;
 {
     UserViewController * VC = [[UserViewController alloc]init];
     VC.user = [self.dataArrayForlikeUser objectAtIndex:button.tag];
     [self.navigationController pushViewController:VC animated:YES];
 }
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:@"分享到微信"]) {
+        [self wxShare:0];
+    }else if ([buttonTitle isEqualToString:@"分享到朋友圈"]) {
+        [self wxShare:1];
+    }
+    else if ([buttonTitle isEqualToString:@"分享到新浪微博"]) {
+        [self weiboShare];
+    }
+    else if ([buttonTitle isEqualToString:@"举报商品"]) {
+        return ;
+    }
+    else if ([buttonTitle isEqualToString:@"写点评"]) {
+        [self noteButtonAction];
+    }
+    else if ([buttonTitle isEqualToString:@"修改点评"]) {
+        [self noteButtonAction];
+    }
+    else if ([buttonTitle isEqualToString:@"删除点评"]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定要删除点评？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alertView.delegate = self;
+        [alertView show];
+    }
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [GKAPI deleteNoteByNoteId:self.note.noteId success:^{
+            __block NSInteger noteIndex = -1;
+            [self.dataArrayForNote enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                GKNote *note = obj;
+                if (note.noteId == self.note.noteId) {
+                    noteIndex = (NSInteger)idx;
+                }
+            }];
+            
+            if (noteIndex != -1) {
+                [self.dataArrayForNote removeObjectAtIndex:noteIndex];
+                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:noteIndex inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            self.note = nil;
+        } failure:nil];
+    }
+}
+
+
+- (void)wxShare:(int)scene
+{
+    WXMediaMessage *message = [WXMediaMessage message];
+    
+    UIImage *image = [self.image.image  imageWithSize:CGSizeMake(220.f, 220.f)];
+    NSData *oldData = UIImageJPEGRepresentation(image, 1.0);
+    CGFloat size = oldData.length / 1024;
+    if (size > 25.0f) {
+        CGFloat f = 25.0f / size;
+        NSData *datas = UIImageJPEGRepresentation(image, f);
+        //            float s = datas.length / 1024;
+        //            GKLog(@"s---%f",s);
+        UIImage *smallImage = [UIImage imageWithData:datas];
+        [message setThumbImage:smallImage];
+    }
+    else{
+        [message setThumbImage:image];
+    }
+    
+    WXWebpageObject *webPage = [WXWebpageObject object];
+    webPage.webpageUrl = [NSString stringWithFormat:@"%@%@/?from=wechat",kGK_WeixinShareURL,self.entity.entityHash];
+    message.mediaObject = webPage;
+    message.title = @"果库 - 尽收世上好物";
+    if(scene ==1)
+    {
+        message.title = [NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title];
+        message.description = @"";
+    }
+    else
+    {
+        message.title = @"果库 - 尽收世上好物";
+        message.description = [NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title];
+    }
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene =scene;
+    
+    if ([WXApi sendReq:req]) {
+        
+    }
+    else{
+        [SVProgressHUD showImage:nil status:@"图片太大，请关闭高清图片按钮"];
+    }
+}
+
+- (void)weiboShare
+{
+    if(![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
+    {
+        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            [AVOSCloudSNS shareText:@"果库 - 尽收世上好物" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+                
+            } andProgress:^(float percent) {
+                if (percent == 1) {
+                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+                }
+            }];
+        }];
+    }
+    else
+    {
+        [AVOSCloudSNS shareText:@"果库 - 尽收世上好物" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            
+        } andProgress:^(float percent) {
+            if (percent == 1) {
+                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+            }
+        }];
+    }
+}
+
 @end

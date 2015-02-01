@@ -9,6 +9,7 @@
 #import "UserSingleListCell.h"
 #import "UserViewController.h"
 #import "GKAPI.h"
+#import "LoginView.h"
 
 @implementation UserSingleListCell
 
@@ -136,6 +137,12 @@
 }
 - (void)followButtonAction
 {
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     [GKAPI followUserId:self.user.userId state:YES success:^(GKUserRelationType relation) {
         self.user.relation = relation;
         [self configFollowButton];
@@ -146,6 +153,12 @@
 }
 - (void)unfollowButtonAction
 {
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     [GKAPI followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
         self.user.relation = relation;
         [self configFollowButton];

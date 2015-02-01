@@ -38,6 +38,7 @@
     [self.tabBar setItemPositioning:UITabBarItemPositioningAutomatic];
     
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:@"Logout" object:nil];
     UINavigationController * first = [[UINavigationController alloc]initWithRootViewController:[[SelectionViewController alloc] init]];
     UINavigationController * second = [[UINavigationController alloc]initWithRootViewController:[[DiscoverViewController alloc] init]];
     UINavigationController * third = [[UINavigationController alloc]initWithRootViewController:[[NotifactionViewController alloc] init]];
@@ -107,6 +108,16 @@
     {
         [[self.tabBar viewWithTag:100]removeFromSuperview];
     }
+}
+
+- (void)logout
+{
+    UINavigationController * first = [[UINavigationController alloc]initWithRootViewController:[[SelectionViewController alloc] init]];
+    UINavigationController * second = [[UINavigationController alloc]initWithRootViewController:[[DiscoverViewController alloc] init]];
+    UINavigationController * third = [[UINavigationController alloc]initWithRootViewController:[[NotifactionViewController alloc] init]];
+    UINavigationController * fourth = [[UINavigationController alloc]initWithRootViewController:[[MeViewController alloc] init]];
+    self.viewControllers = @[first,second,third,fourth];
+    [self setSelectedIndex:0];
 }
 
 

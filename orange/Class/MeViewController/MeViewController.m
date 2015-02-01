@@ -15,6 +15,7 @@
 #import "FanViewController.h"
 #import "FriendViewController.h"
 #import "TagViewController.h"
+#import "SettingViewController.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -40,6 +41,24 @@
         self.tabBarItem = item;
         
         self.title = @"我";
+        
+        NSMutableArray * array = [NSMutableArray array];
+        
+        {
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+            button.titleLabel.textAlignment = NSTextAlignmentCenter;
+            [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+            [button setTitle:[NSString fontAwesomeIconStringForEnum:FACog] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(settingButtonAction) forControlEvents:UIControlEventTouchUpInside];
+            [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
+            button.backgroundColor = [UIColor clearColor];
+            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+            [array addObject:item];
+        }
+        
+        
+        self.navigationItem.rightBarButtonItems = array;
     }
     return self;
 }
@@ -519,6 +538,13 @@
 {
     FanViewController * VC = [[FanViewController alloc]init];
     VC.user = self.user;
+    VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)settingButtonAction
+{
+    SettingViewController * VC = [[SettingViewController alloc]init];
     VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
 }

@@ -50,7 +50,7 @@
                 UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(18+i*((kScreenWidth-20)/3), 10, (kScreenWidth-20)/3-16, (kScreenWidth-20)/3-16)];
                 [self.itemArray addObject:button];
                 button.layer.borderColor = UIColorFromRGB(0xeeeeee).CGColor;
-                button.contentMode = UIViewContentModeScaleAspectFit;
+                button.imageView.contentMode = UIViewContentModeScaleAspectFit;
                 button.layer.borderWidth = 0.5;
             
                 [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];

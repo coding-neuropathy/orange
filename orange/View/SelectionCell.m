@@ -10,6 +10,7 @@
 #import "MLEmojiLabel.h"
 #import "GKAPI.h"
 #import "EntityViewController.h"
+#import "LoginView.h"
 #define kWidth (kScreenWidth - 20)
 @interface SelectionCell()<MLEmojiLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;
@@ -272,6 +273,12 @@
 #pragma mark - Action
 - (void)likeButtonAction
 {
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             [SVProgressHUD showImage:nil status:@"喜爱成功"];

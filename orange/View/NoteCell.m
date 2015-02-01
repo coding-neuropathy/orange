@@ -9,6 +9,7 @@
 #import "NoteCell.h"
 #import "UserViewController.h"
 #import "GKAPI.h"
+#import "LoginView.h"
 @implementation NoteCell
 
 
@@ -174,6 +175,12 @@
 #pragma mark - Action
 - (void)pokeButtonAction
 {
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     [GKAPI pokeWithNoteId:self.note.noteId state:!self.pokeButton.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
         if (poked == self.pokeButton.selected) {
             

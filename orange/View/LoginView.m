@@ -184,8 +184,9 @@
         if (self.successBlock) {
             self.successBlock();
         }
+        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
         [self dismiss];
-        [SVProgressHUD dismiss];
+
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         switch (stateCode) {
         case 500:

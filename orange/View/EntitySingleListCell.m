@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GKAPI.h"
 #import "EntityViewController.h"
+#import "LoginView.h"
 
 
 
@@ -83,7 +84,7 @@
     
     // 品牌
     if (!self.brandLabel) {
-        _brandLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imageBG.deFrameRight+5,10, CGRectGetWidth(self.frame) - 160, 20*2)];
+        _brandLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imageBG.deFrameRight+5,10, CGRectGetWidth(self.frame) - 190, 20*2)];
         self.brandLabel.numberOfLines = 2;
         self.brandLabel.font = [UIFont systemFontOfSize:14.f];
         self.brandLabel.textAlignment = NSTextAlignmentLeft;
@@ -93,7 +94,7 @@
     
     // 标题
     if (!self.titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.brandLabel.deFrameLeft, self.brandLabel.deFrameBottom, CGRectGetWidth(self.frame)-160, 15)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.brandLabel.deFrameLeft, self.brandLabel.deFrameBottom, CGRectGetWidth(self.frame)-190, 15)];
         self.titleLabel.numberOfLines = 1;
         self.titleLabel.font = [UIFont systemFontOfSize:13.f];
         self.titleLabel.textAlignment = NSTextAlignmentLeft;
@@ -194,7 +195,7 @@
     self.likeButton.selected = self.entity.liked;
     [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     self.likeButton.deFrameRight = self.deFrameWidth - 10;
-    self.likeButton.deFrameTop = 5;
+    self.likeButton.deFrameTop = 10;
     
     if (!self.entity_mark) {
         _entity_mark = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 33, 33)];
@@ -275,6 +276,12 @@
 #pragma mark - Action
 - (void)likeButtonAction
 {
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             [SVProgressHUD showImage:nil status:@"喜爱成功"];
