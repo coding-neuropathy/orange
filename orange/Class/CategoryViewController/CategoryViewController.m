@@ -174,7 +174,7 @@
 {
     if (self.index == 0) {
         [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
-            self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
+            [self.dataArrayForEntity addObjectsFromArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -186,7 +186,7 @@
     else if (self.index == 1)
     {
         [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
-            self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
+            [self.dataArrayForEntity addObjectsFromArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -198,7 +198,7 @@
     else if (self.index == 2)
     {
         [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
-            self.dataArrayForLike = [NSMutableArray arrayWithArray:entityArray];
+            [self.dataArrayForLike addObjectsFromArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {

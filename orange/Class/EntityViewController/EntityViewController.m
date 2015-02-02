@@ -15,6 +15,7 @@
 #import "CategoryViewController.h"
 #import "WXApi.h"
 #import "GKWebVC.h"
+#import "ReportViewController.h"
 
 @interface EntityViewController ()
 @property (nonatomic, strong) GKNote *note;
@@ -118,6 +119,7 @@
 - (void)refresh
 {
     [GKAPI getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray) {
+        self.entity = entity;
         self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
         self.dataArrayForNote = [NSMutableArray arrayWithArray:noteArray];
         for (GKNote *note in self.dataArrayForNote) {
@@ -431,6 +433,40 @@
     
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        return YES;
+    }
+    return NO;
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView*)tableView  editingStyleForRowAtIndexPath:(NSIndexPath*)indexPath;
+{
+    if (indexPath.section == 2) {
+        return UITableViewCellEditingStyleDelete;
+    }
+    return UITableViewCellEditingStyleNone;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        GKNote *note = self.dataArrayForNote[indexPath.row];
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            ReportViewController * VC = [[ReportViewController alloc]init];
+            VC.note = note;
+            [[tableView cellForRowAtIndexPath:indexPath] setEditing:NO animated:YES];
+            [self.navigationController pushViewController:VC animated:YES];
+
+        }
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"举报";
+}
+
 #pragma mark - KVO
 
 - (void)addObserver
@@ -563,7 +599,9 @@
         [self weiboShare];
     }
     else if ([buttonTitle isEqualToString:@"举报商品"]) {
-        return ;
+        ReportViewController * VC = [[ReportViewController alloc]init];
+        VC.entity = self.entity;
+        [self.navigationController pushViewController:VC animated:YES];
     }
     else if ([buttonTitle isEqualToString:@"写点评"]) {
         [self noteButtonAction];

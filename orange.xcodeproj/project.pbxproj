@@ -287,6 +287,8 @@
 		4E66C1DC1A7C8B2500F31A90 /* AVOSCloud.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4E66C1D91A7C8B2500F31A90 /* AVOSCloud.bundle */; };
 		4E66C1DD1A7C8B2500F31A90 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1DB1A7C8B2500F31A90 /* SettingViewController.m */; };
 		4E66C1E11A7CBD2F00F31A90 /* GKWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E01A7CBD2F00F31A90 /* GKWebVC.m */; };
+		4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E41A7DBA0F00F31A90 /* NoteViewController.m */; };
+		4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E71A7DBAB400F31A90 /* CommentCell.m */; };
 		4E8D6A991A38B59F00156C17 /* fontdiao.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */; };
 		4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A921A38B59F00156C17 /* NSString+FontDiao.m */; };
 		4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A941A38B59F00156C17 /* UIButton+FontDiao.m */; };
@@ -299,6 +301,7 @@
 		4E8D6AAC1A3B441000156C17 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8D6AAB1A3B441000156C17 /* libc++.dylib */; };
 		4E8D6AB31A3B57F600156C17 /* UINavigationController+statusbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB21A3B57F600156C17 /* UINavigationController+statusbar.m */; };
 		4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB61A3B66F900156C17 /* MCPHandler.m */; };
+		4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */; };
 		4EAA458119E03BA60098C9E0 /* emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA423219E03B9C0098C9E0 /* emoji.json */; };
 		4EAA458219E03BA60098C9E0 /* 0023-20E3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA423419E03B9C0098C9E0 /* 0023-20E3.png */; };
 		4EAA458319E03BA60098C9E0 /* 0030-20E3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA423519E03B9C0098C9E0 /* 0030-20E3.png */; };
@@ -1599,6 +1602,10 @@
 		4E66C1DB1A7C8B2500F31A90 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		4E66C1DF1A7CBD2F00F31A90 /* GKWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKWebVC.h; sourceTree = "<group>"; };
 		4E66C1E01A7CBD2F00F31A90 /* GKWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKWebVC.m; sourceTree = "<group>"; };
+		4E66C1E31A7DBA0F00F31A90 /* NoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteViewController.h; sourceTree = "<group>"; };
+		4E66C1E41A7DBA0F00F31A90 /* NoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteViewController.m; sourceTree = "<group>"; };
+		4E66C1E61A7DBAB400F31A90 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		4E66C1E71A7DBAB400F31A90 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontdiao.ttf; sourceTree = "<group>"; };
 		4E8D6A901A38B59F00156C17 /* FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontDiao.h; sourceTree = "<group>"; };
 		4E8D6A911A38B59F00156C17 /* NSString+FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontDiao.h"; sourceTree = "<group>"; };
@@ -1620,6 +1627,8 @@
 		4E8D6AB21A3B57F600156C17 /* UINavigationController+statusbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+statusbar.m"; path = "../../Category/UINavigationController+statusbar.m"; sourceTree = "<group>"; };
 		4E8D6AB51A3B66F900156C17 /* MCPHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPHandler.h; sourceTree = "<group>"; };
 		4E8D6AB61A3B66F900156C17 /* MCPHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPHandler.m; sourceTree = "<group>"; };
+		4EA0C4471A7F03DE0025EC2E /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
+		4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
 		4EAA423219E03B9C0098C9E0 /* emoji.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emoji.json; sourceTree = "<group>"; };
 		4EAA423419E03B9C0098C9E0 /* 0023-20E3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0023-20E3.png"; sourceTree = "<group>"; };
 		4EAA423519E03B9C0098C9E0 /* 0030-20E3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0030-20E3.png"; sourceTree = "<group>"; };
@@ -2564,6 +2573,8 @@
 				4EB6ADAA1A771CCA0089797A /* NoteCell.m */,
 				4EC9F7951A7928C70057D736 /* UserSingleListCell.h */,
 				4EC9F7961A7928C70057D736 /* UserSingleListCell.m */,
+				4E66C1E61A7DBAB400F31A90 /* CommentCell.h */,
+				4E66C1E71A7DBAB400F31A90 /* CommentCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3385,6 +3396,8 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
+				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
 				4E66C1DE1A7CBD2F00F31A90 /* GKWebViewVC */,
 				4E66C1D81A7C8B2500F31A90 /* SettingViewController */,
 				4EC9F7A41A7BD0EE0057D736 /* NotePostViewController */,
@@ -3421,6 +3434,15 @@
 				4E66C1E01A7CBD2F00F31A90 /* GKWebVC.m */,
 			);
 			path = GKWebViewVC;
+			sourceTree = "<group>";
+		};
+		4E66C1E21A7DB96F00F31A90 /* NoteViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E66C1E31A7DBA0F00F31A90 /* NoteViewController.h */,
+				4E66C1E41A7DBA0F00F31A90 /* NoteViewController.m */,
+			);
+			path = NoteViewController;
 			sourceTree = "<group>";
 		};
 		4E8D6A8D1A38B59F00156C17 /* FontDiao */ = {
@@ -3466,6 +3488,15 @@
 				4E8D6AB61A3B66F900156C17 /* MCPHandler.m */,
 			);
 			path = MCPHandler;
+			sourceTree = "<group>";
+		};
+		4EA0C4461A7F03CB0025EC2E /* ReportViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4EA0C4471A7F03DE0025EC2E /* ReportViewController.h */,
+				4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */,
+			);
+			path = ReportViewController;
 			sourceTree = "<group>";
 		};
 		4EAA423119E03AC50098C9E0 /* EmojiOne */ = {
@@ -5579,6 +5610,7 @@
 				4E216AB81A261395009FF11D /* JDFlipImageView.m in Sources */,
 				4E1D28D01A125B9300740C17 /* JSQMessagesBubbleImage.m in Sources */,
 				4E3A23491A51A7C500037F9C /* GKUser.m in Sources */,
+				4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */,
 				4E1D28C01A125B9300740C17 /* UIView+JSQMessages.m in Sources */,
 				4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */,
 				4E1D28CF1A125B9300740C17 /* JSQMessagesAvatarImage.m in Sources */,
@@ -5592,6 +5624,7 @@
 				4E1D28391A11CC4F00740C17 /* EarthLoadingView.m in Sources */,
 				4E1D28DB1A125B9300740C17 /* JSQMessagesInputToolbar.m in Sources */,
 				4E3A23611A51AE8300037F9C /* AFHTTPRequestOperation.m in Sources */,
+				4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */,
 				4E3A23641A51AE8300037F9C /* AFJSONRequestOperation.m in Sources */,
 				4E1D312D1A1A46AD00740C17 /* AGEmojiKeyBoardView.m in Sources */,
 				4EE0A8961A4CEB8C0092F884 /* DWBubbleMenuButton.m in Sources */,
@@ -5630,6 +5663,7 @@
 				4E66C1E11A7CBD2F00F31A90 /* GKWebVC.m in Sources */,
 				4E216ABD1A261395009FF11D /* UIView+JDFlipImageView.m in Sources */,
 				4E2D6D4F1A6AC261009E4A17 /* UIViewController+ScrollingNavbar.m in Sources */,
+				4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */,
 				4E3A23781A51B12300037F9C /* NSString+App.m in Sources */,
 				4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */,
 				4E56DF8919D56EF500263B17 /* UIImage+GIF.m in Sources */,

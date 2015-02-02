@@ -29,13 +29,13 @@
 - (void)initViews
 {
 
-
     //[self.navigationController.toolbar setBackgroundImage:[UIImage imageNamed:@"toolbar"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
 
     
     
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kScreenHeight -kNavigationBarHeight-kStatusBarHeight)];
     _webView.delegate = self;
+    _webView.scrollView.delegate = self;
     _webView.scalesPageToFit = YES;
     _webView.scrollView.bouncesZoom = NO;
     [self.view addSubview:_webView];
@@ -128,6 +128,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -135,6 +137,7 @@
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
     [self.activityIndicator stopAnimating];
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -172,8 +175,19 @@
         }
             break;
     }
-    
-    
 }
 
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(CGPoint *)targetContentOffset
+{
+    if(velocity.y>0.5)
+    {
+        //[self.navigationController setNavigationBarHidden:YES animated:YES];
+        return;
+    }
+    
+    if(velocity.y<-05)
+    {
+        //[self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
+}
 @end

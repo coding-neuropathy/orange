@@ -11,6 +11,7 @@
 #import "GKAPI.h"
 #import "EntityThreeGridCell.h"
 #import "CategoryGridCell.h"
+#import "GKWebVC.h"
 
 @interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (strong, nonatomic) UISearchBar *searchBar;
@@ -76,6 +77,9 @@
     self.bannerScrollView.delegate = self;
     self.bannerScrollView.showsHorizontalScrollIndicator = NO;
     self.bannerScrollView.pagingEnabled = YES;
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self action:@selector(tapBanner)];
+    [self.bannerScrollView addGestureRecognizer:tap];
     [headerView addSubview:self.bannerScrollView];
     
     
@@ -437,6 +441,7 @@
     
     self.bannerScrollView.frame = CGRectMake(7, 7, kScreenWidth-14, 149*kScreenWidth/320-15);
     
+    
     [self.bannerArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *dict = (NSDictionary *)obj;
         NSURL *imageURL = [NSURL URLWithString:[dict valueForKey:@"img"]];
@@ -477,8 +482,10 @@
                 url = [url stringByAppendingString:[NSString stringWithFormat:@"?session=%@",[Passport sharedInstance].session]];
             }
         }
-        NSRange range = [url rangeOfString:@"innerApp"];
-        if (range.location != NSNotFound) {
+        NSRange range = [url rangeOfString:@"out_link"];
+        if (range.location == NSNotFound) {
+            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+            [self.navigationController pushViewController:VC animated:YES];
             return;
         }
     }

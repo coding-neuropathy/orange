@@ -10,6 +10,7 @@
 #import "UserViewController.h"
 #import "GKAPI.h"
 #import "LoginView.h"
+#import "NoteViewController.h"
 @implementation NoteCell
 
 
@@ -199,6 +200,9 @@
 }
 - (void)commentButtonAction
 {
+    NoteViewController * VC = [[NoteViewController alloc]init];
+    VC.note = self.note;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 - (void)avatarButtonAction
 {
