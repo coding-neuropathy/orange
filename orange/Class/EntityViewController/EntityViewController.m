@@ -249,6 +249,7 @@
     if (section == 0) {
         if (!self.header) {
             self.header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth + 75)];
+        }
             if (!self.titleLabel) {
                 self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, kScreenWidth-40, 25)];
                 self.titleLabel.numberOfLines = 1;
@@ -257,6 +258,8 @@
                 self.titleLabel.textColor = UIColorFromRGB(0x555555);
                 [self.header addSubview:self.titleLabel];
             }
+            
+
             NSString * brand = @"";
             NSString * title = @"";
             if((![self.entity.brand isEqual:[NSNull null]])&&(![self.entity.brand isEqualToString:@""])&&(self.entity.brand))
@@ -321,7 +324,7 @@
             self.buyButton.deFrameRight= kScreenWidth - 15;
             self.buyButton.deFrameTop = self.image.deFrameBottom+15;
             [self.buyButton addTarget:self action:@selector(buyButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        }
+
         
         return self.header;
         
