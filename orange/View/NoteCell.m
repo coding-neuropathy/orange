@@ -84,7 +84,7 @@
         [self.contentView addSubview:self.contentLabel];
     }
     
-    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>“ %@ ”</font>", self.note.text];
+    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", self.note.text];
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     self.contentLabel.deFrameTop = self.label.deFrameBottom;
     
@@ -168,7 +168,7 @@
     RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 4.0;
-    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>“ %@ ”</font>", note.text];
+    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
     return label.optimumSize.height + 80.f;
     
     

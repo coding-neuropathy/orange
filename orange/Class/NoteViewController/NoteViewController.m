@@ -139,6 +139,11 @@
         cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.comment = [self.dataArrayForComment objectAtIndex:indexPath.row];
+    cell.tapReplyButtonBlock = ^(GKComment *comment) {
+        self.inputTextField.placeholder = [NSString stringWithFormat:@"回复 %@：", comment.creator.nickname];
+        self.inputTextField.tag = comment.commentId;
+        [self.inputTextField becomeFirstResponder];
+    };
     
     return cell;
     
@@ -233,7 +238,7 @@
         [SVProgressHUD showImage:nil status:@"请输入评论内容"];
         return;
     }
-    
+    if (self.inputTextField.tag == 0) {
         [GKAPI postCommentWithNoteId:self.note.noteId content:content success:^(GKComment *comment) {
             [SVProgressHUD showImage:nil status:@"评论成功"];
             self.note.commentCount += 1;
@@ -246,6 +251,21 @@
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"评论失败"];
         }];
+    }else{
+        GKComment *comment = [GKComment modelFromDictionary:@{@"entityId":self.note.entityId, @"noteId":@(self.note.noteId), @"commentId":@(self.inputTextField.tag)}];
+        
+        [GKAPI replyCommentWithNoteId:self.note.noteId commentId:comment.commentId commentCreatorId:comment.creator.userId content:self.inputTextField.text success:^(GKComment *comment) {
+            self.note.commentCount += 1;
+            self.inputTextField.text = nil;
+            [self.inputTextField resignFirstResponder];
+            [self.dataArrayForComment addObject:comment];
+            [self.tableView reloadData];
+            [self.tableView scrollsToTop];
+            [SVProgressHUD showImage:nil status:@"回复成功!"];
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:@"回复失败!"];
+        }];
+    }
 
 }
 

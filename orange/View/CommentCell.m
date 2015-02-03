@@ -9,6 +9,7 @@
 #import "CommentCell.h"
 #import "UserViewController.h"
 
+
 @implementation CommentCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -81,7 +82,17 @@
         [self.contentView addSubview:self.contentLabel];
     }
     
-    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>“ %@ ”</font>", self.comment.text];
+    if (_comment.repliedUser) {
+        
+        [self.contentLabel setText: [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@</font></a><font face='Helvetica' color='^777777' size=14> 回复了 </font><a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@</font></a><font face='Helvetica' color='^999999' size=14>：%@</font>",_comment.creator.userId,_comment.creator.nickname,_comment.repliedUser.userId,_comment.repliedUser.nickname,_comment.text]];
+        
+    }
+    else
+    {
+        [self.contentLabel setText:[NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@</font></a><font face='Helvetica' color='^777777' size=14>：%@</font>",_comment.creator.userId,_comment.creator.nickname,_comment.text]];
+    }
+    
+    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", self.comment.text];
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     self.contentLabel.deFrameTop = self.label.deFrameBottom;
     
@@ -104,6 +115,26 @@
     self.timeButton.deFrameRight = kScreenWidth - 15;
     self.timeButton.deFrameBottom =  self.contentView.deFrameHeight -10;
     
+    if (!self.replyButton) {
+        _replyButton = [[UIButton alloc] init];
+        self.replyButton.deFrameSize = CGSizeMake(44.f, 44.f);
+        self.replyButton.backgroundColor = [UIColor clearColor];
+
+        self.replyButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        self.replyButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.replyButton setTitleColor:UIColorFromRGB(0xcacaca) forState:UIControlStateNormal];
+        [self.replyButton setTitle:[NSString fontAwesomeIconStringForEnum:FAReply] forState:UIControlStateNormal];
+        [self.replyButton addTarget:self action:@selector(replyButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:self.replyButton];
+    }
+    self.replyButton.center = CGPointMake(self.contentView.center.x, self.contentView.center.y - 8);
+    self.replyButton.deFrameRight = CGRectGetWidth(self.contentView.bounds)-8;
+    if (self.comment.creator == [Passport sharedInstance].user) {
+        self.replyButton.hidden = YES;
+    } else {
+        self.replyButton.hidden = NO;
+    }
+    
     [self bringSubviewToFront:self.H];
     _H.deFrameBottom = self.frame.size.height;
 }
@@ -113,7 +144,15 @@
     RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 4.0;
-    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>“ %@ ”</font>", comment.text];
+    if (comment.repliedUser) {
+        
+        [label setText: [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@</font></a><font face='Helvetica' color='^777777' size=14> 回复了 </font><a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@</font></a><font face='Helvetica' color='^999999' size=14>：%@</font>",comment.creator.userId,comment.creator.nickname,comment.repliedUser.userId,comment.repliedUser.nickname,comment.text]];
+        
+    }
+    else
+    {
+        [label setText:[NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@</font></a><font face='Helvetica' color='^777777' size=14>：%@</font>",comment.creator.userId,comment.creator.nickname,comment.text]];
+    }
     return label.optimumSize.height + 60.f;
 }
 
@@ -122,6 +161,13 @@
     UserViewController * VC = [[UserViewController alloc]init];
     VC.user = self.comment.creator;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)replyButtonAction
+{
+    if (self.tapReplyButtonBlock) {
+        self.tapReplyButtonBlock(self.comment);
+    }
 }
 
 @end
