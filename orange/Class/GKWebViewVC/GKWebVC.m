@@ -7,8 +7,9 @@
 //
 
 #import "GKWebVC.h"
+#import "WXApi.h"
 
-@interface GKWebVC ()
+@interface GKWebVC ()<UIActionSheetDelegate>
 
 - (void)initViews;
 - (void)closeWebView;
@@ -39,6 +40,22 @@
     _webView.scalesPageToFit = YES;
     _webView.scrollView.bouncesZoom = NO;
     [self.view addSubview:_webView];
+    
+    NSMutableArray * array = [NSMutableArray array];
+    
+    {
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAEllipsisH] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(moreButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor = [UIColor clearColor];
+        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+        [array addObject:item];
+    }
+    
+    self.navigationItem.rightBarButtonItems = array;
 }
 
 - (void)closeWebView
@@ -81,29 +98,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UIView *titleView = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-        [titleView setBackgroundColor:[UIColor whiteColor]];
-        
-        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-        [label setText:@"宝贝详情"];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont fontWithName:@"Helvetica" size:20];
-        label.textColor = UIColorFromRGB(0x555555);
-        label.adjustsFontSizeToFitWidth = YES;
-        label.backgroundColor = [UIColor clearColor];
-        [label sizeToFit];
-        
-        titleView.deFrameWidth = label.deFrameWidth +10;
-        [titleView addSubview:label];
-        
-        label.center = CGPointMake(titleView.frame.size.width/2, titleView.frame.size.height/2);
-        
-        self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        self.activityIndicator.color = UIColorFromRGB(0x427ec0);
-        
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.activityIndicator];
-        
-        self.navigationItem.titleView = titleView;
+        self.title = @"网页浏览";
     }
     return self;
 }
@@ -113,6 +108,11 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
     [self initViews];
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    self.activityIndicator.color = UIColorFromRGB(0x427ec0);
+    self.activityIndicator.center = CGPointMake(kScreenWidth/2, kScreenHeight/2-100);
+    [self.view addSubview:self.activityIndicator];
+
     
     NSURLRequest * _request;
     _request = [NSURLRequest requestWithURL:_link];
@@ -131,6 +131,8 @@
 
 
 }
+
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -190,4 +192,87 @@
         //[self.navigationController setNavigationBarHidden:NO animated:YES];
     }
 }
+
+
+- (void)moreButtonAction
+{
+    NSMutableArray * array = [NSMutableArray array];
+    [array addObject:@"分享到微博"];
+    [array addObject:@"分享到微信"];
+    [array addObject:@"分享到朋友圈"];
+
+    if ([[self.webView.request.URL absoluteString]containsString:@"400000_12313170"]) {
+        [array addObject:@"在淘宝客户端中打开"];
+    }
+
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles: nil];
+    for (NSString * string in array) {
+        [actionSheet addButtonWithTitle:string];
+    }
+    
+    
+    [actionSheet showInView:self.view];
+
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:@"在淘宝客户端中打开"]) {
+       NSString * url =  [[self.webView.request.URL absoluteString]stringByReplacingOccurrencesOfString:@"http://" withString:@"taobao://"];
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+    }else if ([buttonTitle isEqualToString:@"分享到微博"]) {
+ 
+    }else if ([buttonTitle isEqualToString:@"分享到微信"]) {
+        [self wxShare:0];
+    }else if ([buttonTitle isEqualToString:@"分享到朋友圈"]) {
+        [self wxShare:1];
+    }
+}
+#pragma mark - WX&Weibo
+-(void)wxShare:(int)scene
+{
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = @"果库 - 尽收世上好物";
+    message.description= @"";
+    [message setThumbImage:[UIImage imageNamed:@"weixin_share.png"]];
+    
+    WXAppExtendObject *ext = [WXAppExtendObject object];
+    ext.Url = [self.webView.request.URL absoluteString];
+    
+    message.mediaObject = ext;
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = scene;
+    
+    [WXApi sendReq:req];
+}
+-(void)weiboShare
+{
+    if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
+    {
+        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            [AVOSCloudSNS shareText:@"果库 - 尽收世上好物" andLink:[self.webView.request.URL absoluteString] andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+                
+            } andProgress:^(float percent) {
+                if (percent == 1) {
+                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+                }
+            }];
+        }];
+    }
+    else
+    {
+        [AVOSCloudSNS shareText:@"果库 - 尽收世上好物" andLink:[self.webView.request.URL absoluteString] andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            
+        } andProgress:^(float percent) {
+            if (percent == 1) {
+                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+            }
+        }];
+    }
+}
+
 @end

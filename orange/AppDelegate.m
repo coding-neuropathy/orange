@@ -60,37 +60,7 @@
     [self.window makeKeyAndVisible];
     
     
-    [GKAPI getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
-        
-        NSMutableArray *categoryGroupArray = [NSMutableArray array];
-        NSMutableArray *allCategoryArray = [NSMutableArray array];
-        
-        for (NSDictionary *groupDict in fullCategoryGroupArray) {
-            NSArray *categoryArray = groupDict[@"CategoryArray"];
-            
-            NSMutableArray *filteredCategoryArray = [NSMutableArray array];
-            for (GKEntityCategory *category in categoryArray) {
-                [allCategoryArray addObject:category];
-                
-                if (category.status) {
-                    [filteredCategoryArray addObject:category];
-                }
-            }
-            NSDictionary *filteredGroupDict = @{@"GroupId"       : groupDict[@"GroupId"],
-                                                @"GroupName"     : groupDict[@"GroupName"],
-                                                @"Status"        : groupDict[@"Status"],
-                                                @"Count"         : @(categoryArray.count),
-                                                @"CategoryArray" : filteredCategoryArray};
-            if ([groupDict[@"Status"] integerValue] > 0) {
-                [categoryGroupArray addObject:filteredGroupDict];
-            }
-        }
 
-        
-    } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"失败"];
-        
-    }];
     
     return YES;
 }
@@ -186,55 +156,13 @@
     
     
     [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x2b2b2b) andSize:CGSizeMake(kScreenWidth, 49)]];
+    [[UITabBar appearance] setTranslucent:YES];
     [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
-    [[UITabBar appearance] setAlpha:1];
+    [[UITabBar appearance] setAlpha:0.97];
 }
 
-// 获取当前处于activity状态的view controller
-- (UIViewController *)activityViewController
-{
-    UIViewController* activityViewController = nil;
-    
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    if(window.windowLevel != UIWindowLevelNormal)
-    {
-        NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow *tmpWin in windows)
-        {
-            if(tmpWin.windowLevel == UIWindowLevelNormal)
-            {
-                window = tmpWin;
-                break;
-            }
-        }
-    }
-    
-    NSArray *viewsArray = [window subviews];
-    if([viewsArray count] > 0)
-    {
-        UIView *frontView = [viewsArray objectAtIndex:0];
-        
-        id nextResponder = [frontView nextResponder];
-        
-        if([nextResponder isKindOfClass:[UIViewController class]])
-        {
-            activityViewController = nextResponder;
-        }
-        else
-        {
-            activityViewController = window.rootViewController;
-        }
-    }
-    
-    return activityViewController;
-}
-
-- (UINavigationController *)activityNavController
-{
-    return [self activityViewController].navigationController;
-}
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
@@ -247,6 +175,7 @@
             NSString *entityId = [absoluteString substringFromIndex:range.location+range.length];
             EntityViewController *vc = [[EntityViewController alloc]init];
             vc.entity = [GKEntity modelFromDictionary:@{@"entityId":entityId}];
+            vc.hidesBottomBarWhenPushed = YES;
             if (self.activeVC.navigationController) {
                 [self.activeVC.navigationController pushViewController:vc animated:YES];
             }
@@ -258,6 +187,7 @@
                 NSString *categoryId = [absoluteString substringFromIndex:range.location+range.length];
                 CategoryViewController * vc = [[CategoryViewController alloc]init];
                 vc.category = [GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}];
+                vc.hidesBottomBarWhenPushed = YES;
                 if (self.activeVC.navigationController) {
                     [self.activeVC.navigationController pushViewController:vc animated:YES];
                 }
@@ -272,6 +202,7 @@
                         NSString *userId = [[otherString substringFromIndex:otherRange.location+otherRange.length]stringByReplacingOccurrencesOfString:@"/" withString:@""];
                         GKUser * user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
                         TagViewController * vc = [[TagViewController alloc]init];
+                        vc.hidesBottomBarWhenPushed = YES;
                         vc.tagName = tag;
                         vc.user = user;
                         if (self.activeVC.navigationController) {
@@ -285,6 +216,7 @@
                     if (range.location != NSNotFound) {
                         NSString *userId = [absoluteString substringFromIndex:range.location+range.length];
                         UserViewController * vc = [[UserViewController alloc]init];
+                        vc.hidesBottomBarWhenPushed = YES; 
                         vc.user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
                         if (self.activeVC.navigationController) {
                             [self.activeVC.navigationController pushViewController:vc animated:YES];

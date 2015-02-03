@@ -16,6 +16,7 @@
 #import "WXApi.h"
 #import "GKWebVC.h"
 #import "ReportViewController.h"
+#import "LoginView.h"
 
 @interface EntityViewController ()
 @property (nonatomic, strong) GKNote *note;
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIButton *likeButton;
 @property (nonatomic, strong) UIButton *buyButton;
+@property (nonatomic, strong) UIButton *noteButton;
 
 @property (nonatomic, strong) UIButton *categoryButton;
 @property (nonatomic, strong) UIView *likeUserView;
@@ -145,7 +147,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -153,7 +155,7 @@
     if (section == 2) {
         return self.dataArrayForNote.count;
     }
-    if (section == 3) {
+    if (section == 4) {
         return ceil(self.dataArrayForRecommend.count / (CGFloat)3);
     }
     else
@@ -175,7 +177,7 @@
         cell.note = self.dataArrayForNote[indexPath.row];
         return cell;
     }
-    else if (indexPath.section == 3) {
+    else if (indexPath.section == 4) {
         static NSString *CellIdentifier = @"EntityCell";
         EntityThreeGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
@@ -205,7 +207,7 @@
     if (indexPath.section == 2) {
             return [NoteCell height:self.dataArrayForNote[indexPath.row]];
     }
-    if (indexPath.section == 3) {
+    if (indexPath.section == 4) {
         return [EntityThreeGridCell height];
     }
     if (indexPath.section == 1) {
@@ -235,6 +237,9 @@
         return 50;
     }
     else if (section == 3) {
+        return 50;
+    }
+    else if (section == 4) {
         return 40;
     }
     else
@@ -402,12 +407,34 @@
         self.categoryButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.categoryButton setTitleColor:UIColorFromRGB(0x555555) forState:UIControlStateNormal];
         
-
-        
-        
         return self.categoryButton;
     }
-    if (section == 3) {
+    else if (section == 3) {
+        if(!self.noteButton)
+        {
+            self.noteButton  = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+            self.noteButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:16];
+            [self.noteButton addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
+            
+            {
+                UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,49, kScreenWidth, 0.5)];
+                H.backgroundColor = UIColorFromRGB(0xeeeeee);
+                [self.noteButton addSubview:H];
+            }
+        }
+        if (self.note) {
+            [self.noteButton setTitle:[NSString stringWithFormat:@"%@ 修改点评",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.noteButton setTitle:[NSString stringWithFormat:@"%@ 写点评",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
+        }
+        [self.noteButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [self.noteButton setBackgroundColor:UIColorFromRGB(0xffffff)];
+        [self.noteButton setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+        return self.noteButton;
+    }
+    else if (section == 4) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 20.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
         label.text = @"相似推荐";
         label.textAlignment = NSTextAlignmentLeft;
@@ -495,6 +522,13 @@
 #pragma mark - Action
 - (void)likeButtonAction
 {
+ 
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             [SVProgressHUD showImage:nil status:@"喜爱成功"];
@@ -518,6 +552,12 @@
 
 - (void)noteButtonAction
 {
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     NotePostViewController * VC = [[NotePostViewController alloc]init];
     VC.entity = self.entity;
     VC.note = self.note;
@@ -569,8 +609,10 @@
     {
         url = [NSString stringWithFormat:@"%@%ld",url,user.userId];
     }
+
     GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
     VC.hidesBottomBarWhenPushed = YES;
+    VC.title = @"宝贝详情";
     [self.navigationController pushViewController:VC animated:YES];
     
 }

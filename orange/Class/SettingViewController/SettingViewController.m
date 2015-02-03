@@ -498,7 +498,7 @@
 -(void)wxShare:(int)scene
 {
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = @"Emojiii - 极简熟人社交";
+    message.title = @"果库 - 尽收世上好物";
     message.description= @"";
     [message setThumbImage:[UIImage imageNamed:@"weixin_share.png"]];
     

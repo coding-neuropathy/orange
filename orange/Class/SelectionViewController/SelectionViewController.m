@@ -11,6 +11,7 @@
 #import "GKAPI.h"
 #import "SelectionCell.h"
 #import "EntitySingleListCell.h"
+#import "CategoryViewController.h"
 
 
 @interface SelectionViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -18,6 +19,7 @@
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property(nonatomic, strong) NSMutableArray * dataArrayForArticle;
 @property(nonatomic, assign) NSUInteger index;
+@property (strong, nonatomic) NSMutableArray *allCategoryArray;
 @end
 
 @implementation SelectionViewController
@@ -54,11 +56,11 @@
         
         {
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
             [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
-            [button setTitle:[NSString fontAwesomeIconStringForEnum:FARefresh] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
+            [button setTitle:[NSString fontAwesomeIconStringForEnum:FARandom] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(random) forControlEvents:UIControlEventTouchUpInside];
             button.backgroundColor = [UIColor clearColor];
             UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
             [array addObject:item];
@@ -100,6 +102,39 @@
     
     [self.tableView.pullToRefreshView startAnimating];
     [self refresh];
+    [GKAPI getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
+        
+        NSMutableArray *categoryGroupArray = [NSMutableArray array];
+        NSMutableArray *allCategoryArray = [NSMutableArray array];
+        
+        for (NSDictionary *groupDict in fullCategoryGroupArray) {
+            NSArray *categoryArray = groupDict[@"CategoryArray"];
+            
+            NSMutableArray *filteredCategoryArray = [NSMutableArray array];
+            for (GKEntityCategory *category in categoryArray) {
+                [allCategoryArray addObject:category];
+                
+                if (category.status) {
+                    [filteredCategoryArray addObject:category];
+                }
+            }
+            NSDictionary *filteredGroupDict = @{@"GroupId"       : groupDict[@"GroupId"],
+                                                @"GroupName"     : groupDict[@"GroupName"],
+                                                @"Status"        : groupDict[@"Status"],
+                                                @"Count"         : @(categoryArray.count),
+                                                @"CategoryArray" : filteredCategoryArray};
+            if ([groupDict[@"Status"] integerValue] > 0) {
+                [categoryGroupArray addObject:filteredGroupDict];
+            }
+        }
+        
+        self.allCategoryArray = allCategoryArray;
+    
+        
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:@"失败"];
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -283,6 +318,17 @@
     icon.contentMode = UIViewContentModeScaleAspectFit;
     icon.userInteractionEnabled = YES;
     self.navigationItem.titleView = icon;
+}
+
+- (void)random
+{
+    NSInteger index = arc4random() % ([self.allCategoryArray count]);
+    GKEntityCategory * category = [self.allCategoryArray objectAtIndex:index];
+    CategoryViewController *vc = [[CategoryViewController alloc] init];
+    vc.category = category;
+    if (kAppDelegate.activeVC.navigationController) {
+        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 @end

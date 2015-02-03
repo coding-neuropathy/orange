@@ -139,6 +139,7 @@
 {
     CategoryViewController * VC = [[CategoryViewController alloc]init];
     VC.category = self.category;
+    VC.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 

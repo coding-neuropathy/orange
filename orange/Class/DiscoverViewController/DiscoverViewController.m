@@ -85,7 +85,7 @@
     
     if (!self.segmentedControl) {
         HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
-        [segmentedControl setSectionTitles:@[@"热门商品", @"推荐分类",@"人气图文"]];
+        [segmentedControl setSectionTitles:@[@"热门商品", @"推荐分类"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
         [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
@@ -440,7 +440,7 @@
     }
     
     self.bannerScrollView.frame = CGRectMake(7, 7, kScreenWidth-14, 149*kScreenWidth/320-15);
-    
+    self.bannerScrollView.backgroundColor = UIColorFromRGB(0xf1f1f1);
     
     [self.bannerArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *dict = (NSDictionary *)obj;
@@ -485,6 +485,7 @@
         NSRange range = [url rangeOfString:@"out_link"];
         if (range.location == NSNotFound) {
             GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+            VC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:VC animated:YES];
             return;
         }

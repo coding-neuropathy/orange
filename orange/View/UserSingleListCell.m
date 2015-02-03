@@ -89,7 +89,7 @@
     if (!self.followButton)
     {
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 24)];
-        button.titleLabel.font = [UIFont systemFontOfSize:16];
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
         button.center = CGPointMake(kScreenWidth - 40, 25);
         [self.contentView addSubview:button];
@@ -108,25 +108,25 @@
     }
     self.followButton.hidden = NO;
     if (self.user.relation == GKUserRelationTypeNone) {
-        [self.followButton setTitle:[NSString stringWithFormat:@"+"] forState:UIControlStateNormal];
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAPlus]] forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
         [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(followButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeFan) {
-        [self.followButton setTitle:[NSString stringWithFormat:@"+"] forState:UIControlStateNormal];
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAPlus]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
         [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(followButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeFollowing) {
-        [self.followButton setTitle:[NSString stringWithFormat:@"-"] forState:UIControlStateNormal];
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACheck]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
         [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeBoth) {
-        [self.followButton setTitle:[NSString stringWithFormat:@"－"] forState:UIControlStateNormal];
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAExchange]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
         [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
