@@ -46,7 +46,8 @@
         
         self.title = @"发现";
         
-        
+        self.edgesForExtendedLayout = UIRectEdgeAll;
+        self.extendedLayoutIncludesOpaqueBars = YES;
         [self configSearchBar];
     }
     return self;
@@ -227,7 +228,7 @@
     }
     else
     {
-       return ceil(self.filteredArray.count / (CGFloat)1);
+        return 1;
     }
 }
 
@@ -246,7 +247,7 @@
     }
     else
     {
-        return (self.filteredArray.count /(CGFloat)4);;
+        return (self.filteredArray.count /(CGFloat)4);
     }
 }
 
@@ -307,8 +308,8 @@
             cell = [[CategoryGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
-        NSDictionary *groupDict = self.dataArrayForCategory[indexPath.section];
-        NSArray *categoryDictArray = [groupDict objectForKey:@"CategoryArray"];
+
+        NSArray *categoryDictArray = self.filteredArray;
         
         NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
         
@@ -434,28 +435,26 @@
     self.searchBar.keyboardType = UIKeyboardTypeDefault;
     self.searchBar.delegate = self;
     self.searchBar.placeholder = @"搜索";
-    self.navigationItem.titleView = self.searchBar;
+
     
     _searchDC = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
+    self.searchDC.displaysSearchBarInNavigationBar = YES;
     self.searchDC.searchResultsDataSource = self;
     self.searchDC.searchResultsDelegate = self;
-    self.searchDC.searchResultsTableView.backgroundColor = UIColorFromRGB(0xf7f7f7);
+    self.searchDC.searchResultsTableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.searchDC.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.searchDC.searchResultsTableView.separatorColor = UIColorFromRGB(0xffffff);
+    self.searchDC.searchResultsTableView.tableHeaderView = nil;
     
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    [self.searchBar setShowsCancelButton:YES animated:YES];
-    [self.searchDC setActive:YES];
     return YES;
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
-    [self.searchBar setShowsCancelButton:NO animated:YES];
-    [self.searchDC setActive:NO];
     return YES;
 }
 
@@ -559,10 +558,7 @@
 }
 - (void)handleSearchText:(NSString *)searchText
 {
-    if(!self.filteredArray)
-    {
-        self.filteredArray = [NSMutableArray array];
-    }
+    self.filteredArray = [NSMutableArray array];
     for (GKEntityCategory *word in kAppDelegate.allCategoryArray) {
         NSString *screenName = word.categoryName;
         if ([PinyinTools ifNameString:screenName SearchString:searchText]) {
@@ -570,6 +566,7 @@
         }
     }
     [self.filteredArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
+    [self.searchDC.searchResultsTableView reloadData];
     
 }
 - (void)goKeyword

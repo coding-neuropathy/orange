@@ -5800,8 +5800,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: TE HUI (Z5A6CCJB8R)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: TE HUI (Z5A6CCJB8R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (A5Y9CLHH49)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TE HUI (A5Y9CLHH49)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty",
@@ -5818,7 +5818,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "6b2b5131-6e37-4935-b96c-b18cb15450ec";
+				PROVISIONING_PROFILE = "214c65f3-37fb-4f75-9ae0-5f67fdde5ec9";
 			};
 			name = Debug;
 		};
@@ -5845,7 +5845,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "6b2b5131-6e37-4935-b96c-b18cb15450ec";
+				PROVISIONING_PROFILE = "214c65f3-37fb-4f75-9ae0-5f67fdde5ec9";
 			};
 			name = Release;
 		};
