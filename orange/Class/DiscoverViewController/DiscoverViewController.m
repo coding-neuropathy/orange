@@ -12,6 +12,8 @@
 #import "EntityThreeGridCell.h"
 #import "CategoryGridCell.h"
 #import "GKWebVC.h"
+#import "pinyin.h"
+#import "PinyinTools.h"
 
 @interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (strong, nonatomic) UISearchBar *searchBar;
@@ -27,7 +29,8 @@
 @property (nonatomic, strong) UIScrollView *bannerScrollView;
 @property (nonatomic, strong) UIPageControl *bannerPageControl;
 @property (nonatomic, strong) NSTimer *bannerTimer;
-
+@property (strong, nonatomic) NSMutableArray *filteredArray;
+@property (nonatomic, strong) NSString *keyword;
 @end
 
 @implementation DiscoverViewController
@@ -211,14 +214,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (self.index == 0) {
-        return 1;
-    }
-    else if (self.index == 1)
+    if(tableView == self.tableView)
     {
-        return ceil(self.dataArrayForCategory.count / (CGFloat)1);
+        if (self.index == 0) {
+            return 1;
+        }
+        else if (self.index == 1)
+        {
+            return ceil(self.dataArrayForCategory.count / (CGFloat)1);
+        }
+        return 0;
     }
-    return 0;
+    else
+    {
+       return ceil(self.filteredArray.count / (CGFloat)1);
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -236,7 +246,7 @@
     }
     else
     {
-        return 0;
+        return (self.filteredArray.count /(CGFloat)4);;
     }
 }
 
@@ -291,7 +301,28 @@
     }
     else
     {
-        return [[UITableViewCell alloc] init];
+        static NSString *CellIdentifier = @"CategoryCell";
+        CategoryGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[CategoryGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        NSDictionary *groupDict = self.dataArrayForCategory[indexPath.section];
+        NSArray *categoryDictArray = [groupDict objectForKey:@"CategoryArray"];
+        
+        NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+        
+        NSUInteger offset = indexPath.row * 4;
+        int i = 0;
+        for (; offset < categoryDictArray.count ; offset++) {
+            [categoryArray addObject:categoryDictArray[offset]];
+            i++;
+            if (i>=4) {
+                break;
+            }
+        }
+        cell.categoryArray = categoryArray;
+        return cell;
     }
     
 }
@@ -313,7 +344,7 @@
     }
     else
     {
-        return 0;
+        return [CategoryGridCell height];
     }
 }
 
@@ -501,6 +532,49 @@
         // 设置当前页码
         self.bannerPageControl.currentPage = index;
     }
+}
+
+
+#pragma mark - SearchBar
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    
+    if ([searchText length] == 0) {
+        return;
+    }
+    self.keyword = self.searchBar.text;
+    self.keyword = [self.keyword stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [self handleSearchText:self.keyword];
+    
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSString * searchText = self.searchBar.text;
+    if ([searchText length] == 0) {
+        return;
+    }
+    self.keyword = searchText;
+    [self goKeyword];
+}
+- (void)handleSearchText:(NSString *)searchText
+{
+    if(!self.filteredArray)
+    {
+        self.filteredArray = [NSMutableArray array];
+    }
+    for (GKEntityCategory *word in kAppDelegate.allCategoryArray) {
+        NSString *screenName = word.categoryName;
+        if ([PinyinTools ifNameString:screenName SearchString:searchText]) {
+            [_filteredArray addObject:word];
+        }
+    }
+    [self.filteredArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
+    
+}
+- (void)goKeyword
+{
+    /**/
 }
 
 @end

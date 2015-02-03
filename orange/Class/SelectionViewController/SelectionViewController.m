@@ -19,7 +19,6 @@
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property(nonatomic, strong) NSMutableArray * dataArrayForArticle;
 @property(nonatomic, assign) NSUInteger index;
-@property (strong, nonatomic) NSMutableArray *allCategoryArray;
 @end
 
 @implementation SelectionViewController
@@ -102,39 +101,6 @@
     
     [self.tableView.pullToRefreshView startAnimating];
     [self refresh];
-    [GKAPI getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
-        
-        NSMutableArray *categoryGroupArray = [NSMutableArray array];
-        NSMutableArray *allCategoryArray = [NSMutableArray array];
-        
-        for (NSDictionary *groupDict in fullCategoryGroupArray) {
-            NSArray *categoryArray = groupDict[@"CategoryArray"];
-            
-            NSMutableArray *filteredCategoryArray = [NSMutableArray array];
-            for (GKEntityCategory *category in categoryArray) {
-                [allCategoryArray addObject:category];
-                
-                if (category.status) {
-                    [filteredCategoryArray addObject:category];
-                }
-            }
-            NSDictionary *filteredGroupDict = @{@"GroupId"       : groupDict[@"GroupId"],
-                                                @"GroupName"     : groupDict[@"GroupName"],
-                                                @"Status"        : groupDict[@"Status"],
-                                                @"Count"         : @(categoryArray.count),
-                                                @"CategoryArray" : filteredCategoryArray};
-            if ([groupDict[@"Status"] integerValue] > 0) {
-                [categoryGroupArray addObject:filteredGroupDict];
-            }
-        }
-        
-        self.allCategoryArray = allCategoryArray;
-    
-        
-    } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"失败"];
-        
-    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -322,8 +288,8 @@
 
 - (void)random
 {
-    NSInteger index = arc4random() % ([self.allCategoryArray count]);
-    GKEntityCategory * category = [self.allCategoryArray objectAtIndex:index];
+    NSInteger index = arc4random() % ([kAppDelegate.allCategoryArray count]);
+    GKEntityCategory * category = [kAppDelegate.allCategoryArray objectAtIndex:index];
     CategoryViewController *vc = [[CategoryViewController alloc] init];
     vc.category = category;
     if (kAppDelegate.activeVC.navigationController) {

@@ -302,6 +302,8 @@
 		4E8D6AB31A3B57F600156C17 /* UINavigationController+statusbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB21A3B57F600156C17 /* UINavigationController+statusbar.m */; };
 		4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB61A3B66F900156C17 /* MCPHandler.m */; };
 		4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */; };
+		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
+		4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EAA458119E03BA60098C9E0 /* emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA423219E03B9C0098C9E0 /* emoji.json */; };
 		4EAA458219E03BA60098C9E0 /* 0023-20E3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA423419E03B9C0098C9E0 /* 0023-20E3.png */; };
 		4EAA458319E03BA60098C9E0 /* 0030-20E3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA423519E03B9C0098C9E0 /* 0030-20E3.png */; };
@@ -1629,6 +1631,10 @@
 		4E8D6AB61A3B66F900156C17 /* MCPHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPHandler.m; sourceTree = "<group>"; };
 		4EA0C4471A7F03DE0025EC2E /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
 		4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
+		4EA0C44B1A805CBD0025EC2E /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
+		4EA0C44C1A805CBD0025EC2E /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		4EA0C44D1A805CBD0025EC2E /* PinyinTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinyinTools.h; sourceTree = "<group>"; };
+		4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinTools.m; sourceTree = "<group>"; };
 		4EAA423219E03B9C0098C9E0 /* emoji.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emoji.json; sourceTree = "<group>"; };
 		4EAA423419E03B9C0098C9E0 /* 0023-20E3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0023-20E3.png"; sourceTree = "<group>"; };
 		4EAA423519E03B9C0098C9E0 /* 0030-20E3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0030-20E3.png"; sourceTree = "<group>"; };
@@ -3251,6 +3257,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				4EA0C44A1A805CBD0025EC2E /* pinyinTools */,
 				4E2D6D531A6BFD77009E4A17 /* RTLabel */,
 				4E2D6D4C1A6AC261009E4A17 /* AMScrollingNavbar */,
 				4E2D6D441A69610B009E4A17 /* GKRotateLoadingView */,
@@ -3497,6 +3504,17 @@
 				4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */,
 			);
 			path = ReportViewController;
+			sourceTree = "<group>";
+		};
+		4EA0C44A1A805CBD0025EC2E /* pinyinTools */ = {
+			isa = PBXGroup;
+			children = (
+				4EA0C44B1A805CBD0025EC2E /* pinyin.c */,
+				4EA0C44C1A805CBD0025EC2E /* pinyin.h */,
+				4EA0C44D1A805CBD0025EC2E /* PinyinTools.h */,
+				4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */,
+			);
+			path = pinyinTools;
 			sourceTree = "<group>";
 		};
 		4EAA423119E03AC50098C9E0 /* EmojiOne */ = {
@@ -5571,6 +5589,7 @@
 				4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */,
 				4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */,
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
+				4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */,
 				4E56DF8B19D56EF500263B17 /* UIImage+WebP.m in Sources */,
 				4E56DF8D19D56EF500263B17 /* UIImageView+WebCache.m in Sources */,
 				4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */,
@@ -5639,6 +5658,7 @@
 				4E1D28CE1A125B9300740C17 /* JSQMessage.m in Sources */,
 				4E1D28C11A125B9300740C17 /* JSQMessagesKeyboardController.m in Sources */,
 				4E1D30AD1A125FDF00740C17 /* JSQSystemSoundPlayer.m in Sources */,
+				4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */,
 				4E216AB91A261395009FF11D /* JDFlipNumberDigitView.m in Sources */,
 				4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */,
 				4E1D28DD1A125B9300740C17 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,

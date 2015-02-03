@@ -15,7 +15,9 @@
 #import "UserViewController.h"
 #import "CategoryViewController.h"
 #import "TagViewController.h"
-
+#define CategoryGroupArrayKey @"CategoryGroupArray"
+#define CategoryGroupArrayWithStatusKey @"CategoryGroupArrayWithStatus"
+#define AllCategoryArrayKey @"AllCategoryArray"
 
 @interface AppDelegate ()<WXApiDelegate>
 
@@ -60,7 +62,7 @@
     [self.window makeKeyAndVisible];
     
     
-
+    [self refreshCategory];
     
     return YES;
 }
@@ -231,4 +233,46 @@
     
     return YES;
 }
+
+
+
+- (void)refreshCategory
+{
+    
+    [GKAPI getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
+        
+        NSMutableArray *categoryGroupArray = [NSMutableArray array];
+        NSMutableArray *allCategoryArray = [NSMutableArray array];
+        
+        for (NSDictionary *groupDict in fullCategoryGroupArray) {
+            NSArray *categoryArray = groupDict[@"CategoryArray"];
+            
+            NSMutableArray *filteredCategoryArray = [NSMutableArray array];
+            for (GKEntityCategory *category in categoryArray) {
+                [allCategoryArray addObject:category];
+                
+                if (category.status) {
+                    [filteredCategoryArray addObject:category];
+                }
+            }
+            NSDictionary *filteredGroupDict = @{@"GroupId"       : groupDict[@"GroupId"],
+                                                @"GroupName"     : groupDict[@"GroupName"],
+                                                @"Status"        : groupDict[@"Status"],
+                                                @"Count"         : @(categoryArray.count),
+                                                @"CategoryArray" : filteredCategoryArray};
+            if ([groupDict[@"Status"] integerValue] > 0) {
+                [categoryGroupArray addObject:filteredGroupDict];
+            }
+        }
+        [categoryGroupArray saveToUserDefaultsForKey:CategoryGroupArrayWithStatusKey];
+        [fullCategoryGroupArray saveToUserDefaultsForKey:CategoryGroupArrayKey];
+        [allCategoryArray saveToUserDefaultsForKey:AllCategoryArrayKey];
+        
+        self.allCategoryArray = allCategoryArray;
+        
+    } failure:^(NSInteger stateCode) {
+        
+    }];
+}
+
 @end
