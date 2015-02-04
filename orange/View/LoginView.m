@@ -218,7 +218,18 @@
 
 - (void)tapSinaWeiboButton
 {
-    /**/
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"2906081051" andAppSecret:@"65831776810a0371c82298cdf48efdad" andRedirectURI:@"https://api.weibo.com/oauth2/default.html"];
+    
+    [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
+        if (!error) {
+
+        }
+        else
+        {
+            [SVProgressHUD showImage:nil status:@"登录失败"];
+        }
+    } toPlatform:AVOSCloudSNSSinaWeibo];
 }
 
 - (void)tapTaobaoButton
