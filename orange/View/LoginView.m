@@ -219,11 +219,31 @@
 - (void)tapSinaWeiboButton
 {
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"2906081051" andAppSecret:@"65831776810a0371c82298cdf48efdad" andRedirectURI:@"https://api.weibo.com/oauth2/default.html"];
+    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
     
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         if (!error) {
+            [GKAPI loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] success:^(GKUser *user, NSString *session) {
+                if (self.successBlock) {
+                    self.successBlock();
+                }
+                [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
+                [self dismiss];
+            } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+                switch (stateCode) {
+                    case 500:
+                    {
+                        [SVProgressHUD showImage:nil status:@"服务器出错!"];
+                        break;
+                    }
+                        
+                    default:
+                        [SVProgressHUD dismiss];
+                        break;
+                }
 
+
+            }];
         }
         else
         {

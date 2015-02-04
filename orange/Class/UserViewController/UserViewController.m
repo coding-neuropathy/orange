@@ -15,6 +15,7 @@
 #import "FanViewController.h"
 #import "FriendViewController.h"
 #import "TagViewController.h"
+#import "LoginView.h"
 
 @interface UserViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -25,6 +26,7 @@
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
+@property (nonatomic, strong) UIButton *followButton;
 
 @end
 
@@ -35,6 +37,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        if (!self.followButton)
+        {
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 24)];
+            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+            button.titleLabel.textAlignment = NSTextAlignmentCenter;
+            button.center = CGPointMake(kScreenWidth - 40, 25);
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+            self.followButton = button;
+        }
+        [self configFollowButton];
     }
     return self;
 }
@@ -498,6 +510,8 @@
     [view addSubview:V];
     
     self.tableView.tableHeaderView = view;
+    
+    [self configFollowButton];
 }
 
 - (void)friendButtonAction
@@ -514,6 +528,73 @@
     VC.user = self.user;
     VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
+}
+
+-(void)configFollowButton
+{
+    for (id target in [self.followButton allTargets]) {
+        [self.followButton removeTarget:target action:NULL forControlEvents:UIControlEventAllEvents];
+    }
+    self.followButton.hidden = NO;
+    if (self.user.relation == GKUserRelationTypeNone) {
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAPlus]] forState:UIControlStateNormal];
+        [self.followButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
+        [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [self.followButton addTarget:self action:@selector(followButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (self.user.relation == GKUserRelationTypeFan) {
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAPlus]]  forState:UIControlStateNormal];
+        [self.followButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
+        [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [self.followButton addTarget:self action:@selector(followButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (self.user.relation == GKUserRelationTypeFollowing) {
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACheck]]  forState:UIControlStateNormal];
+        [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
+        [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (self.user.relation == GKUserRelationTypeBoth) {
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAExchange]]  forState:UIControlStateNormal];
+        [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
+        [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (self.user.relation == GKUserRelationTypeSelf) {
+        self.followButton.hidden = YES;
+    }
+}
+- (void)followButtonAction
+{
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
+    [GKAPI followUserId:self.user.userId state:YES success:^(GKUserRelationType relation) {
+        self.user.relation = relation;
+        [self configFollowButton];
+        [SVProgressHUD showImage:nil status:@"关注成功"];
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:@"关注失败"];
+    }];
+}
+- (void)unfollowButtonAction
+{
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
+    [GKAPI followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
+        self.user.relation = relation;
+        [self configFollowButton];
+        [SVProgressHUD showImage:nil status:@"取关成功"];
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:@"取关失败"];
+    }];
 }
 
 @end

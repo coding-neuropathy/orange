@@ -171,6 +171,15 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    if([[url absoluteString]hasPrefix:@"wx"])
+    {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    if([[url absoluteString]hasPrefix:@"sinaweibosso"])
+    {
+        return [AVOSCloudSNS handleOpenURL:url];
+    }
+    
     if([[url absoluteString]hasPrefix:@"guoku"])
     {
         NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
