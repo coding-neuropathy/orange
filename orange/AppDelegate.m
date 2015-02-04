@@ -56,10 +56,18 @@
     [SVProgressHUD setBackgroundColor:UIColorFromRGB(0x2b2b2b)];
     [SVProgressHUD setForegroundColor:UIColorFromRGB(0xffffff)];
     
+
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[TabBarViewcontroller alloc]init];
     [self.window makeKeyAndVisible];
+    
+    
+    self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.alertWindow.windowLevel = 100;
+    UIViewController *vc = [[UIViewController alloc] init];
+    self.alertWindow.rootViewController = vc;
     
     
     [self refreshCategory];

@@ -304,6 +304,10 @@
 		4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */; };
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
+		4EA0C4571A82810D0025EC2E /* GKTaobaoOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4541A82810D0025EC2E /* GKTaobaoOAuthViewController.m */; };
+		4EA0C4581A82810D0025EC2E /* taobao_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EA0C4551A82810D0025EC2E /* taobao_close.png */; };
+		4EA0C4591A82810D0025EC2E /* taobao_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EA0C4561A82810D0025EC2E /* taobao_close@2x.png */; };
+		4EA0C45C1A8287780025EC2E /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C45B1A8287780025EC2E /* SignView.m */; };
 		4EAA458119E03BA60098C9E0 /* emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA423219E03B9C0098C9E0 /* emoji.json */; };
 		4EAA458219E03BA60098C9E0 /* 0023-20E3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA423419E03B9C0098C9E0 /* 0023-20E3.png */; };
 		4EAA458319E03BA60098C9E0 /* 0030-20E3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA423519E03B9C0098C9E0 /* 0030-20E3.png */; };
@@ -1635,6 +1639,13 @@
 		4EA0C44C1A805CBD0025EC2E /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		4EA0C44D1A805CBD0025EC2E /* PinyinTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinyinTools.h; sourceTree = "<group>"; };
 		4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinTools.m; sourceTree = "<group>"; };
+		4EA0C4521A82810D0025EC2E /* GKTaobaoConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKTaobaoConfig.h; sourceTree = "<group>"; };
+		4EA0C4531A82810D0025EC2E /* GKTaobaoOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKTaobaoOAuthViewController.h; sourceTree = "<group>"; };
+		4EA0C4541A82810D0025EC2E /* GKTaobaoOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKTaobaoOAuthViewController.m; sourceTree = "<group>"; };
+		4EA0C4551A82810D0025EC2E /* taobao_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taobao_close.png; sourceTree = "<group>"; };
+		4EA0C4561A82810D0025EC2E /* taobao_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "taobao_close@2x.png"; sourceTree = "<group>"; };
+		4EA0C45A1A8287780025EC2E /* SignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
+		4EA0C45B1A8287780025EC2E /* SignView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
 		4EAA423219E03B9C0098C9E0 /* emoji.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emoji.json; sourceTree = "<group>"; };
 		4EAA423419E03B9C0098C9E0 /* 0023-20E3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0023-20E3.png"; sourceTree = "<group>"; };
 		4EAA423519E03B9C0098C9E0 /* 0030-20E3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0030-20E3.png"; sourceTree = "<group>"; };
@@ -2553,6 +2564,8 @@
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4EA0C45A1A8287780025EC2E /* SignView.h */,
+				4EA0C45B1A8287780025EC2E /* SignView.m */,
 				4ECCD0D71A714A7D009D5A42 /* TagCell.h */,
 				4ECCD0D81A714A7D009D5A42 /* TagCell.m */,
 				4E2D6D5D1A6FF7DE009E4A17 /* NoteSingleListCell.h */,
@@ -3257,6 +3270,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				4EA0C4511A82810D0025EC2E /* Taobao */,
 				4EA0C44A1A805CBD0025EC2E /* pinyinTools */,
 				4E2D6D531A6BFD77009E4A17 /* RTLabel */,
 				4E2D6D4C1A6AC261009E4A17 /* AMScrollingNavbar */,
@@ -3515,6 +3529,18 @@
 				4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */,
 			);
 			path = pinyinTools;
+			sourceTree = "<group>";
+		};
+		4EA0C4511A82810D0025EC2E /* Taobao */ = {
+			isa = PBXGroup;
+			children = (
+				4EA0C4521A82810D0025EC2E /* GKTaobaoConfig.h */,
+				4EA0C4531A82810D0025EC2E /* GKTaobaoOAuthViewController.h */,
+				4EA0C4541A82810D0025EC2E /* GKTaobaoOAuthViewController.m */,
+				4EA0C4551A82810D0025EC2E /* taobao_close.png */,
+				4EA0C4561A82810D0025EC2E /* taobao_close@2x.png */,
+			);
+			path = Taobao;
 			sourceTree = "<group>";
 		};
 		4EAA423119E03AC50098C9E0 /* EmojiOne */ = {
@@ -4783,6 +4809,7 @@
 				4EAA468F19E03BA60098C9E0 /* 1F41A.png in Resources */,
 				4E066B511A5CC02400DFEF65 /* Expression_57@2x.png in Resources */,
 				4EAA488D19E03BA70098C9E0 /* 2660.png in Resources */,
+				4EA0C4581A82810D0025EC2E /* taobao_close.png in Resources */,
 				4EAA471219E03BA60098C9E0 /* 1F49F.png in Resources */,
 				4EAA474919E03BA70098C9E0 /* 1F4D6.png in Resources */,
 				4EAA46AB19E03BA60098C9E0 /* 1F436.png in Resources */,
@@ -4851,6 +4878,7 @@
 				4EAA480A19E03BA70098C9E0 /* 1F640.png in Resources */,
 				4EAA458219E03BA60098C9E0 /* 0023-20E3.png in Resources */,
 				4EAA484519E03BA70098C9E0 /* 1F6AF.png in Resources */,
+				4EA0C4591A82810D0025EC2E /* taobao_close@2x.png in Resources */,
 				4EAA482E19E03BA70098C9E0 /* 1F698.png in Resources */,
 				4EAA469C19E03BA60098C9E0 /* 1F427.png in Resources */,
 				4EAA47C419E03BA70098C9E0 /* 1F567.png in Resources */,
@@ -5537,6 +5565,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EA0C4571A82810D0025EC2E /* GKTaobaoOAuthViewController.m in Sources */,
 				4E3A23471A51A7C500037F9C /* GKNote.m in Sources */,
 				4E1D28D21A125B9300740C17 /* JSQVideoMediaItem.m in Sources */,
 				4E1D28BF1A125B9300740C17 /* UIImage+JSQMessages.m in Sources */,
@@ -5588,6 +5617,7 @@
 				4E216A8D1A1CF692009FF11D /* UIView+Shake.m in Sources */,
 				4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */,
 				4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */,
+				4EA0C45C1A8287780025EC2E /* SignView.m in Sources */,
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
 				4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */,
 				4E56DF8B19D56EF500263B17 /* UIImage+WebP.m in Sources */,
@@ -5818,7 +5848,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "214c65f3-37fb-4f75-9ae0-5f67fdde5ec9";
+				PROVISIONING_PROFILE = "ce37bf43-8112-4a0c-9d8e-1a9e7857de31";
 			};
 			name = Debug;
 		};
@@ -5845,7 +5875,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "214c65f3-37fb-4f75-9ae0-5f67fdde5ec9";
+				PROVISIONING_PROFILE = "ce37bf43-8112-4a0c-9d8e-1a9e7857de31";
 			};
 			name = Release;
 		};
