@@ -36,7 +36,7 @@
         self.clipsToBounds = YES;
         _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
         self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
-        [self.contentView addSubview:self.H];
+        //[self.contentView addSubview:self.H];
     }
     return self;
 }

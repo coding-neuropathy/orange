@@ -137,7 +137,8 @@ typedef NS_ENUM(NSInteger, FeedType) {
     [self configContent];
     
     [self bringSubviewToFront:self.H];
-    _H.deFrameBottom = self.frame.size.height;
+    self.H.hidden = NO;
+    _H.deFrameBottom = self.frame.size.height-1;
     
 }
 
