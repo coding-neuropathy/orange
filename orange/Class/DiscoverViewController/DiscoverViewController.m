@@ -377,7 +377,6 @@
             return view;
         }
     }
-    
     return nil;
 }
 
@@ -552,7 +551,7 @@
         return;
     }
     self.keyword = searchText;
-    [self goKeyword];
+    [self searchButtonAction];
 }
 - (void)handleSearchText:(NSString *)searchText
 {
@@ -564,10 +563,24 @@
         }
     }
     [self.filteredArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
+    
+   
+    {
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitleColor:UIColorFromRGB(0xcacaca) forState:UIControlStateNormal];
+        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAAngleRight] forState:UIControlStateNormal];
+        button.deFrameRight = kScreenWidth -20;
+        button.backgroundColor = [UIColor clearColor];
+        [button addTarget:self action:@selector(searchButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:[NSString stringWithFormat:@"直接搜索 %@ ",searchText] forState:UIControlStateNormal];
+        self.searchDC.searchResultsTableView.tableHeaderView = button;
+    }
     [self.searchDC.searchResultsTableView reloadData];
     
 }
-- (void)goKeyword
+- (void)searchButtonAction
 {
     /**/
 }
