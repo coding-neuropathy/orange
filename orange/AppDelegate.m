@@ -166,15 +166,15 @@
     [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x2b2b2b)}];
     [[UINavigationBar appearance] setAlpha:0.97];
-    //[[UINavigationBar appearance] setTranslucent:YES];
+
     
     
-    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x2b2b2b) andSize:CGSizeMake(kScreenWidth, 49)]];
-    [[UITabBar appearance] setTranslucent:YES];
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x242424) andSize:CGSizeMake(kScreenWidth, 49)]];
+    [[UITabBar appearance]setSelectionIndicatorImage:[UIImage imageWithColor:UIColorFromRGB(0x0f0f0f) andSize:CGSizeMake(kScreenWidth/4, 49)]];
     [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
-    [[UITabBar appearance] setAlpha:0.9];
+
 }
 
 

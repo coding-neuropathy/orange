@@ -34,7 +34,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:@"Save" object:nil];
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"精选" image:[UIImage imageNamed:@"selection"] selectedImage:[UIImage imageNamed:@"selection"]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"精选" image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
         
