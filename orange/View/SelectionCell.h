@@ -16,6 +16,6 @@
 @property (nonatomic, strong) NSDate * date;
 
 
-+ (CGFloat)heightForEmojiText:(NSString*)emojiText;
++ (CGFloat)height:(GKNote *)note;
 
 @end

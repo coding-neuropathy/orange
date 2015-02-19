@@ -353,12 +353,12 @@
             HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
             [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %ld",self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-            [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
+            [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
-            [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
-            [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
-            [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
-            [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
+            [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
+            [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+            [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
+            [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
             [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
             
             self.segmentedControl = segmentedControl;

@@ -7,17 +7,17 @@
 //
 
 #import "SelectionCell.h"
-#import "MLEmojiLabel.h"
+#import "RTLabel.h"
 #import "GKAPI.h"
 #import "EntityViewController.h"
 #import "LoginView.h"
 #define kWidth (kScreenWidth - 20)
-@interface SelectionCell()<MLEmojiLabelDelegate>
+@interface SelectionCell()<RTLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIImageView *tmp;
 @property (nonatomic, strong) UIView *box;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, strong) MLEmojiLabel *emojiLabel;
+@property (nonatomic, strong) RTLabel * contentLabel;
 @property (nonatomic, strong) UIButton *likeButton;
 @property (nonatomic, strong) UIButton *timeButton;
 @property (nonatomic, strong) UIView *H;
@@ -78,14 +78,16 @@
         self.box.backgroundColor = [UIColor whiteColor];
         self.box.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
         self.box.layer.borderWidth = 0.5;
-        [self.contentView addSubview:self.box];
+        //[self.contentView addSubview:self.box];
     }
     
     if (!self.image) {
-        _image = [[UIImageView alloc] initWithFrame:CGRectMake(25.0f, 17.0f,kScreenWidth -50, 280)];
+        _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.0f, 16.0f,kScreenWidth -32, kScreenWidth-32)];
         self.image.contentMode = UIViewContentModeScaleAspectFit;
         self.image.backgroundColor = [UIColor whiteColor];
         self.image.userInteractionEnabled = YES;
+        self.image.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
+        self.image.layer.borderWidth = 0.5;
         [self.contentView addSubview:self.image];
     }
     __block UIImageView *block_img = self.image;
@@ -110,14 +112,20 @@
         }];
     }
     
-    [self.emojiLabel setText:self.note.text];
-    self.emojiLabel.frame = CGRectMake(15.0f, self.box.deFrameBottom +15, kScreenWidth - 30, [[self class] heightForEmojiText:self.note.text]);
-    self.emojiLabel.backgroundColor = [UIColor clearColor];
-    [self.contentView addSubview:self.emojiLabel];
     
+    if(!self.contentLabel) {
+        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
+        self.contentLabel.paragraphReplacement = @"";
+        self.contentLabel.lineSpacing = 7.0;
+        self.contentLabel.delegate = self;
+        [self.contentView addSubview:self.contentLabel];
+    }
+    
+    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
+    self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     
     if (!self.likeButton) {
-        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
+        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];
         self.likeButton.layer.masksToBounds = YES;
         self.likeButton.layer.cornerRadius = 2;
         self.likeButton.backgroundColor = [UIColor clearColor];
@@ -125,35 +133,43 @@
         self.likeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
-        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+        [self.likeButton setImage:[[UIImage imageNamed:@"icon_like"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  forState:UIControlStateNormal];
+        [self.likeButton setImage:[[UIImage imageNamed:@"icon_like"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  forState:UIControlStateHighlighted|UIControlStateNormal];
+        [self.likeButton setImage:[[UIImage imageNamed:@"icon_like_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateSelected];
+        [self.likeButton setImage:[[UIImage imageNamed:@"icon_like_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  forState:UIControlStateHighlighted|UIControlStateSelected];
+        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,8, 0, 0)];
         [self.contentView addSubview:self.likeButton];        
     }
     [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
     self.likeButton.selected = self.entity.liked;
-    self.likeButton.deFrameLeft = self.emojiLabel.deFrameLeft;
-    self.likeButton.deFrameTop = self.emojiLabel.deFrameBottom+10;
+    if(self.likeButton.selected)
+    {
+        [self.likeButton setTintColor:UIColorFromRGB(0xFF1F77)];
+    }
+    else
+    {
+        [self.likeButton setTintColor:UIColorFromRGB(0x9d9e9f)];
+    }
+    self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft;
+    self.likeButton.deFrameTop = self.contentLabel.deFrameBottom + 16;
     [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     
     if (!self.timeButton) {
-        _timeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
+        _timeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];
         self.timeButton.layer.masksToBounds = YES;
         self.timeButton.layer.cornerRadius = 2;
         self.timeButton.backgroundColor = [UIColor clearColor];
-        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [self.timeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-        [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+        [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,4, 0, 0)];
         [self.contentView addSubview:self.timeButton];
     }
     [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.date stringWithDefaultFormat]] forState:UIControlStateNormal];
-    self.timeButton.deFrameRight = self.emojiLabel.deFrameRight;
-    self.timeButton.deFrameTop = self.emojiLabel.deFrameBottom+10;
+    self.timeButton.deFrameRight = self.contentLabel.deFrameRight;
+    self.timeButton.deFrameTop = self.contentLabel.deFrameBottom+16;
     [self.timeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self bringSubviewToFront:self.H];
@@ -164,83 +180,19 @@
     [self.image addGestureRecognizer:tap];
 }
 
-#pragma mark - getter
-- (MLEmojiLabel *)emojiLabel
+
++ (CGFloat)height:(GKNote *)note
 {
-    if (!_emojiLabel) {
-        _emojiLabel = [MLEmojiLabel new];
-        _emojiLabel.numberOfLines = 0;
-        _emojiLabel.font = [UIFont systemFontOfSize:15.0f];
-        _emojiLabel.delegate = self;
-        _emojiLabel.backgroundColor = [UIColor clearColor];
-        _emojiLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        _emojiLabel.textColor = [UIColor darkGrayColor];
-        _emojiLabel.backgroundColor = [UIColor colorWithRed:0.218 green:0.809 blue:0.304 alpha:1.000];
-        
-        _emojiLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-        
-        _emojiLabel.isNeedAtAndPoundSign = YES;
-        _emojiLabel.disableEmoji = NO;
-        
-        _emojiLabel.lineSpacing = 3.0f;
-        
-        _emojiLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
-        
-        //        _emojiLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
-        //        _emojiLabel.customEmojiPlistName = @"expressionImage_custom.plist";
-    }
-    return _emojiLabel;
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
+    label.paragraphReplacement = @"";
+    label.lineSpacing = 7.0;
+    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
+    return label.optimumSize.height + kScreenWidth +40;
+    
+    
 }
 
-#pragma mark - height
-+ (CGFloat)heightForEmojiText:(NSString*)emojiText
-{
-    static MLEmojiLabel *protypeLabel = nil;
-    if (!protypeLabel) {
-        protypeLabel = [MLEmojiLabel new];
-        protypeLabel.numberOfLines = 0;
-        protypeLabel.font = [UIFont systemFontOfSize:15.0f];
-        protypeLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        protypeLabel.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-        protypeLabel.isNeedAtAndPoundSign = YES;
-        protypeLabel.disableEmoji = NO;
-        protypeLabel.lineSpacing = 3.0f;
-        
-        protypeLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
-        
-        //        protypeLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
-        //        protypeLabel.customEmojiPlistName = @"expressionImage_custom.plist";
-    }
-    
-    [protypeLabel setText:emojiText];
-    
-    return [protypeLabel preferredSizeWithMaxWidth:kWidth].height+5.0f*2;
-}
 
-- (void)mlEmojiLabel:(MLEmojiLabel*)emojiLabel didSelectLink:(NSString*)link withType:(MLEmojiLabelLinkType)type
-{
-    switch(type){
-        case MLEmojiLabelLinkTypeURL:
-            NSLog(@"点击了链接%@",link);
-            break;
-        case MLEmojiLabelLinkTypePhoneNumber:
-            NSLog(@"点击了电话%@",link);
-            break;
-        case MLEmojiLabelLinkTypeEmail:
-            NSLog(@"点击了邮箱%@",link);
-            break;
-        case MLEmojiLabelLinkTypeAt:
-            NSLog(@"点击了用户%@",link);
-            break;
-        case MLEmojiLabelLinkTypePoundSign:
-            NSLog(@"点击了话题%@",link);
-            break;
-        default:
-            NSLog(@"点击了不知道啥%@",link);
-            break;
-    }
-    
-}
 #pragma mark - KVO
 - (void)addObserver
 {
@@ -293,6 +245,14 @@
             [SVProgressHUD dismiss];
         }
         [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        if(self.likeButton.selected)
+        {
+            [self.likeButton setTintColor:UIColorFromRGB(0xFF1F77)];
+        }
+        else
+        {
+            [self.likeButton setTintColor:UIColorFromRGB(0x9d9e9f)];
+        }
 
 
 

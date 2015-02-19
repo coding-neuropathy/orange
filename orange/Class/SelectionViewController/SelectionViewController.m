@@ -51,18 +51,18 @@
         [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [segmentedControl setTag:2];
-        self.navigationItem.titleView =  segmentedControl;
+        //self.navigationItem.titleView =  segmentedControl;
         self.index = 0;
 
         
-        //[self logo];
+        [self logo];
         
         NSMutableArray * array = [NSMutableArray array];
         {
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+            [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
             [button setTitle:[NSString fontAwesomeIconStringForEnum:FARandom] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(random) forControlEvents:UIControlEventTouchUpInside];
             button.backgroundColor = [UIColor clearColor];
@@ -226,16 +226,7 @@
         }
         else
         {
-            static NSString *CellIdentifier = @"EntitySingleListCell";
-            EntitySingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[EntitySingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            cell.entity = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"entity"];
-            NSTimeInterval timestamp = [self.dataArrayForEntity[indexPath.row][@"time"] doubleValue];
-
-            
-            return cell;
+            return [[UITableViewCell alloc] init];
         }
 
     }
@@ -254,7 +245,7 @@
     if (self.index == 0) {
         if (1) {
             GKNote * note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
-            return [SelectionCell heightForEmojiText:note.text]+370;
+            return [SelectionCell height:note];
         }
         else
         {
@@ -272,7 +263,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (self.index == 0) {
-        return 36.f;
+        return 0.f;
     }
     else
     {
@@ -296,7 +287,7 @@
         [self.SelectionCountLabelBgView addSubview:self.SelectionCountLabel];
         self.SelectionCountLabelBgView.alpha = 0.97;
         
-        return self.SelectionCountLabelBgView;
+        //return self.SelectionCountLabelBgView;
     }
     return [UIView new];
 }
@@ -372,16 +363,12 @@
 
 - (void)logo
 {
-    /*
-    UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 60, 30)];
-    icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    icon.tintColor = UIColorFromRGB(0x666666);
+    
+    UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 43, 25)];
+    icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     icon.contentMode = UIViewContentModeScaleAspectFit;
     icon.userInteractionEnabled = YES;
     self.navigationItem.titleView = icon;
-    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:icon];
-     */
-    self.title = @"精选";
 }
 
 - (void)random
