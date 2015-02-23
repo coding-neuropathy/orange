@@ -14,6 +14,7 @@
 #import "GKWebVC.h"
 #import "pinyin.h"
 #import "PinyinTools.h"
+#import "GroupViewController.h"
 
 @interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (strong, nonatomic) UISearchBar *searchBar;
@@ -43,10 +44,9 @@
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"tabbar_icon_discover"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_discover"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
-        self.edgesForExtendedLayout = UIRectEdgeAll;
-        self.extendedLayoutIncludesOpaqueBars = YES;
+
         self.title = @"发现";
-        [self configSearchBar];
+   
     }
     return self;
 }
@@ -55,8 +55,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
-    
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, kStatusBarHeight+kNavigationBarHeight, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    [self.navigationController.navigationBar setAlpha:0.99];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.extendedLayoutIncludesOpaqueBars = YES;
+
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f,kNavigationBarHeight+kStatusBarHeight, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -66,9 +70,10 @@
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.view addSubview:self.tableView];
+    [self configSearchBar];
     
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 150.f*kScreenWidth/320+32)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 150.f*kScreenWidth/320+34)];
     headerView.backgroundColor = [UIColor whiteColor];
     
     // Banner
@@ -86,19 +91,25 @@
     
     
     if (!self.segmentedControl) {
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
         [segmentedControl setSectionTitles:@[@"热门商品", @"推荐分类"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
+        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
         [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
         [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
         [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
         [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        segmentedControl.deFrameBottom = headerView.deFrameHeight;
+        segmentedControl.deFrameBottom = headerView.deFrameHeight-1;
         self.segmentedControl = segmentedControl;
         [headerView addSubview:self.segmentedControl];
+        
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,headerView.deFrameHeight-1, kScreenWidth, 0.5)];
+            H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+            [headerView addSubview:H];
+        }
     }
 
     
@@ -129,9 +140,27 @@
      [weakSelf loadMore];
      }];
      */
-    
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     [self.tableView.pullToRefreshView startAnimating];
     [self refresh];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.navigationController.navigationBar setAlpha:0.99];
+    [self.navigationController.navigationBar setTranslucent:YES];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setAlpha:1];
+    [self.navigationController.navigationBar setTranslucent:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -352,7 +381,7 @@
     if(tableView == self.tableView)
     {
         if (self.index == 1) {
-            return 32;
+            return 40;
         }
     }
     return 0.01f;
@@ -364,7 +393,7 @@
     {
         if(self.index == 1)
         {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 6.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 10.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
             label.text = [self.dataArrayForCategory[section] valueForKey:@"GroupName"];
             label.textAlignment = NSTextAlignmentLeft;
             label.textColor = UIColorFromRGB(0x666666);
@@ -373,6 +402,36 @@
             UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 32)];
             view.backgroundColor = [UIColor whiteColor];
             [view addSubview:label];
+            
+            
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 16, 40)];
+            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+            button.titleLabel.textAlignment = NSTextAlignmentLeft;
+            button.tag =section;
+            [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+            [button setTitle:[NSString fontAwesomeIconStringForEnum:FAAngleRight] forState:UIControlStateNormal];
+            button.deFrameRight = kScreenWidth -17;
+            button.backgroundColor = [UIColor clearColor];
+            [button addTarget:self action:@selector(categoryGroupButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
+            [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+            [view addSubview:button];
+
+            
+            UILabel * countLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 11)];
+            countLabel.font = [UIFont systemFontOfSize:12];
+            countLabel.textAlignment = NSTextAlignmentRight;
+            countLabel.textColor = UIColorFromRGB(0x999999);
+            countLabel.hidden = NO;
+            countLabel.center = label.center;
+            [countLabel setText:[NSString stringWithFormat:@"%@个品类",[self.dataArrayForCategory[section] valueForKey:@"Count"]]];
+            countLabel.deFrameWidth = ([[self.dataArrayForCategory[section] valueForKey:@"Count"] stringValue].length -1)*12 +100;
+            countLabel.center = label.center;
+            countLabel.deFrameRight = button.deFrameLeft +10 ;
+            [view addSubview:countLabel];
+            
+            
+            
+            
             
             return view;
         }
@@ -533,6 +592,15 @@
 
 #pragma mark - SearchBar
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    
+}
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     
@@ -583,6 +651,16 @@
 - (void)searchButtonAction
 {
     /**/
+}
+
+- (void)categoryGroupButtonAction:(id)sender
+{
+    if ([sender isKindOfClass:[UIButton class]]) {
+        NSUInteger tag = ((UIButton *)sender).tag;
+        GroupViewController * vc = [[GroupViewController alloc]initWithGid:[[self.dataArrayForCategory[tag] valueForKey:@"GroupId"]integerValue]];
+        vc.navigationItem.title = [self.dataArrayForCategory[tag] valueForKey:@"GroupName"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 @end

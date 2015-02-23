@@ -42,15 +42,18 @@ static NSDateFormatter *dateFormatter;
         return [NSString stringWithFormat:@"%.0f分钟前", minutes];
     } else if (minutes < 60 * 24) {
         return [NSString stringWithFormat:@"%.0f小时前", minutes / 60];
-    } else if (minutes < 60 * 24 * 2) {
+    } else if (minutes < 60 * 24 * 7) {
         return [NSString stringWithFormat:@"%.0f天前", minutes / 60 / 24];
     } else {
+        return [NSString stringWithFormat:@"%.0f周前", minutes / 60 / 24/7];
+        /*
         if (!dateFormatter) {
             dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
             [dateFormatter setLocale:[NSLocale currentLocale]];
         }
         return [dateFormatter stringFromDate:self];
+         */
     }
 }
 

@@ -300,6 +300,7 @@
 		4E8D6AAC1A3B441000156C17 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8D6AAB1A3B441000156C17 /* libc++.dylib */; };
 		4E8D6AB31A3B57F600156C17 /* UINavigationController+statusbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB21A3B57F600156C17 /* UINavigationController+statusbar.m */; };
 		4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB61A3B66F900156C17 /* MCPHandler.m */; };
+		4E934DA81A9AE9FB00374B05 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E934DA71A9AE9FB00374B05 /* GroupViewController.m */; };
 		4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */; };
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
@@ -1631,6 +1632,8 @@
 		4E8D6AB21A3B57F600156C17 /* UINavigationController+statusbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+statusbar.m"; path = "../../Category/UINavigationController+statusbar.m"; sourceTree = "<group>"; };
 		4E8D6AB51A3B66F900156C17 /* MCPHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPHandler.h; sourceTree = "<group>"; };
 		4E8D6AB61A3B66F900156C17 /* MCPHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPHandler.m; sourceTree = "<group>"; };
+		4E934DA61A9AE9FB00374B05 /* GroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupViewController.h; sourceTree = "<group>"; };
+		4E934DA71A9AE9FB00374B05 /* GroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupViewController.m; sourceTree = "<group>"; };
 		4EA0C4471A7F03DE0025EC2E /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
 		4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
 		4EA0C44B1A805CBD0025EC2E /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
@@ -3414,6 +3417,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4E934DA51A9AE9FB00374B05 /* GroupViewController */,
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
 				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
 				4E66C1DE1A7CBD2F00F31A90 /* GKWebViewVC */,
@@ -3506,6 +3510,15 @@
 				4E8D6AB61A3B66F900156C17 /* MCPHandler.m */,
 			);
 			path = MCPHandler;
+			sourceTree = "<group>";
+		};
+		4E934DA51A9AE9FB00374B05 /* GroupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E934DA61A9AE9FB00374B05 /* GroupViewController.h */,
+				4E934DA71A9AE9FB00374B05 /* GroupViewController.m */,
+			);
+			path = GroupViewController;
 			sourceTree = "<group>";
 		};
 		4EA0C4461A7F03CB0025EC2E /* ReportViewController */ = {
@@ -5603,6 +5616,7 @@
 				4E1D312E1A1A46AD00740C17 /* AGEmojiPageView.m in Sources */,
 				4E56DFB119D579F600263B17 /* UIImage+App.m in Sources */,
 				4EAA48D319E03C870098C9E0 /* EmojiOne.m in Sources */,
+				4E934DA81A9AE9FB00374B05 /* GroupViewController.m in Sources */,
 				4E8D6AB31A3B57F600156C17 /* UINavigationController+statusbar.m in Sources */,
 				4E1D28C51A125B9300740C17 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				4EC9F7911A7928520057D736 /* FanViewController.m in Sources */,

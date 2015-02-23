@@ -132,7 +132,7 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     [self addSubview:self.scrollView];
     
-    self.font = [UIFont fontWithName:@"STHeitiSC-Medium" size:14.0f];
+    self.font = [UIFont boldSystemFontOfSize:14];
     self.textColor = [UIColor blackColor];
     self.selectedTextColor = [UIColor blackColor];
     self.backgroundColor = [UIColor whiteColor];
@@ -141,7 +141,7 @@
     
     self.selectedSegmentIndex = 0;
     self.segmentEdgeInset = UIEdgeInsetsMake(0, 5, 0, 5);
-    self.selectionIndicatorHeight = 5.0f;
+    self.selectionIndicatorHeight = 2.0f;
     self.selectionIndicatorEdgeInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
     self.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
     self.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationUp;

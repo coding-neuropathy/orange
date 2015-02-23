@@ -29,7 +29,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
+        self.contentView.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -52,6 +52,7 @@
                 button.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
                 button.imageView.contentMode = UIViewContentModeScaleAspectFit;
                 button.layer.borderWidth = 0.5;
+                button.backgroundColor = UIColorFromRGB(0xffffff);
             
                 [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
                 button.tag = i;
