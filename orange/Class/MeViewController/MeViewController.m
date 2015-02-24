@@ -340,7 +340,7 @@
 {
     if(tableView == self.tableView)
     {
-        return 32;
+        return 40;
     }
     return 0.01f;
 }
@@ -350,7 +350,7 @@
     if(tableView == self.tableView)
     {
         if (!self.segmentedControl) {
-            HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
+            HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
             [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %ld",self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
@@ -362,6 +362,17 @@
             [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
             
             self.segmentedControl = segmentedControl;
+            
+            {
+                UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControl.deFrameHeight-0.5, kScreenWidth, 0.5)];
+                H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                [self.segmentedControl addSubview:H];
+            }
+            {
+                UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
+                H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                [self.segmentedControl addSubview:H];
+            }
         }
         
         [self.segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %ld",self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
@@ -429,7 +440,7 @@
 - (void)configHeaderView
 {
     UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 270)];
-    
+    view.backgroundColor = UIColorFromRGB(0xfafafa);
     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(7.f, 7.f, 100, 100)];
     image.contentMode = UIViewContentModeScaleAspectFit;
     image.center = CGPointMake(kScreenWidth/2, 80);
