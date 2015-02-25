@@ -10,6 +10,7 @@
 #import "CategoryGridCell.h"
 #import "CategoryViewController.h"
 #import "GKAPI.h"
+#import "Config.h"
 @interface GroupViewController ()
 @property (nonatomic, strong) NSArray *categoryGroupArray;
 @property (nonatomic, strong) NSMutableArray *categoryArray;
@@ -42,7 +43,7 @@
 
 - (void)refresh
 {
-    self.categoryGroupArray = [NSObject objectFromUserDefaultsByKey:@"CategoryGroupArrayWithStatusKey"];
+    self.categoryGroupArray = [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayWithStatusKey];
     for (NSDictionary * dic in self.categoryGroupArray) {
         NSUInteger gid = [dic[@"GroupId"] integerValue];
         if (gid == self.gid) {
@@ -57,12 +58,12 @@
 
 - (void)splitArray
 {
-    if (!self.firstCategoryArray) {
+    //if (!self.firstCategoryArray) {
         _firstCategoryArray = [NSMutableArray array];
-    }
-    if (!self.secondCategoryArray) {
+    //}
+    //if (!self.secondCategoryArray) {
         _secondCategoryArray = [NSMutableArray array];
-    }
+    //}
     
     for (GKEntityCategory *category in self.categoryArray) {
         if (category.status > 0) {

@@ -140,14 +140,15 @@
      [weakSelf loadMore];
      }];
      */
+    [self.tableView.pullToRefreshView startAnimating];
+    [self refresh];
 
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.tableView.pullToRefreshView startAnimating];
-    [self refresh];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -221,6 +222,9 @@
                 }
             
             self.dataArrayForCategory = categoryGroupArray;
+            [categoryGroupArray saveToUserDefaultsForKey:CategoryGroupArrayWithStatusKey];
+            [fullCategoryGroupArray saveToUserDefaultsForKey:CategoryGroupArrayKey];
+            [allCategoryArray saveToUserDefaultsForKey:AllCategoryArrayKey];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
     

@@ -15,9 +15,7 @@
 #import "UserViewController.h"
 #import "CategoryViewController.h"
 #import "TagViewController.h"
-#define CategoryGroupArrayKey @"CategoryGroupArray"
-#define CategoryGroupArrayWithStatusKey @"CategoryGroupArrayWithStatus"
-#define AllCategoryArrayKey @"AllCategoryArray"
+
 
 @interface AppDelegate ()<WXApiDelegate>
 
