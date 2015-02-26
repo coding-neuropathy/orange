@@ -100,3 +100,7 @@
 #define sad @"\U0001F628"
 #endif
 
+#define CategoryGroupArrayKey @"CategoryGroupArray"
+#define CategoryGroupArrayWithStatusKey @"CategoryGroupArrayWithStatus"
+#define AllCategoryArrayKey @"AllCategoryArray"
+

@@ -14,6 +14,7 @@
 #import "GKWebVC.h"
 #import "pinyin.h"
 #import "PinyinTools.h"
+#import "GroupViewController.h"
 
 @interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (strong, nonatomic) UISearchBar *searchBar;
@@ -40,13 +41,12 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"discover"] selectedImage:[UIImage imageNamed:@"discover"]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"tabbar_icon_discover"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_discover"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
-        self.edgesForExtendedLayout = UIRectEdgeAll;
-        self.extendedLayoutIncludesOpaqueBars = YES;
+
         self.title = @"发现";
-        [self configSearchBar];
+   
     }
     return self;
 }
@@ -55,8 +55,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
-    
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, kStatusBarHeight+kNavigationBarHeight, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    [self.navigationController.navigationBar setAlpha:0.99];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.extendedLayoutIncludesOpaqueBars = YES;
+
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f,kNavigationBarHeight+kStatusBarHeight, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -66,9 +70,10 @@
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.view addSubview:self.tableView];
+    [self configSearchBar];
     
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 150.f*kScreenWidth/320+32)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 150.f*kScreenWidth/320+34)];
     headerView.backgroundColor = [UIColor whiteColor];
     
     // Banner
@@ -86,19 +91,25 @@
     
     
     if (!self.segmentedControl) {
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
         [segmentedControl setSectionTitles:@[@"热门商品", @"推荐分类"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
-        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
+        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
+        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+        [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+        [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
+        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        segmentedControl.deFrameBottom = headerView.deFrameHeight;
+        segmentedControl.deFrameBottom = headerView.deFrameHeight-1;
         self.segmentedControl = segmentedControl;
         [headerView addSubview:self.segmentedControl];
+        
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,headerView.deFrameHeight-1, kScreenWidth, 0.5)];
+            H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+            [headerView addSubview:H];
+        }
     }
 
     
@@ -129,9 +140,29 @@
      [weakSelf loadMore];
      }];
      */
-    
     [self.tableView.pullToRefreshView startAnimating];
+    [self.tableView reloadData];
     [self refresh];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.navigationController.navigationBar setAlpha:0.99];
+    [self.navigationController.navigationBar setTranslucent:YES];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setAlpha:1];
+    [self.navigationController.navigationBar setTranslucent:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -155,12 +186,12 @@
     if (self.index == 0) {
         [GKAPI getHotEntityListWithType:@"weekly" success:^(NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
-            [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
+                        [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"失败"];
-            [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
+                        [self.tableView reloadData];
         }];
     }
     else if (self.index == 1)
@@ -192,6 +223,9 @@
                 }
             
             self.dataArrayForCategory = categoryGroupArray;
+            [categoryGroupArray saveToUserDefaultsForKey:CategoryGroupArrayWithStatusKey];
+            [fullCategoryGroupArray saveToUserDefaultsForKey:CategoryGroupArrayKey];
+            [allCategoryArray saveToUserDefaultsForKey:AllCategoryArrayKey];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
     
@@ -239,13 +273,13 @@
         }
         else if (self.index == 1)
         {
-            return (((NSMutableArray *)[[self.dataArrayForCategory objectAtIndex:section] objectForKey:@"CategoryArray"]).count /(CGFloat)4);
+            return ceil(((NSMutableArray *)[[self.dataArrayForCategory objectAtIndex:section] objectForKey:@"CategoryArray"]).count /(CGFloat)4);
         }
         return 0;
     }
     else
     {
-        return (self.filteredArray.count /(CGFloat)4);
+        return ceil(self.filteredArray.count /(CGFloat)4);
     }
 }
 
@@ -352,7 +386,7 @@
     if(tableView == self.tableView)
     {
         if (self.index == 1) {
-            return 32;
+            return 40;
         }
     }
     return 0.01f;
@@ -364,7 +398,7 @@
     {
         if(self.index == 1)
         {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 6.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 10.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
             label.text = [self.dataArrayForCategory[section] valueForKey:@"GroupName"];
             label.textAlignment = NSTextAlignmentLeft;
             label.textColor = UIColorFromRGB(0x666666);
@@ -374,10 +408,39 @@
             view.backgroundColor = [UIColor whiteColor];
             [view addSubview:label];
             
+            
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
+            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+            button.titleLabel.textAlignment = NSTextAlignmentRight;
+            button.tag =section;
+            [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+            [button setTitle:[NSString fontAwesomeIconStringForEnum:FAAngleRight] forState:UIControlStateNormal];
+            button.deFrameRight = kScreenWidth -10;
+            button.backgroundColor = [UIColor clearColor];
+            [button addTarget:self action:@selector(categoryGroupButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
+            [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+            [view addSubview:button];
+
+            
+            UILabel * countLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 11)];
+            countLabel.font = [UIFont systemFontOfSize:12];
+            countLabel.textAlignment = NSTextAlignmentRight;
+            countLabel.textColor = UIColorFromRGB(0x999999);
+            countLabel.hidden = NO;
+            countLabel.center = label.center;
+            [countLabel setText:[NSString stringWithFormat:@"%@个品类",[self.dataArrayForCategory[section] valueForKey:@"Count"]]];
+            countLabel.deFrameWidth = ([[self.dataArrayForCategory[section] valueForKey:@"Count"] stringValue].length -1)*12 +100;
+            countLabel.center = label.center;
+            countLabel.deFrameRight = kScreenWidth - 20;
+            [view addSubview:countLabel];
+            
+            
+            
+            
+            
             return view;
         }
     }
-    
     return nil;
 }
 
@@ -534,6 +597,15 @@
 
 #pragma mark - SearchBar
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    
+}
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     
@@ -552,7 +624,7 @@
         return;
     }
     self.keyword = searchText;
-    [self goKeyword];
+    [self searchButtonAction];
 }
 - (void)handleSearchText:(NSString *)searchText
 {
@@ -564,12 +636,38 @@
         }
     }
     [self.filteredArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
+    
+   
+    {
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 80)];
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitleColor:UIColorFromRGB(0xcacaca) forState:UIControlStateNormal];
+        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAAngleRight] forState:UIControlStateNormal];
+        button.deFrameRight = kScreenWidth -20;
+        button.backgroundColor = [UIColor clearColor];
+        [button addTarget:self action:@selector(searchButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:[NSString stringWithFormat:@"直接搜索 「%@」 ",searchText] forState:UIControlStateNormal];
+        self.searchDC.searchResultsTableView.tableHeaderView = button;
+    }
     [self.searchDC.searchResultsTableView reloadData];
+    [self.searchDisplayController.searchResultsTableView reloadData];
     
 }
-- (void)goKeyword
+- (void)searchButtonAction
 {
     /**/
+}
+
+- (void)categoryGroupButtonAction:(id)sender
+{
+    if ([sender isKindOfClass:[UIButton class]]) {
+        NSUInteger tag = ((UIButton *)sender).tag;
+        GroupViewController * vc = [[GroupViewController alloc]initWithGid:[[self.dataArrayForCategory[tag] valueForKey:@"GroupId"]integerValue]];
+        vc.navigationItem.title = [self.dataArrayForCategory[tag] valueForKey:@"GroupName"];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 @end

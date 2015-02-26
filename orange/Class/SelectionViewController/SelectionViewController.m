@@ -12,6 +12,7 @@
 #import "SelectionCell.h"
 #import "EntitySingleListCell.h"
 #import "CategoryViewController.h"
+#import "SDWebImagePrefetcher.h"
 
 
 @interface SelectionViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -19,6 +20,9 @@
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property(nonatomic, strong) NSMutableArray * dataArrayForArticle;
 @property(nonatomic, assign) NSUInteger index;
+
+@property (nonatomic, strong) UILabel * SelectionCountLabel;
+@property (nonatomic, strong) UIView * SelectionCountLabelBgView;
 @end
 
 @implementation SelectionViewController
@@ -27,8 +31,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:@"Save" object:nil];
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"精选" image:[UIImage imageNamed:@"selection"] selectedImage:[UIImage imageNamed:@"selection"]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"精选" image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
         
@@ -52,19 +58,17 @@
         [self logo];
         
         NSMutableArray * array = [NSMutableArray array];
-        
         {
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+            [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
             [button setTitle:[NSString fontAwesomeIconStringForEnum:FARandom] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(random) forControlEvents:UIControlEventTouchUpInside];
             button.backgroundColor = [UIColor clearColor];
             UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
             [array addObject:item];
         }
-        
         self.navigationItem.rightBarButtonItems = array;
         
     }
@@ -75,8 +79,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
+
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kStatusBarHeight -kNavigationBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -85,8 +90,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
-    
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
 
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -97,10 +100,20 @@
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
-     
     
-    [self.tableView.pullToRefreshView startAnimating];
-    [self refresh];
+    [self load];
+    
+    if (self.dataArrayForEntity.count == 0) {
+        [self.tableView.pullToRefreshView startAnimating];
+        [self refresh];
+    }
+    
+    [GKAPI getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
+        
+    } failure:^(NSInteger stateCode) {
+        
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -124,6 +137,15 @@
     if (self.index == 0) {
         [GKAPI getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:0 count:30 success:^(NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
+            [self save];
+            
+            NSMutableArray* imageArray = [NSMutableArray array];
+            for (NSDictionary * dic in dataArray) {
+               GKEntity * entity = [[dic objectForKey:@"content"]objectForKey:@"entity"];
+                [imageArray addObject:entity.imageURL_640x640];
+            }
+            [[SDWebImagePrefetcher sharedImagePrefetcher]prefetchURLs:imageArray];
+            
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -144,6 +166,13 @@
         NSTimeInterval timestamp = (NSTimeInterval)[self.dataArrayForEntity.lastObject[@"time"] doubleValue];
         [GKAPI getSelectionListWithTimestamp:timestamp cateId:0 count:30 success:^(NSArray *dataArray) {
             [self.dataArrayForEntity addObjectsFromArray:[NSMutableArray arrayWithArray:dataArray]];
+            NSMutableArray* imageArray = [NSMutableArray array];
+            for (NSDictionary * dic in dataArray) {
+                GKEntity * entity = [[dic objectForKey:@"content"]objectForKey:@"entity"];
+                [imageArray addObject:entity.imageURL_640x640];
+            }
+            [[SDWebImagePrefetcher sharedImagePrefetcher]prefetchURLs:imageArray];
+            [self save];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -197,16 +226,7 @@
         }
         else
         {
-            static NSString *CellIdentifier = @"EntitySingleListCell";
-            EntitySingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[EntitySingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            cell.entity = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"entity"];
-            NSTimeInterval timestamp = [self.dataArrayForEntity[indexPath.row][@"time"] doubleValue];
-
-            
-            return cell;
+            return [[UITableViewCell alloc] init];
         }
 
     }
@@ -225,7 +245,7 @@
     if (self.index == 0) {
         if (1) {
             GKNote * note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
-            return [SelectionCell heightForEmojiText:note.text]+370;
+            return [SelectionCell height:note];
         }
         else
         {
@@ -242,14 +262,79 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.f;
+    if (self.index == 0) {
+        return 0.f;
+    }
+    else
+    {
+        return 0.f;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if (self.index == 0) {
+        
+        _SelectionCountLabel= [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 36.f)];
+        self.SelectionCountLabel.text = [NSString stringWithFormat:@"%d 条未读精选",10];
+        self.SelectionCountLabel.textAlignment = NSTextAlignmentCenter;
+        self.SelectionCountLabel.textColor = UIColorFromRGB(0xDB1F77);
+        self.SelectionCountLabel.backgroundColor = [UIColor clearColor];
+        self.SelectionCountLabel.font = [UIFont systemFontOfSize:14];
+        
+        _SelectionCountLabelBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 36)];
+        self.SelectionCountLabelBgView.backgroundColor = UIColorFromRGB(0xeeeeee);
+        [self.SelectionCountLabelBgView addSubview:self.SelectionCountLabel];
+        self.SelectionCountLabelBgView.alpha = 0.97;
+        
+        //return self.SelectionCountLabelBgView;
+    }
     return [UIView new];
 }
 
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [[NSUserDefaults standardUserDefaults] setObject:@(scrollView.contentOffset.y) forKey:@"selection-offset-y"];
+    
+    /*
+    static float newy = 0;
+    static float oldy = 0;
+    newy= scrollView.contentOffset.y ;
+    
+    
+    if (newy < 0) {
+        self.SelectionCountLabelBgView.alpha = 1;
+        return;
+    }
+    if (newy >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
+        self.SelectionCountLabelBgView.alpha = 0;
+        return;
+    }
+    
+    if (newy != oldy ) {
+        if (newy > oldy) {
+            if (self.SelectionCountLabelBgView.alpha != 0) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.SelectionCountLabelBgView.alpha = 0;
+                    
+                }];
+            }
+
+        }else if(newy < oldy){
+            if (self.SelectionCountLabelBgView.alpha == 0) {
+                self.SelectionCountLabelBgView.alpha = 0.0;
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.SelectionCountLabelBgView.alpha = 0.97;
+                    
+                }];
+            }
+  
+        }
+        if (abs(newy - oldy)>20) {
+            oldy= newy ;
+        }
+    }*/
+}
 
 
 
@@ -278,9 +363,9 @@
 
 - (void)logo
 {
-    UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 60, 30)];
-    icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    icon.tintColor = [UIColor darkGrayColor];
+    
+    UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 43, 25)];
+    icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     icon.contentMode = UIViewContentModeScaleAspectFit;
     icon.userInteractionEnabled = YES;
     self.navigationItem.titleView = icon;
@@ -292,9 +377,51 @@
     GKEntityCategory * category = [kAppDelegate.allCategoryArray objectAtIndex:index];
     CategoryViewController *vc = [[CategoryViewController alloc] init];
     vc.category = category;
+    vc.hidesBottomBarWhenPushed = YES;
     if (kAppDelegate.activeVC.navigationController) {
         [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)load
+{
+    NSMutableArray * selectionArray;
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"selection"];
+    if (data) {
+        selectionArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    
+    if (!self.dataArrayForEntity) {
+        self.dataArrayForEntity = [NSMutableArray array];
+    }
+    for (NSDictionary * dic in selectionArray) {
+        GKNote * note = [GKNote modelFromDictionary:[[dic objectForKey:@"content"]objectForKey:@"note"]];
+        GKEntity * entity = [GKEntity modelFromDictionary:[[dic objectForKey:@"content"]objectForKey:@"entity"]];
+        NSDictionary * content = [NSMutableDictionary dictionaryWithObjectsAndKeys:entity,@"entity",note,@"note", nil];
+        NSString * time = [dic objectForKey:@"time"];
+        [self.dataArrayForEntity addObject:[NSDictionary dictionaryWithObjectsAndKeys:time,@"time",content,@"content",nil]];
+    }
+    [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointMake(0,[[[NSUserDefaults standardUserDefaults] objectForKey:@"selection-offset-y"] floatValue]  )];
+    
+    if (self.tableView.indexPathsForVisibleRows.firstObject) {
+        [self.tableView selectRowAtIndexPath:self.tableView.indexPathsForVisibleRows.firstObject animated:YES scrollPosition:UITableViewScrollPositionTop];
+    }
+}
+
+-(void)save
+{
+    NSMutableArray *data = [NSMutableArray array];
+    for (NSDictionary * dic in self.dataArrayForEntity) {
+        GKNote * note = [[dic objectForKey:@"content"]objectForKey:@"note"];
+        GKEntity * entity = [[dic objectForKey:@"content"]objectForKey:@"entity"];
+        NSString * time = [dic objectForKey:@"time"];
+        NSDictionary * content = [NSMutableDictionary dictionaryWithObjectsAndKeys:[GKEntity dictionaryFromModel:entity],@"entity",[GKNote dictionaryFromModel:note],@"note", nil];
+        [data addObject:[NSDictionary dictionaryWithObjectsAndKeys:time,@"time",content,@"content",nil]];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:@"selection"];
+    [[NSUserDefaults standardUserDefaults] setObject:@(self.tableView.contentOffset.y) forKey:@"selection-offset-y"];
 }
 
 @end

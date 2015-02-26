@@ -50,7 +50,7 @@
     
     
     if (!self.avatar) {
-        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 13.f, 36.f, 36.f)];
+        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 20.f, 36.f, 36.f)];
         [self.contentView addSubview:self.avatar];
         self.avatar.layer.cornerRadius = 18;
         self.avatar.userInteractionEnabled = YES;
@@ -68,25 +68,25 @@
 
     
     if(!self.label) {
-        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 70, 20)];
+        _label = [[RTLabel alloc] initWithFrame:CGRectMake(56, 20, kScreenWidth - 70, 20)];
         self.label.paragraphReplacement = @"";
-        self.label.lineSpacing = 4.0;
+        self.label.lineSpacing = 7.0;
         self.label.delegate = self;
         [self.contentView addSubview:self.label];
     }
-    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@ </font></a>", self.note.creator.userId, self.note.creator.nickname];
+    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", self.note.creator.userId, self.note.creator.nickname];
     
     if(!self.contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 70, 20)];
+        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(56, 20, kScreenWidth - 70, 20)];
         self.contentLabel.paragraphReplacement = @"";
-        self.contentLabel.lineSpacing = 4.0;
+        self.contentLabel.lineSpacing = 7.0;
         self.contentLabel.delegate = self;
         [self.contentView addSubview:self.contentLabel];
     }
     
-    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", self.note.text];
+    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
-    self.contentLabel.deFrameTop = self.label.deFrameBottom;
+    self.contentLabel.deFrameTop = self.label.deFrameBottom+5;
     
     if (!self.pokeButton) {
         _pokeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
@@ -96,7 +96,7 @@
         self.pokeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         self.pokeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.pokeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [self.pokeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [self.pokeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.pokeButton setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateSelected];
         /*
         [self.pokeButton setImage:[UIImage imageNamed:@"icon_poke"] forState:UIControlStateNormal];
@@ -110,7 +110,7 @@
     self.pokeButton.selected = self.note.poked;
     [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
     self.pokeButton.deFrameLeft = self.contentLabel.deFrameLeft;
-    self.pokeButton.deFrameBottom = self.contentView.deFrameHeight -10;
+    self.pokeButton.deFrameBottom = self.contentView.deFrameHeight -15;
     [self.pokeButton addTarget:self action:@selector(pokeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     if (!self.commentButton) {
@@ -121,7 +121,7 @@
         self.commentButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         self.commentButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.commentButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [self.commentButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [self.commentButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         /*
         [self.commentButton setImage:[UIImage imageNamed:@"icon_comment"] forState:UIControlStateNormal];
         [self.commentButton setImage:[UIImage imageNamed:@"icon_comment"] forState:UIControlStateHighlighted|UIControlStateNormal];
@@ -133,7 +133,7 @@
     }
     [self.commentButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FACommentO],self.note.commentCount] forState:UIControlStateNormal];
     self.commentButton.deFrameLeft = self.pokeButton.deFrameRight +10;
-    self.commentButton.deFrameBottom = self.contentView.deFrameHeight -10;
+    self.commentButton.deFrameBottom = self.contentView.deFrameHeight -15;
     [self.commentButton addTarget:self action:@selector(commentButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     if (!self.timeButton) {
@@ -141,23 +141,35 @@
         self.timeButton.layer.masksToBounds = YES;
         self.timeButton.layer.cornerRadius = 2;
         self.timeButton.backgroundColor = [UIColor clearColor];
-        self.timeButton.titleLabel.font = [UIFont systemFontOfSize:10];
+        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [self.timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
         [self.contentView addSubview:self.timeButton];
     }
-    if (self.note.marked) {
-        [self.timeButton setImage:[UIImage imageNamed:@"icon_star"] forState:UIControlStateNormal];
+    [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
+    self.timeButton.deFrameRight = kScreenWidth - 10;
+    self.timeButton.deFrameBottom =  self.contentView.deFrameHeight -15;
+    
+    if (!self.markButton) {
+        _markButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 20)];
+        self.markButton.layer.masksToBounds = YES;
+        self.markButton.layer.cornerRadius = 2;
+        self.markButton.backgroundColor = [UIColor clearColor];
+        self.markButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        self.markButton.titleLabel.textAlignment = NSTextAlignmentRight;
+        [self.markButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        [self.markButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [self.markButton setTitleColor:UIColorFromRGB(0xFF9600) forState:UIControlStateSelected];
+        [self.markButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+        [self.contentView addSubview:self.markButton];
+        [self.markButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAStar]] forState:UIControlStateNormal];
     }
-    else
-    {
-        [self.timeButton setImage:nil forState:UIControlStateNormal];
-    }
-    [self.timeButton setTitle:[NSString stringWithFormat:@"%@",[self.note.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
-    self.timeButton.deFrameRight = kScreenWidth - 15;
-    self.timeButton.deFrameBottom =  self.contentView.deFrameHeight -10;
+    self.markButton.selected = self.note.marked;
+    self.markButton.center = self.label.center;
+    self.markButton.deFrameRight = kScreenWidth - 10;
+    
     
     [self bringSubviewToFront:self.H];
     _H.deFrameBottom = self.frame.size.height;
@@ -165,11 +177,11 @@
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 0, kScreenWidth -70, 20)];
     label.paragraphReplacement = @"";
-    label.lineSpacing = 4.0;
+    label.lineSpacing = 7.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
-    return label.optimumSize.height + 80.f;
+    return label.optimumSize.height + 100.f;
     
     
 }

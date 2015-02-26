@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UIButton *commentButton;
 @property (nonatomic, strong) UIButton *pokeButton;
 @property (nonatomic, strong) UIButton *timeButton;
+@property (nonatomic, strong) UIButton *markButton;
 @property (nonatomic, strong) GKNote *note;
 
 

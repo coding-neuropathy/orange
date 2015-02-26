@@ -10,8 +10,11 @@
 #import "Passport.h"
 #import "AppDelegate.h"
 #import "GKAPI.h"
+#import "GKTaobaoConfig.h"
+#import "GKTaobaoOAuthViewController.h"
+#import "SignView.h"
 
-@interface LoginView () <UITextFieldDelegate, UIAlertViewDelegate>
+@interface LoginView () <UITextFieldDelegate, UIAlertViewDelegate,GKTaobaoOAuthViewControllerDelegate>
 {
 @private
     UILabel * tip;
@@ -23,6 +26,7 @@
 @property (nonatomic, strong) UIButton *forgotPasswordButton;
 @property (nonatomic, strong) UIButton *sinaWeiboButton;
 @property (nonatomic, strong) UIButton *taobaoButton;
+@property (assign, nonatomic) BOOL flag;
 @end
 
 @implementation LoginView
@@ -32,6 +36,7 @@
     self = [super initWithFrame:kAppDelegate.window.frame];
     if (self) {
         // Initialization code
+        self.flag = NO;
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
         whiteBG = [[UIView alloc]initWithFrame:CGRectMake(20, 80, self.frame.size.width-40, 300)];
         whiteBG.backgroundColor = [UIColor whiteColor];
@@ -254,13 +259,24 @@
 
 - (void)tapTaobaoButton
 {
-    /**/
+    GKTaobaoOAuthViewController *vc = [[GKTaobaoOAuthViewController alloc] init];
+    vc.delegate = self;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    UIBarButtonItem *closeButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeTaobaoView)];
+    vc.navigationItem.leftBarButtonItem = closeButtonItem;
+    
+    [kAppDelegate.alertWindow makeKeyAndVisible];
+    [kAppDelegate.alertWindow.rootViewController presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)closeTaobaoView
 {
-    /**/
+    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
+        [kAppDelegate.window makeKeyAndVisible];
+        kAppDelegate.alertWindow.hidden = YES;
+    }];
 }
+
 
 #pragma mark - UITextFieldDelegate
 
@@ -315,8 +331,16 @@
 
 - (void)tapRegisterButton
 {
-    /**/
-
+    [whiteBG removeFromSuperview];
+    SignView *view = [[SignView alloc] init];
+    view.successBlock = self.successBlock;
+    [view showFromLogin];
+    double delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        [self removeFromSuperview];
+    });
 }
 
 - (void)resignResponder
@@ -348,6 +372,37 @@
             [SVProgressHUD showImage:nil status:@"请输入注册时使用的邮箱"];
         }
     }
+}
+
+#pragma mark - GKTaobaoOAuthViewControllerDelegate
+
+- (void)TaoBaoGrantFinished
+{
+    if (self.flag == YES) {
+        return;
+    }
+    self.flag = YES;
+    
+    NSDictionary *taobaoInfo = [[NSUserDefaults standardUserDefaults] objectForKey:kTaobaoGrantInfo];
+    
+    NSString *taobaoUserId = taobaoInfo[@"taobao_id"];
+    NSString *taobaoToken = taobaoInfo[@"access_token"];
+    [Passport sharedInstance].screenName = taobaoInfo[@"screen_name"];
+    [Passport sharedInstance].taobaoId = taobaoUserId;
+    [Passport sharedInstance].taobaoToken = taobaoToken;
+    [GKAPI loginWithTaobaoUserId:taobaoUserId taobaoToken:taobaoToken success:^(GKUser *user, NSString *session) {
+        if (self.successBlock) {
+            self.successBlock();
+        }
+        [self dismiss];
+        [SVProgressHUD dismiss];
+        [self closeTaobaoView];
+        
+    } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+        [SVProgressHUD dismiss];
+        [self closeTaobaoView];
+        [self tapRegisterButton];
+    }];
 }
 
 

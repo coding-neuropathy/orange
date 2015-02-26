@@ -15,9 +15,7 @@
 #import "UserViewController.h"
 #import "CategoryViewController.h"
 #import "TagViewController.h"
-#define CategoryGroupArrayKey @"CategoryGroupArray"
-#define CategoryGroupArrayWithStatusKey @"CategoryGroupArrayWithStatus"
-#define AllCategoryArrayKey @"AllCategoryArray"
+
 
 @interface AppDelegate ()<WXApiDelegate>
 
@@ -56,10 +54,18 @@
     [SVProgressHUD setBackgroundColor:UIColorFromRGB(0x2b2b2b)];
     [SVProgressHUD setForegroundColor:UIColorFromRGB(0xffffff)];
     
+
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[TabBarViewcontroller alloc]init];
     [self.window makeKeyAndVisible];
+    
+    
+    self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.alertWindow.windowLevel = 100;
+    UIViewController *vc = [[UIViewController alloc] init];
+    self.alertWindow.rootViewController = vc;
     
     
     [self refreshCategory];
@@ -75,6 +81,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"Save" object:nil userInfo:nil];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -93,6 +100,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"Save" object:nil userInfo:nil];
 }
 
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
@@ -150,21 +158,22 @@
 -(void)customizeAppearance
 {
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(2, 2)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setShadowImage:[[UIImage imageWithColor:UIColorFromRGB(0xeeeeee) andSize:CGSizeMake(1, 1)] stretchableImageWithLeftCapWidth:1 topCapHeight:1]];
+    [[UINavigationBar appearance] setShadowImage:[[UIImage imageWithColor:UIColorFromRGB(0xbdbdbd) andSize:CGSizeMake(1, 0.5)] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x2b2b2b)];
-    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x427ec0)];
+    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x414243)];
     [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x2b2b2b)}];
+    UIFont* font = [UIFont boldSystemFontOfSize:17];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}];
     [[UINavigationBar appearance] setAlpha:0.97];
-    //[[UINavigationBar appearance] setTranslucent:YES];
+
     
     
-    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x2b2b2b) andSize:CGSizeMake(kScreenWidth, 49)]];
-    [[UITabBar appearance] setTranslucent:YES];
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x242424) andSize:CGSizeMake(kScreenWidth, 49)]];
+    [[UITabBar appearance]setSelectionIndicatorImage:[UIImage imageWithColor:UIColorFromRGB(0x0f0f0f) andSize:CGSizeMake(kScreenWidth/4, 49)]];
     [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
-    [[UITabBar appearance] setAlpha:0.9];
+
 }
 
 

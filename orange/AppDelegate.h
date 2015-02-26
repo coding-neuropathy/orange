@@ -14,5 +14,6 @@
 @property (strong, nonatomic) UINavigationController * root;
 @property (strong, nonatomic) UIViewController * activeVC;
 @property (strong, nonatomic) NSMutableArray *allCategoryArray;
+@property (strong, nonatomic) UIWindow *alertWindow;
 @end
 

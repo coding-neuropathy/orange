@@ -51,8 +51,8 @@
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
         button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
-        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAShareSquareO] forState:UIControlStateNormal];
+        [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAEllipsisH] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(shareButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
         button.backgroundColor = [UIColor clearColor];
@@ -70,7 +70,7 @@
         [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
         button.backgroundColor = [UIColor clearColor];
         UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-        [array addObject:item];
+        //[array addObject:item];
     }
     
     
@@ -91,6 +91,10 @@
     [self.view addSubview:self.tableView];
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    
+    UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
+    footer.backgroundColor = UIColorFromRGB(0xfafafa);
+    self.tableView.tableFooterView = footer;
     
     
 }
@@ -190,9 +194,8 @@
         for (NSUInteger i = 0; i < 3 && offset < entityArray.count; i++) {
             [array addObject:entityArray[offset++]];
         }
-        
         cell.entityArray = array;
-        
+        cell.backgroundColor = UIColorFromRGB(0xfafafa);
         return cell;
     }
     else
@@ -222,7 +225,7 @@
 {
 
     if (section == 0) {
-        return kScreenWidth+75;
+        return kScreenWidth+105;
     }
     else if (section == 1) {
         if (self.dataArrayForlikeUser.count == 0) {
@@ -256,11 +259,11 @@
             self.header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth + 75)];
         }
             if (!self.titleLabel) {
-                self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, kScreenWidth-40, 25)];
+                self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, kScreenWidth-20, 25)];
                 self.titleLabel.numberOfLines = 1;
                 self.titleLabel.font = [UIFont systemFontOfSize:16.f];
                 self.titleLabel.textAlignment = NSTextAlignmentLeft;
-                self.titleLabel.textColor = UIColorFromRGB(0x555555);
+                self.titleLabel.textColor = UIColorFromRGB(0x414243);
                 [self.header addSubview:self.titleLabel];
             }
             
@@ -279,13 +282,13 @@
             self.titleLabel.text = [NSString stringWithFormat:@"%@%@",brand,title];
 
             if (!self.image) {
-                _image = [[UIImageView alloc] initWithFrame:CGRectMake(15.0f, 40.0f,kScreenWidth -30, kScreenWidth-30)];
+                _image = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, 51.0f,kScreenWidth -20, kScreenWidth-20)];
                 self.image.contentMode = UIViewContentModeScaleAspectFit;
                 self.image.backgroundColor = [UIColor whiteColor];
                 self.image.userInteractionEnabled = YES;
                 [self.header addSubview:self.image];
             }
-            [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -40, kScreenWidth -40)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
+            [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -20, kScreenWidth -20)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             }];
             
             if (!self.likeButton) {
@@ -306,17 +309,17 @@
             }
             [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
             self.likeButton.selected = self.entity.liked;
-            self.likeButton.deFrameLeft = 20;
+            self.likeButton.deFrameLeft = 10;
             self.likeButton.deFrameTop = self.image.deFrameBottom+15;
             [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
             
             
             if (!self.buyButton) {
-                self.buyButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 36)];
+                self.buyButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 36)];
                 self.buyButton.layer.masksToBounds = YES;
                 self.buyButton.layer.cornerRadius = 2;
                 self.buyButton.backgroundColor = [UIColor clearColor];
-                self.buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:18.f];
+                self.buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
                 self.buyButton.titleLabel.textAlignment = NSTextAlignmentCenter;
                 [self.buyButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
                 [self.buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
@@ -326,7 +329,7 @@
             }
             [self.buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f",self.entity.lowestPrice] forState:UIControlStateNormal];
             self.buyButton.selected = self.entity.liked;
-            self.buyButton.deFrameRight= kScreenWidth - 15;
+            self.buyButton.deFrameRight= kScreenWidth - 10;
             self.buyButton.deFrameTop = self.image.deFrameBottom+15;
             [self.buyButton addTarget:self action:@selector(buyButtonAction) forControlEvents:UIControlEventTouchUpInside];
 
@@ -366,13 +369,13 @@
         int i = 0;
         
         for (GKUser * user in self.dataArrayForlikeUser) {
-            if (15 + i*40 > kScreenWidth) {
+            if (10 + i*46 > kScreenWidth) {
                 break;
             }
-            UIButton * avatar = [[UIButton alloc] initWithFrame:CGRectMake(15+40.f * i , 10.f, 30.f, 30.f)];
-            avatar.layer.cornerRadius = 15;
+            UIButton * avatar = [[UIButton alloc] initWithFrame:CGRectMake(10+46.f * i , 6.f, 36.f, 36.f)];
+            avatar.layer.cornerRadius = 18;
             avatar.layer.masksToBounds = YES;
-            [avatar sd_setImageWithURL:user.avatarURL forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
+            [avatar sd_setImageWithURL:user.avatarURL forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(72, 72)]];
             avatar.tag = i;
             [avatar addTarget:self action:@selector(avatarButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.likeUserView addSubview:avatar];
@@ -390,9 +393,9 @@
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 50)];
             button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [button setTitleColor:UIColorFromRGB(0xcacaca) forState:UIControlStateNormal];
+            [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
             [button setTitle:[NSString fontAwesomeIconStringForEnum:FAAngleRight] forState:UIControlStateNormal];
-            button.deFrameRight = kScreenWidth -20;
+            button.deFrameRight = kScreenWidth -17;
             button.backgroundColor = [UIColor clearColor];
             [self.categoryButton addSubview:button];
             
@@ -402,8 +405,8 @@
         GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
         [self.categoryButton setTitle:[NSString stringWithFormat:@"来自「%@」",[category.categoryName componentsSeparatedByString:@"-"][0]] forState:UIControlStateNormal];
         [self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [self.categoryButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
-        [self.categoryButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
+        [self.categoryButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+        [self.categoryButton setBackgroundColor:UIColorFromRGB(0xfafafa)];
         self.categoryButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.categoryButton setTitleColor:UIColorFromRGB(0x555555) forState:UIControlStateNormal];
         
@@ -442,7 +445,7 @@
         label.font = [UIFont boldSystemFontOfSize:14];
         [label sizeToFit];
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 40)];
-        view.backgroundColor = [UIColor whiteColor];
+        view.backgroundColor = UIColorFromRGB(0xfafafa);
         [view addSubview:label];
         
         return view;
@@ -578,11 +581,13 @@
 {
     if (!self.note) {
         UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博",@"写点评", @"举报商品", nil];
+        actionSheet.backgroundColor = UIColorFromRGB(0xffffff);
         [actionSheet showInView:self.view];
     }
     else
     {
         UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博",@"修改点评", @"删除点评", @"举报商品", nil];
+        actionSheet.backgroundColor = UIColorFromRGB(0xffffff);
         [actionSheet showInView:self.view];
     }
 
