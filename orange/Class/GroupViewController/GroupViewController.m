@@ -43,7 +43,7 @@
 
 - (void)refresh
 {
-    self.categoryGroupArray = [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayWithStatusKey];
+    self.categoryGroupArray = [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayKey];
     for (NSDictionary * dic in self.categoryGroupArray) {
         NSUInteger gid = [dic[@"GroupId"] integerValue];
         if (gid == self.gid) {

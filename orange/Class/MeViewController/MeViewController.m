@@ -340,7 +340,7 @@
 {
     if(tableView == self.tableView)
     {
-        return 40;
+        return 44;
     }
     return 0.01f;
 }
@@ -350,11 +350,11 @@
     if(tableView == self.tableView)
     {
         if (!self.segmentedControl) {
-            HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
+            HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
             [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %ld",self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
-            [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
+            [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
             [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
             [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
             [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];

@@ -141,6 +141,7 @@
      }];
      */
     [self.tableView.pullToRefreshView startAnimating];
+    [self.tableView reloadData];
     [self refresh];
 
 }
@@ -185,12 +186,12 @@
     if (self.index == 0) {
         [GKAPI getHotEntityListWithType:@"weekly" success:^(NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
-            [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
+                        [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"失败"];
-            [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
+                        [self.tableView reloadData];
         }];
     }
     else if (self.index == 1)
@@ -272,13 +273,13 @@
         }
         else if (self.index == 1)
         {
-            return (((NSMutableArray *)[[self.dataArrayForCategory objectAtIndex:section] objectForKey:@"CategoryArray"]).count /(CGFloat)4);
+            return ceil(((NSMutableArray *)[[self.dataArrayForCategory objectAtIndex:section] objectForKey:@"CategoryArray"]).count /(CGFloat)4);
         }
         return 0;
     }
     else
     {
-        return (self.filteredArray.count /(CGFloat)4);
+        return ceil(self.filteredArray.count /(CGFloat)4);
     }
 }
 
@@ -408,13 +409,13 @@
             [view addSubview:label];
             
             
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 16, 40)];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
             button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-            button.titleLabel.textAlignment = NSTextAlignmentLeft;
+            button.titleLabel.textAlignment = NSTextAlignmentRight;
             button.tag =section;
             [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
             [button setTitle:[NSString fontAwesomeIconStringForEnum:FAAngleRight] forState:UIControlStateNormal];
-            button.deFrameRight = kScreenWidth -17;
+            button.deFrameRight = kScreenWidth -10;
             button.backgroundColor = [UIColor clearColor];
             [button addTarget:self action:@selector(categoryGroupButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
             [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
@@ -430,7 +431,7 @@
             [countLabel setText:[NSString stringWithFormat:@"%@个品类",[self.dataArrayForCategory[section] valueForKey:@"Count"]]];
             countLabel.deFrameWidth = ([[self.dataArrayForCategory[section] valueForKey:@"Count"] stringValue].length -1)*12 +100;
             countLabel.center = label.center;
-            countLabel.deFrameRight = button.deFrameLeft +10 ;
+            countLabel.deFrameRight = kScreenWidth - 20;
             [view addSubview:countLabel];
             
             
@@ -638,7 +639,7 @@
     
    
     {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 80)];
         button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
         [button setTitleColor:UIColorFromRGB(0xcacaca) forState:UIControlStateNormal];
@@ -646,10 +647,11 @@
         button.deFrameRight = kScreenWidth -20;
         button.backgroundColor = [UIColor clearColor];
         [button addTarget:self action:@selector(searchButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:[NSString stringWithFormat:@"直接搜索 %@ ",searchText] forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"直接搜索 「%@」 ",searchText] forState:UIControlStateNormal];
         self.searchDC.searchResultsTableView.tableHeaderView = button;
     }
     [self.searchDC.searchResultsTableView reloadData];
+    [self.searchDisplayController.searchResultsTableView reloadData];
     
 }
 - (void)searchButtonAction
@@ -663,6 +665,7 @@
         NSUInteger tag = ((UIButton *)sender).tag;
         GroupViewController * vc = [[GroupViewController alloc]initWithGid:[[self.dataArrayForCategory[tag] valueForKey:@"GroupId"]integerValue]];
         vc.navigationItem.title = [self.dataArrayForCategory[tag] valueForKey:@"GroupName"];
+        vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

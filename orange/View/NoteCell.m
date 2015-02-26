@@ -86,7 +86,7 @@
     
     self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
-    self.contentLabel.deFrameTop = self.label.deFrameBottom+10;
+    self.contentLabel.deFrameTop = self.label.deFrameBottom+5;
     
     if (!self.pokeButton) {
         _pokeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
