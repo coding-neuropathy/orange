@@ -59,7 +59,7 @@
     }
     
     
-    self.tableView.tableHeaderView = headerView;
+    //self.tableView.tableHeaderView = headerView;
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{

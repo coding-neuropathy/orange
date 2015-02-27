@@ -48,7 +48,7 @@
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+            [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
             [button setTitle:[NSString fontAwesomeIconStringForEnum:FACog] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(settingButtonAction) forControlEvents:UIControlEventTouchUpInside];
             [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
@@ -321,7 +321,7 @@
             GKNote * note =  [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"note"];
             GKEntity * entity =  [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"entity"];
             note.entityChiefImage = entity.imageURL_640x640;
-            return [NoteSingleListCell heightForEmojiText:note.text];
+            return [NoteSingleListCell height:note];
         }
         else if(self.index ==2)
         {

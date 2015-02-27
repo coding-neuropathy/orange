@@ -39,23 +39,29 @@
     [self.view addSubview:self.tableView];
     
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 32)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 45)];
     headerView.backgroundColor = [UIColor whiteColor];
     
     if (!self.segmentedControl) {
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 32)];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
         [segmentedControl setSectionTitles:@[@"单列", @"三栏",@"我喜爱的"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
-        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
+        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
+        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+        [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+        [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
+        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         segmentedControl.deFrameBottom = headerView.deFrameHeight;
         self.segmentedControl = segmentedControl;
         [headerView addSubview:self.segmentedControl];
+        
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,44.5, kScreenWidth, 0.5)];
+            H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+            [headerView addSubview:H];
+        }
     }
     
     

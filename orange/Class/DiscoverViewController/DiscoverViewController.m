@@ -88,6 +88,9 @@
                                    initWithTarget:self action:@selector(tapBanner)];
     [self.bannerScrollView addGestureRecognizer:tap];
     [headerView addSubview:self.bannerScrollView];
+    self.bannerPageControl.backgroundColor = UIColorFromRGB(0x000000);
+    self.bannerPageControl.center = CGPointMake(self.bannerScrollView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-10);
+    [self.bannerScrollView addSubview:self.bannerPageControl];
     
     
     if (!self.segmentedControl) {
@@ -140,9 +143,11 @@
      [weakSelf loadMore];
      }];
      */
+
     [self.tableView.pullToRefreshView startAnimating];
     [self.tableView reloadData];
     [self refresh];
+    [self.tableView setContentOffset:CGPointMake(0, 0)];
 
 }
 
@@ -157,6 +162,7 @@
     [super viewDidAppear:animated];
     [self.navigationController.navigationBar setAlpha:0.99];
     [self.navigationController.navigationBar setTranslucent:YES];
+
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
