@@ -245,6 +245,7 @@
 		4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23821A52EC9600037F9C /* SettingManager.m */; };
 		4E3A23891A52EDBD00037F9C /* NSObject+App.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23881A52EDBD00037F9C /* NSObject+App.m */; };
 		4E3A238D1A52F21800037F9C /* TabBarViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */; };
+		4E3C413B1A9FFBEB0053DB5E /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */; };
 		4E5251F31A2D43910058C6D6 /* URBMediaFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5251F21A2D43910058C6D6 /* URBMediaFocusViewController.m */; };
 		4E56DF1B19D552C000263B17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF1A19D552C000263B17 /* main.m */; };
 		4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF1D19D552C000263B17 /* AppDelegate.m */; };
@@ -1535,6 +1536,8 @@
 		4E3A23881A52EDBD00037F9C /* NSObject+App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+App.m"; sourceTree = "<group>"; };
 		4E3A238B1A52F21800037F9C /* TabBarViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewcontroller.h; sourceTree = "<group>"; };
 		4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewcontroller.m; sourceTree = "<group>"; };
+		4E3C41391A9FFBEB0053DB5E /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
+		4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
 		4E5251F11A2D43910058C6D6 /* URBMediaFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URBMediaFocusViewController.h; sourceTree = "<group>"; };
 		4E5251F21A2D43910058C6D6 /* URBMediaFocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URBMediaFocusViewController.m; sourceTree = "<group>"; };
 		4E56DF1519D552C000263B17 /* orange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = orange.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3211,6 +3214,15 @@
 			path = TabBarViewcontroller;
 			sourceTree = "<group>";
 		};
+		4E3C41381A9FFBEB0053DB5E /* IBActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				4E3C41391A9FFBEB0053DB5E /* IBActionSheet.h */,
+				4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */,
+			);
+			path = IBActionSheet;
+			sourceTree = "<group>";
+		};
 		4E5251F01A2D43910058C6D6 /* URBMediaFocusViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3270,6 +3282,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				4E3C41381A9FFBEB0053DB5E /* IBActionSheet */,
 				4EA0C4511A82810D0025EC2E /* Taobao */,
 				4EA0C44A1A805CBD0025EC2E /* pinyinTools */,
 				4E2D6D531A6BFD77009E4A17 /* RTLabel */,
@@ -5716,6 +5729,7 @@
 				4E56DF8A19D56EF500263B17 /* UIImage+MultiFormat.m in Sources */,
 				4E3A23401A51A7C500037F9C /* GKEntity+ImageURLFixes.m in Sources */,
 				4E56DF8C19D56EF500263B17 /* UIImageView+HighlightedWebCache.m in Sources */,
+				4E3C413B1A9FFBEB0053DB5E /* IBActionSheet.m in Sources */,
 				4E1D28D61A125B9300740C17 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				4E2D6D431A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				4E1D70221A5ADBA50032719E /* MeViewController.m in Sources */,

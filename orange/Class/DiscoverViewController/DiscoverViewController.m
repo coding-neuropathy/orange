@@ -78,7 +78,9 @@
     
     // Banner
     _bannerScrollView = [[UIScrollView alloc] init];
-    _bannerPageControl = [[UIPageControl alloc] init];
+    _bannerPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    self.bannerPageControl.pageIndicatorTintColor = UIColorFromRGB(0xbbbcbd);
+    self.bannerPageControl.currentPageIndicatorTintColor = UIColorFromRGB(0x414243);
     self.bannerScrollView.frame = CGRectMake(0, 0, headerView.bounds.size.width, headerView.bounds.size.height-32);
     self.bannerScrollView.backgroundColor = [UIColor whiteColor];
     self.bannerScrollView.delegate = self;
@@ -88,9 +90,9 @@
                                    initWithTarget:self action:@selector(tapBanner)];
     [self.bannerScrollView addGestureRecognizer:tap];
     [headerView addSubview:self.bannerScrollView];
-    self.bannerPageControl.backgroundColor = UIColorFromRGB(0x000000);
-    self.bannerPageControl.center = CGPointMake(self.bannerScrollView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-10);
-    [self.bannerScrollView addSubview:self.bannerPageControl];
+    //self.bannerPageControl.backgroundColor = UIColorFromRGB(0x000000);
+    self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-30);
+    [headerView addSubview:self.bannerPageControl];
     
     
     if (!self.segmentedControl) {
