@@ -1158,6 +1158,7 @@
 		4EAA48D319E03C870098C9E0 /* EmojiOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA48D219E03C870098C9E0 /* EmojiOne.m */; };
 		4EB6ADAB1A771CCA0089797A /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6ADAA1A771CCA0089797A /* NoteCell.m */; };
 		4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6ADAE1A77D7220089797A /* BaseViewController.m */; };
+		4EC8A1891AA02D660031AB84 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC8A1881AA02D660031AB84 /* SearchViewController.m */; };
 		4EC9F7911A7928520057D736 /* FanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7901A7928520057D736 /* FanViewController.m */; };
 		4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7931A79286A0057D736 /* FriendViewController.m */; };
 		4EC9F7971A7928C70057D736 /* UserSingleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7961A7928C70057D736 /* UserSingleListCell.m */; };
@@ -2502,6 +2503,8 @@
 		4EB6ADAA1A771CCA0089797A /* NoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteCell.m; sourceTree = "<group>"; };
 		4EB6ADAD1A77D7220089797A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		4EB6ADAE1A77D7220089797A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		4EC8A1871AA02D660031AB84 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		4EC8A1881AA02D660031AB84 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		4EC9F78F1A7928520057D736 /* FanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FanViewController.h; sourceTree = "<group>"; };
 		4EC9F7901A7928520057D736 /* FanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FanViewController.m; sourceTree = "<group>"; };
 		4EC9F7921A79286A0057D736 /* FriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendViewController.h; sourceTree = "<group>"; };
@@ -3430,6 +3433,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4EC8A1861AA02D660031AB84 /* SearchViewController */,
 				4E934DA51A9AE9FB00374B05 /* GroupViewController */,
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
 				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
@@ -4436,6 +4440,15 @@
 				4EB6ADAE1A77D7220089797A /* BaseViewController.m */,
 			);
 			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		4EC8A1861AA02D660031AB84 /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4EC8A1871AA02D660031AB84 /* SearchViewController.h */,
+				4EC8A1881AA02D660031AB84 /* SearchViewController.m */,
+			);
+			path = SearchViewController;
 			sourceTree = "<group>";
 		};
 		4EC9F78D1A7928300057D736 /* FanViewController */ = {
@@ -5705,6 +5718,7 @@
 				4E3A23621A51AE8300037F9C /* AFHTTPRequestOperationLogger.m in Sources */,
 				4E216AB71A261395009FF11D /* JDFlipClockView.m in Sources */,
 				4E56DF1B19D552C000263B17 /* main.m in Sources */,
+				4EC8A1891AA02D660031AB84 /* SearchViewController.m in Sources */,
 				4E56DF7D19D56EF500263B17 /* UIFont+FontAwesome.m in Sources */,
 				4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */,
 				4E216ABB1A261395009FF11D /* JDFlipNumberView.m in Sources */,
@@ -5854,7 +5868,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (A5Y9CLHH49)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TE HUI (A5Y9CLHH49)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5872,7 +5886,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "ce37bf43-8112-4a0c-9d8e-1a9e7857de31";
+				PROVISIONING_PROFILE = "214c65f3-37fb-4f75-9ae0-5f67fdde5ec9";
 			};
 			name = Debug;
 		};
@@ -5881,7 +5895,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (A5Y9CLHH49)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TE HUI (A5Y9CLHH49)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5899,7 +5913,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "ce37bf43-8112-4a0c-9d8e-1a9e7857de31";
+				PROVISIONING_PROFILE = "214c65f3-37fb-4f75-9ae0-5f67fdde5ec9";
 			};
 			name = Release;
 		};
