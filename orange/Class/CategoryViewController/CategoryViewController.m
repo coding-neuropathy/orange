@@ -35,37 +35,7 @@
     self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.view addSubview:self.tableView];
-    
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 45)];
-    headerView.backgroundColor = [UIColor whiteColor];
-    
-    if (!self.segmentedControl) {
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-        [segmentedControl setSectionTitles:@[@"单列", @"三栏",@"我喜爱的"]];
-        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-        [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
-        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        segmentedControl.deFrameBottom = headerView.deFrameHeight;
-        self.segmentedControl = segmentedControl;
-        [headerView addSubview:self.segmentedControl];
-        
-        {
-            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,44.5, kScreenWidth, 0.5)];
-            H.backgroundColor = UIColorFromRGB(0xe6e6e6);
-            [headerView addSubview:H];
-        }
-    }
-    
-    
-    self.tableView.tableHeaderView = headerView;
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -316,12 +286,34 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.1;
+    return 44;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return nil;
+    if (!self.segmentedControl) {
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+        [segmentedControl setSectionTitles:@[@"单列", @"三栏",@"我喜爱的"]];
+        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
+        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
+        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+        [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+        [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
+        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
+        [segmentedControl setSelectionIndicatorHeight:2.5];
+        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+  
+        self.segmentedControl = segmentedControl;
+
+        
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,43.5, kScreenWidth, 0.5)];
+            H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+            [self.segmentedControl addSubview:H];
+        }
+    }
+    return self.segmentedControl;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

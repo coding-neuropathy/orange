@@ -6,15 +6,19 @@
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>2598A25E-F95D-4AF5-8542-C0CCDABBC009</string>
+	<key>IDESourceControlProjectName</key>
+	<string>orange</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DBB8603C3A555E49B8D6EBE5EC2240EF9499317C</key>
 		<string>github.com:huiter/Orange.git</string>
 	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>orange.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DBB8603C3A555E49B8D6EBE5EC2240EF9499317C</key>
-		<string>Orange/</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:huiter/Orange.git</string>
@@ -30,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>DBB8603C3A555E49B8D6EBE5EC2240EF9499317C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Orange</string>
+			<string>orange</string>
 		</dict>
 	</array>
 </dict>
