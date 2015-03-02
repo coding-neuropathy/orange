@@ -37,13 +37,19 @@
         [segmentedControl setSectionTitles:@[@"动态", @"消息"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleArrow];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
+        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
         [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
         [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
         [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
         [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [segmentedControl setTag:2];
+        
+        UIView * V = [[UIView alloc] initWithFrame:CGRectMake(0,7, kScreenWidth/2, 14)];
+        V.backgroundColor = UIColorFromRGB(0xeeeeee);
+        [segmentedControl addSubview:V];
+        
+        
         self.navigationItem.titleView =  segmentedControl;
         self.index = 0;
     }
