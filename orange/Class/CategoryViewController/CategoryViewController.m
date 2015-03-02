@@ -110,7 +110,7 @@
 - (void)refresh
 {
     if (self.index == 0) {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"like" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
@@ -122,7 +122,7 @@
     }
     else if (self.index == 1)
     {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"like" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];

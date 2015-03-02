@@ -213,8 +213,16 @@
     }
     else if ([keyPath isEqualToString:@"liked"]) {
         self.likeButton.selected = self.entity.liked;
+        if(self.likeButton.selected)
+        {
+            [self.likeButton setTintColor:UIColorFromRGB(0xFF1F77)];
+        }
+        else
+        {
+            [self.likeButton setTintColor:UIColorFromRGB(0x9d9e9f)];
+        }
     }
-        
+    
 }
 
 - (void)dealloc

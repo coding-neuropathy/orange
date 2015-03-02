@@ -263,7 +263,50 @@
 }
 - (void)loadMore
 {
-    
+    if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
+    {
+        [self.searchDC.searchResultsTableView.infiniteScrollingView stopAnimating];
+        return;
+    }
+    else if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
+    {
+        [GKAPI searchEntityWithString:self.keyword type:@"all" offset:self.dataArrayForEntityForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+            if (self.dataArrayForEntityForSearch.count == 0) {
+                self.dataArrayForEntityForSearch = [NSMutableArray array];
+            }
+            [self.dataArrayForEntityForSearch addObjectsFromArray:entityArray];
+            [self.searchDC.searchResultsTableView.infiniteScrollingView stopAnimating];
+            [self.searchDC.searchResultsTableView reloadData];
+        } failure:^(NSInteger stateCode) {
+                    [self.searchDC.searchResultsTableView.infiniteScrollingView stopAnimating];
+        }];
+    }
+    else if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
+    {
+        [GKAPI searchUserWithString:self.keyword offset:self.dataArrayForUserForSearch.count count:30 success:^(NSArray *userArray) {
+            if (self.dataArrayForUserForSearch.count == 0) {
+                self.dataArrayForUserForSearch = [NSMutableArray array];
+            }
+            [self.dataArrayForUserForSearch addObjectsFromArray:userArray];
+            [self.searchDC.searchResultsTableView.infiniteScrollingView stopAnimating];
+            [self.searchDC.searchResultsTableView reloadData];
+        } failure:^(NSInteger stateCode) {
+                    [self.searchDC.searchResultsTableView.infiniteScrollingView stopAnimating];
+        }];
+    }
+    else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
+    {
+        [GKAPI searchEntityWithString:self.keyword type:@"like" offset:self.dataArrayForLikeForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+            if (self.dataArrayForLikeForSearch.count == 0) {
+                self.dataArrayForLikeForSearch = [NSMutableArray array];
+            }
+            [self.dataArrayForLikeForSearch addObjectsFromArray:entityArray];
+            [self.searchDC.searchResultsTableView.infiniteScrollingView stopAnimating];
+            [self.searchDC.searchResultsTableView reloadData];
+        } failure:^(NSInteger stateCode) {
+                    [self.searchDC.searchResultsTableView.infiniteScrollingView stopAnimating];
+        }];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -430,7 +473,7 @@
             if (!cell) {
                 cell = [[EntitySingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-            cell.entity = [self.dataArrayForEntityForSearch objectAtIndex:indexPath.row];
+            cell.entity = [self.dataArrayForLikeForSearch objectAtIndex:indexPath.row];
             return cell;
             
         }
@@ -676,6 +719,12 @@
     self.searchDC.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.searchDC.searchResultsTableView.separatorColor = UIColorFromRGB(0xffffff);
     self.searchDC.searchResultsTableView.tableHeaderView = nil;
+    
+    __weak __typeof(&*self)weakSelf = self;
+     [self.searchDC.searchResultsTableView addInfiniteScrollingWithActionHandler:^{
+         [weakSelf loadMore];
+     }];
+    
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
@@ -837,6 +886,7 @@
             self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
             [self.searchDC.searchResultsTableView reloadData];
         } failure:^(NSInteger stateCode) {
+            
         }];
     }
     

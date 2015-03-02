@@ -433,7 +433,7 @@
     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(7.f, 7.f, 64, 64)];
     image.contentMode = UIViewContentModeScaleAspectFit;
     image.center = CGPointMake(kScreenWidth/2, 25+32);
-    image.layer.cornerRadius = 50;
+    image.layer.cornerRadius = 32;
     image.layer.masksToBounds = YES;
     image.backgroundColor = UIColorFromRGB(0xffffff);
     [image sd_setImageWithURL:self.user.avatarURL];

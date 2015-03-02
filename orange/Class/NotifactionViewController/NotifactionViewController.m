@@ -229,14 +229,14 @@
         case 0:
         {
             if (self.dataArrayForFeed.count == 0) {
-                [self refresh];
+                [self.tableView triggerPullToRefresh];
             }
         }
             break;
         case 1:
         {
             if (self.dataArrayForMessage.count == 0) {
-                [self refresh];
+                [self.tableView triggerPullToRefresh];
             }
         }
             break;
