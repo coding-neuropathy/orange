@@ -101,9 +101,10 @@
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self action:@selector(tapBanner)];
     [self.bannerScrollView addGestureRecognizer:tap];
+    self.bannerArray = [NSMutableArray array];
     [headerView addSubview:self.bannerScrollView];
     //self.bannerPageControl.backgroundColor = UIColorFromRGB(0x000000);
-    self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-30);
+    self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-20);
     [headerView addSubview:self.bannerPageControl];
     
     
@@ -721,6 +722,11 @@
     self.searchDC.searchResultsTableView.tableHeaderView = nil;
     
     __weak __typeof(&*self)weakSelf = self;
+    
+    [self.searchDC.searchResultsTableView addPullToRefreshWithActionHandler:^{
+        [weakSelf handleSearchText:self.keyword];
+    }];
+
      [self.searchDC.searchResultsTableView addInfiniteScrollingWithActionHandler:^{
          [weakSelf loadMore];
      }];
@@ -861,32 +867,37 @@
             }
         }
         [self.filteredArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
+        [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
     {
         [GKAPI searchEntityWithString:self.keyword type:@"all" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];
+                    [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];
         } failure:^(NSInteger stateCode) {
-            
+                    [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
         }];
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
     {
         [GKAPI searchUserWithString:self.keyword offset:0 count:30 success:^(NSArray *userArray) {
             self.dataArrayForUserForSearch = [NSMutableArray arrayWithArray:userArray];
+                    [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];
         } failure:^(NSInteger stateCode) {
+                    [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
         }];
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
     {
         [GKAPI searchEntityWithString:self.keyword type:@"like" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
+                    [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];
         } failure:^(NSInteger stateCode) {
-            
+                    [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
         }];
     }
     
