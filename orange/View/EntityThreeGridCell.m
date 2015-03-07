@@ -47,7 +47,7 @@
     if (!self.itemArray) {
         _itemArray = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < 3; i++) {
-                UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(8+i*((kScreenWidth-8)/3), 4, (kScreenWidth-8)/3-8, (kScreenWidth-8)/3-8)];
+                UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(8+i*((kScreenWidth-8)/3), 8, (kScreenWidth-8)/3-8, (kScreenWidth-8)/3-8)];
                 [self.itemArray addObject:button];
                 button.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
                 button.imageView.contentMode = UIViewContentModeScaleAspectFit;

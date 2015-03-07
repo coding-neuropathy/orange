@@ -17,8 +17,8 @@
 #import "GKWebVC.h"
 #import "ReportViewController.h"
 #import "LoginView.h"
-
-@interface EntityViewController ()
+#import "IBActionSheet.h"
+@interface EntityViewController ()<IBActionSheetDelegate>
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UIView *header;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -80,6 +80,8 @@
     self.title = @"商品";
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
     
+    self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight -kNavigationBarHeight - kStatusBarHeight);
+    
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
@@ -89,6 +91,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
+    
+    
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     
@@ -637,8 +641,7 @@
 }
 
 #pragma mark - UIActionSheetDelegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     if ([buttonTitle isEqualToString:@"分享到微信"]) {
         [self wxShare:0];

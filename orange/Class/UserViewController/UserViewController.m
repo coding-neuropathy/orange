@@ -306,7 +306,7 @@
             GKNote * note =  [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"note"];
             GKEntity * entity =  [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"entity"];
             note.entityChiefImage = entity.imageURL_640x640;
-            return [NoteSingleListCell heightForEmojiText:note.text];
+            return [NoteSingleListCell height:note];
         }
         else if(self.index ==2)
         {
@@ -340,14 +340,27 @@
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+            [segmentedControl setSelectionIndicatorHeight:2.5];
             [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
             [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
             [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
             [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
             [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-            
+
             self.segmentedControl = segmentedControl;
+            
+            {
+                UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControl.deFrameHeight-0.5, kScreenWidth, 0.5)];
+                H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                [self.segmentedControl addSubview:H];
+            }
+            {
+                UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
+                H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                [self.segmentedControl addSubview:H];
+            }
         }
+        
         
         [self.segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %ld",self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
 
@@ -417,10 +430,10 @@
     UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 270)];
     view.backgroundColor = UIColorFromRGB(0xfafafa);
     
-    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(7.f, 7.f, 100, 100)];
+    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(7.f, 7.f, 64, 64)];
     image.contentMode = UIViewContentModeScaleAspectFit;
-    image.center = CGPointMake(kScreenWidth/2, 80);
-    image.layer.cornerRadius = 50;
+    image.center = CGPointMake(kScreenWidth/2, 25+32);
+    image.layer.cornerRadius = 32;
     image.layer.masksToBounds = YES;
     image.backgroundColor = UIColorFromRGB(0xffffff);
     [image sd_setImageWithURL:self.user.avatarURL];
@@ -436,7 +449,7 @@
     nicknameLabel.adjustsFontSizeToFitWidth = YES;
     [nicknameLabel sizeToFit];
     nicknameLabel.center = image.center;
-    nicknameLabel.deFrameTop = image.deFrameBottom+15;
+    nicknameLabel.deFrameTop = image.deFrameBottom+12;
     nicknameLabel.backgroundColor = [UIColor clearColor];
     [view addSubview:nicknameLabel];
     

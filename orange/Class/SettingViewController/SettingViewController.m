@@ -49,8 +49,8 @@
     
     NSDictionary *recommandSection = @{@"section" : @"推荐",
                                     @"row"     : @[
-                                            @"      微信分享",
-                                            @"      App Store 评分",
+                                            @"微信分享",
+                                            @"App Store 评分",
                                             ]};
     [self.dataArray addObject:recommandSection];
     
@@ -79,8 +79,10 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorColor = UIColorFromRGB(0xe6e6e6);
     [self.view addSubview:self.tableView];
+    self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 80)];
@@ -114,9 +116,9 @@
     UIView* bgView = [[UIView alloc] init];
     bgView.backgroundColor = [UIColor clearColor];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 90, 32)];
-    titleLabel.textColor=UIColorFromRGB(0X666666);
+    titleLabel.textColor=UIColorFromRGB(0x9d9e9f);
     titleLabel.backgroundColor = [UIColor clearColor];
-    [titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0f]];
+    [titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
     titleLabel.text = [[self.dataArray objectAtIndex:section]objectForKey:@"section"];
     [bgView addSubview:titleLabel];
     return bgView;

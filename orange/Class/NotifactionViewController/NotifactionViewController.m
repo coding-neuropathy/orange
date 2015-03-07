@@ -55,7 +55,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight-kTabBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -229,14 +229,14 @@
         case 0:
         {
             if (self.dataArrayForFeed.count == 0) {
-                [self refresh];
+                [self.tableView triggerPullToRefresh];
             }
         }
             break;
         case 1:
         {
             if (self.dataArrayForMessage.count == 0) {
-                [self refresh];
+                [self.tableView triggerPullToRefresh];
             }
         }
             break;

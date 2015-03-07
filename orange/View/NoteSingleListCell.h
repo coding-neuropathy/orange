@@ -12,6 +12,6 @@
 
 @property (nonatomic, strong) GKNote *note;
 
-+ (CGFloat)heightForEmojiText:(NSString*)emojiText;
++ (CGFloat)height:(GKNote *)note;
 
 @end

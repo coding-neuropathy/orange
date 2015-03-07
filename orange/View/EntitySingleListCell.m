@@ -309,6 +309,7 @@
 {
     EntityViewController * VC = [[EntityViewController alloc]init];
     VC.entity = self.entity;
+    VC.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
