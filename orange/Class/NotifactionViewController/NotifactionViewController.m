@@ -33,10 +33,10 @@
         
         self.title = @"通知";
         
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 28)];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kNavigationBarHeight)];
         [segmentedControl setSectionTitles:@[@"动态", @"消息"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleArrow];
+        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
         [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
         [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
@@ -45,7 +45,7 @@
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [segmentedControl setTag:2];
         
-        UIView * V = [[UIView alloc] initWithFrame:CGRectMake(0,7, kScreenWidth/2, 14)];
+        UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,kNavigationBarHeight/2-7, 1,14 )];
         V.backgroundColor = UIColorFromRGB(0xeeeeee);
         [segmentedControl addSubview:V];
         

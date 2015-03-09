@@ -61,7 +61,7 @@
         
     // 商品主图
     if (!self.image) {
-        self.image = [[UIImageView alloc] initWithFrame:CGRectMake(16, 16.f, 115, 115)];
+        self.image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10.f, 100,100)];
         self.image.contentMode = UIViewContentModeScaleAspectFit;
         self.image.backgroundColor = UIColorFromRGB(0xffffff);
         [self.contentView addSubview:self.image];
@@ -76,7 +76,7 @@
     }
     
     if(!self.contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(146, 20, kScreenWidth - 160, 20)];
+        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(120, 20, kScreenWidth - 130, 20)];
         self.contentLabel.paragraphReplacement = @"";
         self.contentLabel.lineSpacing = 7.0;
         self.contentLabel.delegate = self;
@@ -111,7 +111,7 @@
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 0, kScreenWidth -160, 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 0, kScreenWidth -130, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 7.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
@@ -119,8 +119,8 @@
     
     CGFloat h = label.optimumSize.height+5.0f + 50;
     
-    if (h<150) {
-        return 150;
+    if (h<120) {
+        return 120;
     }
     else
     {

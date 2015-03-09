@@ -124,6 +124,11 @@
         [headerView addSubview:self.segmentedControl];
         
         {
+            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
+            V.backgroundColor = UIColorFromRGB(0xeeeeee);
+            [segmentedControl addSubview:V];
+        }
+        {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,headerView.deFrameHeight-1, kScreenWidth, 0.5)];
             H.backgroundColor = UIColorFromRGB(0xe6e6e6);
             [headerView addSubview:H];
