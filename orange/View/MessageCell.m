@@ -138,6 +138,8 @@ typedef NS_ENUM(NSInteger, MessageType) {
     
     if (!self.image) {
         _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.f, 13.f, 21.f, 21.f)];
+//        [_image set]
+        _image.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.image];
         [self.image addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
         self.image.userInteractionEnabled = YES;
