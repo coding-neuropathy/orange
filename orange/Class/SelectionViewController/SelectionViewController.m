@@ -69,7 +69,7 @@
             UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
             [array addObject:item];
         }
-        self.navigationItem.rightBarButtonItems = array;
+        //self.navigationItem.rightBarButtonItems = array;
         
     }
     return self;
