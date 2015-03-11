@@ -132,7 +132,7 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     [self addSubview:self.scrollView];
     
-    self.font = [UIFont boldSystemFontOfSize:14];
+    self.font = [UIFont systemFontOfSize:14];
     self.textColor = [UIColor blackColor];
     self.selectedTextColor = [UIColor blackColor];
     self.backgroundColor = [UIColor whiteColor];

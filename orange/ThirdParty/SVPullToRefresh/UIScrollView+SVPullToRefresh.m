@@ -455,7 +455,7 @@ static char UIScrollViewPullToRefreshView;
         _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         _activityIndicatorView.hidesWhenStopped = NO;
         _activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-        _activityIndicatorView.color = UIColorFromRGB(0x427ec0);
+        _activityIndicatorView.color = UIColorFromRGB(0x414243);
         [self addSubview:_activityIndicatorView];
     }
     return _activityIndicatorView;
