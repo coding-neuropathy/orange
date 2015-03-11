@@ -94,7 +94,7 @@
     __block UIImageView *tmp_img = self.tmp;
     __weak __typeof(&*self)weakSelf = self;
     {
-        [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -50, 280)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
+        [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             tmp_img = [[UIImageView alloc]initWithImage:image];
             if (tmp_img.frame.size.width<280&&tmp_img.frame.size.height<280) {
                 block_img.contentMode = UIViewContentModeCenter;

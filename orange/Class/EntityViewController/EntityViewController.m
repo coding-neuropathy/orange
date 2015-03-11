@@ -714,7 +714,6 @@
     WXWebpageObject *webPage = [WXWebpageObject object];
     webPage.webpageUrl = [NSString stringWithFormat:@"%@%@/?from=wechat",kGK_WeixinShareURL,self.entity.entityHash];
     message.mediaObject = webPage;
-    message.title = @"果库 - 尽收世上好物";
     if(scene ==1)
     {
         message.title = [NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title];
@@ -743,7 +742,7 @@
     if(![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
     {
         [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-            [AVOSCloudSNS shareText:@"果库 - 尽收世上好物" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            [AVOSCloudSNS shareText:[NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title] andLink:[NSString stringWithFormat:@"%@%@/?from=weibo",kGK_WeixinShareURL,self.entity.entityHash] andImage:[self.image.image  imageWithSize:CGSizeMake(460.f, 460.f)] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
                 
             } andProgress:^(float percent) {
                 if (percent == 1) {
@@ -754,7 +753,7 @@
     }
     else
     {
-        [AVOSCloudSNS shareText:@"果库 - 尽收世上好物" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+        [AVOSCloudSNS shareText:[NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title] andLink:[NSString stringWithFormat:@"%@%@/?from=weibo",kGK_WeixinShareURL,self.entity.entityHash] andImage:[self.image.image  imageWithSize:CGSizeMake(460.f, 460.f)]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
             
         } andProgress:^(float percent) {
             if (percent == 1) {

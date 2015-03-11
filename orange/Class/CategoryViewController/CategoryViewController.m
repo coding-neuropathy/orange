@@ -304,6 +304,17 @@
         [segmentedControl setSelectionIndicatorHeight:2.5];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
   
+        {
+            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/3,44/2-7, 1,14 )];
+            V.backgroundColor = UIColorFromRGB(0xeeeeee);
+            [segmentedControl addSubview:V];
+        }
+        {
+            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth*2/3,44/2-7, 1,14 )];
+            V.backgroundColor = UIColorFromRGB(0xeeeeee);
+            [segmentedControl addSubview:V];
+        }
+        
         self.segmentedControl = segmentedControl;
 
         

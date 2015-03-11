@@ -104,7 +104,7 @@
     self.bannerArray = [NSMutableArray array];
     [headerView addSubview:self.bannerScrollView];
     //self.bannerPageControl.backgroundColor = UIColorFromRGB(0x000000);
-    self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-20);
+    self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-10);
     [headerView addSubview:self.bannerPageControl];
     
     
@@ -728,9 +728,11 @@
     
     __weak __typeof(&*self)weakSelf = self;
     
+    /*
     [self.searchDC.searchResultsTableView addPullToRefreshWithActionHandler:^{
         [weakSelf handleSearchText:self.keyword];
     }];
+     */
 
      [self.searchDC.searchResultsTableView addInfiniteScrollingWithActionHandler:^{
          [weakSelf loadMore];
