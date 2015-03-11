@@ -170,7 +170,6 @@
     [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.date stringWithDefaultFormat]] forState:UIControlStateNormal];
     self.timeButton.deFrameRight = self.contentLabel.deFrameRight;
     self.timeButton.deFrameTop = self.contentLabel.deFrameBottom+16;
-    [self.timeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self bringSubviewToFront:self.H];
     _H.deFrameBottom = self.frame.size.height-5;

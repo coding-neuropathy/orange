@@ -420,7 +420,7 @@
         if(!self.noteButton)
         {
             self.noteButton  = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
-            self.noteButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:16];
+            self.noteButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
             [self.noteButton addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
             
             {

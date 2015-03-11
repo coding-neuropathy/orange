@@ -29,11 +29,11 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
     
-    _inputBG = [[UIView alloc]initWithFrame:CGRectMake(10, 10, kScreenWidth-20, kScreenHeight - NormalKeyboardHeight- 120 - 40 + 15.f)];
+    _inputBG = [[UIView alloc]initWithFrame:CGRectMake(10, 10, kScreenWidth-20, kScreenHeight - NormalKeyboardHeight- 180 - 40 + 15.f)];
     self.inputBG.backgroundColor = UIColorFromRGB(0xf6f6f6);
     [self.view addSubview:_inputBG];
     
-    _textView = [[UITextView alloc] initWithFrame:CGRectMake(20, 20, kScreenWidth-30, kScreenHeight - NormalKeyboardHeight- 120 - 40)];
+    _textView = [[UITextView alloc] initWithFrame:CGRectMake(20, 20, kScreenWidth-30, kScreenHeight - NormalKeyboardHeight- 180 - 40)];
     [self.textView setKeyboardType:UIKeyboardTypeDefault];
     [self.textView setReturnKeyType:UIReturnKeyDefault];
     [self.textView setFont:[UIFont fontWithName:@"Helvetica" size:15.0f]];
