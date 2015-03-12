@@ -365,7 +365,7 @@
         if (indexPath.row == 0) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
             alertView.alertViewStyle = UIAlertViewStyleDefault;
-            alertView.tag =20007;
+            alertView.tag =20006;
             [alertView show];
         }
         if (indexPath.row == 1) {
@@ -376,7 +376,30 @@
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
+//    switch (alertView.tag) {
+//        case 20001:
+//        {
+//            if (buttonIndex == 1) {
+//                UITextField *tf=[alertView textFieldAtIndex:0];
+//                if (tf.text.length==0) {
+//                    [SVProgressHUD showImage:nil status:@"昵称不能为空"];
+//                }
+//                else
+//                {
+//                    [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
+//                        [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+//                        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+//                    } failure:^(NSInteger stateCode) {
+//                        [SVProgressHUD showImage:nil status:@"修改失败"];
+//                    }];
+//                }
+//            }
+//        }
+//            break;
+//            
+//        default:
+//            break;
+//    }
     if(alertView.tag ==20001)
     {
         if(buttonIndex == 1)
@@ -393,8 +416,6 @@
                 } failure:^(NSInteger stateCode) {
                     [SVProgressHUD showImage:nil status:@"修改失败"];
                 }];
-
-                
             }
         }
     }
@@ -460,7 +481,7 @@
             [self clearPicCache];
         }
     }
-    if(alertView.tag ==20007)
+    if(alertView.tag == 20007)
     {
         if(buttonIndex == 1)
         {
@@ -474,9 +495,6 @@
             
         }
     }
-    
-
-    
 }
 
 - (void)clearPicCache
@@ -515,6 +533,7 @@
     
     [WXApi sendReq:req];
 }
+
 -(void)weiboShare
 {
     if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
