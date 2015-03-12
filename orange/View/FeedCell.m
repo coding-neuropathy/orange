@@ -167,7 +167,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             GKUser * user = note.creator;
             
             [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14> 点评了 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a>", user.userId, user.nickname,entity.entityId,entity.title];
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a>", user.userId, user.nickname,entity.entityId,entity.title];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
             
@@ -209,7 +209,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             GKUser * user = note.creator;
             GKEntity *entity = feed[@"object"][@"entity"];
             
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14> 点评了 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a>", user.userId, user.nickname,entity.entityId,entity.title];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a>", user.userId, user.nickname,entity.entityId,entity.title];
             CGFloat y = label.optimumSize.height + 5.f;
             
             

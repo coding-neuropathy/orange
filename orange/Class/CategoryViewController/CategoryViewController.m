@@ -298,12 +298,23 @@
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
         [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
         [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
+        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
         [segmentedControl setSelectionIndicatorHeight:2.5];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
   
+        {
+            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/3,44/2-7, 1,14 )];
+            V.backgroundColor = UIColorFromRGB(0xeeeeee);
+            [segmentedControl addSubview:V];
+        }
+        {
+            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth*2/3,44/2-7, 1,14 )];
+            V.backgroundColor = UIColorFromRGB(0xeeeeee);
+            [segmentedControl addSubview:V];
+        }
+        
         self.segmentedControl = segmentedControl;
 
         

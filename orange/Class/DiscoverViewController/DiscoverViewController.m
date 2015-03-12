@@ -104,7 +104,7 @@
     self.bannerArray = [NSMutableArray array];
     [headerView addSubview:self.bannerScrollView];
     //self.bannerPageControl.backgroundColor = UIColorFromRGB(0x000000);
-    self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-20);
+    self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-10);
     [headerView addSubview:self.bannerPageControl];
     
     
@@ -115,9 +115,9 @@
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
         [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
         [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
+        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         segmentedControl.deFrameBottom = headerView.deFrameHeight-1;
         self.segmentedControl = segmentedControl;
@@ -600,9 +600,9 @@
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
             [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-            [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+            [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
             [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-            [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
+            [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
             [segmentedControl setSelectionIndicatorHeight:2.5];
             [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
             self.segmentedControlForSearch = segmentedControl;
@@ -728,9 +728,11 @@
     
     __weak __typeof(&*self)weakSelf = self;
     
+    /*
     [self.searchDC.searchResultsTableView addPullToRefreshWithActionHandler:^{
         [weakSelf handleSearchText:self.keyword];
     }];
+     */
 
      [self.searchDC.searchResultsTableView addInfiniteScrollingWithActionHandler:^{
          [weakSelf loadMore];

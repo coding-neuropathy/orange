@@ -39,11 +39,11 @@
         // Custom initialization
         if (!self.followButton)
         {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 24)];
-            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 30)];
+            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
             button.center = CGPointMake(kScreenWidth - 40, 25);
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+            //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
             self.followButton = button;
         }
         [self configFollowButton];
@@ -118,14 +118,98 @@
 */
 
 #pragma mark - Data
+
+- (void)configEmptyState
+{
+    
+    NSUInteger index = self.segmentedControl.selectedSegmentIndex;
+    self.index = index;
+    switch (index) {
+        case 0:
+        {
+            
+            if (self.dataArrayForEntity.count == 0) {
+                UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 66)];
+                button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+                button.titleLabel.textAlignment = NSTextAlignmentCenter;
+                [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+                [button setTitle:[NSString stringWithFormat:@"%@还没有标记过喜欢的商品",[NSString fontAwesomeIconStringForEnum:FAHeartO]] forState:UIControlStateNormal];
+                [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
+                button.backgroundColor = [UIColor clearColor];
+                button.userInteractionEnabled = NO;
+                
+                {
+                    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
+                    H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                    [button addSubview:H];
+                }
+                self.tableView.tableFooterView = button;
+            }
+            else
+            {
+                self.tableView.tableFooterView = nil;
+            }
+        }
+            break;
+        case 1:
+        {
+            if (self.dataArrayForNote.count == 0) {
+                UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 66)];
+                button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+                button.titleLabel.textAlignment = NSTextAlignmentCenter;
+                [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+                [button setTitle:[NSString stringWithFormat:@"%@还没有点评过商品",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
+                [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
+                button.backgroundColor = [UIColor clearColor];
+                button.userInteractionEnabled = NO;
+                {
+                    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
+                    H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                    [button addSubview:H];
+                }
+                self.tableView.tableFooterView = button;
+            }
+            else
+            {
+                self.tableView.tableFooterView = nil;
+            }
+        }
+            break;
+        case 2:
+        {
+            if (self.dataArrayForTag.count == 0) {
+                UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 66)];
+                button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+                button.titleLabel.textAlignment = NSTextAlignmentCenter;
+                [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+                [button setTitle:[NSString stringWithFormat:@"%@还没有为商品添加过标签",[NSString fontAwesomeIconStringForEnum:FATag]] forState:UIControlStateNormal];
+                [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
+                button.backgroundColor = [UIColor clearColor];
+                button.userInteractionEnabled = NO;
+                {
+                    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
+                    H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                    [button addSubview:H];
+                }
+                self.tableView.tableFooterView = button;
+            }
+            else
+            {
+                self.tableView.tableFooterView = nil;
+            }
+        }
+    }
+}
 - (void)refresh
 {
     if (self.index == 0) {
         [GKAPI getUserLikeEntityListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
             self.likeTimestamp = timestamp;
+            [self configEmptyState];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
+            
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"失败"];
             [self.tableView reloadData];
@@ -136,6 +220,7 @@
     {
         [GKAPI getUserNoteListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSArray *dataArray) {
             self.dataArrayForNote = [NSMutableArray arrayWithArray:dataArray];
+            [self configEmptyState];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -148,6 +233,7 @@
     {
         [GKAPI getTagListWithUserId:self.user.userId offset:0 count:30 success:^(GKUser *user, NSArray *tagArray) {
             self.dataArrayForTag = [NSMutableArray arrayWithArray:tagArray];
+            [self configEmptyState];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -342,9 +428,9 @@
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
             [segmentedControl setSelectionIndicatorHeight:2.5];
             [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-            [segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+            [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
             [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-            [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
+            [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
             [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
 
             self.segmentedControl = segmentedControl;
@@ -397,8 +483,6 @@
     }
 }
 
-
-
 #pragma mark - HMSegmentedControl
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSUInteger index = segmentedControl.selectedSegmentIndex;
@@ -411,6 +495,10 @@
                 [self.tableView.pullToRefreshView startAnimating];
                 [self refresh];
             }
+            else
+            {
+                [self configEmptyState];
+            }
         }
             break;
         case 1:
@@ -418,6 +506,10 @@
             if (self.dataArrayForNote.count == 0) {
                 [self.tableView.pullToRefreshView startAnimating];
                 [self refresh];
+            }
+            else
+            {
+                [self configEmptyState];
             }
         }
             break;
@@ -427,18 +519,21 @@
                 [self.tableView.pullToRefreshView startAnimating];
                 [self refresh];
             }
+            else
+            {
+                [self configEmptyState];
+            }
         }
             break;
             
         default:
             break;
     }
-    
 }
 
 - (void)configHeaderView
 {
-    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 270)];
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 260)];
     view.backgroundColor = UIColorFromRGB(0xfafafa);
     
     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(7.f, 7.f, 64, 64)];
@@ -529,6 +624,11 @@
     [fanButton setTitle:[NSString stringWithFormat:@"%ld 粉丝",_user.fanCount] forState:UIControlStateNormal];
     [view addSubview:fanButton];
     
+    
+    self.followButton.center = CGPointMake(kScreenWidth/2, fanButton.center.y+40);
+    [view addSubview:self.followButton];
+    
+    
     UIView * V = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1, 20)];
     V.backgroundColor = UIColorFromRGB(0xc8c8c8);
     V.center = CGPointMake(kScreenWidth/2, fanButton.center.y);
@@ -562,25 +662,25 @@
     }
     self.followButton.hidden = NO;
     if (self.user.relation == GKUserRelationTypeNone) {
-        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAPlus]] forState:UIControlStateNormal];
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@ 关注",[NSString fontAwesomeIconStringForEnum:FAPlus]] forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
         [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(followButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeFan) {
-        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAPlus]]  forState:UIControlStateNormal];
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@ 关注",[NSString fontAwesomeIconStringForEnum:FAPlus]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
         [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(followButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeFollowing) {
-        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACheck]]  forState:UIControlStateNormal];
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@ 已关注",[NSString fontAwesomeIconStringForEnum:FACheck]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
         [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeBoth) {
-        [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAExchange]]  forState:UIControlStateNormal];
+        [self.followButton setTitle:[NSString stringWithFormat:@"%@ 互相关注",[NSString fontAwesomeIconStringForEnum:FAExchange]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
         [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
