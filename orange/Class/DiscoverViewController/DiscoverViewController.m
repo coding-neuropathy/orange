@@ -90,6 +90,7 @@
     
     // Banner
     _bannerScrollView = [[UIScrollView alloc] init];
+    _bannerScrollView.scrollsToTop = NO;
     _bannerPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     self.bannerPageControl.pageIndicatorTintColor = UIColorFromRGB(0xbbbcbd);
     self.bannerPageControl.currentPageIndicatorTintColor = UIColorFromRGB(0x414243);

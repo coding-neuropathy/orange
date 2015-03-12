@@ -5,7 +5,7 @@
 //  Copyright (c) 2013年 huiter. All rights reserved.
 //
 
-#define kBaseURL @"http://api.guoku.com/mobile/v3/"
+#define kBaseURL @"http://h.guoku.com/mobile/v4/"
 #define kApiKey @"0b19c2b93687347e95c6b6f5cc91bb87"
 #define kApiSecret @"47b41864d64bd46"
 
@@ -37,7 +37,7 @@
 
 //weixin
 #ifndef kGK_WeixinShareKey
-#define kGK_WeixinShareKey			@"wx59118ccde8270caa"		//REPLACE ME
+#define kGK_WeixinShareKey	@"wx728e94cbff8094df"		//REPLACE ME
 #endif
 
 #ifndef kGK_WeixinShareURL

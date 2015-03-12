@@ -40,7 +40,7 @@ static NSString *CellIdentifier = @"CommentCell";
     self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
-    [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:nil];
+    [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:CellIdentifier];
     [self.view addSubview:self.tableView];
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];

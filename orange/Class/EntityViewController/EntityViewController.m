@@ -18,20 +18,22 @@
 #import "ReportViewController.h"
 #import "LoginView.h"
 #import "IBActionSheet.h"
+#import "EntityHeaderView.h"
 
 
 static NSString *NoteCellIdentifier = @"NoteCell";
 static NSString *EntityCellIdentifier = @"EntityCell";
 
-@interface EntityViewController ()<IBActionSheetDelegate>
+@interface EntityViewController ()<IBActionSheetDelegate, EntityHeaderViewDelegate>
 @property (nonatomic, strong) GKNote *note;
-@property (nonatomic, strong) UIView *header;
+//@property (nonatomic, strong) UIView *header;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIButton *likeButton;
 @property (nonatomic, strong) UIButton *buyButton;
 @property (nonatomic, strong) UIButton *noteButton;
 
+@property (nonatomic, strong) EntityHeaderView * header;
 @property (nonatomic, strong) UIButton *categoryButton;
 @property (nonatomic, strong) UIView *likeUserView;
 
@@ -49,8 +51,6 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     
     NSMutableArray * array = [NSMutableArray array];
     
-    
-
     
     {
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
@@ -101,8 +101,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     [self.view addSubview:self.tableView];
     
     
-    
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     
     UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
     footer.backgroundColor = UIColorFromRGB(0xfafafa);
@@ -124,6 +123,15 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     }
     _entity = entity;
     [self addObserver];
+}
+
+- (EntityHeaderView *)header
+{
+    if (!_header) {
+        _header = [[EntityHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth + 75)];
+        _header.delegate = self;
+    }
+    return _header;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -267,84 +275,84 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        if (!self.header) {
-            self.header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth + 75)];
-        }
-            if (!self.titleLabel) {
-                self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, kScreenWidth-20, 25)];
-                self.titleLabel.numberOfLines = 1;
-                self.titleLabel.font = [UIFont systemFontOfSize:16.f];
-                self.titleLabel.textAlignment = NSTextAlignmentLeft;
-                self.titleLabel.textColor = UIColorFromRGB(0x414243);
-                [self.header addSubview:self.titleLabel];
-            }
-            
-
-            NSString * brand = @"";
-            NSString * title = @"";
-            if((![self.entity.brand isEqual:[NSNull null]])&&(![self.entity.brand isEqualToString:@""])&&(self.entity.brand))
-            {
-                brand = [NSString stringWithFormat:@"%@ - ",self.entity.brand];
-            }
-            if((![self.entity.title isEqual:[NSNull null]])&&(self.entity.title))
-            {
-                title = self.entity.title;
-            }
-            
-            self.titleLabel.text = [NSString stringWithFormat:@"%@%@",brand,title];
-
-            if (!self.image) {
-                _image = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, 51.0f,kScreenWidth -20, kScreenWidth-20)];
-                self.image.contentMode = UIViewContentModeScaleAspectFit;
-                self.image.backgroundColor = [UIColor whiteColor];
-                self.image.userInteractionEnabled = YES;
-                [self.header addSubview:self.image];
-            }
-            [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -20, kScreenWidth -20)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
-            }];
-        
-            if (!self.likeButton) {
-                _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 36)];
-                self.likeButton.layer.masksToBounds = YES;
-                self.likeButton.layer.cornerRadius = 2;
-                self.likeButton.backgroundColor = [UIColor clearColor];
-                self.likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
-                self.likeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-                [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-                [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-                [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
-                [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
-                [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
-                [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
-                [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
-                [self.header addSubview:self.likeButton];
-            }
-            [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
-            self.likeButton.selected = self.entity.liked;
-            self.likeButton.deFrameLeft = 10;
-            self.likeButton.deFrameTop = self.image.deFrameBottom+15;
-            [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
-            
-            
-            if (!self.buyButton) {
-                self.buyButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 36)];
-                self.buyButton.layer.masksToBounds = YES;
-                self.buyButton.layer.cornerRadius = 2;
-                self.buyButton.backgroundColor = [UIColor clearColor];
-                self.buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
-                self.buyButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-                [self.buyButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-                [self.buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-                [self.buyButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
-                [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
-                [self.header addSubview:self.buyButton];
-            }
-            [self.buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f",self.entity.lowestPrice] forState:UIControlStateNormal];
-            self.buyButton.selected = self.entity.liked;
-            self.buyButton.deFrameRight= kScreenWidth - 10;
-            self.buyButton.deFrameTop = self.image.deFrameBottom+15;
-            [self.buyButton addTarget:self action:@selector(buyButtonAction) forControlEvents:UIControlEventTouchUpInside];
-
+//        if (!self.header) {
+//            self.header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth + 75)];
+//        }
+//            if (!self.titleLabel) {
+//                self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, kScreenWidth-20, 25)];
+//                self.titleLabel.numberOfLines = 1;
+//                self.titleLabel.font = [UIFont systemFontOfSize:16.f];
+//                self.titleLabel.textAlignment = NSTextAlignmentLeft;
+//                self.titleLabel.textColor = UIColorFromRGB(0x414243);
+//                [self.header addSubview:self.titleLabel];
+//            }
+//            
+//
+//            NSString * brand = @"";
+//            NSString * title = @"";
+//            if((![self.entity.brand isEqual:[NSNull null]])&&(![self.entity.brand isEqualToString:@""])&&(self.entity.brand))
+//            {
+//                brand = [NSString stringWithFormat:@"%@ - ",self.entity.brand];
+//            }
+//            if((![self.entity.title isEqual:[NSNull null]])&&(self.entity.title))
+//            {
+//                title = self.entity.title;
+//            }
+//            
+//            self.titleLabel.text = [NSString stringWithFormat:@"%@%@",brand,title];
+//
+//            if (!self.image) {
+//                _image = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f, 51.0f,kScreenWidth -20, kScreenWidth-20)];
+//                self.image.contentMode = UIViewContentModeScaleAspectFit;
+//                self.image.backgroundColor = [UIColor whiteColor];
+//                self.image.userInteractionEnabled = YES;
+//                [self.header addSubview:self.image];
+//            }
+//            [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -20, kScreenWidth -20)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
+//            }];
+//
+//            if (!self.likeButton) {
+//                _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 36)];
+//                self.likeButton.layer.masksToBounds = YES;
+//                self.likeButton.layer.cornerRadius = 2;
+//                self.likeButton.backgroundColor = [UIColor clearColor];
+//                self.likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
+//                self.likeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+//                [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+//                [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+//                [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
+//                [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
+//                [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
+//                [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
+//                [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+//                [self.header addSubview:self.likeButton];
+//            }
+//            [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+//            self.likeButton.selected = self.entity.liked;
+//            self.likeButton.deFrameLeft = 10;
+//            self.likeButton.deFrameTop = self.image.deFrameBottom+15;
+//            [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
+//            
+//            
+//            if (!self.buyButton) {
+//                self.buyButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 36)];
+//                self.buyButton.layer.masksToBounds = YES;
+//                self.buyButton.layer.cornerRadius = 2;
+//                self.buyButton.backgroundColor = [UIColor clearColor];
+//                self.buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
+//                self.buyButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+//                [self.buyButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+//                [self.buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+//                [self.buyButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
+//                [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+//                [self.header addSubview:self.buyButton];
+//            }
+//            [self.buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f",self.entity.lowestPrice] forState:UIControlStateNormal];
+////            self.buyButton.selected = self.entity.liked;
+//            self.buyButton.deFrameRight= kScreenWidth - 10;
+//            self.buyButton.deFrameTop = self.image.deFrameBottom+15;
+//            [self.buyButton addTarget:self action:@selector(buyButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        self.header.entity = self.entity;
         
         return self.header;
         
@@ -532,6 +540,20 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (void)dealloc
 {
     [self removeObserver];
+}
+
+#pragma mark
+#pragma mark - Entity Header View Delegate
+- (void)TapLikeBtnAction:(id)sender
+{
+    self.likeButton = (UIButton *)sender;
+    [self likeButtonAction];
+}
+
+- (void)TapBuyBtnAction:(id)sender
+{
+    self.buyButton = (UIButton *)sender;
+    [self buyButtonAction];
 }
 
 #pragma mark - Action
