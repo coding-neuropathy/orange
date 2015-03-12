@@ -10,6 +10,8 @@
 #import "GKAPI.h"
 #import "CommentCell.h"
 
+static NSString *CellIdentifier = @"CommentCell";
+
 @interface NoteViewController ()<UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property(strong,nonatomic) NSMutableArray * dataArrayForComment;
@@ -38,6 +40,7 @@
     self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
+    [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:nil];
     [self.view addSubview:self.tableView];
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
@@ -133,11 +136,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *CellIdentifier = @"CommentCell";
-    CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+//    static NSString *CellIdentifier = @"CommentCell";
+    CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    if (!cell) {
+//        cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//    }
     cell.comment = [self.dataArrayForComment objectAtIndex:indexPath.row];
     cell.tapReplyButtonBlock = ^(GKComment *comment) {
         self.inputTextField.placeholder = [NSString stringWithFormat:@"回复 %@：", comment.creator.nickname];
