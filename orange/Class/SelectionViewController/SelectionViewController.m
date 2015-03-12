@@ -14,6 +14,7 @@
 #import "CategoryViewController.h"
 #import "SDWebImagePrefetcher.h"
 
+static NSString *CellIdentifier = @"SelectionCell";
 
 @interface SelectionViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -79,7 +80,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
-
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kStatusBarHeight -kNavigationBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -89,6 +89,7 @@
     self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
+    [self.tableView registerClass:[SelectionCell class] forCellReuseIdentifier:CellIdentifier];
     [self.view addSubview:self.tableView];
 
     __weak __typeof(&*self)weakSelf = self;
@@ -212,11 +213,12 @@
     if (self.index == 0) {
         
         if (1) {
-            static NSString *CellIdentifier = @"SelectionCell";
-            SelectionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[SelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
+//            static NSString *CellIdentifier = @"SelectionCell";
+//            SelectionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//            if (!cell) {
+//                cell = [[SelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//            }
+            SelectionCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
             cell.note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
             cell.entity = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"entity"];
             NSTimeInterval timestamp = [self.dataArrayForEntity[indexPath.row][@"time"] doubleValue];

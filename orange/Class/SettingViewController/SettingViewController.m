@@ -351,7 +351,7 @@
             [self weiboShare];
         }
         if (indexPath.row == 0) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"分享给好友",@"分享到朋友圈", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"分享给好友", @"分享到朋友圈", nil];
             alertView.alertViewStyle = UIAlertViewStyleDefault;
             alertView.tag =20005;
             [alertView show];
@@ -597,16 +597,19 @@
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)Picker {
-    
+    [Picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)Picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage * image = (UIImage *)[info valueForKey:UIImagePickerControllerEditedImage];
     [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:[image imageData] success:^(GKUser *user) {
         [SVProgressHUD showImage:nil status:@"更新成功"];
-        [self.tableView reloadData];
-    } failure:^(NSInteger stateCode) {
+            } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"更新失败"];
+    }];
+    
+    [Picker dismissViewControllerAnimated:YES completion:^{
+        [self.tableView reloadData];
     }];
 }
 
