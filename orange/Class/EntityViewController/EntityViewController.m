@@ -18,6 +18,11 @@
 #import "ReportViewController.h"
 #import "LoginView.h"
 #import "IBActionSheet.h"
+
+
+static NSString *NoteCellIdentifier = @"NoteCell";
+static NSString *EntityCellIdentifier = @"EntityCell";
+
 @interface EntityViewController ()<IBActionSheetDelegate>
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UIView *header;
@@ -90,6 +95,9 @@
     self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
+    
+    [self.tableView registerClass:[NoteCell class] forCellReuseIdentifier:NoteCellIdentifier];
+    [self.tableView registerClass:[EntityThreeGridCell class] forCellReuseIdentifier:EntityCellIdentifier];
     [self.view addSubview:self.tableView];
     
     
@@ -177,20 +185,20 @@
     if (indexPath.section == 2) {
         
         
-        static NSString *CellIdentifier = @"Cell";
-        NoteCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            cell = [[NoteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
+//        static NSString *CellIdentifier = @"Cell";
+        NoteCell *cell = [tableView dequeueReusableCellWithIdentifier:NoteCellIdentifier forIndexPath:indexPath];
+//        if (!cell) {
+//            cell = [[NoteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//        }
         cell.note = self.dataArrayForNote[indexPath.row];
         return cell;
     }
     else if (indexPath.section == 4) {
-        static NSString *CellIdentifier = @"EntityCell";
-        EntityThreeGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            cell = [[EntityThreeGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
+//        static NSString *CellIdentifier = @"EntityCell";
+        EntityThreeGridCell *cell = [tableView dequeueReusableCellWithIdentifier:EntityCellIdentifier forIndexPath:indexPath];
+//        if (!cell) {
+//            cell = [[EntityThreeGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//        }
         
         NSArray *entityArray = self.dataArrayForRecommend;
         NSMutableArray *array = [[NSMutableArray alloc] init];
@@ -294,7 +302,7 @@
             }
             [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -20, kScreenWidth -20)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             }];
-            
+        
             if (!self.likeButton) {
                 _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 36)];
                 self.likeButton.layer.masksToBounds = YES;
