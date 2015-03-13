@@ -104,3 +104,6 @@
 #define CategoryGroupArrayWithStatusKey @"CategoryGroupArrayWithStatus"
 #define AllCategoryArrayKey @"AllCategoryArray"
 
+#ifndef kSeparateLineWidth
+#define kSeparateLineWidth 0.5f
+#endif

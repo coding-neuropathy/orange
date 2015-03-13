@@ -10,7 +10,7 @@
 #import "RTLabel.h"
 
 @interface CommentCell : UITableViewCell<RTLabelDelegate>
-@property (nonatomic, strong) UIView *H;
+//@property (nonatomic, strong) UIView *H;
 @property (nonatomic, strong) UIImageView *avatar;
 @property (nonatomic, strong) RTLabel *label;
 @property (nonatomic, strong) RTLabel *contentLabel;

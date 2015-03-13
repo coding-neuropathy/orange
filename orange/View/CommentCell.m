@@ -19,10 +19,10 @@
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
+//        _H = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 0.5, kScreenWidth, 0.5)];
+//        self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
 //        self.H.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:self.H];
+//        [self.contentView addSubview:self.H];
         self.contentView.backgroundColor = [UIColor clearColor];
         self.backgroundColor = [UIColor clearColor];
     }
@@ -138,8 +138,8 @@
         self.replyButton.hidden = NO;
     }
     
-    [self bringSubviewToFront:self.H];
-    _H.deFrameBottom = self.frame.size.height;
+//    [self bringSubviewToFront:self.H];
+//    _H.deFrameBottom = self.frame.size.height;
 }
 
 + (CGFloat)height:(GKComment *)comment
@@ -171,6 +171,22 @@
     if (self.tapReplyButtonBlock) {
         self.tapReplyButtonBlock(self.comment);
     }
+}
+
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xeeeeee).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
+    CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
+    
+    
+    CGContextStrokePath(context);
 }
 
 @end
