@@ -24,6 +24,7 @@
 //        self.H.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.H];
         self.contentView.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

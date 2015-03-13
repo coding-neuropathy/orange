@@ -231,6 +231,9 @@ static NSString *CellIdentifier = @"CommentCell";
             [self.dataArrayForComment removeObjectAtIndex:indexPath.row];
             self.note.commentCount -=1;
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            if (self.note.commentCount == 0) {
+                self.tableView.tableFooterView = self.footerView;
+            }
         } failure:nil];
     }
 }
@@ -291,7 +294,7 @@ static NSString *CellIdentifier = @"CommentCell";
             [self.tableView reloadData];
             self.inputTextField.text = @"";
             [self.inputTextField resignFirstResponder];
- 
+            self.tableView.tableFooterView = nil;
             
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"评论失败"];
