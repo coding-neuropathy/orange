@@ -1171,6 +1171,7 @@
 		4EE0A8961A4CEB8C0092F884 /* DWBubbleMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0A8951A4CEB8C0092F884 /* DWBubbleMenuButton.m */; };
 		4EFCBCBB19D5CF650071F7A0 /* UIView+DEFrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCBCBA19D5CF650071F7A0 /* UIView+DEFrameAdditions.m */; };
 		B749632A1AB15E9000C340FB /* EntityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B74963291AB15E9000C340FB /* EntityHeaderView.m */; };
+		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2529,6 +2530,8 @@
 		4EFCBCBA19D5CF650071F7A0 /* UIView+DEFrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DEFrameAdditions.m"; sourceTree = "<group>"; };
 		B74963281AB15E9000C340FB /* EntityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityHeaderView.h; path = EntityView/EntityHeaderView.h; sourceTree = "<group>"; };
 		B74963291AB15E9000C340FB /* EntityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityHeaderView.m; path = EntityView/EntityHeaderView.m; sourceTree = "<group>"; };
+		B749632C1AB28A6C00C340FB /* CommentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentHeaderView.h; path = CommentView/CommentHeaderView.h; sourceTree = "<group>"; };
+		B749632D1AB28A6C00C340FB /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentHeaderView.m; path = CommentView/CommentHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2571,6 +2574,7 @@
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B749632B1AB28A4700C340FB /* CommentView */,
 				B74963271AB15E5A00C340FB /* EntityView */,
 				4EA0C45A1A8287780025EC2E /* SignView.h */,
 				4EA0C45B1A8287780025EC2E /* SignView.m */,
@@ -4523,6 +4527,15 @@
 			name = EntityView;
 			sourceTree = "<group>";
 		};
+		B749632B1AB28A4700C340FB /* CommentView */ = {
+			isa = PBXGroup;
+			children = (
+				B749632C1AB28A6C00C340FB /* CommentHeaderView.h */,
+				B749632D1AB28A6C00C340FB /* CommentHeaderView.m */,
+			);
+			name = CommentView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -5676,6 +5689,7 @@
 				4E1D28C61A125B9300740C17 /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
 				4E1D28D41A125B9300740C17 /* JSQMessagesCollectionView.m in Sources */,
 				4E066B861A5CC02400DFEF65 /* TTTAttributedLabel.m in Sources */,
+				B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */,
 				4EC9F79B1A7937AE0057D736 /* UserViewController.m in Sources */,
 				4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */,
 				4E3A23411A51A7C500037F9C /* GKHTTPClient.m in Sources */,

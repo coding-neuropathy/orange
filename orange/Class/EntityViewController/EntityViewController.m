@@ -389,11 +389,11 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         int i = 0;
         
         for (GKUser * user in self.dataArrayForlikeUser) {
-            if (10 + i*46 > kScreenWidth) {
+            if (5 + i*46 > kScreenWidth) {
                 break;
             }
-            UIButton * avatar = [[UIButton alloc] initWithFrame:CGRectMake(10+46.f * i , 6.f, 36.f, 36.f)];
-            avatar.layer.cornerRadius = 18;
+            UIButton * avatar = [[UIButton alloc] initWithFrame:CGRectMake(5 + 46.f * i , 6.f, 36.f, 36.f)];
+            avatar.layer.cornerRadius = avatar.frame.size.width / 2.;
             avatar.layer.masksToBounds = YES;
             [avatar sd_setImageWithURL:user.avatarURL forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(72, 72)]];
             avatar.tag = i;

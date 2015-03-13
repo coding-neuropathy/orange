@@ -183,7 +183,6 @@
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
     return label.optimumSize.height + 100.f;
     
-    
 }
 #pragma mark - Action
 - (void)pokeButtonAction

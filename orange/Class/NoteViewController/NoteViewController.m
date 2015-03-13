@@ -9,18 +9,50 @@
 #import "NoteViewController.h"
 #import "GKAPI.h"
 #import "CommentCell.h"
+#import "CommentHeaderView.h"
+#import "UserViewController.h"
 
 static NSString *CellIdentifier = @"CommentCell";
 
-@interface NoteViewController ()<UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate>
+@interface NoteViewController ()<UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate, CommentHeaderViewDelegate>
+
 @property (nonatomic, strong) UITableView *tableView;
 @property(strong,nonatomic) NSMutableArray * dataArrayForComment;
 @property (nonatomic, strong) UIView *inputBar;
 @property (nonatomic, strong) UITextField *inputTextField;
-
+@property (nonatomic, strong) CommentHeaderView * headerView;
+@property (nonatomic, strong) UIView * footerView;
 @end
 
 @implementation NoteViewController
+
+- (CommentHeaderView *)headerView
+{
+    if (!_headerView) {
+        _headerView = [[CommentHeaderView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, [CommentHeaderView height:self.note])];
+        _headerView.backgroundColor = UIColorFromRGB(0xffffff);
+        _headerView.delegate = self;
+    }
+    return _headerView;
+}
+
+- (UIView *)footerView
+{
+    if (!_footerView) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 44.)];
+        _footerView.backgroundColor = [UIColor clearColor];
+        UILabel * footerL = [[UILabel alloc] initWithFrame:CGRectMake(0., 12., kScreenWidth, 20.)];
+        footerL.textAlignment = NSTextAlignmentCenter;
+        footerL.font = [UIFont systemFontOfSize:12.];
+        footerL.textColor = UIColorFromRGB(0x9d9e9f);
+        footerL.text = @"暂无评论";
+//        _footerView.backgroundColor = [UIColor redColor];
+        [_footerView addSubview:footerL];
+    
+    }
+    return _footerView;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,7 +69,7 @@ static NSString *CellIdentifier = @"CommentCell";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
+    self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:CellIdentifier];
@@ -49,6 +81,7 @@ static NSString *CellIdentifier = @"CommentCell";
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
+    
     
     if (!self.inputBar) {
         _inputBar = [[UIView alloc] initWithFrame:CGRectMake(0.f, self.tableView.deFrameBottom, kScreenWidth, kToolBarHeight)];
@@ -80,6 +113,9 @@ static NSString *CellIdentifier = @"CommentCell";
         [postButton addTarget:self action:@selector(postButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [self.inputBar addSubview:postButton];
     }
+    
+    self.tableView.tableHeaderView = self.headerView;
+    self.headerView.note = self.note;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -112,6 +148,12 @@ static NSString *CellIdentifier = @"CommentCell";
     
     [GKAPI getNoteDetailWithNoteId:self.note.noteId success:^(GKNote *note, GKEntity *entity, NSArray *commentArray, NSArray *pokerArray) {
         self.dataArrayForComment = [NSMutableArray arrayWithArray:commentArray];
+        if ([commentArray count] > 0) {
+            self.tableView.tableFooterView = nil;
+        } else {
+            self.tableView.tableFooterView = self.footerView;
+        }
+        
         [self.tableView reloadData];
         [self.tableView.pullToRefreshView stopAnimating];
     } failure:^(NSInteger stateCode) {
@@ -272,5 +314,33 @@ static NSString *CellIdentifier = @"CommentCell";
 
 }
 
+#pragma mark - Comment Header View Delegate
+- (void)TapAvatarButtonAction:(id)sender
+{
+    UserViewController * VC = [[UserViewController alloc]init];
+    VC.user = self.note.creator;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)TapPokeButtonAction:(id)sender
+{
+    UIButton * pokeBtn = (UIButton *)sender;
+    
+    [GKAPI pokeWithNoteId:self.note.noteId state:!pokeBtn.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
+        if (poked == pokeBtn.selected) {
+            
+        }
+        else if (poked) {
+            self.note.pokeCount = self.note.pokeCount+1;
+        } else {
+            self.note.pokeCount = self.note.pokeCount-1;
+        }
+        self.note.poked = poked;
+        [pokeBtn setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+        pokeBtn.selected = self.note.poked;
+    } failure:^(NSInteger stateCode) {
+        
+    }];
+}
 
 @end
