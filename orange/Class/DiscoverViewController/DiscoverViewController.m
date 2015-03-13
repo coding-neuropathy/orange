@@ -183,6 +183,7 @@
     [super viewDidAppear:animated];
     [self.navigationController.navigationBar setAlpha:1];
     [self.navigationController.navigationBar setTranslucent:NO];
+    [AVAnalytics beginLogPageView:@"DiscoverView"];
 
 }
 - (void)viewWillDisappear:(BOOL)animated
@@ -193,6 +194,7 @@
     [self.navigationController.navigationBar setTranslucent:NO];
      */
     [self.searchBar resignFirstResponder];
+    [AVAnalytics endLogPageView:@"DiscoverView"];
 }
 
 - (void)didReceiveMemoryWarning {

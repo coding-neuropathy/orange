@@ -26,8 +26,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [AVOSCloud setApplicationId:@"qrvkrm5k86ljg3jrj3ri08sr0dyetgpevd31mul1ffrrxzqd" clientKey:@"bmdnkhha3cbb46sfuyta68e2va7ny3p678p6y3soi8hgdjc1"];
+    [AVOSCloud setApplicationId:@"laier6ulcszfjkn08448ng37nwc71ux4uv6yc6vi529v29a0" clientKey:@"6ad7o8urhbw4q5kx8hfoiaxjjtme205ohodgoy6ltwts8b1i"];
     [AVPush setProductionMode:YES];
+    [AVAnalytics setCrashReportEnabled:YES];
+    
     [WXApi registerApp:kGK_WeixinShareKey];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];

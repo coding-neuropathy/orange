@@ -8,9 +8,10 @@
 
 #import "EntityHeaderView.h"
 
-@interface EntityHeaderView ()
+@interface EntityHeaderView () <UIScrollViewDelegate>
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) UIScrollView * scrollView;
+@property (strong, nonatomic) UIPageControl * pageCtr;
 @property (strong, nonatomic) UIButton * likeBtn;
 @property (strong, nonatomic) UIButton * buyBtn;
 
@@ -27,6 +28,7 @@
     // Drawing code
 }
 */
+
 
 - (UILabel *)titleLabel
 {
@@ -48,9 +50,26 @@
         _scrollView.scrollsToTop = NO;
         _scrollView.pagingEnabled = YES;
         _scrollView.showsHorizontalScrollIndicator = NO;
+        _scrollView.delegate = self;
         [self addSubview:_scrollView];
     }
     return _scrollView;
+}
+
+- (UIPageControl *)pageCtr
+{
+    if (!_pageCtr) {
+        _pageCtr = [[UIPageControl alloc] initWithFrame:CGRectZero];
+        _pageCtr.hidden = YES;
+        _pageCtr.currentPage = 0;
+        _pageCtr.backgroundColor = [UIColor clearColor];
+        _pageCtr.pageIndicatorTintColor = UIColorFromRGB(0xbbbcbd);
+        _pageCtr.currentPageIndicatorTintColor = UIColorFromRGB(0x414243);
+        _pageCtr.layer.cornerRadius = 10.0;
+        [self addSubview:_pageCtr];
+    }
+    
+    return _pageCtr;
 }
 
 - (UIButton *)likeBtn
@@ -80,7 +99,7 @@
     if (!_buyBtn) {
         _buyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _buyBtn.layer.masksToBounds = YES;
-        _buyBtn.layer.cornerRadius = 2;
+//        _buyBtn.layer.cornerRadius = 2;
         _buyBtn.backgroundColor = UIColorFromRGB(0x427ec0);
         _buyBtn.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
         [_buyBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
@@ -126,7 +145,8 @@
     }];
     
     
-    [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱 %ld", _entity.likeCount] forState:UIControlStateNormal];
+    [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱 %lu", _entity.likeCount] forState:UIControlStateNormal];
+    self.likeBtn.selected = _entity.liked;
     [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", _entity.lowestPrice] forState:UIControlStateNormal];
     
     [self setNeedsLayout];
@@ -138,6 +158,15 @@
 
     self.titleLabel.frame = CGRectMake(10., 5., kScreenWidth - 20., 25.);
     self.scrollView.frame = CGRectMake(10., 51., kScreenWidth - 20., kScreenWidth - 20.);
+    
+    if ([_entity.imageURLArray count] > 0) {
+        
+        self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
+        self.pageCtr.center = CGPointMake(self.scrollView.frame.size.width / 2., self.scrollView.frame.size.height + 15.);
+        self.pageCtr.bounds = CGRectMake(0.0, 0.0, 20 * (_pageCtr.numberOfPages - 1) + 20, 20);
+        self.pageCtr.hidden = NO;
+    }
+    
     self.likeBtn.frame = CGRectMake(0, 0, 120, 36);
     self.likeBtn.deFrameLeft = 10.;
     self.likeBtn.deFrameTop = self.scrollView.deFrameBottom + 15.;
@@ -148,6 +177,7 @@
 
 }
 
+#pragma mark - button action
 - (void)TapLikeBtn:(id)sender
 {
     if (_delegate && [_delegate respondsToSelector:@selector(TapLikeBtnAction:)]) {
@@ -160,6 +190,13 @@
     if (_delegate && [_delegate respondsToSelector:@selector(TapBuyBtnAction:)]) {
         [_delegate TapBuyBtnAction:sender];
     }
+}
+
+#pragma mark - scroll view delegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
+    _pageCtr.currentPage = index;
 }
 
 @end

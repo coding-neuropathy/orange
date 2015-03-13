@@ -122,6 +122,18 @@ static NSString *CellIdentifier = @"SelectionCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"SelectionView"];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"SelectionView"];
+}
+
 /*
 #pragma mark - Navigation
 
@@ -161,6 +173,7 @@ static NSString *CellIdentifier = @"SelectionCell";
     }
     return;
 }
+
 - (void)loadMore
 {
     if (self.index == 0) {
