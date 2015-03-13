@@ -90,7 +90,6 @@
     
     // Banner
     _bannerScrollView = [[UIScrollView alloc] init];
-    _bannerScrollView.scrollsToTop = NO;
     _bannerPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     self.bannerPageControl.pageIndicatorTintColor = UIColorFromRGB(0xbbbcbd);
     self.bannerPageControl.currentPageIndicatorTintColor = UIColorFromRGB(0x414243);
@@ -106,7 +105,7 @@
     [headerView addSubview:self.bannerScrollView];
     //self.bannerPageControl.backgroundColor = UIColorFromRGB(0x000000);
     self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-10);
-    [headerView addSubview:self.bannerPageControl];
+//    [headerView addSubview:self.bannerPageControl];
     
     
     if (!self.segmentedControl) {
@@ -183,7 +182,6 @@
     [super viewDidAppear:animated];
     [self.navigationController.navigationBar setAlpha:1];
     [self.navigationController.navigationBar setTranslucent:NO];
-    [AVAnalytics beginLogPageView:@"DiscoverView"];
 
 }
 - (void)viewWillDisappear:(BOOL)animated
@@ -194,7 +192,6 @@
     [self.navigationController.navigationBar setTranslucent:NO];
      */
     [self.searchBar resignFirstResponder];
-    [AVAnalytics endLogPageView:@"DiscoverView"];
 }
 
 - (void)didReceiveMemoryWarning {
