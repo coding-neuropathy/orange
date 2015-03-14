@@ -17,8 +17,9 @@
 #import "GroupViewController.h"
 #import "EntitySingleListCell.h"
 #import "UserSingleListCell.h"
+#import "DiscoverHeaderView.h"
 
-@interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
+@interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate, DiscoverHeaderViewDelegate>
 @property (strong, nonatomic) UISearchBar *searchBar;
 @property (strong, nonatomic) UISearchDisplayController *searchDC;
 @property (nonatomic, strong) UITableView *tableView;
@@ -39,6 +40,8 @@
 @property (nonatomic, strong) UIScrollView *bannerScrollView;
 @property (nonatomic, strong) UIPageControl *bannerPageControl;
 @property (nonatomic, strong) NSTimer *bannerTimer;
+@property (nonatomic, strong) DiscoverHeaderView * headerView;
+
 @property (strong, nonatomic) NSMutableArray *filteredArray;
 @property (nonatomic, strong) NSString *keyword;
 @end
@@ -58,6 +61,16 @@
    
     }
     return self;
+}
+
+- (DiscoverHeaderView *)headerView
+{
+    if (!_headerView) {
+        _headerView = [[DiscoverHeaderView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 150.f*kScreenWidth/320+34)];
+        _headerView.backgroundColor = [UIColor clearColor];
+        _headerView.delegate = self;
+    }
+    return _headerView;
 }
 
 - (void)viewDidLoad {
@@ -84,27 +97,27 @@
     [self.view addSubview:self.tableView];
     [self configSearchBar];
     
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 150.f*kScreenWidth/320+34)];
-    headerView.backgroundColor = [UIColor whiteColor];
-    
-    // Banner
-    _bannerScrollView = [[UIScrollView alloc] init];
-    _bannerPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    self.bannerPageControl.pageIndicatorTintColor = UIColorFromRGB(0xbbbcbd);
-    self.bannerPageControl.currentPageIndicatorTintColor = UIColorFromRGB(0x414243);
-    self.bannerScrollView.frame = CGRectMake(0, 0, headerView.bounds.size.width, headerView.bounds.size.height-32);
-    self.bannerScrollView.backgroundColor = [UIColor whiteColor];
-    self.bannerScrollView.delegate = self;
-    self.bannerScrollView.showsHorizontalScrollIndicator = NO;
-    self.bannerScrollView.pagingEnabled = YES;
-    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self action:@selector(tapBanner)];
-    [self.bannerScrollView addGestureRecognizer:tap];
-    self.bannerArray = [NSMutableArray array];
-    [headerView addSubview:self.bannerScrollView];
+//    
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 150.f*kScreenWidth/320+34)];
+//    headerView.backgroundColor = [UIColor whiteColor];
+//    
+//    // Banner
+//    _bannerScrollView = [[UIScrollView alloc] init];
+//    _bannerPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+//    self.bannerPageControl.pageIndicatorTintColor = UIColorFromRGB(0xbbbcbd);
+//    self.bannerPageControl.currentPageIndicatorTintColor = UIColorFromRGB(0x414243);
+//    self.bannerScrollView.frame = CGRectMake(0, 0, headerView.bounds.size.width, headerView.bounds.size.height-32);
+//    self.bannerScrollView.backgroundColor = [UIColor whiteColor];
+//    self.bannerScrollView.delegate = self;
+//    self.bannerScrollView.showsHorizontalScrollIndicator = NO;
+//    self.bannerScrollView.pagingEnabled = YES;
+//    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+//                                   initWithTarget:self action:@selector(tapBanner)];
+//    [self.bannerScrollView addGestureRecognizer:tap];
+//    self.bannerArray = [NSMutableArray array];
+//    [headerView addSubview:self.bannerScrollView];
     //self.bannerPageControl.backgroundColor = UIColorFromRGB(0x000000);
-    self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-10);
+//    self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-10);
 //    [headerView addSubview:self.bannerPageControl];
     
     
@@ -119,9 +132,9 @@
         [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
         [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        segmentedControl.deFrameBottom = headerView.deFrameHeight-1;
+        segmentedControl.deFrameBottom = self.headerView.deFrameHeight-1;
         self.segmentedControl = segmentedControl;
-        [headerView addSubview:self.segmentedControl];
+        [self.headerView addSubview:self.segmentedControl];
         
         {
             UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
@@ -129,14 +142,15 @@
             [segmentedControl addSubview:V];
         }
         {
-            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,headerView.deFrameHeight-1, kScreenWidth, 0.5)];
-            H.backgroundColor = UIColorFromRGB(0xebebeb);
-            [headerView addSubview:H];
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.deFrameHeight-1, kScreenWidth, 0.5)];
+            H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+            [self.headerView addSubview:H];
         }
     }
 
     
-    self.tableView.tableHeaderView = headerView;
+    self.tableView.tableHeaderView = self.headerView;
+    
     
     [GKAPI getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
         // 过滤可处理的banner类型
@@ -150,7 +164,7 @@
                 [showBannerArray addObject:itemDict];
             }
         }
-        self.bannerArray = showBannerArray;
+        self.headerView.bannerArray = showBannerArray;
     } failure:nil];
     
     __weak __typeof(&*self)weakSelf = self;
@@ -815,6 +829,35 @@
     
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
 }
+
+#pragma mark - Header View Delegate
+- (void)TapBannerImageAction:(NSDictionary *)dict
+{
+//    NSDictionary *dict = (NSDictionary *)self.headerView.bannerArray[index];
+    NSString *url = [dict valueForKey:@"url"];
+    if ([url hasPrefix:@"http://"]) {
+        if (k_isLogin) {
+            NSRange range = [url rangeOfString:@"?"];
+            if (range.location != NSNotFound) {
+                url = [url stringByAppendingString:[NSString stringWithFormat:@"&session=%@",[Passport sharedInstance].session]];
+            }
+            else
+            {
+                url = [url stringByAppendingString:[NSString stringWithFormat:@"?session=%@",[Passport sharedInstance].session]];
+            }
+        }
+        NSRange range = [url rangeOfString:@"out_link"];
+        if (range.location == NSNotFound) {
+            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+            VC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:VC animated:YES];
+            return;
+        }
+    }
+    
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView == self.bannerScrollView) {

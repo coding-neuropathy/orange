@@ -118,6 +118,8 @@
     self.pokeButton.selected = self.note.poked;
     [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %lu",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
 
+    [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
+    
     [self setNeedsLayout];
 }
 
@@ -134,6 +136,10 @@
     self.pokeButton.frame = CGRectMake(0, 0, 50, 20);
     self.pokeButton.deFrameLeft = self.contentLabel.deFrameLeft;
     self.pokeButton.deFrameBottom = self.deFrameHeight - 15;
+    
+    self.timeButton.frame = CGRectMake(0, 0, 160, 20);
+    self.timeButton.deFrameRight = kScreenWidth - 10;
+    self.timeButton.deFrameBottom =  self.deFrameHeight -15;
 }
 
 /*
