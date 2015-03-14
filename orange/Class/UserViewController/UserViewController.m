@@ -333,7 +333,7 @@
             if (!cell) {
                 cell = [[EntityThreeGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-            
+            cell.backgroundColor = UIColorFromRGB(0xf8f8f8);
             NSArray *entityArray = self.dataArrayForEntity;
             NSMutableArray *array = [[NSMutableArray alloc] init];
             NSUInteger offset = indexPath.row * 3;

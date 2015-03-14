@@ -50,7 +50,7 @@
     
     
     if (!self.avatar) {
-        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 20.f, 36.f, 36.f)];
+        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(16.f, 20.f, 36.f, 36.f)];
         [self.contentView addSubview:self.avatar];
         self.avatar.layer.cornerRadius = 18;
         self.avatar.userInteractionEnabled = YES;
@@ -68,7 +68,7 @@
 
     
     if(!self.label) {
-        _label = [[RTLabel alloc] initWithFrame:CGRectMake(56, 20, kScreenWidth - 70, 20)];
+        _label = [[RTLabel alloc] initWithFrame:CGRectMake(64, 20, kScreenWidth - 78, 20)];
         self.label.paragraphReplacement = @"";
         self.label.lineSpacing = 7.0;
         self.label.delegate = self;
@@ -77,7 +77,7 @@
     self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", self.note.creator.userId, self.note.creator.nickname];
     
     if(!self.contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(56, 20, kScreenWidth - 70, 20)];
+        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(64, 20, kScreenWidth - 78, 20)];
         self.contentLabel.paragraphReplacement = @"";
         self.contentLabel.lineSpacing = 7.0;
         self.contentLabel.delegate = self;
@@ -161,7 +161,7 @@
         [self.contentView addSubview:self.timeButton];
     }
     [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
-    self.timeButton.deFrameRight = kScreenWidth - 10;
+    self.timeButton.deFrameRight = kScreenWidth - 16;
     self.timeButton.deFrameBottom =  self.contentView.deFrameHeight -15;
     
     if (!self.markButton) {
@@ -180,7 +180,7 @@
     }
     self.markButton.selected = self.note.marked;
     self.markButton.center = self.label.center;
-    self.markButton.deFrameRight = kScreenWidth - 10;
+    self.markButton.deFrameRight = kScreenWidth - 16;
     
     
     [self bringSubviewToFront:self.H];
@@ -189,11 +189,11 @@
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 0, kScreenWidth -70, 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 0, kScreenWidth -78, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 7.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
-    return label.optimumSize.height + 100.f;
+    return label.optimumSize.height + 97.f;
     
 }
 #pragma mark - Action

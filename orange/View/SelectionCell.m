@@ -125,7 +125,7 @@
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     
     if (!self.likeButton) {
-        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
+        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 30)];
         self.likeButton.layer.masksToBounds = YES;
         self.likeButton.layer.cornerRadius = 4;
         self.likeButton.backgroundColor = UIColorFromRGB(0xf8f8f8);
@@ -140,8 +140,8 @@
         [self.likeButton setImage:[[UIImage imageNamed:@"icon_like"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  forState:UIControlStateHighlighted|UIControlStateNormal];
         [self.likeButton setImage:[[UIImage imageNamed:@"icon_like_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateSelected];
         [self.likeButton setImage:[[UIImage imageNamed:@"icon_like_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  forState:UIControlStateHighlighted|UIControlStateSelected];
-        [self.likeButton setImageEdgeInsets:UIEdgeInsetsMake(0,6, 0, 0)];
-        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,12, 0, 0)];
+        [self.likeButton setImageEdgeInsets:UIEdgeInsetsMake(0,8, 0, 0)];
+        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,14, 0, 0)];
         [self.contentView addSubview:self.likeButton];        
     }
     [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
@@ -161,7 +161,7 @@
         [self.likeButton setTintColor:UIColorFromRGB(0x9d9e9f)];
     }
     self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft;
-    self.likeButton.deFrameTop = self.contentLabel.deFrameBottom + 7;
+    self.likeButton.deFrameTop = self.contentLabel.deFrameBottom + 12;
     [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -196,7 +196,7 @@
     label.paragraphReplacement = @"";
     label.lineSpacing = 7.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
-    return label.optimumSize.height + kScreenWidth +60;
+    return label.optimumSize.height + kScreenWidth +70;
     
     
 }
