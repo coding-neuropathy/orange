@@ -173,7 +173,7 @@ static char UIScrollViewPullToRefreshView;
 
 - (id)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
-        
+
         // default styling values
         self.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
         self.textColor = [UIColor darkGrayColor];

@@ -22,7 +22,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
         _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
+        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
         [self.contentView addSubview:self.H];
     }
     return self;
@@ -50,7 +50,7 @@
     
     
     if (!self.avatar) {
-        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 20.f, 36.f, 36.f)];
+        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(16.f, 20.f, 36.f, 36.f)];
         [self.contentView addSubview:self.avatar];
         self.avatar.layer.cornerRadius = 18;
         self.avatar.userInteractionEnabled = YES;
@@ -68,7 +68,7 @@
 
     
     if(!self.label) {
-        _label = [[RTLabel alloc] initWithFrame:CGRectMake(56, 20, kScreenWidth - 70, 20)];
+        _label = [[RTLabel alloc] initWithFrame:CGRectMake(64, 20, kScreenWidth - 78, 20)];
         self.label.paragraphReplacement = @"";
         self.label.lineSpacing = 7.0;
         self.label.delegate = self;
@@ -77,7 +77,7 @@
     self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", self.note.creator.userId, self.note.creator.nickname];
     
     if(!self.contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(56, 20, kScreenWidth - 70, 20)];
+        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(64, 20, kScreenWidth - 78, 20)];
         self.contentLabel.paragraphReplacement = @"";
         self.contentLabel.lineSpacing = 7.0;
         self.contentLabel.delegate = self;
@@ -109,6 +109,10 @@
     }
     self.pokeButton.selected = self.note.poked;
     [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+    if (self.note.pokeCount ==0) {
+        [self.pokeButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]] forState:UIControlStateNormal];
+    }
+    
     self.pokeButton.deFrameLeft = self.contentLabel.deFrameLeft;
     self.pokeButton.deFrameBottom = self.contentView.deFrameHeight -15;
     [self.pokeButton addTarget:self action:@selector(pokeButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -132,6 +136,14 @@
         [self.contentView addSubview:self.commentButton];
     }
     [self.commentButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FACommentO],self.note.commentCount] forState:UIControlStateNormal];
+    
+    if(self.note.commentCount == 0)
+    {
+        [self.commentButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACommentO]] forState:UIControlStateNormal];
+    }
+    
+    
+    
     self.commentButton.deFrameLeft = self.pokeButton.deFrameRight +10;
     self.commentButton.deFrameBottom = self.contentView.deFrameHeight -15;
     [self.commentButton addTarget:self action:@selector(commentButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -141,7 +153,7 @@
         self.timeButton.layer.masksToBounds = YES;
         self.timeButton.layer.cornerRadius = 2;
         self.timeButton.backgroundColor = [UIColor clearColor];
-        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [self.timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
@@ -149,7 +161,7 @@
         [self.contentView addSubview:self.timeButton];
     }
     [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
-    self.timeButton.deFrameRight = kScreenWidth - 10;
+    self.timeButton.deFrameRight = kScreenWidth - 16;
     self.timeButton.deFrameBottom =  self.contentView.deFrameHeight -15;
     
     if (!self.markButton) {
@@ -168,7 +180,7 @@
     }
     self.markButton.selected = self.note.marked;
     self.markButton.center = self.label.center;
-    self.markButton.deFrameRight = kScreenWidth - 10;
+    self.markButton.deFrameRight = kScreenWidth - 16;
     
     
     [self bringSubviewToFront:self.H];
@@ -177,11 +189,11 @@
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 0, kScreenWidth -70, 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 0, kScreenWidth -78, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 7.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
-    return label.optimumSize.height + 100.f;
+    return label.optimumSize.height + 97.f;
     
 }
 #pragma mark - Action
@@ -204,6 +216,9 @@
         }
         self.note.poked = poked;
         [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+        if (self.note.pokeCount ==0) {
+            [self.pokeButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]] forState:UIControlStateNormal];
+        }
         self.pokeButton.selected = self.note.poked;
     } failure:^(NSInteger stateCode) {
         

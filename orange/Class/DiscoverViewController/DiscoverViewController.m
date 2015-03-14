@@ -18,6 +18,7 @@
 #import "EntitySingleListCell.h"
 #import "UserSingleListCell.h"
 #import "DiscoverHeaderView.h"
+#import "GTScrollNavigationBar.h"
 
 @interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate, DiscoverHeaderViewDelegate>
 @property (strong, nonatomic) UISearchBar *searchBar;
@@ -138,7 +139,7 @@
         
         {
             UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
-            V.backgroundColor = UIColorFromRGB(0xeeeeee);
+            V.backgroundColor = UIColorFromRGB(0xebebeb);
             [segmentedControl addSubview:V];
         }
         {
@@ -194,6 +195,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     [self.navigationController.navigationBar setAlpha:1];
     [self.navigationController.navigationBar setTranslucent:NO];
 
@@ -396,7 +398,7 @@
             if (!cell) {
                 cell = [[EntityThreeGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-            
+            cell.backgroundColor = UIColorFromRGB(0xf8f8f8);
             NSArray *entityArray = self.dataArrayForEntity;
             NSMutableArray *array = [[NSMutableArray alloc] init];
             NSUInteger offset = indexPath.row * 3;
@@ -624,7 +626,7 @@
             
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControlForSearch.deFrameHeight-0.5, kScreenWidth, 0.5)];
-                H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                H.backgroundColor = UIColorFromRGB(0xebebeb);
                 [self.segmentedControlForSearch addSubview:H];
             }
         }
@@ -728,7 +730,7 @@
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.searchBar.keyboardType = UIKeyboardTypeDefault;
     self.searchBar.delegate = self;
-    self.searchBar.placeholder = @"搜索";
+    self.searchBar.placeholder = @" 搜索";
 
     
     _searchDC = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];

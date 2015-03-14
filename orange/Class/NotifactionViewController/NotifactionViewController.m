@@ -11,12 +11,14 @@
 #import "GKAPI.h"
 #import "MessageCell.h"
 #import "FeedCell.h"
+#import "GTScrollNavigationBar.h"
 
 @interface NotifactionViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray * dataArrayForFeed;
 @property(nonatomic, strong) NSMutableArray * dataArrayForMessage;
 @property(nonatomic, assign) NSUInteger index;
+@property(nonatomic, strong) HMSegmentedControl *segmentedControl;
 
 @end
 
@@ -33,7 +35,7 @@
         
         self.title = @"通知";
         
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-20, kNavigationBarHeight)];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
         [segmentedControl setSectionTitles:@[@"动态", @"消息"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
@@ -45,12 +47,19 @@
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [segmentedControl setTag:2];
         
-        UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2-10,kNavigationBarHeight/2-7, 1,14 )];
-        V.backgroundColor = UIColorFromRGB(0xeeeeee);
+        UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
+        V.backgroundColor = UIColorFromRGB(0xebebeb);
         [segmentedControl addSubview:V];
         
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,segmentedControl.deFrameHeight-0.5, kScreenWidth, 0.5)];
+            H.backgroundColor = UIColorFromRGB(0xebebeb);
+            [segmentedControl addSubview:H];
+        }
         
-        self.navigationItem.titleView =  segmentedControl;
+        self.segmentedControl = segmentedControl;
+
+        self.title = @"通知";
         self.index = 0;
     }
     return self;
@@ -70,10 +79,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
-    
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
-    
-    
+
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -88,6 +94,13 @@
     
     [self.tableView.pullToRefreshView startAnimating];
     [self refresh];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.navigationController.scrollNavigationBar.scrollView = self.tableView;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -218,12 +231,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.f;
+    return 44.f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [UIView new];
+    return self.segmentedControl;
 }
 
 #pragma mark - HMSegmentedControl

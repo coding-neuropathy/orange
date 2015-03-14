@@ -21,7 +21,7 @@
 
 + (CGFloat)height
 {
-    return (kScreenWidth-8)/3;
+    return (kScreenWidth-3)/3;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -47,11 +47,11 @@
     if (!self.itemArray) {
         _itemArray = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < 3; i++) {
-                UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(8+i*((kScreenWidth-8)/3), 8, (kScreenWidth-8)/3-8, (kScreenWidth-8)/3-8)];
+                UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(3+i*((kScreenWidth-3)/3), 3, (kScreenWidth-3)/3-3, (kScreenWidth-3)/3-3)];
                 [self.itemArray addObject:button];
-                button.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
-                button.imageView.contentMode = UIViewContentModeScaleAspectFit;
-                button.layer.borderWidth = 0.5;
+                //button.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+                button.imageView.contentMode = UIViewContentModeScaleAspectFill;
+                //button.layer.borderWidth = 0.5;
                 button.backgroundColor = UIColorFromRGB(0xffffff);
             
                 [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -64,7 +64,7 @@
         UIButton *item = self.itemArray[i];
         if (i < self.entityArray.count) {
             GKEntity * entity = self.entityArray[i];
-            [item sd_setImageWithURL:entity.imageURL_240x240 forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake((kScreenWidth-8)/3-8, (kScreenWidth-8)/3-8)]];
+            [item sd_setImageWithURL:entity.imageURL_240x240 forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake((kScreenWidth-3)/3-3, (kScreenWidth-3)/3-3)]];
             item.hidden = NO;
         } else {
             item.hidden = YES;

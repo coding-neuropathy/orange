@@ -13,6 +13,7 @@
 #import "EntitySingleListCell.h"
 #import "CategoryViewController.h"
 #import "SDWebImagePrefetcher.h"
+#import "GTScrollNavigationBar.h"
 
 static NSString *CellIdentifier = @"SelectionCell";
 
@@ -79,9 +80,9 @@ static NSString *CellIdentifier = @"SelectionCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
-    
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kStatusBarHeight -kNavigationBarHeight) style:UITableViewStylePlain];
+    self.view.backgroundColor = UIColorFromRGB(0xffffff);
+
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -89,6 +90,7 @@ static NSString *CellIdentifier = @"SelectionCell";
     self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
+    
     [self.tableView registerClass:[SelectionCell class] forCellReuseIdentifier:CellIdentifier];
     [self.view addSubview:self.tableView];
 
@@ -96,6 +98,7 @@ static NSString *CellIdentifier = @"SelectionCell";
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
+    
     
 
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -125,6 +128,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     [AVAnalytics beginLogPageView:@"SelectionView"];
 }
 
@@ -298,7 +302,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         self.SelectionCountLabel.font = [UIFont systemFontOfSize:14];
         
         _SelectionCountLabelBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 36)];
-        self.SelectionCountLabelBgView.backgroundColor = UIColorFromRGB(0xeeeeee);
+        self.SelectionCountLabelBgView.backgroundColor = UIColorFromRGB(0xebebeb);
         [self.SelectionCountLabelBgView addSubview:self.SelectionCountLabel];
         self.SelectionCountLabelBgView.alpha = 0.97;
         
@@ -381,6 +385,7 @@ static NSString *CellIdentifier = @"SelectionCell";
     
     UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 43, 25)];
     icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    //icon.tintColor = UIColorFromRGB(0x8b8b8b);
     icon.contentMode = UIViewContentModeScaleAspectFit;
     icon.userInteractionEnabled = YES;
     self.navigationItem.titleView = icon;

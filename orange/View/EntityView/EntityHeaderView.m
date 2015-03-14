@@ -65,7 +65,7 @@
         _pageCtr.backgroundColor = [UIColor clearColor];
         _pageCtr.pageIndicatorTintColor = UIColorFromRGB(0xbbbcbd);
         _pageCtr.currentPageIndicatorTintColor = UIColorFromRGB(0x414243);
-        _pageCtr.layer.cornerRadius = 10.0;
+        _pageCtr.layer.cornerRadius = 16.0;
         [self addSubview:_pageCtr];
     }
     
@@ -75,19 +75,22 @@
 - (UIButton *)likeBtn
 {
     if (!_likeBtn) {
-        _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 30)];
         _likeBtn.layer.masksToBounds = YES;
-        _likeBtn.layer.cornerRadius = 2;
-        _likeBtn.backgroundColor = [UIColor clearColor];
-        _likeBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+        _likeBtn.layer.cornerRadius = 4;
+        [_likeBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        _likeBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _likeBtn.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+        _likeBtn.layer.borderWidth = 0.5;
+        _likeBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
         _likeBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
         [_likeBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [_likeBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [_likeBtn setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
         [_likeBtn setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
         [_likeBtn setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
         [_likeBtn setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
-        [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+        [_likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0,8, 0, 0)];
+        [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,14, 0, 0)];
         [_likeBtn addTarget:self action:@selector(TapLikeBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_likeBtn];
     }
@@ -99,7 +102,7 @@
     if (!_buyBtn) {
         _buyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _buyBtn.layer.masksToBounds = YES;
-//        _buyBtn.layer.cornerRadius = 2;
+        _buyBtn.layer.cornerRadius = 4;
         _buyBtn.backgroundColor = UIColorFromRGB(0x427ec0);
         _buyBtn.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
         [_buyBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
@@ -126,7 +129,7 @@
     }
     
     
-    self.scrollView.contentSize = CGSizeMake((kScreenWidth - 20) * ([_entity.imageURLArray count] + 1), kScreenWidth - 20);
+    self.scrollView.contentSize = CGSizeMake((kScreenWidth - 32) * ([_entity.imageURLArray count] + 1), kScreenWidth - 32);
     
     NSMutableArray * imageArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
     
@@ -135,18 +138,22 @@
     
 //    NSLog(@"images %@", imageArray);
     [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 20) * idx, 0., kScreenWidth - 20., kScreenWidth - 20.)];
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 32) * idx, 0., kScreenWidth - 32, kScreenWidth - 32)];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
 //        [imageurl a]
         NSURL * imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
         
-        [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -20, kScreenWidth -20)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+        [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
         [self.scrollView addSubview:imageView];
         
     }];
     
     
     [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱 %lu", _entity.likeCount] forState:UIControlStateNormal];
+    if(_entity.likeCount == 0)
+    {
+        [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
+    }
     self.likeBtn.selected = _entity.liked;
     [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", _entity.lowestPrice] forState:UIControlStateNormal];
     
@@ -157,23 +164,23 @@
 {
     [super layoutSubviews];
 
-    self.titleLabel.frame = CGRectMake(10., 5., kScreenWidth - 20., 25.);
-    self.scrollView.frame = CGRectMake(10., 51., kScreenWidth - 20., kScreenWidth - 20.);
+    self.titleLabel.frame = CGRectMake(16., 5., kScreenWidth - 20., 25.);
+    self.scrollView.frame = CGRectMake(16., 51., kScreenWidth - 32., kScreenWidth - 32.);
     
     if ([_entity.imageURLArray count] > 0) {
         
         self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
-        self.pageCtr.center = CGPointMake(self.scrollView.frame.size.width / 2., self.scrollView.frame.size.height + 15.);
-        self.pageCtr.bounds = CGRectMake(0.0, 0.0, 20 * (_pageCtr.numberOfPages - 1) + 20, 20);
+        self.pageCtr.center = CGPointMake(self.scrollView.frame.size.width / 2., self.scrollView.frame.size.height + 30.);
+        self.pageCtr.bounds = CGRectMake(0.0, 0.0, 32 * (_pageCtr.numberOfPages - 1) + 32, 32);
         self.pageCtr.hidden = NO;
     }
     
-    self.likeBtn.frame = CGRectMake(0, 0, 120, 36);
-    self.likeBtn.deFrameLeft = 10.;
+    self.likeBtn.frame = CGRectMake(0, 0, 86, 30);
+    self.likeBtn.deFrameLeft = 16.;
     self.likeBtn.deFrameTop = self.scrollView.deFrameBottom + 15.;
     
-    self.buyBtn.frame = CGRectMake(0, 0, 120, 36);
-    self.buyBtn.deFrameRight= kScreenWidth - 10.;
+    self.buyBtn.frame = CGRectMake(0, 0, 120, 30);
+    self.buyBtn.deFrameRight= kScreenWidth - 16.;
     self.buyBtn.deFrameTop = self.scrollView.deFrameBottom + 15.;
 
 }

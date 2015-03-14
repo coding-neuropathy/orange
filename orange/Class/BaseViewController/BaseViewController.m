@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "GTScrollNavigationBar.h"
 
 @interface BaseViewController ()
 
@@ -23,6 +24,16 @@
 {
     [super viewDidAppear:animated];
     kAppDelegate.activeVC = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if([self.navigationController.scrollNavigationBar respondsToSelector:@selector(setScrollView:)])
+    {
+        self.navigationController.scrollNavigationBar.scrollView = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -80,7 +80,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.separatorColor = UIColorFromRGB(0xe6e6e6);
+    self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
     

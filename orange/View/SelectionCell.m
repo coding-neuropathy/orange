@@ -35,8 +35,8 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
         _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
-        //[self.contentView addSubview:self.H];
+        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
+        [self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -76,18 +76,18 @@
         _box = [[UIView alloc] initWithFrame:CGRectMake(15.0f, 7.0f,kScreenWidth -30, 300)];
         self.box.contentMode = UIViewContentModeScaleAspectFit;
         self.box.backgroundColor = [UIColor whiteColor];
-        self.box.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
+        self.box.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
         self.box.layer.borderWidth = 0.5;
         //[self.contentView addSubview:self.box];
     }
     
     if (!self.image) {
         _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.0f, 16.0f,kScreenWidth -32, kScreenWidth-32)];
-        self.image.contentMode = UIViewContentModeScaleAspectFit;
+        self.image.contentMode = UIViewContentModeScaleAspectFill;
         self.image.backgroundColor = [UIColor whiteColor];
         self.image.userInteractionEnabled = YES;
-        self.image.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
-        self.image.layer.borderWidth = 0.5;
+        //self.image.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+        //self.image.layer.borderWidth = 0.5;
         [self.contentView addSubview:self.image];
     }
     __block UIImageView *block_img = self.image;
@@ -125,22 +125,32 @@
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     
     if (!self.likeButton) {
-        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];
+        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 30)];
         self.likeButton.layer.masksToBounds = YES;
-        self.likeButton.layer.cornerRadius = 2;
-        self.likeButton.backgroundColor = [UIColor clearColor];
-        self.likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.likeButton.layer.cornerRadius = 4;
+        self.likeButton.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        self.likeButton.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+        self.likeButton.layer.borderWidth = 0.5;
+        self.likeButton.titleLabel.font = [UIFont systemFontOfSize:12];
         self.likeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+        self.likeButton.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
         [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.likeButton setImage:[[UIImage imageNamed:@"icon_like"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  forState:UIControlStateNormal];
         [self.likeButton setImage:[[UIImage imageNamed:@"icon_like"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  forState:UIControlStateHighlighted|UIControlStateNormal];
         [self.likeButton setImage:[[UIImage imageNamed:@"icon_like_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateSelected];
         [self.likeButton setImage:[[UIImage imageNamed:@"icon_like_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  forState:UIControlStateHighlighted|UIControlStateSelected];
-        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,8, 0, 0)];
+        [self.likeButton setImageEdgeInsets:UIEdgeInsetsMake(0,8, 0, 0)];
+        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,14, 0, 0)];
         [self.contentView addSubview:self.likeButton];        
     }
     [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+    
+    if(self.entity.likeCount == 0)
+    {
+        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
+    }
+    
     self.likeButton.selected = self.entity.liked;
     if(self.likeButton.selected)
     {
@@ -151,7 +161,7 @@
         [self.likeButton setTintColor:UIColorFromRGB(0x9d9e9f)];
     }
     self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft;
-    self.likeButton.deFrameTop = self.contentLabel.deFrameBottom + 16;
+    self.likeButton.deFrameTop = self.contentLabel.deFrameBottom + 12;
     [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -160,7 +170,7 @@
         self.timeButton.layer.masksToBounds = YES;
         self.timeButton.layer.cornerRadius = 2;
         self.timeButton.backgroundColor = [UIColor clearColor];
-        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [self.timeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
@@ -182,11 +192,11 @@
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -32, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 7.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
-    return label.optimumSize.height + kScreenWidth +40;
+    return label.optimumSize.height + kScreenWidth +70;
     
     
 }
@@ -252,6 +262,10 @@
             [SVProgressHUD dismiss];
         }
         [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        if(self.entity.likeCount == 0)
+        {
+            [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
+        }
         if(self.likeButton.selected)
         {
             [self.likeButton setTintColor:UIColorFromRGB(0xFF1F77)];
