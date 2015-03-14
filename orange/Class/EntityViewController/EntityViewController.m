@@ -375,13 +375,13 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
-            H.backgroundColor = UIColorFromRGB(0xeeeeee);
+            H.backgroundColor = UIColorFromRGB(0xebebeb);
             [self.likeUserView addSubview:H];
         }
         
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,49, kScreenWidth, 0.5)];
-            H.backgroundColor = UIColorFromRGB(0xeeeeee);
+            H.backgroundColor = UIColorFromRGB(0xebebeb);
             [self.likeUserView addSubview:H];
         }
         
@@ -455,7 +455,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
             
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,49, kScreenWidth, 0.5)];
-                H.backgroundColor = UIColorFromRGB(0xeeeeee);
+                H.backgroundColor = UIColorFromRGB(0xebebeb);
                 [self.noteButton addSubview:H];
             }
         }

@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
         _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
+        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
         [self.contentView addSubview:self.H];
     }
     return self;

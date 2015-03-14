@@ -140,7 +140,7 @@
                 
                 {
                     UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
-                    H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                    H.backgroundColor = UIColorFromRGB(0xebebeb);
                     [button addSubview:H];
                 }
                 self.tableView.tableFooterView = button;
@@ -164,7 +164,7 @@
                 button.userInteractionEnabled = NO;
                 {
                     UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
-                    H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                    H.backgroundColor = UIColorFromRGB(0xebebeb);
                     [button addSubview:H];
                 }
                 self.tableView.tableFooterView = button;
@@ -188,7 +188,7 @@
                 button.userInteractionEnabled = NO;
                 {
                     UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
-                    H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                    H.backgroundColor = UIColorFromRGB(0xebebeb);
                     [button addSubview:H];
                 }
                 self.tableView.tableFooterView = button;
@@ -437,23 +437,23 @@
             
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControl.deFrameHeight-0.5, kScreenWidth, 0.5)];
-                H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                H.backgroundColor = UIColorFromRGB(0xebebeb);
                 [self.segmentedControl addSubview:H];
             }
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
-                H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+                H.backgroundColor = UIColorFromRGB(0xebebeb);
                 [self.segmentedControl addSubview:H];
             }
             
             {
                 UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/3,44/2-7, 1,14 )];
-                V.backgroundColor = UIColorFromRGB(0xeeeeee);
+                V.backgroundColor = UIColorFromRGB(0xebebeb);
                 [segmentedControl addSubview:V];
             }
             {
                 UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth*2/3,44/2-7, 1,14 )];
-                V.backgroundColor = UIColorFromRGB(0xeeeeee);
+                V.backgroundColor = UIColorFromRGB(0xebebeb);
                 [segmentedControl addSubview:V];
             }
         }

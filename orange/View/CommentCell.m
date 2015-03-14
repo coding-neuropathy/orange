@@ -20,7 +20,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
 //        _H = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 0.5, kScreenWidth, 0.5)];
-//        self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
+//        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
 //        self.H.backgroundColor = [UIColor clearColor];
 //        [self.contentView addSubview:self.H];
         self.contentView.backgroundColor = [UIColor clearColor];
@@ -180,7 +180,7 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xeeeeee).CGColor);
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
     CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
     CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);

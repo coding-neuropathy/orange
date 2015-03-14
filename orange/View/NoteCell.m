@@ -22,7 +22,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
         _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xeeeeee);
+        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
         [self.contentView addSubview:self.H];
     }
     return self;
@@ -109,6 +109,10 @@
     }
     self.pokeButton.selected = self.note.poked;
     [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+    if (self.note.pokeCount ==0) {
+        [self.pokeButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]] forState:UIControlStateNormal];
+    }
+    
     self.pokeButton.deFrameLeft = self.contentLabel.deFrameLeft;
     self.pokeButton.deFrameBottom = self.contentView.deFrameHeight -15;
     [self.pokeButton addTarget:self action:@selector(pokeButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -132,6 +136,14 @@
         [self.contentView addSubview:self.commentButton];
     }
     [self.commentButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FACommentO],self.note.commentCount] forState:UIControlStateNormal];
+    
+    if(self.note.commentCount == 0)
+    {
+        [self.commentButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACommentO]] forState:UIControlStateNormal];
+    }
+    
+    
+    
     self.commentButton.deFrameLeft = self.pokeButton.deFrameRight +10;
     self.commentButton.deFrameBottom = self.contentView.deFrameHeight -15;
     [self.commentButton addTarget:self action:@selector(commentButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -141,7 +153,7 @@
         self.timeButton.layer.masksToBounds = YES;
         self.timeButton.layer.cornerRadius = 2;
         self.timeButton.backgroundColor = [UIColor clearColor];
-        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [self.timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
@@ -204,6 +216,9 @@
         }
         self.note.poked = poked;
         [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+        if (self.note.pokeCount ==0) {
+            [self.pokeButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]] forState:UIControlStateNormal];
+        }
         self.pokeButton.selected = self.note.poked;
     } failure:^(NSInteger stateCode) {
         

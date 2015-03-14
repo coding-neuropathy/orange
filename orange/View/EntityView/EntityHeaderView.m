@@ -146,6 +146,10 @@
     
     
     [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱 %lu", _entity.likeCount] forState:UIControlStateNormal];
+    if(_entity.likeCount == 0)
+    {
+        [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
+    }
     self.likeBtn.selected = _entity.liked;
     [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", _entity.lowestPrice] forState:UIControlStateNormal];
     

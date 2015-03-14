@@ -46,7 +46,7 @@
         [segmentedControl setTag:2];
         
         UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2-10,kNavigationBarHeight/2-7, 1,14 )];
-        V.backgroundColor = UIColorFromRGB(0xeeeeee);
+        V.backgroundColor = UIColorFromRGB(0xebebeb);
         [segmentedControl addSubview:V];
         
         

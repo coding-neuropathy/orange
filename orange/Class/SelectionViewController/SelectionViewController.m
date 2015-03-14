@@ -298,7 +298,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         self.SelectionCountLabel.font = [UIFont systemFontOfSize:14];
         
         _SelectionCountLabelBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 36)];
-        self.SelectionCountLabelBgView.backgroundColor = UIColorFromRGB(0xeeeeee);
+        self.SelectionCountLabelBgView.backgroundColor = UIColorFromRGB(0xebebeb);
         [self.SelectionCountLabelBgView addSubview:self.SelectionCountLabel];
         self.SelectionCountLabelBgView.alpha = 0.97;
         
@@ -381,6 +381,7 @@ static NSString *CellIdentifier = @"SelectionCell";
     
     UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 43, 25)];
     icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    //icon.tintColor = UIColorFromRGB(0x8b8b8b);
     icon.contentMode = UIViewContentModeScaleAspectFit;
     icon.userInteractionEnabled = YES;
     self.navigationItem.titleView = icon;
