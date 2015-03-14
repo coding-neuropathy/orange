@@ -133,7 +133,8 @@
     
     NSMutableArray * imageArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
     
-    [imageArray insertObject:_entity.imageURL atIndex:0];
+    if (_entity.imageURL)
+        [imageArray insertObject:_entity.imageURL atIndex:0];
     
 //    NSLog(@"images %@", imageArray);
     [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
