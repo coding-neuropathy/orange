@@ -516,11 +516,11 @@
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict dataParameters:dataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
-        
         NSString *session = objectDict[@"session"];
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
         [Passport sharedInstance].user = user;
         [Passport sharedInstance].session = session;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:nil userInfo:nil];
         if (success) {
             success(user, session);
         }
@@ -569,11 +569,11 @@
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
-        
         NSString *session = objectDict[@"session"];
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
         [Passport sharedInstance].user = user;
         [Passport sharedInstance].session = session;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:nil userInfo:nil];
         if (success) {
             success(user, session);
         }
@@ -627,11 +627,11 @@
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
-        
         NSString *session = objectDict[@"session"];
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
         [Passport sharedInstance].user = user;
         [Passport sharedInstance].session = session;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:nil userInfo:nil];
         if (success) {
             success(user, session);
         }
@@ -682,11 +682,11 @@
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
-        
         NSString *session = objectDict[@"session"];
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
         [Passport sharedInstance].user = user;
         [Passport sharedInstance].session = session;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:nil userInfo:nil];
         if (success) {
             success(user, session);
         }

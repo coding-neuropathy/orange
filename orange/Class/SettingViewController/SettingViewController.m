@@ -26,6 +26,10 @@
         // Custom initialization
         self.title = @"设置";
         self.dataArray = [NSMutableArray array];
+        
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        
+        self.tabBarItem = item;
     }
     return self;
 }
