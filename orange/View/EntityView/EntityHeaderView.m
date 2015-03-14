@@ -129,7 +129,7 @@
     }
     
     
-    self.scrollView.contentSize = CGSizeMake((kScreenWidth - 20) * ([_entity.imageURLArray count] + 1), kScreenWidth - 20);
+    self.scrollView.contentSize = CGSizeMake((kScreenWidth - 32) * ([_entity.imageURLArray count] + 1), kScreenWidth - 32);
     
     NSMutableArray * imageArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
     
@@ -138,12 +138,12 @@
     
 //    NSLog(@"images %@", imageArray);
     [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 20) * idx, 0., kScreenWidth - 20., kScreenWidth - 20.)];
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 32) * idx, 0., kScreenWidth - 32, kScreenWidth - 32)];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
 //        [imageurl a]
         NSURL * imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
         
-        [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -20, kScreenWidth -20)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+        [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
         [self.scrollView addSubview:imageView];
         
     }];
@@ -165,13 +165,13 @@
     [super layoutSubviews];
 
     self.titleLabel.frame = CGRectMake(16., 5., kScreenWidth - 20., 25.);
-    self.scrollView.frame = CGRectMake(16., 51., kScreenWidth - 20., kScreenWidth - 20.);
+    self.scrollView.frame = CGRectMake(16., 51., kScreenWidth - 32., kScreenWidth - 32.);
     
     if ([_entity.imageURLArray count] > 0) {
         
         self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
         self.pageCtr.center = CGPointMake(self.scrollView.frame.size.width / 2., self.scrollView.frame.size.height + 30.);
-        self.pageCtr.bounds = CGRectMake(0.0, 0.0, 20 * (_pageCtr.numberOfPages - 1) + 20, 20);
+        self.pageCtr.bounds = CGRectMake(0.0, 0.0, 32 * (_pageCtr.numberOfPages - 1) + 32, 32);
         self.pageCtr.hidden = NO;
     }
     

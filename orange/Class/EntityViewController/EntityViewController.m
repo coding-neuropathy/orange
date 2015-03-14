@@ -548,7 +548,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (void)shareButtonAction
 {
     if (!self.note) {
-        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博",@"写点评", @"举报商品", nil];
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博", @"举报商品", nil];
         actionSheet.backgroundColor = UIColorFromRGB(0xffffff);
         [actionSheet showInView:self.view];
     }

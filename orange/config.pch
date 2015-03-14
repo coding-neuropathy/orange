@@ -33,7 +33,6 @@
 #import "NSDate+App.h"
 #import "NSObject+App.h"
 #import "UINavigationController+statusbar.h"
-#import "UIViewController+ScrollingNavbar.h"
 
 // FontAwesome
 #import "NSString+FontAwesome.h"
