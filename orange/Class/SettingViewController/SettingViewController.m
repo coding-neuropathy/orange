@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "WXApi.h"
 #import "GKAPI.h"
+#import "LoginView.h"
 @interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -45,11 +46,13 @@
                                               @"修改头像",
                                               @"修改昵称",
                                               @"修改邮箱",
-                                              @"修改密码",
-                                              @"退出登录"
+                                              @"修改密码"
                                               ]};
-    [self.dataArray addObject:locationSection];
     
+    if (k_isLogin) {
+        [self.dataArray addObject:locationSection];
+    }
+
     
     NSDictionary *recommandSection = @{@"section" : @"推荐",
                                     @"row"     : @[
@@ -80,7 +83,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -89,7 +92,9 @@
     self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
-    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 80)];
+
+    
+    [self configFooter];
     
 }
 
@@ -160,7 +165,7 @@
     cell.textLabel.highlightedTextColor = UIColorFromRGB(0X666666);
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
-    if (indexPath.section == 0) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"账号"]) {
         
         switch (indexPath.row) {
 
@@ -252,7 +257,7 @@
         }
     }
     
-    if (indexPath.section == 1) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"]) {
         if (indexPath.row == 2) {
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
             button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
@@ -282,7 +287,7 @@
         }
     }
     
-    if (indexPath.section == 2) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
         if (indexPath.row == 2) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
@@ -293,7 +298,7 @@
             UILabel *currentVersionL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 90.00f, cell.frame.size.height)];
             [currentVersionL setBackgroundColor:[UIColor clearColor]];
             [currentVersionL setTextAlignment:NSTextAlignmentRight];
-            currentVersionL.text = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+            currentVersionL.text = [NSString stringWithFormat:@"v%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
             currentVersionL.font = [UIFont fontWithName:@"Helvetica" size:15];;
             currentVersionL.textColor = UIColorFromRGB(0x999999);
             [accessoryV addSubview:currentVersionL];
@@ -315,7 +320,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    if (indexPath.section == 0) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"账户"]) {
         if(indexPath.row == 0)
         {
             [self photoButtonAction];
@@ -349,7 +354,7 @@
             [alertView show];
         }
     }
-    if (indexPath.section == 1)
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"])
     {
         if (indexPath.row == 2) {
             [self weiboShare];
@@ -365,7 +370,7 @@
             [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
         }
     }
-    if (indexPath.section == 2) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
         if (indexPath.row == 0) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
             alertView.alertViewStyle = UIAlertViewStyleDefault;
@@ -634,6 +639,51 @@
     [Picker dismissViewControllerAnimated:YES completion:^{
         [self.tableView reloadData];
     }];
+}
+
+
+
+- (void)configFooter
+{
+    
+    UIView * view  =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
+    
+    if (k_isLogin) {
+        UIButton * logout = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
+        logout.backgroundColor = UIColorFromRGB(0xcd1841);
+        [logout setTitle:@"退出登录" forState:UIControlStateNormal];
+        [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [logout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:logout];
+    }
+    else
+    {
+        UIButton * login = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
+        login.backgroundColor = UIColorFromRGB(0x427ec0);
+        [login setTitle:@"登录" forState:UIControlStateNormal];
+        [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [login addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:login];
+    }
+    
+    self.tableView.tableFooterView = view;
+}
+
+- (void)logout
+{
+    [AVUser logOut];
+    if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
+        [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
+    }
+    [Passport logout];
+    [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
+}
+
+- (void)login
+{
+    LoginView * view = [[LoginView alloc]init];
+    [view show];
 }
 
 @end
