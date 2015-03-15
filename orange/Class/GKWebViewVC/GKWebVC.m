@@ -47,7 +47,7 @@
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
         button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+        [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
         [button setTitle:[NSString fontAwesomeIconStringForEnum:FAEllipsisH] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(moreButtonAction) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor clearColor];
@@ -109,7 +109,7 @@
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
     [self initViews];
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    self.activityIndicator.color = UIColorFromRGB(0x427ec0);
+    self.activityIndicator.color = [UIColor grayColor];
     self.activityIndicator.center = CGPointMake(kScreenWidth/2, kScreenHeight/2-100);
     [self.view addSubview:self.activityIndicator];
 

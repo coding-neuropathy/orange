@@ -284,12 +284,12 @@
     }
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
-            [SVProgressHUD showImage:nil status:@"喜爱成功"];
+            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
         self.likeButton.selected = liked;
         self.entity.liked = liked;
         if (liked) {
-            [SVProgressHUD showImage:nil status:@"喜爱成功"];
+            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
             self.entity.likeCount = self.entity.likeCount+1;
         } else {
             self.entity.likeCount = self.entity.likeCount-1;

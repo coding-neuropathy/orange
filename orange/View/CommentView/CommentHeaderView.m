@@ -95,7 +95,7 @@
         _timeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _timeButton.layer.masksToBounds = YES;
         _timeButton.backgroundColor = [UIColor clearColor];
-        _timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        _timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         _timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         _timeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
@@ -117,6 +117,9 @@
     
     self.pokeButton.selected = self.note.poked;
     [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %lu",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+    if (self.note.pokeCount ==0) {
+        [self.pokeButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]] forState:UIControlStateNormal];
+    }
 
     [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
     
