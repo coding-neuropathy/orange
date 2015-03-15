@@ -50,11 +50,10 @@ typedef NS_ENUM(NSInteger, MessageType) {
 
 @interface MessageCell()<RTLabelDelegate>
 @property (nonatomic, assign) MessageType type;
-@property (nonatomic, strong) UIImageView *icon;
+@property (nonatomic, strong) UIImageView *avatar;
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) RTLabel *label;
-@property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIView *H;
 
 @end
@@ -68,7 +67,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
+        _H = [[UIView alloc] initWithFrame:CGRectMake(60,self.frame.size.height-1, kScreenWidth, 0.5)];
         self.H.backgroundColor = UIColorFromRGB(0xebebeb);
         [self.contentView addSubview:self.H];
     }
@@ -108,14 +107,22 @@ typedef NS_ENUM(NSInteger, MessageType) {
 {
     [super layoutSubviews];
     
-    if (!self.icon) {
-        _icon = [[UIImageView alloc] initWithFrame:CGRectMake(16.f, 13.f, 21.f, 21.f)];
-        [self.contentView addSubview:self.icon];
-        [self.icon addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    
+    if (!self.avatar) {
+        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(12.f, 12.f, 36.f, 36.f)];
+        [self.contentView addSubview:self.avatar];
+        self.avatar.backgroundColor = UIColorFromRGB(0xf6f6f6);
+        self.avatar.layer.cornerRadius = 18;
+        self.avatar.layer.masksToBounds = YES;
+        [self.avatar addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        self.avatar.userInteractionEnabled = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(avatarButtonAction)];
+        [self.avatar addGestureRecognizer:tap];
     }
     
     if(!self.label) {
-        _label = [[RTLabel alloc] initWithFrame:CGRectMake(50, 15, kScreenWidth - 70, 20)];
+        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 130, 20)];
         self.label.paragraphReplacement = @"";
         self.label.lineSpacing = 4.0;
         self.label.delegate = self;
@@ -124,20 +131,8 @@ typedef NS_ENUM(NSInteger, MessageType) {
         [self.label addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
     }
     
-    if (!self.timeLabel) {
-        _timeLabel = [[UILabel alloc] init];
-        self.timeLabel.backgroundColor = [UIColor clearColor];
-        self.timeLabel.deFrameSize = CGSizeMake(80.f, 12.f);
-        self.timeLabel.font = [UIFont systemFontOfSize:14.f];
-        self.timeLabel.textAlignment = NSTextAlignmentLeft;
-        self.timeLabel.textColor = UIColorFromRGB(0x9d9e9f);
-        [self.contentView addSubview:self.timeLabel];
-        
-        [self.timeLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-    }
-    
     if (!self.image) {
-        _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.f, 13.f, 21.f, 21.f)];
+        _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.f, 12.f, 42.f, 42.f)];
 //        [_image set]
         _image.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.image];
@@ -146,16 +141,14 @@ typedef NS_ENUM(NSInteger, MessageType) {
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
                                        initWithTarget:self action:@selector(imageButtonAction)];
         [self.image addGestureRecognizer:tap];
+        self.image.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+        self.image.layer.borderWidth = 0.5;
     }
     
     [self configContent];
     
-    self.timeLabel.deFrameBottom = self.deFrameHeight - 10.f;
-    self.timeLabel.deFrameLeft = 50;
-    NSTimeInterval timestamp = [self.message[@"time"] doubleValue];
-    self.timeLabel.text = [[NSDate dateWithTimeIntervalSince1970:timestamp] stringWithDefaultFormat];
-    
     [self bringSubviewToFront:self.H];
+    self.H.hidden = NO;
     _H.deFrameBottom = self.frame.size.height;
     
 }
@@ -164,14 +157,16 @@ typedef NS_ENUM(NSInteger, MessageType) {
 {
     NSDictionary * message = self.message;
     MessageType type = [MessageCell typeFromMessage:message];
+    NSTimeInterval timestamp = [self.message[@"time"] doubleValue];
+    NSString *time = [[NSDate dateWithTimeIntervalSince1970:timestamp] stringWithDefaultFormat];
     switch (type) {
         case MessageCommentReply:
         {
             GKComment *replying_comment = message[@"content"][@"replying_comment"];
             GKUser * user = replying_comment.creator;
             
-            self.icon.image = [UIImage imageNamed:@"message_icon_review.png"];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>回复了你的评论</font>", user.userId, user.nickname];
+            [self.avatar sd_setImageWithURL:user.avatarURL];
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>回复了你的评论</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname,time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
             break;
@@ -183,11 +178,11 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKComment *comment = message[@"content"][@"comment"];
             GKUser * user = comment.creator;
             
-            self.icon.image = [UIImage imageNamed:@"message_icon_review.png"];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>评论了你对 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 的点评</font>", user.userId, user.nickname ,note.entityId,note.title];
+            [self.avatar sd_setImageWithURL:user.avatarURL];
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>评论了你对 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 的点评</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname ,note.entityId,note.title,time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = CGRectMake(self.label.deFrameLeft, self.label.deFrameBottom+15, 80, 80);
+            self.image.frame = CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42);
             __block UIImageView *block_img = self.image;
             [self.image sd_setImageWithURL:note.entityChiefImage_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {
@@ -205,8 +200,8 @@ typedef NS_ENUM(NSInteger, MessageType) {
         {
             GKUser *user = self.message[@"content"][@"user"];
             
-            self.icon.image = [UIImage imageNamed:@"message_icon_user.png"];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>关注了你</font>", user.userId, user.nickname];
+            [self.avatar sd_setImageWithURL:user.avatarURL];
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>关注了你</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname,time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
 
             break;
@@ -217,11 +212,11 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKNote *note = message[@"content"][@"note"];
             GKUser * user = message[@"content"][@"user"];
             
-            self.icon.image = [UIImage imageNamed:@"message_icon_poke"];
-            self.label.text =  [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>赞了你对 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 的点评</font>", user.userId, user.nickname ,note.entityId,note.title];
+            [self.avatar sd_setImageWithURL:user.avatarURL];
+            self.label.text =  [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>赞了你对 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 的点评</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname ,note.entityId,note.title,time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = CGRectMake(self.label.deFrameLeft, self.label.deFrameBottom+15, 80, 80);
+            self.image.frame = CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42);
             __block UIImageView *block_img = self.image;
             [self.image sd_setImageWithURL:note.entityChiefImage_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {
@@ -240,12 +235,12 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKNote *note = message[@"content"][@"note"];
             GKUser   *user   = note.creator;
             
-            self.icon.image = [UIImage imageNamed:@"message_icon_review"];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>点评了你推荐的商品</font>", user.userId, user.nickname];
+            [self.avatar sd_setImageWithURL:user.avatarURL];
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>点评了你推荐的商品</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname,time];
             
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = CGRectMake(self.label.deFrameLeft, self.label.deFrameBottom+15, 80, 80);
+            self.image.frame = CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42);
             __block UIImageView *block_img = self.image;
             [self.image sd_setImageWithURL:note.entityChiefImage_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {
@@ -264,11 +259,11 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKEntity *entity = self.message[@"content"][@"entity"];
             GKUser   *user   = self.message[@"content"][@"user"];
             
-            self.icon.image = [UIImage imageNamed:@"message_icon_like"];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>喜爱了你推荐的商品</font>", user.userId, user.nickname];
+            [self.avatar sd_setImageWithURL:user.avatarURL];
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>喜爱了你推荐的商品</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname,time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = CGRectMake(self.label.deFrameLeft, self.label.deFrameBottom+10, 80, 80);
+            self.image.frame = CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42);
             __block UIImageView *block_img = self.image;
             [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {
@@ -286,11 +281,11 @@ typedef NS_ENUM(NSInteger, MessageType) {
         {
             GKEntity *entity = self.message[@"content"][@"entity"];
 
-            self.icon.image = [UIImage imageNamed:@"message_icon_selection"];
-            self.label.text = [NSString stringWithFormat:@"<font face=\'Helvetica\' color=\'^414243\' size=14>你添加的商品被收录精选</font>"];
+            self.avatar.image = [UIImage imageNamed:@"message_avatar_selection"];
+            self.label.text = [NSString stringWithFormat:@"<font face=\'Helvetica\' color=\'^414243\' size=14>你添加的商品被收录精选</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = CGRectMake(self.label.deFrameLeft, self.label.deFrameBottom+15, 80, 80);
+            self.image.frame = CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42);
             __block UIImageView *block_img = self.image;
             [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {
@@ -308,11 +303,13 @@ typedef NS_ENUM(NSInteger, MessageType) {
           
             break;
     }
+    
+    self.avatar.hidden = NO;
 }
 
 - (void)dealloc
 {
-    [self.icon removeObserver:self forKeyPath:@"image"];
+    [self.avatar removeObserver:self forKeyPath:@"image"];
     [self.label removeObserver:self forKeyPath:@"text"];
     [self.image removeObserver:self forKeyPath:@"image"];
 
@@ -374,11 +371,12 @@ typedef NS_ENUM(NSInteger, MessageType) {
 {
     CGFloat height;
     
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -130, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 4.0;
     
-    
+    NSTimeInterval timestamp = [message[@"time"] doubleValue];
+    NSString *time = [[NSDate dateWithTimeIntervalSince1970:timestamp] stringWithDefaultFormat];
     
     MessageType type = [MessageCell typeFromMessage:message];
     switch (type) {
@@ -386,7 +384,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         {
             GKComment *replying_comment = message[@"content"][@"replying_comment"];
             GKUser * user = replying_comment.creator;
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>回复了你的评论</font>", user.userId, user.nickname];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>回复了你的评论</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname,time];
             CGFloat y = label.optimumSize.height + 5.f;
             /*
             RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
@@ -396,7 +394,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             y = label.optimumSize.height + 5.f + y;
             */
             
-            height = y + 40;
+            height = y;
             break;
         }
             // 点评被评论
@@ -405,7 +403,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKNote *note = message[@"content"][@"note"];
             GKComment *comment = message[@"content"][@"comment"];
             GKUser * user = comment.creator;
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>评论了你对 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 的点评</font>", user.userId, user.nickname ,note.entityId,note.title];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>评论了你对 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 的点评</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname ,note.entityId,note.title,time];
             CGFloat y = label.optimumSize.height + 5.f;
             
             /*
@@ -416,7 +414,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             y = label.optimumSize.height + 5.f + y;
              */
             
-            height = y + 150;
+            height = y;
             break;
         }
             
@@ -430,31 +428,31 @@ typedef NS_ENUM(NSInteger, MessageType) {
         {
             GKNote *note = message[@"content"][@"note"];
             GKUser * user = message[@"content"][@"user"];
-            label.text =  [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>赞了你对 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 的点评</font>", user.userId, user.nickname ,note.entityId,note.title];
+            label.text =  [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>赞了你对 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 的点评</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname ,note.entityId,note.title,time];
             CGFloat y = label.optimumSize.height + 5.f;
-            height = 160 + y;
+            height = y;
             break;
         }
             //商品被点评
         case MessageEntityNote:
         {
             GKNote *note = message[@"content"][@"note"];
-            label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", note.text];
+            label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", note.text,time];
             CGFloat y = label.optimumSize.height + 5.f;
-            height = 160 + y;
+            height = y;
             break;
         }
             
         case MessageEntityLike:
         {
-            height = 160;
+            height = 60;
             break;
         }
             
         case MessageNoteSelection:
         {
             
-            height = 150;
+            height = 60;
             break;
         }
             
@@ -463,14 +461,16 @@ typedef NS_ENUM(NSInteger, MessageType) {
             break;
     }
     
-    return height;
+    if (height < 40) {
+        height = 40;
+    }
+    return height+20;
 }
 
 - (void)avatarButtonAction
 {
     NSDictionary * message = self.message;
     GKNote *note = message[@"content"][@"note"];
-    //GKEntity *entity = feed[@"content"][@"entity"];
     UserViewController * VC = [[UserViewController alloc]init];
     VC.user = note.creator;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
