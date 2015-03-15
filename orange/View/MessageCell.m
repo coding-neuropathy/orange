@@ -395,6 +395,9 @@ typedef NS_ENUM(NSInteger, MessageType) {
             */
             
             height = y;
+            if (height < 40) {
+                height = 40;
+            }
             break;
         }
             // 点评被评论
@@ -415,12 +418,15 @@ typedef NS_ENUM(NSInteger, MessageType) {
              */
             
             height = y;
+            if (height < 40) {
+                height = 40;
+            }
             break;
         }
             
         case MessageUserFollow:
         {
-            height = 65.f;
+            height = 26.f;
             break;
         }
             //赞
@@ -431,6 +437,9 @@ typedef NS_ENUM(NSInteger, MessageType) {
             label.text =  [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>赞了你对 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 的点评</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname ,note.entityId,note.title,time];
             CGFloat y = label.optimumSize.height + 5.f;
             height = y;
+            if (height < 40) {
+                height = 40;
+            }
             break;
         }
             //商品被点评
@@ -440,19 +449,28 @@ typedef NS_ENUM(NSInteger, MessageType) {
             label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", note.text,time];
             CGFloat y = label.optimumSize.height + 5.f;
             height = y;
+            if (height < 40) {
+                height = 40;
+            }
             break;
         }
             
         case MessageEntityLike:
         {
-            height = 60;
+            GKUser * user = message[@"content"][@"user"];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>喜爱了你推荐的商品</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname,time];
+            CGFloat y =  label.optimumSize.height + 5.f;
+            height = y;
+            if (height < 40) {
+                height = 40;
+            }
             break;
         }
             
         case MessageNoteSelection:
         {
             
-            height = 60;
+            height = 26;
             break;
         }
             
@@ -461,10 +479,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             break;
     }
     
-    if (height < 40) {
-        height = 40;
-    }
-    return height+20;
+    return height+24;
 }
 
 - (void)avatarButtonAction
