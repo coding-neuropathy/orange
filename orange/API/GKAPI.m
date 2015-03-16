@@ -2117,7 +2117,7 @@
     NSParameterAssert(noteId > 0);
     NSParameterAssert(comment);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/report/", noteId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%lu/report/", noteId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:comment forKey:@"comment"];

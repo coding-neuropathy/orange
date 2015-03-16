@@ -33,4 +33,17 @@
  */
 @property (nonatomic, assign) NSInteger volume;
 
+/**
+ * 来源商品 ID
+ */
+
+@property (nonatomic, strong) NSString * origin_id;
+
+/*
+ * 来源
+ */
+
+@property (nonatomic, strong) NSString * source;
+
+
 @end

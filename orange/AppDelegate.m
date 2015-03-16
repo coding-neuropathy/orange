@@ -32,10 +32,27 @@
     
     [WXApi registerApp:kGK_WeixinShareKey];
     
+    [[TaeSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
+    [[TaeSDK sharedInstance] setAppVersion:@"4.0.0"];
+    [[TaeSDK sharedInstance] setDebugLogOpen:YES];
+    //sdk初始化
+    [[TaeSDK sharedInstance] asyncInit:^{
+        NSLog(@"初始化成功");
+    } failedCallback:^(NSError *error) {
+        NSLog(@"初始化失败:%@",error);
+    }];
+    
+    [[TaeSDK sharedInstance] setSessionStateChangedHandler:^(TaeSession *session) {
+        if([session isLogin]){//未登录变为已登录
+            NSLog(@"用户login");
+        }else{//已登录变为未登录
+            NSLog(@"用户logout");
+            
+        }
+    }];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self customizeAppearance];
-    
-
 
     // Override point for customization after application launch.
     
@@ -105,7 +122,7 @@
         [[NSNotificationCenter defaultCenter]postNotificationName:@"Save" object:nil userInfo:nil];
 }
 
--(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
     if([[url absoluteString]hasPrefix:@"wx"])
     {
         return [WXApi handleOpenURL:url delegate:self];
@@ -184,6 +201,8 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    NSLog(@"url url %@", url);
+    
     if([[url absoluteString]hasPrefix:@"wx"])
     {
         return [WXApi handleOpenURL:url delegate:self];
@@ -191,6 +210,10 @@
     if([[url absoluteString]hasPrefix:@"sinaweibosso"])
     {
         return [AVOSCloudSNS handleOpenURL:url];
+    }
+    
+    if ([[url absoluteString] hasPrefix:@"tbopen23093827"]) {
+        return [[TaeSDK sharedInstance] handleOpenURL:url];
     }
     
     if([[url absoluteString]hasPrefix:@"guoku"])

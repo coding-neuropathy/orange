@@ -44,6 +44,11 @@
 #define kGK_WeixinShareURL @"http://www.guoku.com/detail/"  //apisent
 #endif
 
+//taobaoke
+#ifndef kGK_TaobaoKe_PID
+#define kGK_TaobaoKe_PID @"mm_28514026_4132785_24810648"
+#endif
+
 // Display
 // Screen Height
 #ifndef kScreenHeight

@@ -17,6 +17,8 @@
                              @"buy_link"     : @"buyLink",
                              @"price"        : @"lowestPrice",
                              @"volume"       : @"volume",
+                             @"origin_id"    : @"origin_id",
+                             @"origin_source": @"source",
                              };
     
     return keyDic;

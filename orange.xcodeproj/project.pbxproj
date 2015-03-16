@@ -1175,6 +1175,17 @@
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
 		B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */; };
 		B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */; };
+		B7AAFA761AB7033600A2F20D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA751AB7033600A2F20D /* CFNetwork.framework */; };
+		B7AAFA781AB7036700A2F20D /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA771AB7036700A2F20D /* libstdc++.6.0.9.dylib */; };
+		B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA791AB7039600A2F20D /* Foundation.framework */; };
+		B7AAFA851AB7071D00A2F20D /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7AAFA7D1AB7071D00A2F20D /* AlipaySDK.bundle */; };
+		B7AAFA861AB7071D00A2F20D /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA7E1AB7071D00A2F20D /* AlipaySDK.framework */; };
+		B7AAFA891AB7071D00A2F20D /* CloudPushSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA811AB7071D00A2F20D /* CloudPushSDK.framework */; };
+		B7AAFA8A1AB7071D00A2F20D /* TAESDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA821AB7071D00A2F20D /* TAESDK.framework */; };
+		B7AAFA8B1AB7071D00A2F20D /* TAETopSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA831AB7071D00A2F20D /* TAETopSDK.framework */; };
+		B7AAFA8C1AB7071D00A2F20D /* TaeUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA841AB7071D00A2F20D /* TaeUT.framework */; };
+		B7AAFA8E1AB7078F00A2F20D /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B7AAFA8D1AB7078F00A2F20D /* yw_1222.jpg */; };
+		B7AAFA901AB70CA500A2F20D /* Tae.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7AAFA8F1AB70CA500A2F20D /* Tae.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2542,6 +2553,18 @@
 		B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadioButton.m; path = RadioButton/RadioButton.m; sourceTree = "<group>"; };
 		B7AAFA611AB69DD200A2F20D /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
+		B7AAFA751AB7033600A2F20D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		B7AAFA771AB7036700A2F20D /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		B7AAFA791AB7039600A2F20D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B7AAFA7D1AB7071D00A2F20D /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		B7AAFA7E1AB7071D00A2F20D /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		B7AAFA811AB7071D00A2F20D /* CloudPushSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CloudPushSDK.framework; sourceTree = "<group>"; };
+		B7AAFA821AB7071D00A2F20D /* TAESDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TAESDK.framework; sourceTree = "<group>"; };
+		B7AAFA831AB7071D00A2F20D /* TAETopSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TAETopSDK.framework; sourceTree = "<group>"; };
+		B7AAFA841AB7071D00A2F20D /* TaeUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TaeUT.framework; sourceTree = "<group>"; };
+		B7AAFA8D1AB7078F00A2F20D /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = yw_1222.jpg; path = orange/ThirdParty/yw_1222.jpg; sourceTree = "<group>"; };
+		B7AAFA8F1AB70CA500A2F20D /* Tae.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Tae.bundle; sourceTree = "<group>"; };
+		B7AAFA921AB715AB00A2F20D /* TaeConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaeConstant.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2549,6 +2572,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7AAFA8B1AB7071D00A2F20D /* TAETopSDK.framework in Frameworks */,
+				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
+				B7AAFA781AB7036700A2F20D /* libstdc++.6.0.9.dylib in Frameworks */,
+				B7AAFA761AB7033600A2F20D /* CFNetwork.framework in Frameworks */,
 				4E8D6AAC1A3B441000156C17 /* libc++.dylib in Frameworks */,
 				4E8D6AAA1A3B433500156C17 /* libsqlite3.0.dylib in Frameworks */,
 				4E8D6AA81A3B432700156C17 /* libz.dylib in Frameworks */,
@@ -2557,12 +2584,16 @@
 				4E56DFCB19D5B83B00263B17 /* CoreFoundation.framework in Frameworks */,
 				4E56DFCC19D5B83B00263B17 /* CoreGraphics.framework in Frameworks */,
 				4E56DFC819D5B82900263B17 /* UIKit.framework in Frameworks */,
+				B7AAFA8A1AB7071D00A2F20D /* TAESDK.framework in Frameworks */,
 				4E56DFC519D5AF3300263B17 /* libicucore.dylib in Frameworks */,
 				4E56DFC319D5AF1E00263B17 /* SystemConfiguration.framework in Frameworks */,
 				4E1D28141A0FBC2B00740C17 /* AVOSCloudSNS.framework in Frameworks */,
+				B7AAFA861AB7071D00A2F20D /* AlipaySDK.framework in Frameworks */,
 				4E56DFC119D5AF1400263B17 /* MobileCoreServices.framework in Frameworks */,
 				4E56DFBF19D5AF0900263B17 /* Security.framework in Frameworks */,
+				B7AAFA891AB7071D00A2F20D /* CloudPushSDK.framework in Frameworks */,
 				4E56DFBD19D5AF0000263B17 /* CoreLocation.framework in Frameworks */,
+				B7AAFA8C1AB7071D00A2F20D /* TaeUT.framework in Frameworks */,
 				4E56DFB919D5AEF300263B17 /* CoreMotion.framework in Frameworks */,
 				4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */,
 				4E56DF7919D56EF500263B17 /* AVOSCloud.framework in Frameworks */,
@@ -3257,9 +3288,7 @@
 		4E56DF0C19D552C000263B17 = {
 			isa = PBXGroup;
 			children = (
-				4E8D6AAB1A3B441000156C17 /* libc++.dylib */,
-				4E8D6AA91A3B433500156C17 /* libsqlite3.0.dylib */,
-				4E8D6AA71A3B432700156C17 /* libz.dylib */,
+				B7AAFA8D1AB7078F00A2F20D /* yw_1222.jpg */,
 				4E56DF1719D552C000263B17 /* orange */,
 				4E56DF1619D552C000263B17 /* Products */,
 			);
@@ -3281,6 +3310,7 @@
 				4E3A232B1A51A7C500037F9C /* Core */,
 				4E56DFCF19D5BB3A00263B17 /* Class */,
 				4E56DF9119D570DA00263B17 /* Config.h */,
+				B7AAFA921AB715AB00A2F20D /* TaeConstant.h */,
 				4E56DF1C19D552C000263B17 /* AppDelegate.h */,
 				4E56DF1D19D552C000263B17 /* AppDelegate.m */,
 				4E56DF2519D552C000263B17 /* Images.xcassets */,
@@ -3304,6 +3334,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				B7AAFA741AB6FE1400A2F20D /* TaeSDK */,
 				4E1C36561AB429FE00EA2F00 /* GTScrollNavigationBar */,
 				4E3C41381A9FFBEB0053DB5E /* IBActionSheet */,
 				4EA0C4511A82810D0025EC2E /* Taobao */,
@@ -3432,6 +3463,12 @@
 		4E56DFC619D5AF5600263B17 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				B7AAFA791AB7039600A2F20D /* Foundation.framework */,
+				B7AAFA771AB7036700A2F20D /* libstdc++.6.0.9.dylib */,
+				B7AAFA751AB7033600A2F20D /* CFNetwork.framework */,
+				4E8D6AAB1A3B441000156C17 /* libc++.dylib */,
+				4E8D6AA91A3B433500156C17 /* libsqlite3.0.dylib */,
+				4E8D6AA71A3B432700156C17 /* libz.dylib */,
 				4E56DFCD19D5B84300263B17 /* QuartzCore.framework */,
 				4E56DFC919D5B83B00263B17 /* CoreFoundation.framework */,
 				4E56DFCA19D5B83B00263B17 /* CoreGraphics.framework */,
@@ -4585,6 +4622,20 @@
 			path = UIPlaceHolderTextView;
 			sourceTree = "<group>";
 		};
+		B7AAFA741AB6FE1400A2F20D /* TaeSDK */ = {
+			isa = PBXGroup;
+			children = (
+				B7AAFA8F1AB70CA500A2F20D /* Tae.bundle */,
+				B7AAFA7D1AB7071D00A2F20D /* AlipaySDK.bundle */,
+				B7AAFA7E1AB7071D00A2F20D /* AlipaySDK.framework */,
+				B7AAFA811AB7071D00A2F20D /* CloudPushSDK.framework */,
+				B7AAFA821AB7071D00A2F20D /* TAESDK.framework */,
+				B7AAFA831AB7071D00A2F20D /* TAETopSDK.framework */,
+				B7AAFA841AB7071D00A2F20D /* TaeUT.framework */,
+			);
+			name = TaeSDK;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4661,6 +4712,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7AAFA8E1AB7078F00A2F20D /* yw_1222.jpg in Resources */,
 				4EAA466019E03BA60098C9E0 /* 1F3C7.png in Resources */,
 				4E1D28C31A125B9300740C17 /* JSQMessagesViewController.xib in Resources */,
 				4EAA45DB19E03BA60098C9E0 /* 1F331.png in Resources */,
@@ -4758,6 +4810,7 @@
 				4EAA476119E03BA70098C9E0 /* 1F4EE.png in Resources */,
 				4EAA476219E03BA70098C9E0 /* 1F4EF.png in Resources */,
 				4EAA47AE19E03BA70098C9E0 /* 1F551.png in Resources */,
+				B7AAFA851AB7071D00A2F20D /* AlipaySDK.bundle in Resources */,
 				4EAA478B19E03BA70098C9E0 /* 1F51C.png in Resources */,
 				4EAA472D19E03BA70098C9E0 /* 1F4BA.png in Resources */,
 				4EAA48B419E03BA80098C9E0 /* 2747.png in Resources */,
@@ -4947,6 +5000,7 @@
 				4EAA47E819E03BA70098C9E0 /* 1F61E.png in Resources */,
 				4EAA46AA19E03BA60098C9E0 /* 1F435.png in Resources */,
 				4EAA46D819E03BA60098C9E0 /* 1F465.png in Resources */,
+				B7AAFA901AB70CA500A2F20D /* Tae.bundle in Resources */,
 				4EAA45CD19E03BA60098C9E0 /* 1F314.png in Resources */,
 				4EAA475D19E03BA70098C9E0 /* 1F4EA.png in Resources */,
 				4EAA464B19E03BA60098C9E0 /* 1F3B1.png in Resources */,
@@ -5952,7 +6006,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lstdc++",
+				);
 				PRODUCT_NAME = orange;
 				PROVISIONING_PROFILE = "";
 			};
@@ -5979,7 +6036,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lstdc++",
+				);
 				PRODUCT_NAME = orange;
 				PROVISIONING_PROFILE = "";
 			};

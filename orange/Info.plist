@@ -50,6 +50,16 @@
 				<string>guoku</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.taobao.taesdk</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tbopen23093827</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>4005</string>

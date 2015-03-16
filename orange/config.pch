@@ -12,6 +12,7 @@
 #ifdef __OBJC__
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <TAESDK/TaeSDK.h>
 
 // AFNetworking
 #import <SystemConfiguration/SystemConfiguration.h>
@@ -68,13 +69,6 @@
 #import "GKUser.h"
 #import "GKComment.h"
 #import "GKEntityCategory.h"
-
-
-
-
-
-
-
 
 
 #endif

@@ -19,6 +19,7 @@
 #import "LoginView.h"
 #import "IBActionSheet.h"
 #import "EntityHeaderView.h"
+#import "TaeConstant.h"
 
 
 static NSString *NoteCellIdentifier = @"NoteCell";
@@ -40,9 +41,25 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 @property (nonatomic, strong) NSMutableArray *dataArrayForlikeUser;
 @property (nonatomic, strong) NSMutableArray *dataArrayForNote;
 @property (nonatomic, strong) NSMutableArray *dataArrayForRecommend;
+
+@property (nonatomic) OneSDKItemType itemType;
+
 @end
 
 @implementation EntityViewController
+{
+    tradeProcessSuccessCallback _tradeProcessSuccessCallback;
+    tradeProcessFailedCallback _tradeProcessFailedCallback;
+}
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.itemType = OneSDKItemType_TAOBAO1;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -563,9 +580,23 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 
 - (void)buyButtonAction
 {
+//    NSLog(@"%@", self.entity.purchaseArray);
+
+    
     if (self.entity.purchaseArray.count >0) {
         GKPurchase * purchase = self.entity.purchaseArray[0];
-        [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
+        NSLog(@"%@ %@", purchase.origin_id, purchase.source);
+        if ([purchase.source isEqualToString:@"taobao.com"])
+        {
+            NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
+            [[TaeSDK sharedInstance] showItemDetailByItemId:self isNeedPush:NO webViewUISettings:nil itemId:_itemId itemType:1 params:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+//            TaeTaokeParams *taoKeParams = [[TaeTaokeParams alloc] init];
+//            taoKeParams.pid = kGK_TaobaoKe_PID;
+//            [[TaeSDK sharedInstance] showTaoKeItemDetailByItemId:self isNeedPush:YES webViewUISettings:nil itemId:_itemId itemType:1 params:nil taoKeParams:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+        }
+        else
+
+            [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
     }
 }
 
