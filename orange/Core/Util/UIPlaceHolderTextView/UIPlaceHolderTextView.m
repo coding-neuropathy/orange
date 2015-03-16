@@ -40,7 +40,7 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UITextViewTextDidChangeNotification];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UITextViewTextDidChangeNotification];
 }
 
 - (UILabel *)placeholdeLabel

@@ -2070,17 +2070,20 @@
  *  @param failure  失败block
  */
 + (void)reportEntityId:(NSString *)entityId
+                  type:(NSInteger)type
                comment:(NSString *)comment
                success:(void (^)(BOOL success))success
                failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(entityId);
     NSParameterAssert(comment);
+//    NSParameterAssert(type);
     
     NSString *path = [NSString stringWithFormat:@"entity/%@/report/", entityId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:comment forKey:@"comment"];
+    [paraDict setObject:[NSNumber numberWithInteger:type] forKey:@"type"];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;

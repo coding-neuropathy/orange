@@ -12,11 +12,14 @@
 #import "UIPlaceHolderTextView.h"
 
 static CGFloat NormalKeyboardHeight = 216.0f;
+static CGFloat LeftMargin = 16.;
+
 @interface ReportViewController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIPlaceHolderTextView *textView;
 //@property (nonatomic, strong) UIView *inputBG;
 @property (nonatomic, strong) UILabel *tipLabel;
 @property (nonatomic, strong) UILabel * radioTipLabel;
+@property (nonatomic) NSInteger radioType;
 //@property (nonatomic, strong) UIla
 
 @end
@@ -80,7 +83,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
 - (void)CreateReasonButtons
 {
     NSMutableArray* buttons = [NSMutableArray arrayWithCapacity:4];
-    CGRect btnRect = CGRectMake(10., 60., kScreenWidth - 20., 50);
+    CGRect btnRect = CGRectMake(LeftMargin, 60., kScreenWidth - LeftMargin * 2, 50);
     for (NSString* optionTitle in @[@"商品下架", @"分类错误", @"垃圾或诈骗信息", @"不良内容"]) {
         RadioButton* btn = [[RadioButton alloc] initWithFrame:btnRect];
         [btn addTarget:self action:@selector(onRadioButtonValueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -110,13 +113,13 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
     
     [self CreateReasonButtons];
-    self.radioTipLabel.frame = CGRectMake(10., 10, kScreenWidth - 20, 50.);
+    self.radioTipLabel.frame = CGRectMake(LeftMargin , 10, kScreenWidth - LeftMargin * 2, 50.);
     self.radioTipLabel.text = @"请选择举报原因:";
     
-    self.tipLabel.frame = CGRectMake(10., 270., kScreenWidth - 20, 50.);
+    self.tipLabel.frame = CGRectMake(LeftMargin, 270., kScreenWidth - LeftMargin* 2, 50.);
     self.tipLabel.text = @"补充说明:";
     
-    self.textView.frame = CGRectMake(10., 320., kScreenWidth-20, kScreenHeight - NormalKeyboardHeight- 180 - 40);
+    self.textView.frame = CGRectMake(LeftMargin, 320., kScreenWidth-LeftMargin*2, kScreenHeight - NormalKeyboardHeight- 180 - 40);
     self.textView.placeholder = @"举报原因";
     
 }
@@ -205,7 +208,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
         }];
     }
     else if (self.entity) {
-        [GKAPI reportEntityId:self.entity.entityId comment:comment success:^(BOOL success) {
+        [GKAPI reportEntityId:self.entity.entityId type:self.radioType comment:comment success:^(BOOL success) {
             if (success) {
                 [self.navigationController popViewControllerAnimated:YES];
                 [SVProgressHUD showImage:nil status:@"举报成功"];
@@ -225,6 +228,9 @@ static CGFloat NormalKeyboardHeight = 216.0f;
 {
 //    NSLog(@"button %@", sender);
     if(sender.selected) {
+        if ([sender.titleLabel.text isEqualToString:@"商品下架"]) {
+            self.radioType = 0;
+        }
         NSLog(@"Selected color: %@", sender.titleLabel.text);
     }
 }

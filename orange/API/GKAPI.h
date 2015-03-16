@@ -642,6 +642,7 @@
  *  @param failure  失败block
  */
 + (void)reportEntityId:(NSString *)entityId
+               type:(NSInteger)type
                comment:(NSString *)comment
                success:(void (^)(BOOL success))success
                failure:(void (^)(NSInteger stateCode))failure;
