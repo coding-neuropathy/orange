@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         _timeLabel = [[UILabel alloc] init];
         self.timeLabel.backgroundColor = [UIColor clearColor];
         self.timeLabel.deFrameSize = CGSizeMake(80.f, 12.f);
-        self.timeLabel.font = [UIFont systemFontOfSize:14.f];
+        self.timeLabel.font = [UIFont systemFontOfSize:12.f];
         self.timeLabel.textAlignment = NSTextAlignmentLeft;
         self.timeLabel.textColor = UIColorFromRGB(0x9d9e9f);
         [self.contentView addSubview:self.timeLabel];

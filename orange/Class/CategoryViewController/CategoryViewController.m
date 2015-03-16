@@ -17,7 +17,7 @@
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property(nonatomic, strong) NSMutableArray * dataArrayForLike;
 @property(nonatomic, assign) NSUInteger index;
-@property(nonatomic, strong) HMSegmentedControl *segmentedControl;
+@property(nonatomic, strong) UIView *segmentedControl;
 @end
 
 @implementation CategoryViewController
@@ -109,7 +109,7 @@
 #pragma mark - Data
 - (void)refresh
 {
-    if (self.index == 0) {
+    if (self.index == 1) {
         [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"like" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
@@ -120,7 +120,7 @@
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
-    else if (self.index == 1)
+    else if (self.index == 0)
     {
         [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"like" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
@@ -148,7 +148,7 @@
 }
 - (void)loadMore
 {
-    if (self.index == 0) {
+    if (self.index == 1) {
         [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
             [self.dataArrayForEntity addObjectsFromArray:entityArray];
             [self.tableView reloadData];
@@ -159,7 +159,7 @@
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
-    else if (self.index == 1)
+    else if (self.index == 0)
     {
         [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
             [self.dataArrayForEntity addObjectsFromArray:entityArray];
@@ -206,10 +206,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-        if (self.index == 1) {
+        if (self.index == 0) {
             return ceil(self.dataArrayForEntity.count / (CGFloat)3);
         }
-        else if (self.index == 0)
+        else if (self.index == 1)
         {
             return ceil(self.dataArrayForEntity.count / (CGFloat)1);
         }
@@ -223,7 +223,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.index == 0)
+    if (self.index == 1)
     {
         static NSString *CellIdentifier = @"EntitySingleListCell";
         EntitySingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -233,14 +233,14 @@
         cell.entity = [self.dataArrayForEntity objectAtIndex:indexPath.row];
         return cell;
     }
-    else if (self.index == 1)
+    else if (self.index == 0)
     {
         static NSString *CellIdentifier = @"EntityCell";
         EntityThreeGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
             cell = [[EntityThreeGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        
+        cell.backgroundColor = UIColorFromRGB(0xf8f8f8);
         NSArray *entityArray = self.dataArrayForEntity;
         NSMutableArray *array = [[NSMutableArray alloc] init];
         NSUInteger offset = indexPath.row * 3;
@@ -269,10 +269,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        if (self.index == 1) {
+        if (self.index == 0) {
             return [EntityThreeGridCell height];
         }
-        else if (self.index == 0)
+        else if (self.index == 1)
         {
             return [EntitySingleListCell height];
         }
@@ -292,30 +292,66 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (!self.segmentedControl) {
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-        [segmentedControl setSectionTitles:@[@"单列", @"三栏",@"我喜爱的"]];
-        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-        [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
-        [segmentedControl setSelectionIndicatorHeight:2.5];
-        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-  
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+        view.backgroundColor = UIColorFromRGB(0xffffff);
         {
-            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/3,44/2-7, 1,14 )];
-            V.backgroundColor = UIColorFromRGB(0xebebeb);
-            [segmentedControl addSubview:V];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 44)];
+            button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+            button.titleLabel.textAlignment = NSTextAlignmentCenter;
+            [button setImage:[UIImage imageNamed:@"icon_grid"] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:@"icon_grid_press"] forState:UIControlStateSelected];
+            [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+            [button setTitle:@"" forState:UIControlStateNormal];
+            [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+            [button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
+            button.tag = 0;
+            button.selected = YES;
+            button.backgroundColor = [UIColor clearColor];
+            [view addSubview:button];
         }
         {
-            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth*2/3,44/2-7, 1,14 )];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(90, 0, 90, 44)];
+            button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+            button.titleLabel.textAlignment = NSTextAlignmentCenter;
+            [button setImage:[UIImage imageNamed:@"icon_list"] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:@"icon_list_press"] forState:UIControlStateSelected];
+            [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+            [button setTitle:@"" forState:UIControlStateNormal];
+            [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+            [button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
+            button.tag = 1;
+            button.backgroundColor = [UIColor clearColor];
+            [view addSubview:button];
+        }
+
+        {
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(180, 0, kScreenWidth-180, 44)];
+            button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+            button.titleLabel.textAlignment = NSTextAlignmentCenter;
+            [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+            [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+            [button setTitleColor:UIColorFromRGB(0xDB1F77) forState:UIControlStateSelected];
+            [button setTitle:@"我喜爱的商品" forState:UIControlStateNormal];
+            [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+            [button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
+            button.tag = 2;
+            button.backgroundColor = [UIColor clearColor];
+            [view addSubview:button];
+        }
+        {
+            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(90,44/2-7, 1,14 )];
             V.backgroundColor = UIColorFromRGB(0xebebeb);
-            [segmentedControl addSubview:V];
+            [view addSubview:V];
+        }
+        {
+            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(180,44/2-7, 1,14 )];
+            V.backgroundColor = UIColorFromRGB(0xebebeb);
+            [view addSubview:V];
         }
         
-        self.segmentedControl = segmentedControl;
+        
+        self.segmentedControl = view;
 
         
         {
@@ -334,9 +370,16 @@
 
 
 #pragma mark - HMSegmentedControl
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-    NSUInteger index = segmentedControl.selectedSegmentIndex;
+- (void)segmentedControlChangedValue:(UIButton *)segmentedControl {
+    NSUInteger index = segmentedControl.tag;
     self.index = index;
+    for (UIButton * button in self.segmentedControl.subviews) {
+        if ([button isKindOfClass:[UIButton class]]) {
+            button.selected = NO;
+        }
+    }
+    
+    segmentedControl.selected = YES;
     [self.tableView reloadData];
     switch (index) {
         case 0:

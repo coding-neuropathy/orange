@@ -91,24 +91,15 @@
         [self.contentView addSubview:self.image];
     }
     __block UIImageView *block_img = self.image;
-    __block UIImageView *tmp_img = self.tmp;
     __weak __typeof(&*self)weakSelf = self;
     {
         [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
-            tmp_img = [[UIImageView alloc]initWithImage:image];
-            if (tmp_img.frame.size.width<280&&tmp_img.frame.size.height<280) {
-                block_img.contentMode = UIViewContentModeCenter;
-            }
-            else
-            {
-                block_img.contentMode = UIViewContentModeScaleAspectFit;
-            }
-            if (image && cacheType == SDImageCacheTypeNone) {
-
-            }
+           
+            UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
+            block_img.contentMode = UIViewContentModeCenter;
+            block_img.image = newimage;
             [weakSelf.activityIndicator stopAnimating];
             weakSelf.activityIndicator.hidden = YES;
-
         }];
     }
     
@@ -178,8 +169,9 @@
         [self.contentView addSubview:self.timeButton];
     }
     [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.date stringWithDefaultFormat]] forState:UIControlStateNormal];
+    self.timeButton.center = self.likeButton.center;
     self.timeButton.deFrameRight = self.contentLabel.deFrameRight;
-    self.timeButton.deFrameTop = self.contentLabel.deFrameBottom+16;
+   
     
     [self bringSubviewToFront:self.H];
     _H.deFrameBottom = self.frame.size.height-5;
@@ -250,12 +242,12 @@
     }
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
-            [SVProgressHUD showImage:nil status:@"喜爱成功"];
+            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
         self.likeButton.selected = liked;
         self.entity.liked = liked;
         if (liked) {
-            [SVProgressHUD showImage:nil status:@"喜爱成功"];
+            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
             self.entity.likeCount = self.entity.likeCount+1;
         } else {
             self.entity.likeCount = self.entity.likeCount-1;

@@ -170,7 +170,7 @@
     if ([_entity.imageURLArray count] > 0) {
         
         self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
-        self.pageCtr.center = CGPointMake(self.scrollView.frame.size.width / 2., self.scrollView.frame.size.height + 30.);
+        self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.scrollView.frame.size.height + 30.);
         self.pageCtr.bounds = CGRectMake(0.0, 0.0, 32 * (_pageCtr.numberOfPages - 1) + 32, 32);
         self.pageCtr.hidden = NO;
     }

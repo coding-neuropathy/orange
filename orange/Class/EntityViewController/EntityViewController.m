@@ -88,7 +88,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight -kNavigationBarHeight - kStatusBarHeight);
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStyleGrouped];
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundView = nil;
@@ -100,7 +100,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     [self.tableView registerClass:[EntityThreeGridCell class] forCellReuseIdentifier:EntityCellIdentifier];
     [self.view addSubview:self.tableView];
     
-    
+
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     
     UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
@@ -502,12 +502,12 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     }
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
-            [SVProgressHUD showImage:nil status:@"喜爱成功"];
+            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
         self.likeButton.selected = liked;
         self.entity.liked = liked;
         if (liked) {
-            [SVProgressHUD showImage:nil status:@"喜爱成功"];
+            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
             self.entity.likeCount = self.entity.likeCount+1;
         } else {
             self.entity.likeCount = self.entity.likeCount-1;
