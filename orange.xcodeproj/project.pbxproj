@@ -1173,6 +1173,8 @@
 		B749632A1AB15E9000C340FB /* EntityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B74963291AB15E9000C340FB /* EntityHeaderView.m */; };
 		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
+		B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */; };
+		B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2536,6 +2538,10 @@
 		B749632D1AB28A6C00C340FB /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentHeaderView.m; path = CommentView/CommentHeaderView.m; sourceTree = "<group>"; };
 		B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = DiscoverView/DiscoverHeaderView.h; sourceTree = "<group>"; };
 		B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverHeaderView.m; path = DiscoverView/DiscoverHeaderView.m; sourceTree = "<group>"; };
+		B7AAFA5D1AB67E5600A2F20D /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioButton.h; path = RadioButton/RadioButton.h; sourceTree = "<group>"; };
+		B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadioButton.m; path = RadioButton/RadioButton.m; sourceTree = "<group>"; };
+		B7AAFA611AB69DD200A2F20D /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3209,6 +3215,8 @@
 		4E3A23791A52EC9600037F9C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				B7AAFA601AB69DD200A2F20D /* UIPlaceHolderTextView */,
+				B7AAFA5C1AB67E2300A2F20D /* RadioButton */,
 				B74266DA1AB3DFE10064A010 /* AutoScroll */,
 				4E3A237E1A52EC9600037F9C /* KeyAndTag.h */,
 				4E3A237F1A52EC9600037F9C /* Passport.h */,
@@ -4559,6 +4567,24 @@
 			name = DiscoverView;
 			sourceTree = "<group>";
 		};
+		B7AAFA5C1AB67E2300A2F20D /* RadioButton */ = {
+			isa = PBXGroup;
+			children = (
+				B7AAFA5D1AB67E5600A2F20D /* RadioButton.h */,
+				B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */,
+			);
+			name = RadioButton;
+			sourceTree = "<group>";
+		};
+		B7AAFA601AB69DD200A2F20D /* UIPlaceHolderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				B7AAFA611AB69DD200A2F20D /* UIPlaceHolderTextView.h */,
+				B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */,
+			);
+			path = UIPlaceHolderTextView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -5722,6 +5748,7 @@
 				4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */,
 				4E1D28BD1A125B9300740C17 /* UIColor+JSQMessages.m in Sources */,
 				4E56DF8319D56EF500263B17 /* SDWebImageDecoder.m in Sources */,
+				B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				4E1D28BC1A125B9300740C17 /* NSString+JSQMessages.m in Sources */,
 				4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */,
@@ -5750,6 +5777,7 @@
 				4E3A23611A51AE8300037F9C /* AFHTTPRequestOperation.m in Sources */,
 				4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */,
 				4E3A23641A51AE8300037F9C /* AFJSONRequestOperation.m in Sources */,
+				B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */,
 				4E1D312D1A1A46AD00740C17 /* AGEmojiKeyBoardView.m in Sources */,
 				4EE0A8961A4CEB8C0092F884 /* DWBubbleMenuButton.m in Sources */,
 				4E216AC01A280760009FF11D /* NSDate+App.m in Sources */,

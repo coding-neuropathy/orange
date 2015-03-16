@@ -8,11 +8,16 @@
 
 #import "ReportViewController.h"
 #import "GKAPI.h"
+#import "RadioButton.h"
+#import "UIPlaceHolderTextView.h"
+
 static CGFloat NormalKeyboardHeight = 216.0f;
 @interface ReportViewController ()<UITextViewDelegate>
-@property (nonatomic, strong) UITextView *textView;
-@property (nonatomic, strong) UIView *inputBG;
+@property (nonatomic, strong) UIPlaceHolderTextView *textView;
+//@property (nonatomic, strong) UIView *inputBG;
 @property (nonatomic, strong) UILabel *tipLabel;
+@property (nonatomic, strong) UILabel * radioTipLabel;
+//@property (nonatomic, strong) UIla
 
 @end
 
@@ -21,49 +26,101 @@ static CGFloat NormalKeyboardHeight = 216.0f;
 
 #pragma mark - Life Cycle
 
+- (UILabel *)radioTipLabel
+{
+    if (!_radioTipLabel) {
+        _radioTipLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _radioTipLabel.font = [UIFont systemFontOfSize:16.];
+        _radioTipLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _radioTipLabel.textAlignment = NSTextAlignmentLeft;
+        
+        [self.view addSubview:_radioTipLabel];
+    }
+    return _radioTipLabel;
+}
+
+- (UILabel *)tipLabel
+{
+    if (!_tipLabel) {
+        _tipLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _tipLabel.font = [UIFont systemFontOfSize:16.];
+        _tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _tipLabel.textAlignment = NSTextAlignmentLeft;
+        
+        [self.view addSubview:_tipLabel];
+    }
+    return _tipLabel;
+}
+
+- (UIPlaceHolderTextView *)textView
+{
+    if (!_textView) {
+        _textView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectZero];
+        [_textView setKeyboardType:UIKeyboardTypeDefault];
+        [_textView setReturnKeyType:UIReturnKeyDefault];
+        [_textView setFont:[UIFont fontWithName:@"Helvetica" size:15.0f]];
+        [_textView setScrollEnabled:YES];
+        [_textView setEditable:YES];
+        [_textView becomeFirstResponder];
+        [_textView setContentOffset:CGPointMake(10, 10)];
+        _textView.contentSize = CGSizeMake(kScreenWidth-30, _textView.deFrameSize.height-20);
+//        self.textView.backgroundColor = [UIColor clearColor];
+        _textView.textColor = UIColorFromRGB(0x666666);
+        [_textView setTintColor:UIColorFromRGB(0x6d9acb)];
+        _textView.delegate = self;
+        _textView.spellCheckingType = UITextSpellCheckingTypeNo;
+        _textView.autocorrectionType = UITextAutocorrectionTypeNo;
+        _textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        
+        [self.view addSubview:_textView];
+    }
+    return _textView;
+}
+
+- (void)CreateReasonButtons
+{
+    NSMutableArray* buttons = [NSMutableArray arrayWithCapacity:4];
+    CGRect btnRect = CGRectMake(10., 60., kScreenWidth - 20., 50);
+    for (NSString* optionTitle in @[@"商品下架", @"分类错误", @"垃圾或诈骗信息", @"不良内容"]) {
+        RadioButton* btn = [[RadioButton alloc] initWithFrame:btnRect];
+        [btn addTarget:self action:@selector(onRadioButtonValueChanged:) forControlEvents:UIControlEventValueChanged];
+        //        btn.backgroundColor = [UIColor redColor];
+        btnRect.origin.y += 50;
+        btn.titleLabel.font = [UIFont systemFontOfSize:14.];
+        [btn setTitle:optionTitle forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+        [btn setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
+        [self.view addSubview:btn];
+        [buttons addObject:btn];
+    }
+    [buttons[0] setGroupButtons:buttons];
+    
+    [buttons[0] setSelected:YES];
+}
+
 - (void)loadView
 {
     [super loadView];
     
+//    self.title = @"举报";
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
-    self.title = @"举报";
-    _inputBG = [[UIView alloc]initWithFrame:CGRectMake(10, 10, kScreenWidth-20, kScreenHeight - NormalKeyboardHeight- 180 - 40 + 15.f)];
-    self.inputBG.backgroundColor = UIColorFromRGB(0xf6f6f6);
-    [self.view addSubview:_inputBG];
     
-    _textView = [[UITextView alloc] initWithFrame:CGRectMake(20, 20, kScreenWidth-30, kScreenHeight - NormalKeyboardHeight- 180 - 40)];
-    [self.textView setKeyboardType:UIKeyboardTypeDefault];
-    [self.textView setReturnKeyType:UIReturnKeyDefault];
-    [self.textView setFont:[UIFont fontWithName:@"Helvetica" size:15.0f]];
-    [self.textView setScrollEnabled:YES];
-    [self.textView setEditable:YES];
-    [self.textView becomeFirstResponder];
-    [self.textView setContentOffset:CGPointMake(10, 10)];
-    self.textView.contentSize = CGSizeMake(kScreenWidth-30, _textView.deFrameSize.height-20);
-    self.textView.backgroundColor = [UIColor clearColor];
-    self.textView.textColor = UIColorFromRGB(0x666666);
-    [self.textView setTintColor:UIColorFromRGB(0x6d9acb)];
-    self.textView.delegate = self;
-    self.textView.spellCheckingType = UITextSpellCheckingTypeNo;
-    self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [self CreateReasonButtons];
+    self.radioTipLabel.frame = CGRectMake(10., 10, kScreenWidth - 20, 50.);
+    self.radioTipLabel.text = @"请选择举报原因:";
     
-    [self.view addSubview:self.textView];
+    self.tipLabel.frame = CGRectMake(10., 270., kScreenWidth - 20, 50.);
+    self.tipLabel.text = @"补充说明:";
     
-    _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 15)];
-    self.tipLabel.textAlignment = NSTextAlignmentLeft;
-    self.tipLabel.backgroundColor = [UIColor clearColor];
-    [self.tipLabel setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
-    self.tipLabel.textColor = UIColorFromRGB(0x999999);
-    self.tipLabel.text = @"举报原因";
-    
-    self.tipLabel.deFrameLeft = self.textView.deFrameLeft+10;
-    self.tipLabel.deFrameTop = self.textView.deFrameTop+8;
-    [self.view addSubview:self.tipLabel];
-    
-    
+    self.textView.frame = CGRectMake(10., 320., kScreenWidth-20, kScreenHeight - NormalKeyboardHeight- 180 - 40);
+    self.textView.placeholder = @"举报原因";
     
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -97,6 +154,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     _note = note;
     self.type = @"note";
 }
+
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
@@ -109,19 +167,19 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)textViewDidChange:(UITextView *)textView
-{
-    if (textView.text.length >0) {
-        self.tipLabel.hidden = YES;
-    }
-    else
-    {
-        self.tipLabel.hidden = NO;
-    }
-}
+//- (void)textViewDidChange:(UITextView *)textView
+//{
+//    if (textView.text.length >0) {
+//        self.tipLabel.hidden = YES;
+//    }
+//    else
+//    {
+//        self.tipLabel.hidden = NO;
+//    }
+//}
 
 
-#pragma mark - Selector Methdo
+#pragma mark - Selector Method
 
 - (void)postButtonAction
 {
@@ -159,6 +217,15 @@ static CGFloat NormalKeyboardHeight = 216.0f;
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"举报失败"];
         }];
+    }
+}
+
+#pragma mark - 
+- (void)onRadioButtonValueChanged:(RadioButton*)sender
+{
+//    NSLog(@"button %@", sender);
+    if(sender.selected) {
+        NSLog(@"Selected color: %@", sender.titleLabel.text);
     }
 }
 
