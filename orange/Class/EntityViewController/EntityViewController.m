@@ -589,10 +589,10 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         if ([purchase.source isEqualToString:@"taobao.com"])
         {
             NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-            [[TaeSDK sharedInstance] showItemDetailByItemId:self isNeedPush:NO webViewUISettings:nil itemId:_itemId itemType:1 params:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
-//            TaeTaokeParams *taoKeParams = [[TaeTaokeParams alloc] init];
-//            taoKeParams.pid = kGK_TaobaoKe_PID;
-//            [[TaeSDK sharedInstance] showTaoKeItemDetailByItemId:self isNeedPush:YES webViewUISettings:nil itemId:_itemId itemType:1 params:nil taoKeParams:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+//            [[TaeSDK sharedInstance] showItemDetailByItemId:self isNeedPush:NO webViewUISettings:nil itemId:_itemId itemType:1 params:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+            TaeTaokeParams *taoKeParams = [[TaeTaokeParams alloc] init];
+            taoKeParams.pid = kGK_TaobaoKe_PID;
+            [[TaeSDK sharedInstance] showTaoKeItemDetailByItemId:self isNeedPush:YES webViewUISettings:nil itemId:_itemId itemType:1 params:nil taoKeParams:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
         }
         else
 
