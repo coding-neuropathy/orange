@@ -259,6 +259,24 @@
 
 - (void)tapTaobaoButton
 {
+//    UIViewController * controller = [[UIViewController alloc] init];
+//    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:controller];
+//    
+//    if(![[TaeSession sharedInstance] isLogin]){
+//        [[TaeSDK sharedInstance] showLogin:nav  successCallback:^(TaeSession *session) {
+//            NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@,登录时间:%@, user id %@",[session getUser],[session getLoginTime], [session getUser].userId];
+//            NSLog(@"%@", tip);
+//        } failedCallback:^(NSError *error) {
+//            
+//            NSString *tip=[NSString stringWithFormat:@"登录失败:%@",error];
+//            NSLog(@"%@", tip);
+//            
+//        }];
+//    }else{
+//        TaeSession *session=[TaeSession sharedInstance];
+//        NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@,登录时间:%@, user id %@",[session getUser],[session getLoginTime], [session getUser].userId];
+//        NSLog(@"%@", tip);
+//    }
     GKTaobaoOAuthViewController *vc = [[GKTaobaoOAuthViewController alloc] init];
     vc.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
