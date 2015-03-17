@@ -170,7 +170,7 @@
                 button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
                 button.titleLabel.textAlignment = NSTextAlignmentCenter;
                 [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-                [button setTitle:[NSString stringWithFormat:@"%@还没有点评过商品",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
+                [button setTitle:[NSString stringWithFormat:@"%@ 还没有点评过商品",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
                 [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
                 button.backgroundColor = [UIColor clearColor];
                 button.userInteractionEnabled = NO;
@@ -194,7 +194,7 @@
                 button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
                 button.titleLabel.textAlignment = NSTextAlignmentCenter;
                 [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-                [button setTitle:[NSString stringWithFormat:@"%@还没有为商品添加过标签",[NSString fontAwesomeIconStringForEnum:FATag]] forState:UIControlStateNormal];
+                [button setTitle:[NSString stringWithFormat:@"%@ 还没有为商品添加过标签",[NSString fontAwesomeIconStringForEnum:FATag]] forState:UIControlStateNormal];
                 [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
                 button.backgroundColor = [UIColor clearColor];
                 button.userInteractionEnabled = NO;

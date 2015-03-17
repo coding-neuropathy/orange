@@ -157,8 +157,8 @@ static NSString *MessageCellIdentifier = @"MessageCell";
                 self.tableView.tableFooterView = self.noMessageView;
             } else {
                 self.tableView.tableFooterView = nil;
-                [self.tableView reloadData];
             }
+            [self.tableView reloadData];
             
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {

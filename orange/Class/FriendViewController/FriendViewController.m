@@ -9,14 +9,28 @@
 #import "FriendViewController.h"
 #import "UserSingleListCell.h"
 #import "GKAPI.h"
+#import "NoDataView.h"
+
+static NSString *CellIdentifier = @"UserSingleListCell";
 
 @interface FriendViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray * dataArrayForUser;
+@property (nonatomic, strong) NSMutableArray * dataArrayForUser;
+@property (nonatomic, strong) NoDataView * noDataView;
 
 @end
 
 @implementation FriendViewController
+
+- (NoDataView *)noDataView
+{
+    if (!_noDataView) {
+        _noDataView = [[NoDataView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 44.)];
+        _noDataView.backgroundColor = [UIColor clearColor];
+    }
+    return _noDataView;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +49,7 @@
     [self.view addSubview:self.tableView];
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    [self.tableView registerClass:[UserSingleListCell class] forCellReuseIdentifier:CellIdentifier];
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -72,6 +87,12 @@
 
         [GKAPI getUserFollowingListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
             self.dataArrayForUser = [NSMutableArray arrayWithArray:userArray];
+            if (self.dataArrayForUser.count == 0) {
+                self.tableView.tableFooterView = self.noDataView;
+                self.noDataView.text = @"没有关注任何人";
+            } else {
+                self.tableView.tableFooterView = nil;
+            }
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -84,6 +105,7 @@
 {
     [GKAPI getUserFollowingListWithUserId:self.user.userId offset:self.dataArrayForUser.count count:30 success:^(NSArray *userArray) {
         [self.dataArrayForUser addObjectsFromArray:userArray];
+    
         [self.tableView reloadData];
         [self.tableView.infiniteScrollingView stopAnimating];
     } failure:^(NSInteger stateCode) {
@@ -106,16 +128,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    static NSString *CellIdentifier = @"UserSingleListCell";
-    UserSingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UserSingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    UserSingleListCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.user = [self.dataArrayForUser objectAtIndex:indexPath.row];
     
     return cell;
-    
 }
 
 #pragma mark - UITableViewDelegate
