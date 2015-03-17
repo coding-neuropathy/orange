@@ -1172,6 +1172,7 @@
 		B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */; };
 		B749632A1AB15E9000C340FB /* EntityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B74963291AB15E9000C340FB /* EntityHeaderView.m */; };
 		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
+		B766763A1AB805B5002F294C /* NoMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676391AB805B5002F294C /* NoMessageView.m */; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
 		B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */; };
 		B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */; };
@@ -2547,6 +2548,8 @@
 		B74963291AB15E9000C340FB /* EntityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityHeaderView.m; path = EntityView/EntityHeaderView.m; sourceTree = "<group>"; };
 		B749632C1AB28A6C00C340FB /* CommentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentHeaderView.h; path = CommentView/CommentHeaderView.h; sourceTree = "<group>"; };
 		B749632D1AB28A6C00C340FB /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentHeaderView.m; path = CommentView/CommentHeaderView.m; sourceTree = "<group>"; };
+		B76676381AB805B5002F294C /* NoMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoMessageView.h; path = NotificationView/NoMessageView.h; sourceTree = "<group>"; };
+		B76676391AB805B5002F294C /* NoMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoMessageView.m; path = NotificationView/NoMessageView.m; sourceTree = "<group>"; };
 		B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = DiscoverView/DiscoverHeaderView.h; sourceTree = "<group>"; };
 		B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverHeaderView.m; path = DiscoverView/DiscoverHeaderView.m; sourceTree = "<group>"; };
 		B7AAFA5D1AB67E5600A2F20D /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioButton.h; path = RadioButton/RadioButton.h; sourceTree = "<group>"; };
@@ -2615,6 +2618,7 @@
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B76676371AB8058A002F294C /* NotificationView */,
 				B79270921AB3D8E800FD7371 /* DiscoverView */,
 				B749632B1AB28A4700C340FB /* CommentView */,
 				B74963271AB15E5A00C340FB /* EntityView */,
@@ -4595,6 +4599,15 @@
 			name = CommentView;
 			sourceTree = "<group>";
 		};
+		B76676371AB8058A002F294C /* NotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				B76676381AB805B5002F294C /* NoMessageView.h */,
+				B76676391AB805B5002F294C /* NoMessageView.m */,
+			);
+			name = NotificationView;
+			sourceTree = "<group>";
+		};
 		B79270921AB3D8E800FD7371 /* DiscoverView */ = {
 			isa = PBXGroup;
 			children = (
@@ -5772,6 +5785,7 @@
 				4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */,
 				4EA0C45C1A8287780025EC2E /* SignView.m in Sources */,
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
+				B766763A1AB805B5002F294C /* NoMessageView.m in Sources */,
 				4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */,
 				4E56DF8B19D56EF500263B17 /* UIImage+WebP.m in Sources */,
 				4E56DF8D19D56EF500263B17 /* UIImageView+WebCache.m in Sources */,

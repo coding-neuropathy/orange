@@ -12,6 +12,11 @@
 #import "MessageCell.h"
 #import "FeedCell.h"
 #import "GTScrollNavigationBar.h"
+#import "NoMessageView.h"
+
+
+static NSString *FeedCellIdentifier = @"FeedCell";
+static NSString *MessageCellIdentifier = @"MessageCell";
 
 @interface NotifactionViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -19,6 +24,8 @@
 @property(nonatomic, strong) NSMutableArray * dataArrayForMessage;
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) HMSegmentedControl *segmentedControl;
+
+@property (nonatomic, strong) NoMessageView * noMessageView;
 
 @end
 
@@ -33,7 +40,7 @@
         
         self.tabBarItem = item;
         
-        self.title = @"通知";
+//        self.title = @"通知";
         
         HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
         [segmentedControl setSectionTitles:@[@"动态", @"消息"]];
@@ -65,6 +72,15 @@
     return self;
 }
 
+- (NoMessageView *)noMessageView
+{
+    if (!_noMessageView) {
+        _noMessageView = [[NoMessageView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+//        _noMessageView.backgroundColor = [UIColor redColor];
+    }
+    return _noMessageView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -80,6 +96,8 @@
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
 
+    [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:FeedCellIdentifier];
+    [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:MessageCellIdentifier];
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -135,7 +153,13 @@
     {
         [GKAPI getMessageListWithTimestamp:[[NSDate date] timeIntervalSince1970]  count:30 success:^(NSArray *messageArray) {
             self.dataArrayForMessage = [NSMutableArray arrayWithArray:messageArray];
-            [self.tableView reloadData];
+            if (self.dataArrayForMessage.count == 0) {
+                self.tableView.tableFooterView = self.noMessageView;
+            } else {
+                self.tableView.tableFooterView = nil;
+                [self.tableView reloadData];
+            }
+            
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
             [self.tableView.pullToRefreshView stopAnimating];
@@ -191,22 +215,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.index == 0) {
-        static NSString *CellIdentifier = @"FeedCell";
-        FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
+//        static NSString *CellIdentifier = @"FeedCell";
+        FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:FeedCellIdentifier forIndexPath:indexPath];
+//        if (!cell) {
+//            cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//        }
     
         cell.feed = self.dataArrayForFeed[indexPath.row];
         return cell;
     }
     else if (self.index == 1)
     {
-        static NSString *CellIdentifier = @"MessageCell";
-        MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            cell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
+//        static NSString *CellIdentifier = @"MessageCell";
+        MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:MessageCellIdentifier forIndexPath:indexPath];
+//        if (!cell) {
+//            cell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//        }
         cell.message = self.dataArrayForMessage[indexPath.row];
         return cell;
     }

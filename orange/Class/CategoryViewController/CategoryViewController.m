@@ -72,7 +72,7 @@
 {
     _category = category;
     UIView *titleView = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-    [titleView setBackgroundColor:[UIColor whiteColor]];
+    [titleView setBackgroundColor:[UIColor clearColor]];
     
     UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 26, 26)];
     icon.contentMode =UIViewContentModeScaleAspectFit;
