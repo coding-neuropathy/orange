@@ -19,6 +19,7 @@
 @private
     UILabel * tip;
     UIView * whiteBG;
+    UIImageView *logo;
 }
 @property (nonatomic, strong) UITextField *emailTextField;
 @property (nonatomic, strong) UITextField *passwordTextField;
@@ -50,14 +51,21 @@
         UITapGestureRecognizer *Tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
         [whiteBG addGestureRecognizer:Tap2];
         
-        tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 38, whiteBG.deFrameWidth, 30)];
-        tip.textColor = UIColorFromRGB(0x777777);
-        tip.font = [UIFont systemFontOfSize:20];
+        
+        
+        logo = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        logo.tintColor = UIColorFromRGB(0x9d9e9f);
+        logo.center = CGPointMake(whiteBG.deFrameWidth/2, 60);
+        [whiteBG addSubview:logo];
+        
+        tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 80, whiteBG.deFrameWidth, 30)];
+        tip.textColor = UIColorFromRGB(0xcbcbcb);
+        tip.font = [UIFont systemFontOfSize:15];
         tip.textAlignment = NSTextAlignmentCenter;
-        tip.text = @"欢迎回来";
+        tip.text = @"Live Different";
         [whiteBG addSubview:tip];
         
-        _emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(15.f, tip.deFrameBottom+32, whiteBG.deFrameWidth - 30, 45.f)];
+        _emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(24.f, tip.deFrameBottom+12, whiteBG.deFrameWidth - 48, 45.f)];
         self.emailTextField.delegate = self;
         self.emailTextField.borderStyle = UITextBorderStyleNone;
         //self.emailTextField.layer.borderColor = UIColorFromRGB(0xdcdcdc).CGColor;
@@ -69,18 +77,37 @@
         }
         self.emailTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 16., 45.)];
         self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
+        
+        {
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+            label.textColor = UIColorFromRGB(0x414243);
+            label.textAlignment = NSTextAlignmentLeft;
+            label.font = [UIFont systemFontOfSize:14];
+            label.text = @"邮箱";
+            self.emailTextField.leftView = label;
+        }
         self.emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-        self.emailTextField.placeholder = @"邮箱";
+        self.emailTextField.placeholder = @"";
         self.emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.emailTextField.returnKeyType = UIReturnKeyNext;
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
         [self.emailTextField setTextColor:UIColorFromRGB(0x666666)];
-        self.emailTextField.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        self.emailTextField.backgroundColor = UIColorFromRGB(0xffffff);
+        
+        
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.emailTextField.deFrameWidth,0.5)];
+            H.backgroundColor = UIColorFromRGB(0xebebeb);
+            H.center = CGPointMake(self.emailTextField.deFrameWidth/2, self.emailTextField.deFrameHeight);
+            [self.emailTextField addSubview:H];
+        }
         
         [whiteBG addSubview:self.emailTextField];
         
         _forgotPasswordButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 45)];
-        [_forgotPasswordButton setImage:[UIImage imageNamed:@"button_icon_forgot.png"] forState:UIControlStateNormal];
+        [_forgotPasswordButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:18]];
+        [_forgotPasswordButton setTitle:[NSString fontAwesomeIconStringForEnum:FAQuestionCircle] forState:UIControlStateNormal];
+        [_forgotPasswordButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         _forgotPasswordButton.backgroundColor = [UIColor clearColor];
         [self.forgotPasswordButton addTarget:self action:@selector(tapForgotPasswordButton) forControlEvents:UIControlEventTouchUpInside];
         
@@ -95,34 +122,35 @@
         if (iOS7) {
             [self.passwordTextField setTintColor:UIColorFromRGB(0x6d9acb)];
         }
-        self.passwordTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 16., 45.)];
+        {
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+            label.textColor = UIColorFromRGB(0x414243);
+            label.textAlignment = NSTextAlignmentLeft;
+            label.font = [UIFont systemFontOfSize:14];
+            label.text = @"密码";
+            self.passwordTextField.leftView = label;
+        }
         self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
         self.passwordTextField.rightView = _forgotPasswordButton;
         self.passwordTextField.rightViewMode = UITextFieldViewModeAlways;
         self.passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-        self.passwordTextField.placeholder = @"密码";
+        self.passwordTextField.placeholder = @"";
         self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.passwordTextField.returnKeyType = UIReturnKeyGo;
         [self.passwordTextField setTextColor:UIColorFromRGB(0x666666)];
-        self.passwordTextField.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        self.passwordTextField.backgroundColor = UIColorFromRGB(0xffffff);
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextField.deFrameWidth,0.5)];
+            H.backgroundColor = UIColorFromRGB(0xebebeb);
+            H.center = CGPointMake(self.passwordTextField.deFrameWidth/2, self.passwordTextField.deFrameHeight);
+            [self.passwordTextField addSubview:H];
+        }
         [whiteBG addSubview:self.passwordTextField];
-        
-        UIButton *loginButton = [[UIButton alloc]init];
-        loginButton.frame = CGRectMake(15.f, self.passwordTextField.deFrameBottom + 23, whiteBG.deFrameWidth - 30, 45.f);
-        loginButton.layer.cornerRadius = 2;
-        loginButton.layer.masksToBounds = YES;
-        loginButton.backgroundColor = UIColorFromRGB(0x457ebd);
-        [loginButton setTitle:@"登录" forState:UIControlStateNormal];
-        [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
-        [whiteBG addSubview:loginButton];
-        
-
         
         _sinaWeiboButton = [[UIButton alloc] init];
         self.sinaWeiboButton.deFrameSize = CGSizeMake(44.f, 44.f);
-        self.sinaWeiboButton.deFrameTop = loginButton.deFrameBottom+18;
-        self.sinaWeiboButton.deFrameLeft = 15.f;
+        self.sinaWeiboButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
+        self.sinaWeiboButton.deFrameLeft = 24.f;
         self.sinaWeiboButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
         self.sinaWeiboButton.layer.cornerRadius = 22;
         [self.sinaWeiboButton addTarget:self action:@selector(tapSinaWeiboButton) forControlEvents:UIControlEventTouchUpInside];
@@ -133,23 +161,50 @@
         self.taobaoButton.deFrameSize = CGSizeMake(44.f, 44.f);
         self.taobaoButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
         self.taobaoButton.layer.cornerRadius = 22;
-        self.taobaoButton.deFrameTop = loginButton.deFrameBottom+18;
+        self.taobaoButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
         self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.f;
         [self.taobaoButton addTarget:self action:@selector(tapTaobaoButton) forControlEvents:UIControlEventTouchUpInside];
         [self.taobaoButton setImage:[UIImage imageNamed:@"login_icon_taobao.png"] forState:UIControlStateNormal];
         [whiteBG addSubview:self.taobaoButton];
         
-        _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(self.taobaoButton.deFrameRight + 15.f, loginButton.deFrameBottom+18, whiteBG.deFrameWidth-self.taobaoButton.deFrameRight -15 , 44.f)];
+        UIButton *loginButton = [[UIButton alloc]init];
+        loginButton.frame = CGRectMake(0, 0,90, 40.f);
+        loginButton.center = self.sinaWeiboButton.center;
+        loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
+        loginButton.layer.cornerRadius = 2;
+        loginButton.layer.masksToBounds = YES;
+        loginButton.backgroundColor = UIColorFromRGB(0x457ebd);
+        [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+        [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
+        [whiteBG addSubview:loginButton];
+        
+        
+        UIButton * close = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
+        close.backgroundColor = [UIColor clearColor];
+        close.titleLabel.textAlignment = NSTextAlignmentLeft;
+        close.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
+        [close setTitle:[NSString fontAwesomeIconStringForEnum:FATimes] forState:UIControlStateNormal];
+        [close setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        close.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [close addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        close.deFrameTop = 10;
+        close.deFrameLeft = 16;
+        [whiteBG addSubview:close];
+        
+        _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
         _registerButton.backgroundColor = [UIColor clearColor];
-        _registerButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-        [_registerButton setTitle:@"注册帐号 >>" forState:UIControlStateNormal];
-        [_registerButton setTitleColor:UIColorFromRGB(0xdcdcdc) forState:UIControlStateNormal];
-        [_registerButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        _registerButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _registerButton.titleLabel.textAlignment = NSTextAlignmentRight;
+        [_registerButton setTitle:@"注册 >" forState:UIControlStateNormal];
+        [_registerButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [_registerButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        _registerButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_registerButton addTarget:self action:@selector(tapRegisterButton) forControlEvents:UIControlEventTouchUpInside];
+        _registerButton.deFrameTop = 10;
+        _registerButton.deFrameRight = whiteBG.deFrameWidth - 16;
         [whiteBG addSubview:_registerButton];
         
-        whiteBG.deFrameHeight = self.taobaoButton.deFrameBottom + 20;
+        whiteBG.deFrameHeight = self.taobaoButton.deFrameBottom + 45;
         if(kScreenHeight >= 548)
         {
             whiteBG.deFrameTop = 140;
@@ -356,7 +411,7 @@
     double delayInSeconds = 0.3;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
         [self removeFromSuperview];
     });
 }

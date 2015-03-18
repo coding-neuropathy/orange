@@ -45,14 +45,14 @@
         
 
         
-        tip = [[UILabel alloc]initWithFrame:CGRectMake(75, 38, whiteBG.deFrameWidth-90, 30)];
+        tip = [[UILabel alloc]initWithFrame:CGRectMake(90, 38, whiteBG.deFrameWidth-90, 30)];
         tip.textColor = UIColorFromRGB(0x777777);
-        tip.font = [UIFont systemFontOfSize:20];
+        tip.font = [UIFont systemFontOfSize:18];
         tip.textAlignment = NSTextAlignmentLeft;
         tip.text = @"注册帐号";
         [whiteBG addSubview:tip];
         
-        UIView * _avatarBG = [[UIView alloc]initWithFrame:CGRectMake(15, 30, 50, 50)];
+        UIView * _avatarBG = [[UIView alloc]initWithFrame:CGRectMake(24, 30, 40, 40)];
         _avatarBG.backgroundColor =UIColorFromRGB(0xf4f4f4);
         
         UIImageView * _avatar_icon = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 30, 30)];
@@ -62,7 +62,7 @@
         
         [whiteBG addSubview:_avatarBG];
         
-        _avatarButton = [[UIButton alloc]initWithFrame:CGRectMake(15, 20, 50, 50)];
+        _avatarButton = [[UIButton alloc]initWithFrame:CGRectMake(24, 20, 40, 40)];
         [_avatarButton addTarget:self action:@selector(avatarButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [_avatarButton setBackgroundColor:[UIColor clearColor]];
         _avatarButton.center = CGPointMake(_avatarButton.center.x, tip.center.y);
@@ -75,7 +75,7 @@
         }
         [whiteBG addSubview:_avatarButton];
         
-        _nicknameTextField = [[UITextField alloc] initWithFrame:CGRectMake(15.f, tip.deFrameBottom+20, whiteBG.deFrameWidth - 30, 45.f)];
+        _nicknameTextField = [[UITextField alloc] initWithFrame:CGRectMake(24.f, tip.deFrameBottom+30, whiteBG.deFrameWidth - 48, 45.f)];
         self.nicknameTextField.delegate = self;
         self.nicknameTextField.returnKeyType = UIReturnKeyNext;
         self.nicknameTextField.borderStyle = UITextBorderStyleNone;
@@ -88,15 +88,30 @@
         if (iOS7) {
             [self.nicknameTextField setTintColor:UIColorFromRGB(0x6d9acb)];
         }
-        self.nicknameTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 16., 45.)];
+        
+        {
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+            label.textColor = UIColorFromRGB(0x414243);
+            label.textAlignment = NSTextAlignmentLeft;
+            label.font = [UIFont systemFontOfSize:14];
+            label.text = @"昵称";
+            self.nicknameTextField.leftView = label;
+        }
         self.nicknameTextField.leftViewMode = UITextFieldViewModeAlways;
         self.nicknameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.nicknameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-        self.nicknameTextField.placeholder = @"昵称";
+        self.nicknameTextField.placeholder = @"";
         self.nicknameTextField.delegate = self;
         self.nicknameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self.nicknameTextField setTextColor:UIColorFromRGB(0x666666)];
-        self.nicknameTextField.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        self.nicknameTextField.backgroundColor = UIColorFromRGB(0xffffff);
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.nicknameTextField.deFrameWidth,0.5)];
+            H.backgroundColor = UIColorFromRGB(0xebebeb);
+            H.center = CGPointMake(self.nicknameTextField.deFrameWidth/2, self.nicknameTextField.deFrameHeight);
+            [self.nicknameTextField addSubview:H];
+        }
+
         [whiteBG addSubview:self.nicknameTextField];
         
         _emailTextField = [[UITextField alloc] initWithFrame:self.nicknameTextField.frame];
@@ -111,15 +126,29 @@
         if (iOS7) {
             [self.emailTextField setTintColor:UIColorFromRGB(0x6d9acb)];
         }
-        self.emailTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 16., 45.)];
+        {
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+            label.textColor = UIColorFromRGB(0x414243);
+            label.textAlignment = NSTextAlignmentLeft;
+            label.font = [UIFont systemFontOfSize:14];
+            label.text = @"邮箱";
+            self.emailTextField.leftView = label;
+        }
         self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
         self.emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-        self.emailTextField.placeholder = @"邮箱";
+        self.emailTextField.placeholder = @"";
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
         self.emailTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self.emailTextField setTextColor:UIColorFromRGB(0x666666)];
-        self.emailTextField.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        self.emailTextField.backgroundColor = UIColorFromRGB(0xffffff);
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.emailTextField.deFrameWidth,0.5)];
+            H.backgroundColor = UIColorFromRGB(0xebebeb);
+            H.center = CGPointMake(self.emailTextField.deFrameWidth/2, self.emailTextField.deFrameHeight);
+            [self.emailTextField addSubview:H];
+        }
+
         [whiteBG addSubview:self.emailTextField];
         
         _passwordTextField = [[UITextField alloc] initWithFrame:self.emailTextField.frame];
@@ -133,22 +162,35 @@
         if (iOS7) {
             [self.passwordTextField setTintColor:UIColorFromRGB(0x6d9acb)];
         }
-        self.passwordTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 16., 45.)];
+        {
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+            label.textColor = UIColorFromRGB(0x414243);
+            label.textAlignment = NSTextAlignmentLeft;
+            label.font = [UIFont systemFontOfSize:14];
+            label.text = @"密码";
+            self.passwordTextField.leftView = label;
+        }
         self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
         self.passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-        self.passwordTextField.placeholder = @"密码";
+        self.passwordTextField.placeholder = @"";
         self.passwordTextField.delegate = self;
         self.passwordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self.passwordTextField setTextColor:UIColorFromRGB(0x666666)];
-        self.passwordTextField.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        self.passwordTextField.backgroundColor = UIColorFromRGB(0xffffff);
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.emailTextField.deFrameWidth,0.5)];
+            H.backgroundColor = UIColorFromRGB(0xebebeb);
+            H.center = CGPointMake(self.emailTextField.deFrameWidth/2, self.emailTextField.deFrameHeight);
+            [self.passwordTextField addSubview:H];
+        }
         [whiteBG addSubview:self.passwordTextField];
         
         
 
         
         UIButton *registerButton = [[UIButton alloc]init ];
-        registerButton.frame = CGRectMake(15.f, self.passwordTextField.deFrameBottom + 23, whiteBG.deFrameWidth - 30, 45.f);
+        registerButton.frame = CGRectMake(24.f, self.passwordTextField.deFrameBottom + 23, whiteBG.deFrameWidth - 48, 40.f);
         registerButton.layer.cornerRadius = 2;
         registerButton.layer.masksToBounds = YES;
         registerButton.backgroundColor = UIColorFromRGB(0x457ebd);

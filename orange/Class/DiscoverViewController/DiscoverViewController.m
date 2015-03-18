@@ -95,7 +95,7 @@
     [self configSearchBar];
     
     
-    UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
+    UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 24)];
     footer.backgroundColor = UIColorFromRGB(0xf8f8f8);
     self.tableView.tableFooterView = footer;
     
