@@ -64,7 +64,7 @@ static CGFloat LeftMargin = 16.;
         [_textView setFont:[UIFont fontWithName:@"Helvetica" size:15.0f]];
         [_textView setScrollEnabled:YES];
         [_textView setEditable:YES];
-        [_textView becomeFirstResponder];
+        //[_textView becomeFirstResponder];
         [_textView setContentOffset:CGPointMake(10, 10)];
         _textView.contentSize = CGSizeMake(kScreenWidth-30, _textView.deFrameSize.height-20);
 //        self.textView.backgroundColor = [UIColor clearColor];

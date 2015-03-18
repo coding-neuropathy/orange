@@ -28,7 +28,7 @@ static char UIScrollViewAutoScrollTimer;
     
 //    CGFloat scale = (self.window ? self.window.screen.scale : [UIScreen mainScreen].scale);
 //    CGFloat animationDuration = (1.0f / (self.scrollPointsPerSecond * scale));
-    self.autoScrollTimer = [NSTimer scheduledTimerWithTimeInterval:2.
+    self.autoScrollTimer = [NSTimer scheduledTimerWithTimeInterval:5.
                                                             target:self
                                                           selector:@selector(scrollTick)
                                                           userInfo:nil

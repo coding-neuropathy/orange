@@ -109,16 +109,12 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
     
     [self.tableView registerClass:[NoteCell class] forCellReuseIdentifier:NoteCellIdentifier];
     [self.tableView registerClass:[EntityThreeGridCell class] forCellReuseIdentifier:EntityCellIdentifier];
     [self.view addSubview:self.tableView];
-    
-
-    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     
     UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
     footer.backgroundColor = UIColorFromRGB(0xfafafa);
@@ -147,6 +143,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     if (!_header) {
         _header = [[EntityHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth + 75)];
         _header.delegate = self;
+        _header.backgroundColor = UIColorFromRGB(0xffffff);
     }
     return _header;
 }
@@ -304,6 +301,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         if(!self.likeUserView)
         {
             self.likeUserView  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+            self.likeUserView.backgroundColor = UIColorFromRGB(0xffffff);
         }
         
         for (UIView * view in self.likeUserView.subviews) {
@@ -409,11 +407,11 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         return self.noteButton;
     }
     else if (section == 4) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 20.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 10.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
         label.text = @"相似推荐";
         label.textAlignment = NSTextAlignmentLeft;
-        label.textColor = UIColorFromRGB(0x666666);
-        label.font = [UIFont boldSystemFontOfSize:14];
+        label.textColor = UIColorFromRGB(0x414243);
+        label.font = [UIFont systemFontOfSize:14];
         [label sizeToFit];
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 40)];
         view.backgroundColor = UIColorFromRGB(0xfafafa);

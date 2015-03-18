@@ -63,8 +63,8 @@
         _pageCtr.hidden = YES;
         _pageCtr.currentPage = 0;
         _pageCtr.backgroundColor = [UIColor clearColor];
-        _pageCtr.pageIndicatorTintColor = UIColorFromRGB(0xbbbcbd);
-        _pageCtr.currentPageIndicatorTintColor = UIColorFromRGB(0x414243);
+        _pageCtr.pageIndicatorTintColor = UIColorFromRGB(0x9d9e9f);
+        _pageCtr.currentPageIndicatorTintColor = UIColorFromRGB(0x656768);
         _pageCtr.layer.cornerRadius = 16.0;
         [self addSubview:_pageCtr];
     }
@@ -89,8 +89,8 @@
         [_likeBtn setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
         [_likeBtn setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
         [_likeBtn setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
-        [_likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0,8, 0, 0)];
-        [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,14, 0, 0)];
+        [_likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+        [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,16, 0, 0)];
         [_likeBtn addTarget:self action:@selector(TapLikeBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_likeBtn];
     }
@@ -154,7 +154,7 @@
     {
         [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
     }
-    self.likeBtn.selected = _entity.liked;
+    UIFont* font = [UIFont systemFontOfSize:12];
     [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", _entity.lowestPrice] forState:UIControlStateNormal];
     
     [self setNeedsLayout];
@@ -177,6 +177,8 @@
     
     self.likeBtn.frame = CGRectMake(0, 0, 86, 30);
     self.likeBtn.deFrameLeft = 16.;
+    UIFont* font = [UIFont systemFontOfSize:12];
+    self.likeBtn.deFrameWidth = [self.likeBtn.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}].width+40;
     self.likeBtn.deFrameTop = self.scrollView.deFrameBottom + 15.;
     
     self.buyBtn.frame = CGRectMake(0, 0, 120, 30);

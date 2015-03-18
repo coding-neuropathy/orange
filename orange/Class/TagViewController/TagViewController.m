@@ -125,7 +125,7 @@
 - (void)loadMore
 {
     if (self.index == 0) {
-        [GKAPI getEntityListWithUserId:self.user.userId tag:self.tagName offset:0 count:30 success:^(GKUser *user, NSArray *entityArray) {
+        [GKAPI getEntityListWithUserId:self.user.userId tag:self.tagName offset:self.dataArrayForEntity.count count:30 success:^(GKUser *user, NSArray *entityArray) {
             [self.dataArrayForEntity addObjectsFromArray:entityArray];
             [self.tableView.infiniteScrollingView stopAnimating];
             [self.tableView reloadData];

@@ -11,6 +11,28 @@
 #import "GKAPI.h"
 #import "LoginView.h"
 #import "NoteViewController.h"
+#import "TagViewController.h"
+#import "EntityViewController.h"
+
+static inline NSRegularExpression * ParenthesisRegularExpression() {
+    static NSRegularExpression *_parenthesisRegularExpression = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _parenthesisRegularExpression = [[NSRegularExpression alloc] initWithPattern:@"(#|＃)([のA-Z0-9a-z\u4e00-\u9fa5_]+)" options:NSRegularExpressionCaseInsensitive error:nil];
+    });
+    
+    return _parenthesisRegularExpression;
+}
+static inline NSRegularExpression * UrlRegularExpression() {
+    static NSRegularExpression *_urlRegularExpression = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _urlRegularExpression = [[NSRegularExpression alloc] initWithPattern:@"(http(s)?://([A-Z0-9a-z._=&?-]*(/)?)*)" options:NSRegularExpressionCaseInsensitive error:nil];
+    });
+    
+    return _urlRegularExpression;
+}
+
 @implementation NoteCell
 
 
@@ -81,10 +103,52 @@
         self.contentLabel.paragraphReplacement = @"";
         self.contentLabel.lineSpacing = 7.0;
         self.contentLabel.delegate = self;
+        [self.contentLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
         [self.contentView addSubview:self.contentLabel];
     }
     
-    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
+    if(self.note.text!=nil)
+    {
+        NSMutableString * resultText = [NSMutableString stringWithString:self.note.text];
+        NSRegularExpression *regexp =  ParenthesisRegularExpression();
+        NSArray *array = [regexp matchesInString: self.note.text
+                                         options: 0
+                                           range: NSMakeRange( 0, [self.note.text length])];
+        
+        NSUInteger i = 0;
+        NSUInteger j = 0;
+        for (NSTextCheckingResult *match in array)
+        {
+            j = match.range.location+i;
+            
+            NSString * a = [NSString stringWithFormat:@"<a href='tag:%@'><font face='Helvetica' color='^427ec0'>",[[self.note.text substringWithRange:NSMakeRange(match.range.location+1,match.range.length-1)]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            [resultText insertString:a atIndex:j];
+            NSString * b = [NSString stringWithFormat:@"</font></a>"];
+            j = match.range.length+j+a.length;
+            [resultText insertString:b atIndex:j];
+            
+            i = i + b.length + a.length;
+        }
+        NSRegularExpression *urlregexp =  UrlRegularExpression();
+        NSArray *urlarray = [urlregexp matchesInString: resultText
+                                               options: 0
+                                                 range: NSMakeRange( 0, [resultText length])];
+        i = 0;
+        for (NSTextCheckingResult *match in urlarray)
+        {
+            j = match.range.location+i;
+            NSString * a = [NSString stringWithFormat:@"<a href='%@'><font face='Helvetica' color='^427ec0'>",[resultText substringWithRange:NSMakeRange(match.range.location,match.range.length)]];
+            [resultText insertString:a atIndex:j];
+            NSString * b = [NSString stringWithFormat:@"</font></a>"];
+            j = match.range.length+j+a.length;
+            [resultText insertString:b atIndex:j];
+            
+            i = i + b.length + a.length;
+            
+        }
+        
+        [self.contentLabel setText:resultText];
+    }
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     self.contentLabel.deFrameTop = self.label.deFrameBottom+5;
     
@@ -235,5 +299,39 @@
     UserViewController * VC = [[UserViewController alloc]init];
     VC.user = self.note.creator;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url
+{
+    
+    NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
+    if([array[0] isEqualToString:@"tag"])
+    {
+        TagViewController * vc = [[TagViewController alloc]init];
+        vc.tagName = [array[1]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        vc.user = self.note.creator;
+        if (kAppDelegate.activeVC.navigationController) {
+            [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+        }
+    }
+    if([array[0] isEqualToString:@"user"])
+    {
+        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
+        UserViewController * vc = [[UserViewController alloc]init];
+        vc.user = user;
+        if (kAppDelegate.activeVC.navigationController) {
+            [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+        }
+    }
+    if([array[0] isEqualToString:@"entity"])
+    {
+        GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
+        EntityViewController * vc = [[EntityViewController alloc]init];
+        vc.entity = entity;
+        if (kAppDelegate.activeVC.navigationController) {
+            [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+        }
+    }
+    
 }
 @end

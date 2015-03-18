@@ -53,7 +53,7 @@
     if (!_image) {
         _image = [[UIImageView alloc] initWithFrame:CGRectZero];
         _image.contentMode = UIViewContentModeScaleAspectFill;
-        _image.backgroundColor = [UIColor redColor];
+        _image.backgroundColor = [UIColor clearColor];
         _image.userInteractionEnabled = YES;
         
         [self.contentView addSubview:_image];
@@ -75,7 +75,8 @@
         [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             
             UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
-//            block_img.contentMode = UIViewContentModeCenter;
+
+            block_img.contentMode = UIViewContentModeScaleAspectFit;
             block_img.image = newimage;
             [weakSelf.activityIndicator stopAnimating];
             weakSelf.activityIndicator.hidden = YES;
@@ -138,8 +139,8 @@
         [self.likeButton setImage:[[UIImage imageNamed:@"icon_like"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  forState:UIControlStateHighlighted|UIControlStateNormal];
         [self.likeButton setImage:[[UIImage imageNamed:@"icon_like_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateSelected];
         [self.likeButton setImage:[[UIImage imageNamed:@"icon_like_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  forState:UIControlStateHighlighted|UIControlStateSelected];
-        [self.likeButton setImageEdgeInsets:UIEdgeInsetsMake(0,8, 0, 0)];
-        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,14, 0, 0)];
+        [self.likeButton setImageEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,16, 0, 0)];
         [self.contentView addSubview:self.likeButton];        
     }
     [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
@@ -160,6 +161,9 @@
     }
     self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft;
     self.likeButton.deFrameTop = self.contentLabel.deFrameBottom + 12;
+    UIFont* font = [UIFont systemFontOfSize:12];
+    self.likeButton.deFrameWidth = [self.likeButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}].width+40;
+    
     [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     
