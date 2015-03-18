@@ -39,37 +39,47 @@ static NSString *MessageCellIdentifier = @"MessageCell";
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"通知" image:[UIImage imageNamed:@"tabbar_icon_notifaction"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_notifaction"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
-        
-//        self.title = @"通知";
-        
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-        [segmentedControl setSectionTitles:@[@"动态", @"消息"]];
-        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-        [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
-        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        [segmentedControl setTag:2];
-        
-        UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
-        V.backgroundColor = UIColorFromRGB(0xebebeb);
-        [segmentedControl addSubview:V];
-        
-        {
-            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,segmentedControl.deFrameHeight-0.5, kScreenWidth, 0.5)];
-            H.backgroundColor = UIColorFromRGB(0xebebeb);
-            [segmentedControl addSubview:H];
-        }
-        
-        self.segmentedControl = segmentedControl;
-
-        self.title = @"通知";
         self.index = 0;
     }
     return self;
+}
+
+- (void)loadView
+{
+    [super loadView];
+
+    
+    self.title = @"通知";
+
+}
+
+- (HMSegmentedControl *)segmentedControl
+{
+    if (!_segmentedControl) {
+         _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+        [_segmentedControl setSectionTitles:@[@"动态", @"消息"]];
+        [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
+        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
+        [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+        [_segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
+        [_segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
+        [_segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
+        [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
+        [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+        [_segmentedControl setTag:2];
+        
+        
+        UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
+        V.backgroundColor = UIColorFromRGB(0xebebeb);
+        [_segmentedControl addSubview:V];
+        
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,_segmentedControl.deFrameHeight-0.5, kScreenWidth, 0.5)];
+            H.backgroundColor = UIColorFromRGB(0xebebeb);
+            [_segmentedControl addSubview:H];
+        }
+    }
+    return _segmentedControl;
 }
 
 - (NoMessageView *)noMessageView
@@ -84,7 +94,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
+//    self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -98,6 +108,8 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 
     [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:FeedCellIdentifier];
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:MessageCellIdentifier];
+    
+    self.tableView.tableHeaderView = self.segmentedControl;
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -252,16 +264,36 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     }
     return 0;
 }
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 44.f;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+////    if (section == 0)
+//    return self.segmentedControl;
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 44.f;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return self.segmentedControl;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    if (section == 0) {
+//        if (self.dataArrayForMessage.count == 0 && self.index == 1) {
+//            return kScreenHeight;
+//        }
+//    }
+//    return 0.;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    if (section == 0) {
+//        if (self.dataArrayForMessage.count == 0 && self.index == 1)
+//            return self.noMessageView;
+//    }
+//    return nil;
+//}
 
 #pragma mark - HMSegmentedControl
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
