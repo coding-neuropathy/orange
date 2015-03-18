@@ -11,7 +11,6 @@
 #import "GKAPI.h"
 #import "EntityThreeGridCell.h"
 #import "EntitySingleListCell.h"
-#import "CategoryLikeViewController.h"
 
 @interface CategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -28,22 +27,6 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
     
-    
-    NSMutableArray * array = [NSMutableArray array];
-    {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
-        button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAInbox] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(archive) forControlEvents:UIControlEventTouchUpInside];
-        button.backgroundColor = [UIColor clearColor];
-        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-        [array addObject:item];
-    }
-    self.navigationItem.rightBarButtonItems = array;
-    
-    
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
@@ -53,14 +36,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
-    
-    
-    [GKAPI getCategoryStatByCategoryId:self.category.categoryId success:^(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount) {
-        UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:2];
-        [button setTitle:[NSString stringWithFormat:@"%ld件商品",entityCount] forState:UIControlStateNormal];
-    } failure:^(NSInteger stateCode) {
-        
-    }];
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -357,9 +332,9 @@
             [button setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
             [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
             [button setTitleColor:UIColorFromRGB(0xDB1F77) forState:UIControlStateSelected];
-            [button setTitle:@"" forState:UIControlStateNormal];
+            [button setTitle:@"我喜爱的商品" forState:UIControlStateNormal];
             [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-            //[button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
             button.tag = 2;
             button.backgroundColor = [UIColor clearColor];
             [view addSubview:button];
@@ -435,10 +410,5 @@
     
 }
 
--(void)archive
-{
-    CategoryLikeViewController * vc = [[CategoryLikeViewController alloc]init];
-    vc.category = self.category;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+
 @end

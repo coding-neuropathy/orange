@@ -6,14 +6,14 @@
 //  Copyright (c) 2015年 sensoro. All rights reserved.
 //
 
-#import "CategoryViewController.h"
+#import "CategoryLikeViewController.h"
 #import "HMSegmentedControl.h"
 #import "GKAPI.h"
 #import "EntityThreeGridCell.h"
 #import "EntitySingleListCell.h"
-#import "CategoryLikeViewController.h"
 
-@interface CategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@interface CategoryLikeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property(nonatomic, strong) NSMutableArray * dataArrayForLike;
@@ -21,28 +21,12 @@
 @property(nonatomic, strong) UIView *segmentedControl;
 @end
 
-@implementation CategoryViewController
+@implementation CategoryLikeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
-    
-    
-    NSMutableArray * array = [NSMutableArray array];
-    {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
-        button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAInbox] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(archive) forControlEvents:UIControlEventTouchUpInside];
-        button.backgroundColor = [UIColor clearColor];
-        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-        [array addObject:item];
-    }
-    self.navigationItem.rightBarButtonItems = array;
-    
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -54,10 +38,9 @@
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
     
-    
     [GKAPI getCategoryStatByCategoryId:self.category.categoryId success:^(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount) {
         UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:2];
-        [button setTitle:[NSString stringWithFormat:@"%ld件商品",entityCount] forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"%ld件商品",likeCount] forState:UIControlStateNormal];
     } failure:^(NSInteger stateCode) {
         
     }];
@@ -103,10 +86,10 @@
     icon.contentMode =UIViewContentModeScaleAspectFit;
     icon.backgroundColor = [UIColor clearColor];
     [icon sd_setImageWithURL:self.category.iconURL placeholderImage:nil options:SDWebImageRetryFailed];
-    [titleView addSubview:icon];
+    //[titleView addSubview:icon];
     
     UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-    [label setText:([self.category.categoryName componentsSeparatedByString:@"-"][0])];
+    [label setText:[NSString stringWithFormat:@"我喜爱的 %@",([self.category.categoryName componentsSeparatedByString:@"-"][0])]];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Helvetica" size:20];
     label.textColor = UIColorFromRGB(0x555555);
@@ -117,12 +100,15 @@
     
     titleView.deFrameWidth = label.deFrameWidth + icon.deFrameWidth * 2 +10;
     [titleView addSubview:label];
+    
+    /*
     if (self.category.iconURL) {
         label.center = CGPointMake(titleView.frame.size.width/2+8, titleView.frame.size.height/2);
         icon.hidden = NO;
         icon.deFrameRight = label.deFrameLeft - 5;
     }
     else
+     */
     {
         icon.hidden = YES;
         label.center = CGPointMake(titleView.frame.size.width/2, titleView.frame.size.height/2);
@@ -135,7 +121,7 @@
 - (void)refresh
 {
     if (self.index == 1) {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"like" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
@@ -147,7 +133,7 @@
     }
     else if (self.index == 0)
     {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"like" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
@@ -174,8 +160,7 @@
 - (void)loadMore
 {
     if (self.index == 1) {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
-            [self.dataArrayForEntity addObjectsFromArray:entityArray];
+        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -186,8 +171,7 @@
     }
     else if (self.index == 0)
     {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
-            [self.dataArrayForEntity addObjectsFromArray:entityArray];
+        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -357,7 +341,7 @@
             [button setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
             [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
             [button setTitleColor:UIColorFromRGB(0xDB1F77) forState:UIControlStateSelected];
-            [button setTitle:@"" forState:UIControlStateNormal];
+            [button setTitle:@"我喜爱的商品" forState:UIControlStateNormal];
             [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
             //[button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
             button.tag = 2;
@@ -435,10 +419,5 @@
     
 }
 
--(void)archive
-{
-    CategoryLikeViewController * vc = [[CategoryLikeViewController alloc]init];
-    vc.category = self.category;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+
 @end

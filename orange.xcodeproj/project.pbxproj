@@ -120,6 +120,7 @@
 		4E066B841A5CC02400DFEF65 /* expressionImage_custom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E066B121A5CC02400DFEF65 /* expressionImage_custom.plist */; };
 		4E066B851A5CC02400DFEF65 /* MLEmojiLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066B141A5CC02400DFEF65 /* MLEmojiLabel.m */; };
 		4E066B861A5CC02400DFEF65 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066B171A5CC02400DFEF65 /* TTTAttributedLabel.m */; };
+		4E117B551AB9CBBD00844935 /* CategoryLikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B541AB9CBBD00844935 /* CategoryLikeViewController.m */; };
 		4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */; };
 		4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */; };
 		4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C441A66B86F004C59C4 /* CategoryGridCell.m */; };
@@ -1309,6 +1310,8 @@
 		4E066B141A5CC02400DFEF65 /* MLEmojiLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLEmojiLabel.m; sourceTree = "<group>"; };
 		4E066B161A5CC02400DFEF65 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		4E066B171A5CC02400DFEF65 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		4E117B531AB9CBBD00844935 /* CategoryLikeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryLikeViewController.h; sourceTree = "<group>"; };
+		4E117B541AB9CBBD00844935 /* CategoryLikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryLikeViewController.m; sourceTree = "<group>"; };
 		4E198C3D1A65FE6E004C59C4 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
 		4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
 		4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityTwoGridCell.h; sourceTree = "<group>"; };
@@ -2799,6 +2802,15 @@
 			path = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
+		4E117B521AB9CBBD00844935 /* CategoryLikeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E117B531AB9CBBD00844935 /* CategoryLikeViewController.h */,
+				4E117B541AB9CBBD00844935 /* CategoryLikeViewController.m */,
+			);
+			path = CategoryLikeViewController;
+			sourceTree = "<group>";
+		};
 		4E1C36561AB429FE00EA2F00 /* GTScrollNavigationBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -3500,6 +3512,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4E117B521AB9CBBD00844935 /* CategoryLikeViewController */,
 				4E934DA51A9AE9FB00374B05 /* GroupViewController */,
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
 				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
@@ -5805,6 +5818,7 @@
 				4EA0C45C1A8287780025EC2E /* SignView.m in Sources */,
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
 				B766763A1AB805B5002F294C /* NoMessageView.m in Sources */,
+				4E117B551AB9CBBD00844935 /* CategoryLikeViewController.m in Sources */,
 				4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */,
 				4E56DF8B19D56EF500263B17 /* UIImage+WebP.m in Sources */,
 				4E56DF8D19D56EF500263B17 /* UIImageView+WebCache.m in Sources */,
@@ -6024,8 +6038,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (4EYA86V3Q7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TE HUI (4EYA86V3Q7)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty",
