@@ -34,9 +34,9 @@
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self.contentView addSubview:self.H];
+//        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
+//        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
+//        [self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -109,18 +109,7 @@
         //[self.contentView addSubview:self.box];
     }
     
-//    if (!self.image) {
-//        _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.0f, 16.0f,kScreenWidth -32, kScreenWidth-32)];
-//        _image.contentMode = UIViewContentModeScaleAspectFill;
-//        self.image.backgroundColor = [UIColor whiteColor];
-//        self.image.userInteractionEnabled = YES;
-//        //self.image.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
-//        //self.image.layer.borderWidth = 0.5;
-//        [self.contentView addSubview:self.image];
-//    }
     self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth -32, kScreenWidth-32);
-
-    
     
     if(!self.contentLabel) {
         _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
@@ -191,8 +180,8 @@
     self.timeButton.deFrameRight = self.contentLabel.deFrameRight;
    
     
-    [self bringSubviewToFront:self.H];
-    _H.deFrameBottom = self.frame.size.height-5;
+//    [self bringSubviewToFront:self.H];
+//    _H.deFrameBottom = self.frame.size.height-5;
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
                                      initWithTarget:self action:@selector(imageButtonAction)];
@@ -299,6 +288,21 @@
     VC.hidesBottomBarWhenPushed = YES;
     VC.entity = self.entity;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
+    CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
+    
+    
+    CGContextStrokePath(context);
 }
 
 
