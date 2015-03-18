@@ -82,45 +82,22 @@
     [self.navigationController.navigationBar setTranslucent:YES];
     self.edgesForExtendedLayout = UIRectEdgeAll;
     self.extendedLayoutIncludesOpaqueBars = YES;
-    
-    
-    
 
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f,kNavigationBarHeight+kStatusBarHeight, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f,kNavigationBarHeight+kStatusBarHeight, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
+    self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.view addSubview:self.tableView];
     [self configSearchBar];
     
-//    
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 150.f*kScreenWidth/320+34)];
-//    headerView.backgroundColor = [UIColor whiteColor];
-//    
-//    // Banner
-//    _bannerScrollView = [[UIScrollView alloc] init];
-//    _bannerPageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-//    self.bannerPageControl.pageIndicatorTintColor = UIColorFromRGB(0xbbbcbd);
-//    self.bannerPageControl.currentPageIndicatorTintColor = UIColorFromRGB(0x414243);
-//    self.bannerScrollView.frame = CGRectMake(0, 0, headerView.bounds.size.width, headerView.bounds.size.height-32);
-//    self.bannerScrollView.backgroundColor = [UIColor whiteColor];
-//    self.bannerScrollView.delegate = self;
-//    self.bannerScrollView.showsHorizontalScrollIndicator = NO;
-//    self.bannerScrollView.pagingEnabled = YES;
-//    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-//                                   initWithTarget:self action:@selector(tapBanner)];
-//    [self.bannerScrollView addGestureRecognizer:tap];
-//    self.bannerArray = [NSMutableArray array];
-//    [headerView addSubview:self.bannerScrollView];
-    //self.bannerPageControl.backgroundColor = UIColorFromRGB(0x000000);
-//    self.bannerPageControl.center = CGPointMake(headerView.deFrameWidth/2, self.bannerScrollView.deFrameHeight-10);
-//    [headerView addSubview:self.bannerPageControl];
     
+    UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
+    footer.backgroundColor = UIColorFromRGB(0xf8f8f8);
+    self.tableView.tableFooterView = footer;
     
     if (!self.segmentedControl) {
         HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
@@ -173,12 +150,6 @@
         [weakSelf refresh];
     }];
     
-    /*
-     [self.tableView addInfiniteScrollingWithActionHandler:^{
-     [weakSelf loadMore];
-     }];
-     */
-
     [self.tableView.pullToRefreshView startAnimating];
     [self.tableView reloadData];
     [self refresh];

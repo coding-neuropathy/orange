@@ -291,7 +291,7 @@
     }
     
     if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             UIView *accessoryV = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, cell.frame.size.height)];
@@ -374,9 +374,6 @@
         switch (indexPath.row) {
             case 0:
             {
-//                GKWebVC * webView = [[GKWebVC alloc] init];
-//                webView
-//                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:webView];
                 [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/about/"]] animated:YES];
             }
                 break;
@@ -397,41 +394,10 @@
             default:
                 break;
         }
-//        
-//        if (indexPath.row == 1) {
-//
-//        }
-//        if (indexPath.row == 2) {
-//
-//        }
     }
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-//    switch (alertView.tag) {
-//        case 20001:
-//        {
-//            if (buttonIndex == 1) {
-//                UITextField *tf=[alertView textFieldAtIndex:0];
-//                if (tf.text.length==0) {
-//                    [SVProgressHUD showImage:nil status:@"昵称不能为空"];
-//                }
-//                else
-//                {
-//                    [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
-//                        [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
-//                        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-//                    } failure:^(NSInteger stateCode) {
-//                        [SVProgressHUD showImage:nil status:@"修改失败"];
-//                    }];
-//                }
-//            }
-//        }
-//            break;
-//            
-//        default:
-//            break;
-//    }
     if(alertView.tag ==20001)
     {
         if(buttonIndex == 1)

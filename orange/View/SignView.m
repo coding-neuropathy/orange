@@ -29,11 +29,11 @@
     self = [super initWithFrame:kAppDelegate.window.frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
         whiteBG = [[UIView alloc]initWithFrame:CGRectMake(20, 80, self.frame.size.width-40, 300)];
         
         whiteBG.backgroundColor = [UIColor whiteColor];
-        whiteBG.layer.cornerRadius = 4.0f;
+        whiteBG.layer.cornerRadius = 0.0f;
         whiteBG.layer.masksToBounds = YES;
         [self addSubview:whiteBG];
         
