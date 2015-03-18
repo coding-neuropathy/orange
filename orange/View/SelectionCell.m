@@ -47,6 +47,20 @@
     
     // Configure the view for the selected state
 }
+
+- (UIImageView *)image
+{
+    if (!_image) {
+        _image = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _image.contentMode = UIViewContentModeScaleAspectFill;
+        _image.backgroundColor = [UIColor redColor];
+        _image.userInteractionEnabled = YES;
+        
+        [self.contentView addSubview:_image];
+    }
+    return _image;
+}
+
 - (void)setEntity:(GKEntity *)entity
 {
     if (_entity) {
@@ -54,6 +68,20 @@
     }
     _entity = entity;
     [self addObserver];
+
+    __block UIImageView *block_img = self.image;
+    __weak __typeof(&*self)weakSelf = self;
+    {
+        [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
+            
+            UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
+//            block_img.contentMode = UIViewContentModeCenter;
+            block_img.image = newimage;
+            [weakSelf.activityIndicator stopAnimating];
+            weakSelf.activityIndicator.hidden = YES;
+        }];
+    }
+    
     [self setNeedsLayout];
 }
 - (void)setNote:(GKNote *)note
@@ -81,27 +109,17 @@
         //[self.contentView addSubview:self.box];
     }
     
-    if (!self.image) {
-        _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.0f, 16.0f,kScreenWidth -32, kScreenWidth-32)];
-        self.image.contentMode = UIViewContentModeScaleAspectFill;
-        self.image.backgroundColor = [UIColor whiteColor];
-        self.image.userInteractionEnabled = YES;
-        //self.image.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
-        //self.image.layer.borderWidth = 0.5;
-        [self.contentView addSubview:self.image];
-    }
-    __block UIImageView *block_img = self.image;
-    __weak __typeof(&*self)weakSelf = self;
-    {
-        [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
-           
-            UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
-            block_img.contentMode = UIViewContentModeCenter;
-            block_img.image = newimage;
-            [weakSelf.activityIndicator stopAnimating];
-            weakSelf.activityIndicator.hidden = YES;
-        }];
-    }
+//    if (!self.image) {
+//        _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.0f, 16.0f,kScreenWidth -32, kScreenWidth-32)];
+//        _image.contentMode = UIViewContentModeScaleAspectFill;
+//        self.image.backgroundColor = [UIColor whiteColor];
+//        self.image.userInteractionEnabled = YES;
+//        //self.image.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+//        //self.image.layer.borderWidth = 0.5;
+//        [self.contentView addSubview:self.image];
+//    }
+    self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth -32, kScreenWidth-32);
+
     
     
     if(!self.contentLabel) {
