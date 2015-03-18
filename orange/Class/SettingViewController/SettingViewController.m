@@ -10,6 +10,8 @@
 #import "WXApi.h"
 #import "GKAPI.h"
 #import "LoginView.h"
+#import "GKWebVC.h"
+
 @interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -64,6 +66,7 @@
     // 其他
     NSDictionary *otherSection = @{@"section" : @"其他",
                                    @"row"     : @[
+                                           @"关于我们",
                                            @"清空图片缓存",
                                            @"意见反馈",
                                            @"版本",
@@ -120,22 +123,22 @@
 
 #pragma mark - UITableViewDataSource
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView* bgView = [[UIView alloc] init];
-    bgView.backgroundColor = [UIColor clearColor];
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 90, 32)];
-    titleLabel.textColor=UIColorFromRGB(0x9d9e9f);
-    titleLabel.backgroundColor = [UIColor clearColor];
-    [titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
-    titleLabel.text = [[self.dataArray objectAtIndex:section]objectForKey:@"section"];
-    [bgView addSubview:titleLabel];
-    return bgView;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView* bgView = [[UIView alloc] init];
+//    bgView.backgroundColor = [UIColor clearColor];
+//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 90, 32)];
+//    titleLabel.textColor=UIColorFromRGB(0x9d9e9f);
+//    titleLabel.backgroundColor = [UIColor clearColor];
+//    [titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
+//    titleLabel.text = [[self.dataArray objectAtIndex:section]objectForKey:@"section"];
+//    [bgView addSubview:titleLabel];
+//    return bgView;
+//}
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 32.0;
+    return 16.0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -306,9 +309,6 @@
         }
     }
     
-    
-    
-    
     return cell;
 }
 
@@ -371,16 +371,39 @@
         }
     }
     if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
-        if (indexPath.row == 0) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
-            alertView.alertViewStyle = UIAlertViewStyleDefault;
-            alertView.tag =20006;
-            [alertView show];
+        switch (indexPath.row) {
+            case 0:
+            {
+//                GKWebVC * webView = [[GKWebVC alloc] init];
+//                webView
+//                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:webView];
+                [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/about/"]] animated:YES];
+            }
+                break;
+            case 1:
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
+                alertView.alertViewStyle = UIAlertViewStyleDefault;
+                alertView.tag =20006;
+                [alertView show];
+            }
+                break;
+            case 2:
+            {
+                AVUserFeedbackAgent *agent = [AVUserFeedbackAgent sharedInstance];
+                [agent showConversations:self title:@"意见反馈" contact:@""];
+            }
+                break;
+            default:
+                break;
         }
-        if (indexPath.row == 1) {
-            AVUserFeedbackAgent *agent = [AVUserFeedbackAgent sharedInstance];
-            [agent showConversations:self title:@"意见反馈" contact:@""];
-        }
+//        
+//        if (indexPath.row == 1) {
+//
+//        }
+//        if (indexPath.row == 2) {
+//
+//        }
     }
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
