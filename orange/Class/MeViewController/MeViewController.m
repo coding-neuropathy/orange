@@ -16,6 +16,7 @@
 #import "FriendViewController.h"
 #import "TagViewController.h"
 #import "SettingViewController.h"
+#import "NoDataView.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -26,6 +27,7 @@
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
+@property (nonatomic, strong) NoDataView * nodataView;
 
 @end
 
@@ -61,6 +63,16 @@
         self.navigationItem.rightBarButtonItems = array;
     }
     return self;
+}
+
+- (NoDataView *)nodataView
+{
+    if (!_nodataView) {
+        _nodataView = [[NoDataView alloc] initWithFrame:CGRectZero];
+        
+        
+    }
+    return _nodataView;
 }
 
 - (void)viewDidLoad {
@@ -142,20 +154,9 @@
         {
             
             if (self.dataArrayForEntity.count == 0) {
-                UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 66)];
-                button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-                button.titleLabel.textAlignment = NSTextAlignmentCenter;
-                [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-                [button setTitle:[NSString stringWithFormat:@"%@还没有标记过喜欢的商品",[NSString fontAwesomeIconStringForEnum:FAHeartO]] forState:UIControlStateNormal];
-                [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
-                button.backgroundColor = [UIColor clearColor];
-                button.userInteractionEnabled = NO;
-                {
-                    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
-                    H.backgroundColor = UIColorFromRGB(0xebebeb);
-                    [button addSubview:H];
-                }
-                self.tableView.tableFooterView = button;
+                self.tableView.tableFooterView = self.nodataView;
+                self.nodataView.frame = CGRectMake(0, 0, kScreenWidth, 66);
+                self.nodataView.text = [NSString stringWithFormat:@"%@ 还没有标记过喜欢的商品",[NSString fontAwesomeIconStringForEnum:FAHeartO]];
             }
             else
             {
@@ -166,20 +167,22 @@
         case 1:
         {
             if (self.dataArrayForNote.count == 0) {
-                UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 66)];
-                button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-                button.titleLabel.textAlignment = NSTextAlignmentCenter;
-                [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-                [button setTitle:[NSString stringWithFormat:@"%@ 还没有点评过商品",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
-                [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
-                button.backgroundColor = [UIColor clearColor];
-                button.userInteractionEnabled = NO;
-                {
-                    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
-                    H.backgroundColor = UIColorFromRGB(0xebebeb);
-                    [button addSubview:H];
-                }
-                self.tableView.tableFooterView = button;
+//                UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 66)];
+//                button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+//                button.titleLabel.textAlignment = NSTextAlignmentCenter;
+//                [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+//                [button setTitle:[NSString stringWithFormat:@"%@ 还没有点评过商品",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
+//                [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
+//                button.backgroundColor = [UIColor clearColor];
+//                button.userInteractionEnabled = NO;
+//                {
+//                    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
+//                    H.backgroundColor = UIColorFromRGB(0xebebeb);
+//                    [button addSubview:H];
+//                }
+                self.tableView.tableFooterView = self.nodataView;
+                self.nodataView.frame = CGRectMake(0, 0, kScreenWidth, 66);
+                self.nodataView.text = [NSString stringWithFormat:@"%@ 还没有点评过商品",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]];
             }
             else
             {
@@ -190,20 +193,22 @@
         case 2:
         {
             if (self.dataArrayForTag.count == 0) {
-                UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 66)];
-                button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-                button.titleLabel.textAlignment = NSTextAlignmentCenter;
-                [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-                [button setTitle:[NSString stringWithFormat:@"%@ 还没有为商品添加过标签",[NSString fontAwesomeIconStringForEnum:FATag]] forState:UIControlStateNormal];
-                [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
-                button.backgroundColor = [UIColor clearColor];
-                button.userInteractionEnabled = NO;
-                {
-                    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
-                    H.backgroundColor = UIColorFromRGB(0xebebeb);
-                    [button addSubview:H];
-                }
-                self.tableView.tableFooterView = button;
+//                UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 66)];
+//                button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+//                button.titleLabel.textAlignment = NSTextAlignmentCenter;
+//                [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+//                [button setTitle:[NSString stringWithFormat:@"%@ 还没有为商品添加过标签",[NSString fontAwesomeIconStringForEnum:FATag]] forState:UIControlStateNormal];
+//                [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
+//                button.backgroundColor = [UIColor clearColor];
+//                button.userInteractionEnabled = NO;
+//                {
+//                    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(30,65, kScreenWidth-60, 0.5)];
+//                    H.backgroundColor = UIColorFromRGB(0xebebeb);
+//                    [button addSubview:H];
+//                }
+                self.tableView.tableFooterView = self.nodataView;
+                self.nodataView.frame = CGRectMake(0, 0, kScreenWidth, 66);
+                self.nodataView.text = [NSString stringWithFormat:@"%@ 还没有为商品添加过标签",[NSString fontAwesomeIconStringForEnum:FATag]] ;
             }
             else
             {

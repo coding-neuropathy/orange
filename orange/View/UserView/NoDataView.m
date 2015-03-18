@@ -29,7 +29,7 @@
 {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.font = [UIFont systemFontOfSize:14.];
+        _titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.textColor = UIColorFromRGB(0x9d9e9f);
         [self addSubview:_titleLabel];
