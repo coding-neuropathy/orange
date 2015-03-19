@@ -9,14 +9,25 @@
 #import "FanViewController.h"
 #import "UserSingleListCell.h"
 #import "GKAPI.h"
+#import "NoDataView.h"
 
 @interface FanViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray * dataArrayForUser;
+@property (nonatomic, strong) NSMutableArray * dataArrayForUser;
+@property (nonatomic, strong) NoDataView * noDataView;
 
 @end
 
 @implementation FanViewController
+
+- (NoDataView *)noDataView
+{
+    if (!_noDataView) {
+        _noDataView = [[NoDataView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 44.)];
+        _noDataView.backgroundColor = [UIColor clearColor];
+    }
+    return _noDataView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,6 +66,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
 /*
  #pragma mark - Navigation
  
@@ -71,6 +84,12 @@
     
     [GKAPI getUserFanListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
         self.dataArrayForUser = [NSMutableArray arrayWithArray:userArray];
+        if (self.dataArrayForUser.count == 0) {
+            self.tableView.tableFooterView = self.noDataView;
+            self.noDataView.text = @"没有任何粉丝";
+        } else {
+            self.tableView.tableFooterView = nil;
+        }
         [self.tableView reloadData];
         [self.tableView.pullToRefreshView stopAnimating];
     } failure:^(NSInteger stateCode) {
