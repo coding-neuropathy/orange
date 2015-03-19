@@ -441,7 +441,7 @@
     {
         if (!self.segmentedControl) {
             HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-            [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %ld",self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
+            [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %lu",self.user.likeCount], [NSString stringWithFormat:@"点评 %lu",self.user.noteCount],[NSString stringWithFormat:@"标签 %lu",self.user.tagCount]]];
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];

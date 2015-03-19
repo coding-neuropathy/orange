@@ -68,7 +68,7 @@
 {
     if (!_headerView) {
         _headerView = [[DiscoverHeaderView alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 150.f*kScreenWidth/320+34)];
-        _headerView.backgroundColor = [UIColor clearColor];
+        _headerView.backgroundColor = UIColorFromRGB(0xffffff);
         _headerView.delegate = self;
     }
     return _headerView;
@@ -77,7 +77,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = UIColorFromRGB(0xffffff);
+//    self.view.backgroundColor = UIColorFromRGB(0xffffff);
     [self.navigationController.navigationBar setAlpha:0.99];
     [self.navigationController.navigationBar setTranslucent:YES];
     self.edgesForExtendedLayout = UIRectEdgeAll;
@@ -118,11 +118,6 @@
             UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
             V.backgroundColor = UIColorFromRGB(0xebebeb);
             [segmentedControl addSubview:V];
-        }
-        {
-            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.deFrameHeight-1, kScreenWidth, 0.5)];
-            H.backgroundColor = UIColorFromRGB(0xe6e6e6);
-            [self.headerView addSubview:H];
         }
     }
 
