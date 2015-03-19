@@ -112,6 +112,8 @@
     self.pageControl.userInteractionEnabled = NO;
     self.pageControl.currentPage = 0;
     self.pageControl.numberOfPages = 4;
+    self.pageControl.pageIndicatorTintColor = UIColorFromRGB(0x9d9e9f);
+    self.pageControl.currentPageIndicatorTintColor = UIColorFromRGB(0x656768);
     [self.view addSubview:self.pageControl];
     [self.view bringSubviewToFront:self.pageControl];
 
