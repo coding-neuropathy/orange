@@ -34,7 +34,7 @@
             [SettingManager sharedInstance].jumpToTaobao = [objectDict[@"config"][@"jump_to_taobao"]boolValue];
         }
         if (objectDict[@"config"][@"taobao_ban_count"]) {
-            [SettingManager sharedInstance].taobaoBanCount = [objectDict[@"config"][@"taobao_ban_count"]unsignedIntegerValue];
+            //[SettingManager sharedInstance].taobaoBanCount = [objectDict[@"config"][@"taobao_ban_count"]unsignedIntegerValue];
         }
         if (objectDict[@"config"][@"show_selection_only"]) {
             [SettingManager sharedInstance].hidesNote = [objectDict[@"config"][@"show_selection_only"]boolValue];

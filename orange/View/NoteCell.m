@@ -104,6 +104,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         self.contentLabel.lineSpacing = 7.0;
         self.contentLabel.delegate = self;
         [self.contentLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
+        self.contentLabel.textColor = UIColorFromRGB(0x414243);
         [self.contentView addSubview:self.contentLabel];
     }
     

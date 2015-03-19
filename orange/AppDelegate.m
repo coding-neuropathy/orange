@@ -15,6 +15,7 @@
 #import "UserViewController.h"
 #import "CategoryViewController.h"
 #import "TagViewController.h"
+#import "IntruductionVC.h"
 
 
 @interface AppDelegate ()<WXApiDelegate>
@@ -50,6 +51,14 @@
             
         }
     }];
+    
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+    
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self customizeAppearance];
@@ -88,6 +97,11 @@
     
     
     [self refreshCategory];
+    
+    //if([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4"]) {
+        [self.window.rootViewController presentViewController:[IntruductionVC new] animated:NO completion:NULL];
+    //}
+    
     
     return YES;
 }

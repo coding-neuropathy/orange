@@ -9,7 +9,7 @@
 #import "GKWebVC.h"
 #import "WXApi.h"
 
-@interface GKWebVC ()<UIActionSheetDelegate>
+@interface GKWebVC ()<UIActionSheetDelegate,UIScrollViewDelegate>
 
 - (void)initViews;
 - (void)closeWebView;
@@ -178,21 +178,6 @@
             break;
     }
 }
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(CGPoint *)targetContentOffset
-{
-    if(velocity.y>0.5)
-    {
-        //[self.navigationController setNavigationBarHidden:YES animated:YES];
-        return;
-    }
-    
-    if(velocity.y<-05)
-    {
-        //[self.navigationController setNavigationBarHidden:NO animated:YES];
-    }
-}
-
 
 - (void)moreButtonAction
 {
