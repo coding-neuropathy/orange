@@ -95,21 +95,21 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBadge) name:@"ShowBadge" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBadge) name:@"HideBadge" object:nil];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
+    self.tableView.backgroundColor = UIColorFromRGB(0XF8F8F8);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
 
     [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:FeedCellIdentifier];
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:MessageCellIdentifier];
-    
-    self.tableView.tableHeaderView = self.segmentedControl;
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -130,6 +130,13 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 {
     [super viewDidAppear:animated];
     self.navigationController.scrollNavigationBar.scrollView = self.tableView;
+    if (kAppDelegate.messageCount) {
+        [self addBadge];
+    }
+    else
+    {
+        [self removeBadge];
+    }
     
 }
 
@@ -170,6 +177,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
             } else {
                 self.tableView.tableFooterView = nil;
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"HideBadge" object:nil userInfo:nil];
             [self.tableView reloadData];
             
             [self.tableView.pullToRefreshView stopAnimating];
@@ -264,36 +272,42 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     }
     return 0;
 }
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 44.f;
-//}
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-////    if (section == 0)
-//    return self.segmentedControl;
-//}
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    if (section == 0) {
-//        if (self.dataArrayForMessage.count == 0 && self.index == 1) {
-//            return kScreenHeight;
-//        }
-//    }
-//    return 0.;
-//}
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-//{
-//    if (section == 0) {
-//        if (self.dataArrayForMessage.count == 0 && self.index == 1)
-//            return self.noMessageView;
-//    }
-//    return nil;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 44.f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return self.segmentedControl;
+    }
+    else
+    {
+        return nil;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        if (self.dataArrayForMessage.count == 0 && self.index == 1) {
+            return kScreenHeight;
+        }
+    }
+    return 0.;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        if (self.dataArrayForMessage.count == 0 && self.index == 1)
+            return self.noMessageView;
+    }
+    return nil;
+}
 
 #pragma mark - HMSegmentedControl
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
@@ -318,6 +332,34 @@ static NSString *MessageCellIdentifier = @"MessageCell";
             
         default:
             break;
+    }
+}
+
+- (void)addBadge
+{
+    [self removeBadge];
+    [self tabBadge:YES];
+}
+
+- (void)removeBadge
+{
+    [self tabBadge:NO];
+}
+
+- (void)tabBadge:(BOOL)yes
+{
+    if (yes) {
+        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 6, 6)];
+        badge.backgroundColor = UIColorFromRGB(0xFF1F77);
+        badge.tag = 100;
+        badge.layer.cornerRadius = 3;
+        badge.layer.masksToBounds = YES;
+        badge.center = CGPointMake(kScreenWidth*3/4+24,10);
+        [self.segmentedControl addSubview:badge];
+    }
+    else
+    {
+        [[self.segmentedControl viewWithTag:100]removeFromSuperview];
     }
 }
 

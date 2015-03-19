@@ -34,7 +34,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBadge) name:@"ShowBadge" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBadge) name:@"HideBadge" object:nil];
+    
     self.tabBar.translucent = NO;
     self.delegate = self;
     [self.tabBar setItemPositioning:UITabBarItemPositioningAutomatic];
@@ -122,12 +124,12 @@
 - (void)tabBadge:(BOOL)yes
 {
     if (yes) {
-        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 8, 8)];
-        badge.backgroundColor = UIColorFromRGB(0xff1b00);
+        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 6, 6)];
+        badge.backgroundColor = UIColorFromRGB(0xFF1F77);
         badge.tag = 100;
-        badge.layer.cornerRadius = 4;
+        badge.layer.cornerRadius = 3;
         badge.layer.masksToBounds = YES;
-        badge.center = CGPointMake(kScreenWidth*5/8+20,10);
+        badge.center = CGPointMake(kScreenWidth*5/8+15,10);
         [self.tabBar addSubview:badge];
     }
     else

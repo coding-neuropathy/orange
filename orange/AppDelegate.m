@@ -103,6 +103,15 @@
     //}
     
     
+    {    NSTimer *_timer = [NSTimer scheduledTimerWithTimeInterval:240.0f
+                                                             target:self
+                                                           selector:@selector(checkNewMessage)
+                                                           userInfo:nil
+                                                            repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+        [self performSelector:@selector(checkNewMessage) withObject:nil afterDelay:4];
+    }
+    
     return YES;
 }
 
@@ -335,5 +344,25 @@
         
     }];
 }
+
+-(void)checkNewMessage
+{
+    if (!k_isLogin) {
+        return;
+    }
+    
+    [GKAPI getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
+        if (dictionary[@"unread_message_count"]) {
+            NSUInteger unreadMessageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
+            self.messageCount = 1;
+            if (self.messageCount != 0) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBadge" object:nil userInfo:nil];
+            }
+        }
+    } failure:^(NSInteger stateCode) {
+        
+    }];
+}
+
 
 @end
