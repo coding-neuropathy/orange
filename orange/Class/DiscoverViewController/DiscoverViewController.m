@@ -94,18 +94,18 @@
 //    self.view.backgroundColor = UIColorFromRGB(0xffffff);
     [self.navigationController.navigationBar setAlpha:0.99];
     [self.navigationController.navigationBar setTranslucent:YES];
-//    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.edgesForExtendedLayout = UIRectEdgeAll;
     self.extendedLayoutIncludesOpaqueBars = YES;
 
-//    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f,kNavigationBarHeight+kStatusBarHeight, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
-//    self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//    self.tableView.delegate = self;
-//    self.tableView.dataSource = self;
-//    self.tableView.backgroundView = nil;
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    self.tableView.showsVerticalScrollIndicator = YES;
-//    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
-//    [self.view addSubview:self.tableView];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f,kNavigationBarHeight+kStatusBarHeight, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
+    self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.backgroundView = nil;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    [self.view addSubview:self.tableView];
     [self configSearchBar];
     
     
@@ -167,8 +167,8 @@
     [self.tableView setContentOffset:CGPointMake(0, 0)];
 //    [self.tableView setcon]
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 
@@ -750,71 +750,7 @@
 }
 
 
-#pragma mark - Getter And Setter
-//- (void)setBannerArray:(NSArray *)bannerArray
-//{
-//    _bannerArray = bannerArray;
-//    
-//    for (UIView *view in self.bannerScrollView.subviews) {
-//        if ([view isKindOfClass:[UIImageView class]] && view.tag == 100) {
-//            [view removeFromSuperview];
-//        }
-//    }
-//    
-//    self.bannerScrollView.frame = CGRectMake(7, 7, kScreenWidth-14, 149*kScreenWidth/320-15);
-//    self.bannerScrollView.backgroundColor = UIColorFromRGB(0xf1f1f1);
-//    
-//    [self.bannerArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//        NSDictionary *dict = (NSDictionary *)obj;
-//        NSURL *imageURL = [NSURL URLWithString:[dict valueForKey:@"img"]];
-//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.bannerScrollView.frame) * idx, 0.f, CGRectGetWidth(self.bannerScrollView.frame), CGRectGetHeight(self.bannerScrollView.frame))];
-//        imageView.tag = 100;
-//        imageView.backgroundColor = UIColorFromRGB(0xf1f1f1);
-//        [imageView setContentMode:UIViewContentModeScaleAspectFill];
-//        [imageView sd_setImageWithURL:imageURL placeholderImage:nil options:SDWebImageRetryFailed];
-//        [self.bannerScrollView addSubview:imageView];
-//    }];
 
-//    self.bannerScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.bannerScrollView.frame) * self.bannerArray.count, CGRectGetHeight(self.bannerScrollView.frame));
-//    self.bannerPageControl.currentPage = 0;
-//    self.bannerPageControl.numberOfPages = self.bannerArray.count;
-//}
-
-//- (void)changeBanner
-//{
-//    NSInteger index = fabs(self.bannerScrollView.contentOffset.x) / CGRectGetWidth(self.bannerScrollView.bounds);
-//    self.bannerPageControl.currentPage = (index + 1) % self.bannerArray.count;
-//    [self.bannerScrollView setContentOffset:CGPointMake(self.bannerPageControl.currentPage * CGRectGetWidth(self.bannerScrollView.bounds), 0.f) animated:YES];
-//}
-
-//- (void)tapBanner
-//{
-//    
-//    NSInteger index = self.bannerPageControl.currentPage;
-//    NSDictionary *dict = (NSDictionary *)self.bannerArray[index];
-//    NSString *url = [dict valueForKey:@"url"];
-//    if ([url hasPrefix:@"http://"]) {
-//        if (k_isLogin) {
-//            NSRange range = [url rangeOfString:@"?"];
-//            if (range.location != NSNotFound) {
-//                url = [url stringByAppendingString:[NSString stringWithFormat:@"&session=%@",[Passport sharedInstance].session]];
-//            }
-//            else
-//            {
-//                url = [url stringByAppendingString:[NSString stringWithFormat:@"?session=%@",[Passport sharedInstance].session]];
-//            }
-//        }
-//        NSRange range = [url rangeOfString:@"out_link"];
-//        if (range.location == NSNotFound) {
-//            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
-//            VC.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:VC animated:YES];
-//            return;
-//        }
-//    }
-//    
-//    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
-//}
 
 #pragma mark - Header View Delegate
 - (void)TapBannerImageAction:(NSDictionary *)dict

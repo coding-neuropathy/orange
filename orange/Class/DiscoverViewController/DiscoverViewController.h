@@ -7,8 +7,8 @@
 //
 
 //#import <UIKit/UIKit.h>
-#import "ListViewController.h"
+//#import "ListViewController.h"
 
-@interface DiscoverViewController : ListViewController;
+@interface DiscoverViewController : BaseViewController;
 
 @end
