@@ -67,6 +67,9 @@
         
         _emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(24.f, tip.deFrameBottom+12, whiteBG.deFrameWidth - 48, 45.f)];
         self.emailTextField.delegate = self;
+        self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
+        self.emailTextField.adjustsFontSizeToFitWidth = YES;
+//        self.emailTextField.uitex
         self.emailTextField.borderStyle = UITextBorderStyleNone;
         //self.emailTextField.layer.borderColor = UIColorFromRGB(0xdcdcdc).CGColor;
         //self.emailTextField.layer.borderWidth = 0.5;
