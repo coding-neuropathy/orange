@@ -94,18 +94,18 @@
 //    self.view.backgroundColor = UIColorFromRGB(0xffffff);
     [self.navigationController.navigationBar setAlpha:0.99];
     [self.navigationController.navigationBar setTranslucent:YES];
-    self.edgesForExtendedLayout = UIRectEdgeAll;
+//    self.edgesForExtendedLayout = UIRectEdgeAll;
     self.extendedLayoutIncludesOpaqueBars = YES;
 
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f,kNavigationBarHeight+kStatusBarHeight, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.backgroundView = nil;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.showsVerticalScrollIndicator = YES;
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
-    [self.view addSubview:self.tableView];
+//    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f,kNavigationBarHeight+kStatusBarHeight, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
+//    self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//    self.tableView.delegate = self;
+//    self.tableView.dataSource = self;
+//    self.tableView.backgroundView = nil;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.showsVerticalScrollIndicator = YES;
+//    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+//    [self.view addSubview:self.tableView];
     [self configSearchBar];
     
     
@@ -154,6 +154,8 @@
         self.headerView.bannerArray = showBannerArray;
     } failure:nil];
     
+
+    
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
@@ -163,8 +165,12 @@
     [self.tableView reloadData];
     [self refresh];
     [self.tableView setContentOffset:CGPointMake(0, 0)];
-
+//    [self.tableView setcon]
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -580,10 +586,6 @@
             countLabel.deFrameRight = kScreenWidth - 20;
             [view addSubview:countLabel];
             
-            
-            
-            
-            
             return view;
         }
     }
@@ -934,11 +936,8 @@
                     [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
         }];
     }
-    
-
-
-    
 }
+
 - (void)searchButtonAction
 {
     [self handleSearchText:self.keyword];

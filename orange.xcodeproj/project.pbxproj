@@ -1171,6 +1171,7 @@
 		4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */; };
 		4EE0A8961A4CEB8C0092F884 /* DWBubbleMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0A8951A4CEB8C0092F884 /* DWBubbleMenuButton.m */; };
 		4EFCBCBB19D5CF650071F7A0 /* UIView+DEFrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCBCBA19D5CF650071F7A0 /* UIView+DEFrameAdditions.m */; };
+		B708432A1ABBF427009605D8 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B70843291ABBF427009605D8 /* NSString+Helper.m */; };
 		B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */; };
 		B749632A1AB15E9000C340FB /* EntityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B74963291AB15E9000C340FB /* EntityHeaderView.m */; };
 		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
@@ -1192,6 +1193,7 @@
 		B7AAFA901AB70CA500A2F20D /* Tae.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7AAFA8F1AB70CA500A2F20D /* Tae.bundle */; };
 		B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C6847F1ABBC45800A122E8 /* EmptyView.m */; };
 		B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */; };
+		B7C684861ABBD78E00A122E8 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C684851ABBD78E00A122E8 /* ListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2551,6 +2553,8 @@
 		4EE0A8951A4CEB8C0092F884 /* DWBubbleMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWBubbleMenuButton.m; sourceTree = "<group>"; };
 		4EFCBCB919D5CF650071F7A0 /* UIView+DEFrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DEFrameAdditions.h"; sourceTree = "<group>"; };
 		4EFCBCBA19D5CF650071F7A0 /* UIView+DEFrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DEFrameAdditions.m"; sourceTree = "<group>"; };
+		B70843281ABBF427009605D8 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Helper.h"; path = "NSString+/NSString+Helper.h"; sourceTree = "<group>"; };
+		B70843291ABBF427009605D8 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Helper.m"; path = "NSString+/NSString+Helper.m"; sourceTree = "<group>"; };
 		B74266DB1AB3DFE10064A010 /* UIScrollView+AutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+AutoScroll.h"; sourceTree = "<group>"; };
 		B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+AutoScroll.m"; sourceTree = "<group>"; };
 		B74963281AB15E9000C340FB /* EntityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityHeaderView.h; path = EntityView/EntityHeaderView.h; sourceTree = "<group>"; };
@@ -2583,6 +2587,8 @@
 		B7C6847F1ABBC45800A122E8 /* EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmptyView.m; path = Components/EmptyView.m; sourceTree = "<group>"; };
 		B7C684811ABBC63C00A122E8 /* NoSearchResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoSearchResultView.h; path = DiscoverView/NoSearchResultView.h; sourceTree = "<group>"; };
 		B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoSearchResultView.m; path = DiscoverView/NoSearchResultView.m; sourceTree = "<group>"; };
+		B7C684841ABBD78E00A122E8 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		B7C684851ABBD78E00A122E8 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3285,6 +3291,7 @@
 		4E3A23791A52EC9600037F9C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				B70843271ABBF3C0009605D8 /* NSString+ */,
 				B7AAFA601AB69DD200A2F20D /* UIPlaceHolderTextView */,
 				B7AAFA5C1AB67E2300A2F20D /* RadioButton */,
 				B74266DA1AB3DFE10064A010 /* AutoScroll */,
@@ -4533,6 +4540,8 @@
 			children = (
 				4EB6ADAD1A77D7220089797A /* BaseViewController.h */,
 				4EB6ADAE1A77D7220089797A /* BaseViewController.m */,
+				B7C684841ABBD78E00A122E8 /* ListViewController.h */,
+				B7C684851ABBD78E00A122E8 /* ListViewController.m */,
 			);
 			path = BaseViewController;
 			sourceTree = "<group>";
@@ -4607,6 +4616,15 @@
 				4EE0A8951A4CEB8C0092F884 /* DWBubbleMenuButton.m */,
 			);
 			path = DWBubbleMenuButton;
+			sourceTree = "<group>";
+		};
+		B70843271ABBF3C0009605D8 /* NSString+ */ = {
+			isa = PBXGroup;
+			children = (
+				B70843281ABBF427009605D8 /* NSString+Helper.h */,
+				B70843291ABBF427009605D8 /* NSString+Helper.m */,
+			);
+			name = "NSString+";
 			sourceTree = "<group>";
 		};
 		B74266DA1AB3DFE10064A010 /* AutoScroll */ = {
@@ -5787,6 +5805,7 @@
 			files = (
 				4EA0C4571A82810D0025EC2E /* GKTaobaoOAuthViewController.m in Sources */,
 				4E3A23471A51A7C500037F9C /* GKNote.m in Sources */,
+				B7C684861ABBD78E00A122E8 /* ListViewController.m in Sources */,
 				4E1D28D21A125B9300740C17 /* JSQVideoMediaItem.m in Sources */,
 				4E1D28BF1A125B9300740C17 /* UIImage+JSQMessages.m in Sources */,
 				4E2D6D5F1A6FF7DE009E4A17 /* NoteSingleListCell.m in Sources */,
@@ -5808,6 +5827,7 @@
 				4E3A23461A51A7C500037F9C /* GKEntityCategory.m in Sources */,
 				4E3A23851A52EC9600037F9C /* Passport.m in Sources */,
 				4E1D28CB1A125B9300740C17 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
+				B708432A1ABBF427009605D8 /* NSString+Helper.m in Sources */,
 				B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */,
 				4E1D28CC1A125B9300740C17 /* JSQLocationMediaItem.m in Sources */,
 				4E1D28C71A125B9300740C17 /* JSQMessagesTimestampFormatter.m in Sources */,
@@ -6066,37 +6086,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (A5Y9CLHH49)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TE HUI (A5Y9CLHH49)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/orange/ThirdParty",
-				);
-				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = orange/config.pch;
-				INFOPLIST_FILE = "$(SRCROOT)/orange/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lstdc++",
-				);
-				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "7d792a44-3244-4b27-bac0-6c274324376d";
-			};
-			name = Debug;
-		};
-		4E56DF3A19D552C000263B17 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (A5Y9CLHH49)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6117,7 +6107,37 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "7d792a44-3244-4b27-bac0-6c274324376d";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		4E56DF3A19D552C000263B17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/orange/ThirdParty",
+				);
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = orange/config.pch;
+				INFOPLIST_FILE = "$(SRCROOT)/orange/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = orange;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

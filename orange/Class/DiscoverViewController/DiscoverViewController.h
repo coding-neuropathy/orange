@@ -6,8 +6,9 @@
 //  Copyright (c) 2015年 sensoro. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import "ListViewController.h"
 
-@interface DiscoverViewController : BaseViewController
+@interface DiscoverViewController : ListViewController;
 
 @end

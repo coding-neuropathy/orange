@@ -18,7 +18,8 @@
 #import "SettingViewController.h"
 #import "NoDataView.h"
 
-@interface MeViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
+@interface MeViewController ()<UITableViewDelegate,UITableViewDataSource>
+
 @property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property(nonatomic, strong) NSMutableArray * dataArrayForNote;

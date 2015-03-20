@@ -9,6 +9,7 @@
 #import "GKEntity.h"
 #import "GKPurchase.h"
 #import "GKNote.h"
+#import "NSString+Helper.h"
 
 @implementation GKEntity
 
@@ -117,16 +118,27 @@
 
 - (NSURL *)imageURL_640x640
 {
+//    NSLog(@"image url %@", self.imageURL.absoluteString);
+    if ([self.imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+        return [NSURL URLWithString:[self.imageURL.absoluteString imageURLWithSize:640]];
+    }
+    
     return [NSURL URLWithString:[self.imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
 }
 
 - (NSURL *)imageURL_240x240
 {
+    if ([self.imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+        return [NSURL URLWithString:[self.imageURL.absoluteString imageURLWithSize:240]];
+    }
     return [NSURL URLWithString:[self.imageURL.absoluteString stringByAppendingString:@"_240x240.jpg"]];
 }
 
 - (NSURL *)imageURL_310x310
 {
+    if ([self.imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+        return [NSURL URLWithString:[self.imageURL.absoluteString imageURLWithSize:310]];
+    }
     return [NSURL URLWithString:[self.imageURL.absoluteString stringByAppendingString:@"_310x310.jpg"]];
 }
 

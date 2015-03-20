@@ -81,17 +81,17 @@ static NSString *CellIdentifier = @"SelectionCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
-
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kStatusBarHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.backgroundView = nil;
-//    self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.showsVerticalScrollIndicator = YES;
-    self.tableView.backgroundColor = [UIColor clearColor];
-    
+//
+//    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kStatusBarHeight) style:UITableViewStylePlain];
+//    self.tableView.backgroundColor = [UIColor whiteColor];
+//    self.tableView.delegate = self;
+//    self.tableView.dataSource = self;
+//    self.tableView.backgroundView = nil;
+////    self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.showsVerticalScrollIndicator = YES;
+//    self.tableView.backgroundColor = [UIColor clearColor];
+//    self.tableView.frame = CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kStatusBarHeight);
     [self.tableView registerClass:[SelectionCell class] forCellReuseIdentifier:CellIdentifier];
     [self.view addSubview:self.tableView];
 
