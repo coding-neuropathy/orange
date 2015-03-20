@@ -140,7 +140,7 @@
 
 
 - (void) changePage:(id)sender {
-    int page = _pageControl.currentPage;
+    NSInteger page = _pageControl.currentPage;
     [_scrollView setContentOffset:CGPointMake(kScreenWidth * page, 0)];
 }
 @end

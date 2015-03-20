@@ -485,9 +485,18 @@ typedef NS_ENUM(NSInteger, MessageType) {
 - (void)avatarButtonAction
 {
     NSDictionary * message = self.message;
+    
+    UserViewController * VC = [[UserViewController alloc] init];
+    
+    
     GKNote *note = message[@"content"][@"note"];
-    UserViewController * VC = [[UserViewController alloc]init];
-    VC.user = note.creator;
+    if (note)
+        VC.user = note.creator;
+    else {
+        GKUser * user = message[@"content"][@"user"];
+        VC.user = user;
+    }
+    
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
