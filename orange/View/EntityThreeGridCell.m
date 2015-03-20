@@ -64,7 +64,7 @@
         UIButton *item = self.itemArray[i];
         if (i < self.entityArray.count) {
             GKEntity * entity = self.entityArray[i];
-            [item sd_setImageWithURL:entity.imageURL_240x240 forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf8f8f8) andSize:CGSizeMake((kScreenWidth-3)/3-3, (kScreenWidth-3)/3-3)]];
+            [item sd_setImageWithURL:entity.imageURL_240x240 forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake((kScreenWidth-3)/3-3, (kScreenWidth-3)/3-3)]];
             item.hidden = NO;
         } else {
             item.hidden = YES;

@@ -35,6 +35,9 @@
 @property(nonatomic, strong) NSMutableArray * dataArrayForUserForSearch;
 @property(nonatomic, strong) NSMutableArray * dataArrayForLikeForSearch;
 
+@property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
+@property(nonatomic, strong) NSMutableArray * dataArrayForOffsetForSearch;
+
 
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) HMSegmentedControl *segmentedControl;
@@ -108,11 +111,6 @@
     [self.view addSubview:self.tableView];
     [self configSearchBar];
     
-    
-    UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 24)];
-    footer.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    self.tableView.tableFooterView = footer;
-    
     if (!self.segmentedControl) {
         HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
         [segmentedControl setSectionTitles:@[@"热门商品", @"推荐品类"]];
@@ -169,6 +167,8 @@
     
 //    self.automaticallyAdjustsScrollViewInsets = NO;
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    [self configFooter];
 }
 
 
@@ -631,7 +631,9 @@
     {
         NSUInteger index = segmentedControl.selectedSegmentIndex;
         self.index = index;
+        CGFloat y = [[self.dataArrayForOffset objectAtIndexedSubscript:self.segmentedControl.selectedSegmentIndex] floatValue];
         [self.tableView reloadData];
+        [self.tableView setContentOffset:CGPointMake(0, y) animated:NO];
         switch (index) {
             case 0:
             {
@@ -658,7 +660,10 @@
     }
     else if(segmentedControl == self.segmentedControlForSearch)
     {
+     
+        CGFloat y = [[self.dataArrayForOffsetForSearch objectAtIndexedSubscript:self.segmentedControlForSearch.selectedSegmentIndex] floatValue];
         [self.searchDC.searchResultsTableView reloadData];
+        [self.searchDC.searchResultsTableView setContentOffset:CGPointMake(0, y) animated:NO];
         NSUInteger index = segmentedControl.selectedSegmentIndex;
         switch (index) {
             case 0:
@@ -780,16 +785,24 @@
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
 }
 
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-//{
-//    if (scrollView == self.bannerScrollView) {
-//        // 获取当前页码
-//        NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
-//        // 设置当前页码
-//        self.bannerPageControl.currentPage = index;
-//    }
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:self.tableView]) {
+        if (!self.dataArrayForOffset) {
+            self.dataArrayForOffset = [NSMutableArray arrayWithObjects:@(0),@(0),@(0),nil];
+        }
+        [self.dataArrayForOffset setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.segmentedControl.selectedSegmentIndex];
+    }
+    else
+    {
+        if (!self.dataArrayForOffsetForSearch) {
+            self.dataArrayForOffsetForSearch = [NSMutableArray arrayWithObjects:@(0),@(0),@(0),@(0),nil];
+        }
+        [self.dataArrayForOffsetForSearch setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.segmentedControlForSearch.selectedSegmentIndex];
+    }
 
+    
+}
 
 #pragma mark - SearchBar
 
@@ -888,6 +901,32 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)configFooter
+{
+    UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 21)];
+    footer.backgroundColor = UIColorFromRGB(0xf8f8f8);
+    self.tableView.tableFooterView = footer;
+    
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,100)];
+    view.backgroundColor = UIColorFromRGB(0xf8f8f8);
+    
+    
+    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(20,60, kScreenWidth-40, 0.5)];
+    H.backgroundColor = UIColorFromRGB(0xebebeb);
+    [view addSubview:H];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 120, 20.f)];
+    label.backgroundColor = UIColorFromRGB(0xf8f8f8);
+    label.font = [UIFont fontWithName:@"FultonsHand" size:14];
+    label.center = CGPointMake(kScreenWidth/2, 60);
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"Live Different";
+    label.textColor = UIColorFromRGB(0x9d9e9f);
+    [view addSubview:label];
+    
+    [footer addSubview:view];
 }
 
 @end
