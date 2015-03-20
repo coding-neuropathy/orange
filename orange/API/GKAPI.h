@@ -629,6 +629,7 @@
  *  @param failure    失败block
  */
 + (void)getRandomEntityListByCategoryId:(NSUInteger)categoryId
+                                entityId:(NSString *)entityId
                                   count:(NSInteger)count
                                 success:(void (^)(NSArray *entityArray))success
                                 failure:(void (^)(NSInteger stateCode))failure;

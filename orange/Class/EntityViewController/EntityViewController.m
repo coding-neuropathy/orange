@@ -173,7 +173,9 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         
     }];
     
-    [GKAPI getRandomEntityListByCategoryId:self.entity.categoryId count:9 success:^(NSArray *entityArray) {
+    [GKAPI getRandomEntityListByCategoryId:self.entity.categoryId
+                                  entityId:self.entity.entityId
+                                     count:9 success:^(NSArray *entityArray) {
         self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
         [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
@@ -216,12 +218,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         return cell;
     }
     else if (indexPath.section == 4) {
-//        static NSString *CellIdentifier = @"EntityCell";
         EntityThreeGridCell *cell = [tableView dequeueReusableCellWithIdentifier:EntityCellIdentifier forIndexPath:indexPath];
-//        if (!cell) {
-//            cell = [[EntityThreeGridCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//        }
-        
         NSArray *entityArray = self.dataArrayForRecommend;
         NSMutableArray *array = [[NSMutableArray alloc] init];
         NSUInteger offset = indexPath.row * 3;

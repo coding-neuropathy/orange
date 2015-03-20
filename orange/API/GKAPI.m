@@ -2026,11 +2026,13 @@
  *  @param failure    失败block
  */
 + (void)getRandomEntityListByCategoryId:(NSUInteger)categoryId
+                               entityId:(NSString *)entityId
                                   count:(NSInteger)count
                                 success:(void (^)(NSArray *entityArray))success
                                 failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(categoryId >= 0);
+//    NSParameterAssert(entityId > 0);
     NSParameterAssert(count > 0);
     
     NSString *path = @"entity/guess/";
@@ -2040,6 +2042,7 @@
         [paraDict setObject:@(categoryId) forKey:@"cid"];
     }
     [paraDict setObject:@(count) forKey:@"count"];
+    [paraDict setObject:entityId forKey:@"eid"];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
