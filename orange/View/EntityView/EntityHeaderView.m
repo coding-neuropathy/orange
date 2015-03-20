@@ -7,6 +7,7 @@
 //
 
 #import "EntityHeaderView.h"
+#import "NSString+Helper.h"
 
 @interface EntityHeaderView () <UIScrollViewDelegate>
 @property (strong, nonatomic) UILabel * titleLabel;
@@ -16,6 +17,8 @@
 @property (strong, nonatomic) UIButton * buyBtn;
 
 @end
+
+static CGFloat kEntityViewMarginLeft = 16.;
 
 @implementation EntityHeaderView
 
@@ -34,7 +37,7 @@
 {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.numberOfLines = 1;
+        _titleLabel.numberOfLines = 2;
         _titleLabel.font = [UIFont systemFontOfSize:16.f];
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.textColor = UIColorFromRGB(0x414243);
@@ -163,7 +166,11 @@
 {
     [super layoutSubviews];
 
-    self.titleLabel.frame = CGRectMake(16., 5., kScreenWidth - 20., 25.);
+    CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font];
+    
+    self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 5., kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
+    
+    
     self.scrollView.frame = CGRectMake(16., 51., kScreenWidth - 32., kScreenWidth - 32.);
     
     if ([_entity.imageURLArray count] > 0) {
