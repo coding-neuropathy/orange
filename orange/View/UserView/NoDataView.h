@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EmptyView.h"
 
-@interface NoDataView : UIView
+@interface NoDataView : EmptyView
 
 @property (strong, nonatomic) NSString * text;
 

@@ -85,7 +85,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 - (NoMessageView *)noMessageView
 {
     if (!_noMessageView) {
-        _noMessageView = [[NoMessageView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        _noMessageView = [[NoMessageView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200)];
 //        _noMessageView.backgroundColor = [UIColor redColor];
     }
     return _noMessageView;
@@ -99,7 +99,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBadge) name:@"HideBadge" object:nil];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor whiteColor];
+//    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundView = nil;
@@ -162,6 +162,12 @@ static NSString *MessageCellIdentifier = @"MessageCell";
         
         [GKAPI getFeedWithTimestamp:[[NSDate date] timeIntervalSince1970] type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
             self.dataArrayForFeed = [NSMutableArray arrayWithArray:feedArray];
+            if (self.dataArrayForMessage.count == 0) {
+                self.tableView.tableFooterView = self.noMessageView;
+                self.noMessageView.type = NoFeedType;
+            } else {
+                self.tableView.tableFooterView = nil;
+            }
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -174,6 +180,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
             self.dataArrayForMessage = [NSMutableArray arrayWithArray:messageArray];
             if (self.dataArrayForMessage.count == 0) {
                 self.tableView.tableFooterView = self.noMessageView;
+                self.noMessageView.type = NoMessageType;
             } else {
                 self.tableView.tableFooterView = nil;
             }
@@ -290,24 +297,24 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    if (section == 0) {
-        if (self.dataArrayForMessage.count == 0 && self.index == 1) {
-            return kScreenHeight;
-        }
-    }
-    return 0.;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    if (section == 0) {
-        if (self.dataArrayForMessage.count == 0 && self.index == 1)
-            return self.noMessageView;
-    }
-    return nil;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    if (section == 0) {
+//        if (self.dataArrayForMessage.count == 0 && self.index == 1) {
+//            return kScreenHeight;
+//        }
+//    }
+//    return 0.;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    if (section == 0) {
+//        if (self.dataArrayForMessage.count == 0 && self.index == 1)
+//            return self.noMessageView;
+//    }
+//    return nil;
+//}
 
 #pragma mark - HMSegmentedControl
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {

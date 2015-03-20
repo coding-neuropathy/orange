@@ -19,8 +19,11 @@
 #import "UserSingleListCell.h"
 #import "DiscoverHeaderView.h"
 #import "GTScrollNavigationBar.h"
+#import "NoSearchResultView.h"
 
-@interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate, DiscoverHeaderViewDelegate>
+
+@interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchDisplayDelegate, DiscoverHeaderViewDelegate>
+
 @property (strong, nonatomic) UISearchBar *searchBar;
 @property (strong, nonatomic) UISearchDisplayController *searchDC;
 @property (nonatomic, strong) UITableView *tableView;
@@ -38,13 +41,15 @@
 @property(nonatomic, strong) HMSegmentedControl *segmentedControlForSearch;
 
 @property (nonatomic, strong) NSArray *bannerArray;
-@property (nonatomic, strong) UIScrollView *bannerScrollView;
-@property (nonatomic, strong) UIPageControl *bannerPageControl;
-@property (nonatomic, strong) NSTimer *bannerTimer;
+//@property (nonatomic, strong) UIScrollView *bannerScrollView;
+//@property (nonatomic, strong) UIPageControl *bannerPageControl;
+//@property (nonatomic, strong) NSTimer *bannerTimer;
 @property (nonatomic, strong) DiscoverHeaderView * headerView;
 
-@property (strong, nonatomic) NSMutableArray *filteredArray;
+@property (nonatomic, strong) NSMutableArray *filteredArray;
 @property (nonatomic, strong) NSString *keyword;
+@property (nonatomic, strong) NoSearchResultView * noResultView;
+
 @end
 
 @implementation DiscoverViewController
@@ -72,6 +77,15 @@
         _headerView.delegate = self;
     }
     return _headerView;
+}
+
+- (NoSearchResultView *)noResultView
+{
+    if (!_noResultView) {
+        _noResultView = [[NoSearchResultView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        
+    }
+    return _noResultView;
 }
 
 - (void)viewDidLoad {
@@ -703,6 +717,7 @@
     self.searchDC.displaysSearchBarInNavigationBar = YES;
     self.searchDC.searchResultsDataSource = self;
     self.searchDC.searchResultsDelegate = self;
+    self.searchDC.delegate = self;
     self.searchDC.searchResultsTableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.searchDC.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.searchDC.searchResultsTableView.separatorColor = UIColorFromRGB(0xffffff);
@@ -732,71 +747,72 @@
     return YES;
 }
 
+
 #pragma mark - Getter And Setter
-- (void)setBannerArray:(NSArray *)bannerArray
-{
-    _bannerArray = bannerArray;
-    
-    for (UIView *view in self.bannerScrollView.subviews) {
-        if ([view isKindOfClass:[UIImageView class]] && view.tag == 100) {
-            [view removeFromSuperview];
-        }
-    }
-    
-    self.bannerScrollView.frame = CGRectMake(7, 7, kScreenWidth-14, 149*kScreenWidth/320-15);
-    self.bannerScrollView.backgroundColor = UIColorFromRGB(0xf1f1f1);
-    
-    [self.bannerArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *dict = (NSDictionary *)obj;
-        NSURL *imageURL = [NSURL URLWithString:[dict valueForKey:@"img"]];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.bannerScrollView.frame) * idx, 0.f, CGRectGetWidth(self.bannerScrollView.frame), CGRectGetHeight(self.bannerScrollView.frame))];
-        imageView.tag = 100;
-        imageView.backgroundColor = UIColorFromRGB(0xf1f1f1);
-        [imageView setContentMode:UIViewContentModeScaleAspectFill];
-        [imageView sd_setImageWithURL:imageURL placeholderImage:nil options:SDWebImageRetryFailed];
-        [self.bannerScrollView addSubview:imageView];
-    }];
-    
-    self.bannerScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.bannerScrollView.frame) * self.bannerArray.count, CGRectGetHeight(self.bannerScrollView.frame));
-    self.bannerPageControl.currentPage = 0;
-    self.bannerPageControl.numberOfPages = self.bannerArray.count;
-}
+//- (void)setBannerArray:(NSArray *)bannerArray
+//{
+//    _bannerArray = bannerArray;
+//    
+//    for (UIView *view in self.bannerScrollView.subviews) {
+//        if ([view isKindOfClass:[UIImageView class]] && view.tag == 100) {
+//            [view removeFromSuperview];
+//        }
+//    }
+//    
+//    self.bannerScrollView.frame = CGRectMake(7, 7, kScreenWidth-14, 149*kScreenWidth/320-15);
+//    self.bannerScrollView.backgroundColor = UIColorFromRGB(0xf1f1f1);
+//    
+//    [self.bannerArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        NSDictionary *dict = (NSDictionary *)obj;
+//        NSURL *imageURL = [NSURL URLWithString:[dict valueForKey:@"img"]];
+//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.bannerScrollView.frame) * idx, 0.f, CGRectGetWidth(self.bannerScrollView.frame), CGRectGetHeight(self.bannerScrollView.frame))];
+//        imageView.tag = 100;
+//        imageView.backgroundColor = UIColorFromRGB(0xf1f1f1);
+//        [imageView setContentMode:UIViewContentModeScaleAspectFill];
+//        [imageView sd_setImageWithURL:imageURL placeholderImage:nil options:SDWebImageRetryFailed];
+//        [self.bannerScrollView addSubview:imageView];
+//    }];
 
-- (void)changeBanner
-{
-    NSInteger index = fabs(self.bannerScrollView.contentOffset.x) / CGRectGetWidth(self.bannerScrollView.bounds);
-    self.bannerPageControl.currentPage = (index + 1) % self.bannerArray.count;
-    [self.bannerScrollView setContentOffset:CGPointMake(self.bannerPageControl.currentPage * CGRectGetWidth(self.bannerScrollView.bounds), 0.f) animated:YES];
-}
+//    self.bannerScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.bannerScrollView.frame) * self.bannerArray.count, CGRectGetHeight(self.bannerScrollView.frame));
+//    self.bannerPageControl.currentPage = 0;
+//    self.bannerPageControl.numberOfPages = self.bannerArray.count;
+//}
 
-- (void)tapBanner
-{
-    
-    NSInteger index = self.bannerPageControl.currentPage;
-    NSDictionary *dict = (NSDictionary *)self.bannerArray[index];
-    NSString *url = [dict valueForKey:@"url"];
-    if ([url hasPrefix:@"http://"]) {
-        if (k_isLogin) {
-            NSRange range = [url rangeOfString:@"?"];
-            if (range.location != NSNotFound) {
-                url = [url stringByAppendingString:[NSString stringWithFormat:@"&session=%@",[Passport sharedInstance].session]];
-            }
-            else
-            {
-                url = [url stringByAppendingString:[NSString stringWithFormat:@"?session=%@",[Passport sharedInstance].session]];
-            }
-        }
-        NSRange range = [url rangeOfString:@"out_link"];
-        if (range.location == NSNotFound) {
-            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
-            VC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:VC animated:YES];
-            return;
-        }
-    }
-    
-    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
-}
+//- (void)changeBanner
+//{
+//    NSInteger index = fabs(self.bannerScrollView.contentOffset.x) / CGRectGetWidth(self.bannerScrollView.bounds);
+//    self.bannerPageControl.currentPage = (index + 1) % self.bannerArray.count;
+//    [self.bannerScrollView setContentOffset:CGPointMake(self.bannerPageControl.currentPage * CGRectGetWidth(self.bannerScrollView.bounds), 0.f) animated:YES];
+//}
+
+//- (void)tapBanner
+//{
+//    
+//    NSInteger index = self.bannerPageControl.currentPage;
+//    NSDictionary *dict = (NSDictionary *)self.bannerArray[index];
+//    NSString *url = [dict valueForKey:@"url"];
+//    if ([url hasPrefix:@"http://"]) {
+//        if (k_isLogin) {
+//            NSRange range = [url rangeOfString:@"?"];
+//            if (range.location != NSNotFound) {
+//                url = [url stringByAppendingString:[NSString stringWithFormat:@"&session=%@",[Passport sharedInstance].session]];
+//            }
+//            else
+//            {
+//                url = [url stringByAppendingString:[NSString stringWithFormat:@"?session=%@",[Passport sharedInstance].session]];
+//            }
+//        }
+//        NSRange range = [url rangeOfString:@"out_link"];
+//        if (range.location == NSNotFound) {
+//            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+//            VC.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:VC animated:YES];
+//            return;
+//        }
+//    }
+//    
+//    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+//}
 
 #pragma mark - Header View Delegate
 - (void)TapBannerImageAction:(NSDictionary *)dict
@@ -826,15 +842,15 @@
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    if (scrollView == self.bannerScrollView) {
-        // 获取当前页码
-        NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
-        // 设置当前页码
-        self.bannerPageControl.currentPage = index;
-    }
-}
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+//{
+//    if (scrollView == self.bannerScrollView) {
+//        // 获取当前页码
+//        NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
+//        // 设置当前页码
+//        self.bannerPageControl.currentPage = index;
+//    }
+//}
 
 
 #pragma mark - SearchBar

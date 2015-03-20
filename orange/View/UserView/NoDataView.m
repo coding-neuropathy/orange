@@ -16,26 +16,18 @@
 
 @implementation NoDataView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = [UIColor clearColor];
-    }
-    return self;
-}
 
-- (UILabel *)titleLabel
-{
-    if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.textColor = UIColorFromRGB(0x9d9e9f);
-        [self addSubview:_titleLabel];
-    }
-    return _titleLabel;
-}
+//- (UILabel *)titleLabel
+//{
+//    if (!_titleLabel) {
+//        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+//        _titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+//        _titleLabel.textAlignment = NSTextAlignmentCenter;
+//        _titleLabel.textColor = UIColorFromRGB(0x9d9e9f);
+//        [self addSubview:_titleLabel];
+//    }
+//    return _titleLabel;
+//}
 
 
 - (void)setText:(NSString *)text
