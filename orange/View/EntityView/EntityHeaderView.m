@@ -154,7 +154,6 @@
     {
         [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
     }
-    UIFont* font = [UIFont systemFontOfSize:12];
     [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", _entity.lowestPrice] forState:UIControlStateNormal];
     
     [self setNeedsLayout];

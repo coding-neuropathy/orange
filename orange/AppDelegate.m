@@ -15,6 +15,7 @@
 #import "UserViewController.h"
 #import "CategoryViewController.h"
 #import "TagViewController.h"
+#import "IntruductionVC.h"
 
 
 @interface AppDelegate ()<WXApiDelegate>
@@ -50,6 +51,14 @@
             
         }
     }];
+    
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+    
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self customizeAppearance];
@@ -88,6 +97,20 @@
     
     
     [self refreshCategory];
+    
+    //if([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4"]) {
+        [self.window.rootViewController presentViewController:[IntruductionVC new] animated:NO completion:NULL];
+    //}
+    
+    
+    {    NSTimer *_timer = [NSTimer scheduledTimerWithTimeInterval:240.0f
+                                                             target:self
+                                                           selector:@selector(checkNewMessage)
+                                                           userInfo:nil
+                                                            repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+        [self performSelector:@selector(checkNewMessage) withObject:nil afterDelay:4];
+    }
     
     return YES;
 }
@@ -321,5 +344,25 @@
         
     }];
 }
+
+-(void)checkNewMessage
+{
+    if (!k_isLogin) {
+        return;
+    }
+    
+    [GKAPI getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
+        if (dictionary[@"unread_message_count"]) {
+            NSUInteger unreadMessageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
+            self.messageCount = 1;
+            if (self.messageCount != 0) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBadge" object:nil userInfo:nil];
+            }
+        }
+    } failure:^(NSInteger stateCode) {
+        
+    }];
+}
+
 
 @end

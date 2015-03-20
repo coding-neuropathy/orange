@@ -63,7 +63,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
+    self.tableView.backgroundColor = UIColorFromRGB(0XF8F8F8);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];

@@ -40,7 +40,7 @@
     
     [GKAPI getCategoryStatByCategoryId:self.category.categoryId success:^(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount) {
         UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:2];
-        [button setTitle:[NSString stringWithFormat:@"%ld件商品",likeCount] forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"%ld 件商品",likeCount] forState:UIControlStateNormal];
     } failure:^(NSInteger stateCode) {
         
     }];

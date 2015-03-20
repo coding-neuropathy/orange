@@ -15,5 +15,6 @@
 @property (strong, nonatomic) UIViewController * activeVC;
 @property (strong, nonatomic) NSMutableArray *allCategoryArray;
 @property (strong, nonatomic) UIWindow *alertWindow;
+@property (assign, nonatomic) NSUInteger messageCount;
 @end
 
