@@ -69,6 +69,7 @@
 	<string>启动位置服务</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>FultonsHand Regular.TTF</string>
 		<string>FontAwesome.ttf</string>
 		<string>fontdiao.ttf</string>
 	</array>

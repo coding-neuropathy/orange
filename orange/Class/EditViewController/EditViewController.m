@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 sensoro. All rights reserved.
 //
 
-#import "SettingViewController.h"
+#import "EditViewController.h"
 #import "WXApi.h"
 #import "GKAPI.h"
 #import "LoginView.h"
 #import "GKWebVC.h"
 
-@interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
+@interface EditViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UISwitch * switch_notification;
@@ -20,14 +20,14 @@
 
 @end
 
-@implementation SettingViewController
+@implementation EditViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"设置";
+        self.title = @"编辑个人资料";
         self.dataArray = [NSMutableArray array];
         
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
@@ -52,7 +52,7 @@
                                               ]};
     
     if (k_isLogin) {
-      //  [self.dataArray addObject:locationSection];
+        [self.dataArray addObject:locationSection];
     }
 
     
@@ -61,7 +61,7 @@
                                             @"微信分享",
                                             @"App Store 评分",
                                             ]};
-    [self.dataArray addObject:recommandSection];
+    //[self.dataArray addObject:recommandSection];
     
     // 其他
     NSDictionary *otherSection = @{@"section" : @"其他",
@@ -71,7 +71,7 @@
                                            @"意见反馈",
                                            @"版本",
                                            ]};
-    [self.dataArray addObject:otherSection];
+    //[self.dataArray addObject:otherSection];
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,9 +95,6 @@
     self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
-
-    
-    [self configFooter];
     
 }
 
@@ -105,11 +102,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    /*
-    [self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0xffffff)];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0x2b2b2b) andSize:CGSizeMake(2, 2)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
-     */
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -122,19 +114,6 @@
 }
 
 #pragma mark - UITableViewDataSource
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView* bgView = [[UIView alloc] init];
-//    bgView.backgroundColor = [UIColor clearColor];
-//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 90, 32)];
-//    titleLabel.textColor=UIColorFromRGB(0x9d9e9f);
-//    titleLabel.backgroundColor = [UIColor clearColor];
-//    [titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
-//    titleLabel.text = [[self.dataArray objectAtIndex:section]objectForKey:@"section"];
-//    [bgView addSubview:titleLabel];
-//    return bgView;
-//}
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

@@ -17,6 +17,7 @@
 #import "TagViewController.h"
 #import "SettingViewController.h"
 #import "NoDataView.h"
+#import "EditViewController.h"
 
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -595,7 +596,7 @@
     UILabel * bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 20.f, 260.f, 30.f)];
     bioLabel.numberOfLines = 0;
     bioLabel.backgroundColor = [UIColor clearColor];
-    bioLabel.font = [UIFont systemFontOfSize:12];
+    bioLabel.font = [UIFont systemFontOfSize:14];
     bioLabel.textAlignment = NSTextAlignmentCenter;
     bioLabel.textColor = UIColorFromRGB(0x999999);
     bioLabel.text = self.user.bio;
@@ -650,7 +651,7 @@
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 30)];
         button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitle:[NSString stringWithFormat:@"%@编辑个人资料",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]]  forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"%@ 编辑个人资料",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]]  forState:UIControlStateNormal];
         [button setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
         [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
         [button addTarget:self action:@selector(editButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -686,7 +687,8 @@
 
 - (void)editButtonAction
 {
-
+    EditViewController * vc = [[EditViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
