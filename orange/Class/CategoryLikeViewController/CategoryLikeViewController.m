@@ -19,6 +19,7 @@
 @property(nonatomic, strong) NSMutableArray * dataArrayForLike;
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) UIView *segmentedControl;
+@property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
 @end
 
 @implementation CategoryLikeViewController
@@ -382,6 +383,9 @@
 - (void)segmentedControlChangedValue:(UIButton *)segmentedControl {
     NSUInteger index = segmentedControl.tag;
     self.index = index;
+    CGFloat y = [[self.dataArrayForOffset objectAtIndexedSubscript:self.index] floatValue];
+    [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointMake(0, y) animated:NO];
     for (UIButton * button in self.segmentedControl.subviews) {
         if ([button isKindOfClass:[UIButton class]]) {
             button.selected = NO;
@@ -417,6 +421,16 @@
             break;
     }
     
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:self.tableView]) {
+        if (!self.dataArrayForOffset) {
+            self.dataArrayForOffset = [NSMutableArray arrayWithObjects:@(0),@(0),@(0),nil];
+        }
+        [self.dataArrayForOffset setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.index];
+    }
 }
 
 

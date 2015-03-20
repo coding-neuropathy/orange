@@ -27,6 +27,7 @@
 @property(nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
 @property (nonatomic, strong) UIButton *followButton;
+@property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
 
 @end
 
@@ -86,7 +87,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewWillAppear:animated];
     [self configHeaderView];
     [self.tableView reloadData];
     if (self.dataArrayForEntity.count == 0) {
@@ -487,7 +488,9 @@
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSUInteger index = segmentedControl.selectedSegmentIndex;
     self.index = index;
+    CGFloat y = [[self.dataArrayForOffset objectAtIndexedSubscript:self.segmentedControl.selectedSegmentIndex] floatValue];
     [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointMake(0, y) animated:NO];
     switch (index) {
         case 0:
         {
@@ -720,6 +723,16 @@
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"取关失败"];
     }];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:self.tableView]) {
+        if (!self.dataArrayForOffset) {
+            self.dataArrayForOffset = [NSMutableArray arrayWithObjects:@(0),@(0),@(0),nil];
+        }
+        [self.dataArrayForOffset setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.segmentedControl.selectedSegmentIndex];
+    }
 }
 
 @end

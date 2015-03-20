@@ -30,6 +30,7 @@
 @property(nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
 @property (nonatomic, strong) NoDataView * nodataView;
+@property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
 
 @end
 
@@ -506,7 +507,9 @@
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSUInteger index = segmentedControl.selectedSegmentIndex;
     self.index = index;
+    CGFloat y = [[self.dataArrayForOffset objectAtIndexedSubscript:self.segmentedControl.selectedSegmentIndex] floatValue];
     [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointMake(0, y) animated:NO];
     switch (index) {
         case 0:
         {
@@ -689,6 +692,16 @@
 {
     EditViewController * vc = [[EditViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:self.tableView]) {
+        if (!self.dataArrayForOffset) {
+            self.dataArrayForOffset = [NSMutableArray arrayWithObjects:@(0),@(0),@(0),nil];
+        }
+        [self.dataArrayForOffset setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.segmentedControl.selectedSegmentIndex];
+    }
 }
 
 @end

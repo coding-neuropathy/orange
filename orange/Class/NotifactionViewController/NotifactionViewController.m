@@ -24,6 +24,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 @property(nonatomic, strong) NSMutableArray * dataArrayForMessage;
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) HMSegmentedControl *segmentedControl;
+@property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
 
 @property (nonatomic, strong) NoMessageView * noMessageView;
 
@@ -320,7 +321,9 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSUInteger index = segmentedControl.selectedSegmentIndex;
     self.index = index;
+    CGFloat y = [[self.dataArrayForOffset objectAtIndexedSubscript:self.segmentedControl.selectedSegmentIndex] floatValue];
     [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointMake(0, y) animated:NO];
     switch (index) {
         case 0:
         {
@@ -367,6 +370,16 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     else
     {
         [[self.segmentedControl viewWithTag:100]removeFromSuperview];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:self.tableView]) {
+        if (!self.dataArrayForOffset) {
+            self.dataArrayForOffset = [NSMutableArray arrayWithObjects:@(0),@(0),nil];
+        }
+        [self.dataArrayForOffset setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.segmentedControl.selectedSegmentIndex];
     }
 }
 
