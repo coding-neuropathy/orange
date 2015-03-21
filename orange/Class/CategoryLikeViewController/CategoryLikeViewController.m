@@ -39,8 +39,17 @@
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
     
+    UISwipeGestureRecognizer * leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+    UISwipeGestureRecognizer * rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+    
+    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [self.view addGestureRecognizer:leftSwipeGestureRecognizer];
+    [self.view addGestureRecognizer:rightSwipeGestureRecognizer];
+    
     [GKAPI getCategoryStatByCategoryId:self.category.categoryId success:^(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount) {
-        UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:2];
+        UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:1002];
         [button setTitle:[NSString stringWithFormat:@"%ld 件商品",likeCount] forState:UIControlStateNormal];
     } failure:^(NSInteger stateCode) {
         
@@ -314,7 +323,7 @@
             [button setTitle:@"" forState:UIControlStateNormal];
             [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
             [button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
-            button.tag = 0;
+            button.tag = 1000;
             button.selected = YES;
             button.backgroundColor = [UIColor clearColor];
             [view addSubview:button];
@@ -329,7 +338,7 @@
             [button setTitle:@"" forState:UIControlStateNormal];
             [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
             [button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
-            button.tag = 1;
+            button.tag = 1001;
             button.backgroundColor = [UIColor clearColor];
             [view addSubview:button];
         }
@@ -345,7 +354,7 @@
             [button setTitle:@"我喜爱的商品" forState:UIControlStateNormal];
             [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
             //[button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
-            button.tag = 2;
+            button.tag = 1002;
             button.backgroundColor = [UIColor clearColor];
             [view addSubview:button];
         }
@@ -381,7 +390,7 @@
 
 #pragma mark - HMSegmentedControl
 - (void)segmentedControlChangedValue:(UIButton *)segmentedControl {
-    NSUInteger index = segmentedControl.tag;
+    NSUInteger index = segmentedControl.tag -1000;
     self.index = index;
     CGFloat y = [[self.dataArrayForOffset objectAtIndexedSubscript:self.index] floatValue];
     [self.tableView reloadData];
@@ -433,5 +442,19 @@
     }
 }
 
+- (void)handleSwipes:(UISwipeGestureRecognizer *)sender
+{
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+        
+        [self segmentedControlChangedValue:(UIButton *)[self.segmentedControl viewWithTag:1001]];
+    }
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
+        [self segmentedControlChangedValue:(UIButton *)[self.segmentedControl viewWithTag:1000]];
+        
+    }
+    
+}
 
 @end
