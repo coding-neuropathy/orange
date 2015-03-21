@@ -353,7 +353,7 @@
     
     [GKAPI getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
         if (dictionary[@"unread_message_count"]) {
-            NSUInteger unreadMessageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
+            self.messageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
             if (self.messageCount != 0) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBadge" object:nil userInfo:nil];
             }
