@@ -636,7 +636,8 @@
     [view addSubview:V];
     
     {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 30)];
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+        button.layer.cornerRadius = 4;
         button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
         [button setTitle:[NSString stringWithFormat:@"%@ 编辑个人资料",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]]  forState:UIControlStateNormal];

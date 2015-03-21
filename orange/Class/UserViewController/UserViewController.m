@@ -616,7 +616,7 @@
     [friendButton addTarget:self action:@selector(friendButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [friendButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     [friendButton.titleLabel setTextAlignment:NSTextAlignmentRight];
-    [friendButton setTitle:[NSString stringWithFormat:@"%ld 关注",_user.followingCount] forState:UIControlStateNormal];
+    [friendButton setTitle:[NSString stringWithFormat:@"关注 %ld",_user.followingCount] forState:UIControlStateNormal];
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         friendButton.deFrameTop = bioLabel.deFrameBottom+10;
     }
@@ -634,7 +634,7 @@
     [fanButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [fanButton.titleLabel setTextAlignment:NSTextAlignmentLeft];
     fanButton.deFrameTop = friendButton.deFrameTop;
-    [fanButton setTitle:[NSString stringWithFormat:@"%ld 粉丝",_user.fanCount] forState:UIControlStateNormal];
+    [fanButton setTitle:[NSString stringWithFormat:@"粉丝 %ld",_user.fanCount] forState:UIControlStateNormal];
     [view addSubview:fanButton];
     
     
