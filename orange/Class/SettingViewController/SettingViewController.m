@@ -516,7 +516,7 @@
 -(void)wxShare:(int)scene
 {
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = @"果库 - 尽收世上好物";
+    message.title = @"果库 - 精英消费指南";
     message.description= @"";
     [message setThumbImage:[UIImage imageNamed:@"weixin_share.png"]];
     
@@ -537,7 +537,7 @@
     if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
     {
         [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-            [AVOSCloudSNS shareText:@"果库 - 尽收世上好物" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            [AVOSCloudSNS shareText:@"果库 - 精英消费指南" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
                 
             } andProgress:^(float percent) {
                 if (percent == 1) {
@@ -548,7 +548,7 @@
     }
     else
     {
-        [AVOSCloudSNS shareText:@"果库 - 尽收世上好物" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+        [AVOSCloudSNS shareText:@"果库 - 精英消费指南" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
             
         } andProgress:^(float percent) {
             if (percent == 1) {

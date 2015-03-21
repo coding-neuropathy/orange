@@ -215,7 +215,7 @@
             [self.tableView.pullToRefreshView stopAnimating];
             
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -228,7 +228,7 @@
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -241,7 +241,7 @@
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -260,7 +260,7 @@
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
@@ -274,7 +274,7 @@
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];

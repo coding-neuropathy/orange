@@ -116,7 +116,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     [self.tableView registerClass:[EntityThreeGridCell class] forCellReuseIdentifier:EntityCellIdentifier];
     [self.view addSubview:self.tableView];
     
-    UIView * header =  [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    UIView * header =  [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
     header.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.tableHeaderView = header;
     
@@ -277,7 +277,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         return 50;
     }
     else if (section == 4) {
-        return 40;
+        return 50;
     }
     else
     {
@@ -407,13 +407,13 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         return self.noteButton;
     }
     else if (section == 4) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 10.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 20.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
         label.text = @"相似推荐";
         label.textAlignment = NSTextAlignmentLeft;
         label.textColor = UIColorFromRGB(0x414243);
         label.font = [UIFont systemFontOfSize:14];
         [label sizeToFit];
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 40)];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 50)];
         view.backgroundColor = UIColorFromRGB(0xfafafa);
         [view addSubview:label];
         
@@ -714,7 +714,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     }
     else
     {
-        message.title = @"果库 - 尽收世上好物";
+        message.title = @"果库 - 精英消费指南";
         message.description = [NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title];
     }
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];

@@ -167,13 +167,13 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
     else if (self.index == 1)
     {
-        [SVProgressHUD showImage:nil status:@"失败"];
+        [SVProgressHUD showImage:nil status:@"加载失败"];
         [self.tableView.pullToRefreshView stopAnimating];
     }
     return;
@@ -195,13 +195,13 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
     else if (self.index == 1)
     {
-        [SVProgressHUD showImage:nil status:@"失败"];
+        [SVProgressHUD showImage:nil status:@"加载失败"];
         [self.tableView.infiniteScrollingView stopAnimating];
     }
     return;

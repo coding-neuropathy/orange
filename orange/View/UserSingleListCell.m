@@ -162,9 +162,9 @@
     [GKAPI followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
         self.user.relation = relation;
         [self configFollowButton];
-        [SVProgressHUD showImage:nil status:@"取关成功"];
+        //[SVProgressHUD showImage:nil status:@"取关成功"];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"取关失败"];
+        [SVProgressHUD showImage:nil status:@"取消关注失败"];
     }];
 }
 - (void)avatarButtonAction

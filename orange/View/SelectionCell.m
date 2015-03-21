@@ -222,6 +222,8 @@
 {
     if ([keyPath isEqualToString:@"likeCount"]) {
         [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        UIFont* font = [UIFont systemFontOfSize:12];
+        self.likeButton.deFrameWidth = [self.likeButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}].width+40;
     }
     else if ([keyPath isEqualToString:@"liked"]) {
         self.likeButton.selected = self.entity.liked;
