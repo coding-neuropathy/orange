@@ -591,7 +591,7 @@
     UILabel * bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 20.f, 260.f, 30.f)];
     bioLabel.numberOfLines = 0;
     bioLabel.backgroundColor = [UIColor clearColor];
-    bioLabel.font = [UIFont systemFontOfSize:12];
+    bioLabel.font = [UIFont systemFontOfSize:14];
     bioLabel.textAlignment = NSTextAlignmentCenter;
     bioLabel.textColor = UIColorFromRGB(0x999999);
     bioLabel.text = self.user.bio;
