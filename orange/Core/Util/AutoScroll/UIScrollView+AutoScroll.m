@@ -62,7 +62,7 @@ static char UIScrollViewAutoScrollTimer;
         [self scrollRectToVisible:CGRectMake(self.frame.size.width, 0, self.frame.size.width, self.frame.size.height) animated:NO];
 
     } else {
-        [UIView animateWithDuration:1.5
+        [UIView animateWithDuration:0.5
                               delay:0
                             options:UIViewAnimationOptionAllowUserInteraction
                          animations:^{

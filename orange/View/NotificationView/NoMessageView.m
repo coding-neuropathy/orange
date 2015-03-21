@@ -45,7 +45,7 @@
     switch (_type) {
         case NoMessageType:
         {
-            self.titleLabel.text = @"没有收到任何消息";
+            self.titleLabel.text = @"没有任何消息";
             self.detailLabel.text = @"当有人关注你、点评你添加的商品\n或发生任何与你相关的事件时，会在这里通知你";
             
             UIImage * noticImage = [UIImage imageNamed:@"empty_notifaction.png"];
@@ -54,10 +54,10 @@
             break;
         case NoFeedType:
         {
-            self.titleLabel.text = @"没关注任何人";
-            self.detailLabel.text = @"关注推荐用户，\nTA 们的动态将出现在这里";
+            self.titleLabel.text = @"没有任何动态";
+            self.detailLabel.text = @"关注活跃用户，\nTA 们的动态将出现在这里";
             
-            UIImage * noticImage = [UIImage imageNamed:@"empty_contact.png"];
+            UIImage * noticImage = [UIImage imageNamed:@"empty_act.png"];
             self.noticImageView.image = noticImage;
         }
             break;

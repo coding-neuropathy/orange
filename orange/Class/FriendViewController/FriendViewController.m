@@ -89,7 +89,7 @@ static NSString *CellIdentifier = @"UserSingleListCell";
             self.dataArrayForUser = [NSMutableArray arrayWithArray:userArray];
             if (self.dataArrayForUser.count == 0) {
                 self.tableView.tableFooterView = self.noDataView;
-                self.noDataView.text = @"没有关注任何人";
+                self.noDataView.text = @"TA 没有关注任何人";
             } else {
                 self.tableView.tableFooterView = nil;
             }

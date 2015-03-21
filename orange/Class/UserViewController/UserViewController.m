@@ -144,7 +144,7 @@
                 button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
                 button.titleLabel.textAlignment = NSTextAlignmentCenter;
                 [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-                [button setTitle:[NSString stringWithFormat:@"%@ 还没有标记过喜欢的商品",[NSString fontAwesomeIconStringForEnum:FAHeartO]] forState:UIControlStateNormal];
+                [button setTitle:[NSString stringWithFormat:@"%@ 没有喜爱任何商品",[NSString fontAwesomeIconStringForEnum:FAHeartO]] forState:UIControlStateNormal];
                 [button setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
                 button.backgroundColor = [UIColor clearColor];
                 button.userInteractionEnabled = NO;
@@ -169,7 +169,7 @@
                 button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
                 button.titleLabel.textAlignment = NSTextAlignmentCenter;
                 [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-                [button setTitle:[NSString stringWithFormat:@"%@ 还没有点评过商品",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
+                [button setTitle:[NSString stringWithFormat:@"%@ 没有点评任何商品",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
                 [button setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
                 button.backgroundColor = [UIColor clearColor];
                 button.userInteractionEnabled = NO;
@@ -193,7 +193,7 @@
                 button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
                 button.titleLabel.textAlignment = NSTextAlignmentCenter;
                 [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-                [button setTitle:[NSString stringWithFormat:@"%@ 还没有为商品添加过标签",[NSString fontAwesomeIconStringForEnum:FATag]] forState:UIControlStateNormal];
+                [button setTitle:[NSString stringWithFormat:@"%@ 没有为商品添加标签",[NSString fontAwesomeIconStringForEnum:FATag]] forState:UIControlStateNormal];
                 [button setTitleEdgeInsets:UIEdgeInsetsMake(4, 0, 0, 0)];
                 button.backgroundColor = [UIColor clearColor];
                 button.userInteractionEnabled = NO;
