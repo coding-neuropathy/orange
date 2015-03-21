@@ -142,8 +142,14 @@
         {
             UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
             V.backgroundColor = UIColorFromRGB(0xebebeb);
-            [segmentedControl addSubview:V];
+            //[segmentedControl addSubview:V];
         }
+        
+        segmentedControl.layer.shadowColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor;
+        segmentedControl.layer.shadowOffset = CGSizeMake(0, 2);
+        segmentedControl.layer.shadowRadius = 4;
+        
+        
     }
 
     
@@ -929,7 +935,7 @@
 
 - (void)configFooter
 {
-    UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 21)];
+    UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 23)];
     footer.backgroundColor = UIColorFromRGB(0xf8f8f8);
     self.tableView.tableFooterView = footer;
     

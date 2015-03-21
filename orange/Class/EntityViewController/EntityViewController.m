@@ -761,16 +761,16 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     
     
     UIView * H = [[UIView alloc] initWithFrame:CGRectMake(20,40, kScreenWidth-40, 0.5)];
-    H.backgroundColor = UIColorFromRGB(0xebebeb);
+    H.backgroundColor = UIColorFromRGB(0xcbcbcb);
     [view addSubview:H];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 120, 20.f)];
-    label.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    label.font = [UIFont fontWithName:@"FultonsHand" size:14];
+    label.backgroundColor = UIColorFromRGB(0xcbcbcb);
+    label.font = [UIFont fontWithName:@"FultonsHand" size:12];
     label.center = CGPointMake(kScreenWidth/2, 40);
     label.textAlignment = NSTextAlignmentCenter;
     label.text = @"Live Different";
-    label.textColor = UIColorFromRGB(0x9d9e9f);
+    label.textColor = UIColorFromRGB(0xcbcbcb);
     [view addSubview:label];
     
     [footer addSubview:view];
