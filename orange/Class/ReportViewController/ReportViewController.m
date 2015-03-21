@@ -103,10 +103,9 @@ static CGFloat LeftMargin = 16.;
         [btn addTarget:self action:@selector(onRadioButtonValueChanged:) forControlEvents:UIControlEventValueChanged];
         //        btn.backgroundColor = [UIColor redColor];
         btnRect.origin.y += 50;
-        btn.titleLabel.font = [UIFont systemFontOfSize:14.];
         [btn setTitle:optionTitle forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+        btn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         [btn setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -134,7 +133,7 @@ static CGFloat LeftMargin = 16.;
     self.tipLabel.text = @"补充说明:";
     
     self.textView.frame = CGRectMake(LeftMargin, 320., kScreenWidth-LeftMargin*2, kScreenHeight - NormalKeyboardHeight- 180 - 40);
-    self.textView.placeholder = @"举报原因";
+    self.textView.placeholder = @"靠谱的举报原因";
     
 }
 
