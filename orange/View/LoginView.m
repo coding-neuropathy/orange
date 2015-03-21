@@ -60,7 +60,7 @@
         
         tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 80, whiteBG.deFrameWidth, 30)];
         tip.textColor = UIColorFromRGB(0xcbcbcb);
-        tip.font = [UIFont systemFontOfSize:15];
+        tip.font = [UIFont fontWithName:@"FultonsHand" size:16];
         tip.textAlignment = NSTextAlignmentCenter;
         tip.text = @"Live Different";
         [whiteBG addSubview:tip];
@@ -94,7 +94,7 @@
         self.emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.emailTextField.returnKeyType = UIReturnKeyNext;
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
-        [self.emailTextField setTextColor:UIColorFromRGB(0x666666)];
+        [self.emailTextField setTextColor:UIColorFromRGB(0x9d9e9f)];
         self.emailTextField.backgroundColor = UIColorFromRGB(0xffffff);
         
         
@@ -110,7 +110,7 @@
         _forgotPasswordButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 45)];
         [_forgotPasswordButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:18]];
         [_forgotPasswordButton setTitle:[NSString fontAwesomeIconStringForEnum:FAQuestionCircle] forState:UIControlStateNormal];
-        [_forgotPasswordButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [_forgotPasswordButton setTitleColor:UIColorFromRGB(0xcbcbcb) forState:UIControlStateNormal];
         _forgotPasswordButton.backgroundColor = [UIColor clearColor];
         [self.forgotPasswordButton addTarget:self action:@selector(tapForgotPasswordButton) forControlEvents:UIControlEventTouchUpInside];
         
@@ -140,7 +140,7 @@
         self.passwordTextField.placeholder = @"";
         self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.passwordTextField.returnKeyType = UIReturnKeyGo;
-        [self.passwordTextField setTextColor:UIColorFromRGB(0x666666)];
+        [self.passwordTextField setTextColor:UIColorFromRGB(0x9d9e9f)];
         self.passwordTextField.backgroundColor = UIColorFromRGB(0xffffff);
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextField.deFrameWidth,0.5)];

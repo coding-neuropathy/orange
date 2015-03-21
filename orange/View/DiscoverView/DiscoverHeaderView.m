@@ -142,7 +142,7 @@
     }
     
 }
-
+/*
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
@@ -156,5 +156,6 @@
     
     CGContextStrokePath(context);
 }
+ */
 
 @end

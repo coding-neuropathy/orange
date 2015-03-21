@@ -43,6 +43,7 @@
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 105, 30)];
             button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
+            button.layer.cornerRadius = 4;
             button.center = CGPointMake(kScreenWidth - 40, 25);
             //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
             self.followButton = button;

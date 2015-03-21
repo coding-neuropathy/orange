@@ -111,10 +111,15 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     self.tableView.backgroundView = nil;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
-    
+
     [self.tableView registerClass:[NoteCell class] forCellReuseIdentifier:NoteCellIdentifier];
     [self.tableView registerClass:[EntityThreeGridCell class] forCellReuseIdentifier:EntityCellIdentifier];
     [self.view addSubview:self.tableView];
+    
+    UIView * header =  [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    header.backgroundColor = UIColorFromRGB(0xffffff);
+    self.tableView.tableHeaderView = header;
+    
     
     [self configFooter];
     
@@ -760,14 +765,14 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     view.backgroundColor = UIColorFromRGB(0xf8f8f8);
     
     
-    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(20,40, kScreenWidth-40, 0.5)];
-    H.backgroundColor = UIColorFromRGB(0xcbcbcb);
+    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(20,50, kScreenWidth-40, 0.5)];
+    H.backgroundColor = UIColorFromRGB(0xebebeb);
     [view addSubview:H];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 120, 20.f)];
-    label.backgroundColor = UIColorFromRGB(0xcbcbcb);
-    label.font = [UIFont fontWithName:@"FultonsHand" size:12];
-    label.center = CGPointMake(kScreenWidth/2, 40);
+    label.backgroundColor = UIColorFromRGB(0xf8f8f8);
+    label.font = [UIFont fontWithName:@"FultonsHand" size:14];
+    label.center = CGPointMake(kScreenWidth/2, 50);
     label.textAlignment = NSTextAlignmentCenter;
     label.text = @"Live Different";
     label.textColor = UIColorFromRGB(0xcbcbcb);

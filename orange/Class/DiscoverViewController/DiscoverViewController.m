@@ -135,21 +135,15 @@
         [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
         [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        segmentedControl.deFrameBottom = self.headerView.deFrameHeight-1;
+        segmentedControl.deFrameBottom = self.headerView.deFrameHeight;
         self.segmentedControl = segmentedControl;
         [self.headerView addSubview:self.segmentedControl];
         
         {
             UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
             V.backgroundColor = UIColorFromRGB(0xebebeb);
-            //[segmentedControl addSubview:V];
+            [segmentedControl addSubview:V];
         }
-        
-        segmentedControl.layer.shadowColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor;
-        segmentedControl.layer.shadowOffset = CGSizeMake(0, 2);
-        segmentedControl.layer.shadowRadius = 4;
-        
-        
     }
 
     
@@ -953,7 +947,7 @@
     label.center = CGPointMake(kScreenWidth/2, 60);
     label.textAlignment = NSTextAlignmentCenter;
     label.text = @"Live Different";
-    label.textColor = UIColorFromRGB(0x9d9e9f);
+    label.textColor = UIColorFromRGB(0xcbcbcb);
     [view addSubview:label];
     
     [footer addSubview:view];

@@ -34,7 +34,6 @@
     self.tableView.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.view addSubview:self.tableView];
     
     

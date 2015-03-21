@@ -103,7 +103,7 @@
         self.nicknameTextField.placeholder = @"";
         self.nicknameTextField.delegate = self;
         self.nicknameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        [self.nicknameTextField setTextColor:UIColorFromRGB(0x666666)];
+        [self.nicknameTextField setTextColor:UIColorFromRGB(0x9d9e9f)];
         self.nicknameTextField.backgroundColor = UIColorFromRGB(0xffffff);
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.nicknameTextField.deFrameWidth,0.5)];
@@ -140,7 +140,7 @@
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
         self.emailTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        [self.emailTextField setTextColor:UIColorFromRGB(0x666666)];
+        [self.emailTextField setTextColor:UIColorFromRGB(0x9d9e9f)];
         self.emailTextField.backgroundColor = UIColorFromRGB(0xffffff);
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.emailTextField.deFrameWidth,0.5)];

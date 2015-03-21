@@ -199,7 +199,7 @@
 
 -(void)customizeAppearance
 {
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageNamed:@"navbar.png"] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageNamed:@"nav_bar_bg.png"] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
     //[[UINavigationBar appearance] setShadowImage:[[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(1, 0.5)] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
     [[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x414243)];
@@ -354,7 +354,6 @@
     [GKAPI getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
         if (dictionary[@"unread_message_count"]) {
             NSUInteger unreadMessageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
-            self.messageCount = 1;
             if (self.messageCount != 0) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBadge" object:nil userInfo:nil];
             }
