@@ -182,6 +182,9 @@
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self configFooter];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"发现"  style:UIBarButtonItemStylePlain  target:self  action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
 }
 
 
