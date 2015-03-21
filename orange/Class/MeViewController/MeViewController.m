@@ -95,6 +95,16 @@
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
     
+    UISwipeGestureRecognizer * leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+    UISwipeGestureRecognizer * rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+    
+    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [self.view addGestureRecognizer:leftSwipeGestureRecognizer];
+    [self.view addGestureRecognizer:rightSwipeGestureRecognizer];
+    
+    
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
@@ -704,5 +714,23 @@
         [self.dataArrayForOffset setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.segmentedControl.selectedSegmentIndex];
     }
 }
+
+- (void)handleSwipes:(UISwipeGestureRecognizer *)sender
+{
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+        if (self.segmentedControl.selectedSegmentIndex !=2) {
+            [self.segmentedControl setSelectedSegmentIndex:self.segmentedControl.selectedSegmentIndex+1 animated:YES notify:YES];
+        }
+    }
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
+        if (self.segmentedControl.selectedSegmentIndex !=0) {
+            [self.segmentedControl setSelectedSegmentIndex:self.segmentedControl.selectedSegmentIndex-1 animated:YES notify:YES];
+        }
+    }
+    
+}
+
 
 @end

@@ -109,6 +109,15 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
+    
+    UISwipeGestureRecognizer * leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+    UISwipeGestureRecognizer * rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+    
+    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [self.view addGestureRecognizer:leftSwipeGestureRecognizer];
+    [self.view addGestureRecognizer:rightSwipeGestureRecognizer];
 
     [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:FeedCellIdentifier];
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:MessageCellIdentifier];
@@ -382,6 +391,20 @@ static NSString *MessageCellIdentifier = @"MessageCell";
         }
         [self.dataArrayForOffset setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.segmentedControl.selectedSegmentIndex];
     }
+}
+
+- (void)handleSwipes:(UISwipeGestureRecognizer *)sender
+{
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+        
+        [self.segmentedControl setSelectedSegmentIndex:1 animated:YES notify:YES];
+    }
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
+        [self.segmentedControl setSelectedSegmentIndex:0 animated:YES notify:YES];
+    }
+    
 }
 
 @end

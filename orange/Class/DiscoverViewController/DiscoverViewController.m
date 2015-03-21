@@ -109,6 +109,19 @@
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.view addSubview:self.tableView];
+    {
+        UISwipeGestureRecognizer * leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+        UISwipeGestureRecognizer * rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+        
+        leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+        
+        [self.view addGestureRecognizer:leftSwipeGestureRecognizer];
+        [self.view addGestureRecognizer:rightSwipeGestureRecognizer];
+    }
+
+    
+    
     [self configSearchBar];
     
     if (!self.segmentedControl) {
@@ -742,6 +755,17 @@
          [weakSelf loadMore];
      }];
     
+    {
+        UISwipeGestureRecognizer * leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipesForSearch:)];
+        UISwipeGestureRecognizer * rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipesForSearch:)];
+        
+        leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+        
+        [self.searchDC.searchResultsTableView addGestureRecognizer:leftSwipeGestureRecognizer];
+        [self.searchDC.searchResultsTableView addGestureRecognizer:rightSwipeGestureRecognizer];
+    }
+    
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
@@ -796,7 +820,7 @@
     else
     {
         if (!self.dataArrayForOffsetForSearch) {
-            self.dataArrayForOffsetForSearch = [NSMutableArray arrayWithObjects:@(0),@(0),@(0),@(0),nil];
+            self.dataArrayForOffsetForSearch = [NSMutableArray arrayWithObjects:@(-64),@(-64),@(-64),@(-64),nil];
         }
         [self.dataArrayForOffsetForSearch setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.segmentedControlForSearch.selectedSegmentIndex];
     }
@@ -928,5 +952,40 @@
     
     [footer addSubview:view];
 }
+
+- (void)handleSwipes:(UISwipeGestureRecognizer *)sender
+{
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+        
+        [self.segmentedControl setSelectedSegmentIndex:1 animated:YES notify:YES];
+    }
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
+        [self.segmentedControl setSelectedSegmentIndex:0 animated:YES notify:YES];
+    }
+    
+}
+
+- (void)handleSwipesForSearch:(UISwipeGestureRecognizer *)sender
+{
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+        if (self.segmentedControlForSearch.selectedSegmentIndex !=3) {
+            [self.segmentedControlForSearch setSelectedSegmentIndex:self.segmentedControlForSearch.selectedSegmentIndex+1 animated:YES notify:YES];
+        }
+    }
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
+        if (self.segmentedControlForSearch.selectedSegmentIndex !=0) {
+            [self.segmentedControlForSearch setSelectedSegmentIndex:self.segmentedControlForSearch.selectedSegmentIndex-1 animated:YES notify:YES];
+        }
+    }
+    
+}
+
+
+
+
 
 @end
