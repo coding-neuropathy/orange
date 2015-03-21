@@ -8,6 +8,7 @@
 
 #import "GKNote.h"
 #import "GKUser.h"
+#import "NSString+Helper.h"
 
 @implementation GKNote
 
@@ -73,6 +74,9 @@
 
 - (NSURL *)entityChiefImage_240x240
 {
+    if ([self.entityChiefImage.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+        return [NSURL URLWithString:[self.entityChiefImage.absoluteString imageURLWithSize:240]];
+    }
     return [NSURL URLWithString:[self.entityChiefImage.absoluteString stringByAppendingString:@"_240x240.jpg"]];
 }
 

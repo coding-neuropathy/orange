@@ -937,14 +937,14 @@
     view.backgroundColor = UIColorFromRGB(0xf8f8f8);
     
     
-    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(20,60, kScreenWidth-40, 0.5)];
+    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(20,45, kScreenWidth-40, 0.5)];
     H.backgroundColor = UIColorFromRGB(0xebebeb);
     [view addSubview:H];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 120, 20.f)];
     label.backgroundColor = UIColorFromRGB(0xf8f8f8);
     label.font = [UIFont fontWithName:@"FultonsHand" size:14];
-    label.center = CGPointMake(kScreenWidth/2, 60);
+    label.center = CGPointMake(kScreenWidth/2, 45);
     label.textAlignment = NSTextAlignmentCenter;
     label.text = @"Live Different";
     label.textColor = UIColorFromRGB(0xcbcbcb);
