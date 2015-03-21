@@ -446,7 +446,7 @@
             HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
             [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %lu",self.user.likeCount], [NSString stringWithFormat:@"点评 %lu",self.user.noteCount],[NSString stringWithFormat:@"标签 %lu",self.user.tagCount]]];
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-            [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStylea];
+            [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
             [segmentedControl setSelectionIndicatorHeight:2.5];
             [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
