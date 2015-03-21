@@ -29,6 +29,7 @@
     
     [AVOSCloud setApplicationId:@"laier6ulcszfjkn08448ng37nwc71ux4uv6yc6vi529v29a0" clientKey:@"6ad7o8urhbw4q5kx8hfoiaxjjtme205ohodgoy6ltwts8b1i"];
     [AVPush setProductionMode:YES];
+    [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
     
     [WXApi registerApp:kGK_WeixinShareKey];

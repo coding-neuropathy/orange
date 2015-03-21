@@ -125,9 +125,17 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"EntityView"];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [AVAnalytics endLogPageView:@"EntityView"];
+
 }
 
 

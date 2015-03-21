@@ -299,7 +299,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"账户"]) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"section"] isEqualToString:@"账号"]) {
         if(indexPath.row == 0)
         {
             [self photoButtonAction];

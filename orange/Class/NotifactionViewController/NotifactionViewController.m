@@ -142,7 +142,14 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     {
         [self removeBadge];
     }
+    [AVAnalytics beginLogPageView:@"NotificationView"];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"NotificationView"];
 }
 
 - (void)didReceiveMemoryWarning {
