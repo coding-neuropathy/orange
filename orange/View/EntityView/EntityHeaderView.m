@@ -153,6 +153,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
     
     
     [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱 %lu", _entity.likeCount] forState:UIControlStateNormal];
+    self.likeBtn.selected = self.entity.liked;
     if(_entity.likeCount == 0)
     {
         [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];

@@ -118,8 +118,8 @@
     UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
     [label setText:([self.category.categoryName componentsSeparatedByString:@"-"][0])];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"Helvetica" size:20];
-    label.textColor = UIColorFromRGB(0x555555);
+    label.font = [UIFont fontWithName:@"Helvetica" size:17];
+    label.textColor = UIColorFromRGB(0x414243);
     label.adjustsFontSizeToFitWidth = YES;
     label.backgroundColor = [UIColor clearColor];
     [label sizeToFit];
@@ -361,7 +361,7 @@
 
         {
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(180, 0, kScreenWidth-180, 44)];
-            button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+            button.titleLabel.font = [UIFont systemFontOfSize:14];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
             [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];

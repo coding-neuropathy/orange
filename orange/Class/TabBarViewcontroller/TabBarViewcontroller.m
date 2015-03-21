@@ -156,6 +156,9 @@
         if ([nav.viewControllers.firstObject isKindOfClass:[SettingViewController class]]) {
             [array removeObject:nav];
         }
+        if ([nav.viewControllers.firstObject isKindOfClass:[MeViewController class]]) {
+            return;
+        }
     }
     [array addObject:fourth];
     self.viewControllers = array;

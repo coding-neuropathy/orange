@@ -162,6 +162,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 {
     [GKAPI getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray) {
         self.entity = entity;
+        self.header.entity = entity;
         self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
         self.dataArrayForNote = [NSMutableArray arrayWithArray:noteArray];
         for (GKNote *note in self.dataArrayForNote) {
