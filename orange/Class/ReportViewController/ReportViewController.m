@@ -15,6 +15,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
 static CGFloat LeftMargin = 16.;
 
 @interface ReportViewController ()<UITextViewDelegate>
+@property (nonatomic, strong) UIScrollView * scrollView;
 @property (nonatomic, strong) UIPlaceHolderTextView *textView;
 //@property (nonatomic, strong) UIView *inputBG;
 @property (nonatomic, strong) UILabel *tipLabel;
@@ -28,6 +29,19 @@ static CGFloat LeftMargin = 16.;
 
 
 #pragma mark - Life Cycle
+
+- (UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        
+        _scrollView.showsHorizontalScrollIndicator = NO;
+        _scrollView.showsVerticalScrollIndicator = NO;
+        _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight);
+        _scrollView.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return _scrollView;
+}
 
 - (UILabel *)radioTipLabel
 {
@@ -107,10 +121,10 @@ static CGFloat LeftMargin = 16.;
 
 - (void)loadView
 {
-    [super loadView];
-    
+//    [super loadView];
+    self.view = self.scrollView;
 //    self.title = @"举报";
-    self.view.backgroundColor = UIColorFromRGB(0xffffff);
+//    self.view.backgroundColor = UIColorFromRGB(0xffffff);
     
     [self CreateReasonButtons];
     self.radioTipLabel.frame = CGRectMake(LeftMargin , 10, kScreenWidth - LeftMargin * 2, 50.);
