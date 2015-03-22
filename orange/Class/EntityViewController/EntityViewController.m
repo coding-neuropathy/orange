@@ -27,7 +27,6 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 
 @interface EntityViewController ()<IBActionSheetDelegate, EntityHeaderViewDelegate>
 @property (nonatomic, strong) GKNote *note;
-//@property (nonatomic, strong) UIView *header;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIButton *likeButton;
@@ -96,6 +95,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     }
     
     
+    
     self.navigationItem.rightBarButtonItems = array;
     
     
@@ -119,7 +119,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     UIView * header =  [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
     header.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.tableHeaderView = header;
-    
+    self.image = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 240, 240)];
     
     [self configFooter];
     
@@ -169,6 +169,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (void)refresh
 {
     [GKAPI getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray) {
+        [self.image sd_setImageWithURL:self.entity.imageURL_240x240];
         self.entity = entity;
         self.header.entity = entity;
         self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
