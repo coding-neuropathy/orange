@@ -84,9 +84,9 @@
         [weakSelf refresh];
     }];
     
-    [GKAPI getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
-        weakSelf.user = user;
-        [weakSelf configHeaderView];
+    [GKAPI getUserDetailWithUserId:self.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
+        self.user = user;
+        [self configHeaderView];
     } failure:^(NSInteger stateCode) {
         
     }];

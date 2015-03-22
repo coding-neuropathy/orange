@@ -73,6 +73,7 @@
         self.emailTextField.borderStyle = UITextBorderStyleNone;
         //self.emailTextField.layer.borderColor = UIColorFromRGB(0xdcdcdc).CGColor;
         //self.emailTextField.layer.borderWidth = 0.5;
+        self.emailTextField.font = [UIFont systemFontOfSize:14];
         self.emailTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
         if (iOS7) {
@@ -138,6 +139,7 @@
         self.passwordTextField.rightViewMode = UITextFieldViewModeAlways;
         self.passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         self.passwordTextField.placeholder = @"";
+        self.passwordTextField.font = [UIFont systemFontOfSize:14];
         self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.passwordTextField.returnKeyType = UIReturnKeyGo;
         [self.passwordTextField setTextColor:UIColorFromRGB(0x9d9e9f)];
@@ -198,9 +200,9 @@
         _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
         _registerButton.backgroundColor = [UIColor clearColor];
         _registerButton.titleLabel.textAlignment = NSTextAlignmentRight;
-        [_registerButton setTitle:@"注册 >" forState:UIControlStateNormal];
+        [_registerButton setTitle:[NSString stringWithFormat:@"注册 %@",[NSString fontAwesomeIconStringForEnum:FAChevronRight]] forState:UIControlStateNormal];
         [_registerButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-        [_registerButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [_registerButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:14]];
         _registerButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_registerButton addTarget:self action:@selector(tapRegisterButton) forControlEvents:UIControlEventTouchUpInside];
         _registerButton.deFrameTop = 10;
@@ -424,6 +426,20 @@
 {
     [self.emailTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
+}
+
+- (void)showFromRegister
+{
+    
+    [kAppDelegate.window addSubview:self];
+    self.backgroundColor = [UIColor clearColor];
+    whiteBG.alpha = 0;
+    [UIView animateWithDuration:0.3 animations:^{
+        
+    } completion:^(BOOL finished) {
+        whiteBG.alpha = 1;
+        
+    }];
 }
 
 #pragma mark - UIAlertViewDelegate
