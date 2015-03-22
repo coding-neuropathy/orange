@@ -51,6 +51,7 @@
 - (void)showEverything
 {
         [UIView animateWithDuration:0.8 delay:0.4 options:UIViewAnimationOptionCurveEaseOut animations:^{
+
             _logo.alpha = 1;
         } completion:^(BOOL finished) {
             [self performSelector:@selector(dismiss) withObject:nil afterDelay:1.5];
@@ -58,7 +59,7 @@
 }
 - (void)dismiss
 {
-    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4"]) {
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4"]) {
         AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         IntruductionVC * vc = [[IntruductionVC alloc]init];
         self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

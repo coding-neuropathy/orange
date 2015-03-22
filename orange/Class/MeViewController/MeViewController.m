@@ -432,7 +432,7 @@
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-            [segmentedControl setSelectionIndicatorHeight:2.5];
+            [segmentedControl setSelectionIndicatorHeight:1.5];
             [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
             [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
             [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
