@@ -122,13 +122,13 @@
     if (self.user.relation == GKUserRelationTypeFollowing) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACheck]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-        [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.followButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeBoth) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAExchange]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-        [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.followButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeSelf) {

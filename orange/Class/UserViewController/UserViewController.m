@@ -604,7 +604,7 @@
     bioLabel.backgroundColor = [UIColor clearColor];
     bioLabel.font = [UIFont systemFontOfSize:14];
     bioLabel.textAlignment = NSTextAlignmentCenter;
-    bioLabel.textColor = UIColorFromRGB(0x999999);
+    bioLabel.textColor = UIColorFromRGB(0x9d9e9f);
     bioLabel.text = self.user.bio;
     bioLabel.center = image.center;
     bioLabel.backgroundColor = [UIColor clearColor];
@@ -700,13 +700,13 @@
     if (self.user.relation == GKUserRelationTypeFollowing) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@ 已关注",[NSString fontAwesomeIconStringForEnum:FACheck]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-        [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.followButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeBoth) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@ 互相关注",[NSString fontAwesomeIconStringForEnum:FAExchange]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-        [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.followButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeSelf) {

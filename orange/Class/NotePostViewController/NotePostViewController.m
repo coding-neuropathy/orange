@@ -94,7 +94,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     self.tipLabel.textAlignment = NSTextAlignmentLeft;
     self.tipLabel.backgroundColor = [UIColor clearColor];
     [self.tipLabel setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
-    self.tipLabel.textColor = UIColorFromRGB(0x999999);
+    self.tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
     self.tipLabel.text = @"撰写真实、有用、有趣的商品点评";
     
     self.tipLabel.deFrameLeft = self.textView.deFrameLeft+10;

@@ -598,7 +598,7 @@
             UILabel * countLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 11)];
             countLabel.font = [UIFont systemFontOfSize:12];
             countLabel.textAlignment = NSTextAlignmentRight;
-            countLabel.textColor = UIColorFromRGB(0x999999);
+            countLabel.textColor = UIColorFromRGB(0x9d9e9f);
             countLabel.hidden = NO;
             countLabel.center = label.center;
             [countLabel setText:[NSString stringWithFormat:@"%@个品类",[self.dataArrayForCategory[section] valueForKey:@"Count"]]];

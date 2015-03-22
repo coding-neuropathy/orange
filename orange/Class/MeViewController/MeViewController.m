@@ -586,7 +586,7 @@
     bioLabel.backgroundColor = [UIColor clearColor];
     bioLabel.font = [UIFont systemFontOfSize:14];
     bioLabel.textAlignment = NSTextAlignmentCenter;
-    bioLabel.textColor = UIColorFromRGB(0x999999);
+    bioLabel.textColor = UIColorFromRGB(0x9d9e9f);
     bioLabel.text = self.user.bio;
     bioLabel.center = image.center;
     bioLabel.backgroundColor = [UIColor clearColor];
