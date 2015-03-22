@@ -82,12 +82,13 @@
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
-        [GKAPI getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
-            weakSelf.user = user;
-            [weakSelf configHeaderView];
-        } failure:^(NSInteger stateCode) {
-            
-        }];
+    }];
+    
+    [GKAPI getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
+        weakSelf.user = user;
+        [weakSelf configHeaderView];
+    } failure:^(NSInteger stateCode) {
+        
     }];
     
 
