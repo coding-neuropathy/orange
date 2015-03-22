@@ -41,7 +41,7 @@
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
         whiteBG = [[UIView alloc]initWithFrame:CGRectMake(20, 80, self.frame.size.width-40, 300)];
         whiteBG.backgroundColor = [UIColor whiteColor];
-        whiteBG.layer.cornerRadius = 0.0f;
+        whiteBG.layer.cornerRadius = 5.0f;
         whiteBG.layer.masksToBounds = YES;
         [self addSubview:whiteBG];
         
@@ -55,10 +55,10 @@
         
         logo = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         logo.tintColor = UIColorFromRGB(0x9d9e9f);
-        logo.center = CGPointMake(whiteBG.deFrameWidth/2, 60);
+        logo.center = CGPointMake(whiteBG.deFrameWidth/2, 80);
         [whiteBG addSubview:logo];
         
-        tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 80, whiteBG.deFrameWidth, 30)];
+        tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, whiteBG.deFrameWidth, 30)];
         tip.textColor = UIColorFromRGB(0xcbcbcb);
         tip.font = [UIFont fontWithName:@"FultonsHand" size:16];
         tip.textAlignment = NSTextAlignmentCenter;

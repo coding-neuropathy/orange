@@ -124,6 +124,7 @@
 		4E117B591ABB067300844935 /* IntruductionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B581ABB067200844935 /* IntruductionVC.m */; };
 		4E117B5E1ABC6FDC00844935 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B5D1ABC6FDC00844935 /* EditViewController.m */; };
 		4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */; };
+		4E117B631ABEE79800844935 /* WelcomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B621ABEE79800844935 /* WelcomeVC.m */; };
 		4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */; };
 		4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */; };
 		4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C441A66B86F004C59C4 /* CategoryGridCell.m */; };
@@ -1323,6 +1324,8 @@
 		4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FultonsHand Regular.TTF"; sourceTree = "<group>"; };
 		4E117B5C1ABC6FDC00844935 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		4E117B5D1ABC6FDC00844935 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		4E117B611ABEE79800844935 /* WelcomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeVC.h; sourceTree = "<group>"; };
+		4E117B621ABEE79800844935 /* WelcomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeVC.m; sourceTree = "<group>"; };
 		4E198C3D1A65FE6E004C59C4 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
 		4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
 		4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityTwoGridCell.h; sourceTree = "<group>"; };
@@ -2847,6 +2850,15 @@
 			path = EditViewController;
 			sourceTree = "<group>";
 		};
+		4E117B601ABEE79800844935 /* WelcomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				4E117B611ABEE79800844935 /* WelcomeVC.h */,
+				4E117B621ABEE79800844935 /* WelcomeVC.m */,
+			);
+			path = WelcomeVC;
+			sourceTree = "<group>";
+		};
 		4E1C36561AB429FE00EA2F00 /* GTScrollNavigationBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -3550,6 +3562,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4E117B601ABEE79800844935 /* WelcomeVC */,
 				4E117B5B1ABC6FDC00844935 /* EditViewController */,
 				4E117B561ABB067200844935 /* IntruductionVC */,
 				4E117B521AB9CBBD00844935 /* CategoryLikeViewController */,
@@ -5844,6 +5857,7 @@
 				4E3A23461A51A7C500037F9C /* GKEntityCategory.m in Sources */,
 				4E3A23851A52EC9600037F9C /* Passport.m in Sources */,
 				4E1D28CB1A125B9300740C17 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
+				4E117B631ABEE79800844935 /* WelcomeVC.m in Sources */,
 				B708432A1ABBF427009605D8 /* NSString+Helper.m in Sources */,
 				B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */,
 				4E1D28CC1A125B9300740C17 /* JSQLocationMediaItem.m in Sources */,

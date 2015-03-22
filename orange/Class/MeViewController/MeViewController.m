@@ -444,7 +444,7 @@
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControl.deFrameHeight-0.5, kScreenWidth, 0.5)];
                 H.backgroundColor = UIColorFromRGB(0xebebeb);
-                [self.segmentedControl addSubview:H];
+                //[self.segmentedControl addSubview:H];
             }
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
