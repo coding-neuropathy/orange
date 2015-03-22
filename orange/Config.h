@@ -9,9 +9,9 @@
 #define kApiKey @"0b19c2b93687347e95c6b6f5cc91bb87"
 #define kApiSecret @"47b41864d64bd46"
 
-#ifndef kAppID_iPhone
-#define kAppID_iPhone @"939493680"
-#endif
+//#ifndef kAppID_iPhone
+//#define kAppID_iPhone @"939493680"
+//#endif
 
 #ifndef kTTID_IPHONE
 #define kTTID_IPHONE @"400000_12313170@guoku_iphone"
