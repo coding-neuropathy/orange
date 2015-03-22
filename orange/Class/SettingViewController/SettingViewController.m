@@ -366,7 +366,7 @@
             [alertView show];
         }
         if (indexPath.row == 1) {
-            NSString* url = [NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@?mt=8", kAppID_iPhone];
+            NSString* url = [NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@?mt=8", kGK_AppID_iPhone];
             [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
         }
     }
@@ -521,7 +521,7 @@
     [message setThumbImage:[UIImage imageNamed:@"weixin_share.png"]];
     
     WXAppExtendObject *ext = [WXAppExtendObject object];
-    ext.Url = [NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@?mt=8", kAppID_iPhone];;
+    ext.Url = [NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@?mt=8", kGK_AppID_iPhone];;
     
     message.mediaObject = ext;
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
