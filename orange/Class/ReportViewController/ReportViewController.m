@@ -34,7 +34,7 @@ static CGFloat LeftMargin = 16.;
 {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-        
+        _scrollView.delegate = self;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight);
@@ -88,6 +88,7 @@ static CGFloat LeftMargin = 16.;
         _textView.spellCheckingType = UITextSpellCheckingTypeNo;
         _textView.autocorrectionType = UITextAutocorrectionTypeNo;
         _textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _textView.delegate = self;
         
         [self.view addSubview:_textView];
     }
@@ -246,6 +247,19 @@ static CGFloat LeftMargin = 16.;
         }
         NSLog(@"Selected color: %@", sender.titleLabel.text);
     }
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.scrollView.deFrameTop = -240;
+}
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    self.scrollView.deFrameTop = 0;
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.textView resignFirstResponder];
 }
 
 @end

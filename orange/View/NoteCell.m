@@ -13,6 +13,7 @@
 #import "NoteViewController.h"
 #import "TagViewController.h"
 #import "EntityViewController.h"
+#import "GKWebVC.h"
 
 static inline NSRegularExpression * ParenthesisRegularExpression() {
     static NSRegularExpression *_parenthesisRegularExpression = nil;
@@ -306,6 +307,11 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     
     NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
+    if([array[0] isEqualToString:@"http"])
+    {
+        GKWebVC * vc =  [GKWebVC linksWebViewControllerWithURL:url];
+        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    }
     if([array[0] isEqualToString:@"tag"])
     {
         TagViewController * vc = [[TagViewController alloc]init];

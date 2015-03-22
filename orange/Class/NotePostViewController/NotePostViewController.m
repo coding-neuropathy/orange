@@ -52,6 +52,18 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     
     [self.view addSubview:self.textView];
     
+    
+    if(_inputBG.deFrameHeight < 120)
+    {
+        self.inputBG.deFrameHeight = 120;
+    }
+    
+    if(self.textView.deFrameHeight < 105)
+    {
+        self.textView.deFrameHeight = 105;
+    }
+    
+    
     //    _addPhotoButton = [[UIButton alloc]initWithFrame:CGRectMake(self.inputBG.deFrameRight-70, _inputBG.deFrameTop+10, 60, 60)];
     //    [self.addPhotoButton setImage:[UIImage imageNamed:@"photo.png"] forState:UIControlStateNormal];
     //    [self.addPhotoButton addTarget:self action:@selector(tapAddPhotoButton) forControlEvents:UIControlEventTouchUpInside];

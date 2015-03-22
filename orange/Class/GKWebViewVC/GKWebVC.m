@@ -160,6 +160,7 @@
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     return YES;
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -189,7 +190,7 @@
     if ([[self.webView.request.URL absoluteString]containsString:@"400000_12313170"]) {
         [array addObject:@"在淘宝客户端中打开"];
     }
-
+    [array addObject:@"在 Safari 中打开"];
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles: nil];
     for (NSString * string in array) {
         [actionSheet addButtonWithTitle:string];
@@ -213,6 +214,8 @@
         [self wxShare:0];
     }else if ([buttonTitle isEqualToString:@"分享到朋友圈"]) {
         [self wxShare:1];
+    }else if ([buttonTitle isEqualToString:@"在 Safari 中打开"]) {
+        [[UIApplication sharedApplication]openURL:self.webView.request.URL];
     }
 }
 #pragma mark - WX&Weibo
