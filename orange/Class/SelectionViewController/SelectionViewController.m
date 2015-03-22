@@ -112,6 +112,11 @@ static NSString *CellIdentifier = @"SelectionCell";
         [self.tableView.pullToRefreshView startAnimating];
         [self refresh];
     }
+    else
+    {
+        [self.tableView.pullToRefreshView startAnimating];
+        [self refresh];
+    }
     
     [GKAPI getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
         

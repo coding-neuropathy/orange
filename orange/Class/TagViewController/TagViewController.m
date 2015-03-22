@@ -65,10 +65,11 @@
         [weakSelf refresh];
     }];
     
-    
+    /*
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
+     */
 }
 
 - (void)viewDidAppear:(BOOL)animated

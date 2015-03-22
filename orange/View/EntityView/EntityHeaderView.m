@@ -55,6 +55,8 @@ static CGFloat kEntityViewMarginLeft = 16.;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.delegate = self;
         [self addSubview:_scrollView];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TapBuyBtn:)];
+        [_scrollView addGestureRecognizer:tap];
     }
     return _scrollView;
 }
