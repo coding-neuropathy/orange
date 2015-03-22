@@ -19,15 +19,15 @@
 
 @interface UserViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
-@property(nonatomic, strong) NSMutableArray * dataArrayForNote;
-@property(nonatomic, strong) NSMutableArray * dataArrayForTag;
+@property (nonatomic, strong) NSMutableArray * dataArrayForEntity;
+@property (nonatomic, strong) NSMutableArray * dataArrayForNote;
+@property (nonatomic, strong) NSMutableArray * dataArrayForTag;
 
-@property(nonatomic, assign) NSUInteger index;
-@property(nonatomic, strong) HMSegmentedControl *segmentedControl;
+@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
 @property (nonatomic, strong) UIButton *followButton;
-@property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
+@property (nonatomic, strong) NSMutableArray * dataArrayForOffset;
 
 @end
 
@@ -108,9 +108,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
- 
-    
 }
 
 - (void)didReceiveMemoryWarning {
