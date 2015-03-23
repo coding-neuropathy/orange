@@ -112,8 +112,6 @@
     if (self.dataArrayForEntity.count == 0) {
         [self refresh];
     }
-    
-
 }
 
 -(void)viewDidAppear:(BOOL)animated

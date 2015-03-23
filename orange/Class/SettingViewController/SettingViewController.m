@@ -74,6 +74,7 @@
     [self.dataArray addObject:otherSection];
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -105,6 +106,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"SettingView"];
     /*
     [self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0xffffff)];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -119,6 +121,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"SettingView"];
 }
 
 #pragma mark - UITableViewDataSource
@@ -517,8 +520,8 @@
 {
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = @"果库 - 精英消费指南";
-    message.description= @"";
-    [message setThumbImage:[UIImage imageNamed:@"weixin_share.png"]];
+    message.description= @"帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。";
+    [message setThumbImage:[UIImage imageNamed:@"wxshare.png"]];
     
     WXAppExtendObject *ext = [WXAppExtendObject object];
     ext.Url = [NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@?mt=8", kGK_AppID_iPhone];;

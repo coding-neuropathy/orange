@@ -209,8 +209,8 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 - (void)loadMore
 {
     if (self.index == 0) {
-        GKNote *note = self.dataArrayForFeed.lastObject[@"object"][@"note"];
-        [GKAPI getFeedWithTimestamp:note.updatedTime type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
+        NSTimeInterval timestamp = [self.dataArrayForFeed.lastObject[@"time"] doubleValue];
+        [GKAPI getFeedWithTimestamp:timestamp type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
             [self.dataArrayForFeed addObjectsFromArray:feedArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];

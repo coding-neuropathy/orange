@@ -1465,14 +1465,39 @@
         NSMutableArray *dataArray = [NSMutableArray array];
         for (NSDictionary *dict in objectArray) {
             NSDictionary *objectDict = [dict objectForKey:@"content"];
-            
-            GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
-            GKNote *note = [GKNote modelFromDictionary:objectDict[@"note"]];
+            NSTimeInterval timestamp = [[dict objectForKey:@"created_time"] doubleValue];
             NSString *type = [dict objectForKey:@"type"];
-            NSDictionary *dataDict = @{@"object" :  @{@"entity"  : entity,
+            
+            if ([type isEqualToString:@"entity"]){
+                GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
+                GKNote *note = [GKNote modelFromDictionary:objectDict[@"note"]];
+                NSDictionary *dataDict = @{@"object" :  @{@"entity"  : entity,
                                                       @"note"    : note},
-                                       @"type"   :  type};
-            [dataArray addObject:dataDict];
+                                       @"type"   :  type,
+                                       @"time"   :  @(timestamp)};
+                [dataArray addObject:dataDict];
+            }
+            if ([type isEqualToString:@"user_follow"]) {
+                NSLog(@"%@", objectDict);
+                GKUser * user = [GKUser modelFromDictionary:objectDict[@"user"]];
+                GKUser * target = [GKUser modelFromDictionary:objectDict[@"target"]];
+                NSDictionary *dataDict = @{@"object" :  @{@"user"  : user,
+                                                          @"target": target},
+                                           @"type"   :  type,
+                                           @"time"   :  @(timestamp)};
+                [dataArray addObject:dataDict];
+            }
+            
+            
+            if ([type isEqualToString:@"user_like"]) {
+                GKUser * user = [GKUser modelFromDictionary:objectDict[@"liker"]];
+                GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
+                NSDictionary *dataDict = @{@"object" :  @{@"entity"  : entity,
+                                                          @"user"    : user},
+                                           @"type"   :  type,
+                                           @"time"   :  @(timestamp)};
+                [dataArray addObject:dataDict];
+            }
         }
         
         if (success) {
@@ -1493,6 +1518,7 @@
  *  @param success 成功block
  *  @param failure 失败block
  */
+
 + (void)getNoteDetailWithNoteId:(NSUInteger)noteId
                         success:(void (^)(GKNote *note, GKEntity *entity, NSArray *commentArray, NSArray *pokerArray))success
                         failure:(void (^)(NSInteger stateCode))failure
