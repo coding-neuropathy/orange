@@ -198,7 +198,6 @@ typedef NS_ENUM(NSInteger, FeedType) {
 //    NSDictionary * feed = self.feed;
     NSTimeInterval timestamp = [self.feed[@"time"] doubleValue];
     NSString *time = [[NSDate dateWithTimeIntervalSince1970:timestamp] stringWithDefaultFormat];
-    //NSLog(@"type %@", self.feed[@"type"]);
     FeedType type = [FeedCell typeFromFeed:self.feed];
     switch (type) {
         case FeedEntityNote:

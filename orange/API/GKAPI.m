@@ -1478,7 +1478,7 @@
                 [dataArray addObject:dataDict];
             }
             if ([type isEqualToString:@"user_follow"]) {
-                NSLog(@"%@", objectDict);
+//                NSLog(@"%@", objectDict);
                 GKUser * user = [GKUser modelFromDictionary:objectDict[@"user"]];
                 GKUser * target = [GKUser modelFromDictionary:objectDict[@"target"]];
                 NSDictionary *dataDict = @{@"object" :  @{@"user"  : user,
