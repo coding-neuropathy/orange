@@ -169,7 +169,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (void)refresh
 {
     [GKAPI getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray) {
-        [self.image sd_setImageWithURL:self.entity.imageURL_240x240];
+        [self.image sd_setImageWithURL:self.entity.imageURL_640x640];
         self.entity = entity;
         self.header.entity = entity;
         self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
