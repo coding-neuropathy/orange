@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         _contentLabel.lineSpacing = 4.0;
         _contentLabel.delegate = self;
         
-        [self.contentLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        [_contentLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
         
         [self.contentView addSubview:_contentLabel];
     }
@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         _timeLabel.textAlignment = NSTextAlignmentLeft;
         _timeLabel.textColor = UIColorFromRGB(0x9d9e9f);
         
-        [self.timeLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        [_timeLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
         
         [self.contentView addSubview:_timeLabel];
     }
@@ -135,11 +135,12 @@ typedef NS_ENUM(NSInteger, FeedType) {
         _image.contentMode = UIViewContentModeScaleAspectFit;
         
         [_image addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-        self.image.userInteractionEnabled = YES;
+        _image.userInteractionEnabled = YES;
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
                                        initWithTarget:self action:@selector(imageButtonAction)];
         [_image addGestureRecognizer:tap];
-        
+        _image.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+        _image.layer.borderWidth = 0.5;
         [self.contentView addSubview:_image];
     }
     return _image;
@@ -326,12 +327,34 @@ typedef NS_ENUM(NSInteger, FeedType) {
 }
 - (void)avatarButtonAction
 {
+
     NSDictionary * feed = self.feed;
-    GKNote *note = feed[@"object"][@"note"];
-    //GKEntity *entity = feed[@"object"][@"entity"];
-    UserViewController * VC = [[UserViewController alloc]init];
-    VC.user = note.creator;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    GKUser * user;
+    switch (_type) {
+        case FeedEntityNote:
+        {
+            GKNote *note = feed[@"object"][@"note"];
+            user = note.creator;
+        }
+            break;
+        case FeedUserLike:
+        {
+            user = feed[@"object"][@"user"];
+
+        }
+            break;
+        case FeedUserFollower:
+        {
+            user = feed[@"object"][@"user"];
+        }
+            break;
+    }
+
+    if (user) {
+        UserViewController * VC = [[UserViewController alloc]init];
+        VC.user=user;
+        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    }
 }
 
 - (void)imageButtonAction
@@ -364,7 +387,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
 }
-/*
+
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
@@ -378,5 +401,5 @@ typedef NS_ENUM(NSInteger, FeedType) {
     
     CGContextStrokePath(context);
 }
-*/
+
 @end
