@@ -51,7 +51,7 @@
                                               @"所在地"
                                               ]};
     
-    NSDictionary *accountSection = @{@"section" : @"账号",
+    NSDictionary *accountSection = @{@"section" : @"帐号",
                                       @"row"     : @[
                                               @"邮箱",
                                               @"密码"
@@ -284,7 +284,7 @@
         }
     }
     
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"账号"]) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"帐号"]) {
         
         switch (indexPath.row) {
             case 0:
@@ -361,49 +361,60 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"账户"]) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"个人资料"]) {
         if(indexPath.row == 0)
-        {
-            [self photoButtonAction];
-        }
-        if(indexPath.row == 1)
         {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改昵称" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
             alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
             alertView.tag =20001;
             [alertView show];
         }
-        if(indexPath.row == 2)
+        if(indexPath.row == 1)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改邮箱" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改性别" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
             alertView.tag =20002;
             [alertView show];
         }
-        if(indexPath.row == 3)
+        if(indexPath.row == 2)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改密码" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改简介" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             alertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
             alertView.tag =20003;
             [alertView show];
         }
-        if(indexPath.row == 4)
+        if(indexPath.row == 3)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"确认退出登录？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改所在地" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             alertView.alertViewStyle = UIAlertViewStyleDefault;
-            alertView.tag =20007;
+            alertView.tag =20004;
             [alertView show];
         }
     }
+    
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"帐号"]) {
+        if(indexPath.row == 0)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改邮箱" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+            alertView.tag =20005;
+            [alertView show];
+        }
+        if(indexPath.row == 1)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改密码" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            alertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
+            alertView.tag =20006;
+            [alertView show];
+        }
+    }
+    
     if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"])
     {
-        if (indexPath.row == 2) {
-            [self weiboShare];
-        }
         if (indexPath.row == 0) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"分享给好友", @"分享到朋友圈", nil];
             alertView.alertViewStyle = UIAlertViewStyleDefault;
-            alertView.tag =20005;
+            alertView.tag =20007;
             [alertView show];
         }
         if (indexPath.row == 1) {
@@ -425,7 +436,7 @@
             {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
                 alertView.alertViewStyle = UIAlertViewStyleDefault;
-                alertView.tag =20006;
+                alertView.tag =20008;
                 [alertView show];
             }
                 break;
@@ -468,6 +479,73 @@
         {
             UITextField *tf=[alertView textFieldAtIndex:0];
             if (tf.text.length==0) {
+                [SVProgressHUD showImage:nil status:@"性别不能为空"];
+            }
+            else
+            {
+                /*
+                [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
+                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                } failure:^(NSInteger stateCode) {
+                    [SVProgressHUD showImage:nil status:@"修改失败"];
+                }];
+                 */
+            }
+        }
+    }
+    
+    if(alertView.tag ==20003)
+    {
+        if(buttonIndex == 1)
+        {
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            if (tf.text.length==0) {
+                [SVProgressHUD showImage:nil status:@"简介不能为空"];
+            }
+            else
+            {
+                /*
+                 [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
+                 [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                 } failure:^(NSInteger stateCode) {
+                 [SVProgressHUD showImage:nil status:@"修改失败"];
+                 }];
+                 */
+            }
+        }
+    }
+    
+    if(alertView.tag ==20004)
+    {
+        if(buttonIndex == 1)
+        {
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            if (tf.text.length==0) {
+                [SVProgressHUD showImage:nil status:@"所在地不能为空"];
+            }
+            else
+            {
+                /*
+                 [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
+                 [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                 } failure:^(NSInteger stateCode) {
+                 [SVProgressHUD showImage:nil status:@"修改失败"];
+                 }];
+                 */
+            }
+        }
+    }
+
+    
+    if(alertView.tag ==20005)
+    {
+        if(buttonIndex == 1)
+        {
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            if (tf.text.length==0) {
                 [SVProgressHUD showImage:nil status:@"邮箱不能为空"];
             }
             else
@@ -482,8 +560,8 @@
             }
         }
     }
-
-    if(alertView.tag ==20003)
+    
+    if(alertView.tag ==20006)
     {
         if(buttonIndex == 1)
         {
@@ -504,7 +582,7 @@
         }
     }
     
-    if(alertView.tag ==20005)
+    if(alertView.tag ==20007)
     {
         if(buttonIndex == 1)
         {
@@ -516,25 +594,11 @@
         }
     }
     
-    if(alertView.tag ==20006)
+    if(alertView.tag ==20008)
     {
         if(buttonIndex == 1)
         {
             [self clearPicCache];
-        }
-    }
-    if(alertView.tag == 20007)
-    {
-        if(buttonIndex == 1)
-        {
-            [AVUser logOut];
-            if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
-                [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
-            }
-           [Passport logout];
-            [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
-            
         }
     }
 }
