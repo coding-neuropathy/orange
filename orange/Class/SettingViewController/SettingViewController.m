@@ -506,7 +506,7 @@
 }
 - (void)showClearPicCacheFinish
 {
-    [SVProgressHUD showSuccessWithStatus:@"Clear Success"];
+    [SVProgressHUD showSuccessWithStatus:@"已清除"];
 }
 
 - (void)handleSwith:(UISwitch *)sender
