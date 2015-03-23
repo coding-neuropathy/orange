@@ -27,6 +27,7 @@
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
 @property (nonatomic, strong) UIButton *followButton;
+@property (nonatomic, strong) UIButton *editButton;
 @property (nonatomic, strong) NSMutableArray * dataArrayForOffset;
 
 @end
@@ -655,6 +656,21 @@
     
     self.tableView.tableHeaderView = view;
     
+    
+    {
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+        button.layer.cornerRadius = 4;
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitle:[NSString stringWithFormat:@"%@ 编辑个人资料",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]]  forState:UIControlStateNormal];
+        [button setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
+        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(editButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        button.center = CGPointMake(kScreenWidth/2, fanButton.center.y+40);
+        [view addSubview:button];
+        self.editButton = button;
+    }
+    
     [self configFollowButton];
 }
 
@@ -679,6 +695,7 @@
     for (id target in [self.followButton allTargets]) {
         [self.followButton removeTarget:target action:NULL forControlEvents:UIControlEventAllEvents];
     }
+    self.editButton.hidden = YES;
     self.followButton.hidden = NO;
     if (self.user.relation == GKUserRelationTypeNone) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@ 关注",[NSString fontAwesomeIconStringForEnum:FAPlus]] forState:UIControlStateNormal];
@@ -706,6 +723,7 @@
     }
     if (self.user.relation == GKUserRelationTypeSelf) {
         self.followButton.hidden = YES;
+        self.editButton.hidden = NO;
     }
 }
 - (void)followButtonAction

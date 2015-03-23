@@ -22,7 +22,7 @@
         self.clipsToBounds = YES;
         _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
         self.H.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self.contentView addSubview:self.H];
+        //[self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -49,7 +49,7 @@
     
     
     if (!self.avatar) {
-        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 7.f, 36.f, 36.f)];
+        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 19.f, 36.f, 36.f)];
         [self.contentView addSubview:self.avatar];
         self.avatar.userInteractionEnabled = YES;
         self.avatar.layer.cornerRadius = 18;
@@ -66,7 +66,7 @@
     self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
         
     if(!self.label) {
-        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 7, kScreenWidth - 70, 20)];
+        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 19, kScreenWidth - 70, 20)];
         self.label.paragraphReplacement = @"";
         self.label.lineSpacing = 4.0;
         self.label.delegate = self;
@@ -75,7 +75,7 @@
     self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@ </font></a>", self.user.userId, self.user.nickname];
     
     if(!self.contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 70, 20)];
+        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 27, kScreenWidth - 70, 20)];
         self.contentLabel.paragraphReplacement = @"";
         self.contentLabel.lineSpacing = 4.0;
         self.contentLabel.delegate = self;
@@ -91,7 +91,7 @@
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 24)];
         button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        button.center = CGPointMake(kScreenWidth - 40, 25);
+        button.center = CGPointMake(kScreenWidth - 40, 37);
         [self.contentView addSubview:button];
         self.followButton = button;
     }
@@ -176,6 +176,19 @@
 
 + (CGFloat)height
 {
-    return 50;
+    return 74;
+}
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    CGContextMoveToPoint(context, 60., self.frame.size.height - kSeparateLineWidth);
+    CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
+    
+    CGContextStrokePath(context);
 }
 @end
