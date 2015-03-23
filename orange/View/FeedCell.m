@@ -198,7 +198,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 //    NSDictionary * feed = self.feed;
     NSTimeInterval timestamp = [self.feed[@"time"] doubleValue];
     NSString *time = [[NSDate dateWithTimeIntervalSince1970:timestamp] stringWithDefaultFormat];
-    NSLog(@"type %@", self.feed[@"type"]);
+    //NSLog(@"type %@", self.feed[@"type"]);
     FeedType type = [FeedCell typeFromFeed:self.feed];
     switch (type) {
         case FeedEntityNote:
@@ -209,7 +209,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             
             [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
             
-            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 1 件商品：</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nickname, note.text, time];
+            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 1 件商品：</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, note.text, time];
             self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
 
             
@@ -226,7 +226,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 //            NSLog(@"%@ %@", self.feed[@"type"], user.nickname);
             [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60., 60.)]];
             
-            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 喜爱 1 件商品<font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nickname, time];
+            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 喜爱 1 件商品</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, time];
             
             self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
             
@@ -240,7 +240,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             GKUser * user = self.feed[@"object"][@"user"];
             GKUser * target = self.feed[@"object"][@"target"];
             [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60., 60.)]];
-            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 开始关注 <a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nickname, target.userId, target.nickname, time];
+            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 开始关注</font> <a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, target.userId, target.nickname, time];
             self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
 
             self.image.hidden = YES;
@@ -273,26 +273,35 @@ typedef NS_ENUM(NSInteger, FeedType) {
             
             label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 1 件商品：</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, note.text, time];
             CGFloat y = label.optimumSize.height + 5.;
-            height = y + 24;
+            height = y;
+            if (height < 40) {
+                height = 40;
+            }
         }
             break;
         case FeedUserLike:
         {
             GKUser * user = feed[@"object"][@"user"];
 //            NSLog(@"%@", feed[@"type"]);
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 喜爱 1 件商品<font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nickname, time];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 喜爱 1 件商品</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, time];
 ////
             CGFloat y = label.optimumSize.height + 5.;
-            height = y + 24.;
+            height = y;
+            if (height < 40) {
+                height = 40;
+            }
         }
             break;
         case FeedUserFollower:
         {
             GKUser * user = feed[@"object"][@"user"];
             GKUser * target = feed[@"object"][@"target"];
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 开始关注<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nickname, target.userId, target.nickname, time];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 开始关注</font><a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, target.userId, target.nickname, time];
             CGFloat y = label.optimumSize.height + 5.;
-            height = y + 24.;
+            height = y;
+            if (height < 40) {
+                height = 40;
+            }
         }
             break;
         default:
@@ -300,7 +309,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             break;
     }
     
-    return height;
+    return height+24;
 }
 
 - (void)dealloc
@@ -356,7 +365,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
 }
-
+/*
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
@@ -370,5 +379,5 @@ typedef NS_ENUM(NSInteger, FeedType) {
     
     CGContextStrokePath(context);
 }
-
+*/
 @end
