@@ -125,6 +125,7 @@
 		4E117B5E1ABC6FDC00844935 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B5D1ABC6FDC00844935 /* EditViewController.m */; };
 		4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */; };
 		4E117B631ABEE79800844935 /* WelcomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B621ABEE79800844935 /* WelcomeVC.m */; };
+		4E117B931AC05B0500844935 /* AVOSCloud.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B921AC05B0500844935 /* AVOSCloud.bundle */; };
 		4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */; };
 		4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */; };
 		4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C441A66B86F004C59C4 /* CategoryGridCell.m */; };
@@ -1326,6 +1327,7 @@
 		4E117B5D1ABC6FDC00844935 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		4E117B611ABEE79800844935 /* WelcomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeVC.h; sourceTree = "<group>"; };
 		4E117B621ABEE79800844935 /* WelcomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeVC.m; sourceTree = "<group>"; };
+		4E117B921AC05B0500844935 /* AVOSCloud.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AVOSCloud.bundle; sourceTree = "<group>"; };
 		4E198C3D1A65FE6E004C59C4 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
 		4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
 		4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityTwoGridCell.h; sourceTree = "<group>"; };
@@ -3406,6 +3408,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				4E117B921AC05B0500844935 /* AVOSCloud.bundle */,
 				4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */,
 				B7AAFA741AB6FE1400A2F20D /* TaeSDK */,
 				4E1C36561AB429FE00EA2F00 /* GTScrollNavigationBar */,
@@ -5661,6 +5664,7 @@
 				4EAA45C819E03BA60098C9E0 /* 1F30F.png in Resources */,
 				4EAA46D019E03BA60098C9E0 /* 1F45D.png in Resources */,
 				4EAA486C19E03BA70098C9E0 /* 23EB.png in Resources */,
+				4E117B931AC05B0500844935 /* AVOSCloud.bundle in Resources */,
 				4EAA475E19E03BA70098C9E0 /* 1F4EB.png in Resources */,
 				4EAA489619E03BA80098C9E0 /* 26A1.png in Resources */,
 				4EAA45E219E03BA60098C9E0 /* 1F339.png in Resources */,

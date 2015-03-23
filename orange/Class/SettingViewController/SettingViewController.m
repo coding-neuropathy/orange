@@ -510,7 +510,7 @@
 }
 - (void)showClearPicCacheFinish
 {
-    [SVProgressHUD showSuccessWithStatus:@"Clear Success"];
+    [SVProgressHUD showSuccessWithStatus:@"清空成功"];
 }
 
 - (void)handleSwith:(UISwitch *)sender
@@ -544,7 +544,7 @@
     if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
     {
         [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-            [AVOSCloudSNS shareText:@"果库 - 精英消费指南" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
                 
             } andProgress:^(float percent) {
                 if (percent == 1) {
@@ -555,7 +555,7 @@
     }
     else
     {
-        [AVOSCloudSNS shareText:@"果库 - 精英消费指南" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+        [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
             
         } andProgress:^(float percent) {
             if (percent == 1) {
@@ -647,6 +647,7 @@
     if (k_isLogin) {
         UIButton * logout = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
         logout.backgroundColor = UIColorFromRGB(0xcd1841);
+        logout.layer.cornerRadius = 5;
         [logout setTitle:@"退出登录" forState:UIControlStateNormal];
         [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [logout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
@@ -656,6 +657,7 @@
     {
         UIButton * login = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
         login.backgroundColor = UIColorFromRGB(0x427ec0);
+        login.layer.cornerRadius = 5;
         [login setTitle:@"登录" forState:UIControlStateNormal];
         [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [login addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];

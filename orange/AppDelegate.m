@@ -213,10 +213,14 @@
     [[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x414243)];
     [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x414243)];
-    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
+    //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
     UIFont* font = [UIFont boldSystemFontOfSize:17];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}];
     [[UINavigationBar appearance] setAlpha:0.97];
+    
+    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back.png"]];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back.png"]];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, 1) forBarMetrics:UIBarMetricsDefault];
 
     
     
@@ -225,7 +229,7 @@
     [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
-    //[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -100) forBarMetrics:UIBarMetricsDefault];
+
 }
 
 
