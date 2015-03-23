@@ -76,7 +76,7 @@
         self.entityCountLabel.textColor = [UIColor lightGrayColor];
         [self.contentView addSubview:self.entityCountLabel];
     }
-    self.entityCountLabel.text = [NSString stringWithFormat:@"%ld件商品", self.entityCount];
+    self.entityCountLabel.text = [NSString stringWithFormat:@"%ld 件商品", self.entityCount];
 
     self.entityCountLabel.deFrameWidth = 100.f;
     [self.entityCountLabel sizeToFit];
