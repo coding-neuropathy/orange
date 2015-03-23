@@ -20,7 +20,7 @@
 {
     [super awakeFromNib];
 //    self.placeholder = @"";
-//    self.placeholderColor = UIColorFromRGB(0x999999);
+//    self.placeholderColor = UIColorFromRGB(0x9d9e9f);
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextViewTextDidChangeNotification object:nil];
 }
 
@@ -52,7 +52,7 @@
         _placeholdeLabel.numberOfLines = 0;
         _placeholdeLabel.font = self.font;
 //        _placeholdeLabel.backgroundColor = [UIColor clearColor];
-        _placeholdeLabel.textColor = UIColorFromRGB(0x999999);
+        _placeholdeLabel.textColor = UIColorFromRGB(0x9d9e9f);
         _placeholdeLabel.alpha = 0;
         _placeholdeLabel.tag = 999;
         [self addSubview:_placeholdeLabel];

@@ -76,7 +76,14 @@
             
             UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
 
-            block_img.contentMode = UIViewContentModeScaleAspectFit;
+            if (kScreenWidth > 320) {
+                block_img.contentMode = UIViewContentModeCenter;
+            }
+            else
+            {
+                block_img.contentMode = UIViewContentModeScaleAspectFit;
+            }
+
             block_img.image = newimage;
             [weakSelf.activityIndicator stopAnimating];
             weakSelf.activityIndicator.hidden = YES;

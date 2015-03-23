@@ -80,7 +80,7 @@
         _pokeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         _pokeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         _pokeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [_pokeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [_pokeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [_pokeButton setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateSelected];
         [_pokeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [_pokeButton addTarget:self action:@selector(pokeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -98,7 +98,7 @@
         _timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         _timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         _timeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [_timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [_timeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         
         [self addSubview:_timeButton];
     }

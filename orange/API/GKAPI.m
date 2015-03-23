@@ -1587,7 +1587,7 @@
         
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
         GKEntity *lastLikeEntity = [GKEntity modelFromDictionary:objectDict[@"last_like"]];
-        GKNote *lastNote = [GKNote modelFromDictionary:objectDict[@"last_note"]];
+        GKNote *lastNote = nil;
         
         if (success) {
             success(user, lastLikeEntity, lastNote);

@@ -282,7 +282,7 @@
             [currentVersionL setTextAlignment:NSTextAlignmentRight];
             currentVersionL.text = [NSString stringWithFormat:@"v%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
             currentVersionL.font = [UIFont fontWithName:@"Helvetica" size:15];;
-            currentVersionL.textColor = UIColorFromRGB(0x999999);
+            currentVersionL.textColor = UIColorFromRGB(0x9d9e9f);
             [accessoryV addSubview:currentVersionL];
             cell.accessoryView = accessoryV;
         }

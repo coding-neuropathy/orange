@@ -16,7 +16,7 @@
 #import "CategoryViewController.h"
 #import "TagViewController.h"
 #import "IntruductionVC.h"
-
+#import "WelcomeVC.h"
 
 @interface AppDelegate ()<WXApiDelegate>
 
@@ -53,7 +53,6 @@
         }
     }];
     
-    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
@@ -88,7 +87,21 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[TabBarViewcontroller alloc]init];
+    self.window.rootViewController.view.hidden = YES;
     [self.window makeKeyAndVisible];
+    
+    NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if(userInfo)
+    {
+        application.applicationIconBadgeNumber = 0;
+        self.window.rootViewController.view.hidden = NO;
+    }
+    else
+    {
+        self.window.rootViewController.view.hidden = YES;
+        WelcomeVC * welcomeVc = [[WelcomeVC alloc] init];
+        [self.window.rootViewController presentViewController: welcomeVc animated:NO completion:NULL];
+    }
     
     
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -98,11 +111,6 @@
     
     
     [self refreshCategory];
-    
-    //if([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4"]) {
-    //    [self.window.rootViewController presentViewController:[IntruductionVC new] animated:NO completion:NULL];
-    //}
-    
     
     {    NSTimer *_timer = [NSTimer scheduledTimerWithTimeInterval:240.0f
                                                              target:self

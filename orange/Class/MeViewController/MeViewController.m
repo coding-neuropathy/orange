@@ -432,7 +432,7 @@
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-            [segmentedControl setSelectionIndicatorHeight:2.5];
+            [segmentedControl setSelectionIndicatorHeight:1.5];
             [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
             [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
             [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
@@ -444,7 +444,7 @@
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControl.deFrameHeight-0.5, kScreenWidth, 0.5)];
                 H.backgroundColor = UIColorFromRGB(0xebebeb);
-                [self.segmentedControl addSubview:H];
+                //[self.segmentedControl addSubview:H];
             }
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
@@ -586,7 +586,7 @@
     bioLabel.backgroundColor = [UIColor clearColor];
     bioLabel.font = [UIFont systemFontOfSize:14];
     bioLabel.textAlignment = NSTextAlignmentCenter;
-    bioLabel.textColor = UIColorFromRGB(0x999999);
+    bioLabel.textColor = UIColorFromRGB(0x9d9e9f);
     bioLabel.text = self.user.bio;
     bioLabel.center = image.center;
     bioLabel.backgroundColor = [UIColor clearColor];
