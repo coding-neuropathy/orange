@@ -540,7 +540,7 @@
     if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
     {
         [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-            [AVOSCloudSNS shareText:@"果库 - 精英消费指南" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            [AVOSCloudSNS shareText:@"果库 - 精英消费指南" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weiboshare.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
                 
             } andProgress:^(float percent) {
                 if (percent == 1) {
