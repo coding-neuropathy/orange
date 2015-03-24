@@ -7,6 +7,7 @@
 //
 
 #import "EditViewController.h"
+#import "NSString+Helper.h"
 //#import "WXApi.h"
 #import "GKAPI.h"
 //#import "LoginView.h"
@@ -76,22 +77,14 @@ NSString *SettingTableIdentifier = @"SettingCell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"location %@", [Passport sharedInstance].user.location);
+//    NSLog(@"location %@", [Passport sharedInstance].user.location);
     NSDictionary * profileSection = @{
                                       @"section" : @"profile",
-                                      @"row"     : @[
-                                              @{@"key":@"昵称", @"value":[Passport sharedInstance].user.nickname},
-                                              @{@"key":@"性别", @"value": [Passport sharedInstance].user.gender},
-                                              @{@"key":@"简介", @"value":[Passport sharedInstance].user.bio},
-                                              @{@"key":@"所在地", @"value":[Passport sharedInstance].user.location},
-                                              ]
+                                      @"row"     : @[@"昵称",@"性别", @"简介", @"所在地",]
                                       };
     
     NSDictionary *accountSection = @{@"section" : @"帐号",
-                                      @"row"     : @[
-                                             @{@"key":@"邮箱", @"value":[Passport sharedInstance].user.email},
-                                             @{@"key":@"密码", @"value":@"修改密码"},
-                                              ]};
+                                      @"row"     : @[@"邮箱", @"密码"]};
 
 //    NSLog(@"email %@", [Passport sharedInstance].user.email);
 //    if (k_isLogin) {
@@ -152,7 +145,9 @@ NSString *SettingTableIdentifier = @"SettingCell";
 {
     
     EditViewCell * cell  = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier forIndexPath:indexPath];
-    cell.dict = [[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row];
+//    cell.dict = [[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row];
+//    NSLog(@"string %@", [[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row]);
+    cell.string = [[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 
     return cell;
@@ -173,12 +168,64 @@ NSString *SettingTableIdentifier = @"SettingCell";
             {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改昵称" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
                 alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                alertView.tag = 20001;
+                UITextField *textField = [alertView textFieldAtIndex:0];
+                textField.text = [Passport sharedInstance].user.nickname;
                 [alertView show];
             }
                 break;
             case 1:
             {
-            
+                UIActionSheet *actionSheet= [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男", @"女", @"其他", nil];
+                actionSheet.tag = 20000;
+                [actionSheet showInView:self.view];
+            }
+                break;
+            case 2:
+            {
+                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"修改简介" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
+                alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                alertView.tag = 20002;
+                UITextField *textField = [alertView textFieldAtIndex:0];
+                textField.text = [Passport sharedInstance].user.bio;
+                [alertView show];
+            }
+                break;
+            case 3:
+            {
+                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"修改所在地" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
+                alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                alertView.tag = 20003;
+                UITextField *textField = [alertView textFieldAtIndex:0];
+                textField.text = [Passport sharedInstance].user.location;
+                [alertView show];
+            }
+            default:
+                break;
+        }
+    }
+    
+    if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
+            {
+                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"修改邮箱" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
+                alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                alertView.tag = 30000;
+                UITextField *textField = [alertView textFieldAtIndex:0];
+                textField.text = [Passport sharedInstance].user.email;
+                [alertView show];
+            }
+                break;
+            case 1:
+            {
+                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"修改密码" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
+                alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                alertView.tag = 30001;
+                UITextField *textField = [alertView textFieldAtIndex:0];
+                textField.secureTextEntry = YES;
+//                textField.text = [Passport sharedInstance].user.email;
+                [alertView show];
             }
                 break;
             default:
@@ -186,11 +233,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
         }
     }
     
-    if (indexPath.section == 1) {
-    
-    }
-    
-    NSLog(@"row row %lu", indexPath.row);
+//    NSLog(@"row row %lu", indexPath.row);
 //    if ([[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"section"] isEqualToString:@"帐号"]) {
 //        if(indexPath.row == 0)
 //        {
@@ -269,19 +312,21 @@ NSString *SettingTableIdentifier = @"SettingCell";
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(alertView.tag ==20001)
+    if(alertView.tag == 20001)
     {
         if(buttonIndex == 1)
         {
-        UITextField *tf=[alertView textFieldAtIndex:0];
+            UITextField *tf=[alertView textFieldAtIndex:0];
             if (tf.text.length==0) {
                 [SVProgressHUD showImage:nil status:@"昵称不能为空"];
             }
             else
             {
-                [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
+                NSDictionary * dict = @{@"nickname": tf.text};
+                [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
+                    [Passport sharedInstance].user.nickname = user.nickname;
                     [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
-                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                    [self.tableView reloadData];
                 } failure:^(NSInteger stateCode) {
                     [SVProgressHUD showImage:nil status:@"修改失败"];
                 }];
@@ -295,13 +340,17 @@ NSString *SettingTableIdentifier = @"SettingCell";
         {
             UITextField *tf=[alertView textFieldAtIndex:0];
             if (tf.text.length==0) {
-                [SVProgressHUD showImage:nil status:@"邮箱不能为空"];
+                [SVProgressHUD showImage:nil status:@"不能为空"];
             }
             else
             {
-                [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
+                NSDictionary * dict = @{@"bio": tf.text};
+                [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
+                    [Passport sharedInstance].user.bio = user.bio;
+
                     [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
-                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                    [self.tableView reloadData];
+                    
                 } failure:^(NSInteger stateCode) {
                     [SVProgressHUD showImage:nil status:@"修改失败"];
                 }];
@@ -315,18 +364,56 @@ NSString *SettingTableIdentifier = @"SettingCell";
         if(buttonIndex == 1)
         {
             UITextField *tf=[alertView textFieldAtIndex:0];
-            if (tf.text.length<6) {
-                [SVProgressHUD showImage:nil status:@"密码不能少于6位"];
+            if (tf.text.length == 0) {
+                [SVProgressHUD showImage:nil status:@"不能为空"];
             }
             else
             {
-                [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
+                NSDictionary *dict = @{@"location":tf.text};
+//                NSLog(@"location %@", tf.text);
+                [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
+//                    NSLog(@"update update %@", user.location);
+                    [Passport sharedInstance].user.location = user.location;
                     [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
-                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                    [self.tableView reloadData];
                 } failure:^(NSInteger stateCode) {
                     [SVProgressHUD showImage:nil status:@"修改失败"];
                 }];
-                
+            }
+        }
+    }
+    
+    if (alertView.tag == 30000) {
+        if (buttonIndex == 1) {
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            if ([tf.text validateEmail]) {
+                NSDictionary *dict = @{@"email": tf.text};
+                [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+                    [Passport sharedInstance].user.email = user.email;
+                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                    [self.tableView reloadData];
+                } failure:^(NSInteger stateCode) {
+                    [SVProgressHUD showImage:nil status:@"修改失败"];
+                }];
+            } else {
+                [SVProgressHUD showImage:nil status:@"邮箱格式错误"];
+            }
+        }
+    
+    }
+    
+    if (alertView.tag == 30001) {
+        if(buttonIndex == 1) {
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            if (tf.text.length < 8) {
+                [SVProgressHUD showImage:nil status:@"密码不能小于8位"];
+            } else {
+                NSDictionary *dict = @{@"password":tf.text};
+                [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                } failure:^(NSInteger stateCode) {
+                    [SVProgressHUD showImage:nil status:@"修改失败"];
+                }];
             }
         }
     }
@@ -343,27 +430,27 @@ NSString *SettingTableIdentifier = @"SettingCell";
 //        }
 //    }
     
-    if(alertView.tag ==20006)
-    {
-        if(buttonIndex == 1)
-        {
-//            [self clearPicCache];
-        }
-    }
-    if(alertView.tag == 20007)
-    {
-        if(buttonIndex == 1)
-        {
-            [AVUser logOut];
-            if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
-                [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
-            }
-           [Passport logout];
-            [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
-            
-        }
-    }
+//    if(alertView.tag ==20006)
+//    {
+//        if(buttonIndex == 1)
+//        {
+////            [self clearPicCache];
+//        }
+//    }
+//    if(alertView.tag == 20007)
+//    {
+//        if(buttonIndex == 1)
+//        {
+//            [AVUser logOut];
+//            if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
+//                [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
+//            }
+//           [Passport logout];
+//            [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
+//            
+//        }
+//    }
 }
 
 
@@ -488,24 +575,56 @@ NSString *SettingTableIdentifier = @"SettingCell";
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // 修改头像
-    switch (buttonIndex) {
-        case 0:
-        {
-            // 拍照
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                [self showImagePickerToTakePhoto];
-            }
-            break;
+//    NSLog(@"index %lu", actionSheet.tag);
+    
+    if (actionSheet.tag == 20000) {
+        NSString * gender = nil;
+        switch (buttonIndex) {
+            case 0:
+                gender = @"M";
+                break;
+            case 1:
+                gender = @"F";
+                break;
+                
+            case 2:
+                gender = @"O";
+                break;
+            default:
+                return;
+                break;
         }
-            
-        case 1:
-        {
-            // 照片库
-            [self showImagePickerFromPhotoLibrary];
-            break;
+//        NSLog(@"index index %lu", buttonIndex);
+        NSDictionary * dict = @{@"gender": gender};
+        [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
+            [Passport sharedInstance].user.gender = user.gender;
+            NSLog(@"geneder %@", user.gender);
+            [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+            [self.tableView reloadData];
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:@"修改失败"];
+        }];
+    
+    } else {
+        switch (buttonIndex) {
+            case 0:
+            {
+                // 拍照
+                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                    [self showImagePickerToTakePhoto];
+                }
+                break;
+            }
+            case 1:
+            {
+                // 照片库
+                [self showImagePickerFromPhotoLibrary];
+                break;
+            }
         }
     }
 }
+
 - (void)showImagePickerFromPhotoLibrary
 {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
@@ -537,7 +656,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 
 - (void)imagePickerController:(UIImagePickerController *)Picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage * image = (UIImage *)[info valueForKey:UIImagePickerControllerEditedImage];
-    [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:[image imageData] success:^(GKUser *user) {
+    [GKAPI updateUserProfileWithParameters:nil imageData:[image imageData] success:^(GKUser *user) {
         self.headerView.avatarURL = user.avatarURL;
         [SVProgressHUD showImage:nil status:@"更新成功"];
     } failure:^(NSInteger stateCode) {

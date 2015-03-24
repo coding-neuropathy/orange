@@ -510,6 +510,34 @@
  *  更新当前用户信息
  *
  *  @param nickname  昵称
+ *  @param bio       简介
+ *  @param gender    性别
+ *  @param imageData 头像
+ *  @param success   成功block
+ *  @param failure   失败block
+ */
+
++ (void)updateUserProfileWithParameters:(NSDictionary *)parameters
+                              imageData:(NSData *)imageData
+                                success:(void (^)(GKUser *user))success
+                                failure:(void (^)(NSInteger stateCode))failure;
+
+/**
+ *  更新当前用户账号信息
+ *
+ *  @param email     邮箱
+ *  @param password  密码
+ *  @param success   成功block
+ *  @param failure   失败block
+ */
++ (void)updateaccountWithParameters:(NSDictionary *)parameters
+                            success:(void (^)(GKUser *user))success
+                            failure:(void (^)(NSInteger stateCode))failure;
+
+/**
+ *  更新当前用户信息
+ *
+ *  @param nickname  昵称
  *  @param email     邮箱
  *  @param password  密码
  *  @param imageData 头像

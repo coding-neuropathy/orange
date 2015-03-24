@@ -33,11 +33,31 @@
 
 
 
-- (void)setDict:(NSDictionary *)dict
+- (void)setString:(NSString *)string
 {
-    _dict = dict;
-    self.textLabel.text = _dict[@"key"];
-    self.detailTextLabel.text = _dict[@"value"];
+    _string = string;
+    self.textLabel.text = _string;
+    
+    if ([_string isEqualToString:@"昵称"])
+        self.detailTextLabel.text  = [Passport sharedInstance].user.nickname;
+    if ([_string isEqualToString:@"性别"])
+    {
+        if([[Passport sharedInstance].user.gender isEqualToString:@"M"])
+            self.detailTextLabel.text = @"男";
+        else if ([[Passport sharedInstance].user.gender isEqualToString:@"F"])
+            self.detailTextLabel.text = @"女";
+        else
+            self.detailTextLabel.text = @"其他";
+    }
+    if ([_string isEqualToString:@"简介"])
+        self.detailTextLabel.text = [Passport sharedInstance].user.bio;
+    if ([_string isEqualToString:@"所在地"])
+        self.detailTextLabel.text = [Passport sharedInstance].user.location;
+    if ([_string isEqualToString:@"邮箱"])
+        self.detailTextLabel.text = [Passport sharedInstance].user.email;
+    if ([_string isEqualToString:@"密码"])
+        self.detailTextLabel.text = @"修改密码";
+    
     [self setNeedsLayout];
 }
 

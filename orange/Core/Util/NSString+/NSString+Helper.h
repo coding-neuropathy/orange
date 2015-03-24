@@ -16,4 +16,6 @@
 - (CGFloat)heightWithLineWidth:(CGFloat)width Font:(UIFont *)font;
 - (CGFloat)widthWithLineWidth:(CGFloat)width Font:(UIFont *)font;
 
+- (BOOL)validateEmail;
+
 @end

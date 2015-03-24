@@ -1626,6 +1626,82 @@
     }];
 }
 
+
+/**
+ *  更新当前用户信息
+ *
+ *  @param nickname  昵称
+ *  @param bio       简介
+ *  @param gender    性别
+ *  @param imageData 头像
+ *  @param success   成功block
+ *  @param failure   失败block
+ */
+
++ (void)updateUserProfileWithParameters:(NSDictionary *)parameters
+                                imageData:(NSData *)imageData
+                                success:(void (^)(GKUser *user))success
+                                failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString *path = @"user/update/";
+    NSDictionary *dataParameters;
+    if (imageData) {
+        dataParameters = @{@"image":imageData};
+    }
+    
+//    if (!parameters)
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    if (parameters)
+        paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    
+    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict dataParameters:dataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *objectDict = (NSDictionary *)responseObject;
+        
+        GKUser *user = [GKUser modelFromDictionary:objectDict];
+        
+        if (success) {
+            success(user);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
+/**
+ *  更新当前用户账号信息
+ *
+ *  @param email     邮箱
+ *  @param password  密码
+ *  @param success   成功block
+ *  @param failure   失败block
+ */
++ (void)updateaccountWithParameters:(NSDictionary *)parameters
+                                success:(void (^)(GKUser *user))success
+                                failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString *path = @"user/update/account/";
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    if (parameters)
+        paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *objectDict = (NSDictionary *)responseObject;
+        
+        GKUser *user = [GKUser modelFromDictionary:objectDict];
+        
+        if (success) {
+            success(user);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
 /**
  *  更新当前用户信息
  *

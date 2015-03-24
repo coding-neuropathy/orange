@@ -10,6 +10,6 @@
 
 @interface EditViewCell : UITableViewCell
 
-@property (strong, nonatomic) NSDictionary * dict;
+@property (strong, nonatomic) NSString * string;
 
 @end

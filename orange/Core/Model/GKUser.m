@@ -74,16 +74,16 @@
     }
 }
 
-- (NSString *)gender
-{
-    if ([_gender isEqualToString:@"M"]) {
-        return @"男";
-    } else if ([_gender isEqualToString:@"F"]) {
-        return @"女";
-    } else {
-        return @"其他";
-    }
-}
+//- (NSString *)gender
+//{
+//    if ([_gender isEqualToString:@"M"]) {
+//        return @"男";
+//    } else if ([_gender isEqualToString:@"F"]) {
+//        return @"女";
+//    } else {
+//        return @"其他";
+//    }
+//}
 
 - (NSString *)location
 {
