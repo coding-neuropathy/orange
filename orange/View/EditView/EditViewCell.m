@@ -26,7 +26,8 @@
         self.detailTextLabel.textColor = UIColorFromRGB(0x9d9e9f);
         self.detailTextLabel.highlightedTextColor = UIColorFromRGB(0x9d9e9f);
         self.detailTextLabel.textAlignment = NSTextAlignmentRight;
-        self.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+        self.detailTextLabel.adjustsFontSizeToFitWidth = NO;
+        self.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     }
     return self;
 }
@@ -66,7 +67,7 @@
 {
     [super layoutSubviews];
     self.textLabel.frame = CGRectMake(20., 0., 100., 44.);
-    self.detailTextLabel.frame = CGRectMake(kScreenWidth - 200., 0., 150., 44.);
+    self.detailTextLabel.frame = CGRectMake(kScreenWidth - 250., 0., 200., 44.);
 }
 
 @end
