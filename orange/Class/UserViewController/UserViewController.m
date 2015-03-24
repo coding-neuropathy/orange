@@ -113,6 +113,14 @@
     if (self.dataArrayForEntity.count == 0) {
         [self refresh];
     }
+    
+    [AVAnalytics beginLogPageView:@"UserView"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"UserView"];
 }
 
 -(void)viewDidAppear:(BOOL)animated
