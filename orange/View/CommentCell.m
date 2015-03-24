@@ -78,7 +78,7 @@
     self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@ </font></a>", self.comment.creator.userId, self.comment.creator.nickname];
     
     if(!self.contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 70, 20)];
+        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 120, 20)];
         self.contentLabel.paragraphReplacement = @"";
         self.contentLabel.lineSpacing = 4.0;
         self.contentLabel.delegate = self;
@@ -107,7 +107,7 @@
         self.timeButton.titleLabel.font = [UIFont systemFontOfSize:10];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-        [self.timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.timeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
         [self.contentView addSubview:self.timeButton];
     }
@@ -144,7 +144,7 @@
 
 + (CGFloat)height:(GKComment *)comment
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -120, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 4.0;
     if (comment.repliedUser) {

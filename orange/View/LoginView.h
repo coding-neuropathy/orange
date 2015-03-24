@@ -14,4 +14,5 @@
 
 - (void)show;
 - (void)dismiss;
+- (void)showFromRegister;
 @end

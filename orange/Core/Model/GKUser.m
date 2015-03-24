@@ -21,8 +21,8 @@
                              @"avatar_large"     : @"avatarURL",
                              @"avatar_small"     : @"avatarURL_s",
                              @"verified"         : @"verified",
-                             @"verified_type"    : @"verifiedType",
-                             @"verified_reason"  : @"verifiedReason",
+//                             @"verified_type"    : @"verifiedType",
+//                             @"verified_reason"  : @"verifiedReason",
                              @"gender"           : @"gender",
                              @"bio"              : @"bio",
                              @"following_count"  : @"followingCount",
@@ -36,6 +36,7 @@
                              @"expert_statistics": @"expertStatisticsDic",
                              @"relation"         : @"relation",
                              @"email"            : @"email",
+                             @"location"         : @"location",
                              };
     
     return keyDic;
@@ -70,6 +71,17 @@
         _avatarURL_s = avatarURL_s;
     } else if ([avatarURL_s isKindOfClass:[NSString class]]) {
         _avatarURL_s = [NSURL URLWithString:(NSString *)avatarURL_s];
+    }
+}
+
+- (NSString *)gender
+{
+    if ([_gender isEqualToString:@"M"]) {
+        return @"男";
+    } else if ([_gender isEqualToString:@"F"]) {
+        return @"女";
+    } else {
+        return @"其他";
     }
 }
 

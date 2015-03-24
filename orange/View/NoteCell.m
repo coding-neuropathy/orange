@@ -13,6 +13,7 @@
 #import "NoteViewController.h"
 #import "TagViewController.h"
 #import "EntityViewController.h"
+#import "GKWebVC.h"
 
 static inline NSRegularExpression * ParenthesisRegularExpression() {
     static NSRegularExpression *_parenthesisRegularExpression = nil;
@@ -161,7 +162,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         self.pokeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         self.pokeButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.pokeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [self.pokeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.pokeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.pokeButton setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateSelected];
         /*
         [self.pokeButton setImage:[UIImage imageNamed:@"icon_poke"] forState:UIControlStateNormal];
@@ -190,7 +191,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         self.commentButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         self.commentButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.commentButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [self.commentButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.commentButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         /*
         [self.commentButton setImage:[UIImage imageNamed:@"icon_comment"] forState:UIControlStateNormal];
         [self.commentButton setImage:[UIImage imageNamed:@"icon_comment"] forState:UIControlStateHighlighted|UIControlStateNormal];
@@ -221,7 +222,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-        [self.timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.timeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
         [self.contentView addSubview:self.timeButton];
     }
@@ -306,6 +307,11 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     
     NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
+    if([array[0] isEqualToString:@"http"])
+    {
+        GKWebVC * vc =  [GKWebVC linksWebViewControllerWithURL:url];
+        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    }
     if([array[0] isEqualToString:@"tag"])
     {
         TagViewController * vc = [[TagViewController alloc]init];

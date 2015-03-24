@@ -55,6 +55,8 @@ static CGFloat kEntityViewMarginLeft = 16.;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.delegate = self;
         [self addSubview:_scrollView];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TapBuyBtn:)];
+        [_scrollView addGestureRecognizer:tap];
     }
     return _scrollView;
 }
@@ -126,7 +128,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
     {
         self.titleLabel.text = [NSString stringWithFormat:@"%@ - %@", _entity.brand, _entity.title];
     }
-    if((![_entity.title isEqual:[NSNull null]])&&(_entity.title))
+    else if((![_entity.title isEqual:[NSNull null]])&&(_entity.title))
     {
         self.titleLabel.text = _entity.title;
     }
@@ -153,6 +155,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
     
     
     [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱 %lu", _entity.likeCount] forState:UIControlStateNormal];
+    self.likeBtn.selected = self.entity.liked;
     if(_entity.likeCount == 0)
     {
         [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];

@@ -19,15 +19,16 @@
 
 @interface UserViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
-@property(nonatomic, strong) NSMutableArray * dataArrayForNote;
-@property(nonatomic, strong) NSMutableArray * dataArrayForTag;
+@property (nonatomic, strong) NSMutableArray * dataArrayForEntity;
+@property (nonatomic, strong) NSMutableArray * dataArrayForNote;
+@property (nonatomic, strong) NSMutableArray * dataArrayForTag;
 
-@property(nonatomic, assign) NSUInteger index;
-@property(nonatomic, strong) HMSegmentedControl *segmentedControl;
+@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
 @property (nonatomic, strong) UIButton *followButton;
-@property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
+@property (nonatomic, strong) UIButton *editButton;
+@property (nonatomic, strong) NSMutableArray * dataArrayForOffset;
 
 @end
 
@@ -84,10 +85,19 @@
         [weakSelf refresh];
     }];
     
+    [GKAPI getUserDetailWithUserId:self.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
+        self.user = user;
+        [self configHeaderView];
+    } failure:^(NSInteger stateCode) {
+        
+    }];
+    
 
      [self.tableView addInfiniteScrollingWithActionHandler:^{
          [weakSelf loadMore];
      }];
+    
+
 }
 - (void)setUser:(GKUser *)user
 {
@@ -108,9 +118,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
- 
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -222,7 +229,7 @@
             [self.tableView.pullToRefreshView stopAnimating];
             
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -235,7 +242,7 @@
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -248,7 +255,7 @@
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -266,7 +273,7 @@
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
@@ -280,7 +287,7 @@
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
@@ -437,7 +444,7 @@
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-            [segmentedControl setSelectionIndicatorHeight:2.5];
+            [segmentedControl setSelectionIndicatorHeight:1.5];
             [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
             [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
             [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
@@ -449,12 +456,12 @@
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControl.deFrameHeight-0.5, kScreenWidth, 0.5)];
                 H.backgroundColor = UIColorFromRGB(0xebebeb);
-                [self.segmentedControl addSubview:H];
+                //[self.segmentedControl addSubview:H];
             }
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
                 H.backgroundColor = UIColorFromRGB(0xebebeb);
-                [self.segmentedControl addSubview:H];
+                //[self.segmentedControl addSubview:H];
             }
             
             {
@@ -591,9 +598,9 @@
     UILabel * bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 20.f, 260.f, 30.f)];
     bioLabel.numberOfLines = 0;
     bioLabel.backgroundColor = [UIColor clearColor];
-    bioLabel.font = [UIFont systemFontOfSize:12];
+    bioLabel.font = [UIFont systemFontOfSize:14];
     bioLabel.textAlignment = NSTextAlignmentCenter;
-    bioLabel.textColor = UIColorFromRGB(0x999999);
+    bioLabel.textColor = UIColorFromRGB(0x9d9e9f);
     bioLabel.text = self.user.bio;
     bioLabel.center = image.center;
     bioLabel.backgroundColor = [UIColor clearColor];
@@ -616,7 +623,7 @@
     [friendButton addTarget:self action:@selector(friendButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [friendButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     [friendButton.titleLabel setTextAlignment:NSTextAlignmentRight];
-    [friendButton setTitle:[NSString stringWithFormat:@"%ld 关注",_user.followingCount] forState:UIControlStateNormal];
+    [friendButton setTitle:[NSString stringWithFormat:@"关注 %ld",_user.followingCount] forState:UIControlStateNormal];
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         friendButton.deFrameTop = bioLabel.deFrameBottom+10;
     }
@@ -634,7 +641,7 @@
     [fanButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [fanButton.titleLabel setTextAlignment:NSTextAlignmentLeft];
     fanButton.deFrameTop = friendButton.deFrameTop;
-    [fanButton setTitle:[NSString stringWithFormat:@"%ld 粉丝",_user.fanCount] forState:UIControlStateNormal];
+    [fanButton setTitle:[NSString stringWithFormat:@"粉丝 %ld",_user.fanCount] forState:UIControlStateNormal];
     [view addSubview:fanButton];
     
     
@@ -648,6 +655,21 @@
     [view addSubview:V];
     
     self.tableView.tableHeaderView = view;
+    
+    
+    {
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+        button.layer.cornerRadius = 4;
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitle:[NSString stringWithFormat:@"%@ 编辑个人资料",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]]  forState:UIControlStateNormal];
+        [button setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
+        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(editButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        button.center = CGPointMake(kScreenWidth/2, fanButton.center.y+40);
+        [view addSubview:button];
+        self.editButton = button;
+    }
     
     [self configFollowButton];
 }
@@ -673,6 +695,7 @@
     for (id target in [self.followButton allTargets]) {
         [self.followButton removeTarget:target action:NULL forControlEvents:UIControlEventAllEvents];
     }
+    self.editButton.hidden = YES;
     self.followButton.hidden = NO;
     if (self.user.relation == GKUserRelationTypeNone) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@ 关注",[NSString fontAwesomeIconStringForEnum:FAPlus]] forState:UIControlStateNormal];
@@ -689,17 +712,18 @@
     if (self.user.relation == GKUserRelationTypeFollowing) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@ 已关注",[NSString fontAwesomeIconStringForEnum:FACheck]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-        [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.followButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeBoth) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@ 互相关注",[NSString fontAwesomeIconStringForEnum:FAExchange]]  forState:UIControlStateNormal];
         [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-        [self.followButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.followButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeSelf) {
         self.followButton.hidden = YES;
+        self.editButton.hidden = NO;
     }
 }
 - (void)followButtonAction
@@ -729,9 +753,9 @@
     [GKAPI followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
         self.user.relation = relation;
         [self configFollowButton];
-        [SVProgressHUD showImage:nil status:@"取关成功"];
+        //[SVProgressHUD showImage:nil status:@"取关成功"];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"取关失败"];
+        [SVProgressHUD showImage:nil status:@"取消关注失败"];
     }];
 }
 

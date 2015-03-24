@@ -97,7 +97,7 @@
         self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-        [self.timeButton setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [self.timeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
         [self.contentView addSubview:self.timeButton];
     }

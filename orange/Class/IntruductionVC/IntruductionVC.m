@@ -59,14 +59,14 @@
     
 
     
-    UIImageView *imageview1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"1.png"]];
-    [imageview1 setCenter:CGPointMake(kScreenWidth/2,kScreenHeight/2-30)];
+    UIImageView *imageview1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,kScreenHeight)];
+    [imageview1 setCenter:CGPointMake(kScreenWidth/2,kScreenHeight/2)];
     imageview1.contentMode = UIViewContentModeScaleAspectFit;
     imageview1.userInteractionEnabled = YES;
     [self.scrollView addSubview:imageview1];
 
-    imageview2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"2.png"]];
-    [imageview2 setCenter:CGPointMake(kScreenWidth*3/2,kScreenHeight/2-30)];
+    imageview2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,kScreenHeight)];
+    [imageview2 setCenter:CGPointMake(kScreenWidth*3/2,kScreenHeight/2)];
     imageview2.contentMode = UIViewContentModeScaleAspectFit;
     imageview2.userInteractionEnabled = YES;
     [self.scrollView addSubview:imageview2];
@@ -75,32 +75,67 @@
     
     
 
-    UIImageView *imageview3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"3.png"]];
-    [imageview3 setCenter:CGPointMake(kScreenWidth*5/2,kScreenHeight/2-30)];
+    UIImageView *imageview3 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,kScreenHeight)];
+    [imageview3 setCenter:CGPointMake(kScreenWidth*5/2,kScreenHeight/2)];
     imageview3.contentMode = UIViewContentModeScaleAspectFit;
     imageview3.userInteractionEnabled = YES;
+
     [self.scrollView addSubview:imageview3];
 
-    UIImageView *imageview4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"4.png"]];
-    [imageview4 setCenter:CGPointMake(kScreenWidth*7/2,kScreenHeight/2-30)];
+    UIImageView *imageview4 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,kScreenHeight)];
+    imageview4.frame = CGRectMake(0, 0, kScreenWidth,kScreenHeight);
+    [imageview4 setCenter:CGPointMake(kScreenWidth*7/2,kScreenHeight/2)];
     imageview4.contentMode = UIViewContentModeScaleAspectFit;
     imageview4.userInteractionEnabled = YES;
     
     [self.scrollView addSubview:imageview4];
     
     UIButton * button = [[UIButton alloc]init];
-    [button setTitle:@"马上开始" forState:UIControlStateNormal];
+    [button setTitle:@"" forState:UIControlStateNormal];
     [button setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont systemFontOfSize:18]];
     button.layer.cornerRadius = 8;
     button.layer.masksToBounds = YES;
-    button.backgroundColor = UIColorFromRGB(0x457ebd);
-    button.frame = CGRectMake(0, 0, 120, 40);
-    button.center = CGPointMake(kScreenWidth*3+kScreenWidth/2, kScreenHeight - 120);
+    button.backgroundColor = [UIColor clearColor];
+    button.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    button.center = CGPointMake(kScreenWidth*3+kScreenWidth/2, kScreenHeight/2);
     [button addTarget:self action:@selector(beginInGuoku) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:button];
     
     [self.view addSubview:self.scrollView];
+    
+    
+    
+    if (kScreenHeight == 480) {
+        imageview1.image = [UIImage imageNamed:@"01 4s.png"];
+        imageview2.image = [UIImage imageNamed:@"02 4s.png"];
+        imageview3.image = [UIImage imageNamed:@"03 4s.png"];
+        imageview4.image = [UIImage imageNamed:@"04 4s.png"];
+    }
+    else if(kScreenHeight == 568 && kScreenWidth == 320)
+    {
+        imageview1.image = [UIImage imageNamed:@"01 5.png"];
+        imageview2.image = [UIImage imageNamed:@"02 5.png"];
+        imageview3.image = [UIImage imageNamed:@"03 5.png"];
+        imageview4.image = [UIImage imageNamed:@"04 5.png"];
+    
+    }
+    else if(kScreenWidth == 375)
+    {
+        imageview1.image = [UIImage imageNamed:@"01 6.png"];
+        imageview2.image = [UIImage imageNamed:@"02 6.png"];
+        imageview3.image = [UIImage imageNamed:@"03 6.png"];
+        imageview4.image = [UIImage imageNamed:@"04 6.png"];
+        
+    }
+    else if(kScreenWidth > 375)
+    {
+        imageview1.image = [UIImage imageNamed:@"01 plus.png"];
+        imageview2.image = [UIImage imageNamed:@"02 plus.png"];
+        imageview3.image = [UIImage imageNamed:@"03 plus.png"];
+        imageview4.image = [UIImage imageNamed:@"04 plus.png"];
+        
+    }
 
     
     // PageControl
@@ -123,6 +158,7 @@
 - (void)beginInGuoku
 {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunchV4"];
+    self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

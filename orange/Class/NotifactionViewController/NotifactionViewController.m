@@ -66,7 +66,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
         [_segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
         [_segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
         [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
-        [_segmentedControl setSelectionIndicatorHeight:2.5];
+        [_segmentedControl setSelectionIndicatorHeight:1.5];
         [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [_segmentedControl setTag:2];
         
@@ -142,7 +142,14 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     {
         [self removeBadge];
     }
+    [AVAnalytics beginLogPageView:@"NotificationView"];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"NotificationView"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -202,8 +209,8 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 - (void)loadMore
 {
     if (self.index == 0) {
-        GKNote *note = self.dataArrayForFeed.lastObject[@"object"][@"note"];
-        [GKAPI getFeedWithTimestamp:note.updatedTime type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
+        NSTimeInterval timestamp = [self.dataArrayForFeed.lastObject[@"time"] doubleValue];
+        [GKAPI getFeedWithTimestamp:timestamp type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
             [self.dataArrayForFeed addObjectsFromArray:feedArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];

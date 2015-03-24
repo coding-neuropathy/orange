@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger, FeedType) {
      */
     FeedTypeDefault = 0,
     FeedEntityNote,
+    FeedUserFollower,
+    FeedUserLike,
 };
 
 @interface FeedCell()<RTLabelDelegate>
@@ -27,7 +29,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 @property (nonatomic, strong) RTLabel *label;
 @property (nonatomic, strong) RTLabel *contentLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UIView *H;
+//@property (nonatomic, strong) UIView *H;
 @end
 
 @implementation FeedCell
@@ -40,9 +42,6 @@ typedef NS_ENUM(NSInteger, FeedType) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -54,18 +53,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
     // Configure the view for the selected state
 }
 
-- (void)setFeed:(NSDictionary *)feed
-{
-    _feed = feed;
-    
-    self.type = [FeedCell typeFromFeed:self.feed];
-}
 
-- (void)setType:(FeedType)type
-{
-    _type = type;
-    [self setNeedsLayout];
-}
 
 - (void)prepareForReuse
 {
@@ -76,70 +64,117 @@ typedef NS_ENUM(NSInteger, FeedType) {
     }
 }
 
+- (UIImageView *)avatar
+{
+    if (!_avatar) {
+        _avatar = [[UIImageView alloc] initWithFrame:CGRectZero];
+        
+        _avatar.layer.cornerRadius = 18;
+        _avatar.layer.masksToBounds = YES;
+        [_avatar addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        _avatar.userInteractionEnabled = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(avatarButtonAction)];
+        [_avatar addGestureRecognizer:tap];
+        
+        [self.contentView addSubview:_avatar];
+    }
+    return _avatar;
+}
+
+- (RTLabel *)label
+{
+    if (!_label) {
+        _label = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _label.paragraphReplacement = @"";
+        _label.lineSpacing = 4.0;
+        _label.delegate = self;
+        [self.contentView addSubview:_label];
+        
+        [_label addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    }
+    return _label;
+}
+
+- (RTLabel *)contentLabel
+{
+    if (!_contentLabel) {
+        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _contentLabel.paragraphReplacement = @"";
+        _contentLabel.lineSpacing = 4.0;
+        _contentLabel.delegate = self;
+        
+        [_contentLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        
+        [self.contentView addSubview:_contentLabel];
+    }
+    return _contentLabel;
+}
+
+- (UILabel *)timeLabel
+{
+    if (!_timeLabel) {
+        _timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _timeLabel.backgroundColor = [UIColor clearColor];
+        
+        _timeLabel.font = [UIFont systemFontOfSize:12.f];
+        _timeLabel.textAlignment = NSTextAlignmentLeft;
+        _timeLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        
+        [_timeLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        
+        [self.contentView addSubview:_timeLabel];
+    }
+    return _timeLabel;
+}
+
+- (UIImageView *)image
+{
+    if (!_image) {
+        _image = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _image.contentMode = UIViewContentModeScaleAspectFit;
+        
+        [_image addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        _image.userInteractionEnabled = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(imageButtonAction)];
+        [_image addGestureRecognizer:tap];
+        _image.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+        _image.layer.borderWidth = 0.5;
+        [self.contentView addSubview:_image];
+    }
+    return _image;
+}
+
+- (void)setFeed:(NSDictionary *)feed
+{
+    _feed = feed;
+    
+//    NSLog(@"%@", _feed);
+    self.type = [FeedCell typeFromFeed:self.feed];
+}
+
+- (void)setType:(FeedType)type
+{
+    _type = type;
+    [self setNeedsLayout];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    
-    if (!self.avatar) {
-        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(12.f, 13.f, 36.f, 36.f)];
-        [self.contentView addSubview:self.avatar];
-        self.avatar.layer.cornerRadius = 18;
-        self.avatar.layer.masksToBounds = YES;
-        [self.avatar addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-        self.avatar.userInteractionEnabled = YES;
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self action:@selector(avatarButtonAction)];
-        [self.avatar addGestureRecognizer:tap];
-    }
-    
-    if(!self.label) {
-        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 70, 20)];
-        self.label.paragraphReplacement = @"";
-        self.label.lineSpacing = 4.0;
-        self.label.delegate = self;
-        [self.contentView addSubview:self.label];
-        
-        [self.label addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-    }
-    
-    if(!self.contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 70, 20)];
-        self.contentLabel.paragraphReplacement = @"";
-        self.contentLabel.lineSpacing = 4.0;
-        self.contentLabel.delegate = self;
-        [self.contentView addSubview:self.contentLabel];
-        [self.contentLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-    }
-    
-    if (!self.timeLabel) {
-        _timeLabel = [[UILabel alloc] init];
-        self.timeLabel.backgroundColor = [UIColor clearColor];
-        self.timeLabel.deFrameSize = CGSizeMake(80.f, 12.f);
-        self.timeLabel.font = [UIFont systemFontOfSize:12.f];
-        self.timeLabel.textAlignment = NSTextAlignmentLeft;
-        self.timeLabel.textColor = UIColorFromRGB(0x9d9e9f);
-        [self.contentView addSubview:self.timeLabel];
-        
-        [self.timeLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-    }
-    
-    if (!self.image) {
-        _image = [[UIImageView alloc] initWithFrame:CGRectMake(60.f, 0.f, 100, 100)];
-        _image.contentMode = UIViewContentModeScaleAspectFit;
-        [self.contentView addSubview:self.image];
-        [self.image addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-        self.image.userInteractionEnabled = YES;
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self action:@selector(imageButtonAction)];
-        [self.image addGestureRecognizer:tap];
-    }
+    self.avatar.frame = CGRectMake(12.f, 13.f, 36.f, 36.f);
+//    self.label.frame = CGRectMake(60., 15., kScreenWidth - 70., 20.);
+    self.contentLabel.frame = CGRectMake(60, 15, kScreenWidth - 70 - 58, 20);
+//    self.timeLabel.deFrameSize = CGSizeMake(80.f, 12.f);
+    self.image.frame = CGRectMake(0., 13., 42., 42.);
     
     [self configContent];
     
-    [self bringSubviewToFront:self.H];
-    self.H.hidden = NO;
-    _H.deFrameBottom = self.frame.size.height-1;
+//    [self bringSubviewToFront:self.H];
+//    self.H.hidden = NO;
+//    _H.deFrameBottom = self.frame.size.height-1;
     
 }
 
@@ -150,6 +185,10 @@ typedef NS_ENUM(NSInteger, FeedType) {
     NSString *typeString = feedDict[@"type"];
     if ([typeString isEqualToString:@"entity"]) {
         type = FeedEntityNote;
+    } else if ([typeString isEqualToString:@"user_follow"]) {
+        type = FeedUserFollower;
+    } else if ([typeString isEqualToString:@"user_like"]) {
+        type = FeedUserLike;
     }
     
     return type;
@@ -157,34 +196,57 @@ typedef NS_ENUM(NSInteger, FeedType) {
 
 - (void)configContent
 {
-    NSDictionary * feed = self.feed;
-    FeedType type = [FeedCell typeFromFeed:feed];
+//    NSDictionary * feed = self.feed;
+    NSTimeInterval timestamp = [self.feed[@"time"] doubleValue];
+    NSString *time = [[NSDate dateWithTimeIntervalSince1970:timestamp] stringWithDefaultFormat];
+    FeedType type = [FeedCell typeFromFeed:self.feed];
     switch (type) {
         case FeedEntityNote:
         {
-            GKNote *note = feed[@"object"][@"note"];
-            GKEntity *entity = feed[@"object"][@"entity"];
+            GKNote *note = self.feed[@"object"][@"note"];
+            GKEntity *entity = self.feed[@"object"][@"entity"];
             GKUser * user = note.creator;
             
             [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a>", user.userId, user.nickname,entity.entityId,entity.title];
-            self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            
-            self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", note.text];
-            self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
-            self.contentLabel.deFrameTop = self.label.deFrameBottom;
-            
-            self.timeLabel.deFrameBottom = self.deFrameHeight - 10.f;
-            self.timeLabel.deFrameLeft = 60;
+            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 1 件商品：</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, note.text, time];
+            self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
 
-            self.timeLabel.text = [note.createdDate stringWithDefaultFormat];
             
             [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(100, 100)]];
-            self.image.deFrameTop = self.contentLabel.deFrameBottom +10;
-            
-            break;
+//            self.image.deFrameTop = self.contentLabel.deFrameBottom +10;
+            self.image.deFrameLeft = self.contentLabel.deFrameRight + 12.;
         }
+            break;
+        case FeedUserLike:
+        {
+            
+            GKUser * user = self.feed[@"object"][@"user"];
+            GKEntity *entity = self.feed[@"object"][@"entity"];
+//            NSLog(@"%@ %@", self.feed[@"type"], user.nickname);
+            [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60., 60.)]];
+            
+            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 喜爱了 1 件商品</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, time];
+            
+            self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
+            
+            [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(100, 100)]];
+            self.image.deFrameLeft = self.contentLabel.deFrameRight + 12.;
+            
+        }
+            break;
+        case FeedUserFollower:
+        {
+            GKUser * user = self.feed[@"object"][@"user"];
+            GKUser * target = self.feed[@"object"][@"target"];
+            [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60., 60.)]];
+            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 开始关注</font> <a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, target.userId, target.nickname, time];
+            self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
+
+            self.image.hidden = YES;
+        }
+            break;
+//        case FEE:
         default:
             break;
             
@@ -193,13 +255,13 @@ typedef NS_ENUM(NSInteger, FeedType) {
 
 + (CGFloat)height:(NSDictionary *)feed
 {
-    CGFloat height;
-    
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
+    CGFloat height = 0.;
+//    NSLog(@"feed %@", feed);
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70 - 58., 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 4.0;
-    
-    
+    NSTimeInterval timestamp = [feed[@"time"] doubleValue];
+    NSString *time = [[NSDate dateWithTimeIntervalSince1970:timestamp] stringWithDefaultFormat];
     
     FeedType type = [FeedCell typeFromFeed:feed];
     switch (type) {
@@ -207,30 +269,47 @@ typedef NS_ENUM(NSInteger, FeedType) {
         {
             GKNote *note = feed[@"object"][@"note"];
             GKUser * user = note.creator;
-            GKEntity *entity = feed[@"object"][@"entity"];
+//            GKEntity *entity = feed[@"object"][@"entity"];
             
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 </font><a href='entity:%@'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a>", user.userId, user.nickname,entity.entityId,entity.title];
-            CGFloat y = label.optimumSize.height + 5.f;
-            
-            
-            {
-                 RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
-                 label.paragraphReplacement = @"";
-                 label.lineSpacing = 4.0;
-                 label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", note.text];
-                 y = label.optimumSize.height + 5.f + y;
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 1 件商品：</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, note.text, time];
+            CGFloat y = label.optimumSize.height + 5.;
+            height = y;
+            if (height < 40) {
+                height = 40;
             }
-            
-            
-            height = y + 160;
-            break;
         }
+            break;
+        case FeedUserLike:
+        {
+            GKUser * user = feed[@"object"][@"user"];
+//            NSLog(@"%@", feed[@"type"]);
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 喜爱了 1 件商品</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, time];
+////
+            CGFloat y = label.optimumSize.height + 5.;
+            height = y;
+            if (height < 40) {
+                height = 40;
+            }
+        }
+            break;
+        case FeedUserFollower:
+        {
+            GKUser * user = feed[@"object"][@"user"];
+            GKUser * target = feed[@"object"][@"target"];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 开始关注</font><a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, target.userId, target.nickname, time];
+            CGFloat y = label.optimumSize.height + 5.;
+            height = y;
+            if (height < 40) {
+                height = 40;
+            }
+        }
+            break;
         default:
-            height = 0;
+//            height = 0;
             break;
     }
     
-    return height;
+    return height+24;
 }
 
 - (void)dealloc
@@ -248,19 +327,41 @@ typedef NS_ENUM(NSInteger, FeedType) {
 }
 - (void)avatarButtonAction
 {
+
     NSDictionary * feed = self.feed;
-    GKNote *note = feed[@"object"][@"note"];
-    //GKEntity *entity = feed[@"object"][@"entity"];
-    UserViewController * VC = [[UserViewController alloc]init];
-    VC.user = note.creator;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    GKUser * user;
+    switch (_type) {
+        case FeedEntityNote:
+        {
+            GKNote *note = feed[@"object"][@"note"];
+            user = note.creator;
+        }
+            break;
+        case FeedUserLike:
+        {
+            user = feed[@"object"][@"user"];
+
+        }
+            break;
+        case FeedUserFollower:
+        {
+            user = feed[@"object"][@"user"];
+        }
+            break;
+    }
+
+    if (user) {
+        UserViewController * VC = [[UserViewController alloc]init];
+        VC.user=user;
+        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    }
 }
 
 - (void)imageButtonAction
 {
-    NSDictionary * feed = self.feed;
+//    NSDictionary * feed = self.feed;
     //GKNote *note = feed[@"object"][@"note"];
-    GKEntity *entity = feed[@"object"][@"entity"];
+    GKEntity *entity = self.feed[@"object"][@"entity"];
     EntityViewController * VC = [[EntityViewController alloc]init];
     VC.hidesBottomBarWhenPushed = YES;
     VC.entity = entity;
@@ -285,6 +386,20 @@ typedef NS_ENUM(NSInteger, FeedType) {
         VC.entity = entity;
         [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    CGContextMoveToPoint(context, 60., self.frame.size.height - kSeparateLineWidth);
+    CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
+    
+    CGContextStrokePath(context);
 }
 
 @end

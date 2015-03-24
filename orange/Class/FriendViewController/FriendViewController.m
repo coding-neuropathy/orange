@@ -71,6 +71,19 @@ static NSString *CellIdentifier = @"UserSingleListCell";
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"friendView"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"friendView"];
+}
+
 /*
  #pragma mark - Navigation
  
@@ -96,7 +109,7 @@ static NSString *CellIdentifier = @"UserSingleListCell";
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
 
@@ -109,7 +122,7 @@ static NSString *CellIdentifier = @"UserSingleListCell";
         [self.tableView reloadData];
         [self.tableView.infiniteScrollingView stopAnimating];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"失败"];
+        [SVProgressHUD showImage:nil status:@"加载失败"];
         [self.tableView.infiniteScrollingView stopAnimating];
     }];
 }

@@ -34,7 +34,7 @@ static CGFloat LeftMargin = 16.;
 {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-        
+        _scrollView.delegate = self;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight);
@@ -88,6 +88,7 @@ static CGFloat LeftMargin = 16.;
         _textView.spellCheckingType = UITextSpellCheckingTypeNo;
         _textView.autocorrectionType = UITextAutocorrectionTypeNo;
         _textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _textView.delegate = self;
         
         [self.view addSubview:_textView];
     }
@@ -103,10 +104,9 @@ static CGFloat LeftMargin = 16.;
         [btn addTarget:self action:@selector(onRadioButtonValueChanged:) forControlEvents:UIControlEventValueChanged];
         //        btn.backgroundColor = [UIColor redColor];
         btnRect.origin.y += 50;
-        btn.titleLabel.font = [UIFont systemFontOfSize:14.];
         [btn setTitle:optionTitle forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+        btn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         [btn setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -134,7 +134,7 @@ static CGFloat LeftMargin = 16.;
     self.tipLabel.text = @"补充说明:";
     
     self.textView.frame = CGRectMake(LeftMargin, 320., kScreenWidth-LeftMargin*2, kScreenHeight - NormalKeyboardHeight- 180 - 40);
-    self.textView.placeholder = @"举报原因";
+    self.textView.placeholder = @"靠谱的举报原因";
     
 }
 
@@ -247,6 +247,19 @@ static CGFloat LeftMargin = 16.;
         }
         NSLog(@"Selected color: %@", sender.titleLabel.text);
     }
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.scrollView.deFrameTop = -240;
+}
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    self.scrollView.deFrameTop = 0;
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.textView resignFirstResponder];
 }
 
 @end

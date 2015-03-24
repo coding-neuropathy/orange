@@ -76,7 +76,14 @@
             
             UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
 
-            block_img.contentMode = UIViewContentModeScaleAspectFit;
+            if (kScreenWidth > 320) {
+                block_img.contentMode = UIViewContentModeCenter;
+            }
+            else
+            {
+                block_img.contentMode = UIViewContentModeScaleAspectFit;
+            }
+
             block_img.image = newimage;
             [weakSelf.activityIndicator stopAnimating];
             weakSelf.activityIndicator.hidden = YES;
@@ -221,7 +228,14 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"likeCount"]) {
-        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        if (self.entity.likeCount) {
+            [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
+        }
+
     }
     else if ([keyPath isEqualToString:@"liked"]) {
         self.likeButton.selected = self.entity.liked;
@@ -234,6 +248,8 @@
             [self.likeButton setTintColor:UIColorFromRGB(0x9d9e9f)];
         }
     }
+    UIFont* font = [UIFont systemFontOfSize:12];
+    self.likeButton.deFrameWidth = [self.likeButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}].width+40;
     
 }
 
@@ -245,18 +261,21 @@
 #pragma mark - Action
 - (void)likeButtonAction
 {
+    
     if(!k_isLogin)
     {
         LoginView * view = [[LoginView alloc]init];
         [view show];
         return;
     }
+    [AVAnalytics event:@"like_click"];
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
         self.likeButton.selected = liked;
         self.entity.liked = liked;
+        
         if (liked) {
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
             self.entity.likeCount = self.entity.likeCount+1;
@@ -264,11 +283,14 @@
             self.entity.likeCount = self.entity.likeCount-1;
             [SVProgressHUD dismiss];
         }
-        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        
+        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %lu",self.entity.likeCount] forState:UIControlStateNormal];
+        
         if(self.entity.likeCount == 0)
         {
             [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
         }
+        
         if(self.likeButton.selected)
         {
             [self.likeButton setTintColor:UIColorFromRGB(0xFF1F77)];

@@ -124,6 +124,8 @@
 		4E117B591ABB067300844935 /* IntruductionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B581ABB067200844935 /* IntruductionVC.m */; };
 		4E117B5E1ABC6FDC00844935 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B5D1ABC6FDC00844935 /* EditViewController.m */; };
 		4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */; };
+		4E117B631ABEE79800844935 /* WelcomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B621ABEE79800844935 /* WelcomeVC.m */; };
+		4E117B931AC05B0500844935 /* AVOSCloud.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B921AC05B0500844935 /* AVOSCloud.bundle */; };
 		4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */; };
 		4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */; };
 		4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C441A66B86F004C59C4 /* CategoryGridCell.m */; };
@@ -1196,6 +1198,8 @@
 		B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C6847F1ABBC45800A122E8 /* EmptyView.m */; };
 		B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */; };
 		B7C684861ABBD78E00A122E8 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C684851ABBD78E00A122E8 /* ListViewController.m */; };
+		B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */; };
+		B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B9211AC142A500664BDB /* EditViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1323,6 +1327,9 @@
 		4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FultonsHand Regular.TTF"; sourceTree = "<group>"; };
 		4E117B5C1ABC6FDC00844935 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		4E117B5D1ABC6FDC00844935 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		4E117B611ABEE79800844935 /* WelcomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeVC.h; sourceTree = "<group>"; };
+		4E117B621ABEE79800844935 /* WelcomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeVC.m; sourceTree = "<group>"; };
+		4E117B921AC05B0500844935 /* AVOSCloud.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AVOSCloud.bundle; sourceTree = "<group>"; };
 		4E198C3D1A65FE6E004C59C4 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
 		4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
 		4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityTwoGridCell.h; sourceTree = "<group>"; };
@@ -2594,6 +2601,10 @@
 		B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoSearchResultView.m; path = DiscoverView/NoSearchResultView.m; sourceTree = "<group>"; };
 		B7C684841ABBD78E00A122E8 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		B7C684851ABBD78E00A122E8 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		B7D1B91D1AC12C3500664BDB /* EditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHeaderView.h; path = EditView/EditHeaderView.h; sourceTree = "<group>"; };
+		B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditHeaderView.m; path = EditView/EditHeaderView.m; sourceTree = "<group>"; };
+		B7D1B9201AC142A500664BDB /* EditViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewCell.h; path = EditView/EditViewCell.h; sourceTree = "<group>"; };
+		B7D1B9211AC142A500664BDB /* EditViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewCell.m; path = EditView/EditViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2644,6 +2655,7 @@
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B7D1B9191AC12BEF00664BDB /* EditView */,
 				B7C6847D1ABBC3F500A122E8 /* Components */,
 				B766763E1AB8173B002F294C /* UserView */,
 				B76676371AB8058A002F294C /* NotificationView */,
@@ -2845,6 +2857,15 @@
 				4E117B5D1ABC6FDC00844935 /* EditViewController.m */,
 			);
 			path = EditViewController;
+			sourceTree = "<group>";
+		};
+		4E117B601ABEE79800844935 /* WelcomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				4E117B611ABEE79800844935 /* WelcomeVC.h */,
+				4E117B621ABEE79800844935 /* WelcomeVC.m */,
+			);
+			path = WelcomeVC;
 			sourceTree = "<group>";
 		};
 		4E1C36561AB429FE00EA2F00 /* GTScrollNavigationBar */ = {
@@ -3394,6 +3415,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				4E117B921AC05B0500844935 /* AVOSCloud.bundle */,
 				4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */,
 				B7AAFA741AB6FE1400A2F20D /* TaeSDK */,
 				4E1C36561AB429FE00EA2F00 /* GTScrollNavigationBar */,
@@ -3550,6 +3572,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4E117B601ABEE79800844935 /* WelcomeVC */,
 				4E117B5B1ABC6FDC00844935 /* EditViewController */,
 				4E117B561ABB067200844935 /* IntruductionVC */,
 				4E117B521AB9CBBD00844935 /* CategoryLikeViewController */,
@@ -4740,6 +4763,17 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
+		B7D1B9191AC12BEF00664BDB /* EditView */ = {
+			isa = PBXGroup;
+			children = (
+				B7D1B91D1AC12C3500664BDB /* EditHeaderView.h */,
+				B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */,
+				B7D1B9201AC142A500664BDB /* EditViewCell.h */,
+				B7D1B9211AC142A500664BDB /* EditViewCell.m */,
+			);
+			name = EditView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4771,7 +4805,7 @@
 				TargetAttributes = {
 					4E56DF1419D552C000263B17 = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = Z5A6CCJB8R;
+						DevelopmentTeam = BKXKS4HPNG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -5648,6 +5682,7 @@
 				4EAA45C819E03BA60098C9E0 /* 1F30F.png in Resources */,
 				4EAA46D019E03BA60098C9E0 /* 1F45D.png in Resources */,
 				4EAA486C19E03BA70098C9E0 /* 23EB.png in Resources */,
+				4E117B931AC05B0500844935 /* AVOSCloud.bundle in Resources */,
 				4EAA475E19E03BA70098C9E0 /* 1F4EB.png in Resources */,
 				4EAA489619E03BA80098C9E0 /* 26A1.png in Resources */,
 				4EAA45E219E03BA60098C9E0 /* 1F339.png in Resources */,
@@ -5829,6 +5864,7 @@
 				4E56DF7B19D56EF500263B17 /* NSString+FontAwesome.m in Sources */,
 				4E1D28C81A125B9300740C17 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */,
+				B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */,
 				4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */,
 				4E1D28D51A125B9300740C17 /* JSQMessagesCollectionViewCell.m in Sources */,
 				4E56DF8619D56EF500263B17 /* SDWebImageManager.m in Sources */,
@@ -5844,6 +5880,7 @@
 				4E3A23461A51A7C500037F9C /* GKEntityCategory.m in Sources */,
 				4E3A23851A52EC9600037F9C /* Passport.m in Sources */,
 				4E1D28CB1A125B9300740C17 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
+				4E117B631ABEE79800844935 /* WelcomeVC.m in Sources */,
 				B708432A1ABBF427009605D8 /* NSString+Helper.m in Sources */,
 				B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */,
 				4E1D28CC1A125B9300740C17 /* JSQLocationMediaItem.m in Sources */,
@@ -5873,6 +5910,7 @@
 				B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */,
 				4EC9F7911A7928520057D736 /* FanViewController.m in Sources */,
 				4E1D28CA1A125B9300740C17 /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
+				B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */,
 				4E56DF7A19D56EF500263B17 /* FAImageView.m in Sources */,
 				4E1D28DF1A125B9300740C17 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				4E1D28CD1A125B9300740C17 /* JSQMediaItem.m in Sources */,
@@ -6104,8 +6142,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (A5Y9CLHH49)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TE HUI (A5Y9CLHH49)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty",
@@ -6125,7 +6163,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "7d792a44-3244-4b27-bac0-6c274324376d";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -6135,7 +6173,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TE HUI (4EYA86V3Q7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty",
@@ -6155,7 +6193,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "7d792a44-3244-4b27-bac0-6c274324376d";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

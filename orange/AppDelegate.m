@@ -16,7 +16,7 @@
 #import "CategoryViewController.h"
 #import "TagViewController.h"
 #import "IntruductionVC.h"
-
+#import "WelcomeVC.h"
 
 @interface AppDelegate ()<WXApiDelegate>
 
@@ -29,6 +29,7 @@
     
     [AVOSCloud setApplicationId:@"laier6ulcszfjkn08448ng37nwc71ux4uv6yc6vi529v29a0" clientKey:@"6ad7o8urhbw4q5kx8hfoiaxjjtme205ohodgoy6ltwts8b1i"];
     [AVPush setProductionMode:YES];
+    [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
     
     [WXApi registerApp:kGK_WeixinShareKey];
@@ -51,7 +52,6 @@
             
         }
     }];
-    
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
@@ -87,7 +87,21 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[TabBarViewcontroller alloc]init];
+    self.window.rootViewController.view.hidden = YES;
     [self.window makeKeyAndVisible];
+    
+    NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if(userInfo)
+    {
+        application.applicationIconBadgeNumber = 0;
+        self.window.rootViewController.view.hidden = NO;
+    }
+    else
+    {
+        self.window.rootViewController.view.hidden = YES;
+        WelcomeVC * welcomeVc = [[WelcomeVC alloc] init];
+        [self.window.rootViewController presentViewController: welcomeVc animated:NO completion:NULL];
+    }
     
     
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -97,11 +111,6 @@
     
     
     [self refreshCategory];
-    
-    //if([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4"]) {
-        [self.window.rootViewController presentViewController:[IntruductionVC new] animated:NO completion:NULL];
-    //}
-    
     
     {    NSTimer *_timer = [NSTimer scheduledTimerWithTimeInterval:240.0f
                                                              target:self
@@ -204,10 +213,14 @@
     [[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x414243)];
     [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x414243)];
-    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
+    //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
     UIFont* font = [UIFont boldSystemFontOfSize:17];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}];
     [[UINavigationBar appearance] setAlpha:0.97];
+    
+    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back.png"]];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back.png"]];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, 1) forBarMetrics:UIBarMetricsDefault];
 
     
     
@@ -216,7 +229,6 @@
     [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
-    //[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -100) forBarMetrics:UIBarMetricsDefault];
 
 }
 

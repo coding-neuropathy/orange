@@ -12,4 +12,5 @@
 @property (nonatomic, strong) NSDictionary *feed;
 
 + (CGFloat)height:(NSDictionary *)feed;
+
 @end

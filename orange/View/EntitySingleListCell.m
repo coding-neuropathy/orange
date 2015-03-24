@@ -176,26 +176,33 @@
     }];
     
     if (!self.likeButton) {
-        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 20)];
+        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 40)];
         self.likeButton.layer.masksToBounds = YES;
         self.likeButton.layer.cornerRadius = 2;
         self.likeButton.backgroundColor = [UIColor clearColor];
-        self.likeButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        self.likeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];;
         self.likeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-        [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        /*
         [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
         [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
         [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
         [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
-        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+         */
+        
+        [self.likeButton setTitle:[NSString fontAwesomeIconStringForEnum:FAHeartO] forState:UIControlStateNormal];
+        [self.likeButton setTitle:[NSString fontAwesomeIconStringForEnum:FAHeart] forState:UIControlStateSelected];
+        [self.likeButton setTitleColor:UIColorFromRGB(0xFF1F77) forState:UIControlStateSelected];
+        [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        
+        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 10)];
         [self.contentView addSubview:self.likeButton];
     }
-    [self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
+
     self.likeButton.selected = self.entity.liked;
     [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    self.likeButton.deFrameRight = self.deFrameWidth - 10;
-    self.likeButton.deFrameTop = 10;
+    self.likeButton.deFrameRight = self.deFrameWidth;
+    self.likeButton.deFrameTop = 0;
     
     if (!self.entity_mark) {
         _entity_mark = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 33, 33)];
@@ -260,7 +267,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"likeCount"]) {
-        [self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        //[self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
     }
     else if ([keyPath isEqualToString:@"liked"]) {
         self.likeButton.selected = self.entity.liked;
@@ -295,7 +302,7 @@
             self.entity.likeCount = self.entity.likeCount-1;
             [SVProgressHUD dismiss];
         }
-        [self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        //[self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
         
         
         

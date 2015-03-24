@@ -27,7 +27,6 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 
 @interface EntityViewController ()<IBActionSheetDelegate, EntityHeaderViewDelegate>
 @property (nonatomic, strong) GKNote *note;
-//@property (nonatomic, strong) UIView *header;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIButton *likeButton;
@@ -96,6 +95,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     }
     
     
+    
     self.navigationItem.rightBarButtonItems = array;
     
     
@@ -116,18 +116,26 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     [self.tableView registerClass:[EntityThreeGridCell class] forCellReuseIdentifier:EntityCellIdentifier];
     [self.view addSubview:self.tableView];
     
-    UIView * header =  [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    UIView * header =  [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
     header.backgroundColor = UIColorFromRGB(0xffffff);
     self.tableView.tableHeaderView = header;
-    
+    self.image = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 240, 240)];
     
     [self configFooter];
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"EntityView"];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [AVAnalytics endLogPageView:@"EntityView"];
+
 }
 
 
@@ -161,7 +169,9 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (void)refresh
 {
     [GKAPI getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray) {
+        [self.image sd_setImageWithURL:self.entity.imageURL_640x640];
         self.entity = entity;
+        self.header.entity = entity;
         self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
         self.dataArrayForNote = [NSMutableArray arrayWithArray:noteArray];
         for (GKNote *note in self.dataArrayForNote) {
@@ -276,7 +286,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         return 50;
     }
     else if (section == 4) {
-        return 40;
+        return 50;
     }
     else
     {
@@ -406,13 +416,13 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         return self.noteButton;
     }
     else if (section == 4) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 10.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 20.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
         label.text = @"相似推荐";
         label.textAlignment = NSTextAlignmentLeft;
         label.textColor = UIColorFromRGB(0x414243);
         label.font = [UIFont systemFontOfSize:14];
         [label sizeToFit];
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 40)];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 50)];
         view.backgroundColor = UIColorFromRGB(0xfafafa);
         [view addSubview:label];
         
@@ -507,13 +517,14 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 #pragma mark - Action
 - (void)likeButtonAction
 {
- 
+    
     if(!k_isLogin)
     {
         LoginView * view = [[LoginView alloc]init];
         [view show];
         return;
     }
+    [AVAnalytics event:@"like_click"];
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
@@ -578,7 +589,6 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (void)buyButtonAction
 {
 //    NSLog(@"%@", self.entity.purchaseArray);
-
     
     if (self.entity.purchaseArray.count >0) {
         GKPurchase * purchase = self.entity.purchaseArray[0];
@@ -586,14 +596,14 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         if ([purchase.source isEqualToString:@"taobao.com"])
         {
             NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-//            [[TaeSDK sharedInstance] showItemDetailByItemId:self isNeedPush:NO webViewUISettings:nil itemId:_itemId itemType:1 params:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
             TaeTaokeParams *taoKeParams = [[TaeTaokeParams alloc] init];
             taoKeParams.pid = kGK_TaobaoKe_PID;
             [[TaeSDK sharedInstance] showTaoKeItemDetailByItemId:self isNeedPush:YES webViewUISettings:nil itemId:_itemId itemType:1 params:nil taoKeParams:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
         }
         else
-
             [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
+        
+        [AVAnalytics event:@"buy action" label:purchase.source];
     }
 }
 
@@ -713,7 +723,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     }
     else
     {
-        message.title = @"果库 - 尽收世上好物";
+        message.title = @"果库 - 精英消费指南";
         message.description = [NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title];
     }
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];

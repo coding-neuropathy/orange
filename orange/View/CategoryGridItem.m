@@ -83,7 +83,7 @@
         self.categoryNameLabel.backgroundColor = [UIColor clearColor];
         self.categoryNameLabel.font = [UIFont systemFontOfSize:12.f];
         self.categoryNameLabel.textAlignment = NSTextAlignmentCenter;
-        self.categoryNameLabel.textColor = UIColorFromRGB(0x999999);
+        self.categoryNameLabel.textColor = UIColorFromRGB(0x9d9e9f);
         [self addSubview:self.categoryNameLabel];
     }
 

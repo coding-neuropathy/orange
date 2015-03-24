@@ -19,7 +19,7 @@
 
 + (CGFloat)height
 {
-    return 44.f;
+    return 60.f;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -30,7 +30,7 @@
         bg.backgroundColor = UIColorFromRGB(0xf6f6f6);
         self.selectedBackgroundView = bg;
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        UIView *H = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-1, self.frame.size.width, 0.5)];
+        UIView *H = [[UIView alloc] initWithFrame:CGRectMake(0, 59.5, self.frame.size.width, 0.5)];
         H.backgroundColor = UIColorFromRGB(0xf1f1f1);
         [self.contentView addSubview:H];
     }
@@ -65,7 +65,7 @@
     self.tagLabel.text = [NSString stringWithFormat:@"#%@", self.tagName];
     self.tagLabel.deFrameWidth = 200.f;
     [self.tagLabel sizeToFit];
-    self.tagLabel.center = self.contentView.center;
+    self.tagLabel.center = CGPointMake(0, 20);
     self.tagLabel.deFrameLeft = 15.f;
     
     if (!self.entityCountLabel) {
@@ -76,11 +76,14 @@
         self.entityCountLabel.textColor = [UIColor lightGrayColor];
         [self.contentView addSubview:self.entityCountLabel];
     }
-    self.entityCountLabel.text = [NSString stringWithFormat:@"%ld件商品", self.entityCount];
+    self.entityCountLabel.text = [NSString stringWithFormat:@"%ld 件商品", self.entityCount];
+
     self.entityCountLabel.deFrameWidth = 100.f;
     [self.entityCountLabel sizeToFit];
     self.entityCountLabel.center = self.contentView.center;
-    self.entityCountLabel.deFrameLeft = self.tagLabel.deFrameRight + 8.f;
+    self.entityCountLabel.deFrameTop = self.tagLabel.deFrameBottom+4.f;
+    self.entityCountLabel.deFrameLeft = 15.f;
+    //self.entityCountLabel.deFrameLeft = self.tagLabel.deFrameRight + 8.f;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

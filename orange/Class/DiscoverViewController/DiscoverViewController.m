@@ -132,6 +132,7 @@
         [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
         [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
         [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
+        [segmentedControl setSelectionIndicatorHeight:1.5];
         [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
         [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
@@ -182,6 +183,9 @@
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self configFooter];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"发现"  style:UIBarButtonItemStylePlain  target:self  action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
 }
 
 
@@ -197,6 +201,8 @@
     self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     [self.navigationController.navigationBar setAlpha:1];
     [self.navigationController.navigationBar setTranslucent:NO];
+    
+    [AVAnalytics beginLogPageView:@"DiscoverView"];
 
 }
 - (void)viewWillDisappear:(BOOL)animated
@@ -207,6 +213,8 @@
     [self.navigationController.navigationBar setTranslucent:NO];
      */
     [self.searchBar resignFirstResponder];
+    
+    [AVAnalytics endLogPageView:@"DiscovreView"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -233,7 +241,7 @@
             [self.tableView.pullToRefreshView stopAnimating];
                         [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView.pullToRefreshView stopAnimating];
                         [self.tableView reloadData];
         }];
@@ -274,7 +282,7 @@
             [self.tableView.pullToRefreshView stopAnimating];
     
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"失败"];
+            [SVProgressHUD showImage:nil status:@"加载失败"];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
             
@@ -284,12 +292,12 @@
 }
 - (void)loadMore
 {
-    if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
+    if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
     {
         [self.searchDC.searchResultsTableView.infiniteScrollingView stopAnimating];
         return;
     }
-    else if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
+    else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
     {
         [GKAPI searchEntityWithString:self.keyword type:@"all" offset:self.dataArrayForEntityForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             if (self.dataArrayForEntityForSearch.count == 0) {
@@ -367,11 +375,11 @@
     else
     {
          NSInteger index = self.segmentedControlForSearch.selectedSegmentIndex;
-        if (index == 0)
+        if (index == 1)
         {
             return ceil(self.filteredArray.count /(CGFloat)4);
         }
-        else if(index == 1)
+        else if(index == 0)
         {
             return self.dataArrayForEntityForSearch.count;
         }
@@ -440,7 +448,7 @@
     {
         
         NSInteger index = self.segmentedControlForSearch.selectedSegmentIndex;
-        if (index == 0) {
+        if (index == 1) {
             static NSString *CellIdentifier = @"CategoryCell";
             CategoryGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -464,7 +472,7 @@
             cell.categoryArray = categoryArray;
             return cell;
         }
-        else if(index == 1)
+        else if(index == 0)
         {
             static NSString *CellIdentifier = @"EntitySingleListCell";
             EntitySingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -522,10 +530,10 @@
     else
     {
         NSInteger index = self.segmentedControlForSearch.selectedSegmentIndex;
-        if (index == 0) {
+        if (index == 1) {
             return [CategoryGridCell height];
         }
-        else if (index == 1)
+        else if (index == 0)
         {
             return [EntitySingleListCell height];
         }
@@ -590,7 +598,7 @@
             UILabel * countLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 11)];
             countLabel.font = [UIFont systemFontOfSize:12];
             countLabel.textAlignment = NSTextAlignmentRight;
-            countLabel.textColor = UIColorFromRGB(0x999999);
+            countLabel.textColor = UIColorFromRGB(0x9d9e9f);
             countLabel.hidden = NO;
             countLabel.center = label.center;
             [countLabel setText:[NSString stringWithFormat:@"%@个品类",[self.dataArrayForCategory[section] valueForKey:@"Count"]]];
@@ -606,7 +614,7 @@
         
         if (!self.segmentedControlForSearch) {
             HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-            [segmentedControl setSectionTitles:@[@"品类", @"商品",@"用户",@"喜爱"]];
+            [segmentedControl setSectionTitles:@[ @"商品",@"品类",@"用户",@"喜爱"]];
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
@@ -614,7 +622,7 @@
             [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
             [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
             [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
-            [segmentedControl setSelectionIndicatorHeight:2.5];
+            [segmentedControl setSelectionIndicatorHeight:1.5];
             [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
             self.segmentedControlForSearch = segmentedControl;
 
@@ -622,7 +630,7 @@
             {
                 UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControlForSearch.deFrameHeight-0.5, kScreenWidth, 0.5)];
                 H.backgroundColor = UIColorFromRGB(0xebebeb);
-                [self.segmentedControlForSearch addSubview:H];
+                //[self.segmentedControlForSearch addSubview:H];
             }
         }
         
@@ -679,12 +687,12 @@
         [self.searchDC.searchResultsTableView setContentOffset:CGPointMake(0, y) animated:NO];
         NSUInteger index = segmentedControl.selectedSegmentIndex;
         switch (index) {
-            case 0:
+            case 1:
             {
                 [self handleSearchText:self.keyword];
             }
                 break;
-            case 1:
+            case 0:
             {
                 if (self.dataArrayForEntityForSearch.count == 0) {
                     [self handleSearchText:self.keyword];
@@ -730,7 +738,7 @@
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.searchBar.keyboardType = UIKeyboardTypeDefault;
     self.searchBar.delegate = self;
-    self.searchBar.placeholder = @" 搜索";
+    self.searchBar.placeholder = @"搜索";
 
     
     _searchDC = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
@@ -866,7 +874,7 @@
 }
 - (void)handleSearchText:(NSString *)searchText
 {
-    if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
+    if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
     {
         self.filteredArray = [NSMutableArray array];
         for (GKEntityCategory *word in kAppDelegate.allCategoryArray) {
@@ -879,7 +887,7 @@
         [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];
     }
-    else if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
+    else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
     {
         [GKAPI searchEntityWithString:self.keyword type:@"all" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];

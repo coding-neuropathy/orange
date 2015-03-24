@@ -41,7 +41,7 @@
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
         whiteBG = [[UIView alloc]initWithFrame:CGRectMake(20, 80, self.frame.size.width-40, 300)];
         whiteBG.backgroundColor = [UIColor whiteColor];
-        whiteBG.layer.cornerRadius = 0.0f;
+        whiteBG.layer.cornerRadius = 5.0f;
         whiteBG.layer.masksToBounds = YES;
         [self addSubview:whiteBG];
         
@@ -55,10 +55,10 @@
         
         logo = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         logo.tintColor = UIColorFromRGB(0x9d9e9f);
-        logo.center = CGPointMake(whiteBG.deFrameWidth/2, 60);
+        logo.center = CGPointMake(whiteBG.deFrameWidth/2, 80);
         [whiteBG addSubview:logo];
         
-        tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 80, whiteBG.deFrameWidth, 30)];
+        tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, whiteBG.deFrameWidth, 30)];
         tip.textColor = UIColorFromRGB(0xcbcbcb);
         tip.font = [UIFont fontWithName:@"FultonsHand" size:16];
         tip.textAlignment = NSTextAlignmentCenter;
@@ -73,6 +73,7 @@
         self.emailTextField.borderStyle = UITextBorderStyleNone;
         //self.emailTextField.layer.borderColor = UIColorFromRGB(0xdcdcdc).CGColor;
         //self.emailTextField.layer.borderWidth = 0.5;
+        self.emailTextField.font = [UIFont systemFontOfSize:14];
         self.emailTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
         if (iOS7) {
@@ -138,6 +139,7 @@
         self.passwordTextField.rightViewMode = UITextFieldViewModeAlways;
         self.passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         self.passwordTextField.placeholder = @"";
+        self.passwordTextField.font = [UIFont systemFontOfSize:14];
         self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.passwordTextField.returnKeyType = UIReturnKeyGo;
         [self.passwordTextField setTextColor:UIColorFromRGB(0x9d9e9f)];
@@ -198,9 +200,9 @@
         _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
         _registerButton.backgroundColor = [UIColor clearColor];
         _registerButton.titleLabel.textAlignment = NSTextAlignmentRight;
-        [_registerButton setTitle:@"注册 >" forState:UIControlStateNormal];
+        [_registerButton setTitle:[NSString stringWithFormat:@"注册 %@",[NSString fontAwesomeIconStringForEnum:FAChevronRight]] forState:UIControlStateNormal];
         [_registerButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-        [_registerButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [_registerButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:14]];
         _registerButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_registerButton addTarget:self action:@selector(tapRegisterButton) forControlEvents:UIControlEventTouchUpInside];
         _registerButton.deFrameTop = 10;
@@ -248,6 +250,7 @@
             self.successBlock();
         }
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
+        [AVAnalytics event:@"sign in" label:@"success"];
         [self dismiss];
 
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
@@ -255,6 +258,7 @@
         case 500:
             {
                 [SVProgressHUD showImage:nil status:@"服务器出错!"];
+                [AVAnalytics event:@"sign in" label:@"failure"];
                 break;
             }
             
@@ -424,6 +428,20 @@
 {
     [self.emailTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
+}
+
+- (void)showFromRegister
+{
+    
+    [kAppDelegate.window addSubview:self];
+    self.backgroundColor = [UIColor clearColor];
+    whiteBG.alpha = 0;
+    [UIView animateWithDuration:0.3 animations:^{
+        
+    } completion:^(BOOL finished) {
+        whiteBG.alpha = 1;
+        
+    }];
 }
 
 #pragma mark - UIAlertViewDelegate
