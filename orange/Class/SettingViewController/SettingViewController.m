@@ -54,6 +54,7 @@
     NSDictionary *otherSection = @{@"section" : @"其他",
                                    @"row"     : @[
                                            @"关于我们",
+                                           @"用户协议",
                                            @"清空图片缓存",
                                            //@"意见反馈",
                                            @"版本",
@@ -145,7 +146,7 @@
     }
     
     if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             UIView *accessoryV = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, cell.frame.size.height)];
@@ -199,18 +200,25 @@
                 break;
             case 1:
             {
+                [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/agreement/"]] animated:YES];
+            }
+                break;
+            case 2:
+            {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
                 alertView.alertViewStyle = UIAlertViewStyleDefault;
                 alertView.tag =20008;
                 [alertView show];
             }
                 break;
+                /*
             case 2:
             {
                 AVUserFeedbackAgent *agent = [AVUserFeedbackAgent sharedInstance];
                 [agent showConversations:self title:@"意见反馈" contact:@""];
             }
                 break;
+                 */
             default:
                 break;
         }
