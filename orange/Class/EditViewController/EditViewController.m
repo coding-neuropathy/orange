@@ -20,8 +20,8 @@ NSString *SettingTableIdentifier = @"SettingCell";
 @interface EditViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIActionSheetDelegate, EditHeaderViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, strong) UISwitch * switch_notification;
-@property (nonatomic, strong) UISwitch * switch_assistant;
+//@property (nonatomic, strong) UISwitch * switch_notification;
+//@property (nonatomic, strong) UISwitch * switch_assistant;
 @property (nonatomic, strong) UIPickerView * genderPickerView;
 @property (nonatomic, strong) EditHeaderView * headerView;
 
@@ -112,6 +112,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"EditView"];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -121,6 +122,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"EditView"];
 }
 
 #pragma mark - UITableViewDataSource

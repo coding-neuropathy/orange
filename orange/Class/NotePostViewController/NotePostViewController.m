@@ -134,6 +134,18 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"PostNoteView"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"PostNoteView"];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -171,8 +183,10 @@ static CGFloat NormalKeyboardHeight = 216.0f;
             if (self.successBlock) {
                 self.successBlock(note);
             }
+            [AVAnalytics event:@"update note" label:@"success"];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"修改失败"];
+            [AVAnalytics event:@"update note" label:@"failure"];
         }];
     } else {
         [GKAPI postNoteWithEntityId:self.entity.entityId content:content score:score imageData:nil success:^(GKNote *note) {
@@ -182,8 +196,11 @@ static CGFloat NormalKeyboardHeight = 216.0f;
             if (self.successBlock) {
                 self.successBlock(note);
             }
+            
+            [AVAnalytics event:@"post note" label:@"success"];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"发布失败"];
+            [AVAnalytics event:@"post note" label:@"failure"];
         }];
     }
 }
