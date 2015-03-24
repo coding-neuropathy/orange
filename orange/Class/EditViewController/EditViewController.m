@@ -43,7 +43,7 @@
     // Do any additional setup after loading the view.
     
     
-    NSDictionary *locationSection = @{@"section" : @"账号",
+    NSDictionary *locationSection = @{@"section" : @"帐号",
                                       @"row"     : @[
                                               @"修改头像",
                                               @"修改昵称",
@@ -147,7 +147,7 @@
     cell.textLabel.highlightedTextColor = UIColorFromRGB(0X666666);
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"账号"]) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"帐号"]) {
         
         switch (indexPath.row) {
 
@@ -299,7 +299,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    if ([[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"section"] isEqualToString:@"账号"]) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"section"] isEqualToString:@"帐号"]) {
         if(indexPath.row == 0)
         {
             [self photoButtonAction];

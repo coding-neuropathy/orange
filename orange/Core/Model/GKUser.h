@@ -60,6 +60,11 @@ typedef NS_ENUM(NSInteger, GKUserRelationType) {
 @property (nonatomic, strong) NSString *email;
 
 /**
+ *  所在地
+ */
+@property (nonatomic, strong) NSString *location;
+
+/**
  *  头像URL
  */
 @property (nonatomic, strong) NSURL *avatarURL;

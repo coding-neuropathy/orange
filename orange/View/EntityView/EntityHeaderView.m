@@ -128,7 +128,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
     {
         self.titleLabel.text = [NSString stringWithFormat:@"%@ - %@", _entity.brand, _entity.title];
     }
-    if((![_entity.title isEqual:[NSNull null]])&&(_entity.title))
+    else if((![_entity.title isEqual:[NSNull null]])&&(_entity.title))
     {
         self.titleLabel.text = _entity.title;
     }

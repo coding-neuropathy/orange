@@ -43,16 +43,23 @@
     // Do any additional setup after loading the view.
     
     
-    NSDictionary *locationSection = @{@"section" : @"账号",
+    NSDictionary *locationSection = @{@"section" : @"个人资料",
                                       @"row"     : @[
-                                              @"修改头像",
-                                              @"修改昵称",
-                                              @"修改邮箱",
-                                              @"修改密码"
+                                              @"昵称",
+                                              @"性别",
+                                              @"简介",
+                                              @"所在地"
+                                              ]};
+    
+    NSDictionary *accountSection = @{@"section" : @"帐号",
+                                      @"row"     : @[
+                                              @"邮箱",
+                                              @"密码"
                                               ]};
     
     if (k_isLogin) {
-      //  [self.dataArray addObject:locationSection];
+       [self.dataArray addObject:locationSection];
+        [self.dataArray addObject:accountSection];
     }
 
     
@@ -97,6 +104,37 @@
     self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
+    
+    
+    if(k_isLogin)
+    {
+    
+        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0,0, kScreenWidth, 162)];
+        view.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        self.tableView.tableHeaderView = view;
+    
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.f,0.f,82, 82)];
+        imageView.tag = 1001;
+        imageView.layer.cornerRadius = 41;
+        imageView.layer.masksToBounds = YES;
+        imageView.center = CGPointMake(kScreenWidth/2, 81);
+        [view addSubview:imageView];
+
+        [imageView sd_setImageWithURL:[Passport sharedInstance].user.avatarURL placeholderImage:nil options:SDWebImageRetryFailed ];
+        
+        
+        UIButton *button = [[UIButton alloc]initWithFrame:imageView.frame];
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [button setTitle:[NSString fontAwesomeIconStringForEnum:FACamera] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(photoButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        button.layer.cornerRadius = 41;
+        button.layer.masksToBounds = YES;
+        button.backgroundColor = [UIColor colorWithWhite:0 alpha:0.32];
+        [view addSubview:button];
+        
+    }
 
     
     [self configFooter];
@@ -108,11 +146,6 @@
 {
     [super viewWillAppear:animated];
     [AVAnalytics beginLogPageView:@"SettingView"];
-    /*
-    [self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0xffffff)];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0x2b2b2b) andSize:CGSizeMake(2, 2)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
-     */
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -126,19 +159,6 @@
 }
 
 #pragma mark - UITableViewDataSource
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView* bgView = [[UIView alloc] init];
-//    bgView.backgroundColor = [UIColor clearColor];
-//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 90, 32)];
-//    titleLabel.textColor=UIColorFromRGB(0x9d9e9f);
-//    titleLabel.backgroundColor = [UIColor clearColor];
-//    [titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
-//    titleLabel.text = [[self.dataArray objectAtIndex:section]objectForKey:@"section"];
-//    [bgView addSubview:titleLabel];
-//    return bgView;
-//}
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -172,126 +192,143 @@
     cell.textLabel.highlightedTextColor = UIColorFromRGB(0X666666);
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"账号"]) {
+    
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"个人资料"]) {
         
         switch (indexPath.row) {
-
+                
             case 0:
-                {
-                    cell.textLabel.textAlignment = NSTextAlignmentRight;
-                    
-                    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1001];
-                    
-                    if (!imageView) {
-                        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 7.f,30.f, 30.f)];
-                        imageView.tag = 1001;
-                        imageView.layer.cornerRadius = 15;
-                        imageView.layer.masksToBounds = YES;
-                        [cell.contentView addSubview:imageView];
-                    }
-                    [imageView sd_setImageWithURL:[Passport sharedInstance].user.avatarURL placeholderImage:nil options:SDWebImageRetryFailed ];
-                    break;
+            {
+                UILabel *label = (UILabel *)[cell.contentView viewWithTag:1000];
+                
+                if (!label) {
+                    label = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth -240, 0.f, 200.f, 44.f)];
+                    label.tag = 1002;
+                    label.textAlignment = NSTextAlignmentRight;
+                    label.backgroundColor = [UIColor clearColor];
+                    label.font = [UIFont systemFontOfSize:15];
+                    label.textColor = UIColorFromRGB(0X666666);
+                    label.highlightedTextColor = UIColorFromRGB(0X666666);
+                    [cell.contentView addSubview:label];
                 }
+                label.text =[Passport sharedInstance].user.nickname;
+                break;
+            }
                 
             case 1:
+            {
+                
+                
+                UILabel *label = (UILabel *)[cell.contentView viewWithTag:1001];
+                
+                if (!label) {
+                    label = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth -240, 0.f, 200.f, 44.f)];
+                    label.tag = 1002;
+                    label.textAlignment = NSTextAlignmentRight;
+                    label.backgroundColor = [UIColor clearColor];
+                    label.font = [UIFont systemFontOfSize:15];
+                    label.textColor = UIColorFromRGB(0X666666);
+                    label.highlightedTextColor = UIColorFromRGB(0X666666);
+                    [cell.contentView addSubview:label];
+                }
+                if ([[Passport sharedInstance].user.gender isEqualToString:@"M"]) {
+                    label.text = @"男";
+                }
+                if ([[Passport sharedInstance].user.gender isEqualToString:@"F"]) {
+                    label.text = @"女";
+                }
+                if ([[Passport sharedInstance].user.gender isEqualToString:@"O"]) {
+                    label.text = @"未知";
+                }
+              
+                break;
+            }
+            case 2:
+            {
+                
+                
+                UILabel *label = (UILabel *)[cell.contentView viewWithTag:1002];
+                
+                if (!label) {
+                    label = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth -240, 0.f, 200.f, 44.f)];
+                    label.tag = 1003;
+                    label.textAlignment = NSTextAlignmentRight;
+                    label.backgroundColor = [UIColor clearColor];
+                    label.font = [UIFont systemFontOfSize:15];
+                    label.textColor = UIColorFromRGB(0X666666);
+                    label.highlightedTextColor = UIColorFromRGB(0X666666);
+                    [cell.contentView addSubview:label];
+                }
+                label.text = [Passport sharedInstance].user.bio;
+                
+                break;
+            }
+            case 3:
+            {
+                
+                UILabel *label = (UILabel *)[cell.contentView viewWithTag:1003];
+                
+                if (!label) {
+                    label = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth -240, 0.f, 200.f, 44.f)];
+                    label.tag = 1004;
+                    label.textAlignment = NSTextAlignmentRight;
+                    label.backgroundColor = [UIColor clearColor];
+                    label.font = [UIFont systemFontOfSize:15];
+                    label.textColor = UIColorFromRGB(0X666666);
+                    label.highlightedTextColor = UIColorFromRGB(0X666666);
+                    [cell.contentView addSubview:label];
+                }
+                label.text = [Passport sharedInstance].user.location;
+                break;
+            }
+        }
+    }
+    
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"帐号"]) {
+        
+        switch (indexPath.row) {
+            case 0:
                 {
-                    cell.textLabel.textAlignment = NSTextAlignmentRight;
-                    
-                    UILabel *label = (UILabel *)[cell.contentView viewWithTag:1002];
+                    UILabel *label = (UILabel *)[cell.contentView viewWithTag:2000];
                     
                     if (!label) {
-                        label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 0.f, 200.f, 44.f)];
+                        label = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth-240, 0.f, 200.f, 44.f)];
                         label.tag = 1002;
-                        label.textAlignment = NSTextAlignmentLeft;
+                        label.textAlignment = NSTextAlignmentRight;
                         label.backgroundColor = [UIColor clearColor];
                         label.font = [UIFont systemFontOfSize:15];
                         label.textColor = UIColorFromRGB(0X666666);
                         label.highlightedTextColor = UIColorFromRGB(0X666666);
                         [cell.contentView addSubview:label];
                     }
-                    label.text =[Passport sharedInstance].user.nickname;
+                    label.text =[Passport sharedInstance].user.email;
                     break;
                 }
-            case 2:
+            case 1:
             {
-                cell.textLabel.textAlignment = NSTextAlignmentRight;
+              
                 
-                UILabel *label = (UILabel *)[cell.contentView viewWithTag:1003];
+                UILabel *label = (UILabel *)[cell.contentView viewWithTag:2001];
                 
                 if (!label) {
-                    label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 0.f, 200.f, 44.f)];
+                    label = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth-240, 0.f, 200.f, 44.f)];
                     label.tag = 1003;
-                    label.textAlignment = NSTextAlignmentLeft;
+                    label.textAlignment = NSTextAlignmentRight;
                     label.backgroundColor = [UIColor clearColor];
                     label.font = [UIFont systemFontOfSize:15];
                     label.textColor = UIColorFromRGB(0X666666);
                     label.highlightedTextColor = UIColorFromRGB(0X666666);
                     [cell.contentView addSubview:label];
                 }
-                label.text = [Passport sharedInstance].user.email;
+                label.text = @"修改密码";
                 
                 break;
-            }
-            case 3:
-            {
-                cell.textLabel.textAlignment = NSTextAlignmentRight;
-                
-                UILabel *label = (UILabel *)[cell.contentView viewWithTag:1004];
-                
-                if (!label) {
-                    label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 0.f, 200.f, 44.f)];
-                    label.tag = 1004;
-                    label.textAlignment = NSTextAlignmentLeft;
-                    label.backgroundColor = [UIColor clearColor];
-                    label.font = [UIFont systemFontOfSize:15];
-                    label.textColor = UIColorFromRGB(0X666666);
-                    label.highlightedTextColor = UIColorFromRGB(0X666666);
-                    [cell.contentView addSubview:label];
-                }
-                label.text = @"密码";
-                break;
-            }
-            case 4:{
-            
-                UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(75, 1, 44, 44)];
-                button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
-                button.titleLabel.textAlignment = NSTextAlignmentCenter;
-                [button setTitleColor:UIColorFromRGB(0x2b2b2b) forState:UIControlStateNormal];
-                [button setTitle:[NSString fontAwesomeIconStringForEnum:FASignOut] forState:UIControlStateNormal];
-                button.backgroundColor = [UIColor clearColor];
-                //[cell addSubview:button];
             }
         }
     }
     
     if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"]) {
-        if (indexPath.row == 2) {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
-            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
-            button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [button setTitleColor:UIColorFromRGB(0x2b2b2b) forState:UIControlStateNormal];
-            [button setTitle:[NSString fontAwesomeIconStringForEnum:FAWeibo] forState:UIControlStateNormal];
-            button.backgroundColor = [UIColor clearColor];
-            //[cell addSubview:button];
-        }
-        if (indexPath.row == 0) {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
-            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
-            button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [button setTitleColor:UIColorFromRGB(0x2b2b2b) forState:UIControlStateNormal];
-            [button setTitle:[NSString fontAwesomeIconStringForEnum:FAwechat] forState:UIControlStateNormal];
-            button.backgroundColor = [UIColor clearColor];
-            //[cell addSubview:button];
-        }
-        if (indexPath.row == 1) {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
-            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
-            button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [button setTitleColor:UIColorFromRGB(0x2b2b2b) forState:UIControlStateNormal];
-            [button setTitle:[NSString fontAwesomeIconStringForEnum:FAStar] forState:UIControlStateNormal];
-            button.backgroundColor = [UIColor clearColor];
-            //[cell addSubview:button];
-        }
+
     }
     
     if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
@@ -324,49 +361,60 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"账户"]) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"个人资料"]) {
         if(indexPath.row == 0)
-        {
-            [self photoButtonAction];
-        }
-        if(indexPath.row == 1)
         {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改昵称" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
             alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
             alertView.tag =20001;
             [alertView show];
         }
-        if(indexPath.row == 2)
+        if(indexPath.row == 1)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改邮箱" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改性别" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
             alertView.tag =20002;
             [alertView show];
         }
-        if(indexPath.row == 3)
+        if(indexPath.row == 2)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改密码" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改简介" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             alertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
             alertView.tag =20003;
             [alertView show];
         }
-        if(indexPath.row == 4)
+        if(indexPath.row == 3)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"确认退出登录？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改所在地" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
             alertView.alertViewStyle = UIAlertViewStyleDefault;
-            alertView.tag =20007;
+            alertView.tag =20004;
             [alertView show];
         }
     }
+    
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"帐号"]) {
+        if(indexPath.row == 0)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改邮箱" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+            alertView.tag =20005;
+            [alertView show];
+        }
+        if(indexPath.row == 1)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改密码" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            alertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
+            alertView.tag =20006;
+            [alertView show];
+        }
+    }
+    
     if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"])
     {
-        if (indexPath.row == 2) {
-            [self weiboShare];
-        }
         if (indexPath.row == 0) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"分享给好友", @"分享到朋友圈", nil];
             alertView.alertViewStyle = UIAlertViewStyleDefault;
-            alertView.tag =20005;
+            alertView.tag =20007;
             [alertView show];
         }
         if (indexPath.row == 1) {
@@ -388,7 +436,7 @@
             {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
                 alertView.alertViewStyle = UIAlertViewStyleDefault;
-                alertView.tag =20006;
+                alertView.tag =20008;
                 [alertView show];
             }
                 break;
@@ -431,6 +479,73 @@
         {
             UITextField *tf=[alertView textFieldAtIndex:0];
             if (tf.text.length==0) {
+                [SVProgressHUD showImage:nil status:@"性别不能为空"];
+            }
+            else
+            {
+                /*
+                [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
+                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                } failure:^(NSInteger stateCode) {
+                    [SVProgressHUD showImage:nil status:@"修改失败"];
+                }];
+                 */
+            }
+        }
+    }
+    
+    if(alertView.tag ==20003)
+    {
+        if(buttonIndex == 1)
+        {
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            if (tf.text.length==0) {
+                [SVProgressHUD showImage:nil status:@"简介不能为空"];
+            }
+            else
+            {
+                /*
+                 [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
+                 [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                 } failure:^(NSInteger stateCode) {
+                 [SVProgressHUD showImage:nil status:@"修改失败"];
+                 }];
+                 */
+            }
+        }
+    }
+    
+    if(alertView.tag ==20004)
+    {
+        if(buttonIndex == 1)
+        {
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            if (tf.text.length==0) {
+                [SVProgressHUD showImage:nil status:@"所在地不能为空"];
+            }
+            else
+            {
+                /*
+                 [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:nil success:^(GKUser *user) {
+                 [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                 } failure:^(NSInteger stateCode) {
+                 [SVProgressHUD showImage:nil status:@"修改失败"];
+                 }];
+                 */
+            }
+        }
+    }
+
+    
+    if(alertView.tag ==20005)
+    {
+        if(buttonIndex == 1)
+        {
+            UITextField *tf=[alertView textFieldAtIndex:0];
+            if (tf.text.length==0) {
                 [SVProgressHUD showImage:nil status:@"邮箱不能为空"];
             }
             else
@@ -445,8 +560,8 @@
             }
         }
     }
-
-    if(alertView.tag ==20003)
+    
+    if(alertView.tag ==20006)
     {
         if(buttonIndex == 1)
         {
@@ -467,7 +582,7 @@
         }
     }
     
-    if(alertView.tag ==20005)
+    if(alertView.tag ==20007)
     {
         if(buttonIndex == 1)
         {
@@ -479,25 +594,11 @@
         }
     }
     
-    if(alertView.tag ==20006)
+    if(alertView.tag ==20008)
     {
         if(buttonIndex == 1)
         {
             [self clearPicCache];
-        }
-    }
-    if(alertView.tag == 20007)
-    {
-        if(buttonIndex == 1)
-        {
-            [AVUser logOut];
-            if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
-                [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
-            }
-           [Passport logout];
-            [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
-            
         }
     }
 }
@@ -687,5 +788,6 @@
     LoginView * view = [[LoginView alloc]init];
     [view show];
 }
+
 
 @end

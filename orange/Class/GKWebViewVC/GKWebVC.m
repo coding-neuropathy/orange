@@ -18,6 +18,7 @@
 - (void)reload;
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UIImage * image;
 @end
 
 @implementation GKWebVC
@@ -157,6 +158,14 @@
 {
     [SVProgressHUD dismiss];
     [self.activityIndicator stopAnimating];
+    NSString * imageURL = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('img')[1].src"];
+    UIImageView * a = [[UIImageView alloc]init];
+    [a sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        self.image = image;
+    }];
+    
+    
+    
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -209,7 +218,7 @@
        NSString * url =  [[self.webView.request.URL absoluteString]stringByReplacingOccurrencesOfString:@"http://" withString:@"taobao://"];
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
     }else if ([buttonTitle isEqualToString:@"分享到微博"]) {
- 
+        [self weiboShare];
     }else if ([buttonTitle isEqualToString:@"分享到微信"]) {
         [self wxShare:0];
     }else if ([buttonTitle isEqualToString:@"分享到朋友圈"]) {
@@ -222,9 +231,16 @@
 -(void)wxShare:(int)scene
 {
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = @"果库 - 精英消费指南";
+    message.title = self.title;
     message.description= @"";
-    [message setThumbImage:[UIImage imageNamed:@"weixin_share.png"]];
+    if (self.image) {
+        [message setThumbImage:[UIImage imageWithData:[self.image imageDataLessThan_10K]]];
+    }
+    else
+    {
+        [message setThumbImage:[UIImage imageNamed:@"wxshare"]];
+    }
+
     
     WXAppExtendObject *ext = [WXAppExtendObject object];
     ext.Url = [self.webView.request.URL absoluteString];
@@ -242,7 +258,7 @@
     if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
     {
         [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-            [AVOSCloudSNS shareText:@"果库 - 精英消费指南" andLink:[self.webView.request.URL absoluteString] andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            [AVOSCloudSNS shareText:self.title andLink:[self.webView.request.URL absoluteString] andImage:[UIImage imageNamed:@"wxshare"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
                 
             } andProgress:^(float percent) {
                 if (percent == 1) {
@@ -253,7 +269,7 @@
     }
     else
     {
-        [AVOSCloudSNS shareText:@"果库 - 精英消费指南" andLink:[self.webView.request.URL absoluteString] andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+        [AVOSCloudSNS shareText:self.title andLink:[self.webView.request.URL absoluteString] andImage:[UIImage imageNamed:@"wxshare"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
             
         } andProgress:^(float percent) {
             if (percent == 1) {
@@ -261,6 +277,21 @@
             }
         }];
     }
+}
+
+- (void)configTitleView
+{
+    
+    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+    [label setText:self.title];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"Helvetica" size:17];
+    label.textColor = UIColorFromRGB(0x414243);
+    label.adjustsFontSizeToFitWidth = YES;
+    label.lineBreakMode = NSLineBreakByTruncatingTail;
+    label.backgroundColor = [UIColor clearColor];
+    
+    self.navigationItem.titleView = label;
 }
 
 @end

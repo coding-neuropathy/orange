@@ -36,6 +36,7 @@
                              @"expert_statistics": @"expertStatisticsDic",
                              @"relation"         : @"relation",
                              @"email"            : @"email",
+                             @"location"         : @"location",
                              };
     
     return keyDic;
