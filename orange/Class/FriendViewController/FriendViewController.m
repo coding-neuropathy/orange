@@ -71,6 +71,19 @@ static NSString *CellIdentifier = @"UserSingleListCell";
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"friendView"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"friendView"];
+}
+
 /*
  #pragma mark - Navigation
  

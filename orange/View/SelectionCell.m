@@ -284,7 +284,7 @@
             [SVProgressHUD dismiss];
         }
         
-        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %lu",self.entity.likeCount] forState:UIControlStateNormal];
         
         if(self.entity.likeCount == 0)
         {
