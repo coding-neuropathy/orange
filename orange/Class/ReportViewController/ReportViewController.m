@@ -201,11 +201,13 @@ static CGFloat LeftMargin = 16.;
 - (void)postButtonAction
 {
     NSString *comment = self.textView.text;
+    
+    /*
     if (comment.length == 0) {
         [SVProgressHUD showImage:nil status:@"请填写举报原因"];
         return;
     }
-    
+    */
     
     if (self.note) {
         [GKAPI reportNoteId:self.note.noteId comment:comment success:^(BOOL success) {
@@ -255,7 +257,7 @@ static CGFloat LeftMargin = 16.;
 }
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    self.scrollView.deFrameTop = 0;
+    self.scrollView.deFrameTop = 68;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

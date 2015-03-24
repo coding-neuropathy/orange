@@ -164,7 +164,7 @@
         self.image = image;
     }];
     
-    
+    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -282,7 +282,7 @@
 - (void)configTitleView
 {
     
-    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 160, 40)];
     [label setText:self.title];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Helvetica" size:17];
