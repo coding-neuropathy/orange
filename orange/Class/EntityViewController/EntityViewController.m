@@ -755,6 +755,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     }
 }
 
+
 - (void)configFooter
 {
     UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
