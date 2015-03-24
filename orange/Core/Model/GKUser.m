@@ -85,6 +85,14 @@
     }
 }
 
+- (NSString *)location
+{
+    if (!_location) {
+        return @"";
+    }
+    return _location;
+}
+
 - (NSURL *)avatarURL_s
 {
     NSRange range =[[_avatarURL_s absoluteString] rangeOfString:@"avatar/default"];

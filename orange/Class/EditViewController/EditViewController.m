@@ -7,10 +7,10 @@
 //
 
 #import "EditViewController.h"
-#import "WXApi.h"
+//#import "WXApi.h"
 #import "GKAPI.h"
-#import "LoginView.h"
-#import "GKWebVC.h"
+//#import "LoginView.h"
+//#import "GKWebVC.h"
 #import "EditHeaderView.h"
 #import "EditViewCell.h"
 
@@ -21,6 +21,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UISwitch * switch_notification;
 @property (nonatomic, strong) UISwitch * switch_assistant;
+@property (nonatomic, strong) UIPickerView * genderPickerView;
 @property (nonatomic, strong) EditHeaderView * headerView;
 
 @end
@@ -75,7 +76,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    NSLog(@"gender %@", [Passport sharedInstance].user.gender);
+    NSLog(@"location %@", [Passport sharedInstance].user.location);
     NSDictionary * profileSection = @{
                                       @"section" : @"profile",
                                       @"row"     : @[
@@ -167,7 +168,22 @@ NSString *SettingTableIdentifier = @"SettingCell";
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     
     if (indexPath.section == 0) {
-    
+        switch (indexPath.row) {
+            case 0:
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改昵称" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
+                alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                [alertView show];
+            }
+                break;
+            case 1:
+            {
+            
+            }
+                break;
+            default:
+                break;
+        }
     }
     
     if (indexPath.section == 1) {
@@ -412,8 +428,6 @@ NSString *SettingTableIdentifier = @"SettingCell";
 //    
 //    [actionSheet showInView:kAppDelegate.window];
 //}
-
-
 
 
 
