@@ -82,12 +82,12 @@ typedef NS_ENUM(NSInteger, GKUserRelationType) {
 /**
  *  认证类型
  */
-@property (nonatomic, strong) NSString *verifiedType;
+//@property (nonatomic, strong) NSString *verifiedType;
 
 /**
  *  认证原因
  */
-@property (nonatomic, strong) NSString *verifiedReason;
+//@property (nonatomic, strong) NSString *verifiedReason;
 
 /**
  *  性别（M:男、F:女、O:未知）
