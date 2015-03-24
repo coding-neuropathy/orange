@@ -517,13 +517,14 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 #pragma mark - Action
 - (void)likeButtonAction
 {
- 
+    
     if(!k_isLogin)
     {
         LoginView * view = [[LoginView alloc]init];
         [view show];
         return;
     }
+    [AVAnalytics event:@"like_click"];
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
@@ -588,7 +589,6 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (void)buyButtonAction
 {
 //    NSLog(@"%@", self.entity.purchaseArray);
-
     
     if (self.entity.purchaseArray.count >0) {
         GKPurchase * purchase = self.entity.purchaseArray[0];
@@ -596,14 +596,14 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         if ([purchase.source isEqualToString:@"taobao.com"])
         {
             NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-//            [[TaeSDK sharedInstance] showItemDetailByItemId:self isNeedPush:NO webViewUISettings:nil itemId:_itemId itemType:1 params:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
             TaeTaokeParams *taoKeParams = [[TaeTaokeParams alloc] init];
             taoKeParams.pid = kGK_TaobaoKe_PID;
             [[TaeSDK sharedInstance] showTaoKeItemDetailByItemId:self isNeedPush:YES webViewUISettings:nil itemId:_itemId itemType:1 params:nil taoKeParams:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
         }
         else
-
             [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
+        
+        [AVAnalytics event:@"buy action" label:purchase.source];
     }
 }
 

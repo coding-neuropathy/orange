@@ -55,22 +55,22 @@
         [self.dataArray addObject:locationSection];
     }
 
-    
-    NSDictionary *recommandSection = @{@"section" : @"推荐",
-                                    @"row"     : @[
-                                            @"微信分享",
-                                            @"App Store 评分",
-                                            ]};
+//    
+//    NSDictionary *recommandSection = @{@"section" : @"推荐",
+//                                    @"row"     : @[
+//                                            @"微信分享",
+//                                            @"App Store 评分",
+//                                            ]};
     //[self.dataArray addObject:recommandSection];
     
     // 其他
-    NSDictionary *otherSection = @{@"section" : @"其他",
-                                   @"row"     : @[
-                                           @"关于我们",
-                                           @"清空图片缓存",
-                                           @"意见反馈",
-                                           @"版本",
-                                           ]};
+//    NSDictionary *otherSection = @{@"section" : @"其他",
+//                                   @"row"     : @[
+//                                           @"关于我们",
+//                                           @"清空图片缓存",
+//                                           @"意见反馈",
+//                                           @"版本",
+//                                           ]};
     //[self.dataArray addObject:otherSection];
 }
 

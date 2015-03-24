@@ -261,18 +261,21 @@
 #pragma mark - Action
 - (void)likeButtonAction
 {
+    
     if(!k_isLogin)
     {
         LoginView * view = [[LoginView alloc]init];
         [view show];
         return;
     }
+    [AVAnalytics event:@"like_click"];
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
         self.likeButton.selected = liked;
         self.entity.liked = liked;
+        
         if (liked) {
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
             self.entity.likeCount = self.entity.likeCount+1;
@@ -280,11 +283,14 @@
             self.entity.likeCount = self.entity.likeCount-1;
             [SVProgressHUD dismiss];
         }
+        
         [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        
         if(self.entity.likeCount == 0)
         {
             [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
         }
+        
         if(self.likeButton.selected)
         {
             [self.likeButton setTintColor:UIColorFromRGB(0xFF1F77)];

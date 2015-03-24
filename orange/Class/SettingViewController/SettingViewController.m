@@ -611,11 +611,7 @@
 }
 - (void)showClearPicCacheFinish
 {
-<<<<<<< HEAD
-    [SVProgressHUD showSuccessWithStatus:@"已清除"];
-=======
     [SVProgressHUD showSuccessWithStatus:@"清空成功"];
->>>>>>> 83b2399297d4b680f253603fe3d912e4bf6faff7
 }
 
 - (void)handleSwith:(UISwitch *)sender

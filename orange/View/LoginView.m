@@ -250,6 +250,7 @@
             self.successBlock();
         }
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
+        [AVAnalytics event:@"sign in" label:@"success"];
         [self dismiss];
 
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
@@ -257,6 +258,7 @@
         case 500:
             {
                 [SVProgressHUD showImage:nil status:@"服务器出错!"];
+                [AVAnalytics event:@"sign in" label:@"failure"];
                 break;
             }
             
