@@ -166,6 +166,14 @@ NSString *SettingTableIdentifier = @"SettingCell";
 {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     
+    if (indexPath.section == 0) {
+    
+    }
+    
+    if (indexPath.section == 1) {
+    
+    }
+    
     NSLog(@"row row %lu", indexPath.row);
 //    if ([[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"section"] isEqualToString:@"帐号"]) {
 //        if(indexPath.row == 0)
