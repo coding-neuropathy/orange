@@ -366,7 +366,7 @@
             [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
             [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-            [button setTitleColor:UIColorFromRGB(0xDB1F77) forState:UIControlStateSelected];
+            [button setTitleColor:UIColorFromRGB(0xFF1F77) forState:UIControlStateSelected];
             [button setTitle:@"" forState:UIControlStateNormal];
             [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
             //[button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];

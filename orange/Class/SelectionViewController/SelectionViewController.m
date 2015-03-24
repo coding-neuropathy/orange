@@ -303,7 +303,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         _SelectionCountLabel= [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 36.f)];
         self.SelectionCountLabel.text = [NSString stringWithFormat:@"%d 条未读精选",10];
         self.SelectionCountLabel.textAlignment = NSTextAlignmentCenter;
-        self.SelectionCountLabel.textColor = UIColorFromRGB(0xDB1F77);
+        self.SelectionCountLabel.textColor = UIColorFromRGB(0xFF1F77);
         self.SelectionCountLabel.backgroundColor = [UIColor clearColor];
         self.SelectionCountLabel.font = [UIFont systemFontOfSize:14];
         

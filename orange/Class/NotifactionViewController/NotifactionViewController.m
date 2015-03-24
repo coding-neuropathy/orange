@@ -65,7 +65,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
         [_segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
         [_segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
         [_segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xDB1F77)];
+        [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
         [_segmentedControl setSelectionIndicatorHeight:1.5];
         [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [_segmentedControl setTag:2];
