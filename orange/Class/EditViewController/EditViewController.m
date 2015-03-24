@@ -233,82 +233,6 @@ NSString *SettingTableIdentifier = @"SettingCell";
         }
     }
     
-//    NSLog(@"row row %lu", indexPath.row);
-//    if ([[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"section"] isEqualToString:@"帐号"]) {
-//        if(indexPath.row == 0)
-//        {
-////            [self photoButtonAction];
-//        }
-//        if(indexPath.row == 1)
-//        {
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改昵称" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
-//            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-//            alertView.tag =20001;
-//            [alertView show];
-//        }
-//        if(indexPath.row == 2)
-//        {
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改邮箱" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-//            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-//            alertView.tag =20002;
-//            [alertView show];
-//        }
-//        if(indexPath.row == 3)
-//        {
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改密码" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-//            alertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
-//            alertView.tag =20003;
-//            [alertView show];
-//        }
-//        if(indexPath.row == 4)
-//        {
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"确认退出登录？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-//            alertView.alertViewStyle = UIAlertViewStyleDefault;
-//            alertView.tag =20007;
-//            [alertView show];
-//        }
-//    }
-//    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"])
-//    {
-//        if (indexPath.row == 2) {
-//            [self weiboShare];
-//        }
-//        if (indexPath.row == 0) {
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"分享给好友", @"分享到朋友圈", nil];
-//            alertView.alertViewStyle = UIAlertViewStyleDefault;
-//            alertView.tag =20005;
-//            [alertView show];
-//        }
-//        if (indexPath.row == 1) {
-//            NSString* url = [NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@?mt=8", kGK_AppID_iPhone];
-//            [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
-//        }
-//    }
-//    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
-//        switch (indexPath.row) {
-//            case 0:
-//            {
-//                [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/about/"]] animated:YES];
-//            }
-//                break;
-//            case 1:
-//            {
-//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
-//                alertView.alertViewStyle = UIAlertViewStyleDefault;
-//                alertView.tag =20006;
-//                [alertView show];
-//            }
-//                break;
-//            case 2:
-//            {
-//                AVUserFeedbackAgent *agent = [AVUserFeedbackAgent sharedInstance];
-//                [agent showConversations:self title:@"意见反馈" contact:@""];
-//            }
-//                break;
-//            default:
-//                break;
-//        }
-//    }
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -325,6 +249,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 NSDictionary * dict = @{@"nickname": tf.text};
                 [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
                     [Passport sharedInstance].user.nickname = user.nickname;
+                    [Passport sharedInstance].user = [Passport sharedInstance].user;
                     [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
                     [self.tableView reloadData];
                 } failure:^(NSInteger stateCode) {
@@ -347,7 +272,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 NSDictionary * dict = @{@"bio": tf.text};
                 [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
                     [Passport sharedInstance].user.bio = user.bio;
-
+                    [Passport sharedInstance].user = [Passport sharedInstance].user;
                     [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
                     [self.tableView reloadData];
                     
@@ -374,6 +299,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
 //                    NSLog(@"update update %@", user.location);
                     [Passport sharedInstance].user.location = user.location;
+                    [Passport sharedInstance].user = [Passport sharedInstance].user;
                     [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
                     [self.tableView reloadData];
                 } failure:^(NSInteger stateCode) {
@@ -390,6 +316,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 NSDictionary *dict = @{@"email": tf.text};
                 [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
                     [Passport sharedInstance].user.email = user.email;
+                    [Passport sharedInstance].user = [Passport sharedInstance].user;
                     [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
                     [self.tableView reloadData];
                 } failure:^(NSInteger stateCode) {
@@ -417,149 +344,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
             }
         }
     }
-    
-//    if(alertView.tag ==20005)
-//    {
-//        if(buttonIndex == 1)
-//        {
-//            [self wxShare:0];
-//        }
-//        if(buttonIndex == 2)
-//        {
-//            [self wxShare:1];
-//        }
-//    }
-    
-//    if(alertView.tag ==20006)
-//    {
-//        if(buttonIndex == 1)
-//        {
-////            [self clearPicCache];
-//        }
-//    }
-//    if(alertView.tag == 20007)
-//    {
-//        if(buttonIndex == 1)
-//        {
-//            [AVUser logOut];
-//            if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
-//                [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
-//            }
-//           [Passport logout];
-//            [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
-//            
-//        }
-//    }
 }
-
-
-//- (void)handleSwith:(UISwitch *)sender
-//{
-//    if (sender == self.switch_notification) {
-//        
-//    }
-//}
-//#pragma mark - WX&Weibo
-//-(void)wxShare:(int)scene
-//{
-//    WXMediaMessage *message = [WXMediaMessage message];
-//    message.title = @"果库 - 精英消费指南";
-//    message.description= @"";
-//    [message setThumbImage:[UIImage imageNamed:@"weixin_share.png"]];
-////    [message setThumbImage:[UIImage imageNamed:@"logo.png"]];
-//    
-//    WXAppExtendObject *ext = [WXAppExtendObject object];
-//    ext.Url = [NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@?mt=8", kGK_AppID_iPhone];;
-//    
-//    message.mediaObject = ext;
-//    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-//    req.bText = NO;
-//    req.message = message;
-//    req.scene = scene;
-//    
-//    [WXApi sendReq:req];
-//}
-
-//-(void)weiboShare
-//{
-//    if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
-//    {
-//        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//            [AVOSCloudSNS shareText:@"果库 - 精英消费指南" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//                
-//            } andProgress:^(float percent) {
-//                if (percent == 1) {
-//                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-//                }
-//            }];
-//        }];
-//    }
-//    else
-//    {
-//        [AVOSCloudSNS shareText:@"果库 - 精英消费指南" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"logo.png"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//            
-//        } andProgress:^(float percent) {
-//            if (percent == 1) {
-//                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-//            }
-//        }];
-//    }
-//}
-//#pragma mark - AVATAR
-//
-//- (void)photoButtonAction{
-//    
-//    // 设置头像
-//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
-//    
-//    [actionSheet showInView:kAppDelegate.window];
-//}
-
-
-
-//- (void)configFooter
-//{
-//    
-//    UIView * view  =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
-//    
-//    if (k_isLogin) {
-//        UIButton * logout = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
-//        logout.backgroundColor = UIColorFromRGB(0xcd1841);
-//        [logout setTitle:@"退出登录" forState:UIControlStateNormal];
-//        [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [logout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:logout];
-//    }
-//    else
-//    {
-//        UIButton * login = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
-//        login.backgroundColor = UIColorFromRGB(0x427ec0);
-//        [login setTitle:@"登录" forState:UIControlStateNormal];
-//        [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [login addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:login];
-//    }
-//    
-//    self.tableView.tableFooterView = view;
-//}
-
-//- (void)logout
-//{
-//    [AVUser logOut];
-//    if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
-//        [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
-//    }
-//    [Passport logout];
-//    //[SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
-//}
-//
-//- (void)login
-//{
-//    LoginView * view = [[LoginView alloc]init];
-//    [view show];
-//}
 
 #pragma mark - Header View Delegate
 
@@ -598,6 +383,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
         NSDictionary * dict = @{@"gender": gender};
         [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
             [Passport sharedInstance].user.gender = user.gender;
+            [Passport sharedInstance].user = [Passport sharedInstance].user;
             NSLog(@"geneder %@", user.gender);
             [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
             [self.tableView reloadData];

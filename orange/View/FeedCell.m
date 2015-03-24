@@ -315,7 +315,6 @@ typedef NS_ENUM(NSInteger, FeedType) {
 - (void)dealloc
 {
     [self.avatar removeObserver:self forKeyPath:@"image"];
-    [self.label removeObserver:self forKeyPath:@"text"];
     [self.contentLabel removeObserver:self forKeyPath:@"text"];
     [self.image removeObserver:self forKeyPath:@"image"];
     
