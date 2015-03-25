@@ -94,6 +94,7 @@
 {
     [super viewWillAppear:animated];
     [AVAnalytics beginLogPageView:@"SettingView"];
+    [MobClick beginLogPageView:@"SettingView"];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -104,6 +105,7 @@
 {
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"SettingView"];
+    [MobClick endLogPageView:@"SettingView"];
 }
 
 #pragma mark - UITableViewDataSource
