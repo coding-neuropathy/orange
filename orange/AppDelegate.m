@@ -18,6 +18,7 @@
 #import "IntruductionVC.h"
 #import "WelcomeVC.h"
 
+
 @interface AppDelegate ()<WXApiDelegate>
 
 @end
@@ -33,6 +34,7 @@
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
     
+    // wechat
     [WXApi registerApp:kGK_WeixinShareKey];
     
     [[TaeSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
