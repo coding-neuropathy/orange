@@ -176,7 +176,7 @@
         loginButton.frame = CGRectMake(0, 0,90, 40.f);
         loginButton.center = self.sinaWeiboButton.center;
         loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
-        loginButton.layer.cornerRadius = 2;
+        loginButton.layer.cornerRadius = 4;
         loginButton.layer.masksToBounds = YES;
         loginButton.backgroundColor = UIColorFromRGB(0x457ebd);
         [loginButton setTitle:@"登录" forState:UIControlStateNormal];
@@ -209,7 +209,7 @@
         _registerButton.deFrameRight = whiteBG.deFrameWidth - 16;
         [whiteBG addSubview:_registerButton];
         
-        whiteBG.deFrameHeight = self.taobaoButton.deFrameBottom + 45;
+        whiteBG.deFrameHeight = self.taobaoButton.deFrameBottom + 30;
         if(kScreenHeight >= 548)
         {
             whiteBG.deFrameTop = 140;

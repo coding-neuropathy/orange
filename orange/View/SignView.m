@@ -9,8 +9,10 @@
 #import "SignView.h"
 #import "GKAPI.h"
 #import "LoginView.h"
+#import "GKWebVC.h"
+#import "RTLabel.h"
 
-@interface SignView () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+@interface SignView () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,RTLabelDelegate>
 {
 @private
     UILabel * tip;
@@ -22,7 +24,7 @@
 @property (nonatomic, strong) UITextField *nicknameTextField;
 @property (nonatomic, strong) UIButton * avatarButton;
 @property (nonatomic, strong) UIButton *loginButton;
-
+@property (nonatomic, strong) RTLabel *label;
 @end
 
 @implementation SignView
@@ -181,7 +183,7 @@
         registerButton.frame = CGRectMake(0, self.passwordTextField.deFrameBottom + 23, 90, 40.f);
         registerButton.center = self.passwordTextField.center;
         registerButton.deFrameTop = self.passwordTextField.deFrameBottom+23;
-        registerButton.layer.cornerRadius = 2;
+        registerButton.layer.cornerRadius = 4;
         registerButton.layer.masksToBounds = YES;
         registerButton.backgroundColor = UIColorFromRGB(0x457ebd);
         [registerButton setTitle:@"注册" forState:UIControlStateNormal];
@@ -216,7 +218,22 @@
         [whiteBG addSubview:_loginButton];
         
         
-        whiteBG.deFrameHeight = registerButton.deFrameBottom + 30;
+        if(!self.label) {
+            _label = [[RTLabel alloc] initWithFrame:CGRectMake(0, 0,220, 20)];
+            self.label.paragraphReplacement = @"";
+            self.label.textAlignment = NSTextAlignmentCenter;
+            self.label.lineSpacing = 7.0;
+            //self.label.backgroundColor = UIColorFromRGB(0xff0000);
+            self.label.delegate = self;
+            [whiteBG addSubview:self.label];
+        }
+        self.label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^9d9e9f' size=14>使用果库，表示你已同意 <a href='http://www.guoku.com/agreement'>使用协议</a></font>"];
+        self.label.center = CGPointMake(whiteBG.deFrameWidth/2, 0);
+        self.label.deFrameTop = registerButton.deFrameBottom + 20;
+
+        
+        
+        whiteBG.deFrameHeight = self.label.deFrameBottom + 10;
         if(kScreenHeight >= 548)
         {
             whiteBG.deFrameTop = 140;
@@ -498,5 +515,15 @@
         kAppDelegate.alertWindow.hidden = YES;
     }];
 }
-
+- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url
+{
+    [self dismiss];
+    NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
+    if([array[0] isEqualToString:@"http"])
+    {
+        GKWebVC * vc =  [GKWebVC linksWebViewControllerWithURL:url];
+        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    }
+    
+}
 @end
