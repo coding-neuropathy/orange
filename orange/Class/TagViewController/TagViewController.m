@@ -82,6 +82,20 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"TagView"];
+    [MobClick beginLogPageView:@"TagView"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"TagView"];
+    [MobClick endLogPageView:@"TagView"];
+}
+
 - (void)setTagName:(NSString *)tagName
 {
     _tagName = tagName;

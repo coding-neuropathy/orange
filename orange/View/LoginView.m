@@ -249,16 +249,22 @@
         if (self.successBlock) {
             self.successBlock();
         }
-        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
+        
+        // analytics
         [AVAnalytics event:@"sign in" label:@"success"];
+        [MobClick event:@"sign in" label:@"success"];
+        
+        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
         [self dismiss];
 
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+        [AVAnalytics event:@"sign in" label:@"failure"];
+        [MobClick event:@"sign in" label:@"failure"];
+        
         switch (stateCode) {
         case 500:
             {
                 [SVProgressHUD showImage:nil status:@"服务器出错!"];
-                [AVAnalytics event:@"sign in" label:@"failure"];
                 break;
             }
             
@@ -398,6 +404,8 @@
             
         }];
     }];
+    [AVAnalytics beginLogPageView:@"SignInView"];
+    [MobClick beginLogPageView:@"SignInView"];
 }
 - (void)dismiss
 {
@@ -407,7 +415,8 @@
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
-    
+    [AVAnalytics endLogPageView:@"SignInView"];
+    [MobClick endLogPageView:@"SignInView"];
 }
 
 - (void)tapRegisterButton

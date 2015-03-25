@@ -136,12 +136,14 @@ static NSString *CellIdentifier = @"SelectionCell";
     [super viewWillAppear:animated];
     self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     [AVAnalytics beginLogPageView:@"SelectionView"];
+    [MobClick beginLogPageView:@"SelectionView"];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"SelectionView"];
+    [MobClick endLogPageView:@"SelectionView"];
 }
 
 /*
@@ -320,45 +322,6 @@ static NSString *CellIdentifier = @"SelectionCell";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [[NSUserDefaults standardUserDefaults] setObject:@(scrollView.contentOffset.y) forKey:@"selection-offset-y"];
-    
-    /*
-    static float newy = 0;
-    static float oldy = 0;
-    newy= scrollView.contentOffset.y ;
-    
-    
-    if (newy < 0) {
-        self.SelectionCountLabelBgView.alpha = 1;
-        return;
-    }
-    if (newy >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
-        self.SelectionCountLabelBgView.alpha = 0;
-        return;
-    }
-    
-    if (newy != oldy ) {
-        if (newy > oldy) {
-            if (self.SelectionCountLabelBgView.alpha != 0) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    self.SelectionCountLabelBgView.alpha = 0;
-                    
-                }];
-            }
-
-        }else if(newy < oldy){
-            if (self.SelectionCountLabelBgView.alpha == 0) {
-                self.SelectionCountLabelBgView.alpha = 0.0;
-                [UIView animateWithDuration:0.3 animations:^{
-                    self.SelectionCountLabelBgView.alpha = 0.97;
-                    
-                }];
-            }
-  
-        }
-        if (abs(newy - oldy)>20) {
-            oldy= newy ;
-        }
-    }*/
 }
 
 

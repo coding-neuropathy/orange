@@ -203,6 +203,7 @@
     [self.navigationController.navigationBar setTranslucent:NO];
     
     [AVAnalytics beginLogPageView:@"DiscoverView"];
+    [MobClick beginLogPageView:@"DiscoverView"];
 
 }
 - (void)viewWillDisappear:(BOOL)animated
@@ -215,6 +216,7 @@
     [self.searchBar resignFirstResponder];
     
     [AVAnalytics endLogPageView:@"DiscovreView"];
+    [MobClick endLogPageView:@"DiscovreView"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -813,7 +815,8 @@
             return;
         }
     }
-    
+    [AVAnalytics event:@"banner" attributes:@{@"url": url}];
+    [MobClick event:@"banner" attributes:@{@"url": url}];
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
 }
 

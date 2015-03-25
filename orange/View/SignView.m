@@ -265,12 +265,18 @@
     [self endEditing:YES];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [GKAPI registerWithEmail:email password:password nickname:nickname imageData:[_avatarButton.imageView.image imageData] sinaUserId:[Passport sharedInstance].sinaUserID sinaToken:[Passport sharedInstance].sinaToken                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    taobaoUserId:[Passport sharedInstance].taobaoId taobaoToken:[Passport sharedInstance].taobaoToken screenName:[Passport sharedInstance].screenName success:^(GKUser *user, NSString *session) {
+        
+        // analytics
+        [AVAnalytics event:@"sign up" label:@"success"];
+        [MobClick event:@"sign up" label:@"success"];
+        
         if (self.successBlock) {
             self.successBlock();
         }
         [self dismiss];
         [SVProgressHUD dismiss];
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+        
         switch (stateCode) {
             case 409:
             {
@@ -294,6 +300,8 @@
                 [SVProgressHUD dismiss];
                 break;
         }
+        [AVAnalytics event:@"sign up" label:@"failure"];
+        [MobClick event:@"sign up" label:@"failure"];
     }];
 }
 
@@ -370,6 +378,9 @@
 
 - (void)show
 {
+    [AVAnalytics beginLogPageView:@"SignUpView"];
+    [MobClick beginLogPageView:@"SignUpView"];
+    
     self.alpha = 0;
     
     [kAppDelegate.window addSubview:self];
@@ -399,6 +410,9 @@
 }
 - (void)dismiss
 {
+    [AVAnalytics endLogPageView:@"SignUpView"];
+    [MobClick endLogPageView:@"SignUpView"];
+    
     self.alpha = 1;
     [UIView animateWithDuration:0.3 animations:^{
         self.alpha = 0;

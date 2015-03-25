@@ -129,13 +129,14 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 {
     [super viewWillAppear:animated];
     [AVAnalytics beginLogPageView:@"EntityView"];
+    [MobClick beginLogPageView:@"EntityView"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     [AVAnalytics endLogPageView:@"EntityView"];
-
+    [MobClick endLogPageView:@"EntityView"];
 }
 
 
@@ -524,7 +525,10 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         [view show];
         return;
     }
-    [AVAnalytics event:@"like_click"];
+    
+    [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
+    [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
+    
     [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
@@ -588,8 +592,6 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 
 - (void)buyButtonAction
 {
-//    NSLog(@"%@", self.entity.purchaseArray);
-    
     if (self.entity.purchaseArray.count >0) {
         GKPurchase * purchase = self.entity.purchaseArray[0];
         NSLog(@"%@ %@", purchase.origin_id, purchase.source);
@@ -603,7 +605,8 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         else
             [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
         
-        [AVAnalytics event:@"buy action" label:purchase.source];
+        [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
+        [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
     }
 }
 
@@ -633,6 +636,9 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     CategoryViewController * VC = [[CategoryViewController alloc]init];
     VC.category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    
+    [AVAnalytics event:@"entity_forward_categoty"];
+    [MobClick event:@"entity_forward_categoty"];
 }
 
 - (void)avatarButtonAction:(UIButton *)button;
@@ -640,6 +646,9 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     UserViewController * VC = [[UserViewController alloc]init];
     VC.user = [self.dataArrayForlikeUser objectAtIndex:button.tag];
     [self.navigationController pushViewController:VC animated:YES];
+    
+    [AVAnalytics event:@"entity_forward_user"];
+    [AVAnalytics event:@"entity_forward_user"];
 }
 
 #pragma mark - UIActionSheetDelegate

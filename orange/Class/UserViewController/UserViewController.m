@@ -115,12 +115,14 @@
     }
     
     [AVAnalytics beginLogPageView:@"UserView"];
+    [MobClick beginLogPageView:@"UserView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"UserView"];
+    [MobClick endLogPageView:@"UserView"];
 }
 
 -(void)viewDidAppear:(BOOL)animated

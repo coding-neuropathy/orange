@@ -21,6 +21,9 @@
 #define kGK_AppID_iPhone @"477652209"
 #endif
 
+// umeng
+#define UMENG_APPKEY @"5219f06856240bd4ab01407a"
+
 
 // weibo
 #ifndef kGK_WeiboAPPKey

@@ -19,9 +19,15 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "UIImageView+WebCache.h"
 
+
+// AVOS
 #import <AVOSCloud/AVOSCloud.h>
 #import <AVOSCloudSNS/AVOSCloudSNS.h>
 #import <AVOSCloudSNS/AVUser+SNS.h>
+
+
+// Umeng
+#import "MobClick.h"
 
 //Emoji
 #import "EmojiOne.h"
