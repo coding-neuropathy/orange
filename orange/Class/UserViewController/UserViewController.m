@@ -83,15 +83,15 @@
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
+        [GKAPI getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
+            weakSelf.user = user;
+            [weakSelf configHeaderView];
+            [weakSelf.tableView reloadData];
+        } failure:^(NSInteger stateCode) {
+            
+        }];
     }];
-    
-    [GKAPI getUserDetailWithUserId:self.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
-        self.user = user;
-        [self configHeaderView];
-    } failure:^(NSInteger stateCode) {
-        
-    }];
-    
+
 
      [self.tableView addInfiniteScrollingWithActionHandler:^{
          [weakSelf loadMore];

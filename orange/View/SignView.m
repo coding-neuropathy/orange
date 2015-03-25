@@ -41,7 +41,7 @@
         [self addSubview:whiteBG];
         
         UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
-        [self addGestureRecognizer:Tap];
+        //[self addGestureRecognizer:Tap];
         
         UITapGestureRecognizer *Tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
         [whiteBG addGestureRecognizer:Tap2];
@@ -274,7 +274,7 @@
             self.successBlock();
         }
         [self dismiss];
-        [SVProgressHUD dismiss];
+        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"注册成功"]];
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         
         switch (stateCode) {

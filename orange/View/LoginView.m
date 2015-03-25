@@ -46,7 +46,7 @@
         [self addSubview:whiteBG];
         
         UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
-        [self addGestureRecognizer:Tap];
+        //[self addGestureRecognizer:Tap];
         
         UITapGestureRecognizer *Tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
         [whiteBG addGestureRecognizer:Tap2];
@@ -291,7 +291,6 @@
 
 - (void)tapSinaWeiboButton
 {
-    [self dismiss];
 //    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
     
@@ -314,7 +313,10 @@
                     {
                         [Passport sharedInstance].sinaAvatarURL = [object objectForKey:@"avatar"];
                         [Passport sharedInstance].screenName = [object objectForKey:@"username"];
+                        [Passport sharedInstance].sinaUserID = [object objectForKey:@"id"];
+                        [Passport sharedInstance].sinaToken = [object objectForKey:@"access_token"];
                         [self tapRegisterButton];
+                        [SVProgressHUD showImage:nil status:@"补全信息"];
                         break;
                     }
    
@@ -337,24 +339,6 @@
 
 - (void)tapTaobaoButton
 {
-//    UIViewController * controller = [[UIViewController alloc] init];
-//    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:controller];
-//    
-//    if(![[TaeSession sharedInstance] isLogin]){
-//        [[TaeSDK sharedInstance] showLogin:nav  successCallback:^(TaeSession *session) {
-//            NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@,登录时间:%@, user id %@",[session getUser],[session getLoginTime], [session getUser].userId];
-//            NSLog(@"%@", tip);
-//        } failedCallback:^(NSError *error) {
-//            
-//            NSString *tip=[NSString stringWithFormat:@"登录失败:%@",error];
-//            NSLog(@"%@", tip);
-//            
-//        }];
-//    }else{
-//        TaeSession *session=[TaeSession sharedInstance];
-//        NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@,登录时间:%@, user id %@",[session getUser],[session getLoginTime], [session getUser].userId];
-//        NSLog(@"%@", tip);
-//    }
     GKTaobaoOAuthViewController *vc = [[GKTaobaoOAuthViewController alloc] init];
     vc.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
