@@ -583,11 +583,12 @@
             NSInteger stateCode = operation.response.statusCode;
             NSString *message;
             NSString *type;
-            
+//            NSLog(@"%@", [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"]);
             switch (stateCode) {
                 case 400:
                 {
                     NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
+                    
                     NSDictionary *dict = [htmlString objectFromJSONString];
                     message = dict[@"message"];
                     type = dict[@"type"];
