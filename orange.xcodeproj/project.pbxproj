@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C829501AC29089009DE9BE /* libMobClickLibrary.a */; };
 		4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */; };
 		4E066AA31A5C56C600DFEF65 /* SelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066AA21A5C56C600DFEF65 /* SelectionCell.m */; };
 		4E066B181A5CC02400DFEF65 /* Expression_100@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E066AA61A5CC02400DFEF65 /* Expression_100@2x.png */; };
@@ -1203,6 +1204,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		39C829501AC29089009DE9BE /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		39C829511AC29089009DE9BE /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		39C829521AC29089009DE9BE /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		4E066A9D1A5C43E800DFEF65 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		4E066AA11A5C56C600DFEF65 /* SelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionCell.h; sourceTree = "<group>"; };
@@ -2627,6 +2631,7 @@
 				B7AAFA8A1AB7071D00A2F20D /* TAESDK.framework in Frameworks */,
 				4E56DFC519D5AF3300263B17 /* libicucore.dylib in Frameworks */,
 				4E56DFC319D5AF1E00263B17 /* SystemConfiguration.framework in Frameworks */,
+				39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */,
 				4E1D28141A0FBC2B00740C17 /* AVOSCloudSNS.framework in Frameworks */,
 				B7AAFA861AB7071D00A2F20D /* AlipaySDK.framework in Frameworks */,
 				4E56DFC119D5AF1400263B17 /* MobileCoreServices.framework in Frameworks */,
@@ -2643,6 +2648,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39C8294F1AC29089009DE9BE /* UMAnalytics_Sdk_3.4.6 */ = {
+			isa = PBXGroup;
+			children = (
+				39C829501AC29089009DE9BE /* libMobClickLibrary.a */,
+				39C829511AC29089009DE9BE /* MobClick.h */,
+				39C829521AC29089009DE9BE /* MobClickSocialAnalytics.h */,
+			);
+			path = UMAnalytics_Sdk_3.4.6;
+			sourceTree = "<group>";
+		};
 		4E066A9C1A5C43E800DFEF65 /* HMSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -3415,6 +3430,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				39C8294F1AC29089009DE9BE /* UMAnalytics_Sdk_3.4.6 */,
 				4E117B921AC05B0500844935 /* AVOSCloud.bundle */,
 				4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */,
 				B7AAFA741AB6FE1400A2F20D /* TaeSDK */,
@@ -6159,6 +6175,7 @@
 					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
 					/Users/edison7500/Downloads/GoogleAnalyticsServicesiOS_3.08,
 					"$(PROJECT_DIR)/orange/ThirdParty/GAI",
+					"$(PROJECT_DIR)/orange/ThirdParty/UMAnalytics_Sdk_3.4.6",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -6191,6 +6208,7 @@
 					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
 					/Users/edison7500/Downloads/GoogleAnalyticsServicesiOS_3.08,
 					"$(PROJECT_DIR)/orange/ThirdParty/GAI",
+					"$(PROJECT_DIR)/orange/ThirdParty/UMAnalytics_Sdk_3.4.6",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

@@ -323,6 +323,9 @@ static NSString *CellIdentifier = @"CommentCell";
     UserViewController * VC = [[UserViewController alloc]init];
     VC.user = self.note.creator;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    
+    [AVAnalytics event:@"note_forward_user"];
+    [MobClick event:@"note_forward_user"];
 }
 
 - (void)TapPokeButtonAction:(id)sender
@@ -341,8 +344,12 @@ static NSString *CellIdentifier = @"CommentCell";
         self.note.poked = poked;
         [pokeBtn setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
         pokeBtn.selected = self.note.poked;
-    } failure:^(NSInteger stateCode) {
         
+        [AVAnalytics event:@"poke note" attributes:@{@"note": @(self.note.noteId), @"status":@"success"} durations:(int)self.note.pokeCount];
+        [MobClick event:@"poke note" attributes:@{@"note": @(self.note.noteId), @"status":@"success"} counter:(int)self.note.pokeCount];
+    } failure:^(NSInteger stateCode) {
+        [AVAnalytics event:@"poke note" attributes:@{@"note":@(self.note.noteId), @"status":@"failure"}];
+        [MobClick event:@"poke note" attributes:@{@"note":@(self.note.noteId), @"status":@"failure"}];
     }];
 }
 

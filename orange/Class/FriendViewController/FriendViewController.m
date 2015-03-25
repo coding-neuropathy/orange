@@ -76,12 +76,14 @@ static NSString *CellIdentifier = @"UserSingleListCell";
 {
     [super viewWillAppear:animated];
     [AVAnalytics beginLogPageView:@"friendView"];
+    [MobClick beginLogPageView:@"friendView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"friendView"];
+    [MobClick endLogPageView:@"friendView"];
 }
 
 /*

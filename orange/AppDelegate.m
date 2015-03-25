@@ -34,6 +34,13 @@
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
     
+    // umeng
+    [MobClick setLogEnabled:NO];
+    [MobClick setAppVersion:XcodeAppVersion];
+    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
+
+    [MobClick updateOnlineConfig];
+    
     // wechat
     [WXApi registerApp:kGK_WeixinShareKey];
     
