@@ -265,12 +265,14 @@
     [self endEditing:YES];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [GKAPI registerWithEmail:email password:password nickname:nickname imageData:[_avatarButton.imageView.image imageData] sinaUserId:[Passport sharedInstance].sinaUserID sinaToken:[Passport sharedInstance].sinaToken                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    taobaoUserId:[Passport sharedInstance].taobaoId taobaoToken:[Passport sharedInstance].taobaoToken screenName:[Passport sharedInstance].screenName success:^(GKUser *user, NSString *session) {
+        [AVAnalytics event:@"sign up" label:@"success"];
         if (self.successBlock) {
             self.successBlock();
         }
         [self dismiss];
         [SVProgressHUD dismiss];
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+        
         switch (stateCode) {
             case 409:
             {
@@ -294,6 +296,7 @@
                 [SVProgressHUD dismiss];
                 break;
         }
+        [AVAnalytics event:@"sign up" label:@"failure"];
     }];
 }
 
