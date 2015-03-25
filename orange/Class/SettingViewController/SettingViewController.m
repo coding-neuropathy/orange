@@ -156,7 +156,7 @@
             UILabel *currentVersionL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 90.00f, cell.frame.size.height)];
             [currentVersionL setBackgroundColor:[UIColor clearColor]];
             [currentVersionL setTextAlignment:NSTextAlignmentRight];
-            currentVersionL.text = [NSString stringWithFormat:@"v%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+            currentVersionL.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
             currentVersionL.font = [UIFont fontWithName:@"Helvetica" size:15];;
             currentVersionL.textColor = UIColorFromRGB(0x9d9e9f);
             [accessoryV addSubview:currentVersionL];
