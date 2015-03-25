@@ -329,7 +329,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 
     NSDictionary * feed = self.feed;
     GKUser * user;
-    switch (_type) {
+    switch (self.type) {
         case FeedEntityNote:
         {
             GKNote *note = feed[@"object"][@"note"];
@@ -347,13 +347,18 @@ typedef NS_ENUM(NSInteger, FeedType) {
             user = feed[@"object"][@"user"];
         }
             break;
+        default:
+            break;
     }
 
     if (user) {
+
         UserViewController * VC = [[UserViewController alloc]init];
         VC.user=user;
         [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
+    [AVAnalytics event:@"feed_forward_user"];
+    [MobClick event:@"feed_forward_user"];
 }
 
 - (void)imageButtonAction
@@ -365,6 +370,9 @@ typedef NS_ENUM(NSInteger, FeedType) {
     VC.hidesBottomBarWhenPushed = YES;
     VC.entity = entity;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    
+    [AVAnalytics event:@"feed_forward_entity"];
+    [MobClick event:@"feed_forward_entity"];
 }
 
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url

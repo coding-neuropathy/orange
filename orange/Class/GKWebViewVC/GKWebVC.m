@@ -129,18 +129,17 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-
+    [AVAnalytics beginLogPageView:@"webView"];
+    [MobClick beginLogPageView:@"webView"];
 }
-
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
     [self.activityIndicator stopAnimating];
-
+    [AVAnalytics endLogPageView:@"webView"];
+    [MobClick endLogPageView:@"webView"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

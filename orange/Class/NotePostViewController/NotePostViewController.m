@@ -138,12 +138,14 @@ static CGFloat NormalKeyboardHeight = 216.0f;
 {
     [super viewWillAppear:animated];
     [AVAnalytics beginLogPageView:@"PostNoteView"];
+    [MobClick beginLogPageView:@"PostNoteView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"PostNoteView"];
+    [MobClick endLogPageView:@"PostNoteView"];
 }
 
 - (void)didReceiveMemoryWarning

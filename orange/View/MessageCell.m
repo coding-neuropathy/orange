@@ -498,6 +498,8 @@ typedef NS_ENUM(NSInteger, MessageType) {
     }
     
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    [AVAnalytics event:@"message_forward_user"];
+    [MobClick event:@"message_forward_user"];
 }
 
 - (void)imageButtonAction
@@ -516,5 +518,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         VC.entity = [GKEntity modelFromDictionary:@{@"entityId":@([note.entityId integerValue])}];
     }
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    [AVAnalytics event:@"message_forward_entity"];
+    [MobClick event:@"message_forward_entity"];
 }
 @end

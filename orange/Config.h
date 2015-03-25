@@ -6,6 +6,7 @@
 //
 
 #define kBaseURL @"http://api.guoku.com/mobile/v4/"
+//#define kBaseURL @"http://127.0.0.1:8000/mobile/v4/"
 #define kApiKey @"0b19c2b93687347e95c6b6f5cc91bb87"
 #define kApiSecret @"47b41864d64bd46"
 
