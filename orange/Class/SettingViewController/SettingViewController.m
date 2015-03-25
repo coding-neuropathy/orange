@@ -286,9 +286,7 @@
 
 -(void)weiboShare
 {
-    if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
-    {
-        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+
             [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
                 
             } andProgress:^(float percent) {
@@ -296,18 +294,7 @@
                     [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
                 }
             }];
-        }];
-    }
-    else
-    {
-        [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-            
-        } andProgress:^(float percent) {
-            if (percent == 1) {
-                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-            }
-        }];
-    }
+
 }
 #pragma mark - AVATAR
 
