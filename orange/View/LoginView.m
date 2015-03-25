@@ -310,8 +310,17 @@
                         [SVProgressHUD showImage:nil status:@"服务器出错!"];
                         break;
                     }
-                        
+                    case 409:
+                    {
+                        [Passport sharedInstance].sinaAvatarURL = [object objectForKey:@"avatar"];
+                        [Passport sharedInstance].screenName = [object objectForKey:@"username"];
+                        [self tapRegisterButton];
+                        break;
+                    }
+   
                     default:
+
+
                         [SVProgressHUD dismiss];
                         break;
                 }
