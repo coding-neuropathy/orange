@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		396C5B6E1AC2BD2600412A72 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396C5B6C1AC2BD2600412A72 /* AVOSCloud.framework */; };
+		396C5B6F1AC2BD2600412A72 /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396C5B6D1AC2BD2600412A72 /* AVOSCloudSNS.framework */; };
 		39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C829501AC29089009DE9BE /* libMobClickLibrary.a */; };
 		4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */; };
 		4E066AA31A5C56C600DFEF65 /* SelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066AA21A5C56C600DFEF65 /* SelectionCell.m */; };
@@ -132,7 +134,6 @@
 		4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C441A66B86F004C59C4 /* CategoryGridCell.m */; };
 		4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C461A66B86F004C59C4 /* CategoryGridItem.m */; };
 		4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1C36581AB429FE00EA2F00 /* GTScrollNavigationBar.m */; };
-		4E1D28141A0FBC2B00740C17 /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1D28131A0FBC2B00740C17 /* AVOSCloudSNS.framework */; };
 		4E1D28391A11CC4F00740C17 /* EarthLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D28251A11CC4F00740C17 /* EarthLoadingView.m */; };
 		4E1D283A1A11CC4F00740C17 /* earth-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E1D28271A11CC4F00740C17 /* earth-1.png */; };
 		4E1D283B1A11CC4F00740C17 /* earth-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E1D28281A11CC4F00740C17 /* earth-10.png */; };
@@ -257,7 +258,6 @@
 		4E56DF1B19D552C000263B17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF1A19D552C000263B17 /* main.m */; };
 		4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF1D19D552C000263B17 /* AppDelegate.m */; };
 		4E56DF2619D552C000263B17 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E56DF2519D552C000263B17 /* Images.xcassets */; };
-		4E56DF7919D56EF500263B17 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DF4019D56EF500263B17 /* AVOSCloud.framework */; };
 		4E56DF7A19D56EF500263B17 /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF4319D56EF500263B17 /* FAImageView.m */; };
 		4E56DF7B19D56EF500263B17 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF4519D56EF500263B17 /* NSString+FontAwesome.m */; };
 		4E56DF7C19D56EF500263B17 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E56DF4719D56EF500263B17 /* FontAwesome.ttf */; };
@@ -1204,6 +1204,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		396C5B6C1AC2BD2600412A72 /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
+		396C5B6D1AC2BD2600412A72 /* AVOSCloudSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudSNS.framework; sourceTree = "<group>"; };
 		39C829501AC29089009DE9BE /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		39C829511AC29089009DE9BE /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		39C829521AC29089009DE9BE /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -1344,7 +1346,6 @@
 		4E198C461A66B86F004C59C4 /* CategoryGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryGridItem.m; sourceTree = "<group>"; };
 		4E1C36571AB429FE00EA2F00 /* GTScrollNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTScrollNavigationBar.h; sourceTree = "<group>"; };
 		4E1C36581AB429FE00EA2F00 /* GTScrollNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTScrollNavigationBar.m; sourceTree = "<group>"; };
-		4E1D28131A0FBC2B00740C17 /* AVOSCloudSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudSNS.framework; sourceTree = "<group>"; };
 		4E1D28241A11CC4F00740C17 /* EarthLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthLoadingView.h; sourceTree = "<group>"; };
 		4E1D28251A11CC4F00740C17 /* EarthLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthLoadingView.m; sourceTree = "<group>"; };
 		4E1D28271A11CC4F00740C17 /* earth-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "earth-1.png"; sourceTree = "<group>"; };
@@ -1590,7 +1591,6 @@
 		4E56DF1C19D552C000263B17 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4E56DF1D19D552C000263B17 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4E56DF2519D552C000263B17 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4E56DF4019D56EF500263B17 /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
 		4E56DF4219D56EF500263B17 /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAImageView.h; sourceTree = "<group>"; };
 		4E56DF4319D56EF500263B17 /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAImageView.m; sourceTree = "<group>"; };
 		4E56DF4419D56EF500263B17 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
@@ -2616,6 +2616,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				396C5B6E1AC2BD2600412A72 /* AVOSCloud.framework in Frameworks */,
+				396C5B6F1AC2BD2600412A72 /* AVOSCloudSNS.framework in Frameworks */,
 				B7AAFA8B1AB7071D00A2F20D /* TAETopSDK.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
 				B7AAFA781AB7036700A2F20D /* libstdc++.6.0.9.dylib in Frameworks */,
@@ -2632,7 +2634,6 @@
 				4E56DFC519D5AF3300263B17 /* libicucore.dylib in Frameworks */,
 				4E56DFC319D5AF1E00263B17 /* SystemConfiguration.framework in Frameworks */,
 				39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */,
-				4E1D28141A0FBC2B00740C17 /* AVOSCloudSNS.framework in Frameworks */,
 				B7AAFA861AB7071D00A2F20D /* AlipaySDK.framework in Frameworks */,
 				4E56DFC119D5AF1400263B17 /* MobileCoreServices.framework in Frameworks */,
 				4E56DFBF19D5AF0900263B17 /* Security.framework in Frameworks */,
@@ -2641,7 +2642,6 @@
 				B7AAFA8C1AB7071D00A2F20D /* TaeUT.framework in Frameworks */,
 				4E56DFB919D5AEF300263B17 /* CoreMotion.framework in Frameworks */,
 				4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */,
-				4E56DF7919D56EF500263B17 /* AVOSCloud.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3430,6 +3430,8 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				396C5B6C1AC2BD2600412A72 /* AVOSCloud.framework */,
+				396C5B6D1AC2BD2600412A72 /* AVOSCloudSNS.framework */,
 				39C8294F1AC29089009DE9BE /* UMAnalytics_Sdk_3.4.6 */,
 				4E117B921AC05B0500844935 /* AVOSCloud.bundle */,
 				4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */,
@@ -3458,11 +3460,9 @@
 				4E1D30A91A125FDF00740C17 /* JSQSystemSoundPlayer */,
 				4E1D284C1A125B9300740C17 /* JSQMessagesViewController */,
 				4E1D28231A11CC4F00740C17 /* EarthLoadingView */,
-				4E1D28131A0FBC2B00740C17 /* AVOSCloudSNS.framework */,
 				4EAA423119E03AC50098C9E0 /* EmojiOne */,
 				4E56DF9619D579F600263B17 /* Category */,
 				4E56DF9219D5755F00263B17 /* JSONKit */,
-				4E56DF4019D56EF500263B17 /* AVOSCloud.framework */,
 				4E56DF4119D56EF500263B17 /* FontAwesome */,
 				4E56DF5219D56EF500263B17 /* SDWebImage */,
 			);
@@ -6163,6 +6163,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty",
+					"/Users/edison7500/Downloads/avoscloud-ios-sdk-v3.0.0/iOS/release-v3.0.0",
+					"/Users/edison7500/Downloads/avoscloud-ios-sdk-v3.0.0/iOS",
+					"2/release-v3.0.0",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6196,6 +6199,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty",
+					"/Users/edison7500/Downloads/avoscloud-ios-sdk-v3.0.0/iOS/release-v3.0.0",
+					"/Users/edison7500/Downloads/avoscloud-ios-sdk-v3.0.0/iOS",
+					"2/release-v3.0.0",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
