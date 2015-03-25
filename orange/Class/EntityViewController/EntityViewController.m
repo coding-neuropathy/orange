@@ -741,20 +741,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 
 - (void)weiboShare
 {
-    if(![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
-    {
-        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-            [AVOSCloudSNS shareText:[NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title] andLink:[NSString stringWithFormat:@"%@%@/?from=weibo",kGK_WeixinShareURL,self.entity.entityHash] andImage:[self.image.image  imageWithSize:CGSizeMake(460.f, 460.f)] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-                
-            } andProgress:^(float percent) {
-                if (percent == 1) {
-                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-                }
-            }];
-        }];
-    }
-    else
-    {
+
         [AVOSCloudSNS shareText:[NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title] andLink:[NSString stringWithFormat:@"%@%@/?from=weibo",kGK_WeixinShareURL,self.entity.entityHash] andImage:[self.image.image  imageWithSize:CGSizeMake(460.f, 460.f)]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
             
         } andProgress:^(float percent) {
@@ -762,7 +749,6 @@ static NSString *EntityCellIdentifier = @"EntityCell";
                 [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
             }
         }];
-    }
 }
 
 
