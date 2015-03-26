@@ -171,6 +171,20 @@
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
+        [GKAPI getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
+            // 过滤可处理的banner类型
+            NSMutableArray *showBannerArray = [NSMutableArray array];
+            for (NSDictionary *itemDict in bannerArray) {
+                NSString *url = [[itemDict objectForKey:@"url"] lowercaseString];
+                if ([url hasPrefix:@"guoku://entity"] ||
+                    [url hasPrefix:@"guoku://category"] ||
+                    [url hasPrefix:@"guoku://user"] ||
+                    [url hasPrefix:@"http://"]) {
+                    [showBannerArray addObject:itemDict];
+                }
+            }
+            weakSelf.headerView.bannerArray = showBannerArray;
+        } failure:nil];
     }];
     
     [self.tableView.pullToRefreshView startAnimating];
