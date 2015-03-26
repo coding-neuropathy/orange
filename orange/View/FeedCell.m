@@ -327,24 +327,25 @@ typedef NS_ENUM(NSInteger, FeedType) {
 - (void)avatarButtonAction
 {
 
-    NSDictionary * feed = self.feed;
+//    NSDictionary * feed = self.feed;
+//    NSLog(@"feed %@", self.feed);
     GKUser * user;
-    switch (self.type) {
+    switch ([FeedCell typeFromFeed:self.feed]) {
         case FeedEntityNote:
         {
-            GKNote *note = feed[@"object"][@"note"];
+            GKNote *note = self.feed[@"object"][@"note"];
             user = note.creator;
         }
             break;
         case FeedUserLike:
         {
-            user = feed[@"object"][@"user"];
+            user = self.feed[@"object"][@"user"];
 
         }
             break;
         case FeedUserFollower:
         {
-            user = feed[@"object"][@"user"];
+            user = self.feed[@"object"][@"user"];
         }
             break;
         default:
