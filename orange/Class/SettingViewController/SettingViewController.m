@@ -12,6 +12,7 @@
 #import "LoginView.h"
 #import "GKWebVC.h"
 
+
 @interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -56,7 +57,7 @@
                                            @"关于我们",
                                            @"用户协议",
                                            @"清空图片缓存",
-                                           //@"意见反馈",
+                                           @"意见反馈",
                                            @"版本",
                                            ]};
     [self.dataArray addObject:otherSection];
@@ -148,7 +149,7 @@
     }
     
     if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
-        if (indexPath.row == 3) {
+        if (indexPath.row == 4) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             UIView *accessoryV = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, cell.frame.size.height)];
@@ -213,14 +214,16 @@
                 [alertView show];
             }
                 break;
-                /*
-            case 2:
+            
+            case 3:
             {
-                AVUserFeedbackAgent *agent = [AVUserFeedbackAgent sharedInstance];
-                [agent showConversations:self title:@"意见反馈" contact:@""];
+                [self presentViewController:[UMFeedback feedbackModalViewController] animated:YES completion:nil];
+//                [self.navigationController pushViewController:[UMFeedback feedbackViewController] animated:YES];
+//                AVUserFeedbackAgent *agent = [AVUserFeedbackAgent sharedInstance];
+//                [agent showConversations:self title:@"意见反馈" contact:@""];
             }
                 break;
-                 */
+                
             default:
                 break;
         }
