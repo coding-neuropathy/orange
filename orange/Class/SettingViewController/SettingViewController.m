@@ -11,6 +11,7 @@
 #import "GKAPI.h"
 #import "LoginView.h"
 #import "GKWebVC.h"
+#import "FeedBackViewController.h"
 
 
 @interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
@@ -217,10 +218,9 @@
             
             case 3:
             {
-                [self presentViewController:[UMFeedback feedbackModalViewController] animated:YES completion:nil];
-//                [self.navigationController pushViewController:[UMFeedback feedbackViewController] animated:YES];
-//                AVUserFeedbackAgent *agent = [AVUserFeedbackAgent sharedInstance];
-//                [agent showConversations:self title:@"意见反馈" contact:@""];
+                
+                [self presentViewController:[FeedBackViewController feedbackModalViewController] animated:YES completion:nil];
+                
             }
                 break;
                 

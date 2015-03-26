@@ -1198,6 +1198,7 @@
 		B7662ACB1AC3AD8E00C82B4B /* umeng_fb_audio_play_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AB51AC3AD8E00C82B4B /* umeng_fb_audio_play_default@2x.png */; };
 		B7662ACC1AC3AD8E00C82B4B /* libUMOpus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AB81AC3AD8E00C82B4B /* libUMOpus.a */; };
 		B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */; };
+		B7662AD21AC3B49E00C82B4B /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7662AD11AC3B49E00C82B4B /* FeedBackViewController.m */; };
 		B766763A1AB805B5002F294C /* NoMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676391AB805B5002F294C /* NoMessageView.m */; };
 		B76676411AB81758002F294C /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676401AB81758002F294C /* NoDataView.m */; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
@@ -2617,6 +2618,8 @@
 		B7662ABA1AC3AD8E00C82B4B /* UMRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMRecorder.h; sourceTree = "<group>"; };
 		B7662ABB1AC3AD8E00C82B4B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMFeedbackLocalizable.strings"; sourceTree = "<group>"; };
 		B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B7662AD01AC3B49E00C82B4B /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedBackViewController.h; path = FeedBackViewController/FeedBackViewController.h; sourceTree = "<group>"; };
+		B7662AD11AC3B49E00C82B4B /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedBackViewController.m; path = FeedBackViewController/FeedBackViewController.m; sourceTree = "<group>"; };
 		B76676381AB805B5002F294C /* NoMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoMessageView.h; path = NotificationView/NoMessageView.h; sourceTree = "<group>"; };
 		B76676391AB805B5002F294C /* NoMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoMessageView.m; path = NotificationView/NoMessageView.m; sourceTree = "<group>"; };
 		B766763F1AB81758002F294C /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoDataView.h; path = UserView/NoDataView.h; sourceTree = "<group>"; };
@@ -3633,6 +3636,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
 				4E117B601ABEE79800844935 /* WelcomeVC */,
 				4E117B5B1ABC6FDC00844935 /* EditViewController */,
 				4E117B561ABB067200844935 /* IntruductionVC */,
@@ -4795,6 +4799,15 @@
 				B7662AB91AC3AD8E00C82B4B /* UMOpus.h */,
 			);
 			path = UMOpus;
+			sourceTree = "<group>";
+		};
+		B7662ACF1AC3B47000C82B4B /* FeedBackViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7662AD01AC3B49E00C82B4B /* FeedBackViewController.h */,
+				B7662AD11AC3B49E00C82B4B /* FeedBackViewController.m */,
+			);
+			name = FeedBackViewController;
 			sourceTree = "<group>";
 		};
 		B76676371AB8058A002F294C /* NotificationView */ = {
@@ -6109,6 +6122,7 @@
 				4E3A23621A51AE8300037F9C /* AFHTTPRequestOperationLogger.m in Sources */,
 				4E216AB71A261395009FF11D /* JDFlipClockView.m in Sources */,
 				4E56DF1B19D552C000263B17 /* main.m in Sources */,
+				B7662AD21AC3B49E00C82B4B /* FeedBackViewController.m in Sources */,
 				4E56DF7D19D56EF500263B17 /* UIFont+FontAwesome.m in Sources */,
 				4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */,
 				4E216ABB1A261395009FF11D /* JDFlipNumberView.m in Sources */,
