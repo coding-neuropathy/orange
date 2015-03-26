@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		396C5B6E1AC2BD2600412A72 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396C5B6C1AC2BD2600412A72 /* AVOSCloud.framework */; };
-		396C5B6F1AC2BD2600412A72 /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396C5B6D1AC2BD2600412A72 /* AVOSCloudSNS.framework */; };
 		39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C829501AC29089009DE9BE /* libMobClickLibrary.a */; };
 		4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */; };
 		4E066AA31A5C56C600DFEF65 /* SelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066AA21A5C56C600DFEF65 /* SelectionCell.m */; };
@@ -1180,6 +1178,8 @@
 		B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */; };
 		B749632A1AB15E9000C340FB /* EntityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B74963291AB15E9000C340FB /* EntityHeaderView.m */; };
 		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
+		B7662AA11AC39D5600C82B4B /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662A9F1AC39D5600C82B4B /* AVOSCloud.framework */; };
+		B7662AA21AC39D5600C82B4B /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AA01AC39D5600C82B4B /* AVOSCloudSNS.framework */; };
 		B766763A1AB805B5002F294C /* NoMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676391AB805B5002F294C /* NoMessageView.m */; };
 		B76676411AB81758002F294C /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676401AB81758002F294C /* NoDataView.m */; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
@@ -1204,8 +1204,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		396C5B6C1AC2BD2600412A72 /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
-		396C5B6D1AC2BD2600412A72 /* AVOSCloudSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudSNS.framework; sourceTree = "<group>"; };
 		39C829501AC29089009DE9BE /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		39C829511AC29089009DE9BE /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		39C829521AC29089009DE9BE /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -2577,6 +2575,8 @@
 		B74963291AB15E9000C340FB /* EntityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityHeaderView.m; path = EntityView/EntityHeaderView.m; sourceTree = "<group>"; };
 		B749632C1AB28A6C00C340FB /* CommentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentHeaderView.h; path = CommentView/CommentHeaderView.h; sourceTree = "<group>"; };
 		B749632D1AB28A6C00C340FB /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentHeaderView.m; path = CommentView/CommentHeaderView.m; sourceTree = "<group>"; };
+		B7662A9F1AC39D5600C82B4B /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
+		B7662AA01AC39D5600C82B4B /* AVOSCloudSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudSNS.framework; sourceTree = "<group>"; };
 		B76676381AB805B5002F294C /* NoMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoMessageView.h; path = NotificationView/NoMessageView.h; sourceTree = "<group>"; };
 		B76676391AB805B5002F294C /* NoMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoMessageView.m; path = NotificationView/NoMessageView.m; sourceTree = "<group>"; };
 		B766763F1AB81758002F294C /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoDataView.h; path = UserView/NoDataView.h; sourceTree = "<group>"; };
@@ -2616,8 +2616,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				396C5B6E1AC2BD2600412A72 /* AVOSCloud.framework in Frameworks */,
-				396C5B6F1AC2BD2600412A72 /* AVOSCloudSNS.framework in Frameworks */,
+				B7662AA11AC39D5600C82B4B /* AVOSCloud.framework in Frameworks */,
+				B7662AA21AC39D5600C82B4B /* AVOSCloudSNS.framework in Frameworks */,
 				B7AAFA8B1AB7071D00A2F20D /* TAETopSDK.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
 				B7AAFA781AB7036700A2F20D /* libstdc++.6.0.9.dylib in Frameworks */,
@@ -3430,8 +3430,8 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				396C5B6C1AC2BD2600412A72 /* AVOSCloud.framework */,
-				396C5B6D1AC2BD2600412A72 /* AVOSCloudSNS.framework */,
+				B7662A9F1AC39D5600C82B4B /* AVOSCloud.framework */,
+				B7662AA01AC39D5600C82B4B /* AVOSCloudSNS.framework */,
 				39C8294F1AC29089009DE9BE /* UMAnalytics_Sdk_3.4.6 */,
 				4E117B921AC05B0500844935 /* AVOSCloud.bundle */,
 				4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */,
@@ -6158,14 +6158,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (A5Y9CLHH49)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TE HUI (A5Y9CLHH49)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty",
-					"/Users/edison7500/Downloads/avoscloud-ios-sdk-v3.0.0/iOS/release-v3.0.0",
-					"/Users/edison7500/Downloads/avoscloud-ios-sdk-v3.0.0/iOS",
-					"2/release-v3.0.0",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6176,8 +6173,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
-					/Users/edison7500/Downloads/GoogleAnalyticsServicesiOS_3.08,
-					"$(PROJECT_DIR)/orange/ThirdParty/GAI",
 					"$(PROJECT_DIR)/orange/ThirdParty/UMAnalytics_Sdk_3.4.6",
 				);
 				OTHER_LDFLAGS = (
@@ -6185,7 +6180,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "7d792a44-3244-4b27-bac0-6c274324376d";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -6194,14 +6189,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (A5Y9CLHH49)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty",
-					"/Users/edison7500/Downloads/avoscloud-ios-sdk-v3.0.0/iOS/release-v3.0.0",
-					"/Users/edison7500/Downloads/avoscloud-ios-sdk-v3.0.0/iOS",
-					"2/release-v3.0.0",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6212,8 +6204,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
-					/Users/edison7500/Downloads/GoogleAnalyticsServicesiOS_3.08,
-					"$(PROJECT_DIR)/orange/ThirdParty/GAI",
 					"$(PROJECT_DIR)/orange/ThirdParty/UMAnalytics_Sdk_3.4.6",
 				);
 				OTHER_LDFLAGS = (
@@ -6221,7 +6211,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "7d792a44-3244-4b27-bac0-6c274324376d";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
