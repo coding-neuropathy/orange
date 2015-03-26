@@ -543,7 +543,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
             [SVProgressHUD dismiss];
         }
         [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
-        
+        self.header.entity = self.entity;
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"喜爱失败"];
         
