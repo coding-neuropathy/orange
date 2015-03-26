@@ -522,8 +522,8 @@
     if([array[0] isEqualToString:@"http"])
     {
         GKWebVC * vc =  [GKWebVC linksWebViewControllerWithURL:url];
+        vc.hidesBottomBarWhenPushed = YES;
         [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
     }
-    
 }
 @end
