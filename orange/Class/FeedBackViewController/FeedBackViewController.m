@@ -57,8 +57,9 @@
     [UMFeedback setLogEnabled:NO];
 //    [UMFeedback setVersion:XcodeAppVersion];
     self.feedback = [UMFeedback sharedInstance];
-    [self.feedback get];
+//    [self.feedback get];
     self.feedback.delegate = self;
+    self.senderId = @"user_reply";
     
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
 //    self.inputToolbar.sendButtonOnRight = NO;
@@ -101,7 +102,11 @@
                                   @"type": @"user_reply",
                                   };
     [[UMFeedback sharedInstance] post:postContent];
-    [self finishSendingMessageAnimated:YES];
+    
+    
+//    JSQMessage * message = [[JSQMessage alloc] initWithSenderId:postContent[@"type"] senderDisplayName:@"" date:[NSDate date]  text:postContent[@"content"]];
+//    [self.messageData addObject:message];
+//    [self finishSendingMessageAnimated:YES];
 }
 
 #pragma mark - JSQMessages CollectionView DataSource
@@ -125,17 +130,12 @@
 {
     JSQMessage *message = [self.messageData objectAtIndex:indexPath.item];
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-    if ([message.senderId isEqualToString:@"dev_reply"]) {
-        return [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    if ([message.senderId isEqualToString:self.senderId]) {
+        return [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+        
     }
-    return [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+    return [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
 }
-
-//- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    JSQMessage *message = [self.messageData objectAtIndex:indexPath.item];
-//    return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
-//}
 
 #pragma mark - UICollectionView DataSource
 
@@ -145,15 +145,65 @@
     return [self.messageData count];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessagesCollectionViewCell * cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-//    JSQMessage *msg = [self.messageData objectAtIndex:indexPath.item];
+    JSQMessage *msg = [self.messageData objectAtIndex:indexPath.item];
 
-    cell.textView.textColor = [UIColor blackColor];
+    if ([msg.senderId isEqualToString:@"dev_reply"]) {
+        cell.textView.textColor = [UIColor blackColor];
+    }
     cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                                                      NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     return cell;
+}
+
+
+#pragma mark - JSQMessages collection view flow layout delegate
+
+#pragma mark - Adjusting cell label heights
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    /**
+     *  Each label in a cell has a `height` delegate method that corresponds to its text dataSource method
+     */
+    
+    /**
+     *  This logic should be consistent with what you return from `attributedTextForCellTopLabelAtIndexPath:`
+     *  The other label height delegate methods should follow similarly
+     *
+     *  Show a timestamp for every 3rd message
+     */
+    if (indexPath.item % 3 == 0) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    
+    return 0.0f;
+}
+
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 0.;
+    /**
+     *  iOS7-style sender name labels
+     */
+//    JSQMessage *currentMessage = [self.messageData objectAtIndex:indexPath.item];
+//    if ([[currentMessage senderId] isEqualToString:self.senderId]) {
+//        return 0.0f;
+//    }
+//    
+//    if (indexPath.item - 1 > 0) {
+//        JSQMessage *previousMessage = [self.messageData objectAtIndex:indexPath.item - 1];
+//        if ([[previousMessage senderId] isEqualToString:[currentMessage senderId]]) {
+//            return 0.0f;
+//        }
+//    }
+//    
+//    return kJSQMessagesCollectionViewCellLabelHeightDefault;
 }
 
 #pragma mark - UMFeedback Delegate
@@ -164,15 +214,15 @@
     } else {
 //        NSLog(@"feed back %@", self.feedback.topicAndReplies);
         for(NSDictionary * row in self.feedback.topicAndReplies) {
-            NSLog(@"row %@", row);
+//            NSLog(@"row %@", row);
 
             JSQMessage * message = [[JSQMessage alloc] initWithSenderId:row[@"type"] senderDisplayName:row[@"reply_id"] date:[NSDate dateWithTimeIntervalSince1970:[row[@"create_at"] integerValue]] text:row[@"content"]];
             
             [self.messageData addObject:message];
         }
-        NSLog(@"%@", self.messageData);
+//        NSLog(@"%@", self.messageData);
         [self finishReceivingMessageAnimated:YES];
-        [self.collectionView reloadData];
+//        [self.collectionView reloadData];
         
     }
 }
@@ -181,11 +231,17 @@
     if (error != nil) {
         NSLog(@"%@", error);
     } else {
-//        NSLog(@"post post %@", self.feedback.topicAndReplies);
+//        NSLog(@"post post %@", self.feedback.topicAndReplies.lastObject);
 //        for (NSDictionary * dict in self.feedback.topicAndReplies ) {
 //            NSLog(@"post post %@")
 //        }
         
+        NSDictionary * row = self.feedback.topicAndReplies.lastObject;
+        
+        JSQMessage * message = [[JSQMessage alloc] initWithSenderId:row[@"type"] senderDisplayName:row[@"reply_id"] date:[NSDate dateWithTimeIntervalSince1970:[row[@"create_at"] integerValue]] text:row[@"content"]];
+        
+        [self.messageData addObject:message];
+        [self finishSendingMessageAnimated:YES];
         
 //        self.messageData = self.feedback.topicAndReplies;
     }
