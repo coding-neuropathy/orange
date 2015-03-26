@@ -1182,20 +1182,6 @@
 		B7662AA21AC39D5600C82B4B /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AA01AC39D5600C82B4B /* AVOSCloudSNS.framework */; };
 		B7662ABC1AC3AD8E00C82B4B /* UMFeedbackLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7662AA41AC3AD8E00C82B4B /* UMFeedbackLocalizable.strings */; };
 		B7662ABD1AC3AD8E00C82B4B /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AA61AC3AD8E00C82B4B /* libUMFeedback.a */; };
-		B7662ABE1AC3AD8E00C82B4B /* bubble_min@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AA81AC3AD8E00C82B4B /* bubble_min@2x.png */; };
-		B7662ABF1AC3AD8E00C82B4B /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AA91AC3AD8E00C82B4B /* cancel@2x.png */; };
-		B7662AC01AC3AD8E00C82B4B /* microphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AAA1AC3AD8E00C82B4B /* microphone@2x.png */; };
-		B7662AC11AC3AD8E00C82B4B /* save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AAB1AC3AD8E00C82B4B /* save@2x.png */; };
-		B7662AC21AC3AD8E00C82B4B /* ToolViewInputText@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AAC1AC3AD8E00C82B4B /* ToolViewInputText@2x.png */; };
-		B7662AC31AC3AD8E00C82B4B /* ToolViewInputTextHL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AAD1AC3AD8E00C82B4B /* ToolViewInputTextHL@2x.png */; };
-		B7662AC41AC3AD8E00C82B4B /* ToolViewInputVoice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AAE1AC3AD8E00C82B4B /* ToolViewInputVoice@2x.png */; };
-		B7662AC51AC3AD8E00C82B4B /* ToolViewInputVoiceHL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AAF1AC3AD8E00C82B4B /* ToolViewInputVoiceHL@2x.png */; };
-		B7662AC61AC3AD8E00C82B4B /* umeng_fb_audio_dialog_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AB01AC3AD8E00C82B4B /* umeng_fb_audio_dialog_cancel@2x.png */; };
-		B7662AC71AC3AD8E00C82B4B /* umeng_fb_audio_dialog_content@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AB11AC3AD8E00C82B4B /* umeng_fb_audio_dialog_content@2x.png */; };
-		B7662AC81AC3AD8E00C82B4B /* umeng_fb_audio_play_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AB21AC3AD8E00C82B4B /* umeng_fb_audio_play_01@2x.png */; };
-		B7662AC91AC3AD8E00C82B4B /* umeng_fb_audio_play_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AB31AC3AD8E00C82B4B /* umeng_fb_audio_play_02@2x.png */; };
-		B7662ACA1AC3AD8E00C82B4B /* umeng_fb_audio_play_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AB41AC3AD8E00C82B4B /* umeng_fb_audio_play_03@2x.png */; };
-		B7662ACB1AC3AD8E00C82B4B /* umeng_fb_audio_play_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7662AB51AC3AD8E00C82B4B /* umeng_fb_audio_play_default@2x.png */; };
 		B7662ACC1AC3AD8E00C82B4B /* libUMOpus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AB81AC3AD8E00C82B4B /* libUMOpus.a */; };
 		B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */; };
 		B7662AD21AC3B49E00C82B4B /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7662AD11AC3B49E00C82B4B /* FeedBackViewController.m */; };
@@ -2598,20 +2584,6 @@
 		B7662AA01AC39D5600C82B4B /* AVOSCloudSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudSNS.framework; sourceTree = "<group>"; };
 		B7662AA51AC3AD8E00C82B4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/UMFeedbackLocalizable.strings; sourceTree = "<group>"; };
 		B7662AA61AC3AD8E00C82B4B /* libUMFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMFeedback.a; sourceTree = "<group>"; };
-		B7662AA81AC3AD8E00C82B4B /* bubble_min@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_min@2x.png"; sourceTree = "<group>"; };
-		B7662AA91AC3AD8E00C82B4B /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
-		B7662AAA1AC3AD8E00C82B4B /* microphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "microphone@2x.png"; sourceTree = "<group>"; };
-		B7662AAB1AC3AD8E00C82B4B /* save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save@2x.png"; sourceTree = "<group>"; };
-		B7662AAC1AC3AD8E00C82B4B /* ToolViewInputText@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewInputText@2x.png"; sourceTree = "<group>"; };
-		B7662AAD1AC3AD8E00C82B4B /* ToolViewInputTextHL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewInputTextHL@2x.png"; sourceTree = "<group>"; };
-		B7662AAE1AC3AD8E00C82B4B /* ToolViewInputVoice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewInputVoice@2x.png"; sourceTree = "<group>"; };
-		B7662AAF1AC3AD8E00C82B4B /* ToolViewInputVoiceHL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewInputVoiceHL@2x.png"; sourceTree = "<group>"; };
-		B7662AB01AC3AD8E00C82B4B /* umeng_fb_audio_dialog_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_dialog_cancel@2x.png"; sourceTree = "<group>"; };
-		B7662AB11AC3AD8E00C82B4B /* umeng_fb_audio_dialog_content@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_dialog_content@2x.png"; sourceTree = "<group>"; };
-		B7662AB21AC3AD8E00C82B4B /* umeng_fb_audio_play_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_play_01@2x.png"; sourceTree = "<group>"; };
-		B7662AB31AC3AD8E00C82B4B /* umeng_fb_audio_play_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_play_02@2x.png"; sourceTree = "<group>"; };
-		B7662AB41AC3AD8E00C82B4B /* umeng_fb_audio_play_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_play_03@2x.png"; sourceTree = "<group>"; };
-		B7662AB51AC3AD8E00C82B4B /* umeng_fb_audio_play_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "umeng_fb_audio_play_default@2x.png"; sourceTree = "<group>"; };
 		B7662AB61AC3AD8E00C82B4B /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = "<group>"; };
 		B7662AB81AC3AD8E00C82B4B /* libUMOpus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMOpus.a; sourceTree = "<group>"; };
 		B7662AB91AC3AD8E00C82B4B /* UMOpus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOpus.h; sourceTree = "<group>"; };
@@ -4763,33 +4735,11 @@
 			children = (
 				B7662AA41AC3AD8E00C82B4B /* UMFeedbackLocalizable.strings */,
 				B7662AA61AC3AD8E00C82B4B /* libUMFeedback.a */,
-				B7662AA71AC3AD8E00C82B4B /* Resources */,
 				B7662AB61AC3AD8E00C82B4B /* UMFeedback.h */,
 				B7662AB71AC3AD8E00C82B4B /* UMOpus */,
 				B7662ABA1AC3AD8E00C82B4B /* UMRecorder.h */,
 			);
 			path = UMengFeedback_SDK_2.1.1;
-			sourceTree = "<group>";
-		};
-		B7662AA71AC3AD8E00C82B4B /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				B7662AA81AC3AD8E00C82B4B /* bubble_min@2x.png */,
-				B7662AA91AC3AD8E00C82B4B /* cancel@2x.png */,
-				B7662AAA1AC3AD8E00C82B4B /* microphone@2x.png */,
-				B7662AAB1AC3AD8E00C82B4B /* save@2x.png */,
-				B7662AAC1AC3AD8E00C82B4B /* ToolViewInputText@2x.png */,
-				B7662AAD1AC3AD8E00C82B4B /* ToolViewInputTextHL@2x.png */,
-				B7662AAE1AC3AD8E00C82B4B /* ToolViewInputVoice@2x.png */,
-				B7662AAF1AC3AD8E00C82B4B /* ToolViewInputVoiceHL@2x.png */,
-				B7662AB01AC3AD8E00C82B4B /* umeng_fb_audio_dialog_cancel@2x.png */,
-				B7662AB11AC3AD8E00C82B4B /* umeng_fb_audio_dialog_content@2x.png */,
-				B7662AB21AC3AD8E00C82B4B /* umeng_fb_audio_play_01@2x.png */,
-				B7662AB31AC3AD8E00C82B4B /* umeng_fb_audio_play_02@2x.png */,
-				B7662AB41AC3AD8E00C82B4B /* umeng_fb_audio_play_03@2x.png */,
-				B7662AB51AC3AD8E00C82B4B /* umeng_fb_audio_play_default@2x.png */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		B7662AB71AC3AD8E00C82B4B /* UMOpus */ = {
@@ -4982,7 +4932,6 @@
 				4E066B7E1A5CC02400DFEF65 /* Expression_98@2x.png in Resources */,
 				4EAA472319E03BA70098C9E0 /* 1F4B0.png in Resources */,
 				4EAA489E19E03BA80098C9E0 /* 26D4.png in Resources */,
-				B7662AC51AC3AD8E00C82B4B /* ToolViewInputVoiceHL@2x.png in Resources */,
 				4EAA46C019E03BA60098C9E0 /* 1F44D.png in Resources */,
 				4EAA46C519E03BA60098C9E0 /* 1F452.png in Resources */,
 				4EAA480719E03BA70098C9E0 /* 1F63D.png in Resources */,
@@ -5109,7 +5058,6 @@
 				4EAA46CE19E03BA60098C9E0 /* 1F45B.png in Resources */,
 				4EAA482019E03BA70098C9E0 /* 1F68A.png in Resources */,
 				4EAA47E319E03BA70098C9E0 /* 1F619.png in Resources */,
-				B7662AC81AC3AD8E00C82B4B /* umeng_fb_audio_play_01@2x.png in Resources */,
 				4EAA465219E03BA60098C9E0 /* 1F3B8.png in Resources */,
 				4EAA480019E03BA70098C9E0 /* 1F636.png in Resources */,
 				4EAA458A19E03BA60098C9E0 /* 0037-20E3.png in Resources */,
@@ -5234,7 +5182,6 @@
 				4EAA47D819E03BA70098C9E0 /* 1F60E.png in Resources */,
 				4E1D31311A1A4C9D00740C17 /* EmojisList.plist in Resources */,
 				4EAA47B219E03BA70098C9E0 /* 1F555.png in Resources */,
-				B7662AC21AC3AD8E00C82B4B /* ToolViewInputText@2x.png in Resources */,
 				4EAA45B819E03BA60098C9E0 /* 1F251.png in Resources */,
 				4EAA465B19E03BA60098C9E0 /* 1F3C1.png in Resources */,
 				4EAA46E719E03BA60098C9E0 /* 1F474.png in Resources */,
@@ -5258,7 +5205,6 @@
 				4EAA458E19E03BA60098C9E0 /* 00AE.png in Resources */,
 				4EAA459519E03BA60098C9E0 /* 1F18E.png in Resources */,
 				4EAA47E819E03BA70098C9E0 /* 1F61E.png in Resources */,
-				B7662AC31AC3AD8E00C82B4B /* ToolViewInputTextHL@2x.png in Resources */,
 				4EAA46AA19E03BA60098C9E0 /* 1F435.png in Resources */,
 				4EAA46D819E03BA60098C9E0 /* 1F465.png in Resources */,
 				B7AAFA901AB70CA500A2F20D /* Tae.bundle in Resources */,
@@ -5414,7 +5360,6 @@
 				4EAA487E19E03BA70098C9E0 /* 2615.png in Resources */,
 				4EAA47C219E03BA70098C9E0 /* 1F565.png in Resources */,
 				4E066B711A5CC02400DFEF65 /* Expression_86@2x.png in Resources */,
-				B7662AC71AC3AD8E00C82B4B /* umeng_fb_audio_dialog_content@2x.png in Resources */,
 				4E066B3A1A5CC02400DFEF65 /* Expression_36@2x.png in Resources */,
 				4EAA47D419E03BA70098C9E0 /* 1F60A.png in Resources */,
 				4EAA47B119E03BA70098C9E0 /* 1F554.png in Resources */,
@@ -5433,7 +5378,6 @@
 				4E066B4A1A5CC02400DFEF65 /* Expression_50@2x.png in Resources */,
 				4EAA484819E03BA70098C9E0 /* 1F6B2.png in Resources */,
 				4EAA459919E03BA60098C9E0 /* 1F194.png in Resources */,
-				B7662AC01AC3AD8E00C82B4B /* microphone@2x.png in Resources */,
 				4EAA471E19E03BA70098C9E0 /* 1F4AB.png in Resources */,
 				4EAA462119E03BA60098C9E0 /* 1F378.png in Resources */,
 				4EAA481719E03BA70098C9E0 /* 1F681.png in Resources */,
@@ -5552,7 +5496,6 @@
 				4EAA482719E03BA70098C9E0 /* 1F691.png in Resources */,
 				4EAA460219E03BA60098C9E0 /* 1F359.png in Resources */,
 				4EAA46E319E03BA60098C9E0 /* 1F470.png in Resources */,
-				B7662ABE1AC3AD8E00C82B4B /* bubble_min@2x.png in Resources */,
 				4EAA48B019E03BA80098C9E0 /* 2728.png in Resources */,
 				4EAA45CF19E03BA60098C9E0 /* 1F316.png in Resources */,
 				4EAA463419E03BA60098C9E0 /* 1F38E.png in Resources */,
@@ -5563,7 +5506,6 @@
 				4EAA47A919E03BA70098C9E0 /* 1F53A.png in Resources */,
 				4EAA473619E03BA70098C9E0 /* 1F4C3.png in Resources */,
 				4EAA459819E03BA60098C9E0 /* 1F193.png in Resources */,
-				B7662AC91AC3AD8E00C82B4B /* umeng_fb_audio_play_02@2x.png in Resources */,
 				4EAA480C19E03BA70098C9E0 /* 1F646.png in Resources */,
 				4E066B5F1A5CC02400DFEF65 /* Expression_6@2x.png in Resources */,
 				4EAA481419E03BA70098C9E0 /* 1F64E.png in Resources */,
@@ -5636,7 +5578,6 @@
 				4EAA469119E03BA60098C9E0 /* 1F41C.png in Resources */,
 				4EAA461919E03BA60098C9E0 /* 1F370.png in Resources */,
 				4EAA48AE19E03BA80098C9E0 /* 2714.png in Resources */,
-				B7662AC11AC3AD8E00C82B4B /* save@2x.png in Resources */,
 				4EAA488019E03BA70098C9E0 /* 263A.png in Resources */,
 				4EAA47A019E03BA70098C9E0 /* 1F531.png in Resources */,
 				4EAA479319E03BA70098C9E0 /* 1F524.png in Resources */,
@@ -5646,7 +5587,6 @@
 				4EAA475219E03BA70098C9E0 /* 1F4DF.png in Resources */,
 				4EAA462E19E03BA60098C9E0 /* 1F388.png in Resources */,
 				4EAA483619E03BA70098C9E0 /* 1F6A0.png in Resources */,
-				B7662AC61AC3AD8E00C82B4B /* umeng_fb_audio_dialog_cancel@2x.png in Resources */,
 				4EAA47B019E03BA70098C9E0 /* 1F553.png in Resources */,
 				4EAA48BB19E03BA80098C9E0 /* 2764.png in Resources */,
 				4E066B7C1A5CC02400DFEF65 /* Expression_96@2x.png in Resources */,
@@ -5678,7 +5618,6 @@
 				4E1D28DE1A125B9300740C17 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 				4E066B6C1A5CC02400DFEF65 /* Expression_81@2x.png in Resources */,
 				4EAA485919E03BA70098C9E0 /* 1F6C3.png in Resources */,
-				B7662AC41AC3AD8E00C82B4B /* ToolViewInputVoice@2x.png in Resources */,
 				4EAA480319E03BA70098C9E0 /* 1F639.png in Resources */,
 				4E066B791A5CC02400DFEF65 /* Expression_93@2x.png in Resources */,
 				4EAA484A19E03BA70098C9E0 /* 1F6B4.png in Resources */,
@@ -5717,7 +5656,6 @@
 				4EAA481D19E03BA70098C9E0 /* 1F687.png in Resources */,
 				4EAA468219E03BA60098C9E0 /* 1F40D.png in Resources */,
 				4EAA46FD19E03BA60098C9E0 /* 1F48A.png in Resources */,
-				B7662ACA1AC3AD8E00C82B4B /* umeng_fb_audio_play_03@2x.png in Resources */,
 				4EAA479219E03BA70098C9E0 /* 1F523.png in Resources */,
 				4E1D28491A11CC4F00740C17 /* earth-7.png in Resources */,
 				4EAA46CB19E03BA60098C9E0 /* 1F458.png in Resources */,
@@ -5845,7 +5783,6 @@
 				4EAA46AE19E03BA60098C9E0 /* 1F439.png in Resources */,
 				4EAA475C19E03BA70098C9E0 /* 1F4E9.png in Resources */,
 				4EAA470419E03BA60098C9E0 /* 1F491.png in Resources */,
-				B7662ACB1AC3AD8E00C82B4B /* umeng_fb_audio_play_default@2x.png in Resources */,
 				4EAA46EC19E03BA60098C9E0 /* 1F479.png in Resources */,
 				4EAA461E19E03BA60098C9E0 /* 1F375.png in Resources */,
 				4EAA45E819E03BA60098C9E0 /* 1F33F.png in Resources */,
@@ -5917,7 +5854,6 @@
 				4EAA46C719E03BA60098C9E0 /* 1F454.png in Resources */,
 				4EAA45F519E03BA60098C9E0 /* 1F34C.png in Resources */,
 				4EAA46AD19E03BA60098C9E0 /* 1F438.png in Resources */,
-				B7662ABF1AC3AD8E00C82B4B /* cancel@2x.png in Resources */,
 				4E066B2B1A5CC02400DFEF65 /* Expression_22@2x.png in Resources */,
 				4E216ABA1A261395009FF11D /* JDFlipNumberView.bundle in Resources */,
 				4EAA468B19E03BA60098C9E0 /* 1F416.png in Resources */,
@@ -6284,40 +6220,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (A5Y9CLHH49)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TE HUI (A5Y9CLHH49)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/orange/ThirdParty",
-				);
-				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = orange/config.pch;
-				INFOPLIST_FILE = "$(SRCROOT)/orange/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
-					"$(PROJECT_DIR)/orange/ThirdParty/UMAnalytics_Sdk_3.4.6",
-					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1",
-					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1/UMOpus",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lstdc++",
-				);
-				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "7d792a44-3244-4b27-bac0-6c274324376d";
-			};
-			name = Debug;
-		};
-		4E56DF3A19D552C000263B17 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TE HUI (A5Y9CLHH49)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6341,7 +6244,40 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "7d792a44-3244-4b27-bac0-6c274324376d";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		4E56DF3A19D552C000263B17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/orange/ThirdParty",
+				);
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = orange/config.pch;
+				INFOPLIST_FILE = "$(SRCROOT)/orange/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
+					"$(PROJECT_DIR)/orange/ThirdParty/UMAnalytics_Sdk_3.4.6",
+					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1",
+					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1/UMOpus",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = orange;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

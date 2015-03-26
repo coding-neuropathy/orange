@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UMFeedback *feedback;
 @property (strong, nonatomic) UIView * containerView;
 @property (strong, nonatomic) NSMutableArray *messageData;
+@property (strong, nonatomic) JSQMessagesBubbleImageFactory * bubbleFactory;
 
 @end
 
@@ -39,6 +40,8 @@
         self.title = @"意见反馈";
         self.view.backgroundColor = UIColorFromRGB(0xfafafa);
         self.messageData = [[NSMutableArray alloc] initWithCapacity:0];
+        
+        self.bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
     }
     return self;
 }
@@ -61,12 +64,17 @@
     self.feedback.delegate = self;
     self.senderId = @"user_reply";
     
+    if (k_isLogin){
+        [[UMFeedback sharedInstance] updateUserInfo:@{@"contact": @{
+                                                                    @"email": [Passport sharedInstance].user.email,}}];
+    }
+    
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
 //    self.inputToolbar.sendButtonOnRight = NO;
     self.inputToolbar.contentView.leftBarButtonItem = nil;
     
 //    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
-//    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
 
 }
 
@@ -129,12 +137,12 @@
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage *message = [self.messageData objectAtIndex:indexPath.item];
-    JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
+//    JSQMessagesBubbleImageFactory * bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
     if ([message.senderId isEqualToString:self.senderId]) {
-        return [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+        return [self.bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
         
     }
-    return [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+    return [self.bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
 }
 
 #pragma mark - UICollectionView DataSource
@@ -150,9 +158,12 @@
     JSQMessagesCollectionViewCell * cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     JSQMessage *msg = [self.messageData objectAtIndex:indexPath.item];
 
-    if ([msg.senderId isEqualToString:@"dev_reply"]) {
+    if ([msg.senderId isEqualToString:self.senderId]) {
+        
+    } else {
         cell.textView.textColor = [UIColor blackColor];
     }
+    
     cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                                                      NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     return cell;
@@ -214,7 +225,7 @@
     } else {
 //        NSLog(@"feed back %@", self.feedback.topicAndReplies);
         for(NSDictionary * row in self.feedback.topicAndReplies) {
-//            NSLog(@"row %@", row);
+            NSLog(@"row %@", row);
 
             JSQMessage * message = [[JSQMessage alloc] initWithSenderId:row[@"type"] senderDisplayName:row[@"reply_id"] date:[NSDate dateWithTimeIntervalSince1970:[row[@"create_at"] integerValue]] text:row[@"content"]];
             
@@ -231,19 +242,12 @@
     if (error != nil) {
         NSLog(@"%@", error);
     } else {
-//        NSLog(@"post post %@", self.feedback.topicAndReplies.lastObject);
-//        for (NSDictionary * dict in self.feedback.topicAndReplies ) {
-//            NSLog(@"post post %@")
-//        }
-        
         NSDictionary * row = self.feedback.topicAndReplies.lastObject;
         
         JSQMessage * message = [[JSQMessage alloc] initWithSenderId:row[@"type"] senderDisplayName:row[@"reply_id"] date:[NSDate dateWithTimeIntervalSince1970:[row[@"create_at"] integerValue]] text:row[@"content"]];
         
         [self.messageData addObject:message];
         [self finishSendingMessageAnimated:YES];
-        
-//        self.messageData = self.feedback.topicAndReplies;
     }
 }
 

@@ -97,7 +97,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         self.label.delegate = self;
         [self.contentView addSubview:self.label];
     }
-    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", self.note.creator.userId, self.note.creator.nickname];
+    self.label.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", self.note.creator.userId, self.note.creator.nickname];
     
     if(!self.contentLabel) {
         _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(64, 20, kScreenWidth - 78, 20)];
