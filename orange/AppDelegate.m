@@ -19,6 +19,7 @@
 #import "WelcomeVC.h"
 
 
+
 @interface AppDelegate ()<WXApiDelegate>
 
 @end
@@ -40,6 +41,11 @@
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
 
     [MobClick updateOnlineConfig];
+    
+    [UMOpus setAudioEnable:YES];
+    [UMFeedback setAppkey:UMENG_APPKEY];
+    [UMFeedback setLogEnabled:YES];
+    [[UMFeedback sharedInstance] setFeedbackViewController:[UMFeedback feedbackViewController] shouldPush:YES];
     
     // wechat
     [WXApi registerApp:kGK_WeixinShareKey];

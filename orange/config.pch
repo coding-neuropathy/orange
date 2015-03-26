@@ -28,6 +28,9 @@
 
 // Umeng
 #import "MobClick.h"
+#import "UMFeedback.h"
+//#import "UMessage.h"
+#import "UMOpus.h"
 
 //Emoji
 #import "EmojiOne.h"
