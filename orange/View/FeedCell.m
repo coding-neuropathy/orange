@@ -354,6 +354,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
     if (user) {
 
         UserViewController * VC = [[UserViewController alloc]init];
+        VC.hidesBottomBarWhenPushed = YES;
         VC.user=user;
         [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
@@ -382,6 +383,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
     {
         GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
         UserViewController * VC = [[UserViewController alloc]init];
+        VC.hidesBottomBarWhenPushed = YES;
         VC.user = user;
         [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }

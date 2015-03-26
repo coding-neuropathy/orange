@@ -16,6 +16,7 @@
 #import "FriendViewController.h"
 #import "TagViewController.h"
 #import "LoginView.h"
+#import "EditViewController.h"
 
 @interface UserViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -97,6 +98,16 @@
          [weakSelf loadMore];
      }];
     
+    
+    self.followButton.hidden = YES;
+    [GKAPI getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
+        weakSelf.user = user;
+        [weakSelf configHeaderView];
+        self.followButton.hidden = NO;
+        [weakSelf.tableView reloadData];
+    } failure:^(NSInteger stateCode) {
+        
+    }];
 
 }
 - (void)setUser:(GKUser *)user
@@ -606,7 +617,7 @@
     
 
     UILabel * bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 20.f, 260.f, 30.f)];
-    bioLabel.numberOfLines = 0;
+    bioLabel.numberOfLines = 2;
     bioLabel.backgroundColor = [UIColor clearColor];
     bioLabel.font = [UIFont systemFontOfSize:14];
     bioLabel.textAlignment = NSTextAlignmentCenter;
@@ -615,8 +626,8 @@
     bioLabel.center = image.center;
     bioLabel.backgroundColor = [UIColor clearColor];
     if ([self.user.bio isEqualToString:@""]||!self.user.bio) {
-        bioLabel.deFrameHeight = 0;
-        bioLabel.deFrameTop = nicknameLabel.deFrameBottom+0;
+        bioLabel.deFrameHeight = 30;
+        bioLabel.deFrameTop = nicknameLabel.deFrameBottom+10;
     }
     else
     {
@@ -795,5 +806,12 @@
     }
     
 }
+
+- (void)editButtonAction
+{
+    EditViewController * vc = [[EditViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 @end

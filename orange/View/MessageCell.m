@@ -330,6 +330,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
         UserViewController * VC = [[UserViewController alloc]init];
         VC.user = user;
+        VC.hidesBottomBarWhenPushed = YES;
         [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
     if([array[0] isEqualToString:@"entity"])
@@ -496,7 +497,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         GKUser * user = message[@"content"][@"user"];
         VC.user = user;
     }
-    
+    VC.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     [AVAnalytics event:@"message_forward_user"];
     [MobClick event:@"message_forward_user"];

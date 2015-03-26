@@ -50,7 +50,7 @@
         
 
         
-        logo = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        logo = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"login_logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         logo.tintColor = UIColorFromRGB(0x9d9e9f);
         logo.center = CGPointMake(whiteBG.deFrameWidth/2, 80);
         [whiteBG addSubview:logo];
