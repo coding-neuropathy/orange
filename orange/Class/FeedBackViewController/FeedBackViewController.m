@@ -72,7 +72,7 @@
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
 //    self.inputToolbar.sendButtonOnRight = NO;
     self.inputToolbar.contentView.leftBarButtonItem = nil;
-    
+    self.inputToolbar.contentView.textView.layer.borderWidth = 0;
 //    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
 
@@ -107,14 +107,10 @@
     
     NSDictionary *postContent = @{@"content":text,
                                   @"gender": gender,
-                                  @"type": @"user_reply",
+                                  @"type": self.senderId,
                                   };
     [[UMFeedback sharedInstance] post:postContent];
-    
-    
-//    JSQMessage * message = [[JSQMessage alloc] initWithSenderId:postContent[@"type"] senderDisplayName:@"" date:[NSDate date]  text:postContent[@"content"]];
-//    [self.messageData addObject:message];
-//    [self finishSendingMessageAnimated:YES];
+    JSQMessage * message = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:postContent[@"reply_id"] date:[NSDate date] text:postContent[@"content"]];
 }
 
 #pragma mark - JSQMessages CollectionView DataSource
@@ -240,13 +236,9 @@
 
 - (void)postFinishedWithError:(NSError *)error {
     if (error != nil) {
-//        NSLog(@"%@", error);
+        NSLog(@"%@", error);
     } else {
-        NSDictionary * row = self.feedback.topicAndReplies.lastObject;
         
-        JSQMessage * message = [[JSQMessage alloc] initWithSenderId:row[@"type"] senderDisplayName:row[@"reply_id"] date:[NSDate dateWithTimeIntervalSince1970:[row[@"create_at"] integerValue]] text:row[@"content"]];
-        
-        [self.messageData addObject:message];
         [self finishSendingMessageAnimated:YES];
     }
 }
