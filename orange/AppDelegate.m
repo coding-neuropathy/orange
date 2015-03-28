@@ -34,6 +34,7 @@
     [AVPush setProductionMode:YES];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
+//    [AVAnalytics setChannel:@"91"];
     
     // umeng
     [MobClick setLogEnabled:NO];

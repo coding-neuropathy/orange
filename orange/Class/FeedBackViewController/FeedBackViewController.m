@@ -221,11 +221,11 @@
 
 - (void)getFinishedWithError:(NSError *)error {
     if (error != nil) {
-        NSLog(@"%@", error);
+//        NSLog(@"%@", error);
     } else {
 //        NSLog(@"feed back %@", self.feedback.topicAndReplies);
         for(NSDictionary * row in self.feedback.topicAndReplies) {
-            NSLog(@"row %@", row);
+//            NSLog(@"row %@", row);
 
             JSQMessage * message = [[JSQMessage alloc] initWithSenderId:row[@"type"] senderDisplayName:row[@"reply_id"] date:[NSDate dateWithTimeIntervalSince1970:[row[@"create_at"] integerValue]] text:row[@"content"]];
             
@@ -240,7 +240,7 @@
 
 - (void)postFinishedWithError:(NSError *)error {
     if (error != nil) {
-        NSLog(@"%@", error);
+//        NSLog(@"%@", error);
     } else {
         NSDictionary * row = self.feedback.topicAndReplies.lastObject;
         

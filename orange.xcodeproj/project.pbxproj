@@ -1642,7 +1642,6 @@
 		4E56DFB519D57ECC00263B17 /* config.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.pch; sourceTree = "<group>"; };
 		4E56DFB619D5AEED00263B17 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		4E56DFB819D5AEF300263B17 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		4E56DFBA19D5AEFA00263B17 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		4E56DFBC19D5AF0000263B17 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4E56DFBE19D5AF0900263B17 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4E56DFC019D5AF1400263B17 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -3597,7 +3596,6 @@
 				4E56DFC019D5AF1400263B17 /* MobileCoreServices.framework */,
 				4E56DFBE19D5AF0900263B17 /* Security.framework */,
 				4E56DFBC19D5AF0000263B17 /* CoreLocation.framework */,
-				4E56DFBA19D5AEFA00263B17 /* CoreBluetooth.framework */,
 				4E56DFB819D5AEF300263B17 /* CoreMotion.framework */,
 				4E56DFB619D5AEED00263B17 /* CoreTelephony.framework */,
 			);
