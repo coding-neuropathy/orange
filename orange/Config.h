@@ -116,3 +116,8 @@
 #ifndef kSeparateLineWidth
 #define kSeparateLineWidth 0.5f
 #endif
+
+
+#ifndef kLocalizedFile
+#define kLocalizedFile @"guoku"
+#endif

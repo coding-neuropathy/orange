@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "EmojiOne.h"
+//#import "EmojiOne.h"
 #import "WXApi.h"
 #import "TabBarViewController.h"
 #import "GKAPI.h"

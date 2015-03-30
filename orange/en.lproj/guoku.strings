@@ -1,0 +1,24 @@
+/* 
+  File.strings
+  orange
+
+  Created by 谢家欣 on 15/3/30.
+  Copyright (c) 2015年 guoku.com. All rights reserved.
+*/
+
+
+"guoku" = "Guoku";
+
+"selected" = "Selected";
+
+"settings"  = "Settings";
+"weibo"     = "Weibo";
+"taobao"    = "Taobao";
+"wechat"    = "WeChat";
+"share application to wechat" = "Share APP to WeChat";
+"share application to weibo" = "Share APP to Weibo";
+"about"     = "About";
+"agreement" = "Agreement";
+"clear image cache" = "Clear Image Cache";
+"feedback"  = "FeedBack";
+"version"   = "Version";

@@ -7,11 +7,17 @@
 //
 
 #import "SettingViewController.h"
+#import "SettingsViewCell.h"
+
 #import "WXApi.h"
 #import "GKAPI.h"
 #import "LoginView.h"
+
 #import "GKWebVC.h"
 #import "FeedBackViewController.h"
+
+
+static NSString *SettingTableIdentifier = @"SettingCell";
 
 
 @interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
@@ -29,10 +35,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"设置";
+        self.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
         self.dataArray = [NSMutableArray array];
         
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
     }
@@ -44,22 +50,31 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSDictionary *recommandSection = @{@"section" : @"推荐",
+    NSDictionary * linkSection = @{@"section"   :   @"link settings",
+                                   @"row"       :   @[
+                                           @"weibo",
+                                           @"taobao",
+                                           @"wechat",
+                                           ]};
+    
+    [self.dataArray addObject:linkSection];
+    
+    NSDictionary *recommandSection = @{@"section" : @"recommandtion",
                                     @"row"     : @[
-                                            @"微信分享",
-                                            @"分享应用到微博",
+                                            @"share application to wechat",
+                                            @"share application to weibo",
                                             @"App Store 评分",
                                             ]};
     [self.dataArray addObject:recommandSection];
     
     // 其他
-    NSDictionary *otherSection = @{@"section" : @"其他",
+    NSDictionary *otherSection = @{@"section" : @"other",
                                    @"row"     : @[
-                                           @"关于我们",
-                                           @"用户协议",
-                                           @"清空图片缓存",
-                                           @"意见反馈",
-                                           @"版本",
+                                           @"about",
+//                                           @"agreement",
+                                           @"clear image cache",
+                                           @"feedback",
+                                           @"version",
                                            ]};
     [self.dataArray addObject:otherSection];
 }
@@ -75,7 +90,7 @@
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
@@ -86,6 +101,8 @@
     self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
+    
+    [self.tableView registerClass:[SettingsViewCell class] forCellReuseIdentifier:SettingTableIdentifier];
     
     [self configFooter];
     
@@ -130,43 +147,46 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *SettingTableIdentifier = [NSString stringWithFormat:@"Setting%ld%ld",indexPath.section,indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingTableIdentifier];
-    }
+//    NSString *SettingTableIdentifier = [NSString stringWithFormat:@"Setting%ld%ld",indexPath.section,indexPath.row];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier];
+//    if (!cell) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingTableIdentifier];
+//    }
+//
+    SettingsViewCell * cell = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"row"]objectAtIndex:indexPath.row];
-    cell.contentView.backgroundColor = [UIColor clearColor];
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
-    cell.textLabel.textColor = UIColorFromRGB(0X666666);
-    cell.textLabel.highlightedTextColor = UIColorFromRGB(0X666666);
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
-    
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"]) {
-
-    }
-    
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
-        if (indexPath.row == 4) {
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            UIView *accessoryV = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, cell.frame.size.height)];
-            [accessoryV setBackgroundColor:[UIColor clearColor]];
-            accessoryV.clipsToBounds = NO;
-            
-            UILabel *currentVersionL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 90.00f, cell.frame.size.height)];
-            [currentVersionL setBackgroundColor:[UIColor clearColor]];
-            [currentVersionL setTextAlignment:NSTextAlignmentRight];
-            currentVersionL.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-            currentVersionL.font = [UIFont fontWithName:@"Helvetica" size:15];;
-            currentVersionL.textColor = UIColorFromRGB(0x9d9e9f);
-            [accessoryV addSubview:currentVersionL];
-            cell.accessoryView = accessoryV;
-        }
-    }
+    cell.text = [[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"row"]objectAtIndex:indexPath.row];
+//    cell.textLabel.text = [[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"row"]objectAtIndex:indexPath.row];
+//    cell.contentView.backgroundColor = [UIColor clearColor];
+//    cell.textLabel.backgroundColor = [UIColor clearColor];
+//    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
+//    cell.textLabel.textColor = UIColorFromRGB(0X666666);
+//    cell.textLabel.highlightedTextColor = UIColorFromRGB(0X666666);
+//    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+//    
+//    
+//    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"]) {
+//
+//    }
+//    
+//    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
+//        if (indexPath.row == 4) {
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            
+//            UIView *accessoryV = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, cell.frame.size.height)];
+//            [accessoryV setBackgroundColor:[UIColor clearColor]];
+//            accessoryV.clipsToBounds = NO;
+//            
+//            UILabel *currentVersionL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 90.00f, cell.frame.size.height)];
+//            [currentVersionL setBackgroundColor:[UIColor clearColor]];
+//            [currentVersionL setTextAlignment:NSTextAlignmentRight];
+//            currentVersionL.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+//            currentVersionL.font = [UIFont fontWithName:@"Helvetica" size:15];;
+//            currentVersionL.textColor = UIColorFromRGB(0x9d9e9f);
+//            [accessoryV addSubview:currentVersionL];
+//            cell.accessoryView = accessoryV;
+//        }
+//    }
     
     return cell;
 }
@@ -179,7 +199,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"])
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"recommandtion"])
     {
         if (indexPath.row == 0) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"分享给好友", @"分享到朋友圈", nil];
@@ -195,19 +215,19 @@
             [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
         }
     }
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
+    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"other"]) {
         switch (indexPath.row) {
             case 0:
             {
                 [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/about/"]] animated:YES];
             }
                 break;
+//            case 1:
+//            {
+//                [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/agreement/"]] animated:YES];
+//            }
+//                break;
             case 1:
-            {
-                [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/agreement/"]] animated:YES];
-            }
-                break;
-            case 2:
             {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
                 alertView.alertViewStyle = UIAlertViewStyleDefault;
@@ -216,7 +236,7 @@
             }
                 break;
             
-            case 3:
+            case 2:
             {
                 
                 [self presentViewController:[FeedBackViewController feedbackModalViewController] animated:YES completion:nil];
@@ -229,6 +249,7 @@
         }
     }
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(alertView.tag ==20007)
