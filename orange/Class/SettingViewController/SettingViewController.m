@@ -215,10 +215,49 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     return 44;
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"recommandtion"])
+    
+    NSString * section = [[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"section"];
+    
+    if ([section isEqualToString:@"link settings"]) {
+        switch (indexPath.row) {
+            case 0:
+            {
+                if ([Passport sharedInstance].user.sinaScreenName) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"解除绑定" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+                    alertView.alertViewStyle = UIAlertViewStyleDefault;
+                    alertView.tag =40001;
+                    [alertView show];
+                    break;
+                }
+                
+                [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
+                [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
+                    NSLog(@"%@", object);
+                    if (!error) {
+                        [GKAPI bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] success:^(GKUser *user) {
+                        
+                        } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+                            [SVProgressHUD showErrorWithStatus:message];
+                        }];
+                    }
+                } toPlatform:AVOSCloudSNSSinaWeibo];
+                
+            }
+                break;
+            case 1:
+            {
+            
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    if ([section isEqualToString:@"recommandtion"])
     {
         if (indexPath.row == 0) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"分享给好友", @"分享到朋友圈", nil];
@@ -234,18 +273,13 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
         }
     }
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"other"]) {
+    if ([section isEqualToString:@"other"]) {
         switch (indexPath.row) {
             case 0:
             {
                 [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/about/"]] animated:YES];
             }
                 break;
-//            case 1:
-//            {
-//                [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/agreement/"]] animated:YES];
-//            }
-//                break;
             case 1:
             {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
@@ -332,13 +366,13 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 -(void)weiboShare
 {
 
-            [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+    [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
                 
-            } andProgress:^(float percent) {
-                if (percent == 1) {
-                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-                }
-            }];
+    } andProgress:^(float percent) {
+        if (percent == 1) {
+            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+        }
+    }];
 
 }
 #pragma mark - AVATAR

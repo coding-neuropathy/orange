@@ -9,11 +9,23 @@
 
 "guoku" = "Guoku";
 
-"selected" = "Selected";
+"selected"  = "Selected";
+"discover"  = "Discover";
+"notify"    = "Notify";
+"settings"  = "Settings";
 
 "like"      = "Like";
 
-"settings"  = "Settings";
+/*
+ form page
+ */
+"email"     = "Email";
+"password"  = "Password";
+
+
+/*
+ setting page
+ */
 "weibo"     = "Weibo";
 "taobao"    = "Taobao";
 "wechat"    = "WeChat";
@@ -26,5 +38,6 @@
 "version"   = "Version";
 
 "sign in"   = "Sign In";
+"sign up"   = "Sign Up";
 "sign out"  = "Sign Out";
 

@@ -206,6 +206,22 @@
                       failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
 
 /**
+ *  新浪用户绑定果库账号
+ *  @param userId           果库用户ID
+ *  @param sinaUserId       新浪用户ID
+ *  @param sinaScreenname   新浪用户名
+ *  @param sinaToken        新浪token
+ *  @param expires_at       token过期时间
+ *  @param success          成功block
+ *  @param failure          失败block
+ */
++ (void)bindWeiboWithUserId:(NSInteger)user_id sinaUserId:(NSString *)sina_user_id
+             sinaScreenname:(NSString *)screen_name
+                accessToken:(NSString *)access_token
+                    success:(void (^)(GKUser *user))success
+                    failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
+
+/**
  *  用户注销
  *
  *  @param success  成功block

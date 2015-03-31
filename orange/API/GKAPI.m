@@ -715,6 +715,53 @@
 }
 
 /**
+ *  新浪用户绑定果库账号
+ *  @param userId           果库用户ID
+ *  @param sinaUserId       新浪用户ID
+ *  @param sinaScreenname   新浪用户名
+ *  @param sinaToken        新浪token
+ *  @param expires_at       token过期时间
+ *  @param success          成功block
+ *  @param failure          失败block
+ */
++ (void)bindWeiboWithUserId:(NSInteger)user_id sinaUserId:(NSString *)sina_user_id
+                sinaScreenname:(NSString *)screen_name
+                accessToken:(NSString *)access_token
+                success:(void (^)(GKUser *user))success
+                failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure
+{
+    NSParameterAssert(user_id);
+    NSParameterAssert(sina_user_id);
+    NSParameterAssert(screen_name);
+    NSParameterAssert(access_token);
+    
+    NSString * path = @"sina/bind/";
+    
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(user_id) forKey:@"user_id"];
+    [paraDict setValue:sina_user_id forKey:@"sina_id"];
+    [paraDict setValue:screen_name forKey:@"screen_name"];
+    [paraDict setValue:access_token forKey:@"sina_token"];
+    
+    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
+            NSDictionary *dict = [htmlString objectFromJSONString];
+            NSString * message = dict[@"message"];
+            NSString * type = dict[@"type"];
+
+            failure(stateCode, type, NSLocalizedStringFromTable(message, kLocalizedFile, nil));
+        }
+    }];
+}
+
+
+/**
  *  用户注销
  *
  *  @param success  成功block

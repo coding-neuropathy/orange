@@ -11,10 +11,20 @@
 
 "selected"  = "精選";
 "discover"  = "發現";
+"notify"    = "通知";
+"settings"  = "設置";
 
 "like"      = "喜愛";
 
-"settings"  = "設置";
+/*
+ form page
+ */
+"email"     = "郵箱";
+"password"  = "密碼";
+
+/*
+ setting page
+ */
 "weibo"     = "微博";
 "taobao"    = "淘寶";
 "wechat"    = "微信";
@@ -27,4 +37,5 @@
 "version"   = "版本";
 
 "sign in"   = "登錄";
+"sign up"   = "登記";
 "sign out"  = "退出登錄";

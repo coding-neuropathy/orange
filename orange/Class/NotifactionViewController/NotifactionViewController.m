@@ -37,7 +37,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"通知" image:[UIImage imageNamed:@"tabbar_icon_notifaction"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_notifaction"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: NSLocalizedStringFromTable(@"notify", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_notifaction"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_notifaction"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
         self.index = 0;
@@ -50,7 +50,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     [super loadView];
 
     
-    self.title = @"通知";
+    self.title = NSLocalizedStringFromTable(@"notify", kLocalizedFile, nil);
 
 }
 

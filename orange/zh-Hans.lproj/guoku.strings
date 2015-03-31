@@ -11,10 +11,21 @@
 
 "selected"  = "精选";
 "discover"  = "发现";
+"notify"    = "通知";
+"settings"  = "设置";
 
 "like"      = "喜爱";
 
-"settings"  = "设置";
+/*
+  form page
+ */
+"email"     = "邮箱";
+"password"  = "密码";
+
+
+/*
+ setting page
+ */
 "weibo"     = "微博";
 "taobao"    = "淘宝";
 "wechat"    = "微信";
@@ -27,4 +38,5 @@
 "version"   = "版本";
 
 "sign in"   = "登录";
+"sign up"   = "注册";
 "sign out"  = "退出登录";

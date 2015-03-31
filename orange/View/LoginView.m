@@ -87,7 +87,7 @@
             label.textColor = UIColorFromRGB(0x414243);
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
-            label.text = @"邮箱";
+            label.text = NSLocalizedStringFromTable(@"email", kLocalizedFile, nil);
             self.emailTextField.leftView = label;
         }
         self.emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -131,7 +131,7 @@
             label.textColor = UIColorFromRGB(0x414243);
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
-            label.text = @"密码";
+            label.text = NSLocalizedStringFromTable(@"password", kLocalizedFile, nil);
             self.passwordTextField.leftView = label;
         }
         self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -179,7 +179,7 @@
         loginButton.layer.cornerRadius = 4;
         loginButton.layer.masksToBounds = YES;
         loginButton.backgroundColor = UIColorFromRGB(0x457ebd);
-        [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+        [loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
         [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
         [whiteBG addSubview:loginButton];
@@ -200,7 +200,7 @@
         _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
         _registerButton.backgroundColor = [UIColor clearColor];
         _registerButton.titleLabel.textAlignment = NSTextAlignmentRight;
-        [_registerButton setTitle:[NSString stringWithFormat:@"注册 %@",[NSString fontAwesomeIconStringForEnum:FAChevronRight]] forState:UIControlStateNormal];
+        [_registerButton setTitle:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"sign up", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FAChevronRight]] forState:UIControlStateNormal];
         [_registerButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         [_registerButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:14]];
         _registerButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
@@ -335,6 +335,8 @@
             [SVProgressHUD showImage:nil status:@"登录失败"];
         }
     } toPlatform:AVOSCloudSNSSinaWeibo];
+    
+    [self dismiss];
 }
 
 - (void)tapTaobaoButton
