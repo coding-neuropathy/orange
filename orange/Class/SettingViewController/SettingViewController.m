@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "SettingsViewCell.h"
+#import "SettingsFooterView.h"
 
 #import "WXApi.h"
 #import "GKAPI.h"
@@ -20,11 +21,12 @@
 static NSString *SettingTableIdentifier = @"SettingCell";
 
 
-@interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
+@interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIActionSheetDelegate, SettingsFooterViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UISwitch * switch_notification;
 @property (nonatomic, strong) UISwitch * switch_assistant;
+@property (nonatomic, strong) SettingsFooterView * footerView;
 
 @end
 
@@ -45,19 +47,51 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     return self;
 }
 
+- (SettingsFooterView *)footerView
+{
+    if (!_footerView) {
+        _footerView = [[SettingsFooterView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 100.)];
+        _footerView.delegate = self;
+        _footerView.is_login = k_isLogin;
+    }
+    return _footerView;
+}
+
+- (void)loadView
+{
+    [super loadView];
+    
+    //    self.view.backgroundColor = [UIColor whiteColor];
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
+    [self.view addSubview:self.tableView];
+    self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
+    
+    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
+    
+
+
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSDictionary * linkSection = @{@"section"   :   @"link settings",
+    if (k_isLogin) {
+        NSDictionary * linkSection = @{@"section"   :   @"link settings",
                                    @"row"       :   @[
                                            @"weibo",
                                            @"taobao",
-                                           @"wechat",
+//                                           @"wechat",
                                            ]};
     
-    [self.dataArray addObject:linkSection];
+        [self.dataArray addObject:linkSection];
+    }
     
     NSDictionary *recommandSection = @{@"section" : @"recommandtion",
                                     @"row"     : @[
@@ -77,6 +111,11 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                                            @"version",
                                            ]};
     [self.dataArray addObject:otherSection];
+    
+    
+    [self.tableView registerClass:[SettingsViewCell class] forCellReuseIdentifier:SettingTableIdentifier];
+    self.tableView.tableFooterView = self.footerView;
+
 }
 
 
@@ -86,27 +125,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loadView
-{
-    [super loadView];
-    
-//    self.view.backgroundColor = [UIColor whiteColor];
-    
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
-    [self.view addSubview:self.tableView];
-    self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
-    
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
-    
-    [self.tableView registerClass:[SettingsViewCell class] forCellReuseIdentifier:SettingTableIdentifier];
-    
-    [self configFooter];
-    
-}
+
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -397,35 +416,43 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 
 
-- (void)configFooter
+//- (void)configFooter
+//{
+//    
+//    UIView * view  =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
+//    
+//    if (k_isLogin) {
+//        UIButton * logout = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
+//        logout.backgroundColor = UIColorFromRGB(0xcd1841);
+//        logout.layer.cornerRadius = 5;
+//        [logout setTitle:@"退出登录" forState:UIControlStateNormal];
+//        [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [logout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+//        [view addSubview:logout];
+//    }
+//    else
+//    {
+//        UIButton * login = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
+//        login.backgroundColor = UIColorFromRGB(0x427ec0);
+//        login.layer.cornerRadius = 5;
+//        [login setTitle:@"登录" forState:UIControlStateNormal];
+//        [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [login addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+//        [view addSubview:login];
+//    }
+//    
+//    self.tableView.tableFooterView = view;
+//}
+
+#pragma mark - Setting Footer View Delegate
+
+- (void)TapLoginBtnAction
 {
-    
-    UIView * view  =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
-    
-    if (k_isLogin) {
-        UIButton * logout = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
-        logout.backgroundColor = UIColorFromRGB(0xcd1841);
-        logout.layer.cornerRadius = 5;
-        [logout setTitle:@"退出登录" forState:UIControlStateNormal];
-        [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [logout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:logout];
-    }
-    else
-    {
-        UIButton * login = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
-        login.backgroundColor = UIColorFromRGB(0x427ec0);
-        login.layer.cornerRadius = 5;
-        [login setTitle:@"登录" forState:UIControlStateNormal];
-        [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [login addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:login];
-    }
-    
-    self.tableView.tableFooterView = view;
+    LoginView * view = [[LoginView alloc]init];
+    [view show];
 }
 
-- (void)logout
+- (void)TapLogoutBtnAction
 {
     [AVUser logOut];
     if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
@@ -436,11 +463,22 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
 }
 
-- (void)login
-{
-    LoginView * view = [[LoginView alloc]init];
-    [view show];
-}
+//- (void)logout
+//{
+//    [AVUser logOut];
+//    if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
+//        [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
+//    }
+//    [Passport logout];
+//    [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
+//}
+
+//- (void)login
+//{
+//    LoginView * view = [[LoginView alloc]init];
+//    [view show];
+//}
 
 
 @end

@@ -11,6 +11,8 @@
 
 "selected" = "Selected";
 
+"like"      = "Like";
+
 "settings"  = "Settings";
 "weibo"     = "Weibo";
 "taobao"    = "Taobao";
@@ -22,3 +24,7 @@
 "clear image cache" = "Clear Image Cache";
 "feedback"  = "FeedBack";
 "version"   = "Version";
+
+"sign in"   = "Sign In";
+"sign out"  = "Sign Out";
+

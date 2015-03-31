@@ -12,6 +12,8 @@
 "selected"  = "精选";
 "discover"  = "发现";
 
+"like"      = "喜爱";
+
 "settings"  = "设置";
 "weibo"     = "微博";
 "taobao"    = "淘宝";
@@ -23,3 +25,6 @@
 "clear image cache" = "清除图片缓存";
 "feedback"  = "意见反馈";
 "version"   = "版本";
+
+"sign in"   = "登录";
+"sign out"  = "退出登录";

@@ -12,6 +12,8 @@
 "selected"  = "精選";
 "discover"  = "發現";
 
+"like"      = "喜愛";
+
 "settings"  = "設置";
 "weibo"     = "微博";
 "taobao"    = "淘寶";
@@ -23,3 +25,6 @@
 "clear image cache" = "清除圖片緩存";
 "feedback"  = "意見反饋";
 "version"   = "版本";
+
+"sign in"   = "登錄";
+"sign out"  = "退出登錄";

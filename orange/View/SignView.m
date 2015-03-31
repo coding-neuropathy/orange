@@ -42,7 +42,7 @@
         whiteBG.layer.masksToBounds = YES;
         [self addSubview:whiteBG];
         
-        UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+//        UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
         //[self addGestureRecognizer:Tap];
         
         UITapGestureRecognizer *Tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];

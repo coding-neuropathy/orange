@@ -18,6 +18,7 @@
                              @"user_id"          : @"userId",
                              @"nickname"         : @"nickname",
                              @"sina_screen_name" : @"sinaScreenName",
+                             @"taobao_nick"      : @"taobaoScreenName",
                              @"avatar_large"     : @"avatarURL",
                              @"avatar_small"     : @"avatarURL_s",
                              @"verified"         : @"verified",

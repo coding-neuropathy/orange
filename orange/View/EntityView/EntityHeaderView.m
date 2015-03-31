@@ -146,7 +146,13 @@ static CGFloat kEntityViewMarginLeft = 16.;
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 32) * idx, 0., kScreenWidth - 32, kScreenWidth - 32)];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
 //        [imageurl a]
-        NSURL * imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
+//        NSLog(@"image url %@", imageURL);
+        NSURL * imageURL_640;
+        if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+            imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:640]];
+        } else {
+            imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
+        }
         
         [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
         [self.scrollView addSubview:imageView];
@@ -154,11 +160,11 @@ static CGFloat kEntityViewMarginLeft = 16.;
     }];
     
     
-    [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱 %lu", _entity.likeCount] forState:UIControlStateNormal];
+    [self.likeBtn setTitle:[NSString stringWithFormat:@"%@ %lu", NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), _entity.likeCount] forState:UIControlStateNormal];
     self.likeBtn.selected = self.entity.liked;
     if(_entity.likeCount == 0)
     {
-        [self.likeBtn setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
+        [self.likeBtn setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
     }
     [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", _entity.lowestPrice] forState:UIControlStateNormal];
     
