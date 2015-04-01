@@ -11,6 +11,14 @@
 
 @interface GKAPI : NSObject
 
+typedef NS_ENUM(NSInteger, GKSNSType){
+    /// 新浪微博
+    GKSinaWeibo = 1,
+    /// QQ
+    GKTaobao,
+    
+} ;
+
 /**
  *  获取主页信息（banner、hotCategory）
  *
@@ -221,6 +229,20 @@
                 accessToken:(NSString *)access_token
                 ExpiresIn:(NSDate *)expires_in
                     success:(void (^)(GKUser *user))success
+                    failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
+
+/**
+ *  果库账号解除SNS綁定
+ *  @param userId           果库用户ID
+ *  @param SNSUserId        SNS用户名
+ *  @param platform         SNS平台
+ *  @param success          成功block
+ *  @param failure          失败block
+ */
++ (void)unbindSNSWithUserId:(NSInteger)user_id
+                SNSUserName:(NSString *)sns_user_name
+                setPlatform:(GKSNSType)platform
+                    success:(void (^)(bool status))success
                     failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
 
 /**

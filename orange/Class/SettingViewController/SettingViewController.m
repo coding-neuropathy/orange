@@ -206,6 +206,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                         [GKAPI bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] ExpiresIn:object[@"expires_at"]  success:^(GKUser *user) {
                             [Passport sharedInstance].user = user;
                             [Passport sharedInstance].screenName = user.sinaScreenName;
+//                            [Passport sharedInstance].sinaUserID = user.
                             [self.tableView reloadData];
                             [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"bind success", kLocalizedFile, nil)];
                         } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
@@ -300,6 +301,21 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         if(buttonIndex == 1)
         {
             [self logout];
+        }
+    }
+    
+    if (alertView.tag == 40001) {
+        if (buttonIndex == 1) {
+//            NSLog(@"unbind weibo %@", [Passport sharedInstance].user.sinaScreenName);
+            [GKAPI unbindSNSWithUserId:[Passport sharedInstance].user.userId SNSUserName:[Passport sharedInstance].user.sinaScreenName setPlatform:GKSinaWeibo success:^(bool status) {
+                if (status) {
+//                    [Passport sharedInstance].screenName = nil;
+                    [Passport sharedInstance].user.sinaScreenName = nil;
+                    [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"unbind success", kLocalizedFile, nil)];
+                }
+            } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+                [SVProgressHUD showErrorWithStatus:message];
+            }];
         }
     }
 }

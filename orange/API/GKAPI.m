@@ -771,6 +771,57 @@
     }];
 }
 
+/**
+ *  果库账号解除SNS綁定
+ *  @param userId           果库用户ID
+ *  @param SNSUserId        SNS用户名
+ *  @param platform         SNS平台
+ *  @param success          成功block
+ *  @param failure          失败block
+ */
++ (void)unbindSNSWithUserId:(NSInteger)user_id
+                    SNSUserName:(NSString *)sns_user_name
+                    setPlatform:(GKSNSType)platform
+                    success:(void (^)(bool status))success
+                    failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure
+{
+    NSParameterAssert(user_id);
+    NSParameterAssert(sns_user_name);
+    NSParameterAssert(platform);
+    
+    NSString * path;
+    switch (platform) {
+        case GKTaobao:
+            path = @"";
+            break;
+            
+        default:
+            path = @"sina/unbind/";
+            break;
+    }
+    
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(user_id) forKey:@"user_id"];
+    [paraDict setValue:sns_user_name forKey:@"sns_user_name"];
+    [[GKHTTPClient sharedClient] requestPath:path method:path parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (success) {
+            success(YES);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
+            NSLog(@"html %@", htmlString);
+            NSDictionary *dict = [htmlString objectFromJSONString];
+            NSString * message = dict[@"message"];
+            NSString * type = dict[@"type"];
+            
+            failure(stateCode, type, NSLocalizedStringFromTable(message, kLocalizedFile, nil));
+        }
+    }];
+    
+}
+
 
 /**
  *  用户注销
