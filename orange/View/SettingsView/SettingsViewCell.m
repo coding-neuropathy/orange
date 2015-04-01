@@ -38,11 +38,18 @@
     if([_text isEqualToString:@"version"]) {
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    } else if ([_text isEqualToString:@"weibo"] && [Passport sharedInstance].user.sinaScreenName) {
+    }
+    if ([_text isEqualToString:@"weibo"] && [Passport sharedInstance].user.sinaScreenName) {
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"@%@", [Passport sharedInstance].user.sinaScreenName];
-        NSLog(@"weibo screen name %@", [Passport sharedInstance].user.sinaScreenName);
-    } else if ([_text isEqualToString:@"taobao"] && [Passport sharedInstance].user.taobaoScreenName){
+//        NSLog(@"weibo screen name %@", [Passport sharedInstance].user.sinaScreenName);
+    } else {
+        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        self.detailTextLabel.text = nil;
+    }
+    
+    
+    if ([_text isEqualToString:@"taobao"] && [Passport sharedInstance].user.taobaoScreenName){
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Passport sharedInstance].user.taobaoScreenName];
     }

@@ -805,8 +805,7 @@
     [paraDict setValue:sns_user_name forKey:@"sns_user_name"];
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSInteger stateCode = operation.response.statusCode;
-//        NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
-        NSLog(@"html %lu", stateCode);
+        NSLog(@"html success %lu", stateCode);
         if (success) {
             success(YES);
         }
@@ -814,7 +813,7 @@
         if (failure) {
             NSInteger stateCode = operation.response.statusCode;
             NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
-            NSLog(@"html %lu", stateCode);
+//            NSLog(@"html %lu", stateCode);
             NSDictionary *dict = [htmlString objectFromJSONString];
             NSString * message = dict[@"message"];
             NSString * type = dict[@"type"];
