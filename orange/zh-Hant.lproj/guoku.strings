@@ -14,6 +14,7 @@
  */
 
 "cancel"    = "取消";
+"confirm"   = "確認";
 
 "selected"  = "精選";
 "discover"  = "發現";

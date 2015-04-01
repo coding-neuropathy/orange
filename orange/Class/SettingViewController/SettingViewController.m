@@ -166,46 +166,10 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSString *SettingTableIdentifier = [NSString stringWithFormat:@"Setting%ld%ld",indexPath.section,indexPath.row];
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier];
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingTableIdentifier];
-//    }
-//
+
     SettingsViewCell * cell = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier forIndexPath:indexPath];
     
     cell.text = [[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"row"]objectAtIndex:indexPath.row];
-//    cell.textLabel.text = [[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"row"]objectAtIndex:indexPath.row];
-//    cell.contentView.backgroundColor = [UIColor clearColor];
-//    cell.textLabel.backgroundColor = [UIColor clearColor];
-//    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
-//    cell.textLabel.textColor = UIColorFromRGB(0X666666);
-//    cell.textLabel.highlightedTextColor = UIColorFromRGB(0X666666);
-//    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-//    
-//    
-//    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"]) {
-//
-//    }
-//    
-//    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
-//        if (indexPath.row == 4) {
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            
-//            UIView *accessoryV = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, cell.frame.size.height)];
-//            [accessoryV setBackgroundColor:[UIColor clearColor]];
-//            accessoryV.clipsToBounds = NO;
-//            
-//            UILabel *currentVersionL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 90.00f, cell.frame.size.height)];
-//            [currentVersionL setBackgroundColor:[UIColor clearColor]];
-//            [currentVersionL setTextAlignment:NSTextAlignmentRight];
-//            currentVersionL.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-//            currentVersionL.font = [UIFont fontWithName:@"Helvetica" size:15];;
-//            currentVersionL.textColor = UIColorFromRGB(0x9d9e9f);
-//            [accessoryV addSubview:currentVersionL];
-//            cell.accessoryView = accessoryV;
-//        }
-//    }
     
     return cell;
 }
@@ -267,7 +231,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     if ([section isEqualToString:@"recommandtion"])
     {
         if (indexPath.row == 0) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"分享给好友", @"分享到朋友圈", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  otherButtonTitles:@"分享给好友", @"分享到朋友圈", nil];
             alertView.alertViewStyle = UIAlertViewStyleDefault;
             alertView.tag =20007;
             [alertView show];
@@ -289,7 +253,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                 break;
             case 1:
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  otherButtonTitles:@"确认清除", nil];
                 alertView.alertViewStyle = UIAlertViewStyleDefault;
                 alertView.tag = 20008;
                 [alertView show];
@@ -387,7 +351,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (void)photoButtonAction{
     
     // 设置头像
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
     
     [actionSheet showInView:kAppDelegate.window];
 }
@@ -503,23 +467,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
 }
-
-//- (void)logout
-//{
-//    [AVUser logOut];
-//    if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
-//        [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
-//    }
-//    [Passport logout];
-//    [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
-//}
-
-//- (void)login
-//{
-//    LoginView * view = [[LoginView alloc]init];
-//    [view show];
-//}
 
 
 @end
