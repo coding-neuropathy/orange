@@ -5,13 +5,9 @@
 //  Copyright (c) 2013年 huiter. All rights reserved.
 //
 
-<<<<<<< HEAD
 //#define kBaseURL @"http://api.guoku.com/mobile/v4/"
 #define kBaseURL @"http://h.guoku.com/mobile/v4/"
-=======
-#define kBaseURL @"http://api.guoku.com/mobile/v4/"
-//#define kBaseURL @"http://127.0.0.1:8000/mobile/v4/"
->>>>>>> 90a7c63550c1ae9ba7cf8c2aa0a236dfacbca958
+
 #define kApiKey @"0b19c2b93687347e95c6b6f5cc91bb87"
 #define kApiSecret @"47b41864d64bd46"
 
