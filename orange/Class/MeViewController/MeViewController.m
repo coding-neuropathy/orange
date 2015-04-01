@@ -451,7 +451,7 @@
     {
         if (!self.segmentedControl) {
             HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-            [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.user.likeCount], [NSString stringWithFormat:@"点评 %lu",self.user.noteCount],[NSString stringWithFormat:@"％@ %lu", NSLocalizedStringFromTable(@"tags", kLocalizedFile, nil), self.user.tagCount]]];
+            [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.user.likeCount], [NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"note", kLocalizedFile, nil), self.user.noteCount],[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"tags", kLocalizedFile, nil), self.user.tagCount]]];
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
@@ -486,7 +486,12 @@
             }
         }
         
-        [self.segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"tags", kLocalizedFile, nil), self.user.tagCount]]];
+        [self.segmentedControl setSectionTitles:@[
+                                                  [NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.user.likeCount],
+                                                  [NSString stringWithFormat:@"%@ %ld",NSLocalizedStringFromTable(@"note", kLocalizedFile, nil), self.user.noteCount],
+                                                  [NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"tags", kLocalizedFile, nil), self.user.tagCount]
+                                                  ]
+         ];
 
         
         return self.segmentedControl;
