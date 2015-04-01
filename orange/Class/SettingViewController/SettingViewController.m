@@ -226,22 +226,29 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             case 0:
             {
                 if ([Passport sharedInstance].user.sinaScreenName) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"解除绑定" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"解除绑定" message:@"" delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) otherButtonTitles:NSLocalizedStringFromTable(@"confirm", kLocalizedFile, nil), nil];
                     alertView.alertViewStyle = UIAlertViewStyleDefault;
-                    alertView.tag =40001;
+                    alertView.tag = 40001;
                     [alertView show];
                     break;
                 }
                 
                 [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
                 [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
-                    NSLog(@"%@", object);
+                    NSLog(@"%.0f", [object[@"expires_at"] timeIntervalSince1970]);
+                    
+                    
                     if (!error) {
-                        [GKAPI bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] success:^(GKUser *user) {
-                        
+                        [GKAPI bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] ExpiresIn:object[@"expires_at"]  success:^(GKUser *user) {
+                            [Passport sharedInstance].user = user;
+                            [Passport sharedInstance].screenName = user.sinaScreenName;
+                            [self.tableView reloadData];
+                            [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"bind success", kLocalizedFile, nil)];
                         } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
                             [SVProgressHUD showErrorWithStatus:message];
                         }];
+                    } else {
+                        NSLog(@"error %@", error);
                     }
                 } toPlatform:AVOSCloudSNSSinaWeibo];
                 
@@ -284,7 +291,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
                 alertView.alertViewStyle = UIAlertViewStyleDefault;
-                alertView.tag =20008;
+                alertView.tag = 20008;
                 [alertView show];
             }
                 break;

@@ -216,8 +216,9 @@
  *  @param failure          失败block
  */
 + (void)bindWeiboWithUserId:(NSInteger)user_id sinaUserId:(NSString *)sina_user_id
-             sinaScreenname:(NSString *)screen_name
+                sinaScreenname:(NSString *)screen_name
                 accessToken:(NSString *)access_token
+                ExpiresIn:(NSDate *)expires_in
                     success:(void (^)(GKUser *user))success
                     failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
 

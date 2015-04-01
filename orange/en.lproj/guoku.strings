@@ -9,6 +9,12 @@
 
 "guoku" = "Guoku";
 
+/*
+ base infomation
+ */
+
+"cancel"    = "Cancel";
+
 "selected"  = "Selected";
 "discover"  = "Discover";
 "notify"    = "Notify";

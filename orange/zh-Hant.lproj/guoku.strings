@@ -9,6 +9,12 @@
 
 "guoku" = "果庫";
 
+/*
+ base infomation
+ */
+
+"cancel"    = "取消";
+
 "selected"  = "精選";
 "discover"  = "發現";
 "notify"    = "通知";
