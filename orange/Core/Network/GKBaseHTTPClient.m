@@ -51,8 +51,11 @@
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSDictionary *responseDict = [responseString objectFromJSONString];
+//        NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        DDLogInfo(@"%@", responseObject);
+//        NSDictionary *responseDict = [responseString objectFromJSONString];
+        NSDictionary * responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        
         if (success) {
             success(operation, responseDict);
         }

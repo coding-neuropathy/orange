@@ -533,7 +533,10 @@
                 case 409:
                 {
                     NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
-                    NSDictionary *dict = [htmlString objectFromJSONString];
+                    NSData *objectData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+                    //            NSDictionary *dict = [htmlString objectFromJSONString];
+                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
+//                    NSDictionary *dict = [htmlString objectFromJSONString];
                     message = dict[@"message"];
                     type = dict[@"type"];
                     break;
@@ -589,7 +592,10 @@
                 {
                     NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
                     
-                    NSDictionary *dict = [htmlString objectFromJSONString];
+//                    NSDictionary *dict = [htmlString objectFromJSONString];
+                    NSData *objectData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+                    //            NSDictionary *dict = [htmlString objectFromJSONString];
+                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
                     message = dict[@"message"];
                     type = dict[@"type"];
                     break;
@@ -650,7 +656,10 @@
                 case 400:
                 {
                     NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
-                    NSDictionary *dict = [htmlString objectFromJSONString];
+//                    NSDictionary *dict = [htmlString objectFromJSONString];
+                    NSData *objectData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+                    //            NSDictionary *dict = [htmlString objectFromJSONString];
+                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
                     message = dict[@"message"];
                     type = dict[@"type"];
                     break;
@@ -705,7 +714,10 @@
                 case 400:
                 {
                     NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
-                    NSDictionary *dict = [htmlString objectFromJSONString];
+//                    NSDictionary *dict = [htmlString objectFromJSONString];
+                    NSData *objectData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+                    //            NSDictionary *dict = [htmlString objectFromJSONString];
+                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
                     message = dict[@"message"];
                     type = dict[@"type"];
                     break;
@@ -761,8 +773,11 @@
         if (failure) {
             NSInteger stateCode = operation.response.statusCode;
             NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
-            NSLog(@"html %@", htmlString);
-            NSDictionary *dict = [htmlString objectFromJSONString];
+//            NSLog(@"html %@", htmlString);
+//            NSDictionary *dict = [htmlString objectFromJSONString];
+            NSData *objectData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+            //            NSDictionary *dict = [htmlString objectFromJSONString];
+            NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
             NSString * message = dict[@"message"];
             NSString * type = dict[@"type"];
 
@@ -814,7 +829,9 @@
             NSInteger stateCode = operation.response.statusCode;
             NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
 //            NSLog(@"html %lu", stateCode);
-            NSDictionary *dict = [htmlString objectFromJSONString];
+            NSData *objectData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+//            NSDictionary *dict = [htmlString objectFromJSONString];
+            NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
             NSString * message = dict[@"message"];
             NSString * type = dict[@"type"];
             

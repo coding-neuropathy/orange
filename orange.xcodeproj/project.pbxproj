@@ -142,7 +142,6 @@
 		4E56DF8C19D56EF500263B17 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF6F19D56EF500263B17 /* UIImageView+HighlightedWebCache.m */; };
 		4E56DF8D19D56EF500263B17 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF7119D56EF500263B17 /* UIImageView+WebCache.m */; };
 		4E56DF8E19D56EF500263B17 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF7319D56EF500263B17 /* UIView+WebCacheOperation.m */; };
-		4E56DF9519D5756000263B17 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF9419D5755F00263B17 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4E56DFB119D579F600263B17 /* UIImage+App.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DFA419D579F600263B17 /* UIImage+App.m */; };
 		4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFB619D5AEED00263B17 /* CoreTelephony.framework */; };
 		4E56DFB919D5AEF300263B17 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFB819D5AEF300263B17 /* CoreMotion.framework */; };
@@ -230,6 +229,19 @@
 		B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */; };
 		B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B9211AC142A500664BDB /* EditViewCell.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B7BFC7FC1ACC1707009627CA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		393715B01ACBD9C300DC50FF /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
@@ -519,8 +531,6 @@
 		4E56DF7219D56EF500263B17 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		4E56DF7319D56EF500263B17 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		4E56DF9119D570DA00263B17 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
-		4E56DF9319D5755F00263B17 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		4E56DF9419D5755F00263B17 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		4E56DFA319D579F600263B17 /* UIImage+App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+App.h"; sourceTree = "<group>"; };
 		4E56DFA419D579F600263B17 /* UIImage+App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+App.m"; sourceTree = "<group>"; };
 		4E56DFB519D57ECC00263B17 /* config.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.pch; sourceTree = "<group>"; };
@@ -1341,7 +1351,6 @@
 				4E1D30A91A125FDF00740C17 /* JSQSystemSoundPlayer */,
 				4E1D284C1A125B9300740C17 /* JSQMessagesViewController */,
 				4E56DF9619D579F600263B17 /* Category */,
-				4E56DF9219D5755F00263B17 /* JSONKit */,
 				4E56DF4119D56EF500263B17 /* FontAwesome */,
 				4E56DF5219D56EF500263B17 /* SDWebImage */,
 			);
@@ -1408,15 +1417,6 @@
 				4E56DF7319D56EF500263B17 /* UIView+WebCacheOperation.m */,
 			);
 			path = SDWebImage;
-			sourceTree = "<group>";
-		};
-		4E56DF9219D5755F00263B17 /* JSONKit */ = {
-			isa = PBXGroup;
-			children = (
-				4E56DF9319D5755F00263B17 /* JSONKit.h */,
-				4E56DF9419D5755F00263B17 /* JSONKit.m */,
-			);
-			path = JSONKit;
 			sourceTree = "<group>";
 		};
 		4E56DF9619D579F600263B17 /* Category */ = {
@@ -1858,6 +1858,7 @@
 				4E56DF1119D552C000263B17 /* Sources */,
 				4E56DF1219D552C000263B17 /* Frameworks */,
 				4E56DF1319D552C000263B17 /* Resources */,
+				B7BFC7FC1ACC1707009627CA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2043,7 +2044,6 @@
 				4E1D28E21A125B9300740C17 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				4E3A23671A51AE8300037F9C /* AFURLConnectionOperation.m in Sources */,
 				4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */,
-				4E56DF9519D5756000263B17 /* JSONKit.m in Sources */,
 				4E1D28C61A125B9300740C17 /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
 				4E1D28D41A125B9300740C17 /* JSQMessagesCollectionView.m in Sources */,
 				B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */,
