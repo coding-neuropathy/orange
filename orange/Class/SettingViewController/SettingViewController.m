@@ -86,7 +86,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         NSDictionary * linkSection = @{@"section"   :   @"link settings",
                                    @"row"       :   @[
                                            @"weibo",
-                                           @"taobao",
+//                                           @"taobao",
 //                                           @"wechat",
                                            ]};
     
