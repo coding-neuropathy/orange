@@ -803,7 +803,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:@(user_id) forKey:@"user_id"];
     [paraDict setValue:sns_user_name forKey:@"sns_user_name"];
-    [[GKHTTPClient sharedClient] requestPath:path method:path parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
             success(YES);
         }
