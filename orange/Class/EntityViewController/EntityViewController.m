@@ -594,7 +594,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 {
     if (self.entity.purchaseArray.count >0) {
         GKPurchase * purchase = self.entity.purchaseArray[0];
-        NSLog(@"%@ %@", purchase.origin_id, purchase.source);
+//        NSLog(@"%@ %@", purchase.origin_id, purchase.source);
         if ([purchase.source isEqualToString:@"taobao.com"])
         {
             NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
