@@ -23,11 +23,24 @@
 
 "like"      = "喜愛";
 
+"activity"  = "動態";
+"message"   = "消息";
+
 /*
  form page
  */
 "email"     = "郵箱";
 "password"  = "密碼";
+
+/*
+ personal settings
+ */
+
+"edit your profile" = "編輯個人資料";
+"nickname"  = "暱稱";
+"gender"    = "性別";
+"bio"       = "簡介";
+"location"  = "所在地";
 
 /*
  setting page

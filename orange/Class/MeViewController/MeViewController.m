@@ -451,7 +451,7 @@
     {
         if (!self.segmentedControl) {
             HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-            [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %lu",self.user.likeCount], [NSString stringWithFormat:@"点评 %lu",self.user.noteCount],[NSString stringWithFormat:@"标签 %lu",self.user.tagCount]]];
+            [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.user.likeCount], [NSString stringWithFormat:@"点评 %lu",self.user.noteCount],[NSString stringWithFormat:@"标签 %lu",self.user.tagCount]]];
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
@@ -486,7 +486,7 @@
             }
         }
         
-        [self.segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"喜爱 %ld",self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
+        [self.segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
 
         
         return self.segmentedControl;
@@ -663,7 +663,7 @@
         button.layer.cornerRadius = 4;
         button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitle:[NSString stringWithFormat:@"%@ 编辑个人资料",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]]  forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO], NSLocalizedStringFromTable(@"edit your profile", kLocalizedFile, nil)]  forState:UIControlStateNormal];
         [button setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
         [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
         [button addTarget:self action:@selector(editButtonAction) forControlEvents:UIControlEventTouchUpInside];

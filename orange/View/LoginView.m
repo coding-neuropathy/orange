@@ -296,7 +296,8 @@
     
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         if (!error) {
-            [GKAPI loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] success:^(GKUser *user, NSString *session) {
+//            [Passport sharedInstance].screenName = [object objectForKey:@"username"];
+            [GKAPI loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] ScreenName:object[@"username"] success:^(GKUser *user, NSString *session) {
                 if (self.successBlock) {
                     self.successBlock();
                 }

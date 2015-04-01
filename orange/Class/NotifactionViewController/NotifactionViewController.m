@@ -58,7 +58,8 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 {
     if (!_segmentedControl) {
         _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-        [_segmentedControl setSectionTitles:@[@"动态", @"消息"]];
+        
+        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"activity", kLocalizedFile, nil), NSLocalizedStringFromTable(@"message", kLocalizedFile, nil)]];
         [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];

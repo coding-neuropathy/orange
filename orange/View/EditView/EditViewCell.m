@@ -37,11 +37,11 @@
 - (void)setString:(NSString *)string
 {
     _string = string;
-    self.textLabel.text = _string;
+    self.textLabel.text = NSLocalizedStringFromTable(string, kLocalizedFile, nil);
     
-    if ([_string isEqualToString:@"昵称"])
+    if ([_string isEqualToString:@"nickname"])
         self.detailTextLabel.text  = [Passport sharedInstance].user.nickname;
-    if ([_string isEqualToString:@"性别"])
+    if ([_string isEqualToString:@"gender"])
     {
         if([[Passport sharedInstance].user.gender isEqualToString:@"M"])
             self.detailTextLabel.text = @"男";
@@ -50,13 +50,13 @@
         else
             self.detailTextLabel.text = @"其他";
     }
-    if ([_string isEqualToString:@"简介"])
+    if ([_string isEqualToString:@"bio"])
         self.detailTextLabel.text = [Passport sharedInstance].user.bio;
-    if ([_string isEqualToString:@"所在地"])
+    if ([_string isEqualToString:@"location"])
         self.detailTextLabel.text = [Passport sharedInstance].user.location;
-    if ([_string isEqualToString:@"邮箱"])
+    if ([_string isEqualToString:@"email"])
         self.detailTextLabel.text = [Passport sharedInstance].user.email;
-    if ([_string isEqualToString:@"密码"])
+    if ([_string isEqualToString:@"password"])
         self.detailTextLabel.text = @"修改密码";
     
     [self setNeedsLayout];

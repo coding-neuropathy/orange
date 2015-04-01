@@ -188,7 +188,8 @@
  *  @param failure    失败block
  */
 + (void)loginWithSinaUserId:(NSString *)sinaUserId
-                  sinaToken:(NSString *)sinaToken
+                    sinaToken:(NSString *)sinaToken
+                    ScreenName:(NSString *)screenname
                     success:(void (^)(GKUser *user, NSString *session))success
                     failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
 

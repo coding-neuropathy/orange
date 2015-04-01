@@ -610,21 +610,24 @@
  *  @param failure    失败block
  */
 + (void)loginWithSinaUserId:(NSString *)sinaUserId
-                  sinaToken:(NSString *)sinaToken
+                    sinaToken:(NSString *)sinaToken
+                    ScreenName:(NSString *)screenname
                     success:(void (^)(GKUser *user, NSString *session))success
                     failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure
 {
     NSParameterAssert(sinaUserId);
     NSParameterAssert(sinaToken);
+    NSParameterAssert(screenname);
     
     NSString *path = @"sina/login/";
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:sinaUserId forKey:@"sina_id"];
     [paraDict setObject:sinaToken forKey:@"sina_token"];
-    if ([Passport sharedInstance].screenName) {
-        [paraDict setObject:[Passport sharedInstance].screenName forKey:@"screen_name"];
-    }
+    [paraDict setObject:screenname forKey:@"screen_name"];
+//    if ([Passport sharedInstance].screenName) {
+//        [paraDict setObject:[Passport sharedInstance].screenName forKey:@"screen_name"];
+//    }
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;

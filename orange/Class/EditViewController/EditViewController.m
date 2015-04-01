@@ -34,12 +34,12 @@ NSString *SettingTableIdentifier = @"SettingCell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"编辑个人资料";
+        self.title =NSLocalizedStringFromTable(@"edit your profile", kLocalizedFile, nil);
         self.dataArray = [NSMutableArray array];
         
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+//        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
-        self.tabBarItem = item;
+//        self.tabBarItem = item;
     }
     return self;
 }
@@ -80,11 +80,11 @@ NSString *SettingTableIdentifier = @"SettingCell";
 //    NSLog(@"location %@", [Passport sharedInstance].user.location);
     NSDictionary * profileSection = @{
                                       @"section" : @"profile",
-                                      @"row"     : @[@"昵称",@"性别", @"简介", @"所在地",]
+                                      @"row"     : @[@"nickname", @"gender", @"bio", @"location",]
                                       };
     
     NSDictionary *accountSection = @{@"section" : @"帐号",
-                                      @"row"     : @[@"邮箱", @"密码"]};
+                                      @"row"     : @[@"email", @"password"]};
 
 //    NSLog(@"email %@", [Passport sharedInstance].user.email);
 //    if (k_isLogin) {
@@ -352,7 +352,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 
 - (void)TapPhotoBtn:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
     
     [actionSheet showInView:kAppDelegate.window];
 }

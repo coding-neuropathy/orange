@@ -23,12 +23,23 @@
 
 "like"      = "Like";
 
+"activity"  = "Activity";
+"message"   = "Message";
+
 /*
  form page
  */
 "email"     = "Email";
 "password"  = "Password";
 
+/*
+  personal settings
+ */
+"edit your profile" = "Edit Your Profile";
+"nickname"  = "Nickname";
+"gender"    = "Gender";
+"bio"       = "Bio";
+"location"  = "Location";
 
 /*
  setting page

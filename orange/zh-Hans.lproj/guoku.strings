@@ -23,12 +23,23 @@
 
 "like"      = "喜爱";
 
+"activity"  = "动态";
+"message"   = "消息";
 /*
   form page
  */
 "email"     = "邮箱";
 "password"  = "密码";
 
+/*
+ personal settings
+ */
+
+"edit your profile" = "编辑个人资料";
+"nickname"  = "昵称";
+"gender"    = "性别";
+"bio"       = "简介";
+"location"  = "所在地";
 
 /*
  setting page
