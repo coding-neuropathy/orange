@@ -20,8 +20,10 @@
 "discover"  = "發現";
 "notify"    = "通知";
 "settings"  = "設置";
+"me"        = "我";
 
 "like"      = "喜愛";
+"tags"      = "標簽";
 
 "activity"  = "動態";
 "message"   = "消息";
@@ -32,10 +34,15 @@
 "email"     = "郵箱";
 "password"  = "密碼";
 
+/**
+ *  personal page
+ */
+"following" = "關注";
+"followers"  = "粉絲";
+
 /*
  personal settings
  */
-
 "edit your profile" = "編輯個人資料";
 "nickname"  = "暱稱";
 "gender"    = "性別";

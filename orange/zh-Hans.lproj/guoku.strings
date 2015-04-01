@@ -20,21 +20,29 @@
 "discover"  = "发现";
 "notify"    = "通知";
 "settings"  = "设置";
+"me"        = "我";
 
 "like"      = "喜爱";
+"tags"      = "标签";
 
 "activity"  = "动态";
 "message"   = "消息";
+
 /*
   form page
  */
 "email"     = "邮箱";
 "password"  = "密码";
 
+/**
+ *  personal page
+ */
+"following" = "关注";
+"followers"  = "粉丝";
+
 /*
  personal settings
  */
-
 "edit your profile" = "编辑个人资料";
 "nickname"  = "昵称";
 "gender"    = "性别";

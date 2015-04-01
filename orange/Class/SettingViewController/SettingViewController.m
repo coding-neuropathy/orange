@@ -311,7 +311,10 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                 if (status) {
 //                    [Passport sharedInstance].screenName = nil;
                     [Passport sharedInstance].user.sinaScreenName = nil;
+                    [Passport sharedInstance].screenName = nil;
+                    DDLogCInfo(@"sina screen name %@", [Passport sharedInstance].user.sinaScreenName);
                     [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"unbind success", kLocalizedFile, nil)];
+                    [self.tableView reloadData];
                 }
             } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
                 [SVProgressHUD showErrorWithStatus:message];

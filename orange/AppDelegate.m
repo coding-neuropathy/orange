@@ -18,7 +18,7 @@
 #import "IntruductionVC.h"
 #import "WelcomeVC.h"
 
-
+int ddLogLevel;
 
 @interface AppDelegate ()<WXApiDelegate>
 
@@ -390,6 +390,23 @@
     } failure:^(NSInteger stateCode) {
         
     }];
+}
+
+#pragma mark - config log
+- (void)configLog
+{
+    ddLogLevel = LOG_LEVEL_VERBOSE;
+    //ddLogLevel = LOG_LEVEL_OFF;
+    // 控制台输出
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [DDTTYLogger sharedInstance].colorsEnabled = YES;
+    // 设备输出
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    // 文件输出
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+    [DDLog addLogger:fileLogger];
 }
 
 

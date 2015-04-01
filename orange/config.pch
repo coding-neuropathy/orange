@@ -79,5 +79,11 @@
 #import "GKComment.h"
 #import "GKEntityCategory.h"
 
+// Log
+#import "DDTTYLogger.h"
+#import "DDASLLogger.h"
+#import "DDFileLogger.h"
+extern int ddLogLevel;
+
 
 #endif

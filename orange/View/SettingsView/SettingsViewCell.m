@@ -41,6 +41,7 @@
     } else if ([_text isEqualToString:@"weibo"] && [Passport sharedInstance].user.sinaScreenName) {
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"@%@", [Passport sharedInstance].user.sinaScreenName];
+        NSLog(@"weibo screen name %@", [Passport sharedInstance].user.sinaScreenName);
     } else if ([_text isEqualToString:@"taobao"] && [Passport sharedInstance].user.taobaoScreenName){
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Passport sharedInstance].user.taobaoScreenName];

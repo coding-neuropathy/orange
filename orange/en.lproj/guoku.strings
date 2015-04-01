@@ -12,7 +12,6 @@
 /*
  base infomation
  */
-
 "cancel"    = "Cancel";
 "confirm"   = "Confirm";
 
@@ -20,8 +19,10 @@
 "discover"  = "Discover";
 "notify"    = "Notify";
 "settings"  = "Settings";
+"me"        = "Me";
 
 "like"      = "Like";
+"tags"      = "Tags";
 
 "activity"  = "Activity";
 "message"   = "Message";
@@ -31,6 +32,12 @@
  */
 "email"     = "Email";
 "password"  = "Password";
+
+/**
+ *  personal page
+ */
+"following" = "Following";
+"followers"  = "Followers";
 
 /*
   personal settings

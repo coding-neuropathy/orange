@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		393715BF1ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B11ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m */; };
+		393715C01ACBD9C300DC50FF /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B31ACBD9C300DC50FF /* DDASLLogger.m */; };
+		393715C11ACBD9C300DC50FF /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B51ACBD9C300DC50FF /* DDFileLogger.m */; };
+		393715C21ACBD9C300DC50FF /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B71ACBD9C300DC50FF /* DDLog.m */; };
+		393715C31ACBD9C300DC50FF /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B91ACBD9C300DC50FF /* DDTTYLogger.m */; };
+		393715C41ACBD9C300DC50FF /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715BC1ACBD9C300DC50FF /* ContextFilterLogFormatter.m */; };
+		393715C51ACBD9C300DC50FF /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715BE1ACBD9C300DC50FF /* DispatchQueueLogFormatter.m */; };
 		39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C829501AC29089009DE9BE /* libMobClickLibrary.a */; };
 		4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */; };
 		4E066AA31A5C56C600DFEF65 /* SelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066AA21A5C56C600DFEF65 /* SelectionCell.m */; };
@@ -225,6 +232,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		393715B01ACBD9C300DC50FF /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		393715B11ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		393715B21ACBD9C300DC50FF /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		393715B31ACBD9C300DC50FF /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		393715B41ACBD9C300DC50FF /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		393715B51ACBD9C300DC50FF /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		393715B61ACBD9C300DC50FF /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		393715B71ACBD9C300DC50FF /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		393715B81ACBD9C300DC50FF /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		393715B91ACBD9C300DC50FF /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		393715BB1ACBD9C300DC50FF /* ContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		393715BC1ACBD9C300DC50FF /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		393715BD1ACBD9C300DC50FF /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		393715BE1ACBD9C300DC50FF /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
 		39C829501AC29089009DE9BE /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		39C829511AC29089009DE9BE /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		39C829521AC29089009DE9BE /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -690,6 +711,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		393715AF1ACBD9C300DC50FF /* Lumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				393715B01ACBD9C300DC50FF /* DDAbstractDatabaseLogger.h */,
+				393715B11ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m */,
+				393715B21ACBD9C300DC50FF /* DDASLLogger.h */,
+				393715B31ACBD9C300DC50FF /* DDASLLogger.m */,
+				393715B41ACBD9C300DC50FF /* DDFileLogger.h */,
+				393715B51ACBD9C300DC50FF /* DDFileLogger.m */,
+				393715B61ACBD9C300DC50FF /* DDLog.h */,
+				393715B71ACBD9C300DC50FF /* DDLog.m */,
+				393715B81ACBD9C300DC50FF /* DDTTYLogger.h */,
+				393715B91ACBD9C300DC50FF /* DDTTYLogger.m */,
+				393715BA1ACBD9C300DC50FF /* Extensions */,
+			);
+			path = Lumberjack;
+			sourceTree = "<group>";
+		};
+		393715BA1ACBD9C300DC50FF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				393715BB1ACBD9C300DC50FF /* ContextFilterLogFormatter.h */,
+				393715BC1ACBD9C300DC50FF /* ContextFilterLogFormatter.m */,
+				393715BD1ACBD9C300DC50FF /* DispatchQueueLogFormatter.h */,
+				393715BE1ACBD9C300DC50FF /* DispatchQueueLogFormatter.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		39C8294F1AC29089009DE9BE /* UMAnalytics_Sdk_3.4.6 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1262,6 +1312,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				393715AF1ACBD9C300DC50FF /* Lumberjack */,
 				B7662AA31AC3AD8E00C82B4B /* UMengFeedback_SDK_2.1.1 */,
 				B7662A9F1AC39D5600C82B4B /* AVOSCloud.framework */,
 				B7662AA01AC39D5600C82B4B /* AVOSCloudSNS.framework */,
@@ -1920,6 +1971,8 @@
 				4E1D28D51A125B9300740C17 /* JSQMessagesCollectionViewCell.m in Sources */,
 				4E56DF8619D56EF500263B17 /* SDWebImageManager.m in Sources */,
 				B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */,
+				393715C01ACBD9C300DC50FF /* DDASLLogger.m in Sources */,
+				393715C51ACBD9C300DC50FF /* DispatchQueueLogFormatter.m in Sources */,
 				4E3A23661A51AE8300037F9C /* AFPropertyListRequestOperation.m in Sources */,
 				4E1D28E01A125B9300740C17 /* JSQMessagesToolbarContentView.m in Sources */,
 				4EB6ADAB1A771CCA0089797A /* NoteCell.m in Sources */,
@@ -1927,6 +1980,7 @@
 				4E2D6D3F1A69601F009E4A17 /* SVIndefiniteAnimatedView.m in Sources */,
 				4E2D6D411A69601F009E4A17 /* SVProgressHUD.m in Sources */,
 				4E56DF8119D56EF500263B17 /* SDImageCache.m in Sources */,
+				393715C41ACBD9C300DC50FF /* ContextFilterLogFormatter.m in Sources */,
 				4E56DF8519D56EF500263B17 /* SDWebImageDownloaderOperation.m in Sources */,
 				4E3A23461A51A7C500037F9C /* GKEntityCategory.m in Sources */,
 				4E3A23851A52EC9600037F9C /* Passport.m in Sources */,
@@ -1938,6 +1992,7 @@
 				4E1D28C71A125B9300740C17 /* JSQMessagesTimestampFormatter.m in Sources */,
 				4E56DF8E19D56EF500263B17 /* UIView+WebCacheOperation.m in Sources */,
 				4E56DF8819D56EF500263B17 /* UIButton+WebCache.m in Sources */,
+				393715C31ACBD9C300DC50FF /* DDTTYLogger.m in Sources */,
 				4E3A23431A51A7C500037F9C /* GKBaseModel.m in Sources */,
 				4E3A23891A52EDBD00037F9C /* NSObject+App.m in Sources */,
 				4E3A23601A51AE8300037F9C /* AFHTTPClient.m in Sources */,
@@ -1964,6 +2019,7 @@
 				4E1D28DF1A125B9300740C17 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				4E1D28CD1A125B9300740C17 /* JSQMediaItem.m in Sources */,
 				4E216A8D1A1CF692009FF11D /* UIView+Shake.m in Sources */,
+				393715BF1ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m in Sources */,
 				4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */,
 				4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */,
 				4EA0C45C1A8287780025EC2E /* SignView.m in Sources */,
@@ -2033,6 +2089,8 @@
 				4E56DF1B19D552C000263B17 /* main.m in Sources */,
 				B7662AD21AC3B49E00C82B4B /* FeedBackViewController.m in Sources */,
 				4E56DF7D19D56EF500263B17 /* UIFont+FontAwesome.m in Sources */,
+				393715C21ACBD9C300DC50FF /* DDLog.m in Sources */,
+				393715C11ACBD9C300DC50FF /* DDFileLogger.m in Sources */,
 				4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */,
 				4E1D28CE1A125B9300740C17 /* JSQMessage.m in Sources */,
 				4E1D28C11A125B9300740C17 /* JSQMessagesKeyboardController.m in Sources */,

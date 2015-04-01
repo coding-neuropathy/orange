@@ -41,11 +41,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"我" image:[UIImage imageNamed:@"tabbar_icon_me"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_me"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"me", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_me"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_me"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
         
-        self.title = @"我";
+        self.title = NSLocalizedStringFromTable(@"me", kLocalizedFile, nil);
         
         NSMutableArray * array = [NSMutableArray array];
         
@@ -451,7 +451,7 @@
     {
         if (!self.segmentedControl) {
             HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-            [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.user.likeCount], [NSString stringWithFormat:@"点评 %lu",self.user.noteCount],[NSString stringWithFormat:@"标签 %lu",self.user.tagCount]]];
+            [segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.user.likeCount], [NSString stringWithFormat:@"点评 %lu",self.user.noteCount],[NSString stringWithFormat:@"％@ %lu", NSLocalizedStringFromTable(@"tags", kLocalizedFile, nil), self.user.tagCount]]];
             [segmentedControl setSelectedSegmentIndex:0 animated:NO];
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
@@ -486,7 +486,7 @@
             }
         }
         
-        [self.segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"标签 %ld",self.user.tagCount]]];
+        [self.segmentedControl setSectionTitles:@[[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.user.likeCount], [NSString stringWithFormat:@"点评 %ld",self.user.noteCount],[NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"tags", kLocalizedFile, nil), self.user.tagCount]]];
 
         
         return self.segmentedControl;
@@ -632,7 +632,7 @@
     [friendButton addTarget:self action:@selector(friendButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [friendButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     [friendButton.titleLabel setTextAlignment:NSTextAlignmentRight];
-    [friendButton setTitle:[NSString stringWithFormat:@"关注 %lu",_user.followingCount] forState:UIControlStateNormal];
+    [friendButton setTitle:[NSString stringWithFormat:@"%@ %lu", NSLocalizedStringFromTable(@"following", kLocalizedFile, nil),_user.followingCount] forState:UIControlStateNormal];
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         friendButton.deFrameTop = bioLabel.deFrameBottom+10;
     }
@@ -650,7 +650,7 @@
     [fanButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [fanButton.titleLabel setTextAlignment:NSTextAlignmentLeft];
     fanButton.deFrameTop = friendButton.deFrameTop;
-    [fanButton setTitle:[NSString stringWithFormat:@"粉丝 %lu",_user.fanCount] forState:UIControlStateNormal];
+    [fanButton setTitle:[NSString stringWithFormat:@"%@ %lu",NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil), _user.fanCount] forState:UIControlStateNormal];
     [view addSubview:fanButton];
     
     UIView * V = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1, 20)];
