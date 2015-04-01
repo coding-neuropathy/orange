@@ -804,6 +804,9 @@
     [paraDict setValue:@(user_id) forKey:@"user_id"];
     [paraDict setValue:sns_user_name forKey:@"sns_user_name"];
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSInteger stateCode = operation.response.statusCode;
+//        NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
+        NSLog(@"html %lu", stateCode);
         if (success) {
             success(YES);
         }
