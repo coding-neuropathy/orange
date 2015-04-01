@@ -811,7 +811,7 @@
         if (failure) {
             NSInteger stateCode = operation.response.statusCode;
             NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
-            NSLog(@"html %@", htmlString);
+            NSLog(@"html %lu", stateCode);
             NSDictionary *dict = [htmlString objectFromJSONString];
             NSString * message = dict[@"message"];
             NSString * type = dict[@"type"];
