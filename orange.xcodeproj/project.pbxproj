@@ -2236,7 +2236,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7d792a44-3244-4b27-bac0-6c274324376d";
 			};
 			name = Debug;
 		};
@@ -2269,7 +2269,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7d792a44-3244-4b27-bac0-6c274324376d";
 			};
 			name = Release;
 		};

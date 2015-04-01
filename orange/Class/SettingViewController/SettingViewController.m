@@ -295,6 +295,13 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             [self clearPicCache];
         }
     }
+    if(alertView.tag ==20009)
+    {
+        if(buttonIndex == 1)
+        {
+            [self logout];
+        }
+    }
 }
 
 - (void)clearPicCache
@@ -419,36 +426,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     }];
 }
 
-
-
-//- (void)configFooter
-//{
-//    
-//    UIView * view  =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
-//    
-//    if (k_isLogin) {
-//        UIButton * logout = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
-//        logout.backgroundColor = UIColorFromRGB(0xcd1841);
-//        logout.layer.cornerRadius = 5;
-//        [logout setTitle:@"退出登录" forState:UIControlStateNormal];
-//        [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [logout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:logout];
-//    }
-//    else
-//    {
-//        UIButton * login = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
-//        login.backgroundColor = UIColorFromRGB(0x427ec0);
-//        login.layer.cornerRadius = 5;
-//        [login setTitle:@"登录" forState:UIControlStateNormal];
-//        [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [login addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:login];
-//    }
-//    
-//    self.tableView.tableFooterView = view;
-//}
-
 #pragma mark - Setting Footer View Delegate
 
 - (void)TapLoginBtnAction
@@ -458,6 +435,15 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 }
 
 - (void)TapLogoutBtnAction
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定退出登录？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.delegate = self;
+    alertView.tag = 20009;
+    [alertView show];
+
+}
+
+- (void)logout
 {
     [AVUser logOut];
     if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
