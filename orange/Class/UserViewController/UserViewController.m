@@ -763,7 +763,29 @@
         [SVProgressHUD showImage:nil status:@"关注失败"];
     }];
 }
+
+
 - (void)unfollowButtonAction
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定取消关注？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.delegate = self;
+    alertView.tag = 20001;
+    [alertView show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.tag ==20001)
+    {
+        if(buttonIndex == 1)
+        {
+            [self unfollow];
+        }
+    }
+}
+
+- (void)unfollow
 {
     if(!k_isLogin)
     {
@@ -779,6 +801,8 @@
         [SVProgressHUD showImage:nil status:@"取消关注失败"];
     }];
 }
+
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

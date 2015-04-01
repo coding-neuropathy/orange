@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "EmojiOne.h"
+//#import "EmojiOne.h"
 #import "WXApi.h"
 #import "TabBarViewController.h"
 #import "GKAPI.h"
@@ -34,6 +34,7 @@
     [AVPush setProductionMode:YES];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
+//    [AVAnalytics setChannel:@"91"];
     
     // umeng
     [MobClick setLogEnabled:NO];

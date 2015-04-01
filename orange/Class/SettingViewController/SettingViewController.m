@@ -7,18 +7,26 @@
 //
 
 #import "SettingViewController.h"
+#import "SettingsViewCell.h"
+#import "SettingsFooterView.h"
+
 #import "WXApi.h"
 #import "GKAPI.h"
 #import "LoginView.h"
+
 #import "GKWebVC.h"
 #import "FeedBackViewController.h"
 
 
-@interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
+static NSString *SettingTableIdentifier = @"SettingCell";
+
+
+@interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIActionSheetDelegate, SettingsFooterViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UISwitch * switch_notification;
 @property (nonatomic, strong) UISwitch * switch_assistant;
+@property (nonatomic, strong) SettingsFooterView * footerView;
 
 @end
 
@@ -29,53 +37,31 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"设置";
+        self.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
         self.dataArray = [NSMutableArray array];
         
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
     }
     return self;
 }
 
-- (void)viewDidLoad
+- (SettingsFooterView *)footerView
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    NSDictionary *recommandSection = @{@"section" : @"推荐",
-                                    @"row"     : @[
-                                            @"微信分享",
-                                            @"分享应用到微博",
-                                            @"App Store 评分",
-                                            ]};
-    [self.dataArray addObject:recommandSection];
-    
-    // 其他
-    NSDictionary *otherSection = @{@"section" : @"其他",
-                                   @"row"     : @[
-                                           @"关于我们",
-                                           @"用户协议",
-                                           @"清空图片缓存",
-                                           @"意见反馈",
-                                           @"版本",
-                                           ]};
-    [self.dataArray addObject:otherSection];
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if (!_footerView) {
+        _footerView = [[SettingsFooterView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 100.)];
+        _footerView.delegate = self;
+        _footerView.is_login = k_isLogin;
+    }
+    return _footerView;
 }
 
 - (void)loadView
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    //    self.view.backgroundColor = [UIColor whiteColor];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
@@ -87,9 +73,59 @@
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
     
-    [self configFooter];
-    
+
+
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    if (k_isLogin) {
+        NSDictionary * linkSection = @{@"section"   :   @"link settings",
+                                   @"row"       :   @[
+                                           @"weibo",
+                                           @"taobao",
+//                                           @"wechat",
+                                           ]};
+    
+        [self.dataArray addObject:linkSection];
+    }
+    
+    NSDictionary *recommandSection = @{@"section" : @"recommandtion",
+                                    @"row"     : @[
+                                            @"share application to wechat",
+                                            @"share application to weibo",
+                                            @"App Store 评分",
+                                            ]};
+    [self.dataArray addObject:recommandSection];
+    
+    // 其他
+    NSDictionary *otherSection = @{@"section" : @"other",
+                                   @"row"     : @[
+                                           @"about",
+//                                           @"agreement",
+                                           @"clear image cache",
+                                           @"feedback",
+                                           @"version",
+                                           ]};
+    [self.dataArray addObject:otherSection];
+    
+    
+    [self.tableView registerClass:[SettingsViewCell class] forCellReuseIdentifier:SettingTableIdentifier];
+    self.tableView.tableFooterView = self.footerView;
+
+}
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -130,43 +166,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *SettingTableIdentifier = [NSString stringWithFormat:@"Setting%ld%ld",indexPath.section,indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingTableIdentifier];
-    }
-    
-    cell.textLabel.text = [[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"row"]objectAtIndex:indexPath.row];
-    cell.contentView.backgroundColor = [UIColor clearColor];
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
-    cell.textLabel.textColor = UIColorFromRGB(0X666666);
-    cell.textLabel.highlightedTextColor = UIColorFromRGB(0X666666);
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
-    
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"]) {
 
-    }
+    SettingsViewCell * cell = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier forIndexPath:indexPath];
     
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
-        if (indexPath.row == 4) {
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            UIView *accessoryV = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, cell.frame.size.height)];
-            [accessoryV setBackgroundColor:[UIColor clearColor]];
-            accessoryV.clipsToBounds = NO;
-            
-            UILabel *currentVersionL = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 90.00f, cell.frame.size.height)];
-            [currentVersionL setBackgroundColor:[UIColor clearColor]];
-            [currentVersionL setTextAlignment:NSTextAlignmentRight];
-            currentVersionL.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-            currentVersionL.font = [UIFont fontWithName:@"Helvetica" size:15];;
-            currentVersionL.textColor = UIColorFromRGB(0x9d9e9f);
-            [accessoryV addSubview:currentVersionL];
-            cell.accessoryView = accessoryV;
-        }
-    }
+    cell.text = [[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"row"]objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -176,13 +179,60 @@
     return 44;
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"推荐"])
+    
+    NSString * section = [[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"section"];
+    
+    if ([section isEqualToString:@"link settings"]) {
+        switch (indexPath.row) {
+            case 0:
+            {
+                if ([Passport sharedInstance].user.sinaScreenName) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"解除绑定" message:@"" delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) otherButtonTitles:NSLocalizedStringFromTable(@"confirm", kLocalizedFile, nil), nil];
+                    alertView.alertViewStyle = UIAlertViewStyleDefault;
+                    alertView.tag = 40001;
+                    [alertView show];
+                    break;
+                }
+                
+                [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
+                [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
+                    NSLog(@"%.0f", [object[@"expires_at"] timeIntervalSince1970]);
+                    
+                    
+                    if (!error) {
+                        [GKAPI bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] ExpiresIn:object[@"expires_at"]  success:^(GKUser *user) {
+                            [Passport sharedInstance].user = user;
+                            [Passport sharedInstance].screenName = user.sinaScreenName;
+//                            [Passport sharedInstance].sinaUserID = user.
+                            [self.tableView reloadData];
+                            [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"bind success", kLocalizedFile, nil)];
+                        } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+                            [SVProgressHUD showErrorWithStatus:message];
+                        }];
+                    } else {
+                        NSLog(@"error %@", error);
+                    }
+                } toPlatform:AVOSCloudSNSSinaWeibo];
+                
+            }
+                break;
+            case 1:
+            {
+            
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    if ([section isEqualToString:@"recommandtion"])
     {
         if (indexPath.row == 0) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"分享给好友", @"分享到朋友圈", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"微信分享" message:@"" delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  otherButtonTitles:@"分享给好友", @"分享到朋友圈", nil];
             alertView.alertViewStyle = UIAlertViewStyleDefault;
             alertView.tag =20007;
             [alertView show];
@@ -195,7 +245,7 @@
             [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
         }
     }
-    if ([[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"section"] isEqualToString:@"其他"]) {
+    if ([section isEqualToString:@"other"]) {
         switch (indexPath.row) {
             case 0:
             {
@@ -204,19 +254,14 @@
                 break;
             case 1:
             {
-                [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/agreement/"]] animated:YES];
-            }
-                break;
-            case 2:
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认清除", nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  otherButtonTitles:@"确认清除", nil];
                 alertView.alertViewStyle = UIAlertViewStyleDefault;
-                alertView.tag =20008;
+                alertView.tag = 20008;
                 [alertView show];
             }
                 break;
             
-            case 3:
+            case 2:
             {
                 
                 [self presentViewController:[FeedBackViewController feedbackModalViewController] animated:YES completion:nil];
@@ -229,6 +274,7 @@
         }
     }
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(alertView.tag ==20007)
@@ -248,6 +294,28 @@
         if(buttonIndex == 1)
         {
             [self clearPicCache];
+        }
+    }
+    if(alertView.tag ==20009)
+    {
+        if(buttonIndex == 1)
+        {
+            [self logout];
+        }
+    }
+    
+    if (alertView.tag == 40001) {
+        if (buttonIndex == 1) {
+//            NSLog(@"unbind weibo %@", [Passport sharedInstance].user.sinaScreenName);
+            [GKAPI unbindSNSWithUserId:[Passport sharedInstance].user.userId SNSUserName:[Passport sharedInstance].user.sinaScreenName setPlatform:GKSinaWeibo success:^(bool status) {
+                if (status) {
+//                    [Passport sharedInstance].screenName = nil;
+                    [Passport sharedInstance].user.sinaScreenName = nil;
+                    [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"unbind success", kLocalizedFile, nil)];
+                }
+            } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+                [SVProgressHUD showErrorWithStatus:message];
+            }];
         }
     }
 }
@@ -292,13 +360,13 @@
 -(void)weiboShare
 {
 
-            [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+    [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
                 
-            } andProgress:^(float percent) {
-                if (percent == 1) {
-                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-                }
-            }];
+    } andProgress:^(float percent) {
+        if (percent == 1) {
+            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+        }
+    }];
 
 }
 #pragma mark - AVATAR
@@ -306,7 +374,7 @@
 - (void)photoButtonAction{
     
     // 设置头像
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
     
     [actionSheet showInView:kAppDelegate.window];
 }
@@ -374,34 +442,21 @@
     }];
 }
 
+#pragma mark - Setting Footer View Delegate
 
-
-- (void)configFooter
+- (void)TapLoginBtnAction
 {
-    
-    UIView * view  =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
-    
-    if (k_isLogin) {
-        UIButton * logout = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
-        logout.backgroundColor = UIColorFromRGB(0xcd1841);
-        logout.layer.cornerRadius = 5;
-        [logout setTitle:@"退出登录" forState:UIControlStateNormal];
-        [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [logout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:logout];
-    }
-    else
-    {
-        UIButton * login = [[UIButton alloc]initWithFrame:CGRectMake(20,20 , kScreenWidth-40, 44)];
-        login.backgroundColor = UIColorFromRGB(0x427ec0);
-        login.layer.cornerRadius = 5;
-        [login setTitle:@"登录" forState:UIControlStateNormal];
-        [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [login addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:login];
-    }
-    
-    self.tableView.tableFooterView = view;
+    LoginView * view = [[LoginView alloc]init];
+    [view show];
+}
+
+- (void)TapLogoutBtnAction
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定退出登录？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.delegate = self;
+    alertView.tag = 20009;
+    [alertView show];
+
 }
 
 - (void)logout
@@ -413,12 +468,6 @@
     [Passport logout];
     [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
-}
-
-- (void)login
-{
-    LoginView * view = [[LoginView alloc]init];
-    [view show];
 }
 
 

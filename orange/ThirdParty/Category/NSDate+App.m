@@ -45,7 +45,7 @@ static NSDateFormatter *dateFormatter;
     } else if (minutes < 60 * 24 * 7) {
         return [NSString stringWithFormat:@"%.0f天前", minutes / 60 / 24];
     } else {
-        return [NSString stringWithFormat:@"%.0f周前", minutes / 60 / 24/7];
+        return [NSString stringWithFormat:@"%.0f周前", minutes / 60 / 24 / 7];
         /*
         if (!dateFormatter) {
             dateFormatter = [[NSDateFormatter alloc] init];

@@ -11,6 +11,14 @@
 
 @interface GKAPI : NSObject
 
+typedef NS_ENUM(NSInteger, GKSNSType){
+    /// 新浪微博
+    GKSinaWeibo = 1,
+    /// QQ
+    GKTaobao,
+    
+} ;
+
 /**
  *  获取主页信息（banner、hotCategory）
  *
@@ -188,7 +196,8 @@
  *  @param failure    失败block
  */
 + (void)loginWithSinaUserId:(NSString *)sinaUserId
-                  sinaToken:(NSString *)sinaToken
+                    sinaToken:(NSString *)sinaToken
+                    ScreenName:(NSString *)screenname
                     success:(void (^)(GKUser *user, NSString *session))success
                     failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
 
@@ -204,6 +213,37 @@
                   taobaoToken:(NSString *)taobaoToken
                       success:(void (^)(GKUser *user, NSString *session))success
                       failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
+
+/**
+ *  新浪用户绑定果库账号
+ *  @param userId           果库用户ID
+ *  @param sinaUserId       新浪用户ID
+ *  @param sinaScreenname   新浪用户名
+ *  @param sinaToken        新浪token
+ *  @param expires_at       token过期时间
+ *  @param success          成功block
+ *  @param failure          失败block
+ */
++ (void)bindWeiboWithUserId:(NSInteger)user_id sinaUserId:(NSString *)sina_user_id
+                sinaScreenname:(NSString *)screen_name
+                accessToken:(NSString *)access_token
+                ExpiresIn:(NSDate *)expires_in
+                    success:(void (^)(GKUser *user))success
+                    failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
+
+/**
+ *  果库账号解除SNS綁定
+ *  @param userId           果库用户ID
+ *  @param SNSUserId        SNS用户名
+ *  @param platform         SNS平台
+ *  @param success          成功block
+ *  @param failure          失败block
+ */
++ (void)unbindSNSWithUserId:(NSInteger)user_id
+                SNSUserName:(NSString *)sns_user_name
+                setPlatform:(GKSNSType)platform
+                    success:(void (^)(bool status))success
+                    failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
 
 /**
  *  用户注销

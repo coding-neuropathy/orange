@@ -32,8 +32,8 @@
 //#import "UMessage.h"
 //#import "UMOpus.h"
 
-//Emoji
-#import "EmojiOne.h"
+////Emoji
+//#import "EmojiOne.h"
 
 // Category
 #import "UIImage+App.h"

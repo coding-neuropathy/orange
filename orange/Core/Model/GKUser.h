@@ -55,6 +55,11 @@ typedef NS_ENUM(NSInteger, GKUserRelationType) {
 @property (nonatomic, strong) NSString *sinaScreenName;
 
 /**
+ *  淘宝昵称
+ */
+@property (nonatomic, strong) NSString *taobaoScreenName;
+
+/**
  *  用户邮箱
  */
 @property (nonatomic, strong) NSString *email;

@@ -33,6 +33,8 @@
     [Passport sharedInstance].sinaUserID = nil;
     [NSObject removeFromUserDefaultsByKey:SinaUserIDKey];
     
+    [Passport sharedInstance].screenName = nil;
+    
     [Passport sharedInstance].sinaToken = nil;
 
     
@@ -100,6 +102,8 @@
     if (self.screenName) {
         [[NSUserDefaults standardUserDefaults] setValue:self.screenName forKey:SinaNickNameKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [NSObject removeFromUserDefaultsByKey:SinaNickNameKey];
     }
 }
 

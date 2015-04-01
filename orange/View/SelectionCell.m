@@ -150,11 +150,11 @@
         [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,16, 0, 0)];
         [self.contentView addSubview:self.likeButton];        
     }
-    [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+    [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",NSLocalizedStringFromTable(@"like", kLocalizedFile, nil),  self.entity.likeCount] forState:UIControlStateNormal];
     
     if(self.entity.likeCount == 0)
     {
-        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
+        [self.likeButton setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
     }
     
     self.likeButton.selected = self.entity.liked;

@@ -81,18 +81,18 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         [array addObject:item];
     }
     
-    {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
-        button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
-        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAPencilSquareO] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
-        button.backgroundColor = [UIColor clearColor];
-        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-        //[array addObject:item];
-    }
+//    {
+//        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+//        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+//        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+//        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+//        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAPencilSquareO] forState:UIControlStateNormal];
+//        [button addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
+//        [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
+//        button.backgroundColor = [UIColor clearColor];
+//        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+//        //[array addObject:item];
+//    }
     
     
     
@@ -583,7 +583,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     }
     else
     {
-        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博",@"修改点评", @"删除点评", @"举报商品", nil];
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博", @"删除点评", @"举报商品", nil];
         actionSheet.backgroundColor = UIColorFromRGB(0xffffff);
         [actionSheet showInView:self.view];
     }

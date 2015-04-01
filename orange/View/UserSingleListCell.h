@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RTLabel.h"
 
-@interface UserSingleListCell : UITableViewCell<RTLabelDelegate>
+@interface UserSingleListCell : UITableViewCell<RTLabelDelegate,UIAlertViewDelegate>
 @property(strong, nonatomic) GKUser * user;
 @property (nonatomic, strong) UIImageView *avatar;
 @property (nonatomic, strong) RTLabel *label;
