@@ -9,6 +9,8 @@
 #import "TodayViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
 #import "HttpRequest.h"
+#import "TodayViewCell.h"
+//#import "UIImageView+AFNetworking.h"
 
 
 @interface TodayViewController () <NCWidgetProviding>
@@ -31,18 +33,20 @@
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@([[NSDate date] timeIntervalSince1970]) forKey:@"timestamp"];
-    [paraDict setObject:@(2) forKey:@"count"];
-    NSLog(@"http request with params %@", paraDict);
+    [paraDict setObject:@(3) forKey:@"count"];
+//    NSLog(@"http request with params %@", paraDict);
     [HttpRequest getDataWithParamters:paraDict URL:@"selection/" Block:^(id res, NSError *error) {
         if (!error) {
-            NSLog(@"%@", res);
+//            NSLog(@"%lu", [res count]);
             self.objects = res;
             [self.tableView reloadData];
         }
     }];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"TodayCell"];
-    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  120.0);
+    [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
+//    NSLog(@"width %f", self.preferredContentSize.width);
+    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  80.);
+    self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,19 +76,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TodayCell" forIndexPath:indexPath];
-//    cell.textLabel.text = @"test";
-//    NSLog(@"%@", [self.objects objectAtIndex:indexPath.row]);
+    TodayViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TodayCell" forIndexPath:indexPath];
     NSDictionary * row = [self.objects objectAtIndex:indexPath.row];
-    NSLog(@"note %@", row[@"content"][@"note"][@"content"]);
-    cell.textLabel.text = row[@"content"][@"note"][@"content"];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont systemFontOfSize:12.];
-    cell.textLabel.numberOfLines = 0;
-//    [cell.imageView ]
+    cell.data = row;
     return cell;
 }
-
 
 #pragma mark - table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

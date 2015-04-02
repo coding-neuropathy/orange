@@ -22,12 +22,6 @@
         
         if (block) {
             block((NSArray *)JSON, nil);
-//            HttpResponse * res = [[HttpResponse alloc] init];
-//            [res processObj:JSON];
-//            if (!res.error)
-//                block(res.dict, nil);
-//            else
-//                block(nil, res.error);
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

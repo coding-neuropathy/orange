@@ -14,6 +14,7 @@
 		393715C31ACBD9C300DC50FF /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B91ACBD9C300DC50FF /* DDTTYLogger.m */; };
 		393715C41ACBD9C300DC50FF /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715BC1ACBD9C300DC50FF /* ContextFilterLogFormatter.m */; };
 		393715C51ACBD9C300DC50FF /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715BE1ACBD9C300DC50FF /* DispatchQueueLogFormatter.m */; };
+		39B868181ACCF5DB00A2115D /* TodayViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B868171ACCF5DB00A2115D /* TodayViewCell.m */; };
 		39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C829501AC29089009DE9BE /* libMobClickLibrary.a */; };
 		4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */; };
 		4E066AA31A5C56C600DFEF65 /* SelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066AA21A5C56C600DFEF65 /* SelectionCell.m */; };
@@ -294,6 +295,8 @@
 		393715BC1ACBD9C300DC50FF /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextFilterLogFormatter.m; sourceTree = "<group>"; };
 		393715BD1ACBD9C300DC50FF /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
 		393715BE1ACBD9C300DC50FF /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		39B868161ACCF5DB00A2115D /* TodayViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TodayViewCell.h; path = Views/TodayViewCell.h; sourceTree = "<group>"; };
+		39B868171ACCF5DB00A2115D /* TodayViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TodayViewCell.m; path = Views/TodayViewCell.m; sourceTree = "<group>"; };
 		39C829501AC29089009DE9BE /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		39C829511AC29089009DE9BE /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		39C829521AC29089009DE9BE /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -823,6 +826,15 @@
 				393715BE1ACBD9C300DC50FF /* DispatchQueueLogFormatter.m */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		39B868151ACCF5BA00A2115D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				39B868161ACCF5DB00A2115D /* TodayViewCell.h */,
+				39B868171ACCF5DB00A2115D /* TodayViewCell.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		39C8294F1AC29089009DE9BE /* UMAnalytics_Sdk_3.4.6 */ = {
@@ -1917,6 +1929,7 @@
 		B7BFC9001ACC27C2009627CA /* today */ = {
 			isa = PBXGroup;
 			children = (
+				39B868151ACCF5BA00A2115D /* Views */,
 				B7BFC92E1ACC33FF009627CA /* API */,
 				B7BFC90F1ACC3065009627CA /* AFNetworking */,
 				B7BFC9031ACC27C2009627CA /* TodayViewController.h */,
@@ -2333,6 +2346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39B868181ACCF5DB00A2115D /* TodayViewCell.m in Sources */,
 				B7BFC9281ACC3065009627CA /* AFURLConnectionOperation.m in Sources */,
 				B7BFC9391ACC3767009627CA /* HttpRequest.m in Sources */,
 				B7BFC92A1ACC3065009627CA /* AFURLResponseSerialization.m in Sources */,
