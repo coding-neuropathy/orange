@@ -39,6 +39,7 @@
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     }
+    
     if ([_text isEqualToString:@"weibo"] && [Passport sharedInstance].user.sinaScreenName) {
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"@%@", [Passport sharedInstance].user.sinaScreenName];

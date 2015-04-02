@@ -8,7 +8,8 @@
 
 #import "TodayViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
-#import "HttpRequest.h"
+//#import "HttpRequest.h"
+#import "core.h"
 #import "TodayViewCell.h"
 //#import "UIImageView+AFNetworking.h"
 
@@ -33,11 +34,11 @@
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@([[NSDate date] timeIntervalSince1970]) forKey:@"timestamp"];
-    [paraDict setObject:@(3) forKey:@"count"];
+    [paraDict setObject:@(2) forKey:@"count"];
 //    NSLog(@"http request with params %@", paraDict);
     [HttpRequest getDataWithParamters:paraDict URL:@"selection/" Block:^(id res, NSError *error) {
         if (!error) {
-//            NSLog(@"%lu", [res count]);
+            NSLog(@"%@", res);
             self.objects = res;
             [self.tableView reloadData];
         }
@@ -45,7 +46,8 @@
     
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
-    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  80.);
+    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
+    self.tableView.rowHeight = 80.;
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
 }
 
@@ -85,6 +87,8 @@
 #pragma mark - table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     NSDictionary * row = [self.objects objectAtIndex:indexPath.row];
     NSString * entity_id = row[@"content"][@"entity"][@"entity_id"];
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entity_id]];
