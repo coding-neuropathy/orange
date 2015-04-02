@@ -42,7 +42,7 @@
     }];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"TodayCell"];
-    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  88.0);
+    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  120.0);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,14 +80,11 @@
     cell.textLabel.text = row[@"content"][@"note"][@"content"];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.font = [UIFont systemFontOfSize:12.];
+    cell.textLabel.numberOfLines = 0;
 //    [cell.imageView ]
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44;
-}
 
 #pragma mark - table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
