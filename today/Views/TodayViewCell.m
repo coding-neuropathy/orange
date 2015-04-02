@@ -62,16 +62,20 @@
 
 - (NSString *)imageURLWithURLString:(NSString *)urlstring Size:(NSInteger)size
 {
-    NSString * uri_string = [urlstring stringByReplacingOccurrencesOfString:@"http://imgcdn.guoku.com/" withString:@""];
     
-    NSMutableArray * array = [NSMutableArray arrayWithArray:[uri_string componentsSeparatedByString:@"/"]];
-    
-    [array insertObject:[NSNumber numberWithInteger:size] atIndex:1];
-    //        NSLog(@"%@", array);
-    NSString * image_uri_string = [[array valueForKey:@"description"] componentsJoinedByString:@"/"];
-    //    NSLog(@"%@", image_uri_string);
-    
-    return [NSString stringWithFormat:@"http://imgcdn.guoku.com/%@", image_uri_string];
+    if ([urlstring hasPrefix:@"http://imgcdn.guoku.com/"]) {
+        NSString * uri_string = [urlstring stringByReplacingOccurrencesOfString:@"http://imgcdn.guoku.com/" withString:@""];
+        
+        NSMutableArray * array = [NSMutableArray arrayWithArray:[uri_string componentsSeparatedByString:@"/"]];
+        
+        [array insertObject:[NSNumber numberWithInteger:size] atIndex:1];
+        //        NSLog(@"%@", array);
+        NSString * image_uri_string = [[array valueForKey:@"description"] componentsJoinedByString:@"/"];
+        //    NSLog(@"%@", image_uri_string);
+        
+        return [NSString stringWithFormat:@"http://imgcdn.guoku.com/%@", image_uri_string];
+    }
+    return urlstring;
 }
 
 @end
