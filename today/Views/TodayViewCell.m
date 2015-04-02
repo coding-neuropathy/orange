@@ -25,6 +25,7 @@
         self.textLabel.textColor = [UIColor whiteColor];
         self.textLabel.font = [UIFont systemFontOfSize:12.];
         self.textLabel.numberOfLines = 2;
+//        self.backgroundColor = [UIColor redColor];
 //        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
 //        self.imageView.backgroundColor = [UIColor clearColor];
     }
@@ -56,8 +57,8 @@
 {
     [super layoutSubviews];
     
-    self.entityImageView.frame = CGRectMake(0., 10., 60., 60.);
-    self.textLabel.frame = CGRectMake(74., 10., 150., 44);
+    self.entityImageView.frame = CGRectMake(10., 10., 60., 60.);
+    self.textLabel.frame = CGRectMake(74., 10., 200., 44);
 }
 
 - (NSString *)imageURLWithURLString:(NSString *)urlstring Size:(NSInteger)size

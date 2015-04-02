@@ -22,10 +22,6 @@
 
 @implementation TodayViewController
 
-- (void)loadView
-{
-    [super loadView];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,9 +42,19 @@
     
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
-    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
+//    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
+    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, 160.);
     self.tableView.rowHeight = 80.;
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
+}
+
+
+/**
+ * 取消 widget 默认 inset
+ */
+- (UIEdgeInsets)widgetMarginInsetsForProposedMarginInsets:(UIEdgeInsets)defaultMarginInsets
+{
+    return UIEdgeInsetsZero;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,6 +71,11 @@
 
     completionHandler(NCUpdateResultNewData);
 }
+
+//- (void)receivedAdditionalContent
+//{
+//    self.preferredContentSize = [self sizeNeededToShowAdditionalContent];
+//}
 
 #pragma mark - table view delegate
 
