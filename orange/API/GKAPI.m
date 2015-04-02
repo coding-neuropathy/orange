@@ -807,7 +807,7 @@
     NSString * path;
     switch (platform) {
         case GKTaobao:
-            path = @"";
+            path = @"taobao/unbind";
             break;
             
         default:

@@ -1,0 +1,16 @@
+//
+//  config.pch
+//  orange
+//
+//  Created by 谢家欣 on 15/4/1.
+//  Copyright (c) 2015年 guoku.com. All rights reserved.
+//
+
+
+
+#ifndef widgetPrefix_pch
+#define widgetPrefix_pch
+
+#define AF_APP_EXTENSIONS
+
+#endif
