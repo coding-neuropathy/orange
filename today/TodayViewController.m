@@ -36,11 +36,6 @@
     [HttpRequest getDataWithParamters:paraDict URL:@"selection/" Block:^(id res, NSError *error) {
         if (!error) {
             NSLog(@"%@", res);
-//            self.objects = res[@"content"];
-//            for (NSDictionary * selectionDict)
-//            for (int i = 0; i < 2; i++) {
-//                [self.objects addObject:[res objectAtIndex:i]];
-//            }
             self.objects = res;
             [self.tableView reloadData];
         }
@@ -74,6 +69,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.objects.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TodayCell" forIndexPath:indexPath];
@@ -86,6 +82,11 @@
     cell.textLabel.font = [UIFont systemFontOfSize:12.];
 //    [cell.imageView ]
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
 }
 
 #pragma mark - table view delegate
