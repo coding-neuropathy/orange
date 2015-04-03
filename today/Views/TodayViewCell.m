@@ -49,7 +49,7 @@
     self.textLabel.text = _data[@"content"][@"entity"][@"title"];
     NSString * urlstring =  _data[@"content"][@"entity"][@"chief_image"];
     
-    [self.entityImageView sd_setImageWithURL:[NSURL URLWithString:[self imageURLWithURLString:urlstring Size:180]]];
+    [self.entityImageView sd_setImageWithURL:[NSURL URLWithString:[self imageURLWithURLString:urlstring Size:120.]]];
     [self setNeedsLayout];
 }
 
@@ -58,7 +58,7 @@
     [super layoutSubviews];
     
     self.entityImageView.frame = CGRectMake(10., 10., 60., 60.);
-    self.textLabel.frame = CGRectMake(74., 10., 200., 44);
+    self.textLabel.frame = CGRectMake(80., 10., 200., 44);
 }
 
 - (NSString *)imageURLWithURLString:(NSString *)urlstring Size:(NSInteger)size

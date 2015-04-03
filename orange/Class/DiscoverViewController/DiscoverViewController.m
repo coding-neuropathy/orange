@@ -126,7 +126,7 @@
     
     if (!self.segmentedControl) {
         HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-        [segmentedControl setSectionTitles:@[@"热门商品", @"推荐品类"]];
+        [segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"popular", kLocalizedFile, nil), NSLocalizedStringFromTable(@"category", kLocalizedFile, nil)]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];

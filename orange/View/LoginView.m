@@ -88,6 +88,7 @@
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
             label.text = NSLocalizedStringFromTable(@"email", kLocalizedFile, nil);
+            label.adjustsFontSizeToFitWidth = YES;
             self.emailTextField.leftView = label;
         }
         self.emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -132,6 +133,7 @@
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
             label.text = NSLocalizedStringFromTable(@"password", kLocalizedFile, nil);
+            label.adjustsFontSizeToFitWidth = YES;
             self.passwordTextField.leftView = label;
         }
         self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -342,6 +344,7 @@
 
 - (void)tapTaobaoButton
 {
+
     GKTaobaoOAuthViewController *vc = [[GKTaobaoOAuthViewController alloc] init];
     vc.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];

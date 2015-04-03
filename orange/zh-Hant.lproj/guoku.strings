@@ -26,6 +26,10 @@
 "note"      = "點評";
 "tags"      = "標簽";
 
+
+"popular"   = "熱門商品";
+"category"  = "推薦品類";
+
 "activity"  = "動態";
 "message"   = "消息";
 

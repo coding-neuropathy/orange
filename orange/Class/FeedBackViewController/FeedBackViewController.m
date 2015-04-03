@@ -111,6 +111,8 @@
                                   };
     [[UMFeedback sharedInstance] post:postContent];
     JSQMessage * message = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:postContent[@"reply_id"] date:[NSDate date] text:postContent[@"content"]];
+    
+    [self.messageData addObject:message];
 }
 
 #pragma mark - JSQMessages CollectionView DataSource
@@ -236,7 +238,7 @@
 
 - (void)postFinishedWithError:(NSError *)error {
     if (error != nil) {
-        NSLog(@"%@", error);
+        DDLogError(@"%@", error);
     } else {
         
         [self finishSendingMessageAnimated:YES];

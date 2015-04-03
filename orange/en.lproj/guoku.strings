@@ -25,6 +25,9 @@
 "note"      = "Note";
 "tags"      = "Tags";
 
+"popular"   = "Popular";
+"category"  = "Category";
+
 "activity"  = "Activity";
 "message"   = "Message";
 

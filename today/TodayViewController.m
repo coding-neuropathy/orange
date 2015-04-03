@@ -16,7 +16,7 @@
 
 @interface TodayViewController () <NCWidgetProviding>
 
-@property (strong, nonatomic) NSMutableArray * objects;
+@property (strong, nonatomic) NSMutableArray * dataArray;
 
 @end
 
@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.objects = [NSMutableArray arrayWithCapacity:2];
+//    self.objects = [NSMutableArray arrayWithCapacity:2];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@([[NSDate date] timeIntervalSince1970]) forKey:@"timestamp"];
@@ -34,8 +34,9 @@
 //    NSLog(@"http request with params %@", paraDict);
     [HttpRequest getDataWithParamters:paraDict URL:@"selection/" Block:^(id res, NSError *error) {
         if (!error) {
-            NSLog(@"%@", res);
-            self.objects = res;
+//            NSLog(@"%@", res);
+            self.dataArray = res;
+            [self save];
             [self.tableView reloadData];
         }
     }];
@@ -84,13 +85,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.objects.count;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TodayViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TodayCell" forIndexPath:indexPath];
-    NSDictionary * row = [self.objects objectAtIndex:indexPath.row];
+    NSDictionary * row = [self.dataArray objectAtIndex:indexPath.row];
     cell.data = row;
     return cell;
 }
@@ -100,11 +101,29 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary * row = [self.objects objectAtIndex:indexPath.row];
+    NSDictionary * row = [self.dataArray objectAtIndex:indexPath.row];
     NSString * entity_id = row[@"content"][@"entity"][@"entity_id"];
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entity_id]];
     
     [self.extensionContext openURL:url completionHandler:nil];
 }
+
+#pragma mark - cache 
+- (NSMutableArray *)dataArray
+{
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray arrayWithCapacity:2];
+        _dataArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"TodayArray"];
+    }
+    return _dataArray;
+}
+
+- (void)save
+{
+    [[NSUserDefaults standardUserDefaults] setObject:self.dataArray forKey:@"TodayArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
 
 @end

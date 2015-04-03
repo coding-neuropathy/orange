@@ -26,6 +26,9 @@
 "note"      = "点评";
 "tags"      = "标签";
 
+"popular"   = "热门商品";
+"category"  = "推荐品类";
+
 "activity"  = "动态";
 "message"   = "消息";
 

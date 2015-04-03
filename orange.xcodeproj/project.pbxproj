@@ -272,6 +272,7 @@
 		B7662AD21AC3B49E00C82B4B /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7662AD11AC3B49E00C82B4B /* FeedBackViewController.m */; };
 		B766763A1AB805B5002F294C /* NoMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676391AB805B5002F294C /* NoMessageView.m */; };
 		B76676411AB81758002F294C /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676401AB81758002F294C /* NoDataView.m */; };
+		B76F1D8A1ACE283B00A25A7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B76F1D8C1ACE283B00A25A7D /* InfoPlist.strings */; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
 		B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */; };
 		B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */; };
@@ -811,6 +812,9 @@
 		B76676391AB805B5002F294C /* NoMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoMessageView.m; path = NotificationView/NoMessageView.m; sourceTree = "<group>"; };
 		B766763F1AB81758002F294C /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoDataView.h; path = UserView/NoDataView.h; sourceTree = "<group>"; };
 		B76676401AB81758002F294C /* NoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoDataView.m; path = UserView/NoDataView.m; sourceTree = "<group>"; };
+		B76F1D8B1ACE283B00A25A7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B76F1D8D1ACE283D00A25A7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		B76F1D8E1ACE284100A25A7D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = DiscoverView/DiscoverHeaderView.h; sourceTree = "<group>"; };
 		B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverHeaderView.m; path = DiscoverView/DiscoverHeaderView.m; sourceTree = "<group>"; };
 		B7AAFA5D1AB67E5600A2F20D /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioButton.h; path = RadioButton/RadioButton.h; sourceTree = "<group>"; };
@@ -2174,6 +2178,7 @@
 			children = (
 				B7BFC9021ACC27C2009627CA /* Info.plist */,
 				B7BFC92C1ACC30C4009627CA /* config.pch */,
+				B76F1D8C1ACE283B00A25A7D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2406,6 +2411,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B76F1D8A1ACE283B00A25A7D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2697,6 +2703,16 @@
 				B7662ABB1AC3AD8E00C82B4B /* zh-Hans */,
 			);
 			name = UMFeedbackLocalizable.strings;
+			sourceTree = "<group>";
+		};
+		B76F1D8C1ACE283B00A25A7D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B76F1D8B1ACE283B00A25A7D /* en */,
+				B76F1D8D1ACE283D00A25A7D /* zh-Hans */,
+				B76F1D8E1ACE284100A25A7D /* zh-Hant */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
