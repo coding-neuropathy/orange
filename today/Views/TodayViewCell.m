@@ -22,9 +22,14 @@
     self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        self.textLabel.textColor = [UIColor whiteColor];
-        self.textLabel.font = [UIFont systemFontOfSize:12.];
-        self.textLabel.numberOfLines = 2;
+        self.textLabel.textColor = UIColorFromRGB(0xffffff);
+        self.textLabel.font = [UIFont systemFontOfSize:16.];
+        self.textLabel.numberOfLines = 1;
+        
+        self.detailTextLabel.textColor = UIColorFromRGB(0x9c9c9c);
+        self.detailTextLabel.font = [UIFont systemFontOfSize:14.];
+        self.detailTextLabel.numberOfLines = 2;
+//        self.detailTextLabel.adjustsFontSizeToFitWidth = YES;
 //        self.backgroundColor = [UIColor redColor];
 //        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
 //        self.imageView.backgroundColor = [UIColor clearColor];
@@ -47,6 +52,7 @@
 {
     _data = data;
     self.textLabel.text = _data[@"content"][@"entity"][@"title"];
+    self.detailTextLabel.text = _data[@"content"][@"note"][@"content"];
     NSString * urlstring =  _data[@"content"][@"entity"][@"chief_image"];
     
     [self.entityImageView sd_setImageWithURL:[NSURL URLWithString:[self imageURLWithURLString:urlstring Size:120.]]];
@@ -57,8 +63,10 @@
 {
     [super layoutSubviews];
     
-    self.entityImageView.frame = CGRectMake(10., 10., 60., 60.);
-    self.textLabel.frame = CGRectMake(80., 10., 200., 44);
+    self.entityImageView.frame = CGRectMake(kScreenWidth - 50, 10., 40, 40.);
+    self.textLabel.frame = CGRectMake(10, 10., kScreenWidth - 60., 20.);
+    self.detailTextLabel.frame = CGRectMake(10., 30., kScreenWidth - 60., 20.);
+//    self.detailTextLabel.frame
 }
 
 - (NSString *)imageURLWithURLString:(NSString *)urlstring Size:(NSInteger)size

@@ -12,3 +12,6 @@
 #define AF_APP_EXTENSIONS
 
 #endif
+
+
+#define kBaseURL @"http://h.guoku.com/mobile/v4/"

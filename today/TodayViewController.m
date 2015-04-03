@@ -30,22 +30,30 @@
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@([[NSDate date] timeIntervalSince1970]) forKey:@"timestamp"];
-    [paraDict setObject:@(2) forKey:@"count"];
+    [paraDict setObject:@(3) forKey:@"count"];
 //    NSLog(@"http request with params %@", paraDict);
-    [HttpRequest getDataWithParamters:paraDict URL:@"selection/" Block:^(id res, NSError *error) {
-        if (!error) {
+//    [HttpRequest getDataWithParamters:paraDict URL:@"selection/" Block:^(id res, NSError *error) {
+//        if (!error) {
 //            NSLog(@"%@", res);
-            self.dataArray = res;
-            [self save];
-            [self.tableView reloadData];
-        }
+//            self.dataArray = res;
+//            [self save];
+//            [self.tableView reloadData];
+//        }
+//    }];
+    [API getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] count:3 success:^(NSArray *dataArray) {
+        NSLog(@"%@", dataArray);
+        self.dataArray = (NSMutableArray *)dataArray;
+        [self save];
+        [self.tableView reloadData];
+    } failure:^(NSInteger stateCode) {
+        
     }];
-    
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
 //    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
-    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, 160.);
-    self.tableView.rowHeight = 80.;
+    self.tableView.rowHeight = 60.;
+    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.tableView.rowHeight * 3);
+    ;
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
 }
 

@@ -21,8 +21,8 @@
 "settings"  = "Settings";
 "me"        = "Me";
 
-"like"      = "Like";
-"note"      = "Note";
+"like"      = "Liked";
+"note"      = "Notes";
 "tags"      = "Tags";
 
 "popular"   = "Popular";
