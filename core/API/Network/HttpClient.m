@@ -11,7 +11,7 @@
 
 @interface HttpClient ()
 
-@property (strong, nonatomic, readwrite) NSURL * baseURL;
+//@property (strong, nonatomic, readwrite) NSURL * baseURL;
 
 @end
 
@@ -26,7 +26,7 @@
     dispatch_once(&onceToken, ^{
         sharedClient = [[HttpClient alloc] initWithBaseURL:baseURL];
     });
-    sharedClient.baseURL = baseURL;
+//    sharedClient.baseURL = baseURL;
     
     return sharedClient;
 }

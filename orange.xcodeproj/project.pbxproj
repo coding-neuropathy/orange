@@ -252,6 +252,8 @@
 		4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */; };
 		4EE0A8961A4CEB8C0092F884 /* DWBubbleMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0A8951A4CEB8C0092F884 /* DWBubbleMenuButton.m */; };
 		4EFCBCBB19D5CF650071F7A0 /* UIView+DEFrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCBCBA19D5CF650071F7A0 /* UIView+DEFrameAdditions.m */; };
+		B7067F3A1ACEFF190046B8B8 /* GKUser.h in Headers */ = {isa = PBXBuildFile; fileRef = B7067F381ACEFF190046B8B8 /* GKUser.h */; };
+		B7067F3B1ACEFF190046B8B8 /* GKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B7067F391ACEFF190046B8B8 /* GKUser.m */; };
 		B708432A1ABBF427009605D8 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B70843291ABBF427009605D8 /* NSString+Helper.m */; };
 		B71E494A1AC9207B00D4DB6D /* guoku.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E494C1AC9207B00D4DB6D /* guoku.strings */; };
 		B71E49521AC923FB00D4DB6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E49541AC923FB00D4DB6D /* InfoPlist.strings */; };
@@ -269,7 +271,6 @@
 		B766763A1AB805B5002F294C /* NoMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676391AB805B5002F294C /* NoMessageView.m */; };
 		B76676411AB81758002F294C /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676401AB81758002F294C /* NoDataView.m */; };
 		B76F1D8A1ACE283B00A25A7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B76F1D8C1ACE283B00A25A7D /* InfoPlist.strings */; };
-		B76F1D901ACE487900A25A7D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B76F1D8F1ACE487900A25A7D /* WebKit.framework */; };
 		B77D65B61ACEEFD600EC2BE4 /* BaseHttpClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B77D65B41ACEEFD600EC2BE4 /* BaseHttpClient.h */; };
 		B77D65B71ACEEFD600EC2BE4 /* BaseHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B77D65B51ACEEFD600EC2BE4 /* BaseHttpClient.m */; };
 		B77D65BE1ACEF30200EC2BE4 /* HttpClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B77D65BC1ACEF30200EC2BE4 /* HttpClient.h */; };
@@ -779,6 +780,8 @@
 		4EE0A8951A4CEB8C0092F884 /* DWBubbleMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWBubbleMenuButton.m; sourceTree = "<group>"; };
 		4EFCBCB919D5CF650071F7A0 /* UIView+DEFrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DEFrameAdditions.h"; sourceTree = "<group>"; };
 		4EFCBCBA19D5CF650071F7A0 /* UIView+DEFrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DEFrameAdditions.m"; sourceTree = "<group>"; };
+		B7067F381ACEFF190046B8B8 /* GKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKUser.h; path = Models/GKUser.h; sourceTree = "<group>"; };
+		B7067F391ACEFF190046B8B8 /* GKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKUser.m; path = Models/GKUser.m; sourceTree = "<group>"; };
 		B70843281ABBF427009605D8 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Helper.h"; path = "NSString+/NSString+Helper.h"; sourceTree = "<group>"; };
 		B70843291ABBF427009605D8 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Helper.m"; path = "NSString+/NSString+Helper.m"; sourceTree = "<group>"; };
 		B71E494E1AC9208100D4DB6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/guoku.strings"; sourceTree = "<group>"; };
@@ -816,7 +819,6 @@
 		B76F1D8B1ACE283B00A25A7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B76F1D8D1ACE283D00A25A7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B76F1D8E1ACE284100A25A7D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		B76F1D8F1ACE487900A25A7D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		B77D65B41ACEEFD600EC2BE4 /* BaseHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHttpClient.h; sourceTree = "<group>"; };
 		B77D65B51ACEEFD600EC2BE4 /* BaseHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHttpClient.m; sourceTree = "<group>"; };
 		B77D65BC1ACEF30200EC2BE4 /* HttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClient.h; sourceTree = "<group>"; };
@@ -874,7 +876,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B76F1D901ACE487900A25A7D /* WebKit.framework in Frameworks */,
 				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
 				B7662AA11AC39D5600C82B4B /* AVOSCloud.framework in Frameworks */,
 				B7662AA21AC39D5600C82B4B /* AVOSCloudSNS.framework in Frameworks */,
@@ -2129,6 +2130,8 @@
 			children = (
 				B77D65C51ACEFB6300EC2BE4 /* BaseModel.h */,
 				B77D65C61ACEFB6300EC2BE4 /* BaseModel.m */,
+				B7067F381ACEFF190046B8B8 /* GKUser.h */,
+				B7067F391ACEFF190046B8B8 /* GKUser.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2179,7 +2182,6 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B76F1D8F1ACE487900A25A7D /* WebKit.framework */,
 				39D399BE1ACD1A2B008E838B /* ImageIO.framework */,
 				B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */,
 			);
@@ -2263,6 +2265,7 @@
 				393546F21ACD1F1D002678B8 /* UIView+WebCacheOperation.h in Headers */,
 				39B869171ACD0E7E00A2115D /* NSDictionary+Sign.h in Headers */,
 				393546D31ACD1F1D002678B8 /* MKAnnotationView+WebCache.h in Headers */,
+				B7067F3A1ACEFF190046B8B8 /* GKUser.h in Headers */,
 				393546E81ACD1F1D002678B8 /* UIImage+GIF.h in Headers */,
 				39B868D61ACD0D4500A2115D /* AFHTTPRequestOperationManager.h in Headers */,
 				39B868DA1ACD0D4500A2115D /* AFNetworking.h in Headers */,
@@ -2476,6 +2479,7 @@
 				393546F31ACD1F1D002678B8 /* UIView+WebCacheOperation.m in Sources */,
 				393546E21ACD1F1D002678B8 /* SDWebImageManager.m in Sources */,
 				39B868E41ACD0D4500A2115D /* AFURLResponseSerialization.m in Sources */,
+				B7067F3B1ACEFF190046B8B8 /* GKUser.m in Sources */,
 				39B868D51ACD0D4500A2115D /* AFHTTPRequestOperation.m in Sources */,
 				B77D65B71ACEEFD600EC2BE4 /* BaseHttpClient.m in Sources */,
 			);

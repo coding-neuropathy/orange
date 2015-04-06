@@ -31,15 +31,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@([[NSDate date] timeIntervalSince1970]) forKey:@"timestamp"];
     [paraDict setObject:@(3) forKey:@"count"];
-//    NSLog(@"http request with params %@", paraDict);
-//    [HttpRequest getDataWithParamters:paraDict URL:@"selection/" Block:^(id res, NSError *error) {
-//        if (!error) {
-//            NSLog(@"%@", res);
-//            self.dataArray = res;
-//            [self save];
-//            [self.tableView reloadData];
-//        }
-//    }];
+
     [API getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] count:3 success:^(NSArray *dataArray) {
         NSLog(@"%@", dataArray);
         self.dataArray = (NSMutableArray *)dataArray;
