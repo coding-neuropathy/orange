@@ -38,7 +38,7 @@
         [self save];
         [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
-        
+        self.dataArray = [self getCache];
     }];
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
@@ -112,15 +112,21 @@
 - (NSMutableArray *)dataArray
 {
     if (!_dataArray) {
-        _dataArray = [NSMutableArray arrayWithCapacity:2];
-        _dataArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"TodayArray"];
+        _dataArray = [NSMutableArray arrayWithCapacity:3];
     }
     return _dataArray;
 }
 
+- (NSMutableArray *)getCache
+{
+    NSData * archivedData = [[NSUserDefaults standardUserDefaults] objectForKey:@"TodayArray"];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+}
+
 - (void)save
 {
-    [[NSUserDefaults standardUserDefaults] setObject:self.dataArray forKey:@"TodayArray"];
+//    [self.dataArray]
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dataArray] forKey:@"TodayArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

@@ -25,6 +25,7 @@
         self.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:15];;
         self.detailTextLabel.textColor = UIColorFromRGB(0x9d9e9f);
         self.detailTextLabel.textAlignment = NSTextAlignmentRight;
+//        [self setAccessoryType:UITableViewCellAccessoryNone];
     }
     return self;
 }
@@ -32,28 +33,28 @@
 - (void)setText:(NSString *)text
 {
     _text = text;
-//    NSLog(@"text %@", [Passport sharedInstance].user.taobaoScreenName);
     self.textLabel.text = NSLocalizedStringFromTable(_text, kLocalizedFile, nil);
     
     if([_text isEqualToString:@"version"]) {
+        DDLogInfo(@"version %@", [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]);
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     }
-    
-    if ([_text isEqualToString:@"weibo"] && [Passport sharedInstance].user.sinaScreenName) {
+    else if ([_text isEqualToString:@"weibo"] && [Passport sharedInstance].user.sinaScreenName) {
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"@%@", [Passport sharedInstance].user.sinaScreenName];
 //        NSLog(@"weibo screen name %@", [Passport sharedInstance].user.sinaScreenName);
-    } else {
-        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        self.detailTextLabel.text = nil;
     }
-    
-    
-    if ([_text isEqualToString:@"taobao"] && [Passport sharedInstance].user.taobaoScreenName){
+    else if ([_text isEqualToString:@"taobao"] && [Passport sharedInstance].user.taobaoScreenName){
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Passport sharedInstance].user.taobaoScreenName];
     }
+    
+    else {
+        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        self.detailTextLabel.text = nil;
+    }
+
     
     [self setNeedsLayout];
 }

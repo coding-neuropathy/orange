@@ -830,6 +830,8 @@
             NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
 //            NSLog(@"html %lu", stateCode);
             NSData *objectData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+            
+            DDLogInfo(@"%@", objectData);
 //            NSDictionary *dict = [htmlString objectFromJSONString];
             NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
             NSString * message = dict[@"message"];

@@ -136,7 +136,6 @@
 		4E1D70221A5ADBA50032719E /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70211A5ADBA50032719E /* MeViewController.m */; };
 		4E1D70251A5ADC100032719E /* NotifactionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70241A5ADC100032719E /* NotifactionViewController.m */; };
 		4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70271A5ADC260032719E /* SelectionViewController.m */; };
-		4E216A8D1A1CF692009FF11D /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A8C1A1CF692009FF11D /* UIView+Shake.m */; };
 		4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A901A1FA37D009FF11D /* AKSegmentedControl.m */; };
 		4E216A951A2392F2009FF11D /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A941A2392F2009FF11D /* JSBadgeView.m */; };
 		4E216AC01A280760009FF11D /* NSDate+App.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216ABF1A280760009FF11D /* NSDate+App.m */; };
@@ -178,7 +177,6 @@
 		4E3A23891A52EDBD00037F9C /* NSObject+App.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23881A52EDBD00037F9C /* NSObject+App.m */; };
 		4E3A238D1A52F21800037F9C /* TabBarViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */; };
 		4E3C413B1A9FFBEB0053DB5E /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */; };
-		4E5251F31A2D43910058C6D6 /* URBMediaFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5251F21A2D43910058C6D6 /* URBMediaFocusViewController.m */; };
 		4E56DF1B19D552C000263B17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF1A19D552C000263B17 /* main.m */; };
 		4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF1D19D552C000263B17 /* AppDelegate.m */; };
 		4E56DF2619D552C000263B17 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E56DF2519D552C000263B17 /* Images.xcassets */; };
@@ -557,8 +555,6 @@
 		4E1D70241A5ADC100032719E /* NotifactionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifactionViewController.m; sourceTree = "<group>"; };
 		4E1D70261A5ADC260032719E /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
 		4E1D70271A5ADC260032719E /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewController.m; sourceTree = "<group>"; };
-		4E216A8B1A1CF692009FF11D /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
-		4E216A8C1A1CF692009FF11D /* UIView+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shake.m"; sourceTree = "<group>"; };
 		4E216A8F1A1FA37D009FF11D /* AKSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSegmentedControl.h; sourceTree = "<group>"; };
 		4E216A901A1FA37D009FF11D /* AKSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSegmentedControl.m; sourceTree = "<group>"; };
 		4E216A931A2392F2009FF11D /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
@@ -645,8 +641,6 @@
 		4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewcontroller.m; sourceTree = "<group>"; };
 		4E3C41391A9FFBEB0053DB5E /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
 		4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
-		4E5251F11A2D43910058C6D6 /* URBMediaFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URBMediaFocusViewController.h; sourceTree = "<group>"; };
-		4E5251F21A2D43910058C6D6 /* URBMediaFocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URBMediaFocusViewController.m; sourceTree = "<group>"; };
 		4E56DF1519D552C000263B17 /* orange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = orange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E56DF1919D552C000263B17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E56DF1A19D552C000263B17 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1403,15 +1397,6 @@
 			path = SelectionViewController;
 			sourceTree = "<group>";
 		};
-		4E216A8A1A1CF692009FF11D /* UIView-Shake */ = {
-			isa = PBXGroup;
-			children = (
-				4E216A8B1A1CF692009FF11D /* UIView+Shake.h */,
-				4E216A8C1A1CF692009FF11D /* UIView+Shake.m */,
-			);
-			path = "UIView-Shake";
-			sourceTree = "<group>";
-		};
 		4E216A8E1A1FA37D009FF11D /* AKSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -1597,15 +1582,6 @@
 			path = IBActionSheet;
 			sourceTree = "<group>";
 		};
-		4E5251F01A2D43910058C6D6 /* URBMediaFocusViewController */ = {
-			isa = PBXGroup;
-			children = (
-				4E5251F11A2D43910058C6D6 /* URBMediaFocusViewController.h */,
-				4E5251F21A2D43910058C6D6 /* URBMediaFocusViewController.m */,
-			);
-			path = URBMediaFocusViewController;
-			sourceTree = "<group>";
-		};
 		4E56DF0C19D552C000263B17 = {
 			isa = PBXGroup;
 			children = (
@@ -1684,10 +1660,8 @@
 				4E8D6AB41A3B66F900156C17 /* MCPHandler */,
 				4E8D6A9E1A3B3E2200156C17 /* WeChat */,
 				4E8D6A8D1A38B59F00156C17 /* FontDiao */,
-				4E5251F01A2D43910058C6D6 /* URBMediaFocusViewController */,
 				4E216A921A2392F2009FF11D /* JSBadgeView */,
 				4E216A8E1A1FA37D009FF11D /* AKSegmentedControl */,
-				4E216A8A1A1CF692009FF11D /* UIView-Shake */,
 				4E1D30A91A125FDF00740C17 /* JSQSystemSoundPlayer */,
 				4E1D284C1A125B9300740C17 /* JSQMessagesViewController */,
 				4E56DF9619D579F600263B17 /* Category */,
@@ -2550,7 +2524,6 @@
 				4E56DF7A19D56EF500263B17 /* FAImageView.m in Sources */,
 				4E1D28DF1A125B9300740C17 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				4E1D28CD1A125B9300740C17 /* JSQMediaItem.m in Sources */,
-				4E216A8D1A1CF692009FF11D /* UIView+Shake.m in Sources */,
 				393715BF1ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m in Sources */,
 				4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */,
 				4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */,
@@ -2570,7 +2543,6 @@
 				4E8D6A9C1A38B59F00156C17 /* UIFont+FontDiao.m in Sources */,
 				4E1D70251A5ADC100032719E /* NotifactionViewController.m in Sources */,
 				4EC9F7A71A7BD1020057D736 /* NotePostViewController.m in Sources */,
-				4E5251F31A2D43910058C6D6 /* URBMediaFocusViewController.m in Sources */,
 				4EFCBCBB19D5CF650071F7A0 /* UIView+DEFrameAdditions.m in Sources */,
 				4E1D28E21A125B9300740C17 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				4E3A23671A51AE8300037F9C /* AFURLConnectionOperation.m in Sources */,

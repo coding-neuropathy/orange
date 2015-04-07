@@ -104,7 +104,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     // 其他
     NSDictionary *otherSection = @{@"section" : @"other",
                                    @"row"     : @[
-                                           @"about",
+//                                           @"about",
 //                                           @"agreement",
                                            @"clear image cache",
                                            @"feedback",
@@ -169,7 +169,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
     SettingsViewCell * cell = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier forIndexPath:indexPath];
     
-    cell.text = [[[self.dataArray objectAtIndex:indexPath.section]objectForKey:@"row"]objectAtIndex:indexPath.row];
+    cell.text = [[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -213,7 +213,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                             [SVProgressHUD showErrorWithStatus:message];
                         }];
                     } else {
-                        NSLog(@"error %@", error);
+                        DDLogError(@"error %@", error);
                     }
                 } toPlatform:AVOSCloudSNSSinaWeibo];
                 
@@ -247,12 +247,12 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     }
     if ([section isEqualToString:@"other"]) {
         switch (indexPath.row) {
+//            case 0:
+//            {
+//                [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/about/"]] animated:YES];
+//            }
+//                break;
             case 0:
-            {
-                [self.navigationController pushViewController:[GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:@"http://www.guoku.com/about/"]] animated:YES];
-            }
-                break;
-            case 1:
             {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  otherButtonTitles:@"确认清除", nil];
                 alertView.alertViewStyle = UIAlertViewStyleDefault;
@@ -261,11 +261,10 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             }
                 break;
             
-            case 2:
+            case 1:
             {
                 
                 [self presentViewController:[FeedBackViewController feedbackModalViewController] animated:YES completion:nil];
-                
             }
                 break;
                 

@@ -38,7 +38,7 @@
 // Category
 #import "UIImage+App.h"
 #import "UIView+DEFrameAdditions.h"
-#import "UIView+Shake.h"
+//#import "UIView+Shake.h"
 #import "NSString+App.h"
 #import "NSDate+App.h"
 #import "NSObject+App.h"
