@@ -49,7 +49,6 @@
 		393715C41ACBD9C300DC50FF /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715BC1ACBD9C300DC50FF /* ContextFilterLogFormatter.m */; };
 		393715C51ACBD9C300DC50FF /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715BE1ACBD9C300DC50FF /* DispatchQueueLogFormatter.m */; };
 		39B868181ACCF5DB00A2115D /* TodayViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B868171ACCF5DB00A2115D /* TodayViewCell.m */; };
-		39B868A61ACD0CF700A2115D /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		39B868D41ACD0D4500A2115D /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B868AF1ACD0D4500A2115D /* AFHTTPRequestOperation.h */; };
 		39B868D51ACD0D4500A2115D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B868B01ACD0D4500A2115D /* AFHTTPRequestOperation.m */; };
 		39B868D61ACD0D4500A2115D /* AFHTTPRequestOperationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B868B11ACD0D4500A2115D /* AFHTTPRequestOperationManager.h */; };
@@ -325,7 +324,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				39B868A61ACD0CF700A2115D /* core.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;

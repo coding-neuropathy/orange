@@ -52,7 +52,7 @@
 {
     if (!_image) {
         _image = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _image.contentMode = UIViewContentModeScaleAspectFill;
+        _image.contentMode = UIViewContentModeScaleAspectFit;
         _image.backgroundColor = [UIColor clearColor];
         _image.userInteractionEnabled = YES;
         

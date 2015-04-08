@@ -281,7 +281,12 @@ typedef NS_ENUM(NSInteger, MessageType) {
         {
             GKEntity *entity = self.message[@"content"][@"entity"];
 
-            self.avatar.image = [UIImage imageNamed:@"message_avatar_selection"];
+            self.avatar.image = [UIImage imageNamed:@"message_star.png"];
+            self.avatar.backgroundColor = UIColorFromRGB(0xfafafa);
+            self.avatar.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+            self.avatar.layer.borderWidth = 0.5;
+            self.avatar.userInteractionEnabled = NO;
+            self.avatar.contentMode = UIViewContentModeCenter;
             self.label.text = [NSString stringWithFormat:@"<font face=\'Helvetica\' color=\'^414243\' size=14>你添加的商品被收录精选</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
@@ -471,7 +476,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         case MessageNoteSelection:
         {
             
-            height = 26;
+            height = 40.;
             break;
         }
             
@@ -480,7 +485,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             break;
     }
     
-    return height+24;
+    return height + 24.;
 }
 
 - (void)avatarButtonAction
