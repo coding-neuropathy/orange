@@ -99,8 +99,8 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     self.navigationItem.rightBarButtonItems = array;
     
     
-    self.title = @"商品";
-    self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
+    self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
+//    self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
     
     self.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight -kNavigationBarHeight - kStatusBarHeight);
     
@@ -132,11 +132,16 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     [MobClick beginLogPageView:@"EntityView"];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"EntityView"];
+    [MobClick endLogPageView:@"EntityView"];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    [AVAnalytics endLogPageView:@"EntityView"];
-    [MobClick endLogPageView:@"EntityView"];
 }
 
 
