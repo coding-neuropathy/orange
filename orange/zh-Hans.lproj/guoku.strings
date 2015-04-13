@@ -33,6 +33,12 @@
 "message"   = "消息";
 
 /*
+ * entity page
+ */
+"from"              = "来自";
+"recommendation"    = "相似推荐";
+
+/*
   form page
  */
 "email"     = "邮箱";

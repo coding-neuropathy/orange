@@ -809,29 +809,10 @@
 - (void)TapBannerImageAction:(NSDictionary *)dict
 {
 //    NSDictionary *dict = (NSDictionary *)self.headerView.bannerArray[index];
-    NSString *url = [dict valueForKey:@"url"];
-    if ([url hasPrefix:@"http://"]) {
-        if (k_isLogin) {
-            NSRange range = [url rangeOfString:@"?"];
-            if (range.location != NSNotFound) {
-                url = [url stringByAppendingString:[NSString stringWithFormat:@"&session=%@",[Passport sharedInstance].session]];
-            }
-            else
-            {
-                url = [url stringByAppendingString:[NSString stringWithFormat:@"?session=%@",[Passport sharedInstance].session]];
-            }
-        }
-        NSRange range = [url rangeOfString:@"out_link"];
-        if (range.location == NSNotFound) {
-            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
-            VC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:VC animated:YES];
-            return;
-        }
-    }
+3
     [AVAnalytics event:@"banner" attributes:@{@"url": url}];
     [MobClick event:@"banner" attributes:@{@"url": url}];
-    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

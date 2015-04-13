@@ -32,6 +32,12 @@
 "message"   = "Message";
 
 /*
+ * entity page
+ */
+"from"              = "From";
+"recommendation"    = "Recommendation";
+
+/*
  form page
  */
 "email"     = "Email";

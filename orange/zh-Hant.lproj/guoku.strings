@@ -34,6 +34,12 @@
 "message"   = "消息";
 
 /*
+ * entity page
+ */
+"from"              = "來自";
+"recommendation"    = "相似推薦";
+
+/*
  form page
  */
 "email"     = "郵箱";
