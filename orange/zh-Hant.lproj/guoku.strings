@@ -38,6 +38,7 @@
  */
 "from"              = "來自";
 "recommendation"    = "相似推薦";
+"item"              = "商品";
 
 /*
  form page

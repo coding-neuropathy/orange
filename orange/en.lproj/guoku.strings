@@ -36,6 +36,7 @@
  */
 "from"              = "From";
 "recommendation"    = "Recommendation";
+"item"              = "Item";
 
 /*
  form page

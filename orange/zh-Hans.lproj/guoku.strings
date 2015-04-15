@@ -37,6 +37,7 @@
  */
 "from"              = "来自";
 "recommendation"    = "相似推荐";
+"item"              = "商品";
 
 /*
   form page

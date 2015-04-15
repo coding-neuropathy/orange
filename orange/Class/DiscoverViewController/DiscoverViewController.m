@@ -808,8 +808,7 @@
 #pragma mark - Header View Delegate
 - (void)TapBannerImageAction:(NSDictionary *)dict
 {
-//    NSDictionary *dict = (NSDictionary *)self.headerView.bannerArray[index];
-3
+    NSString * url = dict[@"url"];
     [AVAnalytics event:@"banner" attributes:@{@"url": url}];
     [MobClick event:@"banner" attributes:@{@"url": url}];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
