@@ -233,6 +233,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         case MessageEntityNote:
         {
             GKNote *note = message[@"content"][@"note"];
+            GKEntity * entity = message[@"content"][@"entity"];
             GKUser   *user   = note.creator;
             
             [self.avatar sd_setImageWithURL:user.avatarURL];
@@ -242,8 +243,8 @@ typedef NS_ENUM(NSInteger, MessageType) {
             
             self.image.frame = CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42);
             __block UIImageView *block_img = self.image;
-//            DDLogInfo(@"note image %@", note.entityChiefImage_240x240);
-            [self.image sd_setImageWithURL:note.entityChiefImage_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
+//            DDLogInfo(@"note image %@", entity.imageURL_240x240);
+            [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {
                     block_img.alpha = 0.0;
                     [UIView animateWithDuration:0.25 animations:^{
