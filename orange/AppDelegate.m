@@ -35,13 +35,13 @@ int ddLogLevel;
     [AVPush setProductionMode:YES];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
-//    [AVAnalytics setChannel:@"91"];
+//    [AVAnalytics setChannel:@"tongbu"];
     
     // umeng
-    [MobClick setLogEnabled:NO];
     [MobClick setAppVersion:XcodeAppVersion];
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
-
+//    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:@"tongbu"];
+    [MobClick setLogEnabled:NO];
     [MobClick updateOnlineConfig];
 //    
 //    [UMOpus setAudioEnable:YES];
@@ -72,11 +72,10 @@ int ddLogLevel;
         }
     }];
 
-    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
-        [[NSUserDefaults standardUserDefaults]synchronize];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
     

@@ -350,7 +350,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [message setThumbImage:[UIImage imageNamed:@"wxshare.png"]];
     
     WXAppExtendObject *ext = [WXAppExtendObject object];
-    ext.Url = [NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@?mt=8", kGK_AppID_iPhone];;
+    ext.url = [NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@?mt=8", kGK_AppID_iPhone];;
     
     message.mediaObject = ext;
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];

@@ -641,7 +641,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     GKUser *user = [Passport sharedInstance].user;
     if(user)
     {
-        url = [NSString stringWithFormat:@"%@%ld",url,user.userId];
+        url = [NSString stringWithFormat:@"%@%lu",url,user.userId];
     }
 
     GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
