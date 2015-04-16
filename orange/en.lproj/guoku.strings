@@ -17,7 +17,7 @@
 
 "selected"  = "Selected";
 "discover"  = "Discover";
-"notify"    = "Notify";
+"notify"    = "Activity";
 "settings"  = "Settings";
 "me"        = "Me";
 
@@ -28,8 +28,13 @@
 "popular"   = "Popular";
 "category"  = "Category";
 
-"activity"  = "Activity";
-"message"   = "Message";
+"activity"  = "Following";
+"message"   = "You";
+
+/*
+ * Discover page
+ */
+"search"    = "Search";
 
 /*
  * entity page
@@ -67,10 +72,11 @@
 "wechat"    = "WeChat";
 "share application to wechat" = "Share APP to WeChat";
 "share application to weibo" = "Share APP to Weibo";
+"app store review" = "App Store Review";
 "about"     = "About";
 "agreement" = "Agreement";
-"clear image cache" = "Clear Image Cache";
-"feedback"  = "FeedBack";
+"clear image cache" = "Clear Cache";
+"feedback"  = "Feedback";
 "version"   = "Version";
 
 "sign in"   = "Sign In";

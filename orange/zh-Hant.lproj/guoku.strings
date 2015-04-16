@@ -34,6 +34,11 @@
 "message"   = "消息";
 
 /*
+ * Discover page
+ */
+"search"    = "搜索";
+
+/*
  * entity page
  */
 "from"              = "來自";
@@ -69,6 +74,7 @@
 "wechat"    = "微信";
 "share application to wechat" = "微信分享";
 "share application to weibo" = "分享應用到微博";
+"app store review" = "App Store 評分";
 "about"     = "關於我們";
 "agreement" = "用戶協議";
 "clear image cache" = "清除圖片緩存";

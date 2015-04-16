@@ -754,7 +754,7 @@
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.searchBar.keyboardType = UIKeyboardTypeDefault;
     self.searchBar.delegate = self;
-    self.searchBar.placeholder = @"搜索";
+    self.searchBar.placeholder = NSLocalizedStringFromTable(@"search", kLocalizedFile, nil);
 
     
     _searchDC = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];

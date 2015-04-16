@@ -36,7 +36,7 @@ static NSString *CellIdentifier = @"UserSingleListCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
-    self.title = @"关注";
+    self.title = NSLocalizedStringFromTable(@"following", kLocalizedFile, nil);
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];

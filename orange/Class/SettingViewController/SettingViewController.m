@@ -97,7 +97,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                                     @"row"     : @[
                                             @"share application to wechat",
                                             @"share application to weibo",
-                                            @"App Store 评分",
+                                            @"app store review",
                                             ]};
     [self.dataArray addObject:recommandSection];
     
@@ -124,9 +124,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
