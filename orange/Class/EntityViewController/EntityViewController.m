@@ -19,7 +19,6 @@
 #import "LoginView.h"
 #import "IBActionSheet.h"
 #import "EntityHeaderView.h"
-#import "TaeConstant.h"
 
 
 static NSString *NoteCellIdentifier = @"NoteCell";
@@ -41,7 +40,9 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 @property (nonatomic, strong) NSMutableArray *dataArrayForNote;
 @property (nonatomic, strong) NSMutableArray *dataArrayForRecommend;
 
-@property (nonatomic) OneSDKItemType itemType;
+@property(nonatomic, strong) id<ALBBItemService> itemService;
+
+//@property (nonatomic) OneSDKItemType itemType;
 
 @end
 
@@ -54,7 +55,8 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.itemType = OneSDKItemType_TAOBAO1;
+//        self.itemType = OneSDKItemType_TAOBAO1;
+        self.itemService=[[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
     }
     return self;
 }
@@ -605,7 +607,16 @@ static NSString *EntityCellIdentifier = @"EntityCell";
             NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
             TaeTaokeParams *taoKeParams = [[TaeTaokeParams alloc] init];
             taoKeParams.pid = kGK_TaobaoKe_PID;
-            [[TaeSDK sharedInstance] showTaoKeItemDetailByItemId:self isNeedPush:YES webViewUISettings:nil itemId:_itemId itemType:1 params:nil taoKeParams:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+            [_itemService showTaoKeItemDetailByItemId:self
+                                           isNeedPush:YES
+                                    webViewUISettings:nil
+                                               itemId:_itemId
+                                             itemType:1
+                                               params:nil
+                                          taoKeParams:taoKeParams
+                          tradeProcessSuccessCallback:_tradeProcessSuccessCallback
+                           tradeProcessFailedCallback:_tradeProcessFailedCallback];
+//            [[TaeSDK sharedInstance] showTaoKeItemDetailByItemId:self isNeedPush:YES webViewUISettings:nil itemId:_itemId itemType:1 params:nil taoKeParams:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
         }
         else
             [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];

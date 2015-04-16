@@ -62,14 +62,16 @@ int ddLogLevel;
         NSLog(@"初始化失败:%@",error);
     }];
     
-    [[TaeSDK sharedInstance] setSessionStateChangedHandler:^(TaeSession *session) {
+    //插件版登录状态监听
+    id<ALBBLoginService> loginService = [[TaeSDK sharedInstance]getService:@protocol(ALBBLoginService)];
+    [loginService setSessionStateChangedHandler:^(TaeSession *session) {
         if([session isLogin]){//未登录变为已登录
-            NSLog(@"用户login");
+            NSLog(@"【插件版监听：用户login】");
         }else{//已登录变为未登录
-            NSLog(@"用户logout");
-            
+            NSLog(@"【插件版监听：用户logout】");
         }
     }];
+
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
