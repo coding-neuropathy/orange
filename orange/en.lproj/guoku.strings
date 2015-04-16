@@ -77,3 +77,12 @@
 "sign up"   = "Sign Up";
 "sign out"  = "Sign Out";
 
+/*
+ * datetime
+ */
+"seconds"    = "s";
+"hours"      = "h";
+"minutes"    = "m";
+"days"       = "d";
+"weeks"      = "w";
+

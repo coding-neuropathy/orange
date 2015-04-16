@@ -198,7 +198,7 @@
     
     [self configFooter];
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"发现"  style:UIBarButtonItemStylePlain  target:self  action:nil];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"discover", kLocalizedFile, nil)  style:UIBarButtonItemStylePlain  target:self  action:nil];
     self.navigationItem.backBarButtonItem = backButton;
 }
 

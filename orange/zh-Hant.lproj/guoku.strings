@@ -78,3 +78,12 @@
 "sign in"   = "登錄";
 "sign up"   = "登記";
 "sign out"  = "退出登錄";
+
+/*
+ * datetime
+ */
+"seconds"    = "秒前";
+"hours"      = "小時前";
+"minutes"    = "分鐘前";
+"days"       = "天前";
+"weeks"      = "周前";

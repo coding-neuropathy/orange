@@ -53,8 +53,8 @@ int ddLogLevel;
     [WXApi registerApp:kGK_WeixinShareKey];
     
     [[TaeSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
-    [[TaeSDK sharedInstance] setAppVersion:@"4.0.0"];
-    [[TaeSDK sharedInstance] setDebugLogOpen:YES];
+    [[TaeSDK sharedInstance] setAppVersion:XcodeAppVersion];
+    [[TaeSDK sharedInstance] setDebugLogOpen:NO];
     //sdk初始化
     [[TaeSDK sharedInstance] asyncInit:^{
         NSLog(@"初始化成功");

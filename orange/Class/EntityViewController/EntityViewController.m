@@ -389,7 +389,10 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         }
     
         GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
-        [self.categoryButton setTitle:[NSString stringWithFormat:@"来自「%@」",[category.categoryName componentsSeparatedByString:@"-"][0]] forState:UIControlStateNormal];
+        [self.categoryButton setTitle:[NSString stringWithFormat:@"%@「%@」",
+                                       NSLocalizedStringFromTable(@"from", kLocalizedFile, nil),
+                                       [category.categoryName componentsSeparatedByString:@"-"][0]]
+                             forState:UIControlStateNormal];
         [self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [self.categoryButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
         [self.categoryButton setBackgroundColor:UIColorFromRGB(0xfafafa)];
@@ -425,7 +428,8 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     }
     else if (section == 4) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 20.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
-        label.text = @"相似推荐";
+//        label.text = @"相似推荐";
+        label.text = NSLocalizedStringFromTable(@"recommendation", kLocalizedFile, nil);
         label.textAlignment = NSTextAlignmentLeft;
         label.textColor = UIColorFromRGB(0x414243);
         label.font = [UIFont systemFontOfSize:14];
@@ -549,7 +553,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
             self.entity.likeCount = self.entity.likeCount-1;
             [SVProgressHUD dismiss];
         }
-        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+        [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.entity.likeCount] forState:UIControlStateNormal];
         self.header.entity = self.entity;
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"喜爱失败"];

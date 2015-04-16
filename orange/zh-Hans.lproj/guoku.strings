@@ -77,3 +77,12 @@
 "sign in"   = "登录";
 "sign up"   = "注册";
 "sign out"  = "退出登录";
+
+/*
+ * datetime
+ */
+"seconds"    = "秒前";
+"hours"      = "小时前";
+"minutes"    = "分钟前";
+"days"       = "天前";
+"weeks"      = "周前";
