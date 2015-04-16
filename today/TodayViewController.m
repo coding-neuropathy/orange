@@ -22,6 +22,11 @@
 
 @implementation TodayViewController
 
+- (void)loadView
+{
+    [super loadView];
+    self.dataArray = [self getCache];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,12 +38,13 @@
     [paraDict setObject:@(3) forKey:@"count"];
 
     [API getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] count:3 success:^(NSArray *dataArray) {
-        NSLog(@"%@", dataArray);
+//        NSLog(@"%@", dataArray);
         self.dataArray = (NSMutableArray *)dataArray;
         [self save];
         [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
         self.dataArray = [self getCache];
+        [self.tableView reloadData];
     }];
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);

@@ -82,16 +82,16 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (k_isLogin) {
-        NSDictionary * linkSection = @{@"section"   :   @"link settings",
-                                   @"row"       :   @[
-                                           @"weibo",
-//                                           @"taobao",
-//                                           @"wechat",
-                                           ]};
-    
-        [self.dataArray addObject:linkSection];
-    }
+//    if (k_isLogin) {
+//        NSDictionary * linkSection = @{@"section"   :   @"link settings",
+//                                   @"row"       :   @[
+//                                           @"weibo",
+////                                           @"taobao",
+////                                           @"wechat",
+//                                           ]};
+//    
+//        [self.dataArray addObject:linkSection];
+//    }
     
     NSDictionary *recommandSection = @{@"section" : @"recommandtion",
                                     @"row"     : @[

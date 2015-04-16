@@ -97,7 +97,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         self.label.delegate = self;
         [self.contentView addSubview:self.label];
     }
-    self.label.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", self.note.creator.userId, self.note.creator.nickname];
+    self.label.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", (unsigned long)self.note.creator.userId, self.note.creator.nickname];
     
     if(!self.contentLabel) {
         _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(64, 20, kScreenWidth - 78, 20)];
@@ -174,7 +174,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         [self.contentView addSubview:self.pokeButton];
     }
     self.pokeButton.selected = self.note.poked;
-    [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+    [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],(unsigned long)self.note.pokeCount] forState:UIControlStateNormal];
     if (self.note.pokeCount ==0) {
         [self.pokeButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]] forState:UIControlStateNormal];
     }
@@ -201,7 +201,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         [self.commentButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [self.contentView addSubview:self.commentButton];
     }
-    [self.commentButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FACommentO],self.note.commentCount] forState:UIControlStateNormal];
+    [self.commentButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FACommentO],(unsigned long)self.note.commentCount] forState:UIControlStateNormal];
     
     if(self.note.commentCount == 0)
     {
@@ -281,7 +281,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
             self.note.pokeCount = self.note.pokeCount-1;
         }
         self.note.poked = poked;
-        [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+        [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],(unsigned long)self.note.pokeCount] forState:UIControlStateNormal];
         if (self.note.pokeCount ==0) {
             [self.pokeButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]] forState:UIControlStateNormal];
         }
