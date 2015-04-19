@@ -380,7 +380,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         [self.dataArrayForEntity addObject:[NSDictionary dictionaryWithObjectsAndKeys:time,@"time",content,@"content",nil]];
     }
     [self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointMake(0,[[[NSUserDefaults standardUserDefaults] objectForKey:@"selection-offset-y"] floatValue]  )];
+    //[self.tableView setContentOffset:CGPointMake(0,[[[NSUserDefaults standardUserDefaults] objectForKey:@"selection-offset-y"] floatValue]  )];
     
     if (self.tableView.indexPathsForVisibleRows.firstObject) {
         [self.tableView selectRowAtIndexPath:self.tableView.indexPathsForVisibleRows.firstObject animated:YES scrollPosition:UITableViewScrollPositionTop];

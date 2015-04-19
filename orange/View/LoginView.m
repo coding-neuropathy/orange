@@ -285,6 +285,8 @@
 
 - (void)tapForgotPasswordButton
 {
+    [self.passwordTextField resignFirstResponder];
+    [self.emailTextField resignFirstResponder];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"忘记密码" message:@"输入注册时的邮箱\n\n" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertView textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
@@ -434,6 +436,10 @@
 
 - (void)resignResponder
 {
+    if(kScreenHeight >= 548)
+    {
+        whiteBG.deFrameTop = 140;
+    }
     [self.emailTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
 }
