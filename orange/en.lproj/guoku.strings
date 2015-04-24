@@ -42,6 +42,8 @@
 "from"              = "From";
 "recommendation"    = "Recommendation";
 "item"              = "Item";
+"update note"       = "Update Note";
+"comment"           = "Comment";
 
 /*
  form page

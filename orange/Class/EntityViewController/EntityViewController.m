@@ -415,7 +415,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
             }
         }
         if (self.note) {
-            [self.noteButton setTitle:[NSString stringWithFormat:@"%@ 修改点评",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
+            [self.noteButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO], NSLocalizedStringFromTable(@"update note", kLocalizedFile, nil)] forState:UIControlStateNormal];
         }
         else
         {

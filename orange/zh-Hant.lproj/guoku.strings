@@ -44,6 +44,8 @@
 "from"              = "來自";
 "recommendation"    = "相似推薦";
 "item"              = "商品";
+"update note"       = "修改點評";
+"comment"           = "評論";
 
 /*
  form page

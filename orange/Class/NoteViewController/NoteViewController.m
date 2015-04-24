@@ -63,7 +63,7 @@ static NSString *CellIdentifier = @"CommentCell";
     
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
-    self.title = @"评论";
+    self.title = NSLocalizedStringFromTable(@"comment", kLocalizedFile, nil);
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight-kToolBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
