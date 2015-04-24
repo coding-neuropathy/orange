@@ -419,15 +419,20 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         }
         else
         {
-            [self.noteButton setTitle:[NSString stringWithFormat:@"%@ 写点评",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]] forState:UIControlStateNormal];
+            [self.noteButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO], NSLocalizedStringFromTable(@"post note", kLocalizedFile, nil)] forState:UIControlStateNormal];
         }
         [self.noteButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [self.noteButton setBackgroundColor:UIColorFromRGB(0xffffff)];
         [self.noteButton setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+        
+        DDLogInfo(@"user user state %lu", [Passport sharedInstance].user.user_state);
+        if ([Passport sharedInstance].user.user_state == 0) {
+            self.noteButton.enabled = NO;
+        }
         return self.noteButton;
     }
     else if (section == 4) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 20.f, CGRectGetWidth(tableView.frame)-20, 20.f)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 20.f, CGRectGetWidth(tableView.frame) - 20, 20.f)];
 //        label.text = @"相似推荐";
         label.text = NSLocalizedStringFromTable(@"recommendation", kLocalizedFile, nil);
         label.textAlignment = NSTextAlignmentLeft;

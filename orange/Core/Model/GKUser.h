@@ -35,6 +35,27 @@ typedef NS_ENUM(NSInteger, GKUserRelationType) {
 };
 
 /**
+ *  用户状态
+ */
+typedef NS_ENUM(NSInteger, GKUserState) {
+
+    /**
+     *  禁言用户
+     */
+    GKUserBlockState,
+    
+    /**
+     *  普通用户
+     */
+    GKUserNormalState,
+    
+    /**
+     * 编辑
+     */
+    GKUserEditorState,
+};
+
+/**
  *  用户
  */
 @interface GKUser : GKBaseModel
@@ -82,7 +103,7 @@ typedef NS_ENUM(NSInteger, GKUserRelationType) {
 /**
  *  是否认证
  */
-@property (nonatomic, assign, getter = isVerified) BOOL verified;
+//@property (nonatomic, assign, getter = isVerified) BOOL verified;
 
 /**
  *  认证类型
@@ -108,6 +129,8 @@ typedef NS_ENUM(NSInteger, GKUserRelationType) {
  *  关注数
  */
 @property (nonatomic, assign) NSInteger followingCount;
+
+@property (assign, nonatomic) GKUserState user_state;
 
 /**
  *  粉丝数
