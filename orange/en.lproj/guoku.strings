@@ -45,6 +45,23 @@
 "update note"       = "Update Note";
 "comment"           = "Comment";
 
+
+/*
+ *  activity page
+ */
+"commented on a product"    = "commented on a product";
+
+/*
+ * message page
+ */
+"replied your comment"                                                  = "replied your comment";
+"commented on your"                                                     = "commented on your";
+"followed you"                                                          = "followed you";
+"commented on a product of your recommendation"                         = "commented on a product of your recommendation";
+"liked a product of your recommendation"                                = "liked a product of your recommendation";
+"a product of your recommendation is marked as exceptional choice"    = "a product of your recommendation is marked as “exceptional choice”";
+"liked a product"                                                       = "liked a product";
+
 /*
  form page
  */

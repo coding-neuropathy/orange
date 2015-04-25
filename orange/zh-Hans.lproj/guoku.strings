@@ -48,6 +48,22 @@
 "comment"           = "评论";
 
 /*
+ *  activity page
+ */
+"commented on a product"    = "点评了 1 件商品";
+
+/*
+ * message page
+ */
+"replied your comment"                                                  = "回复了你的评论";
+"commented on your"                                                     = "评论了你对";
+"followed you"                                                          = "关注了你";
+"commented on a product of your recommendation"                         = "点评了你推荐的商品";
+"liked a product of your recommendation"                                = "喜爱了你推荐的商品";
+"a product of your recommendation is marked as “exceptional choice”"    = "你添加的商品被收录精选";
+"liked a product"                                                       = "喜爱了 1 件商品";
+
+/*
   form page
  */
 "email"     = "邮箱";

@@ -209,7 +209,12 @@ typedef NS_ENUM(NSInteger, FeedType) {
             
             [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
             
-            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 1 件商品：</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, note.text, time];
+            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> %@：</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",
+                                      user.userId,
+                                      user.nickname,
+                                      NSLocalizedStringFromTable(@"commented on a product", kLocalizedFile, nil),
+                                      note.text,
+                                      time];
             self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
 
             
@@ -226,7 +231,11 @@ typedef NS_ENUM(NSInteger, FeedType) {
 //            NSLog(@"%@ %@", self.feed[@"type"], user.nickname);
             [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60., 60.)]];
             
-            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 喜爱了 1 件商品</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, time];
+            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> %@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",
+                                      user.userId,
+                                      user.nickname,
+                                      NSLocalizedStringFromTable(@"liked a product", kLocalizedFile, nil),
+                                      time];
             
             self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
             
@@ -271,7 +280,12 @@ typedef NS_ENUM(NSInteger, FeedType) {
             GKUser * user = note.creator;
 //            GKEntity *entity = feed[@"object"][@"entity"];
             
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 点评了 1 件商品：</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, note.text, time];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> %@：</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",
+                          user.userId,
+                          user.nickname,
+                          NSLocalizedStringFromTable(@"commented on a product", kLocalizedFile, nil),
+                          note.text,
+                          time];
             CGFloat y = label.optimumSize.height + 5.;
             height = y;
             if (height < 40) {
@@ -283,7 +297,11 @@ typedef NS_ENUM(NSInteger, FeedType) {
         {
             GKUser * user = feed[@"object"][@"user"];
 //            NSLog(@"%@", feed[@"type"]);
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> 喜爱了 1 件商品</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>", user.userId, user.nickname, time];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> %@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",
+                          user.userId,
+                          user.nickname,
+                          NSLocalizedStringFromTable(@"liked a product", kLocalizedFile, nil),
+                          time];
 ////
             CGFloat y = label.optimumSize.height + 5.;
             height = y;
