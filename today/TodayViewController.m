@@ -36,16 +36,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@([[NSDate date] timeIntervalSince1970]) forKey:@"timestamp"];
     [paraDict setObject:@(3) forKey:@"count"];
-
-//    [API getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] count:3 success:^(NSArray *dataArray) {
-////        NSLog(@"%@", dataArray);
-//        self.dataArray = (NSMutableArray *)dataArray;
-//        [self save];
-//        [self.tableView reloadData];
-//    } failure:^(NSInteger stateCode) {
-//        self.dataArray = [self getCache];
-//        [self.tableView reloadData];
-//    }];
+    
     [API getTopTenEntityCount:3 success:^(NSArray *array) {
         NSLog(@"%@", array);
         self.dataArray = (NSMutableArray *)array;
