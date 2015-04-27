@@ -208,7 +208,9 @@ static inline NSRegularExpression * UrlRegularExpression() {
         [self.commentButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACommentO]] forState:UIControlStateNormal];
     }
     
-    
+    if ([Passport sharedInstance].user.user_state == 0) {
+        self.commentButton.hidden = YES;
+    }
     
     self.commentButton.deFrameLeft = self.pokeButton.deFrameRight +10;
     self.commentButton.deFrameBottom = self.contentView.deFrameHeight -15;

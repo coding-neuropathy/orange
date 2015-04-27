@@ -18,7 +18,7 @@
 static NSString *CellIdentifier = @"SelectionCell";
 
 @interface SelectionViewController ()<UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic, strong) UITableView *tableView;
+//@property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property(nonatomic, strong) NSMutableArray * dataArrayForArticle;
 @property(nonatomic, assign) NSUInteger index;

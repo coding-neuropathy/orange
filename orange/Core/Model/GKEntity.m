@@ -116,6 +116,18 @@
     return [NSDate dateWithTimeIntervalSince1970:self.updatedTime];
 }
 
+- (NSString *)entityName
+{
+    NSString * name;
+    if (self.brand.length > 0)
+    {
+        name = [NSString stringWithFormat:@"%@ - %@", self.brand, self.title];
+    } else {
+        name = self.title;
+    }
+    return name;
+}
+
 - (NSURL *)imageURL_800x800
 {
     //    NSLog(@"image url %@", self.imageURL.absoluteString);

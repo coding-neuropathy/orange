@@ -159,7 +159,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (EntityHeaderView *)header
 {
     if (!_header) {
-        _header = [[EntityHeaderView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth + 75)];
+        _header = [[EntityHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth + 75)];
         _header.delegate = self;
         _header.backgroundColor = UIColorFromRGB(0xffffff);
     }
@@ -276,7 +276,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 {
 
     if (section == 0) {
-        return kScreenWidth+105;
+        return kScreenWidth + 105.;
     }
     else if (section == 1) {
         if (self.dataArrayForlikeUser.count == 0) {
@@ -291,6 +291,9 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         return 50;
     }
     else if (section == 3) {
+        if ([Passport sharedInstance].user.user_state == 0) {
+            return 0;
+        }
         return 50;
     }
     else if (section == 4) {
@@ -361,7 +364,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 
             avatar.layer.cornerRadius = avatar.frame.size.width / 2.;
             avatar.layer.masksToBounds = YES;
-            [avatar sd_setImageWithURL:user.avatarURL forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(72, 72)]];
+            [avatar sd_setImageWithURL:user.avatarURL forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(36., 36.)]];
             avatar.tag = i;
             [avatar addTarget:self action:@selector(avatarButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.likeUserView addSubview:avatar];
@@ -402,6 +405,10 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         return self.categoryButton;
     }
     else if (section == 3) {
+        if ([Passport sharedInstance].user.user_state == 0) {
+            return nil;
+            //            self.noteButton.enabled = NO;
+        }
         if(!self.noteButton)
         {
             self.noteButton  = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
@@ -425,10 +432,8 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         [self.noteButton setBackgroundColor:UIColorFromRGB(0xffffff)];
         [self.noteButton setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
         
-        DDLogInfo(@"user user state %lu", [Passport sharedInstance].user.user_state);
-        if ([Passport sharedInstance].user.user_state == 0) {
-            self.noteButton.enabled = NO;
-        }
+//        DDLogInfo(@"user user state %lu", [Passport sharedInstance].user.user_state);
+
         return self.noteButton;
     }
     else if (section == 4) {

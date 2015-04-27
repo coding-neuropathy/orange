@@ -73,6 +73,8 @@
 //Config
 #import "Config.h"
 
+#import "RTLabel.h"
+
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 

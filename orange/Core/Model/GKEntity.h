@@ -16,6 +16,11 @@
 @interface GKEntity : GKBaseModel
 
 /**
+ *  商品名称 （include brand and title）
+ */
+@property (nonatomic, strong) NSString *entityName;
+
+/**
  *  商品ID
  */
 @property (nonatomic, strong) NSString *entityId;

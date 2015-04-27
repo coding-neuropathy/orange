@@ -11,6 +11,9 @@
 #import "GKAPI.h"
 #import "EntityViewController.h"
 #import "LoginView.h"
+//#import "NewEntityViewController.h"
+#import "EntityViewController.h"
+
 #define kWidth (kScreenWidth - 20)
 @interface SelectionCell()<RTLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;
@@ -291,7 +294,7 @@
         
         if(self.entity.likeCount == 0)
         {
-            [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
+            [self.likeButton setTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil)] forState:UIControlStateNormal];
         }
         
         if(self.likeButton.selected)
@@ -313,7 +316,7 @@
 
 - (void)imageButtonAction
 {
-    EntityViewController * VC = [[EntityViewController alloc]init];
+    EntityViewController * VC = [[EntityViewController alloc] init];
     VC.hidesBottomBarWhenPushed = YES;
     VC.entity = self.entity;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
@@ -329,8 +332,6 @@
     CGContextSetLineWidth(context, kSeparateLineWidth);
     CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
     CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
-    
-    
     CGContextStrokePath(context);
 }
 
