@@ -29,6 +29,7 @@
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
 @property (nonatomic, strong) UIButton *followButton;
 @property (nonatomic, strong) UIButton *editButton;
+@property (nonatomic, strong) UIButton * blockedBtn;
 @property (nonatomic, strong) NSMutableArray * dataArrayForOffset;
 
 @end
@@ -53,6 +54,28 @@
         [self configFollowButton];
     }
     return self;
+}
+
+- (UIButton *)blockedBtn
+{
+    if (!_blockedBtn) {
+        _blockedBtn = [UIButton  buttonWithType:UIButtonTypeCustom];
+        
+        _blockedBtn.frame = CGRectMake(0., 0., 130., 30.);
+        _blockedBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+        _blockedBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _blockedBtn.layer.cornerRadius = 4.;
+        _blockedBtn.center = CGPointMake(kScreenWidth - 40., 25.);
+        _blockedBtn.enabled = NO;
+        _blockedBtn.hidden = YES;
+        
+        [_blockedBtn setTitle:[NSString stringWithFormat:@"%@ 该用户已被禁言",[NSString fontAwesomeIconStringForEnum:FATimes]] forState:UIControlStateNormal];
+        [_blockedBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateDisabled];
+        [_blockedBtn setBackgroundColor:UIColorFromRGB(0xf0f0f0)];
+        [_blockedBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+
+    }
+    return _blockedBtn;
 }
 
 - (void)viewDidLoad {
@@ -644,7 +667,7 @@
     [friendButton addTarget:self action:@selector(friendButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [friendButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     [friendButton.titleLabel setTextAlignment:NSTextAlignmentRight];
-    [friendButton setTitle:[NSString stringWithFormat:@"关注 %ld",_user.followingCount] forState:UIControlStateNormal];
+    [friendButton setTitle:[NSString stringWithFormat:@"%@ %ld",NSLocalizedStringFromTable(@"following", kLocalizedFile, nil), _user.followingCount] forState:UIControlStateNormal];
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         friendButton.deFrameTop = bioLabel.deFrameBottom+10;
     }
@@ -662,35 +685,38 @@
     [fanButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [fanButton.titleLabel setTextAlignment:NSTextAlignmentLeft];
     fanButton.deFrameTop = friendButton.deFrameTop;
-    [fanButton setTitle:[NSString stringWithFormat:@"粉丝 %ld",_user.fanCount] forState:UIControlStateNormal];
+    [fanButton setTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"follwers", kLocalizedFile, nil), _user.fanCount] forState:UIControlStateNormal];
     [view addSubview:fanButton];
     
     
     self.followButton.center = CGPointMake(kScreenWidth/2, fanButton.center.y+40);
     [view addSubview:self.followButton];
     
+    self.blockedBtn.center = CGPointMake(kScreenWidth/2, fanButton.center.y+40);
+    [view addSubview:self.blockedBtn];
+    
     
     UIView * V = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1, 20)];
     V.backgroundColor = UIColorFromRGB(0xc8c8c8);
-    V.center = CGPointMake(kScreenWidth/2, fanButton.center.y);
+    V.center = CGPointMake(kScreenWidth / 2., fanButton.center.y);
     [view addSubview:V];
     
     self.tableView.tableHeaderView = view;
     
     
-    {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
-        button.layer.cornerRadius = 4;
-        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-        button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitle:[NSString stringWithFormat:@"%@ 编辑个人资料",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]]  forState:UIControlStateNormal];
-        [button setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(editButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        button.center = CGPointMake(kScreenWidth/2, fanButton.center.y+40);
-        [view addSubview:button];
-        self.editButton = button;
-    }
+//    {
+//        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+//        button.layer.cornerRadius = 4;
+//        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+//        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+//        [button setTitle:[NSString stringWithFormat:@"%@ 编辑个人资料",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO]]  forState:UIControlStateNormal];
+//        [button setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
+//        [button setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+//        [button addTarget:self action:@selector(editButtonAction) forControlEvents:UIControlEventTouchUpInside];
+//        button.center = CGPointMake(kScreenWidth/2, fanButton.center.y+40);
+//        [view addSubview:button];
+//        self.editButton = button;
+//    }
     
     [self configFollowButton];
 }
@@ -713,6 +739,14 @@
 
 -(void)configFollowButton
 {
+    if (self.user.user_state == 0) {
+        self.editButton.hidden = YES;
+        self.followButton.hidden = YES;
+        self.blockedBtn.hidden = NO;
+//        [s]
+        return;
+    }
+    
     for (id target in [self.followButton allTargets]) {
         [self.followButton removeTarget:target action:NULL forControlEvents:UIControlEventAllEvents];
     }

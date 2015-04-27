@@ -174,7 +174,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         [self.contentView addSubview:self.pokeButton];
     }
     self.pokeButton.selected = self.note.poked;
-    [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],(unsigned long)self.note.pokeCount] forState:UIControlStateNormal];
+    [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %lu",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp], (long)self.note.pokeCount] forState:UIControlStateNormal];
     if (self.note.pokeCount ==0) {
         [self.pokeButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]] forState:UIControlStateNormal];
     }
@@ -201,7 +201,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         [self.commentButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [self.contentView addSubview:self.commentButton];
     }
-    [self.commentButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FACommentO],(unsigned long)self.note.commentCount] forState:UIControlStateNormal];
+    [self.commentButton setTitle:[NSString stringWithFormat:@"%@ %lu",[NSString fontAwesomeIconStringForEnum:FACommentO], (long)self.note.commentCount] forState:UIControlStateNormal];
     
     if(self.note.commentCount == 0)
     {
@@ -283,7 +283,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
             self.note.pokeCount = self.note.pokeCount-1;
         }
         self.note.poked = poked;
-        [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],(unsigned long)self.note.pokeCount] forState:UIControlStateNormal];
+        [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %lu",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp], (long)self.note.pokeCount] forState:UIControlStateNormal];
         if (self.note.pokeCount ==0) {
             [self.pokeButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]] forState:UIControlStateNormal];
         }
