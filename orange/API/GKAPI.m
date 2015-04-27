@@ -141,7 +141,7 @@
 {
     NSParameterAssert(categoryId > 0);
     
-    NSString *path = [NSString stringWithFormat:@"category/%ld/stat", categoryId];
+    NSString *path = [NSString stringWithFormat:@"category/%lu/stat", (long)categoryId];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"GET" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;

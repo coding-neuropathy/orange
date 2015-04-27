@@ -242,7 +242,7 @@
 
     
     WXAppExtendObject *ext = [WXAppExtendObject object];
-    ext.Url = [self.webView.request.URL absoluteString];
+    ext.url = [self.webView.request.URL absoluteString];
     
     message.mediaObject = ext;
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];

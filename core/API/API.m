@@ -105,4 +105,40 @@
     }];
 }
 
+
+/**
+ *  获取 24小时 Top 10 商品列表
+ *
+ *  @param count   获取商品个数
+ *  @param success 成功block
+ *  @param failure 失败block
+ */
++ (void)getTopTenEntityCount:(NSInteger)count
+                       success:(void (^)(NSArray * array))success
+                       failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString *path = @"toppopular/";
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:@(count) forKey:@"count"];
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *objectArray = (NSArray *)responseObject;
+        //
+        //        NSMutableArray *entityArray = [NSMutableArray array];
+//        NSArray *content = objectDict[@"content"];
+        //        for (NSDictionary *objectDict in content) {
+        //            GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
+        //            [entityArray addObject:entity];
+        //        }
+        
+        if (success) {
+            success(objectArray);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
 @end
