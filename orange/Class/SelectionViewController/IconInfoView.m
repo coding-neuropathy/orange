@@ -56,7 +56,7 @@
         _infoLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _infoLabel.textColor = UIColorFromRGB(0x414243);
         _infoLabel.font = [UIFont boldSystemFontOfSize:17.];
-//        _infoLabel.textAlignment = NSTextAlignmentLeft;
+        _infoLabel.textAlignment = NSTextAlignmentCenter;
         _infoLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_infoLabel];
     }
