@@ -11,7 +11,7 @@
 
 @interface SelectionCategoryView : UIView
 
-@property (nonatomic, copy) void (^tapButtonBlock)(NSUInteger i);
+@property (nonatomic, copy) void (^tapButtonBlock)(NSUInteger i, NSString * catename);
 @property (nonatomic, assign) NSUInteger cateId;
 - (id)initWithCateId:(NSUInteger)cateId;
 - (void)show;

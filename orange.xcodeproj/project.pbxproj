@@ -253,6 +253,7 @@
 		B71E495B1AC9259000D4DB6D /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B71E495A1AC9259000D4DB6D /* SettingsViewCell.m */; };
 		B71E495F1AC98E4700D4DB6D /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B71E495E1AC98E4700D4DB6D /* SettingsFooterView.m */; };
 		B72FD82A1AEF2DB400354248 /* SelectionCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD8291AEF2DB400354248 /* SelectionCategoryView.m */; };
+		B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD82E1AEF5B3A00354248 /* IconInfoView.m */; };
 		B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */; };
 		B749632A1AB15E9000C340FB /* EntityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B74963291AB15E9000C340FB /* EntityHeaderView.m */; };
 		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
@@ -787,6 +788,8 @@
 		B71E495E1AC98E4700D4DB6D /* SettingsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsFooterView.m; path = SettingsView/SettingsFooterView.m; sourceTree = "<group>"; };
 		B72FD8281AEF2DB400354248 /* SelectionCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionCategoryView.h; sourceTree = "<group>"; };
 		B72FD8291AEF2DB400354248 /* SelectionCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionCategoryView.m; sourceTree = "<group>"; };
+		B72FD82D1AEF5B3A00354248 /* IconInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconInfoView.h; sourceTree = "<group>"; };
+		B72FD82E1AEF5B3A00354248 /* IconInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconInfoView.m; sourceTree = "<group>"; };
 		B74266DB1AB3DFE10064A010 /* UIScrollView+AutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+AutoScroll.h"; sourceTree = "<group>"; };
 		B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+AutoScroll.m"; sourceTree = "<group>"; };
 		B74963281AB15E9000C340FB /* EntityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityHeaderView.h; path = EntityView/EntityHeaderView.h; sourceTree = "<group>"; };
@@ -1398,6 +1401,8 @@
 				B72FD8291AEF2DB400354248 /* SelectionCategoryView.m */,
 				4E1D70261A5ADC260032719E /* SelectionViewController.h */,
 				4E1D70271A5ADC260032719E /* SelectionViewController.m */,
+				B72FD82D1AEF5B3A00354248 /* IconInfoView.h */,
+				B72FD82E1AEF5B3A00354248 /* IconInfoView.m */,
 			);
 			path = SelectionViewController;
 			sourceTree = "<group>";
@@ -2537,6 +2542,7 @@
 				4EFCBCBB19D5CF650071F7A0 /* UIView+DEFrameAdditions.m in Sources */,
 				4E1D28E21A125B9300740C17 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				4E3A23671A51AE8300037F9C /* AFURLConnectionOperation.m in Sources */,
+				B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */,
 				4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */,
 				4E1D28C61A125B9300740C17 /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
 				4E1D28D41A125B9300740C17 /* JSQMessagesCollectionView.m in Sources */,

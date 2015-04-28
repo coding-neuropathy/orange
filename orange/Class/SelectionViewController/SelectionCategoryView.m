@@ -109,8 +109,11 @@
 - (void)buttonAction:(id)sender
 {
     NSInteger i = ((UIButton *)sender).tag;
+    NSInteger index = i - 20000;
+    NSString * catename = kSelectionCategoryStringArray[index];
+//    DDLogInfo(@"cate %@", kSelectionCategoryStringArray[_cateId]);
     if (self.tapButtonBlock) {
-        self.tapButtonBlock(i-20000);
+        self.tapButtonBlock(index, catename);
     }
     [self dismiss];
 }

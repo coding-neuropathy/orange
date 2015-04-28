@@ -15,6 +15,7 @@
 #import "SDWebImagePrefetcher.h"
 #import "GTScrollNavigationBar.h"
 #import "SelectionCategoryView.h"
+#import "IconInfoView.h"
 
 static NSString *CellIdentifier = @"SelectionCell";
 
@@ -26,6 +27,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 
 @property (nonatomic, strong) UILabel * SelectionCountLabel;
 @property (nonatomic, strong) UIView * SelectionCountLabelBgView;
+@property (nonatomic, strong) IconInfoView * iconInfoView;
 //@property (nonatomic, strong) PopoverView * selection_pv;
 @property (nonatomic, assign) NSInteger cateId;
 @end
@@ -60,7 +62,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         self.index = 0;
         self.cateId = 0;
         
-        [self logo];
+//        [self logo];
         
         NSMutableArray * array = [NSMutableArray array];
         {
@@ -78,6 +80,20 @@ static NSString *CellIdentifier = @"SelectionCell";
         
     }
     return self;
+}
+
+- (IconInfoView *)iconInfoView
+{
+    if (!_iconInfoView) {
+        
+        _iconInfoView = [[IconInfoView alloc] initWithFrame:CGRectMake(0., 7., 63, 25.)];
+        _iconInfoView.categroyText = nil;
+        
+        UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTitleView:)];
+        [_iconInfoView addGestureRecognizer:Tap];
+    
+    }
+    return _iconInfoView;
 }
 
 - (void)viewDidLoad {
@@ -115,7 +131,8 @@ static NSString *CellIdentifier = @"SelectionCell";
     } failure:^(NSInteger stateCode) {
         
     }];
-
+    
+    self.navigationItem.titleView = self.iconInfoView;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -339,19 +356,19 @@ static NSString *CellIdentifier = @"SelectionCell";
     }
 }
 
-- (void)logo
-{
-    
-    UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 43, 25)];
-    icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    //icon.tintColor = UIColorFromRGB(0x8b8b8b);
-    icon.contentMode = UIViewContentModeScaleAspectFit;
-    icon.userInteractionEnabled = YES;
-    self.navigationItem.titleView = icon;
-    
-    UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTitleView:)];
-    [icon addGestureRecognizer:Tap];
-}
+//- (void)logo
+//{
+//    
+//    UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 43, 25)];
+//    icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    //icon.tintColor = UIColorFromRGB(0x8b8b8b);
+//    icon.contentMode = UIViewContentModeScaleAspectFit;
+//    icon.userInteractionEnabled = YES;
+//    self.navigationItem.titleView = icon;
+//    
+//    UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTitleView:)];
+//    [icon addGestureRecognizer:Tap];
+//}
 
 - (void)random
 {
@@ -409,12 +426,13 @@ static NSString *CellIdentifier = @"SelectionCell";
 #pragma mark title view tap action
 - (void)tapTitleView:(id)sender
 {
+
+    
     SelectionCategoryView * view = [[SelectionCategoryView alloc]initWithCateId:self.cateId];
-    view.tapButtonBlock = ^(NSUInteger i){
-//        [self.dataArray removeAllObjects];
-//        [self.tableView reloadData];
+    view.tapButtonBlock = ^(NSUInteger i, NSString * catename){
+        
+        self.iconInfoView.categroyText = catename;
         self.cateId = i;
-//        [self.label setText:[NSString stringWithFormat:@"%@",kSelectionCategoryStringArray[_cateId]]];
         [self.tableView triggerPullToRefresh];
     };
     [view show];
