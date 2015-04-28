@@ -426,7 +426,8 @@ static NSString *CellIdentifier = @"SelectionCell";
 #pragma mark title view tap action
 - (void)tapTitleView:(id)sender
 {
-
+    [AVAnalytics event:@"tap selection category" ];
+    [MobClick event:@"tap selection category"];
     
     SelectionCategoryView * view = [[SelectionCategoryView alloc]initWithCateId:self.cateId];
     view.tapButtonBlock = ^(NSUInteger i, NSString * catename){
@@ -437,6 +438,10 @@ static NSString *CellIdentifier = @"SelectionCell";
         } else {
             self.iconInfoView.categroyText = catename;
         }
+        
+        [AVAnalytics event:@"go to category" attributes:@{@"category": catename}];
+        [MobClick event:@"go to category" attributes:@{@"category": catename}];
+        
         [self.tableView triggerPullToRefresh];
     };
     [view show];
