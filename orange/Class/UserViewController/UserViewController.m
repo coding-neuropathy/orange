@@ -746,7 +746,7 @@
 //        [s]
         return;
     }
-    
+    self.blockedBtn.hidden = YES;
     for (id target in [self.followButton allTargets]) {
         [self.followButton removeTarget:target action:NULL forControlEvents:UIControlEventAllEvents];
     }

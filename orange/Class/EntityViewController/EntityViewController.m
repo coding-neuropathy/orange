@@ -291,7 +291,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         return 50;
     }
     else if (section == 3) {
-        if ([Passport sharedInstance].user.user_state == 0) {
+        if (k_isLogin && [Passport sharedInstance].user.user_state == 0 ) {
             return 0;
         }
         return 50;
@@ -405,7 +405,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         return self.categoryButton;
     }
     else if (section == 3) {
-        if ([Passport sharedInstance].user.user_state == 0) {
+        if (k_isLogin && [Passport sharedInstance].user.user_state == 0 ) {
             return nil;
             //            self.noteButton.enabled = NO;
         }

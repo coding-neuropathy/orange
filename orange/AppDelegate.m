@@ -84,20 +84,20 @@ int ddLogLevel;
 
     // Override point for customization after application launch.
     
-    if (iOS8) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
-                                                | UIUserNotificationTypeBadge
-                                                | UIUserNotificationTypeSound
-                                                                                 categories:[NSSet setWithObjects:nil]];
-        
-        [application registerUserNotificationSettings:settings];
-        [application registerForRemoteNotifications];
-    }else{
-        [application registerForRemoteNotificationTypes:
-         UIRemoteNotificationTypeBadge |
-         UIRemoteNotificationTypeAlert |
-         UIRemoteNotificationTypeSound];
-    }
+//    if (iOS8) {
+//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
+//                                                | UIUserNotificationTypeBadge
+//                                                | UIUserNotificationTypeSound
+//                                                                                 categories:[NSSet setWithObjects:nil]];
+//        
+//        [application registerUserNotificationSettings:settings];
+//        [application registerForRemoteNotifications];
+//    }else{
+//        [application registerForRemoteNotificationTypes:
+//         UIRemoteNotificationTypeBadge |
+//         UIRemoteNotificationTypeAlert |
+//         UIRemoteNotificationTypeSound];
+//    }
     [SVProgressHUD setBackgroundColor:UIColorFromRGB(0x2b2b2b)];
     [SVProgressHUD setForegroundColor:UIColorFromRGB(0xffffff)];
     
@@ -397,8 +397,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-//    ddLogLevel = LOG_LEVEL_VERBOSE;
-    ddLogLevel = LOG_LEVEL_ERROR;
+    ddLogLevel = LOG_LEVEL_VERBOSE;
+//    ddLogLevel = LOG_LEVEL_ERROR;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;

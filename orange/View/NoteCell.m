@@ -208,7 +208,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         [self.commentButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACommentO]] forState:UIControlStateNormal];
     }
     
-    if ([Passport sharedInstance].user.user_state == 0) {
+    if (k_isLogin && [Passport sharedInstance].user.user_state == 0) {
         self.commentButton.hidden = YES;
     }
     

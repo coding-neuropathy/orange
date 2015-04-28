@@ -207,6 +207,8 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser *user = self.message[@"content"][@"user"];
             
             [self.avatar sd_setImageWithURL:user.avatarURL];
+//            self.imageView.hidden = YES;
+            self.image.hidden = YES;
             self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",
                                user.userId,
                                user.nickname,
@@ -454,7 +456,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             
         case MessageUserFollow:
         {
-            height = 26.f;
+            height = 40.f;
             break;
         }
             //赞

@@ -39,6 +39,7 @@
         DDLogInfo(@"version %@", [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]);
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     else if ([_text isEqualToString:@"weibo"] && [Passport sharedInstance].user.sinaScreenName) {
         [self setAccessoryType:UITableViewCellAccessoryNone];

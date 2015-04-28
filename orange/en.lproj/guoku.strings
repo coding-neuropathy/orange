@@ -111,3 +111,9 @@
 "days"       = "d";
 "weeks"      = "w";
 
+/*
+ *  category
+ */
+"all"           = "ALL";
+"woman"         = "Woman";
+"men"           = "man";

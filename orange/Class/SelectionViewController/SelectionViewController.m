@@ -14,6 +14,7 @@
 #import "CategoryViewController.h"
 #import "SDWebImagePrefetcher.h"
 #import "GTScrollNavigationBar.h"
+#import "SelectionCategoryView.h"
 
 static NSString *CellIdentifier = @"SelectionCell";
 
@@ -21,10 +22,12 @@ static NSString *CellIdentifier = @"SelectionCell";
 //@property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property(nonatomic, strong) NSMutableArray * dataArrayForArticle;
-@property(nonatomic, assign) NSUInteger index;
+@property(nonatomic, assign) NSInteger index;
 
 @property (nonatomic, strong) UILabel * SelectionCountLabel;
 @property (nonatomic, strong) UIView * SelectionCountLabelBgView;
+//@property (nonatomic, strong) PopoverView * selection_pv;
+@property (nonatomic, assign) NSInteger cateId;
 @end
 
 @implementation SelectionViewController
@@ -55,7 +58,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         [segmentedControl setTag:2];
         //self.navigationItem.titleView =  segmentedControl;
         self.index = 0;
-
+        self.cateId = 0;
         
         [self logo];
         
@@ -149,7 +152,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 - (void)refresh
 {
     if (self.index == 0) {
-        [GKAPI getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:0 count:30 success:^(NSArray *dataArray) {
+        [GKAPI getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:self.cateId count:30 success:^(NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
             [self save];
             
@@ -179,7 +182,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 {
     if (self.index == 0) {
         NSTimeInterval timestamp = (NSTimeInterval)[self.dataArrayForEntity.lastObject[@"time"] doubleValue];
-        [GKAPI getSelectionListWithTimestamp:timestamp cateId:0 count:30 success:^(NSArray *dataArray) {
+        [GKAPI getSelectionListWithTimestamp:timestamp cateId:self.cateId count:30 success:^(NSArray *dataArray) {
             [self.dataArrayForEntity addObjectsFromArray:[NSMutableArray arrayWithArray:dataArray]];
             NSMutableArray* imageArray = [NSMutableArray array];
             for (NSDictionary * dic in dataArray) {
@@ -314,8 +317,6 @@ static NSString *CellIdentifier = @"SelectionCell";
 }
 
 
-
-
 #pragma mark - HMSegmentedControl
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSUInteger index = segmentedControl.selectedSegmentIndex;
@@ -347,6 +348,9 @@ static NSString *CellIdentifier = @"SelectionCell";
     icon.contentMode = UIViewContentModeScaleAspectFit;
     icon.userInteractionEnabled = YES;
     self.navigationItem.titleView = icon;
+    
+    UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTitleView:)];
+    [icon addGestureRecognizer:Tap];
 }
 
 - (void)random
@@ -400,6 +404,20 @@ static NSString *CellIdentifier = @"SelectionCell";
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:@"selection"];
     [[NSUserDefaults standardUserDefaults] setObject:@(self.tableView.contentOffset.y) forKey:@"selection-offset-y"];
+}
+
+#pragma mark title view tap action
+- (void)tapTitleView:(id)sender
+{
+    SelectionCategoryView * view = [[SelectionCategoryView alloc]initWithCateId:self.cateId];
+    view.tapButtonBlock = ^(NSUInteger i){
+//        [self.dataArray removeAllObjects];
+//        [self.tableView reloadData];
+        self.cateId = i;
+//        [self.label setText:[NSString stringWithFormat:@"%@",kSelectionCategoryStringArray[_cateId]]];
+        [self.tableView triggerPullToRefresh];
+    };
+    [view show];
 }
 
 @end
