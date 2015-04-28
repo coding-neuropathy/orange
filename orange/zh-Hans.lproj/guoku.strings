@@ -44,6 +44,7 @@
 "from"              = "来自";
 "recommendation"    = "相似推荐";
 "item"              = "商品";
+"post note"         = "写点评";
 "update note"       = "修改点评";
 "comment"           = "评论";
 
@@ -118,5 +119,13 @@
  */
 "all"           = "所有";
 "woman"         = "女装";
-"men"           = "男装";
+"man"           = "男装";
 "kid"           = "孩童";
+"accessories"   = "配饰";
+"beauty"        = "美容";
+"tech"          = "科技";
+"living"        = "居家";
+"outdoors"      = "户外";
+"culture"       = "文化";
+"food"          = "美食";
+"fun"           = "玩乐";

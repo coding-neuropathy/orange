@@ -9,7 +9,7 @@
 #import "SelectionCategoryView.h"
 #import "LoginView.h"
 #import <QuartzCore/QuartzCore.h>
-#define kSelectionCategoryStringArray [NSArray arrayWithObjects:@"all", @"woman", @"man", @"kid", @"配饰",@"美容",@"科技",@"居家",@"户外",@"文化",@"美食",@"玩乐",nil]
+#define kSelectionCategoryStringArray [NSArray arrayWithObjects:@"all", @"woman", @"man", @"kid", @"accessories",@"beauty",@"tech",@"living",@"outdoors",@"culture",@"food",@"fun",nil]
 @interface SelectionCategoryView () <UIGestureRecognizerDelegate>
 
 @end
@@ -38,7 +38,7 @@
         tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 16, self.frame.size.width, 50)];
         tip.numberOfLines = 0;
         tip.textColor = UIColorFromRGB(0x777777);
-//        tip.font = [UIFont appFontWithSize:20];
+        tip.font = [UIFont systemFontOfSize:20.];
         tip.textAlignment = NSTextAlignmentCenter;
         tip.text = @"选择分类";
         [whiteBG addSubview:tip];
@@ -55,7 +55,8 @@
 //        DDLogInfo(@"cate %@", obj);
         
         [button setTitle:NSLocalizedStringFromTable(obj, kLocalizedFile, nil) forState:UIControlStateNormal];
-//        [button.titleLabel setFont:[UIFont appFontWithSize:14]];
+        [button.titleLabel setFont:[UIFont systemFontOfSize:16.]];
+        button.titleLabel.adjustsFontSizeToFitWidth = YES;
 
         [button setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         if (kScreenWidth == 320.) {

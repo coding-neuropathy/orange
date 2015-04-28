@@ -43,6 +43,7 @@
 "recommendation"    = "Recommendation";
 "item"              = "Item";
 "update note"       = "Update Note";
+"post note"         = "Post Note";
 "comment"           = "Comment";
 
 
@@ -115,7 +116,16 @@
  *  category
  */
 "all"           = "ALL";
-"woman"         = "Woman";
-"man"           = "Man";
-"kid"           = "Kid";
-//""
+"woman"         = "WOMEN'S";
+"man"           = "MEN'S";
+"kid"           = "KID'S";
+"accessories"   = "ACCESSORIES";
+"beauty"        = "BEAUTY";
+"tech"          = "TECH";
+"living"        = "LIVING";
+"outdoors"      = "OUTDOORS";
+"culture"       = "CULTURE";
+"food"          = "FOOD";
+"fun"           = "FUN";
+
+
