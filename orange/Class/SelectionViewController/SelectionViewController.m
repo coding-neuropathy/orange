@@ -86,7 +86,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 {
     if (!_iconInfoView) {
         
-        _iconInfoView = [[IconInfoView alloc] initWithFrame:CGRectMake(0., 7., 63, 25.)];
+        _iconInfoView = [[IconInfoView alloc] initWithFrame:CGRectMake(0., 7., 100., 25.)];
         _iconInfoView.categroyText = nil;
         
         UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTitleView:)];
@@ -430,9 +430,13 @@ static NSString *CellIdentifier = @"SelectionCell";
     
     SelectionCategoryView * view = [[SelectionCategoryView alloc]initWithCateId:self.cateId];
     view.tapButtonBlock = ^(NSUInteger i, NSString * catename){
-        
-        self.iconInfoView.categroyText = catename;
         self.cateId = i;
+
+        if (self.cateId == 0) {
+            self.iconInfoView.categroyText = nil;
+        } else {
+            self.iconInfoView.categroyText = catename;
+        }
         [self.tableView triggerPullToRefresh];
     };
     [view show];

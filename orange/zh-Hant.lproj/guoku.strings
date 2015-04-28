@@ -111,3 +111,11 @@
 "minutes"    = "分鐘前";
 "days"       = "天前";
 "weeks"      = "周前";
+
+/*
+ *  category
+ */
+"all"           = "所有";
+"woman"         = "女裝";
+"men"           = "男裝";
+"kid"           = "孩童";

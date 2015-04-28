@@ -9,7 +9,7 @@
 #import "SelectionCategoryView.h"
 #import "LoginView.h"
 #import <QuartzCore/QuartzCore.h>
-#define kSelectionCategoryStringArray [NSArray arrayWithObjects:@"所有",@"女装",@"男装",@"孩童", @"配饰",@"美容",@"科技",@"居家",@"户外",@"文化",@"美食",@"玩乐",nil]
+#define kSelectionCategoryStringArray [NSArray arrayWithObjects:@"all", @"woman", @"man", @"kid", @"配饰",@"美容",@"科技",@"居家",@"户外",@"文化",@"美食",@"玩乐",nil]
 @interface SelectionCategoryView () <UIGestureRecognizerDelegate>
 
 @end
@@ -52,7 +52,9 @@
     [kSelectionCategoryStringArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.backgroundColor = UIColorFromRGB(0xf6f6f6);
-        [button setTitle:obj forState:UIControlStateNormal];
+//        DDLogInfo(@"cate %@", obj);
+        
+        [button setTitle:NSLocalizedStringFromTable(obj, kLocalizedFile, nil) forState:UIControlStateNormal];
 //        [button.titleLabel setFont:[UIFont appFontWithSize:14]];
 
         [button setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
@@ -111,9 +113,9 @@
     NSInteger i = ((UIButton *)sender).tag;
     NSInteger index = i - 20000;
     NSString * catename = kSelectionCategoryStringArray[index];
-//    DDLogInfo(@"cate %@", kSelectionCategoryStringArray[_cateId]);
+    DDLogInfo(@"cate %@", catename);
     if (self.tapButtonBlock) {
-        self.tapButtonBlock(index, catename);
+        self.tapButtonBlock(index, NSLocalizedStringFromTable(catename, kLocalizedFile, nil));
     }
     [self dismiss];
 }

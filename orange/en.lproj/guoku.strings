@@ -116,4 +116,6 @@
  */
 "all"           = "ALL";
 "woman"         = "Woman";
-"men"           = "man";
+"man"           = "Man";
+"kid"           = "Kid";
+//""
