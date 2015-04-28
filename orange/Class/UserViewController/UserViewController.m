@@ -685,7 +685,7 @@
     [fanButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [fanButton.titleLabel setTextAlignment:NSTextAlignmentLeft];
     fanButton.deFrameTop = friendButton.deFrameTop;
-    [fanButton setTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"follwers", kLocalizedFile, nil), _user.fanCount] forState:UIControlStateNormal];
+    [fanButton setTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil), _user.fanCount] forState:UIControlStateNormal];
     [view addSubview:fanButton];
     
     

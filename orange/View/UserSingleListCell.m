@@ -82,7 +82,12 @@
         [self.contentView addSubview:self.contentLabel];
     }
     
-    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=12>关注 %ld   粉丝 %ld</font>",self.user.followingCount,self.user.fanCount];;
+    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=12>%@ %ld   %@ %ld</font>",
+                              NSLocalizedStringFromTable(@"following", kLocalizedFile, nil),
+                              self.user.followingCount,
+                              NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil),
+                              self.user.fanCount];;
+    
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     self.contentLabel.deFrameTop = self.label.deFrameBottom;
     
