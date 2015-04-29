@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		393546F41ACD1F2A002678B8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D399BE1ACD1A2B008E838B /* ImageIO.framework */; };
 		393715BF1ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B11ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m */; };
 		393715C01ACBD9C300DC50FF /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B31ACBD9C300DC50FF /* DDASLLogger.m */; };
 		393715C11ACBD9C300DC50FF /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B51ACBD9C300DC50FF /* DDFileLogger.m */; };
@@ -244,6 +243,7 @@
 		B7B6958B1AF05C400016AAB8 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B695791AF05C400016AAB8 /* UIImageView+HighlightedWebCache.m */; };
 		B7B6958C1AF05C400016AAB8 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B6957B1AF05C400016AAB8 /* UIImageView+WebCache.m */; };
 		B7B6958D1AF05C400016AAB8 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B6957D1AF05C400016AAB8 /* UIView+WebCacheOperation.m */; };
+		B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B6958E1AF05F310016AAB8 /* ImageIO.framework */; };
 		B7BFC8FF1ACC27C2009627CA /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */; };
 		B7BFC9051ACC27C2009627CA /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BFC9041ACC27C2009627CA /* TodayViewController.m */; };
 		B7BFC90A1ACC27C2009627CA /* today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B7BFC8FC1ACC27C1009627CA /* today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -355,7 +355,6 @@
 		39C829501AC29089009DE9BE /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		39C829511AC29089009DE9BE /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		39C829521AC29089009DE9BE /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
-		39D399BE1ACD1A2B008E838B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4E066A9D1A5C43E800DFEF65 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		4E066AA11A5C56C600DFEF65 /* SelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionCell.h; sourceTree = "<group>"; };
@@ -761,6 +760,7 @@
 		B7B6957B1AF05C400016AAB8 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		B7B6957C1AF05C400016AAB8 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		B7B6957D1AF05C400016AAB8 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		B7B6958E1AF05F310016AAB8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B7BFC8FC1ACC27C1009627CA /* today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = today.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		B7BFC9021ACC27C2009627CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -795,7 +795,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				393546F41ACD1F2A002678B8 /* ImageIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,6 +802,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */,
 				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
 				B7662AA11AC39D5600C82B4B /* AVOSCloud.framework in Frameworks */,
 				B7F18B911ADF39A400B9AFDD /* UTMini.framework in Frameworks */,
@@ -2017,7 +2017,7 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				39D399BE1ACD1A2B008E838B /* ImageIO.framework */,
+				B7B6958E1AF05F310016AAB8 /* ImageIO.framework */,
 				B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
