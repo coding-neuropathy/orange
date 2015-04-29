@@ -55,7 +55,17 @@
     self.detailTextLabel.text = _data[@"content"][@"note"][@"content"];
     NSString * urlstring =  _data[@"content"][@"entity"][@"chief_image"];
     
-    [self.entityImageView sd_setImageWithURL:[NSURL URLWithString:[self imageURLWithURLString:urlstring Size:120.]]];
+//    [self.entityImageView sd_setImageWithURL:[NSURL URLWithString:[self imageURLWithURLString:urlstring Size:120.]]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL *url = [NSURL URLWithString:[self imageURLWithURLString:urlstring Size:120.]];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *placeholder = [UIImage imageWithData:data];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.entityImageView setImage:placeholder];
+        });
+    });
+
     [self setNeedsLayout];
 }
 

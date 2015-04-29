@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 //#import "HttpRequest.h"
 #import "API.h"
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
 //#import "UIButton+WebCache.h"
 
 //! Project version number for core.
