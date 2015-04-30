@@ -125,6 +125,14 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     
     [self configFooter];
     
+    [GKAPI getRandomEntityListByCategoryId:self.entity.categoryId
+                                  entityId:self.entity.entityId
+                                     count:9 success:^(NSArray *entityArray) {
+                                         self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
+                                         [self.tableView reloadData];
+                                     } failure:^(NSInteger stateCode) {
+                                         
+                                     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -188,15 +196,6 @@ static NSString *EntityCellIdentifier = @"EntityCell";
                 break;
             }
         }
-        [self.tableView reloadData];
-    } failure:^(NSInteger stateCode) {
-        
-    }];
-    
-    [GKAPI getRandomEntityListByCategoryId:self.entity.categoryId
-                                  entityId:self.entity.entityId
-                                     count:9 success:^(NSArray *entityArray) {
-        self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
         [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
         

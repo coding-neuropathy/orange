@@ -172,10 +172,10 @@ static NSString *CellIdentifier = @"SelectionCell";
         [GKAPI getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:self.cateId count:30 success:^(NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
             [self save];
-            
             NSMutableArray* imageArray = [NSMutableArray array];
             for (NSDictionary * dic in dataArray) {
                GKEntity * entity = [[dic objectForKey:@"content"]objectForKey:@"entity"];
+                
                 [imageArray addObject:entity.imageURL_640x640];
             }
             [[SDWebImagePrefetcher sharedImagePrefetcher]prefetchURLs:imageArray];
