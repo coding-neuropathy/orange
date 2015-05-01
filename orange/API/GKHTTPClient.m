@@ -146,7 +146,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self failureLogWithOperation:operation responseObject:error];
-        
+        DDLogInfo(@"%@", [[error userInfo] valueForKey:@"NSErrorFailingURLKey"]);
         if (failure) {
             failure(operation, error);
         }

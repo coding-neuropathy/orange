@@ -198,7 +198,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         }
         [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
-        
+
     }];
 }
 

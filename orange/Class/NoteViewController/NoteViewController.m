@@ -75,7 +75,7 @@ static NSString *CellIdentifier = @"CommentCell";
     [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:CellIdentifier];
     [self.view addSubview:self.tableView];
     
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+//    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{

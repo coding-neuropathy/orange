@@ -15,6 +15,7 @@
 @property (nonatomic, strong) RTLabel *contentLabel;
 @property (nonatomic, strong) UIButton *pokeButton;
 @property (nonatomic, strong) UIButton *timeButton;
+@property (strong, nonatomic) UILabel * starLabel;
 
 @end
 
@@ -105,6 +106,22 @@
     return _timeButton;
 }
 
+- (UILabel *)starLabel
+{
+    if (!_starLabel) {
+        _starLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _starLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        _starLabel.textAlignment = NSTextAlignmentRight;
+        //        _starLabel.hidden = YES;
+        _starLabel.backgroundColor = [UIColor clearColor];
+        _starLabel.textColor = UIColorFromRGB(0xFF9600);
+        _starLabel.text = [NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAStar]];
+        [self addSubview:_starLabel];
+    }
+    return _starLabel;
+}
+
+
 - (void)setNote:(GKNote *)note
 {
     _note = note;
@@ -122,6 +139,11 @@
     }
 
     [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
+    
+    self.starLabel.hidden = YES;
+    if (self.note.marked) {
+        self.starLabel.hidden = NO;
+    }
     
     [self setNeedsLayout];
 }
@@ -143,6 +165,10 @@
     self.timeButton.frame = CGRectMake(0, 0, 160, 20);
     self.timeButton.deFrameRight = kScreenWidth - 10;
     self.timeButton.deFrameBottom =  self.deFrameHeight -15;
+
+    self.starLabel.frame = CGRectMake(0., 0., 160., 20.);
+    self.starLabel.center = self.label.center;
+    self.starLabel.deFrameRight = kScreenWidth - 16.;
 }
 
 /*
