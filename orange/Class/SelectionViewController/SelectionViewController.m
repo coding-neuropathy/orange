@@ -444,6 +444,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         
         [self.tableView triggerPullToRefresh];
     };
+    view.tableView = self.tableView;
     [view show];
 }
 

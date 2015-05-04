@@ -8,10 +8,12 @@
 
 #import "SelectionCategoryView.h"
 #import "LoginView.h"
+#import "FXBlurView.h"
 #import <QuartzCore/QuartzCore.h>
 #define kSelectionCategoryStringArray [NSArray arrayWithObjects:@"all", @"woman", @"man", @"kid", @"accessories",@"beauty",@"tech",@"living",@"outdoors",@"culture",@"food",@"fun",nil]
 @interface SelectionCategoryView () <UIGestureRecognizerDelegate>
-
+@property(nonatomic, strong) FXBlurView * mask;
+@property(nonatomic, strong) UIView * black;
 @end
 
 @implementation SelectionCategoryView
@@ -22,14 +24,19 @@
 }
 - (id)initWithCateId:(NSUInteger)cateId           
 {
-    self = [super initWithFrame:kAppDelegate.window.frame];
+    self = [super initWithFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight)];
     if (self) {
         self.cateId = cateId+20000;
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-        whiteBG = [[UIView alloc]initWithFrame:CGRectMake(0, -kScreenWidth, self.frame.size.width, kScreenWidth)];
-        whiteBG.frame = CGRectMake(0, 0, whiteBG.frame.size.width, whiteBG.frame.size.height);
+        self.backgroundColor = [UIColor clearColor];
+        
+
+      
+        
+        whiteBG = [[UIView alloc]init];
+        whiteBG.frame = CGRectMake(0, kStatusBarHeight + kNavigationBarHeight, kScreenWidth, 0);
         whiteBG.backgroundColor = [UIColor whiteColor];
         [self addSubview:whiteBG];
+
         
         UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
         Tap.delegate = self;
@@ -41,7 +48,15 @@
         tip.font = [UIFont systemFontOfSize:20.];
         tip.textAlignment = NSTextAlignmentCenter;
         tip.text = @"选择分类";
-        [whiteBG addSubview:tip];
+        //[whiteBG addSubview:tip];
+        
+        _mask = [[FXBlurView alloc]initWithFrame:CGRectMake(0,kStatusBarHeight + kNavigationBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight + kNavigationBarHeight)];
+        self.mask.tintColor =[UIColor blackColor];
+        self.mask.blurRadius = 4;
+        self.mask.iterations = 0;
+        
+        _black = [[UIView alloc]initWithFrame:CGRectMake(0,kStatusBarHeight + kNavigationBarHeight, kScreenWidth, kScreenHeight)];
+        self.black.backgroundColor =[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     }
     return self;
 }
@@ -51,27 +66,28 @@
     
     [kSelectionCategoryStringArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.backgroundColor = UIColorFromRGB(0xf6f6f6);
+        button.backgroundColor = UIColorFromRGB(0xf8f8f8);
 //        DDLogInfo(@"cate %@", obj);
         
         [button setTitle:NSLocalizedStringFromTable(obj, kLocalizedFile, nil) forState:UIControlStateNormal];
         [button.titleLabel setFont:[UIFont systemFontOfSize:16.]];
         button.titleLabel.adjustsFontSizeToFitWidth = YES;
 
-        [button setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         if (kScreenWidth == 320.) {
-            [button setDeFrameOrigin:CGPointMake( 8+(idx%4)*78, 80+(idx/4)*78)];
+            [button setDeFrameOrigin:CGPointMake( 8+(idx%4)*78, 8+(idx/4)*78)];
             button.deFrameSize = CGSizeMake(72, 72);
         } else if (kScreenWidth == 375.) {
-            [button setDeFrameOrigin:CGPointMake(8+(idx%4)*92, 94+(idx/4)*92)];
+            [button setDeFrameOrigin:CGPointMake(8+(idx%4)*92, 8+(idx/4)*92)];
             button.deFrameSize = CGSizeMake(84, 84);
         } else {
-            [button setDeFrameOrigin:CGPointMake(8+(idx%4)*102., 104 + (idx/4) * 102)];
+            [button setDeFrameOrigin:CGPointMake(8+(idx%4)*102., 8 + (idx/4) * 102)];
             button.deFrameSize = CGSizeMake(94, 94);
         }
         button.tag = idx+20000;
         [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         [whiteBG addSubview:button];
+        whiteBG.deFrameHeight = button.deFrameBottom + 8;
     }];
     
     if ([self viewWithTag:self.cateId]) {
@@ -79,10 +95,20 @@
             [((UIButton *)[self viewWithTag:self.cateId]) setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
         }
     }
+    
+
+
 }
 
 - (void)show
 {
+    {
+        UIView * view  = [[UIView alloc]initWithFrame:CGRectMake(0,kScreenHeight, kScreenWidth, 80)];
+        view.backgroundColor =[UIColor colorWithRed:0 green:0 blue:0 alpha:1];
+        [kAppDelegate.window addSubview:view];
+    }
+    [kAppDelegate.window addSubview:self.black];
+    [kAppDelegate.window addSubview:self.mask];
     self.alpha = 0;
     [kAppDelegate.window addSubview:self];
 
@@ -99,6 +125,8 @@
         [view removeFromSuperview];
     }
     self.alpha = 1;
+    [self.black removeFromSuperview];
+    [self.mask removeFromSuperview];
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         //whiteBG.frame = CGRectMake(0, -320, whiteBG.frame.size.width, whiteBG.frame.size.height);
         //whiteBG.alpha = 0;

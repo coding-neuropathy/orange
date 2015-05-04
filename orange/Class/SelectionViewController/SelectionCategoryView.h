@@ -13,6 +13,7 @@
 
 @property (nonatomic, copy) void (^tapButtonBlock)(NSUInteger i, NSString * catename);
 @property (nonatomic, assign) NSUInteger cateId;
+@property (nonatomic, weak) UITableView *tableView;
 - (id)initWithCateId:(NSUInteger)cateId;
 - (void)show;
 - (void)dismiss;
