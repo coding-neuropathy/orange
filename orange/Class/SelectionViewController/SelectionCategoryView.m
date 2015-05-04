@@ -112,7 +112,7 @@
     self.alpha = 0;
     [kAppDelegate.window addSubview:self];
 
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         self.alpha = 1;
        // whiteBG.frame = CGRectMake(0, 0, whiteBG.frame.size.width, whiteBG.frame.size.height);
     } completion:^(BOOL finished) {
@@ -125,13 +125,14 @@
         [view removeFromSuperview];
     }
     self.alpha = 1;
-    [self.black removeFromSuperview];
-    [self.mask removeFromSuperview];
+
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         //whiteBG.frame = CGRectMake(0, -320, whiteBG.frame.size.width, whiteBG.frame.size.height);
         //whiteBG.alpha = 0;
         self.alpha = 0;
     } completion:^(BOOL finished) {
+        [self.black removeFromSuperview];
+        [self.mask removeFromSuperview];
         [self removeFromSuperview];
     }];
     

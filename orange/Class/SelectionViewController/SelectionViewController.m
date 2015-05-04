@@ -78,6 +78,8 @@ static NSString *CellIdentifier = @"SelectionCell";
         }
         //self.navigationItem.rightBarButtonItems = array;
         
+
+        
     }
     return self;
 }
@@ -331,6 +333,20 @@ static NSString *CellIdentifier = @"SelectionCell";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [[NSUserDefaults standardUserDefaults] setObject:@(scrollView.contentOffset.y) forKey:@"selection-offset-y"];
+
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+        if (scrollView.contentOffset.y>20000) {
+            [self tipForTapStatusBar];
+        }
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
+{
+    [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
+    [self dismissTip];
 }
 
 
@@ -441,11 +457,68 @@ static NSString *CellIdentifier = @"SelectionCell";
         
         [AVAnalytics event:@"go to category" attributes:@{@"category": catename}];
         [MobClick event:@"go to category" attributes:@{@"category": catename}];
-        
+        [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
         [self.tableView triggerPullToRefresh];
     };
     view.tableView = self.tableView;
     [view show];
 }
+- (void)tapStatusBar:(id)sender
+{
+    [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
+}
+
+- (void)tipForTapStatusBar
+{
+    if([[NSUserDefaults standardUserDefaults]boolForKey:@"everShowTipStatusBar"])
+    {
+        return;
+    }
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everShowTipStatusBar"];
+    
+    if ([kAppDelegate.window viewWithTag:30001] ) {
+        return;
+    }
+    UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight)];
+    button.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    button.tag = 30001;
+    [button addTarget:self action:@selector(dismissTip) forControlEvents:UIControlEventTouchUpInside];
+    [kAppDelegate.window addSubview:button];
+    
+    
+    UILabel * tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 19, kScreenWidth, 34)];
+    tip.backgroundColor = UIColorFromRGB(0x343434);
+    tip.textColor = UIColorFromRGB(0xffffff);
+    tip.textAlignment = NSTextAlignmentCenter;
+    tip.text = @"点击状态栏，瞬间回到顶部";
+    tip.font = [UIFont systemFontOfSize:14];
+    tip.layer.masksToBounds = YES;
+    tip.layer.cornerRadius = 17;
+    [tip sizeToFit];
+    tip.frame = CGRectMake(0, 0, tip.deFrameWidth + 48, 34);
+    tip.center = CGPointMake(kScreenWidth/2, 0);
+    tip.deFrameTop = 19;
+    [button addSubview:tip];
+    
+    UIImageView * icon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_ triangle"]];
+    icon.center =CGPointMake(kScreenWidth/2, 0);
+    icon.deFrameTop = 11.5;
+    [button addSubview:icon];
+}
+
+- (void)dismissTip
+{
+    UIView * view =[kAppDelegate.window viewWithTag:30001];
+    if (view) {
+        [UIView animateWithDuration:0.3 animations:^{
+            view.alpha = 0;
+        } completion:^(BOOL finished) {
+            [[kAppDelegate.window viewWithTag:30001] removeFromSuperview];
+        }];
+    }
+
+}
+
+
 
 @end
