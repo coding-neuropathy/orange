@@ -46,8 +46,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     //[super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     [self performSelector:@selector(showEverything) withObject:nil afterDelay:0.0];
 }
+
 - (void)showEverything
 {
         [UIView animateWithDuration:0.8 delay:0.4 options:UIViewAnimationOptionCurveEaseOut animations:^{

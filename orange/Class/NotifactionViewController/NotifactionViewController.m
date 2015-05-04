@@ -134,7 +134,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     if (kAppDelegate.messageCount) {
         [self addBadge];

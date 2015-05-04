@@ -42,7 +42,7 @@
     if (!_entityImageView) {
         _entityImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _entityImageView.contentMode = UIViewContentModeScaleAspectFill;
-        
+//        _entityImageView.image = [UIImage im]
         [self.contentView addSubview:_entityImageView];
     }
     return _entityImageView;
@@ -54,10 +54,9 @@
     self.textLabel.text = _data[@"content"][@"entity"][@"title"];
     self.detailTextLabel.text = _data[@"content"][@"note"][@"content"];
     NSString * urlstring =  _data[@"content"][@"entity"][@"chief_image"];
-    
-//    [self.entityImageView sd_setImageWithURL:[NSURL URLWithString:[self imageURLWithURLString:urlstring Size:120.]]];
+   
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSURL *url = [NSURL URLWithString:[self imageURLWithURLString:urlstring Size:120.]];
+        NSURL *url = [NSURL URLWithString:[self imageURLWithURLString:urlstring Size:80.]];
         NSData *data = [NSData dataWithContentsOfURL:url];
         UIImage *placeholder = [UIImage imageWithData:data];
         
@@ -65,6 +64,7 @@
             [self.entityImageView setImage:placeholder];
         });
     });
+
 
     [self setNeedsLayout];
 }

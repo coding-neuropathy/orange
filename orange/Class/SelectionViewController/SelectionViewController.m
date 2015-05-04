@@ -423,7 +423,7 @@ static NSString *CellIdentifier = @"SelectionCell";
     [[NSUserDefaults standardUserDefaults] setObject:@(self.tableView.contentOffset.y) forKey:@"selection-offset-y"];
 }
 
-#pragma mark title view tap action
+#pragma mark  - title view tap action
 - (void)tapTitleView:(id)sender
 {
     [AVAnalytics event:@"tap selection category" ];
