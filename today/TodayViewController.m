@@ -36,16 +36,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@([[NSDate date] timeIntervalSince1970]) forKey:@"timestamp"];
     [paraDict setObject:@(3) forKey:@"count"];
-    
-    [API getTopTenEntityCount:3 success:^(NSArray *array) {
-        NSLog(@"%@", array);
-        self.dataArray = (NSMutableArray *)array;
-        [self save];
-        [self.tableView reloadData];
-    } failure:^(NSInteger stateCode) {
-        self.dataArray = [self getCache];
-        [self.tableView reloadData];
-    }];
+
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
 //    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
@@ -75,8 +66,21 @@
     // If an error is encountered, use NCUpdateResultFailed
     // If there's no update required, use NCUpdateResultNoData
     // If there's an update, use NCUpdateResultNewData
-
-    completionHandler(NCUpdateResultNewData);
+    
+    [API getTopTenEntityCount:3 success:^(NSArray *array) {
+        NSLog(@"%@", array);
+        self.dataArray = (NSMutableArray *)array;
+        [self save];
+        [self.tableView reloadData];
+        completionHandler(NCUpdateResultNewData);
+    } failure:^(NSInteger stateCode) {
+        NSLog(@"error %lu", (long)stateCode);
+        self.dataArray = [self getCache];
+        [self.tableView reloadData];
+        completionHandler(NCUpdateResultNoData);
+    }];
+    
+    
 }
 
 //- (void)receivedAdditionalContent

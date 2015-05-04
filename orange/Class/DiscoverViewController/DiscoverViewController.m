@@ -211,7 +211,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     [self.navigationController.navigationBar setAlpha:1];
     [self.navigationController.navigationBar setTranslucent:NO];
@@ -220,6 +220,7 @@
     [MobClick beginLogPageView:@"DiscoverView"];
 
 }
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

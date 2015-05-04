@@ -142,7 +142,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewWillAppear:animated];
     self.user = [Passport sharedInstance].user;
 
     if (self.dataArrayForEntity.count == 0) {
