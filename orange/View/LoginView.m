@@ -38,9 +38,16 @@
     if (self) {
         // Initialization code
         self.flag = NO;
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
+        effectview.frame = CGRectMake(0, 0, kScreenWidth ,kScreenHeight);
+        [self addSubview:effectview];
+        
+        
         whiteBG = [[UIView alloc]initWithFrame:CGRectMake(20, 80, self.frame.size.width-40, 300)];
-        whiteBG.backgroundColor = [UIColor whiteColor];
+        whiteBG.backgroundColor = [UIColor clearColor];
         whiteBG.layer.cornerRadius = 5.0f;
         whiteBG.layer.masksToBounds = YES;
         [self addSubview:whiteBG];
@@ -54,12 +61,12 @@
         
         
         logo = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"login_logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-        logo.tintColor = UIColorFromRGB(0x9d9e9f);
+        logo.tintColor = UIColorFromRGB(0xffffff);
         logo.center = CGPointMake(whiteBG.deFrameWidth/2, 80);
         [whiteBG addSubview:logo];
         
         tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, whiteBG.deFrameWidth, 30)];
-        tip.textColor = UIColorFromRGB(0xcbcbcb);
+        tip.textColor = UIColorFromRGB(0xffffff);
         tip.font = [UIFont fontWithName:@"FultonsHand" size:16];
         tip.textAlignment = NSTextAlignmentCenter;
         tip.text = @"Live Different";
@@ -84,7 +91,7 @@
         
         {
             UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
-            label.textColor = UIColorFromRGB(0x414243);
+            label.textColor = UIColorFromRGB(0xffffff);
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
             label.text = NSLocalizedStringFromTable(@"email", kLocalizedFile, nil);
@@ -97,7 +104,7 @@
         self.emailTextField.returnKeyType = UIReturnKeyNext;
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
         [self.emailTextField setTextColor:UIColorFromRGB(0x9d9e9f)];
-        self.emailTextField.backgroundColor = UIColorFromRGB(0xffffff);
+        self.emailTextField.backgroundColor = [UIColor clearColor];
         
         
         {
@@ -112,7 +119,7 @@
         _forgotPasswordButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 45)];
         [_forgotPasswordButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:18]];
         [_forgotPasswordButton setTitle:[NSString fontAwesomeIconStringForEnum:FAQuestionCircle] forState:UIControlStateNormal];
-        [_forgotPasswordButton setTitleColor:UIColorFromRGB(0xcbcbcb) forState:UIControlStateNormal];
+        [_forgotPasswordButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         _forgotPasswordButton.backgroundColor = [UIColor clearColor];
         [self.forgotPasswordButton addTarget:self action:@selector(tapForgotPasswordButton) forControlEvents:UIControlEventTouchUpInside];
         
@@ -125,11 +132,11 @@
         //self.passwordTextField.layer.borderWidth = 0.5;
         self.passwordTextField.secureTextEntry = YES;
         if (iOS7) {
-            [self.passwordTextField setTintColor:UIColorFromRGB(0x6d9acb)];
+            [self.passwordTextField setTintColor:UIColorFromRGB(0xffffff)];
         }
         {
             UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
-            label.textColor = UIColorFromRGB(0x414243);
+            label.textColor = UIColorFromRGB(0xffffff);
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
             label.text = NSLocalizedStringFromTable(@"password", kLocalizedFile, nil);
@@ -144,11 +151,11 @@
         self.passwordTextField.font = [UIFont systemFontOfSize:14];
         self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.passwordTextField.returnKeyType = UIReturnKeyGo;
-        [self.passwordTextField setTextColor:UIColorFromRGB(0x9d9e9f)];
-        self.passwordTextField.backgroundColor = UIColorFromRGB(0xffffff);
+        [self.passwordTextField setTextColor:UIColorFromRGB(0xffffff)];
+        self.passwordTextField.backgroundColor = [UIColor clearColor];
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextField.deFrameWidth,0.5)];
-            H.backgroundColor = UIColorFromRGB(0xebebeb);
+            H.backgroundColor = UIColorFromRGB(0xffffff);
             H.center = CGPointMake(self.passwordTextField.deFrameWidth/2, self.passwordTextField.deFrameHeight);
             [self.passwordTextField addSubview:H];
         }
@@ -192,7 +199,7 @@
         close.titleLabel.textAlignment = NSTextAlignmentLeft;
         close.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
         [close setTitle:[NSString fontAwesomeIconStringForEnum:FATimes] forState:UIControlStateNormal];
-        [close setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [close setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         close.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [close addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         close.deFrameTop = 10;
@@ -203,7 +210,7 @@
         _registerButton.backgroundColor = [UIColor clearColor];
         _registerButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [_registerButton setTitle:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"sign up", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FAChevronRight]] forState:UIControlStateNormal];
-        [_registerButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [_registerButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [_registerButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:14]];
         _registerButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_registerButton addTarget:self action:@selector(tapRegisterButton) forControlEvents:UIControlEventTouchUpInside];
@@ -214,7 +221,7 @@
         whiteBG.deFrameHeight = self.taobaoButton.deFrameBottom + 40;
         if(kScreenHeight >= 548)
         {
-            whiteBG.deFrameTop = 140;
+            whiteBG.deFrameTop = 100;
         }
         else
         {
@@ -429,7 +436,7 @@
     double delayInSeconds = 0.3;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
         [self removeFromSuperview];
     });
 }
@@ -438,7 +445,7 @@
 {
     if(kScreenHeight >= 548)
     {
-        whiteBG.deFrameTop = 140;
+        whiteBG.deFrameTop = 100;
     }
     [self.emailTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
