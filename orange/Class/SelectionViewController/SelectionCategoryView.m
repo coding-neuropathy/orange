@@ -12,8 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #define kSelectionCategoryStringArray [NSArray arrayWithObjects:@"all", @"woman", @"man", @"kid", @"accessories",@"beauty",@"tech",@"living",@"outdoors",@"culture",@"food",@"fun",nil]
 @interface SelectionCategoryView () <UIGestureRecognizerDelegate>
-@property(nonatomic, strong) FXBlurView * mask;
-@property(nonatomic, strong) UIView * black;
+@property(nonatomic, strong) UIView * mask;
 @end
 
 @implementation SelectionCategoryView
@@ -28,9 +27,6 @@
     if (self) {
         self.cateId = cateId+20000;
         self.backgroundColor = [UIColor clearColor];
-        
-
-      
         
         whiteBG = [[UIView alloc]init];
         whiteBG.frame = CGRectMake(0, kStatusBarHeight + kNavigationBarHeight, kScreenWidth, 0);
@@ -49,14 +45,11 @@
         tip.textAlignment = NSTextAlignmentCenter;
         tip.text = @"选择分类";
         //[whiteBG addSubview:tip];
+ 
+        _mask = [[UIView alloc]initWithFrame:CGRectMake(0,kStatusBarHeight + kNavigationBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight + kNavigationBarHeight)];
+        self.mask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        [self addSubview:self.mask];
         
-        _mask = [[FXBlurView alloc]initWithFrame:CGRectMake(0,kStatusBarHeight + kNavigationBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight + kNavigationBarHeight)];
-        self.mask.tintColor =[UIColor blackColor];
-        self.mask.blurRadius = 4;
-        self.mask.iterations = 0;
-        
-        _black = [[UIView alloc]initWithFrame:CGRectMake(0,kStatusBarHeight + kNavigationBarHeight, kScreenWidth, kScreenHeight)];
-        self.black.backgroundColor =[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     }
     return self;
 }
@@ -102,13 +95,6 @@
 
 - (void)show
 {
-    {
-        UIView * view  = [[UIView alloc]initWithFrame:CGRectMake(0,kScreenHeight, kScreenWidth, 80)];
-        view.backgroundColor =[UIColor colorWithRed:0 green:0 blue:0 alpha:1];
-        [kAppDelegate.window addSubview:view];
-    }
-    [kAppDelegate.window addSubview:self.black];
-    [kAppDelegate.window addSubview:self.mask];
     self.alpha = 0;
     [kAppDelegate.window addSubview:self];
 
@@ -131,8 +117,6 @@
         //whiteBG.alpha = 0;
         self.alpha = 0;
     } completion:^(BOOL finished) {
-        [self.black removeFromSuperview];
-        [self.mask removeFromSuperview];
         [self removeFromSuperview];
     }];
     

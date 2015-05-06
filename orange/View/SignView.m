@@ -34,7 +34,7 @@
     self = [super initWithFrame:kAppDelegate.window.frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.9];
         
         
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
@@ -336,7 +336,7 @@
     LoginView *view = [[LoginView alloc] init];
     view.successBlock = self.successBlock;
     [view showFromRegister];
-    double delayInSeconds = 0.3;
+    double delayInSeconds = 0.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
@@ -411,10 +411,10 @@
     
     [kAppDelegate.window addSubview:self];
     
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.0 animations:^{
         self.alpha = 1;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:0.0 animations:^{
         } completion:^(BOOL finished) {
             
         }];
@@ -427,7 +427,7 @@
     [kAppDelegate.window addSubview:self];
     self.backgroundColor = [UIColor clearColor];
     whiteBG.alpha = 0;
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.0 animations:^{
    
     } completion:^(BOOL finished) {
         whiteBG.alpha = 1;
@@ -440,7 +440,7 @@
     [MobClick endLogPageView:@"SignUpView"];
     
     self.alpha = 1;
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.0 animations:^{
         self.alpha = 0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
