@@ -2,7 +2,7 @@
 //  ALILocationService.h
 //  TAESDK
 //
-//  Created by madding on 3/16/15.
+//  Created by madding.lip on 3/16/15.
 //  Copyright (c) 2015 alibaba. All rights reserved.
 //
 

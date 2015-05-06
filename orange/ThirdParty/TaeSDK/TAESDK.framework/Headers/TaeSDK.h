@@ -5,13 +5,16 @@
 //  Created by 友和(lai.zhoul@alibaba-inc.com) on 14-8-2.
 //  Copyright (c) 2014年 com.taobao. All rights reserved.
 //
-static NSString * _TAE_SDK_VERSION = @"1.4.1";//当前TaeSDK的版本号
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import "TaeWebViewUISettings.h"
 
 #import "TaeTest.h"
 #import "TaeTopClient.h"
+
+static NSString * _TAE_SDK_VERSION = @"1.5.2";//当前TaeSDK的版本号
 
 
 @class TaeWebViewUISettings;
@@ -175,5 +178,12 @@ typedef enum{
  *  @param postFix <#postFix description#>
  */
 -(void) setSecGuardImagePostfix:(NSString *) postFix;
+
+
+/**
+ * 设置SDK发布渠道,包含渠道类型和渠道名
+ * 如：
+ */
+-(void) setChanne:(NSString *) type name:(NSString *) name;
 
 @end

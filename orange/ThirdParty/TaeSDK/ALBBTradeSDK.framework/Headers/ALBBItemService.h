@@ -81,12 +81,13 @@ tradeProcessFailedCallback:(tradeProcessFailedCallback)tradeProcessFailedCallbac
    tradeProcessSuccessCallback:(tradeProcessSuccessCallback)tradeProcessSuccessCallback tradeProcessFailedCallback:(tradeProcessFailedCallback)tradeProcessFailedCallback;
 
 /**
- *  打开商品详情页面
+ * 此方法不建议使用，请使用 showItemDetailByOpenId
+ * 打开商品详情页面
  *
  *  @param parentController  app当前的Controller
  *  @param isNeedPush            是否需要使用parentController进行push
  *  @param webViewUISettings        可以自定义的webview配置项
- *  @param itemId                      商品详情页请求参数
+ *  @param itemId                      商品混淆id
  *  @param itemType                      商品类型:1代表淘宝，2代表天猫
  *  @param params                        商品详情页请求附加参数
  *  @param tradeProcessSuccessCallback    交易流程成功完成订单支付的回调
@@ -146,12 +147,13 @@ tradeProcessFailedCallback:(tradeProcessFailedCallback)tradeProcessFailedCallbac
                         taoKeParams:(TaeTaokeParams *)taoKeParams
         tradeProcessSuccessCallback:(tradeProcessSuccessCallback)tradeProcessSuccessCallback tradeProcessFailedCallback:(tradeProcessFailedCallback)tradeProcessFailedCallback;
 /**
+ *  此方法不建议使用，请使用 showItemDetailByOpenId
  *  以淘客方式打开商品详情页面
  *
  *  @param parentController  app当前的Controller
  *  @param isNeedPush            是否需要使用parentController进行push
  *  @param webViewUISettings        可以自定义的webview配置项
- *  @param itemId                      商品详情页请求参数
+ *  @param itemId                      商品混淆id
  *  @param itemType                      商品类型:1代表淘宝，2代表天猫
  *  @param params                        商品详情页请求附加参数
  *  @param taoKeParams                        淘客参数

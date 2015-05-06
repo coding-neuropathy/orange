@@ -16,4 +16,6 @@
 
 -(void) addUTLog:(NSString *)trackId label:(NSString *)label propertys:(NSDictionary *)propertyDict;
 
+-(void) addUTLog:(NSString *)trackId page:(NSString *)page label:(NSString *)label interval:(NSInteger)interval  propertys:(NSDictionary *)propertyDict;
+
 @end

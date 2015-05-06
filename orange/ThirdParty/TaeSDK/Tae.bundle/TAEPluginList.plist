@@ -9,6 +9,13 @@
 		<key>pluginAdapterName</key>
 		<string>TaeDemoPluginAdapter</string>
 	</dict>
+	<key>globalTrade</key>
+	<dict>
+		<key>dependOn</key>
+		<string></string>
+		<key>pluginAdapterName</key>
+		<string>ALBBGlobalTradeSDKPluginAdapter</string>
+	</dict>
 	<key>login</key>
 	<dict>
 		<key>dependOn</key>
@@ -23,14 +30,14 @@
 		<key>pluginAdapterName</key>
 		<string>ALBBTradeSDKPluginAdapter</string>
 	</dict>
-	<key>image</key>
+	<key>media</key>
 	<dict>
 		<key>dependOn</key>
 		<string></string>
 		<key>pluginAdapterName</key>
 		<string>ALBBMediaServicePluginAdapter</string>
 	</dict>
-	<key>wx</key>
+	<key>openim</key>
 	<dict>
 		<key>dependOn</key>
 		<string></string>
@@ -43,6 +50,13 @@
 		<string></string>
 		<key>pluginAdapterName</key>
 		<string>ALBBOpenAccountPluginAdapter</string>
+	</dict>
+	<key>openAccountUI</key>
+	<dict>
+		<key>dependOn</key>
+		<string>openAccount</string>
+		<key>pluginAdapterName</key>
+		<string>ALBBOpenAccountUIPluginAdapter</string>
 	</dict>
 	<key>mas</key>
 	<dict>
