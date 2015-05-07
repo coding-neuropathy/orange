@@ -267,6 +267,7 @@
 		B7C80D151AEDE387003AE031 /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */; };
 		B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B9211AC142A500664BDB /* EditViewCell.m */; };
+		DA35B3BB1AFBB30700D66671 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA35B3BA1AFBB30700D66671 /* Reveal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -791,6 +792,7 @@
 		B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditHeaderView.m; path = EditView/EditHeaderView.m; sourceTree = "<group>"; };
 		B7D1B9201AC142A500664BDB /* EditViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewCell.h; path = EditView/EditViewCell.h; sourceTree = "<group>"; };
 		B7D1B9211AC142A500664BDB /* EditViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewCell.m; path = EditView/EditViewCell.m; sourceTree = "<group>"; };
+		DA35B3BA1AFBB30700D66671 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -812,6 +814,7 @@
 				B7662AA11AC39D5600C82B4B /* AVOSCloud.framework in Frameworks */,
 				B7662AA21AC39D5600C82B4B /* AVOSCloudSNS.framework in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
+				DA35B3BB1AFBB30700D66671 /* Reveal.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
 				B7AAFA781AB7036700A2F20D /* libstdc++.6.0.9.dylib in Frameworks */,
 				B754E6B41AFA76460034AB7D /* TAESDK.framework in Frameworks */,
@@ -1538,6 +1541,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				DA35B3BA1AFBB30700D66671 /* Reveal.framework */,
 				4E9727031AF73D69004C4940 /* FXBlurView */,
 				B7B6955C1AF05C400016AAB8 /* SDWebImage */,
 				B7F18B7C1ADF39A400B9AFDD /* TaeSDK */,
