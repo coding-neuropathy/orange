@@ -110,8 +110,6 @@ static NSString *CellIdentifier = @"SelectionCell";
         [weakSelf refresh];
     }];
     
-    
-
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
@@ -185,13 +183,13 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"加载失败"];
+            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
     else if (self.index == 1)
     {
-        [SVProgressHUD showImage:nil status:@"加载失败"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
         [self.tableView.pullToRefreshView stopAnimating];
     }
     return;
@@ -213,13 +211,13 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"加载失败"];
+            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
     else if (self.index == 1)
     {
-        [SVProgressHUD showImage:nil status:@"加载失败"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
         [self.tableView.infiniteScrollingView stopAnimating];
     }
     return;

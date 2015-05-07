@@ -19,6 +19,7 @@
 #import "NoDataView.h"
 #import "EditViewController.h"
 
+
 @interface MeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -31,6 +32,10 @@
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
 @property (nonatomic, strong) NoDataView * nodataView;
 @property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
+
+@property(nonatomic, strong) id<ALBBCartService> cartService;
+@property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
+@property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
 
 @end
 
@@ -61,9 +66,21 @@
             UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
             [array addObject:item];
         }
-        
+        {
+            UIButton * cartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            cartBtn.frame = CGRectMake(0., 0., 32., 44.);
+            cartBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
+            [cartBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+            [cartBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAShoppingCart] forState:UIControlStateNormal];
+            [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(8., 0., 0., 0.)];
+            [cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            UIBarButtonItem * cartBtnItem = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
+            [array addObject:cartBtnItem];
+        }
         
         self.navigationItem.rightBarButtonItems = array;
+        
+        _cartService=[[TaeSDK sharedInstance] getService:@protocol(ALBBCartService)];
     }
     return self;
 }
@@ -238,7 +255,7 @@
             [self.tableView.pullToRefreshView stopAnimating];
             
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"加载失败"];
+            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -251,7 +268,7 @@
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"加载失败"];
+            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -264,7 +281,7 @@
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"加载失败"];
+            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -283,7 +300,7 @@
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"加载失败"];
+            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
@@ -297,7 +314,7 @@
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"加载失败"];
+            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
@@ -679,6 +696,9 @@
     self.tableView.tableHeaderView = view;
 }
 
+
+#pragma mark - button action
+
 - (void)friendButtonAction
 {
     FriendViewController * VC = [[FriendViewController alloc]init];
@@ -708,6 +728,11 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)cartBtnAction:(id)sender
+{
+    [_cartService showCart:self isNeedPush:YES webViewUISettings:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if ([scrollView isEqual:self.tableView]) {
@@ -734,6 +759,7 @@
     }
     
 }
+
 
 
 @end

@@ -72,7 +72,7 @@
         self.label.delegate = self;
         [self.contentView addSubview:self.label];
     }
-    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@ </font></a>", self.user.userId, self.user.nickname];
+    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^414243' size=14>%@ </font></a>", self.user.userId, self.user.nickname];
     
     if(!self.contentLabel) {
         _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 27, kScreenWidth - 70, 20)];

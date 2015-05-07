@@ -19,7 +19,7 @@
 {
 @private
     UIView * whiteBG;
-    UILabel * tip;
+//    UILabel * tip;
 }
 - (id)initWithCateId:(NSUInteger)cateId           
 {
@@ -28,9 +28,9 @@
         self.cateId = cateId+20000;
         self.backgroundColor = [UIColor clearColor];
         
-        whiteBG = [[UIView alloc]init];
-        whiteBG.frame = CGRectMake(0, kStatusBarHeight + kNavigationBarHeight, kScreenWidth, 0);
-        whiteBG.backgroundColor = [UIColor whiteColor];
+        whiteBG = [[UIView alloc] init];
+        whiteBG.frame = CGRectMake(0, kStatusBarHeight + kNavigationBarHeight, kScreenWidth, 0.);
+        whiteBG.backgroundColor = UIColorFromRGB(0xffffff);
         [self addSubview:whiteBG];
 
         
@@ -38,21 +38,32 @@
         Tap.delegate = self;
         [self addGestureRecognizer:Tap];
         
-        tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 16, self.frame.size.width, 50)];
-        tip.numberOfLines = 0;
-        tip.textColor = UIColorFromRGB(0x777777);
-        tip.font = [UIFont systemFontOfSize:20.];
-        tip.textAlignment = NSTextAlignmentCenter;
-        tip.text = @"选择分类";
+//        tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 16, self.frame.size.width, 50)];
+//        tip.numberOfLines = 0;
+//        tip.textColor = UIColorFromRGB(0x777777);
+//        tip.font = [UIFont systemFontOfSize:20.];
+//        tip.textAlignment = NSTextAlignmentCenter;
+//        tip.text = @"选择分类";
         //[whiteBG addSubview:tip];
  
-        _mask = [[UIView alloc]initWithFrame:CGRectMake(0,kStatusBarHeight + kNavigationBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight + kNavigationBarHeight)];
+        _mask = [[UIView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight + kNavigationBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight + kNavigationBarHeight)];
         self.mask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
         [self addSubview:self.mask];
         
     }
     return self;
 }
+
+- (UIView *)mask
+{
+    if(!_mask) {
+        _mask = [[UIView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight + kNavigationBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight + kNavigationBarHeight)];
+        _mask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+//        [self addSubview:_mask];
+    }
+    return _mask;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -89,7 +100,7 @@
         }
     }
     
-
+    [self insertSubview:self.mask atIndex:0];
 
 }
 
@@ -100,7 +111,7 @@
 
     [UIView animateWithDuration:0.2 animations:^{
         self.alpha = 1;
-       // whiteBG.frame = CGRectMake(0, 0, whiteBG.frame.size.width, whiteBG.frame.size.height);
+//        whiteBG.frame = CGRectMake(0, 64, whiteBG.frame.size.width, 400.);
     } completion:^(BOOL finished) {
 
     }];

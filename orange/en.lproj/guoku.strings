@@ -129,3 +129,8 @@
 "fun"           = "FUN";
 
 
+/*
+ * error info
+ */
+"load failure"         = "Load Failure";
+

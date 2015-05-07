@@ -103,7 +103,8 @@
         self.emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.emailTextField.returnKeyType = UIReturnKeyNext;
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
-        [self.emailTextField setTextColor:UIColorFromRGB(0x9d9e9f)];
+//        [self.emailTextField setTextColor:UIColorFromRGB(0x9d9e9f)];
+        self.emailTextField.textColor = UIColorFromRGB(0xffffff);
         self.emailTextField.backgroundColor = [UIColor clearColor];
         
         
@@ -371,7 +372,6 @@
         kAppDelegate.alertWindow.hidden = YES;
     }];
 }
-
 
 #pragma mark - UITextFieldDelegate
 

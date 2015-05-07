@@ -20,7 +20,7 @@
 
 + (CGFloat)height
 {
-    return kScreenWidth/2;
+    return kScreenWidth / 2;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
