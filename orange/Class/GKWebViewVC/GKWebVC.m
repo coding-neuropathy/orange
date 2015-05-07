@@ -182,7 +182,7 @@
             break;
         default:
         {
-            [SVProgressHUD showImage:nil status:@"加载失败"];
+            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
         }
             break;
     }

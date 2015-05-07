@@ -129,3 +129,8 @@
 "culture"       = "文化";
 "food"          = "美食";
 "fun"           = "玩乐";
+
+/*
+ * error info
+ */
+"load failure"         = "加载失败";
