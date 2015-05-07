@@ -795,11 +795,18 @@
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    view.backgroundColor = UIColorFromRGB(0xff0000);
+    view.tag = 999;
+    [self.searchDC.searchContentsController.view addSubview:view];
     return YES;
+    
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
+    [[self.searchDC.searchContentsController.view viewWithTag:999] removeFromSuperview];
+    
     return YES;
 }
 
