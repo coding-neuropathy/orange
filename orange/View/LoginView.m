@@ -38,10 +38,11 @@
     if (self) {
         // Initialization code
         self.flag = NO;
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.9];
+        self.backgroundColor = [UIColor clearColor];
         
-        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
+        effectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
         effectview.frame = CGRectMake(0, 0, kScreenWidth ,kScreenHeight);
         [self addSubview:effectview];
         
@@ -110,7 +111,7 @@
         
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.emailTextField.deFrameWidth,0.5)];
-            H.backgroundColor = UIColorFromRGB(0xebebeb);
+            H.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.5];
             H.center = CGPointMake(self.emailTextField.deFrameWidth/2, self.emailTextField.deFrameHeight);
             [self.emailTextField addSubview:H];
         }
@@ -156,7 +157,7 @@
         self.passwordTextField.backgroundColor = [UIColor clearColor];
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextField.deFrameWidth,0.5)];
-            H.backgroundColor = UIColorFromRGB(0xffffff);
+            H.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.5];
             H.center = CGPointMake(self.passwordTextField.deFrameWidth/2, self.passwordTextField.deFrameHeight);
             [self.passwordTextField addSubview:H];
         }
@@ -188,7 +189,8 @@
         loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
         loginButton.layer.cornerRadius = 4;
         loginButton.layer.masksToBounds = YES;
-        loginButton.backgroundColor = UIColorFromRGB(0x457ebd);
+        loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        loginButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
         [loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
         [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
@@ -430,13 +432,21 @@
 - (void)tapRegisterButton
 {
     [whiteBG removeFromSuperview];
+    for(UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UIVisualEffectView class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    
+    
     SignView *view = [[SignView alloc] init];
     view.successBlock = self.successBlock;
     [view showFromLogin];
     double delayInSeconds = 0.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        view.backgroundColor = [UIColor clearColor];
         [self removeFromSuperview];
     });
 }
