@@ -227,7 +227,6 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 {
     if (indexPath.section == 2) {
         
-        
 //        static NSString *CellIdentifier = @"Cell";
         NoteCell *cell = [tableView dequeueReusableCellWithIdentifier:NoteCellIdentifier forIndexPath:indexPath];
 //        if (!cell) {
@@ -566,7 +565,6 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         self.header.entity = self.entity;
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"喜爱失败"];
-        
     }];
 }
 
@@ -574,7 +572,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 {
     if(!k_isLogin)
     {
-        LoginView * view = [[LoginView alloc]init];
+        LoginView * view = [[LoginView alloc] init];
         [view show];
         return;
     }
@@ -758,7 +756,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     WXWebpageObject *webPage = [WXWebpageObject object];
     webPage.webpageUrl = [NSString stringWithFormat:@"%@%@/?from=wechat",kGK_WeixinShareURL,self.entity.entityHash];
     message.mediaObject = webPage;
-    if(scene ==1)
+    if(scene == 1)
     {
         message.title = [NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title];
         message.description = @"";
