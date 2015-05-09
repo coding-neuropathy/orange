@@ -34,12 +34,13 @@
     self = [super initWithFrame:kAppDelegate.window.frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.9];
+        self.backgroundColor = [UIColor clearColor];
         
         
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
         effectview.frame =CGRectMake(0, 0, kScreenWidth ,kScreenHeight);
+        effectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
         [self addSubview:effectview];
         
         
@@ -103,7 +104,7 @@
         self.nicknameTextField.backgroundColor = [UIColor clearColor];
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.nicknameTextField.deFrameWidth,0.5)];
-            H.backgroundColor = UIColorFromRGB(0xffffff);
+            H.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.5];
             H.center = CGPointMake(self.nicknameTextField.deFrameWidth/2, self.nicknameTextField.deFrameHeight);
             [self.nicknameTextField addSubview:H];
         }
@@ -141,7 +142,7 @@
         self.emailTextField.backgroundColor = [UIColor clearColor];
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.emailTextField.deFrameWidth,0.5)];
-            H.backgroundColor = UIColorFromRGB(0xffffff);
+            H.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.5];
             H.center = CGPointMake(self.emailTextField.deFrameWidth/2, self.emailTextField.deFrameHeight);
             [self.emailTextField addSubview:H];
         }
@@ -178,7 +179,7 @@
         self.passwordTextField.backgroundColor = [UIColor clearColor];
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.emailTextField.deFrameWidth,0.5)];
-            H.backgroundColor = UIColorFromRGB(0xffffff);
+            H.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.5];
             H.center = CGPointMake(self.emailTextField.deFrameWidth/2, self.emailTextField.deFrameHeight);
             [self.passwordTextField addSubview:H];
         }
@@ -191,9 +192,10 @@
         registerButton.frame = CGRectMake(0, self.passwordTextField.deFrameBottom + 23, 90, 40.f);
         registerButton.center = self.passwordTextField.center;
         registerButton.deFrameTop = self.passwordTextField.deFrameBottom+23;
+        registerButton.titleLabel.font = [UIFont systemFontOfSize:14];
         registerButton.layer.cornerRadius = 4;
         registerButton.layer.masksToBounds = YES;
-        registerButton.backgroundColor = UIColorFromRGB(0x457ebd);
+        registerButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
         [registerButton setTitle:@"注册" forState:UIControlStateNormal];
         [registerButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         
@@ -339,7 +341,7 @@
     double delayInSeconds = 0.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        view.backgroundColor = [UIColor clearColor];
         [self removeFromSuperview];
     });
 }

@@ -793,57 +793,6 @@
     
 }
 
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
-{
-    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    view.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.97];
-    view.tag = 999;
-    
-    UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_search"]];
-    image.center = CGPointMake(kScreenWidth/2, 0);
-    image.deFrameTop = 50+kStatusBarHeight+kNavigationBarHeight;
-    [view addSubview:image];
-    
-    [self.searchDC.searchContentsController.view addSubview:view];
-    return YES;
-    
-}
-
-- (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
-{
-    for(UIView * v in controller.searchContentsController.view.subviews)
-    {
-        NSLog(@"%@",[v class]);
-       
-        if([v isKindOfClass:NSClassFromString(@"UISearchDisplayControllerContainerView")])
-        {
-            //v.alpha = 0
-            for(UIView * v1 in v.subviews)
-            {
-                for(UIView * v2 in v1.subviews)
-                {
-                    NSLog(@"%@",[v2 class]);
-                    if([v2 isKindOfClass:NSClassFromString(@"_UISearchDisplayControllerDimmingView")])
-                    {
-                        v2.backgroundColor = [UIColor clearColor];
-                    }
-                }
-            }
-        }
-
-    }
-}
-
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
-{
-    [[self.searchDC.searchContentsController.view viewWithTag:999] removeFromSuperview];
-    
-    return YES;
-}
-
-
-
-
 #pragma mark - Header View Delegate
 - (void)TapBannerImageAction:(NSDictionary *)dict
 {
@@ -894,6 +843,55 @@
 
 #pragma mark - SearchBar
 
+- (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
+{
+    for(UIView * v in controller.searchContentsController.view.subviews)
+    {
+        NSLog(@"%@",[v class]);
+        
+        if([v isKindOfClass:NSClassFromString(@"UISearchDisplayControllerContainerView")])
+        {
+            //v.alpha = 0
+            for(UIView * v1 in v.subviews)
+            {
+                for(UIView * v2 in v1.subviews)
+                {
+                    NSLog(@"%@",[v2 class]);
+                    if([v2 isKindOfClass:NSClassFromString(@"_UISearchDisplayControllerDimmingView")])
+                    {
+                        v2.backgroundColor = [UIColor clearColor];
+                    }
+                }
+            }
+        }
+        
+    }
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
+{
+    
+    [[self.searchDC.searchContentsController.view viewWithTag:999] removeFromSuperview];
+    return YES;
+}
+
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    view.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.97];
+    view.tag = 999;
+    
+    UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_search"]];
+    image.center = CGPointMake(kScreenWidth/2, 0);
+    image.deFrameTop = 50+kStatusBarHeight+kNavigationBarHeight;
+    [view addSubview:image];
+    
+    [self.searchDC.searchContentsController.view addSubview:view];
+    return YES;
+    
+}
+
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     
@@ -907,7 +905,11 @@
 {
     
     if ([searchText length] == 0) {
-        return;
+        [self.searchDC.searchContentsController.view viewWithTag:999].hidden = NO;
+    }
+    else
+    {
+        [self.searchDC.searchContentsController.view viewWithTag:999].hidden = YES;
     }
     
     self.dataArrayForUserForSearch = nil;
