@@ -99,12 +99,13 @@ static CGFloat LeftMargin = 16.;
 {
     NSMutableArray* buttons = [NSMutableArray arrayWithCapacity:4];
     CGRect btnRect = CGRectMake(LeftMargin, 60., kScreenWidth - LeftMargin * 2, 50);
-    for (NSString* optionTitle in @[@"商品下架", @"分类错误", @"垃圾或诈骗信息", @"不良内容"]) {
+    for (NSString* optionTitle in @[@"sold out", @"miss category", @"meaningless information", @"malicious information"]) {
         RadioButton* btn = [[RadioButton alloc] initWithFrame:btnRect];
         [btn addTarget:self action:@selector(onRadioButtonValueChanged:) forControlEvents:UIControlEventValueChanged];
         //        btn.backgroundColor = [UIColor redColor];
         btnRect.origin.y += 50;
-        [btn setTitle:optionTitle forState:UIControlStateNormal];
+        [btn setTitle:NSLocalizedStringFromTable(optionTitle, kLocalizedFile, nil) forState:UIControlStateNormal];
+        btn.tag = [self StringToType:optionTitle];
         [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         [btn setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
@@ -164,6 +165,19 @@ static CGFloat LeftMargin = 16.;
             self.tipLabel.hidden = NO;
         }
 
+}
+
+- (TipOffType)StringToType:(NSString *)string
+{
+    if([string isEqualToString:@"sold out"]) {
+        return SoldOutType;
+    } else if ([string isEqualToString:@"miss category"]) {
+        return MissCategoryType;
+    } else if ([string isEqualToString:@"meaningless information"]) {
+        return MeaningLessInfoType;
+    } else {
+        return MalicaiousInfoType;
+    }
 }
 
 - (void)setNote:(GKNote *)note
@@ -244,10 +258,11 @@ static CGFloat LeftMargin = 16.;
 {
 //    NSLog(@"button %@", sender);
     if(sender.selected) {
-        if ([sender.titleLabel.text isEqualToString:@"商品下架"]) {
-            self.radioType = 0;
-        }
-        NSLog(@"Selected color: %@", sender.titleLabel.text);
+        self.radioType = sender.tag;
+//        if ([sender.titleLabel.text isEqualToString:@"商品下架"]) {
+//            self.radioType = 0;
+//        }
+//        NSLog(@"Selected color: %@", sender.titleLabel.text);
     }
 }
 

@@ -134,3 +134,13 @@
  * error info
  */
 "load failure"         = "加载失败";
+
+
+/*
+ * tip off information
+ */
+"sold out"                  = "商品下架";
+"miss category"             = "分类错误";
+"meaningless information"   = "垃圾或诈骗信息";
+"malicious information"     = "不良信息";
+

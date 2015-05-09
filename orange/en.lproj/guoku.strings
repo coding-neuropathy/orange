@@ -134,3 +134,12 @@
  */
 "load failure"         = "Load Failure";
 
+
+/*
+ * tip off information
+ */
+"sold out"                  = "Sold Out";
+"miss category"             = "Miss Category";
+"meaningless information"   = "Meaningless Information";
+"malicious information"     = "Maliciou Informaion";
+
