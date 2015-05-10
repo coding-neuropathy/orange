@@ -347,8 +347,8 @@ NSString *SettingTableIdentifier = @"SettingCell";
     if (alertView.tag == 30001) {
         if(buttonIndex == 1) {
             UITextField *tf=[alertView textFieldAtIndex:0];
-            if (tf.text.length < 8) {
-                [SVProgressHUD showImage:nil status:@"密码不能小于8位"];
+            if (tf.text.length < 6) {
+                [SVProgressHUD showImage:nil status:@"密码不能小于6位"];
             } else {
                 NSDictionary *dict = @{@"password":tf.text};
                 [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {

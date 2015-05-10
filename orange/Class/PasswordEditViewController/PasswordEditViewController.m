@@ -10,10 +10,10 @@
 #import "GKAPI.h"
 static CGFloat NormalKeyboardHeight = 216.0f;
 
-@interface PasswordEditViewController ()<UITextViewDelegate>
-@property (nonatomic, strong) UITextView *textView;
-@property (nonatomic, strong) UIView *inputBG;
-@property (nonatomic, strong) UILabel *tipLabel;
+@interface PasswordEditViewController ()<UITextFieldDelegate>
+@property (nonatomic, strong) UITextField *passwordTextField;
+@property (nonatomic, strong) UITextField *passwordTextFieldForNew;
+@property (nonatomic, strong) UITextField *passwordTextFieldForSecond;
 @end
 
 @implementation PasswordEditViewController
@@ -23,129 +23,152 @@ static CGFloat NormalKeyboardHeight = 216.0f;
 
 #pragma mark - Life Cycle
 
+
 - (void)loadView
 {
     [super loadView];
-    
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
-    
-    _inputBG = [[UIView alloc]initWithFrame:CGRectMake(10, 10, kScreenWidth-20, kScreenHeight - NormalKeyboardHeight- 180 - 40 + 15.f)];
-    self.inputBG.backgroundColor = UIColorFromRGB(0xf6f6f6);
-    [self.view addSubview:_inputBG];
-    
-    _textView = [[UITextView alloc] initWithFrame:CGRectMake(20, 20, kScreenWidth-30, kScreenHeight - NormalKeyboardHeight- 180 - 40)];
-    [self.textView setKeyboardType:UIKeyboardTypeDefault];
-    [self.textView setReturnKeyType:UIReturnKeyDefault];
-    [self.textView setFont:[UIFont fontWithName:@"Helvetica" size:15.0f]];
-    [self.textView setScrollEnabled:YES];
-    [self.textView setEditable:YES];
-    [self.textView becomeFirstResponder];
-    [self.textView setContentOffset:CGPointMake(10, 10)];
-    self.textView.contentSize = CGSizeMake(kScreenWidth-30, _textView.deFrameSize.height-20);
-    self.textView.backgroundColor = [UIColor clearColor];
-    self.textView.textColor = UIColorFromRGB(0x666666);
-    [self.textView setTintColor:UIColorFromRGB(0x6d9acb)];
-    self.textView.delegate = self;
-    self.textView.spellCheckingType = UITextSpellCheckingTypeNo;
-    self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    
-    [self.view addSubview:self.textView];
-    
-    
-    if(_inputBG.deFrameHeight < 120)
-    {
-        self.inputBG.deFrameHeight = 120;
+        
+    _passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(40.f,30, kScreenWidth - 80, 45.f)];
+    self.passwordTextField.delegate = self;
+    self.passwordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.passwordTextField.borderStyle = UITextBorderStyleNone;
+    self.passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.passwordTextField.secureTextEntry = YES;
+    if (iOS7) {
+        [self.passwordTextField setTintColor:UIColorFromRGB(0x414243)];
     }
-    
-    if(self.textView.deFrameHeight < 105)
     {
-        self.textView.deFrameHeight = 105;
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
+        label.textColor = UIColorFromRGB(0x9d9e9f);
+        label.textAlignment = NSTextAlignmentLeft;
+        label.font = [UIFont systemFontOfSize:14];
+        label.text = @"原密码";
+        label.adjustsFontSizeToFitWidth = YES;
+        self.passwordTextField.leftView = label;
     }
+    self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.passwordTextField.rightViewMode = UITextFieldViewModeAlways;
+    self.passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.passwordTextField.placeholder = @"";
+    self.passwordTextField.font = [UIFont systemFontOfSize:14];
+    self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.passwordTextField.returnKeyType = UIReturnKeyGo;
+    [self.passwordTextField setTextColor:UIColorFromRGB(0x414243)];
+    self.passwordTextField.backgroundColor = [UIColor clearColor];
+    {
+        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextField.deFrameWidth,0.5)];
+        H.backgroundColor = UIColorFromRGB(0xebebeb);
+        H.center = CGPointMake(self.passwordTextField.deFrameWidth/2, self.passwordTextField.deFrameHeight);
+        [self.passwordTextField addSubview:H];
+    }
+    [self.view addSubview:self.passwordTextField];
     
     
-    //    _addPhotoButton = [[UIButton alloc]initWithFrame:CGRectMake(self.inputBG.deFrameRight-70, _inputBG.deFrameTop+10, 60, 60)];
-    //    [self.addPhotoButton setImage:[UIImage imageNamed:@"photo.png"] forState:UIControlStateNormal];
-    //    [self.addPhotoButton addTarget:self action:@selector(tapAddPhotoButton) forControlEvents:UIControlEventTouchUpInside];
-    //    [self.view addSubview:self.addPhotoButton];
-    /*
-     _H = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight - NormalKeyboardHeight- 100, kScreenWidth, 1)];
-     _H.backgroundColor = UIColorFromRGB(0xeaeaea);
-     [self.view addSubview:_H];
-     
-     _shareLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, _H.deFrameBottom+10, 72, 15)];
-     self.shareLabel.textAlignment = NSTextAlignmentLeft;
-     self.shareLabel.backgroundColor = [UIColor clearColor];
-     [self.shareLabel setFont:[UIFont fontWithName:@"Helvetica" size:12.0f]];
-     self.shareLabel.textColor = UIColorFromRGB(0x666666);
-     self.shareLabel.text = @"同时分享到：";
-     [self.view addSubview:self.shareLabel];
-     
-     _sinaShareButton = [[UIButton alloc]initWithFrame:CGRectMake(_shareLabel.deFrameRight, _H.deFrameBottom+8, 30, 20)];
-     [self.sinaShareButton setImage:[UIImage imageNamed:@"icon_sina.png"] forState:UIControlStateNormal];
-     [self.view addSubview:self.sinaShareButton];
-     
-     _weixinShareButton = [[UIButton alloc]initWithFrame:CGRectMake(_sinaShareButton.deFrameRight, _H.deFrameBottom+8, 30, 20)];
-     [self.weixinShareButton setImage:[UIImage imageNamed:@"icon_weixin.png"] forState:UIControlStateNormal];
-     [self.view addSubview:self.weixinShareButton];
-     */
+    _passwordTextFieldForNew = [[UITextField alloc] initWithFrame:CGRectMake(40.f,80, kScreenWidth - 80, 45.f)];
+    self.passwordTextFieldForNew.delegate = self;
+    self.passwordTextFieldForNew.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.passwordTextFieldForNew.borderStyle = UITextBorderStyleNone;
+    self.passwordTextFieldForNew.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.passwordTextFieldForNew.secureTextEntry = YES;
+    if (iOS7) {
+        [self.passwordTextFieldForNew setTintColor:UIColorFromRGB(0x414243)];
+    }
+    {
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
+        label.textColor = UIColorFromRGB(0x9d9e9f);
+        label.textAlignment = NSTextAlignmentLeft;
+        label.font = [UIFont systemFontOfSize:14];
+        label.text = @"新密码";
+        label.adjustsFontSizeToFitWidth = YES;
+        self.passwordTextFieldForNew.leftView = label;
+    }
+    self.passwordTextFieldForNew.leftViewMode = UITextFieldViewModeAlways;
+    self.passwordTextFieldForNew.rightViewMode = UITextFieldViewModeAlways;
+    self.passwordTextFieldForNew.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.passwordTextFieldForNew.placeholder = @"";
+    self.passwordTextFieldForNew.font = [UIFont systemFontOfSize:14];
+    self.passwordTextFieldForNew.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.passwordTextFieldForNew.returnKeyType = UIReturnKeyGo;
+    [self.passwordTextFieldForNew setTextColor:UIColorFromRGB(0x414243)];
+    self.passwordTextFieldForNew.backgroundColor = [UIColor clearColor];
+    {
+        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextFieldForNew.deFrameWidth,0.5)];
+        H.backgroundColor = UIColorFromRGB(0xebebeb);
+        H.center = CGPointMake(self.passwordTextFieldForNew.deFrameWidth/2, self.passwordTextFieldForNew.deFrameHeight);
+        [self.passwordTextFieldForNew addSubview:H];
+    }
+    [self.view addSubview:self.passwordTextFieldForNew];
     
-    _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 15)];
-    self.tipLabel.textAlignment = NSTextAlignmentLeft;
-    self.tipLabel.backgroundColor = [UIColor clearColor];
-    [self.tipLabel setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
-    self.tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
-    self.tipLabel.text = @"撰写真实、有用、有趣的商品点评";
-    
-    self.tipLabel.deFrameLeft = self.textView.deFrameLeft+10;
-    self.tipLabel.deFrameTop = self.textView.deFrameTop+8;
-    [self.view addSubview:self.tipLabel];
-    
+    _passwordTextFieldForSecond = [[UITextField alloc] initWithFrame:CGRectMake(40.f,130, kScreenWidth - 80, 45.f)];
+    self.passwordTextFieldForSecond.delegate = self;
+    self.passwordTextFieldForSecond.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.passwordTextFieldForSecond.borderStyle = UITextBorderStyleNone;
+    self.passwordTextFieldForSecond.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.passwordTextFieldForSecond.secureTextEntry = YES;
+    if (iOS7) {
+        [self.passwordTextFieldForSecond setTintColor:UIColorFromRGB(0x414243)];
+    }
+    {
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
+        label.textColor = UIColorFromRGB(0x9d9e9f);
+        label.textAlignment = NSTextAlignmentLeft;
+        label.font = [UIFont systemFontOfSize:14];
+        label.text = @"确认密码";
+        label.adjustsFontSizeToFitWidth = YES;
+        self.passwordTextFieldForSecond.leftView = label;
+    }
+    self.passwordTextFieldForSecond.leftViewMode = UITextFieldViewModeAlways;
+    self.passwordTextFieldForSecond.rightViewMode = UITextFieldViewModeAlways;
+    self.passwordTextFieldForSecond.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.passwordTextFieldForSecond.placeholder = @"";
+    self.passwordTextFieldForSecond.font = [UIFont systemFontOfSize:14];
+    self.passwordTextFieldForSecond.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.passwordTextFieldForSecond.returnKeyType = UIReturnKeyGo;
+    [self.passwordTextFieldForSecond setTextColor:UIColorFromRGB(0x414243)];
+    self.passwordTextFieldForSecond.backgroundColor = [UIColor clearColor];
+    {
+        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextFieldForSecond.deFrameWidth,0.5)];
+        H.backgroundColor = UIColorFromRGB(0xebebeb);
+        H.center = CGPointMake(self.passwordTextFieldForSecond.deFrameWidth/2, self.passwordTextFieldForSecond.deFrameHeight);
+        [self.passwordTextFieldForSecond addSubview:H];
+    }
+    [self.view addSubview:self.passwordTextFieldForSecond];
     
     
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"撰写点评";
+    self.title = @"修改密码";
+
     NSMutableArray * array = [NSMutableArray array];
     {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
-        button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-        [button setTitle:[NSString fontAwesomeIconStringForEnum:FApaperPlane] forState:UIControlStateNormal];
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 44)];
+        button.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        button.titleLabel.textAlignment = NSTextAlignmentRight;
+        [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [button setTitle:@"保存" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(postButtonAction) forControlEvents:UIControlEventTouchUpInside];
         button.backgroundColor = [UIColor clearColor];
         UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
         [array addObject:item];
     }
     self.navigationItem.rightBarButtonItems = array;
-    
-    if (self.note) {
-        self.textView.text = self.note.text;
-        if (self.textView.text.length >0) {
-            self.tipLabel.hidden = YES;
-        }
-        else
-        {
-            self.tipLabel.hidden = NO;
-        }
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"PostNoteView"];
-    [MobClick beginLogPageView:@"PostNoteView"];
+    [AVAnalytics beginLogPageView:@"PasswordEditView"];
+    [MobClick beginLogPageView:@"PasswordEditView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"PostNoteView"];
-    [MobClick endLogPageView:@"PostNoteView"];
+    [AVAnalytics endLogPageView:@"PasswordEditView"];
+    [MobClick endLogPageView:@"PasswordEditView"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -154,57 +177,64 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)textViewDidChange:(UITextView *)textView
-{
-    if (textView.text.length >0) {
-        self.tipLabel.hidden = YES;
-    }
-    else
-    {
-        self.tipLabel.hidden = NO;
-    }
-}
-
-
 #pragma mark - Selector Methdo
 
 - (void)postButtonAction
 {
-    NSInteger score = 0;
-    NSString *content = self.textView.text;
+    NSString *password = self.passwordTextField.text;
+    NSString *passwordnew = self.passwordTextFieldForNew.text;
+    NSString *passwordsecond = self.passwordTextFieldForSecond.text;
     
-    if (content.length == 0) {
-        [SVProgressHUD showImage:nil status:@"请输入点评内容"];
+    if (!password || password.length == 0) {
+        [SVProgressHUD showImage:nil status:@"请输入密码"];
         return;
     }
     
-    if (self.note) {
-        [GKAPI updateNoteWithNoteId:self.note.noteId content:content score:score imageData:nil success:^(GKNote *note) {
-            [self.navigationController popViewControllerAnimated:YES];
-            [SVProgressHUD showImage:nil status:@"修改成功"];
-            if (self.successBlock) {
-                self.successBlock(note);
-            }
-            [AVAnalytics event:@"update note" label:@"success"];
+    if (!passwordnew || passwordnew.length == 0) {
+        [SVProgressHUD showImage:nil status:@"请输入新密码"];
+        return;
+    }
+    
+    if (!passwordsecond || passwordsecond.length == 0) {
+        [SVProgressHUD showImage:nil status:@"请输入确认密码"];
+        return;
+    }
+    
+    if (![passwordsecond isEqualToString:passwordnew])
+    {
+        [SVProgressHUD showImage:nil status:@"两次密码不一致"];
+        return;
+    }
+    
+    UITextField *tf= self.passwordTextFieldForNew;
+    if (tf.text.length < 6) {
+        [SVProgressHUD showImage:nil status:@"密码不能小于6位"];
+    } else {
+        NSDictionary *dict = @{@"password":tf.text};
+        [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+            [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"修改失败"];
-            [AVAnalytics event:@"update note" label:@"failure"];
-        }];
-    } else {
-        [GKAPI postNoteWithEntityId:self.entity.entityId content:content score:score imageData:nil success:^(GKNote *note) {
-            [self.navigationController popViewControllerAnimated:YES];
-            [SVProgressHUD showImage:nil status:@"发布成功"];
-            [Passport sharedInstance].user.noteCount += 1;
-            if (self.successBlock) {
-                self.successBlock(note);
-            }
-            
-            [AVAnalytics event:@"post note" label:@"success"];
-        } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"发布失败"];
-            [AVAnalytics event:@"post note" label:@"failure"];
         }];
     }
+
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([string isEqualToString:@"\n"]) {
+        if (textField == self.passwordTextField) {
+            [self.passwordTextFieldForNew becomeFirstResponder];
+        }
+        else if (textField == self.passwordTextFieldForNew) {
+            [self.passwordTextFieldForSecond becomeFirstResponder];
+        }
+        else {
+            [self postButtonAction];
+        }
+    }
+    return YES;
+}
+
 
 @end
