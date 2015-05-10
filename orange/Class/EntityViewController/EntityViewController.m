@@ -257,7 +257,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 2) {
-            return [NoteCell height:self.dataArrayForNote[indexPath.row]];
+        return [NoteCell height:self.dataArrayForNote[indexPath.row]];
     }
     if (indexPath.section == 4) {
         return [EntityThreeGridCell height];
@@ -717,18 +717,23 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     if (buttonIndex == 1) {
         [GKAPI deleteNoteByNoteId:self.note.noteId success:^{
             __block NSInteger noteIndex = -1;
+            DDLogInfo(@"okoko");
             [self.dataArrayForNote enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                GKNote *note = obj;
-                if (note.noteId == self.note.noteId) {
-                    noteIndex = (NSInteger)idx;
+                if (stop) {
+                    GKNote *note = obj;
+//                NSLog(@"OKOKOKOKO");
+                    if (note.noteId == self.note.noteId) {
+                        noteIndex = (NSInteger)idx;
+                    }
+                    if (noteIndex != -1) {
+                        [self.dataArrayForNote removeObjectAtIndex:noteIndex];
+//                        DDLogInfo(@"del %@", [NSIndexPath indexPathForRow:noteIndex inSection:0]);
+                        [self.tableView reloadData];
+//                        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:noteIndex inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    }
+                    self.note = nil;
                 }
             }];
-            
-            if (noteIndex != -1) {
-                [self.dataArrayForNote removeObjectAtIndex:noteIndex];
-                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:noteIndex inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-            self.note = nil;
         } failure:nil];
     }
 }
@@ -772,7 +777,13 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     req.scene =scene;
     
     if ([WXApi sendReq:req]) {
-        
+        if (scene == 1) {
+            [AVAnalytics event:@"share entity to moments" attributes:@{@"entity":self.entity.entityName}];
+            [MobClick event:@"share entity to moments" attributes:@{@"entity":self.entity.entityName}];
+        } else {
+            [AVAnalytics event:@"share entity to wechat" attributes:@{@"entity":self.entity.entityName}];
+            [MobClick event:@"share entity to wechat" attributes:@{@"entity":self.entity.entityName}];
+        }
     }
     else{
         [SVProgressHUD showImage:nil status:@"图片太大，请关闭高清图片按钮"];
@@ -787,6 +798,8 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         } andProgress:^(float percent) {
             if (percent == 1) {
                 [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+                [AVAnalytics event:@"share to entity to weibo" attributes:@{@"entity":self.entity.entityName}];
+                [MobClick event:@"share to entity to weibo" attributes:@{@"entity":self.entity.entityName}];
             }
         }];
 }
