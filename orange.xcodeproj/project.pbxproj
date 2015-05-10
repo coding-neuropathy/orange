@@ -268,6 +268,8 @@
 		B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */; };
 		B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B9211AC142A500664BDB /* EditViewCell.m */; };
 		DA35B3BB1AFBB30700D66671 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA35B3BA1AFBB30700D66671 /* Reveal.framework */; };
+		DA35B3C61AFEE31200D66671 /* EmailEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35B3C21AFEE31200D66671 /* EmailEditViewController.m */; };
+		DA35B3C71AFEE31200D66671 /* PasswordEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35B3C51AFEE31200D66671 /* PasswordEditViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -793,6 +795,10 @@
 		B7D1B9201AC142A500664BDB /* EditViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewCell.h; path = EditView/EditViewCell.h; sourceTree = "<group>"; };
 		B7D1B9211AC142A500664BDB /* EditViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewCell.m; path = EditView/EditViewCell.m; sourceTree = "<group>"; };
 		DA35B3BA1AFBB30700D66671 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		DA35B3C11AFEE31200D66671 /* EmailEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailEditViewController.h; sourceTree = "<group>"; };
+		DA35B3C21AFEE31200D66671 /* EmailEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailEditViewController.m; sourceTree = "<group>"; };
+		DA35B3C41AFEE31200D66671 /* PasswordEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordEditViewController.h; sourceTree = "<group>"; };
+		DA35B3C51AFEE31200D66671 /* PasswordEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordEditViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1644,6 +1650,8 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
+				DA35B3C31AFEE31200D66671 /* PasswordEditViewController */,
 				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
 				4E117B601ABEE79800844935 /* WelcomeVC */,
 				4E117B5B1ABC6FDC00844935 /* EditViewController */,
@@ -2099,6 +2107,24 @@
 			path = TaeSDK;
 			sourceTree = "<group>";
 		};
+		DA35B3C01AFEE31200D66671 /* EmailEditViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DA35B3C11AFEE31200D66671 /* EmailEditViewController.h */,
+				DA35B3C21AFEE31200D66671 /* EmailEditViewController.m */,
+			);
+			path = EmailEditViewController;
+			sourceTree = "<group>";
+		};
+		DA35B3C31AFEE31200D66671 /* PasswordEditViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DA35B3C41AFEE31200D66671 /* PasswordEditViewController.h */,
+				DA35B3C51AFEE31200D66671 /* PasswordEditViewController.m */,
+			);
+			path = PasswordEditViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2428,6 +2454,7 @@
 				4E1D28C01A125B9300740C17 /* UIView+JSQMessages.m in Sources */,
 				4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */,
 				4E1D28CF1A125B9300740C17 /* JSQMessagesAvatarImage.m in Sources */,
+				DA35B3C61AFEE31200D66671 /* EmailEditViewController.m in Sources */,
 				4E66C1DD1A7C8B2500F31A90 /* SettingViewController.m in Sources */,
 				B7B695861AF05C400016AAB8 /* SDWebImagePrefetcher.m in Sources */,
 				4E1D28D31A125B9300740C17 /* JSQMessagesCellTextView.m in Sources */,
@@ -2445,6 +2472,7 @@
 				4E56DF1B19D552C000263B17 /* main.m in Sources */,
 				B7662AD21AC3B49E00C82B4B /* FeedBackViewController.m in Sources */,
 				4E56DF7D19D56EF500263B17 /* UIFont+FontAwesome.m in Sources */,
+				DA35B3C71AFEE31200D66671 /* PasswordEditViewController.m in Sources */,
 				B7B6957E1AF05C400016AAB8 /* MKAnnotationView+WebCache.m in Sources */,
 				393715C21ACBD9C300DC50FF /* DDLog.m in Sources */,
 				B7B695881AF05C400016AAB8 /* UIImage+GIF.m in Sources */,
