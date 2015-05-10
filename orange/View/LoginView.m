@@ -100,6 +100,7 @@
             self.emailTextField.leftView = label;
         }
         self.emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.emailTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.emailTextField.placeholder = @"";
         self.emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.emailTextField.returnKeyType = UIReturnKeyNext;
@@ -130,6 +131,7 @@
         self.passwordTextField.deFrameTop = self.emailTextField.deFrameBottom + 10.f;
         self.passwordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.passwordTextField.borderStyle = UITextBorderStyleNone;
+        self.passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         //self.passwordTextField.layer.borderColor = UIColorFromRGB(0xdcdcdc).CGColor;
         //self.passwordTextField.layer.borderWidth = 0.5;
         self.passwordTextField.secureTextEntry = YES;

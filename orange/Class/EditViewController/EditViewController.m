@@ -14,6 +14,8 @@
 //#import "GKWebVC.h"
 #import "EditHeaderView.h"
 #import "EditViewCell.h"
+#import "EmailEditViewController.h"
+#import "PasswordEditViewController.h"
 
 NSString *SettingTableIdentifier = @"SettingCell";
 
@@ -40,6 +42,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 //        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
 //        self.tabBarItem = item;
+        [self.navigationItem.backBarButtonItem setBackButtonTitlePositionAdjustment:UIOffsetMake(-100,-100) forBarMetrics:UIBarMetricsDefault];
     }
     return self;
 }
@@ -112,6 +115,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.tableView reloadData];
     [AVAnalytics beginLogPageView:@"EditView"];
 }
 
@@ -211,16 +215,22 @@ NSString *SettingTableIdentifier = @"SettingCell";
         switch (indexPath.row) {
             case 0:
             {
+                /*
                 UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"修改邮箱" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
                 alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
                 alertView.tag = 30000;
                 UITextField *textField = [alertView textFieldAtIndex:0];
                 textField.text = [Passport sharedInstance].user.email;
                 [alertView show];
+                 */
+                EmailEditViewController * VC = [[EmailEditViewController alloc]init];
+                [self.navigationController pushViewController:VC animated:YES];
+                
             }
                 break;
             case 1:
             {
+                /*
                 UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"修改密码" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
                 alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
                 alertView.tag = 30001;
@@ -228,6 +238,9 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 textField.secureTextEntry = YES;
 //                textField.text = [Passport sharedInstance].user.email;
                 [alertView show];
+                 */
+                PasswordEditViewController * VC = [[PasswordEditViewController alloc]init];
+                [self.navigationController pushViewController:VC animated:YES];
             }
                 break;
             default:

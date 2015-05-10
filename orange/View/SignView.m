@@ -96,6 +96,7 @@
         self.nicknameTextField.leftViewMode = UITextFieldViewModeAlways;
         self.nicknameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.nicknameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.nicknameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.nicknameTextField.placeholder = @"";
         self.nicknameTextField.delegate = self;
         self.nicknameTextField.font = [UIFont systemFontOfSize:14];
@@ -134,6 +135,7 @@
         }
         self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
         self.emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.emailTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.emailTextField.placeholder = @"";
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
         self.emailTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -171,6 +173,7 @@
         }
         self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
         self.passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.passwordTextField.placeholder = @"";
         self.passwordTextField.delegate = self;
         self.passwordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
