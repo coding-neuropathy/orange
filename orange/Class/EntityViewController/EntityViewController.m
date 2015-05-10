@@ -777,7 +777,13 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     req.scene =scene;
     
     if ([WXApi sendReq:req]) {
-        
+        if (scene == 1) {
+            [AVAnalytics event:@"share entity to moments" attributes:@{@"entity":self.entity.entityName}];
+            [MobClick event:@"share entity to moments" attributes:@{@"entity":self.entity.entityName}];
+        } else {
+            [AVAnalytics event:@"share entity to wechat" attributes:@{@"entity":self.entity.entityName}];
+            [MobClick event:@"share entity to wechat" attributes:@{@"entity":self.entity.entityName}];
+        }
     }
     else{
         [SVProgressHUD showImage:nil status:@"图片太大，请关闭高清图片按钮"];
@@ -792,6 +798,8 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         } andProgress:^(float percent) {
             if (percent == 1) {
                 [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+                [AVAnalytics event:@"share to entity to weibo" attributes:@{@"entity":self.entity.entityName}];
+                [MobClick event:@"share to entity to weibo" attributes:@{@"entity":self.entity.entityName}];
             }
         }];
 }
