@@ -714,25 +714,38 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    DDLogInfo(@"note %@", self.note.text);
     if (buttonIndex == 1) {
         [GKAPI deleteNoteByNoteId:self.note.noteId success:^{
             __block NSInteger noteIndex = -1;
-            DDLogInfo(@"okoko");
+//            DDLogInfo(@"okoko");
             [self.dataArrayForNote enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                if (stop) {
-                    GKNote *note = obj;
-//                NSLog(@"OKOKOKOKO");
-                    if (note.noteId == self.note.noteId) {
-                        noteIndex = (NSInteger)idx;
-                    }
-                    if (noteIndex != -1) {
-                        [self.dataArrayForNote removeObjectAtIndex:noteIndex];
-//                        DDLogInfo(@"del %@", [NSIndexPath indexPathForRow:noteIndex inSection:0]);
-                        [self.tableView reloadData];
-//                        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:noteIndex inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-                    }
+                GKNote * note = obj;
+                if (note.noteId == self.note.noteId) {
+                    noteIndex = idx;
+//                    if (noteIndex)
+                    [self.dataArrayForNote removeObjectAtIndex:idx];
                     self.note = nil;
+                    [self.tableView reloadData];
+//                    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+
                 }
+//                if (stop) {
+//                    GKNote *note = obj;
+//                    DDLogInfo(@"note %ld", note.noteId);
+//                    if (note.noteId == self.note.noteId) {
+//                        noteIndex = (NSInteger)idx;
+//                    }
+//                    DDLogInfo(@"noteindex %ld", self.note.noteId);
+//                    if (noteIndex != -1) {
+//                        [self.dataArrayForNote removeObjectAtIndex:noteIndex];
+//                        DDLogInfo(@"note array %@", self.dataArrayForNote);
+////                        DDLogInfo(@"del %@", [NSIndexPath indexPathForRow:noteIndex inSection:0]);
+//                        [self.tableView reloadData];
+////                        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:noteIndex inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+//                    }
+//                    self.note = nil;
+//                }
             }];
         } failure:nil];
     }
