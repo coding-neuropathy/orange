@@ -55,6 +55,7 @@
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:self.tableView];
     
+    /*
     UISwipeGestureRecognizer * leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
     UISwipeGestureRecognizer * rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
     
@@ -63,6 +64,7 @@
     
     [self.view addGestureRecognizer:leftSwipeGestureRecognizer];
     [self.view addGestureRecognizer:rightSwipeGestureRecognizer];
+     */
     
     
     [GKAPI getCategoryStatByCategoryId:self.category.categoryId success:^(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount) {
@@ -344,22 +346,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
         view.backgroundColor = UIColorFromRGB(0xffffff);
         {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 44)];
-            button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
-            button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [button setImage:[UIImage imageNamed:@"icon_grid"] forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:@"icon_grid_press"] forState:UIControlStateSelected];
-            [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-            [button setTitle:@"" forState:UIControlStateNormal];
-            [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-            [button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
-            button.tag = 1000;
-            button.selected = YES;
-            button.backgroundColor = [UIColor clearColor];
-            [view addSubview:button];
-        }
-        {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(90, 0, 90, 44)];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth -57 , 0, 57, 44)];
             button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
             [button setImage:[UIImage imageNamed:@"icon_list"] forState:UIControlStateNormal];
@@ -369,12 +356,14 @@
             [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
             [button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
             button.tag = 1001;
+            button.selected = YES;
             button.backgroundColor = [UIColor clearColor];
             [view addSubview:button];
+            
         }
 
         {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(180, 0, kScreenWidth-180, 44)];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth-77, 44)];
             button.titleLabel.font = [UIFont systemFontOfSize:14];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
             [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
@@ -382,19 +371,42 @@
             [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
             [button setTitleColor:UIColorFromRGB(0xFF1F77) forState:UIControlStateSelected];
             [button setTitle:@"" forState:UIControlStateNormal];
-            [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-            //[button addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventTouchUpInside];
+            [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
             button.tag = 1002;
+            button.userInteractionEnabled = NO;
             button.backgroundColor = [UIColor clearColor];
             [view addSubview:button];
         }
+        
         {
-            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(90,44/2-7, 1,14 )];
-            V.backgroundColor = UIColorFromRGB(0xebebeb);
-            [view addSubview:V];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(16, 0, kScreenWidth-100, 44)];
+            button.titleLabel.font = [UIFont systemFontOfSize:14];
+            button.titleLabel.textAlignment = NSTextAlignmentLeft;
+            [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+            [button setTitleColor:UIColorFromRGB(0x000000) forState:UIControlStateNormal];
+            [button setTitleColor:UIColorFromRGB(0x000000) forState:UIControlStateSelected];
+            [button setTitle:@"按时间" forState:UIControlStateNormal];
+            [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+            [button addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+            button.tag = 1003;
+            button.backgroundColor = [UIColor clearColor];
+            [view addSubview:button];
+            
+            {
+                UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(66, 0, 44, 44)];
+                label.textColor = UIColorFromRGB(0x9d9e9f);
+                label.textAlignment = NSTextAlignmentLeft;
+                label.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+                label.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
+                label.tag = 30000;
+                label.adjustsFontSizeToFitWidth = YES;
+                [view addSubview:label];
+            }
         }
+        
         {
-            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(180,44/2-7, 1,14 )];
+            UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth - 57 ,44/2-7, 1,14 )];
             V.backgroundColor = UIColorFromRGB(0xebebeb);
             [view addSubview:V];
         }
@@ -422,6 +434,21 @@
 - (void)segmentedControlChangedValue:(UIButton *)segmentedControl {
     NSUInteger index = segmentedControl.tag-1000;
     self.index = index;
+    
+    if(index == 0)
+    {
+        UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:1000];
+        button.tag = 1001;
+        [button setImage:[UIImage imageNamed:@"icon_list"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"icon_list_press"] forState:UIControlStateSelected];
+    }
+    else if(index == 1)
+    {
+        UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:1001];
+        button.tag = 1000;
+        [button setImage:[UIImage imageNamed:@"icon_grid"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"icon_grid_press"] forState:UIControlStateSelected];
+    }
     
     
     CGFloat y = [[self.dataArrayForOffset objectAtIndexedSubscript:self.index] floatValue];
@@ -481,7 +508,7 @@
         [self.dataArrayForOffset setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.index];
     }
 }
-
+/*
 - (void)handleSwipes:(UISwipeGestureRecognizer *)sender
 {
     
@@ -496,5 +523,45 @@
     }
     
 }
+*/
 
+
+- (void)showMenu
+{
+    UIButton * view = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    view.backgroundColor = [UIColor clearColor];
+    view.tag = 99;
+    [view addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:view];
+    
+    
+    UIView * mask = [[UIView alloc]initWithFrame:CGRectMake(0, 44, kScreenWidth, kScreenHeight)];
+    mask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.22];
+    [view addSubview:mask];
+    
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, 16, 0, 0);
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    button.titleLabel.textAlignment = NSTextAlignmentLeft;
+    [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+    [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+    [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateSelected];
+    [button setTitle:@"按喜爱" forState:UIControlStateNormal];
+    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [button addTarget:self action:@selector(tapChangeSort) forControlEvents:UIControlEventTouchUpInside];
+    button.tag = 1003;
+    button.backgroundColor = [UIColor whiteColor];
+    [mask addSubview:button];
+    
+}
+
+- (void)hideMenu
+{
+    [[self.view viewWithTag:99] removeFromSuperview];
+}
+- (void)tapChangeSort
+{
+    [self hideMenu];
+}
 @end
