@@ -14,6 +14,7 @@
 #import "CategoryLikeViewController.h"
 
 @interface CategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,strong) NSString * sort;
 @property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property(nonatomic, strong) NSMutableArray * dataArrayForLike;
@@ -28,6 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
+    self.sort = @"time";
     
     
     NSMutableArray * array = [NSMutableArray array];
@@ -161,7 +163,7 @@
 - (void)refresh
 {
     if (self.index == 1) {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"like" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
@@ -173,7 +175,7 @@
     }
     else if (self.index == 0)
     {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"like" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
@@ -185,7 +187,7 @@
     }
     else if (self.index == 2)
     {
-        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForLike = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
@@ -386,7 +388,13 @@
             [button setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
             [button setTitleColor:UIColorFromRGB(0x000000) forState:UIControlStateNormal];
             [button setTitleColor:UIColorFromRGB(0x000000) forState:UIControlStateSelected];
-            [button setTitle:@"按时间" forState:UIControlStateNormal];
+            if ([self.sort isEqualToString:@"like"]) {
+                [button setTitle:@"按喜爱" forState:UIControlStateNormal];
+            }
+            else
+            {
+                [button setTitle:@"按时间" forState:UIControlStateNormal];
+            }
             [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
             [button addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
             button.tag = 1003;
@@ -547,7 +555,15 @@
     [button setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
     [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
     [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateSelected];
-    [button setTitle:@"按喜爱" forState:UIControlStateNormal];
+    
+    if (![self.sort isEqualToString:@"like"]) {
+        [button setTitle:@"按喜爱" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [button setTitle:@"按时间" forState:UIControlStateNormal];
+    }
+
     [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [button addTarget:self action:@selector(tapChangeSort) forControlEvents:UIControlEventTouchUpInside];
     button.tag = 1003;
@@ -562,6 +578,17 @@
 }
 - (void)tapChangeSort
 {
+    UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:1003];
+    if ([self.sort isEqualToString:@"like"]) {
+        self.sort = @"time";
+        [button setTitle:@"按时间" forState:UIControlStateNormal];
+    }
+    else
+    {
+        self.sort = @"like";
+        [button setTitle:@"按喜爱" forState:UIControlStateNormal];
+    }
+    [self.tableView triggerPullToRefresh];
     [self hideMenu];
 }
 @end
