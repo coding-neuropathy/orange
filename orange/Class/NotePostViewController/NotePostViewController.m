@@ -186,9 +186,11 @@ static CGFloat NormalKeyboardHeight = 216.0f;
                 self.successBlock(note);
             }
             [AVAnalytics event:@"update note" label:@"success"];
+            [MobClick event:@"update note" label:@"success"];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"修改失败"];
             [AVAnalytics event:@"update note" label:@"failure"];
+            [MobClick event:@"update note" label:@"failure"];
         }];
     } else {
         [GKAPI postNoteWithEntityId:self.entity.entityId content:content score:score imageData:nil success:^(GKNote *note) {
@@ -200,9 +202,11 @@ static CGFloat NormalKeyboardHeight = 216.0f;
             }
             
             [AVAnalytics event:@"post note" label:@"success"];
+            [AVAnalytics event:@"post note" label:@"success"];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"发布失败"];
             [AVAnalytics event:@"post note" label:@"failure"];
+            [MobClick event:@"post note" label:@"failure"];
         }];
     }
 }

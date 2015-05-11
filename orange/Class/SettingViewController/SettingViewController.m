@@ -132,15 +132,15 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [MobClick beginLogPageView:@"SettingView"];
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleDefault;
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"SettingView"];
     [MobClick endLogPageView:@"SettingView"];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark - UITableViewDataSource

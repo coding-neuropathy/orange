@@ -164,7 +164,22 @@ static CGFloat LeftMargin = 16.;
         {
             self.tipLabel.hidden = NO;
         }
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [AVAnalytics beginLogPageView:@"TipOffView"];
+    [MobClick beginLogPageView:@"TipOffView"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    
+    [AVAnalytics endLogPageView:@"TipOffView"];
+    [MobClick endLogPageView:@"TipOffView"];
 }
 
 - (TipOffType)StringToType:(NSString *)string
