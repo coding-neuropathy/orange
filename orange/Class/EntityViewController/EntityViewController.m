@@ -805,16 +805,17 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 
 - (void)weiboShare
 {
-
-        [AVOSCloudSNS shareText:[NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title] andLink:[NSString stringWithFormat:@"%@%@/?from=weibo",kGK_WeixinShareURL,self.entity.entityHash] andImage:[self.image.image  imageWithSize:CGSizeMake(460.f, 460.f)]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+    
+    [AVOSCloudSNS shareText:[NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title] andLink:[NSString stringWithFormat:@"%@%@/?from=weibo",kGK_WeixinShareURL,self.entity.entityHash] andImage:[self.image.image  imageWithSize:CGSizeMake(460.f, 460.f)]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
             
-        } andProgress:^(float percent) {
-            if (percent == 1) {
-                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-                [AVAnalytics event:@"share to entity to weibo" attributes:@{@"entity":self.entity.entityName}];
-                [MobClick event:@"share to entity to weibo" attributes:@{@"entity":self.entity.entityName}];
-            }
-        }];
+    } andProgress:^(float percent) {
+        if (percent == 1) {
+            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+            
+            [AVAnalytics event:@"share to entity to weibo" attributes:@{@"entity":self.entity.entityName}];
+            [MobClick event:@"share to entity to weibo" attributes:@{@"entity":self.entity.entityName}];
+        }
+    }];
 }
 
 

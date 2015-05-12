@@ -100,6 +100,10 @@ typedef NS_ENUM(NSInteger, GKUserState) {
  */
 @property (nonatomic, strong) NSURL *avatarURL_s;
 
+/*
+ * 用户状态
+ */
+@property (assign, nonatomic) GKUserState user_state;
 /**
  *  是否认证
  */
@@ -129,8 +133,6 @@ typedef NS_ENUM(NSInteger, GKUserState) {
  *  关注数
  */
 @property (nonatomic, assign) NSInteger followingCount;
-
-@property (assign, nonatomic) GKUserState user_state;
 
 /**
  *  粉丝数
