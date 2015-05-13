@@ -42,7 +42,7 @@
 
 //weixin
 #ifndef kGK_WeixinShareKey
-#define kGK_WeixinShareKey	@"wx728e94cbff8094df"		//REPLACE ME
+#define kGK_WeixinShareKey	@"wx59118ccde8270caa"		//REPLACE ME
 #endif
 
 #ifndef kGK_WeixinShareURL

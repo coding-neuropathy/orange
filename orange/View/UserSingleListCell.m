@@ -11,6 +11,12 @@
 #import "GKAPI.h"
 #import "LoginView.h"
 
+@interface UserSingleListCell ()
+
+@property (strong, nonatomic) UIButton * blockBtn;
+
+@end
+
 @implementation UserSingleListCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -31,9 +37,47 @@
     // Initialization code
 }
 
+- (UIButton *)blockBtn
+{
+    if (!_blockBtn) {
+        _blockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _blockBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        _blockBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _blockBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        [_blockBtn setTitle:[NSString fontAwesomeIconStringForEnum:FATimes] forState:UIControlStateNormal];
+        [_blockBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        _blockBtn.hidden = YES;
+        
+        [self.contentView addSubview:_blockBtn];
+    }
+    return _blockBtn;
+}
+
+- (UIButton *)followButton
+{
+    if (!_followButton) {
+        _followButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _followButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+        _followButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+//        button.center = CGPointMake(kScreenWidth - 40, 37);
+        _followButton.hidden = YES;
+        [self.contentView addSubview:_followButton];
+    }
+    return _followButton;
+}
+
 - (void)setUser:(GKUser *)user
 {
     _user = user;
+    
+    if (_user.user_state == GKUserBlockState) {
+        self.followButton.hidden = YES;
+        self.blockBtn.hidden = NO;
+    } else {
+        self.followButton.hidden = NO;
+        self.blockBtn.hidden = YES;
+    }
+    
     [self setNeedsLayout];
 }
 
@@ -90,18 +134,24 @@
     
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     self.contentLabel.deFrameTop = self.label.deFrameBottom;
-    
-    if (!self.followButton)
-    {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 24)];
-        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
-        button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        button.center = CGPointMake(kScreenWidth - 40, 37);
-        [self.contentView addSubview:button];
-        self.followButton = button;
+//    
+//    if (!self.followButton)
+//    {
+//        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 24)];
+//        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
+//        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+//        button.center = CGPointMake(kScreenWidth - 40, 37);
+//        [self.contentView addSubview:button];
+//        self.followButton = button;
+//    }
+    if (self.user.user_state == GKUserBlockState) {
+        self.blockBtn.frame = CGRectMake(0., 0., 40., 24.);
+        self.blockBtn.center = CGPointMake(kScreenWidth - 40, 37);
+    } else {
+        self.followButton.frame = CGRectMake(0., 0., 40., 24.);
+        self.followButton.center = CGPointMake(kScreenWidth - 40, 37);
+        [self configFollowButton];
     }
-    [self configFollowButton];
-    
     [self bringSubviewToFront:self.H];
     _H.deFrameBottom = self.frame.size.height;
 }
