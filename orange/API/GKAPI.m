@@ -1801,19 +1801,51 @@
     }];
 }
 
+///**
+// *  更新当前用户账号信息
+// *
+// *  @param email     邮箱
+// *  @param password  密码
+// *  @param success   成功block
+// *  @param failure   失败block
+// */
+//+ (void)updateaccountWithParameters:(NSDictionary *)parameters
+//                                success:(void (^)(GKUser *user))success
+//                                failure:(void (^)(NSInteger stateCode))failure
+//{
+//    NSString *path = @"user/update/account/";
+//    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+//    if (parameters)
+//        paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+//    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSDictionary *objectDict = (NSDictionary *)responseObject;
+//        
+//        GKUser *user = [GKUser modelFromDictionary:objectDict];
+//        
+//        if (success) {
+//            success(user);
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        if (failure) {
+//            NSInteger stateCode = operation.response.statusCode;
+//            failure(stateCode);
+//        }
+//    }];
+//}
+
 /**
- *  更新当前用户账号信息
+ *  更新当前用户邮箱
  *
  *  @param email     邮箱
  *  @param password  密码
  *  @param success   成功block
  *  @param failure   失败block
  */
-+ (void)updateaccountWithParameters:(NSDictionary *)parameters
-                                success:(void (^)(GKUser *user))success
-                                failure:(void (^)(NSInteger stateCode))failure
++ (void)updateEmailWithParameters:(NSDictionary *)parameters
+                            success:(void (^)(GKUser *user))success
+                            failure:(void (^)(NSInteger stateCode, NSString *errorMsg))failure
 {
-    NSString *path = @"user/update/account/";
+    NSString *path = @"user/update/email/";
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     if (parameters)
         paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
@@ -1828,10 +1860,13 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
             NSInteger stateCode = operation.response.statusCode;
-            failure(stateCode);
+            NSString * messageString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
+            NSDictionary * messageObj = [NSJSONSerialization JSONObjectWithData:[messageString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+            failure(stateCode, [messageObj valueForKeyPath:@"message"]);
         }
     }];
 }
+
 
 /**
  *  更新当前用户信息

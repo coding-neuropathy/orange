@@ -133,8 +133,9 @@
 /*
  * error info
  */
-"load failure"         = "加载失败";
-
+"load failure"          = "加载失败";
+"password error"        = "密码错误";
+"duplicate email"       = "邮箱被占用";
 
 /*
  * tip off information

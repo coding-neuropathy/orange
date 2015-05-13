@@ -176,7 +176,6 @@
 		4E8D6AB31A3B57F600156C17 /* UINavigationController+statusbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB21A3B57F600156C17 /* UINavigationController+statusbar.m */; };
 		4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB61A3B66F900156C17 /* MCPHandler.m */; };
 		4E934DA81A9AE9FB00374B05 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E934DA71A9AE9FB00374B05 /* GroupViewController.m */; };
-		4E9727061AF73D69004C4940 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9727051AF73D69004C4940 /* FXBlurView.m */; };
 		4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */; };
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
@@ -635,8 +634,6 @@
 		4E8D6AB61A3B66F900156C17 /* MCPHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPHandler.m; sourceTree = "<group>"; };
 		4E934DA61A9AE9FB00374B05 /* GroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupViewController.h; sourceTree = "<group>"; };
 		4E934DA71A9AE9FB00374B05 /* GroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupViewController.m; sourceTree = "<group>"; };
-		4E9727041AF73D69004C4940 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
-		4E9727051AF73D69004C4940 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
 		4EA0C4471A7F03DE0025EC2E /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
 		4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
 		4EA0C44B1A805CBD0025EC2E /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
@@ -1544,7 +1541,6 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				4E9727031AF73D69004C4940 /* FXBlurView */,
 				B7B6955C1AF05C400016AAB8 /* SDWebImage */,
 				B7F18B7C1ADF39A400B9AFDD /* TaeSDK */,
 				393715AF1ACBD9C300DC50FF /* Lumberjack */,
@@ -1754,15 +1750,6 @@
 				4E934DA71A9AE9FB00374B05 /* GroupViewController.m */,
 			);
 			path = GroupViewController;
-			sourceTree = "<group>";
-		};
-		4E9727031AF73D69004C4940 /* FXBlurView */ = {
-			isa = PBXGroup;
-			children = (
-				4E9727041AF73D69004C4940 /* FXBlurView.h */,
-				4E9727051AF73D69004C4940 /* FXBlurView.m */,
-			);
-			path = FXBlurView;
 			sourceTree = "<group>";
 		};
 		4EA0C4461A7F03CB0025EC2E /* ReportViewController */ = {
@@ -2346,7 +2333,6 @@
 				4EA0C4571A82810D0025EC2E /* GKTaobaoOAuthViewController.m in Sources */,
 				4E3A23471A51A7C500037F9C /* GKNote.m in Sources */,
 				B7C684861ABBD78E00A122E8 /* ListViewController.m in Sources */,
-				4E9727061AF73D69004C4940 /* FXBlurView.m in Sources */,
 				4E1D28D21A125B9300740C17 /* JSQVideoMediaItem.m in Sources */,
 				4E1D28BF1A125B9300740C17 /* UIImage+JSQMessages.m in Sources */,
 				4E2D6D5F1A6FF7DE009E4A17 /* NoteSingleListCell.m in Sources */,

@@ -57,9 +57,9 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     self.emailTextField.font = [UIFont systemFontOfSize:14];
     self.emailTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
-    if (iOS7) {
-        [self.emailTextField setTintColor:UIColorFromRGB(0x414243)];
-    }
+//    if (iOS7) {
+//        [self.emailTextField setTintColor:UIColorFromRGB(0x414243)];
+//    }
     self.emailTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 16., 45.)];
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
     
@@ -108,9 +108,9 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     self.passwordTextField.borderStyle = UITextBorderStyleNone;
     self.passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.passwordTextField.secureTextEntry = YES;
-    if (iOS7) {
-        [self.passwordTextField setTintColor:UIColorFromRGB(0x414243)];
-    }
+//    if (iOS7) {
+//        [self.passwordTextField setTintColor:UIColorFromRGB(0x414243)];
+//    }
     {
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 44)];
         label.textColor = UIColorFromRGB(0x9d9e9f);
@@ -206,24 +206,35 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     UITextField *tf=self.emailTextField;
     if ([tf.text validateEmail]) {
         NSDictionary *dict = @{@"email": tf.text,@"password":self.passwordTextField.text};
-        [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+        [GKAPI updateEmailWithParameters:dict success:^(GKUser *user) {
             [Passport sharedInstance].user.email = user.email;
             [Passport sharedInstance].user = [Passport sharedInstance].user;
             [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
             [self.navigationController popViewControllerAnimated:YES];
-        } failure:^(NSInteger stateCode) {
-            if(stateCode == 500)
+        } failure:^(NSInteger stateCode, NSString *errorMsg) {
+            if (stateCode == 400)
             {
-               [SVProgressHUD showImage:nil status:@"此邮箱已被使用"];
-            }
-            else if(stateCode == 400)
-            {
-                [SVProgressHUD showImage:nil status:@"密码错误"];
-            }
-            else {
-                [SVProgressHUD showImage:nil status:@"修改失败"];
+                [SVProgressHUD showErrorWithStatus:NSLocalizedStringFromTable(errorMsg, kLocalizedFile, nil)];
             }
         }];
+//        [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+//            [Passport sharedInstance].user.email = user.email;
+//            [Passport sharedInstance].user = [Passport sharedInstance].user;
+//            [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+//            [self.navigationController popViewControllerAnimated:YES];
+//        } failure:^(NSInteger stateCode) {
+//            if(stateCode == 500)
+//            {
+//               [SVProgressHUD showImage:nil status:@"此邮箱已被使用"];
+//            }
+//            else if(stateCode == 400)
+//            {
+//                [SVProgressHUD showImage:nil status:@"密码错误"];
+//            }
+//            else {
+//                [SVProgressHUD showImage:nil status:@"修改失败"];
+//            }
+//        }];
     } else {
         [SVProgressHUD showImage:nil status:@"邮箱格式错误"];
     }

@@ -8,7 +8,7 @@
 
 #import "SelectionCategoryView.h"
 #import "LoginView.h"
-#import "FXBlurView.h"
+//#import "FXBlurView.h"
 #import <QuartzCore/QuartzCore.h>
 #define kSelectionCategoryStringArray [NSArray arrayWithObjects:@"all", @"woman", @"man", @"kid", @"accessories",@"beauty",@"tech",@"living",@"outdoors",@"culture",@"food",@"fun",nil]
 @interface SelectionCategoryView () <UIGestureRecognizerDelegate>

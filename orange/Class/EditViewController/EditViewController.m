@@ -329,14 +329,14 @@ NSString *SettingTableIdentifier = @"SettingCell";
             UITextField *tf=[alertView textFieldAtIndex:0];
             if ([tf.text validateEmail]) {
                 NSDictionary *dict = @{@"email": tf.text};
-                [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
-                    [Passport sharedInstance].user.email = user.email;
-                    [Passport sharedInstance].user = [Passport sharedInstance].user;
-                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
-                    [self.tableView reloadData];
-                } failure:^(NSInteger stateCode) {
-                    [SVProgressHUD showImage:nil status:@"修改失败"];
-                }];
+//                [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+//                    [Passport sharedInstance].user.email = user.email;
+//                    [Passport sharedInstance].user = [Passport sharedInstance].user;
+//                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+//                    [self.tableView reloadData];
+//                } failure:^(NSInteger stateCode) {
+//                    [SVProgressHUD showImage:nil status:@"修改失败"];
+//                }];
             } else {
                 [SVProgressHUD showImage:nil status:@"邮箱格式错误"];
             }
@@ -351,11 +351,11 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 [SVProgressHUD showImage:nil status:@"密码不能小于6位"];
             } else {
                 NSDictionary *dict = @{@"password":tf.text};
-                [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
-                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
-                } failure:^(NSInteger stateCode) {
-                    [SVProgressHUD showImage:nil status:@"修改失败"];
-                }];
+//                [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+//                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+//                } failure:^(NSInteger stateCode) {
+//                    [SVProgressHUD showImage:nil status:@"修改失败"];
+//                }];
             }
         }
     }

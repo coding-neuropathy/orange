@@ -132,7 +132,9 @@
 /*
  * error info
  */
-"load failure"         = "Load Failure";
+"load failure"          = "Load Failure";
+"password error"        = "Password Error";
+"duplicate email"       = "Dupllicate Email";
 
 
 /*
