@@ -207,10 +207,18 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     }
     
     UITextField *tf= self.passwordTextFieldForNew;
-    if (tf.text.length < 6) {
-        [SVProgressHUD showImage:nil status:@"密码不能小于6位"];
+    if (tf.text.length < 8) {
+        [SVProgressHUD showImage:nil status:@"密码不能小于8位"];
     } else {
-        NSDictionary *dict = @{@"password":tf.text};
+        NSDictionary *dict = @{@"password":password, @"new_password":passwordnew, @"confirm_password":passwordsecond};
+        
+        [GKAPI resetPasswordWithParameters:dict success:^(GKUser *user) {
+            [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+        } failure:^(NSInteger stateCode, NSString *errorMsg) {
+            if(stateCode == 400) {
+                [SVProgressHUD showErrorWithStatus:NSLocalizedStringFromTable(errorMsg, kLocalizedFile, nil)];
+            }
+        }];
 //        [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
 //            [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
 //        } failure:^(NSInteger stateCode) {

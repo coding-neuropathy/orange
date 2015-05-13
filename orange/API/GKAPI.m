@@ -1869,6 +1869,42 @@
 
 
 /**
+ *  更新当前用户邮箱
+ *
+ *  @param password         密码
+ *  @param new_passowrd     新密码
+ *  @param confirm_password 确认密码
+ *  @param success          成功block
+ *  @param failure          失败block
+ */
++ (void)resetPasswordWithParameters:(NSDictionary *)parameters
+                          success:(void (^)(GKUser *user))success
+                          failure:(void (^)(NSInteger stateCode, NSString *errorMsg))failure
+{
+    NSString *path = @"user/reset/password/";
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    if (parameters)
+        paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *objectDict = (NSDictionary *)responseObject;
+        
+        GKUser *user = [GKUser modelFromDictionary:objectDict];
+        
+        if (success) {
+            success(user);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            NSString * messageString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
+            NSDictionary * messageObj = [NSJSONSerialization JSONObjectWithData:[messageString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+            failure(stateCode, [messageObj valueForKeyPath:@"message"]);
+        }
+    }];
+}
+
+
+/**
  *  更新当前用户信息
  *
  *  @param nickname  昵称
