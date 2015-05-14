@@ -35,12 +35,12 @@ int ddLogLevel;
     [AVPush setProductionMode:YES];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
-//    [AVAnalytics setChannel:@"tongbu"];
+//    [AVAnalytics setChannel:@"91"];
     
     // umeng
     [MobClick setAppVersion:XcodeAppVersion];
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
-//    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:@"tongbu"];
+//    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:@"91"];
     [MobClick setLogEnabled:NO];
     [MobClick updateOnlineConfig];
 //    

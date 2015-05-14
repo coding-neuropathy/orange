@@ -52,33 +52,7 @@
         
         self.title = NSLocalizedStringFromTable(@"me", kLocalizedFile, nil);
         
-        NSMutableArray * array = [NSMutableArray array];
-        
-        {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
-            button.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-            [button setTitle:[NSString fontAwesomeIconStringForEnum:FACog] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(settingButtonAction) forControlEvents:UIControlEventTouchUpInside];
-            [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
-            button.backgroundColor = [UIColor clearColor];
-            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-            [array addObject:item];
-        }
-        {
-            UIButton * cartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            cartBtn.frame = CGRectMake(0., 0., 32., 44.);
-            cartBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
-            [cartBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-            [cartBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAShoppingCart] forState:UIControlStateNormal];
-            [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(8., 0., 0., 0.)];
-            [cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-            UIBarButtonItem * cartBtnItem = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
-            [array addObject:cartBtnItem];
-        }
-        
-        self.navigationItem.rightBarButtonItems = array;
+
         
         _cartService=[[TaeSDK sharedInstance] getService:@protocol(ALBBCartService)];
     }
@@ -166,6 +140,36 @@
         [self refresh];
     }
     [AVAnalytics beginLogPageView:@"MeView"];
+    
+    NSMutableArray * array = [NSMutableArray array];
+    
+    {
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+        button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [button setTitle:[NSString fontAwesomeIconStringForEnum:FACog] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(settingButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
+        button.backgroundColor = [UIColor clearColor];
+        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+        [array addObject:item];
+    }
+    
+    if ([[TaeSession sharedInstance] isLogin])
+    {
+        UIButton * cartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        cartBtn.frame = CGRectMake(0., 0., 32., 44.);
+        cartBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
+        [cartBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [cartBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAShoppingCart] forState:UIControlStateNormal];
+        [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(8., 0., 0., 0.)];
+        [cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem * cartBtnItem = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
+        [array addObject:cartBtnItem];
+    }
+    
+    self.navigationItem.rightBarButtonItems = array;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

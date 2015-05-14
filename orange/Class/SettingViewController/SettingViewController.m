@@ -28,6 +28,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 @property (nonatomic, strong) UISwitch * switch_assistant;
 @property (nonatomic, strong) SettingsFooterView * footerView;
 
+@property (nonatomic, strong) id<ALBBLoginService> loginService;
+
 @end
 
 @implementation SettingViewController
@@ -43,6 +45,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
+        
+        _loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
     }
     return self;
 }
@@ -467,6 +471,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
     }
     [Passport logout];
+//    [[TaeSession sharedInstance] lo]
+    [self.loginService logout];
     [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
 }
