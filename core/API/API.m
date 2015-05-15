@@ -135,6 +135,9 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
+//            NSLog(@"%@", [[error userInfo] allKeys]);
+//            NSLog(@"url %@", [[error userInfo] valueForKey:@"NSErrorFailingURLKey"]);
+            
             NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
