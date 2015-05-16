@@ -26,6 +26,14 @@ static NSString *CellIdentifier = @"CommentCell";
 
 @implementation NoteViewController
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UIKeyboardWillShowNotification];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UIKeyboardWillHideNotification];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:UIKeyboardWillChangeFrameNotification];
+}
+
 - (CommentHeaderView *)headerView
 {
     if (!_headerView) {
