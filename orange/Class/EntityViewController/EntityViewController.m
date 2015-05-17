@@ -694,6 +694,13 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         [self weiboShare];
     }
     else if ([buttonTitle isEqualToString:@"举报商品"]) {
+        
+        if(!k_isLogin)
+        {
+            LoginView * view = [[LoginView alloc]init];
+            [view show];
+            return;
+        }
         ReportViewController * VC = [[ReportViewController alloc]init];
         VC.entity = self.entity;
         [self.navigationController pushViewController:VC animated:YES];
