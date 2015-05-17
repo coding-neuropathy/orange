@@ -20,6 +20,7 @@
 #import "DiscoverHeaderView.h"
 #import "GTScrollNavigationBar.h"
 #import "NoSearchResultView.h"
+#import "WebViewController.h"
 
 
 @interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchDisplayDelegate, DiscoverHeaderViewDelegate>
@@ -812,7 +813,8 @@
         }
         NSRange range = [url rangeOfString:@"out_link"];
         if (range.location == NSNotFound) {
-            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+//            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+            WebViewController * VC = [[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
             VC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:VC animated:YES];
             return;

@@ -201,6 +201,8 @@
 		B71E49521AC923FB00D4DB6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E49541AC923FB00D4DB6D /* InfoPlist.strings */; };
 		B71E495B1AC9259000D4DB6D /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B71E495A1AC9259000D4DB6D /* SettingsViewCell.m */; };
 		B71E495F1AC98E4700D4DB6D /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B71E495E1AC98E4700D4DB6D /* SettingsFooterView.m */; };
+		B72000B51B0848160001F199 /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B72000B41B0848160001F199 /* libPushSDK-1.8.3.a */; };
+		B72000B71B0849E50001F199 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B72000B61B0849E50001F199 /* PushConfig.plist */; };
 		B72FD82A1AEF2DB400354248 /* SelectionCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD8291AEF2DB400354248 /* SelectionCategoryView.m */; };
 		B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD82E1AEF5B3A00354248 /* IconInfoView.m */; };
 		B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */; };
@@ -266,6 +268,8 @@
 		B7C80D151AEDE387003AE031 /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */; };
 		B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B9211AC142A500664BDB /* EditViewCell.m */; };
+		B7F5AA011B08C75A0033BB2D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F5AA001B08C75A0033BB2D /* WebViewController.m */; };
+		B7F5AA0B1B08D3320033BB2D /* WebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F5AA0A1B08D3320033BB2D /* WebViewProgressView.m */; };
 		DA35B3C61AFEE31200D66671 /* EmailEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35B3C21AFEE31200D66671 /* EmailEditViewController.m */; };
 		DA35B3C71AFEE31200D66671 /* PasswordEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35B3C51AFEE31200D66671 /* PasswordEditViewController.m */; };
 /* End PBXBuildFile section */
@@ -685,6 +689,9 @@
 		B71E495C1AC92AD600D4DB6D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/guoku.strings"; sourceTree = "<group>"; };
 		B71E495D1AC98E4700D4DB6D /* SettingsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsFooterView.h; path = SettingsView/SettingsFooterView.h; sourceTree = "<group>"; };
 		B71E495E1AC98E4700D4DB6D /* SettingsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsFooterView.m; path = SettingsView/SettingsFooterView.m; sourceTree = "<group>"; };
+		B72000B31B0848160001F199 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		B72000B41B0848160001F199 /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
+		B72000B61B0849E50001F199 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		B72FD8281AEF2DB400354248 /* SelectionCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionCategoryView.h; sourceTree = "<group>"; };
 		B72FD8291AEF2DB400354248 /* SelectionCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionCategoryView.m; sourceTree = "<group>"; };
 		B72FD82D1AEF5B3A00354248 /* IconInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconInfoView.h; sourceTree = "<group>"; };
@@ -790,6 +797,10 @@
 		B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditHeaderView.m; path = EditView/EditHeaderView.m; sourceTree = "<group>"; };
 		B7D1B9201AC142A500664BDB /* EditViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewCell.h; path = EditView/EditViewCell.h; sourceTree = "<group>"; };
 		B7D1B9211AC142A500664BDB /* EditViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewCell.m; path = EditView/EditViewCell.m; sourceTree = "<group>"; };
+		B7F5A9FF1B08C75A0033BB2D /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		B7F5AA001B08C75A0033BB2D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		B7F5AA091B08D3320033BB2D /* WebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewProgressView.h; sourceTree = "<group>"; };
+		B7F5AA0A1B08D3320033BB2D /* WebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewProgressView.m; sourceTree = "<group>"; };
 		DA35B3C11AFEE31200D66671 /* EmailEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailEditViewController.h; sourceTree = "<group>"; };
 		DA35B3C21AFEE31200D66671 /* EmailEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailEditViewController.m; sourceTree = "<group>"; };
 		DA35B3C41AFEE31200D66671 /* PasswordEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordEditViewController.h; sourceTree = "<group>"; };
@@ -836,6 +847,7 @@
 				4E56DFC319D5AF1E00263B17 /* SystemConfiguration.framework in Frameworks */,
 				B754E6AD1AFA76460034AB7D /* ALBBLoginSDK.framework in Frameworks */,
 				39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */,
+				B72000B51B0848160001F199 /* libPushSDK-1.8.3.a in Frameworks */,
 				4E56DFC119D5AF1400263B17 /* MobileCoreServices.framework in Frameworks */,
 				4E56DFBF19D5AF0900263B17 /* Security.framework in Frameworks */,
 				4E56DFBD19D5AF0000263B17 /* CoreLocation.framework in Frameworks */,
@@ -1534,6 +1546,7 @@
 				4E56DF1919D552C000263B17 /* Info.plist */,
 				4E56DF1A19D552C000263B17 /* main.m */,
 				4E56DFB519D57ECC00263B17 /* config.pch */,
+				B72000B61B0849E50001F199 /* PushConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1541,6 +1554,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				B72000B21B0848160001F199 /* JPush */,
 				B7B6955C1AF05C400016AAB8 /* SDWebImage */,
 				B7F18B7C1ADF39A400B9AFDD /* TaeSDK */,
 				393715AF1ACBD9C300DC50FF /* Lumberjack */,
@@ -1685,6 +1699,10 @@
 			children = (
 				4E66C1DF1A7CBD2F00F31A90 /* GKWebVC.h */,
 				4E66C1E01A7CBD2F00F31A90 /* GKWebVC.m */,
+				B7F5A9FF1B08C75A0033BB2D /* WebViewController.h */,
+				B7F5AA001B08C75A0033BB2D /* WebViewController.m */,
+				B7F5AA091B08D3320033BB2D /* WebViewProgressView.h */,
+				B7F5AA0A1B08D3320033BB2D /* WebViewProgressView.m */,
 			);
 			path = GKWebViewVC;
 			sourceTree = "<group>";
@@ -1876,6 +1894,15 @@
 				B71E495E1AC98E4700D4DB6D /* SettingsFooterView.m */,
 			);
 			name = SettingsView;
+			sourceTree = "<group>";
+		};
+		B72000B21B0848160001F199 /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				B72000B31B0848160001F199 /* APService.h */,
+				B72000B41B0848160001F199 /* libPushSDK-1.8.3.a */,
+			);
+			path = JPush;
 			sourceTree = "<group>";
 		};
 		B74266DA1AB3DFE10064A010 /* AutoScroll */ = {
@@ -2287,6 +2314,7 @@
 				4E1D28BA1A125B9300740C17 /* JSQMessages.strings in Resources */,
 				4E8D6AA41A3B3E2200156C17 /* read_me.txt in Resources */,
 				4E1D28DE1A125B9300740C17 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
+				B72000B71B0849E50001F199 /* PushConfig.plist in Resources */,
 				4E56DF7C19D56EF500263B17 /* FontAwesome.ttf in Resources */,
 				4E1D28E31A125B9300740C17 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				B71E494A1AC9207B00D4DB6D /* guoku.strings in Resources */,
@@ -2359,6 +2387,7 @@
 				B708432A1ABBF427009605D8 /* NSString+Helper.m in Sources */,
 				B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */,
 				4E1D28CC1A125B9300740C17 /* JSQLocationMediaItem.m in Sources */,
+				B7F5AA0B1B08D3320033BB2D /* WebViewProgressView.m in Sources */,
 				4E1D28C71A125B9300740C17 /* JSQMessagesTimestampFormatter.m in Sources */,
 				393715C31ACBD9C300DC50FF /* DDTTYLogger.m in Sources */,
 				4E3A23431A51A7C500037F9C /* GKBaseModel.m in Sources */,
@@ -2370,6 +2399,7 @@
 				4E1D28C21A125B9300740C17 /* JSQMessagesViewController.m in Sources */,
 				4E1D28C41A125B9300740C17 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				4EC9F7971A7928C70057D736 /* UserSingleListCell.m in Sources */,
+				B7F5AA011B08C75A0033BB2D /* WebViewController.m in Sources */,
 				4E3A238D1A52F21800037F9C /* TabBarViewcontroller.m in Sources */,
 				4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */,
 				B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */,
@@ -2747,6 +2777,7 @@
 					"$(PROJECT_DIR)/orange/ThirdParty/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1",
 					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1/UMOpus",
+					"$(PROJECT_DIR)/orange/ThirdParty/JPush",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -2781,6 +2812,7 @@
 					"$(PROJECT_DIR)/orange/ThirdParty/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1",
 					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1/UMOpus",
+					"$(PROJECT_DIR)/orange/ThirdParty/JPush",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
