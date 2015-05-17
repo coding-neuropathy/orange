@@ -91,7 +91,7 @@
         self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
         
         {
-            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
             label.textColor = UIColorFromRGB(0xffffff);
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
@@ -139,7 +139,7 @@
             [self.passwordTextField setTintColor:UIColorFromRGB(0xffffff)];
         }
         {
-            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
             label.textColor = UIColorFromRGB(0xffffff);
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
@@ -211,7 +211,7 @@
         close.deFrameLeft = 16;
         [whiteBG addSubview:close];
         
-        _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
+        _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 60.f)];
         _registerButton.backgroundColor = [UIColor clearColor];
         _registerButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [_registerButton setTitle:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"sign up", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FAChevronRight]] forState:UIControlStateNormal];

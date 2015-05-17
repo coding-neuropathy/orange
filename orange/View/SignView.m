@@ -86,11 +86,11 @@
         }
         
         {
-            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
             label.textColor = UIColorFromRGB(0xffffff);
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
-            label.text = @"昵称";
+            label.text = NSLocalizedStringFromTable(@"nickname", kLocalizedFile, nil);
             self.nicknameTextField.leftView = label;
         }
         self.nicknameTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -126,11 +126,11 @@
             [self.emailTextField setTintColor:UIColorFromRGB(0xffffff)];
         }
         {
-            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
             label.textColor = UIColorFromRGB(0xffffff);
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
-            label.text = @"邮箱";
+            label.text =  NSLocalizedStringFromTable(@"email", kLocalizedFile, nil);
             self.emailTextField.leftView = label;
         }
         self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -164,11 +164,11 @@
             [self.passwordTextField setTintColor:UIColorFromRGB(0xffffff)];
         }
         {
-            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
             label.textColor = UIColorFromRGB(0xffffff);
             label.textAlignment = NSTextAlignmentLeft;
             label.font = [UIFont systemFontOfSize:14];
-            label.text = @"密码";
+            label.text =  NSLocalizedStringFromTable(@"password", kLocalizedFile, nil);
             self.passwordTextField.leftView = label;
         }
         self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -199,13 +199,13 @@
         registerButton.layer.cornerRadius = 4;
         registerButton.layer.masksToBounds = YES;
         registerButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
-        [registerButton setTitle:@"注册" forState:UIControlStateNormal];
+        [registerButton setTitle:NSLocalizedStringFromTable(@"sign up", kLocalizedFile, nil) forState:UIControlStateNormal];
         [registerButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         
         [registerButton addTarget:self action:@selector(tapRegisterButton) forControlEvents:UIControlEventTouchUpInside];
         [whiteBG addSubview:registerButton];
         
-        UIButton * close = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
+        UIButton * close = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80.f , 40.f)];
         close.backgroundColor = [UIColor clearColor];
         close.titleLabel.textAlignment = NSTextAlignmentLeft;
         close.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
@@ -221,7 +221,7 @@
         _loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
         _loginButton.backgroundColor = [UIColor clearColor];
         _loginButton.titleLabel.textAlignment = NSTextAlignmentRight;
-        [_loginButton setTitle:[NSString stringWithFormat:@"登录 %@",[NSString fontAwesomeIconStringForEnum:FAChevronRight]] forState:UIControlStateNormal];
+        [_loginButton setTitle:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil),[NSString fontAwesomeIconStringForEnum:FAChevronRight]] forState:UIControlStateNormal];
         [_loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [_loginButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:14]];
         _loginButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
