@@ -279,7 +279,12 @@ static NSString *CellIdentifier = @"CommentCell";
 
 - (void)postButtonAction
 {
-
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     NSString *content = self.inputTextField.text;
     
     if (content.length == 0) {

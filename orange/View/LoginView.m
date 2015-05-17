@@ -211,16 +211,29 @@
         close.deFrameLeft = 16;
         [whiteBG addSubview:close];
         
-        _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 60.f)];
+        _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
         _registerButton.backgroundColor = [UIColor clearColor];
         _registerButton.titleLabel.textAlignment = NSTextAlignmentRight;
-        [_registerButton setTitle:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"sign up", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FAChevronRight]] forState:UIControlStateNormal];
+        [_registerButton setTitle:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"sign up", kLocalizedFile, nil)] forState:UIControlStateNormal];
         [_registerButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [_registerButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:14]];
+        [_registerButton.titleLabel setFont: [UIFont systemFontOfSize:14]];
         _registerButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_registerButton addTarget:self action:@selector(tapRegisterButton) forControlEvents:UIControlEventTouchUpInside];
         _registerButton.deFrameTop = 10;
         _registerButton.deFrameRight = whiteBG.deFrameWidth - 16;
+        _registerButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
+        
+        {
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 14, 40)];
+            label.textColor = UIColorFromRGB(0xffffff);
+            label.textAlignment = NSTextAlignmentLeft;
+            label.font =[UIFont fontWithName:kFontAwesomeFamilyName size:14];
+            label.text = [NSString fontAwesomeIconStringForEnum:FAChevronRight];
+            label.adjustsFontSizeToFitWidth = YES;
+            label.deFrameRight = _registerButton.deFrameWidth;
+            [_registerButton addSubview:label];
+
+        }
         [whiteBG addSubview:_registerButton];
         
         whiteBG.deFrameHeight = self.taobaoButton.deFrameBottom + 40;

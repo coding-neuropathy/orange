@@ -221,13 +221,26 @@
         _loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
         _loginButton.backgroundColor = [UIColor clearColor];
         _loginButton.titleLabel.textAlignment = NSTextAlignmentRight;
-        [_loginButton setTitle:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil),[NSString fontAwesomeIconStringForEnum:FAChevronRight]] forState:UIControlStateNormal];
+        [_loginButton setTitle:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil)] forState:UIControlStateNormal];
         [_loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [_loginButton.titleLabel setFont:[UIFont fontWithName:kFontAwesomeFamilyName size:14]];
+        [_loginButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
         _loginButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
         _loginButton.deFrameTop = 10;
         _loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
+        _loginButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
+        
+        {
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 14, 40)];
+            label.textColor = UIColorFromRGB(0xffffff);
+            label.textAlignment = NSTextAlignmentLeft;
+            label.font =[UIFont fontWithName:kFontAwesomeFamilyName size:14];
+            label.text = [NSString fontAwesomeIconStringForEnum:FAChevronRight];
+            label.adjustsFontSizeToFitWidth = YES;
+            label.deFrameRight = _loginButton.deFrameWidth;
+            [_loginButton addSubview:label];
+            
+        }
         [whiteBG addSubview:_loginButton];
         
         
