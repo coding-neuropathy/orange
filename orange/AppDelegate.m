@@ -35,12 +35,12 @@ int ddLogLevel;
     [AVPush setProductionMode:YES];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
-//    [AVAnalytics setChannel:@"91"];
+//    [AVAnalytics setChannel:@"tongbu"];
     
     // umeng
     [MobClick setAppVersion:XcodeAppVersion];
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
-//    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:@"91"];
+//    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:@"tongbu"];
     [MobClick setLogEnabled:NO];
     [MobClick updateOnlineConfig];
 //    
@@ -395,8 +395,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-    ddLogLevel = LOG_LEVEL_VERBOSE;
-//    ddLogLevel = LOG_LEVEL_ERROR;
+//    ddLogLevel = LOG_LEVEL_VERBOSE;
+    ddLogLevel = LOG_LEVEL_ERROR;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;
