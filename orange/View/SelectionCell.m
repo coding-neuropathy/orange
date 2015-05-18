@@ -232,11 +232,11 @@
 {
     if ([keyPath isEqualToString:@"likeCount"]) {
         if (self.entity.likeCount) {
-            [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %ld",self.entity.likeCount] forState:UIControlStateNormal];
+            [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString stringWithFormat:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil)],self.entity.likeCount] forState:UIControlStateNormal];
         }
         else
         {
-            [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱"] forState:UIControlStateNormal];
+            [self.likeButton setTitle:[NSString stringWithFormat:@"%@",[NSString stringWithFormat:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil)]] forState:UIControlStateNormal];
         }
 
     }
@@ -290,7 +290,7 @@
             [SVProgressHUD dismiss];
         }
         
-        [self.likeButton setTitle:[NSString stringWithFormat:@"喜爱 %lu",self.entity.likeCount] forState:UIControlStateNormal];
+        [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %lu",[NSString stringWithFormat:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil)],self.entity.likeCount] forState:UIControlStateNormal];
         
         if(self.entity.likeCount == 0)
         {
