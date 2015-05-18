@@ -139,7 +139,6 @@
     if (self.dataArrayForEntity.count == 0) {
         [self refresh];
     }
-    [AVAnalytics beginLogPageView:@"MeView"];
     
     NSMutableArray * array = [NSMutableArray array];
     
@@ -170,12 +169,16 @@
     }
     
     self.navigationItem.rightBarButtonItems = array;
+    
+    [AVAnalytics beginLogPageView:@"MeView"];
+    [MobClick beginLogPageView:@"MeView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"MeView"];
+    [MobClick endLogPageView:@"MeView"];
 }
 
 -(void)viewDidAppear:(BOOL)animated

@@ -147,8 +147,8 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self failureLogWithOperation:operation responseObject:error];
         DDLogError(@"error url %@", [[error userInfo] valueForKey:@"NSErrorFailingURLKey"]);
-        DDLogError(@"%@", [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"]);
-        DDLogError(@"error %@", [[error userInfo] allKeys]);
+//        DDLogError(@"%@", [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"]);
+//        DDLogError(@"error %@", [[error userInfo] allKeys]);
         if (failure) {
             failure(operation, error);
         }

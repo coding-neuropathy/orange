@@ -14,12 +14,12 @@
 #import "NotePostViewController.h"
 #import "CategoryViewController.h"
 #import "WXApi.h"
-#import "GKWebVC.h"
+//#import "GKWebVC.h"
 #import "ReportViewController.h"
 #import "LoginView.h"
 #import "IBActionSheet.h"
 #import "EntityHeaderView.h"
-
+#import "WebViewController.h"
 
 static NSString *NoteCellIdentifier = @"NoteCell";
 static NSString *EntityCellIdentifier = @"EntityCell";
@@ -655,9 +655,10 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         url = [NSString stringWithFormat:@"%@%lu",url,user.userId];
     }
 
-    GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
-    VC.hidesBottomBarWhenPushed = YES;
+//    GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+    WebViewController *VC =[[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
     VC.title = @"宝贝详情";
+    VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
     
 }

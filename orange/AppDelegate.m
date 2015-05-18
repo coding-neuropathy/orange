@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-//#import "EmojiOne.h"
 #import "WXApi.h"
 #import "TabBarViewController.h"
 #import "GKAPI.h"
@@ -17,6 +16,7 @@
 #import "TagViewController.h"
 #import "IntruductionVC.h"
 #import "WelcomeVC.h"
+#import "APService.h"
 
 int ddLogLevel;
 
@@ -35,20 +35,15 @@ int ddLogLevel;
     [AVPush setProductionMode:YES];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
-//    [AVAnalytics setChannel:@"91"];
+//    [AVAnalytics setChannel:@"tongbu"];
     
     // umeng
     [MobClick setAppVersion:XcodeAppVersion];
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
-//    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:@"91"];
+//    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:@"tongbu"];
     [MobClick setLogEnabled:NO];
     [MobClick updateOnlineConfig];
-//    
-//    [UMOpus setAudioEnable:YES];
-//    [UMFeedback setAppkey:UMENG_APPKEY];
-//    [UMFeedback setLogEnabled:YES];
-//    [[UMFeedback sharedInstance] setFeedbackViewController:[UMFeedback feedbackViewController] shouldPush:YES];
-//    
+   
     // wechat
     [WXApi registerApp:kGK_WeixinShareKey];
     
@@ -92,12 +87,11 @@ int ddLogLevel;
 //        
 //        [application registerUserNotificationSettings:settings];
 //        [application registerForRemoteNotifications];
-//    }else{
-//        [application registerForRemoteNotificationTypes:
-//         UIRemoteNotificationTypeBadge |
-//         UIRemoteNotificationTypeAlert |
-//         UIRemoteNotificationTypeSound];
-//    }
+
+    [APService registerForRemoteNotificationTypes:UIUserNotificationTypeAlert| UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
+    [APService setupWithOption:launchOptions];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateJPushID:) name:kJPFNetworkDidLoginNotification object:nil];
+    
     [SVProgressHUD setBackgroundColor:UIColorFromRGB(0x2b2b2b)];
     [SVProgressHUD setForegroundColor:UIColorFromRGB(0xffffff)];
     
@@ -182,15 +176,19 @@ int ddLogLevel;
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation setObject:[AVUser currentUser] forKey:@"owner"];
-    [currentInstallation saveInBackground];
+//    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
+//    [currentInstallation setDeviceTokenFromData:deviceToken];
+//    [currentInstallation setObject:[AVUser currentUser] forKey:@"owner"];
+//    [currentInstallation saveInBackground];
+    [APService registerDeviceToken:deviceToken];
+    
+    DDLogInfo(@"device token %@", deviceToken);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-
+    DDLogError(@"user info %@", userInfo);
+    [APService handleRemoteNotification:userInfo];
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
@@ -200,7 +198,8 @@ int ddLogLevel;
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler
 {
-    
+    [APService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 
@@ -243,7 +242,7 @@ int ddLogLevel;
 
     [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x232323) andSize:CGSizeMake(kScreenWidth, 49)]];
     //[[UITabBar appearance]setSelectionIndicatorImage:[UIImage imageWithColor:UIColorFromRGB(0x0f0f0f) andSize:CGSizeMake(kScreenWidth/4, 49)]];
-    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
+//    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
 
@@ -334,6 +333,7 @@ int ddLogLevel;
 }
 
 
+#pragma mark - get init data
 
 - (void)refreshCategory
 {
@@ -395,8 +395,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-    ddLogLevel = LOG_LEVEL_VERBOSE;
-//    ddLogLevel = LOG_LEVEL_ERROR;
+//    ddLogLevel = LOG_LEVEL_VERBOSE;
+    ddLogLevel = LOG_LEVEL_ERROR;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;
@@ -409,5 +409,10 @@ int ddLogLevel;
     [DDLog addLogger:fileLogger];
 }
 
+#pragma mark - notification
+- (void)UpdateJPushID:(NSNotification *)notifier
+{
+//    NSLog(@"regid %@", [APService registrationID]);
+}
 
 @end

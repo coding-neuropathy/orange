@@ -20,6 +20,7 @@
 #import "DiscoverHeaderView.h"
 #import "GTScrollNavigationBar.h"
 #import "NoSearchResultView.h"
+#import "WebViewController.h"
 
 
 @interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchDisplayDelegate, DiscoverHeaderViewDelegate>
@@ -812,7 +813,8 @@
         }
         NSRange range = [url rangeOfString:@"out_link"];
         if (range.location == NSNotFound) {
-            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+//            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+            WebViewController * VC = [[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
             VC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:VC animated:YES];
             return;
@@ -847,8 +849,6 @@
 {
     for(UIView * v in controller.searchContentsController.view.subviews)
     {
-        NSLog(@"%@",[v class]);
-        
         if([v isKindOfClass:NSClassFromString(@"UISearchDisplayControllerContainerView")])
         {
             //v.alpha = 0
@@ -856,7 +856,7 @@
             {
                 for(UIView * v2 in v1.subviews)
                 {
-                    NSLog(@"%@",[v2 class]);
+//                    NSLog(@"%@",[v2 class]);
                     if([v2 isKindOfClass:NSClassFromString(@"_UISearchDisplayControllerDimmingView")])
                     {
                         v2.backgroundColor = [UIColor clearColor];
@@ -870,7 +870,6 @@
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
-    
     [[self.searchDC.searchContentsController.view viewWithTag:999] removeFromSuperview];
     return YES;
 }
@@ -898,7 +897,7 @@
 }
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-
+//    [searchBar setShowsCancelButton:NO];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -979,6 +978,8 @@
 
 - (void)searchButtonAction
 {
+    [AVAnalytics event:@"search" attributes:@{@"keyword": self.keyword}];
+    [MobClick event:@"search" attributes:@{@"keyword": self.keyword}];
     [self handleSearchText:self.keyword];
 }
 
