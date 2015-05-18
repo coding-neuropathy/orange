@@ -58,7 +58,7 @@ int ddLogLevel;
     }];
     
     //插件版登录状态监听
-    id<ALBBLoginService> loginService = [[TaeSDK sharedInstance]getService:@protocol(ALBBLoginService)];
+    id<ALBBLoginService> loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
     [loginService setSessionStateChangedHandler:^(TaeSession *session) {
         if([session isLogin]){//未登录变为已登录
             NSLog(@"【插件版监听：用户login】");

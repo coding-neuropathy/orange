@@ -343,8 +343,6 @@
                         [SVProgressHUD dismiss];
                         break;
                 }
-
-
             }];
         }
         else
