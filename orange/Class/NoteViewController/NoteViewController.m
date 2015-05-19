@@ -11,7 +11,7 @@
 #import "CommentCell.h"
 #import "CommentHeaderView.h"
 #import "UserViewController.h"
-
+#import "LoginView.h"
 static NSString *CellIdentifier = @"CommentCell";
 
 @interface NoteViewController ()<UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate, CommentHeaderViewDelegate>
@@ -287,7 +287,12 @@ static NSString *CellIdentifier = @"CommentCell";
 
 - (void)postButtonAction
 {
-
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     NSString *content = self.inputTextField.text;
     
     if (content.length == 0) {
@@ -339,7 +344,12 @@ static NSString *CellIdentifier = @"CommentCell";
 - (void)TapPokeButtonAction:(id)sender
 {
     UIButton * pokeBtn = (UIButton *)sender;
-    
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     [GKAPI pokeWithNoteId:self.note.noteId state:!pokeBtn.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
         if (poked == pokeBtn.selected) {
             
