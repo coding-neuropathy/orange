@@ -45,8 +45,8 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-    //[super viewDidAppear:animated];
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
+//    [super viewWillAppear:animated];
     [self performSelector:@selector(showEverything) withObject:nil afterDelay:0.0];
 }
 

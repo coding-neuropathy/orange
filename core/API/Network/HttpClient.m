@@ -68,10 +68,10 @@
 - (void)failureLogWithOperation:(AFHTTPRequestOperation *)operation responseObject:(NSError *)error
 {
     NSInteger stateCode = operation.response.statusCode;
-    NSString *urlString = [[error userInfo] valueForKey:@"NSErrorFailingURLKey"];
-    if (!urlString) {
-        urlString = operation.response.URL.absoluteString;
-    }
+//    NSString *urlString = [[error userInfo] valueForKey:@"NSErrorFailingURLKey"];
+//    if (!urlString) {
+//        urlString = operation.response.URL.absoluteString;
+//    }
     // NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
     
     
