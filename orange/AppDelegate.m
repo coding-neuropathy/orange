@@ -78,15 +78,6 @@ int ddLogLevel;
     [self customizeAppearance];
 
     // Override point for customization after application launch.
-    
-//    if (iOS8) {
-//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
-//                                                | UIUserNotificationTypeBadge
-//                                                | UIUserNotificationTypeSound
-//                                                                                 categories:[NSSet setWithObjects:nil]];
-//        
-//        [application registerUserNotificationSettings:settings];
-//        [application registerForRemoteNotifications];
 
     [APService registerForRemoteNotificationTypes:UIUserNotificationTypeAlert| UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
     [APService setupWithOption:launchOptions];
@@ -412,7 +403,7 @@ int ddLogLevel;
 #pragma mark - notification
 - (void)UpdateJPushID:(NSNotification *)notifier
 {
-//    NSLog(@"regid %@", [APService registrationID]);
+
 }
 
 @end

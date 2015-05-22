@@ -14,5 +14,5 @@
 #endif
 
 
-#define kBaseURL @"http://h.guoku.com/mobile/v4/"
-//#define kBaseURL @"http://api.guoku.com/mobile/v4/"
+//#define kBaseURL @"http://h.guoku.com/mobile/v4/"
+#define kBaseURL @"http://api.guoku.com/mobile/v4/"
