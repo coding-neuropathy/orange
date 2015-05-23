@@ -11,7 +11,7 @@
 #import "GKAPI.h"
 #import "EntityThreeGridCell.h"
 #import "CategoryGridCell.h"
-#import "GKWebVC.h"
+//#import "GKWebVC.h"
 #import "pinyin.h"
 #import "PinyinTools.h"
 #import "GroupViewController.h"

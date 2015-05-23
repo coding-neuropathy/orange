@@ -160,7 +160,6 @@
 		4E56DFCC19D5B83B00263B17 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFCA19D5B83B00263B17 /* CoreGraphics.framework */; };
 		4E56DFCE19D5B84300263B17 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFCD19D5B84300263B17 /* QuartzCore.framework */; };
 		4E66C1DD1A7C8B2500F31A90 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1DB1A7C8B2500F31A90 /* SettingViewController.m */; };
-		4E66C1E11A7CBD2F00F31A90 /* GKWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E01A7CBD2F00F31A90 /* GKWebVC.m */; };
 		4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E41A7DBA0F00F31A90 /* NoteViewController.m */; };
 		4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E71A7DBAB400F31A90 /* CommentCell.m */; };
 		4E8D6A991A38B59F00156C17 /* fontdiao.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */; };
@@ -610,8 +609,6 @@
 		4E56DFCD19D5B84300263B17 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4E66C1DA1A7C8B2500F31A90 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		4E66C1DB1A7C8B2500F31A90 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
-		4E66C1DF1A7CBD2F00F31A90 /* GKWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKWebVC.h; sourceTree = "<group>"; };
-		4E66C1E01A7CBD2F00F31A90 /* GKWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKWebVC.m; sourceTree = "<group>"; };
 		4E66C1E31A7DBA0F00F31A90 /* NoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteViewController.h; sourceTree = "<group>"; };
 		4E66C1E41A7DBA0F00F31A90 /* NoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteViewController.m; sourceTree = "<group>"; };
 		4E66C1E61A7DBAB400F31A90 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
@@ -1701,8 +1698,6 @@
 		4E66C1DE1A7CBD2F00F31A90 /* GKWebViewVC */ = {
 			isa = PBXGroup;
 			children = (
-				4E66C1DF1A7CBD2F00F31A90 /* GKWebVC.h */,
-				4E66C1E01A7CBD2F00F31A90 /* GKWebVC.m */,
 				B7F5A9FF1B08C75A0033BB2D /* WebViewController.h */,
 				B7F5AA001B08C75A0033BB2D /* WebViewController.m */,
 				B7F5AA091B08D3320033BB2D /* WebViewProgressView.h */,
@@ -2528,7 +2523,6 @@
 				4E2D6D431A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				4E1D70221A5ADBA50032719E /* MeViewController.m in Sources */,
 				4E3A23651A51AE8300037F9C /* AFNetworkActivityIndicatorManager.m in Sources */,
-				4E66C1E11A7CBD2F00F31A90 /* GKWebVC.m in Sources */,
 				4E117B5E1ABC6FDC00844935 /* EditViewController.m in Sources */,
 				4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */,
 				4E3A23781A51B12300037F9C /* NSString+App.m in Sources */,

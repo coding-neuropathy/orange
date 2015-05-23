@@ -9,7 +9,8 @@
 #import "SignView.h"
 #import "GKAPI.h"
 #import "LoginView.h"
-#import "GKWebVC.h"
+//#import "GKWebVC.h"
+#import "WebViewController.h"
 #import "RTLabel.h"
 
 @interface SignView () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,RTLabelDelegate>
@@ -548,7 +549,8 @@
     NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
     if([array[0] isEqualToString:@"http"])
     {
-        GKWebVC * vc =  [GKWebVC linksWebViewControllerWithURL:url];
+//        GKWebVC * vc =  [GKWebVC linksWebViewControllerWithURL:url];
+        WebViewController * vc = [[WebViewController alloc] initWithURL:url];
         vc.hidesBottomBarWhenPushed = YES;
         [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
     }

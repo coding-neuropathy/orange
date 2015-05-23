@@ -14,7 +14,8 @@
 #import "GKAPI.h"
 #import "LoginView.h"
 
-#import "GKWebVC.h"
+//#import "GKWebVC.h"
+#import "WebViewController.h"
 #import "FeedBackViewController.h"
 
 
