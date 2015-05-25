@@ -177,12 +177,11 @@ static CGFloat kEntityViewMarginLeft = 16.;
 
     CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font];
     
-    self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 5., kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
-    
+    self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 0., kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
     
     self.scrollView.frame = CGRectMake(0., 0., kScreenWidth - 32., kScreenWidth - 32.);
     self.scrollView.deFrameLeft = 16.;
-    self.scrollView.deFrameTop = self.titleLabel.deFrameBottom + 5.;
+    self.scrollView.deFrameTop = self.titleLabel.deFrameBottom + 16.;
     
     if ([_entity.imageURLArray count] > 0) {
         
@@ -228,7 +227,9 @@ static CGFloat kEntityViewMarginLeft = 16.;
 #pragma mark - class method
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity
 {
-    return kScreenWidth + 105.;
+    CGFloat titleHeight = [entity.entityName heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:[UIFont systemFontOfSize:16.f]];
+//    DDLogInfo(@"title hight %f", titleHeight);
+    return kScreenWidth + titleHeight + 50.;
 }
 
 @end
