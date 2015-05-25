@@ -180,7 +180,9 @@ static CGFloat kEntityViewMarginLeft = 16.;
     self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 5., kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
     
     
-    self.scrollView.frame = CGRectMake(16., 51., kScreenWidth - 32., kScreenWidth - 32.);
+    self.scrollView.frame = CGRectMake(0., 0., kScreenWidth - 32., kScreenWidth - 32.);
+    self.scrollView.deFrameLeft = 16.;
+    self.scrollView.deFrameTop = self.titleLabel.deFrameBottom + 5.;
     
     if ([_entity.imageURLArray count] > 0) {
         
@@ -199,7 +201,6 @@ static CGFloat kEntityViewMarginLeft = 16.;
     self.buyBtn.frame = CGRectMake(0, 0, 120, 30);
     self.buyBtn.deFrameRight= kScreenWidth - 16.;
     self.buyBtn.deFrameTop = self.scrollView.deFrameBottom + 15.;
-
 }
 
 #pragma mark - button action
@@ -222,6 +223,12 @@ static CGFloat kEntityViewMarginLeft = 16.;
 {
     NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
     _pageCtr.currentPage = index;
+}
+
+#pragma mark - class method
++ (CGFloat)headerViewHightWithEntity:(GKEntity *)entity
+{
+    return kScreenWidth + 105.;
 }
 
 @end

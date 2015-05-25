@@ -274,7 +274,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 {
 
     if (section == 0) {
-        return kScreenWidth + 105.;
+        return [EntityHeaderView headerViewHightWithEntity:self.entity];
     }
     else if (section == 1) {
         if (self.dataArrayForlikeUser.count == 0) {
@@ -631,9 +631,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
                                           taoKeParams:taoKeParams
                           tradeProcessSuccessCallback:_tradeProcessSuccessCallback
                            tradeProcessFailedCallback:_tradeProcessFailedCallback];
-//            [[TaeSDK sharedInstance] showTaoKeItemDetailByItemId:self isNeedPush:YES webViewUISettings:nil itemId:_itemId itemType:1 params:nil taoKeParams:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
-        }
-        else
+        } else
             [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
         
         [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];

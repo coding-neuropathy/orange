@@ -32,7 +32,7 @@ int ddLogLevel;
     
     [AVOSCloud setApplicationId:@"laier6ulcszfjkn08448ng37nwc71ux4uv6yc6vi529v29a0" clientKey:@"6ad7o8urhbw4q5kx8hfoiaxjjtme205ohodgoy6ltwts8b1i"];
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
-    [AVPush setProductionMode:YES];
+//    [AVPush setProductionMode:YES];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [AVAnalytics setCrashReportEnabled:YES];
 //    [AVAnalytics setChannel:@"tongbu"];
@@ -386,8 +386,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-//    ddLogLevel = LOG_LEVEL_VERBOSE;
-    ddLogLevel = LOG_LEVEL_ERROR;
+    ddLogLevel = LOG_LEVEL_VERBOSE;
+//    ddLogLevel = LOG_LEVEL_ERROR;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;
@@ -403,7 +403,14 @@ int ddLogLevel;
 #pragma mark - notification
 - (void)UpdateJPushID:(NSNotification *)notifier
 {
-
+    UIDevice *device = [[UIDevice alloc] init];
+    DDLogInfo(@"rid %@ %@ %@", [APService registrationID], [device model], XcodeAppVersion);
+    
+    [GKAPI postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
+        
+    } Failure:^(NSInteger stateCode) {
+        DDLogError(@"error code %lu", stateCode);
+    }];
 }
 
 @end

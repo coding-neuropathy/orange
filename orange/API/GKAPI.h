@@ -14,10 +14,16 @@
 typedef NS_ENUM(NSInteger, GKSNSType){
     /// 新浪微博
     GKSinaWeibo = 1,
-    /// QQ
+    /// 淘宝
     GKTaobao,
     
 } ;
+
+/*
+ *  更新 JPush Register ID
+ */
++ (void)postRegisterID:(NSString *)rid Model:(NSString *)model Version:(NSString *)ver Success:(void (^)())success
+               Failure:(void (^)(NSInteger stateCode))failure;
 
 /**
  *  获取主页信息（banner、hotCategory）

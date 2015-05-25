@@ -70,6 +70,7 @@
 #import "SVPullToRefresh.h"
 
 #import "Passport.h"
+
 //Config
 #import "Config.h"
 
@@ -84,6 +85,9 @@
 #import "GKUser.h"
 #import "GKComment.h"
 #import "GKEntityCategory.h"
+
+#import "UIDevice-Hardware.h"
+
 
 // Log
 #import "DDTTYLogger.h"

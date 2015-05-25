@@ -16,25 +16,26 @@
 /*
  *  更新 JPush Register ID
  */
-
-//+ (void)postRegisterID:(NSString *)rid Success:(void (^)())success
-//               Failure:(void (^)(NSInteger stateCode))failure
-//{
-//    NSString * path = @"apns/token/";
-//    
-//    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
-//    [paraDict setValue:@(rid) forKey:@"register"]
-//    
-//    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-////        DDLogError(@"status code %lu", operation.response.statusCode);
-//        if (failure) {
-//            NSInteger statusCode = operation.response.statusCode;
-//            failure(statusCode);
-//        }
-//    }];
-//}
++ (void)postRegisterID:(NSString *)rid Model:(NSString *)model Version:(NSString *)ver Success:(void (^)())success
+               Failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString * path = @"apns/token/";
+    
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:rid forKey:@"rid"];
+    [paraDict setValue:model forKey:@"model"];
+    [paraDict setValue:ver forKey:@"version"];
+    
+    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        DDLogError(@"status code %lu", operation.response.statusCode);
+        if (failure) {
+            NSInteger statusCode = operation.response.statusCode;
+            failure(statusCode);
+        }
+    }];
+}
 
 /**
  *  获取主页信息（banner、hotCategory、hotTag）

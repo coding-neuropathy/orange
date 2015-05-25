@@ -212,8 +212,8 @@
     alertView.delegate = self;
     alertView.tag = 20001;
     [alertView show];
-
 }
+
 - (void)unfollow
 {
     if(!k_isLogin)
