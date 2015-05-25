@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		390204D41B12C64800BD747B /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 390204D31B12C64800BD747B /* InterfaceController.m */; };
+		390204D71B12C64800BD747B /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 390204D61B12C64800BD747B /* NotificationController.m */; };
+		390204D91B12C64800BD747B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 390204D81B12C64800BD747B /* Images.xcassets */; };
+		390204DD1B12C64800BD747B /* orange WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 390204DC1B12C64800BD747B /* orange WatchKit App.app */; };
+		390204E51B12C64800BD747B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 390204E31B12C64800BD747B /* Interface.storyboard */; };
+		390204E71B12C64800BD747B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 390204E61B12C64800BD747B /* Images.xcassets */; };
+		390204EA1B12C64800BD747B /* orange WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 390204CD1B12C64800BD747B /* orange WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		393715BF1ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B11ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m */; };
 		393715C01ACBD9C300DC50FF /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B31ACBD9C300DC50FF /* DDASLLogger.m */; };
 		393715C11ACBD9C300DC50FF /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B51ACBD9C300DC50FF /* DDFileLogger.m */; };
@@ -275,6 +282,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		390204DE1B12C64800BD747B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E56DF0D19D552C000263B17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 390204DB1B12C64800BD747B;
+			remoteInfo = "orange WatchKit App";
+		};
+		390204E81B12C64800BD747B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E56DF0D19D552C000263B17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 390204CC1B12C64800BD747B;
+			remoteInfo = "orange WatchKit Extension";
+		};
 		39B868A31ACD0CF700A2115D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4E56DF0D19D552C000263B17 /* Project object */;
@@ -310,6 +331,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				B7BFC90A1ACC27C2009627CA /* today.appex in Embed App Extensions */,
+				390204EA1B12C64800BD747B /* orange WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +339,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		390204CD1B12C64800BD747B /* orange WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "orange WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		390204D01B12C64800BD747B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		390204D11B12C64800BD747B /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		390204D21B12C64800BD747B /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		390204D31B12C64800BD747B /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		390204D51B12C64800BD747B /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
+		390204D61B12C64800BD747B /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
+		390204D81B12C64800BD747B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		390204DC1B12C64800BD747B /* orange WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "orange WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		390204E21B12C64800BD747B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		390204E41B12C64800BD747B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		390204E61B12C64800BD747B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		393715B01ACBD9C300DC50FF /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		393715B11ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		393715B21ACBD9C300DC50FF /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
@@ -807,6 +841,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		390204CA1B12C64800BD747B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		39B8688A1ACD0CF600A2115D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -869,6 +910,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		390204CE1B12C64800BD747B /* orange WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				390204D21B12C64800BD747B /* InterfaceController.h */,
+				390204D31B12C64800BD747B /* InterfaceController.m */,
+				390204D51B12C64800BD747B /* NotificationController.h */,
+				390204D61B12C64800BD747B /* NotificationController.m */,
+				390204D81B12C64800BD747B /* Images.xcassets */,
+				390204CF1B12C64800BD747B /* Supporting Files */,
+			);
+			path = "orange WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		390204CF1B12C64800BD747B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				390204D01B12C64800BD747B /* Info.plist */,
+				390204D11B12C64800BD747B /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		390204E01B12C64800BD747B /* orange WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				390204E31B12C64800BD747B /* Interface.storyboard */,
+				390204E61B12C64800BD747B /* Images.xcassets */,
+				390204E11B12C64800BD747B /* Supporting Files */,
+			);
+			path = "orange WatchKit App";
+			sourceTree = "<group>";
+		};
+		390204E11B12C64800BD747B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				390204E21B12C64800BD747B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		393715AF1ACBD9C300DC50FF /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
@@ -1505,6 +1586,8 @@
 				4E56DF1719D552C000263B17 /* orange */,
 				B7BFC9001ACC27C2009627CA /* today */,
 				39B8688F1ACD0CF600A2115D /* core */,
+				390204CE1B12C64800BD747B /* orange WatchKit Extension */,
+				390204E01B12C64800BD747B /* orange WatchKit App */,
 				B7BFC8FD1ACC27C2009627CA /* Frameworks */,
 				4E56DF1619D552C000263B17 /* Products */,
 			);
@@ -1516,6 +1599,8 @@
 				4E56DF1519D552C000263B17 /* orange.app */,
 				B7BFC8FC1ACC27C1009627CA /* today.appex */,
 				39B8688E1ACD0CF600A2115D /* core.framework */,
+				390204CD1B12C64800BD747B /* orange WatchKit Extension.appex */,
+				390204DC1B12C64800BD747B /* orange WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2163,6 +2248,39 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		390204CC1B12C64800BD747B /* orange WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 390204F01B12C64800BD747B /* Build configuration list for PBXNativeTarget "orange WatchKit Extension" */;
+			buildPhases = (
+				390204C91B12C64800BD747B /* Sources */,
+				390204CA1B12C64800BD747B /* Frameworks */,
+				390204CB1B12C64800BD747B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				390204DF1B12C64800BD747B /* PBXTargetDependency */,
+			);
+			name = "orange WatchKit Extension";
+			productName = "orange WatchKit Extension";
+			productReference = 390204CD1B12C64800BD747B /* orange WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		390204DB1B12C64800BD747B /* orange WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 390204EF1B12C64800BD747B /* Build configuration list for PBXNativeTarget "orange WatchKit App" */;
+			buildPhases = (
+				390204DA1B12C64800BD747B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "orange WatchKit App";
+			productName = "orange WatchKit App";
+			productReference = 390204DC1B12C64800BD747B /* orange WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 		39B8688D1ACD0CF600A2115D /* core */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 39B868A71ACD0CF700A2115D /* Build configuration list for PBXNativeTarget "core" */;
@@ -2196,6 +2314,7 @@
 			dependencies = (
 				B7BFC9091ACC27C2009627CA /* PBXTargetDependency */,
 				39B868A41ACD0CF700A2115D /* PBXTargetDependency */,
+				390204E91B12C64800BD747B /* PBXTargetDependency */,
 			);
 			name = orange;
 			productName = card;
@@ -2228,6 +2347,13 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = guoku.com;
 				TargetAttributes = {
+					390204CC1B12C64800BD747B = {
+						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = BKXKS4HPNG;
+					};
+					390204DB1B12C64800BD747B = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
 					39B8688D1ACD0CF600A2115D = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = BKXKS4HPNG;
@@ -2281,11 +2407,31 @@
 				4E56DF1419D552C000263B17 /* orange */,
 				B7BFC8FB1ACC27C1009627CA /* today */,
 				39B8688D1ACD0CF600A2115D /* core */,
+				390204CC1B12C64800BD747B /* orange WatchKit Extension */,
+				390204DB1B12C64800BD747B /* orange WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		390204CB1B12C64800BD747B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				390204DD1B12C64800BD747B /* orange WatchKit App.app in Resources */,
+				390204D91B12C64800BD747B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		390204DA1B12C64800BD747B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				390204E51B12C64800BD747B /* Interface.storyboard in Resources */,
+				390204E71B12C64800BD747B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		39B8688C1ACD0CF600A2115D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2333,6 +2479,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		390204C91B12C64800BD747B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				390204D71B12C64800BD747B /* NotificationController.m in Sources */,
+				390204D41B12C64800BD747B /* InterfaceController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		39B868891ACD0CF600A2115D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2543,6 +2698,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		390204DF1B12C64800BD747B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 390204DB1B12C64800BD747B /* orange WatchKit App */;
+			targetProxy = 390204DE1B12C64800BD747B /* PBXContainerItemProxy */;
+		};
+		390204E91B12C64800BD747B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 390204CC1B12C64800BD747B /* orange WatchKit Extension */;
+			targetProxy = 390204E81B12C64800BD747B /* PBXContainerItemProxy */;
+		};
 		39B868A41ACD0CF700A2115D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 39B8688D1ACD0CF600A2115D /* core */;
@@ -2556,6 +2721,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		390204E31B12C64800BD747B /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				390204E41B12C64800BD747B /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		4E1D28501A125B9300740C17 /* JSQMessages.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2620,6 +2793,78 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		390204EB1B12C64800BD747B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "orange WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		390204EC1B12C64800BD747B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "orange WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		390204ED1B12C64800BD747B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = orange_WatchKit_Extension;
+				INFOPLIST_FILE = "orange WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		390204EE1B12C64800BD747B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				IBSC_MODULE = orange_WatchKit_Extension;
+				INFOPLIST_FILE = "orange WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
 		39B868A81ACD0CF700A2115D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2859,6 +3104,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		390204EF1B12C64800BD747B /* Build configuration list for PBXNativeTarget "orange WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				390204ED1B12C64800BD747B /* Debug */,
+				390204EE1B12C64800BD747B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		390204F01B12C64800BD747B /* Build configuration list for PBXNativeTarget "orange WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				390204EB1B12C64800BD747B /* Debug */,
+				390204EC1B12C64800BD747B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		39B868A71ACD0CF700A2115D /* Build configuration list for PBXNativeTarget "core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
