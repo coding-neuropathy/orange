@@ -452,7 +452,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 - (void)TapLoginBtnAction
 {
-    LoginView * view = [[LoginView alloc]init];
+    LoginView * view = [[LoginView alloc] init];
+//    view.parentController = self;
     [view show];
 }
 

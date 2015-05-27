@@ -208,6 +208,17 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                     failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
 
 /**
+ *  百川登录
+ *
+ *  @param taobaoUserId 淘宝用户ID
+ *  @param success      成功block
+ *  @param failure      失败block
+ */
++ (void)loginWithBaichuan:(NSString *)uid
+                  success:(void (^)(GKUser *user, NSString *session))success
+                  failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
+
+/**
  *  淘宝登录
  *
  *  @param taobaoUserId 淘宝用户ID
