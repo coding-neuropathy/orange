@@ -23,7 +23,7 @@
     
     if (self) {
         self.textLabel.textColor = UIColorFromRGB(0xffffff);
-        self.textLabel.font = [UIFont systemFontOfSize:16.];
+        self.textLabel.font = [UIFont systemFontOfSize:19.];
         self.textLabel.numberOfLines = 1;
         
         self.detailTextLabel.textColor = UIColorFromRGB(0x9c9c9c);
@@ -73,9 +73,10 @@
 {
     [super layoutSubviews];
     
-    self.entityImageView.frame = CGRectMake(kScreenWidth - 50, 10., 40, 40.);
-    self.textLabel.frame = CGRectMake(10, 10., kScreenWidth - 60., 20.);
-    self.detailTextLabel.frame = CGRectMake(10., 30., kScreenWidth - 60., 20.);
+    self.entityImageView.frame = CGRectMake(kScreenWidth - 84., 9., 76., 76.);
+    self.textLabel.frame = CGRectMake(10, 10., kScreenWidth - 100., 20.);
+    self.detailTextLabel.frame = CGRectMake(10., 40., kScreenWidth - 100., 40.);
+
 //    self.detailTextLabel.frame
 }
 

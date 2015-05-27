@@ -40,7 +40,7 @@
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
 //    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
-    self.tableView.rowHeight = 60.;
+    self.tableView.rowHeight = 94.;
     self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.tableView.rowHeight * 3);
     ;
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
