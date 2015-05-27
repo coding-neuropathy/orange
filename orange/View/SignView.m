@@ -363,32 +363,32 @@
     });
 }
 
-#pragma mark - Private Method
-
-- (void)showImagePickerFromPhotoLibrary
-{
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
-        imagePickerVC.allowsEditing = YES;
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePickerVC.delegate = self;
-        
-        [kAppDelegate.alertWindow makeKeyAndVisible];
-        [kAppDelegate.alertWindow.rootViewController presentViewController:imagePickerVC animated:YES completion:nil];
-    }
-}
-
-- (void)showImagePickerToTakePhoto
-{
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
-        imagePickerVC.allowsEditing = YES;
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePickerVC.delegate = self;
-        [kAppDelegate.alertWindow makeKeyAndVisible];
-        [kAppDelegate.alertWindow.rootViewController presentViewController:imagePickerVC animated:YES completion:nil];
-    }
-}
+//#pragma mark - Private Method
+//
+//- (void)showImagePickerFromPhotoLibrary
+//{
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+//        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+//        imagePickerVC.allowsEditing = YES;
+//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        imagePickerVC.delegate = self;
+//        
+//        [kAppDelegate.alertWindow makeKeyAndVisible];
+//        [kAppDelegate.alertWindow.rootViewController presentViewController:imagePickerVC animated:YES completion:nil];
+//    }
+//}
+//
+//- (void)showImagePickerToTakePhoto
+//{
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+//        imagePickerVC.allowsEditing = YES;
+//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        imagePickerVC.delegate = self;
+//        [kAppDelegate.alertWindow makeKeyAndVisible];
+//        [kAppDelegate.alertWindow.rootViewController presentViewController:imagePickerVC animated:YES completion:nil];
+//    }
+//}
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -487,62 +487,62 @@
     [self.passwordTextField resignFirstResponder];
 }
 
-#pragma mark - UIActionSheetDelegate
+//#pragma mark - UIActionSheetDelegate
+//
+//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    // 修改头像
+//    switch (buttonIndex) {
+//        case 0:
+//        {
+//            // 拍照
+//            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//                [self showImagePickerToTakePhoto];
+//            }
+//            break;
+//        }
+//            
+//        case 1:
+//        {
+//            // 照片库
+//            [self showImagePickerFromPhotoLibrary];
+//            break;
+//        }
+//    }
+//}
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    // 修改头像
-    switch (buttonIndex) {
-        case 0:
-        {
-            // 拍照
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                [self showImagePickerToTakePhoto];
-            }
-            break;
-        }
-            
-        case 1:
-        {
-            // 照片库
-            [self showImagePickerFromPhotoLibrary];
-            break;
-        }
-    }
-}
-
-#pragma mark- UIImagePickerControllerDelegate
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
-{
-    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [kAppDelegate.window makeKeyAndVisible];
-        kAppDelegate.alertWindow.hidden = YES;
-    }];
-    
-    [self.avatarButton setImage:image forState:UIControlStateNormal];
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [kAppDelegate.window makeKeyAndVisible];
-        kAppDelegate.alertWindow.hidden = YES;
-    }];
-    
-    if([info count] > 0) {
-        UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
-        [self.avatarButton setImage:editedImage forState:UIControlStateNormal];
-    }
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [kAppDelegate.window makeKeyAndVisible];
-        kAppDelegate.alertWindow.hidden = YES;
-    }];
-}
+//#pragma mark- UIImagePickerControllerDelegate
+//
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+//{
+//    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
+//        [kAppDelegate.window makeKeyAndVisible];
+//        kAppDelegate.alertWindow.hidden = YES;
+//    }];
+//    
+//    [self.avatarButton setImage:image forState:UIControlStateNormal];
+//}
+//
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+//{
+//    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
+//        [kAppDelegate.window makeKeyAndVisible];
+//        kAppDelegate.alertWindow.hidden = YES;
+//    }];
+//    
+//    if([info count] > 0) {
+//        UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+//        [self.avatarButton setImage:editedImage forState:UIControlStateNormal];
+//    }
+//}
+//
+//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+//{
+//    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
+//        [kAppDelegate.window makeKeyAndVisible];
+//        kAppDelegate.alertWindow.hidden = YES;
+//    }];
+//}
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url
 {
     [self dismiss];
