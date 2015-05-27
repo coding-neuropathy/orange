@@ -86,16 +86,15 @@ int ddLogLevel;
     [SVProgressHUD setBackgroundColor:UIColorFromRGB(0x2b2b2b)];
     [SVProgressHUD setForegroundColor:UIColorFromRGB(0xffffff)];
     
-
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[TabBarViewcontroller alloc]init];
     self.window.rootViewController.view.hidden = YES;
     [self.window makeKeyAndVisible];
-    
+
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if(userInfo)
+    NSDictionary * urlInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+    if(userInfo || urlInfo)
     {
         application.applicationIconBadgeNumber = 0;
         self.window.rootViewController.view.hidden = NO;
@@ -106,8 +105,7 @@ int ddLogLevel;
         WelcomeVC * welcomeVc = [[WelcomeVC alloc] init];
         [self.window.rootViewController presentViewController: welcomeVc animated:NO completion:NULL];
     }
-    
-    
+
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;
     UIViewController *vc = [[UIViewController alloc] init];
@@ -124,6 +122,8 @@ int ddLogLevel;
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
         [self performSelector:@selector(checkNewMessage) withObject:nil afterDelay:4];
     }
+    
+
     
     return YES;
 }
@@ -243,8 +243,6 @@ int ddLogLevel;
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-//    NSLog(@"url url %@", url);
-    
     if([[url absoluteString]hasPrefix:@"wx"])
     {
         return [WXApi handleOpenURL:url delegate:self];
@@ -258,6 +256,22 @@ int ddLogLevel;
         return [[TaeSDK sharedInstance] handleOpenURL:url];
     }
     
+    if ([sourceApplication isEqualToString:@"com.guoku.iphone"]) {
+         [self openLocalURL:url];
+    }
+    else
+    {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self openLocalURL:url];
+        });
+    }
+
+
+    return YES;
+}
+- (void)openLocalURL:(NSURL *)url
+{
+
     if([[url absoluteString]hasPrefix:@"guoku"])
     {
         NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -307,22 +321,19 @@ int ddLogLevel;
                     if (range.location != NSNotFound) {
                         NSString *userId = [absoluteString substringFromIndex:range.location+range.length];
                         UserViewController * vc = [[UserViewController alloc]init];
-                        vc.hidesBottomBarWhenPushed = YES; 
+                        vc.hidesBottomBarWhenPushed = YES;
                         vc.user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
                         if (self.activeVC.navigationController) {
                             [self.activeVC.navigationController pushViewController:vc animated:YES];
                         }
                     }
                 }
-
+                
             }
         }
         
     }
-    
-    return YES;
 }
-
 
 #pragma mark - get init data
 

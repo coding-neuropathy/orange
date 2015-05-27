@@ -400,6 +400,14 @@ static NSString *EntityCellIdentifier = @"EntityCell";
         self.categoryButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.categoryButton setTitleColor:UIColorFromRGB(0x555555) forState:UIControlStateNormal];
         
+        if (category.categoryName) {
+            self.categoryButton.hidden = NO;
+        }
+        else
+        {
+            self.categoryButton.hidden = YES;
+        }
+        
         return self.categoryButton;
     }
     else if (section == 3) {
