@@ -26,7 +26,7 @@
     [paraDict setValue:model forKey:@"model"];
     [paraDict setValue:ver forKey:@"version"];
     
-    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        DDLogError(@"status code %lu", operation.response.statusCode);

@@ -530,8 +530,6 @@
     
 }
 
-#pragma mark - UITableViewDelegate
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(tableView == self.tableView)
@@ -564,7 +562,7 @@
             return [EntitySingleListCell height];
         }
         return 0;
-
+        
     }
 }
 
@@ -583,6 +581,7 @@
     return 0.01f;
 }
 
+#pragma mark - <UITableViewDelegate>
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if(tableView == self.tableView)

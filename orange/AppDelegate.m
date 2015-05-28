@@ -403,14 +403,16 @@ int ddLogLevel;
 #pragma mark - notification
 - (void)UpdateJPushID:(NSNotification *)notifier
 {
-    UIDevice *device = [[UIDevice alloc] init];
-    DDLogInfo(@"rid %@ %@ %@", [APService registrationID], [device model], XcodeAppVersion);
+    if(!TARGET_IPHONE_SIMULATOR){
+        UIDevice *device = [[UIDevice alloc] init];
+        DDLogInfo(@"jpush rid %@ %@ %@", [APService registrationID], [device model], XcodeAppVersion);
     
-    [GKAPI postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
+        [GKAPI postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
         
-    } Failure:^(NSInteger stateCode) {
-        DDLogError(@"error code %lu", stateCode);
-    }];
+        } Failure:^(NSInteger stateCode) {
+            DDLogError(@"error code %lu", stateCode);
+        }];
+    }
 }
 
 @end
