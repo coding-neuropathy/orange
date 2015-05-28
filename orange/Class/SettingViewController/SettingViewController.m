@@ -375,85 +375,87 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     }];
 
 }
-#pragma mark - AVATAR
-
-- (void)photoButtonAction{
-    
-    // 设置头像
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
-    
-    [actionSheet showInView:kAppDelegate.window];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    // 修改头像
-    switch (buttonIndex) {
-        case 0:
-        {
-            // 拍照
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                [self showImagePickerToTakePhoto];
-            }
-            break;
-        }
-            
-        case 1:
-        {
-            // 照片库
-            [self showImagePickerFromPhotoLibrary];
-            break;
-        }
-    }
-}
-- (void)showImagePickerFromPhotoLibrary
-{
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePickerVC.allowsEditing = YES;
-        imagePickerVC.delegate = self;
-        [self presentViewController:imagePickerVC animated:YES completion:NULL];
-    }
-}
-
-- (void)showImagePickerToTakePhoto
-{
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePickerVC.allowsEditing = YES;
-        imagePickerVC.delegate = self;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self presentViewController:imagePickerVC animated:YES completion:NULL];
-        });
-
-    }
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)Picker {
-    [Picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)imagePickerController:(UIImagePickerController *)Picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    UIImage * image = (UIImage *)[info valueForKey:UIImagePickerControllerEditedImage];
-    [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:[image imageData] success:^(GKUser *user) {
-        [SVProgressHUD showImage:nil status:@"更新成功"];
-            } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"更新失败"];
-    }];
-    
-    [Picker dismissViewControllerAnimated:YES completion:^{
-        [self.tableView reloadData];
-    }];
-}
+//#pragma mark - AVATAR
+//- (void)photoButtonAction{
+//    
+//    // 设置头像
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
+//    
+//    [actionSheet showInView:kAppDelegate.window];
+//}
+//
+//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    // 修改头像
+//    switch (buttonIndex) {
+//        case 0:
+//        {
+//            // 拍照
+//            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//                [self showImagePickerToTakePhoto];
+//            }
+//            break;
+//        }
+//            
+//        case 1:
+//        {
+//            // 照片库
+//            [self showImagePickerFromPhotoLibrary];
+//            break;
+//        }
+//    }
+//}
+//- (void)showImagePickerFromPhotoLibrary
+//{
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+//        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        imagePickerVC.allowsEditing = YES;
+//        imagePickerVC.delegate = self;
+//        [self presentViewController:imagePickerVC animated:YES completion:NULL];
+//    }
+//}
+//
+//- (void)showImagePickerToTakePhoto
+//{
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        imagePickerVC.allowsEditing = YES;
+//        imagePickerVC.delegate = self;
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    [self presentViewController:imagePickerVC animated:YES completion:NULL];
+//        });
+//
+//    }
+//}
+//
+//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)Picker {
+//    [Picker dismissViewControllerAnimated:YES completion:nil];
+//}
+//
+//- (void)imagePickerController:(UIImagePickerController *)Picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+//    UIImage * image = (UIImage *)[info valueForKey:UIImagePickerControllerEditedImage];
+//    [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:[image imageData] success:^(GKUser *user) {
+//        [SVProgressHUD showImage:nil status:@"更新成功"];
+//            } failure:^(NSInteger stateCode) {
+//        [SVProgressHUD showImage:nil status:@"更新失败"];
+//    }];
+//    
+//    [Picker dismissViewControllerAnimated:YES completion:^{
+//        [self.tableView reloadData];
+//    }];
+//}
 
 #pragma mark - Setting Footer View Delegate
 
 - (void)TapLoginBtnAction
 {
-    LoginView * view = [[LoginView alloc] init];
-    [view show];
+//    LoginView * view = [[LoginView alloc] init];
+//    [view show];
+    [[OpenCenterController sharedOpenCenterController] openAccountViewControllerWithSuccessBlock:^{
+        
+    }];
 }
 
 - (void)TapLogoutBtnAction
@@ -482,7 +484,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [Passport logout];
 //    [[TaeSession sharedInstance] lo]
     [self.loginService logout];
-    [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
+    [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
 }
 

@@ -89,6 +89,8 @@
 #import "UIDevice-Hardware.h"
 
 
+#import "OpenCenterController.h"
+
 // Log
 #import "DDTTYLogger.h"
 #import "DDASLLogger.h"

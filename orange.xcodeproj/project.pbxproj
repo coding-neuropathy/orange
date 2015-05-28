@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		391F5F811B16FEF200931533 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F801B16FEF200931533 /* SignInViewController.m */; };
+		391F5F911B1705A000931533 /* JXFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F901B1705A000931533 /* JXFormCell.m */; };
+		391F5F941B1705E500931533 /* SignInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F931B1705E500931533 /* SignInCell.m */; };
+		391F5F981B17173C00931533 /* OpenCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F971B17173C00931533 /* OpenCenterController.m */; };
 		393715BF1ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B11ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m */; };
 		393715C01ACBD9C300DC50FF /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B31ACBD9C300DC50FF /* DDASLLogger.m */; };
 		393715C11ACBD9C300DC50FF /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B51ACBD9C300DC50FF /* DDFileLogger.m */; };
@@ -316,6 +320,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		391F5F7F1B16FEF200931533 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignInViewController.h; path = AccountViewController/SignInViewController.h; sourceTree = "<group>"; };
+		391F5F801B16FEF200931533 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInViewController.m; path = AccountViewController/SignInViewController.m; sourceTree = "<group>"; };
+		391F5F8F1B1705A000931533 /* JXFormCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXFormCell.h; sourceTree = "<group>"; };
+		391F5F901B1705A000931533 /* JXFormCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXFormCell.m; sourceTree = "<group>"; };
+		391F5F921B1705E500931533 /* SignInCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignInCell.h; path = AccountViewController/SignInCell.h; sourceTree = "<group>"; };
+		391F5F931B1705E500931533 /* SignInCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInCell.m; path = AccountViewController/SignInCell.m; sourceTree = "<group>"; };
+		391F5F961B17173C00931533 /* OpenCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenCenterController.h; path = OpenCenterController/OpenCenterController.h; sourceTree = "<group>"; };
+		391F5F971B17173C00931533 /* OpenCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenCenterController.m; path = OpenCenterController/OpenCenterController.m; sourceTree = "<group>"; };
 		393715B01ACBD9C300DC50FF /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		393715B11ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		393715B21ACBD9C300DC50FF /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
@@ -866,6 +878,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		391F5F7B1B16EAE500931533 /* AccountViewController */ = {
+			isa = PBXGroup;
+			children = (
+				391F5F7F1B16FEF200931533 /* SignInViewController.h */,
+				391F5F801B16FEF200931533 /* SignInViewController.m */,
+				391F5F921B1705E500931533 /* SignInCell.h */,
+				391F5F931B1705E500931533 /* SignInCell.m */,
+			);
+			name = AccountViewController;
+			sourceTree = "<group>";
+		};
+		391F5F8D1B1705A000931533 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				391F5F8E1B1705A000931533 /* JXFormCell */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		391F5F8E1B1705A000931533 /* JXFormCell */ = {
+			isa = PBXGroup;
+			children = (
+				391F5F8F1B1705A000931533 /* JXFormCell.h */,
+				391F5F901B1705A000931533 /* JXFormCell.m */,
+			);
+			path = JXFormCell;
+			sourceTree = "<group>";
+		};
+		391F5F951B17171000931533 /* OpenCenterController */ = {
+			isa = PBXGroup;
+			children = (
+				391F5F961B17173C00931533 /* OpenCenterController.h */,
+				391F5F971B17173C00931533 /* OpenCenterController.m */,
+			);
+			name = OpenCenterController;
+			sourceTree = "<group>";
+		};
 		393715AF1ACBD9C300DC50FF /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
@@ -1390,6 +1439,7 @@
 		4E3A232B1A51A7C500037F9C /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				391F5F951B17171000931533 /* OpenCenterController */,
 				4E3A23791A52EC9600037F9C /* Util */,
 				4E3A232C1A51A7C500037F9C /* Model */,
 				4E3A233C1A51A7C500037F9C /* Network */,
@@ -1653,6 +1703,8 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				391F5F8D1B1705A000931533 /* UIComponents */,
+				391F5F7B1B16EAE500931533 /* AccountViewController */,
 				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
 				DA35B3C31AFEE31200D66671 /* PasswordEditViewController */,
 				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
@@ -2396,9 +2448,11 @@
 				4E1D28C41A125B9300740C17 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				4EC9F7971A7928C70057D736 /* UserSingleListCell.m in Sources */,
 				B7F5AA011B08C75A0033BB2D /* WebViewController.m in Sources */,
+				391F5F911B1705A000931533 /* JXFormCell.m in Sources */,
 				4E3A238D1A52F21800037F9C /* TabBarViewcontroller.m in Sources */,
 				4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */,
 				B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */,
+				391F5F981B17173C00931533 /* OpenCenterController.m in Sources */,
 				4EC9F7A31A7BBEF20057D736 /* TagViewController.m in Sources */,
 				4E56DFB119D579F600263B17 /* UIImage+App.m in Sources */,
 				4E934DA81A9AE9FB00374B05 /* GroupViewController.m in Sources */,
@@ -2455,6 +2509,7 @@
 				4E117B591ABB067300844935 /* IntruductionVC.m in Sources */,
 				4E1D28D01A125B9300740C17 /* JSQMessagesBubbleImage.m in Sources */,
 				B7B695851AF05C400016AAB8 /* SDWebImageManager.m in Sources */,
+				391F5F941B1705E500931533 /* SignInCell.m in Sources */,
 				4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */,
 				B76676411AB81758002F294C /* NoDataView.m in Sources */,
 				4E3A23491A51A7C500037F9C /* GKUser.m in Sources */,
@@ -2501,6 +2556,7 @@
 				B7B695841AF05C400016AAB8 /* SDWebImageDownloaderOperation.m in Sources */,
 				4E3A23481A51A7C500037F9C /* GKPurchase.m in Sources */,
 				4E2D6D5B1A6D49F0009E4A17 /* LoginView.m in Sources */,
+				391F5F811B16FEF200931533 /* SignInViewController.m in Sources */,
 				B7B6958A1AF05C400016AAB8 /* UIImage+WebP.m in Sources */,
 				4E3A23631A51AE8300037F9C /* AFImageRequestOperation.m in Sources */,
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
