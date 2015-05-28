@@ -7,6 +7,6 @@
 //
 
 #import "BaseViewController.h"
-@interface WelcomeVC : BaseViewController
+@interface WelcomeVC : UIViewController
 
 @end

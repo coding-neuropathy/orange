@@ -56,11 +56,20 @@
 /*
  *  activity page
  */
-"commented on a product"    = "點評了 1 件商品";
+//"commented on a product"    = "點評了 1 件商品";
+
+"started following" = "開始關注";
+"liked 1 item" = "喜愛了1件商品";
+"noted 1 item:" = "點評了1件商品：";
+"commented" = "評論了";
+"'s note:" = "的點評";
+"bumped" = "贊了";
 
 /*
  * message page
  */
+
+/*
 "replied your comment"                                                  = "回復了你的評論";
 "commented on your"                                                     = "評論了你對";
 "followed you"                                                          = "關注了你";
@@ -68,6 +77,15 @@
 "liked a product of your recommendation"                                = "喜愛了你推薦的商品";
 "a product of your recommendation is marked as exceptional choice"    = "你添加的商品被收錄到精選";
 "liked a product"                                                       = "喜愛了 1 件商品";
+ */
+
+"started following you" = "關注了你";
+"commented your note" = "評論了你撰寫的點評";
+"bumped your note" = "贊了你撰寫的點評";
+"noted 1 item your added" = "點評了你添加的商品";
+"liked 1 item your added" = "喜愛了你添加的商品";
+"reply to your comment:" = "回复了你的評論：";
+"The item you added have been selected" = "你添加的商品被收錄精選";
 
 /*
  form page

@@ -696,6 +696,50 @@
 }
 
 /**
+ *  百川登录
+ *
+ *  @param taobaoUserId 淘宝用户ID
+ *  @param success      成功block
+ *  @param failure      失败block
+ */
++ (void)loginWithBaichuan:(NSString *)uid
+                      success:(void (^)(GKUser *user, NSString *session))success
+                      failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure
+{
+    NSParameterAssert(uid);
+    
+    NSString * path = @"baichuan/login/";
+    
+    NSMutableDictionary * paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:uid forKey:@"user_id"];
+    
+    [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *objectDict = (NSDictionary *)responseObject;
+        NSString *session = objectDict[@"session"];
+        GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
+        [Passport sharedInstance].user = user;
+        [Passport sharedInstance].session = session;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:nil userInfo:nil];
+        if (success) {
+            success(user, session);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            NSString *message;
+            NSString *type;
+
+            NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
+            
+            DDLogInfo(@"%@", htmlString);
+            
+            failure(stateCode, type, message);
+        }
+    }];
+    
+}
+
+/**
  *  淘宝登录
  *
  *  @param taobaoUserId 淘宝用户ID

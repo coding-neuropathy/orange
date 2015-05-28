@@ -90,7 +90,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
      [self.view addSubview:self.weixinShareButton];
      */
     
-    _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 15)];
+    _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 15)];
     self.tipLabel.textAlignment = NSTextAlignmentLeft;
     self.tipLabel.backgroundColor = [UIColor clearColor];
     [self.tipLabel setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];

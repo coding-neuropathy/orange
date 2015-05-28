@@ -28,6 +28,12 @@
 @property (nonatomic, strong) UIButton *sinaWeiboButton;
 @property (nonatomic, strong) UIButton *taobaoButton;
 @property (assign, nonatomic) BOOL flag;
+
+@property (nonatomic, strong) UIWindow * window;
+@property(nonatomic, strong) id<ALBBLoginService> loginService;
+@property(nonatomic, strong) loginSuccessCallback loginSuccessCallback;
+@property(nonatomic, strong) loginFailedCallback loginFailedCallback;
+
 @end
 
 @implementation LoginView
@@ -245,6 +251,8 @@
         {
             whiteBG.deFrameTop = 50;
         }
+        
+        self.loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
 
     }
     return self;
@@ -369,15 +377,66 @@
 
 - (void)tapTaobaoButton
 {
+//    UIViewController * vc = [[UIViewController alloc] init];
 
-    GKTaobaoOAuthViewController *vc = [[GKTaobaoOAuthViewController alloc] init];
-    vc.delegate = self;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    UIBarButtonItem *closeButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeTaobaoView)];
-    vc.navigationItem.leftBarButtonItem = closeButtonItem;
     
-    [kAppDelegate.alertWindow makeKeyAndVisible];
-    [kAppDelegate.alertWindow.rootViewController presentViewController:nav animated:YES completion:nil];
+    if(![[TaeSession sharedInstance] isLogin]){
+        
+        self.window = [[UIWindow alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        self.window.backgroundColor = [UIColor yellowColor];
+        [self.window makeKeyAndVisible];
+        __weak __typeof(&*self)weakSelf = self;
+        _loginSuccessCallback = ^(TaeSession *session) {
+            [weakSelf finishedBaichuanWithSession:session];
+        };
+        
+        _loginFailedCallback = ^(NSError * error) {
+            NSString *tip=[NSString stringWithFormat:@"登录失败:%@",error];
+//            NSLog(@"%@", tip);
+            DDLogError(@"Error: %@", tip);
+            weakSelf.window.rootViewController = nil;
+            weakSelf.window = nil;
+//            kAppDelegate.window.hidden = YES;
+        };
+        
+        [self.loginService showLoginOnRootView:self.window successCallback:_loginSuccessCallback failedCallback:_loginFailedCallback notUseTaobaoAppLogin:NO isBackButtonHidden:NO];
+    }else{
+        TaeSession *session=[TaeSession sharedInstance];
+        [self finishedBaichuanWithSession:session];
+
+    }
+//    GKTaobaoOAuthViewController *vc = [[GKTaobaoOAuthViewController alloc] init];
+//    vc.delegate = self;
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//    UIBarButtonItem *closeButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeTaobaoView)];
+//    vc.navigationItem.leftBarButtonItem = closeButtonItem;
+//    
+//    [kAppDelegate.alertWindow makeKeyAndVisible];
+//    [kAppDelegate.alertWindow.rootViewController presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)finishedBaichuanWithSession:(TaeSession *)session
+{
+    [Passport sharedInstance].taobaoId = [session getUser].userId;
+    [Passport sharedInstance].screenName = [session getUser].nick;
+//    [Passport sharedInstance].tao
+    [GKAPI loginWithBaichuan:[session getUser].userId success:^(GKUser *user, NSString *session) {
+        DDLogInfo(@"%@", user);
+        
+        if (self.successBlock) {
+            self.successBlock();
+        }
+        [self dismiss];
+        [SVProgressHUD dismiss];
+        self.window.rootViewController = nil;
+        self.window = nil;
+    } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+        [SVProgressHUD dismiss];
+        self.window.rootViewController = nil;
+        self.window = nil;
+        
+        [self tapRegisterButton];
+    }];
 }
 
 - (void)closeTaobaoView
@@ -450,8 +509,6 @@
             [view removeFromSuperview];
         }
     }
-    
-    
     
     SignView *view = [[SignView alloc] init];
     view.successBlock = self.successBlock;

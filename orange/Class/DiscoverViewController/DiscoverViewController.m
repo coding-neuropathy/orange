@@ -880,6 +880,9 @@
     view.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.97];
     view.tag = 999;
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignSearch)];
+    [view addGestureRecognizer:tap];
+    
     UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_search"]];
     image.center = CGPointMake(kScreenWidth/2, 0);
     image.deFrameTop = 50+kStatusBarHeight+kNavigationBarHeight;
@@ -902,7 +905,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     
-    if ([searchText length] == 0) {
+    if ([self.searchBar.text length] == 0) {
         [self.searchDC.searchContentsController.view viewWithTag:999].hidden = NO;
     }
     else
@@ -1051,7 +1054,9 @@
 }
 
 
-
-
+-(void)resignSearch
+{
+    [self.searchBar resignFirstResponder];
+}
 
 @end

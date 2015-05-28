@@ -54,6 +54,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
         _scrollView.pagingEnabled = YES;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.delegate = self;
+        _scrollView.backgroundColor = UIColorFromRGB(0xf7f7f7);
         [self addSubview:_scrollView];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TapBuyBtn:)];
         [_scrollView addGestureRecognizer:tap];
