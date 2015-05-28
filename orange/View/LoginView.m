@@ -29,6 +29,10 @@
 @property (nonatomic, strong) UIButton *taobaoButton;
 @property (assign, nonatomic) BOOL flag;
 
+@property(nonatomic, strong) id<ALBBLoginService> loginService;
+@property(nonatomic, strong) loginSuccessCallback loginSuccessCallback;
+@property(nonatomic, strong) loginFailedCallback loginFailedCallback;
+
 @end
 
 @implementation LoginView
@@ -246,6 +250,8 @@
         {
             whiteBG.deFrameTop = 50;
         }
+        
+        _loginService = [[TaeSDK sharedInstance]getService:@protocol(ALBBLoginService)];
 
     }
     return self;
@@ -370,14 +376,35 @@
 
 - (void)tapTaobaoButton
 {
-    GKTaobaoOAuthViewController *vc = [[GKTaobaoOAuthViewController alloc] init];
-    vc.delegate = self;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    UIBarButtonItem *closeButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeTaobaoView)];
-    vc.navigationItem.leftBarButtonItem = closeButtonItem;
+    if(![[TaeSession sharedInstance] isLogin]){
+        
+        _loginSuccessCallback = ^(TaeSession * session) {
+            [self finishedBaichuanWithSession:session];
+        };
+        
+        _loginFailedCallback = ^(NSError * error) {
+//            [self closeTaobaoView];
+            [kAppDelegate.window makeKeyAndVisible];
+            kAppDelegate.alertWindow.hidden = YES;
+        };
+        
+        [kAppDelegate.alertWindow makeKeyAndVisible];
+        [_loginService showLogin:kAppDelegate.alertWindow.rootViewController successCallback:_loginSuccessCallback failedCallback:_loginFailedCallback];
+    }else{
+        TaeSession *session=[TaeSession sharedInstance];
+//        NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@,登录时间:%@",[session getUser],[session getLoginTime]];
+//        NSLog(@"%@", tip);
+    }
     
-    [kAppDelegate.alertWindow makeKeyAndVisible];
-    [kAppDelegate.alertWindow.rootViewController presentViewController:nav animated:YES completion:nil];
+    
+//    GKTaobaoOAuthViewController *vc = [[GKTaobaoOAuthViewController alloc] init];
+//    vc.delegate = self;
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//    UIBarButtonItem *closeButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeTaobaoView)];
+//    vc.navigationItem.leftBarButtonItem = closeButtonItem;
+//    
+//    [kAppDelegate.alertWindow makeKeyAndVisible];
+//    [kAppDelegate.alertWindow.rootViewController presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)finishedBaichuanWithSession:(TaeSession *)session
@@ -386,21 +413,20 @@
     [Passport sharedInstance].screenName = [session getUser].nick;
 //    [Passport sharedInstance].tao
     [GKAPI loginWithBaichuan:[session getUser].userId success:^(GKUser *user, NSString *session) {
-        DDLogInfo(@"%@", user);
-        
+//        DDLogInfo(@"%@", user);
+        [kAppDelegate.window makeKeyAndVisible];
+        kAppDelegate.alertWindow.hidden = YES;
         if (self.successBlock) {
             self.successBlock();
         }
-        [self dismiss];
-        [SVProgressHUD dismiss];
-        self.window.rootViewController = nil;
-        self.window = nil;
+//        [self dismiss];
+//        [SVProgressHUD dismiss];
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         
-        
+        [kAppDelegate.window makeKeyAndVisible];
+        kAppDelegate.alertWindow.hidden = YES;
 //        [SVProgressHUD dismiss];
-        self.window.rootViewController = nil;
-        self.window = nil;
+
         if (stateCode == 500) {
             [SVProgressHUD showErrorWithStatus:@"error"];
         } else {
@@ -410,13 +436,13 @@
     }];
 }
 
-- (void)closeTaobaoView
-{
-    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [kAppDelegate.window makeKeyAndVisible];
-        kAppDelegate.alertWindow.hidden = YES;
-    }];
-}
+//- (void)closeTaobaoView
+//{
+//    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
+//        [kAppDelegate.window makeKeyAndVisible];
+//        kAppDelegate.alertWindow.hidden = YES;
+//    }];
+//}
 
 #pragma mark - UITextFieldDelegate
 
@@ -541,36 +567,36 @@
     }
 }
 
-#pragma mark - GKTaobaoOAuthViewControllerDelegate
-
-- (void)TaoBaoGrantFinished
-{
-    if (self.flag == YES) {
-        return;
-    }
-    self.flag = YES;
-    
-    NSDictionary *taobaoInfo = [[NSUserDefaults standardUserDefaults] objectForKey:kTaobaoGrantInfo];
-    
-    NSString *taobaoUserId = taobaoInfo[@"taobao_id"];
-    NSString *taobaoToken = taobaoInfo[@"access_token"];
-    [Passport sharedInstance].screenName = taobaoInfo[@"screen_name"];
-    [Passport sharedInstance].taobaoId = taobaoUserId;
-    [Passport sharedInstance].taobaoToken = taobaoToken;
-    [GKAPI loginWithTaobaoUserId:taobaoUserId taobaoToken:taobaoToken success:^(GKUser *user, NSString *session) {
-        if (self.successBlock) {
-            self.successBlock();
-        }
-        [self dismiss];
-        [SVProgressHUD dismiss];
-        [self closeTaobaoView];
-        
-    } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
-        [SVProgressHUD dismiss];
-        [self closeTaobaoView];
-        [self tapRegisterButton];
-    }];
-}
+//#pragma mark - GKTaobaoOAuthViewControllerDelegate
+//
+//- (void)TaoBaoGrantFinished
+//{
+//    if (self.flag == YES) {
+//        return;
+//    }
+//    self.flag = YES;
+//    
+//    NSDictionary *taobaoInfo = [[NSUserDefaults standardUserDefaults] objectForKey:kTaobaoGrantInfo];
+//    
+//    NSString *taobaoUserId = taobaoInfo[@"taobao_id"];
+//    NSString *taobaoToken = taobaoInfo[@"access_token"];
+//    [Passport sharedInstance].screenName = taobaoInfo[@"screen_name"];
+//    [Passport sharedInstance].taobaoId = taobaoUserId;
+//    [Passport sharedInstance].taobaoToken = taobaoToken;
+//    [GKAPI loginWithTaobaoUserId:taobaoUserId taobaoToken:taobaoToken success:^(GKUser *user, NSString *session) {
+//        if (self.successBlock) {
+//            self.successBlock();
+//        }
+//        [self dismiss];
+//        [SVProgressHUD dismiss];
+//        [self closeTaobaoView];
+//        
+//    } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+//        [SVProgressHUD dismiss];
+//        [self closeTaobaoView];
+//        [self tapRegisterButton];
+//    }];
+//}
 
 
 

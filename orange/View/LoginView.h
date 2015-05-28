@@ -11,7 +11,6 @@
 @interface LoginView : UIView
 
 @property (nonatomic, copy) void (^successBlock)();
-@property (nonatomic, strong) UIWindow * window;
 
 - (void)show;
 - (void)dismiss;

@@ -451,11 +451,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 - (void)TapLoginBtnAction
 {
-//    LoginView * view = [[LoginView alloc] init];
-//    [view show];
-    [[OpenCenterController sharedOpenCenterController] openAccountViewControllerWithSuccessBlock:^{
-        
-    }];
+    LoginView * view = [[LoginView alloc] init];
+    [view show];
 }
 
 - (void)TapLogoutBtnAction
