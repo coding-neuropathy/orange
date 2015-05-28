@@ -377,9 +377,9 @@
 - (void)tapTaobaoButton
 {
     if(![[TaeSession sharedInstance] isLogin]){
-        
+        __weak __typeof(&*self)weakSelf = self;
         _loginSuccessCallback = ^(TaeSession * session) {
-            [self finishedBaichuanWithSession:session];
+            [weakSelf finishedBaichuanWithSession:session];
         };
         
         _loginFailedCallback = ^(NSError * error) {
@@ -392,8 +392,7 @@
         [_loginService showLogin:kAppDelegate.alertWindow.rootViewController successCallback:_loginSuccessCallback failedCallback:_loginFailedCallback];
     }else{
         TaeSession *session=[TaeSession sharedInstance];
-//        NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@,登录时间:%@",[session getUser],[session getLoginTime]];
-//        NSLog(@"%@", tip);
+        [self finishedBaichuanWithSession:session];
     }
     
     
@@ -412,27 +411,28 @@
     [Passport sharedInstance].taobaoId = [session getUser].userId;
     [Passport sharedInstance].screenName = [session getUser].nick;
 //    [Passport sharedInstance].tao
-    [GKAPI loginWithBaichuan:[session getUser].userId success:^(GKUser *user, NSString *session) {
+    [SVProgressHUD show];
+    [GKAPI loginWithBaichuanUid:[session getUser].userId nick:[session getUser].nick  success:^(GKUser *user, NSString *session) {
 //        DDLogInfo(@"%@", user);
         [kAppDelegate.window makeKeyAndVisible];
         kAppDelegate.alertWindow.hidden = YES;
         if (self.successBlock) {
             self.successBlock();
         }
-//        [self dismiss];
-//        [SVProgressHUD dismiss];
+        [self dismiss];
+        [SVProgressHUD dismiss];
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         
         [kAppDelegate.window makeKeyAndVisible];
         kAppDelegate.alertWindow.hidden = YES;
-//        [SVProgressHUD dismiss];
+        [SVProgressHUD dismiss];
 
-        if (stateCode == 500) {
-            [SVProgressHUD showErrorWithStatus:@"error"];
-        } else {
-            [self tapRegisterButton];
-            [SVProgressHUD dismiss];
-        }
+//        if (stateCode == 500) {
+//            [SVProgressHUD showErrorWithStatus:@"error"];
+//        } else {
+//            [self tapRegisterButton];
+//            [SVProgressHUD dismiss];
+//        }
     }];
 }
 

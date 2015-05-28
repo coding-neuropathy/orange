@@ -211,12 +211,14 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  *  百川登录
  *
  *  @param taobaoUserId 淘宝用户ID
+ *  @param nick         淘宝用户昵称
  *  @param success      成功block
  *  @param failure      失败block
  */
-+ (void)loginWithBaichuan:(NSString *)uid
-                  success:(void (^)(GKUser *user, NSString *session))success
-                  failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
++ (void)loginWithBaichuanUid:(NSString *)uid
+                        nick:(NSString *)nick
+                     success:(void (^)(GKUser *user, NSString *session))success
+                     failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
 
 /**
  *  淘宝登录

@@ -699,10 +699,12 @@
  *  百川登录
  *
  *  @param taobaoUserId 淘宝用户ID
+ *  @param nick         淘宝用户昵称
  *  @param success      成功block
  *  @param failure      失败block
  */
-+ (void)loginWithBaichuan:(NSString *)uid
++ (void)loginWithBaichuanUid:(NSString *)uid
+                        nick:(NSString *)nick
                       success:(void (^)(GKUser *user, NSString *session))success
                       failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure
 {
@@ -712,6 +714,7 @@
     
     NSMutableDictionary * paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:uid forKey:@"user_id"];
+    [paraDict setObject:nick forKey:@"nick"];
     
     [[GKHTTPClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
