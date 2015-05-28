@@ -29,7 +29,7 @@
 @property (nonatomic, strong) UIButton *taobaoButton;
 @property (assign, nonatomic) BOOL flag;
 
-@property (nonatomic, strong) UIWindow * window;
+
 @property(nonatomic, strong) id<ALBBLoginService> loginService;
 @property(nonatomic, strong) loginSuccessCallback loginSuccessCallback;
 @property(nonatomic, strong) loginFailedCallback loginFailedCallback;
@@ -382,7 +382,7 @@
     
     if(![[TaeSession sharedInstance] isLogin]){
         
-        self.window = [[UIWindow alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        self.window = [[UIWindow alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
         self.window.backgroundColor = [UIColor yellowColor];
         [self.window makeKeyAndVisible];
         __weak __typeof(&*self)weakSelf = self;
@@ -391,12 +391,9 @@
         };
         
         _loginFailedCallback = ^(NSError * error) {
-            NSString *tip=[NSString stringWithFormat:@"登录失败:%@",error];
-//            NSLog(@"%@", tip);
-            DDLogError(@"Error: %@", tip);
+            DDLogError(@"Error: %@", error);
             weakSelf.window.rootViewController = nil;
             weakSelf.window = nil;
-//            kAppDelegate.window.hidden = YES;
         };
         
         [self.loginService showLoginOnRootView:self.window successCallback:_loginSuccessCallback failedCallback:_loginFailedCallback notUseTaobaoAppLogin:NO isBackButtonHidden:NO];
@@ -431,11 +428,17 @@
         self.window.rootViewController = nil;
         self.window = nil;
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
-        [SVProgressHUD dismiss];
+        
+        
+//        [SVProgressHUD dismiss];
         self.window.rootViewController = nil;
         self.window = nil;
-        
-        [self tapRegisterButton];
+        if (stateCode == 500) {
+            [SVProgressHUD showErrorWithStatus:@"error"];
+        } else {
+            [self tapRegisterButton];
+            [SVProgressHUD dismiss];
+        }
     }];
 }
 

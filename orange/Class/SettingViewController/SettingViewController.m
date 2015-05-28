@@ -297,13 +297,13 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             [self clearPicCache];
         }
     }
-    if(alertView.tag ==20009)
-    {
-        if(buttonIndex == 1)
-        {
-            [self logout];
-        }
-    }
+//    if(alertView.tag ==20009)
+//    {
+//        if(buttonIndex == 1)
+//        {
+//            [self logout];
+//        }
+//    }
     
     if (alertView.tag == 40001) {
         if (buttonIndex == 1) {
@@ -453,17 +453,24 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (void)TapLoginBtnAction
 {
     LoginView * view = [[LoginView alloc] init];
-//    view.parentController = self;
     [view show];
 }
 
 - (void)TapLogoutBtnAction
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定退出登录？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    alertView.delegate = self;
-    alertView.tag = 20009;
-    [alertView show];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"确定退出登录？" message:nil preferredStyle:UIAlertControllerStyleAlert];
 
+    UIAlertAction * cacnel = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        //        [altervc dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    UIAlertAction * confirm = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"confirm", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self logout];
+    }];
+    
+    [alert addAction:cacnel];
+    [alert addAction:confirm];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)logout

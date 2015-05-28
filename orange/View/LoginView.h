@@ -11,7 +11,8 @@
 @interface LoginView : UIView
 
 @property (nonatomic, copy) void (^successBlock)();
-@property (nonatomic, strong) UIViewController * parentController;
+//@property (nonatomic, strong) UIViewController * parentController;
+@property (nonatomic, strong) UIWindow * window;
 
 - (void)show;
 - (void)dismiss;
