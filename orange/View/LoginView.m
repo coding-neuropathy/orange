@@ -410,29 +410,23 @@
 {
     [Passport sharedInstance].taobaoId = [session getUser].userId;
     [Passport sharedInstance].screenName = [session getUser].nick;
-//    [Passport sharedInstance].tao
     [SVProgressHUD show];
     [GKAPI loginWithBaichuanUid:[session getUser].userId nick:[session getUser].nick  success:^(GKUser *user, NSString *session) {
-//        DDLogInfo(@"%@", user);
         [kAppDelegate.window makeKeyAndVisible];
         kAppDelegate.alertWindow.hidden = YES;
         if (self.successBlock) {
             self.successBlock();
         }
+        
+        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
         [self dismiss];
-        [SVProgressHUD dismiss];
+
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         
         [kAppDelegate.window makeKeyAndVisible];
         kAppDelegate.alertWindow.hidden = YES;
         [SVProgressHUD dismiss];
 
-//        if (stateCode == 500) {
-//            [SVProgressHUD showErrorWithStatus:@"error"];
-//        } else {
-//            [self tapRegisterButton];
-//            [SVProgressHUD dismiss];
-//        }
     }];
 }
 
@@ -486,6 +480,7 @@
     [AVAnalytics beginLogPageView:@"SignInView"];
     [MobClick beginLogPageView:@"SignInView"];
 }
+
 - (void)dismiss
 {
     self.alpha = 1;

@@ -649,7 +649,7 @@
     NSParameterAssert(sinaToken);
     NSParameterAssert(screenname);
     
-    NSString *path = @"sina/login/";
+    NSString *path = @"weibo/login/";
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:sinaUserId forKey:@"sina_id"];
