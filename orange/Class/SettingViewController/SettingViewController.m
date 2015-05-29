@@ -29,7 +29,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 @property (nonatomic, strong) UISwitch * switch_assistant;
 @property (nonatomic, strong) SettingsFooterView * footerView;
 
-@property (nonatomic, strong) id<ALBBLoginService> loginService;
+//@property (nonatomic, strong) id<ALBBLoginService> loginService;
 
 @end
 
@@ -47,7 +47,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         
         self.tabBarItem = item;
         
-        _loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
+//        _loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
     }
     return self;
 }
@@ -474,15 +474,23 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 - (void)logout
 {
-    [AVUser logOut];
-    if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
-        [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
-    }
-    [Passport logout];
-//    [[TaeSession sharedInstance] lo]
-    [self.loginService logout];
-    [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
+
+    [GKAPI logoutWithSuccess:^{
+
+        [Passport logout];
+        //    [[TaeSession sharedInstance] lo]
+//        [self.loginService logout];
+        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
+    } failure:^(NSInteger stateCode) {
+        if(stateCode == 500) {
+        
+        } else {
+            [Passport logout];
+        }
+    }];
+    
 }
 
 
