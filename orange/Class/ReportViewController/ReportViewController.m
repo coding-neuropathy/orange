@@ -135,8 +135,7 @@ static CGFloat LeftMargin = 16.;
     self.tipLabel.text = @"补充说明:";
     
     self.textView.frame = CGRectMake(LeftMargin, 320., kScreenWidth-LeftMargin*2, kScreenHeight - NormalKeyboardHeight- 180 - 40);
-    self.textView.placeholder = @"靠谱的举报原因";
-    
+    self.textView.placeholder = @"靠谱的举报原因";    
 }
 
 - (void)viewDidLoad

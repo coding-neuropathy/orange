@@ -111,7 +111,8 @@ static NSString *CellIdentifier = @"UserSingleListCell";
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
 
@@ -124,7 +125,8 @@ static NSString *CellIdentifier = @"UserSingleListCell";
         [self.tableView reloadData];
         [self.tableView.infiniteScrollingView stopAnimating];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
         [self.tableView.infiniteScrollingView stopAnimating];
     }];
 }

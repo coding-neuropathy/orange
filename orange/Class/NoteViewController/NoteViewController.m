@@ -165,7 +165,8 @@ static NSString *CellIdentifier = @"CommentCell";
         [self.tableView reloadData];
         [self.tableView.pullToRefreshView stopAnimating];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
         [self.tableView.pullToRefreshView stopAnimating];
     }];
     

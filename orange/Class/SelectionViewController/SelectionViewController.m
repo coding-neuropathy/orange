@@ -183,13 +183,15 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
     else if (self.index == 1)
     {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
         [self.tableView.pullToRefreshView stopAnimating];
     }
     return;
@@ -211,13 +213,15 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
     else if (self.index == 1)
     {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
         [self.tableView.infiniteScrollingView stopAnimating];
     }
     return;
