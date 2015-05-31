@@ -230,6 +230,13 @@ static NSString *CellIdentifier = @"CommentCell";
         return NO;
     }
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GKComment *comment = self.dataArrayForComment[indexPath.row];
+    self.inputTextField.placeholder = [NSString stringWithFormat:@"回复 %@：", comment.creator.nickname];
+    self.inputTextField.tag = comment.commentId;
+    [self.inputTextField becomeFirstResponder];
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -104,7 +104,7 @@
         self.timeButton.layer.masksToBounds = YES;
         self.timeButton.layer.cornerRadius = 2;
         self.timeButton.backgroundColor = [UIColor clearColor];
-        self.timeButton.titleLabel.font = [UIFont systemFontOfSize:10];
+        self.timeButton.titleLabel.font = [UIFont systemFontOfSize:12];
         self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [self.timeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
