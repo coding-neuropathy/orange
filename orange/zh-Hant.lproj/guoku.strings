@@ -41,7 +41,8 @@
 /*
  * Discover page
  */
-"search"    = "搜索";
+"search"                    = "搜索";
+"recommendation category"   = "推薦品類";
 
 /*
  * entity page
@@ -151,6 +152,8 @@
 "culture"       = "文化";
 "food"          = "美食";
 "fun"           = "玩樂";
+
+"items"         = "件商品";
 
 /*
  * error info
