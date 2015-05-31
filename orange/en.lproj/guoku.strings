@@ -39,7 +39,8 @@
 /*
  * Discover page
  */
-"search"    = "Search";
+"search"                    = "Search";
+"recommendation category"   = "Recommendation Category";
 
 /*
  * entity page
@@ -153,6 +154,7 @@
 "food"          = "FOOD";
 "fun"           = "FUN";
 
+"items"         = "Items";
 
 /*
  * error info
