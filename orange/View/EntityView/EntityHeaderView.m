@@ -54,7 +54,6 @@ static CGFloat kEntityViewMarginLeft = 16.;
         _scrollView.pagingEnabled = YES;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.delegate = self;
-        _scrollView.backgroundColor = UIColorFromRGB(0xf7f7f7);
         [self addSubview:_scrollView];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TapBuyBtn:)];
         [_scrollView addGestureRecognizer:tap];
@@ -187,7 +186,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
     if ([_entity.imageURLArray count] > 0) {
         
         self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
-        self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.scrollView.frame.size.height + 30.);
+        self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.scrollView.frame.size.height+20);
         self.pageCtr.bounds = CGRectMake(0.0, 0.0, 32 * (_pageCtr.numberOfPages - 1) + 32, 32);
         self.pageCtr.hidden = NO;
     }

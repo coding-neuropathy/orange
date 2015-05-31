@@ -273,7 +273,8 @@
             [self.tableView.pullToRefreshView stopAnimating];
             
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -286,7 +287,8 @@
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -299,7 +301,8 @@
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -317,7 +320,8 @@
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
@@ -331,7 +335,8 @@
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];

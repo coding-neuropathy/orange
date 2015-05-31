@@ -534,17 +534,78 @@ typedef NS_ENUM(NSInteger, MessageType) {
 - (void)avatarButtonAction
 {
     NSDictionary * message = self.message;
-    
+    MessageType type = [MessageCell typeFromMessage:message];
     UserViewController * VC = [[UserViewController alloc] init];
-    
-    
-    GKNote *note = message[@"content"][@"note"];
-    if (note)
-        VC.user = note.creator;
-    else {
-        GKUser * user = message[@"content"][@"user"];
-        VC.user = user;
+
+    switch (type) {
+        case MessageCommentReply:
+        {
+            GKComment *replying_comment = message[@"content"][@"replying_comment"];
+            GKUser * user = replying_comment.creator;
+            VC.user = user;
+        }
+            // 点评被评论
+        case MessageNoteComment:
+        {
+            GKNote *note = message[@"content"][@"note"];
+            GKComment *comment = message[@"content"][@"comment"];
+            GKUser * user = comment.creator;
+            VC.user = user;
+            
+            break;
+        }
+            
+        case MessageUserFollow:
+        {
+            GKUser *user = self.message[@"content"][@"user"];
+            
+            [self.avatar sd_setImageWithURL:user.avatarURL];
+            //            self.imageView.hidden = YES;
+            self.image.hidden = YES;
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+                               user.userId,
+                               user.nickname,
+                               NSLocalizedStringFromTable(@"started following you", kLocalizedFile, nil),
+                               time];
+            self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
+            
+            break;
+        }
+            //赞
+        case MessageNotePoke:
+        {
+            GKNote *note = message[@"content"][@"note"];
+            GKUser * user = message[@"content"][@"user"];
+            VC.user = user;
+            
+            break;
+        }
+            //商品被点评
+        case MessageEntityNote:
+        {
+            GKNote *note = message[@"content"][@"note"];
+            GKEntity * entity = message[@"content"][@"entity"];
+            GKUser   *user   = note.creator;
+            VC.user = user;
+            
+            break;
+        }
+            
+        case MessageEntityLike:
+        {
+            GKEntity *entity = self.message[@"content"][@"entity"];
+            GKUser   *user   = self.message[@"content"][@"user"];
+            VC.user = user;
+            
+            break;
+        }
+            
+        case MessageNoteSelection:
+        {
+            return;
+        }
     }
+
     VC.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     [AVAnalytics event:@"message_forward_user"];
