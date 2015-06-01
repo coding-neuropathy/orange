@@ -173,12 +173,13 @@ int ddLogLevel;
 //    [currentInstallation saveInBackground];
     [APService registerDeviceToken:deviceToken];
     
-    DDLogInfo(@"device token %@", deviceToken);
+//    DDLogInfo(@"device token %@", deviceToken);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     DDLogError(@"user info %@", userInfo);
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [APService handleRemoteNotification:userInfo];
 }
 
@@ -272,7 +273,7 @@ int ddLogLevel;
 - (void)openLocalURL:(NSURL *)url
 {
 
-    if([[url absoluteString]hasPrefix:@"guoku"])
+    if([[url absoluteString] hasPrefix:@"guoku"])
     {
         NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSRange range = [absoluteString rangeOfString:@"entity/"];
