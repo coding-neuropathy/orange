@@ -205,6 +205,8 @@
 		B72000B71B0849E50001F199 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B72000B61B0849E50001F199 /* PushConfig.plist */; };
 		B72FD82A1AEF2DB400354248 /* SelectionCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD8291AEF2DB400354248 /* SelectionCategoryView.m */; };
 		B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD82E1AEF5B3A00354248 /* IconInfoView.m */; };
+		B73E90CD1B1C9D5D00616FD7 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73E90CC1B1C9D5D00616FD7 /* AVOSCloud.framework */; };
+		B73E90CF1B1C9D7500616FD7 /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73E90CE1B1C9D7500616FD7 /* AVOSCloudSNS.framework */; };
 		B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */; };
 		B749632A1AB15E9000C340FB /* EntityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B74963291AB15E9000C340FB /* EntityHeaderView.m */; };
 		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
@@ -219,8 +221,6 @@
 		B754E6B51AFA76460034AB7D /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B754E6AA1AFA76460034AB7D /* UTDID.framework */; };
 		B754E6B61AFA76460034AB7D /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B754E6AB1AFA76460034AB7D /* UTMini.framework */; };
 		B754E6B71AFA76460034AB7D /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B754E6AC1AFA76460034AB7D /* yw_1222.jpg */; };
-		B7662AA11AC39D5600C82B4B /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662A9F1AC39D5600C82B4B /* AVOSCloud.framework */; };
-		B7662AA21AC39D5600C82B4B /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AA01AC39D5600C82B4B /* AVOSCloudSNS.framework */; };
 		B7662ABD1AC3AD8E00C82B4B /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AA61AC3AD8E00C82B4B /* libUMFeedback.a */; };
 		B7662ACC1AC3AD8E00C82B4B /* libUMOpus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AB81AC3AD8E00C82B4B /* libUMOpus.a */; };
 		B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */; };
@@ -696,6 +696,8 @@
 		B72FD8291AEF2DB400354248 /* SelectionCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionCategoryView.m; sourceTree = "<group>"; };
 		B72FD82D1AEF5B3A00354248 /* IconInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconInfoView.h; sourceTree = "<group>"; };
 		B72FD82E1AEF5B3A00354248 /* IconInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconInfoView.m; sourceTree = "<group>"; };
+		B73E90CC1B1C9D5D00616FD7 /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
+		B73E90CE1B1C9D7500616FD7 /* AVOSCloudSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudSNS.framework; sourceTree = "<group>"; };
 		B74266DB1AB3DFE10064A010 /* UIScrollView+AutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+AutoScroll.h"; sourceTree = "<group>"; };
 		B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+AutoScroll.m"; sourceTree = "<group>"; };
 		B74963281AB15E9000C340FB /* EntityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityHeaderView.h; path = EntityView/EntityHeaderView.h; sourceTree = "<group>"; };
@@ -713,8 +715,6 @@
 		B754E6AA1AFA76460034AB7D /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
 		B754E6AB1AFA76460034AB7D /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
 		B754E6AC1AFA76460034AB7D /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
-		B7662A9F1AC39D5600C82B4B /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
-		B7662AA01AC39D5600C82B4B /* AVOSCloudSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudSNS.framework; sourceTree = "<group>"; };
 		B7662AA51AC3AD8E00C82B4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/UMFeedbackLocalizable.strings; sourceTree = "<group>"; };
 		B7662AA61AC3AD8E00C82B4B /* libUMFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMFeedback.a; sourceTree = "<group>"; };
 		B7662AB61AC3AD8E00C82B4B /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = "<group>"; };
@@ -823,8 +823,7 @@
 				B754E6B11AFA76460034AB7D /* CloudPushSDK.framework in Frameworks */,
 				B754E6B61AFA76460034AB7D /* UTMini.framework in Frameworks */,
 				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
-				B7662AA11AC39D5600C82B4B /* AVOSCloud.framework in Frameworks */,
-				B7662AA21AC39D5600C82B4B /* AVOSCloudSNS.framework in Frameworks */,
+				B73E90CF1B1C9D7500616FD7 /* AVOSCloudSNS.framework in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
 				B7AAFA781AB7036700A2F20D /* libstdc++.6.0.9.dylib in Frameworks */,
@@ -834,6 +833,7 @@
 				B754E6B51AFA76460034AB7D /* UTDID.framework in Frameworks */,
 				4E8D6AAC1A3B441000156C17 /* libc++.dylib in Frameworks */,
 				4E8D6AAA1A3B433500156C17 /* libsqlite3.0.dylib in Frameworks */,
+				B73E90CD1B1C9D5D00616FD7 /* AVOSCloud.framework in Frameworks */,
 				4E8D6AA81A3B432700156C17 /* libz.dylib in Frameworks */,
 				B754E6B01AFA76460034AB7D /* AlipaySDK.framework in Frameworks */,
 				4E8D6AA31A3B3E2200156C17 /* libWeChatSDK.a in Frameworks */,
@@ -1571,14 +1571,14 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				B73E90CE1B1C9D7500616FD7 /* AVOSCloudSNS.framework */,
+				B73E90CC1B1C9D5D00616FD7 /* AVOSCloud.framework */,
 				399916CB1B11A9DB006826FD /* UIDevice */,
 				B72000B21B0848160001F199 /* JPush */,
 				B7B6955C1AF05C400016AAB8 /* SDWebImage */,
 				B7F18B7C1ADF39A400B9AFDD /* TaeSDK */,
 				393715AF1ACBD9C300DC50FF /* Lumberjack */,
 				B7662AA31AC3AD8E00C82B4B /* UMengFeedback_SDK_2.1.1 */,
-				B7662A9F1AC39D5600C82B4B /* AVOSCloud.framework */,
-				B7662AA01AC39D5600C82B4B /* AVOSCloudSNS.framework */,
 				39C8294F1AC29089009DE9BE /* UMAnalytics_Sdk_3.4.6 */,
 				4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */,
 				4E1C36561AB429FE00EA2F00 /* GTScrollNavigationBar */,
