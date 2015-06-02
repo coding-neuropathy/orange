@@ -34,7 +34,7 @@ int ddLogLevel;
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
 //    [AVPush setProductionMode:YES];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    [AVAnalytics setCrashReportEnabled:YES];
+//    [AVAnalytics setCrashReportEnabled:YES];
 //    [AVAnalytics setChannel:@"tongbu"];
     
     // umeng
@@ -94,6 +94,7 @@ int ddLogLevel;
 
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     NSDictionary * urlInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+    
     if(userInfo || urlInfo)
     {
         application.applicationIconBadgeNumber = 0;
