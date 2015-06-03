@@ -88,6 +88,7 @@
     if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
         [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
 }
 
 - (void)setSession:(NSString *)session

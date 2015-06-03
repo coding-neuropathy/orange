@@ -481,8 +481,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         //    [[TaeSession sharedInstance] lo]
 //        [self.loginService logout];
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
     } failure:^(NSInteger stateCode) {
         if(stateCode == 500) {
         
