@@ -418,7 +418,7 @@ int ddLogLevel;
         [GKAPI postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
         
         } Failure:^(NSInteger stateCode) {
-            DDLogError(@"error code %lu", stateCode);
+            DDLogError(@"error code %ld", stateCode);
         }];
     }
 }
