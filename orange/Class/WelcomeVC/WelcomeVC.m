@@ -32,7 +32,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     _logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 130, 89)];
     _logo.image = [UIImage imageNamed:@"splash.png"];
-    _logo.center = CGPointMake(kScreenWidth/2, kScreenHeight/2 - 40);
+    _logo.center = CGPointMake(kScreenWidth / 2, kScreenHeight / 2 - 40);
     _logo.alpha = 0;
     [self.view addSubview:_logo];
 
