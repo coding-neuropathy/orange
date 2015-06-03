@@ -5,13 +5,13 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>2598A25E-F95D-4AF5-8542-C0CCDABBC009</string>
+	<string>7B1D2A1C-72A0-413C-A164-0F5FC91AC9C1</string>
 	<key>IDESourceControlProjectName</key>
 	<string>orange</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DBB8603C3A555E49B8D6EBE5EC2240EF9499317C</key>
-		<string>https://github.com/guoku/orange.git</string>
+		<string>github.com:guoku/orange.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>orange.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/guoku/orange.git</string>
+	<string>github.com:guoku/orange.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
