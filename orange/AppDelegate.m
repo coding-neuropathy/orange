@@ -168,19 +168,14 @@ int ddLogLevel;
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
-//    [currentInstallation setDeviceTokenFromData:deviceToken];
-//    [currentInstallation setObject:[AVUser currentUser] forKey:@"owner"];
-//    [currentInstallation saveInBackground];
-    [APService registerDeviceToken:deviceToken];
     
-//    DDLogInfo(@"device token %@", deviceToken);
+    [APService registerDeviceToken:deviceToken];
+
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    DDLogError(@"user info %@", userInfo);
-//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    DDLogInfo(@"user info %@", userInfo);
     [APService handleRemoteNotification:userInfo];
 }
 
@@ -399,8 +394,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-    ddLogLevel = LOG_LEVEL_VERBOSE;
-//    ddLogLevel = LOG_LEVEL_ERROR;
+//    ddLogLevel = LOG_LEVEL_VERBOSE;
+    ddLogLevel = LOG_LEVEL_ERROR;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;
