@@ -87,7 +87,6 @@
 {
     if (!_noResultView) {
         _noResultView = [[NoSearchResultView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-        
     }
     return _noResultView;
 }

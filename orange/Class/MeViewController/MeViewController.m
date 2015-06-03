@@ -64,7 +64,6 @@
     if (!_nodataView) {
         _nodataView = [[NoDataView alloc] initWithFrame:CGRectZero];
         
-        
     }
     return _nodataView;
 }

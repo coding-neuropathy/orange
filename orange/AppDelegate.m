@@ -34,7 +34,7 @@ int ddLogLevel;
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
 //    [AVPush setProductionMode:YES];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    [AVAnalytics setCrashReportEnabled:YES];
+//    [AVAnalytics setCrashReportEnabled:YES];
 //    [AVAnalytics setChannel:@"tongbu"];
     
     // umeng
@@ -94,6 +94,7 @@ int ddLogLevel;
 
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     NSDictionary * urlInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+    
     if(userInfo || urlInfo)
     {
         application.applicationIconBadgeNumber = 0;
@@ -167,18 +168,14 @@ int ddLogLevel;
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
-//    [currentInstallation setDeviceTokenFromData:deviceToken];
-//    [currentInstallation setObject:[AVUser currentUser] forKey:@"owner"];
-//    [currentInstallation saveInBackground];
-    [APService registerDeviceToken:deviceToken];
     
-    DDLogInfo(@"device token %@", deviceToken);
+    [APService registerDeviceToken:deviceToken];
+
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    DDLogError(@"user info %@", userInfo);
+    DDLogInfo(@"user info %@", userInfo);
     [APService handleRemoteNotification:userInfo];
 }
 
@@ -272,7 +269,7 @@ int ddLogLevel;
 - (void)openLocalURL:(NSURL *)url
 {
 
-    if([[url absoluteString]hasPrefix:@"guoku"])
+    if([[url absoluteString] hasPrefix:@"guoku"])
     {
         NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSRange range = [absoluteString rangeOfString:@"entity/"];
@@ -397,8 +394,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-    ddLogLevel = LOG_LEVEL_VERBOSE;
-//    ddLogLevel = LOG_LEVEL_ERROR;
+//    ddLogLevel = LOG_LEVEL_VERBOSE;
+    ddLogLevel = LOG_LEVEL_ERROR;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;

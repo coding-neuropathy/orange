@@ -16,11 +16,11 @@
 @interface CategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) NSString * sort;
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
-@property(nonatomic, strong) NSMutableArray * dataArrayForLike;
-@property(nonatomic, assign) NSUInteger index;
-@property(nonatomic, strong) UIView *segmentedControl;
-@property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
+@property (nonatomic, strong) NSMutableArray * dataArrayForEntity;
+@property (nonatomic, strong) NSMutableArray * dataArrayForLike;
+@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, strong) UIView *segmentedControl;
+@property (nonatomic, strong) NSMutableArray * dataArrayForOffset;
 @end
 
 @implementation CategoryViewController
