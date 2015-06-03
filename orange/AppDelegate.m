@@ -52,9 +52,9 @@ int ddLogLevel;
     [[TaeSDK sharedInstance] setDebugLogOpen:NO];
     //sdk初始化
     [[TaeSDK sharedInstance] asyncInit:^{
-        NSLog(@"初始化成功");
+        DDLogInfo(@"初始化成功");
     } failedCallback:^(NSError *error) {
-        NSLog(@"初始化失败:%@",error);
+        DDLogError(@"初始化失败:%@",error);
     }];
     
     //插件版登录状态监听
@@ -106,6 +106,7 @@ int ddLogLevel;
         WelcomeVC * welcomeVc = [[WelcomeVC alloc] init];
         [self.window.rootViewController presentViewController: welcomeVc animated:NO completion:NULL];
     }
+    
 
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;
@@ -115,7 +116,8 @@ int ddLogLevel;
     
     [self refreshCategory];
     
-    {    NSTimer *_timer = [NSTimer scheduledTimerWithTimeInterval:240.0f
+    {
+        NSTimer *_timer = [NSTimer scheduledTimerWithTimeInterval:240.0f
                                                              target:self
                                                            selector:@selector(checkNewMessage)
                                                            userInfo:nil
