@@ -195,6 +195,7 @@
 		4ECCD0D91A714A7D009D5A42 /* TagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0D81A714A7D009D5A42 /* TagCell.m */; };
 		4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */; };
 		4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */; };
+		4EE502571B1EB95400A4DE39 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE502561B1EB95400A4DE39 /* Reveal.framework */; };
 		4EFCBCBB19D5CF650071F7A0 /* UIView+DEFrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCBCBA19D5CF650071F7A0 /* UIView+DEFrameAdditions.m */; };
 		B708432A1ABBF427009605D8 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B70843291ABBF427009605D8 /* NSString+Helper.m */; };
 		B71E494A1AC9207B00D4DB6D /* guoku.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E494C1AC9207B00D4DB6D /* guoku.strings */; };
@@ -675,6 +676,7 @@
 		4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
 		4ECCD0DE1A7349CF009D5A42 /* EntityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityViewController.h; sourceTree = "<group>"; };
 		4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityViewController.m; sourceTree = "<group>"; };
+		4EE502561B1EB95400A4DE39 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		4EFCBCB919D5CF650071F7A0 /* UIView+DEFrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DEFrameAdditions.h"; sourceTree = "<group>"; };
 		4EFCBCBA19D5CF650071F7A0 /* UIView+DEFrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DEFrameAdditions.m"; sourceTree = "<group>"; };
 		B70843281ABBF427009605D8 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Helper.h"; path = "NSString+/NSString+Helper.h"; sourceTree = "<group>"; };
@@ -822,6 +824,7 @@
 				B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */,
 				B754E6B11AFA76460034AB7D /* CloudPushSDK.framework in Frameworks */,
 				B754E6B61AFA76460034AB7D /* UTMini.framework in Frameworks */,
+				4EE502571B1EB95400A4DE39 /* Reveal.framework in Frameworks */,
 				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
 				B7662AA11AC39D5600C82B4B /* AVOSCloud.framework in Frameworks */,
 				B7662AA21AC39D5600C82B4B /* AVOSCloudSNS.framework in Frameworks */,
@@ -1571,6 +1574,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				4EE502561B1EB95400A4DE39 /* Reveal.framework */,
 				399916CB1B11A9DB006826FD /* UIDevice */,
 				B72000B21B0848160001F199 /* JPush */,
 				B7B6955C1AF05C400016AAB8 /* SDWebImage */,

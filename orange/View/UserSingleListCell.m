@@ -193,6 +193,8 @@
     if (self.user.relation == GKUserRelationTypeSelf) {
         self.followButton.hidden = YES;
     }
+    
+    [self.contentView bringSubviewToFront:self.followButton];
 }
 - (void)followButtonAction
 {
