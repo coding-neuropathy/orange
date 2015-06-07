@@ -178,6 +178,10 @@ int ddLogLevel;
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     DDLogInfo(@"user info %@", userInfo);
+    NSString * url = [userInfo valueForKey:@"url"];
+    if (url) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
     [APService handleRemoteNotification:userInfo];
 }
 
@@ -396,8 +400,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-//    ddLogLevel = LOG_LEVEL_VERBOSE;
-    ddLogLevel = LOG_LEVEL_ERROR;
+    ddLogLevel = LOG_LEVEL_VERBOSE;
+//    ddLogLevel = LOG_LEVEL_ERROR;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;
