@@ -10,11 +10,11 @@
 #import "Passport.h"
 #import "AppDelegate.h"
 #import "API.h"
-#import "GKTaobaoConfig.h"
-#import "GKTaobaoOAuthViewController.h"
+//#import "GKTaobaoConfig.h"
+//#import "GKTaobaoOAuthViewController.h"
 #import "SignView.h"
 
-@interface LoginView () <UITextFieldDelegate, UIAlertViewDelegate,GKTaobaoOAuthViewControllerDelegate>
+@interface LoginView () <UITextFieldDelegate, UIAlertViewDelegate>
 {
 @private
     UILabel * tip;
