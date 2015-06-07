@@ -7,7 +7,7 @@
 //
 
 #import "SignView.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "LoginView.h"
 //#import "GKWebVC.h"
 #import "WebViewController.h"
@@ -308,7 +308,7 @@
     
     [self endEditing:YES];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    [GKAPI registerWithEmail:email password:password nickname:nickname imageData:[_avatarButton.imageView.image imageData] sinaUserId:[Passport sharedInstance].sinaUserID sinaToken:[Passport sharedInstance].sinaToken                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    taobaoUserId:[Passport sharedInstance].taobaoId taobaoToken:[Passport sharedInstance].taobaoToken screenName:[Passport sharedInstance].screenName success:^(GKUser *user, NSString *session) {
+    [API registerWithEmail:email password:password nickname:nickname imageData:[_avatarButton.imageView.image imageData] sinaUserId:[Passport sharedInstance].sinaUserID sinaToken:[Passport sharedInstance].sinaToken                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    taobaoUserId:[Passport sharedInstance].taobaoId taobaoToken:[Passport sharedInstance].taobaoToken screenName:[Passport sharedInstance].screenName success:^(GKUser *user, NSString *session) {
         
         // analytics
         [AVAnalytics event:@"sign up" label:@"success"];

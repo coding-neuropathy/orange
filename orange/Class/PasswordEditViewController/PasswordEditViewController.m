@@ -7,7 +7,7 @@
 //
 
 #import "PasswordEditViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 static CGFloat NormalKeyboardHeight = 216.0f;
 
 @interface PasswordEditViewController ()<UITextFieldDelegate>
@@ -212,14 +212,14 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     } else {
         NSDictionary *dict = @{@"password":password, @"new_password":passwordnew, @"confirm_password":passwordsecond};
         
-        [GKAPI resetPasswordWithParameters:dict success:^(GKUser *user) {
+        [API resetPasswordWithParameters:dict success:^(GKUser *user) {
             [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
         } failure:^(NSInteger stateCode, NSString *errorMsg) {
             if(stateCode == 400) {
                 [SVProgressHUD showErrorWithStatus:NSLocalizedStringFromTable(errorMsg, kLocalizedFile, nil)];
             }
         }];
-//        [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+//        [API updateaccountWithParameters:dict success:^(GKUser *user) {
 //            [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
 //        } failure:^(NSInteger stateCode) {
 //            [SVProgressHUD showImage:nil status:@"修改失败"];

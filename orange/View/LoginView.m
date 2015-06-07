@@ -9,7 +9,7 @@
 #import "LoginView.h"
 #import "Passport.h"
 #import "AppDelegate.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "GKTaobaoConfig.h"
 #import "GKTaobaoOAuthViewController.h"
 #import "SignView.h"
@@ -279,7 +279,7 @@
         return;
     }
     
-    [GKAPI loginWithEmail:email password:password success:^(GKUser *user, NSString *session) {
+    [API loginWithEmail:email password:password success:^(GKUser *user, NSString *session) {
         if (self.successBlock) {
             self.successBlock();
         }
@@ -333,7 +333,7 @@
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         if (!error) {
 //            [Passport sharedInstance].screenName = [object objectForKey:@"username"];
-            [GKAPI loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] ScreenName:object[@"username"] success:^(GKUser *user, NSString *session) {
+            [API loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] ScreenName:object[@"username"] success:^(GKUser *user, NSString *session) {
                 if (self.successBlock) {
                     self.successBlock();
                 }
@@ -411,7 +411,7 @@
     [Passport sharedInstance].taobaoId = [session getUser].userId;
     [Passport sharedInstance].screenName = [session getUser].nick;
     [SVProgressHUD show];
-    [GKAPI loginWithBaichuanUid:[session getUser].userId nick:[session getUser].nick  success:^(GKUser *user, NSString *session) {
+    [API loginWithBaichuanUid:[session getUser].userId nick:[session getUser].nick  success:^(GKUser *user, NSString *session) {
         [kAppDelegate.window makeKeyAndVisible];
         kAppDelegate.alertWindow.hidden = YES;
         if (self.successBlock) {
@@ -545,7 +545,7 @@
         NSString *email = [alertView textFieldAtIndex:0].text;
         if (email && email.length > 0) {
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-            [GKAPI forgetPasswordWithEmail:email success:^(BOOL success) {
+            [API forgetPasswordWithEmail:email success:^(BOOL success) {
                 if (success) {
                     [SVProgressHUD showImage:nil status:@"请检查邮箱，重设密码。"];
                 }
@@ -578,7 +578,7 @@
 //    [Passport sharedInstance].screenName = taobaoInfo[@"screen_name"];
 //    [Passport sharedInstance].taobaoId = taobaoUserId;
 //    [Passport sharedInstance].taobaoToken = taobaoToken;
-//    [GKAPI loginWithTaobaoUserId:taobaoUserId taobaoToken:taobaoToken success:^(GKUser *user, NSString *session) {
+//    [API loginWithTaobaoUserId:taobaoUserId taobaoToken:taobaoToken success:^(GKUser *user, NSString *session) {
 //        if (self.successBlock) {
 //            self.successBlock();
 //        }

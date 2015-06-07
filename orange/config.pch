@@ -69,7 +69,7 @@
 // SVPullToRefresh
 #import "SVPullToRefresh.h"
 
-#import "Passport.h"
+//#import "Passport.h"
 
 //Config
 #import "Config.h"
@@ -79,12 +79,7 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 
-#import "GKEntity.h"
-#import "GKNote.h"
-#import "GKPurchase.h"
-#import "GKUser.h"
-#import "GKComment.h"
-#import "GKEntityCategory.h"
+#import "core.h"
 
 #import "UIDevice-Hardware.h"
 

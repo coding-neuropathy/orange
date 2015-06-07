@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "WXApi.h"
 #import "TabBarViewController.h"
-#import "GKAPI.h"
 #import "EntityViewController.h"
 #import "UserViewController.h"
 #import "CategoryViewController.h"
@@ -339,7 +338,7 @@ int ddLogLevel;
 - (void)refreshCategory
 {
     
-    [GKAPI getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
+    [API getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
         
         NSMutableArray *categoryGroupArray = [NSMutableArray array];
         NSMutableArray *allCategoryArray = [NSMutableArray array];
@@ -379,25 +378,25 @@ int ddLogLevel;
 {
     if (!k_isLogin) {
         return;
-    }
-    
-    [GKAPI getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
-        if (dictionary[@"unread_message_count"]) {
-            self.messageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
+    } else {
+        [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
+            if (dictionary[@"unread_message_count"]) {
+                self.messageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
             if (self.messageCount != 0) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBadge" object:nil userInfo:nil];
             }
         }
-    } failure:^(NSInteger stateCode) {
+        } failure:^(NSInteger stateCode) {
         
-    }];
+        }];
+    }
 }
 
 #pragma mark - config log
 - (void)configLog
 {
-//    ddLogLevel = LOG_LEVEL_VERBOSE;
-    ddLogLevel = LOG_LEVEL_ERROR;
+    ddLogLevel = LOG_LEVEL_VERBOSE;
+//    ddLogLevel = LOG_LEVEL_ERROR;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;
@@ -417,7 +416,7 @@ int ddLogLevel;
         UIDevice *device = [[UIDevice alloc] init];
         DDLogInfo(@"jpush rid %@ %@ %@", [APService registrationID], [device model], XcodeAppVersion);
     
-        [GKAPI postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
+        [API postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
         
         } Failure:^(NSInteger stateCode) {
             DDLogError(@"error code %ld", stateCode);

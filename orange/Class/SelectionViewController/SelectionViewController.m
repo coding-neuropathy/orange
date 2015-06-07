@@ -8,7 +8,7 @@
 
 #import "SelectionViewController.h"
 #import "HMSegmentedControl.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "SelectionCell.h"
 #import "EntitySingleListCell.h"
 #import "CategoryViewController.h"
@@ -126,11 +126,11 @@ static NSString *CellIdentifier = @"SelectionCell";
         [self refresh];
     }
     
-    [GKAPI getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
-        
-    } failure:^(NSInteger stateCode) {
-        
-    }];
+//    [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
+//        
+//    } failure:^(NSInteger stateCode) {
+//        
+//    }];
     
     self.navigationItem.titleView = self.iconInfoView;
 }
@@ -169,7 +169,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 - (void)refresh
 {
     if (self.index == 0) {
-        [GKAPI getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:self.cateId count:30 success:^(NSArray *dataArray) {
+        [API getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:self.cateId count:30 success:^(NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
             [self save];
             NSMutableArray* imageArray = [NSMutableArray array];
@@ -201,7 +201,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 {
     if (self.index == 0) {
         NSTimeInterval timestamp = (NSTimeInterval)[self.dataArrayForEntity.lastObject[@"time"] doubleValue];
-        [GKAPI getSelectionListWithTimestamp:timestamp cateId:self.cateId count:30 success:^(NSArray *dataArray) {
+        [API getSelectionListWithTimestamp:timestamp cateId:self.cateId count:30 success:^(NSArray *dataArray) {
             [self.dataArrayForEntity addObjectsFromArray:[NSMutableArray arrayWithArray:dataArray]];
             NSMutableArray* imageArray = [NSMutableArray array];
             for (NSDictionary * dic in dataArray) {

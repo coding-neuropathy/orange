@@ -8,7 +8,7 @@
 
 #import "FriendViewController.h"
 #import "UserSingleListCell.h"
-#import "GKAPI.h"
+//#import "API.h"
 #import "NoDataView.h"
 
 static NSString *CellIdentifier = @"UserSingleListCell";
@@ -100,7 +100,7 @@ static NSString *CellIdentifier = @"UserSingleListCell";
 - (void)refresh
 {
 
-        [GKAPI getUserFollowingListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
+        [API getUserFollowingListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
             self.dataArrayForUser = [NSMutableArray arrayWithArray:userArray];
             if (self.dataArrayForUser.count == 0) {
                 self.tableView.tableFooterView = self.noDataView;
@@ -119,7 +119,7 @@ static NSString *CellIdentifier = @"UserSingleListCell";
 }
 - (void)loadMore
 {
-    [GKAPI getUserFollowingListWithUserId:self.user.userId offset:self.dataArrayForUser.count count:30 success:^(NSArray *userArray) {
+    [API getUserFollowingListWithUserId:self.user.userId offset:self.dataArrayForUser.count count:30 success:^(NSArray *userArray) {
         [self.dataArrayForUser addObjectsFromArray:userArray];
     
         [self.tableView reloadData];

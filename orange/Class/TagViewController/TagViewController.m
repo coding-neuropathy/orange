@@ -9,7 +9,7 @@
 #import "TagViewController.h"
 #import "HMSegmentedControl.h"
 #import "EntitySingleListCell.h"
-#import "GKAPI.h"
+//#import "API.h"
 
 @interface TagViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -122,7 +122,7 @@
 - (void)refresh
 {
     if (self.index == 0) {
-        [GKAPI getEntityListWithUserId:self.user.userId tag:self.tagName offset:0 count:30 success:^(GKUser *user, NSArray *entityArray) {
+        [API getEntityListWithUserId:self.user.userId tag:self.tagName offset:0 count:30 success:^(GKUser *user, NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView.pullToRefreshView stopAnimating];
             [self.tableView reloadData];
@@ -139,7 +139,7 @@
 - (void)loadMore
 {
     if (self.index == 0) {
-        [GKAPI getEntityListWithUserId:self.user.userId tag:self.tagName offset:self.dataArrayForEntity.count count:30 success:^(GKUser *user, NSArray *entityArray) {
+        [API getEntityListWithUserId:self.user.userId tag:self.tagName offset:self.dataArrayForEntity.count count:30 success:^(GKUser *user, NSArray *entityArray) {
             [self.dataArrayForEntity addObjectsFromArray:entityArray];
             [self.tableView.infiniteScrollingView stopAnimating];
             [self.tableView reloadData];

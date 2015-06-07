@@ -8,7 +8,7 @@
 
 #import "EntitySingleListCell.h"
 #import <QuartzCore/QuartzCore.h>
-#import "GKAPI.h"
+#import "API.h"
 #import "EntityViewController.h"
 #import "LoginView.h"
 
@@ -289,7 +289,7 @@
         [view show];
         return;
     }
-    [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
+    [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }

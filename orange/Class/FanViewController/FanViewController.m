@@ -8,7 +8,7 @@
 
 #import "FanViewController.h"
 #import "UserSingleListCell.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "NoDataView.h"
 
 @interface FanViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -95,7 +95,7 @@
 - (void)refresh
 {
     
-    [GKAPI getUserFanListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
+    [API getUserFanListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
         self.dataArrayForUser = [NSMutableArray arrayWithArray:userArray];
         if (self.dataArrayForUser.count == 0) {
             self.tableView.tableFooterView = self.noDataView;
@@ -114,7 +114,7 @@
 }
 - (void)loadMore
 {
-    [GKAPI getUserFanListWithUserId:self.user.userId offset:self.dataArrayForUser.count count:30 success:^(NSArray *userArray) {
+    [API getUserFanListWithUserId:self.user.userId offset:self.dataArrayForUser.count count:30 success:^(NSArray *userArray) {
         [self.dataArrayForUser addObjectsFromArray:userArray];
         [self.tableView reloadData];
         [self.tableView.infiniteScrollingView stopAnimating];

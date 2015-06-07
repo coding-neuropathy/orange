@@ -8,7 +8,7 @@
 
 #import "NoteCell.h"
 #import "UserViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "LoginView.h"
 #import "NoteViewController.h"
 #import "TagViewController.h"
@@ -274,7 +274,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         [view show];
         return;
     }
-    [GKAPI pokeWithNoteId:self.note.noteId state:!self.pokeButton.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
+    [API pokeWithNoteId:self.note.noteId state:!self.pokeButton.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
         if (poked == self.pokeButton.selected) {
             
         }
