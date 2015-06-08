@@ -176,7 +176,7 @@ int ddLogLevel;
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    DDLogInfo(@"user info %@", userInfo);
+//    DDLogInfo(@"user info %@", userInfo);
     NSString * url = [userInfo valueForKey:@"url"];
     if (url) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
