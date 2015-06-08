@@ -2110,15 +2110,21 @@
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
 
-//        NSMutableArray *entityArray = [NSMutableArray array];
+        NSMutableArray *dataArray = [NSMutableArray array];
 //        NSArray *content = responseObject[@"content"];
-//        for (NSDictionary *objectDict in content) {
+        for (NSDictionary *objectDict in objectArray) {
+            GKEntity * entity = [GKEntity modelFromDictionary:objectDict[@"content"][@"entity"]];
+            GKNote * note = [GKNote modelFromDictionary:objectDict[@"content"][@"note"]];
 //            GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
 //            [entityArray addObject:entity];
-//        }
+            [dataArray addObject:@{
+                                   @"entity":entity,
+                                   @"note":note
+                                   }];
+        }
         
         if (success) {
-            success(objectArray);
+            success(dataArray);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {

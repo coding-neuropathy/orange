@@ -77,6 +77,11 @@
 @property (nonatomic, weak) NSURL *imageURL_240x240;
 
 /**
+ *  商品主图（120 * 120）
+ */
+@property (nonatomic, weak) NSURL *imageURL_120x120;
+
+/**
  *  商品图片数组（多图）
  */
 @property (nonatomic, strong) NSArray *imageURLArray;

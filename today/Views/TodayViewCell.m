@@ -51,13 +51,19 @@
 - (void)setData:(NSDictionary *)data
 {
     _data = data;
-    self.textLabel.text = _data[@"content"][@"entity"][@"title"];
-    self.detailTextLabel.text = _data[@"content"][@"note"][@"content"];
-    NSString * urlstring =  _data[@"content"][@"entity"][@"chief_image"];
-   
+//    self.textLabel.text = _data[@"content"][@"entity"][@"title"];
+//    self.detailTextLabel.text = _data[@"content"][@"note"][@"content"];
+//    NSString * urlstring =  _data[@"content"][@"entity"][@"chief_image"];
+    GKEntity * entity = data[@"entity"];
+    GKNote * note = data[@"note"];
+    
+    self.textLabel.text = entity.title;
+    self.detailTextLabel.text = note.text;
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSURL *url = [NSURL URLWithString:[self imageURLWithURLString:urlstring Size:80.]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
+//        NSURL *url = [NSURL URLWithString:entity.imageURL_120x120];
+        
+        NSData *data = [NSData dataWithContentsOfURL:entity.imageURL_120x120];
         UIImage *placeholder = [UIImage imageWithData:data];
         
         dispatch_async(dispatch_get_main_queue(), ^{

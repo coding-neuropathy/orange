@@ -149,6 +149,14 @@
     return [NSURL URLWithString:[self.imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
 }
 
+- (NSURL *)imageURL_310x310
+{
+    if ([self.imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+        return [NSURL URLWithString:[self.imageURL.absoluteString imageURLWithSize:310]];
+    }
+    return [NSURL URLWithString:[self.imageURL.absoluteString stringByAppendingString:@"_310x310.jpg"]];
+}
+
 - (NSURL *)imageURL_240x240
 {
     if ([self.imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
@@ -157,12 +165,12 @@
     return [NSURL URLWithString:[self.imageURL.absoluteString stringByAppendingString:@"_240x240.jpg"]];
 }
 
-- (NSURL *)imageURL_310x310
+- (NSURL *)imageURL_120x120
 {
     if ([self.imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
-        return [NSURL URLWithString:[self.imageURL.absoluteString imageURLWithSize:310]];
+        return [NSURL URLWithString:[self.imageURL.absoluteString imageURLWithSize:120]];
     }
-    return [NSURL URLWithString:[self.imageURL.absoluteString stringByAppendingString:@"_310x310.jpg"]];
+    return [NSURL URLWithString:[self.imageURL.absoluteString stringByAppendingString:@"_120x120.jpg"]];
 }
 
 @end

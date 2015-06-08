@@ -660,6 +660,18 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)getUnreadCountWithSuccess:(void (^)(NSDictionary *dictionary))success
                           failure:(void (^)(NSInteger stateCode))failure;
 
+#pragma mark - today
+/**
+ *  获取 24小时 Top 10 商品列表
+ *
+ *  @param count   获取商品个数
+ *  @param success 成功block
+ *  @param failure 失败block
+ */
++ (void)getTopTenEntityCount:(NSInteger)count
+                     success:(void (^)(NSArray * array))success
+                     failure:(void (^)(NSInteger stateCode))failure;
+
 /**
  *  取消所有网络请求
  */
