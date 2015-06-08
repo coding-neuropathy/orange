@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface NSString (Helper)
 
@@ -16,6 +17,7 @@
 - (CGFloat)heightWithLineWidth:(CGFloat)width Font:(UIFont *)font;
 - (CGFloat)widthWithLineWidth:(CGFloat)width Font:(UIFont *)font;
 
+- (NSString *)encodedUrl;
 - (BOOL)validateEmail;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "CategoryLikeViewController.h"
 #import "HMSegmentedControl.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "EntityThreeGridCell.h"
 #import "EntitySingleListCell.h"
 
@@ -48,7 +48,7 @@
     [self.view addGestureRecognizer:leftSwipeGestureRecognizer];
     [self.view addGestureRecognizer:rightSwipeGestureRecognizer];
     
-    [GKAPI getCategoryStatByCategoryId:self.category.categoryId success:^(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount) {
+    [API getCategoryStatByCategoryId:self.category.categoryId success:^(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount) {
         UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:1002];
         [button setTitle:[NSString stringWithFormat:@"%ld 件商品",(long)likeCount] forState:UIControlStateNormal];
     } failure:^(NSInteger stateCode) {
@@ -131,7 +131,7 @@
 - (void)refresh
 {
     if (self.index == 1) {
-        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [API getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
@@ -143,7 +143,7 @@
     }
     else if (self.index == 0)
     {
-        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [API getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
@@ -155,7 +155,7 @@
     }
     else if (self.index == 2)
     {
-        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [API getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForLike = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
@@ -170,7 +170,7 @@
 - (void)loadMore
 {
     if (self.index == 1) {
-        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
+        [API getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -181,7 +181,7 @@
     }
     else if (self.index == 0)
     {
-        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
+        [API getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
@@ -192,7 +192,7 @@
     }
     else if (self.index == 2)
     {
-        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
+        [API getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
             [self.dataArrayForLike addObjectsFromArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];

@@ -17,7 +17,7 @@
 
 /**
  *  商品名称 （include brand and title）
- */
+*/
 @property (nonatomic, strong) NSString *entityName;
 
 /**
@@ -33,7 +33,7 @@
 /**
  *  商品类别ID
  */
-@property (nonatomic, assign) NSUInteger categoryId;
+@property (nonatomic, assign) NSInteger categoryId;
 
 /**
  *  商品品牌
@@ -56,6 +56,12 @@
 @property (nonatomic, strong) NSURL *imageURL;
 
 /**
+ *  商品主图（800 * 800）
+ */
+@property (nonatomic, weak) NSURL *imageURL_800x800;
+
+
+/**
  *  商品主图（640 * 640）
  */
 @property (nonatomic, weak) NSURL *imageURL_640x640;
@@ -69,6 +75,11 @@
  *  商品主图（240 * 240）
  */
 @property (nonatomic, weak) NSURL *imageURL_240x240;
+
+/**
+ *  商品主图（120 * 120）
+ */
+@property (nonatomic, weak) NSURL *imageURL_120x120;
 
 /**
  *  商品图片数组（多图）

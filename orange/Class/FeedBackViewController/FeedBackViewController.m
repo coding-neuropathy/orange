@@ -110,7 +110,7 @@
                                   @"type": self.senderId,
                                   };
     [[UMFeedback sharedInstance] post:postContent];
-    JSQMessage * message = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:postContent[@"reply_id"] date:[NSDate date] text:postContent[@"content"]];
+    JSQMessage * message = [[JSQMessage alloc] initWithSenderId:self.senderId senderDisplayName:@"user" date:[NSDate date] text:postContent[@"content"]];
     
     [self.messageData addObject:message];
 }
@@ -223,24 +223,21 @@
     } else {
 //        NSLog(@"feed back %@", self.feedback.topicAndReplies);
         for(NSDictionary * row in self.feedback.topicAndReplies) {
-//            NSLog(@"row %@", row);
+            DDLogInfo(@"row %@", row);
 
             JSQMessage * message = [[JSQMessage alloc] initWithSenderId:row[@"type"] senderDisplayName:row[@"reply_id"] date:[NSDate dateWithTimeIntervalSince1970:[row[@"create_at"] integerValue]] text:row[@"content"]];
             
             [self.messageData addObject:message];
         }
-//        NSLog(@"%@", self.messageData);
-        [self finishReceivingMessageAnimated:YES];
-//        [self.collectionView reloadData];
-        
+//        [self finishReceivingMessageAnimated:YES];        
     }
 }
 
 - (void)postFinishedWithError:(NSError *)error {
     if (error != nil) {
-        DDLogError(@"%@", error);
+        DDLogError(@"Error: %@", error);
     } else {
-        
+//        DDLogInfo(@"%@", self.feedback.topicAndReplies);
         [self finishSendingMessageAnimated:YES];
     }
 }

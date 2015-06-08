@@ -11,7 +11,7 @@
 #import "SettingsFooterView.h"
 
 #import "WXApi.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "LoginView.h"
 
 //#import "GKWebVC.h"
@@ -29,7 +29,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 @property (nonatomic, strong) UISwitch * switch_assistant;
 @property (nonatomic, strong) SettingsFooterView * footerView;
 
-//@property (nonatomic, strong) id<ALBBLoginService> loginService;
+@property (nonatomic, strong) id<ALBBLoginService> loginService;
 
 @end
 
@@ -47,7 +47,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         
         self.tabBarItem = item;
         
-//        _loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
+        _loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
     }
     return self;
 }
@@ -205,7 +205,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                     
                     
                     if (!error) {
-                        [GKAPI bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] ExpiresIn:object[@"expires_at"]  success:^(GKUser *user) {
+                        [API bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] ExpiresIn:object[@"expires_at"]  success:^(GKUser *user) {
                             [Passport sharedInstance].user = user;
                             [Passport sharedInstance].screenName = user.sinaScreenName;
 //                            [Passport sharedInstance].sinaUserID = user.
@@ -308,7 +308,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     if (alertView.tag == 40001) {
         if (buttonIndex == 1) {
 //            NSLog(@"unbind weibo %@", [Passport sharedInstance].user.sinaScreenName);
-            [GKAPI unbindSNSWithUserId:[Passport sharedInstance].user.userId SNSUserName:[Passport sharedInstance].user.sinaScreenName setPlatform:GKSinaWeibo success:^(bool status) {
+            [API unbindSNSWithUserId:[Passport sharedInstance].user.userId SNSUserName:[Passport sharedInstance].user.sinaScreenName setPlatform:GKSinaWeibo success:^(bool status) {
                 if (status) {
 //                    [Passport sharedInstance].screenName = nil;
                     [Passport sharedInstance].user.sinaScreenName = nil;
@@ -436,7 +436,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //
 //- (void)imagePickerController:(UIImagePickerController *)Picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
 //    UIImage * image = (UIImage *)[info valueForKey:UIImagePickerControllerEditedImage];
-//    [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:[image imageData] success:^(GKUser *user) {
+//    [API updateUserProfileWithNickname:nil email:nil password:nil imageData:[image imageData] success:^(GKUser *user) {
 //        [SVProgressHUD showImage:nil status:@"更新成功"];
 //            } failure:^(NSInteger stateCode) {
 //        [SVProgressHUD showImage:nil status:@"更新失败"];
@@ -475,16 +475,17 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (void)logout
 {
 
-    [GKAPI logoutWithSuccess:^{
-
+    [API logoutWithSuccess:^{
+        [AVUser logOut];
+        [self.loginService logout];
         [Passport logout];
-        //    [[TaeSession sharedInstance] lo]
-//        [self.loginService logout];
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
     } failure:^(NSInteger stateCode) {
         if(stateCode == 500) {
         
         } else {
+            [AVUser logOut];
+            [self.loginService logout];
             [Passport logout];
         }
     }];

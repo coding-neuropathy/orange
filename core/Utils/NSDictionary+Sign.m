@@ -7,6 +7,7 @@
 //
 
 #import "NSDictionary+Sign.h"
+#import "Passport.h"
 #import <CommonCrypto/CommonDigest.h>
 
 #define kApiKey @"0b19c2b93687347e95c6b6f5cc91bb87"
@@ -55,11 +56,10 @@
 {
     NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithDictionary:self];
     [newDict setObject:kApiKey forKey:@"api_key"];
-    
-//    NSString *session = [Passport sharedInstance].session;
-//    if (session) {
-//        [newDict setObject:session forKey:@"session"];
-//    }
+    NSString *session = [Passport sharedInstance].session;    
+    if (session) {
+        [newDict setObject:session forKey:@"session"];
+    }
     [newDict setObject:[self signWithParamters:newDict] forKey:@"sign"];
     return (NSDictionary *)newDict;
 }

@@ -7,7 +7,7 @@
 //
 
 #import "NoteViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "CommentCell.h"
 #import "CommentHeaderView.h"
 #import "UserViewController.h"
@@ -154,7 +154,7 @@ static NSString *CellIdentifier = @"CommentCell";
 - (void)refresh
 {
     
-    [GKAPI getNoteDetailWithNoteId:self.note.noteId success:^(GKNote *note, GKEntity *entity, NSArray *commentArray, NSArray *pokerArray) {
+    [API getNoteDetailWithNoteId:self.note.noteId success:^(GKNote *note, GKEntity *entity, NSArray *commentArray, NSArray *pokerArray) {
         self.dataArrayForComment = [NSMutableArray arrayWithArray:commentArray];
         if ([commentArray count] > 0) {
             self.tableView.tableFooterView = nil;
@@ -243,7 +243,7 @@ static NSString *CellIdentifier = @"CommentCell";
     GKComment *comment = self.dataArrayForComment[indexPath.row];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //删除评论
-        [GKAPI deleteCommentByNoteId:comment.noteId commentId:comment.commentId success:^() {
+        [API deleteCommentByNoteId:comment.noteId commentId:comment.commentId success:^() {
             [self.dataArrayForComment removeObjectAtIndex:indexPath.row];
             self.note.commentCount -=1;
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -308,7 +308,7 @@ static NSString *CellIdentifier = @"CommentCell";
         return;
     }
     if (self.inputTextField.tag == 0) {
-        [GKAPI postCommentWithNoteId:self.note.noteId content:content success:^(GKComment *comment) {
+        [API postCommentWithNoteId:self.note.noteId content:content success:^(GKComment *comment) {
             [SVProgressHUD showImage:nil status:@"评论成功"];
             self.note.commentCount += 1;
             [self.dataArrayForComment addObject:comment];
@@ -323,7 +323,7 @@ static NSString *CellIdentifier = @"CommentCell";
     }else{
         GKComment *comment = [GKComment modelFromDictionary:@{@"entityId":self.note.entityId, @"noteId":@(self.note.noteId), @"commentId":@(self.inputTextField.tag)}];
         
-        [GKAPI replyCommentWithNoteId:self.note.noteId commentId:comment.commentId commentCreatorId:comment.creator.userId content:self.inputTextField.text success:^(GKComment *comment) {
+        [API replyCommentWithNoteId:self.note.noteId commentId:comment.commentId commentCreatorId:comment.creator.userId content:self.inputTextField.text success:^(GKComment *comment) {
             self.note.commentCount += 1;
             self.inputTextField.text = nil;
             [self.inputTextField resignFirstResponder];
@@ -358,7 +358,7 @@ static NSString *CellIdentifier = @"CommentCell";
         [view show];
         return;
     }
-    [GKAPI pokeWithNoteId:self.note.noteId state:!pokeBtn.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
+    [API pokeWithNoteId:self.note.noteId state:!pokeBtn.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
         if (poked == pokeBtn.selected) {
             
         }

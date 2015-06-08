@@ -38,7 +38,7 @@ typedef NS_ENUM(NSInteger, GKUserRelationType) {
  *  用户状态
  */
 typedef NS_ENUM(NSInteger, GKUserState) {
-
+    
     /**
      *  禁言用户
      */
@@ -104,9 +104,9 @@ typedef NS_ENUM(NSInteger, GKUserState) {
  * 用户状态
  */
 @property (assign, nonatomic) GKUserState user_state;
-/**
- *  是否认证
- */
+///**
+// *  是否认证
+// */
 //@property (nonatomic, assign, getter = isVerified) BOOL verified;
 
 /**

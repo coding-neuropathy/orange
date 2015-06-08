@@ -2,15 +2,11 @@
 //  core.h
 //  core
 //
-//  Created by 谢 家欣 on 15/4/2.
-//  Copyright (c) 2015年 guoku.com. All rights reserved.
+//  Created by 谢家欣 on 15/4/5.
+//  Copyright (c) 2015年 guoku. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-//#import "HttpRequest.h"
-#import "API.h"
-//#import "UIImageView+WebCache.h"
-//#import "UIButton+WebCache.h"
 
 //! Project version number for core.
 FOUNDATION_EXPORT double coreVersionNumber;
@@ -18,6 +14,11 @@ FOUNDATION_EXPORT double coreVersionNumber;
 //! Project version string for core.
 FOUNDATION_EXPORT const unsigned char coreVersionString[];
 
+
 // In this header, you should import all the public headers of your framework using statements like #import <core/PublicHeader.h>
 
+#import "API.h"
 
+#import "GKModel.h"
+#import "NSString+Helper.h"
+#import "Passport.h"

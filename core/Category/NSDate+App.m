@@ -37,15 +37,15 @@ static NSDateFormatter *dateFormatter;
     NSTimeInterval minutes = - [self timeIntervalSinceNow] / 60;
     
     if (minutes < 1) {
-        return [NSString stringWithFormat:@"%.0f%@", - [self timeIntervalSinceNow], NSLocalizedStringFromTable(@"seconds", kLocalizedFile, nil)];
+        return [NSString stringWithFormat:@"%.0f秒前", - [self timeIntervalSinceNow]];
     } else if (minutes < 60) {
-        return [NSString stringWithFormat:@"%.0f%@", minutes, NSLocalizedStringFromTable(@"minutes", kLocalizedFile, nil)];
+        return [NSString stringWithFormat:@"%.0f分钟前", minutes];
     } else if (minutes < 60 * 24) {
-        return [NSString stringWithFormat:@"%.0f%@", minutes / 60, NSLocalizedStringFromTable(@"hours", kLocalizedFile, nil)];
+        return [NSString stringWithFormat:@"%.0f小时前", minutes / 60];
     } else if (minutes < 60 * 24 * 7) {
-        return [NSString stringWithFormat:@"%.0f%@", minutes / 60 / 24, NSLocalizedStringFromTable(@"days", kLocalizedFile, nil)];
+        return [NSString stringWithFormat:@"%.0f天前", minutes / 60 / 24];
     } else {
-        return [NSString stringWithFormat:@"%.0f%@", minutes / 60 / 24 / 7, NSLocalizedStringFromTable(@"weeks", kLocalizedFile, nil)];
+        return [NSString stringWithFormat:@"%.0f周前", minutes / 60 / 24 / 7];
         /*
         if (!dateFormatter) {
             dateFormatter = [[NSDateFormatter alloc] init];

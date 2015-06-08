@@ -8,7 +8,7 @@
 
 #import "DiscoverViewController.h"
 #import "HMSegmentedControl.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "EntityThreeGridCell.h"
 #import "CategoryGridCell.h"
 //#import "GKWebVC.h"
@@ -151,7 +151,7 @@
     self.tableView.tableHeaderView = self.headerView;
     
     
-    [GKAPI getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
+    [API getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
         // 过滤可处理的banner类型
         NSMutableArray *showBannerArray = [NSMutableArray array];
         for (NSDictionary *itemDict in bannerArray) {
@@ -171,7 +171,7 @@
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
-        [GKAPI getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
+        [API getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
             // 过滤可处理的banner类型
             NSMutableArray *showBannerArray = [NSMutableArray array];
             for (NSDictionary *itemDict in bannerArray) {
@@ -253,7 +253,7 @@
 - (void)refresh
 {
     if (self.index == 0) {
-        [GKAPI getHotEntityListWithType:@"weekly" success:^(NSArray *dataArray) {
+        [API getHotEntityListWithType:@"weekly" success:^(NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
             [self.tableView.pullToRefreshView stopAnimating];
                         [self.tableView reloadData];
@@ -266,7 +266,7 @@
     }
     else if (self.index == 1)
     {
-        [GKAPI getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
+        [API getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
         
                 NSMutableArray *categoryGroupArray = [NSMutableArray array];
                 NSMutableArray *allCategoryArray = [NSMutableArray array];
@@ -318,7 +318,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
     {
-        [GKAPI searchEntityWithString:self.keyword type:@"all" offset:self.dataArrayForEntityForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+        [API searchEntityWithString:self.keyword type:@"all" offset:self.dataArrayForEntityForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             if (self.dataArrayForEntityForSearch.count == 0) {
                 self.dataArrayForEntityForSearch = [NSMutableArray array];
             }
@@ -331,7 +331,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
     {
-        [GKAPI searchUserWithString:self.keyword offset:self.dataArrayForUserForSearch.count count:30 success:^(NSArray *userArray) {
+        [API searchUserWithString:self.keyword offset:self.dataArrayForUserForSearch.count count:30 success:^(NSArray *userArray) {
             if (self.dataArrayForUserForSearch.count == 0) {
                 self.dataArrayForUserForSearch = [NSMutableArray array];
             }
@@ -344,7 +344,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
     {
-        [GKAPI searchEntityWithString:self.keyword type:@"like" offset:self.dataArrayForLikeForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+        [API searchEntityWithString:self.keyword type:@"like" offset:self.dataArrayForLikeForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             if (self.dataArrayForLikeForSearch.count == 0) {
                 self.dataArrayForLikeForSearch = [NSMutableArray array];
             }
@@ -949,7 +949,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
     {
-        [GKAPI searchEntityWithString:self.keyword type:@"all" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+        [API searchEntityWithString:self.keyword type:@"all" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];
                     [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];
@@ -959,7 +959,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
     {
-        [GKAPI searchUserWithString:self.keyword offset:0 count:30 success:^(NSArray *userArray) {
+        [API searchUserWithString:self.keyword offset:0 count:30 success:^(NSArray *userArray) {
             self.dataArrayForUserForSearch = [NSMutableArray arrayWithArray:userArray];
                     [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];
@@ -969,7 +969,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
     {
-        [GKAPI searchEntityWithString:self.keyword type:@"like" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+        [API searchEntityWithString:self.keyword type:@"like" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
                     [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];

@@ -66,21 +66,16 @@
     // If an error is encountered, use NCUpdateResultFailed
     // If there's no update required, use NCUpdateResultNoData
     // If there's an update, use NCUpdateResultNewData
-    
     [API getTopTenEntityCount:3 success:^(NSArray *array) {
-//        NSLog(@"%@", array);
-        self.dataArray = (NSMutableArray *)array;
+//        NSLog(@"array %@", array);
+        self.dataArray = [NSMutableArray arrayWithArray:array];
         [self save];
         [self.tableView reloadData];
         completionHandler(NCUpdateResultNewData);
     } failure:^(NSInteger stateCode) {
-//        NSLog(@"error %lu", (long)stateCode);
-        self.dataArray = [self getCache];
         [self.tableView reloadData];
         completionHandler(NCUpdateResultNoData);
     }];
-    
-    
 }
 
 //- (void)receivedAdditionalContent

@@ -196,7 +196,6 @@
     NSString *clientKey = [[self class] clientKeyFromServerKey:key];
     
     NSString *selString = [NSString stringWithFormat:@"is%@%@", [[clientKey substringToIndex:1] uppercaseString], [clientKey substringFromIndex:1]];
-    
     // 这里需要判断为is开头的属性名，比如liked需要判断isLiked。如果都不存在，则说明该类没有此属性。
     if (clientKey && ([self respondsToSelector:NSSelectorFromString(clientKey)] || [self respondsToSelector:NSSelectorFromString(selString)])) {
         if (value) {

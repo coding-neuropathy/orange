@@ -7,7 +7,7 @@
 //
 
 #import "MeViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "HMSegmentedControl.h"
 #import "EntityThreeGridCell.h"
 #import "NoteSingleListCell.h"
@@ -98,7 +98,7 @@
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
-        [GKAPI getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
+        [API getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
             weakSelf.user = user;
             [weakSelf configHeaderView];
             [Passport sharedInstance].user = user;
@@ -115,7 +115,7 @@
     
     if (k_isLogin) {
         self.user = [Passport sharedInstance].user;
-        [GKAPI getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
+        [API getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
             weakSelf.user = user;
             [weakSelf configHeaderView];
             [Passport sharedInstance].user = user;
@@ -253,7 +253,7 @@
 - (void)refresh
 {
     if (self.index == 0) {
-        [GKAPI getUserLikeEntityListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *dataArray) {
+        [API getUserLikeEntityListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
             self.likeTimestamp = timestamp;
             [self configEmptyState];
@@ -269,7 +269,7 @@
     }
     else if (self.index == 1)
     {
-        [GKAPI getUserNoteListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSArray *dataArray) {
+        [API getUserNoteListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSArray *dataArray) {
             self.dataArrayForNote = [NSMutableArray arrayWithArray:dataArray];
             [self configEmptyState];
             [self.tableView reloadData];
@@ -283,7 +283,7 @@
     }
     else if (self.index == 2)
     {
-        [GKAPI getTagListWithUserId:self.user.userId offset:0 count:30 success:^(GKUser *user, NSArray *tagArray) {
+        [API getTagListWithUserId:self.user.userId offset:0 count:30 success:^(GKUser *user, NSArray *tagArray) {
             self.dataArrayForTag = [NSMutableArray arrayWithArray:tagArray];
             [self configEmptyState];
             [self.tableView reloadData];
@@ -303,7 +303,7 @@
     if (self.index == 0) {
         GKEntity *entity = self.dataArrayForEntity.lastObject;
         NSTimeInterval likeTimestamp = entity ? self.likeTimestamp : [[NSDate date] timeIntervalSince1970];
-        [GKAPI getUserLikeEntityListWithUserId:self.user.userId timestamp:likeTimestamp count:30 success:^(NSTimeInterval timestamp, NSArray *dataArray) {
+        [API getUserLikeEntityListWithUserId:self.user.userId timestamp:likeTimestamp count:30 success:^(NSTimeInterval timestamp, NSArray *dataArray) {
             [self.dataArrayForEntity addObjectsFromArray:dataArray];
             self.likeTimestamp = timestamp;
             [self.tableView reloadData];
@@ -319,7 +319,7 @@
     {
         GKNote *note = [self.dataArrayForNote.lastObject objectForKey:@"note"];
         NSTimeInterval timestamp = note ? note.createdTime : [[NSDate date] timeIntervalSince1970];
-        [GKAPI getUserNoteListWithUserId:self.user.userId timestamp:timestamp count:30 success:^(NSArray *dataArray) {
+        [API getUserNoteListWithUserId:self.user.userId timestamp:timestamp count:30 success:^(NSArray *dataArray) {
             [self.dataArrayForNote addObjectsFromArray:dataArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];

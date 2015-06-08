@@ -7,7 +7,7 @@
 //
 
 #import "EntityViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "NoteCell.h"
 #import "EntityThreeGridCell.h"
 #import "UserViewController.h"
@@ -125,7 +125,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     
     [self configFooter];
     
-    [GKAPI getRandomEntityListByCategoryId:self.entity.categoryId
+    [API getRandomEntityListByCategoryId:self.entity.categoryId
                                   entityId:self.entity.entityId
                                      count:9 success:^(NSArray *entityArray) {
                                          self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
@@ -184,7 +184,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 
 - (void)refresh
 {
-    [GKAPI getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray) {
+    [API getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray) {
         [self.image sd_setImageWithURL:self.entity.imageURL_640x640];
         self.entity = entity;
         self.header.entity = entity;
@@ -556,7 +556,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
     [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
     [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
     
-    [GKAPI likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
+    [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
@@ -730,7 +730,7 @@ static NSString *EntityCellIdentifier = @"EntityCell";
 {
     DDLogInfo(@"note %@", self.note.text);
     if (buttonIndex == 1) {
-        [GKAPI deleteNoteByNoteId:self.note.noteId success:^{
+        [API deleteNoteByNoteId:self.note.noteId success:^{
             __block NSInteger noteIndex = -1;
 //            DDLogInfo(@"okoko");
             [self.dataArrayForNote enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {

@@ -7,7 +7,7 @@
 //
 
 #import "ReportViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "RadioButton.h"
 #import "UIPlaceHolderTextView.h"
 
@@ -238,7 +238,7 @@ static CGFloat LeftMargin = 16.;
     */
     
     if (self.note) {
-        [GKAPI reportNoteId:self.note.noteId comment:comment success:^(BOOL success) {
+        [API reportNoteId:self.note.noteId comment:comment success:^(BOOL success) {
             if (success) {
                 [self.navigationController popViewControllerAnimated:YES];
                 [SVProgressHUD showImage:nil status:@"举报成功"];
@@ -252,7 +252,7 @@ static CGFloat LeftMargin = 16.;
         }];
     }
     else if (self.entity) {
-        [GKAPI reportEntityId:self.entity.entityId type:self.radioType comment:comment success:^(BOOL success) {
+        [API reportEntityId:self.entity.entityId type:self.radioType comment:comment success:^(BOOL success) {
             if (success) {
                 [self.navigationController popViewControllerAnimated:YES];
                 [SVProgressHUD showImage:nil status:@"举报成功"];

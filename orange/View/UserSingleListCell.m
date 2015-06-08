@@ -8,7 +8,7 @@
 
 #import "UserSingleListCell.h"
 #import "UserViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "LoginView.h"
 
 @interface UserSingleListCell ()
@@ -204,7 +204,7 @@
         [view show];
         return;
     }
-    [GKAPI followUserId:self.user.userId state:YES success:^(GKUserRelationType relation) {
+    [API followUserId:self.user.userId state:YES success:^(GKUserRelationType relation) {
         self.user.relation = relation;
         [self configFollowButton];
         [SVProgressHUD showImage:nil status:@"关注成功"];
@@ -228,7 +228,7 @@
         [view show];
         return;
     }
-    [GKAPI followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
+    [API followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
         self.user.relation = relation;
         [self configFollowButton];
         //[SVProgressHUD showImage:nil status:@"取关成功"];

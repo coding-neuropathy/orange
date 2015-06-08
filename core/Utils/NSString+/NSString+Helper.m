@@ -25,7 +25,7 @@
     [array insertObject:[NSNumber numberWithInteger:size] atIndex:1];
     //        NSLog(@"%@", array);
     NSString * image_uri_string = [[array valueForKey:@"description"] componentsJoinedByString:@"/"];
-//    NSLog(@"%@", image_uri_string);
+    //    NSLog(@"%@", image_uri_string);
     
     return [NSString stringWithFormat:@"http://imgcdn.guoku.com/%@", image_uri_string];
 }
@@ -52,6 +52,12 @@
                                                context:nil];
     CGSize size = rect.size;
     return size.width;
+}
+
+- (NSString *)encodedUrl
+{
+    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)self,NULL,CFSTR("!*'();:@&=+$,/?%#[]"),kCFStringEncodingUTF8));
+    return result;
 }
 
 - (BOOL)validateEmail

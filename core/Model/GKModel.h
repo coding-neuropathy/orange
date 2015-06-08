@@ -11,3 +11,4 @@
 #import "GKComment.h"
 #import "GKUser.h"
 #import "GKEntityCategory.h"
+#import "GKPurchase.h"

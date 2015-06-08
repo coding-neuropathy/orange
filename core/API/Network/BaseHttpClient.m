@@ -32,39 +32,21 @@
     }
 }
 
-//- (void)requestPath:(NSString *)path
-//             method:(NSString *)method
-//         parameters:(NSDictionary *)parameters
-//     dataParameters:(NSDictionary *)dataParameters
-//            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-//            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-//{
-//    NSParameterAssert(path);
-//    NSParameterAssert(method);
-//    
-//    NSMutableURLRequest *request = [self multipartFormRequestWithMethod:method path:path parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-//        [dataParameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-//            [formData appendPartWithFileData:obj name:key fileName:@"fileName" mimeType:@""];
-//        }];
-//    }];
-//    
-//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        //        NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-//        //        DDLogInfo(@"%@", responseObject);
-//        //        NSDictionary *responseDict = [responseString objectFromJSONString];
-//        NSDictionary * responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-//        
-//        if (success) {
-//            success(operation, responseDict);
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        if (failure) {
-//            failure(operation, error);
-//        }
-//    }];
-//    
-//    [self enqueueHTTPRequestOperation:operation];
-//}
+- (void)requestPath:(NSString *)path
+             method:(NSString *)method
+         parameters:(NSDictionary *)parameters
+     dataParameters:(NSDictionary *)dataParameters
+            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSParameterAssert(path);
+    NSParameterAssert(method);
+    
+    [self POST:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [dataParameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            [formData appendPartWithFileData:obj name:key fileName:@"fileName" mimeType:@""];
+        }];
+    } success:success failure:failure];
+}
 
 @end

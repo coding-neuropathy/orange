@@ -10,13 +10,8 @@
 #import "KeyAndTag.h"
 
 
-@interface Passport ()
-@property (nonatomic, strong) id<ALBBLoginService> loginService;
-@end
-
 @implementation Passport
 
-#pragma mark - class method
 + (Passport *)sharedInstance
 {
     static Passport *sharedInstance = nil;
@@ -48,11 +43,9 @@
     
     [Passport sharedInstance].taobaoId = nil;
 
-    
     [Passport sharedInstance].taobaoToken = nil;
-    
-    [[Passport sharedInstance] logout];
 
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
 }
 
 - (id)init
@@ -74,21 +67,8 @@
         self.sinaToken = sinaToken;
         NSDate *sinaExpirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:SinaExpirationDateKey];
         self.sinaExpirationDate = sinaExpirationDate;
-        
-        _loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
     }
     return self;
-}
-
-- (void)logout
-{
-    [self.loginService logout];
-    
-    [AVUser logOut];
-    if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
-        [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
 }
 
 - (void)setSession:(NSString *)session
