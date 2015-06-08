@@ -188,7 +188,6 @@
 		4E8D6AA81A3B432700156C17 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8D6AA71A3B432700156C17 /* libz.dylib */; };
 		4E8D6AAA1A3B433500156C17 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8D6AA91A3B433500156C17 /* libsqlite3.0.dylib */; };
 		4E8D6AAC1A3B441000156C17 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8D6AAB1A3B441000156C17 /* libc++.dylib */; };
-		4E8D6AB31A3B57F600156C17 /* UINavigationController+statusbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB21A3B57F600156C17 /* UINavigationController+statusbar.m */; };
 		4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB61A3B66F900156C17 /* MCPHandler.m */; };
 		4E934DA81A9AE9FB00374B05 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E934DA71A9AE9FB00374B05 /* GroupViewController.m */; };
 		4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */; };
@@ -621,8 +620,6 @@
 		4E8D6AA71A3B432700156C17 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		4E8D6AA91A3B433500156C17 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		4E8D6AAB1A3B441000156C17 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		4E8D6AB11A3B57F600156C17 /* UINavigationController+statusbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+statusbar.h"; path = "../../Category/UINavigationController+statusbar.h"; sourceTree = "<group>"; };
-		4E8D6AB21A3B57F600156C17 /* UINavigationController+statusbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+statusbar.m"; path = "../../Category/UINavigationController+statusbar.m"; sourceTree = "<group>"; };
 		4E8D6AB51A3B66F900156C17 /* MCPHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPHandler.h; sourceTree = "<group>"; };
 		4E8D6AB61A3B66F900156C17 /* MCPHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPHandler.m; sourceTree = "<group>"; };
 		4E934DA61A9AE9FB00374B05 /* GroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupViewController.h; sourceTree = "<group>"; };
@@ -1540,7 +1537,6 @@
 				4E216A8E1A1FA37D009FF11D /* AKSegmentedControl */,
 				4E1D30A91A125FDF00740C17 /* JSQSystemSoundPlayer */,
 				4E1D284C1A125B9300740C17 /* JSQMessagesViewController */,
-				4E56DF9619D579F600263B17 /* Category */,
 				4E56DF4119D56EF500263B17 /* FontAwesome */,
 			);
 			path = ThirdParty;
@@ -1566,15 +1562,6 @@
 				4E56DF4719D56EF500263B17 /* FontAwesome.ttf */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		4E56DF9619D579F600263B17 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				4E8D6AB11A3B57F600156C17 /* UINavigationController+statusbar.h */,
-				4E8D6AB21A3B57F600156C17 /* UINavigationController+statusbar.m */,
-			);
-			path = Category;
 			sourceTree = "<group>";
 		};
 		4E56DFC619D5AF5600263B17 /* Framework */ = {
@@ -2359,7 +2346,6 @@
 				B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */,
 				4EC9F7A31A7BBEF20057D736 /* TagViewController.m in Sources */,
 				4E934DA81A9AE9FB00374B05 /* GroupViewController.m in Sources */,
-				4E8D6AB31A3B57F600156C17 /* UINavigationController+statusbar.m in Sources */,
 				4E1D28C51A125B9300740C17 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */,
 				4EC9F7911A7928520057D736 /* FanViewController.m in Sources */,
