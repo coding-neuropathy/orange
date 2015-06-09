@@ -147,26 +147,37 @@ static CGFloat kEntityViewMarginLeft = 16.;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
 //        [imageurl a]
 //        NSLog(@"image url %@", imageURL);
-        NSURL * imageURL_640;
-        if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
-            imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:640]];
+        if (IS_IPHONE_6P) {
+            NSURL * imageURL_800;
+            if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:800]];
+            } else {
+                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
+            }
+            
+            [imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+            [self.scrollView addSubview:imageView];
         } else {
-            imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
+            NSURL * imageURL_640;
+            if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+                imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:640]];
+            } else {
+                imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
+            }
+        
+            [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+            [self.scrollView addSubview:imageView];
         }
-        
-        [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
-        [self.scrollView addSubview:imageView];
-        
     }];
     
     
-    [self.likeBtn setTitle:[NSString stringWithFormat:@"%@ %lu", NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), _entity.likeCount] forState:UIControlStateNormal];
-    self.likeBtn.selected = self.entity.liked;
-    if(_entity.likeCount == 0)
-    {
-        [self.likeBtn setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
-    }
-    [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", _entity.lowestPrice] forState:UIControlStateNormal];
+//    [self.likeBtn setTitle:[NSString stringWithFormat:@"%@ %lu", NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), _entity.likeCount] forState:UIControlStateNormal];
+//    self.likeBtn.selected = self.entity.liked;
+//    if(_entity.likeCount == 0)
+//    {
+//        [self.likeBtn setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
+//    }
+//    [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", _entity.lowestPrice] forState:UIControlStateNormal];
     
     [self setNeedsLayout];
 }
@@ -177,7 +188,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
 
     CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font];
     
-    self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 0., kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
+    self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 16., kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
     
     self.scrollView.frame = CGRectMake(0., 0., kScreenWidth - 32., kScreenWidth - 32.);
     self.scrollView.deFrameLeft = 16.;
@@ -191,15 +202,15 @@ static CGFloat kEntityViewMarginLeft = 16.;
         self.pageCtr.hidden = NO;
     }
     
-    self.likeBtn.frame = CGRectMake(0, 0, 86, 30);
-    self.likeBtn.deFrameLeft = 16.;
-    UIFont* font = [UIFont systemFontOfSize:12];
-    self.likeBtn.deFrameWidth = [self.likeBtn.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}].width+40;
-    self.likeBtn.deFrameTop = self.scrollView.deFrameBottom + 15.;
-    
-    self.buyBtn.frame = CGRectMake(0, 0, 120, 30);
-    self.buyBtn.deFrameRight= kScreenWidth - 16.;
-    self.buyBtn.deFrameTop = self.scrollView.deFrameBottom + 15.;
+//    self.likeBtn.frame = CGRectMake(0, 0, 86, 30);
+//    self.likeBtn.deFrameLeft = 16.;
+//    UIFont* font = [UIFont systemFontOfSize:12];
+//    self.likeBtn.deFrameWidth = [self.likeBtn.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}].width+40;
+//    self.likeBtn.deFrameTop = self.scrollView.deFrameBottom + 15.;
+//    
+//    self.buyBtn.frame = CGRectMake(0, 0, 120, 30);
+//    self.buyBtn.deFrameRight= kScreenWidth - 16.;
+//    self.buyBtn.deFrameTop = self.scrollView.deFrameBottom + 15.;
 }
 
 #pragma mark - button action
@@ -229,7 +240,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
 {
     CGFloat titleHeight = [entity.entityName heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:[UIFont systemFontOfSize:16.f]];
 //    DDLogInfo(@"title hight %f", titleHeight);
-    return kScreenWidth + titleHeight + 50.;
+    return kScreenWidth + titleHeight + 16.;
 }
 
 @end

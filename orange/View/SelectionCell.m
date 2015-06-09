@@ -75,17 +75,22 @@
     __block UIImageView *block_img = self.image;
     __weak __typeof(&*self)weakSelf = self;
     {
-        [self.image sd_setImageWithURL:self.entity.imageURL_640x640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
+        NSURL * imageURL = self.entity.imageURL_640x640;
+        if (IS_IPHONE_6P) {
+            imageURL = self.entity.imageURL_800x800;
+        }
+        
+        [self.image sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             
             UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
 
-            if (kScreenWidth > 320) {
-                block_img.contentMode = UIViewContentModeCenter;
-            }
-            else
-            {
-                block_img.contentMode = UIViewContentModeScaleAspectFit;
-            }
+//            if (kScreenWidth > 320) {
+//                block_img.contentMode = UIViewContentModeCenter;
+//            }
+//            else
+//            {
+//                block_img.contentMode = UIViewContentModeScaleAspectFit;
+//            }
 
             block_img.image = newimage;
             [weakSelf.activityIndicator stopAnimating];
@@ -120,7 +125,7 @@
         //[self.contentView addSubview:self.box];
     }
     
-    self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth -32, kScreenWidth-32);
+    self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth - 32, kScreenWidth - 32);
     
     if(!self.contentLabel) {
         _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
@@ -205,7 +210,7 @@
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -32, 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 32, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 7.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];

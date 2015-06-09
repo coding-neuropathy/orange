@@ -236,7 +236,6 @@ static CGFloat LeftMargin = 16.;
         return;
     }
     */
-    
     if (self.note) {
         [API reportNoteId:self.note.noteId comment:comment success:^(BOOL success) {
             if (success) {

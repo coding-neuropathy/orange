@@ -9,7 +9,7 @@
 #import "EmailEditViewController.h"
 #import "API.h"
 #import "NSString+Helper.h"
-static CGFloat NormalKeyboardHeight = 216.0f;
+// static CGFloat NormalKeyboardHeight = 216.0f;
 
 @interface EmailEditViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UITextField *emailTextField;

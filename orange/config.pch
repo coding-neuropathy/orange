@@ -46,7 +46,7 @@
 #import "NSString+App.h"
 #import "NSDate+App.h"
 #import "NSObject+App.h"
-#import "UINavigationController+statusbar.h"
+//#import "UINavigationController+statusbar.h"
 
 // FontAwesome
 #import "NSString+FontAwesome.h"
@@ -72,14 +72,15 @@
 //#import "Passport.h"
 
 //Config
+#import "core.h"
+
 #import "Config.h"
 
 #import "RTLabel.h"
-
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 
-#import "core.h"
+#import "OpenCenter.h"
 
 #import "UIDevice-Hardware.h"
 

@@ -107,8 +107,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary * row = [self.dataArray objectAtIndex:indexPath.row];
-    NSString * entity_id = row[@"content"][@"entity"][@"entity_id"];
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entity_id]];
+    GKEntity * entity = row[@"entity"];
+//    NSString * entity_id = row[@"content"][@"entity"][@"entity_id"];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entity.entityId]];
     
     [self.extensionContext openURL:url completionHandler:nil];
 }
