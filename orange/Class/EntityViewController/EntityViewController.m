@@ -9,17 +9,19 @@
 #import "EntityViewController.h"
 #import "API.h"
 //#import "NoteCell.h"
-#import "EntityThreeGridCell.h"
-#import "CSStickyHeaderFlowLayout.h"
+//#import "EntityThreeGridCell.h"
+//#import "CSStickyHeaderFlowLayout.h"
 #import "UserViewController.h"
 #import "NotePostViewController.h"
 #import "CategoryViewController.h"
 
 #import "WXApi.h"
 //#import "GKWebVC.h"
+#import "EntityLikeUserCell.h"
 #import "EntityNoteCell.h"
 #import "EntityCell.h"
 #import "EntityHeaderSectionView.h"
+
 
 #import "ReportViewController.h"
 #import "LoginView.h"
@@ -58,10 +60,11 @@
     tradeProcessFailedCallback _tradeProcessFailedCallback;
 }
 
-static NSString *NoteCellIdentifier = @"NoteCell";
-static NSString *EntityCellIdentifier = @"EntityCell";
+static NSString * LikeUserIdentifier = @"LikeUserCell";
+static NSString * NoteCellIdentifier = @"NoteCell";
+static NSString * EntityCellIdentifier = @"EntityCell";
 static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSection";
-static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction";
+//static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction";
 
 - (instancetype)init
 {
@@ -121,6 +124,10 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         [self.image sd_setImageWithURL:self.entity.imageURL_640x640];
         self.entity = entity;
         self.header.entity = entity;
+        
+//        self.collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
+//        self.header.frame = CGRectMake(0, - [self headerHeight], kScreenWidth, [self headerHeight]);
+        
         self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
         self.dataArrayForNote = [NSMutableArray arrayWithArray:noteArray];
         for (GKNote *note in self.dataArrayForNote) {
@@ -146,6 +153,8 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.collectionView registerClass:[EntityLikeUserCell class] forCellWithReuseIdentifier:LikeUserIdentifier];
     
     [self.collectionView registerClass:[EntityNoteCell class] forCellWithReuseIdentifier:NoteCellIdentifier];
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
@@ -178,8 +187,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     [postNoteBtn setTitle:[NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForEnum:FAPencilSquareO], NSLocalizedStringFromTable(@"post note", kLocalizedFile, nil)] forState:UIControlStateNormal];
     postNoteBtn.frame = CGRectMake(0., 0., kScreenWidth - 32., 44.);
     [postNoteBtn setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
-//    postNoteBtn.backgroundColor = [UIColor redColor];
-//    [postNoteBtn setBackgroundColor:[]]
+
     [postNoteBtn addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * postNoteBarBtn = [[UIBarButtonItem alloc] initWithCustomView:postNoteBtn];
     self.toolbarItems = @[postNoteBarBtn];
@@ -249,7 +257,20 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 {
     NSInteger count = 0;
     switch (section) {
-            
+        case 1:
+        {
+            count = self.dataArrayForlikeUser.count;
+            if ((IS_IPHONE_4_OR_LESS || IS_IPHONE_5) && count > 7) {
+                count = 7;
+            }
+            if (IS_IPHONE_6 && count > 8) {
+                count = 8;
+            }
+            if (IS_IPHONE_6P && count > 9) {
+                count = 9;
+            }
+        }
+            break;
         case 2:
             count = self.dataArrayForNote.count;
             break;
@@ -265,6 +286,13 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
+        case 1:
+        {
+            EntityLikeUserCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:LikeUserIdentifier forIndexPath:indexPath];
+            cell.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
+            return cell;
+        }
+            break;
         case 2:
         {
             EntityNoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NoteCellIdentifier forIndexPath:indexPath];
@@ -330,6 +358,9 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 {
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
+        case 1:
+            cellsize = CGSizeMake(36., 36.);
+            break;
         case 2:
         {
             CGFloat height = [EntityNoteCell height:[self.dataArrayForNote objectAtIndex:indexPath.row]];
@@ -363,6 +394,13 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         case 0:
 
             break;
+        case 1:
+        {
+            if (self.dataArrayForlikeUser.count != 0) {
+                edge = UIEdgeInsetsMake(8., 16., 8., 16.);
+            }
+        }
+            break;
         case 3:
         {
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
@@ -388,6 +426,9 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     CGFloat itemSpacing = 0.;
     switch (section) {
         case 0:
+            break;
+        case 1:
+            itemSpacing = 3.;
             break;
         case 3:
         {
@@ -437,6 +478,15 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         case 3:
             return CGSizeMake(kScreenWidth, 50.);
             break;
+        case 1:
+        {
+            if (self.entity.likeCount == 0) {
+                return CGSizeMake(0., 0.);
+            } else {
+                return CGSizeMake(kScreenWidth, 30);
+            }
+        }
+            break;
         default:
             return CGSizeMake(kScreenWidth, 30);
             break;
@@ -447,6 +497,16 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
+        case 1:
+        {
+            UserViewController * VC = [[UserViewController alloc]init];
+            VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:VC animated:YES];
+            
+            [AVAnalytics event:@"entity_forward_user"];
+            [AVAnalytics event:@"entity_forward_user"];
+        }
+            break;
         case 2:
         {
 
@@ -964,15 +1024,15 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     [MobClick event:@"entity_forward_categoty"];
 }
 
-- (void)avatarButtonAction:(UIButton *)button;
-{
-    UserViewController * VC = [[UserViewController alloc]init];
-    VC.user = [self.dataArrayForlikeUser objectAtIndex:button.tag];
-    [self.navigationController pushViewController:VC animated:YES];
-    
-    [AVAnalytics event:@"entity_forward_user"];
-    [AVAnalytics event:@"entity_forward_user"];
-}
+//- (void)avatarButtonAction:(UIButton *)button;
+//{
+//    UserViewController * VC = [[UserViewController alloc]init];
+//    VC.user = [self.dataArrayForlikeUser objectAtIndex:button.tag];
+//    [self.navigationController pushViewController:VC animated:YES];
+//    
+//    [AVAnalytics event:@"entity_forward_user"];
+//    [AVAnalytics event:@"entity_forward_user"];
+//}
 
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
