@@ -21,7 +21,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//        self.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//        self.backgroundColor = UIColorFromRGB(0xffffff);
     }
     return self;
 }
@@ -33,7 +34,6 @@
         _textLabel.font = [UIFont systemFontOfSize:14.];
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.textColor = UIColorFromRGB(0x414243);
-        _textLabel.hidden = YES;
         [self addSubview:_textLabel];
     }
     return _textLabel;
@@ -50,7 +50,7 @@
         _indicatorLable.hidden = YES;
         
         [self addSubview:_indicatorLable];
-    }
+    }\
     return _indicatorLable;
 }
 
@@ -65,7 +65,6 @@
 - (void)setHeadertype:(EntitySectionType)headertype
 {
     _headertype = headertype;
-
 }
 
 - (void)setText:(NSString *)text
@@ -75,15 +74,28 @@
         case CategoryType:
         {
             self.textLabel.text = [NSString stringWithFormat:@"%@「%@」",NSLocalizedStringFromTable(@"from", kLocalizedFile, nil), [_text componentsSeparatedByString:@"-"][0]];
-            self.textLabel.hidden = NO;
             self.indicatorLable.hidden = NO;
             self.userInteractionEnabled = YES;
+        }
+            break;
+        case LikeType:
+        {
+            self.textLabel.text = [NSString stringWithFormat:@"%@ 人喜爱", text];
+//            self.textLabel.backgroundColor = [UIColor clearColor];
+            self.indicatorLable.hidden = NO;
+            self.userInteractionEnabled = YES;
+        }
+            break;
+        case NoteType:
+        {
+            self.textLabel.text = [NSString stringWithFormat:@"%@ 人点评", text];
+            self.indicatorLable.hidden = YES;
+            self.userInteractionEnabled = NO;
         }
             break;
         case RecommendType:
         {
             self.textLabel.text = NSLocalizedStringFromTable(_text, kLocalizedFile, nil);
-            self.textLabel.hidden = NO;
             self.indicatorLable.hidden = YES;
             self.userInteractionEnabled = NO;
         }
@@ -99,10 +111,29 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.textLabel.frame = CGRectMake(16., 10., 200., 30.);
-    self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
-    self.indicatorLable.center = self.textLabel.center;
-    self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
+    switch (self.headertype) {
+        case LikeType:
+        case NoteType:
+        {
+            self.backgroundColor = UIColorFromRGB(0xffffff);
+            self.textLabel.frame = CGRectMake(16., 0., 200., 30.);
+            self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
+            self.indicatorLable.center = self.textLabel.center;
+            self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
+        }
+            break;
+        default:
+        {
+            self.backgroundColor = UIColorFromRGB(0xf8f8f8);
+            self.textLabel.frame = CGRectMake(16., 10., 200., 30.);
+            self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
+            self.indicatorLable.center = self.textLabel.center;
+            self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
+        }
+            break;
+    }
+    
+
 }
 
 - (void)drawRect:(CGRect)rect
@@ -120,6 +151,20 @@
         
         CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
         CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
+        CGContextStrokePath(context);
+    }
+    
+    if (NoteType == self.headertype) {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+        CGContextSetLineWidth(context, kSeparateLineWidth);
+        
+        CGContextMoveToPoint(context, 0, kSeparateLineWidth);
+        CGContextAddLineToPoint(context, self.frame.size.width - kSeparateLineWidth, kSeparateLineWidth);
+        
+//        CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
+//        CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
         CGContextStrokePath(context);
     }
 }

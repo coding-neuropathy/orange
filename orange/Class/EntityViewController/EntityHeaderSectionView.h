@@ -10,6 +10,8 @@
 
 typedef NS_ENUM(NSInteger, EntitySectionType) {
     CategoryType = 0,
+    LikeType,
+    NoteType,
     RecommendType,
 };
 

@@ -20,7 +20,6 @@
 #import "EntityNoteCell.h"
 #import "EntityCell.h"
 #import "EntityHeaderSectionView.h"
-#import "EntityHeaderActionView.h"
 
 #import "ReportViewController.h"
 #import "LoginView.h"
@@ -29,7 +28,7 @@
 #import "WebViewController.h"
 
 
-@interface EntityViewController ()<IBActionSheetDelegate, EntityHeaderSectionViewDelegate, EntityHeaderActionViewDelegate, EntityCellDelegate>
+@interface EntityViewController ()<IBActionSheetDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate>
 
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -153,8 +152,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     
     [self.collectionView registerClass:[EntityHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier];
     
-    [self.collectionView registerClass:[EntityHeaderActionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderActionIdentifier];
-    
     NSMutableArray * array = [NSMutableArray array];
     {
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
@@ -245,17 +242,18 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSInteger count = 0;
     switch (section) {
-        case 1:
+            
+        case 2:
             count = self.dataArrayForNote.count;
             break;
-        case 2:
+        case 3:
             count = self.dataArrayForRecommend.count;
             break;
         default:
@@ -267,7 +265,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 1:
+        case 2:
         {
             EntityNoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NoteCellIdentifier forIndexPath:indexPath];
             cell.note = [self.dataArrayForNote objectAtIndex:indexPath.row];
@@ -294,14 +292,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         switch (indexPath.section) {
             case 0:
             {
-                EntityHeaderActionView * headerAction = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderActionIdentifier forIndexPath:indexPath];
-                headerAction.entity = self.entity;
-                headerAction.delegate = self;
-                return headerAction;
-            }
-                break;
-            case 1:
-            {
                 GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
                 headerSection.headertype = CategoryType;
                 headerSection.text = category.categoryName;
@@ -309,7 +299,18 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
                 return headerSection;
             }
                 break;
+            case 1:
+                headerSection.headertype = LikeType;
+                headerSection.text = [NSString stringWithFormat:@"%ld", self.entity.likeCount];
+                headerSection.delegate = self;
+                return headerSection;
+                break;
             case 2:
+                headerSection.headertype = NoteType;
+                headerSection.text = [NSString stringWithFormat:@"%ld", self.dataArrayForNote.count];
+                return headerSection;
+                break;
+            case 3:
             {
                 headerSection.headertype = RecommendType;
                 headerSection.text = @"recommendation";
@@ -317,7 +318,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             }
                 break;
             default:
-
+                return headerSection;
                 break;
         }
     }
@@ -329,13 +330,13 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 {
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
-        case 1:
+        case 2:
         {
             CGFloat height = [EntityNoteCell height:[self.dataArrayForNote objectAtIndex:indexPath.row]];
             cellsize = CGSizeMake(kScreenWidth, height);
         }
             break;
-        case 2:
+        case 3:
         {
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
                 cellsize = CGSizeMake(100., 100.);
@@ -362,7 +363,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         case 0:
 
             break;
-        case 2:
+        case 3:
         {
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
                 edge =  UIEdgeInsetsMake(0., 5., 0, 5.);
@@ -388,7 +389,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     switch (section) {
         case 0:
             break;
-        case 2:
+        case 3:
         {
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
                 itemSpacing = 5.;
@@ -410,7 +411,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 {
     CGFloat spacing = 0;
     switch (section) {
-        case 2:
+        case 3:
         {
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
                 spacing = 5.;
@@ -432,12 +433,12 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     switch (section) {
-        case 1:
-        case 2:
+        case 0:
+        case 3:
             return CGSizeMake(kScreenWidth, 50.);
             break;
         default:
-            return CGSizeMake(kScreenWidth, 54.);
+            return CGSizeMake(kScreenWidth, 30);
             break;
     }
 }
@@ -787,7 +788,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 //}
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return @"举报";
+    return NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil);
 }
 
 #pragma mark - KVO

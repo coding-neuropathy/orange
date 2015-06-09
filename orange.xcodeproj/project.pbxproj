@@ -271,7 +271,6 @@
 		B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */; };
 		B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B9211AC142A500664BDB /* EditViewCell.m */; };
 		B7DA97BB1B25E46200C9BC25 /* EntityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DA97BA1B25E46200C9BC25 /* EntityHeaderView.m */; };
-		B7DA97BE1B26AA1800C9BC25 /* EntityHeaderActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DA97BD1B26AA1800C9BC25 /* EntityHeaderActionView.m */; };
 		B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32AB1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m */; };
 		B7ED32AF1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32AD1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m */; };
 		B7ED32B21B257EFF009BAF5A /* EntityNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32B11B257EFF009BAF5A /* EntityNoteCell.m */; };
@@ -775,8 +774,6 @@
 		B7D1B9211AC142A500664BDB /* EditViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewCell.m; path = EditView/EditViewCell.m; sourceTree = "<group>"; };
 		B7DA97B91B25E46200C9BC25 /* EntityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHeaderView.h; sourceTree = "<group>"; };
 		B7DA97BA1B25E46200C9BC25 /* EntityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderView.m; sourceTree = "<group>"; };
-		B7DA97BC1B26AA1800C9BC25 /* EntityHeaderActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHeaderActionView.h; sourceTree = "<group>"; };
-		B7DA97BD1B26AA1800C9BC25 /* EntityHeaderActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderActionView.m; sourceTree = "<group>"; };
 		B7ED32AA1B25732E009BAF5A /* CSStickyHeaderFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStickyHeaderFlowLayout.h; sourceTree = "<group>"; };
 		B7ED32AB1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStickyHeaderFlowLayout.m; sourceTree = "<group>"; };
 		B7ED32AC1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStickyHeaderFlowLayoutAttributes.h; sourceTree = "<group>"; };
@@ -1827,8 +1824,6 @@
 				B7ED32B11B257EFF009BAF5A /* EntityNoteCell.m */,
 				B7ED32B91B25C8D8009BAF5A /* EntityHeaderSectionView.h */,
 				B7ED32BA1B25C8D8009BAF5A /* EntityHeaderSectionView.m */,
-				B7DA97BC1B26AA1800C9BC25 /* EntityHeaderActionView.h */,
-				B7DA97BD1B26AA1800C9BC25 /* EntityHeaderActionView.m */,
 			);
 			path = EntityViewController;
 			sourceTree = "<group>";
@@ -2345,7 +2340,6 @@
 				4E1D28D21A125B9300740C17 /* JSQVideoMediaItem.m in Sources */,
 				B7ED32B51B257F5B009BAF5A /* EntityCell.m in Sources */,
 				B7ED32AF1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
-				B7DA97BE1B26AA1800C9BC25 /* EntityHeaderActionView.m in Sources */,
 				4E1D28BF1A125B9300740C17 /* UIImage+JSQMessages.m in Sources */,
 				4E2D6D5F1A6FF7DE009E4A17 /* NoteSingleListCell.m in Sources */,
 				4E56DF7B19D56EF500263B17 /* NSString+FontAwesome.m in Sources */,
