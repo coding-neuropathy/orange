@@ -58,6 +58,11 @@ static inline NSRegularExpression * UrlRegularExpression() {
     return self;
 }
 
+- (void)dealloc
+{
+    [self removeObserver];
+}
+
 - (UIImageView *)avatarImageView
 {
     if (!_avatarImageView) {
@@ -166,10 +171,14 @@ static inline NSRegularExpression * UrlRegularExpression() {
     return _timeLabel;
 }
 
+#pragma mark - set note data
 - (void)setNote:(GKNote *)note
 {
+    if (_note) {
+        [self removeObserver];
+    }
     _note = note;
-//    [self addObserver];
+    [self addObserver];
     //    DDLogVerbose(@"cell note creator %@", _note.creator.nickname);
     
     [self.avatarImageView sd_setImageWithURL:_note.creator.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(36., 36.)]];
