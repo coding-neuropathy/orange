@@ -334,14 +334,43 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     //    DDLogInfo(@"tap %@", rtLabel);
     NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
+    if([array[0] isEqualToString:@"http"])
+    {
+        [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+        //        GKWebVC * vc =  [GKWebVC linksWebViewControllerWithURL:url];
+//        WebViewController * vc = [[WebViewController alloc] initWithURL:url];
+//        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    }
     if([array[0] isEqualToString:@"tag"])
     {
-        NSString * tagname = [array[1]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        [[OpenCenterController sharedOpenCenterController] openTagWithUser:self.note.creator TagName:tagname];
+        [[OpenCenter sharedOpenCenter] openTagWithName:[array[1]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] User:self.note.creator];
+//        TagViewController * vc = [[TagViewController alloc]init];
+//        vc.tagName = [array[1]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        vc.user = self.note.creator;
+//        if (kAppDelegate.activeVC.navigationController) {
+//            [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+//        }
     }
     if([array[0] isEqualToString:@"user"])
     {
-//        [[OpenCenterController sharedOpenCenterController] openUser:self.note.creator];
+        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
+        [[OpenCenter sharedOpenCenter] openUser:user];
+//        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
+//        UserViewController * vc = [[UserViewController alloc]init];
+//        vc.user = user;
+//        if (kAppDelegate.activeVC.navigationController) {
+//            [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+//        }
+    }
+    if([array[0] isEqualToString:@"entity"])
+    {
+        GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
+        [[OpenCenter sharedOpenCenter] openEntity:entity];
+//        EntityViewController * vc = [[EntityViewController alloc]init];
+//        vc.entity = entity;
+//        if (kAppDelegate.activeVC.navigationController) {
+//            [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+//        }
     }
 }
 

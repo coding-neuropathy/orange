@@ -56,8 +56,8 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(TapHeaderView)]) {
-        [_delegate TapHeaderView];
+    if (_delegate && [_delegate respondsToSelector:@selector(TapHeaderView:)]) {
+        [_delegate TapHeaderView:self];
     }
 }
 

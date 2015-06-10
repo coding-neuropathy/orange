@@ -11,6 +11,8 @@
 #import "EntityViewController.h"
 #import "NoteViewController.h"
 #import "CategoryViewController.h"
+#import "TagViewController.h"
+#import "WebViewController.h"
 
 #import "AppDelegate.h"
 
@@ -60,6 +62,23 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     NoteViewController * VC = [[NoteViewController alloc]init];
     VC.note = note;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)openTagWithName:(NSString *)tname User:(GKUser *)user
+{
+    TagViewController * vc = [[TagViewController alloc]init];
+    vc.tagName = tname;
+    vc.user = user;
+//    vc.user = self.note.creator;
+    if (kAppDelegate.activeVC.navigationController) {
+        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (void)openWebWithURL:(NSURL *)url
+{
+    WebViewController * vc = [[WebViewController alloc] initWithURL:url];
+    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
 @end

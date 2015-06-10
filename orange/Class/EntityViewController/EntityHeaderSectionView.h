@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, EntitySectionType) {
 @protocol EntityHeaderSectionViewDelegate <NSObject>
 
 @optional
-- (void)TapHeaderView;
+- (void)TapHeaderView:(id)sender;
 
 @end
 

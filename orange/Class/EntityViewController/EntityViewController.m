@@ -580,10 +580,13 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 }
 
 #pragma mark - <EntityHeaderSectionViewDelegate>
-- (void)TapHeaderView
+- (void)TapHeaderView:(id)sender
 {
-    GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
-    [[OpenCenter sharedOpenCenter] openCategory:category];
+    EntityHeaderSectionView * header = (EntityHeaderSectionView *)sender;
+    if (header.headertype == CategoryType) {
+        GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
+        [[OpenCenter sharedOpenCenter] openCategory:category];
+    }
 }
 
 #pragma mark - <EntityHeaderActionViewDelegate>
