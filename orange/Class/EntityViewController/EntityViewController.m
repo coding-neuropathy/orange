@@ -44,9 +44,9 @@
 //@property (nonatomic, strong) UIButton *categoryButton;
 @property (nonatomic, strong) UIView *likeUserView;
 
-@property (nonatomic, strong) UIButton * likeBtn;
+//@property (nonatomic, strong) UIButton * likeBtn;
 @property (nonatomic, strong) UIButton * postBtn;
-@property (nonatomic, strong) UIButton * buyBtn;
+//@property (nonatomic, strong) UIButton * buyBtn;
 
 @property (nonatomic, strong) NSMutableArray *dataArrayForlikeUser;
 @property (nonatomic, strong) NSMutableArray *dataArrayForNote;
@@ -121,55 +121,52 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     return _header;
 }
 
-- (UIButton *)likeBtn
+- (UIButton *)likeButton
 {
-    if (!_likeBtn) {
+    if (!_likeButton) {
 //        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40., 35)];
-        _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _likeBtn.frame = CGRectMake(0, 0, 40., 35);
-        _likeBtn.backgroundColor = [UIColor clearColor];
-        _likeBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
-        [_likeBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAHeartO] forState:UIControlStateNormal];
-        [_likeBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-        [_likeBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAHeart] forState:UIControlStateSelected];
-        [_likeBtn setTitleColor:UIColorFromRGB(0xff1f77) forState:UIControlStateSelected];
-        [_likeBtn addTarget:self action:@selector(handelTapLikeBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
+        _likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _likeButton.frame = CGRectMake(0, 0, 40., 40.);
+        [_likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
+        [_likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
         if (self.entity.isLiked) {
-            _likeBtn.selected = YES;
+            _likeButton.selected = YES;
         }
     }
-    return _likeBtn;
+    return _likeButton;
 }
 
 - (UIButton *)postBtn
 {
     if (!_postBtn) {
         _postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _postBtn.frame = CGRectMake(0., 0., 40., 35.);
+        _postBtn.frame = CGRectMake(0., 0., 40., 40.);
         [_postBtn setImage:[UIImage imageNamed:@"post note"] forState:UIControlStateNormal];
+//        UIImage * image = [UIImage imageWithIcon:@"post note" backgroundColor:[UIColor clearColor] iconColor:UIColorFromRGB(0x414243) fontSize:20.];
+//        [_postBtn setImage:image forState:UIControlStateNormal];
         [_postBtn addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _postBtn;
 }
 
-- (UIButton *)buyBtn
+- (UIButton *)buyButton
 {
-    if (!_buyBtn) {
-        _buyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _buyBtn.frame = CGRectMake(0., 0., 129., 35.);
-        _buyBtn.layer.masksToBounds = YES;
-        _buyBtn.layer.cornerRadius = 4;
-        _buyBtn.backgroundColor = UIColorFromRGB(0x427ec0);
-        _buyBtn.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
-        [_buyBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-        [_buyBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [_buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
-        [_buyBtn addTarget:self action:@selector(handelTapBuyBtn:) forControlEvents:UIControlEventTouchUpInside];
+    if (!_buyButton) {
+        _buyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _buyButton.frame = CGRectMake(0., 0., 129., 35.);
+        _buyButton.layer.masksToBounds = YES;
+        _buyButton.layer.cornerRadius = 4;
+        _buyButton.backgroundColor = UIColorFromRGB(0x427ec0);
+        _buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
+        [_buyButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [_buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+        [_buyButton addTarget:self action:@selector(buyButtonAction) forControlEvents:UIControlEventTouchUpInside];
         
-        [_buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+        [_buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
     }
-    return _buyBtn;
+    return _buyButton;
 }
 
 - (void)configToolbar
@@ -177,9 +174,9 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     self.navigationController.toolbar.clipsToBounds = YES;
     self.navigationController.toolbar.barTintColor = UIColorFromRGB(0xffffff);
     
-    UIBarButtonItem * likeBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.likeBtn];
+    UIBarButtonItem * likeBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.likeButton];
     UIBarButtonItem * postBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.postBtn];
-    UIBarButtonItem * buyBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.buyBtn];
+    UIBarButtonItem * buyBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.buyButton];
     
     UIBarButtonItem * fixedItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     fixedItem.width = kScreenWidth - 60. - 120. -80.;
@@ -589,18 +586,18 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     }
 }
 
-#pragma mark - <EntityHeaderActionViewDelegate>
-- (void)handelTapBuyBtn:(id)sender
-{
-    self.buyButton = (UIButton *)sender;
-    [self buyButtonAction];
-}
+//#pragma mark - <EntityHeaderActionViewDelegate>
+//- (void)handelTapBuyBtn:(id)sender
+//{
+//    self.buyButton = (UIButton *)sender;
+//    [self buyButtonAction];
+//}
 
-- (void)handelTapLikeBtn:(id)sender
-{
-    self.likeButton = (UIButton *)sender;
-    [self likeButtonAction];
-}
+//- (void)handelTapLikeBtn:(id)sender
+//{
+//    self.likeButton = (UIButton *)sender;
+//    [self likeButtonAction];
+//}
 
 //#pragma mark - UITableViewDataSource
 //

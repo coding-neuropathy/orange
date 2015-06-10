@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "icon_like_press.png"
+      "filename" : "喜爱.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "icon_like_press@2x.png"
+      "filename" : "喜爱@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "icon_like_press@3x.png"
+      "filename" : "喜爱@3x.png"
     }
   ],
   "info" : {

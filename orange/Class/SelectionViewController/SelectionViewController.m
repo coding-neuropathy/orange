@@ -257,11 +257,11 @@ static NSString *CellIdentifier = @"SelectionCell";
 //                cell = [[SelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 //            }
             SelectionCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-            cell.note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
-            cell.entity = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"entity"];
-            NSTimeInterval timestamp = [self.dataArrayForEntity[indexPath.row][@"time"] doubleValue];
-            cell.date = [NSDate dateWithTimeIntervalSince1970:timestamp];
-            
+//            cell.note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
+//            cell.entity = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"entity"];
+//            NSTimeInterval timestamp = [self.dataArrayForEntity[indexPath.row][@"time"] doubleValue];
+//            cell.date = [NSDate dateWithTimeIntervalSince1970:timestamp];
+            cell.dict = [self.dataArrayForEntity objectAtIndex:indexPath.row];
             return cell;
         }
         else
@@ -520,7 +520,5 @@ static NSString *CellIdentifier = @"SelectionCell";
     }
 
 }
-
-
 
 @end

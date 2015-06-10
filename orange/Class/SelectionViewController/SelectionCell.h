@@ -15,6 +15,7 @@
 @property (nonatomic, strong) GKEntityCategory * category;
 @property (nonatomic, strong) NSDate * date;
 
+@property (nonatomic, strong) NSDictionary * dict;
 
 + (CGFloat)height:(GKNote *)note;
 

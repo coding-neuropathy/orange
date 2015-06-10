@@ -50,6 +50,7 @@
 
 // FontAwesome
 #import "NSString+FontAwesome.h"
+#import "UIImage+FontAwesome.h"
 #import "FAImageView.h"
 
 #import "FontDiao.h"

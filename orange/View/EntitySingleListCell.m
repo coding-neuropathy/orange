@@ -303,9 +303,6 @@
             [SVProgressHUD dismiss];
         }
         //[self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
-        
-        
-        
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"喜爱失败"];
         
