@@ -41,8 +41,12 @@
 
 @property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) EntityHeaderView * header;
-@property (nonatomic, strong) UIButton *categoryButton;
+//@property (nonatomic, strong) UIButton *categoryButton;
 @property (nonatomic, strong) UIView *likeUserView;
+
+@property (nonatomic, strong) UIButton * likeBtn;
+@property (nonatomic, strong) UIButton * postBtn;
+@property (nonatomic, strong) UIButton * buyBtn;
 
 @property (nonatomic, strong) NSMutableArray *dataArrayForlikeUser;
 @property (nonatomic, strong) NSMutableArray *dataArrayForNote;
@@ -117,6 +121,72 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     return _header;
 }
 
+- (UIButton *)likeBtn
+{
+    if (!_likeBtn) {
+//        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40., 35)];
+        _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _likeBtn.frame = CGRectMake(0, 0, 40., 35);
+        _likeBtn.backgroundColor = [UIColor clearColor];
+        _likeBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
+        [_likeBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAHeartO] forState:UIControlStateNormal];
+        [_likeBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_likeBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAHeart] forState:UIControlStateSelected];
+        [_likeBtn setTitleColor:UIColorFromRGB(0xff1f77) forState:UIControlStateSelected];
+        [_likeBtn addTarget:self action:@selector(handelTapLikeBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (self.entity.isLiked) {
+            _likeBtn.selected = YES;
+        }
+    }
+    return _likeBtn;
+}
+
+- (UIButton *)postBtn
+{
+    if (!_postBtn) {
+        _postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _postBtn.frame = CGRectMake(0., 0., 40., 35.);
+        [_postBtn setImage:[UIImage imageNamed:@"post note"] forState:UIControlStateNormal];
+        [_postBtn addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _postBtn;
+}
+
+- (UIButton *)buyBtn
+{
+    if (!_buyBtn) {
+        _buyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _buyBtn.frame = CGRectMake(0., 0., 129., 35.);
+        _buyBtn.layer.masksToBounds = YES;
+        _buyBtn.layer.cornerRadius = 4;
+        _buyBtn.backgroundColor = UIColorFromRGB(0x427ec0);
+        _buyBtn.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
+        [_buyBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [_buyBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [_buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+        [_buyBtn addTarget:self action:@selector(handelTapBuyBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+    }
+    return _buyBtn;
+}
+
+- (void)configToolbar
+{
+    self.navigationController.toolbar.clipsToBounds = YES;
+    self.navigationController.toolbar.barTintColor = UIColorFromRGB(0xffffff);
+    
+    UIBarButtonItem * likeBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.likeBtn];
+    UIBarButtonItem * postBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.postBtn];
+    UIBarButtonItem * buyBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.buyBtn];
+    
+    UIBarButtonItem * fixedItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    fixedItem.width = kScreenWidth - 60. - 120. -80.;
+    
+    self.toolbarItems = @[likeBarBtn, postBarBtn, fixedItem, buyBarBtn];
+}
+
 #pragma mark - get entity data
 - (void)refresh
 {
@@ -124,9 +194,6 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
         [self.image sd_setImageWithURL:self.entity.imageURL_640x640];
         self.entity = entity;
         self.header.entity = entity;
-        
-//        self.collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
-//        self.header.frame = CGRectMake(0, - [self headerHeight], kScreenWidth, [self headerHeight]);
         
         self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
         self.dataArrayForNote = [NSMutableArray arrayWithArray:noteArray];
@@ -178,22 +245,9 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     
 //    self.navigationController.toolbar.translucent = NO;
     self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
-    
-    self.navigationController.toolbar.clipsToBounds = YES;
-    self.navigationController.toolbar.barTintColor = UIColorFromRGB(0xffffff);
-    
-    UIButton * postNoteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    postNoteBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
-    [postNoteBtn setTitle:[NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForEnum:FAPencilSquareO], NSLocalizedStringFromTable(@"post note", kLocalizedFile, nil)] forState:UIControlStateNormal];
-    postNoteBtn.frame = CGRectMake(0., 0., kScreenWidth - 32., 44.);
-    [postNoteBtn setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
-
-    [postNoteBtn addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * postNoteBarBtn = [[UIBarButtonItem alloc] initWithCustomView:postNoteBtn];
-    self.toolbarItems = @[postNoteBarBtn];
-//    self.navigationController.toolbar.barStyle
-    
     [self.collectionView addSubview:self.header];
+    [self configToolbar];
+    
     
     [API getRandomEntityListByCategoryId:self.entity.categoryId
                                   entityId:self.entity.entityId

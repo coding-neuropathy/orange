@@ -7,6 +7,7 @@
 //
 
 #import "OpenCenter.h"
+#import "UserViewController.h"
 #import "EntityViewController.h"
 #import "NoteViewController.h"
 #import "CategoryViewController.h"
@@ -30,6 +31,13 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
         _controller = [[UIApplication sharedApplication] keyWindow].rootViewController;
     }
     return self;
+}
+
+- (void)openUser:(GKUser *)user
+{
+    UserViewController * VC = [[UserViewController alloc]init];
+    VC.user = user;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)openEntity:(GKEntity *)entity

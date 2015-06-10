@@ -261,7 +261,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     self.starLabel.center = self.nameLabel.center;
     self.starLabel.deFrameRight = kScreenWidth - 16.;
     
-    self.contentLabel.frame = CGRectMake(0, 0., 297., 20);
+    self.contentLabel.frame = CGRectMake(0, 0., kScreenWidth - 78., 20);
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     self.contentLabel.deFrameTop = self.nameLabel.deFrameBottom + 10.;
     self.contentLabel.deFrameLeft = self.avatarImageView.deFrameRight + 10;
@@ -298,7 +298,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(0, 0., 297., 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(0, 0., kScreenWidth - 78., 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 7.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
@@ -310,6 +310,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     DDLogInfo(@"avatar action");
 //    [[OpenCenterController sharedOpenCenterController] openUser:self.note.creator];
+    [[OpenCenter sharedOpenCenter] openUser:self.note.creator];
 }
 
 - (void)pokeBtnAction:(id)sender
@@ -347,7 +348,6 @@ static inline NSRegularExpression * UrlRegularExpression() {
 #pragma mark - Swip
 - (void)swipAction:(id)sender
 {
-//    DDLogInfo(@"OKOKOKO %@", sender);
     UISwipeGestureRecognizer *swip = (UISwipeGestureRecognizer *)sender;
     if ([swip direction] == UISwipeGestureRecognizerDirectionLeft) {
         [UIView animateWithDuration:0.3 animations:^{
@@ -362,16 +362,6 @@ static inline NSRegularExpression * UrlRegularExpression() {
             
         }];
     }
-//    if ([swip state] == UISwipeGestureRecognizerDirectionLeft)
-//
-//        [UIView animateWithDuration:0.3 animations:^{
-//            self.contentView.frame = CGRectOffset(self.contentView.frame, -30., 0.);
-//        }];
-//    else
-//        [UIView animateWithDuration:0.3 animations:^{
-//            self.contentView.frame = CGRectOffset(self.contentView.frame, 30., 0.);
-//        }];
-
 }
 
 #pragma mark - Note model KVO

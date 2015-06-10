@@ -12,6 +12,7 @@
 
 DEFINE_SINGLETON_FOR_HEADER(OpenCenter);
 
+- (void)openUser:(GKUser *)user;
 - (void)openEntity:(GKEntity *)entity;
 - (void)openNoteComment:(GKNote *)note;
 - (void)openCategory:(GKEntityCategory *)category;
