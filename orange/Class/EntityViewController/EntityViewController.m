@@ -1078,15 +1078,6 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     [MobClick event:@"entity_forward_categoty"];
 }
 
-//- (void)avatarButtonAction:(UIButton *)button;
-//{
-//    UserViewController * VC = [[UserViewController alloc]init];
-//    VC.user = [self.dataArrayForlikeUser objectAtIndex:button.tag];
-//    [self.navigationController pushViewController:VC animated:YES];
-//    
-//    [AVAnalytics event:@"entity_forward_user"];
-//    [AVAnalytics event:@"entity_forward_user"];
-//}
 
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
