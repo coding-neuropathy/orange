@@ -84,6 +84,17 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                                 failure:(void (^)(NSInteger stateCode))failure;
 
 /**
+ *  获取商品喜爱用户
+ *
+ *  @param entity_id  商品ID
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getEntityLikerWithEntityId:(NSString *)entity_id
+                           success:(void (^)(NSArray *dataArray, NSInteger page))success
+                           failure:(void (^)(NSInteger stateCode))failure;
+
+/**
  *  对点评点赞
  *
  *  @param noteId  点评ID

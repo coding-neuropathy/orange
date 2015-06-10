@@ -22,6 +22,7 @@
 #import "EntityCell.h"
 #import "EntityHeaderSectionView.h"
 
+#import "EntityLikerController.h"
 
 #import "ReportViewController.h"
 #import "LoginView.h"
@@ -580,9 +581,22 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 - (void)TapHeaderView:(id)sender
 {
     EntityHeaderSectionView * header = (EntityHeaderSectionView *)sender;
-    if (header.headertype == CategoryType) {
-        GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
-        [[OpenCenter sharedOpenCenter] openCategory:category];
+    
+    switch (header.headertype) {
+        case CategoryType:
+        {
+            GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
+            [[OpenCenter sharedOpenCenter] openCategory:category];
+        }
+            break;
+        case LikeType:
+        {
+            EntityLikerController * vc = [[EntityLikerController alloc] initWithEntity:self.entity];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        default:
+            break;
     }
 }
 

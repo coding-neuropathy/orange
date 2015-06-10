@@ -138,7 +138,7 @@ int ddLogLevel;
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"Save" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Save" object:nil userInfo:nil];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -176,11 +176,12 @@ int ddLogLevel;
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-//    DDLogInfo(@"user info %@", userInfo);
+    DDLogInfo(@"user info %@", userInfo);
     NSString * url = [userInfo valueForKey:@"url"];
-    if (url) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    if (url && application.applicationState != UIApplicationStateActive) {
+        [self openLocalURL:[NSURL URLWithString:url]];
     }
+    
     [APService handleRemoteNotification:userInfo];
 }
 
@@ -280,7 +281,7 @@ int ddLogLevel;
         NSRange range = [absoluteString rangeOfString:@"entity/"];
         if (range.location != NSNotFound) {
             NSString *entityId = [absoluteString substringFromIndex:range.location+range.length];
-            EntityViewController *vc = [[EntityViewController alloc]init];
+            EntityViewController *vc = [[EntityViewController alloc] init];
             vc.entity = [GKEntity modelFromDictionary:@{@"entityId":entityId}];
             vc.hidesBottomBarWhenPushed = YES;
             if (self.activeVC.navigationController) {

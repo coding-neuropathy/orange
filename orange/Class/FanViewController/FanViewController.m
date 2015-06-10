@@ -8,7 +8,7 @@
 
 #import "FanViewController.h"
 #import "UserSingleListCell.h"
-#import "API.h"
+//#import "API.h"
 #import "NoDataView.h"
 
 @interface FanViewController ()<UITableViewDataSource, UITableViewDelegate>

@@ -278,6 +278,7 @@
 		B7ED32BB1B25C8D8009BAF5A /* EntityHeaderSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32BA1B25C8D8009BAF5A /* EntityHeaderSectionView.m */; };
 		B7F5AA011B08C75A0033BB2D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F5AA001B08C75A0033BB2D /* WebViewController.m */; };
 		B7F5AA0B1B08D3320033BB2D /* WebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F5AA0A1B08D3320033BB2D /* WebViewProgressView.m */; };
+		B7F9EB101B28894B00887582 /* EntityLikerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9EB0F1B28894B00887582 /* EntityLikerController.m */; };
 		B7FE2A081B28136B001C2E33 /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FE2A071B28136B001C2E33 /* UIImage+FontAwesome.m */; };
 		B7FE2A0B1B2817FD001C2E33 /* SelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FE2A0A1B2817FD001C2E33 /* SelectionCell.m */; };
 		DA35B3C61AFEE31200D66671 /* EmailEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35B3C21AFEE31200D66671 /* EmailEditViewController.m */; };
@@ -789,6 +790,8 @@
 		B7F5AA001B08C75A0033BB2D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		B7F5AA091B08D3320033BB2D /* WebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewProgressView.h; sourceTree = "<group>"; };
 		B7F5AA0A1B08D3320033BB2D /* WebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewProgressView.m; sourceTree = "<group>"; };
+		B7F9EB0E1B28894B00887582 /* EntityLikerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityLikerController.h; sourceTree = "<group>"; };
+		B7F9EB0F1B28894B00887582 /* EntityLikerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityLikerController.m; sourceTree = "<group>"; };
 		B7FE2A061B28136B001C2E33 /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FontAwesome.h"; sourceTree = "<group>"; };
 		B7FE2A071B28136B001C2E33 /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FontAwesome.m"; sourceTree = "<group>"; };
 		B7FE2A091B2817FD001C2E33 /* SelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionCell.h; sourceTree = "<group>"; };
@@ -1829,6 +1832,8 @@
 				B7ED32BA1B25C8D8009BAF5A /* EntityHeaderSectionView.m */,
 				B7DA97BF1B270BE900C9BC25 /* EntityLikeUserCell.h */,
 				B7DA97C01B270BE900C9BC25 /* EntityLikeUserCell.m */,
+				B7F9EB0E1B28894B00887582 /* EntityLikerController.h */,
+				B7F9EB0F1B28894B00887582 /* EntityLikerController.m */,
 			);
 			path = EntityViewController;
 			sourceTree = "<group>";
@@ -2481,6 +2486,7 @@
 				4E1D28D81A125B9300740C17 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				B7B695891AF05C400016AAB8 /* UIImage+MultiFormat.m in Sources */,
 				B71E495B1AC9259000D4DB6D /* SettingsViewCell.m in Sources */,
+				B7F9EB101B28894B00887582 /* EntityLikerController.m in Sources */,
 				B72FD82A1AEF2DB400354248 /* SelectionCategoryView.m in Sources */,
 				4E3C413B1A9FFBEB0053DB5E /* IBActionSheet.m in Sources */,
 				4E1D28D61A125B9300740C17 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
