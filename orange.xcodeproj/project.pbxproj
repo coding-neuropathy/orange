@@ -193,7 +193,6 @@
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C45C1A8287780025EC2E /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C45B1A8287780025EC2E /* SignView.m */; };
-		4EB6ADAB1A771CCA0089797A /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6ADAA1A771CCA0089797A /* NoteCell.m */; };
 		4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6ADAE1A77D7220089797A /* BaseViewController.m */; };
 		4EC9F7911A7928520057D736 /* FanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7901A7928520057D736 /* FanViewController.m */; };
 		4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7931A79286A0057D736 /* FriendViewController.m */; };
@@ -638,8 +637,6 @@
 		4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinTools.m; sourceTree = "<group>"; };
 		4EA0C45A1A8287780025EC2E /* SignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
 		4EA0C45B1A8287780025EC2E /* SignView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
-		4EB6ADA91A771CCA0089797A /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
-		4EB6ADAA1A771CCA0089797A /* NoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteCell.m; sourceTree = "<group>"; };
 		4EB6ADAD1A77D7220089797A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		4EB6ADAE1A77D7220089797A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		4EC9F78F1A7928520057D736 /* FanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FanViewController.h; sourceTree = "<group>"; };
@@ -1125,8 +1122,6 @@
 				4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */,
 				4ECCD0DA1A7297A7009D5A42 /* FeedCell.h */,
 				4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */,
-				4EB6ADA91A771CCA0089797A /* NoteCell.h */,
-				4EB6ADAA1A771CCA0089797A /* NoteCell.m */,
 				4EC9F7951A7928C70057D736 /* UserSingleListCell.h */,
 				4EC9F7961A7928C70057D736 /* UserSingleListCell.m */,
 				4E66C1E61A7DBAB400F31A90 /* CommentCell.h */,
@@ -2364,7 +2359,6 @@
 				393715C01ACBD9C300DC50FF /* DDASLLogger.m in Sources */,
 				393715C51ACBD9C300DC50FF /* DispatchQueueLogFormatter.m in Sources */,
 				4E1D28E01A125B9300740C17 /* JSQMessagesToolbarContentView.m in Sources */,
-				4EB6ADAB1A771CCA0089797A /* NoteCell.m in Sources */,
 				B7ED32BB1B25C8D8009BAF5A /* EntityHeaderSectionView.m in Sources */,
 				4E1D28DA1A125B9300740C17 /* JSQMessagesComposerTextView.m in Sources */,
 				4E2D6D3F1A69601F009E4A17 /* SVIndefiniteAnimatedView.m in Sources */,

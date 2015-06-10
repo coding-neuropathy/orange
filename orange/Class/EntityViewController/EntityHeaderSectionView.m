@@ -147,10 +147,10 @@
         CGContextSetLineWidth(context, kSeparateLineWidth);
         
         CGContextMoveToPoint(context, 0, kSeparateLineWidth);
-        CGContextAddLineToPoint(context, self.frame.size.width - kSeparateLineWidth, kSeparateLineWidth);
+        CGContextAddLineToPoint(context, self.frame.size.width, kSeparateLineWidth);
         
-        CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
-        CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
+//        CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
+//        CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
         CGContextStrokePath(context);
     }
     
@@ -161,10 +161,8 @@
         CGContextSetLineWidth(context, kSeparateLineWidth);
         
         CGContextMoveToPoint(context, 0, kSeparateLineWidth);
-        CGContextAddLineToPoint(context, self.frame.size.width - kSeparateLineWidth, kSeparateLineWidth);
+        CGContextAddLineToPoint(context, self.frame.size.width, kSeparateLineWidth);
         
-//        CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
-//        CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
         CGContextStrokePath(context);
     }
 }

@@ -325,10 +325,28 @@ static inline NSRegularExpression * UrlRegularExpression() {
 - (void)pokeBtnAction:(id)sender
 {
     DDLogInfo(@"poke note action");
-    if (_delegate && [_delegate respondsToSelector:@selector(tapPokeNoteBtn:Note:)])
-    {
-        [_delegate tapPokeNoteBtn:sender Note:self.note];
-    }
+//    if (_delegate && [_delegate respondsToSelector:@selector(tapPokeNoteBtn:Note:)])
+//    {
+//        [_delegate tapPokeNoteBtn:sender Note:self.note];
+//    }
+    [API pokeWithNoteId:self.note.noteId state:!self.pokeBtn.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
+        
+        if (poked == self.pokeBtn.selected) {
+            
+        }
+        else if (poked) {
+            self.note.pokeCount = self.note.pokeCount+1;
+        } else {
+            self.note.pokeCount = self.note.pokeCount-1;
+        }
+        self.note.poked = poked;
+        
+        [AVAnalytics event:@"poke note" attributes:@{@"note": @(self.note.noteId), @"status":@"success"} durations:(int)self.note.pokeCount];
+        [MobClick event:@"poke note" attributes:@{@"note": @(self.note.noteId), @"status":@"success"} counter:(int)self.note.pokeCount];
+    } failure:^(NSInteger stateCode) {
+        [AVAnalytics event:@"poke note" attributes:@{@"note":@(self.note.noteId), @"status":@"failure"}];
+        [MobClick event:@"poke note" attributes:@{@"note":@(self.note.noteId), @"status":@"failure"}];
+    }];
 }
 
 - (void)commentBtnAction:(id)sender
