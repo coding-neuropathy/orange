@@ -17,12 +17,12 @@
 #define kWidth (kScreenWidth - 20)
 @interface SelectionCell()<RTLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;
-@property (nonatomic, strong) UIImageView *tmp;
-@property (nonatomic, strong) UIView *box;
-//@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+//@property (nonatomic, strong) UIImageView *tmp;
+
 @property (nonatomic, strong) RTLabel * contentLabel;
-@property (nonatomic, strong) UIButton *likeButton;
-@property (nonatomic, strong) UIButton *timeButton;
+@property (nonatomic, strong) UIButton * likeButton;
+@property (nonatomic, strong) UIButton * likeCounterButton;
+@property (nonatomic, strong) UIButton * timeButton;
 @property (nonatomic, strong) UIView *H;
 
 @end
@@ -96,6 +96,21 @@
     return _likeButton;
 }
 
+- (UIButton *)likeCounterButton
+{
+    if (!_likeCounterButton) {
+        _likeCounterButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _likeCounterButton.titleLabel.font = [UIFont systemFontOfSize:12.];
+//        _likeCounterButton.titleLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        [_likeCounterButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [_likeCounterButton setBackgroundImage:[UIImage imageNamed:@"like counter"] forState:UIControlStateNormal];
+        [_likeCounterButton setTitleEdgeInsets:UIEdgeInsetsMake(0., 5., 0., 0.)];
+//        _likeCounterButton.enabled = NO;
+        [self.contentView addSubview:_likeCounterButton];
+    }
+    return _likeCounterButton;
+}
+
 - (void)setDict:(NSDictionary *)dict
 {
     _dict = dict;
@@ -107,6 +122,15 @@
     self.entity = dict[@"content"][@"entity"];
     [self addObserver];
     self.likeButton.selected = self.entity.liked;
+//    self.likeCounterLabel.text = [NSString stringWithFormat:@"%ld", self.entity.likeCount];
+    
+    if (self.entity.likeCount <= 0) {
+        self.likeCounterButton.hidden = YES;
+    } else {
+        self.likeCounterButton.hidden = NO;
+        [self.likeCounterButton setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount] forState:UIControlStateNormal];
+    }
+//    DDLogInfo(@"like count %@", self.likeCounterButton.titleLabel.text);
     
     self.note = dict[@"content"][@"note"];
     self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
@@ -141,34 +165,18 @@
 {
     [super layoutSubviews];
     
-//    
-//    if (!self.box) {
-//        _box = [[UIView alloc] initWithFrame:CGRectMake(15.0f, 7.0f,kScreenWidth -30, 300)];
-//        self.box.contentMode = UIViewContentModeScaleAspectFit;
-//        self.box.backgroundColor = [UIColor whiteColor];
-//        self.box.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
-//        self.box.layer.borderWidth = 0.5;
-//        //[self.contentView addSubview:self.box];
-//    }
-    
     self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth - 32, kScreenWidth - 32);
-    
-//    if(!self.contentLabel) {
-//        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
-//        self.contentLabel.paragraphReplacement = @"";
-//        self.contentLabel.lineSpacing = 7.0;
-//        self.contentLabel.delegate = self;
-//        [self.contentView addSubview:self.contentLabel];
-//    }
-    
 
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     
     self.likeButton.frame = CGRectMake(0, 0, 40, 40.);
     self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft;
     self.likeButton.deFrameTop = self.contentLabel.deFrameBottom + 12;
-//    UIFont* font = [UIFont systemFontOfSize:12];
-//    self.likeButton.deFrameWidth = [self.likeButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}].width+40;
+    
+    self.likeCounterButton.frame = CGRectMake(0., 0., 48., 30.);
+    self.likeCounterButton.center = self.likeButton.center;
+    self.likeCounterButton.deFrameLeft = self.likeButton.deFrameRight;
+    
     
     if (!self.timeButton) {
         _timeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];
@@ -215,25 +223,18 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"likeCount"]) {
-        if (self.entity.likeCount) {
-//            [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString stringWithFormat:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil)],self.entity.likeCount] forState:UIControlStateNormal];
+        if (self.entity.likeCount <= 0) {
+            self.likeCounterButton.hidden = YES;
         }
         else
         {
-//            [self.likeButton setTitle:[NSString stringWithFormat:@"%@",[NSString stringWithFormat:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil)]] forState:UIControlStateNormal];
+            self.likeCounterButton.hidden = NO;
+            [self.likeCounterButton setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount] forState:UIControlStateNormal];
         }
 
     }
     else if ([keyPath isEqualToString:@"liked"]) {
         self.likeButton.selected = self.entity.liked;
-//        if(self.likeButton.selected)
-//        {
-//            [self.likeButton setTintColor:UIColorFromRGB(0xFF1F77)];
-//        }
-//        else
-//        {
-//            [self.likeButton setTintColor:UIColorFromRGB(0x9d9e9f)];
-//        }
     }
     
 }
@@ -261,29 +262,11 @@
         
         if (liked) {
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
-            self.entity.likeCount = self.entity.likeCount+1;
+            self.entity.likeCount = self.entity.likeCount + 1;
         } else {
-            self.entity.likeCount = self.entity.likeCount-1;
+            self.entity.likeCount = self.entity.likeCount - 1;
             [SVProgressHUD dismiss];
         }
-        
-//        [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %lu",[NSString stringWithFormat:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil)],self.entity.likeCount] forState:UIControlStateNormal];
-        
-//        if(self.entity.likeCount == 0)
-//        {
-//            [self.likeButton setTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil)] forState:UIControlStateNormal];
-//        }
-        
-//        if(self.likeButton.selected)
-//        {
-//            [self.likeButton setTintColor:UIColorFromRGB(0xFF1F77)];
-//        }
-//        else
-//        {
-//            [self.likeButton setTintColor:UIColorFromRGB(0x9d9e9f)];
-//        }
-
-
 
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"喜爱失败"];
