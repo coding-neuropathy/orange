@@ -106,7 +106,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
         _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
     }
     return _collectionView;
 }
@@ -172,7 +172,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 
 - (void)configToolbar
 {
-    self.navigationController.toolbar.clipsToBounds = YES;
+//    self.navigationController.toolbar.clipsToBounds = YES;
     self.navigationController.toolbar.barTintColor = UIColorFromRGB(0xffffff);
     
     UIBarButtonItem * likeBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.likeButton];
