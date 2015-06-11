@@ -85,7 +85,7 @@ static NSString *CellIdentifier = @"UserCell";
     
     [self.tableView registerClass:[UserSingleListCell class] forCellReuseIdentifier:CellIdentifier];
     
-    self.title = [NSString stringWithFormat:@"%ld 人喜欢", self.entity.likeCount];
+    self.title = [NSString stringWithFormat:@"%ld 人喜爱", (long)self.entity.likeCount];
 }
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
