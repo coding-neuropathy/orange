@@ -106,7 +106,9 @@
         [_likeCounterButton setBackgroundImage:[UIImage imageNamed:@"like counter"] forState:UIControlStateNormal];
         [_likeCounterButton setTitleEdgeInsets:UIEdgeInsetsMake(0., 5., 0., 0.)];
 //        _likeCounterButton.enabled = NO;
+        _likeCounterButton.userInteractionEnabled = NO;
         [self.contentView addSubview:_likeCounterButton];
+
     }
     return _likeCounterButton;
 }
