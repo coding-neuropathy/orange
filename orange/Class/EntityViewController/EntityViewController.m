@@ -464,11 +464,11 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
         case 3:
         {
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                edge =  UIEdgeInsetsMake(0., 5., 0, 5.);
+                edge =  UIEdgeInsetsMake(5., 5., 5, 5.);
             } else if (IS_IPHONE_6) {
-                edge = UIEdgeInsetsMake(0., 10., 0., 10.);
+                edge = UIEdgeInsetsMake(10., 10., 10., 10.);
             } else {
-                edge = UIEdgeInsetsMake(0., 15., 0., 15.);
+                edge = UIEdgeInsetsMake(15., 15., 15., 15.);
             }
         }
             break;
