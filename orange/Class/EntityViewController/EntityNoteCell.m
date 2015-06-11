@@ -27,7 +27,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     return _urlRegularExpression;
 }
 
-@interface EntityNoteCell ()<RTLabelDelegate>
+@interface EntityNoteCell ()<RTLabelDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIImageView * avatarImageView;
 @property (strong, nonatomic) RTLabel * nameLabel;
@@ -45,15 +45,20 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
+        UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+        pan.delegate = self;
+        [self.contentView addGestureRecognizer:pan];
+        
         UISwipeGestureRecognizer * swipLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipAction:)];
         swipLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-        
-        UISwipeGestureRecognizer * swipRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipAction:)];
-        swipRight.direction = UISwipeGestureRecognizerDirectionRight;
-        
-        [self.contentView addGestureRecognizer:swipLeft];
-        [self.contentView addGestureRecognizer:swipRight];
+//
+//        UISwipeGestureRecognizer * swipRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipAction:)];
+//        swipRight.direction = UISwipeGestureRecognizerDirectionRight;
+//        
+//        [self.contentView addGestureRecognizer:swipLeft];
+//        [self.contentView addGestureRecognizer:swipRight];
     }
     return self;
 }
@@ -418,6 +423,28 @@ static inline NSRegularExpression * UrlRegularExpression() {
             
         }];
     }
+}
+
+- (void)panAction:(id)sender
+{
+//    DDLogInfo(@"%@", sender);
+    UIPanGestureRecognizer * recognizer = (UIPanGestureRecognizer *)sender;
+    CGPoint translatedPoint = [recognizer translationInView:self.contentView];
+//    DDLogInfo(@"offset %f", recognizer.view.deFrameLeft);
+//    if (recognizer.view.deFrameLeft <= 0) {
+        CGFloat x = recognizer.view.center.x + translatedPoint.x;
+        recognizer.view.center = CGPointMake(x, recognizer.view.center.y);
+//    }
+//    CGFloat y = recognizer.view.center.y + translatedPoint.y;
+    
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self.contentView];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
+{
+
+//    DDLogInfo(@"return %f", translatedPoint.y);
+    return YES;
 }
 
 #pragma mark - Note model KVO
