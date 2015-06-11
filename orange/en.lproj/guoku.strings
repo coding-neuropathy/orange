@@ -167,6 +167,7 @@
 /*
  * tip off information
  */
+"tip off"                   = "Tip Off";
 "sold out"                  = "Sold Out";
 "miss category"             = "Miss Category";
 "meaningless information"   = "Meaningless Information";

@@ -27,7 +27,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     return _urlRegularExpression;
 }
 
-@interface EntityNoteCell ()<RTLabelDelegate, UIGestureRecognizerDelegate>
+@interface EntityNoteCell ()<RTLabelDelegate>
 
 @property (strong, nonatomic) UIImageView * avatarImageView;
 @property (strong, nonatomic) RTLabel * nameLabel;
@@ -36,6 +36,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
 @property (strong, nonatomic) UIButton * pokeBtn;
 @property (strong, nonatomic) UIButton * commentBtn;
 @property (strong, nonatomic) UILabel * timeLabel;
+@property (strong, nonatomic) UIButton * editBtn;
 
 @end
 
@@ -47,18 +48,18 @@ static inline NSRegularExpression * UrlRegularExpression() {
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xf8f8f8);
         self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
-//        UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
-//        pan.delegate = self;
-//        [self.contentView addGestureRecognizer:pan];
         
         UISwipeGestureRecognizer * swipLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipAction:)];
         swipLeft.direction = UISwipeGestureRecognizerDirectionLeft;
 //
-//        UISwipeGestureRecognizer * swipRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipAction:)];
-//        swipRight.direction = UISwipeGestureRecognizerDirectionRight;
-//        
+        UISwipeGestureRecognizer * swipRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipAction:)];
+        swipRight.direction = UISwipeGestureRecognizerDirectionRight;
+//
         [self.contentView addGestureRecognizer:swipLeft];
-//        [self.contentView addGestureRecognizer:swipRight];
+        [self.contentView addGestureRecognizer:swipRight];
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        [self.contentView addGestureRecognizer:tap];
     }
     return self;
 }
@@ -68,6 +69,21 @@ static inline NSRegularExpression * UrlRegularExpression() {
     [self removeObserver];
 }
 
+#pragma mark - Edit View
+- (UIButton *)editBtn
+{
+    if (!_editBtn) {
+        _editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _editBtn.backgroundColor = [UIColor redColor];
+        [_editBtn setTitle:NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_editBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [_editBtn addTarget:self action:@selector(editBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self insertSubview:_editBtn belowSubview:self.contentView];
+    }
+    return _editBtn;
+}
+
+#pragma mark - cell View;
 - (UIImageView *)avatarImageView
 {
     if (!_avatarImageView) {
@@ -266,6 +282,11 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     [super layoutSubviews];
     
+    self.editBtn.frame = CGRectMake(0., 0., 80., self.deFrameHeight);
+    self.editBtn.deFrameRight = self.deFrameRight;
+    
+    DDLogInfo(@"edit %@", self.editBtn);
+    
     self.avatarImageView.frame = CGRectMake(20., 16., 36., 36.);
     self.nameLabel.frame = CGRectMake(0., 0., 200., 20.);
     self.nameLabel.deFrameTop = self.avatarImageView.deFrameTop;
@@ -358,7 +379,18 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     DDLogInfo(@"comment action");
     [[OpenCenter sharedOpenCenter] openNoteComment:self.note];
-//    [[OpenCenterController sharedOpenCenterController] openNoteComment:self.note];
+}
+
+- (void)editBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(handleCellEditBtn:)]) {
+        [_delegate handleCellEditBtn:self.note];
+    }
+//    [UIView animateWithDuration:0.3 animations:^{
+    self.contentView.frame = CGRectMake(0., 0., self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+//    } completion:^(BOOL finished) {
+    
+//    }];
 }
 
 #pragma mark - <RTLabelDelegate>
@@ -411,11 +443,14 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     UISwipeGestureRecognizer *swip = (UISwipeGestureRecognizer *)sender;
     if ([swip direction] == UISwipeGestureRecognizerDirectionLeft) {
-        [UIView animateWithDuration:0.3 animations:^{
-            self.contentView.frame = CGRectMake(-80, 0., self.deFrameWidth, self.deFrameHeight);
-        } completion:^(BOOL finished) {
-            
-        }];
+        if (_delegate && [_delegate respondsToSelector:@selector(swipLeftWithContentView:)]) {
+            [_delegate swipLeftWithContentView:self.contentView];
+        }
+//        [UIView animateWithDuration:0.3 animations:^{
+//            self.contentView.frame = CGRectMake(-80, 0., self.deFrameWidth, self.deFrameHeight);
+//        } completion:^(BOOL finished) {
+//            
+//        }];
     } else {
         [UIView animateWithDuration:0.3 animations:^{
             self.contentView.frame = CGRectMake(0., 0., self.deFrameWidth, self.deFrameHeight);
@@ -424,6 +459,33 @@ static inline NSRegularExpression * UrlRegularExpression() {
         }];
     }
 }
+
+- (void)tapAction:(id)sender
+{
+    if (self.contentView.deFrameOrigin.x == 0) {
+        return;
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        self.contentView.frame = CGRectMake(0., 0., self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+//- (void)panAction:(id)sender
+//{
+////    DDLogInfo(@"%@", sender);
+//    UIPanGestureRecognizer * recognizer = (UIPanGestureRecognizer *)sender;
+//    CGPoint translatedPoint = [recognizer translationInView:self.contentView];
+////    DDLogInfo(@"offset %f", recognizer.view.deFrameLeft);
+////    if (recognizer.view.deFrameLeft <= 0) {
+//        CGFloat x = recognizer.view.center.x + translatedPoint.x;
+//        recognizer.view.center = CGPointMake(x, recognizer.view.center.y);
+////    }
+////    CGFloat y = recognizer.view.center.y + translatedPoint.y;
+//    
+//    [recognizer setTranslation:CGPointMake(0, 0) inView:self.contentView];
+//}
 
 
 #pragma mark - Note model KVO

@@ -165,6 +165,7 @@
 /*
  * tip off information
  */
+"tip off"                   = "舉報";
 "sold out"                  = "商品下架";
 "miss category"             = "分類錯誤";
 "meaningless information"   = "垃圾或詐騙信息";

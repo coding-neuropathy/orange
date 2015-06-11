@@ -32,7 +32,7 @@
 #import "WebViewController.h"
 
 
-@interface EntityViewController ()<IBActionSheetDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate>
+@interface EntityViewController ()<IBActionSheetDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate>
 
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -45,6 +45,7 @@
 @property (nonatomic, strong) EntityHeaderView * header;
 //@property (nonatomic, strong) UIButton *categoryButton;
 @property (nonatomic, strong) UIView *likeUserView;
+@property (nonatomic, strong) UIView * noteContentView;
 
 //@property (nonatomic, strong) UIButton * likeBtn;
 @property (nonatomic, strong) UIButton * postBtn;
@@ -357,6 +358,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
         {
             EntityNoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NoteCellIdentifier forIndexPath:indexPath];
             cell.note = [self.dataArrayForNote objectAtIndex:indexPath.row];
+            cell.delegate = self;
             return cell;
         }
             break;
@@ -606,18 +608,22 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     }
 }
 
-//#pragma mark - <EntityHeaderActionViewDelegate>
-//- (void)handelTapBuyBtn:(id)sender
-//{
-//    self.buyButton = (UIButton *)sender;
-//    [self buyButtonAction];
-//}
+#pragma mark - <EntityNoteCellDelegate>
+- (void)swipLeftWithContentView:(UIView *)view
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        view.frame = CGRectMake(-80, 0., view.deFrameWidth, view.deFrameHeight);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 
-//- (void)handelTapLikeBtn:(id)sender
-//{
-//    self.likeButton = (UIButton *)sender;
-//    [self likeButtonAction];
-//}
+- (void)handleCellEditBtn:(GKNote *)note
+{
+    ReportViewController * vc = [[ReportViewController alloc] init];
+    vc.note = note;
+    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+}
 
 //#pragma mark - UITableViewDataSource
 //
