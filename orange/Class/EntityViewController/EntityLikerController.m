@@ -49,10 +49,10 @@ static NSString *CellIdentifier = @"UserCell";
 #pragma mark - get data
 - (void)refresh
 {
-    [API getEntityLikerWithEntityId:self.entity.entityId success:^(NSArray *dataArray, NSInteger page) {
+    [API getEntityLikerWithEntityId:self.entity.entityId Page:self.page success:^(NSArray *dataArray, NSInteger page) {
         DDLogInfo(@"%@", dataArray);
         self.dataArray = [NSMutableArray arrayWithArray:dataArray];
-        
+        self.page = page;
         [self.tableView reloadData];
         [self.tableView.pullToRefreshView stopAnimating];
     } failure:^(NSInteger stateCode) {
@@ -62,7 +62,16 @@ static NSString *CellIdentifier = @"UserCell";
 
 - (void)loadMore
 {
-    
+    [API getEntityLikerWithEntityId:self.entity.entityId Page:self.page success:^(NSArray *dataArray, NSInteger page) {
+        DDLogInfo(@"%@", dataArray);
+        [self.dataArray addObjectsFromArray:dataArray];
+//        self.dataArray = [NSMutableArray arrayWithArray:dataArray];
+        self.page = page;
+        [self.tableView reloadData];
+        [self.tableView.infiniteScrollingView stopAnimating];
+    } failure:^(NSInteger stateCode) {
+        [self.tableView.infiniteScrollingView stopAnimating];
+    }];
 }
 
 - (void)loadView

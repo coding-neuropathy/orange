@@ -87,10 +87,12 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  *  获取商品喜爱用户
  *
  *  @param entity_id  商品ID
+ *  @param page       页码page
  *  @param success    成功block
  *  @param failure    失败block
  */
 + (void)getEntityLikerWithEntityId:(NSString *)entity_id
+                              Page:(NSInteger)page
                            success:(void (^)(NSArray *dataArray, NSInteger page))success
                            failure:(void (^)(NSInteger stateCode))failure;
 

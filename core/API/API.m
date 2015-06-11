@@ -284,10 +284,12 @@
  *  获取商品喜爱用户
  *
  *  @param entity_id  商品ID
+ *  @param page       页码page
  *  @param success    成功block
  *  @param failure    失败block
  */
 + (void)getEntityLikerWithEntityId:(NSString *)entity_id
+                              Page:(NSInteger)page
                            success:(void (^)(NSArray *dataArray, NSInteger page))success
                            failure:(void (^)(NSInteger stateCode))failure
 {
@@ -295,11 +297,15 @@
     
     NSString *path = [NSString stringWithFormat:@"entity/%@/liker/", entity_id];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(page) forKey:@"page"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@", responseObject);
         
         NSMutableArray * dataArray = [NSMutableArray array];
         NSInteger page = [[responseObject objectForKey:@"page"] integerValue];
+        page += 1;
         for (NSDictionary * row in responseObject[@"data"]) {
             GKUser * user = [GKUser modelFromDictionary:row];
             [dataArray addObject:user];
@@ -310,7 +316,11 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%ld %@", operation.response.statusCode,  [error userInfo]);
+//        NSLog(@"%ld %@", operation.response.statusCode,  [error userInfo]);
+        NSInteger statusCode = operation.response.statusCode;
+        if (failure) {
+            failure(statusCode);
+        }
     }];
 }
 
