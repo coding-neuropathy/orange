@@ -472,9 +472,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
             }
         }
             break;
-            
         default:
-            //            return UIEdgeInsetsMake(0., 0., 0, 0.);
             break;
     }
     return edge;
