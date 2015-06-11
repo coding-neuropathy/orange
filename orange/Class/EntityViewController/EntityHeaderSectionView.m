@@ -113,10 +113,18 @@
     [super layoutSubviews];
     switch (self.headertype) {
         case LikeType:
+        {
+            self.backgroundColor = UIColorFromRGB(0xffffff);
+            self.textLabel.frame = CGRectMake(16., 9., 200., 30.);
+            self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
+            self.indicatorLable.center = self.textLabel.center;
+            self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
+        }
+            break;
         case NoteType:
         {
             self.backgroundColor = UIColorFromRGB(0xffffff);
-            self.textLabel.frame = CGRectMake(16., 0., 200., 30.);
+            self.textLabel.frame = CGRectMake(16., 9., 200., 30.);
             self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
             self.indicatorLable.center = self.textLabel.center;
             self.indicatorLable.deFrameRight = self.deFrameRight - 10.;

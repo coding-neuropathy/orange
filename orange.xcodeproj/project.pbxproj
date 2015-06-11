@@ -15,6 +15,7 @@
 		393715C31ACBD9C300DC50FF /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715B91ACBD9C300DC50FF /* DDTTYLogger.m */; };
 		393715C41ACBD9C300DC50FF /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715BC1ACBD9C300DC50FF /* ContextFilterLogFormatter.m */; };
 		393715C51ACBD9C300DC50FF /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 393715BE1ACBD9C300DC50FF /* DispatchQueueLogFormatter.m */; };
+		394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */ = {isa = PBXBuildFile; fileRef = 394104131B294E4C00C40846 /* UIScrollView+Slogan.m */; };
 		399916CE1B11A9DB006826FD /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 399916CD1B11A9DB006826FD /* UIDevice-Hardware.m */; };
 		39B720311B1F4C16008519E3 /* API.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B71FED1B1F4C16008519E3 /* API.h */; };
 		39B720321B1F4C16008519E3 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B71FEE1B1F4C16008519E3 /* API.m */; };
@@ -344,6 +345,8 @@
 		393715BC1ACBD9C300DC50FF /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextFilterLogFormatter.m; sourceTree = "<group>"; };
 		393715BD1ACBD9C300DC50FF /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
 		393715BE1ACBD9C300DC50FF /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		394104121B294E4C00C40846 /* UIScrollView+Slogan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Slogan.h"; sourceTree = "<group>"; };
+		394104131B294E4C00C40846 /* UIScrollView+Slogan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Slogan.m"; sourceTree = "<group>"; };
 		399916CC1B11A9DB006826FD /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
 		399916CD1B11A9DB006826FD /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
 		39B71FED1B1F4C16008519E3 /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
@@ -867,6 +870,8 @@
 		391F5F8D1B1705A000931533 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				394104121B294E4C00C40846 /* UIScrollView+Slogan.h */,
+				394104131B294E4C00C40846 /* UIScrollView+Slogan.m */,
 				B7ED32A91B25732E009BAF5A /* CSStickyHeaderFlowLayout */,
 				391F5F8E1B1705A000931533 /* JXFormCell */,
 				B7ED32B31B257F5B009BAF5A /* EntityCell.h */,
@@ -2364,6 +2369,7 @@
 				393715C01ACBD9C300DC50FF /* DDASLLogger.m in Sources */,
 				393715C51ACBD9C300DC50FF /* DispatchQueueLogFormatter.m in Sources */,
 				4E1D28E01A125B9300740C17 /* JSQMessagesToolbarContentView.m in Sources */,
+				394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */,
 				B7ED32BB1B25C8D8009BAF5A /* EntityHeaderSectionView.m in Sources */,
 				4E1D28DA1A125B9300740C17 /* JSQMessagesComposerTextView.m in Sources */,
 				4E2D6D3F1A69601F009E4A17 /* SVIndefiniteAnimatedView.m in Sources */,

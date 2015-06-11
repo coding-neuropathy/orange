@@ -23,6 +23,7 @@
 #import "EntityHeaderSectionView.h"
 
 #import "EntityLikerController.h"
+#import "UIScrollView+Slogan.h"
 
 #import "ReportViewController.h"
 #import "LoginView.h"
@@ -299,6 +300,13 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     }
 }
 
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+//    __weak __typeof(&*self)weakSelf = self;
+    [self.collectionView addSloganView];
+}
+
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -449,7 +457,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
         case 1:
         {
             if (self.dataArrayForlikeUser.count != 0) {
-                edge = UIEdgeInsetsMake(8., 16., 8., 16.);
+                edge = UIEdgeInsetsMake(0., 16., 16., 16.);
             }
         }
             break;
@@ -535,7 +543,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
             if (self.entity.likeCount == 0) {
                 return CGSizeMake(0., 0.);
             } else {
-                return CGSizeMake(kScreenWidth, 30);
+                return CGSizeMake(kScreenWidth, 48.);
             }
         }
             break;
