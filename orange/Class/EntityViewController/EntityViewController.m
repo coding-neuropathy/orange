@@ -635,6 +635,36 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)tapPokeNoteBtn:(id)sender Note:(GKNote *)note
+{
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
+    UIButton * pokeBtn = (UIButton *)sender;
+    
+    [API pokeWithNoteId:self.note.noteId state:!pokeBtn.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
+        
+        if (poked == pokeBtn.selected) {
+            
+        }
+        else if (poked) {
+            note.pokeCount = note.pokeCount+1;
+        } else {
+            note.pokeCount = note.pokeCount-1;
+        }
+        note.poked = poked;
+        
+        [AVAnalytics event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} durations:(int)note.pokeCount];
+        [MobClick event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} counter:(int)note.pokeCount];
+    } failure:^(NSInteger stateCode) {
+        [AVAnalytics event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
+        [MobClick event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
+    }];
+}
+
 //#pragma mark - UITableViewDataSource
 //
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -10,7 +10,7 @@
 
 @protocol EntityNoteCellDelegate <NSObject>
 
-//- (void)tapPokeNoteBtn:(id)sender Note:(GKNote *)note;
+- (void)tapPokeNoteBtn:(id)sender Note:(GKNote *)note;
 @optional
 - (void)swipLeftWithContentView:(UIView *)view;
 - (void)handleCellEditBtn:(GKNote *)note;
