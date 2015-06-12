@@ -87,20 +87,20 @@
     }
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-    CGContextSetLineWidth(context, kSeparateLineWidth);
-    
-    CGContextMoveToPoint(context, 16., 26.);
-    CGContextAddLineToPoint(context, kScreenWidth - 16., 26.);
-    
-    CGContextStrokePath(context);
-}
+//- (void)drawRect:(CGRect)rect
+//{
+//    [super drawRect:rect];
+//    
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+//    CGContextSetLineWidth(context, kSeparateLineWidth);
+//    
+//    CGContextMoveToPoint(context, 16., 26.);
+//    CGContextAddLineToPoint(context, kScreenWidth - 16., 26.);
+//    
+//    CGContextStrokePath(context);
+//}
 
 #pragma mark - Observing
 
