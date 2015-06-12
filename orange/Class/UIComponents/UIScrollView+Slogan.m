@@ -11,6 +11,7 @@
 @interface SloganView ()
 
 @property (strong, nonatomic) UILabel * sloganLabel;
+@property (strong, nonatomic) UIView * H;
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, readwrite) CGFloat originalBottomInset;
 @property (nonatomic, assign) BOOL isObserving;
@@ -33,20 +34,37 @@
 {
     if (!_sloganLabel) {
         _sloganLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _sloganLabel.font = [UIFont fontWithName:@"FultonsHand" size:20];
+        _sloganLabel.font = [UIFont fontWithName:@"FultonsHand" size:14];
         _sloganLabel.textAlignment = NSTextAlignmentCenter;
         _sloganLabel.textColor = UIColorFromRGB(0xcbcbcb);
+        _sloganLabel.backgroundColor = UIColorFromRGB(0xf8f8f8);
         _sloganLabel.text = @"Live Different";
         [self addSubview:_sloganLabel];
     }
     return _sloganLabel;
 }
 
+- (UIView *)H
+{
+    if (!_H) {
+        _H = [[UIView alloc] initWithFrame:CGRectZero];
+        _H.backgroundColor = UIColorFromRGB(0xebebeb);
+        [self addSubview:_H];
+    }
+    return _H;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    self.sloganLabel.frame = CGRectMake(0., 20., self.deFrameWidth, 30.);
+
+    self.backgroundColor = UIColorFromRGB(0xf8f8f8);
+    self.sloganLabel.frame = CGRectMake(0., 0., 120, 30.);
+    self.sloganLabel.center = CGPointMake(self.deFrameWidth/2, 50);
+    self.H.frame = CGRectMake(20,50, self.deFrameWidth-40, 0.5);
+    self.H.center = self.sloganLabel.center;
+    [self bringSubviewToFront:self.sloganLabel];
+
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
@@ -70,7 +88,7 @@
 //    else
     if([keyPath isEqualToString:@"contentSize"]) {
         [self layoutSubviews];
-        self.frame = CGRectMake(0, self.scrollView.contentSize.height, self.bounds.size.width, 80.);
+        self.frame = CGRectMake(0, self.scrollView.contentSize.height, self.bounds.size.width, kScreenHeight);
     }
 }
 
@@ -89,7 +107,7 @@ static char UISloganView;
 - (void)addSloganView
 {
     if (!self.sloganView) {
-        SloganView * view = [[SloganView alloc] initWithFrame:CGRectMake(0., self.contentSize.height, self.deFrameWidth, 80.)];
+        SloganView * view = [[SloganView alloc] initWithFrame:CGRectMake(0., self.contentSize.height, self.deFrameWidth, kScreenHeight)];
 //        view.backgroundColor = [UIColor redColor];
         view.scrollView = self;
         [self addSubview:view];
@@ -120,7 +138,7 @@ static char UISloganView;
         self.sloganView.isObserving = NO;
     } else {
         [self addObserver:self.sloganView forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-        self.sloganView.frame = CGRectMake(0, self.contentSize.height, self.sloganView.bounds.size.width, 60.);
+        self.sloganView.frame = CGRectMake(0, self.contentSize.height, self.sloganView.bounds.size.width, kScreenHeight);
         self.sloganView.isObserving = YES;
     }
 }

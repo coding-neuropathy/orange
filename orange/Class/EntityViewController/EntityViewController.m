@@ -176,6 +176,16 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 {
 //    self.navigationController.toolbar.clipsToBounds = YES;
     self.navigationController.toolbar.barTintColor = UIColorFromRGB(0xffffff);
+    self.navigationController.toolbar.layer.borderWidth = 0;
+    
+    for (UIView * view in self.navigationController.toolbar.subviews) {
+        if ([view  isKindOfClass:[UIImageView class]]&&![view isKindOfClass:[NSClassFromString(@"_UIToolbarBackground") class]]) {
+            view.alpha =0;
+        }
+    }
+    
+    //[self.navigationController.toolbar setShadowImage:[UIImage imageWithColor:[UIColor whiteColor] andSize:CGSizeMake(kScreenWidth, 1)] forToolbarPosition:UIBarPositionAny];
+
     
     UIBarButtonItem * likeBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.likeButton];
     UIBarButtonItem * postBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.postBtn];
