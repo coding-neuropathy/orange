@@ -66,9 +66,9 @@
     [super layoutSubviews];
 
     self.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    self.sloganLabel.frame = CGRectMake(100., 20., self.deFrameWidth - 200, 30.);
+    self.sloganLabel.frame = CGRectMake(100., 0., self.deFrameWidth - 200, 30.);
     self.sloganLabel.center = CGPointMake(self.deFrameWidth/2, 50);
-    self.H.frame = CGRectMake(20,50, self.deFrameWidth-40, 0.5);
+    self.H.frame = CGRectMake(20,50, self.deFrameWidth - 40, 0.5);
     self.H.center = self.sloganLabel.center;
     [self bringSubviewToFront:self.sloganLabel];
 
