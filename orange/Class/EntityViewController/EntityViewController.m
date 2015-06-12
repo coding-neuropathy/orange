@@ -543,24 +543,34 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
+    CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
         case 3:
-            return CGSizeMake(kScreenWidth, 50.);
+            size = CGSizeMake(kScreenWidth, 50.);
             break;
         case 1:
         {
-            if (self.entity.likeCount == 0) {
-                return CGSizeMake(0., 0.);
+            if (self.dataArrayForlikeUser.count != 0) {
+                size =  CGSizeMake(kScreenWidth, 48.);
+            }
+        }
+            break;
+        case 2:
+        {
+            if (self.dataArrayForNote.count != 0) {
+                size = CGSizeMake(kScreenWidth, 30);
             } else {
-                return CGSizeMake(kScreenWidth, 48.);
+                
             }
         }
             break;
         default:
-            return CGSizeMake(kScreenWidth, 30);
+            size =  CGSizeMake(kScreenWidth, 30);
             break;
     }
+    
+    return size;
 }
 
 #pragma mark - <UICollectionViewDelegate>
@@ -651,9 +661,9 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
             
         }
         else if (poked) {
-            note.pokeCount = note.pokeCount+1;
+            note.pokeCount = note.pokeCount + 1;
         } else {
-            note.pokeCount = note.pokeCount-1;
+            note.pokeCount = note.pokeCount - 1;
         }
         note.poked = poked;
         
