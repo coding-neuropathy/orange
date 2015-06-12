@@ -21,20 +21,27 @@
 
 @implementation SloganView
 
-//- (instancetype)initWithFrame:(CGRect)frame
-//{
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        self.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//    }
-//    return self;
-//}
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
 
 - (UILabel *)sloganLabel
 {
     if (!_sloganLabel) {
         _sloganLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _sloganLabel.font = [UIFont fontWithName:@"FultonsHand" size:14];
+        _sloganLabel.backgroundColor = UIColorFromRGB(0xffffff);
+        
+        if (IS_IPHONE) {
+            _sloganLabel.font = [UIFont fontWithName:@"FultonsHand" size:14.];
+        } else {
+            _sloganLabel.font = [UIFont fontWithName:@"FultonsHand" size:20.];
+        }
+
         _sloganLabel.textAlignment = NSTextAlignmentCenter;
         _sloganLabel.textColor = UIColorFromRGB(0xcbcbcb);
         _sloganLabel.backgroundColor = UIColorFromRGB(0xf8f8f8);
@@ -59,7 +66,7 @@
     [super layoutSubviews];
 
     self.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    self.sloganLabel.frame = CGRectMake(0., 0., 120, 30.);
+    self.sloganLabel.frame = CGRectMake(100., 20., self.deFrameWidth - 200, 30.);
     self.sloganLabel.center = CGPointMake(self.deFrameWidth/2, 50);
     self.H.frame = CGRectMake(20,50, self.deFrameWidth-40, 0.5);
     self.H.center = self.sloganLabel.center;
@@ -78,6 +85,21 @@
             }
         }
     }
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    
+    CGContextMoveToPoint(context, 16., 26.);
+    CGContextAddLineToPoint(context, kScreenWidth - 16., 26.);
+    
+    CGContextStrokePath(context);
 }
 
 #pragma mark - Observing

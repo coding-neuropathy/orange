@@ -5,7 +5,7 @@
 //  Copyright (c) 2013年 huiter. All rights reserved.
 //
 
-#define kBaseURL @"http://api.guoku.com/mobile/v4/"
+//#define kBaseURL @"http://api.guoku.com/mobile/v4/"
 //#define kBaseURL @"http://h.guoku.com/mobile/v4/"
 //#define kBaseURL @"http://127.0.0.1:8000/mobile/v4/"
 
@@ -26,6 +26,7 @@
 
 // umeng
 #define UMENG_APPKEY @"5219f06856240bd4ab01407a"
+
 
 
 // weibo
