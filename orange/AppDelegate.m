@@ -13,8 +13,9 @@
 #import "UserViewController.h"
 #import "CategoryViewController.h"
 #import "TagViewController.h"
-#import "IntruductionVC.h"
-#import "WelcomeVC.h"
+//#import "IntruductionVC.h"
+//#import "WelcomeVC.h"
+#import "WelcomeViewController.h"
 #import "APService.h"
 
 int ddLogLevel;
@@ -53,7 +54,7 @@ int ddLogLevel;
     [[TaeSDK sharedInstance] asyncInit:^{
         DDLogInfo(@"初始化成功");
     } failedCallback:^(NSError *error) {
-        DDLogError(@"初始化失败:%@",error);
+        DDLogError(@"初始化失败:%@", error);
     }];
     
     //插件版登录状态监听
@@ -66,11 +67,11 @@ int ddLogLevel;
         }
     }];
 
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+//    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -78,6 +79,7 @@ int ddLogLevel;
 
     // Override point for customization after application launch.
 
+    // jpush config
     [APService registerForRemoteNotificationTypes:UIUserNotificationTypeAlert| UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
     [APService setupWithOption:launchOptions];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateJPushID:) name:kJPFNetworkDidLoginNotification object:nil];
@@ -88,24 +90,38 @@ int ddLogLevel;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[TabBarViewcontroller alloc]init];
-    self.window.rootViewController.view.hidden = YES;
+//    self.window.rootViewController.view.hidden = NO;
     [self.window makeKeyAndVisible];
 
-    NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    NSDictionary * urlInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+//    NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+//    NSDictionary * urlInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
     
-    if(userInfo || urlInfo)
-    {
-        application.applicationIconBadgeNumber = 0;
-        self.window.rootViewController.view.hidden = NO;
-    }
-    else
+//    if(userInfo || urlInfo)
+//    {
+//        application.applicationIconBadgeNumber = 0;
+//        self.window.rootViewController.view.hidden = NO;
+//    }
+//    else
+//    {
+//        self.window.rootViewController.view.hidden = YES;
+//        WelcomeVC * welcomeVc = [[WelcomeVC alloc] init];
+//        [self.window.rootViewController presentViewController: welcomeVc animated:NO completion:NULL];
+//    }
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4"])
     {
         self.window.rootViewController.view.hidden = YES;
-        WelcomeVC * welcomeVc = [[WelcomeVC alloc] init];
-        [self.window.rootViewController presentViewController: welcomeVc animated:NO completion:NULL];
+        //        application.applicationIconBadgeNumber = 0;
+        //        self.window.rootViewController.view.hidden = NO;
+        WelcomeViewController * vc = [WelcomeViewController new];
+        vc.finished = ^(void){
+            self.window.rootViewController.view.hidden = NO;
+        };
+        if (IS_IPAD) {
+            vc.modalPresentationStyle = UIModalPresentationFormSheet;
+            vc.preferredContentSize = CGSizeMake(512., 686.);
+        }
+        [self.window.rootViewController presentViewController:vc animated:NO completion:nil];
     }
-    
 
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;

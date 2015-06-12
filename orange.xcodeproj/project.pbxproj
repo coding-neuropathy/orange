@@ -85,10 +85,8 @@
 		39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C829501AC29089009DE9BE /* libMobClickLibrary.a */; };
 		4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */; };
 		4E117B551AB9CBBD00844935 /* CategoryLikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B541AB9CBBD00844935 /* CategoryLikeViewController.m */; };
-		4E117B591ABB067300844935 /* IntruductionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B581ABB067200844935 /* IntruductionVC.m */; };
 		4E117B5E1ABC6FDC00844935 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B5D1ABC6FDC00844935 /* EditViewController.m */; };
 		4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */; };
-		4E117B631ABEE79800844935 /* WelcomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B621ABEE79800844935 /* WelcomeVC.m */; };
 		4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */; };
 		4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */; };
 		4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C441A66B86F004C59C4 /* CategoryGridCell.m */; };
@@ -235,6 +233,22 @@
 		B7662AD21AC3B49E00C82B4B /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7662AD11AC3B49E00C82B4B /* FeedBackViewController.m */; };
 		B766763A1AB805B5002F294C /* NoMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676391AB805B5002F294C /* NoMessageView.m */; };
 		B76676411AB81758002F294C /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676401AB81758002F294C /* NoDataView.m */; };
+		B769B1171B2ACE91004401FA /* IFTTTAlphaAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B0F91B2ACE91004401FA /* IFTTTAlphaAnimation.m */; };
+		B769B1181B2ACE91004401FA /* IFTTTAngleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B0FB1B2ACE91004401FA /* IFTTTAngleAnimation.m */; };
+		B769B1191B2ACE91004401FA /* IFTTTAnimatedScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B0FD1B2ACE91004401FA /* IFTTTAnimatedScrollViewController.m */; };
+		B769B11A1B2ACE91004401FA /* IFTTTAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B0FF1B2ACE91004401FA /* IFTTTAnimation.m */; };
+		B769B11B1B2ACE91004401FA /* IFTTTAnimationFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1011B2ACE91004401FA /* IFTTTAnimationFrame.m */; };
+		B769B11C1B2ACE91004401FA /* IFTTTAnimationKeyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1031B2ACE91004401FA /* IFTTTAnimationKeyFrame.m */; };
+		B769B11D1B2ACE91004401FA /* IFTTTAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1051B2ACE91004401FA /* IFTTTAnimator.m */; };
+		B769B11E1B2ACE91004401FA /* IFTTTColorAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1071B2ACE91004401FA /* IFTTTColorAnimation.m */; };
+		B769B11F1B2ACE91004401FA /* IFTTTConstraintsAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1091B2ACE91004401FA /* IFTTTConstraintsAnimation.m */; };
+		B769B1201B2ACE91004401FA /* IFTTTCornerRadiusAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B10B1B2ACE91004401FA /* IFTTTCornerRadiusAnimation.m */; };
+		B769B1211B2ACE91004401FA /* IFTTTEasingFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B10D1B2ACE91004401FA /* IFTTTEasingFunction.m */; };
+		B769B1221B2ACE91004401FA /* IFTTTFrameAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B10F1B2ACE91004401FA /* IFTTTFrameAnimation.m */; };
+		B769B1231B2ACE91004401FA /* IFTTTHideAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1111B2ACE91004401FA /* IFTTTHideAnimation.m */; };
+		B769B1241B2ACE91004401FA /* IFTTTScaleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1141B2ACE91004401FA /* IFTTTScaleAnimation.m */; };
+		B769B1251B2ACE91004401FA /* IFTTTTransform3DAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1161B2ACE91004401FA /* IFTTTTransform3DAnimation.m */; };
+		B769B1291B2ACFB3004401FA /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1281B2ACFB3004401FA /* WelcomeViewController.m */; };
 		B76F1D8A1ACE283B00A25A7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B76F1D8C1ACE283B00A25A7D /* InfoPlist.strings */; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
 		B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */; };
@@ -424,13 +438,9 @@
 		4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		4E117B531AB9CBBD00844935 /* CategoryLikeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryLikeViewController.h; sourceTree = "<group>"; };
 		4E117B541AB9CBBD00844935 /* CategoryLikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryLikeViewController.m; sourceTree = "<group>"; };
-		4E117B571ABB067200844935 /* IntruductionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntruductionVC.h; sourceTree = "<group>"; };
-		4E117B581ABB067200844935 /* IntruductionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntruductionVC.m; sourceTree = "<group>"; };
 		4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FultonsHand Regular.TTF"; sourceTree = "<group>"; };
 		4E117B5C1ABC6FDC00844935 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		4E117B5D1ABC6FDC00844935 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
-		4E117B611ABEE79800844935 /* WelcomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeVC.h; sourceTree = "<group>"; };
-		4E117B621ABEE79800844935 /* WelcomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeVC.m; sourceTree = "<group>"; };
 		4E198C3D1A65FE6E004C59C4 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
 		4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
 		4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityTwoGridCell.h; sourceTree = "<group>"; };
@@ -713,6 +723,39 @@
 		B76676391AB805B5002F294C /* NoMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoMessageView.m; path = NotificationView/NoMessageView.m; sourceTree = "<group>"; };
 		B766763F1AB81758002F294C /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoDataView.h; path = UserView/NoDataView.h; sourceTree = "<group>"; };
 		B76676401AB81758002F294C /* NoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoDataView.m; path = UserView/NoDataView.m; sourceTree = "<group>"; };
+		B769B0F81B2ACE91004401FA /* IFTTTAlphaAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTAlphaAnimation.h; sourceTree = "<group>"; };
+		B769B0F91B2ACE91004401FA /* IFTTTAlphaAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTAlphaAnimation.m; sourceTree = "<group>"; };
+		B769B0FA1B2ACE91004401FA /* IFTTTAngleAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTAngleAnimation.h; sourceTree = "<group>"; };
+		B769B0FB1B2ACE91004401FA /* IFTTTAngleAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTAngleAnimation.m; sourceTree = "<group>"; };
+		B769B0FC1B2ACE91004401FA /* IFTTTAnimatedScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTAnimatedScrollViewController.h; sourceTree = "<group>"; };
+		B769B0FD1B2ACE91004401FA /* IFTTTAnimatedScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTAnimatedScrollViewController.m; sourceTree = "<group>"; };
+		B769B0FE1B2ACE91004401FA /* IFTTTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTAnimation.h; sourceTree = "<group>"; };
+		B769B0FF1B2ACE91004401FA /* IFTTTAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTAnimation.m; sourceTree = "<group>"; };
+		B769B1001B2ACE91004401FA /* IFTTTAnimationFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTAnimationFrame.h; sourceTree = "<group>"; };
+		B769B1011B2ACE91004401FA /* IFTTTAnimationFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTAnimationFrame.m; sourceTree = "<group>"; };
+		B769B1021B2ACE91004401FA /* IFTTTAnimationKeyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTAnimationKeyFrame.h; sourceTree = "<group>"; };
+		B769B1031B2ACE91004401FA /* IFTTTAnimationKeyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTAnimationKeyFrame.m; sourceTree = "<group>"; };
+		B769B1041B2ACE91004401FA /* IFTTTAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTAnimator.h; sourceTree = "<group>"; };
+		B769B1051B2ACE91004401FA /* IFTTTAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTAnimator.m; sourceTree = "<group>"; };
+		B769B1061B2ACE91004401FA /* IFTTTColorAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTColorAnimation.h; sourceTree = "<group>"; };
+		B769B1071B2ACE91004401FA /* IFTTTColorAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTColorAnimation.m; sourceTree = "<group>"; };
+		B769B1081B2ACE91004401FA /* IFTTTConstraintsAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTConstraintsAnimation.h; sourceTree = "<group>"; };
+		B769B1091B2ACE91004401FA /* IFTTTConstraintsAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTConstraintsAnimation.m; sourceTree = "<group>"; };
+		B769B10A1B2ACE91004401FA /* IFTTTCornerRadiusAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTCornerRadiusAnimation.h; sourceTree = "<group>"; };
+		B769B10B1B2ACE91004401FA /* IFTTTCornerRadiusAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTCornerRadiusAnimation.m; sourceTree = "<group>"; };
+		B769B10C1B2ACE91004401FA /* IFTTTEasingFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTEasingFunction.h; sourceTree = "<group>"; };
+		B769B10D1B2ACE91004401FA /* IFTTTEasingFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTEasingFunction.m; sourceTree = "<group>"; };
+		B769B10E1B2ACE91004401FA /* IFTTTFrameAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTFrameAnimation.h; sourceTree = "<group>"; };
+		B769B10F1B2ACE91004401FA /* IFTTTFrameAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTFrameAnimation.m; sourceTree = "<group>"; };
+		B769B1101B2ACE91004401FA /* IFTTTHideAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTHideAnimation.h; sourceTree = "<group>"; };
+		B769B1111B2ACE91004401FA /* IFTTTHideAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTHideAnimation.m; sourceTree = "<group>"; };
+		B769B1121B2ACE91004401FA /* IFTTTJazzHands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTJazzHands.h; sourceTree = "<group>"; };
+		B769B1131B2ACE91004401FA /* IFTTTScaleAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTScaleAnimation.h; sourceTree = "<group>"; };
+		B769B1141B2ACE91004401FA /* IFTTTScaleAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTScaleAnimation.m; sourceTree = "<group>"; };
+		B769B1151B2ACE91004401FA /* IFTTTTransform3DAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTTransform3DAnimation.h; sourceTree = "<group>"; };
+		B769B1161B2ACE91004401FA /* IFTTTTransform3DAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTTransform3DAnimation.m; sourceTree = "<group>"; };
+		B769B1271B2ACFB3004401FA /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		B769B1281B2ACFB3004401FA /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		B76F1D8B1ACE283B00A25A7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B76F1D8D1ACE283D00A25A7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B76F1D8E1ACE284100A25A7D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -1150,15 +1193,6 @@
 			path = CategoryLikeViewController;
 			sourceTree = "<group>";
 		};
-		4E117B561ABB067200844935 /* IntruductionVC */ = {
-			isa = PBXGroup;
-			children = (
-				4E117B571ABB067200844935 /* IntruductionVC.h */,
-				4E117B581ABB067200844935 /* IntruductionVC.m */,
-			);
-			path = IntruductionVC;
-			sourceTree = "<group>";
-		};
 		4E117B5B1ABC6FDC00844935 /* EditViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1166,15 +1200,6 @@
 				4E117B5D1ABC6FDC00844935 /* EditViewController.m */,
 			);
 			path = EditViewController;
-			sourceTree = "<group>";
-		};
-		4E117B601ABEE79800844935 /* WelcomeVC */ = {
-			isa = PBXGroup;
-			children = (
-				4E117B611ABEE79800844935 /* WelcomeVC.h */,
-				4E117B621ABEE79800844935 /* WelcomeVC.m */,
-			);
-			path = WelcomeVC;
 			sourceTree = "<group>";
 		};
 		4E1C36561AB429FE00EA2F00 /* GTScrollNavigationBar */ = {
@@ -1547,6 +1572,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				B769B0F71B2ACE91004401FA /* JazzHands */,
 				4E9D0E2C1B2A64BC00AA37F5 /* Reveal.framework */,
 				B73E90CE1B1C9D7500616FD7 /* AVOSCloudSNS.framework */,
 				B73E90CC1B1C9D5D00616FD7 /* AVOSCloud.framework */,
@@ -1630,13 +1656,12 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				B769B1261B2ACFB3004401FA /* WelcomeViewController */,
 				391F5F8D1B1705A000931533 /* UIComponents */,
 				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
 				DA35B3C31AFEE31200D66671 /* PasswordEditViewController */,
 				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
-				4E117B601ABEE79800844935 /* WelcomeVC */,
 				4E117B5B1ABC6FDC00844935 /* EditViewController */,
-				4E117B561ABB067200844935 /* IntruductionVC */,
 				4E117B521AB9CBBD00844935 /* CategoryLikeViewController */,
 				4E934DA51A9AE9FB00374B05 /* GroupViewController */,
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
@@ -1931,6 +1956,53 @@
 				B76676401AB81758002F294C /* NoDataView.m */,
 			);
 			name = UserView;
+			sourceTree = "<group>";
+		};
+		B769B0F71B2ACE91004401FA /* JazzHands */ = {
+			isa = PBXGroup;
+			children = (
+				B769B0F81B2ACE91004401FA /* IFTTTAlphaAnimation.h */,
+				B769B0F91B2ACE91004401FA /* IFTTTAlphaAnimation.m */,
+				B769B0FA1B2ACE91004401FA /* IFTTTAngleAnimation.h */,
+				B769B0FB1B2ACE91004401FA /* IFTTTAngleAnimation.m */,
+				B769B0FC1B2ACE91004401FA /* IFTTTAnimatedScrollViewController.h */,
+				B769B0FD1B2ACE91004401FA /* IFTTTAnimatedScrollViewController.m */,
+				B769B0FE1B2ACE91004401FA /* IFTTTAnimation.h */,
+				B769B0FF1B2ACE91004401FA /* IFTTTAnimation.m */,
+				B769B1001B2ACE91004401FA /* IFTTTAnimationFrame.h */,
+				B769B1011B2ACE91004401FA /* IFTTTAnimationFrame.m */,
+				B769B1021B2ACE91004401FA /* IFTTTAnimationKeyFrame.h */,
+				B769B1031B2ACE91004401FA /* IFTTTAnimationKeyFrame.m */,
+				B769B1041B2ACE91004401FA /* IFTTTAnimator.h */,
+				B769B1051B2ACE91004401FA /* IFTTTAnimator.m */,
+				B769B1061B2ACE91004401FA /* IFTTTColorAnimation.h */,
+				B769B1071B2ACE91004401FA /* IFTTTColorAnimation.m */,
+				B769B1081B2ACE91004401FA /* IFTTTConstraintsAnimation.h */,
+				B769B1091B2ACE91004401FA /* IFTTTConstraintsAnimation.m */,
+				B769B10A1B2ACE91004401FA /* IFTTTCornerRadiusAnimation.h */,
+				B769B10B1B2ACE91004401FA /* IFTTTCornerRadiusAnimation.m */,
+				B769B10C1B2ACE91004401FA /* IFTTTEasingFunction.h */,
+				B769B10D1B2ACE91004401FA /* IFTTTEasingFunction.m */,
+				B769B10E1B2ACE91004401FA /* IFTTTFrameAnimation.h */,
+				B769B10F1B2ACE91004401FA /* IFTTTFrameAnimation.m */,
+				B769B1101B2ACE91004401FA /* IFTTTHideAnimation.h */,
+				B769B1111B2ACE91004401FA /* IFTTTHideAnimation.m */,
+				B769B1121B2ACE91004401FA /* IFTTTJazzHands.h */,
+				B769B1131B2ACE91004401FA /* IFTTTScaleAnimation.h */,
+				B769B1141B2ACE91004401FA /* IFTTTScaleAnimation.m */,
+				B769B1151B2ACE91004401FA /* IFTTTTransform3DAnimation.h */,
+				B769B1161B2ACE91004401FA /* IFTTTTransform3DAnimation.m */,
+			);
+			path = JazzHands;
+			sourceTree = "<group>";
+		};
+		B769B1261B2ACFB3004401FA /* WelcomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B769B1271B2ACFB3004401FA /* WelcomeViewController.h */,
+				B769B1281B2ACFB3004401FA /* WelcomeViewController.m */,
+			);
+			path = WelcomeViewController;
 			sourceTree = "<group>";
 		};
 		B79270921AB3D8E800FD7371 /* DiscoverView */ = {
@@ -2356,12 +2428,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7C684861ABBD78E00A122E8 /* ListViewController.m in Sources */,
+				B769B11A1B2ACE91004401FA /* IFTTTAnimation.m in Sources */,
 				4E1D28D21A125B9300740C17 /* JSQVideoMediaItem.m in Sources */,
 				B7ED32B51B257F5B009BAF5A /* EntityCell.m in Sources */,
 				B7ED32AF1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
 				4E1D28BF1A125B9300740C17 /* UIImage+JSQMessages.m in Sources */,
 				4E2D6D5F1A6FF7DE009E4A17 /* NoteSingleListCell.m in Sources */,
 				4E56DF7B19D56EF500263B17 /* NSString+FontAwesome.m in Sources */,
+				B769B1231B2ACE91004401FA /* IFTTTHideAnimation.m in Sources */,
 				4E1D28C81A125B9300740C17 /* JSQMessagesToolbarButtonFactory.m in Sources */,
 				B7DA97C11B270BE900C9BC25 /* EntityLikeUserCell.m in Sources */,
 				4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */,
@@ -2380,7 +2454,8 @@
 				4E2D6D411A69601F009E4A17 /* SVProgressHUD.m in Sources */,
 				393715C41ACBD9C300DC50FF /* ContextFilterLogFormatter.m in Sources */,
 				4E1D28CB1A125B9300740C17 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
-				4E117B631ABEE79800844935 /* WelcomeVC.m in Sources */,
+				B769B11B1B2ACE91004401FA /* IFTTTAnimationFrame.m in Sources */,
+				B769B1191B2ACE91004401FA /* IFTTTAnimatedScrollViewController.m in Sources */,
 				B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */,
 				4E1D28CC1A125B9300740C17 /* JSQLocationMediaItem.m in Sources */,
 				B7F5AA0B1B08D3320033BB2D /* WebViewProgressView.m in Sources */,
@@ -2402,6 +2477,7 @@
 				4E1D28C51A125B9300740C17 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */,
 				4EC9F7911A7928520057D736 /* FanViewController.m in Sources */,
+				B769B1291B2ACFB3004401FA /* WelcomeViewController.m in Sources */,
 				4E1D28CA1A125B9300740C17 /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
 				B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */,
 				B7B6958D1AF05C400016AAB8 /* UIView+WebCacheOperation.m in Sources */,
@@ -2412,6 +2488,7 @@
 				393715BF1ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m in Sources */,
 				4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */,
 				4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */,
+				B769B1211B2ACE91004401FA /* IFTTTEasingFunction.m in Sources */,
 				4EA0C45C1A8287780025EC2E /* SignView.m in Sources */,
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
 				B766763A1AB805B5002F294C /* NoMessageView.m in Sources */,
@@ -2420,12 +2497,15 @@
 				4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */,
 				4EC9F79F1A7A79800057D736 /* CategoryViewController.m in Sources */,
 				4ECCD0D91A714A7D009D5A42 /* TagCell.m in Sources */,
+				B769B1221B2ACE91004401FA /* IFTTTFrameAnimation.m in Sources */,
+				B769B1171B2ACE91004401FA /* IFTTTAlphaAnimation.m in Sources */,
 				4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */,
 				4E8D6A9C1A38B59F00156C17 /* UIFont+FontDiao.m in Sources */,
 				B7B695801AF05C400016AAB8 /* SDImageCache.m in Sources */,
 				4E1D70251A5ADC100032719E /* NotifactionViewController.m in Sources */,
 				4EC9F7A71A7BD1020057D736 /* NotePostViewController.m in Sources */,
 				4E1D28E21A125B9300740C17 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
+				B769B1201B2ACE91004401FA /* IFTTTCornerRadiusAnimation.m in Sources */,
 				B7B695831AF05C400016AAB8 /* SDWebImageDownloader.m in Sources */,
 				B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */,
 				4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */,
@@ -2437,6 +2517,7 @@
 				4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */,
 				4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */,
 				4E1D28BD1A125B9300740C17 /* UIColor+JSQMessages.m in Sources */,
+				B769B1181B2ACE91004401FA /* IFTTTAngleAnimation.m in Sources */,
 				B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */,
@@ -2445,13 +2526,13 @@
 				4E1D28C91A125B9300740C17 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */,
 				4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */,
-				4E117B591ABB067300844935 /* IntruductionVC.m in Sources */,
 				4E1D28D01A125B9300740C17 /* JSQMessagesBubbleImage.m in Sources */,
 				B7B695851AF05C400016AAB8 /* SDWebImageManager.m in Sources */,
 				4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */,
 				B76676411AB81758002F294C /* NoDataView.m in Sources */,
 				4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */,
 				4E1D28C01A125B9300740C17 /* UIView+JSQMessages.m in Sources */,
+				B769B1251B2ACE91004401FA /* IFTTTTransform3DAnimation.m in Sources */,
 				4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */,
 				4E1D28CF1A125B9300740C17 /* JSQMessagesAvatarImage.m in Sources */,
 				B7FE2A081B28136B001C2E33 /* UIImage+FontAwesome.m in Sources */,
@@ -2471,23 +2552,28 @@
 				B7B6957E1AF05C400016AAB8 /* MKAnnotationView+WebCache.m in Sources */,
 				393715C21ACBD9C300DC50FF /* DDLog.m in Sources */,
 				B7B695881AF05C400016AAB8 /* UIImage+GIF.m in Sources */,
+				B769B11F1B2ACE91004401FA /* IFTTTConstraintsAnimation.m in Sources */,
 				393715C11ACBD9C300DC50FF /* DDFileLogger.m in Sources */,
 				B7B695811AF05C400016AAB8 /* SDWebImageCompat.m in Sources */,
 				4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */,
+				B769B11D1B2ACE91004401FA /* IFTTTAnimator.m in Sources */,
 				B7B6958C1AF05C400016AAB8 /* UIImageView+WebCache.m in Sources */,
 				4E1D28CE1A125B9300740C17 /* JSQMessage.m in Sources */,
 				4E1D28C11A125B9300740C17 /* JSQMessagesKeyboardController.m in Sources */,
+				B769B1241B2ACE91004401FA /* IFTTTScaleAnimation.m in Sources */,
 				4E1D30AD1A125FDF00740C17 /* JSQSystemSoundPlayer.m in Sources */,
 				B7ED32B21B257EFF009BAF5A /* EntityNoteCell.m in Sources */,
 				4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */,
 				4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */,
 				4E1D28DD1A125B9300740C17 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
+				B769B11C1B2ACE91004401FA /* IFTTTAnimationKeyFrame.m in Sources */,
 				B7B695871AF05C400016AAB8 /* UIButton+WebCache.m in Sources */,
 				B7DA97BB1B25E46200C9BC25 /* EntityHeaderView.m in Sources */,
 				B71E495F1AC98E4700D4DB6D /* SettingsFooterView.m in Sources */,
 				4E1D28DC1A125B9300740C17 /* JSQMessagesLabel.m in Sources */,
 				4E1D28D11A125B9300740C17 /* JSQPhotoMediaItem.m in Sources */,
 				B7B695841AF05C400016AAB8 /* SDWebImageDownloaderOperation.m in Sources */,
+				B769B11E1B2ACE91004401FA /* IFTTTColorAnimation.m in Sources */,
 				4E2D6D5B1A6D49F0009E4A17 /* LoginView.m in Sources */,
 				B7B6958A1AF05C400016AAB8 /* UIImage+WebP.m in Sources */,
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,

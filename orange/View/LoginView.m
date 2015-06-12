@@ -301,10 +301,12 @@
                 [SVProgressHUD showImage:nil status:@"服务器出错!"];
                 break;
             }
-            
+        case 400:
+                [SVProgressHUD showErrorWithStatus:message];
+            break;
         default:
-                [SVProgressHUD dismiss];
-                break;
+            [SVProgressHUD dismiss];
+            break;
         }
         
         if ([type isEqualToString:@"email"]) {
