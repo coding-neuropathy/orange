@@ -88,6 +88,7 @@ static CGFloat LabelMargin = 50.;
         [self placeViewsI6P];
     else
         [self placeViews];
+    
     [self configureAnimation];
     
     self.delegate = self;
@@ -603,7 +604,7 @@ static CGFloat LabelMargin = 50.;
 
 - (void)animatedScrollViewControllerDidEndDraggingAtEnd:(IFTTTAnimatedScrollViewController *)animatedScrollViewController
 {
-    NSLog(@"Ended dragging at end of scrollview!");
+//    NSLog(@"Ended dragging at end of scrollview!");
     [self beginBtnAction:nil];
 }
 
