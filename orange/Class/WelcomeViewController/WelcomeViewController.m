@@ -208,7 +208,7 @@ static CGFloat LabelMargin = 50.;
     self.thirdDetailLabel.numberOfLines = 2;
     self.thirdDetailLabel.deFrameLeft = self.thirdLabel.deFrameLeft;
     self.thirdDetailLabel.deFrameTop = self.thirdLabel.deFrameBottom + 10;
-    self.thirdDetailLabel.text = @"剁手大智慧，帮朋友到这儿。\n我的意思是，自己不要花太多钱";
+    self.thirdDetailLabel.text = @"剁手大智慧，帮朋友到这儿。\n我的意思是，自己不要花太多钱。";
     [self.scrollView addSubview:self.thirdDetailLabel];
     
     
@@ -227,7 +227,7 @@ static CGFloat LabelMargin = 50.;
     self.lastDetailLabel.textAlignment = NSTextAlignmentCenter;
     self.lastDetailLabel.frame = CGRectOffset(self.lastDetailLabel.frame, timeForPage(4), 0);
     self.lastDetailLabel.deFrameTop = self.lastLabel.deFrameBottom + 10.;
-    self.lastDetailLabel.text = @"其实，生活不一样";
+    self.lastDetailLabel.text = @"其实，生活不一样。";
     [self.scrollView addSubview:self.lastDetailLabel];
     
     
