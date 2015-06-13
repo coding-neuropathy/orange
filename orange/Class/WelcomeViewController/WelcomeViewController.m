@@ -50,16 +50,14 @@ static CGFloat LabelMargin = 50.;
 
 #pragma mark - IFTTTAnimatedScrollViewControllerDelegate
 
-- (id)init
-{
-    if ((self = [super init])) {
-//        self.animator = [IFTTTAnimation new];
-//        self.animator = [IFTTTAnimator new];
-    
-    }
-    
-    return self;
-}
+//- (id)init
+//{
+//    if ((self = [super init])) {
+//    
+//    }
+//    
+//    return self;
+//}
 
 
 - (void)loadView
@@ -235,7 +233,7 @@ static CGFloat LabelMargin = 50.;
     self.beginIcon.frame = CGRectMake(0., 0., 90., 90.);
     
     self.beginIcon.center = self.lastDetailLabel.center;
-    self.beginIcon.deFrameTop = 180.;
+    self.beginIcon.deFrameTop = 280.;
     [self.scrollView addSubview:self.beginIcon];
     
     self.beginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -379,7 +377,7 @@ static CGFloat LabelMargin = 50.;
     self.beginIcon.frame = CGRectMake(0., 0., 90., 90.);
     
     self.beginIcon.center = self.lastDetailLabel.center;
-    self.beginIcon.deFrameTop = 180.;
+    self.beginIcon.deFrameTop = 240.;
     [self.scrollView addSubview:self.beginIcon];
     
     self.beginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
