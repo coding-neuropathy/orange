@@ -655,7 +655,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     }
     UIButton * pokeBtn = (UIButton *)sender;
     
-    [API pokeWithNoteId:self.note.noteId state:!pokeBtn.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
+    [API pokeWithNoteId:note.noteId state:!pokeBtn.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
         
         if (poked == pokeBtn.selected) {
             
