@@ -477,7 +477,6 @@
         if (self.successBlock) {
             self.successBlock();
         }
-        
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
         [self dismiss];
 
@@ -585,7 +584,6 @@
 }
 
 #pragma mark - UIAlertViewDelegate
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
@@ -609,43 +607,27 @@
     }
 }
 
-//#pragma mark - GKTaobaoOAuthViewControllerDelegate
-//
-//- (void)TaoBaoGrantFinished
-//{
-//    if (self.flag == YES) {
-//        return;
-//    }
-//    self.flag = YES;
-//    
-//    NSDictionary *taobaoInfo = [[NSUserDefaults standardUserDefaults] objectForKey:kTaobaoGrantInfo];
-//    
-//    NSString *taobaoUserId = taobaoInfo[@"taobao_id"];
-//    NSString *taobaoToken = taobaoInfo[@"access_token"];
-//    [Passport sharedInstance].screenName = taobaoInfo[@"screen_name"];
-//    [Passport sharedInstance].taobaoId = taobaoUserId;
-//    [Passport sharedInstance].taobaoToken = taobaoToken;
-//    [API loginWithTaobaoUserId:taobaoUserId taobaoToken:taobaoToken success:^(GKUser *user, NSString *session) {
-//        if (self.successBlock) {
-//            self.successBlock();
-//        }
-//        [self dismiss];
-//        [SVProgressHUD dismiss];
-//        [self closeTaobaoView];
-//        
-//    } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
-//        [SVProgressHUD dismiss];
-//        [self closeTaobaoView];
-//        [self tapRegisterButton];
-//    }];
-//}
-
 #pragma mark - Notification
 - (void)postWeChatCode:(NSNotification *)notification
 {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     SendAuthResp *resp = [notification valueForKey:@"object"];
-    DDLogInfo(@"resp resp %@", [resp code]);
     
+    NSDictionary * json = [API getWeChatAuthWithAppKey:kGK_WeixinShareKey Secret:KGK_WeixinSecret Code:resp.code];
+    
+    NSDictionary * userInfo = [API getWeChatUserInfoWithAccessToken:[json valueForKey:@"access_token"] OpenID:[json valueForKey:@"openid"]];
+    
+    DDLogInfo(@"user info %@", userInfo);
+    
+    [API loginWithWeChatWithUnionid:[userInfo valueForKey:@"unionid"] Nickname:[userInfo valueForKey:@"nickname"] HeaderImgURL:[userInfo valueForKey:@"headimgurl"] success:^(GKUser *user, NSString *session) {
+        if (self.successBlock) {
+            self.successBlock();
+        }
+        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
+        [self dismiss];
+    } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+        [SVProgressHUD showErrorWithStatus:message];
+    }];
     
 }
 

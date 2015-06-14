@@ -528,6 +528,19 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                      failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
 
 /**
+ *  微信登录
+ *
+ *  @param unionid      微信用户 UNIONID
+ *  @param nickname     微信用户昵称
+ *  @param headimgurl   微信用户头像
+ *  @param success      成功block
+ *  @param failure      失败block
+ */
++ (void)loginWithWeChatWithUnionid:(NSString *)unionid Nickname:(NSString *)nickname HeaderImgURL:(NSString *)headimgurl
+                           success:(void (^)(GKUser *user, NSString *session))success
+                           failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure;
+
+/**
  *  新浪用户绑定果库账号
  *  @param userId           果库用户ID
  *  @param sinaUserId       新浪用户ID
@@ -684,6 +697,23 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)getTopTenEntityCount:(NSInteger)count
                      success:(void (^)(NSArray * array))success
                      failure:(void (^)(NSInteger stateCode))failure;
+
+#pragma mark - get wechat open_uid
+/**
+ *  获取微信用户 OPEN ID
+ *  @param weixin app key
+ *  @param weixin app secret
+ *  @param
+ */
++ (NSDictionary *)getWeChatAuthWithAppKey:(NSString *)appkey Secret:(NSString *)secret Code:(NSString *)code;
+
+/**
+ *  获取微信用户信息
+ *
+ *  @param accesstoken
+ *  @param open_id
+ */
++ (NSDictionary *)getWeChatUserInfoWithAccessToken:(NSString *)access_token OpenID:(NSString *)open_id;
 
 /**
  *  取消所有网络请求

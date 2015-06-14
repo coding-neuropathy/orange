@@ -1698,6 +1698,54 @@
 }
 
 /**
+ *  微信登录
+ *
+ *  @param unionid      微信用户 UNIONID
+ *  @param nickname     微信用户昵称
+ *  @param headimgurl   微信用户头像
+ *  @param success      成功block
+ *  @param failure      失败block
+ */
++ (void)loginWithWeChatWithUnionid:(NSString *)unionid Nickname:(NSString *)nickname HeaderImgURL:(NSString *)headimgurl
+                           success:(void (^)(GKUser *user, NSString *session))success
+                           failure:(void (^)(NSInteger stateCode, NSString *type, NSString *message))failure
+{
+    NSParameterAssert(unionid);
+    NSString * path = @"wechat/login/";
+    
+    NSMutableDictionary * paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:unionid forKey:@"unionid"];
+    [paraDict setObject:nickname forKey:@"nickname"];
+    [paraDict setObject:headimgurl forKey:@"headimgurl"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *objectDict = (NSDictionary *)responseObject;
+        NSString *session = objectDict[@"session"];
+        GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
+        [Passport sharedInstance].user = user;
+        [Passport sharedInstance].session = session;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:nil userInfo:nil];
+        if (success) {
+            success(user, session);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            NSString *message, *type;
+            NSData *objectData = [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"];
+            NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
+//            NSLog(@"error %@", [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"]);
+            NSString * string = [[NSString alloc] initWithData:[[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSASCIIStringEncoding];
+            NSLog(@"error %@", string);
+            
+            message = dict[@"message"];
+            type = dict[@"type"];
+            failure(stateCode, type, message);
+        }
+    }];
+}
+
+/**
  *  新浪用户绑定果库账号
  *  @param userId           果库用户ID
  *  @param sinaUserId       新浪用户ID
@@ -2174,6 +2222,65 @@
             failure(stateCode);
         }
     }];
+}
+
+#pragma mark - get wechat open_uid
+/**
+ *  获取微信用户 OPEN ID
+ *  @param weixin app key
+ *  @param weixin app secret
+ *  @param
+ */
++ (NSDictionary *)getWeChatAuthWithAppKey:(NSString *)appkey Secret:(NSString *)secret Code:(NSString *)code
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%@&secret=%@&code=%@&grant_type=authorization_code", appkey, secret, code];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSError * error = nil;
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
+    
+    if (error) {
+//        DDLogError(@"Error: %@", error.localizedDescription);
+        return nil;
+    }
+    
+    //    NSString * responseObj = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    //    DDLogInfo(@"%@", responseObj);
+    id JSON = [NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingAllowFragments error:nil];
+//    DDLogInfo(@"json %@", JSON);
+    return JSON;
+}
+
+/**
+ *  获取微信用户信息
+ *
+ *  @param accesstoken
+ *  @param open_id
+ */
++ (NSDictionary *)getWeChatUserInfoWithAccessToken:(NSString *)access_token OpenID:(NSString *)open_id
+{
+    NSString * urlString = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/userinfo?access_token=%@&openid=%@",  access_token, open_id];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSError * error = nil;
+//    DDLogInfo(@"url %@", urlString);
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
+    if (error) {
+//        DDLogError(@"Error: %@", error.localizedDescription);
+        return nil;
+    }
+    
+    //    NSString * responseObj = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    //    DDLogInfo(@"%@", responseObj);
+    id JSON = [NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingAllowFragments error:nil];
+    //    DDLogInfo(@"json %@", JSON);
+    return JSON;
 }
 
 #pragma mark - cancel all requet

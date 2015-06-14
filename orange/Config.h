@@ -47,6 +47,10 @@
 #define kGK_WeixinShareKey	@"wx59118ccde8270caa"		//REPLACE ME
 #endif
 
+#ifndef KGK_WeixinSecret
+#define KGK_WeixinSecret    @"2200ad1c64775d37bcb0e7f74c8a0641"
+#endif
+
 #ifndef kGK_WeixinShareURL
 #define kGK_WeixinShareURL @"http://www.guoku.com/detail/"  //apisent
 #endif
