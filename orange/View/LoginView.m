@@ -13,6 +13,7 @@
 //#import "GKTaobaoConfig.h"
 //#import "GKTaobaoOAuthViewController.h"
 #import "SignView.h"
+#import "WXApi.h"
 
 @interface LoginView () <UITextFieldDelegate, UIAlertViewDelegate>
 {
@@ -27,6 +28,7 @@
 @property (nonatomic, strong) UIButton *forgotPasswordButton;
 @property (nonatomic, strong) UIButton *sinaWeiboButton;
 @property (nonatomic, strong) UIButton *taobaoButton;
+@property (nonatomic, strong) UIButton * weixinBtn;
 @property (assign, nonatomic) BOOL flag;
 
 @property(nonatomic, strong) id<ALBBLoginService> loginService;
@@ -170,38 +172,30 @@
         }
         [whiteBG addSubview:self.passwordTextField];
         
-        _sinaWeiboButton = [[UIButton alloc] init];
-        self.sinaWeiboButton.deFrameSize = CGSizeMake(44.f, 44.f);
-        self.sinaWeiboButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
-        self.sinaWeiboButton.deFrameLeft = 24.f;
-        self.sinaWeiboButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
-        self.sinaWeiboButton.layer.cornerRadius = 22;
-        [self.sinaWeiboButton addTarget:self action:@selector(tapSinaWeiboButton) forControlEvents:UIControlEventTouchUpInside];
-        [self.sinaWeiboButton setImage:[UIImage imageNamed:@"login_icon_weibo.png"] forState:UIControlStateNormal];
         [whiteBG addSubview:self.sinaWeiboButton];
+        self.sinaWeiboButton.deFrameTop = self.passwordTextField.deFrameBottom + 28.;
+        self.sinaWeiboButton.deFrameLeft = 14.;
         
-        _taobaoButton = [[UIButton alloc] init];
-        self.taobaoButton.deFrameSize = CGSizeMake(44.f, 44.f);
-        self.taobaoButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
-        self.taobaoButton.layer.cornerRadius = 22;
-        self.taobaoButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
-        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.f;
-        [self.taobaoButton addTarget:self action:@selector(tapTaobaoButton) forControlEvents:UIControlEventTouchUpInside];
-        [self.taobaoButton setImage:[UIImage imageNamed:@"login_icon_taobao.png"] forState:UIControlStateNormal];
         [whiteBG addSubview:self.taobaoButton];
+        self.taobaoButton.center = self.sinaWeiboButton.center;
+        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.;
         
-        UIButton *loginButton = [[UIButton alloc]init];
-        loginButton.frame = CGRectMake(0, 0,90, 40.f);
-        loginButton.center = self.sinaWeiboButton.center;
-        loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
-        loginButton.layer.cornerRadius = 4;
-        loginButton.layer.masksToBounds = YES;
-        loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        loginButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
-        [loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
-        [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
-        [whiteBG addSubview:loginButton];
+        self.weixinBtn.center = self.sinaWeiboButton.center;
+        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 15.;
+        [whiteBG addSubview:self.weixinBtn];
+        
+//        UIButton *loginButton = [[UIButton alloc]init];
+//        loginButton.frame = CGRectMake(0, 0,90, 40.f);
+//        loginButton.center = self.sinaWeiboButton.center;
+//        loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
+//        loginButton.layer.cornerRadius = 4;
+//        loginButton.layer.masksToBounds = YES;
+//        loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
+//        loginButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
+//        [loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
+//        [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+//        [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
+//        [whiteBG addSubview:loginButton];
         
         
         UIButton * close = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
@@ -252,9 +246,61 @@
         }
         
         _loginService = [[TaeSDK sharedInstance]getService:@protocol(ALBBLoginService)];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWeChatCode:) name:@"WechatAuthResp" object:nil];
 
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - button
+- (UIButton *)sinaWeiboButton
+{
+    if (!_sinaWeiboButton)
+    {
+        _sinaWeiboButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _sinaWeiboButton.deFrameSize = CGSizeMake(44.f, 44.f);
+//        _sinaWeiboButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
+//        _sinaWeiboButton.deFrameLeft = 24.f;
+        _sinaWeiboButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        _sinaWeiboButton.layer.cornerRadius = 22;
+        [_sinaWeiboButton addTarget:self action:@selector(tapSinaWeiboButton) forControlEvents:UIControlEventTouchUpInside];
+        [_sinaWeiboButton setImage:[UIImage imageNamed:@"login_icon_weibo.png"] forState:UIControlStateNormal];
+    }
+    return _sinaWeiboButton;
+}
+
+- (UIButton *)taobaoButton
+{
+    if (!_taobaoButton) {
+        _taobaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _taobaoButton.deFrameSize = CGSizeMake(44., 44.);
+        _taobaoButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        _taobaoButton.layer.cornerRadius = 22;
+//        self.taobaoButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
+//        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.f;
+        [_taobaoButton addTarget:self action:@selector(tapTaobaoButton) forControlEvents:UIControlEventTouchUpInside];
+        [_taobaoButton setImage:[UIImage imageNamed:@"login_icon_taobao.png"] forState:UIControlStateNormal];
+    }
+    return _taobaoButton;
+}
+
+- (UIButton *)weixinBtn
+{
+    if (!_weixinBtn) {
+        _weixinBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _weixinBtn.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        _weixinBtn.deFrameSize = CGSizeMake(44., 44.);
+        _weixinBtn.layer.cornerRadius = _weixinBtn.deFrameWidth / 2.;
+        [_weixinBtn setImage:[UIImage imageNamed:@"login_icon_weixin"] forState:UIControlStateNormal];
+        [_weixinBtn addTarget:self action:@selector(TapWeixinBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _weixinBtn;
 }
 
 #pragma mark - Selector Method
@@ -327,6 +373,28 @@
     [alertView show];
 }
 
+
+- (void)tapRegisterButton
+{
+    [whiteBG removeFromSuperview];
+    for(UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UIVisualEffectView class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    SignView *view = [[SignView alloc] init];
+    view.successBlock = self.successBlock;
+    [view showFromLogin];
+    double delayInSeconds = 0.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        view.backgroundColor = [UIColor clearColor];
+        [self removeFromSuperview];
+    });
+}
+
+#pragma mark - three part
 - (void)tapSinaWeiboButton
 {
 //    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
@@ -396,16 +464,6 @@
         TaeSession *session=[TaeSession sharedInstance];
         [self finishedBaichuanWithSession:session];
     }
-    
-    
-//    GKTaobaoOAuthViewController *vc = [[GKTaobaoOAuthViewController alloc] init];
-//    vc.delegate = self;
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-//    UIBarButtonItem *closeButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeTaobaoView)];
-//    vc.navigationItem.leftBarButtonItem = closeButtonItem;
-//    
-//    [kAppDelegate.alertWindow makeKeyAndVisible];
-//    [kAppDelegate.alertWindow.rootViewController presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)finishedBaichuanWithSession:(TaeSession *)session
@@ -432,13 +490,20 @@
     }];
 }
 
-//- (void)closeTaobaoView
-//{
-//    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
-//        [kAppDelegate.window makeKeyAndVisible];
-//        kAppDelegate.alertWindow.hidden = YES;
-//    }];
-//}
+- (void)TapWeixinBtn:(id)sender
+{
+    if([WXApi isWXAppInstalled])
+    {
+        SendAuthReq * req = [[SendAuthReq alloc] init];
+        req.scope = @"snsapi_userinfo";
+        //    req.scope = @"snsapi_base";
+        req.state = @"guoku_signin_wechat";
+        [WXApi sendReq:req];
+    } else {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedStringFromTable(@"don't install wechat", kLocalizedFile, nil)];
+    }
+}
+
 
 #pragma mark - UITextFieldDelegate
 
@@ -465,12 +530,22 @@
     return YES;
 }
 
+- (void)resignResponder
+{
+    if(kScreenHeight >= 548)
+    {
+        whiteBG.deFrameTop = 100;
+    }
+    [self.emailTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+}
+
 - (void)show
 {
     self.alpha = 0;
-
+    
     [kAppDelegate.window addSubview:self];
-   
+    
     [UIView animateWithDuration:0.0 animations:^{
         self.alpha = 1;
     } completion:^(BOOL finished) {
@@ -493,36 +568,6 @@
     }];
     [AVAnalytics endLogPageView:@"SignInView"];
     [MobClick endLogPageView:@"SignInView"];
-}
-
-- (void)tapRegisterButton
-{
-    [whiteBG removeFromSuperview];
-    for(UIView * view in self.subviews) {
-        if ([view isKindOfClass:[UIVisualEffectView class]]) {
-            [view removeFromSuperview];
-        }
-    }
-    
-    SignView *view = [[SignView alloc] init];
-    view.successBlock = self.successBlock;
-    [view showFromLogin];
-    double delayInSeconds = 0.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        view.backgroundColor = [UIColor clearColor];
-        [self removeFromSuperview];
-    });
-}
-
-- (void)resignResponder
-{
-    if(kScreenHeight >= 548)
-    {
-        whiteBG.deFrameTop = 100;
-    }
-    [self.emailTextField resignFirstResponder];
-    [self.passwordTextField resignFirstResponder];
 }
 
 - (void)showFromRegister
@@ -595,6 +640,13 @@
 //    }];
 //}
 
-
+#pragma mark - Notification
+- (void)postWeChatCode:(NSNotification *)notification
+{
+    SendAuthResp *resp = [notification valueForKey:@"object"];
+    DDLogInfo(@"resp resp %@", [resp code]);
+    
+    
+}
 
 @end

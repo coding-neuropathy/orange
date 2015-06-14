@@ -45,7 +45,7 @@ int ddLogLevel;
     [MobClick updateOnlineConfig];
    
     // wechat
-    [WXApi registerApp:kGK_WeixinShareKey];
+    [WXApi registerApp:kGK_WeixinShareKey withDescription:NSLocalizedStringFromTable(@"guide to better living", kLocalizedFile, nil)];
     
     [[TaeSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
     [[TaeSDK sharedInstance] setAppVersion:XcodeAppVersion];
@@ -163,12 +163,12 @@ int ddLogLevel;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
-    if (currentInstallation.badge != 0) {
-        currentInstallation.badge = 0;
-        [currentInstallation saveEventually];
-    }
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
+//    if (currentInstallation.badge != 0) {
+//        currentInstallation.badge = 0;
+//        [currentInstallation saveEventually];
+//    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -216,22 +216,45 @@ int ddLogLevel;
 
 - (void)onResp:(BaseResp *)resp
 {
-    if(resp.errCode == 0)
-    {
-        double delayInSeconds = 0.5;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-        });
-        
-    } else {
-        double delayInSeconds = 0.5;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [SVProgressHUD showImage:nil status:@"分享失败\U0001F628"];
-        });
+//    DDLogInfo(@"resp %@", resp);
+//    NSInteger wechatType = [[[NSUserDefaults standardUserDefaults] valueForKeyPath:kWechatType] integerValue];
+    if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
+        switch (resp.errCode) {
+            case 0:
+            {
+                double delayInSeconds = 0.5;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+                });
+            }
+                break;
+                
+            default:
+            {
+                double delayInSeconds = 0.5;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [SVProgressHUD showImage:nil status:@"分享失败\U0001F628"];
+                });
+            }
+                break;
+        }
+    }
+    
+    if([resp isKindOfClass:[SendAuthResp class]]) {
+//        DDLogInfo(@"resp %@", [(SendAuthResp *)resp code]);
+        switch (resp.errCode) {
+            case 0:
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"WechatAuthResp" object:resp];
+                break;
+                
+            default:
+                break;
+        }
         
     }
+
 }
 
 -(void)customizeAppearance
@@ -416,8 +439,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-//    ddLogLevel = LOG_LEVEL_VERBOSE;
-    ddLogLevel = LOG_LEVEL_ERROR;
+    ddLogLevel = LOG_LEVEL_VERBOSE;
+//    ddLogLevel = LOG_LEVEL_ERROR;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;
