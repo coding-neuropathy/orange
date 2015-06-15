@@ -176,7 +176,8 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 {
 //    self.navigationController.toolbar.clipsToBounds = YES;
     self.navigationController.toolbar.barTintColor = UIColorFromRGB(0xffffff);
-    self.navigationController.toolbar.layer.borderWidth = 0;
+    self.navigationController.toolbar.layer.borderWidth = 0.5;
+    self.navigationController.toolbar.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
     
     for (UIView * view in self.navigationController.toolbar.subviews) {
         if ([view  isKindOfClass:[UIImageView class]]&&![view isKindOfClass:[NSClassFromString(@"_UIToolbarBackground") class]]) {
