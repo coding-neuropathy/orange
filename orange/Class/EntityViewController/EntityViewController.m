@@ -59,6 +59,8 @@
 
 //@property (nonatomic) OneSDKItemType itemType;
 
+
+
 @end
 
 @implementation EntityViewController
@@ -129,7 +131,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     if (!_likeButton) {
 //        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40., 35)];
         _likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _likeButton.frame = CGRectMake(0, 0, 40., 40.);
+        _likeButton.frame = CGRectMake(0, 0, 40., 48.);
         [_likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
         [_likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -1325,5 +1327,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 //    
 //    [footer addSubview:view];
 //}
+
+
 
 @end

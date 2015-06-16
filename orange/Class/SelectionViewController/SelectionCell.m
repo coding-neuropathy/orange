@@ -38,9 +38,9 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
         self.backgroundColor = UIColorFromRGB(0xffffff);
-//        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-//        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
-//        [self.contentView addSubview:self.H];
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 10)];
+        self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        [self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -172,7 +172,7 @@
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     
     self.likeButton.frame = CGRectMake(0, 0, 40, 40.);
-    self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft;
+    self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft-8;
     self.likeButton.deFrameTop = self.contentLabel.deFrameBottom + 12;
     
     self.likeCounterButton.frame = CGRectMake(0., 0., 48., 30.);
@@ -195,6 +195,8 @@
     [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.date stringWithDefaultFormat]] forState:UIControlStateNormal];
     self.timeButton.center = self.likeButton.center;
     self.timeButton.deFrameRight = self.contentLabel.deFrameRight;
+    
+    self.H.deFrameBottom = self.contentView.deFrameHeight;
 
 }
 
@@ -205,7 +207,7 @@
     label.paragraphReplacement = @"";
     label.lineSpacing = 7.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
-    return label.optimumSize.height + kScreenWidth + 70;
+    return label.optimumSize.height + kScreenWidth + 75;
 }
 
 
@@ -283,26 +285,6 @@
     VC.hidesBottomBarWhenPushed = YES;
     VC.entity = self.entity;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-    CGContextSetLineWidth(context, kSeparateLineWidth);
-    CGContextMoveToPoint(context, 0., 0.);
-    CGContextAddLineToPoint(context, kScreenWidth, 0.);
-    CGContextStrokePath(context);
-    
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xf8f8f8).CGColor);
-    CGContextSetLineWidth(context, 10.);
-    CGContextMoveToPoint(context, 0., self.deFrameHeight);
-    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
-    
-    CGContextStrokePath(context);
 }
 
 
