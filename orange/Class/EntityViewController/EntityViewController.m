@@ -1072,6 +1072,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
         
         //[self.noteButton setTitle:@"修改" forState:UIControlStateNormal];
         self.note = note;
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
 //        [self.tableView reloadData];
     };
     [self.navigationController pushViewController:VC animated:YES];
