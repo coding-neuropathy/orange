@@ -37,6 +37,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
 @property (strong, nonatomic) UIButton * commentBtn;
 @property (strong, nonatomic) UILabel * timeLabel;
 @property (strong, nonatomic) UIButton * editBtn;
+@property (strong, nonatomic) UIView * separateLine;
 
 @end
 
@@ -192,6 +193,17 @@ static inline NSRegularExpression * UrlRegularExpression() {
     return _timeLabel;
 }
 
+- (UIView *)separateLine
+{
+    if (!_separateLine) {
+        _separateLine = [[UIView alloc] initWithFrame:CGRectZero];
+        _separateLine.backgroundColor = UIColorFromRGB(0xebebeb);
+        
+        [self.contentView addSubview:_separateLine];
+    }
+    return _separateLine;
+}
+
 #pragma mark - set note data
 - (void)setNote:(GKNote *)note
 {
@@ -314,22 +326,23 @@ static inline NSRegularExpression * UrlRegularExpression() {
     self.timeLabel.center = self.commentBtn.center;
     self.timeLabel.deFrameRight = kScreenWidth - 16.;
     
+    self.separateLine.frame = CGRectMake(0, self.contentView.deFrameHeight - kSeparateLineWidth, kScreenWidth, kSeparateLineWidth);
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-    CGContextSetLineWidth(context, kSeparateLineWidth);
-    
-    CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
-    CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
-    
-    CGContextStrokePath(context);
-}
+//- (void)drawRect:(CGRect)rect
+//{
+//    [super drawRect:rect];
+//    
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+//    CGContextSetLineWidth(context, kSeparateLineWidth);
+//    
+//    CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
+//    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+//    
+//    CGContextStrokePath(context);
+//}
 
 + (CGFloat)height:(GKNote *)note
 {
