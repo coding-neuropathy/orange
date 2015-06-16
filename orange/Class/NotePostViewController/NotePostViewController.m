@@ -19,8 +19,6 @@ static CGFloat NormalKeyboardHeight = 216.0f;
 @implementation NotePostViewController
 
 
-
-
 #pragma mark - Life Cycle
 
 - (void)loadView
