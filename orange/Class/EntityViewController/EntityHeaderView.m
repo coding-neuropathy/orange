@@ -239,7 +239,9 @@ static CGFloat kEntityViewMarginLeft = 16.;
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity
 {
     CGFloat titleHeight = [entity.entityName heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:[UIFont systemFontOfSize:16.f]];
-//    DDLogInfo(@"title hight %f", titleHeight);
+    if (titleHeight == 0 ) {
+        titleHeight = 16.;
+    }
     return kScreenWidth + titleHeight + 16.;
 }
 

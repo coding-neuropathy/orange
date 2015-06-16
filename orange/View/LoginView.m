@@ -179,23 +179,23 @@
         [whiteBG addSubview:self.taobaoButton];
         self.taobaoButton.center = self.sinaWeiboButton.center;
         self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.;
+//
+//        self.weixinBtn.center = self.sinaWeiboButton.center;
+//        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 15.;
+//        [whiteBG addSubview:self.weixinBtn];
         
-        self.weixinBtn.center = self.sinaWeiboButton.center;
-        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 15.;
-        [whiteBG addSubview:self.weixinBtn];
-        
-//        UIButton *loginButton = [[UIButton alloc]init];
-//        loginButton.frame = CGRectMake(0, 0,90, 40.f);
-//        loginButton.center = self.sinaWeiboButton.center;
-//        loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
-//        loginButton.layer.cornerRadius = 4;
-//        loginButton.layer.masksToBounds = YES;
-//        loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
-//        loginButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
-//        [loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
-//        [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-//        [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
-//        [whiteBG addSubview:loginButton];
+        UIButton *loginButton = [[UIButton alloc]init];
+        loginButton.frame = CGRectMake(0, 0,90, 40.f);
+        loginButton.center = self.sinaWeiboButton.center;
+        loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
+        loginButton.layer.cornerRadius = 4;
+        loginButton.layer.masksToBounds = YES;
+        loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        loginButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
+        [loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
+        [whiteBG addSubview:loginButton];
         
         
         UIButton * close = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
@@ -623,7 +623,7 @@
         if (self.successBlock) {
             self.successBlock();
         }
-        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
+        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"登录成功"]];
         [self dismiss];
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         [SVProgressHUD showErrorWithStatus:message];
