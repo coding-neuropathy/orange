@@ -79,6 +79,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 {
     if (self = [super init]) {
 //        self.itemType = OneSDKItemType_TAOBAO1;
+        self.image = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.itemService=[[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
     }
     return self;
@@ -188,7 +189,6 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     }
     
     //[self.navigationController.toolbar setShadowImage:[UIImage imageWithColor:[UIColor whiteColor] andSize:CGSizeMake(kScreenWidth, 1)] forToolbarPosition:UIBarPositionAny];
-
     
     UIBarButtonItem * likeBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.likeButton];
     UIBarButtonItem * postBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.postBtn];
