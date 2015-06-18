@@ -1302,33 +1302,4 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     }];
 }
 
-//
-//- (void)configFooter
-//{
-//    UIView * footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
-//    footer.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//    self.tableView.tableFooterView = footer;
-//    
-//    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,80)];
-//    view.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//    
-//    
-//    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(20,50, kScreenWidth-40, 0.5)];
-//    H.backgroundColor = UIColorFromRGB(0xebebeb);
-//    [view addSubview:H];
-//    
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 120, 20.f)];
-//    label.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//    label.font = [UIFont fontWithName:@"FultonsHand" size:14];
-//    label.center = CGPointMake(kScreenWidth/2, 50);
-//    label.textAlignment = NSTextAlignmentCenter;
-//    label.text = @"Live Different";
-//    label.textColor = UIColorFromRGB(0xcbcbcb);
-//    [view addSubview:label];
-//    
-//    [footer addSubview:view];
-//}
-
-
-
 @end
