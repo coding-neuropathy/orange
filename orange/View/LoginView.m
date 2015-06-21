@@ -172,22 +172,11 @@
         }
         [whiteBG addSubview:self.passwordTextField];
         
-        [whiteBG addSubview:self.sinaWeiboButton];
-        self.sinaWeiboButton.deFrameTop = self.passwordTextField.deFrameBottom + 28.;
-        self.sinaWeiboButton.deFrameLeft = 14.;
-        
-        [whiteBG addSubview:self.taobaoButton];
-        self.taobaoButton.center = self.sinaWeiboButton.center;
-        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.;
-//
-//        self.weixinBtn.center = self.sinaWeiboButton.center;
-//        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 15.;
-//        [whiteBG addSubview:self.weixinBtn];
-        
         UIButton *loginButton = [[UIButton alloc]init];
         loginButton.frame = CGRectMake(0, 0,90, 40.f);
-        loginButton.center = self.sinaWeiboButton.center;
-        loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
+        loginButton.center = self.passwordTextField.center;
+        loginButton.deFrameTop = self.passwordTextField.deFrameBottom + 15.;
+//        loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
         loginButton.layer.cornerRadius = 4;
         loginButton.layer.masksToBounds = YES;
         loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -196,6 +185,21 @@
         [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
         [whiteBG addSubview:loginButton];
+        
+        [whiteBG addSubview:self.taobaoButton];
+        self.taobaoButton.center = loginButton.center;
+        self.taobaoButton.deFrameTop = loginButton.deFrameBottom + 28.;
+//        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.;
+        
+        [whiteBG addSubview:self.sinaWeiboButton];
+        self.sinaWeiboButton.center = self.taobaoButton.center;
+        self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 20.;
+
+        self.weixinBtn.center = self.taobaoButton.center;
+        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 20.;
+        [whiteBG addSubview:self.weixinBtn];
+        
+
         
         
         UIButton * close = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
