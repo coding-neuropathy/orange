@@ -188,7 +188,7 @@
         
         [whiteBG addSubview:self.taobaoButton];
         self.taobaoButton.center = loginButton.center;
-        self.taobaoButton.deFrameTop = loginButton.deFrameBottom + 28.;
+        self.taobaoButton.deFrameTop = loginButton.deFrameBottom + 40.;
 //        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.;
         
         [whiteBG addSubview:self.sinaWeiboButton];
