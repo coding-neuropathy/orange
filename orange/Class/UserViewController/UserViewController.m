@@ -580,6 +580,8 @@
             {
                 [self configEmptyState];
             }
+            
+            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         }
             break;
         case 2:
