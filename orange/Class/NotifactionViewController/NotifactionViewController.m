@@ -350,6 +350,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
             if (self.dataArrayForMessage.count == 0) {
                 [self.tableView triggerPullToRefresh];
             }
+            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         }
             break;
             
