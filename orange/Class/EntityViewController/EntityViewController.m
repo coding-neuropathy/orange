@@ -216,6 +216,8 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
                 break;
             }
         }
+        
+        [self.buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
         [self.collectionView reloadData];
         //        [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {

@@ -173,7 +173,7 @@ int ddLogLevel;
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"Save" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Save" object:nil userInfo:nil];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
@@ -197,7 +197,7 @@ int ddLogLevel;
     if (url && application.applicationState != UIApplicationStateActive) {
         [self openLocalURL:[NSURL URLWithString:url]];
     }
-    
+    application.applicationIconBadgeNumber = 0;
     [APService handleRemoteNotification:userInfo];
 }
 

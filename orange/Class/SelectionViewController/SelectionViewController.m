@@ -44,6 +44,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
+//        self.tabBarItem.titlePositionAdjustment = UIOffsetMake(0.f, 50.f);
         
         self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
         
