@@ -61,6 +61,7 @@
         [newDict setObject:session forKey:@"session"];
     }
     [newDict setObject:[self signWithParamters:newDict] forKey:@"sign"];
+    NSLog(@"sign %@", newDict);
     return (NSDictionary *)newDict;
 }
 

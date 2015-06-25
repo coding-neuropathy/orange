@@ -1575,8 +1575,8 @@
             NSString *type;
             switch (stateCode) {
                 case 400:
+                case 409:
                 {
-//                    NSString *message, *type;
                     NSData *objectData = [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"];
                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
                     message = dict[@"message"];

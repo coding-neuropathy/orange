@@ -352,18 +352,19 @@
                 break;
             }
         case 400:
-                [SVProgressHUD showErrorWithStatus:message];
-            break;
+//                [SVProgressHUD showErrorWithStatus:message];
+//            break;
         default:
-            [SVProgressHUD dismiss];
+//            [SVProgressHUD dismiss];
+                [SVProgressHUD showErrorWithStatus:message];
             break;
         }
         
-        if ([type isEqualToString:@"email"]) {
-            [SVProgressHUD showImage:nil status:@"该邮箱不存在!"];
-        } else if ([type isEqualToString:@"password"]) {
-            [SVProgressHUD showImage:nil status:@"邮箱与密码不匹配!"];
-        }
+//        if ([type isEqualToString:@"email"]) {
+//            [SVProgressHUD showImage:nil status:@"该邮箱不存在!"];
+//        } else if ([type isEqualToString:@"password"]) {
+//            [SVProgressHUD showImage:nil status:@"邮箱与密码不匹配!"];
+//        }
     }];
 }
 
