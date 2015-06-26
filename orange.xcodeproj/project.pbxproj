@@ -2840,7 +2840,7 @@
 				);
 				IBSC_MODULE = orange_WatchKit_Extension;
 				INFOPLIST_FILE = "orange WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -2857,7 +2857,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = orange_WatchKit_Extension;
 				INFOPLIST_FILE = "orange WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -3111,6 +3111,7 @@
 				390204EE1B12C64800BD747B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		390204F01B12C64800BD747B /* Build configuration list for PBXNativeTarget "orange WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -3119,6 +3120,7 @@
 				390204EC1B12C64800BD747B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		39B868A71ACD0CF700A2115D /* Build configuration list for PBXNativeTarget "core" */ = {
 			isa = XCConfigurationList;
