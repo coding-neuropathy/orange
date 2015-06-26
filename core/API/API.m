@@ -2052,7 +2052,7 @@
 {
     NSString *path = @"logout/";
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
             success();
         }
