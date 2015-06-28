@@ -107,7 +107,6 @@ typedef NS_ENUM(NSInteger, MessageType) {
 {
     [super layoutSubviews];
     
-    
     if (!self.avatar) {
         _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(12.f, 12.f, 36.f, 36.f)];
         [self.contentView addSubview:self.avatar];
@@ -120,6 +119,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
                                        initWithTarget:self action:@selector(avatarButtonAction)];
         [self.avatar addGestureRecognizer:tap];
     }
+    self.avatar.contentMode = UIViewContentModeScaleAspectFit;
     
     if(!self.label) {
         _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 130, 20)];

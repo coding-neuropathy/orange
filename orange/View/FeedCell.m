@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 {
     if (!_avatar) {
         _avatar = [[UIImageView alloc] initWithFrame:CGRectZero];
-        
+        _avatar.contentMode = UIViewContentModeScaleAspectFit;
         _avatar.layer.cornerRadius = 18;
         _avatar.layer.masksToBounds = YES;
         [_avatar addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
