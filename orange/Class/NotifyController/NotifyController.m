@@ -187,6 +187,7 @@
     if (segmentedControl.selectedSegmentIndex == 1){
         [self.thePageViewController setViewControllers:@[self.msgController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     } else {
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         [self.thePageViewController setViewControllers:@[self.activeController] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     }
     
