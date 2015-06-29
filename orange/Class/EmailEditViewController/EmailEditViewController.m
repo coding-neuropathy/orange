@@ -7,9 +7,9 @@
 //
 
 #import "EmailEditViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "NSString+Helper.h"
-static CGFloat NormalKeyboardHeight = 216.0f;
+// static CGFloat NormalKeyboardHeight = 216.0f;
 
 @interface EmailEditViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UITextField *emailTextField;
@@ -206,7 +206,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     UITextField *tf=self.emailTextField;
     if ([tf.text validateEmail]) {
         NSDictionary *dict = @{@"email": tf.text,@"password":self.passwordTextField.text};
-        [GKAPI updateEmailWithParameters:dict success:^(GKUser *user) {
+        [API updateEmailWithParameters:dict success:^(GKUser *user) {
             [Passport sharedInstance].user.email = user.email;
             [Passport sharedInstance].user = [Passport sharedInstance].user;
             [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
@@ -217,7 +217,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
                 [SVProgressHUD showErrorWithStatus:NSLocalizedStringFromTable(errorMsg, kLocalizedFile, nil)];
             }
         }];
-//        [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+//        [API updateaccountWithParameters:dict success:^(GKUser *user) {
 //            [Passport sharedInstance].user.email = user.email;
 //            [Passport sharedInstance].user = [Passport sharedInstance].user;
 //            [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];

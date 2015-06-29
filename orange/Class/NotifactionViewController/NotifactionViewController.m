@@ -8,7 +8,7 @@
 
 #import "NotifactionViewController.h"
 #import "HMSegmentedControl.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "MessageCell.h"
 #import "FeedCell.h"
 #import "GTScrollNavigationBar.h"
@@ -174,7 +174,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 {
     if (self.index == 0) {
         
-        [GKAPI getFeedWithTimestamp:[[NSDate date] timeIntervalSince1970] type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
+        [API getFeedWithTimestamp:[[NSDate date] timeIntervalSince1970] type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
             self.dataArrayForFeed = [NSMutableArray arrayWithArray:feedArray];
             if (self.dataArrayForFeed.count == 0) {
                 self.tableView.tableFooterView = self.noMessageView;
@@ -190,7 +190,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     }
     else if (self.index == 1)
     {
-        [GKAPI getMessageListWithTimestamp:[[NSDate date] timeIntervalSince1970]  count:30 success:^(NSArray *messageArray) {
+        [API getMessageListWithTimestamp:[[NSDate date] timeIntervalSince1970]  count:30 success:^(NSArray *messageArray) {
             self.dataArrayForMessage = [NSMutableArray arrayWithArray:messageArray];
             if (self.dataArrayForMessage.count == 0) {
                 self.tableView.tableFooterView = self.noMessageView;
@@ -212,7 +212,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 {
     if (self.index == 0) {
         NSTimeInterval timestamp = [self.dataArrayForFeed.lastObject[@"time"] doubleValue];
-        [GKAPI getFeedWithTimestamp:timestamp type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
+        [API getFeedWithTimestamp:timestamp type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
             [self.dataArrayForFeed addObjectsFromArray:feedArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
@@ -223,7 +223,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     else if (self.index == 1)
     {
         NSTimeInterval timestamp = [self.dataArrayForMessage.lastObject[@"time"] doubleValue];
-        [GKAPI getMessageListWithTimestamp:timestamp count:30 success:^(NSArray *messageArray) {
+        [API getMessageListWithTimestamp:timestamp count:30 success:^(NSArray *messageArray) {
             [self.dataArrayForMessage addObjectsFromArray:messageArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
@@ -350,6 +350,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
             if (self.dataArrayForMessage.count == 0) {
                 [self.tableView triggerPullToRefresh];
             }
+            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         }
             break;
             

@@ -7,7 +7,7 @@
 //
 
 #import "ReportViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "RadioButton.h"
 #import "UIPlaceHolderTextView.h"
 
@@ -135,8 +135,7 @@ static CGFloat LeftMargin = 16.;
     self.tipLabel.text = @"补充说明:";
     
     self.textView.frame = CGRectMake(LeftMargin, 320., kScreenWidth-LeftMargin*2, kScreenHeight - NormalKeyboardHeight- 180 - 40);
-    self.textView.placeholder = @"靠谱的举报原因";
-    
+    self.textView.placeholder = @"靠谱的举报原因";    
 }
 
 - (void)viewDidLoad
@@ -237,9 +236,8 @@ static CGFloat LeftMargin = 16.;
         return;
     }
     */
-    
     if (self.note) {
-        [GKAPI reportNoteId:self.note.noteId comment:comment success:^(BOOL success) {
+        [API reportNoteId:self.note.noteId comment:comment success:^(BOOL success) {
             if (success) {
                 [self.navigationController popViewControllerAnimated:YES];
                 [SVProgressHUD showImage:nil status:@"举报成功"];
@@ -253,7 +251,7 @@ static CGFloat LeftMargin = 16.;
         }];
     }
     else if (self.entity) {
-        [GKAPI reportEntityId:self.entity.entityId type:self.radioType comment:comment success:^(BOOL success) {
+        [API reportEntityId:self.entity.entityId type:self.radioType comment:comment success:^(BOOL success) {
             if (success) {
                 [self.navigationController popViewControllerAnimated:YES];
                 [SVProgressHUD showImage:nil status:@"举报成功"];

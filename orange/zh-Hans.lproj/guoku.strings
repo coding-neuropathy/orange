@@ -8,6 +8,7 @@
 
 
 "guoku" = "果库";
+"guide to better living"    = "精英消费者指南";
 
 /*
  base infomation
@@ -40,7 +41,8 @@
 /*
  * Discover page
  */
-"search"    = "搜索";
+"search"                    = "搜索";
+"recommendation category"   = "推荐品类";
 
 
 /*
@@ -56,11 +58,19 @@
 /*
  *  activity page
  */
-"commented on a product"    = "点评了 1 件商品";
+//"commented on a product"    = "点评了 1 件商品";
+
+"started following" = "开始关注";
+"liked 1 item" = "喜爱了1件商品";
+"noted 1 item:" = "点评了1件商品：";
+"commented" = "评论了";
+"'s note:" = "的点评";
+"bumped" = "赞了";
 
 /*
  * message page
  */
+/*
 "replied your comment"                                                  = "回复了你的评论";
 "commented on your"                                                     = "评论了你对";
 "followed you"                                                          = "关注了你";
@@ -68,6 +78,16 @@
 "liked a product of your recommendation"                                = "喜爱了你推荐的商品";
 "a product of your recommendation is marked as exceptional choice"    = "你添加的商品被收录精选";
 "liked a product"                                                       = "喜爱了 1 件商品";
+*/
+
+"started following you" = "关注了你";
+"commented your note" = "评论了你撰写的点评";
+"bumped your note" = "赞了你撰写的点评";
+"noted 1 item your added" = "点评了你添加的商品";
+"liked 1 item your added" = "喜爱了你添加的商品";
+"reply to your comment:" = "回复了你的评论：";
+"The item you added have been selected" = "你添加的商品被收录精选";
+
 
 /*
   form page
@@ -135,6 +155,8 @@
 "food"          = "美食";
 "fun"           = "玩乐";
 
+"items"         = "件商品";
+
 /*
  * error info
  */
@@ -145,6 +167,7 @@
 /*
  * tip off information
  */
+"tip off"                   = "举报";
 "sold out"                  = "商品下架";
 "miss category"             = "分类错误";
 "meaningless information"   = "垃圾或诈骗信息";

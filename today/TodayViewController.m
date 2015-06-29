@@ -40,7 +40,7 @@
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
 //    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
-    self.tableView.rowHeight = 60.;
+    self.tableView.rowHeight = 94.;
     self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.tableView.rowHeight * 3);
     ;
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
@@ -66,21 +66,16 @@
     // If an error is encountered, use NCUpdateResultFailed
     // If there's no update required, use NCUpdateResultNoData
     // If there's an update, use NCUpdateResultNewData
-    
     [API getTopTenEntityCount:3 success:^(NSArray *array) {
-//        NSLog(@"%@", array);
-        self.dataArray = (NSMutableArray *)array;
+//        NSLog(@"array %@", array);
+        self.dataArray = [NSMutableArray arrayWithArray:array];
         [self save];
         [self.tableView reloadData];
         completionHandler(NCUpdateResultNewData);
     } failure:^(NSInteger stateCode) {
-//        NSLog(@"error %lu", (long)stateCode);
-        self.dataArray = [self getCache];
         [self.tableView reloadData];
         completionHandler(NCUpdateResultNoData);
     }];
-    
-    
 }
 
 //- (void)receivedAdditionalContent
@@ -112,8 +107,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary * row = [self.dataArray objectAtIndex:indexPath.row];
-    NSString * entity_id = row[@"content"][@"entity"][@"entity_id"];
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entity_id]];
+    GKEntity * entity = row[@"entity"];
+//    NSString * entity_id = row[@"content"][@"entity"][@"entity_id"];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entity.entityId]];
     
     [self.extensionContext openURL:url completionHandler:nil];
 }

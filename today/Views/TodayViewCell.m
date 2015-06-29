@@ -23,7 +23,7 @@
     
     if (self) {
         self.textLabel.textColor = UIColorFromRGB(0xffffff);
-        self.textLabel.font = [UIFont systemFontOfSize:16.];
+        self.textLabel.font = [UIFont systemFontOfSize:19.];
         self.textLabel.numberOfLines = 1;
         
         self.detailTextLabel.textColor = UIColorFromRGB(0x9c9c9c);
@@ -51,13 +51,19 @@
 - (void)setData:(NSDictionary *)data
 {
     _data = data;
-    self.textLabel.text = _data[@"content"][@"entity"][@"title"];
-    self.detailTextLabel.text = _data[@"content"][@"note"][@"content"];
-    NSString * urlstring =  _data[@"content"][@"entity"][@"chief_image"];
-   
+//    self.textLabel.text = _data[@"content"][@"entity"][@"title"];
+//    self.detailTextLabel.text = _data[@"content"][@"note"][@"content"];
+//    NSString * urlstring =  _data[@"content"][@"entity"][@"chief_image"];
+    GKEntity * entity = data[@"entity"];
+    GKNote * note = data[@"note"];
+    
+    self.textLabel.text = entity.title;
+    self.detailTextLabel.text = note.text;
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSURL *url = [NSURL URLWithString:[self imageURLWithURLString:urlstring Size:80.]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
+//        NSURL *url = [NSURL URLWithString:entity.imageURL_120x120];
+        
+        NSData *data = [NSData dataWithContentsOfURL:entity.imageURL_120x120];
         UIImage *placeholder = [UIImage imageWithData:data];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -73,9 +79,10 @@
 {
     [super layoutSubviews];
     
-    self.entityImageView.frame = CGRectMake(kScreenWidth - 50, 10., 40, 40.);
-    self.textLabel.frame = CGRectMake(10, 10., kScreenWidth - 60., 20.);
-    self.detailTextLabel.frame = CGRectMake(10., 30., kScreenWidth - 60., 20.);
+    self.entityImageView.frame = CGRectMake(kScreenWidth - 84., 9., 76., 76.);
+    self.textLabel.frame = CGRectMake(10, 10., kScreenWidth - 100., 20.);
+    self.detailTextLabel.frame = CGRectMake(10., 40., kScreenWidth - 100., 40.);
+
 //    self.detailTextLabel.frame
 }
 

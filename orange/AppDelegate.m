@@ -9,13 +9,13 @@
 #import "AppDelegate.h"
 #import "WXApi.h"
 #import "TabBarViewController.h"
-#import "GKAPI.h"
 #import "EntityViewController.h"
 #import "UserViewController.h"
 #import "CategoryViewController.h"
 #import "TagViewController.h"
-#import "IntruductionVC.h"
-#import "WelcomeVC.h"
+//#import "IntruductionVC.h"
+//#import "WelcomeVC.h"
+#import "WelcomeViewController.h"
 #import "APService.h"
 
 int ddLogLevel;
@@ -34,7 +34,7 @@ int ddLogLevel;
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
 //    [AVPush setProductionMode:YES];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    [AVAnalytics setCrashReportEnabled:YES];
+//    [AVAnalytics setCrashReportEnabled:YES];
 //    [AVAnalytics setChannel:@"tongbu"];
     
     // umeng
@@ -45,16 +45,16 @@ int ddLogLevel;
     [MobClick updateOnlineConfig];
    
     // wechat
-    [WXApi registerApp:kGK_WeixinShareKey];
+    [WXApi registerApp:kGK_WeixinShareKey withDescription:NSLocalizedStringFromTable(@"guide to better living", kLocalizedFile, nil)];
     
     [[TaeSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
     [[TaeSDK sharedInstance] setAppVersion:XcodeAppVersion];
     [[TaeSDK sharedInstance] setDebugLogOpen:NO];
     //sdk初始化
     [[TaeSDK sharedInstance] asyncInit:^{
-        NSLog(@"初始化成功");
+        DDLogInfo(@"初始化成功");
     } failedCallback:^(NSError *error) {
-        NSLog(@"初始化失败:%@",error);
+        DDLogError(@"初始化失败:%@", error);
     }];
     
     //插件版登录状态监听
@@ -67,11 +67,11 @@ int ddLogLevel;
         }
     }];
 
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+//    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -79,6 +79,7 @@ int ddLogLevel;
 
     // Override point for customization after application launch.
 
+    // jpush config
     [APService registerForRemoteNotificationTypes:UIUserNotificationTypeAlert| UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
     [APService setupWithOption:launchOptions];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateJPushID:) name:kJPFNetworkDidLoginNotification object:nil];
@@ -86,28 +87,42 @@ int ddLogLevel;
     [SVProgressHUD setBackgroundColor:UIColorFromRGB(0x2b2b2b)];
     [SVProgressHUD setForegroundColor:UIColorFromRGB(0xffffff)];
     
-
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[TabBarViewcontroller alloc]init];
-    self.window.rootViewController.view.hidden = YES;
+//    self.window.rootViewController.view.hidden = NO;
     [self.window makeKeyAndVisible];
+
+//    NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+//    NSDictionary * urlInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
     
-    NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if(userInfo)
-    {
-        application.applicationIconBadgeNumber = 0;
-        self.window.rootViewController.view.hidden = NO;
-    }
-    else
+//    if(userInfo || urlInfo)
+//    {
+//        application.applicationIconBadgeNumber = 0;
+//        self.window.rootViewController.view.hidden = NO;
+//    }
+//    else
+//    {
+//        self.window.rootViewController.view.hidden = YES;
+//        WelcomeVC * welcomeVc = [[WelcomeVC alloc] init];
+//        [self.window.rootViewController presentViewController: welcomeVc animated:NO completion:NULL];
+//    }
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4"])
     {
         self.window.rootViewController.view.hidden = YES;
-        WelcomeVC * welcomeVc = [[WelcomeVC alloc] init];
-        [self.window.rootViewController presentViewController: welcomeVc animated:NO completion:NULL];
+        //        application.applicationIconBadgeNumber = 0;
+        //        self.window.rootViewController.view.hidden = NO;
+        WelcomeViewController * vc = [WelcomeViewController new];
+        vc.finished = ^(void){
+            self.window.rootViewController.view.hidden = NO;
+        };
+        if (IS_IPAD) {
+            vc.modalPresentationStyle = UIModalPresentationFormSheet;
+            vc.preferredContentSize = CGSizeMake(512., 686.);
+        }
+        [self.window.rootViewController presentViewController:vc animated:NO completion:nil];
     }
-    
-    
+
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;
     UIViewController *vc = [[UIViewController alloc] init];
@@ -116,7 +131,8 @@ int ddLogLevel;
     
     [self refreshCategory];
     
-    {    NSTimer *_timer = [NSTimer scheduledTimerWithTimeInterval:240.0f
+    {
+        NSTimer *_timer = [NSTimer scheduledTimerWithTimeInterval:240.0f
                                                              target:self
                                                            selector:@selector(checkNewMessage)
                                                            userInfo:nil
@@ -124,6 +140,8 @@ int ddLogLevel;
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
         [self performSelector:@selector(checkNewMessage) withObject:nil afterDelay:4];
     }
+    
+
     
     return YES;
 }
@@ -136,7 +154,7 @@ int ddLogLevel;
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"Save" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Save" object:nil userInfo:nil];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -145,17 +163,17 @@ int ddLogLevel;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
-    if (currentInstallation.badge != 0) {
-        currentInstallation.badge = 0;
-        [currentInstallation saveEventually];
-    }
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
+//    if (currentInstallation.badge != 0) {
+//        currentInstallation.badge = 0;
+//        [currentInstallation saveEventually];
+//    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"Save" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Save" object:nil userInfo:nil];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
@@ -167,18 +185,19 @@ int ddLogLevel;
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
-//    [currentInstallation setDeviceTokenFromData:deviceToken];
-//    [currentInstallation setObject:[AVUser currentUser] forKey:@"owner"];
-//    [currentInstallation saveInBackground];
-    [APService registerDeviceToken:deviceToken];
     
-    DDLogInfo(@"device token %@", deviceToken);
+    [APService registerDeviceToken:deviceToken];
+
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    DDLogError(@"user info %@", userInfo);
+    DDLogInfo(@"user info %@", userInfo);
+    NSString * url = [userInfo valueForKey:@"url"];
+    if (url && application.applicationState != UIApplicationStateActive) {
+        [self openLocalURL:[NSURL URLWithString:url]];
+    }
+    application.applicationIconBadgeNumber = 0;
     [APService handleRemoteNotification:userInfo];
 }
 
@@ -197,22 +216,45 @@ int ddLogLevel;
 
 - (void)onResp:(BaseResp *)resp
 {
-    if(resp.errCode == 0)
-    {
-        double delayInSeconds = 0.5;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-        });
-        
-    } else {
-        double delayInSeconds = 0.5;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [SVProgressHUD showImage:nil status:@"分享失败\U0001F628"];
-        });
+//    DDLogInfo(@"resp %@", resp);
+//    NSInteger wechatType = [[[NSUserDefaults standardUserDefaults] valueForKeyPath:kWechatType] integerValue];
+    if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
+        switch (resp.errCode) {
+            case 0:
+            {
+                double delayInSeconds = 0.5;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+                });
+            }
+                break;
+                
+            default:
+            {
+                double delayInSeconds = 0.5;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [SVProgressHUD showImage:nil status:@"分享失败\U0001F628"];
+                });
+            }
+                break;
+        }
+    }
+    
+    if([resp isKindOfClass:[SendAuthResp class]]) {
+//        DDLogInfo(@"resp %@", [(SendAuthResp *)resp code]);
+        switch (resp.errCode) {
+            case 0:
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"WechatAuthResp" object:resp];
+                break;
+                
+            default:
+                break;
+        }
         
     }
+
 }
 
 -(void)customizeAppearance
@@ -243,8 +285,6 @@ int ddLogLevel;
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-//    NSLog(@"url url %@", url);
-    
     if([[url absoluteString]hasPrefix:@"wx"])
     {
         return [WXApi handleOpenURL:url delegate:self];
@@ -258,13 +298,29 @@ int ddLogLevel;
         return [[TaeSDK sharedInstance] handleOpenURL:url];
     }
     
-    if([[url absoluteString]hasPrefix:@"guoku"])
+    if ([sourceApplication isEqualToString:@"com.guoku.iphone"]) {
+         [self openLocalURL:url];
+    }
+    else
+    {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self openLocalURL:url];
+        });
+    }
+
+
+    return YES;
+}
+- (void)openLocalURL:(NSURL *)url
+{
+
+    if([[url absoluteString] hasPrefix:@"guoku"])
     {
         NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSRange range = [absoluteString rangeOfString:@"entity/"];
         if (range.location != NSNotFound) {
             NSString *entityId = [absoluteString substringFromIndex:range.location+range.length];
-            EntityViewController *vc = [[EntityViewController alloc]init];
+            EntityViewController *vc = [[EntityViewController alloc] init];
             vc.entity = [GKEntity modelFromDictionary:@{@"entityId":entityId}];
             vc.hidesBottomBarWhenPushed = YES;
             if (self.activeVC.navigationController) {
@@ -307,29 +363,26 @@ int ddLogLevel;
                     if (range.location != NSNotFound) {
                         NSString *userId = [absoluteString substringFromIndex:range.location+range.length];
                         UserViewController * vc = [[UserViewController alloc]init];
-                        vc.hidesBottomBarWhenPushed = YES; 
+                        vc.hidesBottomBarWhenPushed = YES;
                         vc.user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
                         if (self.activeVC.navigationController) {
                             [self.activeVC.navigationController pushViewController:vc animated:YES];
                         }
                     }
                 }
-
+                
             }
         }
         
     }
-    
-    return YES;
 }
-
 
 #pragma mark - get init data
 
 - (void)refreshCategory
 {
     
-    [GKAPI getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
+    [API getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
         
         NSMutableArray *categoryGroupArray = [NSMutableArray array];
         NSMutableArray *allCategoryArray = [NSMutableArray array];
@@ -369,18 +422,18 @@ int ddLogLevel;
 {
     if (!k_isLogin) {
         return;
-    }
-    
-    [GKAPI getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
-        if (dictionary[@"unread_message_count"]) {
-            self.messageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
+    } else {
+        [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
+            if (dictionary[@"unread_message_count"]) {
+                self.messageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
             if (self.messageCount != 0) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBadge" object:nil userInfo:nil];
             }
         }
-    } failure:^(NSInteger stateCode) {
+        } failure:^(NSInteger stateCode) {
         
-    }];
+        }];
+    }
 }
 
 #pragma mark - config log
@@ -403,14 +456,16 @@ int ddLogLevel;
 #pragma mark - notification
 - (void)UpdateJPushID:(NSNotification *)notifier
 {
-    UIDevice *device = [[UIDevice alloc] init];
-    DDLogInfo(@"rid %@ %@ %@", [APService registrationID], [device model], XcodeAppVersion);
+    if(!TARGET_IPHONE_SIMULATOR){
+        UIDevice *device = [[UIDevice alloc] init];
+        DDLogInfo(@"jpush rid %@ %@ %@", [APService registrationID], [device model], XcodeAppVersion);
     
-    [GKAPI postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
+        [API postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
         
-    } Failure:^(NSInteger stateCode) {
-        DDLogError(@"error code %lu", stateCode);
-    }];
+        } Failure:^(NSInteger stateCode) {
+            DDLogError(@"error code %ld", stateCode);
+        }];
+    }
 }
 
 @end

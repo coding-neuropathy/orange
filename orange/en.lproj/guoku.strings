@@ -8,6 +8,7 @@
 
 
 "guoku" = "Guoku";
+"guide to better living" = "Guide to Better Living";
 
 /*
  base infomation
@@ -39,7 +40,8 @@
 /*
  * Discover page
  */
-"search"    = "Search";
+"search"                    = "Search";
+"recommendation category"   = "Recommendation Category";
 
 /*
  * entity page
@@ -55,11 +57,22 @@
 /*
  *  activity page
  */
-"commented on a product"    = "commented on a product";
+
+//"commented on a product"    = "commented on a product";
+
+"started following" = "started following";
+"liked 1 item" = "liked 1 item";
+"noted 1 item:" = "noted 1 item : ";
+"commented" = "commented";
+"'s note:" = "'s note : ";
+"bumped" = "bumped";
+
 
 /*
  * message page
- */
+ *
+ 
+/*
 "replied your comment"                                                  = "replied your comment";
 "commented on your"                                                     = "commented on your";
 "followed you"                                                          = "started following you";
@@ -67,6 +80,15 @@
 "liked a product of your recommendation"                                = "liked a product of your recommendation";
 "a product of your recommendation is marked as exceptional choice"    = "a product of your recommendation is marked as “exceptional choice”";
 "liked a product"                                                       = "liked 1 item";
+ */
+
+"started following you" = "started following you";
+"commented your note" = "commented your note";
+"bumped your note" = "bumped your note";
+"noted 1 item your added" = "noted 1 item your added";
+"liked 1 item your added" = "liked 1 item your added";
+"reply to your comment:" = "reply to your comment : ";
+"The item you added have been selected" = "The item you added has been selected";
 
 /*
  form page
@@ -123,7 +145,7 @@
 "all"           = "ALL";
 "woman"         = "WOMEN'S";
 "man"           = "MEN'S";
-"kid"           = "KID'S";
+"kid"           = "KIDS'";
 "accessories"   = "ACCESSORIES";
 "beauty"        = "BEAUTY";
 "tech"          = "TECH";
@@ -133,6 +155,7 @@
 "food"          = "FOOD";
 "fun"           = "FUN";
 
+"items"         = "Items";
 
 /*
  * error info
@@ -145,6 +168,7 @@
 /*
  * tip off information
  */
+"tip off"                   = "Tip Off";
 "sold out"                  = "Sold Out";
 "miss category"             = "Miss Category";
 "meaningless information"   = "Meaningless Information";

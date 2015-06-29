@@ -68,12 +68,10 @@
 - (void)failureLogWithOperation:(AFHTTPRequestOperation *)operation responseObject:(NSError *)error
 {
     NSInteger stateCode = operation.response.statusCode;
-//    NSString *urlString = [[error userInfo] valueForKey:@"NSErrorFailingURLKey"];
-//    if (!urlString) {
-//        urlString = operation.response.URL.absoluteString;
-//    }
-    // NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
-    
+    NSString *urlString = [[error userInfo] valueForKey:@"NSErrorFailingURLKey"];
+    if (!urlString) {
+        urlString = operation.response.URL.absoluteString;
+    }
     
     if (stateCode == 0) {
         if (self.reachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
@@ -87,6 +85,23 @@
 - (void)requestPath:(NSString *)path method:(NSString *)method parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     [super requestPath:path method:method parameters:[parameters configParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self successLogWithOperation:operation responseObject:responseObject];
+        if (success) {
+            success(operation, responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self failureLogWithOperation:operation responseObject:error];
+//        NSLog(@"error %@", [[error userInfo] allKeys]);
+//        NSLog(@"error %@", [[error userInfo] objectForKey:@"NSErrorFailingURLKey"]);
+        if (failure) {
+            failure(operation, error);
+        }
+    }];
+}
+
+- (void)requestPath:(NSString *)path method:(NSString *)method parameters:(NSDictionary *)parameters dataParameters:(NSDictionary *)dataParameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    [super requestPath:path method:method parameters:[parameters configParameters] dataParameters:dataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self successLogWithOperation:operation responseObject:responseObject];
         
         if (success) {

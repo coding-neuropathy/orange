@@ -8,7 +8,7 @@
 
 #import "SelectionViewController.h"
 #import "HMSegmentedControl.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "SelectionCell.h"
 #import "EntitySingleListCell.h"
 #import "CategoryViewController.h"
@@ -44,6 +44,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
+//        self.tabBarItem.titlePositionAdjustment = UIOffsetMake(0.f, 50.f);
         
         self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
         
@@ -126,11 +127,11 @@ static NSString *CellIdentifier = @"SelectionCell";
         [self refresh];
     }
     
-    [GKAPI getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
-        
-    } failure:^(NSInteger stateCode) {
-        
-    }];
+//    [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
+//        
+//    } failure:^(NSInteger stateCode) {
+//        
+//    }];
     
     self.navigationItem.titleView = self.iconInfoView;
 }
@@ -169,7 +170,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 - (void)refresh
 {
     if (self.index == 0) {
-        [GKAPI getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:self.cateId count:30 success:^(NSArray *dataArray) {
+        [API getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:self.cateId count:30 success:^(NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
             [self save];
             NSMutableArray* imageArray = [NSMutableArray array];
@@ -183,13 +184,15 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
     else if (self.index == 1)
     {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
         [self.tableView.pullToRefreshView stopAnimating];
     }
     return;
@@ -199,7 +202,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 {
     if (self.index == 0) {
         NSTimeInterval timestamp = (NSTimeInterval)[self.dataArrayForEntity.lastObject[@"time"] doubleValue];
-        [GKAPI getSelectionListWithTimestamp:timestamp cateId:self.cateId count:30 success:^(NSArray *dataArray) {
+        [API getSelectionListWithTimestamp:timestamp cateId:self.cateId count:30 success:^(NSArray *dataArray) {
             [self.dataArrayForEntity addObjectsFromArray:[NSMutableArray arrayWithArray:dataArray]];
             NSMutableArray* imageArray = [NSMutableArray array];
             for (NSDictionary * dic in dataArray) {
@@ -211,13 +214,15 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
     else if (self.index == 1)
     {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
         [self.tableView.infiniteScrollingView stopAnimating];
     }
     return;
@@ -253,11 +258,11 @@ static NSString *CellIdentifier = @"SelectionCell";
 //                cell = [[SelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 //            }
             SelectionCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-            cell.note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
-            cell.entity = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"entity"];
-            NSTimeInterval timestamp = [self.dataArrayForEntity[indexPath.row][@"time"] doubleValue];
-            cell.date = [NSDate dateWithTimeIntervalSince1970:timestamp];
-            
+//            cell.note = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
+//            cell.entity = [[self.dataArrayForEntity[indexPath.row] objectForKey:@"content"]objectForKey:@"entity"];
+//            NSTimeInterval timestamp = [self.dataArrayForEntity[indexPath.row][@"time"] doubleValue];
+//            cell.date = [NSDate dateWithTimeIntervalSince1970:timestamp];
+            cell.dict = [self.dataArrayForEntity objectAtIndex:indexPath.row];
             return cell;
         }
         else
@@ -516,7 +521,5 @@ static NSString *CellIdentifier = @"SelectionCell";
     }
 
 }
-
-
 
 @end

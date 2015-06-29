@@ -8,7 +8,7 @@
 
 #import "UserSingleListCell.h"
 #import "UserViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "LoginView.h"
 
 @interface UserSingleListCell ()
@@ -68,7 +68,11 @@
 
 - (void)setUser:(GKUser *)user
 {
+    if (_user) {
+        [self removeObserver];
+    }
     _user = user;
+    [self addObserver];
     
     if (_user.user_state == GKUserBlockState) {
         self.followButton.hidden = YES;
@@ -189,6 +193,8 @@
     if (self.user.relation == GKUserRelationTypeSelf) {
         self.followButton.hidden = YES;
     }
+    
+    [self.contentView bringSubviewToFront:self.followButton];
 }
 - (void)followButtonAction
 {
@@ -198,7 +204,7 @@
         [view show];
         return;
     }
-    [GKAPI followUserId:self.user.userId state:YES success:^(GKUserRelationType relation) {
+    [API followUserId:self.user.userId state:YES success:^(GKUserRelationType relation) {
         self.user.relation = relation;
         [self configFollowButton];
         [SVProgressHUD showImage:nil status:@"关注成功"];
@@ -222,7 +228,7 @@
         [view show];
         return;
     }
-    [GKAPI followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
+    [API followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
         self.user.relation = relation;
         [self configFollowButton];
         //[SVProgressHUD showImage:nil status:@"取关成功"];
@@ -266,6 +272,29 @@
             [self unfollow];
         }
     }
+}
+
+#pragma mark - KVO
+- (void)addObserver
+{
+    [self.user addObserver:self forKeyPath:@"relation" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)removeObserver
+{
+    [self.user removeObserver:self forKeyPath:@"relation"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"relation"]) {
+        [self configFollowButton];
+    }
+}
+
+- (void)dealloc
+{
+    [self removeObserver];
 }
 
 @end

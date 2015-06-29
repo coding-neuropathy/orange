@@ -3,16 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "login_icon_weibo.png"
+      "filename" : "weibo.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "login_icon_weibo@2x.png"
+      "filename" : "weibo@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "weibo@3x.png"
     }
   ],
   "info" : {

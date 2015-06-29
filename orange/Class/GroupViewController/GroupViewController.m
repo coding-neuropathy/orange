@@ -9,7 +9,7 @@
 #import "GroupViewController.h"
 #import "CategoryGridCell.h"
 #import "CategoryViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "Config.h"
 @interface GroupViewController ()
 @property (nonatomic, strong) NSArray *categoryGroupArray;

@@ -10,6 +10,7 @@
 #import "SelectionViewController.h"
 #import "DiscoverViewController.h"
 #import "NotifactionViewController.h"
+#import "NotifyController.h"
 #import "MeViewController.h"
 #import "SettingViewController.h"
 #import "LoginView.h"
@@ -52,7 +53,7 @@
     [second setViewControllers:@[[[DiscoverViewController alloc] init]] animated:NO];
     UINavigationController * third = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
                                                                                    toolbarClass:nil];
-    [third setViewControllers:@[[[NotifactionViewController alloc] init]] animated:NO];
+    [third setViewControllers:@[[[NotifyController alloc] init]] animated:NO];
     UINavigationController * fourth = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
                                                                                     toolbarClass:nil];
     
@@ -94,7 +95,7 @@
 #pragma mark - <UITabBarControllerDelegate>
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[NotifactionViewController class]]) {
+    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[NotifyController class]]) {
         if (!k_isLogin) {
             LoginView * view = [[LoginView alloc]init];
             [view show];
@@ -176,7 +177,7 @@
     [second setViewControllers:@[[[DiscoverViewController alloc] init]] animated:NO];
     UINavigationController * third = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
                                                                                     toolbarClass:nil];
-    [third setViewControllers:@[[[NotifactionViewController alloc] init]] animated:NO];
+    [third setViewControllers:@[[[NotifyController alloc] init]] animated:NO];
     UINavigationController * fourth = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
                                                                                     toolbarClass:nil];
     if(k_isLogin)

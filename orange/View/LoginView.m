@@ -9,12 +9,13 @@
 #import "LoginView.h"
 #import "Passport.h"
 #import "AppDelegate.h"
-#import "GKAPI.h"
-#import "GKTaobaoConfig.h"
-#import "GKTaobaoOAuthViewController.h"
+#import "API.h"
+//#import "GKTaobaoConfig.h"
+//#import "GKTaobaoOAuthViewController.h"
 #import "SignView.h"
+#import "WXApi.h"
 
-@interface LoginView () <UITextFieldDelegate, UIAlertViewDelegate,GKTaobaoOAuthViewControllerDelegate>
+@interface LoginView () <UITextFieldDelegate, UIAlertViewDelegate>
 {
 @private
     UILabel * tip;
@@ -27,7 +28,13 @@
 @property (nonatomic, strong) UIButton *forgotPasswordButton;
 @property (nonatomic, strong) UIButton *sinaWeiboButton;
 @property (nonatomic, strong) UIButton *taobaoButton;
+@property (nonatomic, strong) UIButton * weixinBtn;
 @property (assign, nonatomic) BOOL flag;
+
+@property(nonatomic, strong) id<ALBBLoginService> loginService;
+@property(nonatomic, strong) loginSuccessCallback loginSuccessCallback;
+@property(nonatomic, strong) loginFailedCallback loginFailedCallback;
+
 @end
 
 @implementation LoginView
@@ -165,30 +172,11 @@
         }
         [whiteBG addSubview:self.passwordTextField];
         
-        _sinaWeiboButton = [[UIButton alloc] init];
-        self.sinaWeiboButton.deFrameSize = CGSizeMake(44.f, 44.f);
-        self.sinaWeiboButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
-        self.sinaWeiboButton.deFrameLeft = 24.f;
-        self.sinaWeiboButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
-        self.sinaWeiboButton.layer.cornerRadius = 22;
-        [self.sinaWeiboButton addTarget:self action:@selector(tapSinaWeiboButton) forControlEvents:UIControlEventTouchUpInside];
-        [self.sinaWeiboButton setImage:[UIImage imageNamed:@"login_icon_weibo.png"] forState:UIControlStateNormal];
-        [whiteBG addSubview:self.sinaWeiboButton];
-        
-        _taobaoButton = [[UIButton alloc] init];
-        self.taobaoButton.deFrameSize = CGSizeMake(44.f, 44.f);
-        self.taobaoButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
-        self.taobaoButton.layer.cornerRadius = 22;
-        self.taobaoButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
-        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.f;
-        [self.taobaoButton addTarget:self action:@selector(tapTaobaoButton) forControlEvents:UIControlEventTouchUpInside];
-        [self.taobaoButton setImage:[UIImage imageNamed:@"login_icon_taobao.png"] forState:UIControlStateNormal];
-        [whiteBG addSubview:self.taobaoButton];
-        
         UIButton *loginButton = [[UIButton alloc]init];
         loginButton.frame = CGRectMake(0, 0,90, 40.f);
-        loginButton.center = self.sinaWeiboButton.center;
-        loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
+        loginButton.center = self.passwordTextField.center;
+        loginButton.deFrameTop = self.passwordTextField.deFrameBottom + 15.;
+//        loginButton.deFrameRight = whiteBG.deFrameWidth - 16;
         loginButton.layer.cornerRadius = 4;
         loginButton.layer.masksToBounds = YES;
         loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -197,6 +185,21 @@
         [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
         [whiteBG addSubview:loginButton];
+        
+        [whiteBG addSubview:self.taobaoButton];
+        self.taobaoButton.center = loginButton.center;
+        self.taobaoButton.deFrameTop = loginButton.deFrameBottom + 40.;
+//        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.;
+        
+        [whiteBG addSubview:self.sinaWeiboButton];
+        self.sinaWeiboButton.center = self.taobaoButton.center;
+        self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 20.;
+
+        self.weixinBtn.center = self.taobaoButton.center;
+        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 20.;
+        [whiteBG addSubview:self.weixinBtn];
+        
+
         
         
         UIButton * close = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80 , 40.f)];
@@ -245,9 +248,63 @@
         {
             whiteBG.deFrameTop = 50;
         }
+        
+        _loginService = [[TaeSDK sharedInstance]getService:@protocol(ALBBLoginService)];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWeChatCode:) name:@"WechatAuthResp" object:nil];
 
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - button
+- (UIButton *)sinaWeiboButton
+{
+    if (!_sinaWeiboButton)
+    {
+        _sinaWeiboButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _sinaWeiboButton.deFrameSize = CGSizeMake(44.f, 44.f);
+//        _sinaWeiboButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
+//        _sinaWeiboButton.deFrameLeft = 24.f;
+        _sinaWeiboButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        _sinaWeiboButton.layer.cornerRadius = 22;
+        [_sinaWeiboButton addTarget:self action:@selector(tapSinaWeiboButton) forControlEvents:UIControlEventTouchUpInside];
+        [_sinaWeiboButton setImage:[UIImage imageNamed:@"login_icon_weibo.png"] forState:UIControlStateNormal];
+    }
+    return _sinaWeiboButton;
+}
+
+- (UIButton *)taobaoButton
+{
+    if (!_taobaoButton) {
+        _taobaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _taobaoButton.deFrameSize = CGSizeMake(44., 44.);
+        _taobaoButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        _taobaoButton.layer.cornerRadius = 22;
+//        self.taobaoButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
+//        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.f;
+        [_taobaoButton addTarget:self action:@selector(tapTaobaoButton) forControlEvents:UIControlEventTouchUpInside];
+        [_taobaoButton setImage:[UIImage imageNamed:@"login_icon_taobao.png"] forState:UIControlStateNormal];
+    }
+    return _taobaoButton;
+}
+
+- (UIButton *)weixinBtn
+{
+    if (!_weixinBtn) {
+        _weixinBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _weixinBtn.backgroundColor = UIColorFromRGB(0xf4f4f4);
+        _weixinBtn.deFrameSize = CGSizeMake(44., 44.);
+        _weixinBtn.layer.cornerRadius = _weixinBtn.deFrameWidth / 2.;
+        [_weixinBtn setImage:[UIImage imageNamed:@"login_icon_weixin"] forState:UIControlStateNormal];
+        [_weixinBtn addTarget:self action:@selector(TapWeixinBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _weixinBtn;
 }
 
 #pragma mark - Selector Method
@@ -272,7 +329,7 @@
         return;
     }
     
-    [GKAPI loginWithEmail:email password:password success:^(GKUser *user, NSString *session) {
+    [API loginWithEmail:email password:password success:^(GKUser *user, NSString *session) {
         if (self.successBlock) {
             self.successBlock();
         }
@@ -294,17 +351,20 @@
                 [SVProgressHUD showImage:nil status:@"服务器出错!"];
                 break;
             }
-            
+        case 400:
+//                [SVProgressHUD showErrorWithStatus:message];
+//            break;
         default:
-                [SVProgressHUD dismiss];
-                break;
+//            [SVProgressHUD dismiss];
+                [SVProgressHUD showErrorWithStatus:message];
+            break;
         }
         
-        if ([type isEqualToString:@"email"]) {
-            [SVProgressHUD showImage:nil status:@"该邮箱不存在!"];
-        } else if ([type isEqualToString:@"password"]) {
-            [SVProgressHUD showImage:nil status:@"邮箱与密码不匹配!"];
-        }
+//        if ([type isEqualToString:@"email"]) {
+//            [SVProgressHUD showImage:nil status:@"该邮箱不存在!"];
+//        } else if ([type isEqualToString:@"password"]) {
+//            [SVProgressHUD showImage:nil status:@"邮箱与密码不匹配!"];
+//        }
     }];
 }
 
@@ -318,6 +378,28 @@
     [alertView show];
 }
 
+
+- (void)tapRegisterButton
+{
+    [whiteBG removeFromSuperview];
+    for(UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UIVisualEffectView class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    SignView *view = [[SignView alloc] init];
+    view.successBlock = self.successBlock;
+    [view showFromLogin];
+    double delayInSeconds = 0.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        view.backgroundColor = [UIColor clearColor];
+        [self removeFromSuperview];
+    });
+}
+
+#pragma mark - three part
 - (void)tapSinaWeiboButton
 {
 //    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
@@ -326,7 +408,7 @@
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         if (!error) {
 //            [Passport sharedInstance].screenName = [object objectForKey:@"username"];
-            [GKAPI loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] ScreenName:object[@"username"] success:^(GKUser *user, NSString *session) {
+            [API loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] ScreenName:object[@"username"] success:^(GKUser *user, NSString *session) {
                 if (self.successBlock) {
                     self.successBlock();
                 }
@@ -369,24 +451,63 @@
 
 - (void)tapTaobaoButton
 {
-
-    GKTaobaoOAuthViewController *vc = [[GKTaobaoOAuthViewController alloc] init];
-    vc.delegate = self;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    UIBarButtonItem *closeButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeTaobaoView)];
-    vc.navigationItem.leftBarButtonItem = closeButtonItem;
-    
-    [kAppDelegate.alertWindow makeKeyAndVisible];
-    [kAppDelegate.alertWindow.rootViewController presentViewController:nav animated:YES completion:nil];
+    if(![[TaeSession sharedInstance] isLogin]){
+        __weak __typeof(&*self)weakSelf = self;
+        _loginSuccessCallback = ^(TaeSession * session) {
+            [weakSelf finishedBaichuanWithSession:session];
+        };
+        
+        _loginFailedCallback = ^(NSError * error) {
+//            [self closeTaobaoView];
+            [kAppDelegate.window makeKeyAndVisible];
+            kAppDelegate.alertWindow.hidden = YES;
+        };
+        
+        [kAppDelegate.alertWindow makeKeyAndVisible];
+        [_loginService showLogin:kAppDelegate.alertWindow.rootViewController successCallback:_loginSuccessCallback failedCallback:_loginFailedCallback];
+    }else{
+        TaeSession *session=[TaeSession sharedInstance];
+        [self finishedBaichuanWithSession:session];
+    }
 }
 
-- (void)closeTaobaoView
+- (void)finishedBaichuanWithSession:(TaeSession *)session
 {
-    [kAppDelegate.alertWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
+    [Passport sharedInstance].taobaoId = [session getUser].userId;
+    [Passport sharedInstance].screenName = [session getUser].nick;
+    [SVProgressHUD show];
+    [API loginWithBaichuanUid:[session getUser].userId nick:[session getUser].nick  success:^(GKUser *user, NSString *session) {
         [kAppDelegate.window makeKeyAndVisible];
         kAppDelegate.alertWindow.hidden = YES;
+        if (self.successBlock) {
+            self.successBlock();
+        }
+        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
+        [self dismiss];
+
+    } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+        
+        [kAppDelegate.window makeKeyAndVisible];
+        kAppDelegate.alertWindow.hidden = YES;
+        [SVProgressHUD dismiss];
+
     }];
 }
+
+- (void)TapWeixinBtn:(id)sender
+{
+    if([WXApi isWXAppInstalled])
+    {
+        SendAuthReq * req = [[SendAuthReq alloc] init];
+        req.scope = @"snsapi_userinfo";
+        //    req.scope = @"snsapi_base";
+        req.state = @"guoku_signin_wechat";
+        [WXApi sendReq:req];
+    } else {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedStringFromTable(@"don't install wechat", kLocalizedFile, nil)];
+    }
+}
+
 
 #pragma mark - UITextFieldDelegate
 
@@ -413,12 +534,22 @@
     return YES;
 }
 
+- (void)resignResponder
+{
+    if(kScreenHeight >= 548)
+    {
+        whiteBG.deFrameTop = 100;
+    }
+    [self.emailTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+}
+
 - (void)show
 {
     self.alpha = 0;
-
+    
     [kAppDelegate.window addSubview:self];
-   
+    
     [UIView animateWithDuration:0.0 animations:^{
         self.alpha = 1;
     } completion:^(BOOL finished) {
@@ -430,6 +561,7 @@
     [AVAnalytics beginLogPageView:@"SignInView"];
     [MobClick beginLogPageView:@"SignInView"];
 }
+
 - (void)dismiss
 {
     self.alpha = 1;
@@ -440,38 +572,6 @@
     }];
     [AVAnalytics endLogPageView:@"SignInView"];
     [MobClick endLogPageView:@"SignInView"];
-}
-
-- (void)tapRegisterButton
-{
-    [whiteBG removeFromSuperview];
-    for(UIView * view in self.subviews) {
-        if ([view isKindOfClass:[UIVisualEffectView class]]) {
-            [view removeFromSuperview];
-        }
-    }
-    
-    
-    
-    SignView *view = [[SignView alloc] init];
-    view.successBlock = self.successBlock;
-    [view showFromLogin];
-    double delayInSeconds = 0.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        view.backgroundColor = [UIColor clearColor];
-        [self removeFromSuperview];
-    });
-}
-
-- (void)resignResponder
-{
-    if(kScreenHeight >= 548)
-    {
-        whiteBG.deFrameTop = 100;
-    }
-    [self.emailTextField resignFirstResponder];
-    [self.passwordTextField resignFirstResponder];
 }
 
 - (void)showFromRegister
@@ -489,14 +589,13 @@
 }
 
 #pragma mark - UIAlertViewDelegate
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
         NSString *email = [alertView textFieldAtIndex:0].text;
         if (email && email.length > 0) {
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-            [GKAPI forgetPasswordWithEmail:email success:^(BOOL success) {
+            [API forgetPasswordWithEmail:email success:^(BOOL success) {
                 if (success) {
                     [SVProgressHUD showImage:nil status:@"请检查邮箱，重设密码。"];
                 }
@@ -513,37 +612,28 @@
     }
 }
 
-#pragma mark - GKTaobaoOAuthViewControllerDelegate
-
-- (void)TaoBaoGrantFinished
+#pragma mark - Notification
+- (void)postWeChatCode:(NSNotification *)notification
 {
-    if (self.flag == YES) {
-        return;
-    }
-    self.flag = YES;
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    SendAuthResp *resp = [notification valueForKey:@"object"];
     
-    NSDictionary *taobaoInfo = [[NSUserDefaults standardUserDefaults] objectForKey:kTaobaoGrantInfo];
+    NSDictionary * json = [API getWeChatAuthWithAppKey:kGK_WeixinShareKey Secret:KGK_WeixinSecret Code:resp.code];
     
-    NSString *taobaoUserId = taobaoInfo[@"taobao_id"];
-    NSString *taobaoToken = taobaoInfo[@"access_token"];
-    [Passport sharedInstance].screenName = taobaoInfo[@"screen_name"];
-    [Passport sharedInstance].taobaoId = taobaoUserId;
-    [Passport sharedInstance].taobaoToken = taobaoToken;
-    [GKAPI loginWithTaobaoUserId:taobaoUserId taobaoToken:taobaoToken success:^(GKUser *user, NSString *session) {
+    NSDictionary * userInfo = [API getWeChatUserInfoWithAccessToken:[json valueForKey:@"access_token"] OpenID:[json valueForKey:@"openid"]];
+    
+    DDLogInfo(@"user info %@", userInfo);
+    
+    [API loginWithWeChatWithUnionid:[userInfo valueForKey:@"unionid"] Nickname:[userInfo valueForKey:@"nickname"] HeaderImgURL:[userInfo valueForKey:@"headimgurl"] success:^(GKUser *user, NSString *session) {
         if (self.successBlock) {
             self.successBlock();
         }
+        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"登录成功"]];
         [self dismiss];
-        [SVProgressHUD dismiss];
-        [self closeTaobaoView];
-        
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
-        [SVProgressHUD dismiss];
-        [self closeTaobaoView];
-        [self tapRegisterButton];
+        [SVProgressHUD showErrorWithStatus:message];
     }];
+    
 }
-
-
 
 @end

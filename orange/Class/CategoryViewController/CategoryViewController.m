@@ -8,7 +8,7 @@
 
 #import "CategoryViewController.h"
 #import "HMSegmentedControl.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "EntityThreeGridCell.h"
 #import "EntitySingleListCell.h"
 #import "CategoryLikeViewController.h"
@@ -16,11 +16,11 @@
 @interface CategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) NSString * sort;
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
-@property(nonatomic, strong) NSMutableArray * dataArrayForLike;
-@property(nonatomic, assign) NSUInteger index;
-@property(nonatomic, strong) UIView *segmentedControl;
-@property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
+@property (nonatomic, strong) NSMutableArray * dataArrayForEntity;
+@property (nonatomic, strong) NSMutableArray * dataArrayForLike;
+@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, strong) UIView *segmentedControl;
+@property (nonatomic, strong) NSMutableArray * dataArrayForOffset;
 @end
 
 @implementation CategoryViewController
@@ -69,7 +69,7 @@
      */
     
     
-    [GKAPI getCategoryStatByCategoryId:self.category.categoryId success:^(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount) {
+    [API getCategoryStatByCategoryId:self.category.categoryId success:^(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount) {
         UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:1002];
         [button setTitle:[NSString stringWithFormat:@"%ld 件商品",entityCount] forState:UIControlStateNormal];
     } failure:^(NSInteger stateCode) {
@@ -163,36 +163,39 @@
 - (void)refresh
 {
     if (self.index == 1) {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [API getEntityListWithCategoryId:self.category.categoryId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
     else if (self.index == 0)
     {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [API getEntityListWithCategoryId:self.category.categoryId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
     else if (self.index == 2)
     {
-        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        [API getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
             self.dataArrayForLike = [NSMutableArray arrayWithArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
@@ -202,36 +205,39 @@
 - (void)loadMore
 {
     if (self.index == 1) {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
+        [API getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
             [self.dataArrayForEntity addObjectsFromArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
     else if (self.index == 0)
     {
-        [GKAPI getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
+        [API getEntityListWithCategoryId:self.category.categoryId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
             [self.dataArrayForEntity addObjectsFromArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
     else if (self.index == 2)
     {
-        [GKAPI getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
+        [API getLikeEntityListWithCategoryId:self.category.categoryId userId:[Passport sharedInstance].user.userId sort:@"" reverse:NO offset:self.dataArrayForEntity.count count:30 success:^(NSArray *entityArray) {
             [self.dataArrayForLike addObjectsFromArray:entityArray];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
         }];

@@ -8,7 +8,7 @@
 
 #import "FriendViewController.h"
 #import "UserSingleListCell.h"
-#import "GKAPI.h"
+//#import "API.h"
 #import "NoDataView.h"
 
 static NSString *CellIdentifier = @"UserSingleListCell";
@@ -100,31 +100,33 @@ static NSString *CellIdentifier = @"UserSingleListCell";
 - (void)refresh
 {
 
-        [GKAPI getUserFollowingListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
+        [API getUserFollowingListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
             self.dataArrayForUser = [NSMutableArray arrayWithArray:userArray];
             if (self.dataArrayForUser.count == 0) {
                 self.tableView.tableFooterView = self.noDataView;
-                self.noDataView.text = @"TA 没有关注任何人";
+                self.noDataView.text = @"没有关注任何人";
             } else {
                 self.tableView.tableFooterView = nil;
             }
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
 
 }
 - (void)loadMore
 {
-    [GKAPI getUserFollowingListWithUserId:self.user.userId offset:self.dataArrayForUser.count count:30 success:^(NSArray *userArray) {
+    [API getUserFollowingListWithUserId:self.user.userId offset:self.dataArrayForUser.count count:30 success:^(NSArray *userArray) {
         [self.dataArrayForUser addObjectsFromArray:userArray];
     
         [self.tableView reloadData];
         [self.tableView.infiniteScrollingView stopAnimating];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
         [self.tableView.infiniteScrollingView stopAnimating];
     }];
 }

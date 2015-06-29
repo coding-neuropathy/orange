@@ -7,7 +7,7 @@
 //
 
 #import "NotePostViewController.h"
-#import "GKAPI.h"
+#import "API.h"
 static CGFloat NormalKeyboardHeight = 216.0f;
 
 @interface NotePostViewController ()<UITextViewDelegate>
@@ -17,8 +17,6 @@ static CGFloat NormalKeyboardHeight = 216.0f;
 @end
 
 @implementation NotePostViewController
-
-
 
 
 #pragma mark - Life Cycle
@@ -90,7 +88,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
      [self.view addSubview:self.weixinShareButton];
      */
     
-    _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 15)];
+    _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 15)];
     self.tipLabel.textAlignment = NSTextAlignmentLeft;
     self.tipLabel.backgroundColor = [UIColor clearColor];
     [self.tipLabel setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
@@ -179,7 +177,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     }
     
     if (self.note) {
-        [GKAPI updateNoteWithNoteId:self.note.noteId content:content score:score imageData:nil success:^(GKNote *note) {
+        [API updateNoteWithNoteId:self.note.noteId content:content score:score imageData:nil success:^(GKNote *note) {
             [self.navigationController popViewControllerAnimated:YES];
             [SVProgressHUD showImage:nil status:@"修改成功"];
             if (self.successBlock) {
@@ -193,7 +191,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
             [MobClick event:@"update note" label:@"failure"];
         }];
     } else {
-        [GKAPI postNoteWithEntityId:self.entity.entityId content:content score:score imageData:nil success:^(GKNote *note) {
+        [API postNoteWithEntityId:self.entity.entityId content:content score:score imageData:nil success:^(GKNote *note) {
             [self.navigationController popViewControllerAnimated:YES];
             [SVProgressHUD showImage:nil status:@"发布成功"];
             [Passport sharedInstance].user.noteCount += 1;

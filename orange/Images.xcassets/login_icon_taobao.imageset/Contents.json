@@ -3,16 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "login_icon_taobao.png"
+      "filename" : "taobao.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "login_icon_taobao@2x.png"
+      "filename" : "taobao@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "taobao@3x.png"
     }
   ],
   "info" : {

@@ -9,7 +9,7 @@
 #import "EditViewController.h"
 #import "NSString+Helper.h"
 //#import "WXApi.h"
-#import "GKAPI.h"
+#import "API.h"
 //#import "LoginView.h"
 //#import "GKWebVC.h"
 #import "EditHeaderView.h"
@@ -262,7 +262,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
             else
             {
                 NSDictionary * dict = @{@"nickname": tf.text};
-                [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
+                [API updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
                     [Passport sharedInstance].user.nickname = user.nickname;
                     [Passport sharedInstance].user = [Passport sharedInstance].user;
                     [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
@@ -285,7 +285,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
             else
             {
                 NSDictionary * dict = @{@"bio": tf.text};
-                [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
+                [API updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
                     [Passport sharedInstance].user.bio = user.bio;
                     [Passport sharedInstance].user = [Passport sharedInstance].user;
                     [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
@@ -311,7 +311,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
             {
                 NSDictionary *dict = @{@"location":tf.text};
 //                NSLog(@"location %@", tf.text);
-                [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
+                [API updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
 //                    NSLog(@"update update %@", user.location);
                     [Passport sharedInstance].user.location = user.location;
                     [Passport sharedInstance].user = [Passport sharedInstance].user;
@@ -329,7 +329,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
             UITextField *tf=[alertView textFieldAtIndex:0];
             if ([tf.text validateEmail]) {
                 NSDictionary *dict = @{@"email": tf.text};
-//                [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+//                [API updateaccountWithParameters:dict success:^(GKUser *user) {
 //                    [Passport sharedInstance].user.email = user.email;
 //                    [Passport sharedInstance].user = [Passport sharedInstance].user;
 //                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
@@ -351,7 +351,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 [SVProgressHUD showImage:nil status:@"密码不能小于6位"];
             } else {
                 NSDictionary *dict = @{@"password":tf.text};
-//                [GKAPI updateaccountWithParameters:dict success:^(GKUser *user) {
+//                [API updateaccountWithParameters:dict success:^(GKUser *user) {
 //                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
 //                } failure:^(NSInteger stateCode) {
 //                    [SVProgressHUD showImage:nil status:@"修改失败"];
@@ -396,7 +396,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
         }
 //        NSLog(@"index index %lu", buttonIndex);
         NSDictionary * dict = @{@"gender": gender};
-        [GKAPI updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
+        [API updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
             [Passport sharedInstance].user.gender = user.gender;
             [Passport sharedInstance].user = [Passport sharedInstance].user;
             NSLog(@"geneder %@", user.gender);
@@ -457,7 +457,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 
 - (void)imagePickerController:(UIImagePickerController *)Picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage * image = (UIImage *)[info valueForKey:UIImagePickerControllerEditedImage];
-    [GKAPI updateUserProfileWithParameters:nil imageData:[image imageData] success:^(GKUser *user) {
+    [API updateUserProfileWithParameters:nil imageData:[image imageData] success:^(GKUser *user) {
         self.headerView.avatarURL = user.avatarURL;
         [SVProgressHUD showImage:nil status:@"更新成功"];
     } failure:^(NSInteger stateCode) {

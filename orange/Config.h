@@ -5,7 +5,7 @@
 //  Copyright (c) 2013年 huiter. All rights reserved.
 //
 
-#define kBaseURL @"http://api.guoku.com/mobile/v4/"
+//#define kBaseURL @"http://api.guoku.com/mobile/v4/"
 //#define kBaseURL @"http://h.guoku.com/mobile/v4/"
 //#define kBaseURL @"http://127.0.0.1:8000/mobile/v4/"
 
@@ -28,6 +28,7 @@
 #define UMENG_APPKEY @"5219f06856240bd4ab01407a"
 
 
+
 // weibo
 #ifndef kGK_WeiboAPPKey
 #define kGK_WeiboAPPKey @"1459383851"
@@ -44,6 +45,10 @@
 //weixin
 #ifndef kGK_WeixinShareKey
 #define kGK_WeixinShareKey	@"wx59118ccde8270caa"		//REPLACE ME
+#endif
+
+#ifndef KGK_WeixinSecret
+#define KGK_WeixinSecret    @"2200ad1c64775d37bcb0e7f74c8a0641"
 #endif
 
 #ifndef kGK_WeixinShareURL
@@ -123,3 +128,33 @@
 #ifndef kLocalizedFile
 #define kLocalizedFile @"guoku"
 #endif
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
+
+#define DEFINE_SINGLETON_FOR_HEADER(className) \
+\
++ (className *)shared##className;
+
+#define DEFINE_SINGLETON_FOR_CLASS(className) \
+\
++ (className *)shared##className { \
+static className *shared##className = nil; \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+shared##className = [[self alloc] init]; \
+}); \
+return shared##className; \
+}

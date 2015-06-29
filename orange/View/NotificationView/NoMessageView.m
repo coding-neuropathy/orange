@@ -8,14 +8,14 @@
 
 #import "NoMessageView.h"
 
-@interface NoMessageView ()
+//@interface NoMessageView ()
 
 
-@property (strong, nonatomic) UILabel * titleLabel;
-@property (strong, nonatomic) UILabel * detailLabel;
-@property (strong, nonatomic) UIImageView * noticImageView;
+//@property (strong, nonatomic) UILabel * titleLabel;
+//@property (strong, nonatomic) UILabel * detailLabel;
+//@property (strong, nonatomic) UIImageView * noticImageView;
 
-@end
+//@end
 
 @implementation NoMessageView
 

@@ -8,7 +8,7 @@
 
 #import "DiscoverViewController.h"
 #import "HMSegmentedControl.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "EntityThreeGridCell.h"
 #import "CategoryGridCell.h"
 //#import "GKWebVC.h"
@@ -87,7 +87,6 @@
 {
     if (!_noResultView) {
         _noResultView = [[NoSearchResultView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-        
     }
     return _noResultView;
 }
@@ -152,7 +151,7 @@
     self.tableView.tableHeaderView = self.headerView;
     
     
-    [GKAPI getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
+    [API getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
         // 过滤可处理的banner类型
         NSMutableArray *showBannerArray = [NSMutableArray array];
         for (NSDictionary *itemDict in bannerArray) {
@@ -172,7 +171,7 @@
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
-        [GKAPI getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
+        [API getHomepageWithSuccess:^(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray) {
             // 过滤可处理的banner类型
             NSMutableArray *showBannerArray = [NSMutableArray array];
             for (NSDictionary *itemDict in bannerArray) {
@@ -254,19 +253,20 @@
 - (void)refresh
 {
     if (self.index == 0) {
-        [GKAPI getHotEntityListWithType:@"weekly" success:^(NSArray *dataArray) {
+        [API getHotEntityListWithType:@"weekly" success:^(NSArray *dataArray) {
             self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
             [self.tableView.pullToRefreshView stopAnimating];
                         [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView.pullToRefreshView stopAnimating];
                         [self.tableView reloadData];
         }];
     }
     else if (self.index == 1)
     {
-        [GKAPI getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
+        [API getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
         
                 NSMutableArray *categoryGroupArray = [NSMutableArray array];
                 NSMutableArray *allCategoryArray = [NSMutableArray array];
@@ -300,7 +300,8 @@
             [self.tableView.pullToRefreshView stopAnimating];
     
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+            [SVProgressHUD dismiss];
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
             
@@ -317,7 +318,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
     {
-        [GKAPI searchEntityWithString:self.keyword type:@"all" offset:self.dataArrayForEntityForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+        [API searchEntityWithString:self.keyword type:@"all" offset:self.dataArrayForEntityForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             if (self.dataArrayForEntityForSearch.count == 0) {
                 self.dataArrayForEntityForSearch = [NSMutableArray array];
             }
@@ -330,7 +331,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
     {
-        [GKAPI searchUserWithString:self.keyword offset:self.dataArrayForUserForSearch.count count:30 success:^(NSArray *userArray) {
+        [API searchUserWithString:self.keyword offset:self.dataArrayForUserForSearch.count count:30 success:^(NSArray *userArray) {
             if (self.dataArrayForUserForSearch.count == 0) {
                 self.dataArrayForUserForSearch = [NSMutableArray array];
             }
@@ -343,7 +344,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
     {
-        [GKAPI searchEntityWithString:self.keyword type:@"like" offset:self.dataArrayForLikeForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+        [API searchEntityWithString:self.keyword type:@"like" offset:self.dataArrayForLikeForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             if (self.dataArrayForLikeForSearch.count == 0) {
                 self.dataArrayForLikeForSearch = [NSMutableArray array];
             }
@@ -530,8 +531,6 @@
     
 }
 
-#pragma mark - UITableViewDelegate
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(tableView == self.tableView)
@@ -564,7 +563,7 @@
             return [EntitySingleListCell height];
         }
         return 0;
-
+        
     }
 }
 
@@ -583,6 +582,7 @@
     return 0.01f;
 }
 
+#pragma mark - <UITableViewDelegate>
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if(tableView == self.tableView)
@@ -881,6 +881,9 @@
     view.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.97];
     view.tag = 999;
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignSearch)];
+    [view addGestureRecognizer:tap];
+    
     UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_search"]];
     image.center = CGPointMake(kScreenWidth/2, 0);
     image.deFrameTop = 50+kStatusBarHeight+kNavigationBarHeight;
@@ -903,7 +906,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     
-    if ([searchText length] == 0) {
+    if ([self.searchBar.text length] == 0) {
         [self.searchDC.searchContentsController.view viewWithTag:999].hidden = NO;
     }
     else
@@ -946,7 +949,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
     {
-        [GKAPI searchEntityWithString:self.keyword type:@"all" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+        [API searchEntityWithString:self.keyword type:@"all" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];
                     [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];
@@ -956,7 +959,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
     {
-        [GKAPI searchUserWithString:self.keyword offset:0 count:30 success:^(NSArray *userArray) {
+        [API searchUserWithString:self.keyword offset:0 count:30 success:^(NSArray *userArray) {
             self.dataArrayForUserForSearch = [NSMutableArray arrayWithArray:userArray];
                     [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];
@@ -966,7 +969,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
     {
-        [GKAPI searchEntityWithString:self.keyword type:@"like" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+        [API searchEntityWithString:self.keyword type:@"like" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
                     [self.searchDC.searchResultsTableView.pullToRefreshView stopAnimating];
             [self.searchDC.searchResultsTableView reloadData];
@@ -1052,7 +1055,9 @@
 }
 
 
-
-
+-(void)resignSearch
+{
+    [self.searchBar resignFirstResponder];
+}
 
 @end

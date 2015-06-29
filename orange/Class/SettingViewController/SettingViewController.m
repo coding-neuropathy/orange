@@ -11,7 +11,7 @@
 #import "SettingsFooterView.h"
 
 #import "WXApi.h"
-#import "GKAPI.h"
+#import "API.h"
 #import "LoginView.h"
 
 //#import "GKWebVC.h"
@@ -205,7 +205,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                     
                     
                     if (!error) {
-                        [GKAPI bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] ExpiresIn:object[@"expires_at"]  success:^(GKUser *user) {
+                        [API bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] ExpiresIn:object[@"expires_at"]  success:^(GKUser *user) {
                             [Passport sharedInstance].user = user;
                             [Passport sharedInstance].screenName = user.sinaScreenName;
 //                            [Passport sharedInstance].sinaUserID = user.
@@ -256,10 +256,24 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //                break;
             case 0:
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  otherButtonTitles:@"确认清除", nil];
-                alertView.alertViewStyle = UIAlertViewStyleDefault;
-                alertView.tag = 20008;
-                [alertView show];
+//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"清除图片缓存？" message:@"" delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  otherButtonTitles:@"确认清除", nil];
+//                alertView.alertViewStyle = UIAlertViewStyleDefault;
+//                alertView.tag = 20008;
+//                [alertView show];
+                UIAlertController * clearCacheAlert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"clear image cache", kLocalizedFile, nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction * cancel = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                    
+                }];
+                UIAlertAction * confirm = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"confirm", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [[SDImageCache sharedImageCache] clearMemory];
+                    [[SDImageCache sharedImageCache] clearDisk];
+                    [self performSelectorOnMainThread:@selector(showClearPicCacheFinish) withObject:nil waitUntilDone:YES];
+                }];
+                
+                [clearCacheAlert addAction:cancel];
+                [clearCacheAlert addAction:confirm];
+                [self presentViewController:clearCacheAlert animated:YES completion:nil];
             }
                 break;
             
@@ -290,25 +304,18 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         }
     }
     
-    if(alertView.tag ==20008)
-    {
-        if(buttonIndex == 1)
-        {
-            [self clearPicCache];
-        }
-    }
-    if(alertView.tag ==20009)
-    {
-        if(buttonIndex == 1)
-        {
-            [self logout];
-        }
-    }
+//    if(alertView.tag ==20008)
+//    {
+//        if(buttonIndex == 1)
+//        {
+//            [self clearPicCache];
+//        }
+//    }
     
     if (alertView.tag == 40001) {
         if (buttonIndex == 1) {
 //            NSLog(@"unbind weibo %@", [Passport sharedInstance].user.sinaScreenName);
-            [GKAPI unbindSNSWithUserId:[Passport sharedInstance].user.userId SNSUserName:[Passport sharedInstance].user.sinaScreenName setPlatform:GKSinaWeibo success:^(bool status) {
+            [API unbindSNSWithUserId:[Passport sharedInstance].user.userId SNSUserName:[Passport sharedInstance].user.sinaScreenName setPlatform:GKSinaWeibo success:^(bool status) {
                 if (status) {
 //                    [Passport sharedInstance].screenName = nil;
                     [Passport sharedInstance].user.sinaScreenName = nil;
@@ -375,107 +382,50 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     }];
 
 }
-#pragma mark - AVATAR
-
-- (void)photoButtonAction{
-    
-    // 设置头像
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)  destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
-    
-    [actionSheet showInView:kAppDelegate.window];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    // 修改头像
-    switch (buttonIndex) {
-        case 0:
-        {
-            // 拍照
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                [self showImagePickerToTakePhoto];
-            }
-            break;
-        }
-            
-        case 1:
-        {
-            // 照片库
-            [self showImagePickerFromPhotoLibrary];
-            break;
-        }
-    }
-}
-- (void)showImagePickerFromPhotoLibrary
-{
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePickerVC.allowsEditing = YES;
-        imagePickerVC.delegate = self;
-        [self presentViewController:imagePickerVC animated:YES completion:NULL];
-    }
-}
-
-- (void)showImagePickerToTakePhoto
-{
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePickerVC.allowsEditing = YES;
-        imagePickerVC.delegate = self;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self presentViewController:imagePickerVC animated:YES completion:NULL];
-        });
-
-    }
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)Picker {
-    [Picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)imagePickerController:(UIImagePickerController *)Picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    UIImage * image = (UIImage *)[info valueForKey:UIImagePickerControllerEditedImage];
-    [GKAPI updateUserProfileWithNickname:nil email:nil password:nil imageData:[image imageData] success:^(GKUser *user) {
-        [SVProgressHUD showImage:nil status:@"更新成功"];
-            } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"更新失败"];
-    }];
-    
-    [Picker dismissViewControllerAnimated:YES completion:^{
-        [self.tableView reloadData];
-    }];
-}
 
 #pragma mark - Setting Footer View Delegate
 
 - (void)TapLoginBtnAction
 {
-    LoginView * view = [[LoginView alloc]init];
+    LoginView * view = [[LoginView alloc] init];
     [view show];
 }
 
 - (void)TapLogoutBtnAction
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定退出登录？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    alertView.delegate = self;
-    alertView.tag = 20009;
-    [alertView show];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"确定退出登录？" message:nil preferredStyle:UIAlertControllerStyleAlert];
 
+    UIAlertAction * cacnel = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        //        [altervc dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    UIAlertAction * confirm = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"confirm", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self logout];
+    }];
+    
+    [alert addAction:cacnel];
+    [alert addAction:confirm];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)logout
 {
-    [AVUser logOut];
-    if (![AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo]) {
-        [AVOSCloudSNS logout:AVOSCloudSNSSinaWeibo];
-    }
-    [Passport logout];
-//    [[TaeSession sharedInstance] lo]
-    [self.loginService logout];
-    [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"退出成功"]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Logout" object:nil userInfo:nil];
+
+    [API logoutWithSuccess:^{
+        [AVUser logOut];
+        [self.loginService logout];
+        [Passport logout];
+        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
+    } failure:^(NSInteger stateCode) {
+        if(stateCode == 500) {
+        
+        } else {
+            [AVUser logOut];
+            [self.loginService logout];
+            [Passport logout];
+        }
+    }];
+    
 }
 
 

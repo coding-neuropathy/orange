@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EntityViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
+@interface EntityViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIActionSheetDelegate,UIAlertViewDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
+//@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) GKEntity *entity;
+
+- (instancetype)initWithEntity:(GKEntity *)entity;
 
 @end
