@@ -95,7 +95,7 @@
 #pragma mark - <UITabBarControllerDelegate>
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[NotifactionViewController class]]) {
+    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[NotifyController class]]) {
         if (!k_isLogin) {
             LoginView * view = [[LoginView alloc]init];
             [view show];
