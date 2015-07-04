@@ -2109,11 +2109,7 @@
 		B7BFC9001ACC27C2009627CA /* today */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				8A0BD7BA1B45302500E19342 /* today.entitlements */,
-=======
 				B7C853221B47813300CA5F0F /* today.entitlements */,
->>>>>>> 83f3d86cf57b8dfec34cf9148fd554b5a4612fe8
 				39B868151ACCF5BA00A2115D /* Views */,
 				B7BFC9031ACC27C2009627CA /* TodayViewController.h */,
 				B7BFC9041ACC27C2009627CA /* TodayViewController.m */,
@@ -2320,11 +2316,7 @@
 						DevelopmentTeam = BKXKS4HPNG;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-<<<<<<< HEAD
-								enabled = 0;
-=======
 								enabled = 1;
->>>>>>> 83f3d86cf57b8dfec34cf9148fd554b5a4612fe8
 							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
