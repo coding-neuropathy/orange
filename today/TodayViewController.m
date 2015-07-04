@@ -125,15 +125,22 @@
 
 - (NSMutableArray *)getCache
 {
-    NSData * archivedData = [[NSUserDefaults standardUserDefaults] objectForKey:@"TodayArray"];
+//    NSData * archivedData = [[NSUserDefaults standardUserDefaults] objectForKey:@"TodayArray"];
+//    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    NSUserDefaults * shared = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.guoku.iphone"];
+    NSData * archivedData = [shared objectForKey:@"TodayArray"];
     return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
 }
 
 - (void)save
 {
 //    [self.dataArray]
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dataArray] forKey:@"TodayArray"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSUserDefaults * shared = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.guoku.iphone"];
+    [shared setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dataArray] forKey:@"TodayArray"];
+    [shared synchronize];
+//    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dataArray] forKey:@"TodayArray"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

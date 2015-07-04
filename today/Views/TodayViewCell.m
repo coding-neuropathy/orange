@@ -12,6 +12,7 @@
 @interface TodayViewCell ()
 
 @property (strong, nonatomic) UIImageView * entityImageView;
+@property (strong, nonatomic) GKEntity * entity;
 
 @end
 
@@ -54,22 +55,12 @@
 //    self.textLabel.text = _data[@"content"][@"entity"][@"title"];
 //    self.detailTextLabel.text = _data[@"content"][@"note"][@"content"];
 //    NSString * urlstring =  _data[@"content"][@"entity"][@"chief_image"];
-    GKEntity * entity = data[@"entity"];
+    self.entity = data[@"entity"];
     GKNote * note = data[@"note"];
     
-    self.textLabel.text = entity.title;
+    self.textLabel.text = self.entity.title;
     self.detailTextLabel.text = note.text;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSURL *url = [NSURL URLWithString:entity.imageURL_120x120];
-        
-        NSData *data = [NSData dataWithContentsOfURL:entity.imageURL_120x120];
-        UIImage *placeholder = [UIImage imageWithData:data];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.entityImageView setImage:placeholder];
-        });
-    });
 
 
     [self setNeedsLayout];
@@ -83,25 +74,62 @@
     self.textLabel.frame = CGRectMake(10, 10., kScreenWidth - 100., 20.);
     self.detailTextLabel.frame = CGRectMake(10., 40., kScreenWidth - 100., 40.);
 
+    
+    NSData * imageData = [self readImageWithURL:self.entity.imageURL_120x120];
+    
+    if (imageData) {
+        self.entityImageView.image = [UIImage imageWithData:imageData];
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSData *data = [NSData dataWithContentsOfURL:self.entity.imageURL_120x120];
+            UIImage *placeholder = [UIImage imageWithData:data];
+            [self saveImageWhthData:data URL:self.entity.imageURL_120x120];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.entityImageView setImage:placeholder];
+            });
+        });
+    }
 //    self.detailTextLabel.frame
 }
 
-- (NSString *)imageURLWithURLString:(NSString *)urlstring Size:(NSInteger)size
+- (BOOL)saveImageWhthData:(NSData *)data URL:(NSURL *)url
 {
+//    NSError * err = nil;
+    NSString * imagefile = [url.absoluteString md5];
     
-    if ([urlstring hasPrefix:@"http://imgcdn.guoku.com/"]) {
-        NSString * uri_string = [urlstring stringByReplacingOccurrencesOfString:@"http://imgcdn.guoku.com/" withString:@""];
-        
-        NSMutableArray * array = [NSMutableArray arrayWithArray:[uri_string componentsSeparatedByString:@"/"]];
-        
-        [array insertObject:[NSNumber numberWithInteger:size] atIndex:1];
-        //        NSLog(@"%@", array);
-        NSString * image_uri_string = [[array valueForKey:@"description"] componentsJoinedByString:@"/"];
-        //    NSLog(@"%@", image_uri_string);
-        
-        return [NSString stringWithFormat:@"http://imgcdn.guoku.com/%@", image_uri_string];
-    }
-    return urlstring;
+    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
+    NSLog(@"url %@", containerURL);
+    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
+    BOOL result = [data writeToURL:containerURL atomically:YES];
+    return result;
 }
+
+- (NSData *)readImageWithURL:(NSURL *)url
+{
+    NSString * imagefile = [url.absoluteString md5];
+    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
+    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
+    
+    return [NSData dataWithContentsOfURL:containerURL];
+//    return data;
+}
+
+//- (NSString *)imageURLWithURLString:(NSString *)urlstring Size:(NSInteger)size
+//{
+//    
+//    if ([urlstring hasPrefix:@"http://imgcdn.guoku.com/"]) {
+//        NSString * uri_string = [urlstring stringByReplacingOccurrencesOfString:@"http://imgcdn.guoku.com/" withString:@""];
+//        
+//        NSMutableArray * array = [NSMutableArray arrayWithArray:[uri_string componentsSeparatedByString:@"/"]];
+//        
+//        [array insertObject:[NSNumber numberWithInteger:size] atIndex:1];
+//        //        NSLog(@"%@", array);
+//        NSString * image_uri_string = [[array valueForKey:@"description"] componentsJoinedByString:@"/"];
+//        //    NSLog(@"%@", image_uri_string);
+//        
+//        return [NSString stringWithFormat:@"http://imgcdn.guoku.com/%@", image_uri_string];
+//    }
+//    return urlstring;
+//}
 
 @end
