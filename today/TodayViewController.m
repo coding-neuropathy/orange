@@ -36,9 +36,13 @@
 //    NSLog(@"width %f", self.preferredContentSize.width);
 //    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
     self.tableView.rowHeight = 94.;
-    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.tableView.rowHeight * 3);
+    self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
     ;
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
+    
+    if (self.dataArray.count == 0) {
+    
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +57,9 @@
     // If an error is encountered, use NCUpdateResultFailed
     // If there's no update required, use NCUpdateResultNoData
     // If there's an update, use NCUpdateResultNewData
+    
+    completionHandler(NCUpdateResultNewData);
+    
     [API getTopTenEntityCount:3 success:^(NSArray *array) {
         NSLog(@"array %@", array);
         self.dataArray = [NSMutableArray arrayWithArray:array];
@@ -125,7 +132,12 @@
 //    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
     NSUserDefaults * shared = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.guoku.iphone"];
     NSData * archivedData = [shared objectForKey:@"TodayArray"];
-    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    id obj =  [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    
+    if (obj) {
+        return obj;
+    }
+    return [NSMutableArray array];
 }
 
 - (void)save

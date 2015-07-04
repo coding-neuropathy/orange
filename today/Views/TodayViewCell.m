@@ -30,10 +30,6 @@
         self.detailTextLabel.textColor = UIColorFromRGB(0x9c9c9c);
         self.detailTextLabel.font = [UIFont systemFontOfSize:14.];
         self.detailTextLabel.numberOfLines = 2;
-//        self.detailTextLabel.adjustsFontSizeToFitWidth = YES;
-//        self.backgroundColor = [UIColor redColor];
-//        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-//        self.imageView.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -52,9 +48,6 @@
 - (void)setData:(NSDictionary *)data
 {
     _data = data;
-//    self.textLabel.text = _data[@"content"][@"entity"][@"title"];
-//    self.detailTextLabel.text = _data[@"content"][@"note"][@"content"];
-//    NSString * urlstring =  _data[@"content"][@"entity"][@"chief_image"];
     self.entity = data[@"entity"];
     GKNote * note = data[@"note"];
     
@@ -114,22 +107,5 @@
 //    return data;
 }
 
-//- (NSString *)imageURLWithURLString:(NSString *)urlstring Size:(NSInteger)size
-//{
-//    
-//    if ([urlstring hasPrefix:@"http://imgcdn.guoku.com/"]) {
-//        NSString * uri_string = [urlstring stringByReplacingOccurrencesOfString:@"http://imgcdn.guoku.com/" withString:@""];
-//        
-//        NSMutableArray * array = [NSMutableArray arrayWithArray:[uri_string componentsSeparatedByString:@"/"]];
-//        
-//        [array insertObject:[NSNumber numberWithInteger:size] atIndex:1];
-//        //        NSLog(@"%@", array);
-//        NSString * image_uri_string = [[array valueForKey:@"description"] componentsJoinedByString:@"/"];
-//        //    NSLog(@"%@", image_uri_string);
-//        
-//        return [NSString stringWithFormat:@"http://imgcdn.guoku.com/%@", image_uri_string];
-//    }
-//    return urlstring;
-//}
 
 @end
