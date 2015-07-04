@@ -31,11 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-//    self.objects = [NSMutableArray arrayWithCapacity:2];
-    
-    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
-    [paraDict setObject:@([[NSDate date] timeIntervalSince1970]) forKey:@"timestamp"];
-    [paraDict setObject:@(3) forKey:@"count"];
 
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
@@ -46,20 +41,12 @@
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
 }
 
-
-/**
- * 取消 widget 默认 inset
- */
-- (UIEdgeInsets)widgetMarginInsetsForProposedMarginInsets:(UIEdgeInsets)defaultMarginInsets
-{
-    return UIEdgeInsetsZero;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - <NCWidgetProviding>
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
     // Perform any setup necessary in order to update the view.
     
@@ -67,15 +54,24 @@
     // If there's no update required, use NCUpdateResultNoData
     // If there's an update, use NCUpdateResultNewData
     [API getTopTenEntityCount:3 success:^(NSArray *array) {
-//        NSLog(@"array %@", array);
+        NSLog(@"array %@", array);
         self.dataArray = [NSMutableArray arrayWithArray:array];
-        [self save];
         [self.tableView reloadData];
+        [self save];
         completionHandler(NCUpdateResultNewData);
     } failure:^(NSInteger stateCode) {
         [self.tableView reloadData];
         completionHandler(NCUpdateResultNoData);
     }];
+}
+
+
+/**
+ * 取消 widget 默认 inset
+ */
+- (UIEdgeInsets)widgetMarginInsetsForProposedMarginInsets:(UIEdgeInsets)defaultMarginInsets
+{
+    return UIEdgeInsetsZero;
 }
 
 //- (void)receivedAdditionalContent

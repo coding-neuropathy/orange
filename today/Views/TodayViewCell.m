@@ -98,7 +98,7 @@
     NSString * imagefile = [url.absoluteString md5];
     
     NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
-    NSLog(@"url %@", containerURL);
+//    NSLog(@"url %@", containerURL);
     containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
     BOOL result = [data writeToURL:containerURL atomically:YES];
     return result;
