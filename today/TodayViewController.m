@@ -25,7 +25,7 @@
 - (void)loadView
 {
     [super loadView];
-    self.dataArray = [self getCache];
+//    NSLog(@"%@", self.dataArray);
 }
 
 - (void)viewDidLoad {
@@ -40,9 +40,9 @@
     ;
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
     
-    if (self.dataArray.count == 0) {
-    
-    }
+//    if (self.dataArray.count == 0) {
+//    
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,13 +61,15 @@
     completionHandler(NCUpdateResultNewData);
     
     [API getTopTenEntityCount:3 success:^(NSArray *array) {
-        NSLog(@"array %@", array);
+//        NSLog(@"array %@", array);
         self.dataArray = [NSMutableArray arrayWithArray:array];
         [self.tableView reloadData];
         [self save];
         completionHandler(NCUpdateResultNewData);
     } failure:^(NSInteger stateCode) {
+        self.dataArray = [self getCache];
         [self.tableView reloadData];
+//        NSLog(@"%@", self.dataArray);
         completionHandler(NCUpdateResultNoData);
     }];
 }
@@ -132,12 +134,11 @@
 //    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
     NSUserDefaults * shared = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.guoku.iphone"];
     NSData * archivedData = [shared objectForKey:@"TodayArray"];
-    id obj =  [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
-    
-    if (obj) {
-        return obj;
+    if (archivedData) {
+        return [NSMutableArray array];
     }
-    return [NSMutableArray array];
+    id obj = [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    return obj;
 }
 
 - (void)save
