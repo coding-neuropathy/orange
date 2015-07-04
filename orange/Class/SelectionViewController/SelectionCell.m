@@ -233,7 +233,7 @@
         else
         {
             self.likeCounterButton.hidden = NO;
-            [self.likeCounterButton setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount] forState:UIControlStateNormal];
+            [self.likeCounterButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.entity.likeCount] forState:UIControlStateNormal];
         }
 
     }

@@ -21,4 +21,5 @@ FOUNDATION_EXPORT const unsigned char coreVersionString[];
 
 #import "GKModel.h"
 #import "NSString+Helper.h"
+#import "NSString+App.h"
 #import "Passport.h"

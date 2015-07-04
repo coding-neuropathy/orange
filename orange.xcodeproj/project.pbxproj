@@ -821,6 +821,8 @@
 		B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoSearchResultView.m; path = DiscoverView/NoSearchResultView.m; sourceTree = "<group>"; };
 		B7C684841ABBD78E00A122E8 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		B7C684851ABBD78E00A122E8 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		B7C853211B4780D100CA5F0F /* orange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = orange.entitlements; sourceTree = "<group>"; };
+		B7C853221B47813300CA5F0F /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = today.entitlements; sourceTree = "<group>"; };
 		B7D1B91D1AC12C3500664BDB /* EditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHeaderView.h; path = EditView/EditHeaderView.h; sourceTree = "<group>"; };
 		B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditHeaderView.m; path = EditView/EditHeaderView.m; sourceTree = "<group>"; };
 		B7D1B9201AC142A500664BDB /* EditViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewCell.h; path = EditView/EditViewCell.h; sourceTree = "<group>"; };
@@ -1548,6 +1550,7 @@
 		4E56DF1719D552C000263B17 /* orange */ = {
 			isa = PBXGroup;
 			children = (
+				B7C853211B4780D100CA5F0F /* orange.entitlements */,
 				4E066AA01A5C56C600DFEF65 /* View */,
 				4E3A232B1A51A7C500037F9C /* Core */,
 				4E56DFCF19D5BB3A00263B17 /* Class */,
@@ -2105,6 +2108,7 @@
 		B7BFC9001ACC27C2009627CA /* today */ = {
 			isa = PBXGroup;
 			children = (
+				B7C853221B47813300CA5F0F /* today.entitlements */,
 				39B868151ACCF5BA00A2115D /* Views */,
 				B7BFC9031ACC27C2009627CA /* TodayViewController.h */,
 				B7BFC9041ACC27C2009627CA /* TodayViewController.m */,
@@ -2310,6 +2314,9 @@
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = BKXKS4HPNG;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -2320,7 +2327,7 @@
 						DevelopmentTeam = BKXKS4HPNG;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -2842,6 +2849,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2877,6 +2885,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2910,6 +2919,7 @@
 		B7BFC90C1ACC27C2009627CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = today/today.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = today/config.pch;
@@ -2929,6 +2939,7 @@
 		B7BFC90D1ACC27C2009627CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = today/today.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
