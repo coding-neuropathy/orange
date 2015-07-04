@@ -45,8 +45,8 @@
         
         [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"activity", kLocalizedFile, nil), NSLocalizedStringFromTable(@"message", kLocalizedFile, nil)]];
         [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
-//        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
-        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
+//        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
         [_segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
         [_segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];

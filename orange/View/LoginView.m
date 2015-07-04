@@ -186,18 +186,31 @@
         [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
         [whiteBG addSubview:loginButton];
         
-        [whiteBG addSubview:self.taobaoButton];
-        self.taobaoButton.center = loginButton.center;
-        self.taobaoButton.deFrameTop = loginButton.deFrameBottom + 40.;
+        
+        if([WXApi isWXAppInstalled]){
+            [whiteBG addSubview:self.taobaoButton];
+            self.taobaoButton.center = loginButton.center;
+            self.taobaoButton.deFrameTop = loginButton.deFrameBottom + 40.;
 //        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.;
         
-        [whiteBG addSubview:self.sinaWeiboButton];
-        self.sinaWeiboButton.center = self.taobaoButton.center;
-        self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 20.;
+            [whiteBG addSubview:self.sinaWeiboButton];
+            self.sinaWeiboButton.center = self.taobaoButton.center;
+            self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 20.;
 
-        self.weixinBtn.center = self.taobaoButton.center;
-        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 20.;
-        [whiteBG addSubview:self.weixinBtn];
+            self.weixinBtn.center = self.taobaoButton.center;
+            self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 20.;
+            [whiteBG addSubview:self.weixinBtn];
+        } else {
+            [whiteBG addSubview:self.taobaoButton];
+            self.taobaoButton.center = loginButton.center;
+            self.taobaoButton.deFrameTop = loginButton.deFrameBottom + 40.;
+            self.taobaoButton.deFrameLeft = self.taobaoButton.deFrameLeft + 40.;
+            //        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.;
+            
+            [whiteBG addSubview:self.sinaWeiboButton];
+            self.sinaWeiboButton.center = self.taobaoButton.center;
+            self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 40.;
+        }
         
 
         
@@ -504,7 +517,7 @@
         req.state = @"guoku_signin_wechat";
         [WXApi sendReq:req];
     } else {
-        [SVProgressHUD showErrorWithStatus:NSLocalizedStringFromTable(@"don't install wechat", kLocalizedFile, nil)];
+//        [SVProgressHUD showErrorWithStatus:NSLocalizedStringFromTable(@"don't install wechat", kLocalizedFile, nil)];
     }
 }
 
