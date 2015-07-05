@@ -30,6 +30,7 @@
 #import "IBActionSheet.h"
 #import "EntityHeaderView.h"
 #import "WebViewController.h"
+#import "ShareView.h"
 
 
 @interface EntityViewController ()<IBActionSheetDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate>
@@ -180,7 +181,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 //    self.navigationController.toolbar.clipsToBounds = YES;
     self.navigationController.toolbar.barTintColor = UIColorFromRGB(0xffffff);
     self.navigationController.toolbar.layer.borderWidth = 0.5;
-    self.navigationController.toolbar.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+    self.navigationController.toolbar.layer.borderColor = UIColorFromRGB(0xcacaca).CGColor;
     
     for (UIView * view in self.navigationController.toolbar.subviews) {
         if ([view  isKindOfClass:[UIImageView class]]&&![view isKindOfClass:[NSClassFromString(@"_UIToolbarBackground") class]]) {
@@ -1083,6 +1084,16 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 
 - (void)shareButtonAction
 {
+    
+    ShareView * view = [[ShareView alloc]initWithTitle:self.entity.entityName SubTitle:@"" Image:self.image.image URL:[NSString stringWithFormat:@"%@%@/",kGK_WeixinShareURL,self.entity.entityHash]];
+    view.entity = self.entity;
+    view.tapRefreshButtonBlock = ^(){
+        [self.collectionView setScrollsToTop:YES];
+        [self refresh];
+    };
+    [view show];
+    return;
+    /*
     if (!self.note) {
         UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)
                                                     destructiveButtonTitle:nil
@@ -1098,6 +1109,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
         actionSheet.backgroundColor = UIColorFromRGB(0xffffff);
         [actionSheet showInView:self.view];
     }
+     */
 
 }
 
