@@ -25,25 +25,53 @@
 - (void)loadView
 {
     [super loadView];
-    self.dataArray = [self getCache];
+//    NSLog(@"%@", self.dataArray);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-//    self.objects = [NSMutableArray arrayWithCapacity:2];
-    
-    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
-    [paraDict setObject:@([[NSDate date] timeIntervalSince1970]) forKey:@"timestamp"];
-    [paraDict setObject:@(3) forKey:@"count"];
 
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
 //    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
     self.tableView.rowHeight = 94.;
-    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.tableView.rowHeight * 3);
+    self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
     ;
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
+    
+//    if (self.dataArray.count == 0) {
+//    
+//    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - <NCWidgetProviding>
+- (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
+    // Perform any setup necessary in order to update the view.
+    
+    // If an error is encountered, use NCUpdateResultFailed
+    // If there's no update required, use NCUpdateResultNoData
+    // If there's an update, use NCUpdateResultNewData
+    
+    completionHandler(NCUpdateResultNewData);
+    
+    [API getTopTenEntityCount:3 success:^(NSArray *array) {
+//        NSLog(@"array %@", array);
+        self.dataArray = [NSMutableArray arrayWithArray:array];
+        [self.tableView reloadData];
+        [self save];
+        completionHandler(NCUpdateResultNewData);
+    } failure:^(NSInteger stateCode) {
+        self.dataArray = [self getCache];
+        [self.tableView reloadData];
+//        NSLog(@"%@", self.dataArray);
+        completionHandler(NCUpdateResultNoData);
+    }];
 }
 
 
@@ -53,29 +81,6 @@
 - (UIEdgeInsets)widgetMarginInsetsForProposedMarginInsets:(UIEdgeInsets)defaultMarginInsets
 {
     return UIEdgeInsetsZero;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
-    // Perform any setup necessary in order to update the view.
-    
-    // If an error is encountered, use NCUpdateResultFailed
-    // If there's no update required, use NCUpdateResultNoData
-    // If there's an update, use NCUpdateResultNewData
-    [API getTopTenEntityCount:3 success:^(NSArray *array) {
-//        NSLog(@"array %@", array);
-        self.dataArray = [NSMutableArray arrayWithArray:array];
-        [self save];
-        [self.tableView reloadData];
-        completionHandler(NCUpdateResultNewData);
-    } failure:^(NSInteger stateCode) {
-        [self.tableView reloadData];
-        completionHandler(NCUpdateResultNoData);
-    }];
 }
 
 //- (void)receivedAdditionalContent
@@ -129,7 +134,11 @@
 //    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
     NSUserDefaults * shared = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.guoku.iphone"];
     NSData * archivedData = [shared objectForKey:@"TodayArray"];
-    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    if (archivedData) {
+        return [NSMutableArray array];
+    }
+    id obj = [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+    return obj;
 }
 
 - (void)save
