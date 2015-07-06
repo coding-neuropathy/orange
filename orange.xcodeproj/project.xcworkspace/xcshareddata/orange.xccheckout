@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>7B1D2A1C-72A0-413C-A164-0F5FC91AC9C1</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>orange</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DBB8603C3A555E49B8D6EBE5EC2240EF9499317C</key>
 		<string>github.com:guoku/orange.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>orange.xcodeproj/project.xcworkspace</string>
+	<string>orange.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DBB8603C3A555E49B8D6EBE5EC2240EF9499317C</key>

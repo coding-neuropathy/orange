@@ -18,7 +18,7 @@
 @property(nonatomic, strong) NSString * title;
 @property(nonatomic, strong) NSString * subTitle;
 @property(nonatomic, strong) NSString * url;
-
+@property(nonatomic, strong) MFMailComposeViewController *composer;
 
 
 @end
@@ -420,29 +420,43 @@
 
 -(void)ShareActionForMail
 {
-    [self dismiss];
+
     if ([MFMailComposeViewController canSendMail]) {
-        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-        controller.mailComposeDelegate = self;
-        [controller setSubject:@"果库 - 精英消费指南"];
-        [controller setMessageBody:[self.title stringByAppendingString:[NSString stringWithFormat:@"<a href='%@' target='_blank'>购买链接</a>",self.url]] isHTML:YES];
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        UIImage *ui = self.image;
-        pasteboard.image = ui;
-        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(ui)];
-        [controller addAttachmentData:imageData mimeType:@"image/png" fileName:@" "];
-        if (controller) [kAppDelegate.activeVC presentViewController:controller animated:YES completion:^{
-            
-        }];
+        self.composer = [[MFMailComposeViewController alloc] init];
+        self.composer.mailComposeDelegate = self;
+        [self.composer setSubject:@"果库 - 精英消费指南"];
+        [self.composer setMessageBody:[self.title stringByAppendingString:[NSString stringWithFormat:@"<a href='%@' target='_blank'>购买链接</a>",self.url]] isHTML:YES];
+        /*
+        if (self.image) {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            UIImage *ui = self.image;
+            pasteboard.image = ui;
+            NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(ui)];
+            [controller addAttachmentData:imageData mimeType:@"image/png" fileName:@" "];
+        }
+         */
+        
+
+
+        if (self.composer) {
+            [UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.alpha = 0;
+            } completion:^(BOOL finished) {
+                
+            }];
+            [kAppDelegate.activeVC presentViewController:self.composer animated:YES completion:^{
+            }];
+        }
     }else
     {
         [SVProgressHUD showImage:nil status:@"当前设备没有设置邮箱"];
     }
+
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller
           didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError*)error;
+                        error:(NSError*)error
 {
     switch (result)
     {
@@ -461,7 +475,16 @@
         default:
             break;
     }
-    [kAppDelegate.activeVC dismissViewControllerAnimated:YES completion:NULL];
+    
+    [UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [kAppDelegate.activeVC dismissViewControllerAnimated:YES completion:^{
+
+    }];
 }
 
 -(void)ShareActionForRefresh
