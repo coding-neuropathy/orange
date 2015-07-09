@@ -17,6 +17,8 @@
                              @"buy_link"     : @"buyLink",
                              @"price"        : @"lowestPrice",
                              @"volume"       : @"volume",
+                             @"seller"       : @"seller",
+                             @"status"       : @"status",
                              @"origin_id"    : @"origin_id",
                              @"origin_source": @"source",
                              };

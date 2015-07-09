@@ -197,6 +197,7 @@
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C45C1A8287780025EC2E /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C45B1A8287780025EC2E /* SignView.m */; };
+		4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */; };
 		4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6ADAE1A77D7220089797A /* BaseViewController.m */; };
 		4EC9F7911A7928520057D736 /* FanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7901A7928520057D736 /* FanViewController.m */; };
 		4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7931A79286A0057D736 /* FriendViewController.m */; };
@@ -208,6 +209,8 @@
 		4ECCD0D91A714A7D009D5A42 /* TagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0D81A714A7D009D5A42 /* TagCell.m */; };
 		4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */; };
 		4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */; };
+		4EF508811B49042000C92618 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF508801B49042000C92618 /* ShareView.m */; };
+		4EF508831B4919EE00C92618 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF508821B4919EE00C92618 /* Reveal.framework */; };
 		B71E494A1AC9207B00D4DB6D /* guoku.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E494C1AC9207B00D4DB6D /* guoku.strings */; };
 		B71E49521AC923FB00D4DB6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E49541AC923FB00D4DB6D /* InfoPlist.strings */; };
 		B71E495B1AC9259000D4DB6D /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B71E495A1AC9259000D4DB6D /* SettingsViewCell.m */; };
@@ -684,6 +687,7 @@
 		4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinTools.m; sourceTree = "<group>"; };
 		4EA0C45A1A8287780025EC2E /* SignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
 		4EA0C45B1A8287780025EC2E /* SignView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
+		4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4EB6ADAD1A77D7220089797A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		4EB6ADAE1A77D7220089797A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		4EC9F78F1A7928520057D736 /* FanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FanViewController.h; sourceTree = "<group>"; };
@@ -706,6 +710,9 @@
 		4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
 		4ECCD0DE1A7349CF009D5A42 /* EntityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityViewController.h; sourceTree = "<group>"; };
 		4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityViewController.m; sourceTree = "<group>"; };
+		4EF5087F1B49042000C92618 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		4EF508801B49042000C92618 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		4EF508821B4919EE00C92618 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		B71E494E1AC9208100D4DB6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/guoku.strings"; sourceTree = "<group>"; };
 		B71E494F1AC920BA00D4DB6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/guoku.strings; sourceTree = "<group>"; };
 		B71E49531AC923FB00D4DB6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -912,9 +919,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */,
 				B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */,
 				B754E6B11AFA76460034AB7D /* CloudPushSDK.framework in Frameworks */,
 				B754E6B61AFA76460034AB7D /* UTMini.framework in Frameworks */,
+				4EF508831B4919EE00C92618 /* Reveal.framework in Frameworks */,
 				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
 				B73E90CF1B1C9D7500616FD7 /* AVOSCloudSNS.framework in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
@@ -1247,6 +1256,8 @@
 				4EC9F7961A7928C70057D736 /* UserSingleListCell.m */,
 				4E66C1E61A7DBAB400F31A90 /* CommentCell.h */,
 				4E66C1E71A7DBAB400F31A90 /* CommentCell.m */,
+				4EF5087F1B49042000C92618 /* ShareView.h */,
+				4EF508801B49042000C92618 /* ShareView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1727,7 +1738,11 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				B7ADACF81B4105AF00BA02FD /* UIComponents */,
+=======
+				4EF508821B4919EE00C92618 /* Reveal.framework */,
+>>>>>>> 4e9f079d4aeed5b5b69366c0960ca67e26580883
 				B76EE07C1B3D86AE009D8763 /* NotifyController */,
 				B769B1261B2ACFB3004401FA /* WelcomeViewController */,
 				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
@@ -2195,6 +2210,7 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */,
 				B7B6958E1AF05F310016AAB8 /* ImageIO.framework */,
 				B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */,
 			);
@@ -2772,6 +2788,7 @@
 				4E3C413B1A9FFBEB0053DB5E /* IBActionSheet.m in Sources */,
 				4E1D28D61A125B9300740C17 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				4E2D6D431A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m in Sources */,
+				4EF508811B49042000C92618 /* ShareView.m in Sources */,
 				4E1D70221A5ADBA50032719E /* MeViewController.m in Sources */,
 				4E117B5E1ABC6FDC00844935 /* EditViewController.m in Sources */,
 				4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */,
@@ -3104,6 +3121,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty",
 					"$(PROJECT_DIR)/orange/ThirdParty/TaeSDK",
+					"$(PROJECT_DIR)/orange/Class",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3140,6 +3158,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty",
 					"$(PROJECT_DIR)/orange/ThirdParty/TaeSDK",
+					"$(PROJECT_DIR)/orange/Class",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

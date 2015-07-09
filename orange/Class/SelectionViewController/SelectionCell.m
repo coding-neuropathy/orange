@@ -281,9 +281,9 @@
 #pragma mark - button action
 - (void)imageButtonAction
 {
-    EntityViewController * VC = [[EntityViewController alloc] init];
+    EntityViewController * VC = [[EntityViewController alloc] initWithEntity:self.entity];
     VC.hidesBottomBarWhenPushed = YES;
-    VC.entity = self.entity;
+//    VC.entity = self.entity;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 

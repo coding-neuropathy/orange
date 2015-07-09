@@ -14,6 +14,15 @@
 @interface GKPurchase : GKBaseModel
 
 /**
+ * 上下架状态
+ */
+typedef NS_ENUM(NSInteger, GKBuyLinkStatus) {
+    GKBuyREMOVE = 0,
+    GKBuySOLDOUT,
+    GKBuySALE,
+};
+
+/**
  *  店铺名称
  */
 @property (nonatomic, strong) NSString *shopName;
@@ -34,15 +43,23 @@
 @property (nonatomic, assign) NSInteger volume;
 
 /**
+ *  上下架状态
+ */
+@property (nonatomic, assign) GKBuyLinkStatus status;
+
+/**
+ *  店家ID （目前，仅限淘宝天猫）
+ */
+@property (nonatomic, strong) NSString * seller;
+
+/**
  * 来源商品 ID
  */
-
 @property (nonatomic, strong) NSString * origin_id;
 
 /*
  * 来源
  */
-
 @property (nonatomic, strong) NSString * source;
 
 
