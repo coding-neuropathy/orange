@@ -58,6 +58,10 @@
 
 @property(nonatomic, strong) id<ALBBItemService> itemService;
 
+/**
+ * 店家id （仅限淘宝，天猫）
+ */
+@property (strong, nonatomic) NSString * seller_id;
 //@property (nonatomic) OneSDKItemType itemType;
 
 
@@ -92,6 +96,15 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     if (self) {
         self.entity = entity;
 //        self.itemService = [[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
+        
+        if (self.entity.purchaseArray > 0) {
+            GKPurchase * purchase = self.entity.purchaseArray[0];
+            if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"]) {
+                self.seller_id = purchase.seller;
+                DDLogError(@"seller %@", self.seller_id);
+            }
+        }
+        
     }
     return self;
 }
@@ -171,7 +184,38 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
         [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
         [_buyButton addTarget:self action:@selector(buyButtonAction) forControlEvents:UIControlEventTouchUpInside];
         
-        [_buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+        if (self.entity.purchaseArray.count > 0) {
+            GKPurchase * purchase = self.entity.purchaseArray[0];
+            switch (purchase.status) {
+                case GKBuyREMOVE:
+                {
+                    _buyButton.enabled = NO;
+                    _buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                    NSString * priceString = [NSString stringWithFormat:@"已下架 ¥ %0.2f", self.entity.lowestPrice];
+                    CGFloat width = [priceString widthWithLineWidth:0. Font:_buyButton.titleLabel.font];
+                
+                    _buyButton.frame = CGRectMake(0., 0., width + 30., 35.);
+                    [_buyButton setTitle:priceString forState:UIControlStateNormal];
+                
+                }
+                    break;
+                case GKBuySOLDOUT:
+                {
+                    _buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                    NSString * priceString = [NSString stringWithFormat:@"已下架 ¥ %0.2f", self.entity.lowestPrice];
+                    CGFloat width = [priceString widthWithLineWidth:0. Font:_buyButton.titleLabel.font];
+                    
+                    _buyButton.frame = CGRectMake(0., 0., width + 30., 16.);
+                    [_buyButton setTitle:priceString forState:UIControlStateNormal];
+                }
+                    break;
+                default:
+                    [_buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+                    break;
+            }
+            
+        }
+//        [_buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
     }
     return _buyButton;
 }
@@ -217,8 +261,28 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
                 break;
             }
         }
-        
-        [self.buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+//        DDLogError(@"buy %@", self.entity.purchaseArray[0]);
+//        GKPurchase * purchase = self.entity.purchaseArray[0];
+//        DDLogError(@"%d", purchase.status);
+        if (self.entity.purchaseArray.count > 0) {
+            GKPurchase * purchase = self.entity.purchaseArray[0];
+            switch (purchase.status) {
+                case GKBuyREMOVE:
+                    self.buyButton.enabled = NO;
+                    self.buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                    [self.buyButton setTitle:[NSString stringWithFormat:@"已下架 ¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+                    break;
+                case GKBuySOLDOUT:
+                    self.buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                    [self.buyButton setTitle:[NSString stringWithFormat:@"已下架 ¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+                    break;
+                default:
+                    [self.buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+                    break;
+            }
+            
+        }
+
         [self.collectionView reloadData];
         //        [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
@@ -681,307 +745,6 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     }];
 }
 
-//#pragma mark - UITableViewDataSource
-//
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 5;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    if (section == 2) {
-//        return self.dataArrayForNote.count;
-//    }
-//    if (section == 4) {
-//        return ceil(self.dataArrayForRecommend.count / (CGFloat)3);
-//    }
-//    else
-//    {
-//        return 0;
-//    }
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 2) {
-//        
-////        static NSString *CellIdentifier = @"Cell";
-//        NoteCell *cell = [tableView dequeueReusableCellWithIdentifier:NoteCellIdentifier forIndexPath:indexPath];
-////        if (!cell) {
-////            cell = [[NoteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-////        }
-//        cell.note = self.dataArrayForNote[indexPath.row];
-//        return cell;
-//    }
-//    else if (indexPath.section == 4) {
-//        EntityThreeGridCell *cell = [tableView dequeueReusableCellWithIdentifier:EntityCellIdentifier forIndexPath:indexPath];
-//        NSArray *entityArray = self.dataArrayForRecommend;
-//        NSMutableArray *array = [[NSMutableArray alloc] init];
-//        NSUInteger offset = indexPath.row * 3;
-//        for (NSUInteger i = 0; i < 3 && offset < entityArray.count; i++) {
-//            [array addObject:entityArray[offset++]];
-//        }
-//        cell.entityArray = array;
-//        cell.backgroundColor = UIColorFromRGB(0xfafafa);
-//        return cell;
-//    }
-//    else
-//    {
-//        return [UITableViewCell new];
-//    }
-//}
-
-
-
-//#pragma mark - UITableViewDelegate
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 2) {
-//        return [NoteCell height:self.dataArrayForNote[indexPath.row]];
-//    }
-//    if (indexPath.section == 4) {
-//        return [EntityThreeGridCell height];
-//    }
-//    if (indexPath.section == 1) {
-//        return 0;
-//    }
-//    return 0;
-//
-//}
-//
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//
-//    if (section == 0) {
-//        return [EntityHeaderView headerViewHightWithEntity:self.entity];
-//    }
-//    else if (section == 1) {
-//        if (self.dataArrayForlikeUser.count == 0) {
-//            return 0.01;
-//        }
-//        else
-//        {
-//            return 50;
-//        }
-//    }
-//    else if (section == 2) {
-//        return 50;
-//    }
-//    else if (section == 3) {
-//        if (k_isLogin && [Passport sharedInstance].user.user_state == 0 ) {
-//            return 0;
-//        }
-//        return 50;
-//    }
-//    else if (section == 4) {
-//        return 50;
-//    }
-//    else
-//    {
-//        return 0.01;
-//    }
-//    
-//}
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 0) {
-//        self.header.entity = self.entity;
-//        return self.header;
-//    }
-//    else if (section == 1) {
-//        
-//        if (self.dataArrayForlikeUser.count == 0) {
-//            return nil;
-//        }
-//        
-//        if(!self.likeUserView)
-//        {
-//            self.likeUserView  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
-//            self.likeUserView.backgroundColor = UIColorFromRGB(0xffffff);
-//        }
-//        
-//        for (UIView * view in self.likeUserView.subviews) {
-//            [view removeFromSuperview];
-//        }
-//        
-//        {
-//            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
-//            H.backgroundColor = UIColorFromRGB(0xebebeb);
-//            [self.likeUserView addSubview:H];
-//        }
-//        
-//        {
-//            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,49, kScreenWidth, 0.5)];
-//            H.backgroundColor = UIColorFromRGB(0xebebeb);
-//            [self.likeUserView addSubview:H];
-//        }
-//        
-//        
-//        int i = 0;
-//        
-//        for (GKUser * user in self.dataArrayForlikeUser) {
-//            UIButton * avatar;
-//            if (kScreenWidth == 320.) {
-//                if (32 + i*42 > kScreenWidth) {
-//                    break;
-//                }
-//                avatar = [[UIButton alloc] initWithFrame:CGRectMake(16 + 42.f * i , 6.f, 36.f, 36.f)];
-//            } else if (kScreenWidth == 375.) {
-//                if (32 + i*44 > kScreenWidth) {
-//                    break;
-//                }
-//                avatar = [[UIButton alloc] initWithFrame:CGRectMake(16 + 44.f * i , 6.f, 36.f, 36.f)];
-//            } else {
-//                if (32 + i*47 > kScreenWidth) {
-//                    break;
-//                }
-//                avatar = [[UIButton alloc] initWithFrame:CGRectMake(16 + 47.f * i , 6.f, 36.f, 36.f)];
-//            }
-//
-//            avatar.layer.cornerRadius = avatar.frame.size.width / 2.;
-//            avatar.layer.masksToBounds = YES;
-//            [avatar sd_setImageWithURL:user.avatarURL forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(36., 36.)]];
-//            avatar.tag = i;
-//            [avatar addTarget:self action:@selector(avatarButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-//            [self.likeUserView addSubview:avatar];
-//            i++;
-//        }
-//        
-//        return self.likeUserView;
-//    }
-//    
-//    else if (section == 2) {
-//        if(!self.categoryButton)
-//        {
-//            self.categoryButton  = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
-//            
-//            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 50)];
-//            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
-//            button.titleLabel.textAlignment = NSTextAlignmentCenter;
-//            [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-//            [button setTitle:[NSString fontAwesomeIconStringForEnum:FAAngleRight] forState:UIControlStateNormal];
-//            button.deFrameRight = kScreenWidth -17;
-//            button.backgroundColor = [UIColor clearColor];
-//            [self.categoryButton addSubview:button];
-//            
-//            [self.categoryButton addTarget:self action:@selector(categoryButtonAction) forControlEvents:UIControlEventTouchUpInside];
-//        }
-//    
-//        GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
-//        [self.categoryButton setTitle:[NSString stringWithFormat:@"%@「%@」",
-//                                       NSLocalizedStringFromTable(@"from", kLocalizedFile, nil),
-//                                       [category.categoryName componentsSeparatedByString:@"-"][0]]
-//                             forState:UIControlStateNormal];
-//        [self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-//        [self.categoryButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-//        [self.categoryButton setBackgroundColor:UIColorFromRGB(0xfafafa)];
-//        self.categoryButton.titleLabel.font = [UIFont systemFontOfSize:14];
-//        [self.categoryButton setTitleColor:UIColorFromRGB(0x555555) forState:UIControlStateNormal];
-//        
-//        if (category.categoryName) {
-//            self.categoryButton.hidden = NO;
-//        }
-//        else
-//        {
-//            self.categoryButton.hidden = YES;
-//        }
-//        
-//        return self.categoryButton;
-//    }
-//    else if (section == 3) {
-//        if (k_isLogin && [Passport sharedInstance].user.user_state == 0 ) {
-//            return nil;
-//            //            self.noteButton.enabled = NO;
-//        }
-//        if(!self.noteButton)
-//        {
-//            self.noteButton  = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
-//            self.noteButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
-//            [self.noteButton addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
-//            
-//            {
-//                UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,49, kScreenWidth, 0.5)];
-//                H.backgroundColor = UIColorFromRGB(0xebebeb);
-//                [self.noteButton addSubview:H];
-//            }
-//        }
-//        if (self.note) {
-//            [self.noteButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO], NSLocalizedStringFromTable(@"update note", kLocalizedFile, nil)] forState:UIControlStateNormal];
-//        }
-//        else
-//        {
-//            [self.noteButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAPencilSquareO], NSLocalizedStringFromTable(@"post note", kLocalizedFile, nil)] forState:UIControlStateNormal];
-//        }
-//        [self.noteButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-//        [self.noteButton setBackgroundColor:UIColorFromRGB(0xffffff)];
-//        [self.noteButton setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
-//        
-////        DDLogInfo(@"user user state %lu", [Passport sharedInstance].user.user_state);
-//
-//        return self.noteButton;
-//    }
-//    else if (section == 4) {
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.f, 20.f, CGRectGetWidth(tableView.frame) - 20, 20.f)];
-////        label.text = @"相似推荐";
-//        label.text = NSLocalizedStringFromTable(@"recommendation", kLocalizedFile, nil);
-//        label.textAlignment = NSTextAlignmentLeft;
-//        label.textColor = UIColorFromRGB(0x414243);
-//        label.font = [UIFont systemFontOfSize:14];
-//        [label sizeToFit];
-//        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 50)];
-//        view.backgroundColor = UIColorFromRGB(0xfafafa);
-//        [view addSubview:label];
-//        
-//        return view;
-//    }
-//    else
-//    {
-//        return nil;
-//    }
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    return 0.01;
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    
-//}
-//
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 2) {
-//        return YES;
-//    }
-//    return NO;
-//}
-//
-//-(UITableViewCellEditingStyle)tableView:(UITableView*)tableView  editingStyleForRowAtIndexPath:(NSIndexPath*)indexPath;
-//{
-//    if (indexPath.section == 2) {
-//        return UITableViewCellEditingStyleDelete;
-//    }
-//    return UITableViewCellEditingStyleNone;
-//}
-//
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 2) {
-//        GKNote *note = self.dataArrayForNote[indexPath.row];
-//        if (editingStyle == UITableViewCellEditingStyleDelete) {
-//            ReportViewController * VC = [[ReportViewController alloc]init];
-//            VC.note = note;
-//            [[tableView cellForRowAtIndexPath:indexPath] setEditing:NO animated:YES];
-//            [self.navigationController pushViewController:VC animated:YES];
-//
-//        }
-//    }
-//}
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
     return NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil);
@@ -1050,8 +813,6 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
             self.entity.likeCount = self.entity.likeCount-1;
             [SVProgressHUD dismiss];
         }
-//        [self.likeButton setTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), self.entity.likeCount] forState:UIControlStateNormal];
-//        self.header.entity = self.entity;
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"喜爱失败"];
     }];
@@ -1118,7 +879,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     if (self.entity.purchaseArray.count >0) {
         GKPurchase * purchase = self.entity.purchaseArray[0];
 //        NSLog(@"%@ %@", purchase.origin_id, purchase.source);
-        if ([purchase.source isEqualToString:@"taobao.com"])
+        if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"])
         {
             NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
             TaeTaokeParams *taoKeParams = [[TaeTaokeParams alloc] init];
