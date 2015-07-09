@@ -54,6 +54,7 @@
 "post note"         = "寫點評";
 "update note"       = "修改點評";
 "comment"           = "評論";
+"sold out"          = "已下架";
 
 /*
  *  activity page
@@ -66,6 +67,7 @@
 "commented" = "評論了";
 "'s note:" = "的點評";
 "bumped" = "贊了";
+
 
 /*
  * message page

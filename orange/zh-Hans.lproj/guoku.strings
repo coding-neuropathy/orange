@@ -54,6 +54,7 @@
 "post note"         = "写点评";
 "update note"       = "修改点评";
 "comment"           = "评论";
+"sold out"          = "已下架";
 
 /*
  *  activity page
