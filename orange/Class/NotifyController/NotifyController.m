@@ -108,6 +108,8 @@
 
     [self.thePageViewController setViewControllers:@[self.activeController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 //    [self.thePageViewController setViewControllers:@[self.activeController, self.msgController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBadge) name:@"ShowBadge" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBadge) name:@"HideBadge" object:nil];
     
     [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
 }
@@ -178,6 +180,35 @@
     return UIPageViewControllerSpineLocationMin;
 }
 
+#pragma mark badge
+- (void)addBadge
+{
+    [self removeBadge];
+    [self tabBadge:YES];
+}
+
+- (void)removeBadge
+{
+    [self tabBadge:NO];
+}
+
+- (void)tabBadge:(BOOL)yes
+{
+    if (yes) {
+        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 6, 6)];
+        badge.backgroundColor = UIColorFromRGB(0xFF1F77);
+        badge.tag = 100;
+        badge.layer.cornerRadius = 3;
+        badge.layer.masksToBounds = YES;
+        badge.center = CGPointMake(kScreenWidth*3/4+24,10);
+        [self.segmentedControl addSubview:badge];
+    }
+    else
+    {
+        [[self.segmentedControl viewWithTag:100]removeFromSuperview];
+    }
+}
+
 #pragma mark -
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
@@ -185,9 +216,9 @@
     self.index = segmentedControl.selectedSegmentIndex;
     
     if (segmentedControl.selectedSegmentIndex == 1){
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         [self.thePageViewController setViewControllers:@[self.msgController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     } else {
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         [self.thePageViewController setViewControllers:@[self.activeController] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     }
     

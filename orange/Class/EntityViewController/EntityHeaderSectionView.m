@@ -100,6 +100,14 @@
             self.userInteractionEnabled = NO;
         }
             break;
+        case ShopType:
+        {
+//            self.textLabel.text = NSLocalizedStringFromTable(_text, kLocalizedFile, nil);
+            self.textLabel.text = _text;
+            self.indicatorLable.hidden = NO;
+            self.userInteractionEnabled = NO;
+        }
+            break;
         default:
             break;
     }
@@ -125,6 +133,15 @@
         {
             self.backgroundColor = UIColorFromRGB(0xffffff);
             self.textLabel.frame = CGRectMake(16., 9., 200., 30.);
+            self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
+            self.indicatorLable.center = self.textLabel.center;
+            self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
+        }
+            break;
+        case ShopType:
+        {
+            self.backgroundColor = UIColorFromRGB(0xffffff);
+            self.textLabel.frame = CGRectMake(16., 10., 200., 30.);
             self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
             self.indicatorLable.center = self.textLabel.center;
             self.indicatorLable.deFrameRight = self.deFrameRight - 10.;

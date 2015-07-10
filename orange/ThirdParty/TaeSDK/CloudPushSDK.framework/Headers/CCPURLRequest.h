@@ -19,6 +19,7 @@
 @property (nonatomic        ) NSTimeInterval      timeout;
 @property (nonatomic, strong) NSString            *version;
 @property (nonatomic, strong) NSString            *callerVersion;
+@property (nonatomic, strong) NSString            *codecKey;// 加解密的key
 
 @property (nonatomic        ) UInt8               contentType;// 序列化的类型（0：原始数据）
 
@@ -46,6 +47,8 @@
 -(void) setContentType:(UInt8)contentType;
 
 -(void) setCallerVersion:(NSString *)callerVersion;
+
+-(void) setCodecKey:(NSString *)codecKey;
 
 -(NSData *) encryptRequestData:(BOOL) needEncrypt;
 

@@ -138,7 +138,6 @@
 		4E1D30AD1A125FDF00740C17 /* JSQSystemSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D30AC1A125FDF00740C17 /* JSQSystemSoundPlayer.m */; };
 		4E1D701F1A5ADB9A0032719E /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D701E1A5ADB9A0032719E /* DiscoverViewController.m */; };
 		4E1D70221A5ADBA50032719E /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70211A5ADBA50032719E /* MeViewController.m */; };
-		4E1D70251A5ADC100032719E /* NotifactionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70241A5ADC100032719E /* NotifactionViewController.m */; };
 		4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70271A5ADC260032719E /* SelectionViewController.m */; };
 		4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A901A1FA37D009FF11D /* AKSegmentedControl.m */; };
 		4E216A951A2392F2009FF11D /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A941A2392F2009FF11D /* JSBadgeView.m */; };
@@ -560,8 +559,6 @@
 		4E1D701E1A5ADB9A0032719E /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		4E1D70201A5ADBA50032719E /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		4E1D70211A5ADBA50032719E /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
-		4E1D70231A5ADC100032719E /* NotifactionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifactionViewController.h; sourceTree = "<group>"; };
-		4E1D70241A5ADC100032719E /* NotifactionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifactionViewController.m; sourceTree = "<group>"; };
 		4E1D70261A5ADC260032719E /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
 		4E1D70271A5ADC260032719E /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewController.m; sourceTree = "<group>"; };
 		4E216A8F1A1FA37D009FF11D /* AKSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSegmentedControl.h; sourceTree = "<group>"; };
@@ -1418,15 +1415,6 @@
 			path = MeViewController;
 			sourceTree = "<group>";
 		};
-		4E1D701B1A5ADB890032719E /* NotifactionViewController */ = {
-			isa = PBXGroup;
-			children = (
-				4E1D70231A5ADC100032719E /* NotifactionViewController.h */,
-				4E1D70241A5ADC100032719E /* NotifactionViewController.m */,
-			);
-			path = NotifactionViewController;
-			sourceTree = "<group>";
-		};
 		4E1D701C1A5ADB890032719E /* SelectionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1695,7 +1683,6 @@
 				4ECCD0DD1A7348AF009D5A42 /* EntityViewController */,
 				4E1D70191A5ADB890032719E /* DiscoverViewController */,
 				4E1D701A1A5ADB890032719E /* MeViewController */,
-				4E1D701B1A5ADB890032719E /* NotifactionViewController */,
 				4E1D701C1A5ADB890032719E /* SelectionViewController */,
 				4E3A238A1A52F21800037F9C /* TabBarViewcontroller */,
 			);
@@ -2539,7 +2526,6 @@
 				4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */,
 				4E8D6A9C1A38B59F00156C17 /* UIFont+FontDiao.m in Sources */,
 				B7B695801AF05C400016AAB8 /* SDImageCache.m in Sources */,
-				4E1D70251A5ADC100032719E /* NotifactionViewController.m in Sources */,
 				4EC9F7A71A7BD1020057D736 /* NotePostViewController.m in Sources */,
 				4E1D28E21A125B9300740C17 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				B769B1201B2ACE91004401FA /* IFTTTCornerRadiusAnimation.m in Sources */,

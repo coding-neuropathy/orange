@@ -9,7 +9,7 @@
 #import "TabBarViewcontroller.h"
 #import "SelectionViewController.h"
 #import "DiscoverViewController.h"
-#import "NotifactionViewController.h"
+//#import "NotifactionViewController.h"
 #import "NotifyController.h"
 #import "MeViewController.h"
 #import "SettingViewController.h"

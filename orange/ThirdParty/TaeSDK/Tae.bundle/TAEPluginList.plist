@@ -2,26 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>mmusdk</key>
+	<dict>
+		<key>dependOn</key>
+		<string></string>
+		<key>pluginAdapterName</key>
+		<string>MMUSDKPluginAdapter</string>
+	</dict>
 	<key>demo</key>
 	<dict>
 		<key>dependOn</key>
 		<string></string>
 		<key>pluginAdapterName</key>
 		<string>TaeDemoPluginAdapter</string>
-	</dict>
-	<key>globalTrade</key>
-	<dict>
-		<key>dependOn</key>
-		<string></string>
-		<key>pluginAdapterName</key>
-		<string>ALBBGlobalTradeSDKPluginAdapter</string>
-	</dict>
-	<key>login</key>
-	<dict>
-		<key>dependOn</key>
-		<string></string>
-		<key>pluginAdapterName</key>
-		<string>ALBBLoginSDKPluginAdapter</string>
 	</dict>
 	<key>trade</key>
 	<dict>
@@ -44,20 +37,6 @@
 		<key>pluginAdapterName</key>
 		<string>TaeWXSDKForFreePluginAdapter</string>
 	</dict>
-	<key>openAccount</key>
-	<dict>
-		<key>dependOn</key>
-		<string></string>
-		<key>pluginAdapterName</key>
-		<string>ALBBOpenAccountPluginAdapter</string>
-	</dict>
-	<key>openAccountUI</key>
-	<dict>
-		<key>dependOn</key>
-		<string>openAccount</string>
-		<key>pluginAdapterName</key>
-		<string>ALBBOpenAccountUIPluginAdapter</string>
-	</dict>
 	<key>mas</key>
 	<dict>
 		<key>pluginAdapterName</key>
@@ -69,6 +48,20 @@
 		<string></string>
 		<key>pluginAdapterName</key>
 		<string>ALBBOSSPluginAdapter</string>
+	</dict>
+	<key>opentrade</key>
+	<dict>
+		<key>dependOn</key>
+		<string></string>
+		<key>pluginAdapterName</key>
+		<string>ALBBOpenTradePluginAdapter</string>
+	</dict>
+	<key>globaltrade</key>
+	<dict>
+		<key>dependOn</key>
+		<string></string>
+		<key>pluginAdapterName</key>
+		<string>ALBBGlobalTradeSDKPluginAdapter</string>
 	</dict>
 </dict>
 </plist>

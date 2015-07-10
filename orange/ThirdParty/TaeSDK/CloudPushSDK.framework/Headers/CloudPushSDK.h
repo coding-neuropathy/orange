@@ -11,7 +11,7 @@
 #import "CCPURLResponse.h"
 #import "CCPRequestOperation.h"
 
-#define CCP_VERSION = "1.2.6";
+#define CCP_SDK_VERSION   = @"1.2.9";
 
 typedef enum{
     CCPSDKEnvironmentDaily,  //测试环境
@@ -25,17 +25,7 @@ typedef void (^CCPOperateResult)(BOOL success);
 typedef void (^initChannelSuccessCallback)();
 typedef void (^initChannelFailCallback)(NSError *error);
 
-@protocol CloudPushSDKServiceDelegate <NSObject>
-
--(void) messageReceived:(NSData*)content msgId:(NSInteger) msgId;
-
-@end
-
-@interface CloudPushSDK : NSObject<CloudPushSDKServiceDelegate>
-
-
-@property (strong, nonatomic) id<CloudPushSDKServiceDelegate> delegate;
-
+@interface CloudPushSDK : NSObject
 
 
 /**
@@ -105,13 +95,6 @@ typedef void (^initChannelFailCallback)(NSError *error);
 
 +(void) setAcceptTime:(UInt32) startH startMS:(UInt32) startMS endH:(UInt32)endH endMS: (UInt32)endMS withCallback:(CCPOperateResult) callback;
 
-
-/**
- *  注销设备，不再接收消息推送，apns与CloudPush两个通道都关闭
- *
- */
-+(void)unRegisterApp;
-
 /**
  *  对外提供 json 序化列的方法
  *
@@ -120,6 +103,19 @@ typedef void (^initChannelFailCallback)(NSError *error);
  *  @return
  */
 + (NSString *) toJson: (NSDictionary * )dict;
+
+
+/**
+ * 增加自定义的tag, 目前只支持12个自定义的tag
+ */
++(void) addTag:(NSString *) tag withCallback:(CCPOperateResult) callback;
+
+
+/**
+ * 删除自定义的tag, 目前只支持12个自定义的tag
+ */
++(void) removeTag:(NSString *) tag withCallback:(CCPOperateResult) callback;
+
 
 
 +(void) executeRequest:(CCPURLRequest *) ccpRequest success :(successCallBack) successCallBack failure: (failureCallBack)failureCallBack timeout:(NSTimeInterval) timeout;

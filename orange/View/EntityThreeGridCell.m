@@ -50,7 +50,7 @@
                 UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(3+i*((kScreenWidth-3)/3), 3, (kScreenWidth-3)/3-3, (kScreenWidth-3)/3-3)];
                 [self.itemArray addObject:button];
                 //button.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
-                button.imageView.contentMode = UIViewContentModeScaleAspectFill;
+                button.imageView.contentMode = UIViewContentModeScaleAspectFit;
                 //button.layer.borderWidth = 0.5;
                 button.backgroundColor = UIColorFromRGB(0xf0f0f0);
             

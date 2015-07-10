@@ -98,7 +98,7 @@ int ddLogLevel;
     
 //    if(userInfo || urlInfo)
 //    {
-//        application.applicationIconBadgeNumber = 0;
+        application.applicationIconBadgeNumber = 0;
 //        self.window.rootViewController.view.hidden = NO;
 //    }
 //    else

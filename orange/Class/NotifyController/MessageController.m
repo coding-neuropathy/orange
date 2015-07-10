@@ -8,11 +8,13 @@
 
 #import "MessageController.h"
 #import "MessageCell.h"
+#import "NoMessageView.h"
 
 @interface MessageController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray * dataArrayForMessage;
+@property (nonatomic, strong) NSMutableArray * dataArrayForMessage;
+@property (nonatomic, strong) NoMessageView * noMessageView;
 
 @end
 
@@ -30,6 +32,15 @@ static NSString *MessageCellIdentifier = @"MessageCell";
         _tableView.showsVerticalScrollIndicator = YES;
     }
     return _tableView;
+}
+
+- (NoMessageView *)noMessageView
+{
+    if (!_noMessageView) {
+        _noMessageView = [[NoMessageView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200)];
+        //        _noMessageView.backgroundColor = [UIColor redColor];
+    }
+    return _noMessageView;
 }
 
 - (void)loadView
@@ -69,8 +80,8 @@ static NSString *MessageCellIdentifier = @"MessageCell";
         [API getMessageListWithTimestamp:[[NSDate date] timeIntervalSince1970]  count:30 success:^(NSArray *messageArray) {
             self.dataArrayForMessage = [NSMutableArray arrayWithArray:messageArray];
             if (self.dataArrayForMessage.count == 0) {
-//                self.tableView.tableFooterView = self.noMessageView;
-//                self.noMessageView.type = NoMessageType;
+                self.tableView.tableFooterView = self.noMessageView;
+                self.noMessageView.type = NoMessageType;
             } else {
                 self.tableView.tableFooterView = nil;
             }

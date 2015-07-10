@@ -14,7 +14,7 @@
 #import "TaeTest.h"
 #import "TaeTopClient.h"
 
-static NSString * _TAE_SDK_VERSION = @"1.5.2";//当前TaeSDK的版本号
+static NSString * _TAE_SDK_VERSION = @"1.6.0.1";//当前TaeSDK的版本号
 
 
 @class TaeWebViewUISettings;
@@ -133,6 +133,7 @@ typedef enum{
  */
 -(void) closeCrashHandler;
 
+-(NSString *) getAppKey;
 /**
  *  如果引入了高德地图SDK，TAE会返回对应的高德key
  *
@@ -186,4 +187,6 @@ typedef enum{
  */
 -(void) setChanne:(NSString *) type name:(NSString *) name;
 
+
+-(TaeSDKEnvironment) getTaeSDKCurrentEnvironment;
 @end

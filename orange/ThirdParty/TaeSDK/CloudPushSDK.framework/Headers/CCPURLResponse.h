@@ -17,7 +17,7 @@ enum {
     RPC_ERROR_CHANNEL_NOT_READY           = 0,
     RPC_ERROR_CHANNEL_SID_INVLID          = 1,
     RPC_ERROR_CHANNEL_RPC_TIMEOUT         = 3,
-    RPC_ERROR_CHANNEL_http_ERROR          = 4,
+    RPC_ERROR_CHANNEL_HTTP_ERROR          = 4,
     RPC_ERROR_CHANNEL_DECODE_ERROR        = -1,
     RPC_ERROR_CHANNEL_SERVICE_NOT_FOUND   = 404,
     RPC_ERROR_CHANNEL_SERVICE_GATEWAY_BAD = 500,
@@ -44,6 +44,8 @@ enum {
  *  @return
  */
 -(id) initWithData: (NSData *) nsdata : (BOOL) needDecrypt ;
+
+-(id) initWithData: (NSData *) nsdata : (BOOL) needDecrypt :(NSString *) decryptKey;
 
 -(NSData *) memberOfData:(NSData *)object ;
 

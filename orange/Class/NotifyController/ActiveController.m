@@ -8,11 +8,13 @@
 
 #import "ActiveController.h"
 #import "FeedCell.h"
+#import "NoMessageView.h"
 
 @interface ActiveController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray * dataArrayForFeed;
+@property (nonatomic, strong) NSMutableArray * dataArrayForFeed;
+@property (nonatomic, strong) NoMessageView * noMessageView;
 
 @end
 
@@ -30,6 +32,15 @@ static NSString *FeedCellIdentifier = @"FeedCell";
         _tableView.showsVerticalScrollIndicator = YES;
     }
     return _tableView;
+}
+
+- (NoMessageView *)noMessageView
+{
+    if (!_noMessageView) {
+        _noMessageView = [[NoMessageView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200)];
+        //        _noMessageView.backgroundColor = [UIColor redColor];
+    }
+    return _noMessageView;
 }
 
 - (void)loadView
@@ -69,8 +80,8 @@ static NSString *FeedCellIdentifier = @"FeedCell";
     [API getFeedWithTimestamp:[[NSDate date] timeIntervalSince1970] type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
         self.dataArrayForFeed = [NSMutableArray arrayWithArray:feedArray];
         if (self.dataArrayForFeed.count == 0) {
-//            self.tableView.tableFooterView = self.noMessageView;
-//            self.noMessageView.type = NoFeedType;
+            self.tableView.tableFooterView = self.noMessageView;
+            self.noMessageView.type = NoFeedType;
         } else {
             self.tableView.tableFooterView = nil;
         }
