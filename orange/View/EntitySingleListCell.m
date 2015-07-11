@@ -309,6 +309,8 @@
         [SVProgressHUD showImage:nil status:@"喜爱失败"];
         
     }];
+    
+    
 }
 
 - (void)buttonAction

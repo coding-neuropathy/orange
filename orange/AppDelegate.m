@@ -416,6 +416,7 @@ int ddLogLevel;
     } failure:^(NSInteger stateCode) {
         
     }];
+
 }
 
 -(void)checkNewMessage
