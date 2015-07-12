@@ -193,7 +193,7 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     } else {
         [API postNoteWithEntityId:self.entity.entityId content:content score:score imageData:nil success:^(GKNote *note) {
             [self.navigationController popViewControllerAnimated:YES];
-            [SVProgressHUD showImage:nil status:@"发布成功"];
+            [SVProgressHUD showImage:nil status:@"\U0001F603 发布成功"];
             [Passport sharedInstance].user.noteCount += 1;
             if (self.successBlock) {
                 self.successBlock(note);

@@ -340,15 +340,20 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     [self configToolbar];
     
     
+    [self refreshRandom];
+
+}
+
+- (void)refreshRandom
+{
     [API getRandomEntityListByCategoryId:self.entity.categoryId
-                                  entityId:self.entity.entityId
-                                     count:9 success:^(NSArray *entityArray) {
-//                                         DDLogInfo(@"%@", entityArray);
-                                         self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
-                                         [self.collectionView reloadData];
-                                     } failure:^(NSInteger stateCode) {
-                                         
-                                     }];
+                                entityId:self.entity.entityId
+                                   count:9 success:^(NSArray *entityArray) {
+                                       self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
+                                       [self.collectionView reloadData];
+                                   } failure:^(NSInteger stateCode) {
+                                       
+                                   }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -389,6 +394,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     [super viewDidAppear:animated];
     if (!self.dataArrayForNote) {
         [self refresh];
+        [self refreshRandom];
     }
 }
 
@@ -870,8 +876,9 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     view.type = @"entity";
     view.entity = self.entity;
     view.tapRefreshButtonBlock = ^(){
-        [self.collectionView setScrollsToTop:YES];
+        [SVProgressHUD showImage:nil status:@"\U0001F603 刷新成功"];
         [self refresh];
+        [self refreshRandom];
     };
     [view show];
 //    return;
