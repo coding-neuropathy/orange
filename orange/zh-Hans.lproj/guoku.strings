@@ -169,7 +169,7 @@
  * tip off information
  */
 "tip off"                   = "举报";
-"sold out"                  = "商品下架";
+"sold out"                  = "已下架";
 "miss category"             = "分类错误";
 "meaningless information"   = "垃圾或诈骗信息";
 "malicious information"     = "不良信息";

@@ -195,6 +195,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 //                    CGFloat width = [priceString widthWithLineWidth:0. Font:_buyButton.titleLabel.font];
                 
 //                    _buyButton.frame = CGRectMake(0., 0., width + 30., 35.);
+                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                 
                 }
@@ -206,11 +207,15 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 //                    CGFloat width = [priceString widthWithLineWidth:0. Font:_buyButton.titleLabel.font];
                     
 //                    _buyButton.frame = CGRectMake(0., 0., width + 30., 35.);
+                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                 }
                     break;
                 default:
+                {
+                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
                     [_buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+                }
                     break;
             }
             
@@ -270,13 +275,16 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
                 case GKBuyREMOVE:
                     self.buyButton.enabled = NO;
                     self.buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                     [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     break;
                 case GKBuySOLDOUT:
                     self.buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                     [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     break;
                 default:
+                     [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
                     [self.buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
                     break;
             }
@@ -463,7 +471,14 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
             {
                 GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
                 headerSection.headertype = CategoryType;
-                headerSection.text = category.categoryName;
+                if (category.categoryName) {
+                    headerSection.text = category.categoryName;
+                }
+                else
+                {
+                    headerSection.text = @"";
+                }
+                
                 headerSection.delegate = self;
                 return headerSection;
             }
