@@ -130,7 +130,7 @@
         self.likeCounterButton.hidden = YES;
     } else {
         self.likeCounterButton.hidden = NO;
-        [self.likeCounterButton setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount] forState:UIControlStateNormal];
+        [self.likeCounterButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.entity.likeCount] forState:UIControlStateNormal];
     }
 //    DDLogInfo(@"like count %@", self.likeCounterButton.titleLabel.text);
     
@@ -272,7 +272,7 @@
         }
 
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"喜爱失败"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
   
     }];
 }

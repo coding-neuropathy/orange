@@ -161,6 +161,7 @@
 /*
  * error info
  */
+"like failure"          = "喜愛失敗";
 "load failure"          = "加載失敗";
 "password error"        = "密碼錯誤";
 "duplicate email"       = "郵箱被佔用";

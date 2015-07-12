@@ -160,6 +160,7 @@
 /*
  * error info
  */
+"like failure"          = "Like Failure";
 "load failure"          = "Load Failure";
 "password error"        = "Password Error";
 "duplicate email"       = "Dupllicate Email";
