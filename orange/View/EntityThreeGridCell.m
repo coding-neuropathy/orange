@@ -52,7 +52,7 @@
                 //button.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
                 button.imageView.contentMode = UIViewContentModeScaleAspectFit;
                 //button.layer.borderWidth = 0.5;
-                button.backgroundColor = UIColorFromRGB(0xf0f0f0);
+                button.backgroundColor = UIColorFromRGB(0xffffff);
             
                 [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
                 button.tag = i;
