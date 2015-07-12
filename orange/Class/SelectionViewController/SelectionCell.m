@@ -103,7 +103,10 @@
         _likeCounterButton.titleLabel.font = [UIFont systemFontOfSize:12.];
 //        _likeCounterButton.titleLabel.textColor = UIColorFromRGB(0x9d9e9f);
         [_likeCounterButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-        [_likeCounterButton setBackgroundImage:[UIImage imageNamed:@"like counter"] forState:UIControlStateNormal];
+        
+        UIImage * image =[[UIImage imageNamed:@"like counter"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_likeCounterButton setBackgroundImage:image forState:UIControlStateNormal];
+        [_likeCounterButton setTintColor:UIColorFromRGB(0xdcdcdc)];
         [_likeCounterButton setTitleEdgeInsets:UIEdgeInsetsMake(0., 5., 0., 0.)];
 //        _likeCounterButton.enabled = NO;
         _likeCounterButton.userInteractionEnabled = NO;

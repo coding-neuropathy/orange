@@ -343,15 +343,20 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     [self configToolbar];
     
     
+    [self refreshRandom];
+
+}
+
+- (void)refreshRandom
+{
     [API getRandomEntityListByCategoryId:self.entity.categoryId
-                                  entityId:self.entity.entityId
-                                     count:9 success:^(NSArray *entityArray) {
-//                                         DDLogInfo(@"%@", entityArray);
-                                         self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
-                                         [self.collectionView reloadData];
-                                     } failure:^(NSInteger stateCode) {
-                                         
-                                     }];
+                                entityId:self.entity.entityId
+                                   count:9 success:^(NSArray *entityArray) {
+                                       self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
+                                       [self.collectionView reloadData];
+                                   } failure:^(NSInteger stateCode) {
+                                       
+                                   }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -392,6 +397,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     [super viewDidAppear:animated];
     if (!self.dataArrayForNote) {
         [self refresh];
+        [self refreshRandom];
     }
 }
 
@@ -875,9 +881,15 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     __weak __typeof(&*self)weakSelf = self;
 
     view.tapRefreshButtonBlock = ^(){
+<<<<<<< HEAD
 //        [weakSelf.collectionView setScrollsToTop:YES];
         [weakSelf.collectionView setContentOffset:CGPointMake(0., -self.header.deFrameHeight) animated:YES];
         [weakSelf refresh];
+=======
+        [SVProgressHUD showImage:nil status:@"\U0001F603 刷新成功"];
+        [self refresh];
+        [self refreshRandom];
+>>>>>>> 1d6ae93b7589e1e93a5099b90602ecd02292bc9b
     };
     [view show];
 //    return;
