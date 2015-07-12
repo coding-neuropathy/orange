@@ -190,6 +190,11 @@
     [self.tableView.pullToRefreshView startAnimating];
     [self.tableView reloadData];
     [self refresh];
+    self.dataArrayForCategory = [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayWithStatusKey];
+    
+
+    
+    
     [self.tableView setContentOffset:CGPointMake(0, 0)];
 //    [self.tableView setcon]
     

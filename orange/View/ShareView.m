@@ -402,7 +402,7 @@
 
 -(void)ShareActionForWechat
 {
-    [self wxShare:1];
+    [self wxShare:0];
     [self dismiss];
 }
 

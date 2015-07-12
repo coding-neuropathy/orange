@@ -773,7 +773,6 @@
     NSParameterAssert(entityId);
     
     NSString *path = [NSString stringWithFormat:@"entity/%@/like/%d/", entityId, isLike];
-    
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
