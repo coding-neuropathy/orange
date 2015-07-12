@@ -306,9 +306,6 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 - (void)loadView
 {
     self.view = self.collectionView;
-//    [super loadView];
-    
-//    [self.view addSubview:self.collectionView];
 }
 
 - (void)viewDidLoad {
@@ -881,15 +878,12 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     __weak __typeof(&*self)weakSelf = self;
 
     view.tapRefreshButtonBlock = ^(){
-<<<<<<< HEAD
+
 //        [weakSelf.collectionView setScrollsToTop:YES];
+        [SVProgressHUD showImage:nil status:@"\U0001F603 刷新成功"];
         [weakSelf.collectionView setContentOffset:CGPointMake(0., -self.header.deFrameHeight) animated:YES];
         [weakSelf refresh];
-=======
-        [SVProgressHUD showImage:nil status:@"\U0001F603 刷新成功"];
-        [self refresh];
-        [self refreshRandom];
->>>>>>> 1d6ae93b7589e1e93a5099b90602ecd02292bc9b
+        [weakSelf refreshRandom];
     };
     [view show];
 //    return;
