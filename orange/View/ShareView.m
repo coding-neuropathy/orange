@@ -373,7 +373,7 @@
         }
     }
     else{
-        [SVProgressHUD showImage:nil status:@"图片太大，请关闭高清图片按钮"];
+        [SVProgressHUD showImage:nil status:@"分享失败"];
     }
 }
 
@@ -425,7 +425,7 @@
         self.composer = [[MFMailComposeViewController alloc] init];
         self.composer.mailComposeDelegate = self;
         [self.composer setSubject:@"果库 - 精英消费指南"];
-        [self.composer setMessageBody:[self.title stringByAppendingString:[NSString stringWithFormat:@"<a href='%@' target='_blank'>购买链接</a>",self.url]] isHTML:YES];
+        [self.composer setMessageBody:[self.title stringByAppendingString:[NSString stringWithFormat:@"<br><a href='%@' target='_blank'>购买链接</a>",self.url]] isHTML:YES];
         /*
         if (self.image) {
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
@@ -499,7 +499,7 @@
 {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = self.url;
-    [SVProgressHUD showImage:nil status:@"已复制链接到剪切板"];
+    [SVProgressHUD showImage:nil status:@"已复制"];
     [self dismiss];
     
 }
