@@ -13,7 +13,7 @@
 #import "LoginView.h"
 //#import "NewEntityViewController.h"
 #import "EntityViewController.h"
-
+#import "GKNotificationHUB.h"
 #define kWidth (kScreenWidth - 20)
 @interface SelectionCell()<RTLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;
@@ -245,8 +245,7 @@
 
 #pragma mark - Action
 - (void)likeButtonAction
-{
-    
+{    
     if(!k_isLogin)
     {
         LoginView * view = [[LoginView alloc]init];

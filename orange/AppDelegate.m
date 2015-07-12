@@ -17,6 +17,7 @@
 //#import "WelcomeVC.h"
 #import "WelcomeViewController.h"
 #import "APService.h"
+#import "GKNotificationHUB.h"
 
 int ddLogLevel;
 
@@ -141,6 +142,12 @@ int ddLogLevel;
         [self performSelector:@selector(checkNewMessage) withObject:nil afterDelay:4];
     }
     
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(showNetworkStatus)
+     name:@"GKNetworkReachabilityStatusNotReachable"//表示消息名称，发送跟接收双方都要一致
+     object:nil];
 
     
     return YES;
@@ -435,6 +442,12 @@ int ddLogLevel;
         
         }];
     }
+}
+
+- (void)showNetworkStatus
+{
+    GKNotificationHUB * hub = [[GKNotificationHUB alloc]init];
+    [hub show:[NSString stringWithFormat:@"%@  无网络链接",[NSString fontAwesomeIconStringForEnum:FAInfoCircle]]];
 }
 
 #pragma mark - config log

@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface GKNotificationHUB : UIView
+@property (strong,nonatomic) UILabel * label;
+- (void)show:(NSString *)title;
+
 
 @end

@@ -47,7 +47,7 @@
  * entity page
  */
 "from"              = "From";
-"recommendation"    = "Recommendation";
+"recommendation"    = "Related Items";
 "item"              = "Item";
 "update note"       = "Update Note";
 "post note"         = "Post Note";
