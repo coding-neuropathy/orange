@@ -35,7 +35,6 @@
 		39B720401B1F4C16008519E3 /* UIView+DEFrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B71FFE1B1F4C16008519E3 /* UIView+DEFrameAdditions.m */; };
 		39B720411B1F4C16008519E3 /* config.pch in Headers */ = {isa = PBXBuildFile; fileRef = 39B71FFF1B1F4C16008519E3 /* config.pch */; };
 		39B720421B1F4C16008519E3 /* core.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B720001B1F4C16008519E3 /* core.h */; };
-		39B720431B1F4C16008519E3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 39B720011B1F4C16008519E3 /* Info.plist */; };
 		39B720441B1F4C16008519E3 /* GKBaseModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B720031B1F4C16008519E3 /* GKBaseModel.h */; };
 		39B720451B1F4C16008519E3 /* GKBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B720041B1F4C16008519E3 /* GKBaseModel.m */; };
 		39B720461B1F4C16008519E3 /* GKComment.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B720051B1F4C16008519E3 /* GKComment.h */; };
@@ -204,7 +203,6 @@
 		4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */; };
 		4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */; };
 		4EEB29FF1B523C650092A8CF /* GKNotificationHUB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB29FE1B523C650092A8CF /* GKNotificationHUB.m */; };
-		4EEB2A011B52500C0092A8CF /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEB2A001B52500C0092A8CF /* Reveal.framework */; };
 		4EF508811B49042000C92618 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF508801B49042000C92618 /* ShareView.m */; };
 		B71E494A1AC9207B00D4DB6D /* guoku.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E494C1AC9207B00D4DB6D /* guoku.strings */; };
 		B71E49521AC923FB00D4DB6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E49541AC923FB00D4DB6D /* InfoPlist.strings */; };
@@ -680,7 +678,6 @@
 		4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityViewController.m; sourceTree = "<group>"; };
 		4EEB29FD1B523C650092A8CF /* GKNotificationHUB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKNotificationHUB.h; sourceTree = "<group>"; };
 		4EEB29FE1B523C650092A8CF /* GKNotificationHUB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKNotificationHUB.m; sourceTree = "<group>"; };
-		4EEB2A001B52500C0092A8CF /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		4EF5087F1B49042000C92618 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		4EF508801B49042000C92618 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		B71E494E1AC9208100D4DB6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/guoku.strings"; sourceTree = "<group>"; };
@@ -883,7 +880,6 @@
 				B754E6B11AFA76460034AB7D /* CloudPushSDK.framework in Frameworks */,
 				B754E6B61AFA76460034AB7D /* UTMini.framework in Frameworks */,
 				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
-				4EEB2A011B52500C0092A8CF /* Reveal.framework in Frameworks */,
 				B73E90CF1B1C9D7500616FD7 /* AVOSCloudSNS.framework in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
@@ -1554,7 +1550,6 @@
 		4E56DF1719D552C000263B17 /* orange */ = {
 			isa = PBXGroup;
 			children = (
-				4EEB2A001B52500C0092A8CF /* Reveal.framework */,
 				B7C853211B4780D100CA5F0F /* orange.entitlements */,
 				4E066AA01A5C56C600DFEF65 /* View */,
 				4E3A232B1A51A7C500037F9C /* Core */,
@@ -2308,7 +2303,7 @@
 		4E56DF0D19D552C000263B17 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = guoku.com;
 				TargetAttributes = {
 					39B8688D1ACD0CF600A2115D = {
@@ -2376,7 +2371,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39B720431B1F4C16008519E3 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
