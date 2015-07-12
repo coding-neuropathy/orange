@@ -13,6 +13,7 @@
 #import "WebViewProgressView.h"
 #import "SDWebImageDownloader.h"
 //#import "WebViewProgress.h"
+#import "ShareView.h"
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate>
 
@@ -158,6 +159,19 @@
 #pragma mark - button action
 - (void)moreButtonAction:(id)sender
 {
+    UIImage * image = [UIImage imageNamed:@"wxshare"];
+    if (self.image) {
+        image = [UIImage imageWithData:[self.image imageDataLessThan_10K]];
+    }
+    
+    
+    ShareView * view = [[ShareView alloc]initWithTitle:self.title SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
+    view.type = @"url";
+    view.tapRefreshButtonBlock = ^(){
+        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    };
+    [view show];
+    /*
     UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -188,6 +202,7 @@
     [alertController addAction:openInSafariAction];
     
     [self presentViewController:alertController animated:YES completion:nil];
+     */
 }
 
 #pragma mark - webview kvo

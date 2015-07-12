@@ -864,6 +864,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 {
     
     ShareView * view = [[ShareView alloc]initWithTitle:self.entity.entityName SubTitle:@"" Image:self.image.image URL:[NSString stringWithFormat:@"%@%@/",kGK_WeixinShareURL,self.entity.entityHash]];
+    view.type = @"entity";
     view.entity = self.entity;
     view.tapRefreshButtonBlock = ^(){
         [self.collectionView setScrollsToTop:YES];

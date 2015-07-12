@@ -264,7 +264,7 @@
         title.deFrameTop = icon.deFrameBottom + 10;
     }
     
-    {
+    if(![self.type isEqualToString:@"url"]){
         
         NSInteger width = (kScreenWidth -30 - 12*4)/5;
         UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
