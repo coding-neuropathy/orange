@@ -189,7 +189,8 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
             switch (purchase.status) {
                 case GKBuyREMOVE:
                 {
-                    _buyButton.enabled = NO;
+
+                    
                     _buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
 //                    NSString * priceString = [NSString stringWithFormat:@"%@ ¥ %0.2f", NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil), self.entity.lowestPrice];
 //                    CGFloat width = [priceString widthWithLineWidth:0. Font:_buyButton.titleLabel.font];
@@ -197,7 +198,8 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 //                    _buyButton.frame = CGRectMake(0., 0., width + 30., 35.);
                     [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-                
+                    DDLogError(@"okokoko ");
+                    _buyButton.enabled = NO;
                 }
                     break;
                 case GKBuySOLDOUT:
