@@ -184,6 +184,7 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
             //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [SVProgressHUD dismiss];
             [self.tableView.pullToRefreshView stopAnimating];

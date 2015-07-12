@@ -318,6 +318,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     
     [self.collectionView registerClass:[EntityHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier];
     
+    
     NSMutableArray * array = [NSMutableArray array];
     {
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];

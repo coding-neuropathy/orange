@@ -74,11 +74,7 @@
     }
     
     if (stateCode == 0) {
-        if (self.reachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
-            /*网络错误*/
-        } else {
-            
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
     }
 }
 
