@@ -1,16 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6724" systemVersion="14A389" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3735"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--果库-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider=""/>
+                <controller identifier="com.guoku.iphone.watchkitapp" title="果库" id="AgC-eL-Hgc" customClass="InterfaceController">
+                    <items>
+                        <group width="1" height="0.59999999999999998" alignment="left" id="45D-zT-FoW">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" image="sample" contentMode="scaleAspectFill" id="oPT-4e-usM"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="9Uj-YG-48H">
+                            <items>
+                                <label width="51.5" height="15" alignment="left" verticalAlignment="bottom" text="精选商品" id="Pla-Ib-zlk">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                            </items>
+                        </group>
+                        <label width="136" alignment="center" verticalAlignment="center" id="eIz-DM-XB1" userLabel="lable">
+                            <string key="text">季节精选咖啡豆 453g
+</string>
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <segue destination="tkp-V0-9B1" kind="relationship" relationship="nextPage" id="xGO-9y-P8B"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="220" y="344"/>
+        </scene>
+        <!--果库-->
+        <scene sceneID="uLl-Fq-g4m">
+            <objects>
+                <controller title="果库" id="tkp-V0-9B1">
+                    <items>
+                        <group width="1" height="0.59999999999999998" alignment="left" id="JIS-uo-9qb">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" image="sample 2" contentMode="scaleAspectFill" id="1ws-D8-faH"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="TZU-CD-DOe">
+                            <items>
+                                <label width="51.5" height="15" alignment="left" verticalAlignment="bottom" text="精选商品" id="yRT-Ap-gsc">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                            </items>
+                        </group>
+                        <label width="136" alignment="center" verticalAlignment="center" text="金色流苏丝绒乐福鞋" id="fYN-uX-joq" userLabel="lable">
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="435" y="344"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -31,9 +79,10 @@
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModuleProvider=""/>
+                <controller id="4sK-HA-Art" customClass="NotificationController"/>
             </objects>
             <point key="canvasLocation" x="468" y="643"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="1" green="0.1215686275" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
