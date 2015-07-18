@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UIImageView *image;
 //@property (nonatomic, strong) UIImageView *tmp;
 
-@property (nonatomic, strong) RTLabel * contentLabel;
+@property (nonatomic, strong) UILabel * contentLabel;
 @property (nonatomic, strong) UIButton * likeButton;
 @property (nonatomic, strong) UIButton * likeCounterButton;
 @property (nonatomic, strong) UIButton * timeButton;
@@ -72,13 +72,18 @@
     return _image;
 }
 
-- (RTLabel *)contentLabel
+- (UILabel *)contentLabel
 {
     if (!_contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
-        _contentLabel.paragraphReplacement = @"";
-        _contentLabel.lineSpacing = 7.0;
-        _contentLabel.delegate = self;
+        _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
+//        _contentLabel.paragraphReplacement = @"";
+//        _contentLabel.lineSpacing = 7.0;
+        _contentLabel.font = [UIFont fontWithName:@"Helvetica" size:14.];
+        _contentLabel.textColor = UIColorFromRGB(0x414243);
+        _contentLabel.textAlignment = NSTextAlignmentLeft;
+        _contentLabel.numberOfLines = 3;
+        _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+//        _contentLabel.delegate = self;
         [self.contentView addSubview:_contentLabel];
     }
     return _contentLabel;
@@ -138,8 +143,8 @@
 //    DDLogInfo(@"like count %@", self.likeCounterButton.titleLabel.text);
     
     self.note = dict[@"content"][@"note"];
-    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
-    
+//    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
+    self.contentLabel.text = self.note.text;
     NSTimeInterval timestamp = [dict[@"time"] doubleValue];
     self.date = [NSDate dateWithTimeIntervalSince1970:timestamp];
     
@@ -172,7 +177,12 @@
     
     self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth - 32, kScreenWidth - 32);
 
-    self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
+    self.contentLabel.deFrameHeight = [self.note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.]];
+//    self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
+    if (self.contentLabel.deFrameHeight > 60.) {
+        self.contentLabel.deFrameHeight = 60.;
+    }
+    DDLogInfo(@"content label %f", self.contentLabel.deFrameHeight);
     
     self.likeButton.frame = CGRectMake(0, 0, 40, 40.);
     self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft-8;
@@ -206,11 +216,15 @@
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 32, 20)];
-    label.paragraphReplacement = @"";
-    label.lineSpacing = 7.0;
-    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
-    return label.optimumSize.height + kScreenWidth + 75;
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 32, 20)];
+//    label.paragraphReplacement = @"";
+//    label.lineSpacing = 7.0;
+//    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
+    CGFloat height =  [note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.]];
+    if (height > 60) {
+        return 60. + kScreenWidth + 75;
+    }
+    return height + kScreenWidth + 75;
 }
 
 

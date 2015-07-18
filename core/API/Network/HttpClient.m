@@ -105,6 +105,9 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self failureLogWithOperation:operation responseObject:error];
+//        NSData * data = [[error userInfo] objectForKey:@"com.alamofire.serialization.response.error.data"];
+//        NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"%@", string);
         
         if (failure) {
             failure(operation, error);

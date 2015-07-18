@@ -48,19 +48,19 @@ static NSString *CellIdentifier = @"SelectionCell";
         
         self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
         
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 200, 28)];
-        [segmentedControl setSectionTitles:@[@"商品", @"图文"]];
-        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
-        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
-        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        [segmentedControl setTag:2];
+//        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 200, 28)];
+//        [segmentedControl setSectionTitles:@[@"商品", @"图文"]];
+//        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
+//        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
+//        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
+//        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
+//        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
+//        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
+//        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
+//        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+//        [segmentedControl setTag:2];
         //self.navigationItem.titleView =  segmentedControl;
-        self.index = 0;
+//        self.index = 0;
         self.cateId = 0;
         
 //        [self logo];
@@ -78,8 +78,6 @@ static NSString *CellIdentifier = @"SelectionCell";
             [array addObject:item];
         }
         //self.navigationItem.rightBarButtonItems = array;
-        
-
         
     }
     return self;
@@ -105,33 +103,6 @@ static NSString *CellIdentifier = @"SelectionCell";
     self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
     [self.tableView registerClass:[SelectionCell class] forCellReuseIdentifier:CellIdentifier];
     [self.view addSubview:self.tableView];
-
-    __weak __typeof(&*self)weakSelf = self;
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf refresh];
-    }];
-    
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        [weakSelf loadMore];
-    }];
-    
-    [self load];
-    
-    if (self.dataArrayForEntity.count == 0) {
-        [self.tableView.pullToRefreshView startAnimating];
-        [self refresh];
-    }
-    else
-    {
-        [self.tableView.pullToRefreshView startAnimating];
-        [self refresh];
-    }
-    
-//    [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
-//        
-//    } failure:^(NSInteger stateCode) {
-//        
-//    }];
     
     self.navigationItem.titleView = self.iconInfoView;
 }
@@ -156,6 +127,24 @@ static NSString *CellIdentifier = @"SelectionCell";
     [MobClick endLogPageView:@"SelectionView"];
 }
 
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refresh];
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
+    }];
+    //
+    if (self.dataArrayForEntity.count == 0)
+    {
+        [self.tableView triggerPullToRefresh];
+    }
+    
+}
 /*
 #pragma mark - Navigation
 
