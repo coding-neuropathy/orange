@@ -188,7 +188,7 @@
     self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft-8;
     self.likeButton.deFrameTop = self.contentLabel.deFrameBottom + 12;
     
-    self.likeCounterButton.frame = CGRectMake(0., 0., 48., 30.);
+    self.likeCounterButton.frame = CGRectMake(0., 0., 40., 26.);
     self.likeCounterButton.center = self.likeButton.center;
     self.likeCounterButton.deFrameLeft = self.likeButton.deFrameRight;
     
