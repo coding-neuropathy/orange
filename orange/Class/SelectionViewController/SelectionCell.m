@@ -182,7 +182,7 @@
     if (self.contentLabel.deFrameHeight > 60.) {
         self.contentLabel.deFrameHeight = 60.;
     }
-    DDLogInfo(@"content label %f", self.contentLabel.deFrameHeight);
+//    DDLogInfo(@"content label %f", self.contentLabel.deFrameHeight);
     
     self.likeButton.frame = CGRectMake(0, 0, 40, 40.);
     self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft-8;
