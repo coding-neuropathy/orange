@@ -189,13 +189,6 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
             switch (purchase.status) {
                 case GKBuyREMOVE:
                 {
-
-                    
-//                    _buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
-//                    NSString * priceString = [NSString stringWithFormat:@"%@ ¥ %0.2f", NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil), self.entity.lowestPrice];
-//                    CGFloat width = [priceString widthWithLineWidth:0. Font:_buyButton.titleLabel.font];
-                
-//                    _buyButton.frame = CGRectMake(0., 0., width + 30., 35.);
                     [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     [_buyButton setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
@@ -206,10 +199,6 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
                 case GKBuySOLDOUT:
                 {
                     _buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
-//                    NSString * priceString = [NSString stringWithFormat:@"%@ ¥ %0.2f", NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil), self.entity.lowestPrice];
-//                    CGFloat width = [priceString widthWithLineWidth:0. Font:_buyButton.titleLabel.font];
-                    
-//                    _buyButton.frame = CGRectMake(0., 0., width + 30., 35.);
                     [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                 }
@@ -223,7 +212,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
             }
             
         }
-//        [_buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+
     }
     return _buyButton;
 }
@@ -231,9 +220,9 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 - (void)configToolbar
 {
 //    self.navigationController.toolbar.clipsToBounds = YES;
-    self.navigationController.toolbar.barTintColor = UIColorFromRGB(0xffffff);
+    self.navigationController.toolbar.barTintColor = UIColorFromRGB(0xf8f8f8);
     self.navigationController.toolbar.layer.borderWidth = 0.5;
-    self.navigationController.toolbar.layer.borderColor = UIColorFromRGB(0xcacaca).CGColor;
+    self.navigationController.toolbar.layer.borderColor = UIColorFromRGB(0xb6b6b6).CGColor;
     
     for (UIView * view in self.navigationController.toolbar.subviews) {
         if ([view  isKindOfClass:[UIImageView class]]&&![view isKindOfClass:[NSClassFromString(@"_UIToolbarBackground") class]]) {
