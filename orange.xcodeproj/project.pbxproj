@@ -82,6 +82,24 @@
 		39B7207B1B1F50E0008519E3 /* Passport.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B720781B1F50E0008519E3 /* Passport.m */; };
 		39B868181ACCF5DB00A2115D /* TodayViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B868171ACCF5DB00A2115D /* TodayViewCell.m */; };
 		39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C829501AC29089009DE9BE /* libMobClickLibrary.a */; };
+		4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E05AA951B634C2D007596E6 /* EarthLoadingView.m */; };
+		4E05AACE1B6367AF007596E6 /* 1 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AABD1B6367AF007596E6 /* 1 copy.png */; };
+		4E05AACF1B6367AF007596E6 /* 10 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AABE1B6367AF007596E6 /* 10 copy.png */; };
+		4E05AAD01B6367AF007596E6 /* 11 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AABF1B6367AF007596E6 /* 11 copy.png */; };
+		4E05AAD11B6367AF007596E6 /* 12 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AAC01B6367AF007596E6 /* 12 copy.png */; };
+		4E05AAD21B6367AF007596E6 /* 13 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AAC11B6367AF007596E6 /* 13 copy.png */; };
+		4E05AAD31B6367AF007596E6 /* 14 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AAC21B6367AF007596E6 /* 14 copy.png */; };
+		4E05AAD41B6367AF007596E6 /* 15 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AAC31B6367AF007596E6 /* 15 copy.png */; };
+		4E05AAD51B6367AF007596E6 /* 16 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AAC41B6367AF007596E6 /* 16 copy.png */; };
+		4E05AAD61B6367AF007596E6 /* 17 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AAC51B6367AF007596E6 /* 17 copy.png */; };
+		4E05AAD71B6367AF007596E6 /* 2 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AAC61B6367AF007596E6 /* 2 copy.png */; };
+		4E05AAD81B6367AF007596E6 /* 3 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AAC71B6367AF007596E6 /* 3 copy.png */; };
+		4E05AAD91B6367AF007596E6 /* 4 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AAC81B6367AF007596E6 /* 4 copy.png */; };
+		4E05AADA1B6367AF007596E6 /* 5 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AAC91B6367AF007596E6 /* 5 copy.png */; };
+		4E05AADB1B6367AF007596E6 /* 6 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AACA1B6367AF007596E6 /* 6 copy.png */; };
+		4E05AADC1B6367AF007596E6 /* 7 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AACB1B6367AF007596E6 /* 7 copy.png */; };
+		4E05AADD1B6367AF007596E6 /* 8 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AACC1B6367AF007596E6 /* 8 copy.png */; };
+		4E05AADE1B6367AF007596E6 /* 9 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E05AACD1B6367AF007596E6 /* 9 copy.png */; };
 		4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */; };
 		4E117B551AB9CBBD00844935 /* CategoryLikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B541AB9CBBD00844935 /* CategoryLikeViewController.m */; };
 		4E117B5E1ABC6FDC00844935 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B5D1ABC6FDC00844935 /* EditViewController.m */; };
@@ -437,6 +455,25 @@
 		39C829501AC29089009DE9BE /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		39C829511AC29089009DE9BE /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		39C829521AC29089009DE9BE /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		4E05AA941B634C2D007596E6 /* EarthLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthLoadingView.h; sourceTree = "<group>"; };
+		4E05AA951B634C2D007596E6 /* EarthLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthLoadingView.m; sourceTree = "<group>"; };
+		4E05AABD1B6367AF007596E6 /* 1 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 copy.png"; sourceTree = "<group>"; };
+		4E05AABE1B6367AF007596E6 /* 10 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10 copy.png"; sourceTree = "<group>"; };
+		4E05AABF1B6367AF007596E6 /* 11 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11 copy.png"; sourceTree = "<group>"; };
+		4E05AAC01B6367AF007596E6 /* 12 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "12 copy.png"; sourceTree = "<group>"; };
+		4E05AAC11B6367AF007596E6 /* 13 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13 copy.png"; sourceTree = "<group>"; };
+		4E05AAC21B6367AF007596E6 /* 14 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "14 copy.png"; sourceTree = "<group>"; };
+		4E05AAC31B6367AF007596E6 /* 15 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "15 copy.png"; sourceTree = "<group>"; };
+		4E05AAC41B6367AF007596E6 /* 16 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "16 copy.png"; sourceTree = "<group>"; };
+		4E05AAC51B6367AF007596E6 /* 17 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "17 copy.png"; sourceTree = "<group>"; };
+		4E05AAC61B6367AF007596E6 /* 2 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 copy.png"; sourceTree = "<group>"; };
+		4E05AAC71B6367AF007596E6 /* 3 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3 copy.png"; sourceTree = "<group>"; };
+		4E05AAC81B6367AF007596E6 /* 4 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4 copy.png"; sourceTree = "<group>"; };
+		4E05AAC91B6367AF007596E6 /* 5 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 copy.png"; sourceTree = "<group>"; };
+		4E05AACA1B6367AF007596E6 /* 6 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "6 copy.png"; sourceTree = "<group>"; };
+		4E05AACB1B6367AF007596E6 /* 7 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "7 copy.png"; sourceTree = "<group>"; };
+		4E05AACC1B6367AF007596E6 /* 8 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "8 copy.png"; sourceTree = "<group>"; };
+		4E05AACD1B6367AF007596E6 /* 9 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "9 copy.png"; sourceTree = "<group>"; };
 		4E066A9D1A5C43E800DFEF65 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		4E117B531AB9CBBD00844935 /* CategoryLikeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryLikeViewController.h; sourceTree = "<group>"; };
@@ -1148,6 +1185,40 @@
 			path = UMAnalytics_Sdk_3.4.6;
 			sourceTree = "<group>";
 		};
+		4E05AA931B634C2D007596E6 /* EarthLoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				4E05AABC1B6367AF007596E6 /* Resource */,
+				4E05AA941B634C2D007596E6 /* EarthLoadingView.h */,
+				4E05AA951B634C2D007596E6 /* EarthLoadingView.m */,
+			);
+			path = EarthLoadingView;
+			sourceTree = "<group>";
+		};
+		4E05AABC1B6367AF007596E6 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				4E05AABD1B6367AF007596E6 /* 1 copy.png */,
+				4E05AABE1B6367AF007596E6 /* 10 copy.png */,
+				4E05AABF1B6367AF007596E6 /* 11 copy.png */,
+				4E05AAC01B6367AF007596E6 /* 12 copy.png */,
+				4E05AAC11B6367AF007596E6 /* 13 copy.png */,
+				4E05AAC21B6367AF007596E6 /* 14 copy.png */,
+				4E05AAC31B6367AF007596E6 /* 15 copy.png */,
+				4E05AAC41B6367AF007596E6 /* 16 copy.png */,
+				4E05AAC51B6367AF007596E6 /* 17 copy.png */,
+				4E05AAC61B6367AF007596E6 /* 2 copy.png */,
+				4E05AAC71B6367AF007596E6 /* 3 copy.png */,
+				4E05AAC81B6367AF007596E6 /* 4 copy.png */,
+				4E05AAC91B6367AF007596E6 /* 5 copy.png */,
+				4E05AACA1B6367AF007596E6 /* 6 copy.png */,
+				4E05AACB1B6367AF007596E6 /* 7 copy.png */,
+				4E05AACC1B6367AF007596E6 /* 8 copy.png */,
+				4E05AACD1B6367AF007596E6 /* 9 copy.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		4E066A9C1A5C43E800DFEF65 /* HMSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -1581,6 +1652,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				4E05AA931B634C2D007596E6 /* EarthLoadingView */,
 				B769B0F71B2ACE91004401FA /* JazzHands */,
 				B73E90CE1B1C9D7500616FD7 /* AVOSCloudSNS.framework */,
 				B73E90CC1B1C9D5D00616FD7 /* AVOSCloud.framework */,
@@ -2381,6 +2453,8 @@
 				4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */,
 				4E1D28C31A125B9300740C17 /* JSQMessagesViewController.xib in Resources */,
 				4E56DF2619D552C000263B17 /* Images.xcassets in Resources */,
+				4E05AACE1B6367AF007596E6 /* 1 copy.png in Resources */,
+				4E05AAD61B6367AF007596E6 /* 17 copy.png in Resources */,
 				4E1D28B91A125B9300740C17 /* JSQMessagesAssets.bundle in Resources */,
 				B754E6B71AFA76460034AB7D /* yw_1222.jpg in Resources */,
 				B754E6AF1AFA76460034AB7D /* AlipaySDK.bundle in Resources */,
@@ -2388,16 +2462,31 @@
 				B71E49521AC923FB00D4DB6D /* InfoPlist.strings in Resources */,
 				B754E6B31AFA76460034AB7D /* Tae.bundle in Resources */,
 				4E1D28D71A125B9300740C17 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
+				4E05AADB1B6367AF007596E6 /* 6 copy.png in Resources */,
+				4E05AAD91B6367AF007596E6 /* 4 copy.png in Resources */,
 				4E2D6D401A69601F009E4A17 /* SVProgressHUD.bundle in Resources */,
+				4E05AAD11B6367AF007596E6 /* 12 copy.png in Resources */,
+				4E05AAD01B6367AF007596E6 /* 11 copy.png in Resources */,
 				4E1D28BA1A125B9300740C17 /* JSQMessages.strings in Resources */,
+				4E05AAD71B6367AF007596E6 /* 2 copy.png in Resources */,
+				4E05AADA1B6367AF007596E6 /* 5 copy.png in Resources */,
+				4E05AADD1B6367AF007596E6 /* 8 copy.png in Resources */,
+				4E05AAD81B6367AF007596E6 /* 3 copy.png in Resources */,
 				4E8D6AA41A3B3E2200156C17 /* read_me.txt in Resources */,
 				4E1D28DE1A125B9300740C17 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 				B72000B71B0849E50001F199 /* PushConfig.plist in Resources */,
 				4E56DF7C19D56EF500263B17 /* FontAwesome.ttf in Resources */,
 				4E1D28E31A125B9300740C17 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
+				4E05AAD51B6367AF007596E6 /* 16 copy.png in Resources */,
 				B71E494A1AC9207B00D4DB6D /* guoku.strings in Resources */,
 				4E1D28D91A125B9300740C17 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
+				4E05AADE1B6367AF007596E6 /* 9 copy.png in Resources */,
+				4E05AAD31B6367AF007596E6 /* 14 copy.png in Resources */,
+				4E05AACF1B6367AF007596E6 /* 10 copy.png in Resources */,
 				4E1D28E11A125B9300740C17 /* JSQMessagesToolbarContentView.xib in Resources */,
+				4E05AAD41B6367AF007596E6 /* 15 copy.png in Resources */,
+				4E05AAD21B6367AF007596E6 /* 13 copy.png in Resources */,
+				4E05AADC1B6367AF007596E6 /* 7 copy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2556,6 +2645,7 @@
 				4E1D28D01A125B9300740C17 /* JSQMessagesBubbleImage.m in Sources */,
 				B7B695851AF05C400016AAB8 /* SDWebImageManager.m in Sources */,
 				4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */,
+				4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */,
 				B76676411AB81758002F294C /* NoDataView.m in Sources */,
 				4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */,
 				4E1D28C01A125B9300740C17 /* UIView+JSQMessages.m in Sources */,
