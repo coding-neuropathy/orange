@@ -19,7 +19,7 @@
     _currentStep = 0;
     _dotCount = 9;
     _isAnimating = NO;
-    _duration = 0.08f;
+    _duration = 0.05f;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -53,6 +53,7 @@
     if (_isAnimating) {
         return;
     }
+    _currentStep = 0;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:_duration
                                               target:self
@@ -75,7 +76,6 @@
         [_timer invalidate];
         _timer = nil;
     }
-    
     _isAnimating = NO;
     
     if (_hidesWhenStopped) {
@@ -91,7 +91,23 @@
 - (void)repeatAnimation
 {
     _currentStep = ++_currentStep % 17;
-    self.earth.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%d copy",_currentStep+1]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+
+    
+    if (_currentStep == 16) {
+        [UIView animateWithDuration:_duration animations:^{
+            self.earth.alpha = 0.5;
+        }completion:^(BOOL finished) {
+            [UIView animateWithDuration:_duration animations:^{
+                self.earth.alpha = 1;
+            }];
+        }];
+
+    }
+    
+    if (_currentStep < 17)
+    {
+        self.earth.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%d copy",_currentStep+1]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
     //_earth.tintColor = [UIColor colorWithRed:((float)((0xdcdcdc & 0xFF0000) >> 16))/255.0 green:((float)((0xdcdcdc & 0xFF00) >> 8))/255.0 blue:((float)(0xdcdcdc & 0xFF))/255.0 alpha:1.0];
 }
 

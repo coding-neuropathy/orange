@@ -453,7 +453,7 @@ static char UIScrollViewPullToRefreshView;
 - (EarthLoadingView *)activityIndicatorView {
     if(!_activityIndicatorView) {
         _activityIndicatorView = [[EarthLoadingView alloc] init];
-        _activityIndicatorView.hidesWhenStopped = NO;
+        _activityIndicatorView.hidesWhenStopped = YES;
         [self addSubview:_activityIndicatorView];
     }
     return _activityIndicatorView;
