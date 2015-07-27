@@ -388,6 +388,37 @@
     }];
 }
 
+/**
+ *  获取发现数据
+ */
++ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities))success
+                       failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString * path = @"discover/";
+
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@", responseObject);
+//        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:0];
+        NSArray *bannerArray = responseObject[@"banner"];
+        NSMutableArray * entityArray = [NSMutableArray arrayWithCapacity:1];
+        NSArray * content = responseObject[@"entities"];
+        for (NSDictionary *objectDict in content) {
+            GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
+            [entityArray addObject:entity];
+        }
+        
+        if (success) {
+            success(bannerArray, entityArray);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
 
 /**
  *  获取热门商品列表

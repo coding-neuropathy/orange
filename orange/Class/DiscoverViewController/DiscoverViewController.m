@@ -23,7 +23,7 @@
 #import "WebViewController.h"
 
 
-@interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchDisplayDelegate, DiscoverHeaderViewDelegate>
+@interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource, UICollectionViewDataSource, UIBarPositioningDelegate,UICollectionViewDelegateFlowLayout, UISearchBarDelegate,UISearchDisplayDelegate, DiscoverHeaderViewDelegate>
 
 @property (strong, nonatomic) UISearchBar *searchBar;
 @property (strong, nonatomic) UISearchDisplayController *searchDC;
@@ -39,20 +39,18 @@
 @property(nonatomic, strong) NSMutableArray * dataArrayForOffset;
 @property(nonatomic, strong) NSMutableArray * dataArrayForOffsetForSearch;
 
-
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property(nonatomic, strong) HMSegmentedControl *segmentedControlForSearch;
 
 @property (nonatomic, strong) NSArray *bannerArray;
-//@property (nonatomic, strong) UIScrollView *bannerScrollView;
-//@property (nonatomic, strong) UIPageControl *bannerPageControl;
-//@property (nonatomic, strong) NSTimer *bannerTimer;
 @property (nonatomic, strong) DiscoverHeaderView * headerView;
 
 @property (nonatomic, strong) NSMutableArray *filteredArray;
 @property (nonatomic, strong) NSString *keyword;
 @property (nonatomic, strong) NoSearchResultView * noResultView;
+
+@property (nonatomic, strong) UICollectionView * collectionView;
 
 @end
 
@@ -89,6 +87,26 @@
         _noResultView = [[NoSearchResultView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
     }
     return _noResultView;
+}
+
+- (UICollectionView *)collectionView
+{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight- kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
+        
+//        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return _collectionView;
+}
+
+- (void)loadView
+{
+    self.view = self.collectionView;
 }
 
 - (void)viewDidLoad {
@@ -191,8 +209,6 @@
     [self.tableView reloadData];
     [self refresh];
     self.dataArrayForCategory = [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayWithStatusKey];
-    
-
     
     
     [self.tableView setContentOffset:CGPointMake(0, 0)];
@@ -419,6 +435,7 @@
     }
 }
 
+#pragma mark - <UITableViewDataSource>
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(tableView == self.tableView)

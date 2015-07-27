@@ -8,7 +8,8 @@
 
 #import "TabBarViewcontroller.h"
 #import "SelectionViewController.h"
-#import "DiscoverViewController.h"
+#import "DiscoverController.h"
+//#import "DiscoverViewController.h"
 //#import "NotifactionViewController.h"
 #import "NotifyController.h"
 #import "MeViewController.h"
@@ -50,7 +51,7 @@
     
     UINavigationController * second = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
                                                                                     toolbarClass:nil];
-    [second setViewControllers:@[[[DiscoverViewController alloc] init]] animated:NO];
+    [second setViewControllers:@[[[DiscoverController alloc] init]] animated:NO];
     UINavigationController * third = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
                                                                                    toolbarClass:nil];
     [third setViewControllers:@[[[NotifyController alloc] init]] animated:NO];
@@ -174,7 +175,7 @@
     
     UINavigationController * second = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
                                                                                     toolbarClass:nil];
-    [second setViewControllers:@[[[DiscoverViewController alloc] init]] animated:NO];
+    [second setViewControllers:@[[[DiscoverController alloc] init]] animated:NO];
     UINavigationController * third = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
                                                                                     toolbarClass:nil];
     [third setViewControllers:@[[[NotifyController alloc] init]] animated:NO];

@@ -228,6 +228,8 @@
 		B71E495F1AC98E4700D4DB6D /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B71E495E1AC98E4700D4DB6D /* SettingsFooterView.m */; };
 		B72000B51B0848160001F199 /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B72000B41B0848160001F199 /* libPushSDK-1.8.3.a */; };
 		B72000B71B0849E50001F199 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B72000B61B0849E50001F199 /* PushConfig.plist */; };
+		B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = B72ACCC11B66531E0020E841 /* DiscoverController.m */; };
+		B72ACCC81B666B8C0020E841 /* DiscoverBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72ACCC71B666B8C0020E841 /* DiscoverBannerView.m */; };
 		B72FD82A1AEF2DB400354248 /* SelectionCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD8291AEF2DB400354248 /* SelectionCategoryView.m */; };
 		B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD82E1AEF5B3A00354248 /* IconInfoView.m */; };
 		B73E90CD1B1C9D5D00616FD7 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73E90CC1B1C9D5D00616FD7 /* AVOSCloud.framework */; };
@@ -730,6 +732,10 @@
 		B72000B31B0848160001F199 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B72000B41B0848160001F199 /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
 		B72000B61B0849E50001F199 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		B72ACCC01B66531E0020E841 /* DiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverController.h; sourceTree = "<group>"; };
+		B72ACCC11B66531E0020E841 /* DiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverController.m; sourceTree = "<group>"; };
+		B72ACCC61B666B8C0020E841 /* DiscoverBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverBannerView.h; sourceTree = "<group>"; };
+		B72ACCC71B666B8C0020E841 /* DiscoverBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverBannerView.m; sourceTree = "<group>"; };
 		B72FD8281AEF2DB400354248 /* SelectionCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionCategoryView.h; sourceTree = "<group>"; };
 		B72FD8291AEF2DB400354248 /* SelectionCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionCategoryView.m; sourceTree = "<group>"; };
 		B72FD82D1AEF5B3A00354248 /* IconInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconInfoView.h; sourceTree = "<group>"; };
@@ -1477,6 +1483,10 @@
 			children = (
 				4E1D701D1A5ADB9A0032719E /* DiscoverViewController.h */,
 				4E1D701E1A5ADB9A0032719E /* DiscoverViewController.m */,
+				B72ACCC01B66531E0020E841 /* DiscoverController.h */,
+				B72ACCC11B66531E0020E841 /* DiscoverController.m */,
+				B72ACCC61B666B8C0020E841 /* DiscoverBannerView.h */,
+				B72ACCC71B666B8C0020E841 /* DiscoverBannerView.m */,
 			);
 			path = DiscoverViewController;
 			sourceTree = "<group>";
@@ -2643,10 +2653,12 @@
 				4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */,
 				4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */,
 				4E1D28D01A125B9300740C17 /* JSQMessagesBubbleImage.m in Sources */,
+				B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */,
 				B7B695851AF05C400016AAB8 /* SDWebImageManager.m in Sources */,
 				4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */,
 				4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */,
 				B76676411AB81758002F294C /* NoDataView.m in Sources */,
+				B72ACCC81B666B8C0020E841 /* DiscoverBannerView.m in Sources */,
 				4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */,
 				4E1D28C01A125B9300740C17 /* UIView+JSQMessages.m in Sources */,
 				B769B1251B2ACE91004401FA /* IFTTTTransform3DAnimation.m in Sources */,

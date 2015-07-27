@@ -126,6 +126,12 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                               failure:(void (^)(NSInteger stateCode))failure;
 
 /**
+ *  获取发现数据
+ */
++ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities))success
+                       failure:(void (^)(NSInteger stateCode))failure;
+
+/**
  *  获取热门商品列表
  *
  *  @param type    类型(24小时/7天)
