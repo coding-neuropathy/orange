@@ -7,10 +7,12 @@
 //
 
 #import "DiscoverController.h"
+#import "WebViewController.h"
 #import "UIScrollView+Slogan.h"
 #import "DiscoverBannerView.h"
+#import "DiscoverCategoryView.h"
 #import "EntityCell.h"
-#import "WebViewController.h"
+
 
 @interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate>
 
@@ -25,6 +27,7 @@
 
 static NSString * EntityCellIdentifier = @"EntityCell";
 static NSString * BannerIdentifier = @"BannerView";
+static NSString * CategoryIdentifier = @"CategoryView";
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,6 +82,8 @@ static NSString * BannerIdentifier = @"BannerView";
     
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
     [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
+    [self.collectionView registerClass:[DiscoverCategoryView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -167,7 +172,13 @@ static NSString * BannerIdentifier = @"BannerView";
                 return bannerView;
             }
                 break;
-                
+            case 1:
+            {
+                DiscoverCategoryView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier forIndexPath:indexPath];
+                categoryView.categories = self.categoryArray;
+                return categoryView;
+            }
+                break;
             default:
                 break;
         }
@@ -276,7 +287,10 @@ static NSString * BannerIdentifier = @"BannerView";
         case 0:
             headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
             break;
+        case 1:
+            headerSize = CGSizeMake(kScreenWidth, 155.);
             
+            break;
         default:
 //            headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 44.);
             break;

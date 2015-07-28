@@ -79,7 +79,6 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
     //    self.bannerScrollView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height-32);
     self.bannerScrollView.frame = CGRectMake(7., 7., kScreenWidth - 14., 149 * kScreenWidth / 320-15);
     [self.bannerScrollView scrollRectToVisible:CGRectMake(self.bannerScrollView.frame.size.width, 0, self.bannerScrollView.frame.size.width, self.bannerScrollView.frame.size.width) animated:NO];
