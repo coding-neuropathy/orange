@@ -14,6 +14,11 @@
 #import "EntityCell.h"
 
 
+@interface DiscoverHeaderSection : UICollectionReusableView
+@property (strong, nonatomic) UILabel * textLabel;
+@property (strong, nonatomic) NSString * text;
+@end
+
 @interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
@@ -28,6 +33,7 @@
 static NSString * EntityCellIdentifier = @"EntityCell";
 static NSString * BannerIdentifier = @"BannerView";
 static NSString * CategoryIdentifier = @"CategoryView";
+static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -84,6 +90,7 @@ static NSString * CategoryIdentifier = @"CategoryView";
     [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
     [self.collectionView registerClass:[DiscoverCategoryView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier];
     
+    [self.collectionView registerClass:[DiscoverHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -180,6 +187,11 @@ static NSString * CategoryIdentifier = @"CategoryView";
             }
                 break;
             default:
+            {
+                DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
+                header.text = @"热门商品";
+                return header;
+            }
                 break;
         }
     }
@@ -292,7 +304,7 @@ static NSString * CategoryIdentifier = @"CategoryView";
             
             break;
         default:
-//            headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 44.);
+            headerSize = CGSizeMake(kScreenWidth, 44.);
             break;
     }
     return headerSize;
@@ -345,5 +357,41 @@ static NSString * CategoryIdentifier = @"CategoryView";
     // Pass the selected object to the new view controller.
 }
 */
+
+@end
+
+
+#pragma mark - DiscoverView Header
+@implementation DiscoverHeaderSection
+
+- (UILabel *)textLabel
+{
+    if (!_textLabel)
+    {
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _textLabel.font = [UIFont systemFontOfSize:14.];
+        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textAlignment = NSTextAlignmentLeft;
+        _textLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:_textLabel];
+    }
+    return _textLabel;
+}
+
+- (void)setText:(NSString *)text
+{
+    _text = text;
+    self.textLabel.text = _text;
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.backgroundColor = UIColorFromRGB(0xf8f8f8);
+    
+    self.textLabel.frame = CGRectMake(10., 0., kScreenWidth - 20., 44.);
+}
 
 @end
