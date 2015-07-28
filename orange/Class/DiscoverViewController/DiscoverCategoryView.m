@@ -35,7 +35,9 @@
     if (!_categoryScrollView)
     {
         _categoryScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
-        
+        _categoryScrollView.scrollsToTop = NO;
+        _categoryScrollView.showsHorizontalScrollIndicator = NO;
+        _categoryScrollView.showsVerticalScrollIndicator = NO;
         [self addSubview:_categoryScrollView];
     }
     return _categoryScrollView;
@@ -47,6 +49,18 @@
     
     self.categoryLabel.text = NSLocalizedStringFromTable(@"category", kLocalizedFile,  nil);
     
+    self.categoryScrollView.contentSize = CGSizeMake(100 * _categories.count + 5 * (_categories.count - 1), 100.);
+    
+    for (int i = 0; i < _categories.count; i++) {
+        GKCategory * category = _categories[i];
+//        DDLogInfo(@"%@", category);
+        UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i * 100. + i * 5, 0., 100., 100.)];
+        imageView.layer.cornerRadius = 4.;
+        imageView.layer.masksToBounds = YES;
+        [imageView sd_setImageWithURL:category.coverURL];
+        [self.categoryScrollView addSubview:imageView];
+    }
+    
     [self setNeedsLayout];
 }
 
@@ -55,6 +69,8 @@
     [super layoutSubviews];
     
     self.categoryLabel.frame = CGRectMake(10., 5., kScreenWidth - 20., 30.);
+    
+    self.categoryScrollView.frame = CGRectMake(10., 45., kScreenWidth - 20., 100.);
 }
 
 @end
