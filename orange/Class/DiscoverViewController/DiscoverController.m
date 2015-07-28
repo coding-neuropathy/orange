@@ -8,10 +8,10 @@
 
 #import "DiscoverController.h"
 #import "UIScrollView+Slogan.h"
-#import "DiscoverHeaderView.h"
+#import "DiscoverBannerView.h"
 #import "EntityCell.h"
 
-@interface DiscoverController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, EntityCellDelegate>
+@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;

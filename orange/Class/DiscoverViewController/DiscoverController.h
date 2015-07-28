@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface DiscoverController : BaseViewController
+@interface DiscoverController : BaseViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @end

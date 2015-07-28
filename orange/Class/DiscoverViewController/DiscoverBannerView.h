@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DiscoverBannerViewDelegate <NSObject>
+
+- (void)TapBannerImageAction:(NSDictionary *)dict;
+
+@end
+
 @interface DiscoverBannerView : UICollectionReusableView
+
+@property (strong, nonatomic) NSArray * bannerArray;
+@property (weak, nonatomic) id<DiscoverBannerViewDelegate> delegate;
 
 @end
