@@ -10,6 +10,7 @@
 #import "UIScrollView+Slogan.h"
 #import "DiscoverBannerView.h"
 #import "EntityCell.h"
+#import "WebViewController.h"
 
 @interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate>
 
@@ -23,6 +24,7 @@
 @implementation DiscoverController
 
 static NSString * EntityCellIdentifier = @"EntityCell";
+static NSString * BannerIdentifier = @"BannerView";
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,6 +78,7 @@ static NSString * EntityCellIdentifier = @"EntityCell";
     // Do any additional setup after loading the view.
     
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
+    [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -149,6 +152,28 @@ static NSString * EntityCellIdentifier = @"EntityCell";
         }
             break;
     }
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView * reuseableview = [UICollectionReusableView new];
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        switch (indexPath.section) {
+            case 0:
+            {
+                DiscoverBannerView * bannerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier forIndexPath:indexPath];
+                bannerView.bannerArray = self.bannerArray;
+                bannerView.delegate = self;
+                return bannerView;
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    return reuseableview;
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
@@ -244,11 +269,57 @@ static NSString * EntityCellIdentifier = @"EntityCell";
 }
 
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
+{
+    CGSize headerSize = CGSizeMake(0, 0);
+    switch (section) {
+        case 0:
+            headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
+            break;
+            
+        default:
+//            headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 44.);
+            break;
+    }
+    return headerSize;
+}
+
+
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
     [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
     
+}
+
+#pragma mark - <DiscoverBannerViewDelegate>
+- (void)TapBannerImageAction:(NSDictionary *)dict
+{
+    NSString * url = dict[@"url"];
+    [AVAnalytics event:@"banner" attributes:@{@"url": url}];
+    [MobClick event:@"banner" attributes:@{@"url": url}];
+    if ([url hasPrefix:@"http://"]) {
+        if (k_isLogin) {
+            NSRange range = [url rangeOfString:@"?"];
+            if (range.location != NSNotFound) {
+                url = [url stringByAppendingString:[NSString stringWithFormat:@"&session=%@",[Passport sharedInstance].session]];
+            }
+            else
+            {
+                url = [url stringByAppendingString:[NSString stringWithFormat:@"?session=%@",[Passport sharedInstance].session]];
+            }
+        }
+        NSRange range = [url rangeOfString:@"out_link"];
+        if (range.location == NSNotFound) {
+            //            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
+            WebViewController * VC = [[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
+            VC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:VC animated:YES];
+            return;
+        }
+    }
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 /*
