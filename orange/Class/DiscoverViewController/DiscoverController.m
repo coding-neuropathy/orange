@@ -11,10 +11,11 @@
 #import "DiscoverHeaderView.h"
 #import "EntityCell.h"
 
-@interface DiscoverController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface DiscoverController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, EntityCellDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
+@property (strong, nonatomic) NSArray * categoryArray;
 @property (strong, nonatomic) NSArray * entityArray;
 
 @end
@@ -54,10 +55,10 @@ static NSString * EntityCellIdentifier = @"EntityCell";
 #pragma mark - data
 - (void)refresh
 {
-    [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities) {
+    [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities, NSArray * categories) {
         self.bannerArray = banners;
+        self.categoryArray = categories;
         self.entityArray = entities;
-        DDLogInfo(@"%@", self.entityArray);
         [self.collectionView reloadData];
         [self.collectionView.pullToRefreshView stopAnimating];
     } failure:^(NSInteger stateCode) {
@@ -143,7 +144,7 @@ static NSString * EntityCellIdentifier = @"EntityCell";
         {
             EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityCellIdentifier forIndexPath:indexPath];
             cell.entity = [self.entityArray objectAtIndex:indexPath.row];
-            //            cell.delegate = self;
+            cell.delegate = self;
             return cell;
         }
             break;
@@ -240,6 +241,14 @@ static NSString * EntityCellIdentifier = @"EntityCell";
             break;
     }
     return spacing;
+}
+
+
+#pragma mark - <EntityCellDelegate>
+- (void)TapImageWithEntity:(GKEntity *)entity
+{
+    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+    
 }
 
 /*

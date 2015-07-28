@@ -391,16 +391,26 @@
 /**
  *  获取发现数据
  */
-+ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities))success
++ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories))success
                        failure:(void (^)(NSInteger stateCode))failure
 {
     NSString * path = @"discover/";
 
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject[@"categories"]);
 //        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:0];
         NSArray *bannerArray = responseObject[@"banner"];
-        NSMutableArray * entityArray = [NSMutableArray arrayWithCapacity:1];
+        
+        NSMutableArray * categories = [NSMutableArray arrayWithCapacity:0];
+//        NSArray * categoryContent = responseObject[@"categories"];
+        for (NSDictionary * objectDict in responseObject[@"categories"])
+        {
+            GKCategory * category = [GKCategory modelFromDictionary:objectDict[@"category"]];
+//            NSLog(@"url %@", category.coverURL);
+            [categories addObject:category];
+        }
+        
+        NSMutableArray * entityArray = [NSMutableArray arrayWithCapacity:0];
         NSArray * content = responseObject[@"entities"];
         for (NSDictionary *objectDict in content) {
             GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
@@ -408,7 +418,7 @@
         }
         
         if (success) {
-            success(bannerArray, entityArray);
+            success(bannerArray, entityArray, categories);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

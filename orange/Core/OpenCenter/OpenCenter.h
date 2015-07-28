@@ -14,6 +14,8 @@ DEFINE_SINGLETON_FOR_HEADER(OpenCenter);
 
 - (void)openUser:(GKUser *)user;
 - (void)openEntity:(GKEntity *)entity;
+- (void)openEntity:(GKEntity *)entity hideButtomBar:(BOOL)hide;
+
 - (void)openNoteComment:(GKNote *)note;
 - (void)openCategory:(GKEntityCategory *)category;
 - (void)openTagWithName:(NSString *)tname User:(GKUser *)user;

@@ -44,9 +44,16 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
 - (void)openEntity:(GKEntity *)entity
 {
+    [self openEntity:entity hideButtomBar:NO];
+//    EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
+//    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)openEntity:(GKEntity *)entity hideButtomBar:(BOOL)hide
+{
     EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
+    vc.hidesBottomBarWhenPushed = hide;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-    //    [controller.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)openCategory:(GKEntityCategory *)category

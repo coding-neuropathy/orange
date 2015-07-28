@@ -87,8 +87,8 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self failureLogWithOperation:operation responseObject:error];
-//        NSLog(@"error %@", [[error userInfo] allKeys]);
-//        NSLog(@"error %@", [[error userInfo] objectForKey:@"NSErrorFailingURLKey"]);
+        NSLog(@"error %@", [[error userInfo] allKeys]);
+        NSLog(@"error %@", [[error userInfo] objectForKey:@"NSErrorFailingURLKey"]);
         if (failure) {
             failure(operation, error);
         }
