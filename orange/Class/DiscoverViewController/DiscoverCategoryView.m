@@ -54,20 +54,16 @@
     for (int i = 0; i < _categories.count; i++) {
         GKCategory * category = _categories[i];
 //        DDLogInfo(@"%@", category);
-//        UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i * 100. + i * 5, 0., 100., 100.)];
-//        imageView.layer.cornerRadius = 4.;
-//        imageView.layer.masksToBounds = YES;
-//        [imageView sd_setImageWithURL:category.coverURL];
-//        [self.categoryScrollView addSubview:imageView];
-        UIButton * categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        categoryBtn.frame = CGRectMake(i * 100. + i * 5., 0., 100., 100.);
-        categoryBtn.layer.cornerRadius = 4.;
-        categoryBtn.layer.masksToBounds = YES;
-        [categoryBtn setTitle:category.title forState:UIControlStateNormal];
-        [categoryBtn sd_setImageWithURL:category.coverURL forState:UIControlStateNormal];
-        [categoryBtn addTarget:self action:@selector(categoryBtnActoin:) forControlEvents:UIControlEventTouchDragInside];
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * 100. + i * 5, 0., 100., 100.)];
+        imageView.layer.cornerRadius = 4.;
+        imageView.layer.masksToBounds = YES;
+        imageView.userInteractionEnabled = YES;
+        [imageView sd_setImageWithURL:category.coverURL];
+
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(categoryBtnActoin:)];
+        [imageView addGestureRecognizer:tap];
         
-        [self.categoryScrollView addSubview:categoryBtn];
+        [self.categoryScrollView addSubview:imageView];
     }
     
     [self setNeedsLayout];
@@ -85,7 +81,7 @@
 #pragma mark - button action
 -(void)categoryBtnActoin:(id)sender
 {
-
+    DDLogInfo(@"tap tap");
 }
 
 @end
