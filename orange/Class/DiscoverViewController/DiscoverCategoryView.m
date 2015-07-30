@@ -54,11 +54,20 @@
     for (int i = 0; i < _categories.count; i++) {
         GKCategory * category = _categories[i];
 //        DDLogInfo(@"%@", category);
-        UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i * 100. + i * 5, 0., 100., 100.)];
-        imageView.layer.cornerRadius = 4.;
-        imageView.layer.masksToBounds = YES;
-        [imageView sd_setImageWithURL:category.coverURL];
-        [self.categoryScrollView addSubview:imageView];
+//        UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i * 100. + i * 5, 0., 100., 100.)];
+//        imageView.layer.cornerRadius = 4.;
+//        imageView.layer.masksToBounds = YES;
+//        [imageView sd_setImageWithURL:category.coverURL];
+//        [self.categoryScrollView addSubview:imageView];
+        UIButton * categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        categoryBtn.frame = CGRectMake(i * 100. + i * 5., 0., 100., 100.);
+        categoryBtn.layer.cornerRadius = 4.;
+        categoryBtn.layer.masksToBounds = YES;
+        [categoryBtn setTitle:category.title forState:UIControlStateNormal];
+        [categoryBtn sd_setImageWithURL:category.coverURL forState:UIControlStateNormal];
+        [categoryBtn addTarget:self action:@selector(categoryBtnActoin:) forControlEvents:UIControlEventTouchDragInside];
+        
+        [self.categoryScrollView addSubview:categoryBtn];
     }
     
     [self setNeedsLayout];
@@ -71,6 +80,12 @@
     self.categoryLabel.frame = CGRectMake(10., 5., kScreenWidth - 20., 30.);
     
     self.categoryScrollView.frame = CGRectMake(10., 45., kScreenWidth - 20., 100.);
+}
+
+#pragma mark - button action
+-(void)categoryBtnActoin:(id)sender
+{
+
 }
 
 @end

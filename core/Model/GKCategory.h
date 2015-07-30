@@ -16,6 +16,11 @@
 @property (nonatomic, assign) NSUInteger groupId;
 
 /**
+ * 分类名称
+ */
+@property (nonatomic, strong) NSString * title;
+
+/**
  *  分类封面图片 URL
  */
 @property (nonatomic, strong) NSURL *coverURL;
