@@ -7,6 +7,7 @@
 //
 
 #import "DiscoverCategoryView.h"
+#import "CategoryImageView.h"
 
 @interface DiscoverCategoryView ()
 
@@ -54,11 +55,12 @@
     for (int i = 0; i < _categories.count; i++) {
         GKCategory * category = _categories[i];
 //        DDLogInfo(@"%@", category);
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * 100. + i * 5, 0., 100., 100.)];
-        imageView.layer.cornerRadius = 4.;
-        imageView.layer.masksToBounds = YES;
-        imageView.userInteractionEnabled = YES;
-        [imageView sd_setImageWithURL:category.coverURL];
+        CategoryImageView * imageView = [[CategoryImageView alloc] initWithFrame:CGRectMake(i * 100. + i * 5, 0., 100., 100.)];
+//        imageView.layer.cornerRadius = 4.;
+//        imageView.layer.masksToBounds = YES;
+//        imageView.userInteractionEnabled = YES;
+        imageView.category = category;
+        [imageView sd_setImageWithURL:category.coverURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xe6e6e6) andSize:CGSizeMake(100., 100.)]];
 
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(categoryBtnActoin:)];
         [imageView addGestureRecognizer:tap];

@@ -10,6 +10,6 @@
 
 @interface CategoryImageView : UIImageView
 
-@property (strong, nonatomic) GKCategory * categoty;
+@property (strong, nonatomic) GKCategory * category;
 
 @end

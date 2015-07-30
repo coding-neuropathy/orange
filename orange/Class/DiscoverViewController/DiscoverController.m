@@ -9,6 +9,7 @@
 #import "DiscoverController.h"
 #import "WebViewController.h"
 #import "UIScrollView+Slogan.h"
+
 #import "DiscoverBannerView.h"
 #import "DiscoverCategoryView.h"
 #import "EntityCell.h"
