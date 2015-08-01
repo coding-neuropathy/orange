@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UILabel * categorylabel;
 @property (strong, nonatomic) UILabel * categoryENlabel;
+@property (strong, nonatomic) UIImageView * maskView;
 
 @end
 
@@ -26,6 +27,17 @@
         self.userInteractionEnabled = YES;
     }
     return self;
+}
+
+- (UIImageView *)maskView
+{
+    if (!_maskView) {
+        _maskView = [[UIImageView alloc] initWithImage:[UIImage imageWithColor:UIColorFromRGB(0x000000) andSize:CGSizeMake(100., 100.)]];
+//        _maskView.alpha = 0.4;
+//        _maskView.frame = CGRectMake(0., 0., _maskView.image.size.width, _maskView.image.size.height);
+        [self addSubview:_maskView];
+    }
+    return _maskView;
 }
 
 - (UILabel *)categorylabel
@@ -56,13 +68,16 @@
 - (void)setCategory:(GKCategory *)category
 {
     _category = category;
-    
 //    [self sd_setImageWithURL:_categoty.coverURL];
+    self.maskView.alpha = 0.4;
     NSArray * listString = [_category.title componentsSeparatedByString:@" "];
 //    DDLogInfo(@"string %@", listString);
-    
-    self.categorylabel.text = listString[0];
-    self.categoryENlabel.text = listString[1];
+    if (listString.count >= 2) {
+        self.categorylabel.text = listString[0];
+        self.categoryENlabel.text = listString[1];
+    } else {
+        self.categorylabel.text = listString[0];
+    }
  
 //    self.layer.mask
     [self setNeedsLayout];
