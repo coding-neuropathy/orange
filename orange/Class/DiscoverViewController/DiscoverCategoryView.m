@@ -83,7 +83,15 @@
 #pragma mark - button action
 -(void)categoryBtnActoin:(id)sender
 {
-    DDLogInfo(@"tap tap");
+    
+    UITapGestureRecognizer * tap = (UITapGestureRecognizer *)sender;
+//    DDLogInfo(@"tap tap %@", tap.view);
+    
+    CategoryImageView * imageview = (CategoryImageView *)tap.view;
+    
+    if (!self.tapBlock) {
+        self.tapBlock(imageview.category);
+    }
 }
 
 @end

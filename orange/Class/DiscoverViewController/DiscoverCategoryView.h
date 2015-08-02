@@ -11,5 +11,6 @@
 @interface DiscoverCategoryView : UICollectionReusableView
 
 @property (strong, nonatomic) NSArray * categories;
+@property (nonatomic, copy) void (^tapBlock)(GKCategory * category);
 
 @end
