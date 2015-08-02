@@ -11,6 +11,7 @@
 #import "CategoryViewController.h"
 #import "API.h"
 #import "Config.h"
+
 @interface GroupViewController ()
 @property (nonatomic, strong) NSArray *categoryGroupArray;
 @property (nonatomic, strong) NSMutableArray *categoryArray;

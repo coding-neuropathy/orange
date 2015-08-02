@@ -88,8 +88,8 @@
 //    DDLogInfo(@"tap tap %@", tap.view);
     
     CategoryImageView * imageview = (CategoryImageView *)tap.view;
-    
-    if (!self.tapBlock) {
+//    DDLogInfo(@"%@", imageview.category);
+    if (self.tapBlock) {
         self.tapBlock(imageview.category);
     }
 }
