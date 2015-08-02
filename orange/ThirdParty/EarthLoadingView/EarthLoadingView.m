@@ -91,18 +91,6 @@
 - (void)repeatAnimation
 {
     _currentStep = ++_currentStep % 17;
-
-    
-    if (_currentStep == 16) {
-        [UIView animateWithDuration:_duration animations:^{
-            self.earth.alpha = 0.5;
-        }completion:^(BOOL finished) {
-            [UIView animateWithDuration:_duration animations:^{
-                self.earth.alpha = 1;
-            }];
-        }];
-
-    }
     
     if (_currentStep < 17)
     {

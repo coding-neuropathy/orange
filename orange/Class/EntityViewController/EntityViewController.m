@@ -146,9 +146,13 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     if (!_likeButton) {
 //        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40., 35)];
         _likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _likeButton.frame = CGRectMake(0, 0, 40., 48.);
-        [_likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        _likeButton.frame = CGRectMake(0, 0, kScreenWidth/3, 44.);
+        UIImage * like = [[UIImage imageNamed:@"like"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        _likeButton.tintColor = UIColorFromRGB(0xffffff);
+        [_likeButton setImage:like forState:UIControlStateNormal];
         [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
+        [_likeButton setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
+        _likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
         if (self.entity.isLiked) {
             _likeButton.selected = YES;
@@ -161,10 +165,12 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 {
     if (!_postBtn) {
         _postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _postBtn.frame = CGRectMake(0., 0., 40., 40.);
-        [_postBtn setImage:[UIImage imageNamed:@"post note"] forState:UIControlStateNormal];
-//        UIImage * image = [UIImage imageWithIcon:@"post note" backgroundColor:[UIColor clearColor] iconColor:UIColorFromRGB(0x414243) fontSize:20.];
-//        [_postBtn setImage:image forState:UIControlStateNormal];
+        _postBtn.frame = CGRectMake(0., 0.,  kScreenWidth/3, 44.);
+        UIImage * image = [[UIImage imageNamed:@"post note"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        _postBtn.tintColor = UIColorFromRGB(0xffffff);
+        [_postBtn setImage:image forState:UIControlStateNormal];
+        [_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
+        _postBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_postBtn addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _postBtn;
@@ -174,14 +180,14 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 {
     if (!_buyButton) {
         _buyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _buyButton.frame = CGRectMake(0., 0., 129., 35.);
+        _buyButton.frame = CGRectMake(0., 0., kScreenWidth/3, 44.);
         _buyButton.layer.masksToBounds = YES;
-        _buyButton.layer.cornerRadius = 4;
-        _buyButton.backgroundColor = UIColorFromRGB(0x427ec0);
+        _buyButton.layer.cornerRadius = 0;
+        _buyButton.backgroundColor = UIColorFromRGB(0x2a5393);
         _buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
         [_buyButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+        [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [_buyButton addTarget:self action:@selector(buyButtonAction) forControlEvents:UIControlEventTouchUpInside];
         
         if (self.entity.purchaseArray.count > 0) {
@@ -220,9 +226,9 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 - (void)configToolbar
 {
 //    self.navigationController.toolbar.clipsToBounds = YES;
-    self.navigationController.toolbar.barTintColor = UIColorFromRGB(0xf8f8f8);
+    self.navigationController.toolbar.barTintColor = UIColorFromRGB(0x292929);
     self.navigationController.toolbar.layer.borderWidth = 0.5;
-    self.navigationController.toolbar.layer.borderColor = UIColorFromRGB(0xb6b6b6).CGColor;
+    self.navigationController.toolbar.layer.borderColor = UIColorFromRGB(0x292929).CGColor;
     
     for (UIView * view in self.navigationController.toolbar.subviews) {
         if ([view  isKindOfClass:[UIImageView class]]&&![view isKindOfClass:[NSClassFromString(@"_UIToolbarBackground") class]]) {
@@ -235,11 +241,14 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     UIBarButtonItem * likeBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.likeButton];
     UIBarButtonItem * postBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.postBtn];
     UIBarButtonItem * buyBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.buyButton];
+    UIBarButtonItem * flexibleButtonItemLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    //flexibleButtonItemLeft.width = -16;
+    UIBarButtonItem * flexibleButtonItemRight = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    //flexibleButtonItemLeft.width = -16;
+    UIBarButtonItem * flexibleButtonItemMiddle = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    UIBarButtonItem * fixedItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    fixedItem.width = kScreenWidth - 50. - self.buyButton.deFrameWidth - 80.;
     
-    self.toolbarItems = @[likeBarBtn, postBarBtn, fixedItem, buyBarBtn];
+    self.toolbarItems = @[flexibleButtonItemLeft,likeBarBtn, postBarBtn, buyBarBtn,flexibleButtonItemRight];
 }
 
 #pragma mark - get entity data
@@ -324,7 +333,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
     self.navigationItem.rightBarButtonItems = array;
     
 //    self.navigationController.toolbar.translucent = NO;
-    self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
+    //self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
     [self.collectionView addSubview:self.header];
     [self configToolbar];
     
@@ -373,6 +382,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
         [self removeObserver];
     }
     _entity = entity;
+    self.title = entity.entityName;
     [self addObserver];
 }
 
