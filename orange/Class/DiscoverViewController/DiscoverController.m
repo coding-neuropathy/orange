@@ -14,6 +14,8 @@
 #import "DiscoverCategoryView.h"
 #import "EntityCell.h"
 
+#import "GroupViewController.h"
+
 
 @interface DiscoverHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
@@ -184,6 +186,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
             {
                 DiscoverCategoryView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier forIndexPath:indexPath];
                 categoryView.categories = self.categoryArray;
+                categoryView.tapBlock = ^(GKCategory * category){
+//                    DDLogInfo(@"category %@", category);
+                    GroupViewController * groupVC = [[GroupViewController alloc] initWithGid:category.groupId];
+                    [self.navigationController pushViewController:groupVC animated:YES];
+                };
                 return categoryView;
             }
                 break;
