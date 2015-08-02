@@ -7,9 +7,11 @@
 //
 
 #import "EntityCell.h"
+#import "EarthLoadingView.h"
 
 @interface EntityCell ()
 @property (strong, nonatomic) UIImageView * imageView;
+@property (strong, nonatomic) EarthLoadingView * loading;
 @end
 
 @implementation EntityCell
@@ -29,14 +31,28 @@
     return _imageView;
 }
 
+- (EarthLoadingView *)loading {
+    if(!_loading) {
+        _loading = [[EarthLoadingView alloc] init];
+        _loading.hidesWhenStopped = YES;
+        [self.contentView addSubview:_loading];
+    }
+    return _loading;
+}
+
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
-    
+    __weak __typeof(&*self)weakSelf = self;
+    [self.loading startAnimating];
     if (IS_IPHONE_6P) {
-            [self.imageView sd_setImageWithURL:_entity.imageURL_310x310 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(120., 120.)]];
+        [self.imageView sd_setImageWithURL:_entity.imageURL_310x310 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(120., 120.)] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [weakSelf.loading stopAnimating];
+        }];
     } else {
-        [self.imageView sd_setImageWithURL:_entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(120., 120.)]];
+        [self.imageView sd_setImageWithURL:_entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(120., 120.)] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [weakSelf.loading stopAnimating];
+        }];
     }
     [self setNeedsLayout];
 }
@@ -45,6 +61,8 @@
 {
     [super layoutSubviews];
     self.imageView.frame = CGRectMake(0., 0., self.deFrameWidth, self.deFrameHeight);
+    self.loading.center = CGPointMake(self.contentView.deFrameWidth/2, self.contentView.deFrameHeight/2);
+    [self.contentView bringSubviewToFront:self.loading];
 }
 
 #pragma mark - button action
