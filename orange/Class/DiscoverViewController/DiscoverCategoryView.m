@@ -52,6 +52,11 @@
     
     self.categoryScrollView.contentSize = CGSizeMake(100 * _categories.count + 5 * (_categories.count - 1), 100.);
     
+    
+    for (UIView * view in self.categoryScrollView.subviews) {
+        [view removeFromSuperview];
+    }
+    
     for (int i = 0; i < _categories.count; i++) {
         GKCategory * category = _categories[i];
 //        DDLogInfo(@"%@", category);
