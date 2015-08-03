@@ -10,9 +10,13 @@
 #import "WebViewController.h"
 #import "UIScrollView+Slogan.h"
 
+#import "pinyin.h"
+#import "PinyinTools.h"
+
 #import "DiscoverBannerView.h"
 #import "DiscoverCategoryView.h"
 #import "EntityCell.h"
+#import "GTScrollNavigationBar.h"
 
 #import "GroupViewController.h"
 
@@ -22,13 +26,13 @@
 @property (strong, nonatomic) NSString * text;
 @end
 
-@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate>
+@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
 @property (strong, nonatomic) NSArray * categoryArray;
 @property (strong, nonatomic) NSArray * entityArray;
-
+@property (strong, nonatomic) UISearchController * searchVC;
 @end
 
 @implementation DiscoverController
@@ -66,6 +70,26 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return _collectionView;
 }
 
+- (UISearchController *)searchVC
+{
+    if (!_searchVC) {
+        _searchVC = [[UISearchController alloc] initWithSearchResultsController:nil];
+        _searchVC.searchResultsUpdater = self;
+        _searchVC.delegate = self;
+        _searchVC.hidesNavigationBarDuringPresentation = NO;
+        
+        _searchVC.searchBar.tintColor = UIColorFromRGB(0x666666);
+        _searchVC.searchBar.placeholder = NSLocalizedStringFromTable(@"search", kLocalizedFile, nil);
+        [_searchVC.searchBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 48)] stretchableImageWithLeftCapWidth:5 topCapHeight:5]  forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+        [_searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(10, 28)]  forState:UIControlStateNormal];
+        _searchVC.searchBar.searchTextPositionAdjustment = UIOffsetMake(2.f, 0.f);
+        _searchVC.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+        _searchVC.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _searchVC.searchBar.keyboardType = UIKeyboardTypeDefault;
+    }
+    return _searchVC;
+}
+
 #pragma mark - data
 - (void)refresh
 {
@@ -88,12 +112,17 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    
     
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
     [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
     [self.collectionView registerClass:[DiscoverCategoryView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier];
     
     [self.collectionView registerClass:[DiscoverHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
+    
+    self.navigationItem.titleView = self.searchVC.searchBar;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,6 +133,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    self.navigationController.scrollNavigationBar.scrollView = self.collectionView;
+    [self.navigationController.navigationBar setAlpha:1];
+    [self.navigationController.navigationBar setTranslucent:NO];
     
     [AVAnalytics beginLogPageView:@"DiscoverView"];
     [MobClick beginLogPageView:@"DiscoverView"];

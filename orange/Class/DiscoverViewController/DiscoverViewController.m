@@ -89,25 +89,6 @@
     return _noResultView;
 }
 
-- (UICollectionView *)collectionView
-{
-    if (!_collectionView) {
-        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight- kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
-        
-//        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
-    }
-    return _collectionView;
-}
-
-- (void)loadView
-{
-    self.view = self.collectionView;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
