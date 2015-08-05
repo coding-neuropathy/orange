@@ -60,7 +60,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight- kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
         
 //        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
         _collectionView.delegate = self;
@@ -351,6 +351,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return headerSize;
 }
 
+#pragma mark - <UISearchResultsUpdating>
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+//    DDLogInfo(@"%@", searchController);
+}
 
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
