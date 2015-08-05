@@ -352,7 +352,7 @@
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
-        
+        NSLog(@"%@", responseObject);
         NSMutableArray *selectionArray = [NSMutableArray array];
         for (NSDictionary *selectionDict in objectArray) {
             NSString *type = selectionDict[@"type"];
