@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 guoku. All rights reserved.
 //
 
-#import "EarthLoadingView.h"
+#import "ImageLoadingView.h"
 
-@implementation EarthLoadingView
+@implementation ImageLoadingView
 
 @synthesize hidesWhenStopped = _hidesWhenStopped;
 @synthesize dotCount = _dotCount;
@@ -19,7 +19,7 @@
     _currentStep = 0;
     _dotCount = 9;
     _isAnimating = NO;
-    _duration = 0.05f;
+    _duration = 0.1f;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -29,7 +29,7 @@
         // Initialization code
         [self setDefaultProperty];
         self.backgroundColor = [UIColor clearColor];
-        _earth = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"frame 1"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        _earth = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"loading-image"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
         _earth.tintColor = [UIColor colorWithRed:((float)((0xdcdcdc & 0xFF0000) >> 16))/255.0 green:((float)((0xdcdcdc & 0xFF00) >> 8))/255.0 blue:((float)(0xdcdcdc & 0xFF))/255.0 alpha:1.0];
         _earth.frame = CGRectMake(0, 0, 24, 24);
         _earth.contentMode = UIViewContentModeScaleAspectFill;
@@ -54,7 +54,7 @@
         return;
     }
     _currentStep = 0;
-    self.earth.transform = CGAffineTransformMakeRotation(0 * (M_PI / 180.0f));
+    
     _timer = [NSTimer scheduledTimerWithTimeInterval:_duration
                                               target:self
                                             selector:@selector(repeatAnimation)
@@ -92,19 +92,13 @@
 {
     _currentStep = ++_currentStep;
     
-    if (_currentStep < 17)
-    {
-        self.earth.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%d",_currentStep+1]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    }
-    else
-    {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.08];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(endAnimation)];
-        self.earth.transform = CGAffineTransformMakeRotation(30*(_currentStep-17) * (M_PI / 180.0f));
-        [UIView commitAnimations];
-    }
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.1];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(endAnimation)];
+    self.earth.transform = CGAffineTransformMakeRotation(30*(_currentStep) * (M_PI / 180.0f));
+    [UIView commitAnimations];
+    
 }
 
 @end

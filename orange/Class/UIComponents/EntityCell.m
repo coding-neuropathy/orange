@@ -7,11 +7,11 @@
 //
 
 #import "EntityCell.h"
-#import "EarthLoadingView.h"
+#import "ImageLoadingView.h"
 
 @interface EntityCell ()
 @property (strong, nonatomic) UIImageView * imageView;
-@property (strong, nonatomic) EarthLoadingView * loading;
+@property (strong, nonatomic) ImageLoadingView * loading;
 @end
 
 @implementation EntityCell
@@ -31,9 +31,9 @@
     return _imageView;
 }
 
-- (EarthLoadingView *)loading {
+- (ImageLoadingView *)loading {
     if(!_loading) {
-        _loading = [[EarthLoadingView alloc] init];
+        _loading = [[ImageLoadingView alloc] init];
         _loading.hidesWhenStopped = YES;
         [self.contentView addSubview:_loading];
     }
