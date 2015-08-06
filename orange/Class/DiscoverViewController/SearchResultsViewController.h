@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchResultsViewController : UIViewController
+@interface SearchResultsViewController : UIViewController <UISearchResultsUpdating>
 -(void)searchText:(NSString *)string;
 @end

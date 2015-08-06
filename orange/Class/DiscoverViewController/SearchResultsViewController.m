@@ -11,11 +11,12 @@
 #import "NoSearchResultView.h"
 #import "CategoryGridCell.h"
 #import "EntitySingleListCell.h"
-#import "UserSingleListCell.h"
+#import "UserSingleListCell.h"ds
 #import "PinyinTools.h"
-@interface SearchResultsViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property(strong,nonatomic)UITableView * tableView;
-@property(nonatomic, strong) HMSegmentedControl *segmentedControlForSearch;
+
+@interface SearchResultsViewController () <UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic)UITableView * tableView;
+@property (nonatomic, strong) HMSegmentedControl *segmentedControlForSearch;
 @property (nonatomic, strong) NSMutableArray *filteredArray;
 @property (nonatomic, strong) NSString *keyword;
 @property (nonatomic, strong) NoSearchResultView * noResultView;
@@ -38,7 +39,7 @@
 }
 - (HMSegmentedControl *)segmentedControlForSearch
 {
-    if (!self.segmentedControlForSearch) {
+    if (!_segmentedControlForSearch) {
         HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
         [segmentedControl setSectionTitles:@[ @"商品",@"品类",@"用户",@"喜爱"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
@@ -59,15 +60,14 @@
             //[self.segmentedControlForSearch addSubview:H];
         }
     }
-    return self.segmentedControlForSearch;
-
+    return _segmentedControlForSearch;
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f,kNavigationBarHeight+kStatusBarHeight, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -348,6 +348,10 @@
 
 - (void)handleSearchText:(NSString *)searchText
 {
+    if (searchText.length == 0) {
+        return;
+    }
+    
     if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
     {
         self.filteredArray = [NSMutableArray array];
@@ -392,4 +396,16 @@
         }];
     }
 }
+
+#pragma mark - <UISearchResultsUpdating>
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+//    DDLogInfo(@"keyword %@", searchController.searchBar.text);
+    self.keyword = [searchController.searchBar.text Trimed];
+    if (self.keyword.length == 0) {
+        return;
+    }
+    [self handleSearchText:self.keyword];
+}
+
 @end

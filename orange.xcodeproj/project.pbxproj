@@ -197,7 +197,6 @@
 		4E66C1DD1A7C8B2500F31A90 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1DB1A7C8B2500F31A90 /* SettingViewController.m */; };
 		4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E41A7DBA0F00F31A90 /* NoteViewController.m */; };
 		4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E71A7DBAB400F31A90 /* CommentCell.m */; };
-		4E8416091B73024A00359C45 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8416081B73024A00359C45 /* SearchResultsViewController.m */; };
 		4E8D6A991A38B59F00156C17 /* fontdiao.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */; };
 		4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A921A38B59F00156C17 /* NSString+FontDiao.m */; };
 		4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A941A38B59F00156C17 /* UIButton+FontDiao.m */; };
@@ -230,6 +229,7 @@
 		4EEB29FF1B523C650092A8CF /* GKNotificationHUB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB29FE1B523C650092A8CF /* GKNotificationHUB.m */; };
 		4EF508811B49042000C92618 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF508801B49042000C92618 /* ShareView.m */; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
+		8ABA73351B73A8E7006A8F56 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABA73341B73A8E7006A8F56 /* SearchResultsViewController.m */; };
 		B71E494A1AC9207B00D4DB6D /* guoku.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E494C1AC9207B00D4DB6D /* guoku.strings */; };
 		B71E49521AC923FB00D4DB6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E49541AC923FB00D4DB6D /* InfoPlist.strings */; };
 		B71E495B1AC9259000D4DB6D /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B71E495A1AC9259000D4DB6D /* SettingsViewCell.m */; };
@@ -680,8 +680,6 @@
 		4E66C1E41A7DBA0F00F31A90 /* NoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteViewController.m; sourceTree = "<group>"; };
 		4E66C1E61A7DBAB400F31A90 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		4E66C1E71A7DBAB400F31A90 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
-		4E8416071B73024A00359C45 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
-		4E8416081B73024A00359C45 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontdiao.ttf; sourceTree = "<group>"; };
 		4E8D6A901A38B59F00156C17 /* FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontDiao.h; sourceTree = "<group>"; };
 		4E8D6A911A38B59F00156C17 /* NSString+FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontDiao.h"; sourceTree = "<group>"; };
@@ -741,6 +739,8 @@
 		4EF508801B49042000C92618 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		8A402CC51B69F57A00E54FFF /* CategoryImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryImageView.h; sourceTree = "<group>"; };
 		8A402CC61B69F57A00E54FFF /* CategoryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryImageView.m; sourceTree = "<group>"; };
+		8ABA73331B73A8E7006A8F56 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
+		8ABA73341B73A8E7006A8F56 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		B71E494E1AC9208100D4DB6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/guoku.strings"; sourceTree = "<group>"; };
 		B71E494F1AC920BA00D4DB6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/guoku.strings; sourceTree = "<group>"; };
 		B71E49531AC923FB00D4DB6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1486,6 +1486,8 @@
 		4E1D70191A5ADB890032719E /* DiscoverViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8ABA73331B73A8E7006A8F56 /* SearchResultsViewController.h */,
+				8ABA73341B73A8E7006A8F56 /* SearchResultsViewController.m */,
 				4E1D701D1A5ADB9A0032719E /* DiscoverViewController.h */,
 				4E1D701E1A5ADB9A0032719E /* DiscoverViewController.m */,
 				B72ACCC01B66531E0020E841 /* DiscoverController.h */,
@@ -1496,8 +1498,6 @@
 				B76FAE951B67B5FA002AC4C7 /* DiscoverCategoryView.m */,
 				8A402CC51B69F57A00E54FFF /* CategoryImageView.h */,
 				8A402CC61B69F57A00E54FFF /* CategoryImageView.m */,
-				4E8416071B73024A00359C45 /* SearchResultsViewController.h */,
-				4E8416081B73024A00359C45 /* SearchResultsViewController.m */,
 			);
 			path = DiscoverViewController;
 			sourceTree = "<group>";
@@ -2630,7 +2630,7 @@
 				B76EE0821B3D86C3009D8763 /* NotifyController.m in Sources */,
 				B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */,
 				4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */,
-				4E8416091B73024A00359C45 /* SearchResultsViewController.m in Sources */,
+				8ABA73351B73A8E7006A8F56 /* SearchResultsViewController.m in Sources */,
 				B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */,
 				4E1D28D51A125B9300740C17 /* JSQMessagesCollectionViewCell.m in Sources */,
 				B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */,

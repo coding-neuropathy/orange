@@ -26,7 +26,7 @@
 @property (strong, nonatomic) NSString * text;
 @end
 
-@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
+@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
@@ -74,9 +74,14 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (UISearchController *)searchVC
 {
     if (!_searchVC) {
+//        UITableViewController * tablevc = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+        
         _searchVC = [[UISearchController alloc] initWithSearchResultsController:self.searchResultsVC];
-        _searchVC.searchResultsUpdater = self;
+        _searchVC.searchResultsUpdater = self.searchResultsVC;
         _searchVC.delegate = self;
+//        _searchVC.searchBar.delegate = self;
+        
+//        _searchVC.dimsBackgroundDuringPresentation = NO;
         _searchVC.hidesNavigationBarDuringPresentation = NO;
         
         _searchVC.searchBar.tintColor = UIColorFromRGB(0x666666);
@@ -89,15 +94,15 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         _searchVC.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
         _searchVC.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _searchVC.searchBar.keyboardType = UIKeyboardTypeDefault;
-        _searchVC.searchBar.delegate = self;
+
     }
     return _searchVC;
 }
 
-- (SearchResultsViewController *)searchResultsViewController
+- (SearchResultsViewController *)searchResultsVC
 {
     if (!_searchResultsVC) {
-        _searchResultsVC = [[SearchResultsViewController alloc]init];
+        _searchResultsVC = [[SearchResultsViewController alloc] init];
     }
     return _searchResultsVC;
 }
@@ -359,16 +364,37 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return headerSize;
 }
 
-#pragma mark - <UISearchResultsUpdating>
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
-{
-    NSString *searchText = searchController.searchBar.text;
-    NSLog(@"keyword %@", searchText);
-    [self.searchResultsVC searchText:searchText];
-}
+//#pragma mark - <UISearchBarDelegate>
+//- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+//{
+//    NSString * keyword = searchBar.text;
+//    NSLog(@"keyword %@", keyword);
+//    
+//}
+//
+//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+//{
+//    NSString * keyword = searchBar.text;
+//    DDLogInfo(@"keyword %@", keyword);
+////    [self.searchResultsVC searchText:keyword];
+////    [self presentViewController:self.searchResultsVC animated:YES completion:nil];
+//}
+
+//#pragma mark - <UISearchResultsUpdating>
+//- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+//{
+//    NSString *searchText = searchController.searchBar.text;
+////    NSLog(@"keyword %@", searchText);
+////    [self.searchResultsVC searchText:searchText];
+//
+//}
 
 #pragma mark - <UISearchControllerDelegate>
-//- (void)p
+- (void)willPresentSearchController:(UISearchController *)searchController
+{
+//    DDLogInfo(@"search %@", searchController);
+//    [self.view addSubview:searchController.searchResultsController.view];
+}
 
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
