@@ -197,6 +197,7 @@
 		4E66C1DD1A7C8B2500F31A90 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1DB1A7C8B2500F31A90 /* SettingViewController.m */; };
 		4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E41A7DBA0F00F31A90 /* NoteViewController.m */; };
 		4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66C1E71A7DBAB400F31A90 /* CommentCell.m */; };
+		4E8416091B73024A00359C45 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8416081B73024A00359C45 /* SearchResultsViewController.m */; };
 		4E8D6A991A38B59F00156C17 /* fontdiao.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */; };
 		4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A921A38B59F00156C17 /* NSString+FontDiao.m */; };
 		4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A941A38B59F00156C17 /* UIButton+FontDiao.m */; };
@@ -225,6 +226,7 @@
 		4ECCD0D91A714A7D009D5A42 /* TagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0D81A714A7D009D5A42 /* TagCell.m */; };
 		4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */; };
 		4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */; };
+		4ED7685A1B7248A600AA3BF7 /* loading-static.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED768591B7248A600AA3BF7 /* loading-static.png */; };
 		4EEB29FF1B523C650092A8CF /* GKNotificationHUB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB29FE1B523C650092A8CF /* GKNotificationHUB.m */; };
 		4EF508811B49042000C92618 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF508801B49042000C92618 /* ShareView.m */; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
@@ -678,6 +680,8 @@
 		4E66C1E41A7DBA0F00F31A90 /* NoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteViewController.m; sourceTree = "<group>"; };
 		4E66C1E61A7DBAB400F31A90 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		4E66C1E71A7DBAB400F31A90 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		4E8416071B73024A00359C45 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
+		4E8416081B73024A00359C45 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontdiao.ttf; sourceTree = "<group>"; };
 		4E8D6A901A38B59F00156C17 /* FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontDiao.h; sourceTree = "<group>"; };
 		4E8D6A911A38B59F00156C17 /* NSString+FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontDiao.h"; sourceTree = "<group>"; };
@@ -730,6 +734,7 @@
 		4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
 		4ECCD0DE1A7349CF009D5A42 /* EntityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityViewController.h; sourceTree = "<group>"; };
 		4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityViewController.m; sourceTree = "<group>"; };
+		4ED768591B7248A600AA3BF7 /* loading-static.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-static.png"; sourceTree = "<group>"; };
 		4EEB29FD1B523C650092A8CF /* GKNotificationHUB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKNotificationHUB.h; sourceTree = "<group>"; };
 		4EEB29FE1B523C650092A8CF /* GKNotificationHUB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKNotificationHUB.m; sourceTree = "<group>"; };
 		4EF5087F1B49042000C92618 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
@@ -1491,6 +1496,8 @@
 				B76FAE951B67B5FA002AC4C7 /* DiscoverCategoryView.m */,
 				8A402CC51B69F57A00E54FFF /* CategoryImageView.h */,
 				8A402CC61B69F57A00E54FFF /* CategoryImageView.m */,
+				4E8416071B73024A00359C45 /* SearchResultsViewController.h */,
+				4E8416081B73024A00359C45 /* SearchResultsViewController.m */,
 			);
 			path = DiscoverViewController;
 			sourceTree = "<group>";
@@ -1624,6 +1631,7 @@
 		4E4F27D31B6F438E003A63C5 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				4ED768591B7248A600AA3BF7 /* loading-static.png */,
 				4E4F27D41B6F438E003A63C5 /* loading-image.png */,
 				4E4F27D51B6F438E003A63C5 /* loading-image@2x.png */,
 				4E4F27D61B6F438E003A63C5 /* loading-image@3x.png */,
@@ -2530,6 +2538,7 @@
 				B71E49521AC923FB00D4DB6D /* InfoPlist.strings in Resources */,
 				4E4F27ED1B6F4699003A63C5 /* 1.png in Resources */,
 				B754E6B31AFA76460034AB7D /* Tae.bundle in Resources */,
+				4ED7685A1B7248A600AA3BF7 /* loading-static.png in Resources */,
 				4E4F27F11B6F4699003A63C5 /* 13.png in Resources */,
 				4E1D28D71A125B9300740C17 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
 				4E4F27F31B6F4699003A63C5 /* 15.png in Resources */,
@@ -2621,6 +2630,7 @@
 				B76EE0821B3D86C3009D8763 /* NotifyController.m in Sources */,
 				B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */,
 				4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */,
+				4E8416091B73024A00359C45 /* SearchResultsViewController.m in Sources */,
 				B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */,
 				4E1D28D51A125B9300740C17 /* JSQMessagesCollectionViewCell.m in Sources */,
 				B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */,

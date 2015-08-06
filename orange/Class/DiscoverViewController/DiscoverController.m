@@ -17,8 +17,8 @@
 #import "DiscoverCategoryView.h"
 #import "EntityCell.h"
 #import "GTScrollNavigationBar.h"
-
 #import "GroupViewController.h"
+#import "SearchResultsViewController.h"
 
 
 @interface DiscoverHeaderSection : UICollectionReusableView
@@ -33,6 +33,7 @@
 @property (strong, nonatomic) NSArray * categoryArray;
 @property (strong, nonatomic) NSArray * entityArray;
 @property (strong, nonatomic) UISearchController * searchVC;
+@property (strong, nonatomic) SearchResultsViewController * searchResultsVC;
 @end
 
 @implementation DiscoverController
@@ -73,7 +74,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (UISearchController *)searchVC
 {
     if (!_searchVC) {
-        _searchVC = [[UISearchController alloc] initWithSearchResultsController:nil];
+        _searchVC = [[UISearchController alloc] initWithSearchResultsController:self.searchResultsVC];
         _searchVC.searchResultsUpdater = self;
         _searchVC.delegate = self;
         _searchVC.hidesNavigationBarDuringPresentation = NO;
@@ -88,6 +89,14 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         _searchVC.searchBar.keyboardType = UIKeyboardTypeDefault;
     }
     return _searchVC;
+}
+
+- (SearchResultsViewController *)searchResultsViewController
+{
+    if (!_searchResultsVC) {
+        _searchResultsVC = [[SearchResultsViewController alloc]init];
+    }
+    return _searchResultsVC;
 }
 
 #pragma mark - data
@@ -354,7 +363,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <UISearchResultsUpdating>
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-//    DDLogInfo(@"%@", searchController);
+      NSString *searchText = searchController.searchBar.text;
+      
 }
 
 #pragma mark - <EntityCellDelegate>

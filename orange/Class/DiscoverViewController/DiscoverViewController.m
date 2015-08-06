@@ -23,6 +23,7 @@
 #import "WebViewController.h"
 
 
+
 @interface DiscoverViewController ()<UITableViewDelegate,UITableViewDataSource, UICollectionViewDataSource, UIBarPositioningDelegate,UICollectionViewDelegateFlowLayout, UISearchBarDelegate,UISearchDisplayDelegate, DiscoverHeaderViewDelegate>
 
 @property (strong, nonatomic) UISearchBar *searchBar;

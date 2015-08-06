@@ -29,7 +29,7 @@
         // Initialization code
         [self setDefaultProperty];
         self.backgroundColor = [UIColor clearColor];
-        _earth = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"loading-image"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        _earth = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"loading-static"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
         _earth.tintColor = [UIColor colorWithRed:((float)((0xdcdcdc & 0xFF0000) >> 16))/255.0 green:((float)((0xdcdcdc & 0xFF00) >> 8))/255.0 blue:((float)(0xdcdcdc & 0xFF))/255.0 alpha:1.0];
         _earth.frame = CGRectMake(0, 0, 24, 24);
         _earth.contentMode = UIViewContentModeScaleAspectFill;
@@ -55,6 +55,7 @@
     }
     _currentStep = 0;
     
+    /*
     _timer = [NSTimer scheduledTimerWithTimeInterval:_duration
                                               target:self
                                             selector:@selector(repeatAnimation)
@@ -62,6 +63,7 @@
                                              repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     [self repeatAnimation];
+     */
     _isAnimating = YES;
     
     if (_hidesWhenStopped) {

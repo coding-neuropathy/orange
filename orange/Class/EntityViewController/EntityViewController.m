@@ -211,7 +211,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
                     break;
                 default:
                 {
-                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [_buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
                 }
                     break;
@@ -228,7 +228,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
 //    self.navigationController.toolbar.clipsToBounds = YES;
     self.navigationController.toolbar.barTintColor = UIColorFromRGB(0x292929);
     self.navigationController.toolbar.layer.borderWidth = 0.5;
-    self.navigationController.toolbar.layer.borderColor = UIColorFromRGB(0x292929).CGColor;
+    self.navigationController.toolbar.layer.borderColor = [UIColor clearColor].CGColor;
     
     for (UIView * view in self.navigationController.toolbar.subviews) {
         if ([view  isKindOfClass:[UIImageView class]]&&![view isKindOfClass:[NSClassFromString(@"_UIToolbarBackground") class]]) {
@@ -287,7 +287,7 @@ static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSecti
                     [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     break;
                 default:
-                     [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
+                     [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
                     break;
             }
