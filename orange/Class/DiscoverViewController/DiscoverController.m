@@ -26,7 +26,7 @@
 @property (strong, nonatomic) NSString * text;
 @end
 
-@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
+@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
@@ -61,7 +61,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight + kNavigationBarHeight) collectionViewLayout:layout];
         
 //        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
         _collectionView.delegate = self;
@@ -80,13 +80,16 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         _searchVC.hidesNavigationBarDuringPresentation = NO;
         
         _searchVC.searchBar.tintColor = UIColorFromRGB(0x666666);
+        [_searchVC.searchBar sizeToFit];
         _searchVC.searchBar.placeholder = NSLocalizedStringFromTable(@"search", kLocalizedFile, nil);
         [_searchVC.searchBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 48)] stretchableImageWithLeftCapWidth:5 topCapHeight:5]  forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
         [_searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(10, 28)]  forState:UIControlStateNormal];
+        
         _searchVC.searchBar.searchTextPositionAdjustment = UIOffsetMake(2.f, 0.f);
         _searchVC.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
         _searchVC.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _searchVC.searchBar.keyboardType = UIKeyboardTypeDefault;
+        _searchVC.searchBar.delegate = self;
     }
     return _searchVC;
 }
@@ -113,18 +116,13 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     }];
 }
 
-- (void)loadView
-{
-    self.view = self.collectionView;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.edgesForExtendedLayout = UIRectEdgeAll;
     self.extendedLayoutIncludesOpaqueBars = YES;
     
-    
+    [self.view addSubview:self.collectionView];
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
     [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
     [self.collectionView registerClass:[DiscoverCategoryView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier];
@@ -132,6 +130,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [self.collectionView registerClass:[DiscoverHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
     
     self.navigationItem.titleView = self.searchVC.searchBar;
+    self.definesPresentationContext = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -364,9 +363,12 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
     NSString *searchText = searchController.searchBar.text;
+    NSLog(@"keyword %@", searchText);
     [self.searchResultsVC searchText:searchText];
-      
 }
+
+#pragma mark - <UISearchControllerDelegate>
+//- (void)p
 
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
