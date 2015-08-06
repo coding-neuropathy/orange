@@ -363,7 +363,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <UISearchResultsUpdating>
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-      NSString *searchText = searchController.searchBar.text;
+    NSString *searchText = searchController.searchBar.text;
+    [self.searchResultsVC searchText:searchText];
       
 }
 

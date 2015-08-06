@@ -36,6 +36,33 @@
     }
     return _noResultView;
 }
+- (HMSegmentedControl *)segmentedControlForSearch
+{
+    if (!self.segmentedControlForSearch) {
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+        [segmentedControl setSectionTitles:@[ @"商品",@"品类",@"用户",@"喜爱"]];
+        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
+        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
+        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+        [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
+        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
+        [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
+        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
+        [segmentedControl setSelectionIndicatorHeight:1.5];
+        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+        self.segmentedControlForSearch = segmentedControl;
+        
+        
+        {
+            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControlForSearch.deFrameHeight-0.5, kScreenWidth, 0.5)];
+            H.backgroundColor = UIColorFromRGB(0xebebeb);
+            //[self.segmentedControlForSearch addSubview:H];
+        }
+    }
+    return self.segmentedControlForSearch;
+
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -255,29 +282,6 @@
 #pragma mark - <UITableViewDelegate>
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-
-    if (!self.segmentedControlForSearch) {
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-        [segmentedControl setSectionTitles:@[ @"商品",@"品类",@"用户",@"喜爱"]];
-        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-        [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
-        [segmentedControl setSelectionIndicatorHeight:1.5];
-        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        self.segmentedControlForSearch = segmentedControl;
-        
-        
-        {
-            UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControlForSearch.deFrameHeight-0.5, kScreenWidth, 0.5)];
-            H.backgroundColor = UIColorFromRGB(0xebebeb);
-            //[self.segmentedControlForSearch addSubview:H];
-        }
-    }
-    
     return self.segmentedControlForSearch;
 }
 
