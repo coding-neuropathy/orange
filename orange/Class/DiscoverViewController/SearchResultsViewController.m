@@ -53,7 +53,6 @@
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         self.segmentedControlForSearch = segmentedControl;
         
-        
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControlForSearch.deFrameHeight-0.5, kScreenWidth, 0.5)];
             H.backgroundColor = UIColorFromRGB(0xebebeb);
@@ -66,7 +65,7 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -81,15 +80,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-//    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
-//    self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//    self.tableView.delegate = self;
-//    self.tableView.dataSource = self;
-//    self.tableView.backgroundView = nil;
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    self.tableView.showsVerticalScrollIndicator = YES;
-//    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+
     [self.view addSubview:self.tableView];
     
      __weak __typeof(&*self)weakSelf = self;
