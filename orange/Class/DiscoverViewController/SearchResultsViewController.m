@@ -11,7 +11,7 @@
 #import "NoSearchResultView.h"
 #import "CategoryGridCell.h"
 #import "EntitySingleListCell.h"
-#import "UserSingleListCell.h"ds
+#import "UserSingleListCell.h"
 #import "PinyinTools.h"
 
 @interface SearchResultsViewController () <UITableViewDataSource,UITableViewDelegate>
@@ -63,18 +63,33 @@
     return _segmentedControlForSearch;
 }
 
+- (UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundView = nil;
+        _tableView.separatorColor = UITableViewCellSelectionStyleNone;
+        _tableView.showsVerticalScrollIndicator = YES;
+        
+    }
+    return _tableView;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.backgroundView = nil;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.showsVerticalScrollIndicator = YES;
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+//    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
+//    self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//    self.tableView.delegate = self;
+//    self.tableView.dataSource = self;
+//    self.tableView.backgroundView = nil;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.showsVerticalScrollIndicator = YES;
+//    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.view addSubview:self.tableView];
     
      __weak __typeof(&*self)weakSelf = self;
