@@ -11,7 +11,7 @@
 #import "NoSearchResultView.h"
 #import "CategoryGridCell.h"
 #import "EntitySingleListCell.h"
-#import "UserSingleListCell.h"ds
+#import "UserSingleListCell.h"
 #import "PinyinTools.h"
 
 @interface SearchResultsViewController () <UITableViewDataSource,UITableViewDelegate>
@@ -53,7 +53,6 @@
         [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         self.segmentedControlForSearch = segmentedControl;
         
-        
         {
             UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.segmentedControlForSearch.deFrameHeight-0.5, kScreenWidth, 0.5)];
             H.backgroundColor = UIColorFromRGB(0xebebeb);
@@ -63,18 +62,25 @@
     return _segmentedControlForSearch;
 }
 
+- (UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundView = nil;
+        _tableView.separatorColor = UITableViewCellSelectionStyleNone;
+        _tableView.showsVerticalScrollIndicator = YES;
+        
+    }
+    return _tableView;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.backgroundView = nil;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.showsVerticalScrollIndicator = YES;
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+
     [self.view addSubview:self.tableView];
     
      __weak __typeof(&*self)weakSelf = self;
@@ -114,6 +120,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
     {
+        
         [API searchEntityWithString:self.keyword type:@"all" offset:self.dataArrayForEntityForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             if (self.dataArrayForEntityForSearch.count == 0) {
                 self.dataArrayForEntityForSearch = [NSMutableArray array];
@@ -122,6 +129,7 @@
             [self.tableView.infiniteScrollingView stopAnimating];
             [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
+            DDLogInfo(@"code %ld", stateCode);
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
@@ -351,7 +359,7 @@
     if (searchText.length == 0) {
         return;
     }
-    
+    self.tableView.tableFooterView = nil;
     if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
     {
         self.filteredArray = [NSMutableArray array];
@@ -368,7 +376,15 @@
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
     {
         [API searchEntityWithString:self.keyword type:@"all" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
-            self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];
+//            DDLogInfo(@"search result %@", entityArray);
+            if (entityArray.count == 0) {
+                self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];;
+                self.tableView.tableFooterView = self.noResultView;
+                self.noResultView.type = NoResultType;
+//                DDLogInfo(@"%@", self.noResultView);
+            } else {
+                self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];
+            }
             [self.tableView.pullToRefreshView stopAnimating];
             [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
@@ -378,7 +394,14 @@
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
     {
         [API searchUserWithString:self.keyword offset:0 count:30 success:^(NSArray *userArray) {
-            self.dataArrayForUserForSearch = [NSMutableArray arrayWithArray:userArray];
+            if (userArray.count == 0) {
+                self.dataArrayForUserForSearch = [NSMutableArray arrayWithArray:userArray];
+                self.tableView.tableFooterView = self.noResultView;
+                self.noResultView.type = NoResultType;
+            } else {
+                self.dataArrayForUserForSearch = [NSMutableArray arrayWithArray:userArray];
+            }
+            
             [self.tableView.pullToRefreshView stopAnimating];
             [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
@@ -388,7 +411,13 @@
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
     {
         [API searchEntityWithString:self.keyword type:@"like" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
-            self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
+            if (entityArray.count == 0) {
+                self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
+                self.tableView.tableFooterView = self.noResultView;
+                self.noResultView.type = NoResultType;
+            } else {
+                self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
+            }
             [self.tableView.pullToRefreshView stopAnimating];
             [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
