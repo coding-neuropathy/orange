@@ -154,7 +154,6 @@
 		4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23821A52EC9600037F9C /* SettingManager.m */; };
 		4E3A238D1A52F21800037F9C /* TabBarViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */; };
 		4E3C413B1A9FFBEB0053DB5E /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */; };
-		4E474D7D1B6E6E4E00474F42 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E474D7C1B6E6E4E00474F42 /* Reveal.framework */; };
 		4E4F27D71B6F438E003A63C5 /* ImageLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4F27D21B6F438E003A63C5 /* ImageLoadingView.m */; };
 		4E4F27D81B6F438E003A63C5 /* loading-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4F27D41B6F438E003A63C5 /* loading-image.png */; };
 		4E4F27D91B6F438E003A63C5 /* loading-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4F27D51B6F438E003A63C5 /* loading-image@2x.png */; };
@@ -625,7 +624,6 @@
 		4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewcontroller.m; sourceTree = "<group>"; };
 		4E3C41391A9FFBEB0053DB5E /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
 		4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
-		4E474D7C1B6E6E4E00474F42 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		4E4F27D11B6F438E003A63C5 /* ImageLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoadingView.h; sourceTree = "<group>"; };
 		4E4F27D21B6F438E003A63C5 /* ImageLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoadingView.m; sourceTree = "<group>"; };
 		4E4F27D41B6F438E003A63C5 /* loading-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-image.png"; sourceTree = "<group>"; };
@@ -949,7 +947,6 @@
 				B754E6B11AFA76460034AB7D /* CloudPushSDK.framework in Frameworks */,
 				B754E6B61AFA76460034AB7D /* UTMini.framework in Frameworks */,
 				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
-				4E474D7D1B6E6E4E00474F42 /* Reveal.framework in Frameworks */,
 				B73E90CF1B1C9D7500616FD7 /* AVOSCloudSNS.framework in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
@@ -2015,7 +2012,6 @@
 				B7DA97C01B270BE900C9BC25 /* EntityLikeUserCell.m */,
 				B7F9EB0E1B28894B00887582 /* EntityLikerController.h */,
 				B7F9EB0F1B28894B00887582 /* EntityLikerController.m */,
-				4E474D7C1B6E6E4E00474F42 /* Reveal.framework */,
 			);
 			path = EntityViewController;
 			sourceTree = "<group>";
