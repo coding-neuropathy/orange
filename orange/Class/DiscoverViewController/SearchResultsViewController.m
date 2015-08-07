@@ -120,6 +120,7 @@
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
     {
+        
         [API searchEntityWithString:self.keyword type:@"all" offset:self.dataArrayForEntityForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
             if (self.dataArrayForEntityForSearch.count == 0) {
                 self.dataArrayForEntityForSearch = [NSMutableArray array];
@@ -128,6 +129,7 @@
             [self.tableView.infiniteScrollingView stopAnimating];
             [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
+            DDLogInfo(@"code %ld", stateCode);
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
@@ -357,7 +359,7 @@
     if (searchText.length == 0) {
         return;
     }
-    
+    self.tableView.tableFooterView = nil;
     if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
     {
         self.filteredArray = [NSMutableArray array];
@@ -374,7 +376,15 @@
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
     {
         [API searchEntityWithString:self.keyword type:@"all" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
-            self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];
+//            DDLogInfo(@"search result %@", entityArray);
+            if (entityArray.count == 0) {
+                self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];;
+                self.tableView.tableFooterView = self.noResultView;
+                self.noResultView.type = NoResultType;
+//                DDLogInfo(@"%@", self.noResultView);
+            } else {
+                self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];
+            }
             [self.tableView.pullToRefreshView stopAnimating];
             [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
@@ -384,7 +394,14 @@
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
     {
         [API searchUserWithString:self.keyword offset:0 count:30 success:^(NSArray *userArray) {
-            self.dataArrayForUserForSearch = [NSMutableArray arrayWithArray:userArray];
+            if (userArray.count == 0) {
+                self.dataArrayForUserForSearch = [NSMutableArray arrayWithArray:userArray];
+                self.tableView.tableFooterView = self.noResultView;
+                self.noResultView.type = NoResultType;
+            } else {
+                self.dataArrayForUserForSearch = [NSMutableArray arrayWithArray:userArray];
+            }
+            
             [self.tableView.pullToRefreshView stopAnimating];
             [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
@@ -394,7 +411,13 @@
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
     {
         [API searchEntityWithString:self.keyword type:@"like" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
-            self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
+            if (entityArray.count == 0) {
+                self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
+                self.tableView.tableFooterView = self.noResultView;
+                self.noResultView.type = NoResultType;
+            } else {
+                self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
+            }
             [self.tableView.pullToRefreshView stopAnimating];
             [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
