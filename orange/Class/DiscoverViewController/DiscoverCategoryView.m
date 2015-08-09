@@ -65,7 +65,7 @@
 //        imageView.layer.masksToBounds = YES;
 //        imageView.userInteractionEnabled = YES;
         imageView.category = category;
-        [imageView sd_setImageWithURL:category.coverURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xe6e6e6) andSize:CGSizeMake(100., 100.)]];
+        [imageView sd_setImageWithURL:category.coverURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(100., 100.)]];
 
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(categoryBtnActoin:)];
         [imageView addGestureRecognizer:tap];

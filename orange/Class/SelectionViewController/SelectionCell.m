@@ -14,6 +14,7 @@
 //#import "NewEntityViewController.h"
 #import "EntityViewController.h"
 #import "GKNotificationHUB.h"
+#import "ImageLoadingView.h"
 #define kWidth (kScreenWidth - 20)
 @interface SelectionCell()<RTLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;
@@ -24,10 +25,20 @@
 @property (nonatomic, strong) UIButton * likeCounterButton;
 @property (nonatomic, strong) UIButton * timeButton;
 @property (nonatomic, strong) UIView *H;
+@property (strong, nonatomic) ImageLoadingView * loading;
 
 @end
 
 @implementation SelectionCell
+
+- (ImageLoadingView *)loading {
+    if(!_loading) {
+        _loading = [[ImageLoadingView alloc] init];
+        _loading.hidesWhenStopped = YES;
+        [self.contentView addSubview:_loading];
+    }
+    return _loading;
+}
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -130,6 +141,7 @@
     }
     
     self.entity = dict[@"content"][@"entity"];
+    
     [self addObserver];
     self.likeButton.selected = self.entity.liked;
 //    self.likeCounterLabel.text = [NSString stringWithFormat:@"%ld", self.entity.likeCount];
@@ -149,19 +161,17 @@
     self.date = [NSDate dateWithTimeIntervalSince1970:timestamp];
     
     __block UIImageView *block_img = self.image;
-//    __weak __typeof(&*self)weakSelf = self;
+    __weak __typeof(&*self)weakSelf = self;
+    [self.loading startAnimating];
     {
         NSURL * imageURL = self.entity.imageURL_640x640;
         if (IS_IPHONE_6P) {
             imageURL = self.entity.imageURL_800x800;
         }
-        [self.image sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
-            
+        [self.image sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
-            
             block_img.image = newimage;
-//            [weakSelf.activityIndicator stopAnimating];
-//            weakSelf.activityIndicator.hidden = YES;
+            [weakSelf.loading stopAnimating];
         }];
     }
     
@@ -209,6 +219,9 @@
     self.timeButton.deFrameRight = self.contentLabel.deFrameRight;
     
     self.H.deFrameBottom = self.contentView.deFrameHeight;
+    
+    self.loading.center = CGPointMake(self.contentView.deFrameWidth/2, self.contentView.deFrameHeight/2);
+    [self.contentView bringSubviewToFront:self.loading];
 
 }
 
