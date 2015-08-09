@@ -70,7 +70,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundView = nil;
-        _tableView.separatorColor = UITableViewCellSelectionStyleNone;
+        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
         _tableView.showsVerticalScrollIndicator = YES;
         
     }
