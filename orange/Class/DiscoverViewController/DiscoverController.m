@@ -74,14 +74,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (UISearchController *)searchVC
 {
     if (!_searchVC) {
-//        UITableViewController * tablevc = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
-        
         _searchVC = [[UISearchController alloc] initWithSearchResultsController:self.searchResultsVC];
         _searchVC.searchResultsUpdater = self.searchResultsVC;
         _searchVC.delegate = self;
-//        _searchVC.searchBar.delegate = self;
-        
-//        _searchVC.dimsBackgroundDuringPresentation = NO;
         _searchVC.hidesNavigationBarDuringPresentation = NO;
         
         _searchVC.searchBar.tintColor = UIColorFromRGB(0x666666);
@@ -124,8 +119,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.edgesForExtendedLayout = UIRectEdgeAll;
-    self.extendedLayoutIncludesOpaqueBars = YES;
+    //self.edgesForExtendedLayout = UIRectEdgeAll;
+    //self.extendedLayoutIncludesOpaqueBars = YES;
     
     [self.view addSubview:self.collectionView];
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
@@ -153,7 +148,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     [AVAnalytics beginLogPageView:@"DiscoverView"];
     [MobClick beginLogPageView:@"DiscoverView"];
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -400,7 +394,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
     [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-    
 }
 
 #pragma mark - <DiscoverBannerViewDelegate>
@@ -478,5 +471,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     self.textLabel.frame = CGRectMake(10., 0., kScreenWidth - 20., 44.);
 }
+
 
 @end
