@@ -10,12 +10,12 @@
 
 @protocol EntityHeaderViewDelegate <NSObject>
 
-- (void)TapLikeBtnAction:(id)sender;
-- (void)TapBuyBtnAction:(id)sender;
+//- (void)TapLikeBtnAction:(id)sender;
+//- (void)TapBuyBtnAction:(id)sender;
 
 @end
 
-@interface EntityHeaderView : UIView
+@interface EntityHeaderView : UICollectionReusableView
 
 @property (nonatomic, strong) GKEntity *entity;
 @property (weak, nonatomic) id<EntityHeaderViewDelegate> delegate;
