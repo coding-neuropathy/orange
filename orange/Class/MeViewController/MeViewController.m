@@ -597,7 +597,7 @@
 - (void)configHeaderView
 {
     UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 260)];
-    view.backgroundColor = UIColorFromRGB(0xfafafa);
+    view.backgroundColor = UIColorFromRGB(0xffffff);
     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(7.f, 7.f, 64, 64)];
     image.contentMode = UIViewContentModeScaleAspectFit;
     image.center = CGPointMake(kScreenWidth/2, 25+32);

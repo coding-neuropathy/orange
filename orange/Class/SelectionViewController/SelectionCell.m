@@ -49,7 +49,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
         self.backgroundColor = UIColorFromRGB(0xffffff);
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 10)];
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 3)];
         self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
         [self.contentView addSubview:self.H];
     }
@@ -234,9 +234,9 @@
 //    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
     CGFloat height =  [note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.]];
     if (height > 60) {
-        return 60. + kScreenWidth + 75;
+        return 60. + kScreenWidth + 65;
     }
-    return height + kScreenWidth + 75;
+    return height + kScreenWidth + 65;
 }
 
 

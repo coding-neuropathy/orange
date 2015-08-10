@@ -83,6 +83,8 @@
     self.categoryLabel.frame = CGRectMake(10., 5., kScreenWidth - 20., 30.);
     
     self.categoryScrollView.frame = CGRectMake(10., 45., kScreenWidth - 20., 100.);
+    self.categoryScrollView.layer.cornerRadius = 4;
+    self.categoryScrollView.layer.masksToBounds = YES;
 }
 
 #pragma mark - button action
