@@ -35,7 +35,7 @@
     if(!_loading) {
         _loading = [[ImageLoadingView alloc] init];
         _loading.hidesWhenStopped = YES;
-        [self.contentView addSubview:_loading];
+        [self.image addSubview:_loading];
     }
     return _loading;
 }
@@ -220,7 +220,7 @@
     
     self.H.deFrameBottom = self.contentView.deFrameHeight;
     
-    self.loading.center = CGPointMake(self.contentView.deFrameWidth/2, self.contentView.deFrameHeight/2);
+    self.loading.center = CGPointMake(self.image.deFrameWidth/2, self.image.deFrameHeight/2);
     [self.contentView bringSubviewToFront:self.loading];
 
 }

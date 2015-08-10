@@ -61,12 +61,12 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight + kNavigationBarHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
         
-//        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 70, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     }
     return _collectionView;
 }
@@ -111,6 +111,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         self.entityArray = entities;
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
+        [self.collectionView addSloganView];
     } failure:^(NSInteger stateCode) {
         [self.collectionView.pullToRefreshView stopAnimating];
     }];
@@ -165,9 +166,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [self.collectionView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
-    
-    [self.collectionView addSloganView];
-    
+
     if (self.entityArray == 0) {
         [self.collectionView triggerPullToRefresh];
     }
@@ -219,6 +218,13 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                 DiscoverBannerView * bannerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier forIndexPath:indexPath];
                 bannerView.bannerArray = self.bannerArray;
                 bannerView.delegate = self;
+                if (self.bannerArray.count == 0) {
+                    bannerView.hidden = YES;
+                }
+                else
+                {
+                    bannerView.hidden = NO;
+                }
                 return bannerView;
             }
                 break;
@@ -231,13 +237,28 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                     GroupViewController * groupVC = [[GroupViewController alloc] initWithGid:category.groupId];
                     [self.navigationController pushViewController:groupVC animated:YES];
                 };
+                if (self.categoryArray.count == 0) {
+                    categoryView.hidden = YES;
+                }
+                else
+                {
+                    categoryView.hidden = NO;
+                }
                 return categoryView;
             }
                 break;
             default:
             {
+
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
                 header.text = @"热门商品";
+                if (self.entityArray.count == 0) {
+                    header.hidden = YES;
+                }
+                else
+                {
+                    header.hidden = NO;
+                }
                 return header;
             }
                 break;
@@ -254,14 +275,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     switch (indexPath.section) {
         case 2:
         {
-            if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                cellsize = CGSizeMake(100., 100.);
-            } else if (IS_IPHONE_6) {
-                cellsize = CGSizeMake(110., 110.);
-            } else {
-                cellsize = CGSizeMake(120., 120.);
-            }
-            
+            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
         }
             break;
             
@@ -278,13 +292,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     switch (section) {
         case 2:
         {
-            if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                edge =  UIEdgeInsetsMake(5., 5., 5, 5.);
-            } else if (IS_IPHONE_6) {
-                edge = UIEdgeInsetsMake(10., 10., 10., 10.);
-            } else {
-                edge = UIEdgeInsetsMake(15., 15., 15., 15.);
-            }
+            edge = UIEdgeInsetsMake(3., 3., 3., 3.);
         }
             break;
         default:
@@ -300,13 +308,16 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
         case 2:
         {
+            /*
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                itemSpacing = 5.;
+                itemSpacing = 3.;
             } else if (IS_IPHONE_6) {
-                itemSpacing = 10.;
+                itemSpacing = 3.;
             } else {
-                itemSpacing = 10.;
+                itemSpacing = 3.;
             }
+             */
+            itemSpacing = 3.;
         }
             break;
         default:
@@ -322,13 +333,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     switch (section) {
         case 2:
         {
-            if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                spacing = 5.;
-            } else if (IS_IPHONE_6) {
-                spacing = 10.;
-            } else {
-                spacing = 10.;
-            }
+            spacing = 3.;
         }
             break;
             
@@ -358,36 +363,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return headerSize;
 }
 
-//#pragma mark - <UISearchBarDelegate>
-//- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
-//{
-//    NSString * keyword = searchBar.text;
-//    NSLog(@"keyword %@", keyword);
-//    
-//}
-//
-//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-//{
-//    NSString * keyword = searchBar.text;
-//    DDLogInfo(@"keyword %@", keyword);
-////    [self.searchResultsVC searchText:keyword];
-////    [self presentViewController:self.searchResultsVC animated:YES completion:nil];
-//}
-
-//#pragma mark - <UISearchResultsUpdating>
-//- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
-//{
-//    NSString *searchText = searchController.searchBar.text;
-////    NSLog(@"keyword %@", searchText);
-////    [self.searchResultsVC searchText:searchText];
-//
-//}
-
 #pragma mark - <UISearchControllerDelegate>
 - (void)willPresentSearchController:(UISearchController *)searchController
 {
-//    DDLogInfo(@"search %@", searchController);
-//    [self.view addSubview:searchController.searchResultsController.view];
+
 }
 
 #pragma mark - <EntityCellDelegate>
