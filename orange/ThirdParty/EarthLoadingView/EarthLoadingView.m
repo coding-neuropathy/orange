@@ -81,6 +81,11 @@
     if (_hidesWhenStopped) {
         self.hidden = YES;
     }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _currentStep = 0;
+        self.earth.transform = CGAffineTransformMakeRotation(0 * (M_PI / 180.0f));
+        [self repeatAnimation];
+    });
 }
 
 - (BOOL)isAnimating
@@ -92,9 +97,9 @@
 {
     _currentStep = ++_currentStep;
     
-    if (_currentStep < 17)
+    if (_currentStep < 18)
     {
-        self.earth.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%d",_currentStep+1]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        self.earth.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%d",_currentStep]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }
     else
     {
@@ -102,7 +107,7 @@
         [UIView setAnimationDuration:0.08];
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDidStopSelector:@selector(endAnimation)];
-        self.earth.transform = CGAffineTransformMakeRotation(30*(_currentStep-17) * (M_PI / 180.0f));
+        self.earth.transform = CGAffineTransformMakeRotation(30*(_currentStep-18) * (M_PI / 180.0f));
         [UIView commitAnimations];
     }
 }

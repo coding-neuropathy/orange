@@ -114,8 +114,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         self.bannerArray = banners;
         self.categoryArray = categories;
         self.entityArray = entities;
-        [self.collectionView reloadData];
         [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
         [self.collectionView.pullToRefreshView stopAnimating];
     }];
