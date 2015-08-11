@@ -148,14 +148,16 @@
     attributes.zIndex = 1024;
     attributes.hidden = NO;
     CGPoint origin = attributes.frame.origin;
-    CGFloat sectionMaxY = self.collectionView.contentSize.height - attributes.frame.size.height;
     CGFloat y = CGRectGetMaxY(currentBounds) - currentBounds.size.height;
 //  DDLogInfo(@"%.2f, %.2f,", CGRectGetMaxY(currentBounds), currentBounds.size.height);
-    CGFloat maxY = MIN(MAX(y, attributes.frame.origin.y), sectionMaxY);
-    DDLogInfo(@"%.2f, %.2f, %.2f", y, maxY, sectionMaxY);
     
-    if (self.collectionView.contentOffset.y + self.collectionView.bounds.size.height < self.collectionView.contentSize.height) {
-        origin.y = maxY;
+    
+     DDLogInfo(@"%.2f, %.2f, %.2f", y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
+    if (self.collectionView.contentOffset.y == 0) {
+        origin.y = attributes.frame.origin.y;
+    }
+    else if ((self.collectionView.contentOffset.y + self.collectionView.bounds.size.height < self.collectionView.contentSize.height)) {
+        origin.y = MAX(y, attributes.frame.origin.y);
     }
     else
     {
@@ -167,6 +169,8 @@
         origin,
         attributes.frame.size
     };
+    
+   
     DDLogInfo(@"%@", attributes);
 }
 
