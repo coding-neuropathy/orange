@@ -351,6 +351,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     [super viewWillAppear:animated];
     [AVAnalytics beginLogPageView:@"EntityView"];
     [MobClick beginLogPageView:@"EntityView"];
+//    self.navigationController.navigationBarHidden = YES;
 //    self.navigationController.toolbarHidden = NO;
 }
 
