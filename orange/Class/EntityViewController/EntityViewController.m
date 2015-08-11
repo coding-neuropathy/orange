@@ -402,14 +402,14 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSInteger count = 0;
     switch (section) {
-        case 2:
+        case 3:
         {
             count = self.dataArrayForlikeUser.count;
             if ((IS_IPHONE_4_OR_LESS || IS_IPHONE_5) && count > 7) {
@@ -423,10 +423,10 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             }
         }
             break;
-        case 3:
+        case 4:
             count = self.dataArrayForNote.count;
             break;
-        case 4:
+        case 5:
             count = self.dataArrayForRecommend.count;
             break;
         default:
@@ -438,14 +438,14 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 2:
+        case 3:
         {
             EntityLikeUserCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:LikeUserIdentifier forIndexPath:indexPath];
             cell.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
             return cell;
         }
             break;
-        case 3:
+        case 4:
         {
             EntityNoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NoteCellIdentifier forIndexPath:indexPath];
             cell.note = [self.dataArrayForNote objectAtIndex:indexPath.row];
@@ -490,6 +490,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 //                return headerSection;
             }
                 break;
+
             case 1:
             {
                 EntityHeaderActionView * actionView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderActionIdentifier forIndexPath:indexPath];
@@ -501,8 +502,13 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             case 2:
             {
                 EntityHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier forIndexPath:indexPath];
-                headerSection.headertype = LikeType;
-                headerSection.text = [NSString stringWithFormat:@"%ld", self.entity.likeCount];
+                GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
+                headerSection.headertype = CategoryType;
+                if (category.categoryName) {
+                    headerSection.text = category.categoryName;
+                } else {
+                    headerSection.text = @"";
+                }
                 headerSection.delegate = self;
                 return headerSection;
             }
@@ -510,12 +516,21 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             case 3:
             {
                 EntityHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier forIndexPath:indexPath];
+                headerSection.headertype = LikeType;
+                headerSection.text = [NSString stringWithFormat:@"%ld", self.entity.likeCount];
+                headerSection.delegate = self;
+                return headerSection;
+            }
+                break;
+            case 4:
+            {
+                EntityHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier forIndexPath:indexPath];
                 headerSection.headertype = NoteType;
                 headerSection.text = [NSString stringWithFormat:@"%ld", self.dataArrayForNote.count];
                 return headerSection;
             }
                 break;
-            case 4:
+            case 5:
             {
                 EntityHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier forIndexPath:indexPath];
                 headerSection.headertype = RecommendType;
@@ -539,16 +554,16 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 {
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
-        case 2:
+        case 3:
             cellsize = CGSizeMake(36., 36.);
             break;
-        case 3:
+        case 4:
         {
             CGFloat height = [EntityNoteCell height:[self.dataArrayForNote objectAtIndex:indexPath.row]];
             cellsize = CGSizeMake(kScreenWidth, height);
         }
             break;
-        case 4:
+        case 5:
         {
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
                 cellsize = CGSizeMake(100., 100.);
@@ -575,14 +590,14 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         case 0:
             
             break;
-        case 2:
+        case 3:
         {
             if (self.dataArrayForlikeUser.count != 0) {
                 edge = UIEdgeInsetsMake(0., 16., 16., 16.);
             }
         }
             break;
-        case 4:
+        case 5:
         {
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
                 edge =  UIEdgeInsetsMake(5., 5., 5, 5.);
@@ -606,10 +621,10 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     switch (section) {
         case 0:
             break;
-        case 2:
+        case 3:
             itemSpacing = 3.;
             break;
-        case 4:
+        case 5:
         {
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
                 itemSpacing = 5.;
@@ -631,7 +646,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 {
     CGFloat spacing = 0;
     switch (section) {
-        case 4:
+        case 5:
         {
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
                 spacing = 5.;
@@ -658,14 +673,14 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             size = CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
             break;
 
-        case 2:
+        case 3:
         {
             if (self.dataArrayForlikeUser.count != 0) {
                 size =  CGSizeMake(kScreenWidth, 48.);
             }
         }
             break;
-        case 3:
+        case 4:
         {
             if (self.dataArrayForNote.count != 0) {
                 size = CGSizeMake(kScreenWidth, 30);
@@ -687,7 +702,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 2:
+        case 3:
         {
             UserViewController * VC = [[UserViewController alloc]init];
             VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
@@ -697,7 +712,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             [AVAnalytics event:@"entity_forward_user"];
         }
             break;
-        case 3:
+        case 4:
         {
             
         }
