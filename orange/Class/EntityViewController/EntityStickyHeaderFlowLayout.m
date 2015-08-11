@@ -155,7 +155,6 @@ NSString *const EntityStickyHeaderParallaxHeader = @"EntityStickyHeaderParallaxH
     attributes.hidden = NO;
     CGPoint origin = attributes.frame.origin;
     CGFloat sectionMaxY = self.collectionView.contentSize.height - attributes.frame.size.height;
-    //            DDLogInfo(@"section max %f", sectionMaxY);
     CGFloat y = CGRectGetMaxY(currentBounds) - currentBounds.size.height;
     CGFloat maxY = MIN(MAX(y, attributes.frame.origin.y), sectionMaxY);
     DDLogInfo(@"%.2f, %.2f, %.2f", y, maxY, sectionMaxY);

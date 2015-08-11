@@ -327,8 +327,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     }
     self.navigationItem.rightBarButtonItems = array;
 
-//    [self.collectionView addSubview:self.header];
-//    [self configToolbar];
     [self refresh];
     [self refreshRandom];
 
@@ -351,7 +349,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     [super viewWillAppear:animated];
     [AVAnalytics beginLogPageView:@"EntityView"];
     [MobClick beginLogPageView:@"EntityView"];
-//    self.navigationController.toolbarHidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -359,7 +356,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"EntityView"];
     [MobClick endLogPageView:@"EntityView"];
-//    self.navigationController.toolbarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -378,25 +374,10 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     [self addObserver];
 }
 
-
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    if (!self.dataArrayForNote) {
-//        [self refresh];
-//        [self refreshRandom];
-//    }
-//}
-
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
-//    __weak __typeof(&*self)weakSelf = self;
     [self.collectionView addSloganView];
-//    if (!self.dataArrayForNote) {
-//        [self refresh];
-//        [self refreshRandom];
-//    }
 }
 
 #pragma mark - <UICollectionViewDataSource>
@@ -476,18 +457,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
                 headerView.entity = self.entity;
 //                headerView.delegate = self;
                 return headerView;
-//                GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
-//                headerSection.headertype = CategoryType;
-//                if (category.categoryName) {
-//                    headerSection.text = category.categoryName;
-//                }
-//                else
-//                {
-//                    headerSection.text = @"";
-//                }
-//                
-//                headerSection.delegate = self;
-//                return headerSection;
             }
                 break;
 
@@ -565,14 +534,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             break;
         case 5:
         {
-            if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                cellsize = CGSizeMake(100., 100.);
-            } else if (IS_IPHONE_6) {
-                cellsize = CGSizeMake(110., 110.);
-            } else {
-                cellsize = CGSizeMake(120., 120.);
-            }
-            
+            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
         }
             break;
             
@@ -599,13 +561,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             break;
         case 5:
         {
-            if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                edge =  UIEdgeInsetsMake(5., 5., 5, 5.);
-            } else if (IS_IPHONE_6) {
-                edge = UIEdgeInsetsMake(10., 10., 10., 10.);
-            } else {
-                edge = UIEdgeInsetsMake(15., 15., 15., 15.);
-            }
+            edge = UIEdgeInsetsMake(3, 3, 3, 3);
         }
             break;
         default:
@@ -626,13 +582,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             break;
         case 5:
         {
-            if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                itemSpacing = 5.;
-            } else if (IS_IPHONE_6) {
-                itemSpacing = 10.;
-            } else {
-                itemSpacing = 10.;
-            }
+            itemSpacing = 3;
         }
             break;
         default:
@@ -687,10 +637,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             }
         }
             break;
-//        case 1:
-//        case 4:
-//            size = CGSizeMake(kScreenWidth, 50.);
-//            break;
         default:
             size =  CGSizeMake(kScreenWidth, 50);
             break;
@@ -726,7 +672,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
-//    GKEntity * entity = [self.dataArrayForRecommend objectAtIndex:indexPath.row];
     [[OpenCenter sharedOpenCenter] openEntity:entity];
 }
 
@@ -748,10 +693,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-//        case ShopType:
-//        {
-//            
-//        }
         default:
             break;
     }
@@ -831,19 +772,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     [self removeObserver];
 }
 
-//#pragma mark
-//#pragma mark - Entity Header View Delegate
-//- (void)TapLikeBtnAction:(id)sender
-//{
-//    self.likeButton = (UIButton *)sender;
-//    [self likeButtonAction];
-//}
-//
-//- (void)TapBuyBtnAction:(id)sender
-//{
-//    self.buyButton = (UIButton *)sender;
-//    [self buyButtonAction];
-//}
 
 #pragma mark - Action
 - (void)likeButtonAction
@@ -1000,147 +928,5 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 }
 
 
-//#pragma mark - UIActionSheetDelegate
-//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-//    if ([buttonTitle isEqualToString:@"分享到微信"]) {
-//        [self wxShare:0];
-//    }else if ([buttonTitle isEqualToString:@"分享到朋友圈"]) {
-//        [self wxShare:1];
-//    }
-//    else if ([buttonTitle isEqualToString:@"分享到新浪微博"]) {
-//        [self weiboShare];
-//    }
-//    else if ([buttonTitle isEqualToString:@"举报商品"]) {
-//        
-//        if(!k_isLogin)
-//        {
-//            LoginView * view = [[LoginView alloc]init];
-//            [view show];
-//            return;
-//        }
-//        ReportViewController * VC = [[ReportViewController alloc] init];
-//        VC.entity = self.entity;
-//        [self.navigationController pushViewController:VC animated:YES];
-//    }
-//    else if ([buttonTitle isEqualToString:@"写点评"]) {
-//        [self noteButtonAction];
-//    }
-//    else if ([buttonTitle isEqualToString:@"修改点评"]) {
-//        [self noteButtonAction];
-//    }
-//    else if ([buttonTitle isEqualToString:@"删除点评"]) {
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定要删除点评？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//        alertView.delegate = self;
-//        [alertView show];
-//    }
-//}
-//
-//
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    DDLogInfo(@"note %@", self.note.text);
-//    if (buttonIndex == 1) {
-//        [API deleteNoteByNoteId:self.note.noteId success:^{
-//            __block NSInteger noteIndex = -1;
-////            DDLogInfo(@"okoko");
-//            [self.dataArrayForNote enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//                GKNote * note = obj;
-//                if (note.noteId == self.note.noteId) {
-//                    noteIndex = idx;
-////                    if (noteIndex)
-//                    [self.dataArrayForNote removeObjectAtIndex:idx];
-//                    self.note = nil;
-////                    [self.tableView reloadData];
-////                    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
-//
-//                }
-////                if (stop) {
-////                    GKNote *note = obj;
-////                    DDLogInfo(@"note %ld", note.noteId);
-////                    if (note.noteId == self.note.noteId) {
-////                        noteIndex = (NSInteger)idx;
-////                    }
-////                    DDLogInfo(@"noteindex %ld", self.note.noteId);
-////                    if (noteIndex != -1) {
-////                        [self.dataArrayForNote removeObjectAtIndex:noteIndex];
-////                        DDLogInfo(@"note array %@", self.dataArrayForNote);
-//////                        DDLogInfo(@"del %@", [NSIndexPath indexPathForRow:noteIndex inSection:0]);
-////                        [self.tableView reloadData];
-//////                        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:noteIndex inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-////                    }
-////                    self.note = nil;
-////                }
-//            }];
-//        } failure:nil];
-//    }
-//}
-
-
-//- (void)wxShare:(int)scene
-//{
-//    WXMediaMessage *message = [WXMediaMessage message];
-//    
-//    UIImage *image = [self.image.image  imageWithSize:CGSizeMake(220.f, 220.f)];
-//    NSData *oldData = UIImageJPEGRepresentation(image, 1.0);
-//    CGFloat size = oldData.length / 1024;
-//    if (size > 25.0f) {
-//        CGFloat f = 25.0f / size;
-//        NSData *datas = UIImageJPEGRepresentation(image, f);
-//        //            float s = datas.length / 1024;
-//        //            GKLog(@"s---%f",s);
-//        UIImage *smallImage = [UIImage imageWithData:datas];
-//        [message setThumbImage:smallImage];
-//    }
-//    else{
-//        [message setThumbImage:image];
-//    }
-//    
-//    WXWebpageObject *webPage = [WXWebpageObject object];
-//    webPage.webpageUrl = [NSString stringWithFormat:@"%@%@/?from=wechat",kGK_WeixinShareURL,self.entity.entityHash];
-//    message.mediaObject = webPage;
-//    if(scene == 1)
-//    {
-//        message.title = [NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title];
-//        message.description = @"";
-//    }
-//    else
-//    {
-//        message.title = @"果库 - 精英消费指南";
-//        message.description = [NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title];
-//    }
-//    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-//    req.bText = NO;
-//    req.message = message;
-//    req.scene =scene;
-//    
-//    if ([WXApi sendReq:req]) {
-//        if (scene == 1) {
-//            [AVAnalytics event:@"share entity to moments" attributes:@{@"entity":self.entity.entityName}];
-//            [MobClick event:@"share entity to moments" attributes:@{@"entity":self.entity.entityName}];
-//        } else {
-//            [AVAnalytics event:@"share entity to wechat" attributes:@{@"entity":self.entity.entityName}];
-//            [MobClick event:@"share entity to wechat" attributes:@{@"entity":self.entity.entityName}];
-//        }
-//    }
-//    else{
-//        [SVProgressHUD showImage:nil status:@"图片太大，请关闭高清图片按钮"];
-//    }
-//}
-//
-//- (void)weiboShare
-//{
-//    
-//    [AVOSCloudSNS shareText:[NSString stringWithFormat:@"%@ %@",self.entity.brand,self.entity.title] andLink:[NSString stringWithFormat:@"%@%@/?from=weibo",kGK_WeixinShareURL,self.entity.entityHash] andImage:[self.image.image  imageWithSize:CGSizeMake(460.f, 460.f)]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//            
-//    } andProgress:^(float percent) {
-//        if (percent == 1) {
-//            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-//            
-//            [AVAnalytics event:@"share to entity to weibo" attributes:@{@"entity":self.entity.entityName}];
-//            [MobClick event:@"share to entity to weibo" attributes:@{@"entity":self.entity.entityName}];
-//        }
-//    }];
-//}
 
 @end

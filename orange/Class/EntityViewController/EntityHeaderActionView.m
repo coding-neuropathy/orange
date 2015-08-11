@@ -12,6 +12,7 @@
 @property (strong, nonatomic) UIButton *likeButton;
 @property (strong, nonatomic) UIButton *postBtn;
 @property (strong, nonatomic) UIButton *buyButton;
+@property (strong, nonatomic) UIView *H;
 @end
 
 @implementation EntityHeaderActionView
@@ -20,7 +21,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.95];
     }
     return self;
 }
@@ -28,7 +29,6 @@
 - (UIButton *)likeButton
 {
     if (!_likeButton) {
-        //        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40., 35)];
         _likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //        _likeButton.frame = CGRectMake(0, 0, kScreenWidth/3, 44.);
 //        UIImage * like = [[UIImage imageNamed:@"like"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -52,8 +52,6 @@
     if (!_postBtn) {
         _postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-//        UIImage * image = [[UIImage imageNamed:@"post note"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-//        _postBtn.tintColor = UIColorFromRGB(0xffffff);
         [_postBtn setImage:[UIImage imageNamed:@"post note"] forState:UIControlStateNormal];
         [_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_postBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
@@ -63,6 +61,16 @@
         [self addSubview:_postBtn];
     }
     return _postBtn;
+}
+
+- (UIView *)H
+{
+    if (!_H) {
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.5)];
+        _H.backgroundColor = [UIColor colorWithWhite:230/255.0 alpha:0.95];
+        [self addSubview:_H];
+    }
+    return _H;
 }
 
 - (UIButton *)buyButton
@@ -127,12 +135,10 @@
 {
     [super layoutSubviews];
     
-    self.likeButton.deFrameLeft = 16.;
-    self.postBtn.center = self.center;
-    self.postBtn.deFrameTop = self.likeButton.deFrameTop;
-    self.buyButton.deFrameRight = kScreenWidth - 16;
-//    self.postBtn.deFrameLeft = self.likeButton.deFrameRight;
-//    self.buyButton.deFrameLeft = self.postBtn.deFrameRight;
+    self.likeButton.center = CGPointMake(kScreenWidth * 1/6, self.deFrameHeight/2);
+    self.postBtn.center = CGPointMake(kScreenWidth * 3/6, self.deFrameHeight/2);
+    self.buyButton.center = CGPointMake(kScreenWidth * 5/6, self.deFrameHeight/2);
+    self.H.deFrameBottom = self.deFrameHeight;
 }
 
 #pragma mark - button action
