@@ -36,6 +36,7 @@
         [_likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
         [_likeButton setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_likeButton setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
         _likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
         if (self.entity.isLiked) {
@@ -55,6 +56,7 @@
 //        _postBtn.tintColor = UIColorFromRGB(0xffffff);
         [_postBtn setImage:[UIImage imageNamed:@"post note"] forState:UIControlStateNormal];
         [_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_postBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
         _postBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_postBtn addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
         
@@ -69,9 +71,9 @@
         _buyButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //        _buyButton.frame = CGRectMake(0., 0., kScreenWidth/3, 44.);
         _buyButton.layer.masksToBounds = YES;
-        _buyButton.layer.cornerRadius = 0;
-        _buyButton.backgroundColor = UIColorFromRGB(0x2a5393);
-        _buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
+        _buyButton.layer.cornerRadius = 4;
+        _buyButton.backgroundColor = UIColorFromRGB(0x427ec0);
+        _buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:14.f];
         [_buyButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
@@ -113,9 +115,9 @@
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
-    self.likeButton.frame = CGRectMake(0, 0, kScreenWidth/3, 44.);
-    self.postBtn.frame = CGRectMake(0., 0.,  kScreenWidth/3, 44.);
-    self.buyButton.frame = CGRectMake(0., 0., kScreenWidth/3, 44.);
+    self.likeButton.frame = CGRectMake(0, 3., 90., 44.);
+    self.postBtn.frame = CGRectMake(0., 3.,  90., 44.);
+    self.buyButton.frame = CGRectMake(0., 10., 90., 30.);
     [self setNeedsLayout];
     
 //    DDLogInfo(@"log log");
@@ -124,9 +126,13 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
-    self.postBtn.deFrameLeft = self.likeButton.deFrameRight;
-    self.buyButton.deFrameLeft = self.postBtn.deFrameRight;
+    
+    self.likeButton.deFrameLeft = 16.;
+    self.postBtn.center = self.center;
+    self.postBtn.deFrameTop = self.likeButton.deFrameTop;
+    self.buyButton.deFrameRight = kScreenWidth - 16;
+//    self.postBtn.deFrameLeft = self.likeButton.deFrameRight;
+//    self.buyButton.deFrameLeft = self.postBtn.deFrameRight;
 }
 
 @end

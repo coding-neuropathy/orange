@@ -23,7 +23,7 @@ NSString *const EntityStickyHeaderParallaxHeader = @"EntityStickyHeaderParallaxH
     UICollectionViewLayoutAttributes *attributes = [super initialLayoutAttributesForAppearingSupplementaryElementOfKind:elementKind
                                                                                                             atIndexPath:elementIndexPath];
     CGRect frame = attributes.frame;
-    frame.origin.y += self.parallaxHeaderReferenceSize.height;
+//    frame.origin.y += self.parallaxHeaderReferenceSize.height;
     attributes.frame = frame;
     
     return attributes;
@@ -42,7 +42,7 @@ NSString *const EntityStickyHeaderParallaxHeader = @"EntityStickyHeaderParallaxH
 {
     // The rect should compensate the header size
     CGRect adjustedRect = rect;
-    adjustedRect.origin.y -= self.parallaxHeaderReferenceSize.height;
+//    adjustedRect.origin.y -= self.parallaxHeaderReferenceSize.height;
     
     NSMutableArray *allItems = [[super layoutAttributesForElementsInRect:adjustedRect] mutableCopy];
 //    DDLogInfo(@"%@", allItems);
@@ -54,7 +54,7 @@ NSString *const EntityStickyHeaderParallaxHeader = @"EntityStickyHeaderParallaxH
         UICollectionViewLayoutAttributes *attributes = obj;
 //        DDLogInfo(@"%@", attributes);
         CGRect frame = attributes.frame;
-        frame.origin.y += self.parallaxHeaderReferenceSize.height;
+//        frame.origin.y += self.parallaxHeaderReferenceSize.height;
         attributes.frame = frame;
 
         NSIndexPath *indexPath = [(UICollectionViewLayoutAttributes *)obj indexPath];
@@ -88,79 +88,25 @@ NSString *const EntityStickyHeaderParallaxHeader = @"EntityStickyHeaderParallaxH
         visibleParallexHeader = YES;
     }
 
-    if (self.parallaxHeaderAlwaysOnTop == YES) {
-        visibleParallexHeader = YES;
-    }
-    
-    
-    // This method may not be explicitly defined, default to 1
-    // https://developer.apple.com/library/ios/documentation/uikit/reference/UICollectionViewDataSource_protocol/Reference/Reference.html#jumpTo_6
-    NSUInteger numberOfSections = [self.collectionView.dataSource
-                                   respondsToSelector:@selector(numberOfSectionsInCollectionView:)]
-    ? [self.collectionView.dataSource numberOfSectionsInCollectionView:self.collectionView]
-    : 1;
-    
-    // Create the attributes for the Parallex header
-    if (visibleParallexHeader && ! CGSizeEqualToSize(CGSizeZero, self.parallaxHeaderReferenceSize)) {
-        CSStickyHeaderFlowLayoutAttributes *currentAttribute = [CSStickyHeaderFlowLayoutAttributes layoutAttributesForSupplementaryViewOfKind:EntityStickyHeaderParallaxHeader withIndexPath:[NSIndexPath indexPathWithIndex:0]];
-        CGRect frame = currentAttribute.frame;
-        frame.size.width = self.parallaxHeaderReferenceSize.width;
-        frame.size.height = self.parallaxHeaderReferenceSize.height;
+    [allItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSIndexPath *indexPath = [obj indexPath];
+        NSNumber *indexPathKey = @(indexPath.section);
+        UICollectionViewLayoutAttributes *header = headers[indexPathKey];
         
-        CGRect bounds = self.collectionView.bounds;
-        CGFloat maxY = CGRectGetMaxY(frame);
-        
-        // make sure the frame won't be negative values
-        CGFloat y = MIN(maxY - self.parallaxHeaderMinimumReferenceSize.height, bounds.origin.y + self.collectionView.contentInset.top);
-        CGFloat height = MAX(0, -y + maxY);
-        
-        
-        CGFloat maxHeight = self.parallaxHeaderReferenceSize.height;
-        CGFloat minHeight = self.parallaxHeaderMinimumReferenceSize.height;
-        CGFloat progressiveness = (height - minHeight)/(maxHeight - minHeight);
-        currentAttribute.progressiveness = progressiveness;
-        
-        // if zIndex < 0 would prevents tap from recognized right under navigation bar
-        currentAttribute.zIndex = 0;
-        
-        // When parallaxHeaderAlwaysOnTop is enabled, we will check when we should update the y position
-        if (self.parallaxHeaderAlwaysOnTop && height <= self.parallaxHeaderMinimumReferenceSize.height) {
-            CGFloat insetTop = self.collectionView.contentInset.top;
-            // Always stick to top but under the nav bar
-            y = self.collectionView.contentOffset.y + insetTop;
-            currentAttribute.zIndex = 2000;
-        }
-        
-        currentAttribute.frame = (CGRect){
-            frame.origin.x,
-            y,
-            frame.size.width,
-            height,
-        };
-        
-        
-        [allItems addObject:currentAttribute];
-    }
-    
-    if (!self.disableStickyHeaders) {
-        [lastCells enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            NSIndexPath *indexPath = [obj indexPath];
-            NSNumber *indexPathKey = @(indexPath.section);
-            UICollectionViewLayoutAttributes *header = headers[indexPathKey];
-            // CollectionView automatically removes headers not in bounds
-            if ( ! header) {
-                header = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                              atIndexPath:[NSIndexPath indexPathForItem:0 inSection:indexPath.section]];
-                
-                if (header) {
-                    [allItems addObject:header];
-                }
+        if (indexPath.section == 1){
+//            DDLogInfo(@"header %@", header);
+            if (!header){
+                header = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:[NSIndexPath indexPathForItem:0 inSection:indexPath.section]];
             }
-//            if (indexPath.section == 1)
-            [self updateHeaderAttributes:header lastCellAttributes:lastCells[indexPathKey]];
-        }];
-    }
-//    DDLogInfo(@"last %@", allItems);
+            if (header) {
+                [allItems addObject:header];
+            }
+            
+
+            [self updateHeaderAttributes:header];
+//            [self updateHeaderAttributes:header lastCellAttributes:lastCells[indexPathKey]];
+        }
+    }];
     return allItems;
 }
 
@@ -168,7 +114,7 @@ NSString *const EntityStickyHeaderParallaxHeader = @"EntityStickyHeaderParallaxH
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
     CGRect frame = attributes.frame;
-    frame.origin.y += self.parallaxHeaderReferenceSize.height;
+//    frame.origin.y += self.parallaxHeaderReferenceSize.height;
     attributes.frame = frame;
     return attributes;
 }
@@ -180,7 +126,7 @@ NSString *const EntityStickyHeaderParallaxHeader = @"EntityStickyHeaderParallaxH
         return CGSizeZero;
     }
     CGSize size = [super collectionViewContentSize];
-    size.height += self.parallaxHeaderReferenceSize.height;
+//    size.height += self.parallaxHeaderReferenceSize.height;
     return size;
 }
 
@@ -196,34 +142,25 @@ NSString *const EntityStickyHeaderParallaxHeader = @"EntityStickyHeaderParallaxH
 }
 
 - (void)setParallaxHeaderReferenceSize:(CGSize)parallaxHeaderReferenceSize {
-    _parallaxHeaderReferenceSize = parallaxHeaderReferenceSize;
+//    _parallaxHeaderReferenceSize = parallaxHeaderReferenceSize;
     // Make sure we update the layout
     [self invalidateLayout];
 }
 
 #pragma mark Helper
-
-- (void)updateHeaderAttributes:(UICollectionViewLayoutAttributes *)attributes lastCellAttributes:(UICollectionViewLayoutAttributes *)lastCellAttributes
+- (void)updateHeaderAttributes:(UICollectionViewLayoutAttributes *)attributes
 {
     CGRect currentBounds = self.collectionView.bounds;
     attributes.zIndex = 1024;
     attributes.hidden = NO;
-    
     CGPoint origin = attributes.frame.origin;
-    
-    CGFloat sectionMaxY = CGRectGetMaxY(lastCellAttributes.frame) - attributes.frame.size.height;
+    CGFloat sectionMaxY = CGRectGetMaxY(self.collectionView.frame) - attributes.frame.size.height;
+    //            DDLogInfo(@"section max %f", sectionMaxY);
     CGFloat y = CGRectGetMaxY(currentBounds) - currentBounds.size.height + self.collectionView.contentInset.top;
-    
-    if (self.parallaxHeaderAlwaysOnTop) {
-        y += self.parallaxHeaderMinimumReferenceSize.height;
-    }
-    
     CGFloat maxY = MIN(MAX(y, attributes.frame.origin.y), sectionMaxY);
     
-    DDLogInfo(@"%.2f, %.2f, %.2f", y, maxY, sectionMaxY);
-//
+    //            DDLogInfo(@"%.2f, %.2f, %.2f", y, maxY, sectionMaxY);
     origin.y = maxY;
-
     attributes.frame = (CGRect){
         origin,
         attributes.frame.size

@@ -12,9 +12,9 @@ extern NSString *const EntityStickyHeaderParallaxHeader;
 
 @interface EntityStickyHeaderFlowLayout : UICollectionViewFlowLayout
 
-@property (nonatomic) CGSize parallaxHeaderReferenceSize;
-@property (nonatomic) CGSize parallaxHeaderMinimumReferenceSize;
-@property (nonatomic) BOOL parallaxHeaderAlwaysOnTop;
+//@property (nonatomic) CGSize parallaxHeaderReferenceSize;
+//@property (nonatomic) CGSize parallaxHeaderMinimumReferenceSize;
+//@property (nonatomic) BOOL parallaxHeaderAlwaysOnTop;
 @property (nonatomic) BOOL disableStickyHeaders;
 
 @end
