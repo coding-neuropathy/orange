@@ -34,7 +34,7 @@
 #import "ShareView.h"
 
 
-@interface EntityViewController ()<EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate>
+@interface EntityViewController ()<EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate>
 
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -494,6 +494,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             {
                 EntityHeaderActionView * actionView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderActionIdentifier forIndexPath:indexPath];
                 actionView.entity = self.entity;
+                actionView.delegate = self;
                 return actionView;
             }
                 break;
@@ -962,6 +963,25 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     
     [AVAnalytics event:@"entity_forward_categoty"];
     [MobClick event:@"entity_forward_categoty"];
+}
+
+#pragma mark - <EntityHeaderActionViewDelegate>
+- (void)tapLikeBtn:(id)sender
+{
+    self.likeButton = (UIButton *)sender;
+    [self likeButtonAction];
+}
+
+- (void)tapPostNoteBtn:(id)sender
+{
+    self.noteButton = (UIButton *)sender;
+    [self noteButtonAction];
+}
+
+- (void)tapBuyBtn:(id)sender
+{
+    self.buyButton = (UIButton *)sender;
+    [self buyButtonAction];
 }
 
 

@@ -38,7 +38,7 @@
         [_likeButton setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_likeButton setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
         _likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [_likeButton addTarget:self action:@selector(likeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         if (self.entity.isLiked) {
             _likeButton.selected = YES;
         }
@@ -58,7 +58,7 @@
         [_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_postBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
         _postBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_postBtn addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [_postBtn addTarget:self action:@selector(noteButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:_postBtn];
     }
@@ -77,7 +77,7 @@
         [_buyButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-        [_buyButton addTarget:self action:@selector(buyButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [_buyButton addTarget:self action:@selector(buyButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         if (self.entity.purchaseArray.count > 0) {
             GKPurchase * purchase = self.entity.purchaseArray[0];
@@ -133,6 +133,31 @@
     self.buyButton.deFrameRight = kScreenWidth - 16;
 //    self.postBtn.deFrameLeft = self.likeButton.deFrameRight;
 //    self.buyButton.deFrameLeft = self.postBtn.deFrameRight;
+}
+
+#pragma mark - button action
+- (void)likeButtonAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapLikeBtn:)])
+    {
+        [_delegate tapLikeBtn:sender];
+    }
+}
+
+- (void)noteButtonAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapPostNoteBtn:)])
+    {
+        [_delegate tapPostNoteBtn:sender];
+    }
+}
+
+- (void)buyButtonAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapBuyBtn:)])
+    {
+        [_delegate tapBuyBtn:sender];
+    }
 }
 
 @end

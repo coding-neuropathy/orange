@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol EntityHeaderActionViewDelegate <NSObject>
+
+- (void)tapLikeBtn:(id)sender;
+- (void)tapPostNoteBtn:(id)sender;
+- (void)tapBuyBtn:(id)sender;
+
+@end
+
 @interface EntityHeaderActionView : UICollectionReusableView
 
 @property (strong, nonatomic) GKEntity * entity;
+@property (weak, nonatomic) id<EntityHeaderActionViewDelegate> delegate;
 
 @end
