@@ -55,7 +55,7 @@
     }
     _currentStep = 0;
     
-    
+    /*
     _timer = [NSTimer scheduledTimerWithTimeInterval:_duration
                                               target:self
                                             selector:@selector(repeatAnimation)
@@ -63,6 +63,7 @@
                                              repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     [self repeatAnimation];
+     */
     
     _isAnimating = YES;
     
