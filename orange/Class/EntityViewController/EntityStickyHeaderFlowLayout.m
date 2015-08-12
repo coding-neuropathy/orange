@@ -156,16 +156,19 @@
 //  DDLogInfo(@"%.2f, %.2f,", CGRectGetMaxY(currentBounds), currentBounds.size.height);
     
     
-    //DDLogInfo(@"%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
+
     if (self.collectionView.contentOffset.y <self.action_y) {
         origin.y = attributes.frame.origin.y;
+        //DDLogInfo(@"A%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
     }
     else if ((self.collectionView.contentOffset.y + self.collectionView.bounds.size.height < self.collectionView.contentSize.height)) {
         origin.y = y;
+        //DDLogInfo(@"B%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
     }
     else
     {
         origin.y = self.collectionView.contentOffset.y;
+        //DDLogInfo(@"C%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
     }
     
     
