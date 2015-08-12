@@ -85,22 +85,19 @@
         
     }];
     [lastCells enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSIndexPath *indexPath = [obj indexPath];
-        NSNumber *indexPathKey = @(indexPath.section);
+//        NSIndexPath *indexPath = [obj indexPath];
+//        NSNumber *indexPathKey = @(indexPath.section);
         
-        UICollectionViewLayoutAttributes *header = headers[indexPathKey];
+        UICollectionViewLayoutAttributes *header = headers[@(1)];
         // CollectionView automatically removes headers not in bounds
         if ( ! header) {
             [allItems addObject:self.stickyHeader];
-//            header = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-//                                                          atIndexPath:[NSIndexPath indexPathForItem:0 inSection:indexPath.section]];
-//            
-//            if (header) {
-//                [allItems addObject:header];
-//            }
         }
+        DDLogInfo(@"%@", obj);
         [self updateHeaderAttributes:self.stickyHeader];
     }];
+    
+//    DDLogInfo(@"all items %@", allItems);
     return allItems;
 }
 
