@@ -21,7 +21,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
+<<<<<<< HEAD
 	<string>4061</string>
+=======
+	<string>4063</string>
+>>>>>>> 3656b5a54a000a80aa2c0d54cee747f7b357b508
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>

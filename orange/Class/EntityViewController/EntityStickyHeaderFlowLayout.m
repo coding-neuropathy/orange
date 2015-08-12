@@ -14,7 +14,7 @@
 @interface EntityStickyHeaderFlowLayout ()
 
 @property (strong, nonatomic) UICollectionViewLayoutAttributes * stickyHeader;
-
+@property (assign, nonatomic) CGFloat action_y;
 @end
 
 @implementation EntityStickyHeaderFlowLayout
@@ -85,22 +85,19 @@
         
     }];
     [lastCells enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSIndexPath *indexPath = [obj indexPath];
-        NSNumber *indexPathKey = @(indexPath.section);
+//        NSIndexPath *indexPath = [obj indexPath];
+//        NSNumber *indexPathKey = @(indexPath.section);
         
-        UICollectionViewLayoutAttributes *header = headers[indexPathKey];
+        UICollectionViewLayoutAttributes *header = headers[@(1)];
         // CollectionView automatically removes headers not in bounds
         if ( ! header) {
             [allItems addObject:self.stickyHeader];
-//            header = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-//                                                          atIndexPath:[NSIndexPath indexPathForItem:0 inSection:indexPath.section]];
-//            
-//            if (header) {
-//                [allItems addObject:header];
-//            }
         }
+//        DDLogInfo(@"%@", obj);
         [self updateHeaderAttributes:self.stickyHeader];
     }];
+    
+//    DDLogInfo(@"all items %@", allItems);
     return allItems;
 }
 
@@ -144,6 +141,10 @@
 #pragma mark Helper
 - (void)updateHeaderAttributes:(UICollectionViewLayoutAttributes *)attributes
 {
+    if (self.action_y == 0) {
+        self.action_y = attributes.frame.origin.y;
+    }
+   
     CGRect currentBounds = self.collectionView.bounds;
     attributes.zIndex = 1024;
     attributes.hidden = NO;
@@ -152,16 +153,19 @@
 //  DDLogInfo(@"%.2f, %.2f,", CGRectGetMaxY(currentBounds), currentBounds.size.height);
     
     
-     DDLogInfo(@"%.2f, %.2f, %.2f", y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
-    if (self.collectionView.contentOffset.y == 0) {
+
+    if (self.collectionView.contentOffset.y <self.action_y) {
         origin.y = attributes.frame.origin.y;
+        //DDLogInfo(@"A%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
     }
     else if ((self.collectionView.contentOffset.y + self.collectionView.bounds.size.height < self.collectionView.contentSize.height)) {
-        origin.y = MAX(y, attributes.frame.origin.y);
+        origin.y = y;
+        //DDLogInfo(@"B%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
     }
     else
     {
         origin.y = self.collectionView.contentOffset.y;
+        //DDLogInfo(@"C%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
     }
     
     
@@ -171,7 +175,7 @@
     };
     
    
-    DDLogInfo(@"%@", attributes);
+    //DLogInfo(@"%@", attributes);
 }
 
 @end

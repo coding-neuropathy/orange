@@ -598,13 +598,17 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     switch (section) {
         case 5:
         {
+            /*
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
                 spacing = 5.;
             } else if (IS_IPHONE_6) {
-                spacing = 10.;
+                spacing = 5.;
             } else {
                 spacing = 10.;
             }
+             */
+            spacing = 3.;
+             
         }
             break;
             

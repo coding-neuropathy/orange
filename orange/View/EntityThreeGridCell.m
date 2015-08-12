@@ -8,6 +8,7 @@
 
 #import "EntityThreeGridCell.h"
 #import "EntityViewController.h"
+#import "ImageLoadingView.h"
 
 
 
@@ -16,6 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *itemArray;
 
 @end
+
 
 @implementation EntityThreeGridCell
 
@@ -57,6 +59,12 @@
                 [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
                 button.tag = i;
                 [self addSubview:button];
+            
+                ImageLoadingView * loading = [[ImageLoadingView alloc] init];
+                loading.hidesWhenStopped = YES;
+                loading.tag = 404;
+                loading.center = CGPointMake(button.deFrameWidth/2, button.deFrameHeight/2);
+                [button addSubview:loading];
             }
     }
 
@@ -64,7 +72,13 @@
         UIButton *item = self.itemArray[i];
         if (i < self.entityArray.count) {
             GKEntity * entity = self.entityArray[i];
-            [item sd_setImageWithURL:entity.imageURL_240x240 forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf0f0f0) andSize:CGSizeMake((kScreenWidth-3)/3-3, (kScreenWidth-3)/3-3)]];
+            //[item sd_setImageWithURL:entity.imageURL_240x240 forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf0f0f0) andSize:CGSizeMake((kScreenWidth-3)/3-3, (kScreenWidth-3)/3-3)]];
+            __weak __typeof(&*item)weakSelf = item;
+            [weakSelf viewWithTag:404].hidden = NO;
+            [item sd_setImageWithURL:entity.imageURL_240x240 forState:UIControlStateNormal placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(120., 120.)] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [weakSelf viewWithTag:404].hidden = YES;
+            }];
+            
             item.hidden = NO;
         } else {
             item.hidden = YES;
