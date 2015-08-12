@@ -33,7 +33,7 @@
 //        _likeButton.frame = CGRectMake(0, 0, kScreenWidth/3, 44.);
 //        UIImage * like = [[UIImage imageNamed:@"like"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 //        _likeButton.tintColor = UIColorFromRGB(0xffffff);
-        [_likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        [_likeButton setImage:[UIImage imageNamed:@"entity_like"] forState:UIControlStateNormal];
         [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
         [_likeButton setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_likeButton setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];

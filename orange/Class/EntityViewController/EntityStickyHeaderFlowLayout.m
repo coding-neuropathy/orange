@@ -93,7 +93,7 @@
         if ( ! header) {
             [allItems addObject:self.stickyHeader];
         }
-        DDLogInfo(@"%@", obj);
+//        DDLogInfo(@"%@", obj);
         [self updateHeaderAttributes:self.stickyHeader];
     }];
     
