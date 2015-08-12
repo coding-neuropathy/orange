@@ -14,7 +14,7 @@
 @interface EntityStickyHeaderFlowLayout ()
 
 @property (strong, nonatomic) UICollectionViewLayoutAttributes * stickyHeader;
-
+@property (assign, nonatomic) CGFloat action_y;
 @end
 
 @implementation EntityStickyHeaderFlowLayout
@@ -144,6 +144,10 @@
 #pragma mark Helper
 - (void)updateHeaderAttributes:(UICollectionViewLayoutAttributes *)attributes
 {
+    if (self.action_y == 0) {
+        self.action_y = attributes.frame.origin.y;
+    }
+   
     CGRect currentBounds = self.collectionView.bounds;
     attributes.zIndex = 1024;
     attributes.hidden = NO;
@@ -152,12 +156,12 @@
 //  DDLogInfo(@"%.2f, %.2f,", CGRectGetMaxY(currentBounds), currentBounds.size.height);
     
     
-     DDLogInfo(@"%.2f, %.2f, %.2f", y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
-    if (self.collectionView.contentOffset.y == 0) {
+    //DDLogInfo(@"%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
+    if (self.collectionView.contentOffset.y <self.action_y) {
         origin.y = attributes.frame.origin.y;
     }
     else if ((self.collectionView.contentOffset.y + self.collectionView.bounds.size.height < self.collectionView.contentSize.height)) {
-        origin.y = MAX(y, attributes.frame.origin.y);
+        origin.y = y;
     }
     else
     {
@@ -171,7 +175,7 @@
     };
     
    
-    DDLogInfo(@"%@", attributes);
+    //DLogInfo(@"%@", attributes);
 }
 
 @end
