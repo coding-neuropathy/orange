@@ -152,7 +152,6 @@
     CGFloat y = CGRectGetMaxY(currentBounds) - currentBounds.size.height;
 //  DDLogInfo(@"%.2f, %.2f,", CGRectGetMaxY(currentBounds), currentBounds.size.height);
     
-    
 
     if (self.collectionView.contentOffset.y <self.action_y) {
         origin.y = attributes.frame.origin.y;
