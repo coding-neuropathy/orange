@@ -26,7 +26,7 @@
 @property (strong, nonatomic) NSString * text;
 @end
 
-@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate>
+@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate,UISearchBarDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
@@ -89,6 +89,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         _searchVC.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
         _searchVC.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _searchVC.searchBar.keyboardType = UIKeyboardTypeDefault;
+        _searchVC.delegate = self;
 
     }
     return _searchVC;
@@ -172,7 +173,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     }
 }
 
-
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -235,6 +235,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                 categoryView.tapBlock = ^(GKCategory * category){
 //                    DDLogInfo(@"category %@", category);
                     GroupViewController * groupVC = [[GroupViewController alloc] initWithGid:category.groupId];
+                    groupVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:groupVC animated:YES];
                 };
                 if (self.categoryArray.count == 0) {
@@ -366,7 +367,28 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <UISearchControllerDelegate>
 - (void)willPresentSearchController:(UISearchController *)searchController
 {
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    view.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.97];
+    view.tag = 999;
+    
+    UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_search"]];
+    image.center = CGPointMake(kScreenWidth/2, 0);
+    image.deFrameTop = 50+kStatusBarHeight+kNavigationBarHeight;
+    [view addSubview:image];
+    
+    [self.searchVC.view addSubview:view];
+    [self.searchVC.view sendSubviewToBack:view];
+}
 
+- (void)didPresentSearchController:(UISearchController *)searchController
+{
+}
+- (void)willDismissSearchController:(UISearchController *)searchController
+{
+    [[self.searchVC.view viewWithTag:999]removeFromSuperview];
+}
+- (void)didDismissSearchController:(UISearchController *)searchController
+{
 }
 
 #pragma mark - <EntityCellDelegate>
