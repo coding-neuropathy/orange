@@ -111,7 +111,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         self.entityArray = entities;
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
-        [self.collectionView addSloganView];
+//        [self.collectionView addSloganView];
     } failure:^(NSInteger stateCode) {
         [self.collectionView.pullToRefreshView stopAnimating];
     }];
@@ -132,6 +132,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     self.navigationItem.titleView = self.searchVC.searchBar;
     self.definesPresentationContext = YES;
+    
+    [self.collectionView addSloganView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -166,6 +168,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [self.collectionView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
+    
+    
 
     if (self.entityArray == 0) {
         [self.collectionView triggerPullToRefresh];
