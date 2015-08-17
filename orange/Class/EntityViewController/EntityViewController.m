@@ -299,7 +299,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
     [self.collectionView registerClass:[EntityLikeUserCell class] forCellWithReuseIdentifier:LikeUserIdentifier];
     
     [self.collectionView registerClass:[EntityNoteCell class] forCellWithReuseIdentifier:NoteCellIdentifier];
@@ -326,6 +326,12 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         [array addObject:item];
     }
     self.navigationItem.rightBarButtonItems = array;
+    
+    {
+        UIBarButtonItem * item = [[UIBarButtonItem alloc]init];
+        item.title =NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
+        self.navigationItem.backBarButtonItem = item;
+    }
 
     [self refresh];
     [self refreshRandom];

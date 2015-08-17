@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *filteredArray;
 @property (nonatomic, strong) NSString *keyword;
 @property (nonatomic, strong) NoSearchResultView * noResultView;
+@property (nonatomic, weak) UISearchBar * searchBar;
 
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntityForSearch;
 @property(nonatomic, strong) NSMutableArray * dataArrayForUserForSearch;
@@ -65,7 +66,7 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight-kStatusBarHeight-kNavigationBarHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -301,9 +302,10 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (!self.dataArrayForOffsetForSearch) {
-        self.dataArrayForOffsetForSearch = [NSMutableArray arrayWithObjects:@(-64),@(-64),@(-64),@(-64),nil];
+        self.dataArrayForOffsetForSearch = [NSMutableArray arrayWithObjects:@(0),@(0),@(0),@(0),nil];
     }
     [self.dataArrayForOffsetForSearch setObject:@(scrollView.contentOffset.y) atIndexedSubscript:self.segmentedControlForSearch.selectedSegmentIndex];
+    [self.searchBar resignFirstResponder];
 
 }
 #pragma mark - HMSegmentedControl
@@ -360,6 +362,7 @@
         return;
     }
     self.tableView.tableFooterView = nil;
+    [self.tableView.pullToRefreshView startAnimating];
     if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
     {
         self.filteredArray = [NSMutableArray array];
@@ -371,6 +374,11 @@
         }
         [self.filteredArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
         [self.tableView.pullToRefreshView stopAnimating];
+        if(self.filteredArray.count == 0)
+        {
+            self.tableView.tableFooterView = self.noResultView;
+            self.noResultView.type = NoResultType;
+        }
         [self.tableView reloadData];
     }
     else if(self.segmentedControlForSearch.selectedSegmentIndex == 0)
@@ -426,15 +434,23 @@
     }
 }
 
+
 #pragma mark - <UISearchResultsUpdating>
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
+    self.searchBar = searchController.searchBar;
 //    DDLogInfo(@"keyword %@", searchController.searchBar.text);
     self.keyword = [searchController.searchBar.text Trimed];
     if (self.keyword.length == 0) {
+        
         return;
     }
+    [self.tableView triggerPullToRefresh];
     [self handleSearchText:self.keyword];
+    
+
+    
+    
 }
 
 @end
