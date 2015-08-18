@@ -239,6 +239,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                 categoryView.tapBlock = ^(GKCategory * category){
 //                    DDLogInfo(@"category %@", category);
                     GroupViewController * groupVC = [[GroupViewController alloc] initWithGid:category.groupId];
+                    groupVC.title = category.title;
                     groupVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:groupVC animated:YES];
                 };
@@ -256,7 +257,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
             {
 
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
-                header.text = @"热门商品";
+                header.text = NSLocalizedStringFromTable(@"popular", kLocalizedFile, nil);
                 if (self.entityArray.count == 0) {
                     header.hidden = YES;
                 }

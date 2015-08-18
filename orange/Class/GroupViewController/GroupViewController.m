@@ -195,12 +195,14 @@
     [super viewWillAppear:animated];
     [self refresh];
     [AVAnalytics beginLogPageView:@"GroupView"];
+    [MobClick beginLogPageView:@"GroupVuew"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"GroupView"];
+    [MobClick endLogPageView:@"GroupView"];
 }
 
 - (void)didReceiveMemoryWarning
