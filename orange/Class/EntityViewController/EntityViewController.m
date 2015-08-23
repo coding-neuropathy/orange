@@ -442,6 +442,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             {
                 EntityHeaderActionView * actionView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderActionIdentifier forIndexPath:indexPath];
                 actionView.entity = self.entity;
+                self.likeButton = actionView.likeButton;
                 actionView.delegate = self;
                 return actionView;
             }
@@ -692,11 +693,8 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         [popView setNoteBtnSelected];
     }
     popView.tapLikeBtn = ^(UIButton *likeBtn){
-        DDLogInfo(@"like btn %@", likeBtn);
-//        likeBtn.selected = YES;
-        [self likeButtonAction];
-//        [self ]
-//        likeBtn.selected = self.entity.isLiked;
+//        DDLogInfo(@"like btn %@", likeBtn);
+        [self likeButtonActionWithBtn:likeBtn];
     };
     popView.tapNoteBtn = ^(UIButton *noteBtn){
         [self noteButtonAction];
@@ -784,11 +782,40 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 }
 
 
-
 #pragma mark - Action
 - (void)likeButtonAction
 {
-    
+    [self likeButtonActionWithBtn:nil];
+//    if(!k_isLogin)
+//    {
+//        LoginView * view = [[LoginView alloc]init];
+//        [view show];
+//        return;
+//    }
+//    
+//    [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
+//    [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
+//    
+//    [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
+//        if (liked == self.likeButton.selected) {
+//            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+//        }
+//        self.likeButton.selected = liked;
+//        self.entity.liked = liked;
+//        if (liked) {
+//            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+//            self.entity.likeCount = self.entity.likeCount+1;
+//        } else {
+//            self.entity.likeCount = self.entity.likeCount-1;
+//            [SVProgressHUD dismiss];
+//        }
+//    } failure:^(NSInteger stateCode) {
+//        [SVProgressHUD showImage:nil status:@"喜爱失败"];
+//    }];
+}
+
+- (void)likeButtonActionWithBtn:(UIButton *)btn
+{
     if(!k_isLogin)
     {
         LoginView * view = [[LoginView alloc]init];
@@ -805,12 +832,20 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         }
         self.likeButton.selected = liked;
         self.entity.liked = liked;
+        
+        DDLogInfo(@"entity view %d", self.likeButton.selected);
+
+        
         if (liked) {
+            self.entity.likeCount += 1;
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
-            self.entity.likeCount = self.entity.likeCount+1;
         } else {
-            self.entity.likeCount = self.entity.likeCount-1;
+            self.entity.likeCount -= 1;
             [SVProgressHUD dismiss];
+        }
+        if (btn){
+            btn.selected = self.entity.liked;
+            [btn setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount] forState:UIControlStateNormal];
         }
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"喜爱失败"];

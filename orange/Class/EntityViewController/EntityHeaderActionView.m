@@ -9,7 +9,7 @@
 #import "EntityHeaderActionView.h"
 
 @interface EntityHeaderActionView ()
-@property (strong, nonatomic) UIButton *likeButton;
+
 @property (strong, nonatomic) UIButton *postBtn;
 @property (strong, nonatomic) UIButton *buyButton;
 @property (strong, nonatomic) UIView *H;
