@@ -11,6 +11,9 @@
 @interface EntityPopView : UIView
 
 @property (strong, nonatomic) GKEntity * entity;
+@property (copy, nonatomic) void (^tapLikeBtn)(UIButton * likeBtn);
+@property (copy, nonatomic) void (^tapNoteBtn)(UIButton * noteBtn);
+@property (copy, nonatomic) void (^tapBuyBtn)(UIButton * buyBtn);
 
 - (void)showInWindowWithAnimated:(BOOL)animated;
 

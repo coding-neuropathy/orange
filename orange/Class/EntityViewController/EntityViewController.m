@@ -685,6 +685,20 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 //    DDLogInfo(@"OKOKOKOK");
     EntityPopView * popView = [[EntityPopView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
     popView.entity = self.entity;
+    popView.tapLikeBtn = ^(UIButton *likeBtn){
+        DDLogInfo(@"like btn %@", likeBtn);
+//        likeBtn.selected = YES;
+        [self likeButtonAction];
+//        [self ]
+//        likeBtn.selected = self.entity.isLiked;
+    };
+    popView.tapNoteBtn = ^(UIButton *noteBtn){
+        [self noteButtonAction];
+    };
+    
+    popView.tapBuyBtn = ^(UIButton *buyBtn){
+        [self buyButtonAction];
+    };
     [popView showInWindowWithAnimated:YES];
 }
 

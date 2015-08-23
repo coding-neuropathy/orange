@@ -14,6 +14,10 @@
 @property (strong, nonatomic) UIPageControl * pageCtr;
 @property (strong, nonatomic) UIButton * closeBtn;
 
+@property (strong, nonatomic) UIButton * likeBtn;
+@property (strong, nonatomic) UIButton * noteBtn;
+@property (strong, nonatomic) UIButton * buyBtn;
+
 @end
 
 @implementation EntityPopView
@@ -34,7 +38,7 @@
     {
         _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_closeBtn setTitle:[NSString fontAwesomeIconStringForEnum:FATimes] forState:UIControlStateNormal];
-        _closeBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:16.];
+        _closeBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
         [_closeBtn addTarget:self action:@selector(closeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_closeBtn];
     }
@@ -70,7 +74,51 @@
     return _pageCtr;
 }
 
+- (UIButton *)likeBtn {
+    if (!_likeBtn)
+    {
+        _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_likeBtn setImage:[UIImage imageNamed:@"like w"] forState:UIControlStateNormal];
+        [_likeBtn setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
+//        _likeBtn.backgroundColor = [UIColor redColor];
+        _likeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 30.)];
+        
+        [_likeBtn addTarget:self action:@selector(likeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_likeBtn];
+    }
+    return _likeBtn;
+}
 
+- (UIButton *)noteBtn {
+    if (!_noteBtn)
+    {
+        _noteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_noteBtn setImage:[UIImage imageNamed:@"note w"] forState:UIControlStateNormal];
+        [_noteBtn setImage:[UIImage imageNamed:@"noted"] forState:UIControlStateSelected];
+        _noteBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+//        _noteBtn.backgroundColor = [UIColor yellowColor];
+        [_noteBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 30.)];
+        [_noteBtn addTarget:self action:@selector(noteBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_noteBtn];
+    }
+    return _noteBtn;
+}
+
+- (UIButton *)buyBtn {
+    if (!_buyBtn) {
+        _buyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_buyBtn setImage:[UIImage imageNamed:@"buy"] forState:UIControlStateNormal];
+        [_buyBtn setTitle:NSLocalizedStringFromTable(@"buy", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_buyBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 30.)];
+        [_buyBtn addTarget:self action:@selector(buyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_buyBtn];
+    }
+    return _buyBtn;
+}
+
+#pragma mark - set data
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
@@ -108,6 +156,11 @@
         }
         [self.scrollView addSubview:imageView];
     }];
+    
+    self.likeBtn.selected = _entity.isLiked;
+    if (_entity.likeCount > 0)
+        [self.likeBtn setTitle:[NSString stringWithFormat:@"%ld", _entity.likeCount] forState:UIControlStateNormal];
+    
     [self setNeedsLayout];
 }
 
@@ -127,6 +180,16 @@
         self.pageCtr.bounds = CGRectMake(0.0, 0.0, 32 * (_pageCtr.numberOfPages - 1) + 32, 32);
         self.pageCtr.hidden = NO;
     }
+    
+    self.likeBtn.frame = CGRectMake(0., 0., (kScreenWidth - 48. )/ 3, 36.);
+    self.likeBtn.deFrameBottom = kScreenHeight - 30;
+    self.likeBtn.deFrameLeft = 12.;
+    
+    self.noteBtn.frame = self.likeBtn.frame;
+    self.noteBtn.deFrameLeft = self.likeBtn.deFrameRight + 12.;
+    
+    self.buyBtn.frame = self.likeBtn.frame;
+    self.buyBtn.deFrameLeft = self.noteBtn.deFrameRight + 12.;
 }
 
 
@@ -134,18 +197,15 @@
 - (void)fadeIn
 {
     self.alpha = 0;
-//    CGAffineTransform landscapeTransform = CGAffineTransformMakeRotation(degreesToRadian(270));
     self.transform = CGAffineTransformMakeScale(1.3, 1.3);
 
     [UIView animateWithDuration:0.35 animations:^{
         self.alpha = 1.;
         self.transform = CGAffineTransformMakeScale(1., 1.);
-//        self.bounds = CGRectMake(0.0, 0.0,kScreenWidth, kScreenHeight);
     } completion:^(BOOL finished) {
-//        _scrollView.contentSize = CGSizeMake(self.frame.size.height * _pages, self.frame.size.width);
+
     }];
-    
-    //    DDLogInfo(@"faded in %@", self);
+
 }
 
 - (void)fadeOut
@@ -175,6 +235,32 @@
 - (void)closeBtnAction:(id)sender
 {
     [self fadeOut];
+}
+
+- (void)likeBtnAction:(id)sender
+{
+    if (self.tapLikeBtn) {
+        self.tapLikeBtn((UIButton *)sender);
+    }
+}
+
+- (void)noteBtnAction:(id)sender
+{
+    if(self.tapNoteBtn)
+    {
+        self.tapNoteBtn((UIButton *)sender);
+    }
+    [self removeFromSuperview];
+}
+
+- (void)buyBtnAction:(id)sender
+{
+    
+    if (self.tapBuyBtn)
+    {
+        self.tapBuyBtn((UIButton *)sender);
+    }
+    [self removeFromSuperview];
 }
 
 #pragma mark - scroll view delegate
