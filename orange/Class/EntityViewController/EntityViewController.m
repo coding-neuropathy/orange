@@ -8,33 +8,31 @@
 
 #import "EntityViewController.h"
 #import "API.h"
-//#import "NoteCell.h"
-//#import "CSStickyHeaderFlowLayout.h"
+
 #import "EntityStickyHeaderFlowLayout.h"
 #import "UserViewController.h"
 #import "NotePostViewController.h"
 #import "CategoryViewController.h"
 
-//#import "WXApi.h"
-//#import "GKWebVC.h"
+#import "EntityHeaderView.h"
 #import "EntityLikeUserCell.h"
 #import "EntityNoteCell.h"
 #import "EntityCell.h"
 #import "EntityHeaderSectionView.h"
 #import "EntityHeaderActionView.h"
+#import "EntityPopView.h"
 
 #import "EntityLikerController.h"
 #import "UIScrollView+Slogan.h"
 
 #import "ReportViewController.h"
 #import "LoginView.h"
-//#import "IBActionSheet.h"
-#import "EntityHeaderView.h"
+
 #import "WebViewController.h"
 #import "ShareView.h"
 
 
-@interface EntityViewController ()<EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate>
+@interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate>
 
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -215,32 +213,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     }
     return _buyButton;
 }
-
-//- (void)configToolbar
-//{
-////    self.navigationController.toolbar.clipsToBounds = YES;
-//    self.navigationController.toolbar.barTintColor = UIColorFromRGB(0x292929);
-//    self.navigationController.toolbar.layer.borderWidth = 0.5;
-//    self.navigationController.toolbar.layer.borderColor = [UIColor clearColor].CGColor;
-//    
-//    for (UIView * view in self.navigationController.toolbar.subviews) {
-//        if ([view  isKindOfClass:[UIImageView class]]&&![view isKindOfClass:[NSClassFromString(@"_UIToolbarBackground") class]]) {
-//            view.alpha =0;
-//        }
-//    }
-//    
-//    //[self.navigationController.toolbar setShadowImage:[UIImage imageWithColor:[UIColor whiteColor] andSize:CGSizeMake(kScreenWidth, 1)] forToolbarPosition:UIBarPositionAny];
-//    
-//    UIBarButtonItem * likeBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.likeButton];
-//    UIBarButtonItem * postBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.postBtn];
-//    UIBarButtonItem * buyBarBtn = [[UIBarButtonItem alloc] initWithCustomView:self.buyButton];
-//    UIBarButtonItem * flexibleButtonItemLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-//    //flexibleButtonItemLeft.width = -16;
-//    UIBarButtonItem * flexibleButtonItemRight = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-//    
-//    
-//    self.toolbarItems = @[flexibleButtonItemLeft,likeBarBtn, postBarBtn, buyBarBtn,flexibleButtonItemRight];
-//}
 
 #pragma mark - get entity data
 - (void)refresh
@@ -461,7 +433,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             {
                 EntityHeaderView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderIdentifier forIndexPath:indexPath];
                 headerView.entity = self.entity;
-//                headerView.delegate = self;
+                headerView.delegate = self;
                 return headerView;
             }
                 break;
@@ -679,10 +651,41 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     }
 }
 
+#pragma mark - KVO
+- (void)addObserver
+{
+    
+}
+
+- (void)removeObserver
+{
+    
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    
+}
+
+- (void)dealloc
+{
+    [self removeObserver];
+}
+
+
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
     [[OpenCenter sharedOpenCenter] openEntity:entity];
+}
+
+#pragma mark - <EntityHeaderViewDelegate>
+- (void)handelTapImageWithIndex:(NSUInteger)idx
+{
+//    DDLogInfo(@"OKOKOKOK");
+    EntityPopView * popView = [[EntityPopView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+    popView.entity = self.entity;
+    [popView showInWindowWithAnimated:YES];
 }
 
 #pragma mark - <EntityHeaderSectionViewDelegate>
@@ -760,27 +763,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     return NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil);
 }
 
-#pragma mark - KVO
-
-- (void)addObserver
-{
-
-}
-
-- (void)removeObserver
-{
-
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-
-}
-
-- (void)dealloc
-{
-    [self removeObserver];
-}
 
 
 #pragma mark - Action
