@@ -16,5 +16,5 @@
 @property (copy, nonatomic) void (^tapBuyBtn)(UIButton * buyBtn);
 
 - (void)showInWindowWithAnimated:(BOOL)animated;
-
+- (void)setNoteBtnSelected;
 @end

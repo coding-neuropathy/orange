@@ -683,8 +683,14 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 - (void)handelTapImageWithIndex:(NSUInteger)idx
 {
 //    DDLogInfo(@"OKOKOKOK");
+    [AVAnalytics event:@"click entiyt image view"];
+    [MobClick event:@"click entiyt image view"];
     EntityPopView * popView = [[EntityPopView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
     popView.entity = self.entity;
+    
+    if (self.note) {
+        [popView setNoteBtnSelected];
+    }
     popView.tapLikeBtn = ^(UIButton *likeBtn){
         DDLogInfo(@"like btn %@", likeBtn);
 //        likeBtn.selected = YES;

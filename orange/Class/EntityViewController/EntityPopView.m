@@ -270,4 +270,8 @@
     _pageCtr.currentPage = index;
 }
 
+- (void)setNoteBtnSelected
+{
+    self.noteBtn.selected = YES;
+}
 @end
