@@ -37,8 +37,9 @@
     if (!_closeBtn)
     {
         _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_closeBtn setTitle:[NSString fontAwesomeIconStringForEnum:FATimes] forState:UIControlStateNormal];
-        _closeBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
+//        [_closeBtn setTitle:[NSString fontAwesomeIconStringForEnum:FATimes] forState:UIControlStateNormal];
+        [_closeBtn setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
+//        _closeBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
         [_closeBtn addTarget:self action:@selector(closeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_closeBtn];
     }
@@ -171,8 +172,14 @@
     self.closeBtn.frame = CGRectMake(0., 0., 32., 32.);
     self.closeBtn.deFrameTop = 25.;
     self.closeBtn.deFrameRight = kScreenWidth - 10;
-    self.scrollView.deFrameTop = 100.;
     
+    if (IS_IPHONE_4_OR_LESS) {
+        self.scrollView.deFrameTop = 55.;
+    } else if (IS_IPHONE_5) {
+        self.scrollView.deFrameTop = 90.;
+    } else {
+        self.scrollView.deFrameTop = 100.;
+    }
     if ([_entity.imageURLArray count] > 0) {
         
         self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
@@ -270,8 +277,18 @@
     _pageCtr.currentPage = index;
 }
 
+- (void)setImageIndex:(NSInteger)idx
+{
+    [self.scrollView setContentOffset:CGPointMake(idx * kScreenWidth, 0.)];
+}
+
 - (void)setNoteBtnSelected
 {
     self.noteBtn.selected = YES;
+}
+
+- (void)setNoteNumber:(NSInteger)num
+{
+    [self.noteBtn setTitle:[NSString stringWithFormat:@"%ld", num] forState:UIControlStateNormal];
 }
 @end

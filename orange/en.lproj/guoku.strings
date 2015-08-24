@@ -48,7 +48,7 @@
  */
 "from"              = "From";
 "recommendation"    = "Related Items";
-"item"              = "Item";
+"item"              = "Detail";
 "update note"       = "Update Note";
 "post note"         = "Post Note";
 "comment"           = "Comment";

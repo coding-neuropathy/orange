@@ -271,7 +271,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
+    self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
     [self.collectionView registerClass:[EntityLikeUserCell class] forCellWithReuseIdentifier:LikeUserIdentifier];
     
     [self.collectionView registerClass:[EntityNoteCell class] forCellWithReuseIdentifier:NoteCellIdentifier];
@@ -299,11 +299,11 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     }
     self.navigationItem.rightBarButtonItems = array;
     
-    {
-        UIBarButtonItem * item = [[UIBarButtonItem alloc]init];
-        item.title =NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
-        self.navigationItem.backBarButtonItem = item;
-    }
+//    {
+//        UIBarButtonItem * item = [[UIBarButtonItem alloc]init];
+//        item.title =NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
+//        self.navigationItem.backBarButtonItem = item;
+//    }
 
     [self refresh];
     [self refreshRandom];
@@ -348,7 +348,7 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         [self removeObserver];
     }
     _entity = entity;
-    self.title = entity.entityName;
+//    self.title = entity.entityName;
     [self addObserver];
 }
 
@@ -688,6 +688,8 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     [MobClick event:@"click entiyt image view"];
     EntityPopView * popView = [[EntityPopView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
     popView.entity = self.entity;
+    [popView setImageIndex:idx];
+    [popView setNoteNumber:self.dataArrayForNote.count];
     
     if (self.note) {
         [popView setNoteBtnSelected];
