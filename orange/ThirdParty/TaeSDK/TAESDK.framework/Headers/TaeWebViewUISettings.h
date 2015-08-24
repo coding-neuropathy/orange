@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 com.taobao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h> 
+
 @interface TaeWebViewUISettings : NSObject
 
 

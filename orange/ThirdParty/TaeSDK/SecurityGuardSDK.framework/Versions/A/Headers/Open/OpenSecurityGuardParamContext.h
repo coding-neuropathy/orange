@@ -14,7 +14,7 @@
 /**
  *  应用当前使用的appkey
  */
-@property (nonatomic, retain) NSString* appKey;
+@property (nonatomic, strong) NSString* appKey;
 
 
 
@@ -28,7 +28,7 @@
 /**
  *  传入业务参数使用的dictionary，使用的key值见各component的头文件定义
  */
-@property (nonatomic, retain) NSMutableDictionary* paramDict;
+@property (nonatomic, strong) NSMutableDictionary* paramDict;
 
 
 

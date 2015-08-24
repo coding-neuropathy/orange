@@ -11,7 +11,7 @@
 @interface TaeOrderItem : NSObject
 
 
-@property(nonatomic, strong) NSString *itemId;
+@property(nonatomic, strong) NSString *itemId;  //商品混淆id
 @property(nonatomic, strong) NSString *skuId;
 @property(nonatomic, strong) NSNumber *quantity;
 @end

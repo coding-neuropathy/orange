@@ -81,5 +81,20 @@ isBackButtonHidden:(BOOL)isBackButtonHidden;
          isBackButtonHidden:(BOOL)isBackButtonHidden;
 
 
+/**
+ * 唤起官方扫码登录授权页面: 同步手机登陆态到其它终端
+ *
+ *
+ * @param parentController app当前的Controller
+ * @param params  k[shortUrl] : v[h5登录短链]    必填
+ *                k[domain]   : v[业务线域标示]   有自定义样式约定时，必填
+ * @param successCallback      扫码登录成功的回调，返回TaeSession
+ * @param failedCallback       扫码登陆失败的回调，返回NSError
+ *
+ */
+-(void)showQRLogin:(UIViewController *) parentController
+            params:(NSDictionary *)params
+   successCallback:(loginSuccessCallback) successCallback
+    failedCallback:(loginFailedCallback) failedCallback;
 
 @end
