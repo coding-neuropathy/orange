@@ -12,6 +12,7 @@
 
 //- (void)TapLikeBtnAction:(id)sender;
 //- (void)TapBuyBtnAction:(id)sender;
+- (void)handelTapImageWithIndex:(NSUInteger)idx;
 
 @end
 

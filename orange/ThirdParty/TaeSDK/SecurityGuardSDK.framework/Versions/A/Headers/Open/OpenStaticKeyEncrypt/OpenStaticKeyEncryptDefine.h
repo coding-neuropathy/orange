@@ -8,18 +8,6 @@
  *  安全凭证加解密模块使用加密算法
  */
 
-/**
- *  des算法
- */
-extern NSInteger const OPEN_CIPHER_DES;
-
-
-
-/**
- *  3des算法
- */
-extern NSInteger const OPEN_CIPHER_3DES;
-
 
 
 /**
@@ -40,14 +28,6 @@ extern NSInteger const OPEN_CIPHER_AES192;
  *  aes256算法
  */
 extern NSInteger const OPEN_CIPHER_AES256;
-
-
-
-/**
- *  rsa算法
- */
-extern NSInteger const OPEN_CIPHER_RSA;
-
 
 
 /**

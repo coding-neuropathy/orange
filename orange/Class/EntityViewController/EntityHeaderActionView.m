@@ -9,7 +9,7 @@
 #import "EntityHeaderActionView.h"
 
 @interface EntityHeaderActionView ()
-@property (strong, nonatomic) UIButton *likeButton;
+
 @property (strong, nonatomic) UIButton *postBtn;
 @property (strong, nonatomic) UIButton *buyButton;
 @property (strong, nonatomic) UIView *H;
@@ -33,11 +33,12 @@
 //        _likeButton.frame = CGRectMake(0, 0, kScreenWidth/3, 44.);
 //        UIImage * like = [[UIImage imageNamed:@"like"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 //        _likeButton.tintColor = UIColorFromRGB(0xffffff);
-        [_likeButton setImage:[UIImage imageNamed:@"entity_like"] forState:UIControlStateNormal];
+        [_likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
         [_likeButton setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_likeButton setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
         _likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_likeButton setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 10.)];
         [_likeButton addTarget:self action:@selector(likeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         if (self.entity.isLiked) {
             _likeButton.selected = YES;
@@ -52,10 +53,11 @@
     if (!_postBtn) {
         _postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        [_postBtn setImage:[UIImage imageNamed:@"post note"] forState:UIControlStateNormal];
+        [_postBtn setImage:[UIImage imageNamed:@"note"] forState:UIControlStateNormal];
         [_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_postBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
         _postBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_postBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 10.)];
         [_postBtn addTarget:self action:@selector(noteButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:_postBtn];

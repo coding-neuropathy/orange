@@ -89,6 +89,9 @@
         [self failureLogWithOperation:operation responseObject:error];
         NSLog(@"error %@", [[error userInfo] allKeys]);
         NSLog(@"error %@", [[error userInfo] objectForKey:@"NSErrorFailingURLKey"]);
+                NSData * data = [[error userInfo] objectForKey:@"com.alamofire.serialization.response.error.data"];
+                NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"%@", string);
         if (failure) {
             failure(operation, error);
         }

@@ -77,48 +77,6 @@ static CGFloat kEntityViewMarginLeft = 16.;
     return _pageCtr;
 }
 
-//- (UIButton *)likeBtn
-//{
-//    if (!_likeBtn) {
-//        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 86, 30)];
-//        _likeBtn.layer.masksToBounds = YES;
-//        _likeBtn.layer.cornerRadius = 4;
-//        [_likeBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-//        _likeBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//        _likeBtn.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
-//        _likeBtn.layer.borderWidth = 0.5;
-//        _likeBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
-//        _likeBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
-//        [_likeBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-//        [_likeBtn setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
-//        [_likeBtn setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
-//        [_likeBtn setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
-//        [_likeBtn setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
-//        [_likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
-//        [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,16, 0, 0)];
-//        [_likeBtn addTarget:self action:@selector(TapLikeBtn:) forControlEvents:UIControlEventTouchUpInside];
-//        [self addSubview:_likeBtn];
-//    }
-//    return _likeBtn;
-//}
-//
-//- (UIButton *)buyBtn
-//{
-//    if (!_buyBtn) {
-//        _buyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        _buyBtn.layer.masksToBounds = YES;
-//        _buyBtn.layer.cornerRadius = 4;
-//        _buyBtn.backgroundColor = UIColorFromRGB(0x427ec0);
-//        _buyBtn.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
-//        [_buyBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-//        [_buyBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-//        [_buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,10, 0, 0)];
-//        [_buyBtn addTarget:self action:@selector(TapBuyBtn:) forControlEvents:UIControlEventTouchUpInside];
-//        [self addSubview:_buyBtn];
-//    }
-//    return _buyBtn;
-//}
-
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
@@ -145,8 +103,8 @@ static CGFloat kEntityViewMarginLeft = 16.;
     [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 32) * idx, 0., kScreenWidth - 32, kScreenWidth - 32)];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
-//        [imageurl a]
-//        NSLog(@"image url %@", imageURL);
+        imageView.tag = idx;
+        imageView.userInteractionEnabled = YES;
         if (IS_IPHONE_6P) {
             NSURL * imageURL_800;
             if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
@@ -156,7 +114,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
             }
             
             [imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
-            [self.scrollView addSubview:imageView];
+//            [self.scrollView addSubview:imageView];
         } else {
             NSURL * imageURL_640;
             if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
@@ -166,18 +124,14 @@ static CGFloat kEntityViewMarginLeft = 16.;
             }
         
             [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
-            [self.scrollView addSubview:imageView];
+            
         }
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        
+        [imageView addGestureRecognizer:tap];
+        [self.scrollView addSubview:imageView];
     }];
     
-    
-//    [self.likeBtn setTitle:[NSString stringWithFormat:@"%@ %lu", NSLocalizedStringFromTable(@"like", kLocalizedFile, nil), _entity.likeCount] forState:UIControlStateNormal];
-//    self.likeBtn.selected = self.entity.liked;
-//    if(_entity.likeCount == 0)
-//    {
-//        [self.likeBtn setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
-//    }
-//    [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f", _entity.lowestPrice] forState:UIControlStateNormal];
     
     [self setNeedsLayout];
 }
@@ -204,19 +158,14 @@ static CGFloat kEntityViewMarginLeft = 16.;
 }
 
 #pragma mark - button action
-//- (void)TapLikeBtn:(id)sender
-//{
-//    if (_delegate && [_delegate respondsToSelector:@selector(TapLikeBtnAction:)]) {
-//        [_delegate TapLikeBtnAction:sender];
-//    }
-//}
-//
-//- (void)TapBuyBtn:(id)sender
-//{
-//    if (_delegate && [_delegate respondsToSelector:@selector(TapBuyBtnAction:)]) {
-//        [_delegate TapBuyBtnAction:sender];
-//    }
-//}
+- (void)tapAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(handelTapImageWithIndex:)])
+    {
+        [_delegate handelTapImageWithIndex:[(UIGestureRecognizer *)sender view].tag];
+    }
+}
+
 
 #pragma mark - scroll view delegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

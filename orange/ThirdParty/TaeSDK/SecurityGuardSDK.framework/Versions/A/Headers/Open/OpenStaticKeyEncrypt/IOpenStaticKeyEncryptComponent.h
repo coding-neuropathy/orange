@@ -10,7 +10,7 @@
  *
  *  @param value 要存储的安全凭证
  *
- *  @return 保存状态  1，保存成功 2，覆盖保存 3，保存失败
+ *  @return 保存状态  1，保存成功 2，覆盖保存 0，保存失败
  */
 - (int) saveSecret: (NSString*) key value: (NSData*) value;
 
@@ -32,7 +32,7 @@
  *
  *  @param key 数据对应的key
  *
- *  @return 删除结果状态码 1,没有需要被删除的项 2，删除成功 3，删除失败
+ *  @return 删除结果状态码 1,没有需要被删除的项 2，删除成功 0，删除失败
  */
 - (int) removeSecret: (NSString*) key;
 

@@ -52,6 +52,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 - (void)openEntity:(GKEntity *)entity hideButtomBar:(BOOL)hide
 {
     EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
+//    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
     vc.hidesBottomBarWhenPushed = hide;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
