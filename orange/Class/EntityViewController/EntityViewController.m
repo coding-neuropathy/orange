@@ -32,6 +32,7 @@
 #import "ShareView.h"
 
 
+
 @interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate>
 
 @property (nonatomic, strong) GKNote *note;
@@ -43,6 +44,7 @@
 
 @property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) EntityHeaderView * header;
+@property (nonatomic, strong) EntityHeaderActionView * actionView;
 //@property (nonatomic, strong) UIButton *categoryButton;
 @property (nonatomic, strong) UIView *likeUserView;
 @property (nonatomic, strong) UIView * noteContentView;
@@ -352,6 +354,12 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     [self addObserver];
 }
 
+- (void)setNote:(GKNote *)note
+{
+    _note = note;
+    self.actionView.note = note;
+}
+
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -442,8 +450,10 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
             {
                 EntityHeaderActionView * actionView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderActionIdentifier forIndexPath:indexPath];
                 actionView.entity = self.entity;
+                actionView.note = self.note;
                 self.likeButton = actionView.likeButton;
                 actionView.delegate = self;
+                self.actionView = actionView;
                 return actionView;
             }
                 break;
@@ -869,10 +879,11 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         if (![self.dataArrayForNote containsObject:note]) {
             [self.dataArrayForNote insertObject:note atIndex:self.dataArrayForNote.count];
         }
-        
+        [self.noteButton setTitle:NSLocalizedStringFromTable(@"update note", kLocalizedFile, nil) forState:UIControlStateNormal];
         //[self.noteButton setTitle:@"修改" forState:UIControlStateNormal];
         self.note = note;
-        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
+        [self.collectionView reloadData];
+        //[self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
 //        [self.tableView reloadData];
     };
     [self.navigationController pushViewController:VC animated:YES];
