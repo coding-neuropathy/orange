@@ -54,7 +54,12 @@
         _postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
         [_postBtn setImage:[UIImage imageNamed:@"note"] forState:UIControlStateNormal];
-        [_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
+        if (!self.note) {
+            [_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
+        }else{
+            [_postBtn setTitle:NSLocalizedStringFromTable(@"update note", kLocalizedFile, nil) forState:UIControlStateNormal];
+        }
+
         [_postBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
         _postBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_postBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 10.)];
@@ -63,6 +68,16 @@
         [self addSubview:_postBtn];
     }
     return _postBtn;
+}
+
+- (void)setNote:(GKNote *)note
+{
+    _note = note;
+    if (!self.note) {
+        [_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
+    }else{
+        [_postBtn setTitle:NSLocalizedStringFromTable(@"update note", kLocalizedFile, nil) forState:UIControlStateNormal];
+    }
 }
 
 - (UIView *)H
@@ -126,7 +141,7 @@
 {
     _entity = entity;
     self.likeButton.frame = CGRectMake(0, 3., 90., 44.);
-    self.postBtn.frame = CGRectMake(0., 3.,  90., 44.);
+    self.postBtn.frame = CGRectMake(0., 3.,  120., 44.);
     self.buyButton.frame = CGRectMake(0., 10., 90., 30.);
     [self setNeedsLayout];
     
