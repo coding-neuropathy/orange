@@ -17,7 +17,7 @@
 @end
 
 @interface EntityHeaderActionView : UICollectionReusableView
-
+@property (strong, nonatomic) GKNote * note;
 @property (strong, nonatomic) GKEntity * entity;
 @property (strong, nonatomic) UIButton *likeButton;
 @property (weak, nonatomic) id<EntityHeaderActionViewDelegate> delegate;
