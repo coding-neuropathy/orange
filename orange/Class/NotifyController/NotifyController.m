@@ -84,10 +84,8 @@
 {
     if (!_thePageViewController) {
         _thePageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-        //        _thePageViewController.view.frame = CGRectMake(0., 0., WIDTH, HEIGHT - 100.);
         _thePageViewController.dataSource = self;
         _thePageViewController.delegate = self;
-        
     }
     return _thePageViewController;
 }
