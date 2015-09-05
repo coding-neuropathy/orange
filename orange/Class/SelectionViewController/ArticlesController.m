@@ -36,6 +36,20 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     return _collectionView;
 }
 
+#pragma mark - get data
+- (void)refresh
+{
+    [API getArticlesWithSuccess:^(NSArray *articles) {
+        self.articleArray = [NSMutableArray arrayWithArray:articles];
+        
+        [self.collectionView reloadData];
+        [self.collectionView.pullToRefreshView stopAnimating];
+    } failure:^(NSInteger stateCode) {
+        
+        [self.collectionView.pullToRefreshView stopAnimating];
+    }];
+}
+
 - (void)loadView
 {
     self.view = self.collectionView;
@@ -51,6 +65,26 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.collectionView addPullToRefreshWithActionHandler:^{
+        [weakSelf refresh];
+    }];
+    
+//    [self.collectionView addInfiniteScrollingWithActionHandler:^{
+//        [weakSelf loadMore];
+//    }];
+    //
+    if (self.articleArray.count == 0)
+    {
+        [self.collectionView triggerPullToRefresh];
+    }
+    
+}
+
 
 /*
 #pragma mark - Navigation
@@ -76,7 +110,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleIdentifier forIndexPath:indexPath];
-    
+    cell.article = [self.articleArray objectAtIndex:indexPath.row];
     return cell;
 }
 

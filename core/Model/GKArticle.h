@@ -11,7 +11,7 @@
 @interface GKArticle : GKBaseModel
 
 /**
- *  文章 ID
+ *  文章ID
  */
 @property (assign, nonatomic) NSInteger * articleId;
 
@@ -20,10 +20,15 @@
  */
 @property (strong, nonatomic) NSString * title;
 
-
 /**
  *  文章内容
  */
 @property (strong, nonatomic) NSString * content;
+
+
+/**
+ *  文章封面
+ */
+@property (strong, nonatomic) NSURL * coverURL;
 
 @end

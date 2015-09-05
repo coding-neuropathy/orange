@@ -8,12 +8,20 @@
 
 #import "GKArticle.h"
 
+@interface GKArticle ()
+
+@property (strong, nonatomic) NSString * cover;
+
+@end
+
 @implementation GKArticle
+
+static NSString * imageHost = @"http://imgcdn.guoku.com/";
 
 + (NSDictionary *)dictionaryForServerAndClientKeys
 {
     NSDictionary * keyDic = @{
-                            @"id"           :   @"articleId",
+                            @"article_id"    :   @"articleId",
                             @"title"        :   @"title",
                             @"content"      :   @"content",
                             @"url"          :   @"url",
@@ -23,6 +31,17 @@
                     };
     
     return keyDic;
+}
+
+//+ (NSArray *)keyNames
+//{
+//    return @[@"id"];
+//}
+
+- (NSURL *)coverURL
+{
+    
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", imageHost, self.cover]];
 }
 
 @end

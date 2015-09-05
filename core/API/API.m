@@ -397,8 +397,23 @@
     NSString *path = @"articles/";
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSMutableArray * articleList = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary *dict in responseObject)
+        {
+//            NSLog(@"%@", dict);
+            GKArticle * article = [GKArticle modelFromDictionary:dict];
+            [articleList addObject:article];
+//            NSLog(@"url %@", article.coverURL);
+        }
+        if (success){
+            success([NSArray arrayWithArray:articleList]);
+        }
         
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
     }];
 }
 
