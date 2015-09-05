@@ -44,26 +44,9 @@ static NSString *CellIdentifier = @"SelectionCell";
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         
         self.tabBarItem = item;
-//        self.tabBarItem.titlePositionAdjustment = UIOffsetMake(0.f, 50.f);
         
         self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
-        
-//        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 200, 28)];
-//        [segmentedControl setSectionTitles:@[@"商品", @"图文"]];
-//        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-//        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
-//        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
-//        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
-//        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
-//        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
-//        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
-//        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-//        [segmentedControl setTag:2];
-        //self.navigationItem.titleView =  segmentedControl;
-//        self.index = 0;
         self.cateId = 0;
-        
-//        [self logo];
         
         NSMutableArray * array = [NSMutableArray array];
         {

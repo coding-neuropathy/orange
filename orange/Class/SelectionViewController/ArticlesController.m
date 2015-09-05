@@ -63,6 +63,22 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [AVAnalytics beginLogPageView:@"ArticlesView"];
+    [MobClick beginLogPageView:@"ArticlesView"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [AVAnalytics endLogPageView:@"ArticlesView"];
+    [MobClick endLogPageView:@"ArticlesView"];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -79,7 +95,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 //    [self.collectionView addInfiniteScrollingWithActionHandler:^{
 //        [weakSelf loadMore];
 //    }];
-    //
+//
     if (self.articleArray.count == 0)
     {
         [self.collectionView triggerPullToRefresh];
@@ -135,7 +151,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
     NSLog(@"%@", article.articleURL);
     WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
-    
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -169,8 +169,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [self.collectionView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
-    
-    
 
     if (self.entityArray == 0) {
         [self.collectionView triggerPullToRefresh];
@@ -394,6 +392,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 }
 - (void)didDismissSearchController:(UISearchController *)searchController
 {
+    
 }
 
 #pragma mark - <EntityCellDelegate>

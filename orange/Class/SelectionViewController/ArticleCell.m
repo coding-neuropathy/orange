@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) UIImageView * coverImageView;
 @property (strong, nonatomic) UILabel * titleLabel;
-//@property (strong, nonatomic) 
+@property (strong, nonatomic) RTLabel * detailLabel;
 
 @end
 
@@ -51,7 +51,15 @@
     return _titleLabel;
 }
 
-//- (RTLabel *)
+- (RTLabel *)detailLabel
+{
+    if (_detailLabel) {
+        _detailLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
+        
+        [self addSubview:_detailLabel];
+    }
+    return _detailLabel;
+}
 
 - (void)setArticle:(GKArticle *)article
 {
