@@ -11,6 +11,7 @@
 @interface GKArticle ()
 
 @property (strong, nonatomic) NSString * cover;
+@property (strong, nonatomic) NSString * url_string;
 
 @end
 
@@ -21,12 +22,13 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
 + (NSDictionary *)dictionaryForServerAndClientKeys
 {
     NSDictionary * keyDic = @{
-                            @"article_id"    :   @"articleId",
+                            @"article_id"   :   @"articleId",
                             @"title"        :   @"title",
                             @"content"      :   @"content",
-                            @"url"          :   @"url",
+//                            @"url"          :   @"url",
                             @"read_count"   :   @"read_count",
                             @"cover"        :   @"cover",
+                            @"url"          :   @"url_string",
                             @"creator"      :   @"creator",
                     };
     
@@ -42,6 +44,11 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
 {
     
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", imageHost, self.cover]];
+}
+
+- (NSURL *)articleURL
+{
+    return [NSURL URLWithString:[NSString stringWithFormat:@"http://www.guoku.com%@", self.url_string]];
 }
 
 @end

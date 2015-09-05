@@ -31,4 +31,9 @@
  */
 @property (strong, nonatomic) NSURL * coverURL;
 
+/**
+ *  文章 URL
+ */
+@property (strong, nonatomic) NSURL * articleURL;
+
 @end

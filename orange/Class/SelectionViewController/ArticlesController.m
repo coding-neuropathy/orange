@@ -9,6 +9,8 @@
 #import "ArticlesController.h"
 #import "ArticleCell.h"
 
+#import "WebViewController.h"
+
 @interface ArticlesController ()
 
 @property (strong, nonatomic) NSMutableArray * articleArray;
@@ -31,7 +33,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     }
     return _collectionView;
 }
@@ -122,11 +124,19 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     return cellSize;
 }
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0., 0., 10, 0.);
+}
 
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
+    NSLog(@"%@", article.articleURL);
+    WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
     
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

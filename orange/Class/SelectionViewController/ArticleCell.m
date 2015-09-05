@@ -12,10 +12,21 @@
 
 @property (strong, nonatomic) UIImageView * coverImageView;
 @property (strong, nonatomic) UILabel * titleLabel;
+//@property (strong, nonatomic) 
 
 @end
 
 @implementation ArticleCell
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
 
 - (UIImageView *)coverImageView
 {
@@ -40,11 +51,20 @@
     return _titleLabel;
 }
 
+//- (RTLabel *)
+
 - (void)setArticle:(GKArticle *)article
 {
     _article = article;
     
     self.titleLabel.text = _article.title;
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_article.title];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    
+    [paragraphStyle setLineSpacing:10.];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [_article.title length])];
+     self.titleLabel.attributedText = attributedString;
     
     [self.coverImageView sd_setImageWithURL:_article.coverURL];
     
