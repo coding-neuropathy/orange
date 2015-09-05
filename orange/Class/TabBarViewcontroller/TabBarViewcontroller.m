@@ -9,9 +9,8 @@
 #import "TabBarViewcontroller.h"
 #import "SelectionViewController.h"
 #import "DiscoverController.h"
-//#import "DiscoverViewController.h"
-//#import "NotifactionViewController.h"
 #import "NotifyController.h"
+#import "ArticlesController.h"
 #import "MeViewController.h"
 #import "SettingViewController.h"
 #import "LoginView.h"
@@ -47,7 +46,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:@"Logout" object:nil];
     UINavigationController * first = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
                                                                                    toolbarClass:nil];
-    [first setViewControllers:@[[[SelectionViewController alloc] init]] animated:NO];
+    [first setViewControllers:@[[[ArticlesController alloc] init]] animated:NO];
     
     UINavigationController * second = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
                                                                                     toolbarClass:nil];

@@ -10,4 +10,16 @@
 
 @implementation ArticleCell
 
+- (void)setArticle:(GKArticle *)article
+{
+    _article = article;
+    
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+}
+
 @end

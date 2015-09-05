@@ -10,4 +10,6 @@
 
 @interface ArticleCell : UICollectionViewCell
 
+@property (strong, nonatomic) GKArticle * article;
+
 @end
