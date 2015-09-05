@@ -232,9 +232,6 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
                 break;
             }
         }
-//        DDLogError(@"buy %@", self.entity.purchaseArray[0]);
-//        GKPurchase * purchase = self.entity.purchaseArray[0];
-//        DDLogError(@"%d", purchase.status);
         if (self.entity.purchaseArray.count > 0) {
             GKPurchase * purchase = self.entity.purchaseArray[0];
             switch (purchase.status) {

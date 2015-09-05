@@ -143,6 +143,37 @@
     self.likeButton.frame = CGRectMake(0, 3., 90., 44.);
     self.postBtn.frame = CGRectMake(0., 3.,  120., 44.);
     self.buyButton.frame = CGRectMake(0., 10., 90., 30.);
+    
+    if (_entity.purchaseArray.count > 0) {
+        GKPurchase * purchase = self.entity.purchaseArray[0];
+        switch (purchase.status) {
+            case GKBuyREMOVE:
+            {
+                [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
+                [_buyButton setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+                _buyButton.backgroundColor = [UIColor clearColor];
+                _buyButton.enabled = NO;
+            }
+                break;
+            case GKBuySOLDOUT:
+            {
+                _buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
+            }
+                break;
+            default:
+            {
+                [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                [_buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
+            }
+                break;
+        }
+        
+    }
+    
+    
     [self setNeedsLayout];
     
 //    DDLogInfo(@"log log");

@@ -138,15 +138,6 @@
         return self.msgController;
     }
     return nil;
-//    DDLogError(@"after %@", viewController);
-//    
-//    if (self.index == 1) {
-//        return nil;
-//    }
-//    self.index ++;
-//    return self.msgController;
-//    DDLogError(@"after %@", viewController);
-    
 }
 
 #pragma mark - <UIPageViewControllerDelegate>

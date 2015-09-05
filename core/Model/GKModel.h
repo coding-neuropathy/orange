@@ -13,3 +13,4 @@
 #import "GKEntityCategory.h"
 #import "GKPurchase.h"
 #import "GKCategory.h"
+#import "GKArticle.h"

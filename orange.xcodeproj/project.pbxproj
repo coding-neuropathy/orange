@@ -271,6 +271,8 @@
 		B76F1D8A1ACE283B00A25A7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B76F1D8C1ACE283B00A25A7D /* InfoPlist.strings */; };
 		B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76FAE951B67B5FA002AC4C7 /* DiscoverCategoryView.m */; };
 		B77E00A91B8988DC008BCA55 /* EntityPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77E00A81B8988DC008BCA55 /* EntityPopView.m */; };
+		B783F65E1B9AE5DB004DF1CB /* GKArticle.h in Headers */ = {isa = PBXBuildFile; fileRef = B783F65C1B9AE5DB004DF1CB /* GKArticle.h */; };
+		B783F65F1B9AE5DB004DF1CB /* GKArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F65D1B9AE5DB004DF1CB /* GKArticle.m */; };
 		B78C4E0E1B676ED5006620F7 /* GKCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = B78C4E0C1B676ED5006620F7 /* GKCategory.h */; };
 		B78C4E0F1B676ED5006620F7 /* GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B78C4E0D1B676ED5006620F7 /* GKCategory.m */; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
@@ -831,6 +833,8 @@
 		B76FAE951B67B5FA002AC4C7 /* DiscoverCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverCategoryView.m; sourceTree = "<group>"; };
 		B77E00A71B8988DC008BCA55 /* EntityPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityPopView.h; sourceTree = "<group>"; };
 		B77E00A81B8988DC008BCA55 /* EntityPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityPopView.m; sourceTree = "<group>"; };
+		B783F65C1B9AE5DB004DF1CB /* GKArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKArticle.h; sourceTree = "<group>"; };
+		B783F65D1B9AE5DB004DF1CB /* GKArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKArticle.m; sourceTree = "<group>"; };
 		B78C4E0C1B676ED5006620F7 /* GKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKCategory.h; sourceTree = "<group>"; };
 		B78C4E0D1B676ED5006620F7 /* GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKCategory.m; sourceTree = "<group>"; };
 		B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = DiscoverView/DiscoverHeaderView.h; sourceTree = "<group>"; };
@@ -1146,6 +1150,8 @@
 				39B720111B1F4C16008519E3 /* GKUser.m */,
 				B78C4E0C1B676ED5006620F7 /* GKCategory.h */,
 				B78C4E0D1B676ED5006620F7 /* GKCategory.m */,
+				B783F65C1B9AE5DB004DF1CB /* GKArticle.h */,
+				B783F65D1B9AE5DB004DF1CB /* GKArticle.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1815,9 +1821,9 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				391F5F8D1B1705A000931533 /* UIComponents */,
 				B76EE07C1B3D86AE009D8763 /* NotifyController */,
 				B769B1261B2ACFB3004401FA /* WelcomeViewController */,
-				391F5F8D1B1705A000931533 /* UIComponents */,
 				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
 				DA35B3C31AFEE31200D66671 /* PasswordEditViewController */,
 				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
@@ -2391,6 +2397,7 @@
 				39B720481B1F4C16008519E3 /* GKEntity.h in Headers */,
 				39B7203F1B1F4C16008519E3 /* UIView+DEFrameAdditions.h in Headers */,
 				39B7204C1B1F4C16008519E3 /* GKModel.h in Headers */,
+				B783F65E1B9AE5DB004DF1CB /* GKArticle.h in Headers */,
 				39B720351B1F4C16008519E3 /* HttpClient.h in Headers */,
 				39B720411B1F4C16008519E3 /* config.pch in Headers */,
 				39B7207A1B1F50E0008519E3 /* Passport.h in Headers */,
@@ -2616,6 +2623,7 @@
 				39B720591B1F4C16008519E3 /* NSString+Helper.m in Sources */,
 				39B720661B1F4C16008519E3 /* AFURLConnectionOperation.m in Sources */,
 				39B720681B1F4C16008519E3 /* AFURLRequestSerialization.m in Sources */,
+				B783F65F1B9AE5DB004DF1CB /* GKArticle.m in Sources */,
 				39B7206C1B1F4C16008519E3 /* AFURLSessionManager.m in Sources */,
 				39B7206A1B1F4C16008519E3 /* AFURLResponseSerialization.m in Sources */,
 				39B7203C1B1F4C16008519E3 /* NSString+App.m in Sources */,
