@@ -274,6 +274,7 @@
 		B783F65E1B9AE5DB004DF1CB /* GKArticle.h in Headers */ = {isa = PBXBuildFile; fileRef = B783F65C1B9AE5DB004DF1CB /* GKArticle.h */; };
 		B783F65F1B9AE5DB004DF1CB /* GKArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F65D1B9AE5DB004DF1CB /* GKArticle.m */; };
 		B783F6621B9AEC46004DF1CB /* ArticlesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F6611B9AEC46004DF1CB /* ArticlesController.m */; };
+		B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F6641B9AF26C004DF1CB /* ArticleCell.m */; };
 		B78C4E0E1B676ED5006620F7 /* GKCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = B78C4E0C1B676ED5006620F7 /* GKCategory.h */; };
 		B78C4E0F1B676ED5006620F7 /* GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B78C4E0D1B676ED5006620F7 /* GKCategory.m */; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
@@ -838,6 +839,8 @@
 		B783F65D1B9AE5DB004DF1CB /* GKArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKArticle.m; sourceTree = "<group>"; };
 		B783F6601B9AEC46004DF1CB /* ArticlesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesController.h; sourceTree = "<group>"; };
 		B783F6611B9AEC46004DF1CB /* ArticlesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesController.m; sourceTree = "<group>"; };
+		B783F6631B9AF26C004DF1CB /* ArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCell.h; sourceTree = "<group>"; };
+		B783F6641B9AF26C004DF1CB /* ArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCell.m; sourceTree = "<group>"; };
 		B78C4E0C1B676ED5006620F7 /* GKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKCategory.h; sourceTree = "<group>"; };
 		B78C4E0D1B676ED5006620F7 /* GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKCategory.m; sourceTree = "<group>"; };
 		B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = DiscoverView/DiscoverHeaderView.h; sourceTree = "<group>"; };
@@ -1545,6 +1548,8 @@
 				B72FD82E1AEF5B3A00354248 /* IconInfoView.m */,
 				B783F6601B9AEC46004DF1CB /* ArticlesController.h */,
 				B783F6611B9AEC46004DF1CB /* ArticlesController.m */,
+				B783F6631B9AF26C004DF1CB /* ArticleCell.h */,
+				B783F6641B9AF26C004DF1CB /* ArticleCell.m */,
 			);
 			path = SelectionViewController;
 			sourceTree = "<group>";
@@ -2812,6 +2817,7 @@
 				B7B6958A1AF05C400016AAB8 /* UIImage+WebP.m in Sources */,
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				4E1D28BE1A125B9300740C17 /* UIDevice+JSQMessages.m in Sources */,
+				B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */,
 				B7B6958B1AF05C400016AAB8 /* UIImageView+HighlightedWebCache.m in Sources */,
 				4E1D28D81A125B9300740C17 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				B7B695891AF05C400016AAB8 /* UIImage+MultiFormat.m in Sources */,

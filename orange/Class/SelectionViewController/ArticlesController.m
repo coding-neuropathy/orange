@@ -7,6 +7,7 @@
 //
 
 #import "ArticlesController.h"
+#import "ArticleCell.h"
 
 @interface ArticlesController ()
 
@@ -16,6 +17,8 @@
 @end
 
 @implementation ArticlesController
+
+static NSString * ArticleIdentifier = @"ArticleCell";
 
 #pragma mark - init View
 - (UICollectionView *)collectionView
@@ -33,9 +36,15 @@
     return _collectionView;
 }
 
+- (void)loadView
+{
+    self.view = self.collectionView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,5 +61,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - <UICollectionViewDataSource>
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
 
 @end
