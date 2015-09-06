@@ -15,12 +15,26 @@
 
 @property (strong, nonatomic) NSMutableArray * articleArray;
 @property (strong, nonatomic) UICollectionView * collectionView;
+@property (assign, nonatomic) NSInteger page;
+@property (assign, nonatomic) NSInteger size;
+@property (assign, nonatomic) NSTimeInterval timestamp;
 
 @end
 
 @implementation ArticlesController
 
 static NSString * ArticleIdentifier = @"ArticleCell";
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.page = 1;
+        self.size = 20;
+        self.timestamp = [[NSDate date] timeIntervalSince1970];
+    }
+    return self;
+}
 
 #pragma mark - init View
 - (UICollectionView *)collectionView
@@ -41,14 +55,27 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 #pragma mark - get data
 - (void)refresh
 {
-    [API getArticlesWithSuccess:^(NSArray *articles) {
+    self.page = 1;
+    self.timestamp = [[NSDate date] timeIntervalSince1970];
+    [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
         self.articleArray = [NSMutableArray arrayWithArray:articles];
-        
+        self.page +=1;
         [self.collectionView reloadData];
         [self.collectionView.pullToRefreshView stopAnimating];
     } failure:^(NSInteger stateCode) {
-        
         [self.collectionView.pullToRefreshView stopAnimating];
+    }];
+}
+
+- (void)loadMore
+{
+    [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
+        self.page += 1;
+        [self.articleArray addObjectsFromArray:articles];
+        [self.collectionView reloadData];
+        [self.collectionView.infiniteScrollingView stopAnimating];
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.infiniteScrollingView stopAnimating];
     }];
 }
 
@@ -92,10 +119,10 @@ static NSString * ArticleIdentifier = @"ArticleCell";
         [weakSelf refresh];
     }];
     
-//    [self.collectionView addInfiniteScrollingWithActionHandler:^{
-//        [weakSelf loadMore];
-//    }];
-//
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
+    }];
+
     if (self.articleArray.count == 0)
     {
         [self.collectionView triggerPullToRefresh];

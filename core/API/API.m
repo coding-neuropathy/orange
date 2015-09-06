@@ -391,11 +391,20 @@
 /**
  *  获取图文列表
  */
-+ (void)getArticlesWithSuccess:(void (^)(NSArray *articles))success
++ (void)getArticlesWithTimestamp:(NSTimeInterval)timestamp
+            Page:(NSInteger)page
+            Size:(NSInteger)size
+            success:(void (^)(NSArray *articles))success
             failure:(void (^)(NSInteger stateCode))failure
 {
     NSString *path = @"articles/";
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    
+    [paraDict setObject:@(timestamp) forKey:@"timestamp"];
+    [paraDict setObject:@(page) forKey:@"page"];
+    [paraDict setObject:@(size) forKey:@"size"];
+//    [paraDict setObject:@(cateId) forKey:@"rcat"];
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionaryWithDictionary:paraDict] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSMutableArray * articleList = [NSMutableArray arrayWithCapacity:0];
         for (NSDictionary *dict in responseObject)

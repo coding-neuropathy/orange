@@ -128,8 +128,11 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 /**
  *  获取图文列表
  */
-+ (void)getArticlesWithSuccess:(void (^)(NSArray *articles))success
-                       failure:(void (^)(NSInteger stateCode))failure;
++ (void)getArticlesWithTimestamp:(NSTimeInterval)timestamp
+                            Page:(NSInteger)page
+                            Size:(NSInteger)size
+                         success:(void (^)(NSArray *articles))success
+                         failure:(void (^)(NSInteger stateCode))failure;
 
 /**
  *  获取发现数据
