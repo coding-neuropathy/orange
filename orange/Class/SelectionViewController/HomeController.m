@@ -8,6 +8,8 @@
 
 #import "HomeController.h"
 #import "ArticleCell.h"
+#import "HomeEntityCell.h"
+
 #import "DiscoverBannerView.h"
 #import "WebViewController.h"
 
@@ -16,12 +18,13 @@
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
 @property (strong, nonatomic) NSMutableArray * articleArray;
-
+@property (strong, nonatomic) NSMutableArray * entityArray;
 @end
 
 @implementation HomeController
 
 static NSString * ArticleIdentifier = @"HomeArticleCell";
+static NSString * EntityIdentifier = @"EntityCell";
 static NSString * BannerIdentifier = @"BannerView";
 
 #pragma mark - init View
@@ -46,7 +49,7 @@ static NSString * BannerIdentifier = @"BannerView";
     [API getHomeWithSuccess:^(NSArray *banners, NSArray *articles, NSArray *entities) {
         self.bannerArray = banners;
         self.articleArray = [NSMutableArray arrayWithArray:articles];
-        
+        self.entityArray = [NSMutableArray arrayWithArray:entities];
         [self.collectionView reloadData];
         [self.collectionView.pullToRefreshView stopAnimating];
     } failure:^(NSInteger stateCode) {
@@ -65,6 +68,9 @@ static NSString * BannerIdentifier = @"BannerView";
     [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
     
     [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
+    
+    [self.collectionView registerClass:[HomeEntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -115,8 +121,11 @@ static NSString * BannerIdentifier = @"BannerView";
         case 0:
             count = self.articleArray.count;
             break;
-            
+        case 1:
+            count = self.entityArray.count;
+            break;
         default:
+        
             break;
     }
     return count;
@@ -124,19 +133,24 @@ static NSString * BannerIdentifier = @"BannerView";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    switch (indexPath.section) {
-//        case 0:
-//        {
-//        
-//        }
-//            break;
-//            
-//        default:
-//            break;
-//    }
-    ArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleIdentifier forIndexPath:indexPath];
-    cell.article = [self.articleArray objectAtIndex:indexPath.row];
-    return cell;
+    switch (indexPath.section) {
+        case 1:
+        {
+            HomeEntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityIdentifier forIndexPath:indexPath];
+            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+            return cell;
+        }
+            break;
+            
+        default:
+        {
+            ArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleIdentifier forIndexPath:indexPath];
+            cell.article = [self.articleArray objectAtIndex:indexPath.row];
+            return cell;
+        }
+            break;
+    }
+
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -163,7 +177,17 @@ static NSString * BannerIdentifier = @"BannerView";
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSize = CGSizeMake(kScreenWidth, 117);
+    CGSize cellSize = CGSizeMake(0, 0);
+    switch (indexPath.section) {
+        case 0:
+            cellSize = CGSizeMake(kScreenWidth, 117);
+            break;
+        case 1:
+            cellSize = CGSizeMake(kScreenWidth, 180.);
+            break;
+        default:
+            break;
+    }
     
     return cellSize;
 }

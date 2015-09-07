@@ -7,6 +7,7 @@
 //
 
 #import "GKArticle.h"
+#import "NSString+Helper.h"
 
 @interface GKArticle ()
 
@@ -42,8 +43,9 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
 
 - (NSURL *)coverURL
 {
-    
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", imageHost, self.cover]];
+    NSString * url_stirng = [NSString stringWithFormat:@"%@%@", imageHost, self.cover];
+    ;
+    return [NSURL URLWithString:[url_stirng imageURLWithSize:240.]];
 }
 
 - (NSURL *)articleURL
