@@ -7,6 +7,7 @@
 //
 
 #import "HomeController.h"
+#import "ArticleCell.h"
 
 @interface HomeController ()
 
@@ -15,6 +16,8 @@
 @end
 
 @implementation HomeController
+
+static NSString * ArticleIdentifier = @"HomeArticleCell";
 
 #pragma mark - init View
 - (UICollectionView *)collectionView
@@ -32,8 +35,15 @@
     return _collectionView;
 }
 
+- (void)loadView
+{
+    self.view = self.collectionView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
     // Do any additional setup after loading the view.
 }
 
@@ -51,5 +61,61 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - <UICollectionViewDataSource>
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 2;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    NSInteger count = 0;
+    switch (section) {
+        case 0:
+            
+            break;
+            
+        default:
+            break;
+    }
+    return count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+//    switch (indexPath.section) {
+//        case 0:
+//        {
+//        
+//        }
+//            break;
+//            
+//        default:
+//            break;
+//    }
+    ArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleIdentifier forIndexPath:indexPath];
+    
+    return cell;
+}
+
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize cellSize = CGSizeMake(kScreenWidth, 117);
+    
+    return cellSize;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0., 0., 5, 0.);
+}
+
+#pragma mark - <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+
+}
 
 @end
