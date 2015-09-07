@@ -328,7 +328,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
         if (buttonIndex == 1) {
             UITextField *tf=[alertView textFieldAtIndex:0];
             if ([tf.text validateEmail]) {
-                NSDictionary *dict = @{@"email": tf.text};
+//                NSDictionary *dict = @{@"email": tf.text};
 //                [API updateaccountWithParameters:dict success:^(GKUser *user) {
 //                    [Passport sharedInstance].user.email = user.email;
 //                    [Passport sharedInstance].user = [Passport sharedInstance].user;
@@ -350,7 +350,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
             if (tf.text.length < 6) {
                 [SVProgressHUD showImage:nil status:@"密码不能小于6位"];
             } else {
-                NSDictionary *dict = @{@"password":tf.text};
+//                NSDictionary *dict = @{@"password":tf.text};
 //                [API updateaccountWithParameters:dict success:^(GKUser *user) {
 //                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
 //                } failure:^(NSInteger stateCode) {

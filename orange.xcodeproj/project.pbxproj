@@ -3069,7 +3069,6 @@
 					"$(PROJECT_DIR)/orange/ThirdParty",
 					"$(PROJECT_DIR)/orange/ThirdParty/TaeSDK",
 					"$(PROJECT_DIR)/orange/Class",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 					"$(PROJECT_DIR)/orange/Class/EntityViewController",
 					"$(PROJECT_DIR)/orange",
 				);
@@ -3109,7 +3108,6 @@
 					"$(PROJECT_DIR)/orange/ThirdParty",
 					"$(PROJECT_DIR)/orange/ThirdParty/TaeSDK",
 					"$(PROJECT_DIR)/orange/Class",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 					"$(PROJECT_DIR)/orange/Class/EntityViewController",
 					"$(PROJECT_DIR)/orange",
 				);
