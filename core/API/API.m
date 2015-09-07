@@ -326,6 +326,46 @@
 
 #pragma mark - get main list
 /**
+ * 获取首页信息
+ *
+ */
++ (void)getHomeWithSuccess:(void (^)(NSArray  * banners, NSArray * articles, NSArray * entities))success
+                   failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString * path = @"home/";
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@", responseObject);
+        NSArray *banners = responseObject[@"banner"];
+//        NSLog(@"%@", responseObject[@"articles"]);
+        
+        NSMutableArray * articles = [NSMutableArray arrayWithCapacity:0];
+        
+        for (NSDictionary * row in responseObject[@"articles"]) {
+            GKArticle * article = [GKArticle modelFromDictionary:row];
+            [articles addObject:article];
+        }
+        
+        NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject[@"entities"]){
+            GKEntity * entity = [GKEntity modelFromDictionary:row];
+            [entities addObject:entity];
+        }
+        
+        if (success) {
+            success(banners, articles, entities);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger statusCode = operation.response.statusCode;
+            if (failure) {
+                failure(statusCode);
+            }
+        }
+    }];
+}
+
+
+/**
  *  获取精选列表
  *
  *  @param timestamp 时间戳
@@ -390,6 +430,9 @@
 
 /**
  *  获取图文列表
+ *  @param timestamp 时间戳
+ *  @param page 翻页
+ *  @param size 每页数量
  */
 + (void)getArticlesWithTimestamp:(NSTimeInterval)timestamp
             Page:(NSInteger)page

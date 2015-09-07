@@ -111,6 +111,13 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 
 #pragma mark - get main list
 /**
+ * 获取首页信息
+ *
+ */
++ (void)getHomeWithSuccess:(void (^)(NSArray  * banners, NSArray * articles, NSArray * entities))success
+                   failure:(void (^)(NSInteger stateCode))failure;
+
+/**
  *  获取精选列表
  *
  *  @param timestamp 时间戳
