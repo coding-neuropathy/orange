@@ -176,7 +176,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
-    NSLog(@"%@", article.articleURL);
+//    NSLog(@"%@", article.articleURL);
     WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
