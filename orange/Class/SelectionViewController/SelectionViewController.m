@@ -63,6 +63,8 @@ static NSString *CellIdentifier = @"SelectionCell";
         }
         //self.navigationItem.rightBarButtonItems = array;
         
+        self.tableView.frame = CGRectMake(0, 0,kScreenWidth , kScreenHeight-kStatusBarHeight-kNavigationBarHeight - kTabBarHeight);
+        
     }
     return self;
 }

@@ -107,7 +107,7 @@
 
     [self addChildViewController:self.thePageViewController];
     
-    self.thePageViewController.view.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    self.thePageViewController.view.frame = CGRectMake(0, 0, kScreenWidth,  kScreenHeight);
 
     [self.thePageViewController setViewControllers:@[self.homeVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 
@@ -130,7 +130,7 @@
         return self.homeVC;
     }
     if ([viewController isKindOfClass:[HomeController class]]) {
-        return self.articleVC;
+        //return self.articleVC;
     }
 
     return nil;
@@ -140,7 +140,7 @@
 {
     
      if ([viewController isKindOfClass:[ArticlesController class]]) {
-         return self.homeVC;
+         //return self.homeVC;
      }
      if ([viewController isKindOfClass:[HomeController class]]) {
          return self.entityVC;
