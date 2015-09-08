@@ -47,11 +47,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"discover", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_discover"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_discover"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-        
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_discover"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_discover"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         
-        self.title = NSLocalizedStringFromTable(@"discover", kLocalizedFile, nil);
+        //self.title = NSLocalizedStringFromTable(@"discover", kLocalizedFile, nil);
     }
     return self;
 }
@@ -146,7 +146,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     [super viewWillAppear:animated];
     
-    self.navigationController.scrollNavigationBar.scrollView = self.collectionView;
+    //self.navigationController.scrollNavigationBar.scrollView = self.collectionView;
     [self.navigationController.navigationBar setAlpha:1];
     [self.navigationController.navigationBar setTranslucent:NO];
     

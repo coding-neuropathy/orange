@@ -40,11 +40,11 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
+        //self.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
         self.dataArray = [NSMutableArray array];
         
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-        
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         
         _loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];

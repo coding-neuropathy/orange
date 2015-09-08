@@ -29,7 +29,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: NSLocalizedStringFromTable(@"notify", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_notifaction"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_notifaction"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[UIImage imageNamed:@"tabbar_icon_notifaction"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_notifaction"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         
         self.tabBarItem = item;
         self.index = 0;
@@ -41,7 +42,7 @@
 - (HMSegmentedControl *)segmentedControl
 {
     if (!_segmentedControl) {
-        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-40, 36)];
         
         [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"activity", kLocalizedFile, nil), NSLocalizedStringFromTable(@"message", kLocalizedFile, nil)]];
         [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
@@ -49,17 +50,13 @@
 //        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
         [_segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-        [_segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
-        [_segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
+        [_segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+        [_segmentedControl setBackgroundColor:[UIColor clearColor]];
         [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
-        [_segmentedControl setSelectionIndicatorHeight:1.5];
+        [_segmentedControl setSelectionIndicatorHeight:2];
         [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [_segmentedControl setTag:2];
-        
-        
-        UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
-        V.backgroundColor = UIColorFromRGB(0xebebeb);
-        [_segmentedControl addSubview:V];
+
     }
     return _segmentedControl;
 }
@@ -96,13 +93,14 @@
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedStringFromTable(@"notify", kLocalizedFile, nil);
     
-    [self.view addSubview:self.segmentedControl];
+    //self.title = NSLocalizedStringFromTable(@"notify", kLocalizedFile, nil);
+    
+    self.navigationItem.titleView = self.segmentedControl;
 
     [self addChildViewController:self.thePageViewController];
     
-    self.thePageViewController.view.frame = CGRectMake(0, 44., kScreenWidth, kScreenHeight - 44.);
+    self.thePageViewController.view.frame = CGRectMake(0, 0., kScreenWidth, kScreenHeight);
 
     [self.thePageViewController setViewControllers:@[self.activeController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 //    [self.thePageViewController setViewControllers:@[self.activeController, self.msgController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];

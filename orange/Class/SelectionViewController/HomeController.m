@@ -57,11 +57,6 @@ static NSString * BannerIdentifier = @"BannerView";
     }];
 }
 
-- (void)loadView
-{
-    self.view = self.collectionView;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -70,6 +65,8 @@ static NSString * BannerIdentifier = @"BannerView";
     [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
     
     [self.collectionView registerClass:[HomeEntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
+    
+    [self.view addSubview:self.collectionView];
     
     // Do any additional setup after loading the view.
 }
@@ -82,20 +79,14 @@ static NSString * BannerIdentifier = @"BannerView";
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
+    /*
     __weak __typeof(&*self)weakSelf = self;
     [self.collectionView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
-    
-//    [self.collectionView addInfiniteScrollingWithActionHandler:^{
-//        [weakSelf loadMore];
-//    }];
-//    
-//    if (self.articleArray.count == 0)
-//    {
-        [self.collectionView triggerPullToRefresh];
-//    }
-    
+
+    [self.collectionView triggerPullToRefresh];
+    */
 }
 
 /*
@@ -152,12 +143,14 @@ static NSString * BannerIdentifier = @"BannerView";
     }
 
 }
+/*
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView * reuseableview = [UICollectionReusableView new];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader])
     {
+
         DiscoverBannerView * bannerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier forIndexPath:indexPath];
         bannerView.bannerArray = self.bannerArray;
         bannerView.delegate = self;
@@ -169,11 +162,12 @@ static NSString * BannerIdentifier = @"BannerView";
             bannerView.hidden = NO;
         }
         return bannerView;
+ 
     }
     
     return reuseableview;
 }
-
+*/
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -42,10 +42,11 @@ static NSString *CellIdentifier = @"SelectionCell";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:@"Save" object:nil];
         // Custom initialization
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         
         self.tabBarItem = item;
         
-        self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
+        //self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
         self.cateId = 0;
         
         NSMutableArray * array = [NSMutableArray array];
@@ -98,7 +99,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.scrollNavigationBar.scrollView = self.tableView;
+    //self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     [AVAnalytics beginLogPageView:@"SelectionView"];
     [MobClick beginLogPageView:@"SelectionView"];
 }
