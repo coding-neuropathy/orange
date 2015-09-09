@@ -219,7 +219,21 @@ static NSString * BannerIdentifier = @"BannerView";
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    switch (indexPath.section) {
+        case 1:
+            
+            break;
+            
+        default:
+        {
+            GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
+            //    NSLog(@"%@", article.articleURL);
+            WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+    }
 }
 
 #pragma mark - <DiscoverBannerViewDelegate>

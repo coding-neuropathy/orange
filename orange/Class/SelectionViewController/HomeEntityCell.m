@@ -77,7 +77,9 @@
 - (UIButton *)likeBtn
 {
     if (!_likeBtn) {
-    
+        _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [self.contentView addSubview:_likeBtn];
     }
     return _likeBtn;
 }
