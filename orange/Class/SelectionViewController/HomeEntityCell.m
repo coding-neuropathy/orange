@@ -87,7 +87,7 @@
     if (!_likeBtn) {
         _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-        
+        [_likeBtn setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
         [self.contentView addSubview:_likeBtn];
     }
     return _likeBtn;

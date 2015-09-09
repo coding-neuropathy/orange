@@ -76,7 +76,6 @@
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [_article.title length])];
      self.titleLabel.attributedText = attributedString;
     
-//    self.detailLabel.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", _note.creator.userId, _note.creator.nickname];
     self.detailLabel.text = @"<font face='Helvetica-Light' color='^9d9e9f' size=12>精选图文 </font>";
     
     [self.coverImageView sd_setImageWithURL:_article.coverURL];
