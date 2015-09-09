@@ -322,11 +322,11 @@ static NSString *CellIdentifier = @"SelectionCell";
         }
 }
 
-- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
-{
-    [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
-    [self dismissTip];
-}
+//- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
+//{
+//    [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
+//    [self dismissTip];
+//}
 
 
 #pragma mark - HMSegmentedControl
