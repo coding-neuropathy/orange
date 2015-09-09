@@ -64,7 +64,7 @@
     if (!_pageCtr) {
         _pageCtr = [[UIPageControl alloc] initWithFrame:CGRectZero];
         _pageCtr.hidden = YES;
-        _pageCtr.currentPage = 0;
+//        _pageCtr.currentPage = 0;
         _pageCtr.backgroundColor = [UIColor clearColor];
         _pageCtr.pageIndicatorTintColor = UIColorFromRGB(0x656768);
         _pageCtr.currentPageIndicatorTintColor = UIColorFromRGB(0xffffff);
@@ -274,12 +274,17 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
-    _pageCtr.currentPage = index;
+    self.pageCtr.currentPage = index;
 }
 
 - (void)setImageIndex:(NSInteger)idx
 {
+//    self.pageCtr.currentPage = idx;
+//    NSLog(@"%@", self.pageCtr);
     [self.scrollView setContentOffset:CGPointMake(idx * kScreenWidth, 0.)];
+//    self.pageCtr.currentPage = idx;
+//    NSLog(@"page %d", idx);
+//    [self.pageCtr setCurrentPage:idx];
 }
 
 - (void)setNoteBtnSelected
