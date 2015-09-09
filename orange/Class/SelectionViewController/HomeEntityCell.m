@@ -69,7 +69,10 @@
 - (UILabel *)tagLabel
 {
     if (!_tagLabel) {
-    
+        _tagLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        
+        _tagLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        [self.contentView addSubview:_tagLabel];
     }
     return _tagLabel;
 }
