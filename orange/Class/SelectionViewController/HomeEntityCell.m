@@ -100,7 +100,7 @@
  
     [self.imageView sd_setImageWithURL:_entity.imageURL_310x310];
     self.titleLabel.text = _entity.title;
-    self.tagLabel.text = NSLocalizedStringFromTable(@"selection", kLocalizedFile, nil);
+    self.tagLabel.text = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
 //    self.detailLabel.textColor = _entity.description;
     
     [self setNeedsLayout];

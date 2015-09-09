@@ -38,6 +38,13 @@
 "open in safari"    = "Open in Safari";
 
 /*
+ * Selection Page
+ */
+"selection-nav-recommend" = "Recommend";
+"selection-nav-entity" = "Goods";
+"selection-nav-article" = "Articles";
+
+/*
  * Discover page
  */
 "search"                    = "Search";
