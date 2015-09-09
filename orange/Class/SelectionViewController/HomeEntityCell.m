@@ -70,7 +70,8 @@
 {
     if (!_tagLabel) {
         _tagLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        
+        _tagLabel.font = [UIFont systemFontOfSize:12.];
+        _tagLabel.textAlignment = NSTextAlignmentLeft;
         _tagLabel.textColor = UIColorFromRGB(0x9d9e9f);
         [self.contentView addSubview:_tagLabel];
     }
@@ -81,6 +82,7 @@
 {
     if (!_likeBtn) {
         _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         
         [self.contentView addSubview:_likeBtn];
     }
@@ -89,10 +91,12 @@
 
 - (void)setEntity:(GKEntity *)entity
 {
+    
     _entity = entity;
  
     [self.imageView sd_setImageWithURL:_entity.imageURL_310x310];
     self.titleLabel.text = _entity.title;
+    self.tagLabel.text = NSLocalizedStringFromTable(@"selection", kLocalizedFile, nil);
 //    self.detailLabel.textColor = _entity.description;
     
     [self setNeedsLayout];
@@ -108,6 +112,29 @@
     self.titleLabel.deFrameHeight = [self.titleLabel.text heightWithLineWidth:self.titleLabel.deFrameWidth Font:self.titleLabel.font];
     self.titleLabel.deFrameTop = 16.;
     self.titleLabel.deFrameLeft = self.imageView.deFrameRight + 10;
+    
+    self.tagLabel.frame = CGRectMake(0., 0., 100., 20.);
+    self.tagLabel.deFrameLeft = self.titleLabel.deFrameLeft;
+    self.tagLabel.deFrameBottom = self.contentView.deFrameHeight - 10;
+    
+    self.likeBtn.frame = CGRectMake(0., 0., 40., 40.);
+    self.likeBtn.center = self.tagLabel.center;
+    self.likeBtn.deFrameRight = self.contentView.deFrameWidth - 10;
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+
+    CGContextMoveToPoint(context, 190., self.contentView.deFrameHeight - 60);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight - 60.);
+
+    CGContextStrokePath(context);
 }
 
 @end
