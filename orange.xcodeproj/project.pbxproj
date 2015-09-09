@@ -213,6 +213,7 @@
 		4EA0C45C1A8287780025EC2E /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C45B1A8287780025EC2E /* SignView.m */; };
 		4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */; };
 		4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6ADAE1A77D7220089797A /* BaseViewController.m */; };
+		4EB8E2281B9F398B002C7F6F /* SelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8E2271B9F398B002C7F6F /* SelectionController.m */; };
 		4EC9F7911A7928520057D736 /* FanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7901A7928520057D736 /* FanViewController.m */; };
 		4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7931A79286A0057D736 /* FriendViewController.m */; };
 		4EC9F7971A7928C70057D736 /* UserSingleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7961A7928C70057D736 /* UserSingleListCell.m */; };
@@ -718,6 +719,8 @@
 		4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4EB6ADAD1A77D7220089797A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		4EB6ADAE1A77D7220089797A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		4EB8E2261B9F398B002C7F6F /* SelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionController.h; sourceTree = "<group>"; };
+		4EB8E2271B9F398B002C7F6F /* SelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionController.m; sourceTree = "<group>"; };
 		4EC9F78F1A7928520057D736 /* FanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FanViewController.h; sourceTree = "<group>"; };
 		4EC9F7901A7928520057D736 /* FanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FanViewController.m; sourceTree = "<group>"; };
 		4EC9F7921A79286A0057D736 /* FriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendViewController.h; sourceTree = "<group>"; };
@@ -1836,6 +1839,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4EB8E2251B9F398B002C7F6F /* SelectionController */,
 				391F5F8D1B1705A000931533 /* UIComponents */,
 				B76EE07C1B3D86AE009D8763 /* NotifyController */,
 				B769B1261B2ACFB3004401FA /* WelcomeViewController */,
@@ -1977,6 +1981,15 @@
 				B7C684851ABBD78E00A122E8 /* ListViewController.m */,
 			);
 			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		4EB8E2251B9F398B002C7F6F /* SelectionController */ = {
+			isa = PBXGroup;
+			children = (
+				4EB8E2261B9F398B002C7F6F /* SelectionController.h */,
+				4EB8E2271B9F398B002C7F6F /* SelectionController.m */,
+			);
+			path = SelectionController;
 			sourceTree = "<group>";
 		};
 		4EC9F78D1A7928300057D736 /* FanViewController */ = {
@@ -2794,6 +2807,7 @@
 				4E56DF7D19D56EF500263B17 /* UIFont+FontAwesome.m in Sources */,
 				DA35B3C71AFEE31200D66671 /* PasswordEditViewController.m in Sources */,
 				B7B6957E1AF05C400016AAB8 /* MKAnnotationView+WebCache.m in Sources */,
+				4EB8E2281B9F398B002C7F6F /* SelectionController.m in Sources */,
 				393715C21ACBD9C300DC50FF /* DDLog.m in Sources */,
 				B7B695881AF05C400016AAB8 /* UIImage+GIF.m in Sources */,
 				B769B11F1B2ACE91004401FA /* IFTTTConstraintsAnimation.m in Sources */,

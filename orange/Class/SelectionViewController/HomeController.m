@@ -34,7 +34,11 @@ static NSString * BannerIdentifier = @"BannerView";
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         //        layout.parallaxHeaderAlwaysOnTop = YES;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight-kStatusBarHeight-kNavigationBarHeight-kTabBarHeight) collectionViewLayout:layout];
+        
+        [_collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
+        [_collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
+        [_collectionView registerClass:[HomeEntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -50,8 +54,9 @@ static NSString * BannerIdentifier = @"BannerView";
         self.bannerArray = banners;
         self.articleArray = [NSMutableArray arrayWithArray:articles];
         self.entityArray = [NSMutableArray arrayWithArray:entities];
-        [self.collectionView reloadData];
         [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
+
     } failure:^(NSInteger stateCode) {
         [self.collectionView.pullToRefreshView stopAnimating];
     }];
@@ -59,17 +64,16 @@ static NSString * BannerIdentifier = @"BannerView";
 
 - (void)loadView
 {
-    self.view = self.collectionView;
+    [super loadView];
+
+    
+    [self.view addSubview:self.collectionView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
-    
-    [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
-    
-    [self.collectionView registerClass:[HomeEntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
+
     
     // Do any additional setup after loading the view.
 }
@@ -91,10 +95,12 @@ static NSString * BannerIdentifier = @"BannerView";
 //        [weakSelf loadMore];
 //    }];
 //    
-//    if (self.articleArray.count == 0)
-//    {
+    if (self.articleArray.count == 0)
+    {
         [self.collectionView triggerPullToRefresh];
-//    }
+    }
+    
+    //[self refresh];
     
 }
 
@@ -170,6 +176,7 @@ static NSString * BannerIdentifier = @"BannerView";
         }
         return bannerView;
     }
+                                                                               
     
     return reuseableview;
 }

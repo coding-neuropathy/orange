@@ -60,8 +60,8 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
         self.articleArray = [NSMutableArray arrayWithArray:articles];
         self.page +=1;
-        [self.collectionView reloadData];
         [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
         [self.collectionView.pullToRefreshView stopAnimating];
     }];
@@ -72,8 +72,8 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
         self.page += 1;
         [self.articleArray addObjectsFromArray:articles];
-        [self.collectionView reloadData];
         [self.collectionView.infiniteScrollingView stopAnimating];
+        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
         [self.collectionView.infiniteScrollingView stopAnimating];
     }];

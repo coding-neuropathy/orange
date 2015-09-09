@@ -126,9 +126,6 @@
 }
 
 - (void)commonInit {
-    UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-0.5, kScreenWidth, 0.5)];
-    H.backgroundColor = UIColorFromRGB(0xebebeb);
-    [self addSubview:H];
     self.scrollView = [[HMScrollView alloc] init];
     self.scrollView.scrollsToTop = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;

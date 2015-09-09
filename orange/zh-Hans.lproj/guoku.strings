@@ -11,7 +11,7 @@
 "guide to better living"    = "精英消费者指南";
 
 /*
- base infomation
+ * Base Infomation
  */
 
 "cancel"    = "取消";
@@ -39,7 +39,15 @@
 "open in safari"    = "在 Safari 中打开";
 
 /*
- * Discover page
+ * Selection Page
+ */
+"selection-nav-recommend" = "推荐";
+"selection-nav-entity" = "商品";
+"selection-nav-article" = "图文";
+
+
+/*
+ * Discover Page
  */
 "search"                    = "搜索";
 "recommendation category"   = "推荐品类";

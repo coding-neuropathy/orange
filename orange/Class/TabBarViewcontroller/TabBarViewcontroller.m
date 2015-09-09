@@ -7,9 +7,7 @@
 //
 
 #import "TabBarViewcontroller.h"
-#import "SelectionViewController.h"
-#import "ArticlesController.h"
-#import "HomeController.h"
+#import "SelectionController.h"
 #import "DiscoverController.h"
 #import "NotifyController.h"
 
@@ -46,18 +44,14 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login) name:@"Login" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:@"Logout" object:nil];
-    UINavigationController * first = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
-                                                                                   toolbarClass:nil];
-    [first setViewControllers:@[[[HomeController alloc] init]] animated:NO];
+    UINavigationController * first = [[UINavigationController alloc] init];
+    [first setViewControllers:@[[[SelectionController alloc] init]] animated:NO];
     
-    UINavigationController * second = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
-                                                                                    toolbarClass:nil];
+    UINavigationController * second = [[UINavigationController alloc] init];
     [second setViewControllers:@[[[DiscoverController alloc] init]] animated:NO];
-    UINavigationController * third = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
-                                                                                   toolbarClass:nil];
+    UINavigationController * third = [[UINavigationController alloc] init];
     [third setViewControllers:@[[[NotifyController alloc] init]] animated:NO];
-    UINavigationController * fourth = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
-                                                                                    toolbarClass:nil];
+    UINavigationController * fourth = [[UINavigationController alloc] init];
     
     if(k_isLogin)
     {
@@ -68,11 +62,6 @@
         [fourth setViewControllers:@[[[SettingViewController alloc] init]] animated:NO];
     }
 
-    
-    //UINavigationController * first = [[UINavigationController alloc]initWithRootViewController:[[SelectionViewController alloc] init]];
-    //UINavigationController * second = [[UINavigationController alloc]initWithRootViewController:[[DiscoverViewController alloc] init]];
-    //UINavigationController * third = [[UINavigationController alloc]initWithRootViewController:[[NotifactionViewController alloc] init]];
-    //UINavigationController * fourth = [[UINavigationController alloc]initWithRootViewController:[[MeViewController alloc] init]];
     self.viewControllers = @[first,second,third,fourth];
     
 
@@ -91,7 +80,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - <UITabBarControllerDelegate>
@@ -145,8 +133,7 @@
 
 - (void)login
 {
-    UINavigationController * fourth = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
-                                                                                    toolbarClass:nil];
+    UINavigationController * fourth = [[UINavigationController alloc] init];
     if(k_isLogin)
     {
         [fourth setViewControllers:@[[[MeViewController alloc] init]] animated:NO];
@@ -170,18 +157,14 @@
 
 - (void)logout
 {
-    UINavigationController * first = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
-                                                                                   toolbarClass:nil];
-    [first setViewControllers:@[[[HomeController alloc] init]] animated:NO];
+    UINavigationController * first = [[UINavigationController alloc] init];
+    [first setViewControllers:@[[[SelectionController alloc] init]] animated:NO];
     
-    UINavigationController * second = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
-                                                                                    toolbarClass:nil];
+    UINavigationController * second = [[UINavigationController alloc] init];
     [second setViewControllers:@[[[DiscoverController alloc] init]] animated:NO];
-    UINavigationController * third = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
-                                                                                    toolbarClass:nil];
+    UINavigationController * third = [[UINavigationController alloc] init];
     [third setViewControllers:@[[[NotifyController alloc] init]] animated:NO];
-    UINavigationController * fourth = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
-                                                                                    toolbarClass:nil];
+    UINavigationController * fourth = [[UINavigationController alloc] init];
     if(k_isLogin)
     {
         [fourth setViewControllers:@[[[MeViewController alloc] init]] animated:NO];
@@ -190,10 +173,7 @@
     {
         [fourth setViewControllers:@[[[SettingViewController alloc] init]] animated:NO];
     }
-    //UINavigationController * first = [[UINavigationController alloc]initWithRootViewController:[[SelectionViewController alloc] init]];
-    //UINavigationController * second = [[UINavigationController alloc]initWithRootViewController:[[DiscoverViewController alloc] init]];
-    //UINavigationController * third = [[UINavigationController alloc]initWithRootViewController:[[NotifactionViewController alloc] init]];
-    //UINavigationController * fourth = [[UINavigationController alloc]initWithRootViewController:[[MeViewController alloc] init]];
+
     self.viewControllers = @[first,second,third,fourth];
     [self setSelectedIndex:0];
 }

@@ -49,7 +49,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
         self.backgroundColor = UIColorFromRGB(0xffffff);
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 3)];
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 10)];
         self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
         [self.contentView addSubview:self.H];
     }
@@ -120,7 +120,7 @@
 //        _likeCounterButton.titleLabel.textColor = UIColorFromRGB(0x9d9e9f);
         [_likeCounterButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         
-        UIImage * image =[[UIImage imageNamed:@"like counter"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIImage * image =[[UIImage imageNamed:@"counter"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         [_likeCounterButton setBackgroundImage:image forState:UIControlStateNormal];
         [_likeCounterButton setTintColor:UIColorFromRGB(0xdcdcdc)];
         [_likeCounterButton setTitleEdgeInsets:UIEdgeInsetsMake(0., 5., 0., 0.)];
