@@ -87,11 +87,11 @@
 {
     [super layoutSubviews];
     
-    self.titleLabel.frame = CGRectMake(0., 0., 219, 49);
+    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.584, 49);
     self.titleLabel.deFrameTop = 16.;
     self.titleLabel.deFrameLeft = 16.;
     
-    self.detailLabel.frame = CGRectMake(0., 0., 220., 20);
+    self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.584, 20);
     self.detailLabel.deFrameLeft = self.titleLabel.deFrameLeft;
     self.detailLabel.deFrameBottom = self.contentView.deFrameBottom - 16;
     

@@ -171,6 +171,10 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 {
     return UIEdgeInsetsMake(0., 0., 5, 0.);
 }
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 5.;
+}
 
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

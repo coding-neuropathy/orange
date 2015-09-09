@@ -100,7 +100,8 @@
  
     [self.imageView sd_setImageWithURL:_entity.imageURL_310x310];
     self.titleLabel.text = _entity.title;
-    self.tagLabel.text = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
+    self.tagLabel.text = @"精选商品";
+//    self.tagLabel.text = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
 //    self.detailLabel.textColor = _entity.description;
     
     [self setNeedsLayout];
@@ -110,8 +111,8 @@
 {
     [super layoutSubviews];
     
-    self.imageView.frame = CGRectMake(0., 0., 180., 180.);
-    self.titleLabel.frame = CGRectMake(0., 0., 163., 30.);
+    self.imageView.frame = CGRectMake(0., 0., kScreenWidth * 0.48, kScreenWidth * 0.48);
+    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.44, 30.);
 //    CGFloat titleHeight =  [self.titleLabel.text heightWithLineWidth:self.titleLabel.deFrameWidth Font:self.titleLabel.font];
     self.titleLabel.deFrameHeight = [self.titleLabel.text heightWithLineWidth:self.titleLabel.deFrameWidth Font:self.titleLabel.font];
     self.titleLabel.deFrameTop = 16.;

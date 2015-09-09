@@ -203,13 +203,17 @@ static NSString * BannerIdentifier = @"BannerView";
     return UIEdgeInsetsMake(0., 0., 5, 0.);
 }
 
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 5.;
+}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
 {
     CGSize headerSize = CGSizeMake(0, 0);
     switch (section) {
         case 0:
-            headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
+            headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth / 320);
             break;
 //        case 1:
 //            headerSize = CGSizeMake(kScreenWidth, 155.);
