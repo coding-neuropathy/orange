@@ -9,6 +9,7 @@
 #import "HomeController.h"
 #import "ArticleCell.h"
 #import "HomeEntityCell.h"
+#import "UIScrollView+Slogan.h"
 
 #import "DiscoverBannerView.h"
 #import "WebViewController.h"
@@ -72,10 +73,8 @@ static NSString * BannerIdentifier = @"BannerView";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-
-    
     // Do any additional setup after loading the view.
+    [self.collectionView addSloganView];
 }
 
 - (void)didReceiveMemoryWarning {
