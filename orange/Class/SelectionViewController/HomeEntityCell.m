@@ -8,6 +8,7 @@
 
 #import "HomeEntityCell.h"
 #import "NSString+Helper.h"
+#import "EntityViewController.h"
 
 @interface HomeEntityCell ()
 
@@ -34,7 +35,10 @@
 {
     if (!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        
+        _imageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(imageViewAction:)];
+        [_imageView addGestureRecognizer:tap];
         [self.contentView addSubview:_imageView];
     }
     return _imageView;
@@ -135,6 +139,16 @@
     CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight - 60.);
 
     CGContextStrokePath(context);
+}
+
+#pragma mark - button action
+- (void)imageViewAction:(id)sender
+{
+    [[OpenCenter sharedOpenCenter] openEntity:self.entity];
+//    EntityViewController * VC = [[EntityViewController alloc] initWithEntity:self.entity];
+//    VC.hidesBottomBarWhenPushed = YES;
+//    //    VC.entity = self.entity;
+//    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
 @end
