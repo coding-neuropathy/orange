@@ -39,7 +39,7 @@
 @implementation DiscoverController
 
 static NSString * EntityCellIdentifier = @"EntityCell";
-static NSString * BannerIdentifier = @"BannerView";
+//static NSString * BannerIdentifier = @"BannerView";
 static NSString * CategoryIdentifier = @"CategoryView";
 static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
@@ -126,7 +126,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     [self.view addSubview:self.collectionView];
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
-    [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
+//    [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
     [self.collectionView registerClass:[DiscoverCategoryView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier];
     
     [self.collectionView registerClass:[DiscoverHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
@@ -178,13 +178,13 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     switch (section) {
-        case 2:
+        case 1:
             return self.entityArray.count;
             break;
             
@@ -215,22 +215,22 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     UICollectionReusableView * reuseableview = [UICollectionReusableView new];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         switch (indexPath.section) {
+//            case 0:
+//            {
+//                DiscoverBannerView * bannerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier forIndexPath:indexPath];
+//                bannerView.bannerArray = self.bannerArray;
+//                bannerView.delegate = self;
+//                if (self.bannerArray.count == 0) {
+//                    bannerView.hidden = YES;
+//                }
+//                else
+//                {
+//                    bannerView.hidden = NO;
+//                }
+//                return bannerView;
+//            }
+//                break;
             case 0:
-            {
-                DiscoverBannerView * bannerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier forIndexPath:indexPath];
-                bannerView.bannerArray = self.bannerArray;
-                bannerView.delegate = self;
-                if (self.bannerArray.count == 0) {
-                    bannerView.hidden = YES;
-                }
-                else
-                {
-                    bannerView.hidden = NO;
-                }
-                return bannerView;
-            }
-                break;
-            case 1:
             {
                 DiscoverCategoryView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier forIndexPath:indexPath];
                 categoryView.categories = self.categoryArray;
@@ -277,7 +277,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
-        case 2:
+        case 1:
         {
             cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
         }
@@ -294,7 +294,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0, 0.);
     switch (section) {
-        case 2:
+        case 1:
         {
             edge = UIEdgeInsetsMake(3., 3., 3., 3.);
         }
@@ -310,7 +310,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     CGFloat itemSpacing = 0.;
     switch (section) {
 
-        case 2:
+        case 1:
         {
             /*
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
@@ -335,7 +335,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     CGFloat spacing = 0;
     switch (section) {
-        case 2:
+        case 1:
         {
             spacing = 3.;
         }
@@ -353,12 +353,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     CGSize headerSize = CGSizeMake(0, 0);
     switch (section) {
+//        case 0:
+//            headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
+//            break;
         case 0:
-            headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
-            break;
-        case 1:
-            headerSize = CGSizeMake(kScreenWidth, 155.);
-            
+            headerSize = CGSizeMake(kScreenWidth, 155.);            
             break;
         default:
             headerSize = CGSizeMake(kScreenWidth, 44.);
