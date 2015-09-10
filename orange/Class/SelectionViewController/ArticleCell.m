@@ -86,14 +86,8 @@
     
     self.titleLabel.text = _article.title;
     
-//    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_article.title];
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    
-//    [paragraphStyle setLineSpacing:10.];
-//    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [_article.title length])];
-//     self.titleLabel.attributedText = attributedString;
-    
-    self.detailLabel.text = _article.content;
+//    NSLog(@"%@", _article.content);
+    self.detailLabel.text = [_article.content Trimed];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.detailLabel.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
