@@ -227,6 +227,7 @@
 		4ED7685A1B7248A600AA3BF7 /* loading-static.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED768591B7248A600AA3BF7 /* loading-static.png */; };
 		4EEB29FF1B523C650092A8CF /* GKNotificationHUB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB29FE1B523C650092A8CF /* GKNotificationHUB.m */; };
 		4EF508811B49042000C92618 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF508801B49042000C92618 /* ShareView.m */; };
+		8A0345AA1BA15F4A0037BC32 /* HomeArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
 		8ABA73351B73A8E7006A8F56 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABA73341B73A8E7006A8F56 /* SearchResultsViewController.m */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
@@ -746,6 +747,8 @@
 		4EEB29FE1B523C650092A8CF /* GKNotificationHUB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKNotificationHUB.m; sourceTree = "<group>"; };
 		4EF5087F1B49042000C92618 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		4EF508801B49042000C92618 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		8A0345A81BA15F4A0037BC32 /* HomeArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeArticleCell.h; sourceTree = "<group>"; };
+		8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeArticleCell.m; sourceTree = "<group>"; };
 		8A402CC51B69F57A00E54FFF /* CategoryImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryImageView.h; sourceTree = "<group>"; };
 		8A402CC61B69F57A00E54FFF /* CategoryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryImageView.m; sourceTree = "<group>"; };
 		8ABA73331B73A8E7006A8F56 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
@@ -1558,6 +1561,8 @@
 				B7180EA31B9D380A004AD9AD /* HomeController.m */,
 				8AE19DCD1B9DE26C007C2872 /* HomeEntityCell.h */,
 				8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */,
+				8A0345A81BA15F4A0037BC32 /* HomeArticleCell.h */,
+				8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */,
 			);
 			path = SelectionViewController;
 			sourceTree = "<group>";
@@ -2735,6 +2740,7 @@
 				4E56DF7A19D56EF500263B17 /* FAImageView.m in Sources */,
 				B7ED32B81B25C662009BAF5A /* OpenCenter.m in Sources */,
 				4E1D28DF1A125B9300740C17 /* JSQMessagesMediaPlaceholderView.m in Sources */,
+				8A0345AA1BA15F4A0037BC32 /* HomeArticleCell.m in Sources */,
 				4E1D28CD1A125B9300740C17 /* JSQMediaItem.m in Sources */,
 				393715BF1ACBD9C300DC50FF /* DDAbstractDatabaseLogger.m in Sources */,
 				4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */,

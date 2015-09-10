@@ -7,7 +7,7 @@
 //
 
 #import "HomeController.h"
-#import "ArticleCell.h"
+#import "HomeArticleCell.h"
 #import "HomeEntityCell.h"
 #import "UIScrollView+Slogan.h"
 
@@ -38,7 +38,7 @@ static NSString * BannerIdentifier = @"BannerView";
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight-kStatusBarHeight-kNavigationBarHeight-kTabBarHeight) collectionViewLayout:layout];
         
         [_collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
-        [_collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
+        [_collectionView registerClass:[HomeArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
         [_collectionView registerClass:[HomeEntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
         
         _collectionView.delegate = self;

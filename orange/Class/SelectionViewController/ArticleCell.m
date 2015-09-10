@@ -45,7 +45,7 @@
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:16.];
         _titleLabel.textColor = UIColorFromRGB(0x414243);
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.numberOfLines = 1;
         [self.contentView addSubview:_titleLabel];
     }
@@ -86,20 +86,26 @@
     
     self.titleLabel.text = _article.title;
     
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_article.title];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_article.title];
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     
-    [paragraphStyle setLineSpacing:10.];
-    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [_article.title length])];
-     self.titleLabel.attributedText = attributedString;
+//    [paragraphStyle setLineSpacing:10.];
+//    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [_article.title length])];
+//     self.titleLabel.attributedText = attributedString;
     
     self.detailLabel.text = _article.content;
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.detailLabel.text];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:5.];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self.detailLabel.text length])];
+    self.detailLabel.attributedText = attributedString;
+    
     [self.coverImageView sd_setImageWithURL:_article.coverURL];
     
     NSDate * date =  [NSDate dateWithTimeIntervalSince1970:_article.pub_time];
     self.timeLabel.text = [NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForEnum:FAClockO], [date stringWithDefaultFormat]];
     
-//    NSLog(@"%f", _article.pub_time);
     [self setNeedsLayout];
 }
 
