@@ -31,6 +31,7 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
                             @"cover"        :   @"cover",
                             @"url"          :   @"url_string",
                             @"creator"      :   @"creator",
+                            @"pub_time"     :   @"pub_time",
                     };
     
     return keyDic;
@@ -45,7 +46,15 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
 {
     NSString * url_stirng = [NSString stringWithFormat:@"%@%@", imageHost, self.cover];
     ;
-    return [NSURL URLWithString:[url_stirng imageURLWithSize:240.]];
+    return [NSURL URLWithString:url_stirng];
+//    return [NSURL URLWithString:[url_stirng imageURLWithSize:240.]];
+}
+
+- (NSURL *)coverURL_300
+{
+    NSString * url_stirng = [NSString stringWithFormat:@"%@%@", imageHost, self.cover];
+    ;
+    return [NSURL URLWithString:[url_stirng imageURLWithSize:300]];
 }
 
 - (NSURL *)articleURL

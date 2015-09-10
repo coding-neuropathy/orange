@@ -15,6 +15,8 @@
 #import "EntityViewController.h"
 #import "GKNotificationHUB.h"
 #import "ImageLoadingView.h"
+
+
 #define kWidth (kScreenWidth - 20)
 @interface SelectionCell()<RTLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;

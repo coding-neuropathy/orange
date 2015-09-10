@@ -32,8 +32,18 @@
 @property (strong, nonatomic) NSURL * coverURL;
 
 /**
+ *  文章封面 300
+ */
+@property (strong, nonatomic) NSURL * coverURL_300;
+
+/**
  *  文章 URL
  */
 @property (strong, nonatomic) NSURL * articleURL;
+
+/**
+ *  文章发布时间
+ */
+@property (assign, nonatomic) NSTimeInterval pub_time;
 
 @end
