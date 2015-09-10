@@ -189,7 +189,7 @@ static NSString * BannerIdentifier = @"BannerView";
             cellSize = CGSizeMake(kScreenWidth, 117);
             break;
         case 1:
-            cellSize = CGSizeMake(kScreenWidth, 180.);
+            cellSize = CGSizeMake(kScreenWidth, kScreenWidth * 0.48);
             break;
         default:
             break;
