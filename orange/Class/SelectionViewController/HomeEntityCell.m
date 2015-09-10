@@ -18,6 +18,8 @@
 @property (strong, nonatomic) UILabel * tagLabel;
 @property (strong, nonatomic) UIButton * likeBtn;
 
+@property (strong, nonatomic) GKEntity * entity;
+@property (strong, nonatomic) GKNote * note;
 @end
 
 @implementation HomeEntityCell
@@ -93,16 +95,16 @@
     return _likeBtn;
 }
 
-- (void)setEntity:(GKEntity *)entity
+- (void)setData:(NSDictionary *)data
 {
+    self.entity = data[@"entity"];
+    self.note = data[@"note"];
     
-    _entity = entity;
- 
     [self.imageView sd_setImageWithURL:_entity.imageURL_310x310];
     self.titleLabel.text = _entity.title;
+    self.detailLabel.text = _note.text;
+    
     self.tagLabel.text = @"精选商品";
-//    self.tagLabel.text = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
-//    self.detailLabel.textColor = _entity.description;
     
     [self setNeedsLayout];
 }
@@ -113,10 +115,13 @@
     
     self.imageView.frame = CGRectMake(0., 0., kScreenWidth * 0.48, kScreenWidth * 0.48);
     self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.44, 30.);
-//    CGFloat titleHeight =  [self.titleLabel.text heightWithLineWidth:self.titleLabel.deFrameWidth Font:self.titleLabel.font];
     self.titleLabel.deFrameHeight = [self.titleLabel.text heightWithLineWidth:self.titleLabel.deFrameWidth Font:self.titleLabel.font];
     self.titleLabel.deFrameTop = 16.;
     self.titleLabel.deFrameLeft = self.imageView.deFrameRight + 10;
+    
+    self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.44, 40);
+    self.detailLabel.center = self.titleLabel.center;
+    self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
     
     self.tagLabel.frame = CGRectMake(0., 0., 100., 20.);
     self.tagLabel.deFrameLeft = self.titleLabel.deFrameLeft;
@@ -136,8 +141,8 @@
     CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
 
-    CGContextMoveToPoint(context, 190., self.contentView.deFrameHeight - 60);
-    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight - 60.);
+    CGContextMoveToPoint(context, 190., self.contentView.deFrameHeight - 50);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight - 50.);
 
     CGContextStrokePath(context);
 }
@@ -146,10 +151,6 @@
 - (void)imageViewAction:(id)sender
 {
     [[OpenCenter sharedOpenCenter] openEntity:self.entity];
-//    EntityViewController * VC = [[EntityViewController alloc] initWithEntity:self.entity];
-//    VC.hidesBottomBarWhenPushed = YES;
-//    //    VC.entity = self.entity;
-//    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
 @end

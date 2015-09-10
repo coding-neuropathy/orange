@@ -347,8 +347,15 @@
         
         NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
         for (NSDictionary * row in responseObject[@"entities"]){
-            GKEntity * entity = [GKEntity modelFromDictionary:row];
-            [entities addObject:entity];
+            GKEntity * entity = [GKEntity modelFromDictionary:row[@"entity"]];
+            GKNote * note = [GKNote modelFromDictionary:row[@"note"]];
+//            [entities addObject:entity];
+//            NSLog(@"entities %@", row);
+            [entities addObject:@{
+                                  @"entity":entity,
+                                  @"note": note,
+                                  }];
+            
         }
         
         if (success) {

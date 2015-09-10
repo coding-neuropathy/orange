@@ -10,6 +10,7 @@
 
 @interface HomeEntityCell : UICollectionViewCell
 
-@property (strong, nonatomic) GKEntity * entity;
+
+- (void)setData:(NSDictionary *)data;
 
 @end

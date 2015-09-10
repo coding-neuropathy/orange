@@ -142,7 +142,7 @@ static NSString * BannerIdentifier = @"BannerView";
         case 1:
         {
             HomeEntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityIdentifier forIndexPath:indexPath];
-            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+            cell.data = [self.entityArray objectAtIndex:indexPath.row];
             return cell;
         }
             break;
@@ -217,7 +217,7 @@ static NSString * BannerIdentifier = @"BannerView";
             break;
 //        case 1:
 //            headerSize = CGSizeMake(kScreenWidth, 155.);
-//            
+//
 //            break;
 //        default:
 //            headerSize = CGSizeMake(kScreenWidth, 44.);
