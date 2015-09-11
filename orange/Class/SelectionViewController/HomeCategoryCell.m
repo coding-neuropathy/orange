@@ -17,11 +17,20 @@
 
 @implementation HomeCategoryCell
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
+
 - (UIImageView *)imageView
 {
     if (!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _imageView.layer.cornerRadius = 4.;
+        _imageView.layer.cornerRadius = 6.;
         _imageView.layer.masksToBounds = YES;
         [self.contentView addSubview:_imageView];
     }
@@ -54,8 +63,8 @@
 {
     [super layoutSubviews];
 
-    self.imageView.frame = CGRectMake(0., 0., 110., 110.);
-    self.titleLabel.frame = CGRectMake(0., 0., 110., 20);
+    self.imageView.frame = CGRectMake(10., 10., self.contentView.deFrameWidth - 20, self.contentView.deFrameWidth - 20.);
+    self.titleLabel.frame = CGRectMake(0., 0., self.contentView.deFrameWidth, 20);
     self.titleLabel.center = self.imageView.center;
 }
 

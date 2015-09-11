@@ -17,6 +17,9 @@
 
 @interface HomeCategoryFooter : UICollectionReusableView
 
+@property (strong, nonatomic) UILabel * titleLabel;
+@property (strong, nonatomic) NSString * text;
+
 @end
 
 
@@ -200,6 +203,10 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
             bannerView.hidden = NO;
         }
         return bannerView;
+    } else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+        HomeCategoryFooter * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:CategoryFooterIdentifier forIndexPath:indexPath];
+        footer.text = @"推荐品类";
+        return footer;
     }
     
     return reuseableview;
@@ -214,7 +221,7 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
             cellSize = CGSizeMake(kScreenWidth, 117);
             break;
         case 1:
-            cellSize = CGSizeMake(110., 110.);
+            cellSize = CGSizeMake(kScreenWidth / 3, kScreenWidth / 3);
             break;
         case 2:
             cellSize = CGSizeMake(kScreenWidth, kScreenWidth * 0.48);
@@ -231,9 +238,11 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0, 0.);
     switch (section) {
         case 1:
-            edge = UIEdgeInsetsMake(10., 10., 5., 10.);
+//            edge = UIEdgeInsetsMake(10., 0., 10., 0.);
             break;
-            
+        case 2:
+            edge = UIEdgeInsetsMake(5., 0., 0., 0.);
+            break;
         default:
             edge = UIEdgeInsetsMake(0., 0., 5., 0.);
             break;
@@ -243,7 +252,30 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 5.;
+    CGFloat spaceing = 5.;
+    switch (section) {
+        case 1:
+            spaceing = 0;
+            break;
+            
+        default:
+            break;
+    }
+    return spaceing;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat spaceing = 0;
+    switch (section) {
+        case 1:
+//            spaceing = 0;
+            break;
+            
+        default:
+            break;
+    }
+    return spaceing;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
@@ -251,17 +283,25 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
     CGSize headerSize = CGSizeMake(0, 0);
     switch (section) {
         case 0:
-            headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth / 320);
+            headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f * kScreenWidth / 320);
             break;
-//        case 1:
-//            headerSize = CGSizeMake(kScreenWidth, 155.);
-//
-//            break;
-//        default:
-//            headerSize = CGSizeMake(kScreenWidth, 44.);
-//            break;
     }
     return headerSize;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    CGSize footerSize = CGSizeMake(0., 0.);
+    switch (section) {
+        case 1:
+            footerSize = CGSizeMake(kScreenWidth, 30.);
+            break;
+            
+        default:
+            break;
+    }
+    
+    return footerSize;
 }
 
 #pragma mark - <UICollectionViewDelegate>
@@ -277,7 +317,6 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-            
         default:
             break;
     }
@@ -311,6 +350,48 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
     }
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
+@end
+
+#pragma mark - <HomeCategoryFooter>
+@implementation HomeCategoryFooter
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+//        self.backgroundColor = [UIColor redColor];
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
+
+- (UILabel *)titleLabel
+{
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _titleLabel.font = [UIFont systemFontOfSize:12.];
+        _titleLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        [self addSubview:_titleLabel];
+    }
+    return _titleLabel;
+}
+
+- (void)setText:(NSString *)text
+{
+    _text = text;
+    self.titleLabel.text = _text;
+    [self setNeedsDisplay];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.titleLabel.frame = CGRectMake(10., 0., 100., 20.);
+    
 }
 
 @end
