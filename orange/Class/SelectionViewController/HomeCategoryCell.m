@@ -32,6 +32,9 @@
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _imageView.layer.cornerRadius = 6.;
         _imageView.layer.masksToBounds = YES;
+        
+//        _imageView.contentMode = UIViewContentModeCenter;
+//        _imageView.clipsToBounds  = YES;
         [self.contentView addSubview:_imageView];
     }
     return _imageView;
