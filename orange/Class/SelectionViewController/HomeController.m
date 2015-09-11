@@ -8,6 +8,7 @@
 
 #import "HomeController.h"
 #import "HomeArticleCell.h"
+#import "HomeCategoryCell.h"
 #import "HomeEntityCell.h"
 #import "UIScrollView+Slogan.h"
 
@@ -19,14 +20,17 @@
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
 @property (strong, nonatomic) NSMutableArray * articleArray;
+@property (strong, nonatomic) NSMutableArray * categoryArray;
 @property (strong, nonatomic) NSMutableArray * entityArray;
 @end
 
 @implementation HomeController
 
-static NSString * ArticleIdentifier = @"HomeArticleCell";
-static NSString * EntityIdentifier = @"EntityCell";
 static NSString * BannerIdentifier = @"BannerView";
+static NSString * ArticleIdentifier = @"HomeArticleCell";
+static NSString * CategoryIdentifier = @"CategoryCell";
+static NSString * EntityIdentifier = @"EntityCell";
+
 
 #pragma mark - init View
 - (UICollectionView *)collectionView
@@ -38,7 +42,11 @@ static NSString * BannerIdentifier = @"BannerView";
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight-kStatusBarHeight-kNavigationBarHeight-kTabBarHeight) collectionViewLayout:layout];
         
         [_collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
+        
         [_collectionView registerClass:[HomeArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
+        
+        [_collectionView registerClass:[HomeCategoryCell class] forCellWithReuseIdentifier:CategoryIdentifier];
+        
         [_collectionView registerClass:[HomeEntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
         
         _collectionView.delegate = self;
@@ -51,9 +59,10 @@ static NSString * BannerIdentifier = @"BannerView";
 #pragma mark - get Data
 - (void)refresh
 {
-    [API getHomeWithSuccess:^(NSArray *banners, NSArray *articles, NSArray *entities) {
+    [API getHomeWithSuccess:^(NSArray *banners, NSArray *articles, NSArray * categories,  NSArray *entities) {
         self.bannerArray = banners;
         self.articleArray = [NSMutableArray arrayWithArray:articles];
+        self.categoryArray = [NSMutableArray arrayWithArray:categories];
         self.entityArray = [NSMutableArray arrayWithArray:entities];
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
@@ -116,7 +125,7 @@ static NSString * BannerIdentifier = @"BannerView";
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -127,6 +136,9 @@ static NSString * BannerIdentifier = @"BannerView";
             count = self.articleArray.count;
             break;
         case 1:
+            count = self.categoryArray.count;
+            break;
+        case 2:
             count = self.entityArray.count;
             break;
         default:
@@ -139,14 +151,20 @@ static NSString * BannerIdentifier = @"BannerView";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 1:
+        case 2:
         {
             HomeEntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityIdentifier forIndexPath:indexPath];
             cell.data = [self.entityArray objectAtIndex:indexPath.row];
             return cell;
         }
             break;
-            
+        case 1:
+        {
+            HomeCategoryCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CategoryIdentifier forIndexPath:indexPath];
+            cell.category = [self.categoryArray objectAtIndex:indexPath.row];
+            return cell;
+        }
+            break;
         default:
         {
             ArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleIdentifier forIndexPath:indexPath];
@@ -189,6 +207,9 @@ static NSString * BannerIdentifier = @"BannerView";
             cellSize = CGSizeMake(kScreenWidth, 117);
             break;
         case 1:
+            cellSize = CGSizeMake(110., 60.);
+            break;
+        case 2:
             cellSize = CGSizeMake(kScreenWidth, kScreenWidth * 0.48);
             break;
         default:
@@ -200,7 +221,17 @@ static NSString * BannerIdentifier = @"BannerView";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0., 0., 5, 0.);
+    UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0, 0.);
+    switch (section) {
+        case 1:
+            edge = UIEdgeInsetsMake(10., 10., 5., 10.);
+            break;
+            
+        default:
+            edge = UIEdgeInsetsMake(0., 0., 5., 0.);
+            break;
+    }
+    return edge;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
@@ -230,11 +261,7 @@ static NSString * BannerIdentifier = @"BannerView";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 1:
-            
-            break;
-            
-        default:
+        case 0:
         {
             GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
             //    NSLog(@"%@", article.articleURL);
@@ -242,6 +269,9 @@ static NSString * BannerIdentifier = @"BannerView";
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
+            break;
+            
+        default:
             break;
     }
 }

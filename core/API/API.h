@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  * 获取首页信息
  *
  */
-+ (void)getHomeWithSuccess:(void (^)(NSArray  * banners, NSArray * articles, NSArray * entities))success
++ (void)getHomeWithSuccess:(void (^)(NSArray * banners, NSArray * articles, NSArray * category, NSArray * entities))success
                    failure:(void (^)(NSInteger stateCode))failure;
 
 /**

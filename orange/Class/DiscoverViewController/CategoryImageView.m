@@ -33,8 +33,6 @@
 {
     if (!_maskView) {
         _maskView = [[UIImageView alloc] initWithImage:[UIImage imageWithColor:UIColorFromRGB(0x000000) andSize:CGSizeMake(100., 100.)]];
-//        _maskView.alpha = 0.4;
-//        _maskView.frame = CGRectMake(0., 0., _maskView.image.size.width, _maskView.image.size.height);
         [self addSubview:_maskView];
     }
     return _maskView;

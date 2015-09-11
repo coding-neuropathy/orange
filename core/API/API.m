@@ -38,72 +38,6 @@
     }];
 }
 
-//
-///**
-// *  获取主页信息（banner、hotCategory、hotTag）
-// *
-// *  @param success 成功block
-// *  @param failure 失败block
-// */
-//+ (void)getHomepageWithSuccess:(void (^)(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray))success
-//                       failure:(void (^)(NSInteger stateCode))failure
-//{
-//    NSString *path = @"homepage/";
-//    
-//    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSDictionary *objectDict = (NSDictionary *)responseObject;
-//        
-//        NSDictionary *settingDict = objectDict[@"config"];
-//        
-//        NSMutableArray *bannerArray = objectDict[@"banner"];
-//        if (objectDict[@"config"][@"jump_to_taobao"]) {
-////            [SettingManager sharedInstance].jumpToTaobao = [objectDict[@"config"][@"jump_to_taobao"]boolValue];
-//        }
-//        if (objectDict[@"config"][@"taobao_ban_count"]) {
-//            //[SettingManager sharedInstance].taobaoBanCount = [objectDict[@"config"][@"taobao_ban_count"]unsignedIntegerValue];
-//        }
-//        if (objectDict[@"config"][@"show_selection_only"]) {
-////            [SettingManager sharedInstance].hidesNote = [objectDict[@"config"][@"show_selection_only"]boolValue];
-//        }
-//        if (objectDict[@"config"][@"url_ban_list"]) {
-////            [SettingManager sharedInstance].urlBanList = objectDict[@"config"][@"url_ban_list"];
-//        }
-//        
-//        NSMutableArray *hotCategoryArray = [NSMutableArray array];
-//        {
-//            NSArray *itemArray = objectDict[@"discover"];
-//            for (NSDictionary *categoryDict in itemArray) {
-//                GKEntityCategory *category = [GKEntityCategory modelFromDictionary:categoryDict];
-//                [hotCategoryArray addObject:category];
-//            }
-//        }
-//        
-//        NSMutableArray *hotTagArray = [NSMutableArray array];
-//        {
-//            NSArray *itemArray = objectDict[@"hottag"];
-//            for (NSDictionary *Dict in itemArray) {
-//                GKUser * user = [GKUser modelFromDictionary:Dict[@"user"]];
-//                NSMutableArray *entityArray = [NSMutableArray array];
-//                for (NSDictionary *entityDict in Dict[@"entity_list"]) {
-//                    GKEntity *entity = [GKEntity modelFromDictionary:entityDict];
-//                    [entityArray addObject:entity];
-//                }
-//                NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:Dict];
-//                [dic setObject:user forKey:@"user"];
-//                [dic setObject:entityArray forKey:@"entity_list"];
-//                [hotTagArray addObject:dic];
-//            }
-//        }
-//        if (success) {
-//            success(settingDict, bannerArray, hotCategoryArray, hotTagArray);
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        if (failure) {
-//            NSInteger stateCode = operation.response.statusCode;
-//            failure(stateCode);
-//        }
-//    }];
-//}
 
 /**
  *  获取全部分类信息
@@ -329,7 +263,7 @@
  * 获取首页信息
  *
  */
-+ (void)getHomeWithSuccess:(void (^)(NSArray  * banners, NSArray * articles, NSArray * entities))success
++ (void)getHomeWithSuccess:(void (^)(NSArray  * banners, NSArray * articles, NSArray * categories, NSArray * entities))success
                    failure:(void (^)(NSInteger stateCode))failure
 {
     NSString * path = @"home/";
@@ -345,21 +279,26 @@
             [articles addObject:article];
         }
         
+        NSMutableArray * categories = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject[@"categories"]) {
+//            [categories addObject:row]
+            GKCategory * category = [GKCategory modelFromDictionary:row];
+            [categories addObject:category];
+        }
+        
         NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
         for (NSDictionary * row in responseObject[@"entities"]){
             GKEntity * entity = [GKEntity modelFromDictionary:row[@"entity"]];
             GKNote * note = [GKNote modelFromDictionary:row[@"note"]];
-//            [entities addObject:entity];
-//            NSLog(@"entities %@", row);
             [entities addObject:@{
                                   @"entity":entity,
                                   @"note": note,
-                                  }];
+                }];
             
         }
         
         if (success) {
-            success(banners, articles, entities);
+            success(banners, articles, categories, entities);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
