@@ -15,6 +15,11 @@
 #import "DiscoverBannerView.h"
 #import "WebViewController.h"
 
+@interface HomeCategoryFooter : UICollectionReusableView
+
+@end
+
+
 @interface HomeController () <DiscoverBannerViewDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
@@ -31,6 +36,7 @@ static NSString * ArticleIdentifier = @"HomeArticleCell";
 static NSString * CategoryIdentifier = @"CategoryCell";
 static NSString * EntityIdentifier = @"EntityCell";
 
+static NSString * CategoryFooterIdentifier = @"CategoryFooter";
 
 #pragma mark - init View
 - (UICollectionView *)collectionView
@@ -46,6 +52,8 @@ static NSString * EntityIdentifier = @"EntityCell";
         [_collectionView registerClass:[HomeArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
         
         [_collectionView registerClass:[HomeCategoryCell class] forCellWithReuseIdentifier:CategoryIdentifier];
+        
+        [_collectionView registerClass:[HomeCategoryFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:CategoryFooterIdentifier];
         
         [_collectionView registerClass:[HomeEntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
         
@@ -193,7 +201,6 @@ static NSString * EntityIdentifier = @"EntityCell";
         }
         return bannerView;
     }
-                                                                               
     
     return reuseableview;
 }
@@ -207,7 +214,7 @@ static NSString * EntityIdentifier = @"EntityCell";
             cellSize = CGSizeMake(kScreenWidth, 117);
             break;
         case 1:
-            cellSize = CGSizeMake(110., 60.);
+            cellSize = CGSizeMake(110., 110.);
             break;
         case 2:
             cellSize = CGSizeMake(kScreenWidth, kScreenWidth * 0.48);

@@ -11,6 +11,7 @@
 @interface HomeCategoryCell ()
 
 @property (strong, nonatomic) UIImageView * imageView;
+@property (strong, nonatomic) UILabel * titleLabel;
 
 @end
 
@@ -22,15 +23,29 @@
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _imageView.layer.cornerRadius = 4.;
         _imageView.layer.masksToBounds = YES;
-        [self addSubview:_imageView];
+        [self.contentView addSubview:_imageView];
     }
     return _imageView;
+}
+
+- (UILabel *)titleLabel
+{
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        
+        _titleLabel.font = [UIFont systemFontOfSize:14.];
+        _titleLabel.textColor = UIColorFromRGB(0xffffff);
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.contentView insertSubview:_titleLabel aboveSubview:self.imageView];
+    }
+    return _titleLabel;
 }
 
 - (void)setCategory:(GKCategory *)category
 {
     _category = category;
     [self.imageView sd_setImageWithURL:_category.coverURL];
+    self.titleLabel.text = _category.title;
     
     [self setNeedsLayout];
 }
@@ -39,7 +54,9 @@
 {
     [super layoutSubviews];
 
-    self.imageView.frame = CGRectMake(0., 0., 110., 60.);
+    self.imageView.frame = CGRectMake(0., 0., 110., 110.);
+    self.titleLabel.frame = CGRectMake(0., 0., 110., 20);
+    self.titleLabel.center = self.imageView.center;
 }
 
 @end
