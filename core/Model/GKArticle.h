@@ -13,7 +13,7 @@
 /**
  *  文章ID
  */
-@property (assign, nonatomic) NSInteger * articleId;
+@property (assign, nonatomic) NSInteger articleId;
 
 /**
  *  文章标题

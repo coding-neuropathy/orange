@@ -37,10 +37,10 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
     return keyDic;
 }
 
-//+ (NSArray *)keyNames
-//{
-//    return @[@"id"];
-//}
++ (NSArray *)keyNames
+{
+    return @[@"articleId"];
+}
 
 - (NSURL *)coverURL
 {

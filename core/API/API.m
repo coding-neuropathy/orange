@@ -462,7 +462,7 @@
 //            NSLog(@"%@", dict);
             GKArticle * article = [GKArticle modelFromDictionary:dict];
             [articleList addObject:article];
-//            NSLog(@"url %@", article.coverURL);
+//            NSLog(@"url %ld", article.articleId);
         }
         if (success){
             success([NSArray arrayWithArray:articleList]);
