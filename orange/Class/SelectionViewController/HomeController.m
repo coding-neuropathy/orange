@@ -294,7 +294,10 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
     CGSize footerSize = CGSizeMake(0., 0.);
     switch (section) {
         case 1:
-            footerSize = CGSizeMake(kScreenWidth, 30.);
+        {
+            if (self.categoryArray.count > 0)
+                footerSize = CGSizeMake(kScreenWidth, 30.);
+        }
             break;
             
         default:
