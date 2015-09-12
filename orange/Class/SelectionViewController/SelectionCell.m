@@ -124,7 +124,7 @@
         
         UIImage * image =[[UIImage imageNamed:@"counter"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         [_likeCounterButton setBackgroundImage:image forState:UIControlStateNormal];
-        [_likeCounterButton setTintColor:UIColorFromRGB(0xdcdcdc)];
+        [_likeCounterButton setTintColor:UIColorFromRGB(0xf8f8f8)];
         [_likeCounterButton setTitleEdgeInsets:UIEdgeInsetsMake(0., 5., 0., 0.)];
 //        _likeCounterButton.enabled = NO;
         _likeCounterButton.userInteractionEnabled = NO;
