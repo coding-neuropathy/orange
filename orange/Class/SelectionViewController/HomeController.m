@@ -241,10 +241,10 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
 //            edge = UIEdgeInsetsMake(10., 0., 10., 0.);
             break;
         case 2:
-            edge = UIEdgeInsetsMake(5., 0., 0., 0.);
+            edge = UIEdgeInsetsMake(10., 0., 0., 0.);
             break;
         default:
-            edge = UIEdgeInsetsMake(0., 0., 5., 0.);
+            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
             break;
     }
     return edge;
@@ -252,7 +252,7 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    CGFloat spaceing = 5.;
+    CGFloat spaceing = 10.;
     switch (section) {
         case 1:
             spaceing = 0;
