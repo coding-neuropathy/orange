@@ -9,6 +9,7 @@
 #import "HomeEntityCell.h"
 #import "NSString+Helper.h"
 #import "EntityViewController.h"
+#import "LoginView.h"
 
 @interface HomeEntityCell ()
 
@@ -90,6 +91,8 @@
         _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         [_likeBtn setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
+        [_likeBtn addTarget:self action:@selector(likeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         [self.contentView addSubview:_likeBtn];
     }
     return _likeBtn;
@@ -110,9 +113,6 @@
     self.titleLabel.text = _entity.title;
     self.detailLabel.text = _note.text;
     
-//    if (self.entity.isLiked) {
-//        self.likeBtn.selected = YES;
-//    }
     self.likeBtn.selected = self.entity.liked;
     
     self.tagLabel.text = @"精选商品";
@@ -164,6 +164,39 @@
     [[OpenCenter sharedOpenCenter] openEntity:self.entity];
 }
 
+- (void)likeBtnAction:(id)sender
+{
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
+    
+    [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
+    [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
+    
+    [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeBtn.selected success:^(BOOL liked) {
+        if (liked == self.likeBtn.selected) {
+            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+        }
+        self.likeBtn.selected = liked;
+        self.entity.liked = liked;
+        
+        if (liked) {
+            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            self.entity.likeCount = self.entity.likeCount + 1;
+        } else {
+            self.entity.likeCount = self.entity.likeCount - 1;
+            [SVProgressHUD dismiss];
+        }
+        
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
+        
+    }];
+}
+
 #pragma mark - KVO
 - (void)addObserver
 {
@@ -179,18 +212,6 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-//    if ([keyPath isEqualToString:@"likeCount"]) {
-//        if (self.entity.likeCount <= 0) {
-//            self.likeCounterButton.hidden = YES;
-//        }
-//        else
-//        {
-//            self.likeCounterButton.hidden = NO;
-//            [self.likeCounterButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.entity.likeCount] forState:UIControlStateNormal];
-//        }
-//        
-//    }
-//    NSLog(@"OKOKOKOKO");
     if ([keyPath isEqualToString:@"liked"]) {
         self.likeBtn.selected = self.entity.liked;
     }
