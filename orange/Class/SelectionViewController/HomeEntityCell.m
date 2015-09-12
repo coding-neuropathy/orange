@@ -97,12 +97,23 @@
 
 - (void)setData:(NSDictionary *)data
 {
+    if (self.entity) {
+        [self removeObserver];
+    }
+    
     self.entity = data[@"entity"];
     self.note = data[@"note"];
+    
+    [self addObserver];
     
     [self.imageView sd_setImageWithURL:_entity.imageURL_310x310];
     self.titleLabel.text = _entity.title;
     self.detailLabel.text = _note.text;
+    
+//    if (self.entity.isLiked) {
+//        self.likeBtn.selected = YES;
+//    }
+    self.likeBtn.selected = self.entity.liked;
     
     self.tagLabel.text = @"精选商品";
     
@@ -151,6 +162,39 @@
 - (void)imageViewAction:(id)sender
 {
     [[OpenCenter sharedOpenCenter] openEntity:self.entity];
+}
+
+#pragma mark - KVO
+- (void)addObserver
+{
+//    [self.entity addObserver:self forKeyPath:@"likeCount" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    [self.entity addObserver:self forKeyPath:@"liked" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)removeObserver
+{
+//    [self.entity removeObserver:self forKeyPath:@"likeCount"];
+    [self.entity removeObserver:self forKeyPath:@"liked"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+//    if ([keyPath isEqualToString:@"likeCount"]) {
+//        if (self.entity.likeCount <= 0) {
+//            self.likeCounterButton.hidden = YES;
+//        }
+//        else
+//        {
+//            self.likeCounterButton.hidden = NO;
+//            [self.likeCounterButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.entity.likeCount] forState:UIControlStateNormal];
+//        }
+//        
+//    }
+//    NSLog(@"OKOKOKOKO");
+    if ([keyPath isEqualToString:@"liked"]) {
+        self.likeBtn.selected = self.entity.liked;
+    }
+    
 }
 
 @end

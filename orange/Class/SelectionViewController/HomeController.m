@@ -344,7 +344,6 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
         }
         NSRange range = [url rangeOfString:@"out_link"];
         if (range.location == NSNotFound) {
-            //            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
             WebViewController * VC = [[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
             VC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:VC animated:YES];
