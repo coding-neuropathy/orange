@@ -162,7 +162,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSize = CGSizeMake(kScreenWidth, kScreenWidth / 1.1);
+    CGSize cellSize = CGSizeMake(kScreenWidth, 140 + 174* kScreenWidth/(375-32) );
     
     return cellSize;
 }

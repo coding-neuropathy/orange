@@ -112,7 +112,7 @@
     self.coverImageView.deFrameLeft = 16;
     
     self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 32., 25);
-    self.titleLabel.deFrameLeft = 10.;
+    self.titleLabel.deFrameLeft = 16.;
     self.titleLabel.deFrameTop = self.coverImageView.deFrameBottom + 16;
     
     self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth -32, 40);
@@ -120,7 +120,7 @@
     self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 5;
 
     self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
-    self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 16.;
+    self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
     self.timeLabel.deFrameRight = self.contentView.deFrameRight - 16.;
     
 }
