@@ -218,7 +218,7 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
     CGSize cellSize = CGSizeMake(0, 0);
     switch (indexPath.section) {
         case 0:
-            cellSize = CGSizeMake(kScreenWidth, 117);
+            cellSize = CGSizeMake(kScreenWidth, 84 *kScreenWidth/375 + 32);
             break;
         case 1:
             cellSize = CGSizeMake(kScreenWidth / 3, kScreenWidth / 3);

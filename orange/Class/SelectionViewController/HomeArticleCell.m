@@ -76,7 +76,15 @@
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_article.title];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     
-    [paragraphStyle setLineSpacing:10.];
+    NSInteger x = 6;
+    if (kScreenWidth == 320) {
+        x = 6;
+    }
+    else{
+        x = 8;
+    }
+    
+    [paragraphStyle setLineSpacing:x];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [_article.title length])];
     self.titleLabel.attributedText = attributedString;
     
@@ -94,15 +102,15 @@
 {
     [super layoutSubviews];
 //    
-    self.coverImageView.frame = CGRectMake(0., 0., 112, 84.);
+    self.coverImageView.frame = CGRectMake(0., 0., 112*kScreenWidth/375, 84*kScreenWidth/375);
     self.coverImageView.deFrameTop = 16.;
     self.coverImageView.deFrameRight = self.contentView.deFrameRight - 16;
 //
-    self.titleLabel.frame = CGRectMake(0., 0., 219., 40);
+    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, 50);
     self.titleLabel.deFrameTop = 16.;
     self.titleLabel.deFrameLeft = 16.;
 
-    self.detailLabel.frame = CGRectMake(0., 0., 135., 20.);
+    self.detailLabel.frame = CGRectMake(0., 0., self.titleLabel.deFrameWidth, 12.);
     self.detailLabel.deFrameLeft = 16.;
     self.detailLabel.deFrameBottom = self.contentView.deFrameBottom - 16;
 //    self.titleLabel.deFrameTop = self.coverImageView.deFrameBottom + 16;

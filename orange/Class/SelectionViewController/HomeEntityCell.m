@@ -124,21 +124,38 @@
 {
     [super layoutSubviews];
     
+    NSInteger x = 16;
+    if (kScreenWidth == 320) {
+        x = 10;
+    }
+    
+    
     self.imageView.frame = CGRectMake(0., 0., kScreenWidth * 0.48, kScreenWidth * 0.48);
-    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.44, 30.);
+    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.52 - 2*x, 30.);
     self.titleLabel.deFrameHeight = [self.titleLabel.text heightWithLineWidth:self.titleLabel.deFrameWidth Font:self.titleLabel.font];
-    self.titleLabel.deFrameTop = 16.;
-    self.titleLabel.deFrameLeft = self.imageView.deFrameRight + 10;
+    if (self.titleLabel.deFrameHeight > 50) {
+        self.titleLabel.deFrameHeight = 50;
+    }
+
+    self.titleLabel.deFrameTop = x;
+
     
-    self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.44, 40);
+    self.titleLabel.deFrameLeft = self.imageView.deFrameRight + x;
+    
+    self.detailLabel.frame = CGRectMake(0., 0., self.titleLabel.deFrameWidth, 40);
     self.detailLabel.center = self.titleLabel.center;
-    self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
+    if (kScreenWidth == 320) {
+        self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + x - 5;
+    }
+    else{
+        self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + x;
+    }
     
-    self.tagLabel.frame = CGRectMake(0., 0., 100., 20.);
+    self.tagLabel.frame = CGRectMake(0., 0., 100., 44.);
     self.tagLabel.deFrameLeft = self.titleLabel.deFrameLeft;
-    self.tagLabel.deFrameBottom = self.contentView.deFrameHeight - 10;
+    self.tagLabel.deFrameBottom = self.contentView.deFrameHeight;
     
-    self.likeBtn.frame = CGRectMake(0., 0., 40., 40.);
+    self.likeBtn.frame = CGRectMake(0., 0., 40., 44.);
     self.likeBtn.center = self.tagLabel.center;
     self.likeBtn.deFrameRight = self.contentView.deFrameWidth - 10;
 }
@@ -152,8 +169,8 @@
     CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
 
-    CGContextMoveToPoint(context, 190., self.contentView.deFrameHeight - 50);
-    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight - 50.);
+    CGContextMoveToPoint(context, kScreenWidth - self.imageView.deFrameWidth - 16, self.contentView.deFrameHeight - 44);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight - 44.);
 
     CGContextStrokePath(context);
 }
