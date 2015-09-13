@@ -837,8 +837,19 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
     
     [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
+            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
+            image.frame = self.likeButton.imageView.frame;
+            [self.likeButton addSubview:image];
+            [UIView animateWithDuration:0.25 animations:^{
+                image.transform = CGAffineTransformScale(image.transform, 1.6, 1.6);
+                image.alpha = 0.25;
+            }completion:^(BOOL finished) {
+                [image removeFromSuperview];
+            }];
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
+        
+        
         self.likeButton.selected = liked;
         self.entity.liked = liked;
         
@@ -847,11 +858,29 @@ static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction
         
         if (liked) {
             self.entity.likeCount += 1;
+            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
+            image.frame = self.likeButton.imageView.frame;
+            [self.likeButton addSubview:image];
+            
+            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                image.transform = CGAffineTransformScale(image.transform, 1.6, 1.6);
+                image.deFrameTop = image.deFrameTop - 8;
+                image.alpha = 0.1;
+            }completion:^(BOOL finished) {
+                [image removeFromSuperview];
+            }];
+            
+            if ([Passport sharedInstance].user) {
+                [self.dataArrayForlikeUser insertObject:[Passport sharedInstance].user atIndex:0];
+            }
             [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         } else {
+            [self.dataArrayForlikeUser removeObject:[Passport sharedInstance].user];
+            
             self.entity.likeCount -= 1;
             [SVProgressHUD dismiss];
         }
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:3]];
         if (btn){
             btn.selected = self.entity.liked;
             [btn setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount] forState:UIControlStateNormal];
