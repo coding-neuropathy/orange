@@ -61,7 +61,7 @@
 
         NSIndexPath *indexPath = [(UICollectionViewLayoutAttributes *)obj indexPath];
         if ([[obj representedElementKind] isEqualToString:UICollectionElementKindSectionHeader]) {
-            if (indexPath.section == 1) {
+            if (indexPath.section == 2) {
                 self.stickyHeader = obj;
             }
             [headers setObject:obj forKey:@(indexPath.section)];
@@ -85,19 +85,14 @@
         
     }];
     [lastCells enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-//        NSIndexPath *indexPath = [obj indexPath];
-//        NSNumber *indexPathKey = @(indexPath.section);
         
         UICollectionViewLayoutAttributes *header = headers[@(1)];
-        // CollectionView automatically removes headers not in bounds
         if ( ! header) {
             [allItems addObject:self.stickyHeader];
         }
-//        DDLogInfo(@"%@", obj);
         [self updateHeaderAttributes:self.stickyHeader];
     }];
     
-//    DDLogInfo(@"all items %@", allItems);
     return allItems;
 }
 
@@ -105,19 +100,15 @@
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
     CGRect frame = attributes.frame;
-//    frame.origin.y += self.parallaxHeaderReferenceSize.height;
     attributes.frame = frame;
     return attributes;
 }
 
 - (CGSize)collectionViewContentSize {
-    // If not part of view hierarchy then return CGSizeZero (as in docs).
-    // Call [super collectionViewContentSize] can cause EXC_BAD_ACCESS when collectionView has no superview.
     if (!self.collectionView.superview) {
         return CGSizeZero;
     }
     CGSize size = [super collectionViewContentSize];
-//    size.height += self.parallaxHeaderReferenceSize.height;
     return size;
 }
 
@@ -133,8 +124,6 @@
 }
 
 - (void)setParallaxHeaderReferenceSize:(CGSize)parallaxHeaderReferenceSize {
-//    _parallaxHeaderReferenceSize = parallaxHeaderReferenceSize;
-    // Make sure we update the layout
     [self invalidateLayout];
 }
 
@@ -150,21 +139,16 @@
     attributes.hidden = NO;
     CGPoint origin = attributes.frame.origin;
     CGFloat y = CGRectGetMaxY(currentBounds) - currentBounds.size.height;
-//  DDLogInfo(@"%.2f, %.2f,", CGRectGetMaxY(currentBounds), currentBounds.size.height);
     
-
     if (self.collectionView.contentOffset.y <self.action_y) {
         origin.y = attributes.frame.origin.y;
-        //DDLogInfo(@"A%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
     }
     else if ((self.collectionView.contentOffset.y + self.collectionView.bounds.size.height < self.collectionView.contentSize.height)) {
         origin.y = y;
-        //DDLogInfo(@"B%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
     }
     else
     {
         origin.y = self.collectionView.contentOffset.y;
-        //DDLogInfo(@"C%.2f,%.2f, %.2f, %.2f,%.2f", self.action_y,y,attributes.frame.origin.y, MAX(y, attributes.frame.origin.y), self.collectionView.contentOffset.y);
     }
     
     
@@ -172,9 +156,7 @@
         origin,
         attributes.frame.size
     };
-    
-   
-    //DLogInfo(@"%@", attributes);
+
 }
 
 @end

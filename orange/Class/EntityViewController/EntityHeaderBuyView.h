@@ -1,5 +1,5 @@
 //
-//  EntityHeaderActionView.h
+//  EntityHeaderBuyView.h
 //  orange
 //
 //  Created by 谢家欣 on 15/8/9.
@@ -8,18 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol EntityHeaderActionViewDelegate <NSObject>
+@protocol EntityHeaderBuyViewDelegate <NSObject>
 
 - (void)tapLikeBtn:(id)sender;
 - (void)tapPostNoteBtn:(id)sender;
-- (void)tapMoreBtn:(id)sender;
+- (void)tapBuyBtn:(id)sender;
 
 @end
 
-@interface EntityHeaderActionView : UICollectionReusableView
+@interface EntityHeaderBuyView : UICollectionReusableView
 @property (strong, nonatomic) GKNote * note;
 @property (strong, nonatomic) GKEntity * entity;
 @property (strong, nonatomic) UIButton *likeButton;
-@property (weak, nonatomic) id<EntityHeaderActionViewDelegate> delegate;
+@property (weak, nonatomic) id<EntityHeaderBuyViewDelegate> delegate;
 
 @end
