@@ -101,6 +101,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.tableView.scrollsToTop = YES;
     //self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     [AVAnalytics beginLogPageView:@"SelectionView"];
     [MobClick beginLogPageView:@"SelectionView"];
@@ -109,6 +110,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    self.tableView.scrollsToTop = NO;
     [AVAnalytics endLogPageView:@"SelectionView"];
     [MobClick endLogPageView:@"SelectionView"];
 }

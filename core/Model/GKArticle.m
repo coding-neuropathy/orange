@@ -59,7 +59,7 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
 
 - (NSURL *)articleURL
 {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"http://www.guoku.com%@", self.url_string]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"http://m.guoku.com%@", self.url_string]];
 }
 
 @end

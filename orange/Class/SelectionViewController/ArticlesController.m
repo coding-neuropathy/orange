@@ -93,7 +93,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    self.collectionView.scrollsToTop = YES;
     [AVAnalytics beginLogPageView:@"ArticlesView"];
     [MobClick beginLogPageView:@"ArticlesView"];
 }
@@ -101,7 +101,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
+    self.collectionView.scrollsToTop = NO;
     [AVAnalytics endLogPageView:@"ArticlesView"];
     [MobClick endLogPageView:@"ArticlesView"];
 }
