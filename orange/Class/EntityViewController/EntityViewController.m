@@ -288,7 +288,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     
     [self.collectionView registerClass:[EntityHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier];
     
-    
+    /*
     NSMutableArray * array = [NSMutableArray array];
     {
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
@@ -303,6 +303,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         [array addObject:item];
     }
     self.navigationItem.rightBarButtonItems = array;
+    */
     
 //    {
 //        UIBarButtonItem * item = [[UIBarButtonItem alloc]init];
@@ -622,7 +623,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             size = CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
             break;
         case 2:
-            size =  CGSizeMake(kScreenWidth, 70);
+            size =  CGSizeMake(kScreenWidth, 60);
             break;
         case 3:
             size =  CGSizeMake(kScreenWidth, 0);
@@ -834,7 +835,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             }completion:^(BOOL finished) {
                 [image removeFromSuperview];
             }];
-            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
         
         
@@ -861,7 +862,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             if ([Passport sharedInstance].user) {
                 [self.dataArrayForlikeUser insertObject:[Passport sharedInstance].user atIndex:0];
             }
-            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         } else {
             [self.dataArrayForlikeUser removeObject:[Passport sharedInstance].user];
             
@@ -1007,5 +1008,44 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     [self shareButtonAction];
 }
 
+- (void)setNavBarButton:(BOOL)flag
+{
+    if (flag) {
+        NSMutableArray * array = [NSMutableArray array];
+        {
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+            [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(tapMoreBtn) forControlEvents:UIControlEventTouchUpInside];
+            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+            button.backgroundColor = [UIColor clearColor];
+            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+            [array addObject:item];
+        }
+        {
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+            [button setImage:[UIImage imageNamed:@"note"] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(tapNoteBtn) forControlEvents:UIControlEventTouchUpInside];
+            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+            button.backgroundColor = [UIColor clearColor];
+            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+            [array addObject:item];
+        }
+        {
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+            [button setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
+            [button addTarget:self action:@selector(tapLikeBtn) forControlEvents:UIControlEventTouchUpInside];
+            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+            button.backgroundColor = [UIColor clearColor];
+            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+            [array addObject:item];
+        }
+        self.navigationItem.rightBarButtonItems = array;
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+}
 
 @end

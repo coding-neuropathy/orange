@@ -87,7 +87,7 @@
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
-    self.buyButton.frame = CGRectMake(10., 10., kScreenWidth -20., 50.);
+    self.buyButton.frame = CGRectMake(15., 10., kScreenWidth -20., 40.);
     
     if (_entity.purchaseArray.count > 0) {
         GKPurchase * purchase = self.entity.purchaseArray[0];
