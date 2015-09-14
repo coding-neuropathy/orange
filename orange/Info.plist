@@ -67,9 +67,22 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4076</string>
+	<string>4077</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>weixin</string>
+		<string>sinaweibo</string>
+		<string>tbopen23093827</string>
+		<string>wx59118ccde8270caa</string>
+		<string>sinaweibosso.1459383851</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>启动位置服务</string>
 	<key>UIAppFonts</key>
@@ -97,11 +110,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-	  <!--Include to allow all connections (DANGER)-->
-	    <key>NSAllowsArbitraryLoads</key>
-	    <true/>
-    </dict>
 </dict>
 </plist>
