@@ -55,6 +55,24 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:MessageCellIdentifier];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tableView.scrollsToTop = YES;
+    
+    [AVAnalytics beginLogPageView:@"MessageView"];
+    [MobClick beginLogPageView:@"MessageView"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.tableView.scrollsToTop = NO;
+    
+    [AVAnalytics endLogPageView:@"MessageView"];
+    [MobClick endLogPageView:@"MessageView"];
+}
+
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {

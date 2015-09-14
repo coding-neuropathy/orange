@@ -8,7 +8,7 @@
 
 #import "SelectionController.h"
 #import "HMSegmentedControl.h"
-#import "HomeController.h"
+//#import "HomeController.h"
 #import "SelectionViewController.h"
 #import "ArticlesController.h"
 
@@ -19,7 +19,7 @@
 @property (strong, nonatomic) HMSegmentedControl *segmentedControl;
 @property (assign, nonatomic) NSInteger index;
 
-@property (strong, nonatomic) HomeController * homeVC;
+//@property (strong, nonatomic) HomeController * homeVC;
 @property (strong, nonatomic) SelectionViewController * entityVC;
 @property (strong, nonatomic) ArticlesController * articleVC;
 
@@ -45,8 +45,9 @@
 {
     if (!_segmentedControl) {
         _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-40, 32)];
-        
-        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"selection-nav-recommend", kLocalizedFile, nil), NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil),NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil)]];
+    
+//        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"selection-nav-recommend", kLocalizedFile, nil), NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil),NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil)]];
+        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil),NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil)]];
         [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
@@ -60,14 +61,14 @@
     }
     return _segmentedControl;
 }
-
-- (HomeController *)homeVC
-{
-    if (!_homeVC) {
-        _homeVC = [[HomeController alloc] init];
-    }
-    return _homeVC;
-}
+//
+//- (HomeController *)homeVC
+//{
+//    if (!_homeVC) {
+//        _homeVC = [[HomeController alloc] init];
+//    }
+//    return _homeVC;
+//}
 
 - (SelectionViewController *)entityVC
 {
@@ -108,7 +109,7 @@
     
     self.thePageViewController.view.frame = CGRectMake(0, 0, kScreenWidth,  kScreenHeight);
 
-    [self.thePageViewController setViewControllers:@[self.homeVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 
     
     [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
@@ -117,7 +118,7 @@
 #pragma mark - <UIPageViewControllerDataSource>
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-    return 3;
+    return 2;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
@@ -126,11 +127,11 @@
         return self.entityVC;
     }
     if ([viewController isKindOfClass:[SelectionViewController class]]) {
-        return self.homeVC;
+//        return self.homeVC;
     }
-    if ([viewController isKindOfClass:[HomeController class]]) {
-        //return self.articleVC;
-    }
+//    if ([viewController isKindOfClass:[HomeController class]]) {
+//        //return self.articleVC;
+//    }
 
     return nil;
 }
@@ -141,9 +142,9 @@
      if ([viewController isKindOfClass:[ArticlesController class]]) {
          //return self.homeVC;
      }
-     if ([viewController isKindOfClass:[HomeController class]]) {
-         return self.entityVC;
-     }
+//     if ([viewController isKindOfClass:[HomeController class]]) {
+//         return self.entityVC;
+//     }
      if ([viewController isKindOfClass:[SelectionViewController class]]) {
          return self.articleVC;
      }
@@ -155,14 +156,14 @@
 {
     self.index = 0;
     if (completed) {
-        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[HomeController class]]) {
+//        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[HomeController class]]) {
+//            self.index = 0;
+//        }
+        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[SelectionViewController class]]) {
             self.index = 0;
         }
-        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[SelectionViewController class]]) {
-            self.index = 1;
-        }
         if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[ArticlesController class]]) {
-            self.index = 2;
+            self.index = 1;
         }
         
         [self.segmentedControl setSelectedSegmentIndex:self.index animated:YES];
@@ -186,16 +187,16 @@
 {
 
     self.index = segmentedControl.selectedSegmentIndex;
+//    
+//    if (segmentedControl.selectedSegmentIndex == 0){
+//        [self.thePageViewController setViewControllers:@[self.homeVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+//    }
     
     if (segmentedControl.selectedSegmentIndex == 0){
-        [self.thePageViewController setViewControllers:@[self.homeVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
-    }
-    
-    if (segmentedControl.selectedSegmentIndex == 1){
         [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     }
     
-    if (segmentedControl.selectedSegmentIndex == 2){
+    if (segmentedControl.selectedSegmentIndex == 1){
         [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     }
     
