@@ -341,13 +341,10 @@
 		B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B9211AC142A500664BDB /* EditViewCell.m */; };
 		B7DA97BB1B25E46200C9BC25 /* EntityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DA97BA1B25E46200C9BC25 /* EntityHeaderView.m */; };
 		B7DA97C11B270BE900C9BC25 /* EntityLikeUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DA97C01B270BE900C9BC25 /* EntityLikeUserCell.m */; };
-<<<<<<< HEAD
-=======
 		B7E668721B779DE900E177E5 /* EntityHeaderActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E668711B779DE900E177E5 /* EntityHeaderActionView.m */; };
 		B7E668751B77A62100E177E5 /* EntityStickyHeaderFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E668741B77A62100E177E5 /* EntityStickyHeaderFlowLayout.m */; };
 		B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32AB1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m */; };
 		B7ED32AF1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32AD1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m */; };
->>>>>>> master
 		B7ED32B21B257EFF009BAF5A /* EntityNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32B11B257EFF009BAF5A /* EntityNoteCell.m */; };
 		B7ED32B81B25C662009BAF5A /* OpenCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32B71B25C662009BAF5A /* OpenCenter.m */; };
 		B7ED32BB1B25C8D8009BAF5A /* EntityHeaderSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32BA1B25C8D8009BAF5A /* EntityHeaderSectionView.m */; };
@@ -981,8 +978,6 @@
 		B7DA97BA1B25E46200C9BC25 /* EntityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderView.m; sourceTree = "<group>"; };
 		B7DA97BF1B270BE900C9BC25 /* EntityLikeUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityLikeUserCell.h; sourceTree = "<group>"; };
 		B7DA97C01B270BE900C9BC25 /* EntityLikeUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityLikeUserCell.m; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
 		B7E668701B779DE900E177E5 /* EntityHeaderActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHeaderActionView.h; sourceTree = "<group>"; };
 		B7E668711B779DE900E177E5 /* EntityHeaderActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderActionView.m; sourceTree = "<group>"; };
 		B7E668731B77A62100E177E5 /* EntityStickyHeaderFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityStickyHeaderFlowLayout.h; sourceTree = "<group>"; };
@@ -991,7 +986,6 @@
 		B7ED32AB1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStickyHeaderFlowLayout.m; sourceTree = "<group>"; };
 		B7ED32AC1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStickyHeaderFlowLayoutAttributes.h; sourceTree = "<group>"; };
 		B7ED32AD1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStickyHeaderFlowLayoutAttributes.m; sourceTree = "<group>"; };
->>>>>>> master
 		B7ED32B01B257EFF009BAF5A /* EntityNoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityNoteCell.h; sourceTree = "<group>"; };
 		B7ED32B11B257EFF009BAF5A /* EntityNoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityNoteCell.m; sourceTree = "<group>"; };
 		B7ED32B61B25C662009BAF5A /* OpenCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenCenter.h; path = OpenCenter/OpenCenter.h; sourceTree = "<group>"; };
@@ -1927,16 +1921,9 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-<<<<<<< HEAD
 				B7ADACF81B4105AF00BA02FD /* UIComponents */,
-=======
-				4EF508821B4919EE00C92618 /* Reveal.framework */,
->>>>>>> 4e9f079d4aeed5b5b69366c0960ca67e26580883
-=======
 				4EB8E2251B9F398B002C7F6F /* SelectionController */,
 				391F5F8D1B1705A000931533 /* UIComponents */,
->>>>>>> master
 				B76EE07C1B3D86AE009D8763 /* NotifyController */,
 				B769B1261B2ACFB3004401FA /* WelcomeViewController */,
 				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
@@ -2884,11 +2871,8 @@
 				393715C01ACBD9C300DC50FF /* DDASLLogger.m in Sources */,
 				393715C51ACBD9C300DC50FF /* DispatchQueueLogFormatter.m in Sources */,
 				4E1D28E01A125B9300740C17 /* JSQMessagesToolbarContentView.m in Sources */,
-<<<<<<< HEAD
-=======
 				B7180EA41B9D380A004AD9AD /* HomeController.m in Sources */,
 				394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */,
->>>>>>> master
 				B7ED32BB1B25C8D8009BAF5A /* EntityHeaderSectionView.m in Sources */,
 				4E1D28DA1A125B9300740C17 /* JSQMessagesComposerTextView.m in Sources */,
 				4E2D6D3F1A69601F009E4A17 /* SVIndefiniteAnimatedView.m in Sources */,
@@ -2992,11 +2976,8 @@
 				4E66C1DD1A7C8B2500F31A90 /* SettingViewController.m in Sources */,
 				B7B695861AF05C400016AAB8 /* SDWebImagePrefetcher.m in Sources */,
 				4E1D28D31A125B9300740C17 /* JSQMessagesCellTextView.m in Sources */,
-<<<<<<< HEAD
 				B7ADAD091B4105AF00BA02FD /* UIScrollView+Slogan.m in Sources */,
 				4E1D701F1A5ADB9A0032719E /* DiscoverViewController.m in Sources */,
-=======
->>>>>>> master
 				4E1D28DB1A125B9300740C17 /* JSQMessagesInputToolbar.m in Sources */,
 				B7ADAD081B4105AF00BA02FD /* JXFormCell.m in Sources */,
 				4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */,
