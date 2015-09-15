@@ -418,14 +418,12 @@
 /**
  *  获取发现数据
  */
-+ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories))success
++ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * artilces))success
                        failure:(void (^)(NSInteger stateCode))failure
 {
     NSString * path = @"discover/";
 
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"%@", responseObject[@"categories"]);
-//        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:0];
         NSArray *bannerArray = responseObject[@"banner"];
         
         NSMutableArray * categories = [NSMutableArray arrayWithCapacity:0];
@@ -444,8 +442,16 @@
             [entityArray addObject:entity];
         }
         
+        NSMutableArray * articles = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject[@"articles"])
+        {
+            GKArticle * article = [GKArticle modelFromDictionary:row[@"article"]];
+            [articles addObject:article];
+        }
+
+        
         if (success) {
-            success(bannerArray, entityArray, categories);
+            success(bannerArray, entityArray, categories, articles);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -32,6 +32,8 @@
 {
     if (!_coverImageView){
         _coverImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _coverImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _coverImageView.layer.masksToBounds = YES;
         
         [self.contentView addSubview:_coverImageView];
     }
@@ -70,7 +72,7 @@
 - (void)setArticle:(GKArticle *)article
 {
     _article = article;
-    
+    NSLog(@"%@", _article.title);
     self.titleLabel.text = _article.title;
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_article.title];
@@ -113,15 +115,6 @@
     self.detailLabel.frame = CGRectMake(0., 0., self.titleLabel.deFrameWidth, 12.);
     self.detailLabel.deFrameLeft = 16.;
     self.detailLabel.deFrameBottom = self.contentView.deFrameBottom - 16;
-//    self.titleLabel.deFrameTop = self.coverImageView.deFrameBottom + 16;
-//
-//    self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth -32, 40);
-//    self.detailLabel.center = self.titleLabel.center;
-//    self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 5;
-//
-//    self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
-//    self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 16.;
-//    self.timeLabel.deFrameRight = self.contentView.deFrameRight - 16.;
     
 }
 

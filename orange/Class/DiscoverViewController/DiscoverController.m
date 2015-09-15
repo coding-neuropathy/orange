@@ -16,8 +16,11 @@
 #import "DiscoverBannerView.h"
 #import "DiscoverCategoryView.h"
 #import "EntityCell.h"
+#import "HomeArticleCell.h"
+
 #import "GTScrollNavigationBar.h"
-#import "GroupViewController.h"
+//#import "GroupViewController.h"
+#import "CategoryGroupViewController.h"
 #import "SearchResultsViewController.h"
 
 
@@ -32,6 +35,8 @@
 @property (strong, nonatomic) NSArray * bannerArray;
 @property (strong, nonatomic) NSArray * categoryArray;
 @property (strong, nonatomic) NSArray * entityArray;
+@property (strong, nonatomic) NSArray * articleArray;
+
 @property (strong, nonatomic) UISearchController * searchVC;
 @property (strong, nonatomic) SearchResultsViewController * searchResultsVC;
 @end
@@ -39,6 +44,7 @@
 @implementation DiscoverController
 
 static NSString * EntityCellIdentifier = @"EntityCell";
+static NSString * ArticleCellIdentifier = @"ArticleCell";
 static NSString * BannerIdentifier = @"BannerView";
 static NSString * CategoryIdentifier = @"CategoryView";
 static NSString * HeaderSectionIdentifier = @"HeaderSection";
@@ -106,10 +112,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - data
 - (void)refresh
 {
-    [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities, NSArray * categories) {
+    [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * articles) {
         self.bannerArray = banners;
         self.categoryArray = categories;
         self.entityArray = entities;
+        self.articleArray = articles;
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
 //        [self.collectionView addSloganView];
@@ -126,6 +133,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     [self.view addSubview:self.collectionView];
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
+    [self.collectionView registerClass:[HomeArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
+    
     [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
     [self.collectionView registerClass:[DiscoverCategoryView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier];
     
@@ -178,26 +187,37 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    NSInteger count = 0;
     switch (section) {
         case 2:
-            return self.entityArray.count;
+            count = self.articleArray.count;
+            break;
+        case 3:
+            count = self.entityArray.count;
             break;
             
         default:
-            return 0;
+//            return 0;
             break;
     }
-    
+    return count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
+        case 2:
+        {
+            HomeArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleCellIdentifier forIndexPath:indexPath];
+            cell.article = [self.articleArray objectAtIndex:indexPath.row];
+            return cell;
+        }
+            break;
             
         default:
         {
@@ -236,19 +256,23 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                 categoryView.categories = self.categoryArray;
                 categoryView.tapBlock = ^(GKCategory * category){
 //                    DDLogInfo(@"category %@", category);
-                    GroupViewController * groupVC = [[GroupViewController alloc] initWithGid:category.groupId];
+//                    GroupViewController * groupVC = [[GroupViewController alloc] initWithGid:category.groupId];
+//                    groupVC.title = category.title;
+//                    groupVC.hidesBottomBarWhenPushed = YES;
+//                    [self.navigationController pushViewController:groupVC animated:YES];
+                    CategoryGroupViewController * groupVC = [[CategoryGroupViewController alloc] initWithGid:category.groupId];
                     groupVC.title = category.title;
                     groupVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:groupVC animated:YES];
                 };
-//                if (self.categoryArray.count == 0) {
-//                    categoryView.hidden = YES;
-//                }
-//                else
-//                {
-//                    categoryView.hidden = NO;
-//                }
                 return categoryView;
+            }
+                break;
+            case 2:
+            {
+                DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
+                header.text = NSLocalizedStringFromTable(@"popular articles", kLocalizedFile, nil);
+                return header;
             }
                 break;
             default:
@@ -256,13 +280,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"popular", kLocalizedFile, nil);
-                if (self.entityArray.count == 0) {
-                    header.hidden = YES;
-                }
-                else
-                {
-                    header.hidden = NO;
-                }
                 return header;
             }
                 break;
@@ -278,6 +295,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
         case 2:
+            cellsize = CGSizeMake(kScreenWidth, 84 *kScreenWidth/375 + 32);;
+            break;
+        case 3:
         {
             cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
         }
@@ -295,6 +315,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0, 0.);
     switch (section) {
         case 2:
+            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+        case 3:
         {
             edge = UIEdgeInsetsMake(3., 3., 3., 3.);
         }
@@ -310,7 +332,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     CGFloat itemSpacing = 0.;
     switch (section) {
 
-        case 1:
+        case 3:
         {
             /*
             if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
@@ -336,13 +358,16 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     CGFloat spacing = 0;
     switch (section) {
         case 2:
+            spacing =5;
+            break;
+        case 3:
         {
             spacing = 3.;
         }
             break;
             
         default:
-            spacing = 0;
+//            spacing = 0;
             break;
     }
     return spacing;
@@ -360,6 +385,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
             headerSize = CGSizeMake(kScreenWidth, 155.);            
             break;
         case 2:
+        case 3:
         {
             if(self.entityArray.count) {
                 headerSize = CGSizeMake(kScreenWidth, 44.);
@@ -371,6 +397,25 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
             break;
     }
     return headerSize;
+}
+
+#pragma mark - <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 2:
+        {
+            GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
+            //    NSLog(@"%@", article.articleURL);
+            WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - <UISearchControllerDelegate>

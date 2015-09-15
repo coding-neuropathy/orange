@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 /**
  *  获取发现数据
  */
-+ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories))success
++ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * articles))success
                        failure:(void (^)(NSInteger stateCode))failure;
 
 /**
