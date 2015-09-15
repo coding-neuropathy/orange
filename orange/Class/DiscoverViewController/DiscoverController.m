@@ -178,13 +178,13 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     switch (section) {
-        case 1:
+        case 2:
             return self.entityArray.count;
             break;
             
@@ -241,13 +241,13 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                     groupVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:groupVC animated:YES];
                 };
-                if (self.categoryArray.count == 0) {
-                    categoryView.hidden = YES;
-                }
-                else
-                {
-                    categoryView.hidden = NO;
-                }
+//                if (self.categoryArray.count == 0) {
+//                    categoryView.hidden = YES;
+//                }
+//                else
+//                {
+//                    categoryView.hidden = NO;
+//                }
                 return categoryView;
             }
                 break;
@@ -277,7 +277,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
-        case 1:
+        case 2:
         {
             cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
         }
@@ -294,7 +294,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0, 0.);
     switch (section) {
-        case 1:
+        case 2:
         {
             edge = UIEdgeInsetsMake(3., 3., 3., 3.);
         }
@@ -325,7 +325,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         }
             break;
         default:
-            //            itemSpacing = 0;
+//            itemSpacing = 0;
             break;
     }
     return itemSpacing;
@@ -335,7 +335,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     CGFloat spacing = 0;
     switch (section) {
-        case 1:
+        case 2:
         {
             spacing = 3.;
         }
@@ -359,8 +359,15 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         case 1:
             headerSize = CGSizeMake(kScreenWidth, 155.);            
             break;
+        case 2:
+        {
+            if(self.entityArray.count) {
+                headerSize = CGSizeMake(kScreenWidth, 44.);
+            }
+        }
+            break;
         default:
-            headerSize = CGSizeMake(kScreenWidth, 44.);
+            
             break;
     }
     return headerSize;
