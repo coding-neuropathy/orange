@@ -121,6 +121,40 @@
     }];
 }
 
+/**
+ *  获取分类商品列表
+ *  
+ *  @param gid 一级分类 id
+ */
++ (void)getGroupEntityWithGroupId:(NSInteger)gid Page:(NSInteger)page
+                          success:(void (^)(NSArray * entities))success
+                          failure:(void (^)(NSInteger stateCode))failure
+{
+    NSParameterAssert(gid > 0);
+    NSString *path = [NSString stringWithFormat:@"category/%ld/selection/", (unsigned long)gid];
+    
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(page) forKey:@"page"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableArray * entities = [[NSMutableArray alloc]initWithCapacity:0];
+        for (NSDictionary * row in responseObject)
+        {
+            GKEntity * entity = [GKEntity modelFromDictionary:row];
+            [entities addObject:entity];
+        }
+        if (success) {
+            success(entities);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
 #pragma mark - Entity API
 /**
  *  获取商品详细

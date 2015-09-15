@@ -14,7 +14,7 @@
 #import "CategoryLikeViewController.h"
 
 @interface CategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic,strong) NSString * sort;
+@property (nonatomic, strong) NSString * sort;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property (nonatomic, strong) NSMutableArray * dataArrayForLike;

@@ -8,12 +8,20 @@
 
 #import "CategoryGroupViewController.h"
 #import "HMSegmentedControl.h"
+#import "CategoryEntityController.h"
+#import "SubCategoryEntityViewController.h"
 
 
 @interface CategoryGroupViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController * thePageViewController;
 @property (strong, nonatomic) HMSegmentedControl *segmentedControl;
+@property (strong, nonatomic) CategoryEntityController * categoryEntityVC;
+
+@property (nonatomic, strong) NSArray *categoryGroupArray;
+@property (nonatomic, strong) NSMutableArray *categoryArray;
+@property (nonatomic, strong) NSMutableArray *firstCategoryArray;
+
 @property (assign, nonatomic) NSInteger index;
 @property (assign, nonatomic) NSInteger gid;
 
@@ -27,8 +35,62 @@
     self = [super init];
     if (self) {
         _gid = gid;
+        
+        self.categoryGroupArray = [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayKey];
+        for (NSDictionary * dic in self.categoryGroupArray) {
+            NSUInteger gid = [dic[@"GroupId"] integerValue];
+            if (gid == self.gid) {
+                self.categoryArray = [NSMutableArray arrayWithArray:dic[@"CategoryArray"]];
+                [self.categoryArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
+                [self splitArray];
+                break;
+            }
+        }
     }
     return self;
+}
+
+- (void)splitArray
+{
+    _firstCategoryArray = [NSMutableArray array];
+
+    [self.firstCategoryArray addObject:@"所有"];
+    for (GKEntityCategory *category in self.categoryArray) {
+        if (category.status > 0) {
+            [self.firstCategoryArray addObject:category.categoryName];
+        }
+    }
+    [self.firstCategoryArray addObject:@"更多"];
+}
+
+- (HMSegmentedControl *)segmentedControl
+{
+    if (!_segmentedControl) {
+        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(20., 0, kScreenWidth-40, 32)];
+        
+//        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"activity", kLocalizedFile, nil), NSLocalizedStringFromTable(@"message", kLocalizedFile, nil)]];
+        [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
+        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
+        //        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
+        [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
+        [_segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
+        [_segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+//        [_segmentedControl setBackgroundColor:[UIColor clearColor]];
+        [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
+        [_segmentedControl setSelectionIndicatorHeight:2];
+        [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+        [_segmentedControl setTag:2];
+        
+    }
+    return _segmentedControl;
+}
+
+- (CategoryEntityController *)categoryEntityVC
+{
+    if (!_categoryEntityVC) {
+        _categoryEntityVC = [[CategoryEntityController alloc] initWithGID:self.gid];
+    }
+    return _categoryEntityVC;
 }
 
 
@@ -47,9 +109,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.view.backgroundColor = UIColorFromRGB(0xffffff);
+    
     [self addChildViewController:self.thePageViewController];
     
-    self.thePageViewController.view.frame = CGRectMake(0, 0., kScreenWidth, kScreenHeight);
+    [self.thePageViewController setViewControllers:@[self.categoryEntityVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
+    self.thePageViewController.view.frame = CGRectMake(0, 32., kScreenWidth, kScreenHeight -32.);
+
+    [self.view addSubview:self.segmentedControl];
+    
+    [self.segmentedControl setSectionTitles:self.firstCategoryArray];
+//    [self.view addSubview:self.parentViewController.view];
+    [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,19 +129,40 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
 #pragma mark - <UIPageViewControllerDataSource>
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-    return 2;
+    return self.firstCategoryArray.count - 1;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
+    
+//    NSLog(@"%@", pageViewController);
+    if ([viewController isKindOfClass:[SubCategoryEntityViewController class]]) {
+        return self.categoryEntityVC;
+    }
+
+    
     return nil;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
+    
+    if ([viewController isKindOfClass:[CategoryEntityController class]]) {
+        
+    }
     return nil;
 }
 
@@ -77,7 +170,18 @@
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
     //    DDLogError(@"index %ld", self.index);
+    self.index = 0;
+    if (completed) {
 
+        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[CategoryEntityController class]]) {
+            self.index = 0;
+        }
+        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[SubCategoryEntityViewController class]]) {
+            self.index = 1;
+        }
+        
+        [self.segmentedControl setSelectedSegmentIndex:self.index animated:YES];
+    }
 }
 
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController
@@ -94,14 +198,27 @@
     return UIPageViewControllerSpineLocationMin;
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - 
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
+{
+    self.index = segmentedControl.selectedSegmentIndex;
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//    
+    switch (self.index) {
+        case 1:
+        {
+//            [self.firstCategoryArray o
+            SubCategoryEntityViewController * subCategory = [[SubCategoryEntityViewController alloc] initWithSID:1];
+            [self.thePageViewController setViewControllers:@[subCategory] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        }
+            
+            break;
+        default:
+        {
+            [self.thePageViewController setViewControllers:@[self.categoryEntityVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        }
+            break;
+    }
 }
-*/
 
 @end

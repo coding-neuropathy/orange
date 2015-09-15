@@ -58,6 +58,18 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)getCategoryStatByCategoryId:(NSUInteger)categoryId
                             success:(void (^)(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount))success
                             failure:(void (^)(NSInteger stateCode))failure;
+
+/**
+ *  获取分类商品列表
+ *
+ *  @param gid 一级分类 id
+ */
++ (void)getGroupEntityWithGroupId:(NSInteger)gid Page:(NSInteger)page
+                          success:(void (^)(NSArray * entities))success
+                          failure:(void (^)(NSInteger stateCode))failure;
+
+
+#pragma mark - Entity API
 /**
  *  获取商品详细
  *

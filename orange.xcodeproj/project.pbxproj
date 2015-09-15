@@ -293,9 +293,11 @@
 		B783F65F1B9AE5DB004DF1CB /* GKArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F65D1B9AE5DB004DF1CB /* GKArticle.m */; };
 		B783F6621B9AEC46004DF1CB /* ArticlesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F6611B9AEC46004DF1CB /* ArticlesController.m */; };
 		B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F6641B9AF26C004DF1CB /* ArticleCell.m */; };
+		B78C24321BA862A800EFFEB6 /* SubCategoryEntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78C24311BA862A800EFFEB6 /* SubCategoryEntityViewController.m */; settings = {ASSET_TAGS = (); }; };
 		B78C4E0E1B676ED5006620F7 /* GKCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = B78C4E0C1B676ED5006620F7 /* GKCategory.h */; };
 		B78C4E0F1B676ED5006620F7 /* GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B78C4E0D1B676ED5006620F7 /* GKCategory.m */; };
 		B78D350C1BA7F80C005D53CF /* CategoryGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78D350B1BA7F80C005D53CF /* CategoryGroupViewController.m */; settings = {ASSET_TAGS = (); }; };
+		B78D35121BA7FFDA005D53CF /* CategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78D35111BA7FFDA005D53CF /* CategoryEntityController.m */; settings = {ASSET_TAGS = (); }; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
 		B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */; };
 		B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */; };
@@ -870,10 +872,14 @@
 		B783F6611B9AEC46004DF1CB /* ArticlesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesController.m; sourceTree = "<group>"; };
 		B783F6631B9AF26C004DF1CB /* ArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCell.h; sourceTree = "<group>"; };
 		B783F6641B9AF26C004DF1CB /* ArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCell.m; sourceTree = "<group>"; };
+		B78C24301BA862A800EFFEB6 /* SubCategoryEntityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategoryEntityViewController.h; sourceTree = "<group>"; };
+		B78C24311BA862A800EFFEB6 /* SubCategoryEntityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCategoryEntityViewController.m; sourceTree = "<group>"; };
 		B78C4E0C1B676ED5006620F7 /* GKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKCategory.h; sourceTree = "<group>"; };
 		B78C4E0D1B676ED5006620F7 /* GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKCategory.m; sourceTree = "<group>"; };
 		B78D350A1BA7F80C005D53CF /* CategoryGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGroupViewController.h; sourceTree = "<group>"; };
 		B78D350B1BA7F80C005D53CF /* CategoryGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryGroupViewController.m; sourceTree = "<group>"; };
+		B78D35101BA7FFDA005D53CF /* CategoryEntityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryEntityController.h; sourceTree = "<group>"; };
+		B78D35111BA7FFDA005D53CF /* CategoryEntityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryEntityController.m; sourceTree = "<group>"; };
 		B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = DiscoverView/DiscoverHeaderView.h; sourceTree = "<group>"; };
 		B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverHeaderView.m; path = DiscoverView/DiscoverHeaderView.m; sourceTree = "<group>"; };
 		B7AAFA5D1AB67E5600A2F20D /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioButton.h; path = RadioButton/RadioButton.h; sourceTree = "<group>"; };
@@ -1966,6 +1972,10 @@
 				4E934DA71A9AE9FB00374B05 /* GroupViewController.m */,
 				B78D350A1BA7F80C005D53CF /* CategoryGroupViewController.h */,
 				B78D350B1BA7F80C005D53CF /* CategoryGroupViewController.m */,
+				B78D35101BA7FFDA005D53CF /* CategoryEntityController.h */,
+				B78D35111BA7FFDA005D53CF /* CategoryEntityController.m */,
+				B78C24301BA862A800EFFEB6 /* SubCategoryEntityViewController.h */,
+				B78C24311BA862A800EFFEB6 /* SubCategoryEntityViewController.m */,
 			);
 			path = GroupViewController;
 			sourceTree = "<group>";
@@ -2696,6 +2706,7 @@
 				B7ED32B51B257F5B009BAF5A /* EntityCell.m in Sources */,
 				B7ED32AF1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
 				B78D350C1BA7F80C005D53CF /* CategoryGroupViewController.m in Sources */,
+				B78C24321BA862A800EFFEB6 /* SubCategoryEntityViewController.m in Sources */,
 				4E1D28BF1A125B9300740C17 /* UIImage+JSQMessages.m in Sources */,
 				4E2D6D5F1A6FF7DE009E4A17 /* NoteSingleListCell.m in Sources */,
 				4E56DF7B19D56EF500263B17 /* NSString+FontAwesome.m in Sources */,
@@ -2802,6 +2813,7 @@
 				4E1D28C91A125B9300740C17 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */,
 				B7E668751B77A62100E177E5 /* EntityStickyHeaderFlowLayout.m in Sources */,
+				B78D35121BA7FFDA005D53CF /* CategoryEntityController.m in Sources */,
 				4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */,
 				4E1D28D01A125B9300740C17 /* JSQMessagesBubbleImage.m in Sources */,
 				B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */,

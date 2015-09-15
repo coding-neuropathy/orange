@@ -72,14 +72,14 @@
 - (void)setArticle:(GKArticle *)article
 {
     _article = article;
-    NSLog(@"%@", _article.title);
+    
     self.titleLabel.text = _article.title;
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_article.title];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     
     NSInteger x = 6;
-    if (kScreenWidth == 320) {
+    if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
         x = 6;
     }
     else{
