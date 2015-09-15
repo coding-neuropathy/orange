@@ -559,6 +559,8 @@
 
 - (void)show
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     self.alpha = 0;
     
     [kAppDelegate.window addSubview:self];
@@ -585,11 +587,12 @@
     }];
     [AVAnalytics endLogPageView:@"SignInView"];
     [MobClick endLogPageView:@"SignInView"];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)showFromRegister
 {
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [kAppDelegate.window addSubview:self];
     self.backgroundColor = [UIColor clearColor];
     whiteBG.alpha = 0;

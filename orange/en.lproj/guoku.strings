@@ -38,6 +38,13 @@
 "open in safari"    = "Open in Safari";
 
 /*
+ * Selection Page
+ */
+"selection-nav-recommend" = "Trending";
+"selection-nav-entity" = "Goods";
+"selection-nav-article" = "Articles";
+
+/*
  * Discover page
  */
 "search"                    = "Search";
@@ -47,12 +54,13 @@
  * entity page
  */
 "from"              = "From";
-"recommendation"    = "Recommendation";
-"item"              = "Item";
-"update note"       = "Update Note";
+"recommendation"    = "Related Items";
+"item"              = "Detail";
+"update note"       = "Update";
 "post note"         = "Post Note";
 "comment"           = "Comment";
-
+"buy"               = "Buy";
+//"sold out"          = "Sold Out";
 
 /*
  *  activity page
@@ -160,6 +168,7 @@
 /*
  * error info
  */
+"like failure"          = "Like Failure";
 "load failure"          = "Load Failure";
 "password error"        = "Password Error";
 "duplicate email"       = "Dupllicate Email";

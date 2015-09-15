@@ -74,11 +74,7 @@
     }
     
     if (stateCode == 0) {
-        if (self.reachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
-            /*网络错误*/
-        } else {
-            
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
     }
 }
 
@@ -91,8 +87,11 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self failureLogWithOperation:operation responseObject:error];
-//        NSLog(@"error %@", [[error userInfo] allKeys]);
-//        NSLog(@"error %@", [[error userInfo] objectForKey:@"NSErrorFailingURLKey"]);
+        NSLog(@"error %@", [[error userInfo] allKeys]);
+        NSLog(@"error %@", [[error userInfo] objectForKey:@"NSErrorFailingURLKey"]);
+                NSData * data = [[error userInfo] objectForKey:@"com.alamofire.serialization.response.error.data"];
+                NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"%@", string);
         if (failure) {
             failure(operation, error);
         }
@@ -109,6 +108,9 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self failureLogWithOperation:operation responseObject:error];
+//        NSData * data = [[error userInfo] objectForKey:@"com.alamofire.serialization.response.error.data"];
+//        NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"%@", string);
         
         if (failure) {
             failure(operation, error);

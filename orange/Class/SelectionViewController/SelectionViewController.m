@@ -42,28 +42,12 @@ static NSString *CellIdentifier = @"SelectionCell";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:@"Save" object:nil];
         // Custom initialization
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         
         self.tabBarItem = item;
-//        self.tabBarItem.titlePositionAdjustment = UIOffsetMake(0.f, 50.f);
         
-        self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
-        
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 200, 28)];
-        [segmentedControl setSectionTitles:@[@"商品", @"图文"]];
-        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleBox];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationNone];
-        [segmentedControl setTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setSelectedTextColor:UIColorFromRGB(0x427ec0)];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xe4f0fc)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xcde3fb)];
-        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        [segmentedControl setTag:2];
-        //self.navigationItem.titleView =  segmentedControl;
-        self.index = 0;
+        //self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
         self.cateId = 0;
-        
-//        [self logo];
         
         NSMutableArray * array = [NSMutableArray array];
         {
@@ -79,7 +63,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         }
         //self.navigationItem.rightBarButtonItems = array;
         
-
+        self.tableView.frame = CGRectMake(0, 0,kScreenWidth , kScreenHeight-kStatusBarHeight-kNavigationBarHeight - kTabBarHeight);
         
     }
     return self;
@@ -105,33 +89,6 @@ static NSString *CellIdentifier = @"SelectionCell";
     self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
     [self.tableView registerClass:[SelectionCell class] forCellReuseIdentifier:CellIdentifier];
     [self.view addSubview:self.tableView];
-
-    __weak __typeof(&*self)weakSelf = self;
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf refresh];
-    }];
-    
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        [weakSelf loadMore];
-    }];
-    
-    [self load];
-    
-    if (self.dataArrayForEntity.count == 0) {
-        [self.tableView.pullToRefreshView startAnimating];
-        [self refresh];
-    }
-    else
-    {
-        [self.tableView.pullToRefreshView startAnimating];
-        [self refresh];
-    }
-    
-//    [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
-//        
-//    } failure:^(NSInteger stateCode) {
-//        
-//    }];
     
     self.navigationItem.titleView = self.iconInfoView;
 }
@@ -144,7 +101,8 @@ static NSString *CellIdentifier = @"SelectionCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.scrollNavigationBar.scrollView = self.tableView;
+    self.tableView.scrollsToTop = YES;
+    //self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     [AVAnalytics beginLogPageView:@"SelectionView"];
     [MobClick beginLogPageView:@"SelectionView"];
 }
@@ -152,10 +110,29 @@ static NSString *CellIdentifier = @"SelectionCell";
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    self.tableView.scrollsToTop = NO;
     [AVAnalytics endLogPageView:@"SelectionView"];
     [MobClick endLogPageView:@"SelectionView"];
 }
 
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refresh];
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
+    }];
+    //
+    if (self.dataArrayForEntity.count == 0)
+    {
+        [self.tableView triggerPullToRefresh];
+    }
+    
+}
 /*
 #pragma mark - Navigation
 
@@ -184,6 +161,7 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
         } failure:^(NSInteger stateCode) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
             //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [SVProgressHUD dismiss];
             [self.tableView.pullToRefreshView stopAnimating];
@@ -346,11 +324,11 @@ static NSString *CellIdentifier = @"SelectionCell";
         }
 }
 
-- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
-{
-    [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
-    [self dismissTip];
-}
+//- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
+//{
+//    [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
+//    [self dismissTip];
+//}
 
 
 #pragma mark - HMSegmentedControl

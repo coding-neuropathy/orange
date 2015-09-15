@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, EntitySectionType) {
     LikeType,
     NoteType,
     RecommendType,
+    ShopType,
 };
 
 @protocol EntityHeaderSectionViewDelegate <NSObject>

@@ -285,7 +285,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         [self.commentBtn setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FACommentO],self.note.commentCount] forState:UIControlStateNormal];
     }
     
-    self.timeLabel.text = [NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithDefaultFormat]];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithFormat:@"YYYY-MM-dd"]];
     
     [self setNeedsLayout];
 }
@@ -297,7 +297,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     self.editBtn.frame = CGRectMake(0., 0., 80., self.deFrameHeight);
     self.editBtn.deFrameRight = self.deFrameRight;
     
-    DDLogInfo(@"edit %@", self.editBtn);
+//    DDLogInfo(@"edit %@", self.editBtn);
     
     self.avatarImageView.frame = CGRectMake(20., 16., 36., 36.);
     self.nameLabel.frame = CGRectMake(0., 0., 200., 20.);

@@ -29,14 +29,14 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)postRegisterID:(NSString *)rid Model:(NSString *)model Version:(NSString *)ver Success:(void (^)())success
                Failure:(void (^)(NSInteger stateCode))failure;
 
-/**
- *  获取主页信息（banner、hotCategory、hotTag）
- *
- *  @param success 成功block
- *  @param failure 失败block
- */
-+ (void)getHomepageWithSuccess:(void (^)(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray))success
-                       failure:(void (^)(NSInteger stateCode))failure;
+///**
+// *  获取主页信息（banner、hotCategory、hotTag）
+// *
+// *  @param success 成功block
+// *  @param failure 失败block
+// */
+//+ (void)getHomepageWithSuccess:(void (^)(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray))success
+//                       failure:(void (^)(NSInteger stateCode))failure;
 
 /**
  *  获取全部分类信息
@@ -111,6 +111,13 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 
 #pragma mark - get main list
 /**
+ * 获取首页信息
+ *
+ */
++ (void)getHomeWithSuccess:(void (^)(NSArray * banners, NSArray * articles, NSArray * category, NSArray * entities))success
+                   failure:(void (^)(NSInteger stateCode))failure;
+
+/**
  *  获取精选列表
  *
  *  @param timestamp 时间戳
@@ -124,6 +131,21 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                                 count:(NSInteger)count
                               success:(void (^)(NSArray *dataArray))success
                               failure:(void (^)(NSInteger stateCode))failure;
+
+/**
+ *  获取图文列表
+ */
++ (void)getArticlesWithTimestamp:(NSTimeInterval)timestamp
+                            Page:(NSInteger)page
+                            Size:(NSInteger)size
+                         success:(void (^)(NSArray *articles))success
+                         failure:(void (^)(NSInteger stateCode))failure;
+
+/**
+ *  获取发现数据
+ */
++ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories))success
+                       failure:(void (^)(NSInteger stateCode))failure;
 
 /**
  *  获取热门商品列表
@@ -686,17 +708,6 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)getUnreadCountWithSuccess:(void (^)(NSDictionary *dictionary))success
                           failure:(void (^)(NSInteger stateCode))failure;
 
-#pragma mark - today
-/**
- *  获取 24小时 Top 10 商品列表
- *
- *  @param count   获取商品个数
- *  @param success 成功block
- *  @param failure 失败block
- */
-+ (void)getTopTenEntityCount:(NSInteger)count
-                     success:(void (^)(NSArray * array))success
-                     failure:(void (^)(NSInteger stateCode))failure;
 
 #pragma mark - get wechat open_uid
 /**
@@ -714,6 +725,20 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  *  @param open_id
  */
 + (NSDictionary *)getWeChatUserInfoWithAccessToken:(NSString *)access_token OpenID:(NSString *)open_id;
+
+
+#pragma mark - today
+/**
+ *  获取 24小时 Top 10 商品列表
+ *
+ *  @param count   获取商品个数
+ *  @param success 成功block
+ *  @param failure 失败block
+ */
++ (void)getTopTenEntityCount:(NSInteger)count
+                     success:(void (^)(NSArray * array))success
+                     failure:(void (^)(NSInteger stateCode))failure;
+
 
 /**
  *  取消所有网络请求

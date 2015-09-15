@@ -40,6 +40,14 @@
 "open in safari"    = "在 Safari 中打開";
 
 /*
+ * Selection Page
+ */
+"selection-nav-recommend" = "推薦";
+"selection-nav-entity" = "商品";
+"selection-nav-article" = "圖文";
+
+
+/*
  * Discover page
  */
 "search"                    = "搜索";
@@ -54,6 +62,8 @@
 "post note"         = "寫點評";
 "update note"       = "修改點評";
 "comment"           = "評論";
+"buy"               = "購買";
+//"sold out"          = "已下架";
 
 /*
  *  activity page
@@ -66,6 +76,7 @@
 "commented" = "評論了";
 "'s note:" = "的點評";
 "bumped" = "贊了";
+
 
 /*
  * message page
@@ -159,6 +170,7 @@
 /*
  * error info
  */
+"like failure"          = "喜愛失敗";
 "load failure"          = "加載失敗";
 "password error"        = "密碼錯誤";
 "duplicate email"       = "郵箱被佔用";
@@ -167,7 +179,7 @@
  * tip off information
  */
 "tip off"                   = "舉報";
-"sold out"                  = "商品下架";
+"sold out"                  = "已下架";
 "miss category"             = "分類錯誤";
 "meaningless information"   = "垃圾或詐騙信息";
 "malicious information"     = "不良信息";

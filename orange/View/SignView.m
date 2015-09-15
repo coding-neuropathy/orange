@@ -423,6 +423,7 @@
 
 - (void)show
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [AVAnalytics beginLogPageView:@"SignUpView"];
     [MobClick beginLogPageView:@"SignUpView"];
     
@@ -442,7 +443,7 @@
 
 - (void)showFromLogin
 {
-
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [kAppDelegate.window addSubview:self];
     self.backgroundColor = [UIColor clearColor];
     whiteBG.alpha = 0;
@@ -464,6 +465,7 @@
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)avatarButtonAction:(id)sender

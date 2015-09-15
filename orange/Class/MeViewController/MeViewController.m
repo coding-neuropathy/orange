@@ -46,11 +46,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"me", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_me"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_me"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-        
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_me"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_me"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         
-        self.title = NSLocalizedStringFromTable(@"me", kLocalizedFile, nil);
+        //self.title = NSLocalizedStringFromTable(@"me", kLocalizedFile, nil);
         
 
         
@@ -597,7 +597,7 @@
 - (void)configHeaderView
 {
     UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 260)];
-    view.backgroundColor = UIColorFromRGB(0xfafafa);
+    view.backgroundColor = UIColorFromRGB(0xffffff);
     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(7.f, 7.f, 64, 64)];
     image.contentMode = UIViewContentModeScaleAspectFit;
     image.center = CGPointMake(kScreenWidth/2, 25+32);

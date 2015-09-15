@@ -17,6 +17,7 @@
 //#import "WelcomeVC.h"
 #import "WelcomeViewController.h"
 #import "APService.h"
+#import "GKNotificationHUB.h"
 
 int ddLogLevel;
 
@@ -98,7 +99,7 @@ int ddLogLevel;
     
 //    if(userInfo || urlInfo)
 //    {
-//        application.applicationIconBadgeNumber = 0;
+        application.applicationIconBadgeNumber = 0;
 //        self.window.rootViewController.view.hidden = NO;
 //    }
 //    else
@@ -141,6 +142,12 @@ int ddLogLevel;
         [self performSelector:@selector(checkNewMessage) withObject:nil afterDelay:4];
     }
     
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(showNetworkStatus)
+     name:@"GKNetworkReachabilityStatusNotReachable"//表示消息名称，发送跟接收双方都要一致
+     object:nil];
 
     
     return YES;
@@ -259,9 +266,10 @@ int ddLogLevel;
 
 -(void)customizeAppearance
 {
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageNamed:@"nav_bar_bg.png"] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
-    //[[UINavigationBar appearance] setShadowImage:[[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(1, 0.5)] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
-    [[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+    //[[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth, 0.5)]];
+    //[[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x414243)];
     [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x414243)];
     //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
@@ -278,6 +286,7 @@ int ddLogLevel;
 //    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
+    
 
 }
 
@@ -416,6 +425,7 @@ int ddLogLevel;
     } failure:^(NSInteger stateCode) {
         
     }];
+
 }
 
 -(void)checkNewMessage
@@ -434,6 +444,12 @@ int ddLogLevel;
         
         }];
     }
+}
+
+- (void)showNetworkStatus
+{
+    GKNotificationHUB * hub = [[GKNotificationHUB alloc]init];
+    [hub show:[NSString stringWithFormat:@"%@  无网络链接",[NSString fontAwesomeIconStringForEnum:FAInfoCircle]]];
 }
 
 #pragma mark - config log

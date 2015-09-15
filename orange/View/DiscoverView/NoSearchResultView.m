@@ -15,7 +15,7 @@
 {
     _type = type;
     self.titleLabel.text = @"搜索无结果";
-    self.detailLabel.text = @"没有找到任何相关商品/标签/用户，\n不妨换个关键词试试";
+    self.detailLabel.text = @"没有找到任何相关商品/品类/用户，\n不妨换个关键词试试";
     
     UIImage * noticImage = [UIImage imageNamed:@"empty_SR.png"];
     self.noticImageView.image = noticImage;

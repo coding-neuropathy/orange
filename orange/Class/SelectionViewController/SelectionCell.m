@@ -13,21 +13,34 @@
 #import "LoginView.h"
 //#import "NewEntityViewController.h"
 #import "EntityViewController.h"
+#import "GKNotificationHUB.h"
+#import "ImageLoadingView.h"
+
 
 #define kWidth (kScreenWidth - 20)
 @interface SelectionCell()<RTLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;
 //@property (nonatomic, strong) UIImageView *tmp;
 
-@property (nonatomic, strong) RTLabel * contentLabel;
+@property (nonatomic, strong) UILabel * contentLabel;
 @property (nonatomic, strong) UIButton * likeButton;
 @property (nonatomic, strong) UIButton * likeCounterButton;
 @property (nonatomic, strong) UIButton * timeButton;
 @property (nonatomic, strong) UIView *H;
+@property (strong, nonatomic) ImageLoadingView * loading;
 
 @end
 
 @implementation SelectionCell
+
+- (ImageLoadingView *)loading {
+    if(!_loading) {
+        _loading = [[ImageLoadingView alloc] init];
+        _loading.hidesWhenStopped = YES;
+        [self.image addSubview:_loading];
+    }
+    return _loading;
+}
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -72,13 +85,18 @@
     return _image;
 }
 
-- (RTLabel *)contentLabel
+- (UILabel *)contentLabel
 {
     if (!_contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
-        _contentLabel.paragraphReplacement = @"";
-        _contentLabel.lineSpacing = 7.0;
-        _contentLabel.delegate = self;
+        _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
+//        _contentLabel.paragraphReplacement = @"";
+//        _contentLabel.lineSpacing = 7.0;
+        _contentLabel.font = [UIFont fontWithName:@"Helvetica" size:14.];
+        _contentLabel.textColor = UIColorFromRGB(0x414243);
+        _contentLabel.textAlignment = NSTextAlignmentLeft;
+        _contentLabel.numberOfLines = 3;
+        _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+//        _contentLabel.delegate = self;
         [self.contentView addSubview:_contentLabel];
     }
     return _contentLabel;
@@ -103,7 +121,10 @@
         _likeCounterButton.titleLabel.font = [UIFont systemFontOfSize:12.];
 //        _likeCounterButton.titleLabel.textColor = UIColorFromRGB(0x9d9e9f);
         [_likeCounterButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-        [_likeCounterButton setBackgroundImage:[UIImage imageNamed:@"like counter"] forState:UIControlStateNormal];
+        
+        UIImage * image =[[UIImage imageNamed:@"counter"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_likeCounterButton setBackgroundImage:image forState:UIControlStateNormal];
+        [_likeCounterButton setTintColor:UIColorFromRGB(0xf8f8f8)];
         [_likeCounterButton setTitleEdgeInsets:UIEdgeInsetsMake(0., 5., 0., 0.)];
 //        _likeCounterButton.enabled = NO;
         _likeCounterButton.userInteractionEnabled = NO;
@@ -122,6 +143,7 @@
     }
     
     self.entity = dict[@"content"][@"entity"];
+    
     [self addObserver];
     self.likeButton.selected = self.entity.liked;
 //    self.likeCounterLabel.text = [NSString stringWithFormat:@"%ld", self.entity.likeCount];
@@ -130,31 +152,28 @@
         self.likeCounterButton.hidden = YES;
     } else {
         self.likeCounterButton.hidden = NO;
-        [self.likeCounterButton setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount] forState:UIControlStateNormal];
+        [self.likeCounterButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.entity.likeCount] forState:UIControlStateNormal];
     }
 //    DDLogInfo(@"like count %@", self.likeCounterButton.titleLabel.text);
     
     self.note = dict[@"content"][@"note"];
-    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
-    
+//    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
+    self.contentLabel.text = self.note.text;
     NSTimeInterval timestamp = [dict[@"time"] doubleValue];
     self.date = [NSDate dateWithTimeIntervalSince1970:timestamp];
     
     __block UIImageView *block_img = self.image;
-//    __weak __typeof(&*self)weakSelf = self;
+    __weak __typeof(&*self)weakSelf = self;
+    [self.loading startAnimating];
     {
         NSURL * imageURL = self.entity.imageURL_640x640;
         if (IS_IPHONE_6P) {
             imageURL = self.entity.imageURL_800x800;
         }
-        
-        [self.image sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
-            
+        [self.image sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
-            
             block_img.image = newimage;
-//            [weakSelf.activityIndicator stopAnimating];
-//            weakSelf.activityIndicator.hidden = YES;
+            [weakSelf.loading stopAnimating];
         }];
     }
     
@@ -169,13 +188,18 @@
     
     self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth - 32, kScreenWidth - 32);
 
-    self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
+    self.contentLabel.deFrameHeight = [self.note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.]];
+//    self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
+    if (self.contentLabel.deFrameHeight > 60.) {
+        self.contentLabel.deFrameHeight = 60.;
+    }
+//    DDLogInfo(@"content label %f", self.contentLabel.deFrameHeight);
     
     self.likeButton.frame = CGRectMake(0, 0, 40, 40.);
     self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft-8;
     self.likeButton.deFrameTop = self.contentLabel.deFrameBottom + 12;
     
-    self.likeCounterButton.frame = CGRectMake(0., 0., 48., 30.);
+    self.likeCounterButton.frame = CGRectMake(0., 0., 40., 26.);
     self.likeCounterButton.center = self.likeButton.center;
     self.likeCounterButton.deFrameLeft = self.likeButton.deFrameRight;
     
@@ -197,17 +221,24 @@
     self.timeButton.deFrameRight = self.contentLabel.deFrameRight;
     
     self.H.deFrameBottom = self.contentView.deFrameHeight;
+    
+    self.loading.center = CGPointMake(self.image.deFrameWidth/2, self.image.deFrameHeight/2);
+    [self.contentView bringSubviewToFront:self.loading];
 
 }
 
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 32, 20)];
-    label.paragraphReplacement = @"";
-    label.lineSpacing = 7.0;
-    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
-    return label.optimumSize.height + kScreenWidth + 75;
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 32, 20)];
+//    label.paragraphReplacement = @"";
+//    label.lineSpacing = 7.0;
+//    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
+    CGFloat height =  [note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.]];
+    if (height > 60) {
+        return 60. + kScreenWidth + 65;
+    }
+    return height + kScreenWidth + 65;
 }
 
 
@@ -245,8 +276,7 @@
 
 #pragma mark - Action
 - (void)likeButtonAction
-{
-    
+{    
     if(!k_isLogin)
     {
         LoginView * view = [[LoginView alloc]init];
@@ -273,7 +303,7 @@
         }
 
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"喜爱失败"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
   
     }];
 }

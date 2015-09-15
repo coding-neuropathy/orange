@@ -435,7 +435,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             // 点评被评论
         case MessageNoteComment:
         {
-            GKNote *note = message[@"content"][@"note"];
+//            GKNote *note = message[@"content"][@"note"];
             GKComment *comment = message[@"content"][@"comment"];
             GKUser * user = comment.creator;
             label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
@@ -468,7 +468,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             //赞
         case MessageNotePoke:
         {
-            GKNote *note = message[@"content"][@"note"];
+//            GKNote *note = message[@"content"][@"note"];
             GKUser * user = message[@"content"][@"user"];
             label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,

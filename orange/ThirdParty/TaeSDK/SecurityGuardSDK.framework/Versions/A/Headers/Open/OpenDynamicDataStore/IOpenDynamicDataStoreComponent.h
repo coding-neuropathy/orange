@@ -23,7 +23,14 @@
  */
 - (NSString*) getString: (NSString*) key;
 
-
+/**
+ *  获取动态存储中的string值（加解密过程依赖设备硬件）
+ *
+ *  @param key string值对应的key
+ *
+ *  @return 返回存储的value，如果没有找到，返回nil
+ */
+- (NSString*) getStringDDp: (NSString*) key;
 
 /**
  *  向动态存储中存储string
@@ -35,6 +42,16 @@
  */
 - (int) putString: (NSString*) value forKey: (NSString*) key;
 
+/**
+ *  向动态存储中存储string（加解密过程依赖设备硬件）
+ *
+ *  @param value 要存储的string
+ *  @param key   存储值要使用的key
+ *
+ *  @return 存储操作结果
+ */
+- (int) putStringDDp: (NSString*) value forKey: (NSString*) key;
+
 
 
 /**
@@ -43,6 +60,13 @@
  *  @param key 删除操作的结果
  */
 - (void) removeStringForKey: (NSString*) key;
+
+/**
+ *  删除key对应的string值（加解密过程依赖设备硬件）
+ *
+ *  @param key 删除操作的结果
+ */
+- (void) removeStringForKeyDDp: (NSString*) key;
 
 
 
@@ -54,6 +78,15 @@
  *  @return 存储中存储的value，如果没有找到，返回nil
  */
 - (NSData*) getData: (NSString*) key;
+
+/**
+ *  获取动态存储中的data值（加解密过程依赖设备硬件）
+ *
+ *  @param key data值对应的key
+ *
+ *  @return 存储中存储的value，如果没有找到，返回nil
+ */
+- (NSData*) getDataDDp: (NSString*) key;
 
 
 
@@ -67,6 +100,16 @@
  */
 - (int) putData: (NSData*) value forKey: (NSString*) key;
 
+/**
+ *  向动态存储中存储data（加解密过程依赖设备硬件）
+ *
+ *  @param value 要存储的data（存入的data size不宜过大）
+ *  @param key   存储值要使用的key
+ *
+ *  @return 存储操作结果
+ */
+- (int) putDataDDp: (NSData*) value forKey: (NSString*) key;
+
 
 
 /**
@@ -75,6 +118,13 @@
  *  @param key 删除操作的结果
  */
 - (void) removeDataForKey: (NSString*) key;
+
+/**
+ *  删除key对应的data值（加解密过程依赖设备硬件）
+ *
+ *  @param key 删除操作的结果
+ */
+- (void) removeDataForKeyDDp: (NSString*) key;
 
 
 

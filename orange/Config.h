@@ -5,9 +5,6 @@
 //  Copyright (c) 2013年 huiter. All rights reserved.
 //
 
-//#define kBaseURL @"http://api.guoku.com/mobile/v4/"
-//#define kBaseURL @"http://h.guoku.com/mobile/v4/"
-//#define kBaseURL @"http://127.0.0.1:8000/mobile/v4/"
 
 #define kApiKey @"0b19c2b93687347e95c6b6f5cc91bb87"
 #define kApiSecret @"47b41864d64bd46"
@@ -109,6 +106,11 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #ifndef smile
+
+
+
+
+
 #define smile @"\U0001F603"
 #endif
 

@@ -11,6 +11,7 @@
 #import "CategoryViewController.h"
 #import "API.h"
 #import "Config.h"
+
 @interface GroupViewController ()
 @property (nonatomic, strong) NSArray *categoryGroupArray;
 @property (nonatomic, strong) NSMutableArray *categoryArray;
@@ -194,12 +195,14 @@
     [super viewWillAppear:animated];
     [self refresh];
     [AVAnalytics beginLogPageView:@"GroupView"];
+    [MobClick beginLogPageView:@"GroupVuew"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"GroupView"];
+    [MobClick endLogPageView:@"GroupView"];
 }
 
 - (void)didReceiveMemoryWarning

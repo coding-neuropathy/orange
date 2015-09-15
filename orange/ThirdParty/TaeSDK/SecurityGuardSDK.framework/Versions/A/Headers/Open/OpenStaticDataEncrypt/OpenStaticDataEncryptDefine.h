@@ -8,18 +8,6 @@
  *  静态加密与解密中使用加密算法
  */
 
-/**
- *  des算法
- */
-extern NSInteger const OPEN_ENUM_CIPHER_DES;
-
-
-
-/**
- *  3des算法
- */
-extern NSInteger const OPEN_ENUM_CIPHER_3DES;
-
 
 
 /**

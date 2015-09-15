@@ -40,72 +40,6 @@
 
 
 /**
- *  获取主页信息（banner、hotCategory、hotTag）
- *
- *  @param success 成功block
- *  @param failure 失败block
- */
-+ (void)getHomepageWithSuccess:(void (^)(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray))success
-                       failure:(void (^)(NSInteger stateCode))failure
-{
-    NSString *path = @"homepage/";
-    
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *objectDict = (NSDictionary *)responseObject;
-        
-        NSDictionary *settingDict = objectDict[@"config"];
-        
-        NSMutableArray *bannerArray = objectDict[@"banner"];
-        if (objectDict[@"config"][@"jump_to_taobao"]) {
-//            [SettingManager sharedInstance].jumpToTaobao = [objectDict[@"config"][@"jump_to_taobao"]boolValue];
-        }
-        if (objectDict[@"config"][@"taobao_ban_count"]) {
-            //[SettingManager sharedInstance].taobaoBanCount = [objectDict[@"config"][@"taobao_ban_count"]unsignedIntegerValue];
-        }
-        if (objectDict[@"config"][@"show_selection_only"]) {
-//            [SettingManager sharedInstance].hidesNote = [objectDict[@"config"][@"show_selection_only"]boolValue];
-        }
-        if (objectDict[@"config"][@"url_ban_list"]) {
-//            [SettingManager sharedInstance].urlBanList = objectDict[@"config"][@"url_ban_list"];
-        }
-        
-        NSMutableArray *hotCategoryArray = [NSMutableArray array];
-        {
-            NSArray *itemArray = objectDict[@"discover"];
-            for (NSDictionary *categoryDict in itemArray) {
-                GKEntityCategory *category = [GKEntityCategory modelFromDictionary:categoryDict];
-                [hotCategoryArray addObject:category];
-            }
-        }
-        
-        NSMutableArray *hotTagArray = [NSMutableArray array];
-        {
-            NSArray *itemArray = objectDict[@"hottag"];
-            for (NSDictionary *Dict in itemArray) {
-                GKUser * user = [GKUser modelFromDictionary:Dict[@"user"]];
-                NSMutableArray *entityArray = [NSMutableArray array];
-                for (NSDictionary *entityDict in Dict[@"entity_list"]) {
-                    GKEntity *entity = [GKEntity modelFromDictionary:entityDict];
-                    [entityArray addObject:entity];
-                }
-                NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:Dict];
-                [dic setObject:user forKey:@"user"];
-                [dic setObject:entityArray forKey:@"entity_list"];
-                [hotTagArray addObject:dic];
-            }
-        }
-        if (success) {
-            success(settingDict, bannerArray, hotCategoryArray, hotTagArray);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
-            failure(stateCode);
-        }
-    }];
-}
-
-/**
  *  获取全部分类信息
  *
  *  @param success 成功block
@@ -326,6 +260,58 @@
 
 #pragma mark - get main list
 /**
+ * 获取首页信息
+ *
+ */
++ (void)getHomeWithSuccess:(void (^)(NSArray  * banners, NSArray * articles, NSArray * categories, NSArray * entities))success
+                   failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString * path = @"home/";
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@", responseObject);
+        NSArray *banners = responseObject[@"banner"];
+//        NSLog(@"%@", responseObject[@"articles"]);
+        
+        NSMutableArray * articles = [NSMutableArray arrayWithCapacity:0];
+        
+        for (NSDictionary * row in responseObject[@"articles"]) {
+            GKArticle * article = [GKArticle modelFromDictionary:row];
+            [articles addObject:article];
+        }
+        
+        NSMutableArray * categories = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject[@"categories"]) {
+//            [categories addObject:row]
+            GKCategory * category = [GKCategory modelFromDictionary:row];
+            [categories addObject:category];
+        }
+        
+        NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject[@"entities"]){
+            GKEntity * entity = [GKEntity modelFromDictionary:row[@"entity"]];
+            GKNote * note = [GKNote modelFromDictionary:row[@"note"]];
+            [entities addObject:@{
+                                  @"entity":entity,
+                                  @"note": note,
+                }];
+            
+        }
+        
+        if (success) {
+            success(banners, articles, categories, entities);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger statusCode = operation.response.statusCode;
+            if (failure) {
+                failure(statusCode);
+            }
+        }
+    }];
+}
+
+
+/**
  *  获取精选列表
  *
  *  @param timestamp 时间戳
@@ -352,7 +338,7 @@
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
-        
+//        NSLog(@"%@", responseObject);
         NSMutableArray *selectionArray = [NSMutableArray array];
         for (NSDictionary *selectionDict in objectArray) {
             NSString *type = selectionDict[@"type"];
@@ -380,6 +366,88 @@
         if (success) {
             success(selectionArray);
         }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
+/**
+ *  获取图文列表
+ *  @param timestamp 时间戳
+ *  @param page 翻页
+ *  @param size 每页数量
+ */
++ (void)getArticlesWithTimestamp:(NSTimeInterval)timestamp
+            Page:(NSInteger)page
+            Size:(NSInteger)size
+            success:(void (^)(NSArray *articles))success
+            failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString *path = @"articles/";
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    
+    [paraDict setObject:@(timestamp) forKey:@"timestamp"];
+    [paraDict setObject:@(page) forKey:@"page"];
+    [paraDict setObject:@(size) forKey:@"size"];
+//    [paraDict setObject:@(cateId) forKey:@"rcat"];
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionaryWithDictionary:paraDict] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSMutableArray * articleList = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary *dict in responseObject)
+        {
+//            NSLog(@"%@", dict);
+            GKArticle * article = [GKArticle modelFromDictionary:dict];
+            [articleList addObject:article];
+//            NSLog(@"url %ld", article.articleId);
+        }
+        if (success){
+            success([NSArray arrayWithArray:articleList]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
+/**
+ *  获取发现数据
+ */
++ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories))success
+                       failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString * path = @"discover/";
+
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@", responseObject[@"categories"]);
+//        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithCapacity:0];
+        NSArray *bannerArray = responseObject[@"banner"];
+        
+        NSMutableArray * categories = [NSMutableArray arrayWithCapacity:0];
+//        NSArray * categoryContent = responseObject[@"categories"];
+        for (NSDictionary * objectDict in responseObject[@"categories"])
+        {
+            GKCategory * category = [GKCategory modelFromDictionary:objectDict[@"category"]];
+//            NSLog(@"url %@", category.coverURL);
+            [categories addObject:category];
+        }
+        
+        NSMutableArray * entityArray = [NSMutableArray arrayWithCapacity:0];
+        NSArray * content = responseObject[@"entities"];
+        for (NSDictionary *objectDict in content) {
+            GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
+            [entityArray addObject:entity];
+        }
+        
+        if (success) {
+            success(bannerArray, entityArray, categories);
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
             NSInteger stateCode = operation.response.statusCode;
@@ -773,7 +841,6 @@
     NSParameterAssert(entityId);
     
     NSString *path = [NSString stringWithFormat:@"entity/%@/like/%d/", entityId, isLike];
-    
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
@@ -2179,50 +2246,6 @@
     }];
 }
 
-#pragma mark - today
-/**
- *  获取 24小时 Top 10 商品列表
- *
- *  @param count   获取商品个数
- *  @param success 成功block
- *  @param failure 失败block
- */
-+ (void)getTopTenEntityCount:(NSInteger)count
-                     success:(void (^)(NSArray * array))success
-                     failure:(void (^)(NSInteger stateCode))failure
-{
-    NSString *path = @"toppopular/";
-    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
-    [paraDict setObject:@(count) forKey:@"count"];
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *objectArray = (NSArray *)responseObject;
-
-        NSMutableArray *dataArray = [NSMutableArray array];
-//        NSArray *content = responseObject[@"content"];
-        for (NSDictionary *objectDict in objectArray) {
-            GKEntity * entity = [GKEntity modelFromDictionary:objectDict[@"content"][@"entity"]];
-            GKNote * note = [GKNote modelFromDictionary:objectDict[@"content"][@"note"]];
-//            GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
-//            [entityArray addObject:entity];
-            [dataArray addObject:@{
-                                   @"entity":entity,
-                                   @"note":note
-                                   }];
-        }
-        
-        if (success) {
-            success(dataArray);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            //            NSLog(@"%@", [[error userInfo] allKeys]);
-            //            NSLog(@"url %@", [[error userInfo] valueForKey:@"NSErrorFailingURLKey"]);
-            
-            NSInteger stateCode = operation.response.statusCode;
-            failure(stateCode);
-        }
-    }];
-}
 
 #pragma mark - get wechat open_uid
 /**
@@ -2281,6 +2304,51 @@
     id JSON = [NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingAllowFragments error:nil];
     //    DDLogInfo(@"json %@", JSON);
     return JSON;
+}
+
+#pragma mark - today
+/**
+ *  获取 24小时 Top 10 商品列表
+ *
+ *  @param count   获取商品个数
+ *  @param success 成功block
+ *  @param failure 失败block
+ */
++ (void)getTopTenEntityCount:(NSInteger)count
+                     success:(void (^)(NSArray * array))success
+                     failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString *path = @"toppopular/";
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:@(count) forKey:@"count"];
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *objectArray = (NSArray *)responseObject;
+        
+        NSMutableArray *dataArray = [NSMutableArray array];
+        //        NSArray *content = responseObject[@"content"];
+        for (NSDictionary *objectDict in objectArray) {
+            GKEntity * entity = [GKEntity modelFromDictionary:objectDict[@"content"][@"entity"]];
+            GKNote * note = [GKNote modelFromDictionary:objectDict[@"content"][@"note"]];
+            //            GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
+            //            [entityArray addObject:entity];
+            [dataArray addObject:@{
+                                   @"entity":entity,
+                                   @"note":note
+                                   }];
+        }
+        
+        if (success) {
+            success(dataArray);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            //            NSLog(@"%@", [[error userInfo] allKeys]);
+            //            NSLog(@"url %@", [[error userInfo] valueForKey:@"NSErrorFailingURLKey"]);
+            
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
 }
 
 #pragma mark - cancel all requet

@@ -11,35 +11,35 @@ typedef enum {
     /**
      *  签名component
      */
-    SecureSignatureComponentID,
+    OpenSecureSignatureComponentID,
     /**
      *  动态存储component
      */
-    DynamicDataStoreComponentID,
+    OpenDynamicDataStoreComponentID,
     /**
      *  静态存储component
      */
-    StaticDataStoreComponentID,
+    OpenStaticDataStoreComponentID,
     /**
      *  初始化component
      */
-    InitComponentID,
+    OpenInitComponentID,
     /**
      *  静态加解密component
      */
-    StaticDataEncryptCompnentID,
+    OpenStaticDataEncryptCompnentID,
     /**
      *  data collection compnent
      */
-    DataCollectionCompnentID,
+    OpenDataCollectionCompnentID,
     /**
      *  dynamic data encrypt componentID
      */
-    DynamicDataEncryptComponentID,
+    OpenDynamicDataEncryptComponentID,
     /**
      *  StaticKeyEncrypt componentID
      */
-    StaticKeyEncryptComponentID,
+    OpenStaticKeyEncryptComponentID,
     /**
      *  UMID componentID
      */
@@ -49,11 +49,15 @@ typedef enum {
      */
     OpenOpenSDKComponentID,
     /**
+     *  AtlasEncrypt ComponentID
+     */
+    OpenAtlasEncryptComponentID,
+    /**
      *  无效component
      */
-    InvalidComponentID
+    OpenInvalidComponentID
     
-} SecurityGuardComponentID;
+} OpenSecurityGuardComponentID;
 
 
 
@@ -98,15 +102,21 @@ typedef enum {
 @protocol IOpenUMIDComponent;
 
 /**
-
  *  获取 openSDK 接口， 详细定义见 IOpenOpenSDKComponent.h
  */
 @protocol IOpenOpenSDKComponent;
 
 /**
+ *  增强加解密接口， 详细定义见 IStrongDataEncryptComponent.h
+ */
+@protocol IOpenAtlasEncryptComponent;
+
+/**
  *  SecurityGuardSDK管理类
  */
 @interface OpenSecurityGuardManager : NSObject
+
+
 
 /**
  *  获取SecurityGuardManager单例对象
@@ -195,13 +205,21 @@ typedef enum {
 - (id<IOpenOpenSDKComponent>) getOpenOpenSDKComp;
 
 /**
+ *  获取增强加密接口
+ *
+ *  @return 返回增强加密接口，失败返回nil
+ */
+- (id<IOpenAtlasEncryptComponent>) getAtlasEncryptComp;
+
+
+/**
  *  根据传入的component id获取对应的component对象
  *
  *  @param componentId 目标compoent的id
  *
  *  @return 返回componentId对应的component对象，失败时返回nil
  */
-- (id) getComponent: (SecurityGuardComponentID) componentId;
+- (id) getComponent: (OpenSecurityGuardComponentID) componentId;
 
 
 

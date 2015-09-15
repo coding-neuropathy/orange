@@ -13,6 +13,7 @@
 #import "WebViewProgressView.h"
 #import "SDWebImageDownloader.h"
 //#import "WebViewProgress.h"
+#import "ShareView.h"
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate>
 
@@ -125,6 +126,21 @@
 #pragma mark - <WKNavigationDelegate>
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
+    
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    //this is a 'new window action' (aka target="_blank") > open this URL externally. If we´re doing nothing here, WKWebView will also just do nothing. Maybe this will change in a later stage of the iOS 8 Beta
+    if (!navigationAction.targetFrame) {
+        [self.webView loadRequest:navigationAction.request];
+//        NSURL *url = navigationAction.request.URL;
+//        UIApplication *app = [UIApplication sharedApplication];
+//        if ([app canOpenURL:url]) {
+//            [app openURL:url];
+//        }
+    }
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
@@ -158,6 +174,19 @@
 #pragma mark - button action
 - (void)moreButtonAction:(id)sender
 {
+    UIImage * image = [UIImage imageNamed:@"wxshare"];
+    if (self.image) {
+        image = [UIImage imageWithData:[self.image imageDataLessThan_10K]];
+    }
+    
+    
+    ShareView * view = [[ShareView alloc]initWithTitle:self.title SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
+    view.type = @"url";
+    view.tapRefreshButtonBlock = ^(){
+        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    };
+    [view show];
+    /*
     UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -188,6 +217,7 @@
     [alertController addAction:openInSafariAction];
     
     [self presentViewController:alertController animated:YES completion:nil];
+     */
 }
 
 #pragma mark - webview kvo

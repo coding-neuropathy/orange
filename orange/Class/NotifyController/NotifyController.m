@@ -29,7 +29,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: NSLocalizedStringFromTable(@"notify", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_notifaction"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_notifaction"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[UIImage imageNamed:@"tabbar_icon_notifaction"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_notifaction"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         
         self.tabBarItem = item;
         self.index = 0;
@@ -41,7 +42,7 @@
 - (HMSegmentedControl *)segmentedControl
 {
     if (!_segmentedControl) {
-        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-40, 32)];
         
         [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"activity", kLocalizedFile, nil), NSLocalizedStringFromTable(@"message", kLocalizedFile, nil)]];
         [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
@@ -49,17 +50,13 @@
 //        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
         [_segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-        [_segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
-        [_segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
+        [_segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+        [_segmentedControl setBackgroundColor:[UIColor clearColor]];
         [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
-        [_segmentedControl setSelectionIndicatorHeight:1.5];
+        [_segmentedControl setSelectionIndicatorHeight:2];
         [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [_segmentedControl setTag:2];
-        
-        
-        UIView * V = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth/2,44/2-7, 1,14 )];
-        V.backgroundColor = UIColorFromRGB(0xebebeb);
-        [_segmentedControl addSubview:V];
+
     }
     return _segmentedControl;
 }
@@ -84,10 +81,8 @@
 {
     if (!_thePageViewController) {
         _thePageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-        //        _thePageViewController.view.frame = CGRectMake(0., 0., WIDTH, HEIGHT - 100.);
         _thePageViewController.dataSource = self;
         _thePageViewController.delegate = self;
-        
     }
     return _thePageViewController;
 }
@@ -98,16 +93,19 @@
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedStringFromTable(@"notify", kLocalizedFile, nil);
     
-    [self.view addSubview:self.segmentedControl];
+    //self.title = NSLocalizedStringFromTable(@"notify", kLocalizedFile, nil);
+    
+    self.navigationItem.titleView = self.segmentedControl;
 
     [self addChildViewController:self.thePageViewController];
     
-    self.thePageViewController.view.frame = CGRectMake(0, 44., kScreenWidth, kScreenHeight - 44.);
+    self.thePageViewController.view.frame = CGRectMake(0, 0., kScreenWidth, kScreenHeight);
 
     [self.thePageViewController setViewControllers:@[self.activeController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 //    [self.thePageViewController setViewControllers:@[self.activeController, self.msgController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBadge) name:@"ShowBadge" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBadge) name:@"HideBadge" object:nil];
     
     [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
 }
@@ -138,15 +136,6 @@
         return self.msgController;
     }
     return nil;
-//    DDLogError(@"after %@", viewController);
-//    
-//    if (self.index == 1) {
-//        return nil;
-//    }
-//    self.index ++;
-//    return self.msgController;
-//    DDLogError(@"after %@", viewController);
-    
 }
 
 #pragma mark - <UIPageViewControllerDelegate>
@@ -178,6 +167,35 @@
     return UIPageViewControllerSpineLocationMin;
 }
 
+#pragma mark badge
+- (void)addBadge
+{
+    [self removeBadge];
+    [self tabBadge:YES];
+}
+
+- (void)removeBadge
+{
+    [self tabBadge:NO];
+}
+
+- (void)tabBadge:(BOOL)yes
+{
+    if (yes) {
+        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 6, 6)];
+        badge.backgroundColor = UIColorFromRGB(0xFF1F77);
+        badge.tag = 100;
+        badge.layer.cornerRadius = 3;
+        badge.layer.masksToBounds = YES;
+        badge.center = CGPointMake(kScreenWidth*3/4+24,10);
+        [self.segmentedControl addSubview:badge];
+    }
+    else
+    {
+        [[self.segmentedControl viewWithTag:100]removeFromSuperview];
+    }
+}
+
 #pragma mark -
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
@@ -185,9 +203,9 @@
     self.index = segmentedControl.selectedSegmentIndex;
     
     if (segmentedControl.selectedSegmentIndex == 1){
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         [self.thePageViewController setViewControllers:@[self.msgController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     } else {
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         [self.thePageViewController setViewControllers:@[self.activeController] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     }
     
