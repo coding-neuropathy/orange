@@ -36,7 +36,6 @@
     self = [super init];
     if (self) {
         _gid = gid;
-        
         self.categoryGroupArray = [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayKey];
         for (NSDictionary * dic in self.categoryGroupArray) {
             NSUInteger gid = [dic[@"GroupId"] integerValue];
@@ -62,13 +61,13 @@
             [self.subCategoryArray addObject:category];
         }
     }
-    [self.firstCategoryArray addObject:@"更多"];
+    [self.firstCategoryArray addObject:@"更多>>"];
 }
 
 - (HMSegmentedControl *)segmentedControl
 {
     if (!_segmentedControl) {
-        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(20., 0, kScreenWidth-40, 32)];
+        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(10., 0, kScreenWidth - 20, 32)];
         
 //        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"activity", kLocalizedFile, nil), NSLocalizedStringFromTable(@"message", kLocalizedFile, nil)]];
         [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
@@ -153,37 +152,61 @@
 {
     
 //    NSLog(@"%@", pageViewController);
-    if ([viewController isKindOfClass:[SubCategoryEntityViewController class]]) {
-        return self.categoryEntityVC;
+    if ([viewController isKindOfClass:[CategoryEntityController class]]) {
+        return nil;
     }
-
+    switch (self.index) {
+        case 1:
+        {
+            return self.categoryEntityVC;
+        }
+            break;
+ 
+        default:
+        {
+            GKEntityCategory * subCategory = [self.subCategoryArray objectAtIndex:self.index - 2];
+            SubCategoryEntityViewController * subCategoryVC = [[SubCategoryEntityViewController alloc] initWithSubCategory:subCategory];
+            return subCategoryVC;
+        }
+            break;
+    }
     
     return nil;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
+    if (self.index == 4) {
+        return nil;
+    }
     
     if ([viewController isKindOfClass:[CategoryEntityController class]]) {
         GKEntityCategory * subCategory = [self.subCategoryArray objectAtIndex:0];
-        SubCategoryEntityViewController * subCategoryVC = [[SubCategoryEntityViewController alloc] initWithSID:subCategory.categoryId];
+        SubCategoryEntityViewController * subCategoryVC = [[SubCategoryEntityViewController alloc] initWithSubCategory:subCategory];
+        return subCategoryVC;
+    } else if ([viewController isKindOfClass:[SubCategoryEntityViewController class]]) {
+//        NSLog(@"index %ld", self.index);
+        
+        GKEntityCategory * subCategory = [self.subCategoryArray objectAtIndex:self.index];
+        SubCategoryEntityViewController * subCategoryVC = [[SubCategoryEntityViewController alloc] initWithSubCategory:subCategory];
         return subCategoryVC;
     }
     return nil;
 }
 
+
 #pragma mark - <UIPageViewControllerDelegate>
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
-    //    DDLogError(@"index %ld", self.index);
-    self.index = 0;
     if (completed) {
 
         if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[CategoryEntityController class]]) {
             self.index = 0;
         }
         if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[SubCategoryEntityViewController class]]) {
-            self.index = 1;
+            
+            SubCategoryEntityViewController * subCategory = [pageViewController.viewControllers objectAtIndex:0];
+            self.index = [self.subCategoryArray indexOfObject:subCategory.subcategory] + 1;
         }
         
         [self.segmentedControl setSelectedSegmentIndex:self.index animated:YES];
@@ -209,17 +232,25 @@
 {
 
     switch (segmentedControl.selectedSegmentIndex) {
-        case 1:
+        case 0:
+            [self.thePageViewController setViewControllers:@[self.categoryEntityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+            break;
+
+        case 5:
         {
-            GKEntityCategory * subCategory = [self.subCategoryArray objectAtIndex:segmentedControl.selectedSegmentIndex - 1];
-            SubCategoryEntityViewController * subCategoryVC = [[SubCategoryEntityViewController alloc] initWithSID:subCategory.categoryId];
-            [self.thePageViewController setViewControllers:@[subCategoryVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        
         }
-            
             break;
         default:
         {
-            [self.thePageViewController setViewControllers:@[self.categoryEntityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+            GKEntityCategory * subCategory = [self.subCategoryArray objectAtIndex:segmentedControl.selectedSegmentIndex - 1];
+            SubCategoryEntityViewController * subCategoryVC = [[SubCategoryEntityViewController alloc] initWithSubCategory:subCategory];
+            
+            if (self.index < segmentedControl.selectedSegmentIndex) {
+                [self.thePageViewController setViewControllers:@[subCategoryVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+            } else {
+                [self.thePageViewController setViewControllers:@[subCategoryVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+            }
         }
             break;
     }
