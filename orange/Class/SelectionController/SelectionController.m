@@ -51,8 +51,11 @@
         [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-        [_segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-        [_segmentedControl setSelectedTextColor:UIColorFromRGB(0xFF1F77)];
+        
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:UIColorFromRGB(0x9d9e9f) forKey:NSForegroundColorAttributeName];
+        [_segmentedControl setTitleTextAttributes:dict];
+        NSDictionary *dict2 = [NSDictionary dictionaryWithObject:UIColorFromRGB(0xFF1F77) forKey:NSForegroundColorAttributeName];
+        [_segmentedControl setSelectedTitleTextAttributes:dict2];
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
         [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
         [_segmentedControl setSelectionIndicatorHeight:2];
