@@ -8,7 +8,7 @@
 
 #import "PasswordEditViewController.h"
 #import "API.h"
-static CGFloat NormalKeyboardHeight = 216.0f;
+//static CGFloat NormalKeyboardHeight = 216.0f;
 
 @interface PasswordEditViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UITextField *passwordTextField;

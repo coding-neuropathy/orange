@@ -27,11 +27,9 @@
  *  It declares the required and optional methods that a class must implement so that instances of that class 
  *  can be displayed properly within a `JSQMessagesCollectionViewCell`.
  *
- *  Two concrete classes that conform to this protocol are provided in the library. See `JSQTextMessage` and `JSQMediaMessage`.
+ *  The class that conforms to this protocol is provided in the library. See `JSQMessage`.
  *
  *  @see JSQMessage.
- *  @see JSQTextMessage.
- *  @see JSQMediaMessage.
  */
 @protocol JSQMessageData <NSObject>
 
@@ -77,8 +75,11 @@
 
 /**
  *  @return An integer that can be used as a table address in a hash table structure.
+ *
+ *  @discussion This value must be unique for each message with distinct contents. 
+ *  This value is used to cache layout information in the collection view.
  */
-- (NSUInteger)hash;
+- (NSUInteger)messageHash;
 
 @optional
 
