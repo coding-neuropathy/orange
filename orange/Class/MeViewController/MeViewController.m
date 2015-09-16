@@ -484,8 +484,7 @@
             [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
             [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
             [segmentedControl setSelectionIndicatorHeight:1.5];
-            [segmentedControl setTextColor:UIColorFromRGB(0x9d9e9f)];
-            [segmentedControl setSelectedTextColor:UIColorFromRGB(0x414243)];
+
             [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
             [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
             [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
@@ -759,13 +758,13 @@
     
     if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
         if (self.segmentedControl.selectedSegmentIndex !=2) {
-            [self.segmentedControl setSelectedSegmentIndex:self.segmentedControl.selectedSegmentIndex+1 animated:YES notify:YES];
+            [self.segmentedControl setSelectedSegmentIndex:self.segmentedControl.selectedSegmentIndex+1 animated:YES];
         }
     }
     
     if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
         if (self.segmentedControl.selectedSegmentIndex !=0) {
-            [self.segmentedControl setSelectedSegmentIndex:self.segmentedControl.selectedSegmentIndex-1 animated:YES notify:YES];
+            [self.segmentedControl setSelectedSegmentIndex:self.segmentedControl.selectedSegmentIndex-1 animated:YES];
         }
     }
     

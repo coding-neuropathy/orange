@@ -20,7 +20,7 @@
 
 #import "GTScrollNavigationBar.h"
 //#import "GroupViewController.h"
-#import "CategoryGroupViewController.h"
+#import "CategroyGroupController.h"
 #import "SearchResultsViewController.h"
 
 
@@ -255,12 +255,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                 DiscoverCategoryView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier forIndexPath:indexPath];
                 categoryView.categories = self.categoryArray;
                 categoryView.tapBlock = ^(GKCategory * category){
-//                    DDLogInfo(@"category %@", category);
-//                    GroupViewController * groupVC = [[GroupViewController alloc] initWithGid:category.groupId];
-//                    groupVC.title = category.title;
-//                    groupVC.hidesBottomBarWhenPushed = YES;
-//                    [self.navigationController pushViewController:groupVC animated:YES];
-                    CategoryGroupViewController * groupVC = [[CategoryGroupViewController alloc] initWithGid:category.groupId];
+                    CategroyGroupController * groupVC = [[CategroyGroupController alloc] initWithGid:category.groupId];
                     groupVC.title = category.title;
                     groupVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:groupVC animated:YES];
