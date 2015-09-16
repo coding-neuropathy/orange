@@ -63,7 +63,13 @@ static NSString * EntityCellIdentifier = @"EntityCell";
 
 - (void)loadMore
 {
-
+    [API getEntityListWithCategoryId:self.sid sort:self.sort reverse:NO offset:self.entityArray.count count:30 success:^(NSArray *entityArray) {
+        [self.entityArray addObjectsFromArray:entityArray];
+        [self.collectionView.infiniteScrollingView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.infiniteScrollingView stopAnimating];
+    }];
 }
 
 - (void)loadView
