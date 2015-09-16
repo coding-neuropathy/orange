@@ -23,11 +23,12 @@
 
 static NSString * EntityCellIdentifier = @"EntityCell";
 
-- (instancetype)initWithSID:(NSInteger)sid
+- (instancetype)initWithSubCategory:(GKEntityCategory *)subcategory
 {
     self = [super init];
     if (self) {
-        _sid = sid;
+//        _sid = sid;
+        self.subcategory = subcategory;
         self.sort = @"time";
     }
     return self;
@@ -51,7 +52,7 @@ static NSString * EntityCellIdentifier = @"EntityCell";
 #pragma mark - get data
 - (void)refresh
 {
-    [API getEntityListWithCategoryId:self.sid sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+    [API getEntityListWithCategoryId:self.subcategory.categoryId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
         self.entityArray = [NSMutableArray arrayWithArray:entityArray];
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
@@ -63,7 +64,7 @@ static NSString * EntityCellIdentifier = @"EntityCell";
 
 - (void)loadMore
 {
-    [API getEntityListWithCategoryId:self.sid sort:self.sort reverse:NO offset:self.entityArray.count count:30 success:^(NSArray *entityArray) {
+    [API getEntityListWithCategoryId:self.subcategory.categoryId sort:self.sort reverse:NO offset:self.entityArray.count count:30 success:^(NSArray *entityArray) {
         [self.entityArray addObjectsFromArray:entityArray];
         [self.collectionView.infiniteScrollingView stopAnimating];
         [self.collectionView reloadData];

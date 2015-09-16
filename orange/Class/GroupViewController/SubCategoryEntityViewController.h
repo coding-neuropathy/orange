@@ -10,8 +10,10 @@
 
 @interface SubCategoryEntityViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (assign, nonatomic) NSInteger sid;
+//@property (assign, nonatomic) NSInteger sid;
+@property (assign, nonatomic) GKEntityCategory * subcategory;
 
-- (instancetype)initWithSID:(NSInteger)sid;
+//- (instancetype)initWithSID:(NSInteger)sid;
+- (instancetype)initWithSubCategory:(GKEntityCategory *)subcategory;
 
 @end
