@@ -163,7 +163,9 @@
 {
     
     if ([viewController isKindOfClass:[CategoryEntityController class]]) {
-        
+        GKEntityCategory * subCategory = [self.subCategoryArray objectAtIndex:0];
+        SubCategoryEntityViewController * subCategoryVC = [[SubCategoryEntityViewController alloc] initWithSID:subCategory.categoryId];
+        return subCategoryVC;
     }
     return nil;
 }
@@ -203,14 +205,11 @@
 #pragma mark - 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
-    self.index = segmentedControl.selectedSegmentIndex;
 
-//    
-    switch (self.index) {
+    switch (segmentedControl.selectedSegmentIndex) {
         case 1:
         {
-//            [self.firstCategoryArray o
-            GKEntityCategory * subCategory = [self.subCategoryArray objectAtIndex:self.index - 1];
+            GKEntityCategory * subCategory = [self.subCategoryArray objectAtIndex:segmentedControl.selectedSegmentIndex - 1];
             SubCategoryEntityViewController * subCategoryVC = [[SubCategoryEntityViewController alloc] initWithSID:subCategory.categoryId];
             [self.thePageViewController setViewControllers:@[subCategoryVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
         }
@@ -222,6 +221,8 @@
         }
             break;
     }
+    
+    self.index = segmentedControl.selectedSegmentIndex;
 }
 
 @end

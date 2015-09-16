@@ -10,6 +10,8 @@
 
 @interface SubCategoryEntityViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
+@property (assign, nonatomic) NSInteger sid;
+
 - (instancetype)initWithSID:(NSInteger)sid;
 
 @end

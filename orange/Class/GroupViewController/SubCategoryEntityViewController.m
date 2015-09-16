@@ -14,7 +14,7 @@
 @property (strong, nonatomic) UICollectionView * collectionView;
 
 @property (strong, nonatomic) NSMutableArray * entityArray;
-@property (assign, nonatomic) NSInteger sid;
+
 @property (strong, nonatomic) NSString * sort;
 
 @end
