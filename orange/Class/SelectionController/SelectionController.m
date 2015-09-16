@@ -193,7 +193,7 @@
 //    }
     
     if (segmentedControl.selectedSegmentIndex == 0){
-        [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     }
     
     if (segmentedControl.selectedSegmentIndex == 1){

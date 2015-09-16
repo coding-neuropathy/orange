@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSArray *categoryGroupArray;
 @property (nonatomic, strong) NSMutableArray *categoryArray;
 @property (nonatomic, strong) NSMutableArray *firstCategoryArray;
+@property (nonatomic, strong) NSMutableArray *subCategoryArray;
 
 @property (assign, nonatomic) NSInteger index;
 @property (assign, nonatomic) NSInteger gid;
@@ -52,12 +53,13 @@
 
 - (void)splitArray
 {
-    _firstCategoryArray = [NSMutableArray array];
-
+    self.firstCategoryArray = [NSMutableArray array];
+    self.subCategoryArray = [NSMutableArray array];
     [self.firstCategoryArray addObject:@"所有"];
     for (GKEntityCategory *category in self.categoryArray) {
         if (category.status > 0) {
             [self.firstCategoryArray addObject:category.categoryName];
+            [self.subCategoryArray addObject:category];
         }
     }
     [self.firstCategoryArray addObject:@"更多"];
@@ -208,14 +210,15 @@
         case 1:
         {
 //            [self.firstCategoryArray o
-            SubCategoryEntityViewController * subCategory = [[SubCategoryEntityViewController alloc] initWithSID:1];
-            [self.thePageViewController setViewControllers:@[subCategory] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+            GKEntityCategory * subCategory = [self.subCategoryArray objectAtIndex:self.index - 1];
+            SubCategoryEntityViewController * subCategoryVC = [[SubCategoryEntityViewController alloc] initWithSID:subCategory.categoryId];
+            [self.thePageViewController setViewControllers:@[subCategoryVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
         }
             
             break;
         default:
         {
-            [self.thePageViewController setViewControllers:@[self.categoryEntityVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+            [self.thePageViewController setViewControllers:@[self.categoryEntityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
         }
             break;
     }
