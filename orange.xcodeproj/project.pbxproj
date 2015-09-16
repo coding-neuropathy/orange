@@ -293,11 +293,8 @@
 		B783F65F1B9AE5DB004DF1CB /* GKArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F65D1B9AE5DB004DF1CB /* GKArticle.m */; };
 		B783F6621B9AEC46004DF1CB /* ArticlesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F6611B9AEC46004DF1CB /* ArticlesController.m */; };
 		B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F6641B9AF26C004DF1CB /* ArticleCell.m */; };
-		B78C24321BA862A800EFFEB6 /* SubCategoryEntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78C24311BA862A800EFFEB6 /* SubCategoryEntityViewController.m */; settings = {ASSET_TAGS = (); }; };
 		B78C4E0E1B676ED5006620F7 /* GKCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = B78C4E0C1B676ED5006620F7 /* GKCategory.h */; };
 		B78C4E0F1B676ED5006620F7 /* GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B78C4E0D1B676ED5006620F7 /* GKCategory.m */; };
-		B78D350C1BA7F80C005D53CF /* CategoryGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78D350B1BA7F80C005D53CF /* CategoryGroupViewController.m */; settings = {ASSET_TAGS = (); }; };
-		B78D35121BA7FFDA005D53CF /* CategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78D35111BA7FFDA005D53CF /* CategoryEntityController.m */; settings = {ASSET_TAGS = (); }; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
 		B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */; };
 		B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */; };
@@ -321,6 +318,8 @@
 		B7B6958C1AF05C400016AAB8 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B6957B1AF05C400016AAB8 /* UIImageView+WebCache.m */; };
 		B7B6958D1AF05C400016AAB8 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B6957D1AF05C400016AAB8 /* UIView+WebCacheOperation.m */; };
 		B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B6958E1AF05F310016AAB8 /* ImageIO.framework */; };
+		B7BE3E2D1BA9A17A004AD422 /* CategroyGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BE3E2C1BA9A17A004AD422 /* CategroyGroupController.m */; settings = {ASSET_TAGS = (); }; };
+		B7BE3E301BA9B98C004AD422 /* SubCategoryGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BE3E2F1BA9B98C004AD422 /* SubCategoryGroupController.m */; settings = {ASSET_TAGS = (); }; };
 		B7BFC8FF1ACC27C2009627CA /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */; };
 		B7BFC9051ACC27C2009627CA /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BFC9041ACC27C2009627CA /* TodayViewController.m */; };
 		B7BFC90A1ACC27C2009627CA /* today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B7BFC8FC1ACC27C1009627CA /* today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -872,14 +871,8 @@
 		B783F6611B9AEC46004DF1CB /* ArticlesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesController.m; sourceTree = "<group>"; };
 		B783F6631B9AF26C004DF1CB /* ArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCell.h; sourceTree = "<group>"; };
 		B783F6641B9AF26C004DF1CB /* ArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCell.m; sourceTree = "<group>"; };
-		B78C24301BA862A800EFFEB6 /* SubCategoryEntityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategoryEntityViewController.h; sourceTree = "<group>"; };
-		B78C24311BA862A800EFFEB6 /* SubCategoryEntityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCategoryEntityViewController.m; sourceTree = "<group>"; };
 		B78C4E0C1B676ED5006620F7 /* GKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKCategory.h; sourceTree = "<group>"; };
 		B78C4E0D1B676ED5006620F7 /* GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKCategory.m; sourceTree = "<group>"; };
-		B78D350A1BA7F80C005D53CF /* CategoryGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGroupViewController.h; sourceTree = "<group>"; };
-		B78D350B1BA7F80C005D53CF /* CategoryGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryGroupViewController.m; sourceTree = "<group>"; };
-		B78D35101BA7FFDA005D53CF /* CategoryEntityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryEntityController.h; sourceTree = "<group>"; };
-		B78D35111BA7FFDA005D53CF /* CategoryEntityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryEntityController.m; sourceTree = "<group>"; };
 		B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = DiscoverView/DiscoverHeaderView.h; sourceTree = "<group>"; };
 		B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverHeaderView.m; path = DiscoverView/DiscoverHeaderView.m; sourceTree = "<group>"; };
 		B7AAFA5D1AB67E5600A2F20D /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioButton.h; path = RadioButton/RadioButton.h; sourceTree = "<group>"; };
@@ -923,6 +916,10 @@
 		B7B6957C1AF05C400016AAB8 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		B7B6957D1AF05C400016AAB8 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		B7B6958E1AF05F310016AAB8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		B7BE3E2B1BA9A17A004AD422 /* CategroyGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategroyGroupController.h; sourceTree = "<group>"; };
+		B7BE3E2C1BA9A17A004AD422 /* CategroyGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategroyGroupController.m; sourceTree = "<group>"; };
+		B7BE3E2E1BA9B98C004AD422 /* SubCategoryGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategoryGroupController.h; sourceTree = "<group>"; };
+		B7BE3E2F1BA9B98C004AD422 /* SubCategoryGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCategoryGroupController.m; sourceTree = "<group>"; };
 		B7BFC8FC1ACC27C1009627CA /* today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = today.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		B7BFC9021ACC27C2009627CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1970,12 +1967,10 @@
 			children = (
 				4E934DA61A9AE9FB00374B05 /* GroupViewController.h */,
 				4E934DA71A9AE9FB00374B05 /* GroupViewController.m */,
-				B78D350A1BA7F80C005D53CF /* CategoryGroupViewController.h */,
-				B78D350B1BA7F80C005D53CF /* CategoryGroupViewController.m */,
-				B78D35101BA7FFDA005D53CF /* CategoryEntityController.h */,
-				B78D35111BA7FFDA005D53CF /* CategoryEntityController.m */,
-				B78C24301BA862A800EFFEB6 /* SubCategoryEntityViewController.h */,
-				B78C24311BA862A800EFFEB6 /* SubCategoryEntityViewController.m */,
+				B7BE3E2B1BA9A17A004AD422 /* CategroyGroupController.h */,
+				B7BE3E2C1BA9A17A004AD422 /* CategroyGroupController.m */,
+				B7BE3E2E1BA9B98C004AD422 /* SubCategoryGroupController.h */,
+				B7BE3E2F1BA9B98C004AD422 /* SubCategoryGroupController.m */,
 			);
 			path = GroupViewController;
 			sourceTree = "<group>";
@@ -2705,8 +2700,6 @@
 				4E1D28D21A125B9300740C17 /* JSQVideoMediaItem.m in Sources */,
 				B7ED32B51B257F5B009BAF5A /* EntityCell.m in Sources */,
 				B7ED32AF1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
-				B78D350C1BA7F80C005D53CF /* CategoryGroupViewController.m in Sources */,
-				B78C24321BA862A800EFFEB6 /* SubCategoryEntityViewController.m in Sources */,
 				4E1D28BF1A125B9300740C17 /* UIImage+JSQMessages.m in Sources */,
 				4E2D6D5F1A6FF7DE009E4A17 /* NoteSingleListCell.m in Sources */,
 				4E56DF7B19D56EF500263B17 /* NSString+FontAwesome.m in Sources */,
@@ -2722,6 +2715,7 @@
 				B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */,
 				4E1D28D51A125B9300740C17 /* JSQMessagesCollectionViewCell.m in Sources */,
 				B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */,
+				B7BE3E301BA9B98C004AD422 /* SubCategoryGroupController.m in Sources */,
 				399916CE1B11A9DB006826FD /* UIDevice-Hardware.m in Sources */,
 				B7E668721B779DE900E177E5 /* EntityHeaderActionView.m in Sources */,
 				393715C01ACBD9C300DC50FF /* DDASLLogger.m in Sources */,
@@ -2813,7 +2807,6 @@
 				4E1D28C91A125B9300740C17 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				4E198C471A66B86F004C59C4 /* CategoryGridCell.m in Sources */,
 				B7E668751B77A62100E177E5 /* EntityStickyHeaderFlowLayout.m in Sources */,
-				B78D35121BA7FFDA005D53CF /* CategoryEntityController.m in Sources */,
 				4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */,
 				4E1D28D01A125B9300740C17 /* JSQMessagesBubbleImage.m in Sources */,
 				B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */,
@@ -2887,6 +2880,7 @@
 				4E1D70221A5ADBA50032719E /* MeViewController.m in Sources */,
 				4E117B5E1ABC6FDC00844935 /* EditViewController.m in Sources */,
 				4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */,
+				B7BE3E2D1BA9A17A004AD422 /* CategroyGroupController.m in Sources */,
 				4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */,
 				4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */,
 			);
