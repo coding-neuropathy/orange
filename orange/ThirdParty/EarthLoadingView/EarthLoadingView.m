@@ -99,14 +99,14 @@
     
     if (_currentStep < 18)
     {
-        self.earth.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%d",_currentStep]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        self.earth.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%ld",_currentStep]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }
     else
     {
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.08];
         [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(endAnimation)];
+        //[UIView setAnimationDidStopSelector:@selector(endAnimation)];
         self.earth.transform = CGAffineTransformMakeRotation(30*(_currentStep-18) * (M_PI / 180.0f));
         [UIView commitAnimations];
     }

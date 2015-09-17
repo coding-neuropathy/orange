@@ -98,7 +98,7 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.1];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(endAnimation)];
+    //[UIView setAnimationDidStopSelector:@selector(endAnimation)];
     self.earth.transform = CGAffineTransformMakeRotation(30*(_currentStep) * (M_PI / 180.0f));
     [UIView commitAnimations];
     

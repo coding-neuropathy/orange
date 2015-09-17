@@ -47,7 +47,7 @@
 @property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) EntityHeaderView * header;
 @property (nonatomic, strong) EntityHeaderActionView * actionView;
-@property (nonatomic, strong) EntityHeaderActionView * buyView;
+@property (nonatomic, strong) EntityHeaderBuyView * buyView;
 //@property (nonatomic, strong) UIButton *categoryButton;
 @property (nonatomic, strong) UIView *likeUserView;
 @property (nonatomic, strong) UIView * noteContentView;
@@ -1015,7 +1015,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         {
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(tapMoreBtn) forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(tapMoreBtn:) forControlEvents:UIControlEventTouchUpInside];
             [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
             button.backgroundColor = [UIColor clearColor];
             UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
