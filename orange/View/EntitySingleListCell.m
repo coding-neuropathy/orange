@@ -137,7 +137,7 @@
         self.tipLabel.textAlignment = NSTextAlignmentRight;
         self.tipLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
         [self.tipLabel setBackgroundColor:[UIColor clearColor]];
-        self.tipLabel.textColor = UIColorFromRGB(0xcacaca);
+        self.tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
        [self.contentView addSubview:self.tipLabel];
     }
     [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],self.entity.likeCount,[NSString fontAwesomeIconStringForEnum:FAComment],self.entity.noteCount]];

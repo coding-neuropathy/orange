@@ -1704,8 +1704,8 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				4EB8E2251B9F398B002C7F6F /* SelectionController */,
 				391F5F8D1B1705A000931533 /* UIComponents */,
+				4EB8E2251B9F398B002C7F6F /* SelectionController */,
 				B76EE07C1B3D86AE009D8763 /* NotifyController */,
 				B769B1261B2ACFB3004401FA /* WelcomeViewController */,
 				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
