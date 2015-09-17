@@ -10,4 +10,6 @@
 
 @interface SubCategoryEntityController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
+- (instancetype)initWithSubCategory:(GKEntityCategory *)subcategory;
+
 @end

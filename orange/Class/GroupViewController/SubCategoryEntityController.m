@@ -12,13 +12,25 @@
 @interface SubCategoryEntityController () <EntityCellDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
+@property (strong, nonatomic) GKEntityCategory * subcategory;
 @property (strong, nonatomic) NSMutableArray * entityArray;
+@property (strong, nonatomic) NSString * sort;
 
 @end
 
 @implementation SubCategoryEntityController
 
 static NSString * EntityCellIdentifier = @"EntityCell";
+
+- (instancetype)initWithSubCategory:(GKEntityCategory *)subcategory
+{
+    self = [super init];
+    if (self) {
+        _subcategory = subcategory;
+        self.sort = @"time";
+    }
+    return self;
+}
 
 - (UICollectionView *)collectionView
 {
@@ -38,12 +50,28 @@ static NSString * EntityCellIdentifier = @"EntityCell";
 #pragma mark - get data
 - (void)refresh
 {
-
+    [API getEntityListWithCategoryId:self.subcategory.categoryId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        self.entityArray = [NSMutableArray arrayWithArray:entityArray];
+        
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.pullToRefreshView stopAnimating];
+    }];
 }
 
 - (void)loadMore
 {
-
+    [API getEntityListWithCategoryId:self.subcategory.categoryId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
+        self.entityArray = [NSMutableArray arrayWithArray:entityArray];
+//        [self.tableView reloadData];
+        [self.collectionView.infiniteScrollingView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+//        [SVProgressHUD dismiss];
+        [self.collectionView.infiniteScrollingView stopAnimating];
+    }];
 }
 
 - (void)loadView
@@ -60,6 +88,16 @@ static NSString * EntityCellIdentifier = @"EntityCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
 }
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
@@ -96,6 +134,34 @@ static NSString * EntityCellIdentifier = @"EntityCell";
     cell.entity = [self.entityArray objectAtIndex:indexPath.row];
     cell.delegate = self;
     return cell;
+}
+
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+    
+    return cellsize;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    UIEdgeInsets edge = UIEdgeInsetsMake(3., 3., 3., 3.);
+    
+    return edge;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat itemSpacing = 3.;
+    
+    return itemSpacing;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat spacing = 3;
+    return spacing;
 }
 
 #pragma mark - <EntityCellDelegate>
