@@ -200,7 +200,6 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
     switch (self.style) {
         case GridStyle:
         {
@@ -220,9 +219,6 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
         }
             break;
     }
-    
-
-
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
