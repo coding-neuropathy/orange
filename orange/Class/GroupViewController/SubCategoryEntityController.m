@@ -8,6 +8,8 @@
 
 #import "SubCategoryEntityController.h"
 #import "EntityCell.h"
+#import "EntityListCell.h"
+
 
 @interface SubCategoryEntityController () <EntityCellDelegate>
 
@@ -15,12 +17,14 @@
 @property (strong, nonatomic) GKEntityCategory * subcategory;
 @property (strong, nonatomic) NSMutableArray * entityArray;
 @property (strong, nonatomic) NSString * sort;
+@property (assign, nonatomic) EntityDisplayStyle style;
 
 @end
 
 @implementation SubCategoryEntityController
 
 static NSString * EntityCellIdentifier = @"EntityCell";
+static NSString * EntityListCellIdentifier = @"EntityListCell";
 
 - (instancetype)initWithSubCategory:(GKEntityCategory *)subcategory
 {
@@ -28,6 +32,7 @@ static NSString * EntityCellIdentifier = @"EntityCell";
     if (self) {
         _subcategory = subcategory;
         self.sort = @"time";
+        self.style = ListStyle;
     }
     return self;
 }
@@ -83,6 +88,7 @@ static NSString * EntityCellIdentifier = @"EntityCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
+    [self.collectionView registerClass:[EntityListCell class] forCellWithReuseIdentifier:EntityListCellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {

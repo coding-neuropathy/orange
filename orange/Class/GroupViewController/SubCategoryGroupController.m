@@ -14,6 +14,7 @@
 @property (strong, nonatomic) GKEntityCategory * entityCategory;
 @property (strong, nonatomic) UILabel * categoryLabel;
 
+
 @end
 
 @interface SubCategoryGroupController ()

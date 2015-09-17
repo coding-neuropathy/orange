@@ -7,14 +7,15 @@
 //
 
 #import "BaseViewController.h"
+#import "DataStructure.h"
 
-/**
- *  商品显示样式
- */
-typedef NS_ENUM(NSInteger, EntityDisplayStyle) {
-    ListStyle = 0,
-    GridStyle,
-};
+///**
+// *  商品显示样式
+// */
+//typedef NS_ENUM(NSInteger, EntityDisplayStyle) {
+//    ListStyle = 0,
+//    GridStyle,
+//};
 
 @interface CategroyGroupController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
