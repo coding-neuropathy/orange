@@ -88,15 +88,28 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
     [self.collectionView registerClass:[EntityListCell class] forCellWithReuseIdentifier:EntityListCellIdentifier];
     
+    
+    /**
+     * 切换 entity 样式按钮
+     */
     UIButton * styleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage * grid_image = [UIImage imageNamed:@"grid"];
     [styleBtn setImage:grid_image forState:UIControlStateNormal];
     styleBtn.frame = CGRectMake(0., 0., grid_image.size.width, grid_image.size.height);
-    //    styleBtn.tag = self.style;
     [styleBtn addTarget:self action:@selector(styleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    
     UIBarButtonItem * styleBarBtn = [[UIBarButtonItem alloc] initWithCustomView:styleBtn];
-    self.navigationItem.rightBarButtonItems = @[styleBarBtn];
+    
+    /**
+     * 切换排序样式按钮
+     */
+    UIButton * ltBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage * time_image = [UIImage imageNamed:@"like top"];
+    [ltBtn setImage:time_image forState:UIControlStateNormal];
+    ltBtn.frame = CGRectMake(0., 0., time_image.size.width, time_image.size.height);
+    [ltBtn addTarget:self action:@selector(ltBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * ltBarBtn = [[UIBarButtonItem alloc] initWithCustomView:ltBtn];
+
+    self.navigationItem.rightBarButtonItems = @[styleBarBtn, ltBarBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -236,6 +249,7 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
     [[OpenCenter sharedOpenCenter] openEntity:entity];
 }
 
+
 #pragma mark - button action
 - (void)styleBtnAction:(id)sender
 {
@@ -256,6 +270,21 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
             [styleBtn setImage:[UIImage imageNamed:@"grid"] forState:UIControlStateNormal];
             [self.collectionView reloadData];
             break;
+    }
+}
+
+- (void)ltBtnAction:(id)sender
+{
+    UIButton * ltBtn = (UIButton *)sender;
+    
+    if ([self.sort isEqualToString:@"time"]) {
+        self.sort = @"like";
+        [self.collectionView triggerPullToRefresh];
+        [ltBtn setImage:[UIImage imageNamed:@"time_top"] forState:UIControlStateNormal];
+    } else {
+        self.sort = @"time";
+        [self.collectionView triggerPullToRefresh];
+        [ltBtn setImage:[UIImage imageNamed:@"like top"] forState:UIControlStateNormal];
     }
 }
 
