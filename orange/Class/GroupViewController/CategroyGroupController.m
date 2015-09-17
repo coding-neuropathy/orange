@@ -17,7 +17,7 @@
 @property (strong, nonatomic) NSArray * categoryArray;
 @property (strong, nonatomic) UIButton * Morebtn;
 @property (nonatomic, copy) void (^tapMoreBtnBlock)();
-
+@property (nonatomic, copy) void (^tapCategoryBtnBlock)(GKEntityCategory * category);
 @end
 
 @interface CategroyGroupController () <EntityCellDelegate>
@@ -168,6 +168,7 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
         header.categoryArray = self.firstCategoryArray;
         header.tapMoreBtnBlock = ^(){
             SubCategoryGroupController * vc = [[SubCategoryGroupController alloc] initWithSubCategories:self.secondCategoryArray];
+            vc.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
             [self.navigationController pushViewController:vc animated:YES];
         };
         return header;
@@ -242,7 +243,7 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 {
     if (!_Morebtn) {
         _Morebtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_Morebtn setTitle:@"更多 >" forState:UIControlStateNormal];
+        [_Morebtn setTitle:[NSString stringWithFormat:@"%@ >", NSLocalizedStringFromTable(@"more", kLocalizedFile, nil)] forState:UIControlStateNormal];
         [_Morebtn setTitleColor:UIColorFromRGB(0x427EC0) forState:UIControlStateNormal];
         _Morebtn.titleLabel.font = [UIFont systemFontOfSize:14.];
         [_Morebtn addTarget:self action:@selector(MorebtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -264,8 +265,20 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 {
     [super layoutSubviews];
     
-    for (NSInteger i =0; i < self.categoryArray.count; i++){
+    for (NSInteger i = 0; i < self.categoryArray.count; i++){
         UIButton * categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        GKEntityCategory * sc = [self.categoryArray objectAtIndex:i];
+        [categoryBtn setTitle:sc.categoryName forState:UIControlStateNormal];
+        [categoryBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        categoryBtn.layer.cornerRadius = 4.;
+        categoryBtn.layer.masksToBounds = YES;
+        categoryBtn.layer.borderWidth = 0.5;
+        categoryBtn.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
+        categoryBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+        categoryBtn.tag = i;
+        categoryBtn.frame = CGRectMake(10. + (70 + 5) * i, 15., 70., 25);
+        [categoryBtn addTarget:self action:@selector(categoryBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:categoryBtn];
     }
     
     self.Morebtn.frame = CGRectMake(0., 0., 50., 40.);
@@ -279,6 +292,15 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
     if (self.tapMoreBtnBlock)
     {
         self.tapMoreBtnBlock();
+    }
+}
+
+- (void)categoryBtnAction:(id)sender
+{
+    UIButton * categoryBtn = (UIButton *)sender;
+    GKEntityCategory * sc = [self.categoryArray objectAtIndex:categoryBtn.tag];
+    if (self.tapCategoryBtnBlock) {
+        self.tapCategoryBtnBlock(sc);
     }
 }
 
