@@ -62,8 +62,8 @@ static NSString * EntityCellIdentifier = @"EntityCell";
 
 - (void)loadMore
 {
-    [API getEntityListWithCategoryId:self.subcategory.categoryId sort:self.sort reverse:NO offset:0 count:30 success:^(NSArray *entityArray) {
-        self.entityArray = [NSMutableArray arrayWithArray:entityArray];
+    [API getEntityListWithCategoryId:self.subcategory.categoryId sort:self.sort reverse:NO offset:self.entityArray.count count:30 success:^(NSArray *entityArray) {
+        [self.entityArray addObjectsFromArray:entityArray];
 //        [self.tableView reloadData];
         [self.collectionView.infiniteScrollingView stopAnimating];
         [self.collectionView reloadData];
