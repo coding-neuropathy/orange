@@ -12,6 +12,7 @@
 #import <WebKit/WebKit.h>
 #import "WebViewProgressView.h"
 #import "SDWebImageDownloader.h"
+#import "EntityViewController.h"
 //#import "WebViewProgress.h"
 #import "ShareView.h"
 
@@ -131,14 +132,17 @@
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
+//    NSLog(@"%@", navigationAction.request.URL.absoluteString);
+    if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
+        NSURL *url = navigationAction.request.URL;
+        UIApplication *app = [UIApplication sharedApplication];
+        if ([app canOpenURL:url]) {
+            [app openURL:url];
+        }
+    }
     //this is a 'new window action' (aka target="_blank") > open this URL externally. If we´re doing nothing here, WKWebView will also just do nothing. Maybe this will change in a later stage of the iOS 8 Beta
     if (!navigationAction.targetFrame) {
         [self.webView loadRequest:navigationAction.request];
-//        NSURL *url = navigationAction.request.URL;
-//        UIApplication *app = [UIApplication sharedApplication];
-//        if ([app canOpenURL:url]) {
-//            [app openURL:url];
-//        }
     }
     decisionHandler(WKNavigationActionPolicyAllow);
 }

@@ -70,6 +70,7 @@
 	<string>4079</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>guoku</string>
 		<string>weixin</string>
 		<string>sinaweibo</string>
 		<string>tbopen23093827</string>

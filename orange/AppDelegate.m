@@ -329,6 +329,8 @@ int ddLogLevel;
         NSRange range = [absoluteString rangeOfString:@"entity/"];
         if (range.location != NSNotFound) {
             NSString *entityId = [absoluteString substringFromIndex:range.location+range.length];
+            entityId = [entityId stringByReplacingOccurrencesOfString:@"/" withString:@""];
+        
             EntityViewController *vc = [[EntityViewController alloc] init];
             vc.entity = [GKEntity modelFromDictionary:@{@"entityId":entityId}];
             vc.hidesBottomBarWhenPushed = YES;
@@ -455,8 +457,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-    ddLogLevel = LOG_LEVEL_VERBOSE;
-//    ddLogLevel = LOG_LEVEL_ERROR;
+//    ddLogLevel = LOG_LEVEL_VERBOSE;
+    ddLogLevel = LOG_LEVEL_ERROR;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;

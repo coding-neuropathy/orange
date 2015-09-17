@@ -10,4 +10,6 @@
 
 @interface EntityListCell : UICollectionViewCell
 
+@property (strong, nonatomic) GKEntity * entity;
+
 @end

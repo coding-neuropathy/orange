@@ -9,6 +9,7 @@
 #import "CategroyGroupController.h"
 #import "CSStickyHeaderFlowLayout.h"
 #import "EntityCell.h"
+#import "EntityListCell.h"
 
 #import "SubCategoryGroupController.h"
 #import "SubCategoryEntityController.h"
@@ -30,6 +31,7 @@
 @property (strong, nonatomic) NSMutableArray * firstCategoryArray;
 @property (strong, nonatomic) NSMutableArray * secondCategoryArray;
 
+@property (assign, nonatomic) EntityDisplayStyle style;
 
 @property (assign, nonatomic) NSInteger gid;
 @property (assign, nonatomic) NSInteger page;
@@ -39,6 +41,7 @@
 @implementation CategroyGroupController
 
 static NSString * EntityCellIdentifier = @"EntityCell";
+static NSString * EntityListCellIdentifier = @"EntityListCell";
 static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 
 - (instancetype)initWithGid:(NSInteger)gid
@@ -48,6 +51,7 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
     {
         self.gid = gid;
         self.page = 1;
+        self.style = ListStyle;
         
         for (NSDictionary * dic in [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayKey]) {
             NSUInteger gid = [dic[@"GroupId"] integerValue];
@@ -125,7 +129,19 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
     [self.view addSubview:self.collectionView];
     
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
+    [self.collectionView registerClass:[EntityListCell class] forCellWithReuseIdentifier:EntityListCellIdentifier];
     [self.collectionView registerClass:[CategroyGroupHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderIdentifier];
+    
+    
+    UIButton * styleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage * grid_image = [UIImage imageNamed:@"grid"];
+    [styleBtn setImage:grid_image forState:UIControlStateNormal];
+    styleBtn.frame = CGRectMake(0., 0., grid_image.size.width, grid_image.size.height);
+//    styleBtn.tag = self.style;
+    [styleBtn addTarget:self action:@selector(styleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem * styleBarBtn = [[UIBarButtonItem alloc] initWithCustomView:styleBtn];
+    self.navigationItem.rightBarButtonItems = @[styleBarBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -184,37 +200,93 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityCellIdentifier forIndexPath:indexPath];
-    cell.entity = [self.entityArray objectAtIndex:indexPath.row];
-    cell.delegate = self;
-    return cell;
+
+    switch (self.style) {
+        case GridStyle:
+        {
+            EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityCellIdentifier forIndexPath:indexPath];
+            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+            cell.delegate = self;
+            return cell;
+        }
+            break;
+            
+        default:
+        {
+            EntityListCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityListCellIdentifier forIndexPath:indexPath];
+            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+            
+            return cell;
+        }
+            break;
+    }
+    
+
+
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+    CGSize cellsize = CGSizeMake(0, 0);
+    switch (self.style) {
+        case GridStyle:
+            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+            break;
+            
+        default:
+            cellsize = CGSizeMake(kScreenWidth, 110.);
+            break;
+    }
+    
     
     return cellsize;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    UIEdgeInsets edge = UIEdgeInsetsMake(3., 3., 3., 3.);
+    UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
+    
+    switch (self.style) {
+        case GridStyle:
+            edge = UIEdgeInsetsMake(3., 3., 3., 3.);
+            break;
+            
+        default:
+            edge = UIEdgeInsetsMake(3., 0., 0., 0.);
+            break;
+    }
 
     return edge;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    CGFloat itemSpacing = 3.;
+    CGFloat itemSpacing = 0.;
+    switch (self.style) {
+        case GridStyle:
+            itemSpacing = 3.;
+            break;
+            
+        default:
+            break;
+    }
 
     return itemSpacing;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    CGFloat spacing = 3;
+    CGFloat spacing = 0;
+    switch (self.style) {
+        case GridStyle:
+            spacing = 3.;
+            break;
+            
+        default:
+            break;
+    }
+    
     return spacing;
 }
 
@@ -230,6 +302,33 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
     [[OpenCenter sharedOpenCenter] openEntity:entity];
+}
+
+#pragma mark - NavBar Button action
+
+- (void)styleBtnAction:(id)sender
+{
+    UIButton * styleBtn = (UIButton *)sender;
+//    NSLog(@"OKOKOKOKO");
+    
+//    if (styleBtn.tag)
+    
+    switch (self.style) {
+        case ListStyle:
+        {
+            self.style = GridStyle;
+            [styleBtn setImage:[UIImage imageNamed:@"list"] forState:UIControlStateNormal];
+            [self.collectionView reloadData];
+
+        }
+            break;
+            
+        default:
+            self.style = ListStyle;
+            [styleBtn setImage:[UIImage imageNamed:@"grid"] forState:UIControlStateNormal];
+            [self.collectionView reloadData];
+            break;
+    }
 }
 
 @end
