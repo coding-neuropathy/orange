@@ -11,6 +11,7 @@
 #import "EntityCell.h"
 
 #import "SubCategoryGroupController.h"
+#import "SubCategoryEntityController.h"
 
 @interface CategroyGroupHeader : UICollectionReusableView
 
@@ -171,6 +172,11 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
             vc.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
             [self.navigationController pushViewController:vc animated:YES];
         };
+        header.tapCategoryBtnBlock = ^(GKEntityCategory * category){
+            SubCategoryEntityController * vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
+            vc.title = category.categoryName;
+            [self.navigationController pushViewController:vc animated:YES];
+        };
         return header;
     }
     return reusableview;
@@ -243,9 +249,9 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 {
     if (!_Morebtn) {
         _Morebtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_Morebtn setTitle:[NSString stringWithFormat:@"%@ >", NSLocalizedStringFromTable(@"more", kLocalizedFile, nil)] forState:UIControlStateNormal];
+        [_Morebtn setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedStringFromTable(@"more", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FAAngleRight]] forState:UIControlStateNormal];
         [_Morebtn setTitleColor:UIColorFromRGB(0x427EC0) forState:UIControlStateNormal];
-        _Morebtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+        _Morebtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
         [_Morebtn addTarget:self action:@selector(MorebtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_Morebtn];
     }
