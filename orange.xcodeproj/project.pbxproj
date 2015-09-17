@@ -2520,11 +2520,7 @@
 		4E56DF0D19D552C000263B17 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-<<<<<<< HEAD
-				LastUpgradeCheck = 0700;
-=======
 				LastUpgradeCheck = 0710;
->>>>>>> 034395ab5a5597d5451d4d191dedd62de993b472
 				ORGANIZATIONNAME = guoku.com;
 				TargetAttributes = {
 					39B8688D1ACD0CF600A2115D = {
@@ -2711,11 +2707,8 @@
 				4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */,
 				B76EE0821B3D86C3009D8763 /* NotifyController.m in Sources */,
 				B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */,
-<<<<<<< HEAD
 				8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */,
-=======
 				4E688A051BA9C2BA0006AD9B /* JSQMessagesBubbleImageFactory.m in Sources */,
->>>>>>> 034395ab5a5597d5451d4d191dedd62de993b472
 				4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */,
 				8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */,
 				4E688A211BA9C2BA0006AD9B /* JSQMessagesToolbarContentView.m in Sources */,
