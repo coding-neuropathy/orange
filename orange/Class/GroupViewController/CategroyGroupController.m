@@ -368,6 +368,13 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 {
     [super layoutSubviews];
     
+    for(UIView * view in [self subviews])
+    {
+        if (view == self.Morebtn)
+            continue;
+        [view removeFromSuperview];
+    }
+    
     for (NSInteger i = 0; i < self.categoryArray.count; i++){
         UIButton * categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         GKEntityCategory * sc = [self.categoryArray objectAtIndex:i];
