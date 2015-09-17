@@ -74,7 +74,6 @@ static NSString * SubCategoryIdentifiter = @"SubCategoryCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSLog(@"cccc %ld", self.subCateories.count);
     return self.subCateories.count;
 }
 
@@ -86,7 +85,31 @@ static NSString * SubCategoryIdentifiter = @"SubCategoryCell";
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize cellsize = CGSizeMake((kScreenWidth - 32)/4, 30.);
+    
+    return cellsize;
+}
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    UIEdgeInsets edge = UIEdgeInsetsMake(16., 16., 16., 16.);
+    
+    return edge;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat spacing = 16.;
+    return spacing;
+}
+
+#pragma mark - <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    GKEntityCategory * subCategory = [self.subCateories objectAtIndex:indexPath.row];
+}
 
 @end
 
