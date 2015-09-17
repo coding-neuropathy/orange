@@ -7,6 +7,7 @@
 //
 
 #import "SubCategoryGroupController.h"
+#import "SubCategoryEntityController.h"
 
 @interface SubCategoryCell : UICollectionViewCell
 
@@ -66,6 +67,16 @@ static NSString * SubCategoryIdentifiter = @"SubCategoryCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -109,6 +120,10 @@ static NSString * SubCategoryIdentifiter = @"SubCategoryCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     GKEntityCategory * subCategory = [self.subCateories objectAtIndex:indexPath.row];
+    
+    SubCategoryEntityController * VC = [[SubCategoryEntityController alloc] initWithSubCategory:subCategory];
+    VC.title = subCategory.categoryName;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 @end
