@@ -8,6 +8,7 @@
 
 #import "EntityListCell.h"
 #import "ImageLoadingView.h"
+#import "LoginView.h"
 
 @interface EntityListCell ()
 
@@ -131,6 +132,8 @@
         }];
     }
     
+    self.likeBtn.selected = _entity.isLiked;
+    
     self.titleLabel.text = _entity.title;
     GKPurchase * purchase = [_entity.purchaseArray objectAtIndex:0];
     self.priceLabel.text = [NSString stringWithFormat:@"¥ %.2f", purchase.lowestPrice];
@@ -182,7 +185,32 @@
 #pragma mark - button action
 - (void)likeBtnAction:(id)sender
 {
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
     
+    
+    [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeBtn.selected success:^(BOOL liked) {
+        if (liked == self.likeBtn.selected) {
+            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+        }
+        self.likeBtn.selected = liked;
+        self.entity.liked = liked;
+        if (liked) {
+            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            self.entity.likeCount = self.entity.likeCount + 1;
+        } else {
+            self.entity.likeCount = self.entity.likeCount - 1;
+            [SVProgressHUD dismiss];
+        }
+        //[self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:@"喜爱失败"];
+        
+    }];
 }
 
 - (void)tapImageAction:(id)sender

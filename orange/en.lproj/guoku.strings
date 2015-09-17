@@ -49,6 +49,7 @@
  */
 "search"                    = "Search";
 "recommendation category"   = "Recommendation Category";
+"popular articles"          = "Popular Articles";
 
 /*
  * entity page

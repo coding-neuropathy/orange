@@ -311,6 +311,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     switch (section) {
         case 2:
             edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            break;
         case 3:
         {
             edge = UIEdgeInsetsMake(3., 3., 3., 3.);
@@ -353,7 +354,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     CGFloat spacing = 0;
     switch (section) {
         case 2:
-            spacing =5;
+//            spacing =5;
             break;
         case 3:
         {
@@ -493,6 +494,15 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - DiscoverView Header
 @implementation DiscoverHeaderSection
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
+
 - (UILabel *)textLabel
 {
     if (!_textLabel)
@@ -518,7 +528,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     [super layoutSubviews];
     
-    self.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//    self.backgroundColor = UIColorFromRGB(0xf8f8f8);
     
     self.textLabel.frame = CGRectMake(10., 0., kScreenWidth - 20., 44.);
 }
