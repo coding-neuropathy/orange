@@ -127,14 +127,16 @@
  *  @param gid 一级分类 id
  */
 + (void)getGroupEntityWithGroupId:(NSInteger)gid Page:(NSInteger)page
-                          success:(void (^)(NSArray * entities))success
-                          failure:(void (^)(NSInteger stateCode))failure
+                            Sort:(NSString *)sort
+                            success:(void (^)(NSArray * entities))success
+                            failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(gid > 0);
     NSString *path = [NSString stringWithFormat:@"category/%ld/selection/", (unsigned long)gid];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:@(page) forKey:@"page"];
+    [paraDict setValue:sort forKey:@"sort"];
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableArray * entities = [[NSMutableArray alloc]initWithCapacity:0];
@@ -655,7 +657,7 @@
                                 success:(void (^)(NSArray *entityArray))success
                                 failure:(void (^)(NSInteger stateCode))failure
 {
-    NSString *path = [NSString stringWithFormat:@"category/%ld/user/%ld/like/", categoryId, userId];
+    NSString *path = [NSString stringWithFormat:@"category/%ld/user/%ld/like/", (unsigned long)categoryId, userId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:sort forKey:@"sort"];

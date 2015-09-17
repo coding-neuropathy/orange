@@ -160,7 +160,7 @@
     
     self.likeBtn.selected = _entity.isLiked;
     if (_entity.likeCount > 0)
-        [self.likeBtn setTitle:[NSString stringWithFormat:@"%ld", _entity.likeCount] forState:UIControlStateNormal];
+        [self.likeBtn setTitle:[NSString stringWithFormat:@"%ld", (long)_entity.likeCount] forState:UIControlStateNormal];
     
     [self setNeedsLayout];
 }
@@ -294,6 +294,6 @@
 
 - (void)setNoteNumber:(NSInteger)num
 {
-    [self.noteBtn setTitle:[NSString stringWithFormat:@"%ld", num] forState:UIControlStateNormal];
+    [self.noteBtn setTitle:[NSString stringWithFormat:@"%ld", (long)num] forState:UIControlStateNormal];
 }
 @end

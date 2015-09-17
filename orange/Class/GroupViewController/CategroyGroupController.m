@@ -35,6 +35,7 @@
 
 @property (assign, nonatomic) NSInteger gid;
 @property (assign, nonatomic) NSInteger page;
+@property (strong, nonatomic) NSString * sort;
 
 @end
 
@@ -52,7 +53,7 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
         self.gid = gid;
         self.page = 1;
         self.style = ListStyle;
-        
+        self.sort = @"time";
         for (NSDictionary * dic in [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayKey]) {
             NSUInteger gid = [dic[@"GroupId"] integerValue];
             if (gid == self.gid) {
@@ -98,7 +99,7 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 - (void)refresh
 {
     self.page = 1;
-    [API getGroupEntityWithGroupId:self.gid Page:self.page success:^(NSArray *entities) {
+    [API getGroupEntityWithGroupId:self.gid Page:self.page Sort:self.sort success:^(NSArray *entities) {
         self.entityArray = [NSMutableArray arrayWithArray:entities];
         self.page += 1;
         [self.collectionView.pullToRefreshView stopAnimating];
@@ -111,7 +112,7 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 
 - (void)loadMore
 {
-    [API getGroupEntityWithGroupId:self.gid Page:self.page success:^(NSArray *entities) {
+    [API getGroupEntityWithGroupId:self.gid Page:self.page Sort:self.sort success:^(NSArray *entities) {
         [self.entityArray addObjectsFromArray:entities];
         self.page += 1;
         [self.collectionView.infiniteScrollingView stopAnimating];
@@ -139,9 +140,20 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
     styleBtn.frame = CGRectMake(0., 0., grid_image.size.width, grid_image.size.height);
 //    styleBtn.tag = self.style;
     [styleBtn addTarget:self action:@selector(styleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    
     UIBarButtonItem * styleBarBtn = [[UIBarButtonItem alloc] initWithCustomView:styleBtn];
-    self.navigationItem.rightBarButtonItems = @[styleBarBtn];
+    
+    /**
+     * 切换排序样式按钮
+     */
+    UIButton * ltBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage * time_image = [UIImage imageNamed:@"like top"];
+    [ltBtn setImage:time_image forState:UIControlStateNormal];
+    ltBtn.frame = CGRectMake(0., 0., time_image.size.width, time_image.size.height);
+    [ltBtn addTarget:self action:@selector(ltBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * ltBarBtn = [[UIBarButtonItem alloc] initWithCustomView:ltBtn];
+
+    
+    self.navigationItem.rightBarButtonItems = @[styleBarBtn, ltBarBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -305,10 +317,6 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 - (void)styleBtnAction:(id)sender
 {
     UIButton * styleBtn = (UIButton *)sender;
-//    NSLog(@"OKOKOKOKO");
-    
-//    if (styleBtn.tag)
-    
     switch (self.style) {
         case ListStyle:
         {
@@ -324,6 +332,21 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
             [styleBtn setImage:[UIImage imageNamed:@"grid"] forState:UIControlStateNormal];
             [self.collectionView reloadData];
             break;
+    }
+}
+
+- (void)ltBtnAction:(id)sender
+{
+    UIButton * ltBtn = (UIButton *)sender;
+    
+    if ([self.sort isEqualToString:@"time"]) {
+        self.sort = @"like";
+        [self.collectionView triggerPullToRefresh];
+        [ltBtn setImage:[UIImage imageNamed:@"time_top"] forState:UIControlStateNormal];
+    } else {
+        self.sort = @"time";
+        [self.collectionView triggerPullToRefresh];
+        [ltBtn setImage:[UIImage imageNamed:@"like top"] forState:UIControlStateNormal];
     }
 }
 

@@ -64,8 +64,9 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  *
  *  @param gid 一级分类 id
  */
-+ (void)getGroupEntityWithGroupId:(NSInteger)gid Page:(NSInteger)page
-                          success:(void (^)(NSArray * entities))success
++ (void)getGroupEntityWithGroupId:(NSInteger)gid Page:(NSInteger)pag
+                            Sort:(NSString *)sort
+                            success:(void (^)(NSArray * entities))success
                           failure:(void (^)(NSInteger stateCode))failure;
 
 

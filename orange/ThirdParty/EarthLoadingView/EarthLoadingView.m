@@ -99,7 +99,7 @@
     
     if (_currentStep < 18)
     {
-        self.earth.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%ld",_currentStep]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        self.earth.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%ld",(long)_currentStep]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }
     else
     {
