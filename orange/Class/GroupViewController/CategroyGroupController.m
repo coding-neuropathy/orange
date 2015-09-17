@@ -262,8 +262,6 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 {
     _categoryArray = categoryArray;
     
-//    NSLog(@"%@", _categoryArray);
-    
     [self setNeedsLayout];
 }
 
