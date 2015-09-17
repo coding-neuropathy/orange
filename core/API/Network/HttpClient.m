@@ -80,7 +80,9 @@
 
 - (void)requestPath:(NSString *)path method:(NSString *)method parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    #ifndef TARGET_OS_IOS
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    #endif
     [super requestPath:path method:method parameters:[parameters configParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self successLogWithOperation:operation responseObject:responseObject];
         if (success) {
