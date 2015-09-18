@@ -56,6 +56,11 @@
         [_segmentedControl setTitleTextAttributes:dict];
         NSDictionary *dict2 = [NSDictionary dictionaryWithObject:UIColorFromRGB(0xFF1F77) forKey:NSForegroundColorAttributeName];
         [_segmentedControl setSelectedTitleTextAttributes:dict2];
+        UIFont *font = [UIFont boldSystemFontOfSize:17.];
+        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                               forKey:NSFontAttributeName];
+        [_segmentedControl setTitleTextAttributes:attributes];
+        
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
         [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
         [_segmentedControl setSelectionIndicatorHeight:2];

@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "DataStructure.h"
+
 
 @interface SubCategoryEntityController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 

@@ -9,7 +9,7 @@
 #import "SubCategoryEntityController.h"
 #import "EntityCell.h"
 #import "EntityListCell.h"
-
+#import "DataStructure.h"
 
 @interface SubCategoryEntityController () <EntityCellDelegate>
 
@@ -33,6 +33,8 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
         _subcategory = subcategory;
         self.sort = @"time";
         self.style = ListStyle;
+        
+        self.title = _subcategory.categoryName;
     }
     return self;
 }

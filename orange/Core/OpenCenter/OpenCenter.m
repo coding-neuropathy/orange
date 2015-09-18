@@ -10,7 +10,8 @@
 #import "UserViewController.h"
 #import "EntityViewController.h"
 #import "NoteViewController.h"
-#import "CategoryViewController.h"
+//#import "CategoryViewController.h"
+#import "SubCategoryEntityController.h"
 #import "TagViewController.h"
 #import "WebViewController.h"
 
@@ -59,8 +60,8 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
 - (void)openCategory:(GKEntityCategory *)category
 {
-    CategoryViewController *vc = [[CategoryViewController alloc] init];
-    vc.category = category;
+    SubCategoryEntityController *vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
+//    vc.category = category;
     //    [controller.navigationController pushViewController:vc animated:YES];
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }

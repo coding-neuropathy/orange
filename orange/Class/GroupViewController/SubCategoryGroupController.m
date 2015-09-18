@@ -113,7 +113,7 @@ static NSString * SubCategoryIdentifiter = @"SubCategoryCell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    CGFloat spacing = 16.;
+    CGFloat spacing = 32.;
     return spacing;
 }
 
@@ -140,6 +140,7 @@ static NSString * SubCategoryIdentifiter = @"SubCategoryCell";
         _categoryLabel.textColor = UIColorFromRGB(0x427EC0);
         _categoryLabel.textAlignment = NSTextAlignmentCenter;
         
+        _categoryLabel.adjustsFontSizeToFitWidth = YES;
         [self.contentView addSubview:_categoryLabel];
     }
     return _categoryLabel;
@@ -157,7 +158,7 @@ static NSString * SubCategoryIdentifiter = @"SubCategoryCell";
 {
     [super layoutSubviews];
     
-    self.categoryLabel.frame = CGRectMake(0., 0., 80., 30);
+    self.categoryLabel.frame = CGRectMake(0., 0., self.contentView.deFrameWidth, 30);
     
 }
 

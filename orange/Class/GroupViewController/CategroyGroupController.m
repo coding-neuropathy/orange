@@ -404,8 +404,14 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
         categoryBtn.layer.borderWidth = 0.5;
         categoryBtn.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
         categoryBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+//        categoryBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
         categoryBtn.tag = i;
-        categoryBtn.frame = CGRectMake(10. + (70 + 5) * i, 15., 70., 25);
+        if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
+            categoryBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
+            categoryBtn.frame = CGRectMake(10. + (55 + 5) * i, 15., 55., 25);
+            categoryBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+        } else
+            categoryBtn.frame = CGRectMake(10. + (70 + 5) * i, 15., 70., 25);
         [categoryBtn addTarget:self action:@selector(categoryBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:categoryBtn];
     }
