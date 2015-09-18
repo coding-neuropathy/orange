@@ -34,9 +34,48 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
         self.sort = @"time";
         self.style = ListStyle;
         
-        self.title = _subcategory.categoryName;
+//        self.title = _subcategory.categoryName;
+        [self setTitleView];
     }
     return self;
+}
+
+- (void)setTitleView
+{
+    UIView *titleView = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+    [titleView setBackgroundColor:[UIColor clearColor]];
+    
+    UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 26, 26)];
+    icon.contentMode =UIViewContentModeScaleAspectFit;
+    icon.backgroundColor = [UIColor clearColor];
+    [icon sd_setImageWithURL:self.subcategory.iconURL placeholderImage:nil options:SDWebImageRetryFailed];
+    [titleView addSubview:icon];
+    
+    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+    [label setText:([self.subcategory.categoryName componentsSeparatedByString:@"-"][0])];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"Helvetica" size:17];
+    label.textColor = UIColorFromRGB(0x414243);
+    label.adjustsFontSizeToFitWidth = YES;
+    label.backgroundColor = [UIColor clearColor];
+    [label sizeToFit];
+    label.center = icon.center;
+    
+    titleView.deFrameWidth = label.deFrameWidth + icon.deFrameWidth * 2 +10;
+    [titleView addSubview:label];
+    if (self.subcategory.iconURL) {
+        label.center = CGPointMake(titleView.frame.size.width/2+8, titleView.frame.size.height/2);
+        icon.hidden = NO;
+        icon.deFrameRight = label.deFrameLeft - 5;
+    }
+    else
+    {
+        icon.hidden = YES;
+        label.center = CGPointMake(titleView.frame.size.width/2, titleView.frame.size.height/2);
+    }
+    
+    
+    self.navigationItem.titleView = titleView;
 }
 
 - (UICollectionView *)collectionView
