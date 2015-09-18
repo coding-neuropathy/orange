@@ -42,7 +42,7 @@
 {
     if (!_segmentedControlForSearch) {
         HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-        [segmentedControl setSectionTitles:@[ @"商品",@"品类",@"用户",@"喜爱"]];
+        [segmentedControl setSectionTitles:@[ @"商品",@"图文",@"品类",@"用户"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
@@ -96,6 +96,22 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [AVAnalytics beginLogPageView:@"SearchResultView"];
+    [MobClick beginLogPageView:@"SearchResultView"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [AVAnalytics endLogPageView:@"SearchResultView"];
+    [MobClick endLogPageView:@"SearchResultView"];
 }
 
 /*
@@ -175,7 +191,7 @@
 {
 
         NSInteger index = self.segmentedControlForSearch.selectedSegmentIndex;
-        if (index == 1)
+        if (index == 2)
         {
             return ceil(self.filteredArray.count /(CGFloat)4);
         }
@@ -183,14 +199,14 @@
         {
             return self.dataArrayForEntityForSearch.count;
         }
-        else if(index == 2)
+        else if(index == 3)
         {
             return self.dataArrayForUserForSearch.count;
         }
-        else if(index == 3)
-        {
-            return self.dataArrayForLikeForSearch.count;
-        }
+//        else if(index == 3)
+//        {
+//            return self.dataArrayForLikeForSearch.count;
+//        }
         return 0;
 }
 
@@ -200,7 +216,7 @@
 
         
         NSInteger index = self.segmentedControlForSearch.selectedSegmentIndex;
-        if (index == 1) {
+        if (index == 2) {
             static NSString *CellIdentifier = @"CategoryCell";
             CategoryGridCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell) {
@@ -235,7 +251,7 @@
             return cell;
             
         }
-        else if(index == 2)
+        else if(index == 3)
         {
             static NSString *CellIdentifier = @"UserSingleListCell";
             UserSingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -247,18 +263,18 @@
             return cell;
             
         }
-        else if(index == 3)
-        {
-            static NSString *CellIdentifier = @"EntitySingleListCell";
-            EntitySingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (!cell) {
-                cell = [[EntitySingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            cell.entity = [self.dataArrayForLikeForSearch objectAtIndex:indexPath.row];
-            return cell;
-            
-        }
-        
+//        else if(index == 3)
+//        {
+//            static NSString *CellIdentifier = @"EntitySingleListCell";
+//            EntitySingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//            if (!cell) {
+//                cell = [[EntitySingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//            }
+//            cell.entity = [self.dataArrayForLikeForSearch objectAtIndex:indexPath.row];
+//            return cell;
+//            
+//        }
+    
         return [UITableViewCell new];
     
 }
@@ -267,21 +283,21 @@
 {
 
         NSInteger index = self.segmentedControlForSearch.selectedSegmentIndex;
-        if (index == 1) {
+        if (index == 2) {
             return [CategoryGridCell height];
         }
         else if (index == 0)
         {
             return [EntitySingleListCell height];
         }
-        else if (index == 2)
+        else if (index == 3)
         {
             return [UserSingleListCell height];
         }
-        else if (index == 3)
-        {
-            return [EntitySingleListCell height];
-        }
+//        else if (index == 3)
+//        {
+//            return [EntitySingleListCell height];
+//        }
         return 0;
 }
 
@@ -321,7 +337,7 @@
         [self.tableView setContentOffset:CGPointMake(0, y) animated:NO];
         NSUInteger index = segmentedControl.selectedSegmentIndex;
         switch (index) {
-            case 1:
+            case 2:
             {
                 [self handleSearchText:self.keyword];
             }
@@ -333,13 +349,6 @@
                 }
             }
                 break;
-            case 2:
-            {
-                if (self.dataArrayForUserForSearch.count == 0) {
-                    [self handleSearchText:self.keyword];
-                }
-            }
-                break;
             case 3:
             {
                 if (self.dataArrayForUserForSearch.count == 0) {
@@ -347,6 +356,13 @@
                 }
             }
                 break;
+//            case 3:
+//            {
+//                if (self.dataArrayForUserForSearch.count == 0) {
+//                    [self handleSearchText:self.keyword];
+//                }
+//            }
+//                break;
                 
             default:
                 break;
@@ -363,9 +379,11 @@
     if (searchText.length == 0) {
         return;
     }
+    
+
     self.tableView.tableFooterView = nil;
     [self.tableView.pullToRefreshView startAnimating];
-    if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
+    if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
     {
         self.filteredArray = [NSMutableArray array];
         for (GKEntityCategory *word in kAppDelegate.allCategoryArray) {
@@ -401,7 +419,7 @@
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
-    else if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
+    else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
     {
         [API searchUserWithString:self.keyword offset:0 count:30 success:^(NSArray *userArray) {
             if (userArray.count == 0) {
@@ -418,22 +436,22 @@
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }
-    else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
-    {
-        [API searchEntityWithString:self.keyword type:@"like" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
-            if (entityArray.count == 0) {
-                self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
-                self.tableView.tableFooterView = self.noResultView;
-                self.noResultView.type = NoResultType;
-            } else {
-                self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
-            }
-            [self.tableView.pullToRefreshView stopAnimating];
-            [self.tableView reloadData];
-        } failure:^(NSInteger stateCode) {
-            [self.tableView.pullToRefreshView stopAnimating];
-        }];
-    }
+//    else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
+//    {
+//        [API searchEntityWithString:self.keyword type:@"like" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+//            if (entityArray.count == 0) {
+//                self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
+//                self.tableView.tableFooterView = self.noResultView;
+//                self.noResultView.type = NoResultType;
+//            } else {
+//                self.dataArrayForLikeForSearch = [NSMutableArray arrayWithArray:entityArray];
+//            }
+//            [self.tableView.pullToRefreshView stopAnimating];
+//            [self.tableView reloadData];
+//        } failure:^(NSInteger stateCode) {
+//            [self.tableView.pullToRefreshView stopAnimating];
+//        }];
+//    }
 }
 
 

@@ -159,6 +159,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [self.navigationController.navigationBar setAlpha:1];
     [self.navigationController.navigationBar setTranslucent:NO];
     
+    self.collectionView.scrollsToTop = YES;
+    
     [AVAnalytics beginLogPageView:@"DiscoverView"];
     [MobClick beginLogPageView:@"DiscoverView"];
 }
@@ -166,6 +168,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    self.collectionView.scrollsToTop = NO;
     
     [AVAnalytics endLogPageView:@"DiscovreView"];
     [MobClick endLogPageView:@"DiscovreView"];

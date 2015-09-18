@@ -698,6 +698,20 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                        failure:(void (^)(NSInteger stateCode))failure;
 
 /**
+ *  搜索图文
+ *
+ *  @param  string      搜索关键词
+ *  @param  page        翻页
+ *  @param  size        长度
+ *  @param  succes      成功block
+ *  @param  failure     失败block
+ */
++ (void)searchArticlesWithString:(NSString *)string
+                            Page:(NSInteger)page
+                            Size:(NSInteger)size
+                         success:(void (^)(NSArray * articles))success
+                         failure:(void (^)(NSInteger stateCode))failure;
+/**
  *  搜索用户
  *
  *  @param string  搜索关键字

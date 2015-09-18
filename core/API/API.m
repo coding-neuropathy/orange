@@ -657,7 +657,7 @@
                                 success:(void (^)(NSArray *entityArray))success
                                 failure:(void (^)(NSInteger stateCode))failure
 {
-    NSString *path = [NSString stringWithFormat:@"category/%ld/user/%ld/like/", (unsigned long)categoryId, userId];
+    NSString *path = [NSString stringWithFormat:@"category/%ld/user/%ld/like/", (unsigned long)categoryId, (long)userId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:sort forKey:@"sort"];
@@ -2213,6 +2213,40 @@
         if (success) {
             success(stat,entityArray);
         }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
+/**
+ *  搜索图文
+ *
+ *  @param  string      搜索关键词
+ *  @param  page        翻页
+ *  @param  size        长度
+ *  @param  succes      成功block
+ *  @param  failure     失败block
+ */
++ (void)searchArticlesWithString:(NSString *)string
+                            Page:(NSInteger)page
+                            Size:(NSInteger)size
+                         success:(void (^)(NSArray * articles))success
+                         failure:(void (^)(NSInteger stateCode))failure
+{
+    NSParameterAssert(string);
+    
+    NSString *path = @"articles/search/";
+    
+    NSMutableDictionary * paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:string forKey:@"q"];
+    [paraDict setObject:@(page) forKey:@"page"];
+    [paraDict setObject:@(size) forKey:@"size"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
             NSInteger stateCode = operation.response.statusCode;
