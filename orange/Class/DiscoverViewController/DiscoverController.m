@@ -382,7 +382,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
             headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
             break;
         case 1:
-            headerSize = CGSizeMake(kScreenWidth, 155.);            
+            if (self.categoryArray.count) {
+                headerSize = CGSizeMake(kScreenWidth, 155.);
+            }
             break;
         case 2:
         case 3:

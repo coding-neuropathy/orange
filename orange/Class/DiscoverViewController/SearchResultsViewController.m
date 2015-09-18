@@ -151,7 +151,7 @@
                 [self.tableView.infiniteScrollingView stopAnimating];
                 [self.tableView reloadData];
             } failure:^(NSInteger stateCode) {
-                DDLogInfo(@"code %ld", stateCode);
+                DDLogError(@"code %ld", stateCode);
                 [self.tableView.infiniteScrollingView stopAnimating];
             }];
         }
@@ -159,10 +159,11 @@
             
         case ArticleType:
         {
-            NSInteger page = self.articleArray.count / 10 + 1;
+            NSInteger page = ceilf(self.articleArray.count / 10.) + 1;
             [API searchArticlesWithString:self.keyword Page:page Size:10 success:^(NSArray *articles) {
                 [self.articleArray addObjectsFromArray:articles];
                 [self.tableView.infiniteScrollingView stopAnimating];
+                [self.tableView reloadData];
             } failure:^(NSInteger stateCode) {
                 [self.tableView.infiniteScrollingView stopAnimating];
             }];
