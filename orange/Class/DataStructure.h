@@ -20,3 +20,14 @@ typedef NS_ENUM(NSInteger, EntityDisplayStyle) {
     ListStyle = 0,
     GridStyle,
 };
+
+/**
+ *  搜索类型
+ *
+ */
+typedef NS_ENUM(NSInteger, SearchType) {
+    EntityType,
+    ArticleType,
+    CategoryType,
+    UserType,
+};

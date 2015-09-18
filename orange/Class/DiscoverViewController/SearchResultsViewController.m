@@ -132,7 +132,7 @@
 #pragma mark - Data
 - (void)loadMore
 {
-    if(self.segmentedControlForSearch.selectedSegmentIndex == 1)
+    if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
     {
         [self.tableView.infiniteScrollingView stopAnimating];
         return;
@@ -152,7 +152,7 @@
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
-    else if(self.segmentedControlForSearch.selectedSegmentIndex == 2)
+    else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
     {
         [API searchUserWithString:self.keyword offset:self.dataArrayForUserForSearch.count count:30 success:^(NSArray *userArray) {
             if (self.dataArrayForUserForSearch.count == 0) {
@@ -165,19 +165,19 @@
             [self.tableView.infiniteScrollingView stopAnimating];
         }];
     }
-    else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
-    {
-        [API searchEntityWithString:self.keyword type:@"like" offset:self.dataArrayForLikeForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
-            if (self.dataArrayForLikeForSearch.count == 0) {
-                self.dataArrayForLikeForSearch = [NSMutableArray array];
-            }
-            [self.dataArrayForLikeForSearch addObjectsFromArray:entityArray];
-            [self.tableView.infiniteScrollingView stopAnimating];
-            [self.tableView reloadData];
-        } failure:^(NSInteger stateCode) {
-            [self.tableView.infiniteScrollingView stopAnimating];
-        }];
-    }
+//    else if(self.segmentedControlForSearch.selectedSegmentIndex == 3)
+//    {
+//        [API searchEntityWithString:self.keyword type:@"like" offset:self.dataArrayForLikeForSearch.count count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
+//            if (self.dataArrayForLikeForSearch.count == 0) {
+//                self.dataArrayForLikeForSearch = [NSMutableArray array];
+//            }
+//            [self.dataArrayForLikeForSearch addObjectsFromArray:entityArray];
+//            [self.tableView.infiniteScrollingView stopAnimating];
+//            [self.tableView reloadData];
+//        } failure:^(NSInteger stateCode) {
+//            [self.tableView.infiniteScrollingView stopAnimating];
+//        }];
+//    }
 }
 
 #pragma mark - UITableViewDataSource
