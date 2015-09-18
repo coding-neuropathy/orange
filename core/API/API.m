@@ -2247,8 +2247,16 @@
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@", responseObject);
+        NSMutableArray *articles = [NSMutableArray array];
         
-        
+        for(NSDictionary * row in responseObject[@"articles"]) {
+            GKArticle * article = [GKArticle modelFromDictionary:row];
+            [articles addObject:article];
+        }
+
+        if (success) {
+            success(articles);
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {

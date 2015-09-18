@@ -155,6 +155,17 @@
             }];
         }
             break;
+            
+        case ArticleType:
+        {
+            [API searchArticlesWithString:self.keyword Page:1 Size:10 success:^(NSArray *articles) {
+                
+                [self.tableView.infiniteScrollingView stopAnimating];
+            } failure:^(NSInteger stateCode) {
+                [self.tableView.infiniteScrollingView stopAnimating];
+            }];
+        }
+            break;
         case CategoryType:
         {
             [self.tableView.infiniteScrollingView stopAnimating];
@@ -347,6 +358,13 @@
                 }
             }
                 break;
+            case ArticleType:
+            {
+                if (self.articleArray.count == 0) {
+                    [self handleSearchText:self.keyword];
+                }
+            }
+                break;
             case UserType:
             {
                 if (self.dataArrayForUserForSearch.count == 0) {
@@ -392,6 +410,25 @@
         }
             break;
             
+        case ArticleType:
+        {
+            [API searchArticlesWithString:self.keyword Page:1 Size:10 success:^(NSArray *articles) {
+                if (articles.count == 0) {
+                    self.articleArray = [NSMutableArray arrayWithArray:articles];;
+                    self.tableView.tableFooterView = self.noResultView;
+                    self.noResultView.type = NoResultType;
+                    //                DDLogInfo(@"%@", self.noResultView);
+                } else {
+                    self.articleArray = [NSMutableArray arrayWithArray:articles];
+                }
+                
+                [self.tableView.pullToRefreshView stopAnimating];
+                [self.tableView reloadData];
+            } failure:^(NSInteger stateCode) {
+                [self.tableView.pullToRefreshView stopAnimating];
+            }];
+        }
+            break;
         case CategoryType:
         {
             self.filteredArray = [NSMutableArray array];
