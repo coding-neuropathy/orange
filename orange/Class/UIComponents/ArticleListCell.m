@@ -110,4 +110,18 @@
     
 }
 
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    CGContextMoveToPoint(context, 0., self.deFrameHeight);
+    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
+    
+    CGContextStrokePath(context);
+}
+
 @end

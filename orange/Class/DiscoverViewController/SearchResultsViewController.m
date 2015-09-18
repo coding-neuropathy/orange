@@ -340,6 +340,15 @@
     return 0.01f;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.segmentedControlForSearch.selectedSegmentIndex == ArticleType) {
+        GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
+        [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+    }
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (!self.dataArrayForOffsetForSearch) {
@@ -435,7 +444,7 @@
                 } else {
                     self.articleArray = [NSMutableArray arrayWithArray:articles];
                 }
-                NSLog(@"article count %ld", self.articleArray.count);
+//                NSLog(@"article count %ld", self.articleArray.count);
                 
                 [self.tableView.pullToRefreshView stopAnimating];
                 [self.tableView reloadData];
