@@ -2246,6 +2246,9 @@
     [paraDict setObject:@(size) forKey:@"size"];
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
