@@ -17,6 +17,7 @@
 #import "DataStructure.h"
 
 @interface SearchResultsViewController () <UITableViewDataSource,UITableViewDelegate>
+
 @property (strong, nonatomic)UITableView * tableView;
 @property (nonatomic, strong) HMSegmentedControl *segmentedControlForSearch;
 @property (nonatomic, strong) NSMutableArray *filteredArray;
@@ -26,11 +27,12 @@
 
 @property (assign, nonatomic) SearchType searchType;
 
-@property(nonatomic, strong) NSMutableArray * dataArrayForEntityForSearch;
-@property(nonatomic, strong) NSMutableArray * dataArrayForUserForSearch;
-@property(nonatomic, strong) NSMutableArray * dataArrayForLikeForSearch;
+@property (nonatomic, strong) NSMutableArray * dataArrayForEntityForSearch;
+@property (nonatomic, strong) NSMutableArray * dataArrayForUserForSearch;
+@property (nonatomic, strong) NSMutableArray * dataArrayForLikeForSearch;
+@property (strong, nonatomic) NSMutableArray * articleArray;
 
-@property(nonatomic, strong) NSMutableArray * dataArrayForOffsetForSearch;
+@property (nonatomic, strong) NSMutableArray * dataArrayForOffsetForSearch;
 @end
 
 @implementation SearchResultsViewController
@@ -188,31 +190,34 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-        NSInteger index = self.segmentedControlForSearch.selectedSegmentIndex;
-        if (index == 2)
-        {
-            return ceil(self.filteredArray.count /(CGFloat)4);
-        }
-        else if(index == 0)
+    NSInteger index = self.segmentedControlForSearch.selectedSegmentIndex;
+    
+    switch (index) {
+        case EntityType:
         {
             return self.dataArrayForEntityForSearch.count;
         }
-        else if(index == 3)
-        {
+            break;
+            
+        case ArticleType:
+            return self.articleArray.count;
+            break;
+            
+        case CategoryType:
+            return ceil(self.filteredArray.count /(CGFloat)4);
+            break;
+            
+        case UserType:
             return self.dataArrayForUserForSearch.count;
-        }
-//        else if(index == 3)
-//        {
-//            return self.dataArrayForLikeForSearch.count;
-//        }
-        return 0;
+            break;
+    }
+    return 0;
 }
 
 #pragma mark - <UITableViewDataSource>
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        NSInteger index = self.segmentedControlForSearch.selectedSegmentIndex;
+    NSInteger index = self.segmentedControlForSearch.selectedSegmentIndex;
     
     switch (index) {
         case EntityType:
@@ -265,12 +270,9 @@
             return cell;
         }
             break;
-//        default:
-//            break;
     }
     
-        return [UITableViewCell new];
-    
+    return [UITableViewCell new];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -352,22 +354,10 @@
                 }
             }
                 break;
-//            case 3:
-//            {
-//                if (self.dataArrayForUserForSearch.count == 0) {
-//                    [self handleSearchText:self.keyword];
-//                }
-//            }
-//                break;
-                
             default:
                 break;
         }
-        
-        
     }
-    
-    
 }
 
 - (void)handleSearchText:(NSString *)searchText
