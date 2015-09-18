@@ -44,7 +44,7 @@
 //        _buyButton.frame = CGRectMake(0., 0., kScreenWidth/3, 44.);
         _buyButton.layer.masksToBounds = YES;
         _buyButton.layer.cornerRadius = 4;
-        _buyButton.backgroundColor = UIColorFromRGB(0x80B6F2);
+        _buyButton.backgroundColor = UIColorFromRGB(0x6eaaf0);
         _buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:17.f];
         [_buyButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
