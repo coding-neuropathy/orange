@@ -43,7 +43,7 @@
 {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:16.];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:17.];
         _titleLabel.textColor = UIColorFromRGB(0x414243);
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.numberOfLines = 1;
@@ -59,7 +59,7 @@
 //        _detailLabel.paragraphReplacement = @"";
 //        _detailLabel.lineSpacing = 7.0;
 //        _detailLabel.delegate = self;
-        _detailLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:12.];
+        _detailLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:14.];
         _detailLabel.numberOfLines = 2;
         _detailLabel.textColor = UIColorFromRGB(0x9d9e9f);
         [self.contentView addSubview:_detailLabel];
@@ -79,7 +79,6 @@
     return _timeLabel;
 }
 
-
 - (void)setArticle:(GKArticle *)article
 {
     _article = article;
@@ -91,7 +90,7 @@
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.detailLabel.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:5.];
+    [paragraphStyle setLineSpacing:7.];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self.detailLabel.text length])];
     self.detailLabel.attributedText = attributedString;
     

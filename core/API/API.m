@@ -1008,7 +1008,7 @@
 {
     NSParameterAssert(noteId > 0);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/del/", noteId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/del/", (unsigned long)noteId];
     
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
@@ -1116,7 +1116,7 @@
     NSParameterAssert(commentCreatorId >= 0);
     NSParameterAssert(content);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/add/comment/", noteId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/add/comment/", (unsigned long)noteId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:content forKey:@"comment"];

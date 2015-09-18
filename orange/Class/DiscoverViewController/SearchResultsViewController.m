@@ -151,7 +151,7 @@
                 [self.tableView.infiniteScrollingView stopAnimating];
                 [self.tableView reloadData];
             } failure:^(NSInteger stateCode) {
-                DDLogError(@"code %ld", stateCode);
+                DDLogError(@"code %ld", (long)stateCode);
                 [self.tableView.infiniteScrollingView stopAnimating];
             }];
         }

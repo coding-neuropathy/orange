@@ -96,6 +96,7 @@
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         _contentLabel.numberOfLines = 3;
         _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        
 //        _contentLabel.delegate = self;
         [self.contentView addSubview:_contentLabel];
     }
@@ -176,6 +177,12 @@
             [weakSelf.loading stopAnimating];
         }];
     }
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.contentLabel.text];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:7.];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self.contentLabel.text length])];
+    self.contentLabel.attributedText = attributedString;
     
     
     [self setNeedsLayout];
