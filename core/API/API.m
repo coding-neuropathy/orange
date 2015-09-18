@@ -2246,7 +2246,7 @@
     [paraDict setObject:@(size) forKey:@"size"];
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         NSMutableArray *articles = [NSMutableArray array];
         
         for(NSDictionary * row in responseObject[@"articles"]) {

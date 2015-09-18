@@ -11,6 +11,7 @@
 #import "NoSearchResultView.h"
 #import "CategoryGridCell.h"
 #import "EntitySingleListCell.h"
+#import "ArticleListCell.h"
 #import "UserSingleListCell.h"
 #import "PinyinTools.h"
 
@@ -158,8 +159,9 @@
             
         case ArticleType:
         {
-            [API searchArticlesWithString:self.keyword Page:1 Size:10 success:^(NSArray *articles) {
-                
+            NSInteger page = self.articleArray.count / 10 + 1;
+            [API searchArticlesWithString:self.keyword Page:page Size:10 success:^(NSArray *articles) {
+                [self.articleArray addObjectsFromArray:articles];
                 [self.tableView.infiniteScrollingView stopAnimating];
             } failure:^(NSInteger stateCode) {
                 [self.tableView.infiniteScrollingView stopAnimating];
@@ -243,6 +245,16 @@
         }
             break;
         
+        case ArticleType:
+        {
+            static NSString * CellIdentifier = @"ArticleCell";
+            ArticleListCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[ArticleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            cell.article = [self.articleArray objectAtIndex:indexPath.row];
+            return cell;
+        }
         case CategoryType:
         {
             static NSString *CellIdentifier = @"CategoryCell";
@@ -297,7 +309,9 @@
             return [EntitySingleListCell height];
         }
             break;
-            
+        case ArticleType:
+            return 110.;
+            break;
         case CategoryType:
         {
             return [CategoryGridCell height];
@@ -414,13 +428,14 @@
         {
             [API searchArticlesWithString:self.keyword Page:1 Size:10 success:^(NSArray *articles) {
                 if (articles.count == 0) {
-                    self.articleArray = [NSMutableArray arrayWithArray:articles];;
+//                    self.articleArray = [NSMutableArray arrayWithArray:articles];
                     self.tableView.tableFooterView = self.noResultView;
                     self.noResultView.type = NoResultType;
                     //                DDLogInfo(@"%@", self.noResultView);
                 } else {
                     self.articleArray = [NSMutableArray arrayWithArray:articles];
                 }
+                NSLog(@"article count %ld", self.articleArray.count);
                 
                 [self.tableView.pullToRefreshView stopAnimating];
                 [self.tableView reloadData];
