@@ -85,9 +85,8 @@
     
     self.titleLabel.text = _article.title;
     
-//    NSLog(@"%@", _article.content);
-    self.detailLabel.text = [_article.content Trimed];
-    
+
+    self.detailLabel.text = [_article.content Trimed];    
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.detailLabel.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:7.];
@@ -95,8 +94,14 @@
     self.detailLabel.attributedText = attributedString;
     self.detailLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
-    [self.coverImageView sd_setImageWithURL:_article.coverURL];
+    /**
+     *  设置图片
+     */
+    [self.coverImageView sd_setImageWithURL:_article.coverURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth -32, (kScreenWidth - 32) / 1.8)]];
     
+    /**
+     *  设置发布时间
+     */
     NSDate * date =  [NSDate dateWithTimeIntervalSince1970:_article.pub_time];
     self.timeLabel.text = [NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForEnum:FAClockO], [date stringWithDefaultFormat]];
     
