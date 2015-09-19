@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) GKArticle * article;
 
++ (CGSize)CellSizeWithArticle:(GKArticle *)article;
+
 @end

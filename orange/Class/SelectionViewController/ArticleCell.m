@@ -46,7 +46,7 @@
         _titleLabel.font = [UIFont boldSystemFontOfSize:17.];
         _titleLabel.textColor = UIColorFromRGB(0x414243);
         _titleLabel.textAlignment = NSTextAlignmentLeft;
-        _titleLabel.numberOfLines = 1;
+        _titleLabel.numberOfLines = 2;
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;
@@ -85,17 +85,23 @@
     
     self.titleLabel.text = _article.title;
     
-//    NSLog(@"%@", _article.content);
-    self.detailLabel.text = [_article.content Trimed];
-    
+
+    self.detailLabel.text = [_article.content Trimed];    
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.detailLabel.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:7.];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self.detailLabel.text length])];
     self.detailLabel.attributedText = attributedString;
+    self.detailLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
-    [self.coverImageView sd_setImageWithURL:_article.coverURL];
+    /**
+     *  设置图片
+     */
+    [self.coverImageView sd_setImageWithURL:_article.coverURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth -32, (kScreenWidth - 32) / 1.8)]];
     
+    /**
+     *  设置发布时间
+     */
     NSDate * date =  [NSDate dateWithTimeIntervalSince1970:_article.pub_time];
     self.timeLabel.text = [NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForEnum:FAClockO], [date stringWithDefaultFormat]];
     
@@ -110,18 +116,33 @@
     self.coverImageView.deFrameTop = 16.;
     self.coverImageView.deFrameLeft = 16;
     
-    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 32., 25);
+    CGFloat height = [self.article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.]];
+    
+    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 32., height);
     self.titleLabel.deFrameLeft = 16.;
     self.titleLabel.deFrameTop = self.coverImageView.deFrameBottom + 16;
     
     self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth -32, 40);
     self.detailLabel.center = self.titleLabel.center;
-    self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 5;
-
+    self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
+    
     self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
     self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
-    self.timeLabel.deFrameRight = self.contentView.deFrameRight - 16.;
+    self.timeLabel.deFrameRight = self.contentView.deFrameRight - 10.;
     
+}
+
++ (CGSize)CellSizeWithArticle:(GKArticle *)article
+{
+    CGFloat height = [article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.]];
+    NSLog(@"%f", height);
+    
+    CGSize size = CGSizeMake(kScreenWidth, 140 + 174* kScreenWidth/(375-32));
+    
+    if (height > 25) {
+        size = CGSizeMake(kScreenWidth, 165 + 174* kScreenWidth/(375-32));
+    }
+    return size;
 }
 
 @end
