@@ -181,9 +181,10 @@
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.contentLabel.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:7.];
+    
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self.contentLabel.text length])];
     self.contentLabel.attributedText = attributedString;
-    
+    _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
     [self setNeedsLayout];
     [self setNeedsDisplay];
@@ -195,10 +196,10 @@
     
     self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth - 32, kScreenWidth - 32);
 
-    self.contentLabel.deFrameHeight = [self.note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.]];
+    self.contentLabel.deFrameHeight = [self.note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.] LineHeight:7];
 //    self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
-    if (self.contentLabel.deFrameHeight > 60.) {
-        self.contentLabel.deFrameHeight = 60.;
+    if (self.contentLabel.deFrameHeight > 65.) {
+        self.contentLabel.deFrameHeight = 65.;
     }
 //    DDLogInfo(@"content label %f", self.contentLabel.deFrameHeight);
     
@@ -241,9 +242,9 @@
 //    label.paragraphReplacement = @"";
 //    label.lineSpacing = 7.0;
 //    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
-    CGFloat height =  [note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.]];
-    if (height > 60) {
-        return 60. + kScreenWidth + 65;
+    CGFloat height =  [note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.] LineHeight:7.];
+    if (height > 65) {
+        return 65. + kScreenWidth + 65;
     }
     return height + kScreenWidth + 65;
 }

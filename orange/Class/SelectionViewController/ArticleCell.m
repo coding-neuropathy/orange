@@ -116,7 +116,7 @@
     self.coverImageView.deFrameTop = 16.;
     self.coverImageView.deFrameLeft = 16;
     
-    CGFloat height = [self.article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.]];
+    CGFloat height = [self.article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.] LineHeight:7];
     
     self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 32., height);
     self.titleLabel.deFrameLeft = 16.;
@@ -134,14 +134,15 @@
 
 + (CGSize)CellSizeWithArticle:(GKArticle *)article
 {
-    CGFloat height = [article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.]];
+    CGFloat height = [article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.] LineHeight:8];
     NSLog(@"%f", height);
     
-    CGSize size = CGSizeMake(kScreenWidth, 140 + 174* kScreenWidth/(375-32));
+    CGSize size = CGSizeMake(kScreenWidth,height + 125 + 174* kScreenWidth/(375-32));
     
+    /*
     if (height > 25) {
         size = CGSizeMake(kScreenWidth, 165 + 174* kScreenWidth/(375-32));
-    }
+    }*/
     return size;
 }
 

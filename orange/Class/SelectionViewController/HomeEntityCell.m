@@ -131,7 +131,7 @@
     
     self.imageView.frame = CGRectMake(0., 0., kScreenWidth * 0.48, kScreenWidth * 0.48);
     self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.52 - 2*x, 30.);
-    self.titleLabel.deFrameHeight = [self.titleLabel.text heightWithLineWidth:self.titleLabel.deFrameWidth Font:self.titleLabel.font];
+    self.titleLabel.deFrameHeight = [self.titleLabel.text heightWithLineWidth:self.titleLabel.deFrameWidth Font:self.titleLabel.font LineHeight:7];
     if (self.titleLabel.deFrameHeight > 50) {
         self.titleLabel.deFrameHeight = 50;
     }

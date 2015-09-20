@@ -30,11 +30,17 @@
     return [NSString stringWithFormat:@"http://imgcdn.guoku.com/%@", image_uri_string];
 }
 
-- (CGFloat)heightWithLineWidth:(CGFloat)width Font:(UIFont *)font
+- (CGFloat)heightWithLineWidth:(CGFloat)width Font:(UIFont *)font LineHeight:(CGFloat)lineHeight
 {
     
     //    CGFloat width = 286;
-    NSAttributedString * attributedText = [[NSAttributedString alloc] initWithString:self attributes:@{NSFontAttributeName: font}];
+    
+    NSMutableAttributedString * attributedText = [[NSMutableAttributedString alloc] initWithString:self attributes:@{NSFontAttributeName: font}];
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:lineHeight];
+    [attributedText addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self length])];
+    
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin
                                                context:nil];
     CGSize size = rect.size;

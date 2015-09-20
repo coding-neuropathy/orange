@@ -14,7 +14,8 @@
 - (NSString *)Trimed;
 - (NSString *)imageURLWithSize:(NSInteger)size;
 
-- (CGFloat)heightWithLineWidth:(CGFloat)width Font:(UIFont *)font;
+- (CGFloat)heightWithLineWidth:(CGFloat)width Font:(UIFont *)font LineHeight:(CGFloat)lineHeight
+;
 - (CGFloat)widthWithLineWidth:(CGFloat)width Font:(UIFont *)font;
 
 - (NSString *)encodedUrl;

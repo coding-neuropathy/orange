@@ -140,7 +140,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
 {
     [super layoutSubviews];
 
-    CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font];
+    CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font LineHeight:7];
     
     self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 16., kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
     
@@ -177,7 +177,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
 #pragma mark - class method
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity
 {
-    CGFloat titleHeight = [entity.entityName heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:[UIFont systemFontOfSize:16.f]];
+    CGFloat titleHeight = [entity.entityName heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:[UIFont systemFontOfSize:16.f] LineHeight:7];
     if (titleHeight == 0 ) {
         titleHeight = 16.;
     }
