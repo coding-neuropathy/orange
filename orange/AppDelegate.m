@@ -15,7 +15,8 @@
 #import "TagViewController.h"
 //#import "IntruductionVC.h"
 //#import "WelcomeVC.h"
-#import "WelcomeViewController.h"
+//#import "WelcomeViewController.h"
+#import "NewVersionController.h"
 #import "APService.h"
 #import "GKNotificationHUB.h"
 
@@ -100,28 +101,20 @@ int ddLogLevel;
 //    if(userInfo || urlInfo)
 //    {
         application.applicationIconBadgeNumber = 0;
-//        self.window.rootViewController.view.hidden = NO;
-//    }
-//    else
-//    {
-//        self.window.rootViewController.view.hidden = YES;
-//        WelcomeVC * welcomeVc = [[WelcomeVC alloc] init];
-//        [self.window.rootViewController presentViewController: welcomeVc animated:NO completion:NULL];
-//    }
-    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4"])
+
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV41"])
     {
-        self.window.rootViewController.view.hidden = YES;
-        //        application.applicationIconBadgeNumber = 0;
-        //        self.window.rootViewController.view.hidden = NO;
-        WelcomeViewController * vc = [WelcomeViewController new];
-        vc.finished = ^(void){
-            self.window.rootViewController.view.hidden = NO;
+        NewVersionController * vc = [NewVersionController new];
+        [self.window.rootViewController addChildViewController:vc];
+        __weak __typeof(&*vc)weakVC = vc;
+        vc.finished = ^(void) {
+            [weakVC removeFromParentViewController];
         };
-        if (IS_IPAD) {
-            vc.modalPresentationStyle = UIModalPresentationFormSheet;
-            vc.preferredContentSize = CGSizeMake(512., 686.);
-        }
-        [self.window.rootViewController presentViewController:vc animated:NO completion:nil];
+        
+        [self.window addSubview:vc.view];
+        
+//        self.window.rootViewController.view.hidden = YES;
+
     }
 
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

@@ -11,10 +11,10 @@
 #import "API.h"
 #import "SelectionCell.h"
 #import "EntitySingleListCell.h"
-#import "CategoryViewController.h"
+//#import "CategoryViewController.h"
 #import "SDWebImagePrefetcher.h"
 #import "GTScrollNavigationBar.h"
-#import "SelectionCategoryView.h"
+//#import "SelectionCategoryView.h"
 #import "IconInfoView.h"
 
 static NSString *CellIdentifier = @"SelectionCell";
@@ -367,17 +367,17 @@ static NSString *CellIdentifier = @"SelectionCell";
 //    [icon addGestureRecognizer:Tap];
 //}
 
-- (void)random
-{
-    NSInteger index = arc4random() % ([kAppDelegate.allCategoryArray count]);
-    GKEntityCategory * category = [kAppDelegate.allCategoryArray objectAtIndex:index];
-    CategoryViewController *vc = [[CategoryViewController alloc] init];
-    vc.category = category;
-    vc.hidesBottomBarWhenPushed = YES;
-    if (kAppDelegate.activeVC.navigationController) {
-        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-    }
-}
+//- (void)random
+//{
+//    NSInteger index = arc4random() % ([kAppDelegate.allCategoryArray count]);
+//    GKEntityCategory * category = [kAppDelegate.allCategoryArray objectAtIndex:index];
+//    CategoryViewController *vc = [[CategoryViewController alloc] init];
+//    vc.category = category;
+//    vc.hidesBottomBarWhenPushed = YES;
+//    if (kAppDelegate.activeVC.navigationController) {
+//        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+//    }
+//}
 
 - (void)load
 {
@@ -420,30 +420,30 @@ static NSString *CellIdentifier = @"SelectionCell";
     [[NSUserDefaults standardUserDefaults] setObject:@(self.tableView.contentOffset.y) forKey:@"selection-offset-y"];
 }
 
-#pragma mark  - title view tap action
-- (void)tapTitleView:(id)sender
-{
-    [AVAnalytics event:@"tap selection category" ];
-    [MobClick event:@"tap selection category"];
-    
-    SelectionCategoryView * view = [[SelectionCategoryView alloc]initWithCateId:self.cateId];
-    view.tapButtonBlock = ^(NSUInteger i, NSString * catename){
-        self.cateId = i;
-
-        if (self.cateId == 0) {
-            self.iconInfoView.categroyText = nil;
-        } else {
-            self.iconInfoView.categroyText = catename;
-        }
-        
-        [AVAnalytics event:@"go to category" attributes:@{@"category": catename}];
-        [MobClick event:@"go to category" attributes:@{@"category": catename}];
-        [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
-        [self.tableView triggerPullToRefresh];
-    };
-    view.tableView = self.tableView;
-    [view show];
-}
+//#pragma mark  - title view tap action
+//- (void)tapTitleView:(id)sender
+//{
+//    [AVAnalytics event:@"tap selection category" ];
+//    [MobClick event:@"tap selection category"];
+//    
+//    SelectionCategoryView * view = [[SelectionCategoryView alloc]initWithCateId:self.cateId];
+//    view.tapButtonBlock = ^(NSUInteger i, NSString * catename){
+//        self.cateId = i;
+//
+//        if (self.cateId == 0) {
+//            self.iconInfoView.categroyText = nil;
+//        } else {
+//            self.iconInfoView.categroyText = catename;
+//        }
+//        
+//        [AVAnalytics event:@"go to category" attributes:@{@"category": catename}];
+//        [MobClick event:@"go to category" attributes:@{@"category": catename}];
+//        [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+//        [self.tableView triggerPullToRefresh];
+//    };
+//    view.tableView = self.tableView;
+//    [view show];
+//}
 - (void)tapStatusBar:(id)sender
 {
     [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
