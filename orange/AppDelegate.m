@@ -19,6 +19,7 @@
 #import "NewVersionController.h"
 #import "APService.h"
 #import "GKNotificationHUB.h"
+#import "tipView.h"
 
 int ddLogLevel;
 
@@ -111,12 +112,24 @@ int ddLogLevel;
             [weakVC removeFromParentViewController];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            tipView * tip = [[tipView alloc]init];
+            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
+            {
+                [self.window addSubview:tip];
+            }
         };
         
         [self.window addSubview:vc.view];
         
 //        self.window.rootViewController.view.hidden = YES;
 
+    }
+    else{
+        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
+        {
+            tipView * tip = [[tipView alloc]init];
+            [self.window addSubview:tip];
+        }
     }
 
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -144,6 +157,8 @@ int ddLogLevel;
      name:@"GKNetworkReachabilityStatusNotReachable"//表示消息名称，发送跟接收双方都要一致
      object:nil];
 
+
+    
     
     return YES;
 }

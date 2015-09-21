@@ -197,6 +197,8 @@
 		4E688A231BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6889F71BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.m */; };
 		4E688A241BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6889F81BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.xib */; };
 		4E7869691BA70C5A00586BD9 /* EntityHeaderBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */; };
+		4E8A34331BB05C9500DF3841 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8A34321BB05C9500DF3841 /* Reveal.framework */; settings = {ASSET_TAGS = (); }; };
+		4E8A34361BB060D700DF3841 /* tipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A34351BB060D700DF3841 /* tipView.m */; settings = {ASSET_TAGS = (); }; };
 		4E8D6A991A38B59F00156C17 /* fontdiao.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */; };
 		4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A921A38B59F00156C17 /* NSString+FontDiao.m */; };
 		4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A941A38B59F00156C17 /* UIButton+FontDiao.m */; };
@@ -690,6 +692,9 @@
 		4E6889F81BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesTypingIndicatorFooterView.xib; sourceTree = "<group>"; };
 		4E7869671BA70C5A00586BD9 /* EntityHeaderBuyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHeaderBuyView.h; sourceTree = "<group>"; };
 		4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderBuyView.m; sourceTree = "<group>"; };
+		4E8A34321BB05C9500DF3841 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		4E8A34341BB060D700DF3841 /* tipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tipView.h; sourceTree = "<group>"; };
+		4E8A34351BB060D700DF3841 /* tipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tipView.m; sourceTree = "<group>"; };
 		4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontdiao.ttf; sourceTree = "<group>"; };
 		4E8D6A901A38B59F00156C17 /* FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontDiao.h; sourceTree = "<group>"; };
 		4E8D6A911A38B59F00156C17 /* NSString+FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontDiao.h"; sourceTree = "<group>"; };
@@ -992,6 +997,7 @@
 				4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */,
 				B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */,
 				B7721E801BA710A900A356C5 /* UTMini.framework in Frameworks */,
+				4E8A34331BB05C9500DF3841 /* Reveal.framework in Frameworks */,
 				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
 				B73E90CF1B1C9D7500616FD7 /* AVOSCloudSNS.framework in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
@@ -1331,6 +1337,8 @@
 				4EF508801B49042000C92618 /* ShareView.m */,
 				4EEB29FD1B523C650092A8CF /* GKNotificationHUB.h */,
 				4EEB29FE1B523C650092A8CF /* GKNotificationHUB.m */,
+				4E8A34341BB060D700DF3841 /* tipView.h */,
+				4E8A34351BB060D700DF3841 /* tipView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1591,6 +1599,7 @@
 		4E56DF1719D552C000263B17 /* orange */ = {
 			isa = PBXGroup;
 			children = (
+				4E8A34321BB05C9500DF3841 /* Reveal.framework */,
 				B7C853211B4780D100CA5F0F /* orange.entitlements */,
 				4E066AA01A5C56C600DFEF65 /* View */,
 				4E3A232B1A51A7C500037F9C /* Core */,
@@ -2894,6 +2903,7 @@
 				4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */,
 				B7BE3E2D1BA9A17A004AD422 /* CategroyGroupController.m in Sources */,
 				4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */,
+				4E8A34361BB060D700DF3841 /* tipView.m in Sources */,
 				4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

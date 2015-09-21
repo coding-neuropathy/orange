@@ -29,9 +29,9 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
+      "filename" : "Default@2x.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "Default@2x.png",
       "scale" : "2x"
     },
     {
@@ -137,6 +137,14 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "scale" : "2x"
+    },
+    {
+      "filename" : "tip_icon@2x.png",
+      "unassigned" : true
+    },
+    {
+      "filename" : "tip_icon@3x.png",
+      "unassigned" : true
     }
   ],
   "info" : {
