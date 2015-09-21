@@ -18,6 +18,7 @@
 #import "WelcomeViewController.h"
 #import "APService.h"
 #import "GKNotificationHUB.h"
+#import "tipView.h"
 
 int ddLogLevel;
 
@@ -116,12 +117,24 @@ int ddLogLevel;
         WelcomeViewController * vc = [WelcomeViewController new];
         vc.finished = ^(void){
             self.window.rootViewController.view.hidden = NO;
+            tipView * tip = [[tipView alloc]init];
+            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
+            {
+                [self.window addSubview:tip];
+            }
         };
         if (IS_IPAD) {
             vc.modalPresentationStyle = UIModalPresentationFormSheet;
             vc.preferredContentSize = CGSizeMake(512., 686.);
         }
         [self.window.rootViewController presentViewController:vc animated:NO completion:nil];
+    }
+    else{
+        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
+        {
+            tipView * tip = [[tipView alloc]init];
+            [self.window addSubview:tip];
+        }
     }
 
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -149,6 +162,8 @@ int ddLogLevel;
      name:@"GKNetworkReachabilityStatusNotReachable"//表示消息名称，发送跟接收双方都要一致
      object:nil];
 
+
+    
     
     return YES;
 }
