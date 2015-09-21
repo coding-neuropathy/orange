@@ -833,9 +833,10 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
             image.frame = self.likeButton.imageView.frame;
             [self.likeButton addSubview:image];
-            [UIView animateWithDuration:0.25 animations:^{
-                image.transform = CGAffineTransformScale(image.transform, 1.6, 1.6);
-                image.alpha = 0.25;
+            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
+                image.deFrameTop = image.deFrameTop - 10;
+                image.alpha = 0.1;
             }completion:^(BOOL finished) {
                 [image removeFromSuperview];
             }];
@@ -856,8 +857,8 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             [self.likeButton addSubview:image];
             
             [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                image.transform = CGAffineTransformScale(image.transform, 1.6, 1.6);
-                image.deFrameTop = image.deFrameTop - 8;
+                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
+                image.deFrameTop = image.deFrameTop - 10;
                 image.alpha = 0.1;
             }completion:^(BOOL finished) {
                 [image removeFromSuperview];
