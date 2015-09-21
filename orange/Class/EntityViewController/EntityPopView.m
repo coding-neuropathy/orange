@@ -134,17 +134,17 @@
     [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth) * idx, 0., kScreenWidth, kScreenWidth)];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
-        if (IS_IPHONE_6P) {
-            NSURL * imageURL_800;
-            if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
-                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:800]];
-            } else {
-                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
-            }
-            
-            [imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
-            //            [self.scrollView addSubview:imageView];
-        } else {
+//        if (IS_IPHONE_6P) {
+//            NSURL * imageURL_800;
+//            if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+//                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:800]];
+//            } else {
+//                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
+//            }
+//            
+//            [imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+//            //            [self.scrollView addSubview:imageView];
+//        } else {
             NSURL * imageURL_640;
             if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
                 imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:640]];
@@ -154,7 +154,7 @@
             
             [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
             
-        }
+//        }
         [self.scrollView addSubview:imageView];
     }];
     

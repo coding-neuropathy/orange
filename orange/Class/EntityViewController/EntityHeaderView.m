@@ -105,17 +105,17 @@ static CGFloat kEntityViewMarginLeft = 16.;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.tag = idx;
         imageView.userInteractionEnabled = YES;
-        if (IS_IPHONE_6P) {
-            NSURL * imageURL_800;
-            if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
-                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:800]];
-            } else {
-                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
-            }
-            
-            [imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
-//            [self.scrollView addSubview:imageView];
-        } else {
+//        if (IS_IPHONE_6P) {
+//            NSURL * imageURL_800;
+//            if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+//                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:800]];
+//            } else {
+//                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
+//            }
+//            
+//            [imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+////            [self.scrollView addSubview:imageView];
+//        } else {
             NSURL * imageURL_640;
             if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
                 imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:640]];
@@ -125,7 +125,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
         
             [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
             
-        }
+//        }
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
         
         [imageView addGestureRecognizer:tap];

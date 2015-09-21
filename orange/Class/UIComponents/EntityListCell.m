@@ -134,7 +134,7 @@
     
     self.likeBtn.selected = _entity.isLiked;
     
-    self.titleLabel.text = _entity.title;
+    self.titleLabel.text = _entity.entityName;
     GKPurchase * purchase = [_entity.purchaseArray objectAtIndex:0];
     self.priceLabel.text = [NSString stringWithFormat:@"¥ %.2f", purchase.lowestPrice];
     
