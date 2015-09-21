@@ -31,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.32];
-    
+
     self.scrollView.frame = CGRectMake(0, 0, 290., 425.);
     self.scrollView.center = self.view.center;
     self.scrollView.backgroundColor = [UIColor whiteColor];

@@ -49,13 +49,17 @@
         [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
 //        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-        NSDictionary *dict = [NSDictionary dictionaryWithObject:UIColorFromRGB(0x9d9e9f) forKey:NSForegroundColorAttributeName];
-        [_segmentedControl setTitleTextAttributes:dict];
+//        NSDictionary *dict = [NSDictionary dictionaryWithObject:UIColorFromRGB(0x9d9e9f) forKey:NSForegroundColorAttributeName];
+//        [_segmentedControl setTitleTextAttributes:dict];
         NSDictionary *dict2 = [NSDictionary dictionaryWithObject:UIColorFromRGB(0xFF1F77) forKey:NSForegroundColorAttributeName];
         [_segmentedControl setSelectedTitleTextAttributes:dict2];
         UIFont *font = [UIFont boldSystemFontOfSize:17.];
-        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-                                                               forKey:NSFontAttributeName];
+//        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+//                                                               forKey:NSFontAttributeName];
+        
+        NSMutableDictionary * attributes = [NSMutableDictionary dictionary];
+        [attributes setValue:font forKey:NSFontAttributeName];
+        [attributes setValue:UIColorFromRGB(0x9d9e9f) forKey:NSForegroundColorAttributeName];
         [_segmentedControl setTitleTextAttributes:attributes];
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
         [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
