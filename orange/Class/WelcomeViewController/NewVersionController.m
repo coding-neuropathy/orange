@@ -72,23 +72,47 @@
     self.detailLabel.textColor = UIColorFromRGB(0x9d9e9f);
     self.detailLabel.textAlignment = NSTextAlignmentCenter;
     self.detailLabel.text = @"对消费选择的苛求，衣食住行的洞见。\n生活可以将就，也可以讲究。";
-    self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 20.;
+    self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10.;
     [self.scrollView addSubview:self.detailLabel];
     
+    /**
+     *  GUID IMAGE
+     */
+    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0., 0., 225., 260.)];
+    self.imageView.image = [UIImage imageNamed:@"newVer"];
+    self.imageView.center = self.titleLabel.center;
+    self.imageView.deFrameTop = self.detailLabel.deFrameBottom + 5;
+    [self.scrollView addSubview:self.imageView];
     
+    /**
+     *  开始按钮
+     */
     self.startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    
     self.startBtn.frame = CGRectMake(0., 0., 290., 50.);
-    
     [self.startBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
     [self.startBtn setTitle:[NSString stringWithFormat:@"即可体验 %@", [NSString fontAwesomeIconStringForEnum:FAArrowCircleORight]] forState:UIControlStateNormal];
     self.startBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
-    
     self.startBtn.deFrameBottom = CGRectGetHeight(self.scrollView.frame);
     [self.startBtn addTarget:self action:@selector(startBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.scrollView addSubview:self.startBtn];
+}
+
+- (void)fadeOut
+{
+    [UIView animateWithDuration:0.35 animations:^{
+        self.scrollView.transform = CGAffineTransformMakeScale(1.3, 1.3);
+        self.scrollView.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished)
+        {
+//            [self removeFromSuperview];
+//            [self.view removeFromSuperview];
+            if (self.finished) {
+                [self.view removeFromSuperview];
+                self.finished();
+            }
+        }
+    }];
 }
 
 #pragma mark - Button Action
@@ -96,10 +120,11 @@
 {
 //    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
-    if (self.finished) {
-        [self.view removeFromSuperview];
-        self.finished();
-    }
+//    if (self.finished) {
+//        [self.view removeFromSuperview];
+//        self.finished();
+//    }
+    [self fadeOut];
 }
 
 @end

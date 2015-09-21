@@ -109,6 +109,8 @@ int ddLogLevel;
         __weak __typeof(&*vc)weakVC = vc;
         vc.finished = ^(void) {
             [weakVC removeFromParentViewController];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         };
         
         [self.window addSubview:vc.view];
