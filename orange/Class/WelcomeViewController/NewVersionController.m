@@ -118,12 +118,6 @@
 #pragma mark - Button Action
 - (void)startBtnAction:(id)sender
 {
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    if (self.finished) {
-//        [self.view removeFromSuperview];
-//        self.finished();
-//    }
     [self fadeOut];
 }
 
