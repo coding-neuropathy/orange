@@ -313,12 +313,15 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0, 0.);
     switch (section) {
+        case 1:
+            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            break;
         case 2:
             edge = UIEdgeInsetsMake(0., 0., 10., 0.);
             break;
         case 3:
         {
-            edge = UIEdgeInsetsMake(3., 3., 3., 3.);
+            edge = UIEdgeInsetsMake(0., 3., 3., 3.);
         }
             break;
         default:

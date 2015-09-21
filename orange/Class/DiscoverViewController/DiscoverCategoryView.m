@@ -17,6 +17,15 @@
 @end
 
 @implementation DiscoverCategoryView
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
 
 - (UILabel *)categoryLabel
 {
