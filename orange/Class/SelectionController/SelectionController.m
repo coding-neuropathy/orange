@@ -70,14 +70,6 @@
     }
     return _segmentedControl;
 }
-//
-//- (HomeController *)homeVC
-//{
-//    if (!_homeVC) {
-//        _homeVC = [[HomeController alloc] init];
-//    }
-//    return _homeVC;
-//}
 
 - (SelectionViewController *)entityVC
 {
