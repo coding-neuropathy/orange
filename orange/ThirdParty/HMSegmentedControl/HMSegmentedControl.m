@@ -773,11 +773,11 @@
 #pragma mark - Index Change
 
 - (void)setSelectedSegmentIndex:(NSInteger)index {
-    [self setSelectedSegmentIndex:index animated:NO notify:NO];
+    [self setSelectedSegmentIndex:index animated:NO notify:YES];
 }
 
 - (void)setSelectedSegmentIndex:(NSUInteger)index animated:(BOOL)animated {
-    [self setSelectedSegmentIndex:index animated:animated notify:NO];
+    [self setSelectedSegmentIndex:index animated:animated notify:YES];
 }
 
 - (void)setSelectedSegmentIndex:(NSUInteger)index animated:(BOOL)animated notify:(BOOL)notify {

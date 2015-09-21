@@ -297,13 +297,33 @@
     
     [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
-            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
+            image.frame = self.likeButton.imageView.frame;
+            [self.likeButton addSubview:image];
+            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
+                image.deFrameTop = image.deFrameTop - 10;
+                image.alpha = 0.1;
+            }completion:^(BOOL finished) {
+                [image removeFromSuperview];
+            }];
+            //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
         self.likeButton.selected = liked;
         self.entity.liked = liked;
         
         if (liked) {
-            [SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
+            image.frame = self.likeButton.imageView.frame;
+            [self.likeButton addSubview:image];
+            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
+                image.deFrameTop = image.deFrameTop - 10;
+                image.alpha = 0.1;
+            }completion:^(BOOL finished) {
+                [image removeFromSuperview];
+            }];
             self.entity.likeCount = self.entity.likeCount + 1;
         } else {
             self.entity.likeCount = self.entity.likeCount - 1;
