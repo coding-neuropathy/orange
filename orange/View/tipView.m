@@ -26,7 +26,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         UIButton * mask = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kTabBarHeight)];
-        mask.backgroundColor = [UIColor colorWithWhite:0 alpha:0.38];
+        mask.backgroundColor = [UIColor colorWithWhite:0 alpha:0.32];
         [mask addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:mask];
         
@@ -44,6 +44,15 @@
         icon.center = CGPointMake(3*kScreenWidth/8, 0);
         icon.deFrameTop = tip.deFrameBottom-2;
         [self addSubview:icon];
+        tip.alpha = 0;
+        icon.alpha = 0;
+        [UIView animateWithDuration:0.1 animations:^{
+            tip.alpha = 1;
+            icon.alpha = 1;
+        }completion:^(BOOL finished) {
+
+        }];
+        
     }
 
     return self;
