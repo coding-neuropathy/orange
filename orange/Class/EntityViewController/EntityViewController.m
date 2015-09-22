@@ -167,7 +167,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         UIImage * image = [[UIImage imageNamed:@"post note"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _postBtn.tintColor = UIColorFromRGB(0xffffff);
         [_postBtn setImage:image forState:UIControlStateNormal];
-        [_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
+        //[_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
         _postBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_postBtn addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -899,7 +899,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         if (![self.dataArrayForNote containsObject:note]) {
             [self.dataArrayForNote insertObject:note atIndex:self.dataArrayForNote.count];
         }
-        [self.noteButton setTitle:NSLocalizedStringFromTable(@"update note", kLocalizedFile, nil) forState:UIControlStateNormal];
+        //[self.noteButton setTitle:NSLocalizedStringFromTable(@"update note", kLocalizedFile, nil) forState:UIControlStateNormal];
         //[self.noteButton setTitle:@"修改" forState:UIControlStateNormal];
         self.note = note;
         [self.collectionView reloadData];
