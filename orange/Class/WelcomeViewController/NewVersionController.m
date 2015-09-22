@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UILabel * detailLabel;
 @property (strong, nonatomic) UIImageView * imageView;
 @property (strong, nonatomic) UIButton * startBtn;
+@property (strong, nonatomic) UIButton * closeBtn;
 
 @end
 
@@ -78,10 +79,10 @@
     /**
      *  GUID IMAGE
      */
-    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0., 0., 225., 260.)];
-    self.imageView.image = [UIImage imageNamed:@"newVer"];
+    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0., 0., 290, 240.)];
+    self.imageView.image = [UIImage imageNamed:@"Walkthrough"];
     self.imageView.center = self.titleLabel.center;
-    self.imageView.deFrameTop = self.detailLabel.deFrameBottom + 5;
+    self.imageView.deFrameTop = self.detailLabel.deFrameBottom;
     [self.scrollView addSubview:self.imageView];
     
     /**
@@ -95,22 +96,39 @@
     self.startBtn.deFrameBottom = CGRectGetHeight(self.scrollView.frame);
     [self.startBtn addTarget:self action:@selector(startBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.startBtn];
+    
+    
+    /**
+     * 关闭按钮
+     */
+    self.closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *closeimage = [UIImage imageNamed:@"startClose"];
+    [self.closeBtn setImage:closeimage forState:UIControlStateNormal];
+    self.closeBtn.frame = CGRectMake(0., 0., closeimage.size.width, closeimage.size.height);
+    
+    self.closeBtn.deFrameRight =  CGRectGetMaxX(self.scrollView.frame) + 12.;
+    self.closeBtn.deFrameTop = CGRectGetMinY(self.scrollView.frame) - 12.;
+    [self.closeBtn addTarget:self action:@selector(closeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view insertSubview:self.closeBtn aboveSubview:self.scrollView];
 }
 
-- (void)fadeOut
+
+#pragma mark - 
+
+- (void)fadeIn
+{
+//    []
+}
+
+- (void)fadeOutWithAction:(void (^)(void))action
 {
     [UIView animateWithDuration:0.35 animations:^{
-        self.scrollView.transform = CGAffineTransformMakeScale(1.3, 1.3);
-        self.scrollView.alpha = 0;
+        self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
+        self.view.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished)
         {
-//            [self removeFromSuperview];
-//            [self.view removeFromSuperview];
-            if (self.finished) {
-                [self.view removeFromSuperview];
-                self.finished();
-            }
+            action();
         }
     }];
 }
@@ -118,7 +136,22 @@
 #pragma mark - Button Action
 - (void)startBtnAction:(id)sender
 {
-    [self fadeOut];
+    [self fadeOutWithAction:^{
+        if (self.finished) {
+            [self.view removeFromSuperview];
+            self.finished();
+        }
+    }];
+}
+
+- (void)closeBtnAction:(id)sender
+{
+    [self fadeOutWithAction:^{
+        if (self.closeAction) {
+            [self.view removeFromSuperview];
+            self.closeAction();
+        }
+    }];
 }
 
 @end

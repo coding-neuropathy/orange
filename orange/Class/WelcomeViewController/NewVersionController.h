@@ -12,4 +12,6 @@
 
 @property (nonatomic, copy) void (^finished)();
 
+@property (nonatomic, copy) void (^closeAction)();
+
 @end

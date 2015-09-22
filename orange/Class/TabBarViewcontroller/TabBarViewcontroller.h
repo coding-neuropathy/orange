@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SelectionController.h"
 
 @interface TabBarViewcontroller : UITabBarController
+
+@property (strong, nonatomic) SelectionController * selectionController;
 
 @end

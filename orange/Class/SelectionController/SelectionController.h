@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataStructure.h"
 
 @interface SelectionController : UIViewController
+
+- (void)setSelectedWithType:(SelectionType)type;
 
 @end

@@ -31,6 +31,14 @@
     return self;
 }
 
+//- (SelectionController *)selectionController
+//{
+//    if (!_selectionController) {
+//        _selectionController  = [[SelectionController alloc] init]
+//    }
+//    return _selectionController;
+//}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -44,8 +52,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login) name:@"Login" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:@"Logout" object:nil];
+    
     UINavigationController * first = [[UINavigationController alloc] init];
-    [first setViewControllers:@[[[SelectionController alloc] init]] animated:NO];
+    self.selectionController = [[SelectionController alloc] init];
+    [first setViewControllers:@[self.selectionController] animated:NO];
     
     UINavigationController * second = [[UINavigationController alloc] init];
     [second setViewControllers:@[[[DiscoverController alloc] init]] animated:NO];
@@ -158,7 +168,9 @@
 - (void)logout
 {
     UINavigationController * first = [[UINavigationController alloc] init];
-    [first setViewControllers:@[[[SelectionController alloc] init]] animated:NO];
+    self.selectionController = [[SelectionController alloc] init];
+    [first setViewControllers:@[self.selectionController] animated:NO];
+//    [first setViewControllers:@[[[SelectionController alloc] init]] animated:NO];
     
     UINavigationController * second = [[UINavigationController alloc] init];
     [second setViewControllers:@[[[DiscoverController alloc] init]] animated:NO];

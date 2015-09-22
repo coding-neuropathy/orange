@@ -200,6 +200,19 @@
     if (segmentedControl.selectedSegmentIndex == 1){
         [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     }
-    
 }
+
+#pragma mark - set selection type
+- (void)setSelectedWithType:(SelectionType)type
+{
+    switch (type) {
+        case SelectionEntityType:
+            [self.segmentedControl setSelectedSegmentIndex:0 animated:YES];
+            break;
+        case SelectionArticleType:
+            [self.segmentedControl setSelectedSegmentIndex:1 animated:YES];
+            break;
+    }
+}
+
 @end

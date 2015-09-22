@@ -14,6 +14,15 @@
 
 
 /**
+ *  精选商品，图文
+ */
+typedef NS_ENUM(NSInteger, SelectionType) {
+    SelectionEntityType,
+    SelectionArticleType,
+};
+
+
+/**
  *  商品显示样式
  */
 typedef NS_ENUM(NSInteger, EntityDisplayStyle) {

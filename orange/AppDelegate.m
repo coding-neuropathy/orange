@@ -25,6 +25,8 @@ int ddLogLevel;
 
 @interface AppDelegate ()<WXApiDelegate>
 
+@property (strong, nonatomic) TabBarViewcontroller * tabbarViewController;
+
 @end
 
 @implementation AppDelegate
@@ -69,12 +71,6 @@ int ddLogLevel;
             NSLog(@"【插件版监听：用户logout】");
         }
     }];
-
-//    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunchedV4"]) {
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunchedV4"];
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV4"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -92,26 +88,41 @@ int ddLogLevel;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[TabBarViewcontroller alloc]init];
+    self.tabbarViewController = [[TabBarViewcontroller alloc] init];
+//    self.window.rootViewController = [[TabBarViewcontroller alloc] init];
+    self.window.rootViewController = self.tabbarViewController;
+    
 //    self.window.rootViewController.view.hidden = NO;
     [self.window makeKeyAndVisible];
 
-//    NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-//    NSDictionary * urlInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
-    
-//    if(userInfo || urlInfo)
-//    {
-        application.applicationIconBadgeNumber = 0;
+
+    application.applicationIconBadgeNumber = 0;
 
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV41"])
     {
         NewVersionController * vc = [NewVersionController new];
         [self.window.rootViewController addChildViewController:vc];
         __weak __typeof(&*vc)weakVC = vc;
+        __weak __typeof(&*self.tabbarViewController.selectionController)weakSelection = self.tabbarViewController.selectionController;
         vc.finished = ^(void) {
             [weakVC removeFromParentViewController];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            [weakSelection setSelectedWithType:SelectionArticleType];
+            
+            tipView * tip = [[tipView alloc]init];
+            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
+            {
+                [self.window addSubview:tip];
+            }
+        };
+        
+        vc.closeAction = ^(void) {
+            [weakVC removeFromParentViewController];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [weakSelection setSelectedWithType:SelectionArticleType];
+            
             tipView * tip = [[tipView alloc]init];
             if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
             {
