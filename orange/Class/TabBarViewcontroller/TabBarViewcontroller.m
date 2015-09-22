@@ -112,6 +112,14 @@
     return YES;
 }
 
+//- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+//{
+////    NSLog(@"%@", viewController);
+//    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[SelectionController class]]) {
+////        self.selectionController
+//    }
+//}
+
 - (void)addBadge
 {
     [self removeBadge];
