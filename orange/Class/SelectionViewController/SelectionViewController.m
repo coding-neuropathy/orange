@@ -189,16 +189,24 @@ static NSString *CellIdentifier = @"SelectionCell";
 
 - (void)saveEntityToIndexWithData:(NSArray *)data
 {
+    if (![CSSearchableIndex isIndexingAvailable]) {
+        return;
+    }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSMutableArray<CSSearchableItem *> *searchableItems = [NSMutableArray array];
         
         for (NSDictionary * row in data) {
-            CSSearchableItemAttributeSet *attributedSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"image"];
+            CSSearchableItemAttributeSet *attributedSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"entity"];
             GKEntity * entity = [[row objectForKey:@"content"] objectForKey:@"entity"];
             GKNote * note = [[row objectForKey:@"content"] objectForKey:@"note"];
+            
             attributedSet.title = entity.entityName;
             attributedSet.contentDescription = note.text;
-            
+            attributedSet.identifier = @"entity";
+        
+            /**
+             *  set image data
+             */
             NSData * imagedata = [self readImageWithURL:entity.imageURL_240x240];
             if (imagedata) {
                 attributedSet.thumbnailData = imagedata;
@@ -206,7 +214,10 @@ static NSString *CellIdentifier = @"SelectionCell";
                 attributedSet.thumbnailData = [NSData dataWithContentsOfURL:entity.imageURL_240x240];
                 [self saveImageWhthData:attributedSet.thumbnailData URL:entity.imageURL_240x240];
             }
+            
+            
             CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"%@", entity.entityId] domainIdentifier:@"com.guoku.iphone.search.entity" attributeSet:attributedSet];
+            
             [searchableItems addObject:item];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
