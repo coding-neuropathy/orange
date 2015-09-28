@@ -17,12 +17,14 @@
 //#import "SelectionCategoryView.h"
 #import "IconInfoView.h"
 
+@import CoreSpotlight;
+
 static NSString *CellIdentifier = @"SelectionCell";
 
 @interface SelectionViewController ()<UITableViewDataSource, UITableViewDelegate>
 //@property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
-@property(nonatomic, strong) NSMutableArray * dataArrayForArticle;
+//@property(nonatomic, strong) NSMutableArray * dataArrayForArticle;
 @property(nonatomic, assign) NSInteger index;
 
 @property (nonatomic, strong) UILabel * SelectionCountLabel;
@@ -49,39 +51,12 @@ static NSString *CellIdentifier = @"SelectionCell";
         //self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
         self.cateId = 0;
         
-//        NSMutableArray * array = [NSMutableArray array];
-//        {
-//            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-//            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
-//            button.titleLabel.textAlignment = NSTextAlignmentCenter;
-//            [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-//            [button setTitle:[NSString fontAwesomeIconStringForEnum:FARandom] forState:UIControlStateNormal];
-//            [button addTarget:self action:@selector(random) forControlEvents:UIControlEventTouchUpInside];
-//            button.backgroundColor = [UIColor clearColor];
-//            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-//            [array addObject:item];
-//        }
-        //self.navigationItem.rightBarButtonItems = array;
-        
         self.tableView.frame = CGRectMake(0, 0,kScreenWidth , kScreenHeight-kStatusBarHeight-kNavigationBarHeight - kTabBarHeight);
         
     }
     return self;
 }
 
-//- (IconInfoView *)iconInfoView
-//{
-//    if (!_iconInfoView) {
-//        
-//        _iconInfoView = [[IconInfoView alloc] initWithFrame:CGRectMake(0., 7., 100., 25.)];
-//        _iconInfoView.categroyText = nil;
-//        
-//        UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTitleView:)];
-//        [_iconInfoView addGestureRecognizer:Tap];
-//    
-//    }
-//    return _iconInfoView;
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -152,14 +127,16 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self save];
             NSMutableArray* imageArray = [NSMutableArray array];
             for (NSDictionary * dic in dataArray) {
-               GKEntity * entity = [[dic objectForKey:@"content"]objectForKey:@"entity"];
+               GKEntity * entity = [[dic objectForKey:@"content"] objectForKey:@"entity"];
                 
                 [imageArray addObject:entity.imageURL_640x640];
             }
-            [[SDWebImagePrefetcher sharedImagePrefetcher]prefetchURLs:imageArray];
+            [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:imageArray];
             
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
+            
+            [self saveEntityToIndexWithData:dataArray];
         } failure:^(NSInteger stateCode) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
             //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
@@ -191,6 +168,8 @@ static NSString *CellIdentifier = @"SelectionCell";
             [self save];
             [self.tableView reloadData];
             [self.tableView.infiniteScrollingView stopAnimating];
+            
+            [self saveEntityToIndexWithData:dataArray];
         } failure:^(NSInteger stateCode) {
             //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [SVProgressHUD dismiss];
@@ -206,6 +185,64 @@ static NSString *CellIdentifier = @"SelectionCell";
     return;
 }
 
+#pragma mark - save to index
+
+- (void)saveEntityToIndexWithData:(NSArray *)data
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSMutableArray<CSSearchableItem *> *searchableItems = [NSMutableArray array];
+        
+        for (NSDictionary * row in data) {
+            CSSearchableItemAttributeSet *attributedSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"image"];
+            GKEntity * entity = [[row objectForKey:@"content"] objectForKey:@"entity"];
+            GKNote * note = [[row objectForKey:@"content"] objectForKey:@"note"];
+            attributedSet.title = entity.entityName;
+            attributedSet.contentDescription = note.text;
+            
+            NSData * imagedata = [self readImageWithURL:entity.imageURL_240x240];
+            if (imagedata) {
+                attributedSet.thumbnailData = imagedata;
+            } else {
+                attributedSet.thumbnailData = [NSData dataWithContentsOfURL:entity.imageURL_240x240];
+                [self saveImageWhthData:attributedSet.thumbnailData URL:entity.imageURL_240x240];
+            }
+            CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"%@", entity.entityId] domainIdentifier:@"com.guoku.iphone.search.entity" attributeSet:attributedSet];
+            [searchableItems addObject:item];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.entityImageView setImage:placeholder];
+            [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
+                if (error != nil) {
+                    NSLog(@"index Error %@",error.localizedDescription);
+                }
+            }];
+        });
+    });
+}
+
+- (BOOL)saveImageWhthData:(NSData *)data URL:(NSURL *)url
+{
+    //    NSError * err = nil;
+    NSString * imagefile = [url.absoluteString md5];
+    
+    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
+    //    NSLog(@"url %@", containerURL);
+    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
+    BOOL result = [data writeToURL:containerURL atomically:YES];
+    return result;
+}
+
+- (NSData *)readImageWithURL:(NSURL *)url
+{
+    NSString * imagefile = [url.absoluteString md5];
+    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
+    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
+    
+    return [NSData dataWithContentsOfURL:containerURL];
+    //    return data;
+}
+
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -218,10 +255,10 @@ static NSString *CellIdentifier = @"SelectionCell";
     if (self.index == 0) {
         return ceil(self.dataArrayForEntity.count / (CGFloat)1);
     }
-    else if (self.index == 1)
-    {
-         return ceil(self.dataArrayForArticle.count / (CGFloat)1);
-    }
+//    else if (self.index == 1)
+//    {
+//         return ceil(self.dataArrayForArticle.count / (CGFloat)1);
+//    }
     return 0;
 }
 
@@ -249,10 +286,10 @@ static NSString *CellIdentifier = @"SelectionCell";
         }
 
     }
-    else if (self.index == 1)
-    {
-        return [[UITableViewCell alloc] init];
-    }
+//    else if (self.index == 1)
+//    {
+//        return [[UITableViewCell alloc] init];
+//    }
     return [[UITableViewCell alloc] init];
 
 }
@@ -353,31 +390,6 @@ static NSString *CellIdentifier = @"SelectionCell";
     }
 }
 
-//- (void)logo
-//{
-//    
-//    UIImageView * icon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7, 43, 25)];
-//    icon.image = [[UIImage imageNamed:@"logo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    //icon.tintColor = UIColorFromRGB(0x8b8b8b);
-//    icon.contentMode = UIViewContentModeScaleAspectFit;
-//    icon.userInteractionEnabled = YES;
-//    self.navigationItem.titleView = icon;
-//    
-//    UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTitleView:)];
-//    [icon addGestureRecognizer:Tap];
-//}
-
-//- (void)random
-//{
-//    NSInteger index = arc4random() % ([kAppDelegate.allCategoryArray count]);
-//    GKEntityCategory * category = [kAppDelegate.allCategoryArray objectAtIndex:index];
-//    CategoryViewController *vc = [[CategoryViewController alloc] init];
-//    vc.category = category;
-//    vc.hidesBottomBarWhenPushed = YES;
-//    if (kAppDelegate.activeVC.navigationController) {
-//        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-//    }
-//}
 
 - (void)load
 {
@@ -420,30 +432,6 @@ static NSString *CellIdentifier = @"SelectionCell";
     [[NSUserDefaults standardUserDefaults] setObject:@(self.tableView.contentOffset.y) forKey:@"selection-offset-y"];
 }
 
-//#pragma mark  - title view tap action
-//- (void)tapTitleView:(id)sender
-//{
-//    [AVAnalytics event:@"tap selection category" ];
-//    [MobClick event:@"tap selection category"];
-//    
-//    SelectionCategoryView * view = [[SelectionCategoryView alloc]initWithCateId:self.cateId];
-//    view.tapButtonBlock = ^(NSUInteger i, NSString * catename){
-//        self.cateId = i;
-//
-//        if (self.cateId == 0) {
-//            self.iconInfoView.categroyText = nil;
-//        } else {
-//            self.iconInfoView.categroyText = catename;
-//        }
-//        
-//        [AVAnalytics event:@"go to category" attributes:@{@"category": catename}];
-//        [MobClick event:@"go to category" attributes:@{@"category": catename}];
-//        [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
-//        [self.tableView triggerPullToRefresh];
-//    };
-//    view.tableView = self.tableView;
-//    [view show];
-//}
 - (void)tapStatusBar:(id)sender
 {
     [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];

@@ -246,6 +246,8 @@
 		B71E495F1AC98E4700D4DB6D /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B71E495E1AC98E4700D4DB6D /* SettingsFooterView.m */; };
 		B72000B51B0848160001F199 /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B72000B41B0848160001F199 /* libPushSDK-1.8.3.a */; };
 		B72000B71B0849E50001F199 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B72000B61B0849E50001F199 /* PushConfig.plist */; };
+		B72985EB1BB8E41B006E2518 /* IndexRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B72985EA1BB8E41B006E2518 /* IndexRequestHandler.m */; };
+		B72985EF1BB8E41B006E2518 /* seach.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B72985E71BB8E41B006E2518 /* seach.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = B72ACCC11B66531E0020E841 /* DiscoverController.m */; };
 		B72ACCC81B666B8C0020E841 /* DiscoverBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72ACCC71B666B8C0020E841 /* DiscoverBannerView.m */; };
 		B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD82E1AEF5B3A00354248 /* IconInfoView.m */; };
@@ -365,6 +367,13 @@
 			remoteGlobalIDString = 39B8688D1ACD0CF600A2115D;
 			remoteInfo = core;
 		};
+		B72985ED1BB8E41B006E2518 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E56DF0D19D552C000263B17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B72985E61BB8E41B006E2518;
+			remoteInfo = seach;
+		};
 		B7BFC9081ACC27C2009627CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4E56DF0D19D552C000263B17 /* Project object */;
@@ -393,6 +402,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				B7BFC90A1ACC27C2009627CA /* today.appex in Embed App Extensions */,
+				B72985EF1BB8E41B006E2518 /* seach.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -786,6 +796,11 @@
 		B72000B31B0848160001F199 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B72000B41B0848160001F199 /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
 		B72000B61B0849E50001F199 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		B72985E71BB8E41B006E2518 /* seach.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = seach.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B72985E91BB8E41B006E2518 /* IndexRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndexRequestHandler.h; sourceTree = "<group>"; };
+		B72985EA1BB8E41B006E2518 /* IndexRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndexRequestHandler.m; sourceTree = "<group>"; };
+		B72985EC1BB8E41B006E2518 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B72985F31BB8E727006E2518 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
 		B72ACCC01B66531E0020E841 /* DiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverController.h; sourceTree = "<group>"; };
 		B72ACCC11B66531E0020E841 /* DiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverController.m; sourceTree = "<group>"; };
 		B72ACCC61B666B8C0020E841 /* DiscoverBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverBannerView.h; sourceTree = "<group>"; };
@@ -1030,6 +1045,13 @@
 				B7721E791BA710A900A356C5 /* ALBBTradeSDK.framework in Frameworks */,
 				4E56DFB919D5AEF300263B17 /* CoreMotion.framework in Frameworks */,
 				4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B72985E41BB8E41B006E2518 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1578,6 +1600,7 @@
 				39B71FEB1B1F4C16008519E3 /* core */,
 				4E56DF1719D552C000263B17 /* orange */,
 				B7BFC9001ACC27C2009627CA /* today */,
+				B72985E81BB8E41B006E2518 /* seach */,
 				B7BFC8FD1ACC27C2009627CA /* Frameworks */,
 				4E56DF1619D552C000263B17 /* Products */,
 			);
@@ -1589,6 +1612,7 @@
 				4E56DF1519D552C000263B17 /* orange.app */,
 				B7BFC8FC1ACC27C1009627CA /* today.appex */,
 				39B8688E1ACD0CF600A2115D /* core.framework */,
+				B72985E71BB8E41B006E2518 /* seach.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2125,6 +2149,16 @@
 			path = JPush;
 			sourceTree = "<group>";
 		};
+		B72985E81BB8E41B006E2518 /* seach */ = {
+			isa = PBXGroup;
+			children = (
+				B72985E91BB8E41B006E2518 /* IndexRequestHandler.h */,
+				B72985EA1BB8E41B006E2518 /* IndexRequestHandler.m */,
+				B72985EC1BB8E41B006E2518 /* Info.plist */,
+			);
+			path = seach;
+			sourceTree = "<group>";
+		};
 		B74266DA1AB3DFE10064A010 /* AutoScroll */ = {
 			isa = PBXGroup;
 			children = (
@@ -2325,6 +2359,7 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B72985F31BB8E727006E2518 /* CoreSpotlight.framework */,
 				4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */,
 				B7B6958E1AF05F310016AAB8 /* ImageIO.framework */,
 				B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */,
@@ -2505,11 +2540,29 @@
 			dependencies = (
 				B7BFC9091ACC27C2009627CA /* PBXTargetDependency */,
 				39B868A41ACD0CF700A2115D /* PBXTargetDependency */,
+				B72985EE1BB8E41B006E2518 /* PBXTargetDependency */,
 			);
 			name = orange;
 			productName = card;
 			productReference = 4E56DF1519D552C000263B17 /* orange.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B72985E61BB8E41B006E2518 /* seach */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B72985F21BB8E41B006E2518 /* Build configuration list for PBXNativeTarget "seach" */;
+			buildPhases = (
+				B72985E31BB8E41B006E2518 /* Sources */,
+				B72985E41BB8E41B006E2518 /* Frameworks */,
+				B72985E51BB8E41B006E2518 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = seach;
+			productName = seach;
+			productReference = B72985E71BB8E41B006E2518 /* seach.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		B7BFC8FB1ACC27C1009627CA /* today */ = {
 			isa = PBXNativeTarget;
@@ -2553,6 +2606,10 @@
 							};
 						};
 					};
+					B72985E61BB8E41B006E2518 = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = BKXKS4HPNG;
+					};
 					B7BFC8FB1ACC27C1009627CA = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = BKXKS4HPNG;
@@ -2593,6 +2650,7 @@
 				4E56DF1419D552C000263B17 /* orange */,
 				B7BFC8FB1ACC27C1009627CA /* today */,
 				39B8688D1ACD0CF600A2115D /* core */,
+				B72985E61BB8E41B006E2518 /* seach */,
 			);
 		};
 /* End PBXProject section */
@@ -2649,6 +2707,13 @@
 				4E4F27FB1B6F4699003A63C5 /* 7.png in Resources */,
 				4E688A031BA9C2BA0006AD9B /* JSQMessagesViewController.xib in Resources */,
 				4E688A181BA9C2BA0006AD9B /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B72985E51BB8E41B006E2518 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2904,6 +2969,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B72985E31BB8E41B006E2518 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B72985EB1BB8E41B006E2518 /* IndexRequestHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7BFC8F81ACC27C1009627CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2920,6 +2993,11 @@
 			isa = PBXTargetDependency;
 			target = 39B8688D1ACD0CF600A2115D /* core */;
 			targetProxy = 39B868A31ACD0CF700A2115D /* PBXContainerItemProxy */;
+		};
+		B72985EE1BB8E41B006E2518 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B72985E61BB8E41B006E2518 /* seach */;
+			targetProxy = B72985ED1BB8E41B006E2518 /* PBXContainerItemProxy */;
 		};
 		B7BFC9091ACC27C2009627CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3191,6 +3269,39 @@
 			};
 			name = Release;
 		};
+		B72985F01BB8E41B006E2518 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = seach/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone.seach;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B72985F11BB8E41B006E2518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = seach/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone.seach;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		B7BFC90C1ACC27C2009627CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3261,6 +3372,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		B72985F21BB8E41B006E2518 /* Build configuration list for PBXNativeTarget "seach" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B72985F01BB8E41B006E2518 /* Debug */,
+				B72985F11BB8E41B006E2518 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		B7BFC90B1ACC27C2009627CA /* Build configuration list for PBXNativeTarget "today" */ = {
 			isa = XCConfigurationList;

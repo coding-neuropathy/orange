@@ -341,6 +341,8 @@ int ddLogLevel;
 
     return YES;
 }
+
+
 - (void)openLocalURL:(NSURL *)url
 {
 
@@ -407,6 +409,20 @@ int ddLogLevel;
         }
         
     }
+}
+
+#pragma mark - spotlight search
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
+    
+    NSString *entityID = userActivity.userInfo[@"kCSSearchableItemActivityIdentifier"];
+    
+//    if userActivity.user
+    
+//    NSLog(@"%@", userActivity.activityType);
+    
+    [self openLocalURL:[NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entityID]]];
+    return YES;
 }
 
 #pragma mark - get init data

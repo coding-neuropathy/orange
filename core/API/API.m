@@ -391,8 +391,6 @@
                             @"entity" : entity};
             }
             
-//            NSParameterAssert(content);
-            
             NSDictionary *selection = @{@"type"    : type,
                                         @"time"    : @(timestamp),
                                         @"content" : content};
