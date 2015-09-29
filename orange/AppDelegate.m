@@ -419,7 +419,7 @@ int ddLogLevel;
     
 //    if userActivity.user
     
-    NSLog(@"type type %@", userActivity.userInfo);
+//    NSLog(@"type type %@", userActivity.userInfo);
     
     [self openLocalURL:[NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entityID]]];
     return YES;
