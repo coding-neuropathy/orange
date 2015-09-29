@@ -25,6 +25,10 @@
  */
 @property (strong, nonatomic) NSString * content;
 
+/**
+ *  文章标签
+ */
+@property (strong, nonatomic) NSArray * tags;
 
 /**
  *  文章封面

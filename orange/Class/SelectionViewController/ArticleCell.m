@@ -13,6 +13,7 @@
 @property (strong, nonatomic) UIImageView * coverImageView;
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) UILabel * detailLabel;
+@property (strong, nonatomic) RTLabel * tagsLabel;
 @property (strong, nonatomic) UILabel * timeLabel;
 
 @end
@@ -67,6 +68,18 @@
     return _detailLabel;
 }
 
+- (RTLabel *)tagsLabel
+{
+    if (!_tagsLabel) {
+        _tagsLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _tagsLabel.paragraphReplacement = @"";
+        _tagsLabel.lineSpacing = 7.;
+        _tagsLabel.delegate = self;
+        [self.contentView addSubview:_tagsLabel];
+    }
+    return _tagsLabel;
+}
+
 - (UILabel *)timeLabel
 {
     if (!_timeLabel) {
@@ -100,6 +113,20 @@
     [self.coverImageView sd_setImageWithURL:_article.coverURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth -32, (kScreenWidth - 32) / 1.8)]];
     
     /**
+     *  设置图文标签
+     */
+//    NSLog(@"tags %@", self.article.tags);
+    NSMutableString * tagListString = [NSMutableString string];
+    for (NSString * row in self.article.tags) {
+//        NSLog(@"base64 %@", [row base64EncodedString]);
+        
+        NSString * tagString = [NSString stringWithFormat:@"<a href=guoku://articles/tags/%@><font color='^9d9e9f' size=12>#%@</font></a> ", [row encodedUrl], row];
+        [tagListString appendString:tagString];
+    }
+    self.tagsLabel.text = tagListString;
+//    self.tagsLabel.backgroundColor = [UIColor redColor];
+    
+    /**
      *  设置发布时间
      */
     NSDate * date =  [NSDate dateWithTimeIntervalSince1970:_article.pub_time];
@@ -126,16 +153,30 @@
     self.detailLabel.center = self.titleLabel.center;
     self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
     
+//    self.tagsLabel.text =
+    self.tagsLabel.frame = CGRectMake(0., 0., 200., 20.);
+    self.tagsLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
+    self.tagsLabel.deFrameLeft = self.contentView.deFrameLeft + 16.;
+    
     self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
     self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
     self.timeLabel.deFrameRight = self.contentView.deFrameRight - 10.;
     
 }
 
+#pragma mark - <RTLabelDelegate>
+- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
+{
+    NSLog(@"url %@", url.absoluteString);
+}
+
+
+#pragma mark - class method
+
 + (CGSize)CellSizeWithArticle:(GKArticle *)article
 {
     CGFloat height = [article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.] LineHeight:8];
-    NSLog(@"%f", height);
+//    NSLog(@"%f", height);
     
     CGSize size = CGSizeMake(kScreenWidth,height + 125 + 174* kScreenWidth/(375-32));
     

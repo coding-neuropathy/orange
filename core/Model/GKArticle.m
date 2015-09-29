@@ -27,6 +27,7 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
                             @"title"        :   @"title",
                             @"content"      :   @"content",
 //                            @"url"          :   @"url",
+                            @"tags"         :   @"tags",
                             @"read_count"   :   @"read_count",
                             @"cover"        :   @"cover",
                             @"url"          :   @"url_string",
