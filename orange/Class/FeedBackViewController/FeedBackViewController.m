@@ -63,6 +63,7 @@
 //    [self.feedback get];
     self.feedback.delegate = self;
     self.senderId = @"user_reply";
+    self.senderDisplayName = [Passport sharedInstance].user.nickname ? [Passport sharedInstance].user.nickname : @"Anonymous" ;
     
     if (k_isLogin){
         [[UMFeedback sharedInstance] updateUserInfo:@{@"contact": @{
