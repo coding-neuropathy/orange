@@ -294,10 +294,55 @@
     }];
 }
 
+#pragma mark - get Article data
+/**
+ *  获取标签下 图文列表
+ *  @param  name    标签名称
+ *  @param  page    页数
+ *  @param  size    每页数量
+ *  @param  success   成功block
+ *  @param  failure   失败block
+ */
++ (void)getArticlesWithTagName:(NSString *)name
+                          Page:(NSInteger)page
+                          Size:(NSInteger)size
+                       success:(void (^)(NSArray *dataArray))success
+                       failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString * path = [NSString stringWithFormat:@"articles/tags/%@", [name encodedUrl]];
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:@(page) forKey:@"page"];
+    [paraDict setObject:@(size) forKey:@"size"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+//        NSLog(@"%@", responseObject);
+        
+        NSMutableArray * articleList = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary *dict in responseObject)
+        {
+            //            NSLog(@"%@", dict);
+            GKArticle * article = [GKArticle modelFromDictionary:dict];
+            [articleList addObject:article];
+            NSLog(@"url %@", article.title);
+        }
+        if (success){
+            success([NSArray arrayWithArray:articleList]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSInteger statusCode = operation.response.statusCode;
+        if (failure) {
+            failure(statusCode);
+        }
+    }];
+}
+
 #pragma mark - get main list
 /**
- * 获取首页信息
- *
+ *  获取首页信息
+ *  @param success   成功block
+ *  @param failure   失败block
  */
 + (void)getHomeWithSuccess:(void (^)(NSArray  * banners, NSArray * articles, NSArray * categories, NSArray * entities))success
                    failure:(void (^)(NSInteger stateCode))failure

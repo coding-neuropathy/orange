@@ -31,6 +31,11 @@
     return result;
 }
 
+- (NSString *)decodeURL
+{
+    return [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
 - (BOOL)isValidEmail
 {
     NSError *error = NULL;

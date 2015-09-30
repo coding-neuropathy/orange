@@ -37,7 +37,7 @@
 {
     self = [super init];
     if (self) {
-        self.title = @"意见反馈";
+        self.title = NSLocalizedStringFromTable(@"feedback", kLocalizedFile, nil);
         self.view.backgroundColor = UIColorFromRGB(0xfafafa);
         self.messageData = [[NSMutableArray alloc] initWithCapacity:0];
         

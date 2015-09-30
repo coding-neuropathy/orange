@@ -122,6 +122,22 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                success:(void (^)(NSString *entityId, NSUInteger noteId, BOOL state))success
                failure:(void (^)(NSInteger stateCode))failure;
 
+#pragma mark - get Article data
+/**
+ *  获取标签下 图文列表
+ *  @param  name    标签名称
+ *  @param  page    页数
+ *  @param  size    每页数量
+ *  @param  success   成功block
+ *  @param  failure   失败block
+ */
++ (void)getArticlesWithTagName:(NSString *)name
+                          Page:(NSInteger)page
+                          Size:(NSInteger)size
+                       success:(void (^)(NSArray *dataArray))success
+                       failure:(void (^)(NSInteger stateCode))failure;
+
+
 #pragma mark - get main list
 /**
  * 获取首页信息
@@ -136,8 +152,7 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  *  @param timestamp 时间戳
  *  @param cateId    旧版categoryId(0 ~ 11)
  *  @param count     请求的个数
- *  @param success   成功block
- *  @param failure   失败block
+
  */
 + (void)getSelectionListWithTimestamp:(NSTimeInterval)timestamp
                                cateId:(NSUInteger)cateId

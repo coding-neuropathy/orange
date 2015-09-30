@@ -14,6 +14,8 @@
 
 - (NSString *)encodedUrl;
 
+- (NSString *)decodeURL;
+
 - (BOOL)isValidEmail;
 
 - (NSUInteger)unsignedIntValue;

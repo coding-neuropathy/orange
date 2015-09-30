@@ -25,7 +25,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
     }
     return self;
 }
@@ -60,7 +60,7 @@
 //        _detailLabel.paragraphReplacement = @"";
 //        _detailLabel.lineSpacing = 7.0;
 //        _detailLabel.delegate = self;
-        _detailLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:14.];
+        _detailLabel.font = [UIFont systemFontOfSize:14.];
         _detailLabel.numberOfLines = 2;
         _detailLabel.textColor = UIColorFromRGB(0x9d9e9f);
         [self.contentView addSubview:_detailLabel];
@@ -98,8 +98,8 @@
     
     self.titleLabel.text = _article.title;
     
-
-    self.detailLabel.text = [_article.content Trimed];    
+    self.detailLabel.text = _article.content;
+    self.detailLabel.text = [_article.content Trimed];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.detailLabel.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:7.];
@@ -115,16 +115,12 @@
     /**
      *  设置图文标签
      */
-//    NSLog(@"tags %@", self.article.tags);
     NSMutableString * tagListString = [NSMutableString string];
     for (NSString * row in self.article.tags) {
-//        NSLog(@"base64 %@", [row base64EncodedString]);
-        
-        NSString * tagString = [NSString stringWithFormat:@"<a href=guoku://articles/tags/%@><font color='^9d9e9f' size=12>#%@</font></a> ", [row encodedUrl], row];
+        NSString * tagString = [NSString stringWithFormat:@"<a href=%@><font color='^9d9e9f' size=12>#%@</font></a> ", [row encodedUrl], row];
         [tagListString appendString:tagString];
     }
     self.tagsLabel.text = tagListString;
-//    self.tagsLabel.backgroundColor = [UIColor redColor];
     
     /**
      *  设置发布时间
@@ -133,6 +129,7 @@
     self.timeLabel.text = [NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForEnum:FAClockO], [date stringWithDefaultFormat]];
     
     [self setNeedsLayout];
+//    [self setNeedsDisplay];
 }
 
 - (void)layoutSubviews
@@ -149,7 +146,7 @@
     self.titleLabel.deFrameLeft = 16.;
     self.titleLabel.deFrameTop = self.coverImageView.deFrameBottom + 16;
     
-    self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth -32, 40);
+    self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth -32, 45);
     self.detailLabel.center = self.titleLabel.center;
     self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
     
@@ -164,10 +161,13 @@
     
 }
 
+
 #pragma mark - <RTLabelDelegate>
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
 {
     NSLog(@"url %@", url.absoluteString);
+//    [[UIApplication sharedApplication] openURL:url];
+    [[OpenCenter sharedOpenCenter] openArticleTagWithName:url.absoluteString];
 }
 
 

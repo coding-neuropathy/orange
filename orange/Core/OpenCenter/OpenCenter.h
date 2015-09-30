@@ -19,6 +19,7 @@ DEFINE_SINGLETON_FOR_HEADER(OpenCenter);
 - (void)openNoteComment:(GKNote *)note;
 - (void)openCategory:(GKEntityCategory *)category;
 - (void)openTagWithName:(NSString *)tname User:(GKUser *)user;
+- (void)openArticleTagWithName:(NSString *)name;
 
 - (void)openWebWithURL:(NSURL *)url;
 

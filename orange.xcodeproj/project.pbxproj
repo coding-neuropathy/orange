@@ -275,6 +275,7 @@
 		B769B1241B2ACE91004401FA /* IFTTTScaleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1141B2ACE91004401FA /* IFTTTScaleAnimation.m */; };
 		B769B1251B2ACE91004401FA /* IFTTTTransform3DAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1161B2ACE91004401FA /* IFTTTTransform3DAnimation.m */; };
 		B769B1291B2ACFB3004401FA /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B1281B2ACFB3004401FA /* WelcomeViewController.m */; };
+		B76C69D31BBB981E00BD22E5 /* TagArticlesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76C69D21BBB981E00BD22E5 /* TagArticlesController.m */; settings = {ASSET_TAGS = (); }; };
 		B76EE07F1B3D86AE009D8763 /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76EE07E1B3D86AE009D8763 /* MessageController.m */; };
 		B76EE0821B3D86C3009D8763 /* NotifyController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76EE0811B3D86C3009D8763 /* NotifyController.m */; };
 		B76EE0851B3D8A16009D8763 /* ActiveController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76EE0841B3D8A16009D8763 /* ActiveController.m */; };
@@ -846,6 +847,8 @@
 		B769B1161B2ACE91004401FA /* IFTTTTransform3DAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTTransform3DAnimation.m; sourceTree = "<group>"; };
 		B769B1271B2ACFB3004401FA /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		B769B1281B2ACFB3004401FA /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		B76C69D11BBB981D00BD22E5 /* TagArticlesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagArticlesController.h; sourceTree = "<group>"; };
+		B76C69D21BBB981E00BD22E5 /* TagArticlesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagArticlesController.m; sourceTree = "<group>"; };
 		B76EE07D1B3D86AE009D8763 /* MessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageController.h; sourceTree = "<group>"; };
 		B76EE07E1B3D86AE009D8763 /* MessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageController.m; sourceTree = "<group>"; };
 		B76EE0801B3D86C3009D8763 /* NotifyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifyController.h; sourceTree = "<group>"; };
@@ -2066,6 +2069,8 @@
 			children = (
 				4EC9F7A11A7BBEF20057D736 /* TagViewController.h */,
 				4EC9F7A21A7BBEF20057D736 /* TagViewController.m */,
+				B76C69D11BBB981D00BD22E5 /* TagArticlesController.h */,
+				B76C69D21BBB981E00BD22E5 /* TagArticlesController.m */,
 			);
 			path = TagViewController;
 			sourceTree = "<group>";
@@ -2742,6 +2747,7 @@
 				4E2D6D411A69601F009E4A17 /* SVProgressHUD.m in Sources */,
 				393715C41ACBD9C300DC50FF /* ContextFilterLogFormatter.m in Sources */,
 				B783F6621B9AEC46004DF1CB /* ArticlesController.m in Sources */,
+				B76C69D31BBB981E00BD22E5 /* TagArticlesController.m in Sources */,
 				8A0B16E21BABFDED00469DD6 /* ArticleListCell.m in Sources */,
 				B769B11B1B2ACE91004401FA /* IFTTTAnimationFrame.m in Sources */,
 				8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */,

@@ -13,6 +13,8 @@
 //#import "CategoryViewController.h"
 #import "SubCategoryEntityController.h"
 #import "TagViewController.h"
+#import "TagArticlesController.h"
+
 #import "WebViewController.h"
 
 #import "AppDelegate.h"
@@ -73,12 +75,22 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
+#pragma mark - tag viewcontroller
 - (void)openTagWithName:(NSString *)tname User:(GKUser *)user
 {
     TagViewController * vc = [[TagViewController alloc]init];
     vc.tagName = tname;
     vc.user = user;
 //    vc.user = self.note.creator;
+    if (kAppDelegate.activeVC.navigationController) {
+        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (void)openArticleTagWithName:(NSString *)name
+{
+    TagArticlesController * vc = [[TagArticlesController alloc] initWithTagName:name];
+    
     if (kAppDelegate.activeVC.navigationController) {
         [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
     }
