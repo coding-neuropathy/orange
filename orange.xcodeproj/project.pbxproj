@@ -304,6 +304,8 @@
 		B78C4E0F1B676ED5006620F7 /* GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B78C4E0D1B676ED5006620F7 /* GKCategory.m */; };
 		B78D350C1BA7F80C005D53CF /* (null) in Sources */ = {isa = PBXBuildFile; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
+		B796C0881BC17D8E006F4DE1 /* ImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B796C0861BC17D8E006F4DE1 /* ImageCache.h */; settings = {ASSET_TAGS = (); }; };
+		B796C0891BC17D8E006F4DE1 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B796C0871BC17D8E006F4DE1 /* ImageCache.m */; settings = {ASSET_TAGS = (); }; };
 		B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */; };
 		B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */; };
 		B7AAFA761AB7033600A2F20D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA751AB7033600A2F20D /* CFNetwork.framework */; };
@@ -885,6 +887,8 @@
 		B78C4E0D1B676ED5006620F7 /* GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKCategory.m; sourceTree = "<group>"; };
 		B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = DiscoverView/DiscoverHeaderView.h; sourceTree = "<group>"; };
 		B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverHeaderView.m; path = DiscoverView/DiscoverHeaderView.m; sourceTree = "<group>"; };
+		B796C0861BC17D8E006F4DE1 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
+		B796C0871BC17D8E006F4DE1 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		B7AAFA5D1AB67E5600A2F20D /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioButton.h; path = RadioButton/RadioButton.h; sourceTree = "<group>"; };
 		B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadioButton.m; path = RadioButton/RadioButton.m; sourceTree = "<group>"; };
 		B7AAFA611AB69DD200A2F20D /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
@@ -1200,6 +1204,8 @@
 		39B720161B1F4C16008519E3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B796C0861BC17D8E006F4DE1 /* ImageCache.h */,
+				B796C0871BC17D8E006F4DE1 /* ImageCache.m */,
 				39B720171B1F4C16008519E3 /* NSDictionary+Sign.h */,
 				39B720181B1F4C16008519E3 /* NSDictionary+Sign.m */,
 				39B720191B1F4C16008519E3 /* NSString+ */,
@@ -2447,6 +2453,7 @@
 				39B7204F1B1F4C16008519E3 /* GKPurchase.h in Headers */,
 				39B720651B1F4C16008519E3 /* AFURLConnectionOperation.h in Headers */,
 				39B720371B1F4C16008519E3 /* NSDate+App.h in Headers */,
+				B796C0881BC17D8E006F4DE1 /* ImageCache.h in Headers */,
 				39B720461B1F4C16008519E3 /* GKComment.h in Headers */,
 				39B7203B1B1F4C16008519E3 /* NSString+App.h in Headers */,
 				39B720441B1F4C16008519E3 /* GKBaseModel.h in Headers */,
@@ -2704,6 +2711,7 @@
 				39B720741B1F4E78008519E3 /* GKNote+ImageURLFixes.m in Sources */,
 				39B720341B1F4C16008519E3 /* BaseHttpClient.m in Sources */,
 				39B720621B1F4C16008519E3 /* AFNetworkReachabilityManager.m in Sources */,
+				B796C0891BC17D8E006F4DE1 /* ImageCache.m in Sources */,
 				39B7203E1B1F4C16008519E3 /* UIImage+App.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

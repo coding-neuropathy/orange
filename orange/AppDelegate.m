@@ -415,13 +415,21 @@ int ddLogLevel;
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
 {
     
-    NSString *entityID = userActivity.userInfo[@"kCSSearchableItemActivityIdentifier"];
+    NSString *searchID = userActivity.userInfo[@"kCSSearchableItemActivityIdentifier"];
+    if([searchID hasPrefix:@"entity"]) {
+        //        NSLog(@"entity id %@", searchID);
+        NSArray * stringList = [searchID componentsSeparatedByString:@":"];
+        NSString * entity_id = [stringList objectAtIndex:1];
+        [self openLocalURL:[NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entity_id]]];
+    } else {
+//        NSLog(@"entity id %@", searchID);
+        NSArray * stringList = [searchID componentsSeparatedByString:@":"];
+        NSString * article_id = [stringList objectAtIndex:1];
+        NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://m.guoku.com/articles/%@/", article_id]];
+        [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+    }
     
-//    if userActivity.user
-    
-//    NSLog(@"type type %@", userActivity.userInfo);
-    
-    [self openLocalURL:[NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entityID]]];
+//    [self openLocalURL:[NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entityID]]];
     return YES;
 }
 

@@ -207,16 +207,16 @@ static NSString *CellIdentifier = @"SelectionCell";
             /**
              *  set image data
              */
-            NSData * imagedata = [self readImageWithURL:entity.imageURL_240x240];
+            NSData * imagedata = [ImageCache readImageWithURL:entity.imageURL_240x240];
             if (imagedata) {
                 attributedSet.thumbnailData = imagedata;
             } else {
                 attributedSet.thumbnailData = [NSData dataWithContentsOfURL:entity.imageURL_240x240];
-                [self saveImageWhthData:attributedSet.thumbnailData URL:entity.imageURL_240x240];
+                [ImageCache saveImageWhthData:attributedSet.thumbnailData URL:entity.imageURL_240x240];
             }
             
             
-            CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"%@", entity.entityId] domainIdentifier:@"com.guoku.iphone.search.entity" attributeSet:attributedSet];
+            CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"entity:%@", entity.entityId] domainIdentifier:@"com.guoku.iphone.search.entity" attributeSet:attributedSet];
             
             [searchableItems addObject:item];
         }
@@ -231,27 +231,27 @@ static NSString *CellIdentifier = @"SelectionCell";
     });
 }
 
-- (BOOL)saveImageWhthData:(NSData *)data URL:(NSURL *)url
-{
-    //    NSError * err = nil;
-    NSString * imagefile = [url.absoluteString md5];
-    
-    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
-    //    NSLog(@"url %@", containerURL);
-    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
-    BOOL result = [data writeToURL:containerURL atomically:YES];
-    return result;
-}
-
-- (NSData *)readImageWithURL:(NSURL *)url
-{
-    NSString * imagefile = [url.absoluteString md5];
-    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
-    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
-    
-    return [NSData dataWithContentsOfURL:containerURL];
-    //    return data;
-}
+//- (BOOL)saveImageWhthData:(NSData *)data URL:(NSURL *)url
+//{
+//    //    NSError * err = nil;
+//    NSString * imagefile = [url.absoluteString md5];
+//    
+//    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
+//    //    NSLog(@"url %@", containerURL);
+//    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
+//    BOOL result = [data writeToURL:containerURL atomically:YES];
+//    return result;
+//}
+//
+//- (NSData *)readImageWithURL:(NSURL *)url
+//{
+//    NSString * imagefile = [url.absoluteString md5];
+//    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
+//    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
+//    
+//    return [NSData dataWithContentsOfURL:containerURL];
+//    //    return data;
+//}
 
 
 #pragma mark - UITableViewDataSource

@@ -99,6 +99,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 - (void)openWebWithURL:(NSURL *)url
 {
     WebViewController * vc = [[WebViewController alloc] initWithURL:url];
+    vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 

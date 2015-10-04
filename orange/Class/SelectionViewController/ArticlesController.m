@@ -9,7 +9,9 @@
 #import "ArticlesController.h"
 #import "ArticleCell.h"
 
-#import "WebViewController.h"
+//#import "WebViewController.h"
+
+@import CoreSpotlight;
 
 @interface ArticlesController ()
 
@@ -62,6 +64,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
         self.page +=1;
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
+        [self saveEntityToIndexWithData:articles];
     } failure:^(NSInteger stateCode) {
         [self.collectionView.pullToRefreshView stopAnimating];
     }];
@@ -74,10 +77,55 @@ static NSString * ArticleIdentifier = @"ArticleCell";
         [self.articleArray addObjectsFromArray:articles];
         [self.collectionView.infiniteScrollingView stopAnimating];
         [self.collectionView reloadData];
+        [self saveEntityToIndexWithData:articles];
     } failure:^(NSInteger stateCode) {
         [self.collectionView.infiniteScrollingView stopAnimating];
     }];
 }
+
+#pragma mark - save to index
+- (void)saveEntityToIndexWithData:(NSArray *)data
+{
+    if (![CSSearchableIndex isIndexingAvailable]) {
+        return;
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSMutableArray<CSSearchableItem *> *searchableItems = [NSMutableArray array];
+        
+        for (NSDictionary * row in data) {
+            CSSearchableItemAttributeSet *attributedSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"article"];
+            GKArticle * article = (GKArticle *)row;
+            attributedSet.title = article.title;
+            attributedSet.contentDescription = article.content;
+            attributedSet.identifier = @"article";
+            
+            /**
+             *  set image data
+             */
+            NSData * imagedata = [ImageCache readImageWithURL:article.coverURL_300];
+            if (imagedata) {
+                attributedSet.thumbnailData = imagedata;
+            } else {
+                attributedSet.thumbnailData = [NSData dataWithContentsOfURL:article.coverURL_300];
+                [ImageCache saveImageWhthData:attributedSet.thumbnailData URL:article.coverURL_300];
+            }
+            
+            
+            CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"article:%ld", article.articleId] domainIdentifier:@"com.guoku.ipad.search.article" attributeSet:attributedSet];
+            
+            [searchableItems addObject:item];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //            [self.entityImageView setImage:placeholder];
+            [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
+                if (error != nil) {
+                    NSLog(@"index Error %@",error.localizedDescription);
+                }
+            }];
+        });
+    });
+}
+
 
 - (void)loadView
 {
@@ -183,10 +231,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
-//    NSLog(@"%@", article.articleURL);
-    WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
 }
 
 @end

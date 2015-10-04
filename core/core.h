@@ -23,3 +23,4 @@ FOUNDATION_EXPORT const unsigned char coreVersionString[];
 #import "NSString+Helper.h"
 #import "NSString+App.h"
 #import "Passport.h"
+#import "ImageCache.h"
