@@ -68,7 +68,7 @@
     self.detailTextLabel.frame = CGRectMake(10., 40., kScreenWidth - 100., 40.);
 
     
-    NSData * imageData = [self readImageWithURL:self.entity.imageURL_120x120];
+    NSData * imageData = [ImageCache readImageWithURL:self.entity.imageURL_120x120];
     
     if (imageData) {
         self.entityImageView.image = [UIImage imageWithData:imageData];
@@ -76,7 +76,7 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *data = [NSData dataWithContentsOfURL:self.entity.imageURL_120x120];
             UIImage *placeholder = [UIImage imageWithData:data];
-            [self saveImageWhthData:data URL:self.entity.imageURL_120x120];
+            [ImageCache saveImageWhthData:data URL:self.entity.imageURL_120x120];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.entityImageView setImage:placeholder];
             });
@@ -85,27 +85,27 @@
 //    self.detailTextLabel.frame
 }
 
-- (BOOL)saveImageWhthData:(NSData *)data URL:(NSURL *)url
-{
-//    NSError * err = nil;
-    NSString * imagefile = [url.absoluteString md5];
-    
-    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
-//    NSLog(@"url %@", containerURL);
-    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
-    BOOL result = [data writeToURL:containerURL atomically:YES];
-    return result;
-}
-
-- (NSData *)readImageWithURL:(NSURL *)url
-{
-    NSString * imagefile = [url.absoluteString md5];
-    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
-    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
-    
-    return [NSData dataWithContentsOfURL:containerURL];
-//    return data;
-}
+//- (BOOL)saveImageWhthData:(NSData *)data URL:(NSURL *)url
+//{
+////    NSError * err = nil;
+//    NSString * imagefile = [url.absoluteString md5];
+//    
+//    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
+////    NSLog(@"url %@", containerURL);
+//    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
+//    BOOL result = [data writeToURL:containerURL atomically:YES];
+//    return result;
+//}
+//
+//- (NSData *)readImageWithURL:(NSURL *)url
+//{
+//    NSString * imagefile = [url.absoluteString md5];
+//    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
+//    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
+//    
+//    return [NSData dataWithContentsOfURL:containerURL];
+////    return data;
+//}
 
 
 @end

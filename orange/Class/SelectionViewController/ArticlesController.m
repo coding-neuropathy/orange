@@ -111,7 +111,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
             }
             
             
-            CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"article:%ld", article.articleId] domainIdentifier:@"com.guoku.ipad.search.article" attributeSet:attributedSet];
+            CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"article:%ld", article.articleId] domainIdentifier:@"com.guoku.iphone.search.article" attributeSet:attributedSet];
             
             [searchableItems addObject:item];
         }
