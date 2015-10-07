@@ -52,6 +52,7 @@
 //@property (nonatomic, strong) UIButton *categoryButton;
 @property (nonatomic, strong) UIView *likeUserView;
 @property (nonatomic, strong) UIView * noteContentView;
+@property (nonatomic, assign) BOOL flag;
 
 //@property (nonatomic, strong) UIButton * likeBtn;
 @property (nonatomic, strong) UIButton * postBtn;
@@ -91,6 +92,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
     if (self = [super init]) {
 //        self.itemType = OneSDKItemType_TAOBAO1;
+        self.flag = false;
         self.image = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.itemService=[[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
     }
@@ -372,6 +374,12 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 }
 
 #pragma mark - <UICollectionViewDataSource>
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self configConfigNavigationItem];
+}
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 7;
@@ -879,6 +887,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             btn.selected = self.entity.liked;
             [btn setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount] forState:UIControlStateNormal];
         }
+        [self setNavBarButton:self.flag];
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"喜爱失败"];
     }];
@@ -1023,7 +1032,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         {
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(tapMoreBtn:) forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(shareButtonAction) forControlEvents:UIControlEventTouchUpInside];
             [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
             button.backgroundColor = [UIColor clearColor];
             UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
@@ -1032,7 +1041,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         {
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             [button setImage:[UIImage imageNamed:@"note"] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(tapNoteBtn) forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
             [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
             button.backgroundColor = [UIColor clearColor];
             UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
@@ -1042,18 +1051,48 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             [button setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
-            [button addTarget:self action:@selector(tapLikeBtn) forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
             [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
             button.backgroundColor = [UIColor clearColor];
             UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
             [array addObject:item];
+        
+            button.selected = self.entity.liked;
         }
-        self.navigationItem.rightBarButtonItems = array;
+        [self.navigationItem setRightBarButtonItems:array animated:YES];
     }
     else
     {
-        self.navigationItem.rightBarButtonItem = nil;
+        [self.navigationItem setRightBarButtonItems:nil animated:NO];
     }
 }
+
+#pragma mark - ConfigNavigationItem}
+-(void)configConfigNavigationItem
+{
+    CGRect a =  [self.actionView.superview convertRect:self.actionView.frame toView:kAppDelegate.window];
+    
+    if (a.origin.y <= 30) {
+        if (self.flag == YES) {
+            return;
+        }
+        else
+        {
+            self.flag = YES;
+        }
+    }
+    else
+    {
+        if (self.flag == NO) {
+            return;
+        }
+        else{
+            self.flag = NO;
+        }
+    }
+    [self setNavBarButton:self.flag];
+}
+    
+
 
 @end
