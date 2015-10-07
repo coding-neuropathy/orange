@@ -82,9 +82,10 @@
 
 
 // Log
-#import "DDTTYLogger.h"
-#import "DDASLLogger.h"
-#import "DDFileLogger.h"
+//#import "DDTTYLogger.h"
+//#import "DDASLLogger.h"
+//#import "DDFileLogger.h"
+#import "CocoaLumberjack.h"
 extern int ddLogLevel;
 
 
