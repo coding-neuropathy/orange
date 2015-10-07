@@ -165,7 +165,7 @@
 #pragma mark - <RTLabelDelegate>
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
 {
-    NSLog(@"url %@", url.absoluteString);
+//    NSLog(@"url %@", url.absoluteString);
 //    [[UIApplication sharedApplication] openURL:url];
     [[OpenCenter sharedOpenCenter] openArticleTagWithName:url.absoluteString];
 }
