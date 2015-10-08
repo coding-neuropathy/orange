@@ -154,6 +154,18 @@
 	</dict>
 	<dict>
 		<key>name</key>
+		<string>tbapplink</string>
+		<key>pluginAdapterName</key>
+		<string>ALBBTBOpenPluginPluginAdapter</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>taobaoOpenIM</string>
+		<key>pluginAdapterName</key>
+		<string>TaeWXSDKForTaobaoPluginAdapter</string>
+	</dict>
+	<dict>
+		<key>name</key>
 		<string>openaccountsso</string>
 		<key>pluginAdapterName</key>
 		<string>ALBBOpenAccountSSOPluginAdapter</string>

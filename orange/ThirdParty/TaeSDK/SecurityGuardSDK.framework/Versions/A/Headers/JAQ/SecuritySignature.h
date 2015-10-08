@@ -12,8 +12,6 @@
 
 + (NSString*) sign: (NSString*) input key: (NSString*) key;
 
-+ (NSString*) signWithSimulator: (NSString*) input key: (NSString*) key;
-
 + (NSString*) atlasSign: (NSString*) input key: (NSString*) key;
 
 @end

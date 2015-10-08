@@ -51,7 +51,7 @@ typedef NS_ENUM (NSUInteger, TaeSDKEnvironment) {
 };
 
 /** 当前TaeSDK的版本号 */
-static NSString * _TAE_SDK_VERSION = @"1.7.0.1";
+static NSString * _TAE_SDK_VERSION = @"1.8.0";
 
 /** 初始化成功回调 */
 typedef void (^initSuccessCallback)();
@@ -153,4 +153,18 @@ TaeSDKEnvironment TaeSDKCurrentEnvironment();
 /** 设置SDK发布渠道,包含渠道类型和渠道名 */
 - (void)setChanne:(NSString *)type name:(NSString *)name;
 
+/**
+ *  针对外部APP存在appkey多用的情况，特殊标示，由APP自行传入，允许为空
+ *
+ *  @param tag <#tag description#>
+ */
+-(void) setAppTag:(NSString *) tag ;
+
+
+/**
+ *
+ *  设置打开detail页面是否优先跳转到手机淘宝
+ *  @param isUseTaobaoNativeDetail
+ */
+-(void) setUseTaobaoNativeDetail:(BOOL) isUseTaobaoNativeDetail ;
 @end

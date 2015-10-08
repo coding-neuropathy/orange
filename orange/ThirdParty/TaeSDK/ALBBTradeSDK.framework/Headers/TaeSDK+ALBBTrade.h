@@ -72,7 +72,18 @@ tradeProcessFailedCallback:(tradeProcessFailedCallback)tradeProcessFailedCallbac
 
 
 
-
+/**
+ *  检查是否可以跳转到手机淘宝的detail,如果可以，直接跳转
+ *
+ *  @param itemId      商品真实id
+ *  @param params      额外参数
+ *  @param taoKeParams 淘客参数
+ *
+ *  @return <#return value description#>
+ */
+-(BOOL)  checkJumpTBDetail: (NSString *)itemId
+                    params:(NSDictionary *)params
+               taoKeParams:(TaeTaokeParams *) taoKeParams;
 
 
 @end

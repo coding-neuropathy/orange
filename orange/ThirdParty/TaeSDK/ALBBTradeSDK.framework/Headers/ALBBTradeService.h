@@ -29,3 +29,10 @@ typedef void (^addCartCacelledCallback)();
 
 
 @end
+
+
+@interface TaeSDK(TaoKe)
+
+-(void) setTaoKeParams:(TaeTaokeParams *) params;
+
+@end
