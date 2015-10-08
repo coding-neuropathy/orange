@@ -141,7 +141,7 @@
         }
     }
     //this is a 'new window action' (aka target="_blank") > open this URL externally. If we´re doing nothing here, WKWebView will also just do nothing. Maybe this will change in a later stage of the iOS 8 Beta
-    if (!navigationAction.targetFrame) {
+    else if (!navigationAction.targetFrame) {
         [self.webView loadRequest:navigationAction.request];
     }
     decisionHandler(WKNavigationActionPolicyAllow);
