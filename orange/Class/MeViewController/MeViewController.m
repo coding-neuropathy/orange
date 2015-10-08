@@ -72,7 +72,8 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
     
-    self.title = [[Passport sharedInstance] user].nickname;
+//    self.title = [[Passport sharedInstance] user].nickname;
+    self.navigationItem.title = [[Passport sharedInstance] user].nickname;
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
