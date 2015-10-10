@@ -95,6 +95,9 @@
     
     [self.view addSubview:self.tableView];
      __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf handleSearchText:weakSelf.keyword];
+    }];
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
@@ -499,19 +502,26 @@
 #pragma mark - <UISearchResultsUpdating>
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
+    if ([self.keyword isEqualToString:[searchController.searchBar.text Trimed]]) {
+        return;
+    }
     self.searchBar = searchController.searchBar;
 //    DDLogInfo(@"keyword %@", searchController.searchBar.text);
     self.keyword = [searchController.searchBar.text Trimed];
     if (self.keyword.length == 0) {
+        [UIView animateWithDuration:0 animations:^{
+            [self.discoverVC.searchVC.view viewWithTag:999].alpha = 1;
+        }];
         
         return;
     }
-    [self.tableView triggerPullToRefresh];
-    [self handleSearchText:self.keyword];
-    
-
-    
-    
+    [UIView animateWithDuration:0.1 animations:^{
+        [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
+    }completion:^(BOOL finished) {
+        [self.tableView triggerPullToRefresh];
+        [self handleSearchText:self.keyword];
+    }];
+ 
 }
 
 @end

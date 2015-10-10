@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DiscoverController.h"
 
 @interface SearchResultsViewController : UIViewController <UISearchResultsUpdating>
+@property(nonatomic,weak) DiscoverController *discoverVC;
 -(void)searchText:(NSString *)string;
 @end
