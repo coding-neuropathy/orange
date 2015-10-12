@@ -94,13 +94,13 @@
     self.searchType = EntityType;
     
     [self.view addSubview:self.tableView];
-     __weak __typeof(&*self)weakSelf = self;
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf handleSearchText:weakSelf.keyword];
-    }];
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        [weakSelf loadMore];
-    }];
+//     __weak __typeof(&*self)weakSelf = self;
+//    [self.tableView addPullToRefreshWithActionHandler:^{
+//        [weakSelf handleSearchText:weakSelf.keyword];
+//    }];
+//    [self.tableView addInfiniteScrollingWithActionHandler:^{
+//        [weakSelf loadMore];
+//    }];
 
 }
 
@@ -113,6 +113,8 @@
 {
     [super viewWillAppear:animated];
     
+    self.tableView.scrollsToTop = YES;
+    
     [AVAnalytics beginLogPageView:@"SearchResultView"];
     [MobClick beginLogPageView:@"SearchResultView"];
 }
@@ -121,9 +123,24 @@
 {
     [super viewWillDisappear:animated];
     
+    self.tableView.scrollsToTop = NO;
+    
     [AVAnalytics endLogPageView:@"SearchResultView"];
     [MobClick endLogPageView:@"SearchResultView"];
 }
+
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf handleSearchText:weakSelf.keyword];
+    }];
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
+    }];
+}
+
 
 /*
 #pragma mark - Navigation
@@ -411,6 +428,7 @@
         return;
     }
     
+
     self.tableView.tableFooterView = nil;
     [self.tableView.pullToRefreshView startAnimating];
     
@@ -419,12 +437,10 @@
         case EntityType:
         {
             [API searchEntityWithString:self.keyword type:@"all" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
-                //            DDLogInfo(@"search result %@", entityArray);
                 if (entityArray.count == 0) {
                     self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];;
                     self.tableView.tableFooterView = self.noResultView;
                     self.noResultView.type = NoResultType;
-                    //                DDLogInfo(@"%@", self.noResultView);
                 } else {
                     self.dataArrayForEntityForSearch = [NSMutableArray arrayWithArray:entityArray];
                 }
@@ -501,26 +517,28 @@
 #pragma mark - <UISearchResultsUpdating>
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
+//    DDLogInfo(@"keyword %@", searchController.searchBar.text);
     if ([self.keyword isEqualToString:[searchController.searchBar.text Trimed]]) {
         return;
     }
-    self.searchBar = searchController.searchBar;
-//    DDLogInfo(@"keyword %@", searchController.searchBar.text);
+//    self.searchBar = searchController.searchBar;
     self.keyword = [searchController.searchBar.text Trimed];
     if (self.keyword.length == 0) {
         [UIView animateWithDuration:0 animations:^{
             [self.discoverVC.searchVC.view viewWithTag:999].alpha = 1;
         }];
-        
+
         return;
     }
+    
     [UIView animateWithDuration:0.1 animations:^{
         [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
     }completion:^(BOOL finished) {
         [self.tableView triggerPullToRefresh];
-        [self handleSearchText:self.keyword];
+//        [self handleSearchText:self.keyword];
     }];
- 
 }
+
+
 
 @end
