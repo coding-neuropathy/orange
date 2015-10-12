@@ -29,15 +29,16 @@
 @property (strong, nonatomic) NSString * text;
 @end
 
-@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate,UISearchBarDelegate>
+@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
 @property (strong, nonatomic) NSArray * categoryArray;
 @property (strong, nonatomic) NSArray * entityArray;
 @property (strong, nonatomic) NSArray * articleArray;
+@property (strong, nonatomic) UITableView * searchLogTableView;
 
-@property (strong, nonatomic) UISearchController * searchVC;
+
 @property (strong, nonatomic) SearchResultsViewController * searchResultsVC;
 @end
 
@@ -49,6 +50,52 @@ static NSString * BannerIdentifier = @"BannerView";
 static NSString * CategoryIdentifier = @"CategoryView";
 static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
+#pragma mark - search log
+- (void)addSearchLog:(NSString *)text
+{
+    if (text.length == 0) {
+        return;
+    }
+    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    if (!array) {
+        array = [NSMutableArray array];
+    }
+    if (![array containsObject:text]) {
+        [array insertObject:text atIndex:0];
+        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)removeSearchLog:(NSString *)text
+{
+    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    if (!array) {
+        return;
+    }
+    if ([array containsObject:text]) {
+        [array removeObject:text];
+        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (NSMutableArray *)getSearchLog
+{
+    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    if (!array) {
+        array = [NSMutableArray array];
+    }
+    return array;
+}
+
+- (void)clearSearchLogButtonAciton
+{
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"SearchLogs"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.searchLogTableView reloadData];
+}
+#pragma mark - init
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -82,6 +129,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (!_searchVC) {
         _searchVC = [[UISearchController alloc] initWithSearchResultsController:self.searchResultsVC];
         _searchVC.searchResultsUpdater = self.searchResultsVC;
+        self.searchResultsVC.discoverVC = self;
         _searchVC.delegate = self;
         _searchVC.hidesNavigationBarDuringPresentation = NO;
         
@@ -171,6 +219,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     self.collectionView.scrollsToTop = NO;
     
+    if (_searchVC.searchBar.text) {
+        [self addSearchLog:_searchVC.searchBar.text];
+    }
+    
     [AVAnalytics endLogPageView:@"DiscovreView"];
     [MobClick endLogPageView:@"DiscovreView"];
 }
@@ -186,6 +238,84 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (self.entityArray == 0) {
         [self.collectionView triggerPullToRefresh];
     }
+}
+
+#pragma mark - <UITableViewDelegate>
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self getSearchLog].count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"SearchLogCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.backgroundColor = UIColorFromRGB(0xffffff);
+        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(10,43.5, kScreenWidth, 0.5)];
+        H.backgroundColor = UIColorFromRGB(0xebebeb);
+        [cell addSubview:H];
+        
+    }
+    cell.textLabel.text = [[self getSearchLog] objectAtIndex:indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    
+    return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(kScreenWidth, 44)] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf8f8f8) andSize:CGSizeMake(kScreenWidth, 44)] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(clearSearchLogButtonAciton) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"清空历史搜索记录" forState:UIControlStateNormal];
+    [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    return button;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if ([self getSearchLog].count) {
+        return 44;
+    }
+    return 0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString * text = [[self getSearchLog] objectAtIndex:indexPath.row];
+    [self.searchLogTableView deselectRowAtIndexPath:indexPath animated:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_searchVC.searchBar setText:text];
+    });
+
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSString * text = [[self getSearchLog] objectAtIndex:indexPath.row];
+        [self removeSearchLog:text];
+         [self.searchLogTableView reloadData];
+        [self.searchLogTableView.superview bringSubviewToFront:self.searchLogTableView];
+    }
+    return;
 }
 
 #pragma mark - <UICollectionViewDataSource>
@@ -427,20 +557,33 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)willPresentSearchController:(UISearchController *)searchController
 {
     UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    view.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.97];
+    view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
     view.tag = 999;
     
     UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_search"]];
     image.center = CGPointMake(kScreenWidth/2, 0);
     image.deFrameTop = 50+kStatusBarHeight+kNavigationBarHeight;
-    [view addSubview:image];
+    //[view addSubview:image];
+    
+    if (!self.searchLogTableView) {
+        UITableView * searchLogTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        searchLogTableView.delegate = self;
+        searchLogTableView.dataSource = self;
+        searchLogTableView.backgroundColor = [UIColor clearColor];
+        searchLogTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+        self.searchLogTableView = searchLogTableView;
+    }
+    [self.searchLogTableView reloadData];
+    [view addSubview:self.searchLogTableView];
     
     [self.searchVC.view addSubview:view];
-    [self.searchVC.view sendSubviewToBack:view];
+    //[self.searchVC.view sendSubviewToBack:view];
 }
 
 - (void)didPresentSearchController:(UISearchController *)searchController
 {
+
 }
 - (void)willDismissSearchController:(UISearchController *)searchController
 {
@@ -541,6 +684,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     self.textLabel.frame = CGRectMake(10., 0., kScreenWidth - 20., 44.);
 }
+
+
+
+
 
 
 @end
