@@ -411,7 +411,6 @@
         return;
     }
     
-
     self.tableView.tableFooterView = nil;
     [self.tableView.pullToRefreshView startAnimating];
     
