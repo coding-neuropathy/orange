@@ -115,12 +115,12 @@
     /**
      *  设置图文标签
      */
-    NSMutableString * tagListString = [NSMutableString string];
-    for (NSString * row in self.article.tags) {
-        NSString * tagString = [NSString stringWithFormat:@"<a href=%@><font color='^9d9e9f' size=12>#%@</font></a> ", [row encodedUrl], row];
-        [tagListString appendString:tagString];
-    }
-    self.tagsLabel.text = tagListString;
+//    NSMutableString * tagListString = [NSMutableString string];
+//    for (NSString * row in self.article.tags) {
+//        NSString * tagString = [NSString stringWithFormat:@"<a href=%@><font color='^9d9e9f' size=12>#%@</font></a> ", [row encodedUrl], row];
+//        [tagListString appendString:tagString];
+//    }
+//    self.tagsLabel.text = tagListString;
     
     /**
      *  设置发布时间
@@ -150,10 +150,9 @@
     self.detailLabel.center = self.titleLabel.center;
     self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
     
-//    self.tagsLabel.text =
-    self.tagsLabel.frame = CGRectMake(0., 0., 200., 20.);
-    self.tagsLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
-    self.tagsLabel.deFrameLeft = self.contentView.deFrameLeft + 16.;
+//    self.tagsLabel.frame = CGRectMake(0., 0., 200., 20.);
+//    self.tagsLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
+//    self.tagsLabel.deFrameLeft = self.contentView.deFrameLeft + 16.;
     
     self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
     self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
