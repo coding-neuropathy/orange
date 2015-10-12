@@ -91,7 +91,7 @@
     self.startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.startBtn.frame = CGRectMake(0., 0., 290., 50.);
     [self.startBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
-    [self.startBtn setTitle:[NSString stringWithFormat:@"即可体验 %@", [NSString fontAwesomeIconStringForEnum:FAArrowCircleORight]] forState:UIControlStateNormal];
+    [self.startBtn setTitle:[NSString stringWithFormat:@"即刻体验 %@", [NSString fontAwesomeIconStringForEnum:FAArrowCircleORight]] forState:UIControlStateNormal];
     self.startBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
     self.startBtn.deFrameBottom = CGRectGetHeight(self.scrollView.frame);
     [self.startBtn addTarget:self action:@selector(startBtnAction:) forControlEvents:UIControlEventTouchUpInside];
