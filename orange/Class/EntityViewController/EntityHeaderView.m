@@ -39,7 +39,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.numberOfLines = 2;
         _titleLabel.font = [UIFont systemFontOfSize:16.f];
-        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.textColor = UIColorFromRGB(0x414243);
         [self addSubview:_titleLabel];
     }
@@ -68,8 +68,8 @@ static CGFloat kEntityViewMarginLeft = 16.;
         _pageCtr.hidden = YES;
         _pageCtr.currentPage = 0;
         _pageCtr.backgroundColor = [UIColor clearColor];
-        _pageCtr.pageIndicatorTintColor = UIColorFromRGB(0x9d9e9f);
-        _pageCtr.currentPageIndicatorTintColor = UIColorFromRGB(0x656768);
+        _pageCtr.pageIndicatorTintColor = UIColorFromRGB(0xe6e6e6);
+        _pageCtr.currentPageIndicatorTintColor = UIColorFromRGB(0x5ba9ff);
         _pageCtr.layer.cornerRadius = 16.0;
         [self addSubview:_pageCtr];
     }
@@ -142,11 +142,12 @@ static CGFloat kEntityViewMarginLeft = 16.;
 
     CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font LineHeight:7];
     
-    self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 16., kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
+
     
     self.scrollView.frame = CGRectMake(0., 0., kScreenWidth - 32., kScreenWidth - 32.);
     self.scrollView.deFrameLeft = 16.;
-    self.scrollView.deFrameTop = self.titleLabel.deFrameBottom + 16.;
+    self.scrollView.deFrameTop =  16.;
+    self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 16. + self.scrollView.deFrameBottom, kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
     
     if ([_entity.imageURLArray count] > 0) {
         
