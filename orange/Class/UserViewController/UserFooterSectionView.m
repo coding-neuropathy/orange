@@ -8,6 +8,22 @@
 
 #import "UserFooterSectionView.h"
 
+@interface UserFooterSectionView ()
+
+@property (strong, nonatomic) UILabel * titelLabel;
+
+@end
+
 @implementation UserFooterSectionView
+
+- (UILabel *)titelLabel
+{
+    if (!_titelLabel) {
+        _titelLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        
+        [self addSubview:_titelLabel];
+    }
+    return _titelLabel;
+}
 
 @end
