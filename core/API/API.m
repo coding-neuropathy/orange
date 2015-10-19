@@ -2020,7 +2020,7 @@
  *  @param failure 失败block
  */
 + (void)getUserDetailWithUserId:(NSUInteger)userId
-                        success:(void (^)(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote))success
+                        success:(void (^)(GKUser *user, NSArray *lastLikeEntities, NSArray  *lastNotes))success
                         failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(userId > 0);
@@ -2031,11 +2031,16 @@
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
-        GKEntity *lastLikeEntity = [GKEntity modelFromDictionary:objectDict[@"last_like"]];
-        GKNote *lastNote = nil;
+//        GKEntity *lastLikeEntity = [GKEntity modelFromDictionary:objectDict[@"last_like"]];
+//        GKNote *lastNote = nil;
+        NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in objectDict[@"last_user_like"]) {
+            GKEntity * entity = [GKEntity modelFromDictionary:row];
+            [entities addObject:entity];
+        }
         
         if (success) {
-            success(user, lastLikeEntity, lastNote);
+            success(user, entities, [NSArray array]);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
