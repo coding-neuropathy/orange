@@ -12,9 +12,12 @@
 #import "UserFooterSectionView.h"
 #import "EntityCell.h"
 
+#import "FriendViewController.h"
+#import "FanViewController.h"
+
 //#import "DataStructure.h"
 
-@interface UserViewController ()
+@interface UserViewController () <EntityCellDelegate, UserHeaderViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray * likedataArray;
 @property (strong, nonatomic) NSMutableArray * notedataArray;
@@ -157,7 +160,7 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
             {
                 self.headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer forIndexPath:indexPath];
                 self.headerView.user = self.user;
-                
+                self.headerView.delegate = self;
                 return self.headerView;
             }
                 break;
@@ -179,7 +182,7 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
         }
     } else {
         UserFooterSectionView * footerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UserFooterSectionIdentifer forIndexPath:indexPath];
-        
+        footerSection.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
         return footerSection;
     }
     
@@ -232,9 +235,33 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
             size = CGSizeMake(kScreenWidth, 260.);
             break;
             
+        case 1:
+            if (self.likedataArray.count > 0)
+                size = CGSizeMake(kScreenWidth, 44.);
+            break;
+            
         default:
             size = CGSizeMake(kScreenWidth, 44.);
             
+            break;
+    }
+    return size;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    CGSize size = CGSizeMake(0., 0.);
+    switch (section) {
+        case 0:
+            
+            break;
+        case 1:
+        {
+            if (self.likedataArray.count > 4)
+                size = CGSizeMake(kScreenWidth, 54.);
+        }
+            break;
+        default:
             break;
     }
     return size;
@@ -260,13 +287,30 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
     switch (section) {
         case 1:
-            edge = UIEdgeInsetsMake(0., 16., 10., 16.);
+            edge = UIEdgeInsetsMake(0., 16., 16., 16.);
             break;
             
         default:
             break;
     }
     return edge;
+}
+
+#pragma mark - <UserHeaderViewDelegate>
+- (void)TapFriendBtnWithUser:(GKUser *)user
+{
+    FriendViewController * VC = [[FriendViewController alloc]init];
+    VC.user = self.user;
+    VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)TapFansBtnWithUser:(GKUser *)user
+{
+    FanViewController * VC = [[FanViewController alloc]init];
+    VC.user = self.user;
+    VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 #pragma mark - <EntityCellDelegate>

@@ -10,4 +10,6 @@
 
 @interface UserFooterSectionView : UICollectionReusableView
 
+@property (strong, nonatomic) NSString * title;
+
 @end
