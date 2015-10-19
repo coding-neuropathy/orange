@@ -18,7 +18,7 @@
 
 //#import "DataStructure.h"
 
-@interface UserViewController () <EntityCellDelegate, UserHeaderViewDelegate>
+@interface UserViewController () <EntityCellDelegate, UserHeaderViewDelegate, UserFooterSectionDelete>
 
 @property (strong, nonatomic) NSMutableArray * likedataArray;
 @property (strong, nonatomic) NSMutableArray * notedataArray;
@@ -189,7 +189,19 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         }
     } else {
         UserFooterSectionView * footerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UserFooterSectionIdentifer forIndexPath:indexPath];
-        footerSection.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
+//        footerSection.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
+        switch (indexPath.section) {
+            case 1:
+                footerSection.type = UserLikeType;
+                break;
+            case 2:
+                footerSection.type = UserPostType;
+                break;
+            default:
+                break;
+        }
+        
+        footerSection.delegate = self;
         return footerSection;
     }
     
@@ -253,8 +265,8 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             break;
             
         default:
-            size = CGSizeMake(kScreenWidth, 44.);
-            
+            if (self.notedataArray.count > 0)
+                size = CGSizeMake(kScreenWidth, 44.);
             break;
     }
     return size;
@@ -313,6 +325,23 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     return edge;
 }
 
+#pragma mark - <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 2:
+        {
+            GKNote * note = [self.notedataArray objectAtIndex:indexPath.row];
+            GKEntity * entity = [GKEntity modelFromDictionary:@{@"entity_id": note.entityId}];
+            [[OpenCenter sharedOpenCenter] openEntity:entity];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - <UserHeaderViewDelegate>
 - (void)TapFriendBtnWithUser:(GKUser *)user
 {
@@ -328,6 +357,12 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     VC.user = self.user;
     VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
+}
+
+#pragma mark - <UserFooterSectionDelete>
+- (void)TapMoreButtonWithType:(UserPageType)type
+{
+    DDLogInfo(@"OKOKOKOO");
 }
 
 #pragma mark - <EntityCellDelegate>
