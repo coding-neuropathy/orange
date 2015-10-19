@@ -11,6 +11,7 @@
 @interface UserFooterSectionView ()
 
 @property (strong, nonatomic) UILabel * titleLabel;
+@property (strong, nonatomic) UIButton * moreBtn;
 
 @end
 

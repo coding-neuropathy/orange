@@ -2039,8 +2039,14 @@
             [entities addObject:entity];
         }
         
+        NSMutableArray * notes = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in objectDict[@"last_post_note"]) {
+            GKNote * note = [GKNote modelFromDictionary:row];
+            [notes addObject:note];
+        }
+        
         if (success) {
-            success(user, entities, [NSArray array]);
+            success(user, entities, notes);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {

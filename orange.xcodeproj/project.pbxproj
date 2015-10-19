@@ -292,6 +292,7 @@
 		B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76FAE951B67B5FA002AC4C7 /* DiscoverCategoryView.m */; };
 		B772BE941BD50605005C1540 /* UserHeaderSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B772BE931BD50605005C1540 /* UserHeaderSectionView.m */; settings = {ASSET_TAGS = (); }; };
 		B772BE971BD51FFC005C1540 /* UserFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B772BE961BD51FFC005C1540 /* UserFooterSectionView.m */; settings = {ASSET_TAGS = (); }; };
+		B772BE9A1BD53CFA005C1540 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B772BE991BD53CFA005C1540 /* NoteCell.m */; settings = {ASSET_TAGS = (); }; };
 		B77E00A91B8988DC008BCA55 /* EntityPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77E00A81B8988DC008BCA55 /* EntityPopView.m */; };
 		B783F65E1B9AE5DB004DF1CB /* GKArticle.h in Headers */ = {isa = PBXBuildFile; fileRef = B783F65C1B9AE5DB004DF1CB /* GKArticle.h */; };
 		B783F65F1B9AE5DB004DF1CB /* GKArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F65D1B9AE5DB004DF1CB /* GKArticle.m */; };
@@ -876,6 +877,8 @@
 		B772BE931BD50605005C1540 /* UserHeaderSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHeaderSectionView.m; sourceTree = "<group>"; };
 		B772BE951BD51FFC005C1540 /* UserFooterSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserFooterSectionView.h; sourceTree = "<group>"; };
 		B772BE961BD51FFC005C1540 /* UserFooterSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserFooterSectionView.m; sourceTree = "<group>"; };
+		B772BE981BD53CFA005C1540 /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
+		B772BE991BD53CFA005C1540 /* NoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteCell.m; sourceTree = "<group>"; };
 		B77E00A71B8988DC008BCA55 /* EntityPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityPopView.h; sourceTree = "<group>"; };
 		B77E00A81B8988DC008BCA55 /* EntityPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityPopView.m; sourceTree = "<group>"; };
 		B783F65C1B9AE5DB004DF1CB /* GKArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKArticle.h; sourceTree = "<group>"; };
@@ -1092,6 +1095,8 @@
 				8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */,
 				8A0B16E01BABFDED00469DD6 /* ArticleListCell.h */,
 				8A0B16E11BABFDED00469DD6 /* ArticleListCell.m */,
+				B772BE981BD53CFA005C1540 /* NoteCell.h */,
+				B772BE991BD53CFA005C1540 /* NoteCell.m */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -2814,6 +2819,7 @@
 				B7F544051BC2457E0044F5E9 /* UIImageView+WebCache.m in Sources */,
 				B7F5AA0B1B08D3320033BB2D /* WebViewProgressView.m in Sources */,
 				4E688A0C1BA9C2BA0006AD9B /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
+				B772BE9A1BD53CFA005C1540 /* NoteCell.m in Sources */,
 				4E216A951A2392F2009FF11D /* JSBadgeView.m in Sources */,
 				B77E00A91B8988DC008BCA55 /* EntityPopView.m in Sources */,
 				4EC9F7971A7928C70057D736 /* UserSingleListCell.m in Sources */,

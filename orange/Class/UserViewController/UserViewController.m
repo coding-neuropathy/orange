@@ -11,6 +11,7 @@
 #import "UserHeaderSectionView.h"
 #import "UserFooterSectionView.h"
 #import "EntityCell.h"
+#import "NoteCell.h"
 
 #import "FriendViewController.h"
 #import "FanViewController.h"
@@ -34,6 +35,7 @@ static NSString * UserHeaderIdentifer = @"UserHeader";
 static NSString * UserHeaderSectionIdentifer = @"UserHeaderSection";
 static NSString * UserFooterSectionIdentifer = @"UserFooterSection";
 static NSString * UserLikeEntityIdentifer = @"EntityCell";
+static NSString * UserNoteIdentifier = @"NoteCell";
 
 
 - (instancetype)initWithUser:(GKUser *)user
@@ -94,6 +96,7 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
     [self.collectionView registerClass:[UserFooterSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UserFooterSectionIdentifer];
     
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:UserLikeEntityIdentifer];
+    [self.collectionView registerClass:[NoteCell class] forCellWithReuseIdentifier:UserNoteIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,7 +130,7 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -137,14 +140,11 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
         case 1:
         {
             count = self.likedataArray.count > 4 ? 4 : self.likedataArray.count;
-//            if (self.likedataArray.count > 4) {
-//                count = 4;
-//            }
             
         }
             break;
         case 2:
-            count = self.notedataArray.count;
+            count = self.notedataArray.count > 3 ? 3 : self.notedataArray.count;
             break;
         default:
             break;
@@ -172,6 +172,13 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
                 return headerSection;
             }
                 break;
+            case 2:
+            {
+                UserHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer forIndexPath:indexPath];
+                [headerSection setUser:self.user WithType:UserPostType];
+                return headerSection;
+            }
+                break;
             default:
             {
                 UserHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer forIndexPath:indexPath];
@@ -191,10 +198,28 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
-    cell.entity = [self.likedataArray objectAtIndex:indexPath.row];
-    cell.delegate = self;
-    return cell;
+//    EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
+//    cell.entity = [self.likedataArray objectAtIndex:indexPath.row];
+//    cell.delegate = self;
+//    return cell;
+    switch (indexPath.section) {
+        case 2:
+        {
+            NoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserNoteIdentifier forIndexPath:indexPath];
+            cell.note = [self.notedataArray objectAtIndex:indexPath.row];
+            return cell;
+        }
+            break;
+            
+        default:
+        {
+            EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
+            cell.entity = [self.likedataArray objectAtIndex:indexPath.row];
+            cell.delegate = self;
+            return cell;
+        }
+            break;
+    }
 }
 
 #pragma mark <UICollectionViewDelegateFlowLayout>
@@ -205,25 +230,12 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
         case 1:
             itemSize = CGSizeMake(80., 80.);
             break;
-            
+        case 2:
+            itemSize = CGSizeMake(kScreenWidth, 100.);
+            break;
         default:
             break;
     }
-//    if (indexPath.section == 1) {
-//        switch (self.type) {
-//            case UserPostType:
-//                itemSize = CGSizeMake(644., 144.);
-//                break;
-//            case UserTagType:
-//                itemSize = CGSizeMake(624, 36.);
-//                break;
-//            default:
-//                itemSize = CGSizeMake(204., 204.);
-//                break;
-//        }
-//    }
-    
-//    CGSize itemSize = CGSizeMake(204., 204.);
     return itemSize;
 }
 
@@ -261,6 +273,10 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
                 size = CGSizeMake(kScreenWidth, 54.);
         }
             break;
+        case 2:
+            if (self.notedataArray.count > 3)
+                size = CGSizeMake(kScreenWidth, 54.);
+            break;
         default:
             break;
     }
@@ -287,7 +303,8 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
     switch (section) {
         case 1:
-            edge = UIEdgeInsetsMake(0., 16., 16., 16.);
+            if (self.likedataArray.count > 0)
+                edge = UIEdgeInsetsMake(0., 16., 16., 16.);
             break;
             
         default:
