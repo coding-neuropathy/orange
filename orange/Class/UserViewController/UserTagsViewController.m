@@ -8,6 +8,7 @@
 
 #import "UserTagsViewController.h"
 #import "UserTagCell.h"
+#import "TagViewController.h"
 
 @interface UserTagsViewController ()
 
@@ -67,6 +68,12 @@ static NSString * UserTagIdentifier = @"UserTagCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[UserTagCell class] forCellWithReuseIdentifier:UserTagIdentifier];
+    
+    if (self.user.userId == [Passport sharedInstance].user.userId) {
+        self.navigationItem.title = @"我参与的标签";
+    } else {
+        self.navigationItem.title = @"他参与的标签";
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,8 +122,33 @@ static NSString * UserTagIdentifier = @"UserTagCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UserTagCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserTagIdentifier forIndexPath:indexPath];
-    
+    cell.dict = [self.tagArray objectAtIndex:indexPath.row];
     return cell;
+}
+
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize size = CGSizeMake(0., 0.);
+    size = CGSizeMake(kScreenWidth, 44.);
+    return size;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+#pragma mark - <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+//    NSDictionary * dict = [self.tagArray objectAtIndex:indexPath.row];
+    
+    TagViewController * VC = [[TagViewController alloc]init];
+    VC.tagName = [[self.tagArray objectAtIndex:indexPath.row] objectForKey:@"tag"];
+    VC.user = self.user;
+    VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 @end

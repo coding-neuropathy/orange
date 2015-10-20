@@ -10,6 +10,6 @@
 
 @interface UserTagCell : UICollectionViewCell
 
-//@property (strong, nonatomic) GK
+@property (strong, nonatomic) NSDictionary * dict;
 
 @end
