@@ -80,15 +80,15 @@
     switch (_type) {
         case UserLikeType:
             self.titleLabel.text = NSLocalizedStringFromTable(@"like", kLocalizedFile, nil);
-            self.numberLabel.text = [NSString stringWithFormat:@"%ld", _user.likeCount];
+            self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.likeCount];
             break;
         case UserPostType:
             self.titleLabel.text = NSLocalizedStringFromTable(@"note", kLocalizedFile, nil);
-            self.numberLabel.text = [NSString stringWithFormat:@"%ld", _user.noteCount];
+            self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.noteCount];
             break;
         case UserTagType:
             self.titleLabel.text = NSLocalizedStringFromTable(@"tags", kLocalizedFile, nil);
-            self.numberLabel.text = [NSString stringWithFormat:@"%ld", _user.tagCount];
+            self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.tagCount];
             break;
         default:
             break;
