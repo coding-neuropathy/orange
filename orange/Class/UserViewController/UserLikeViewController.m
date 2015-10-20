@@ -7,6 +7,7 @@
 //
 
 #import "UserLikeViewController.h"
+#import "EntityCell.h"
 
 @interface UserLikeViewController ()
 
@@ -17,9 +18,34 @@
 
 @implementation UserLikeViewController
 
+static NSString * EntityIdentifier = @"EntityCell";
+
+#pragma mark - init view
+- (UICollectionView *)collectionView
+{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+        
+        //        _collectionView.contentInset = UIEdgeInsetsMake(617, 0, 0, 0);
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return _collectionView;
+}
+
+
+- (void)loadView
+{
+    self.view = self.collectionView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,5 +62,23 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - <UICollectionViewDataSource>
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.likeEntities.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityIdentifier forIndexPath:indexPath];
+    cell.entity = [self.likeEntities objectAtIndex:indexPath.row];
+    return cell;
+}
 
 @end

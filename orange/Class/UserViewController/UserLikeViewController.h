@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface UserLikeViewController : BaseViewController
+@interface UserLikeViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @end
