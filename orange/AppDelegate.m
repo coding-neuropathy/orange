@@ -11,7 +11,7 @@
 #import "TabBarViewController.h"
 #import "EntityViewController.h"
 #import "UserViewController.h"
-#import "CategoryViewController.h"
+//#import "CategoryViewController.h"
 #import "TagViewController.h"
 //#import "IntruductionVC.h"
 //#import "WelcomeVC.h"
@@ -366,12 +366,14 @@ int ddLogLevel;
             NSRange range = [absoluteString rangeOfString:@"category/"];
             if (range.location != NSNotFound) {
                 NSString *categoryId = [absoluteString substringFromIndex:range.location+range.length];
-                CategoryViewController * vc = [[CategoryViewController alloc]init];
-                vc.category = [GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}];
-                vc.hidesBottomBarWhenPushed = YES;
-                if (self.activeVC.navigationController) {
-                    [self.activeVC.navigationController pushViewController:vc animated:YES];
-                }
+//                CategoryViewController * vc = [[CategoryViewController alloc]init];
+//                vc.category = [GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}];
+//                vc.hidesBottomBarWhenPushed = YES;
+//                GKCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}];
+                [[OpenCenter sharedOpenCenter] openCategory:[GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}]];
+//                if (self.activeVC.navigationController) {
+//                    [self.activeVC.navigationController pushViewController:vc animated:YES];
+//                }
             }
             else{
                 NSRange range = [absoluteString rangeOfString:@"tag/"];

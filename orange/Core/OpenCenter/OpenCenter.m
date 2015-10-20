@@ -65,6 +65,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     SubCategoryEntityController *vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
 //    vc.category = category;
     //    [controller.navigationController pushViewController:vc animated:YES];
+    vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
