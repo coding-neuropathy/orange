@@ -123,6 +123,35 @@ static NSString * EntityIdentifier = @"EntityCell";
     return cell;
 }
 
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize cellsize = CGSizeMake(0, 0);
+    cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+    return cellsize;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
+    edge = UIEdgeInsetsMake(3., 3., 3., 3.);
+    return edge;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat itemSpacing = 3.;
+
+    return itemSpacing;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat spacing = 3.;
+    
+    return spacing;
+}
+
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
