@@ -269,17 +269,17 @@
     }
     else if (self.index == 1)
     {
-        [API getUserNoteListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSArray *dataArray) {
-            self.dataArrayForNote = [NSMutableArray arrayWithArray:dataArray];
-            [self configEmptyState];
-            [self.tableView reloadData];
-            [self.tableView.pullToRefreshView stopAnimating];
-        } failure:^(NSInteger stateCode) {
-            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
-            [SVProgressHUD dismiss];
-            [self.tableView reloadData];
-            [self.tableView.pullToRefreshView stopAnimating];
-        }];
+//        [API getUserNoteListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSArray *dataArray) {
+//            self.dataArrayForNote = [NSMutableArray arrayWithArray:dataArray];
+//            [self configEmptyState];
+//            [self.tableView reloadData];
+//            [self.tableView.pullToRefreshView stopAnimating];
+//        } failure:^(NSInteger stateCode) {
+//            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+//            [SVProgressHUD dismiss];
+//            [self.tableView reloadData];
+//            [self.tableView.pullToRefreshView stopAnimating];
+//        }];
     }
     else if (self.index == 2)
     {
@@ -317,18 +317,18 @@
     }
     else if (self.index == 1)
     {
-        GKNote *note = [self.dataArrayForNote.lastObject objectForKey:@"note"];
-        NSTimeInterval timestamp = note ? note.createdTime : [[NSDate date] timeIntervalSince1970];
-        [API getUserNoteListWithUserId:self.user.userId timestamp:timestamp count:30 success:^(NSArray *dataArray) {
-            [self.dataArrayForNote addObjectsFromArray:dataArray];
-            [self.tableView reloadData];
-            [self.tableView.infiniteScrollingView stopAnimating];
-        } failure:^(NSInteger stateCode) {
-            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
-            [SVProgressHUD dismiss];
-            [self.tableView reloadData];
-            [self.tableView.infiniteScrollingView stopAnimating];
-        }];
+//        GKNote *note = [self.dataArrayForNote.lastObject objectForKey:@"note"];
+//        NSTimeInterval timestamp = note ? note.createdTime : [[NSDate date] timeIntervalSince1970];
+//        [API getUserNoteListWithUserId:self.user.userId timestamp:timestamp count:30 success:^(NSArray *dataArray) {
+//            [self.dataArrayForNote addObjectsFromArray:dataArray];
+//            [self.tableView reloadData];
+//            [self.tableView.infiniteScrollingView stopAnimating];
+//        } failure:^(NSInteger stateCode) {
+//            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
+//            [SVProgressHUD dismiss];
+//            [self.tableView reloadData];
+//            [self.tableView.infiniteScrollingView stopAnimating];
+//        }];
     }
     else if (self.index == 2)
     {

@@ -13,11 +13,13 @@
 #import "EntityCell.h"
 #import "NoteCell.h"
 
+#import "SettingViewController.h"
 #import "FriendViewController.h"
 #import "FanViewController.h"
 
 #import "UserLikeViewController.h"
 #import "UserPostNoteViewController.h"
+
 
 //#import "DataStructure.h"
 
@@ -46,6 +48,11 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     self = [super init];
     if (self) {
         self.user = user;
+        if (self.user.userId == [Passport sharedInstance].user.userId) {
+            UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_me"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_me"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+            item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+            self.tabBarItem = item;
+        }
     }
     return self;
 }
@@ -76,7 +83,6 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
-        
         [self.collectionView.pullToRefreshView stopAnimating];
     }];
 }
@@ -358,6 +364,13 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 {
     FanViewController * VC = [[FanViewController alloc]init];
     VC.user = self.user;
+    VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)TapEditBtnWithUser:(GKUser *)user
+{
+    SettingViewController * VC = [[SettingViewController alloc]init];
     VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
 }

@@ -15,6 +15,7 @@
 @property (strong, nonatomic) UICollectionView * collectionView;
 
 @property (strong, nonatomic) NSMutableArray * postNotes;
+@property (nonatomic, assign) NSTimeInterval refreshTimestamp;
 
 @end
 
@@ -42,7 +43,7 @@ static NSString * NoteIdentifier = @"NoteCell";
         //        _collectionView.contentInset = UIEdgeInsetsMake(617, 0, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
     }
     return _collectionView;
 }
@@ -50,12 +51,28 @@ static NSString * NoteIdentifier = @"NoteCell";
 #pragma mark - get data
 - (void)refresh
 {
-
+    [API getUserNoteListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSArray *dataArray, NSTimeInterval timestamp) {
+        self.postNotes = [NSMutableArray arrayWithArray:dataArray];
+        self.refreshTimestamp = timestamp;
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        
+        [self.collectionView.pullToRefreshView stopAnimating];
+    }];
 }
 
 - (void)loadMore
 {
-
+    [API getUserNoteListWithUserId:self.user.userId timestamp:self.refreshTimestamp count:30 success:^(NSArray *dataArray, NSTimeInterval timestamp) {
+        [self.postNotes addObjectsFromArray:dataArray];
+        self.refreshTimestamp = timestamp;
+        [self.collectionView.infiniteScrollingView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        
+        [self.collectionView.infiniteScrollingView stopAnimating];
+    }];
 }
 
 - (void)loadView
@@ -67,11 +84,30 @@ static NSString * NoteIdentifier = @"NoteCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[NoteCell class] forCellWithReuseIdentifier:NoteIdentifier];
+    
+    self.title = [NSString stringWithFormat:@"%@ 的点评", self.user.nickname];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.collectionView addPullToRefreshWithActionHandler:^{
+        [weakSelf refresh];
+    }];
+    
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
+    }];
+    
+    if (self.postNotes == 0) {
+        [self.collectionView triggerPullToRefresh];
+    }
 }
 
 /*
@@ -102,6 +138,22 @@ static NSString * NoteIdentifier = @"NoteCell";
     
     return cell;
 }
+
+#pragma mark <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize itemSize = CGSizeMake(0, 0);
+    itemSize = CGSizeMake(kScreenWidth, 100.);
+    return itemSize;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
+    edge = UIEdgeInsetsMake(16., 0., 0., 0.);
+    return edge;
+}
+
 
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

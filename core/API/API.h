@@ -234,7 +234,7 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)getUserNoteListWithUserId:(NSUInteger)userId
                         timestamp:(NSTimeInterval)timestamp
                             count:(NSInteger)count
-                          success:(void (^)(NSArray *dataArray))success
+                          success:(void (^)(NSArray *dataArray, NSTimeInterval timestamp))success
                           failure:(void (^)(NSInteger stateCode))failure;
 
 /**

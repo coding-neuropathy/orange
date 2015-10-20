@@ -11,7 +11,8 @@
 #import "DiscoverController.h"
 #import "NotifyController.h"
 
-#import "MeViewController.h"
+//#import "MeViewController.h"
+#import "UserViewController.h"
 #import "SettingViewController.h"
 #import "LoginView.h"
 #import "GTScrollNavigationBar.h"
@@ -65,7 +66,7 @@
     
     if(k_isLogin)
     {
-        [fourth setViewControllers:@[[[MeViewController alloc] init]] animated:NO];
+        [fourth setViewControllers:@[[[UserViewController alloc] initWithUser:[Passport sharedInstance].user]] animated:NO];
     }
     else
     {
@@ -102,7 +103,7 @@
             return NO;
         }
     }
-    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[MeViewController class]]) {
+    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[UserViewController class]]) {
         if (!k_isLogin) {
             LoginView * view = [[LoginView alloc]init];
             [view show];
@@ -154,7 +155,7 @@
     UINavigationController * fourth = [[UINavigationController alloc] init];
     if(k_isLogin)
     {
-        [fourth setViewControllers:@[[[MeViewController alloc] init]] animated:NO];
+        [fourth setViewControllers:@[[[UserViewController alloc] initWithUser:[Passport sharedInstance].user]] animated:NO];
     }
     else
     {
@@ -165,7 +166,7 @@
         if ([nav.viewControllers.firstObject isKindOfClass:[SettingViewController class]]) {
             [array removeObject:nav];
         }
-        if ([nav.viewControllers.firstObject isKindOfClass:[MeViewController class]]) {
+        if ([nav.viewControllers.firstObject isKindOfClass:[UserViewController class]]) {
             return;
         }
     }
@@ -187,7 +188,7 @@
     UINavigationController * fourth = [[UINavigationController alloc] init];
     if(k_isLogin)
     {
-        [fourth setViewControllers:@[[[MeViewController alloc] init]] animated:NO];
+        [fourth setViewControllers:@[[[UserViewController alloc] initWithUser:[Passport sharedInstance].user]] animated:NO];
     }
     else
     {

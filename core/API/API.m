@@ -739,13 +739,13 @@
 + (void)getUserNoteListWithUserId:(NSUInteger)userId
                         timestamp:(NSTimeInterval)timestamp
                             count:(NSInteger)count
-                          success:(void (^)(NSArray *dataArray))success
+                          success:(void (^)(NSArray *dataArray, NSTimeInterval timestamp))success
                           failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(userId > 0);
     NSParameterAssert(count > 0);
     
-    NSString *path = [NSString stringWithFormat:@"user/%lu/entity/note/", (unsigned long)userId];
+    NSString *path = [NSString stringWithFormat:@"user/%lu/notes/", (unsigned long)userId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@(timestamp) forKey:@"timestamp"];
@@ -753,22 +753,17 @@
     
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *objectArray = (NSArray *)responseObject;
-        
+//        NSArray *objectArray = (NSArray *)responseObject;
+        NSTimeInterval timestamp = [responseObject[@"timestamp"] doubleValue];
         NSMutableArray *dataArray = [NSMutableArray array];
         
-        for (NSDictionary *dict in objectArray) {
-            GKEntity *entity = [GKEntity modelFromDictionary:dict[@"entity"]];
-            GKNote *note = [GKNote modelFromDictionary:dict[@"note"]];
-            
-            NSDictionary *dataDict = @{@"entity" : entity,
-                                       @"note"   : note};
-            
-            [dataArray addObject:dataDict];
+        for (NSDictionary * row in responseObject[@"notes"]) {
+            GKNote *note = [GKNote modelFromDictionary:row];
+            [dataArray addObject:note];
         }
         
         if (success) {
-            success(dataArray);
+            success(dataArray, timestamp);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
@@ -2030,8 +2025,6 @@
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
-        
-        
         
         
         NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
