@@ -14,7 +14,7 @@
 @property (strong, nonatomic) GKUser * user;
 @property (strong, nonatomic) UICollectionView * collectionView;
 
-@property (strong, nonatomic) NSMutableArray * postNotes;
+@property (strong, nonatomic) NSMutableArray * noteArray;
 @property (nonatomic, assign) NSTimeInterval refreshTimestamp;
 
 @end
@@ -52,7 +52,7 @@ static NSString * NoteIdentifier = @"NoteCell";
 - (void)refresh
 {
     [API getUserNoteListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSArray *dataArray, NSTimeInterval timestamp) {
-        self.postNotes = [NSMutableArray arrayWithArray:dataArray];
+        self.noteArray = [NSMutableArray arrayWithArray:dataArray];
         self.refreshTimestamp = timestamp;
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
@@ -65,7 +65,7 @@ static NSString * NoteIdentifier = @"NoteCell";
 - (void)loadMore
 {
     [API getUserNoteListWithUserId:self.user.userId timestamp:self.refreshTimestamp count:30 success:^(NSArray *dataArray, NSTimeInterval timestamp) {
-        [self.postNotes addObjectsFromArray:dataArray];
+        [self.noteArray addObjectsFromArray:dataArray];
         self.refreshTimestamp = timestamp;
         [self.collectionView.infiniteScrollingView stopAnimating];
         [self.collectionView reloadData];
@@ -109,7 +109,7 @@ static NSString * NoteIdentifier = @"NoteCell";
         [weakSelf loadMore];
     }];
     
-    if (self.postNotes == 0) {
+    if (self.noteArray == 0) {
         [self.collectionView triggerPullToRefresh];
     }
 }
@@ -132,13 +132,13 @@ static NSString * NoteIdentifier = @"NoteCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.postNotes.count;
+    return self.noteArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NoteIdentifier forIndexPath:indexPath];
-    cell.note = [self.postNotes objectAtIndex:indexPath.row];
+    cell.note = [self.noteArray objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -162,7 +162,7 @@ static NSString * NoteIdentifier = @"NoteCell";
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    GKNote * note = [self.postNotes objectAtIndex:indexPath.row];
+    GKNote * note = [self.noteArray objectAtIndex:indexPath.row];
     GKEntity * entity = [GKEntity modelFromDictionary:@{@"entity_id": note.entityId}];
     [[OpenCenter sharedOpenCenter] openEntity:entity];
 }

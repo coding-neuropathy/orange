@@ -7,6 +7,7 @@
 //
 
 #import "UserTagsViewController.h"
+#import "UserTagCell.h"
 
 @interface UserTagsViewController ()
 
@@ -17,6 +18,8 @@
 @end
 
 @implementation UserTagsViewController
+
+static NSString * UserTagIdentifier = @"UserTagCell";
 
 - (instancetype)initWithUser:(GKUser *)user
 {
@@ -43,6 +46,18 @@
     return _collectionView;
 }
 
+#pragma mark - get data
+- (void)refresh
+{
+    [API getTagListWithUserId:self.user.userId offset:0 count:30 success:^(GKUser *user, NSArray *tagArray) {
+        self.tagArray = [NSMutableArray arrayWithArray:tagArray];
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.pullToRefreshView stopAnimating];
+    }];
+}
+
 - (void)loadView
 {
     self.view = self.collectionView;
@@ -51,6 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.collectionView registerClass:[UserTagCell class] forCellWithReuseIdentifier:UserTagIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,6 +84,23 @@
 }
 */
 
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.collectionView addPullToRefreshWithActionHandler:^{
+        [weakSelf refresh];
+    }];
+    
+//    [self.collectionView addInfiniteScrollingWithActionHandler:^{
+//        [weakSelf loadMore];
+//    }];
+//    
+    if (self.tagArray.count == 0) {
+        [self.collectionView triggerPullToRefresh];
+    }
+}
+
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -77,6 +110,13 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.tagArray.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UserTagCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserTagIdentifier forIndexPath:indexPath];
+    
+    return cell;
 }
 
 @end
