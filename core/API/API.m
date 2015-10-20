@@ -763,6 +763,7 @@
             
             NSDictionary *dataDict = @{@"entity" : entity,
                                        @"note"   : note};
+            
             [dataArray addObject:dataDict];
         }
         
@@ -2030,17 +2031,25 @@
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
-        GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
-//        GKEntity *lastLikeEntity = [GKEntity modelFromDictionary:objectDict[@"last_like"]];
-//        GKNote *lastNote = nil;
+        
+        
+        
         NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
         for (NSDictionary * row in objectDict[@"last_user_like"]) {
             GKEntity * entity = [GKEntity modelFromDictionary:row];
             [entities addObject:entity];
         }
         
+        NSMutableArray * notes = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in objectDict[@"last_post_note"]) {
+            GKNote * note = [GKNote modelFromDictionary:row];
+            [notes addObject:note];
+        }
+        
+        GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
+//        NSLog(@"user %ld", user.relation);
         if (success) {
-            success(user, entities, [NSArray array]);
+            success(user, entities, notes);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {

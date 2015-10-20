@@ -64,7 +64,9 @@
             self.titleLabel.text = NSLocalizedStringFromTable(@"like", kLocalizedFile, nil);
             self.numberLabel.text = [NSString stringWithFormat:@"%ld", _user.likeCount];
             break;
-            
+        case UserPostType:
+            self.titleLabel.text = NSLocalizedStringFromTable(@"note", kLocalizedFile, nil);
+            self.numberLabel.text = [NSString stringWithFormat:@"%ld", _user.noteCount];
         default:
             break;
     }

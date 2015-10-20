@@ -10,7 +10,7 @@
 
 @interface UserFooterSectionView ()
 
-@property (strong, nonatomic) UILabel * titleLabel;
+@property (strong, nonatomic) UIButton * moreBtn;
 
 @end
 
@@ -25,31 +25,43 @@
     return self;
 }
 
-- (UILabel *)titleLabel
+- (UIButton *)moreBtn
 {
-    if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.font = [UIFont systemFontOfSize:14.];
-        _titleLabel.textColor = UIColorFromRGB(0x427ec0);
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-//        _titleLabel.backgroundColor = UIColorFromRGB(0xffffff);
-        [self addSubview:_titleLabel];
+    if (!_moreBtn) {
+        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+//        _moreBtn.titleLabel.textColor = UIColorFromRGB(0x427ec0);
+        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        
+        [_moreBtn addTarget:self action:@selector(moreBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_moreBtn];
     }
-    return _titleLabel;
+    return _moreBtn;
 }
 
-- (void)setTitle:(NSString *)title
+//- (void)setTitle:(NSString *)title
+//{
+//    _title = title;
+////    self.titleLabel.text = _title;
+//    [self.moreBtn setTitle:_title forState:UIControlStateNormal];
+//    [self.moreBtn setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
+//    
+//    [self setNeedsLayout];
+//}
+- (void)setType:(UserPageType)type
 {
-    _title = title;
-    self.titleLabel.text = _title;
-    
+    _type = type;
+    [self.moreBtn setTitle:NSLocalizedStringFromTable(@"more", kLocalizedFile, nil) forState:UIControlStateNormal];
+    [self.moreBtn setTitleColor:UIColorFromRGB(0x427ec0) forState:UIControlStateNormal];
     [self setNeedsLayout];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth, 44.);
+//    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth, 44.);
+    self.moreBtn.frame = CGRectMake(0., 0., kScreenWidth, 44.);
     
 }
 
@@ -72,6 +84,14 @@
     CGContextMoveToPoint(context, 0., self.deFrameHeight);
     CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
     CGContextStrokePath(context);
+}
+
+#pragma mark - button action
+- (void)moreBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(TapMoreButtonWithType:)]) {
+        [_delegate TapMoreButtonWithType:self.type];
+    }
 }
 
 
