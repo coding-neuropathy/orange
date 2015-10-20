@@ -23,7 +23,7 @@
 
 //#import "DataStructure.h"
 
-@interface UserViewController () <EntityCellDelegate, UserHeaderViewDelegate, UserFooterSectionDelete>
+@interface UserViewController () <EntityCellDelegate, UserHeaderViewDelegate, UserHeaderSectionViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray * likedataArray;
 @property (strong, nonatomic) NSMutableArray * notedataArray;
@@ -178,7 +178,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -217,6 +217,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             {
                 UserHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer forIndexPath:indexPath];
                 [headerSection setUser:self.user WithType:UserLikeType];
+                headerSection.delegate = self;
                 return headerSection;
             }
                 break;
@@ -224,6 +225,15 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             {
                 UserHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer forIndexPath:indexPath];
                 [headerSection setUser:self.user WithType:UserPostType];
+                headerSection.delegate = self;
+                return headerSection;
+            }
+                break;
+            case 3:
+            {
+                UserHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer forIndexPath:indexPath];
+                [headerSection setUser:self.user WithType:UserTagType];
+                headerSection.delegate = self;
                 return headerSection;
             }
                 break;
@@ -238,18 +248,6 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     } else {
         UserFooterSectionView * footerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UserFooterSectionIdentifer forIndexPath:indexPath];
 //        footerSection.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
-        switch (indexPath.section) {
-            case 1:
-                footerSection.type = UserLikeType;
-                break;
-            case 2:
-                footerSection.type = UserPostType;
-                break;
-            default:
-                break;
-        }
-        
-        footerSection.delegate = self;
         return footerSection;
     }
     
@@ -312,8 +310,12 @@ static NSString * UserNoteIdentifier = @"NoteCell";
                 size = CGSizeMake(kScreenWidth, 44.);
             break;
             
-        default:
+        case 2:
             if (self.notedataArray.count > 0)
+                size = CGSizeMake(kScreenWidth, 44.);
+            break;
+        case 3:
+            if (self.user.tagCount > 0)
                 size = CGSizeMake(kScreenWidth, 44.);
             break;
     }
@@ -328,14 +330,16 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             
             break;
         case 1:
-        {
             if (self.likedataArray.count > 4)
-                size = CGSizeMake(kScreenWidth, 54.);
-        }
+                size = CGSizeMake(kScreenWidth, 10.);
             break;
         case 2:
             if (self.notedataArray.count > 3)
-                size = CGSizeMake(kScreenWidth, 54.);
+                size = CGSizeMake(kScreenWidth, 10.);
+            break;
+        case 3:
+            if (self.user.tagCount > 0)
+                size = CGSizeMake(kScreenWidth, 10.);
             break;
         default:
             break;
@@ -425,8 +429,8 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     [self settingButtonAction];
 }
 
-#pragma mark - <UserFooterSectionDelete>
-- (void)TapMoreButtonWithType:(UserPageType)type
+#pragma mark - <UserHeaderSectionViewDelegate>
+- (void)TapHeaderViewWithType:(UserPageType)type
 {
     switch (type) {
         case UserLikeType:
@@ -445,6 +449,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             break;
     }
 }
+
 
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity

@@ -50,7 +50,7 @@
         _indicatorLable.hidden = YES;
         
         [self addSubview:_indicatorLable];
-    }\
+    }
     return _indicatorLable;
 }
 

@@ -14,6 +14,8 @@
 @property (strong, nonatomic) GKUser * user;
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) UILabel * numberLabel;
+@property (strong, nonatomic) UILabel * indicatorLable;
+@property (assign, nonatomic) UserPageType type;
 
 @end
 
@@ -55,11 +57,27 @@
     return _numberLabel;
 }
 
+- (UILabel *)indicatorLable
+{
+    if (!_indicatorLable) {
+        _indicatorLable = [[UILabel alloc] initWithFrame:CGRectZero];
+        _indicatorLable.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        _indicatorLable.textAlignment = NSTextAlignmentLeft;
+        _indicatorLable.textColor = UIColorFromRGB(0x9d9e9f);
+        _indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleRight];
+//        _indicatorLable.hidden = YES;
+//        _indicatorLable.backgroundColor = [UIColor redColor];
+        [self addSubview:_indicatorLable];
+    }
+    return _indicatorLable;
+}
+
 - (void)setUser:(GKUser *)user WithType:(UserPageType)type
 {
     _user = user;
+    _type = type;
     
-    switch (type) {
+    switch (_type) {
         case UserLikeType:
             self.titleLabel.text = NSLocalizedStringFromTable(@"like", kLocalizedFile, nil);
             self.numberLabel.text = [NSString stringWithFormat:@"%ld", _user.likeCount];
@@ -67,11 +85,16 @@
         case UserPostType:
             self.titleLabel.text = NSLocalizedStringFromTable(@"note", kLocalizedFile, nil);
             self.numberLabel.text = [NSString stringWithFormat:@"%ld", _user.noteCount];
+            break;
+        case UserTagType:
+            self.titleLabel.text = NSLocalizedStringFromTable(@"tags", kLocalizedFile, nil);
+            self.numberLabel.text = [NSString stringWithFormat:@"%ld", _user.tagCount];
+            break;
         default:
             break;
     }
     
-    [self setNeedsDisplay];
+    [self setNeedsLayout];
 }
 
 - (void)layoutSubviews
@@ -81,6 +104,19 @@
     self.titleLabel.frame = CGRectMake(16., 0., 40., self.deFrameHeight);
     self.numberLabel.frame = CGRectMake(0., 0., 100., self.deFrameHeight);
     self.numberLabel.deFrameLeft = self.titleLabel.deFrameRight + 5.;
+    
+    self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
+    self.indicatorLable.center = self.titleLabel.center;
+    self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
+}
+
+#pragma mark - touch touch
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(TapHeaderViewWithType:)])
+    {
+        [_delegate TapHeaderViewWithType:self.type];
+    }
 }
 
 @end

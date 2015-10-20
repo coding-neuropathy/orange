@@ -75,13 +75,7 @@
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     
     NSInteger x = 7;
-//    if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
-//        x = 6;
-//    }
-//    else{
-//        x = 8;
-//    }
-    
+
     [paragraphStyle setLineSpacing:x];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [_note.text length])];
     self.noteLabel.attributedText = attributedString;

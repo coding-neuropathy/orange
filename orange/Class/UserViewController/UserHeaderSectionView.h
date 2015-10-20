@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "DataStructure.h"
 
+@protocol UserHeaderSectionViewDelegate <NSObject>
+
+@optional
+- (void)TapHeaderViewWithType:(UserPageType)type;
+
+@end
+
 @interface UserHeaderSectionView : UICollectionReusableView
 
+@property (weak, nonatomic) id<UserHeaderSectionViewDelegate> delegate;
 - (void)setUser:(GKUser *)user WithType:(UserPageType)type;
 
 @end

@@ -258,6 +258,7 @@
 		B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = B72ACCC11B66531E0020E841 /* DiscoverController.m */; };
 		B72ACCC81B666B8C0020E841 /* DiscoverBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72ACCC71B666B8C0020E841 /* DiscoverBannerView.m */; };
 		B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD82E1AEF5B3A00354248 /* IconInfoView.m */; };
+		B736FF2A1BD65D6E000668E4 /* UserTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B736FF291BD65D6E000668E4 /* UserTagsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		B73E90CD1B1C9D5D00616FD7 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73E90CC1B1C9D5D00616FD7 /* AVOSCloud.framework */; };
 		B73E90CF1B1C9D7500616FD7 /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73E90CE1B1C9D7500616FD7 /* AVOSCloudSNS.framework */; };
 		B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */; };
@@ -809,6 +810,8 @@
 		B72ACCC71B666B8C0020E841 /* DiscoverBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverBannerView.m; sourceTree = "<group>"; };
 		B72FD82D1AEF5B3A00354248 /* IconInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconInfoView.h; sourceTree = "<group>"; };
 		B72FD82E1AEF5B3A00354248 /* IconInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconInfoView.m; sourceTree = "<group>"; };
+		B736FF281BD65D6E000668E4 /* UserTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTagsViewController.h; sourceTree = "<group>"; };
+		B736FF291BD65D6E000668E4 /* UserTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTagsViewController.m; sourceTree = "<group>"; };
 		B73E90CC1B1C9D5D00616FD7 /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
 		B73E90CE1B1C9D7500616FD7 /* AVOSCloudSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloudSNS.framework; sourceTree = "<group>"; };
 		B74266DB1AB3DFE10064A010 /* UIScrollView+AutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+AutoScroll.h"; sourceTree = "<group>"; };
@@ -2100,6 +2103,8 @@
 				B772BE9C1BD55848005C1540 /* UserLikeViewController.m */,
 				B772BE9E1BD55861005C1540 /* UserPostNoteViewController.h */,
 				B772BE9F1BD55861005C1540 /* UserPostNoteViewController.m */,
+				B736FF281BD65D6E000668E4 /* UserTagsViewController.h */,
+				B736FF291BD65D6E000668E4 /* UserTagsViewController.m */,
 			);
 			path = UserViewController;
 			sourceTree = "<group>";
@@ -2983,6 +2988,7 @@
 				4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */,
 				B7F543F71BC2457E0044F5E9 /* MKAnnotationView+WebCache.m in Sources */,
 				4E8A34361BB060D700DF3841 /* tipView.m in Sources */,
+				B736FF2A1BD65D6E000668E4 /* UserTagsViewController.m in Sources */,
 				4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
