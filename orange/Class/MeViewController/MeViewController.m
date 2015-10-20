@@ -448,7 +448,7 @@
         {
             GKNote * note =  [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"note"];
             GKEntity * entity =  [[self.dataArrayForNote objectAtIndex:indexPath.row] objectForKey:@"entity"];
-            note.entityChiefImage = entity.imageURL_640x640;
+            //note.entityChiefImage = entity.imageURL_640x640;
             return [NoteSingleListCell height:note];
         }
         else if(self.index ==2)
