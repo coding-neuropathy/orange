@@ -8,6 +8,8 @@
 
 #import "BaseViewController.h"
 
-@interface UserTagsViewController : BaseViewController
+@interface UserTagsViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+
+- (instancetype)initWithUser:(GKUser *)user;
 
 @end

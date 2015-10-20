@@ -19,6 +19,7 @@
 
 #import "UserLikeViewController.h"
 #import "UserPostNoteViewController.h"
+#import "UserTagsViewController.h"
 
 
 //#import "DataStructure.h"
@@ -442,6 +443,12 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         case UserPostType:
         {
             UserPostNoteViewController * vc = [[UserPostNoteViewController alloc] initWithUser:self.user];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case UserTagType:
+        {
+            UserTagsViewController * vc = [[UserTagsViewController alloc] initWithUser:self.user];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

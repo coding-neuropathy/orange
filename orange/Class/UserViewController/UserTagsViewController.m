@@ -10,9 +10,43 @@
 
 @interface UserTagsViewController ()
 
+@property (strong, nonatomic) GKUser * user;
+@property (strong, nonatomic) UICollectionView * collectionView;
+@property (strong, nonatomic) NSMutableArray * tagArray;
+
 @end
 
 @implementation UserTagsViewController
+
+- (instancetype)initWithUser:(GKUser *)user
+{
+    self = [super init];
+    if (self) {
+        self.user = user;
+    }
+    return self;
+}
+
+#pragma mark - init view
+- (UICollectionView *)collectionView
+{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+        
+        //        _collectionView.contentInset = UIEdgeInsetsMake(617, 0, 0, 0);
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return _collectionView;
+}
+
+- (void)loadView
+{
+    self.view = self.collectionView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,5 +67,16 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - <UICollectionViewDataSource>
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.tagArray.count;
+}
 
 @end
