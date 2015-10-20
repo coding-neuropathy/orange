@@ -106,6 +106,39 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:UserLikeEntityIdentifer];
     [self.collectionView registerClass:[NoteCell class] forCellWithReuseIdentifier:UserNoteIdentifier];
+    
+    
+    if (self.user.userId == [Passport sharedInstance].user.userId) {
+        NSMutableArray * array = [NSMutableArray array];
+        
+        {
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+            button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+            button.titleLabel.textAlignment = NSTextAlignmentCenter;
+            [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+            [button setTitle:[NSString fontAwesomeIconStringForEnum:FACog] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(settingButtonAction) forControlEvents:UIControlEventTouchUpInside];
+            [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
+            button.backgroundColor = [UIColor clearColor];
+            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+            [array addObject:item];
+        }
+        
+        if ([[TaeSession sharedInstance] isLogin])
+        {
+            UIButton * cartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            cartBtn.frame = CGRectMake(0., 0., 32., 44.);
+            cartBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
+            [cartBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+            [cartBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAShoppingCart] forState:UIControlStateNormal];
+            [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(8., 0., 0., 0.)];
+            [cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            UIBarButtonItem * cartBtnItem = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
+            [array addObject:cartBtnItem];
+        }
+        
+        self.navigationItem.rightBarButtonItems = array;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -351,6 +384,14 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     }
 }
 
+#pragma mark - button action
+- (void)settingButtonAction
+{
+    SettingViewController * VC = [[SettingViewController alloc]init];
+    VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
 #pragma mark - <UserHeaderViewDelegate>
 - (void)TapFriendBtnWithUser:(GKUser *)user
 {
@@ -370,9 +411,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 
 - (void)TapEditBtnWithUser:(GKUser *)user
 {
-    SettingViewController * VC = [[SettingViewController alloc]init];
-    VC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:VC animated:YES];
+    [self settingButtonAction];
 }
 
 #pragma mark - <UserFooterSectionDelete>
