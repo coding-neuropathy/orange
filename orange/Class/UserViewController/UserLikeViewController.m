@@ -9,8 +9,9 @@
 #import "UserLikeViewController.h"
 #import "EntityCell.h"
 
-@interface UserLikeViewController ()
+@interface UserLikeViewController () <EntityCellDelegate>
 
+@property (strong, nonatomic) GKUser * user;
 @property (strong, nonatomic) NSMutableArray * likeEntities;
 @property (strong, nonatomic) UICollectionView * collectionView;
 
@@ -19,6 +20,16 @@
 @implementation UserLikeViewController
 
 static NSString * EntityIdentifier = @"EntityCell";
+
+
+- (instancetype)initWithUser:(GKUser *)user
+{
+    self = [super init];
+    if (self) {
+        _user = user;
+    }
+    return self;
+}
 
 #pragma mark - init view
 - (UICollectionView *)collectionView
@@ -36,6 +47,23 @@ static NSString * EntityIdentifier = @"EntityCell";
     return _collectionView;
 }
 
+#pragma mark - get data
+- (void)refresh
+{
+    [API getUserLikeEntityListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
+        self.likeEntities = [NSMutableArray arrayWithArray:entityArray];
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView reloadData];
+    }];
+}
+
+- (void)loadMore
+{
+    
+}
+
 
 - (void)loadView
 {
@@ -51,6 +79,19 @@ static NSString * EntityIdentifier = @"EntityCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.collectionView addPullToRefreshWithActionHandler:^{
+        [weakSelf refresh];
+    }];
+    
+    if (self.likeEntities == 0) {
+        [self.collectionView triggerPullToRefresh];
+    }
 }
 
 /*
@@ -78,7 +119,14 @@ static NSString * EntityIdentifier = @"EntityCell";
 {
     EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityIdentifier forIndexPath:indexPath];
     cell.entity = [self.likeEntities objectAtIndex:indexPath.row];
+    cell.delegate = self;
     return cell;
+}
+
+#pragma mark - <EntityCellDelegate>
+- (void)TapImageWithEntity:(GKEntity *)entity
+{
+    [[OpenCenter sharedOpenCenter] openEntity:entity];
 }
 
 @end

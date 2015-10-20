@@ -10,4 +10,6 @@
 
 @interface UserLikeViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
+- (instancetype)initWithUser:(GKUser *)user;
+
 @end

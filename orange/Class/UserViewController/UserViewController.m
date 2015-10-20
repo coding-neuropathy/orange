@@ -368,7 +368,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     switch (type) {
         case UserLikeType:
         {
-            UserLikeViewController *vc = [[UserLikeViewController alloc] init];
+            UserLikeViewController *vc = [[UserLikeViewController alloc] initWithUser:self.user];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
