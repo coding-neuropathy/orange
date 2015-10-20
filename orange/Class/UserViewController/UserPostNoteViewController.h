@@ -8,6 +8,8 @@
 
 #import "BaseViewController.h"
 
-@interface UserPostNoteViewController : BaseViewController
+@interface UserPostNoteViewController : BaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+
+- (instancetype)initWithUser:(GKUser *)user;
 
 @end

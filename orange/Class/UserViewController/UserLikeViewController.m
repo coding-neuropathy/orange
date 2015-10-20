@@ -14,6 +14,7 @@
 @property (strong, nonatomic) GKUser * user;
 @property (strong, nonatomic) NSMutableArray * likeEntities;
 @property (strong, nonatomic) UICollectionView * collectionView;
+@property (nonatomic, assign) NSTimeInterval likeTimestamp;
 
 @end
 
@@ -52,6 +53,7 @@ static NSString * EntityIdentifier = @"EntityCell";
 {
     [API getUserLikeEntityListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
         self.likeEntities = [NSMutableArray arrayWithArray:entityArray];
+        self.likeTimestamp = timestamp;
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
@@ -61,7 +63,14 @@ static NSString * EntityIdentifier = @"EntityCell";
 
 - (void)loadMore
 {
-    
+    [API getUserLikeEntityListWithUserId:self.user.userId timestamp:self.likeTimestamp count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
+        [self.likeEntities addObjectsFromArray:entityArray];
+        self.likeTimestamp = timestamp;
+        [self.collectionView.infiniteScrollingView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.infiniteScrollingView stopAnimating];
+    }];
 }
 
 
@@ -87,6 +96,10 @@ static NSString * EntityIdentifier = @"EntityCell";
     __weak __typeof(&*self)weakSelf = self;
     [self.collectionView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
+    }];
+    
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
     }];
     
     if (self.likeEntities == 0) {

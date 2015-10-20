@@ -763,6 +763,7 @@
             
             NSDictionary *dataDict = @{@"entity" : entity,
                                        @"note"   : note};
+            
             [dataArray addObject:dataDict];
         }
         
