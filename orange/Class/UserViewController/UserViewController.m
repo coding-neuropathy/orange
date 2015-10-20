@@ -16,6 +16,9 @@
 #import "FriendViewController.h"
 #import "FanViewController.h"
 
+#import "UserLikeViewController.h"
+#import "UserPostNoteViewController.h"
+
 //#import "DataStructure.h"
 
 @interface UserViewController () <EntityCellDelegate, UserHeaderViewDelegate, UserFooterSectionDelete>
@@ -365,12 +368,14 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     switch (type) {
         case UserLikeType:
         {
-        
+            UserLikeViewController *vc = [[UserLikeViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case UserPostType:
         {
-        
+            UserPostNoteViewController * vc = [[UserPostNoteViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         default:
