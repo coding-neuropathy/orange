@@ -362,7 +362,20 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 #pragma mark - <UserFooterSectionDelete>
 - (void)TapMoreButtonWithType:(UserPageType)type
 {
-    DDLogInfo(@"OKOKOKOO");
+    switch (type) {
+        case UserLikeType:
+        {
+        
+        }
+            break;
+        case UserPostType:
+        {
+        
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - <EntityCellDelegate>

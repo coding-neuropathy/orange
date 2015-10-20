@@ -10,6 +10,9 @@
 
 @interface UserLikeViewController ()
 
+@property (strong, nonatomic) NSMutableArray * likeEntities;
+@property (strong, nonatomic) UICollectionView * collectionView;
+
 @end
 
 @implementation UserLikeViewController
