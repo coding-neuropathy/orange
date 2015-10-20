@@ -430,7 +430,7 @@
     
 
     self.tableView.tableFooterView = nil;
-    [self.tableView.pullToRefreshView startAnimating];
+//    [self.tableView.pullToRefreshView startAnimating];
     
     
     switch (self.segmentedControlForSearch.selectedSegmentIndex) {
@@ -534,8 +534,8 @@
     [UIView animateWithDuration:0.1 animations:^{
         [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
     }completion:^(BOOL finished) {
-        [self.tableView triggerPullToRefresh];
-//        [self handleSearchText:self.keyword];
+//        [self.tableView triggerPullToRefresh];
+        [self handleSearchText:self.keyword];
     }];
 }
 

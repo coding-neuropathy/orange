@@ -571,6 +571,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         searchLogTableView.dataSource = self;
         searchLogTableView.backgroundColor = [UIColor clearColor];
         searchLogTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        searchLogTableView.scrollEnabled = NO;
 
         self.searchLogTableView = searchLogTableView;
     }
