@@ -40,3 +40,12 @@ typedef NS_ENUM(NSInteger, SearchType) {
     CategoryType,
     UserType,
 };
+
+/**
+ *  用户页面类型
+ */
+typedef NS_ENUM(NSInteger, UserPageType) {
+    UserLikeType,
+    UserPostType,
+    UserTagType,
+};

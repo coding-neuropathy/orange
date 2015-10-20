@@ -98,14 +98,14 @@
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
-        [API getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
-            weakSelf.user = user;
-            [weakSelf configHeaderView];
-            [Passport sharedInstance].user = user;
-            [weakSelf.tableView reloadData];
-        } failure:^(NSInteger stateCode) {
-            
-        }];
+//        [API getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
+//            weakSelf.user = user;
+//            [weakSelf configHeaderView];
+//            [Passport sharedInstance].user = user;
+//            [weakSelf.tableView reloadData];
+//        } failure:^(NSInteger stateCode) {
+//            
+//        }];
     }];
     
 
@@ -115,14 +115,14 @@
     
     if (k_isLogin) {
         self.user = [Passport sharedInstance].user;
-        [API getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
-            weakSelf.user = user;
-            [weakSelf configHeaderView];
-            [Passport sharedInstance].user = user;
-            [self.tableView reloadData];
-        } failure:^(NSInteger stateCode) {
-            
-        }];
+//        [API getUserDetailWithUserId:weakSelf.user.userId success:^(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote) {
+//            weakSelf.user = user;
+//            [weakSelf configHeaderView];
+//            [Passport sharedInstance].user = user;
+//            [self.tableView reloadData];
+//        } failure:^(NSInteger stateCode) {
+//            
+//        }];
         [self refresh];
     }
     

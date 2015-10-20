@@ -630,7 +630,7 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  *  @param failure 失败block
  */
 + (void)getUserDetailWithUserId:(NSUInteger)userId
-                        success:(void (^)(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote))success
+                        success:(void (^)(GKUser *user, NSArray *lastLikeEntities, NSArray  *lastNotes))success
                         failure:(void (^)(NSInteger stateCode))failure;
 
 /**

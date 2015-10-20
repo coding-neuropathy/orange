@@ -2,12 +2,16 @@
 //  UserViewController.h
 //  orange
 //
-//  Created by huiter on 15/1/5.
-//  Copyright (c) 2015年 sensoro. All rights reserved.
+//  Created by 谢家欣 on 15/10/19.
+//  Copyright © 2015年 guoku.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface UserViewController : BaseViewController
-@property(nonatomic, strong) GKUser *user;
+@interface UserViewController : BaseViewController <UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (strong, nonatomic) GKUser * user;
+
+- (instancetype)initWithUser:(GKUser *)user;
+
 @end

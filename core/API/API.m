@@ -2020,7 +2020,7 @@
  *  @param failure 失败block
  */
 + (void)getUserDetailWithUserId:(NSUInteger)userId
-                        success:(void (^)(GKUser *user, GKEntity *lastLikeEntity, GKNote *lastNote))success
+                        success:(void (^)(GKUser *user, NSArray *lastLikeEntities, NSArray  *lastNotes))success
                         failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(userId > 0);
@@ -2030,12 +2030,25 @@
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
-        GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
-        GKEntity *lastLikeEntity = [GKEntity modelFromDictionary:objectDict[@"last_like"]];
-        GKNote *lastNote = nil;
         
+        
+        
+        NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in objectDict[@"last_user_like"]) {
+            GKEntity * entity = [GKEntity modelFromDictionary:row];
+            [entities addObject:entity];
+        }
+        
+        NSMutableArray * notes = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in objectDict[@"last_post_note"]) {
+            GKNote * note = [GKNote modelFromDictionary:row];
+            [notes addObject:note];
+        }
+        
+        GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
+//        NSLog(@"user %ld", user.relation);
         if (success) {
-            success(user, lastLikeEntity, lastNote);
+            success(user, entities, notes);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
