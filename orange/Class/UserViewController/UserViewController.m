@@ -32,6 +32,10 @@
 
 @property (assign, nonatomic) UserPageType type;
 
+@property(nonatomic, strong) id<ALBBCartService> cartService;
+@property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
+@property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
+
 @end
 
 @implementation UserViewController
@@ -52,6 +56,8 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_me"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_me"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
             item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
             self.tabBarItem = item;
+            
+            _cartService=[[TaeSDK sharedInstance] getService:@protocol(ALBBCartService)];
         }
     }
     return self;
@@ -96,7 +102,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = self.user.nickname;
+    self.navigationItem.title = self.user.nickname;
     
     [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
     
@@ -390,6 +396,11 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     SettingViewController * VC = [[SettingViewController alloc]init];
     VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)cartBtnAction:(id)sender
+{
+    [_cartService showCart:self isNeedPush:YES webViewUISettings:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
 }
 
 #pragma mark - <UserHeaderViewDelegate>

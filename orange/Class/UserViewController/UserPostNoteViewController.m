@@ -85,7 +85,11 @@ static NSString * NoteIdentifier = @"NoteCell";
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[NoteCell class] forCellWithReuseIdentifier:NoteIdentifier];
     
-    self.title = [NSString stringWithFormat:@"%@ 的点评", self.user.nickname];
+    if (self.user.userId == [Passport sharedInstance].user.userId) {
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ 的点评", self.user.nickname];
+    } else {
+    
+    }
 }
 
 - (void)didReceiveMemoryWarning {
