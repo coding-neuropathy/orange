@@ -42,9 +42,25 @@ static NSString * NoteIdentifier = @"NoteCell";
         //        _collectionView.contentInset = UIEdgeInsetsMake(617, 0, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     }
     return _collectionView;
+}
+
+#pragma mark - get data
+- (void)refresh
+{
+
+}
+
+- (void)loadMore
+{
+
+}
+
+- (void)loadView
+{
+    self.view = self.collectionView;
 }
 
 - (void)viewDidLoad {

@@ -374,7 +374,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             break;
         case UserPostType:
         {
-            UserPostNoteViewController * vc = [[UserPostNoteViewController alloc] init];
+            UserPostNoteViewController * vc = [[UserPostNoteViewController alloc] initWithUser:self.user];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
