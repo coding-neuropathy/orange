@@ -97,6 +97,20 @@ static NSString * NoteIdentifier = @"NoteCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"UserNoteView"];
+    [MobClick beginLogPageView:@"UserNoteView"];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"UserNoteView"];
+    [MobClick endLogPageView:@"UserNoteView"];
+}
+
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {

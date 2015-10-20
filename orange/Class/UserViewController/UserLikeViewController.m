@@ -90,6 +90,21 @@ static NSString * EntityIdentifier = @"EntityCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"UserLikeView"];
+    [MobClick beginLogPageView:@"UserLikeView"];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"UserLikeView"];
+    [MobClick endLogPageView:@"UserLikeView"];
+}
+
+
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {

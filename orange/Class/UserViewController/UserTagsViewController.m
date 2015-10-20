@@ -81,6 +81,20 @@ static NSString * UserTagIdentifier = @"UserTagCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"UserTagView"];
+    [MobClick beginLogPageView:@"UserTagView"];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"UserTagView"];
+    [MobClick endLogPageView:@"UserTagView"];
+}
+
 /*
 #pragma mark - Navigation
 
