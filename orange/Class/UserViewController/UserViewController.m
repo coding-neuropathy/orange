@@ -269,6 +269,9 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         case 2:
         {
             NoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserNoteIdentifier forIndexPath:indexPath];
+            cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+            cell.imageView.layer.borderWidth = 0.5;
+            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
             cell.note = [self.notedataArray objectAtIndex:indexPath.row];
             return cell;
         }
@@ -277,6 +280,9 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         default:
         {
             EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
+            cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+            cell.imageView.layer.borderWidth = 0.5;
+            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
             cell.entity = [self.likedataArray objectAtIndex:indexPath.row];
             cell.delegate = self;
             return cell;

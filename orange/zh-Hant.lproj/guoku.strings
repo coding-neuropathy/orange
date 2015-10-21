@@ -117,6 +117,17 @@
 
 "follow"        = "關注";
 "unfollow"      = "取消關注";
+"me like" = "我的喜愛";
+"me note" = "我的點評";
+"me article" = "我的圖文";
+"me tag" = "我參與過的標籤";
+"me poke" = "我贊過的圖文";
+
+"user like" = "TA 的喜愛";
+"user note" = "TA 的點評";
+"user article" = "TA 的圖文";
+"user tag" = "TA 參與過的標籤";
+"user poke" = "TA 贊過的圖文";
 
 /*
  personal settings

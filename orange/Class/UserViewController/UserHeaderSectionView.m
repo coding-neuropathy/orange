@@ -77,22 +77,43 @@
     _user = user;
     _type = type;
     
-    switch (_type) {
-        case UserLikeType:
-            self.titleLabel.text = NSLocalizedStringFromTable(@"like", kLocalizedFile, nil);
-            self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.likeCount];
-            break;
-        case UserPostType:
-            self.titleLabel.text = NSLocalizedStringFromTable(@"note", kLocalizedFile, nil);
-            self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.noteCount];
-            break;
-        case UserTagType:
-            self.titleLabel.text = NSLocalizedStringFromTable(@"tags", kLocalizedFile, nil);
-            self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.tagCount];
-            break;
-        default:
-            break;
+    if ([user isEqual:[Passport sharedInstance].user]) {
+        switch (_type) {
+            case UserLikeType:
+                self.titleLabel.text = NSLocalizedStringFromTable(@"me like", kLocalizedFile, nil);
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.likeCount];
+                break;
+            case UserPostType:
+                self.titleLabel.text = NSLocalizedStringFromTable(@"me note", kLocalizedFile, nil);
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.noteCount];
+                break;
+            case UserTagType:
+                self.titleLabel.text = NSLocalizedStringFromTable(@"me tag", kLocalizedFile, nil);
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.tagCount];
+                break;
+            default:
+                break;
+        }
+    }else{
+        switch (_type) {
+            case UserLikeType:
+                self.titleLabel.text = NSLocalizedStringFromTable(@"user like", kLocalizedFile, nil);
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.likeCount];
+                break;
+            case UserPostType:
+                self.titleLabel.text = NSLocalizedStringFromTable(@"user note", kLocalizedFile, nil);
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.noteCount];
+                break;
+            case UserTagType:
+                self.titleLabel.text = NSLocalizedStringFromTable(@"user tag", kLocalizedFile, nil);
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.tagCount];
+                break;
+            default:
+                break;
+        }
     }
+    
+
     
     [self setNeedsLayout];
 }
@@ -101,7 +122,9 @@
 {
     [super layoutSubviews];
     
-    self.titleLabel.frame = CGRectMake(16., 0., 40., self.deFrameHeight);
+    self.titleLabel.frame = CGRectMake(16., 0., 200., self.deFrameHeight);
+    self.titleLabel.deFrameWidth = [self.titleLabel.text widthWithLineWidth:200 Font:self.titleLabel.font];
+    
     self.numberLabel.frame = CGRectMake(0., 0., 100., self.deFrameHeight);
     self.numberLabel.deFrameLeft = self.titleLabel.deFrameRight + 5.;
     

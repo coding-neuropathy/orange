@@ -11,5 +11,6 @@
 @interface NoteCell : UICollectionViewCell
 
 @property (strong, nonatomic) GKNote * note;
+@property (strong, nonatomic) UIImageView * imageView;
 
 @end
