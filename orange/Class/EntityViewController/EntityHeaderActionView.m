@@ -35,9 +35,7 @@
         _likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_likeButton setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 10.)];
         [_likeButton addTarget:self action:@selector(likeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        if (self.entity.isLiked) {
-            _likeButton.selected = YES;
-        }
+
         [self addSubview:_likeButton];
     }
     return _likeButton;
@@ -80,6 +78,9 @@
 {
     _entity = entity;
     self.likeButton.frame = CGRectMake(0, 3., 80., 44.);
+    if (_entity.isLiked) {
+        self.likeButton.selected = YES;
+    }
     self.postBtn.frame = CGRectMake(0., 3.,  80., 44.);
     self.moreButton.frame = CGRectMake(0., 3., 80., 44.);
     [self setNeedsLayout];

@@ -264,7 +264,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         }
 
         [self.collectionView reloadData];
-        //        [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
         
     }];
