@@ -67,7 +67,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4100</string>
+	<string>4101</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>guoku</string>
