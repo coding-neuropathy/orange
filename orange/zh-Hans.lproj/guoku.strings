@@ -113,6 +113,9 @@
 "following" = "关注";
 "followers"  = "粉丝";
 
+"follow"        = "关注";
+"unfollow"      = "取消关注";
+
 /*
  personal settings
  */

@@ -113,6 +113,9 @@
 "following" = "Following";
 "followers"  = "Followers";
 
+"follow"        = "Follow";
+"unfollow"      = "Unfollow";
+
 /*
   personal settings
  */

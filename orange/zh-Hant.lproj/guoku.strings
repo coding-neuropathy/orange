@@ -115,6 +115,9 @@
 "following" = "關注";
 "followers"  = "粉絲";
 
+"follow"        = "關注";
+"unfollow"      = "取消關注";
+
 /*
  personal settings
  */
