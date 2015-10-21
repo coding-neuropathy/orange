@@ -518,11 +518,11 @@
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
 //    DDLogInfo(@"keyword %@", searchController.searchBar.text);
-    if ([self.keyword isEqualToString:[searchController.searchBar.text Trimed]]) {
+    if ([self.keyword isEqualToString:[searchController.searchBar.text trimedWithLowercase]]) {
         return;
     }
 //    self.searchBar = searchController.searchBar;
-    self.keyword = [searchController.searchBar.text Trimed];
+    self.keyword = [searchController.searchBar.text trimedWithLowercase];
     if (self.keyword.length == 0) {
         [UIView animateWithDuration:0 animations:^{
             [self.discoverVC.searchVC.view viewWithTag:999].alpha = 1;

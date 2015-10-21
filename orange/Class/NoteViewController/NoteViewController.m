@@ -109,9 +109,9 @@ static NSString *CellIdentifier = @"CommentCell";
         _inputTextField.font = [UIFont systemFontOfSize:14.0f];
         self.inputTextField.borderStyle = UITextBorderStyleNone;
         self.inputTextField.returnKeyType = UIReturnKeySend;
-        if (iOS7) {
-            [self.inputTextField setTintColor:UIColorFromRGB(0x6d9acb)];
-        }
+//        if (iOS7) {
+//            [self.inputTextField setTintColor:UIColorFromRGB(0x6d9acb)];
+//        }
         [self.inputBar addSubview:self.inputTextField];
         
         UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(self.inputTextField.deFrameRight + 5.f, 7.f, 50.f, 30.f)];

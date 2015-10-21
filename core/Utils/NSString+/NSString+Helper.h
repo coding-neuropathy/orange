@@ -11,7 +11,9 @@
 
 @interface NSString (Helper)
 
-- (NSString *)Trimed;
+- (NSString *)trimed;
+- (NSString *)trimedWithLowercase;
+
 - (NSString *)imageURLWithSize:(NSInteger)size;
 
 - (CGFloat)heightWithLineWidth:(CGFloat)width Font:(UIFont *)font LineHeight:(CGFloat)lineHeight

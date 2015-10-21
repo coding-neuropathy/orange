@@ -21,6 +21,8 @@
 #import "UserPostNoteViewController.h"
 #import "UserTagsViewController.h"
 
+#import "UIScrollView+Slogan.h"
+
 
 //#import "DataStructure.h"
 
@@ -161,6 +163,8 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         [weakSelf refresh];
     }];
     
+    [self.collectionView addSloganView];
+    
     if (self.user && self.likedataArray.count == 0) {
         [self.collectionView triggerPullToRefresh];
     }
@@ -287,7 +291,10 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     CGSize itemSize = CGSizeMake(0, 0);
     switch (indexPath.section) {
         case 1:
-            itemSize = CGSizeMake(80., 80.);
+            if (IS_IPHONE_6P || IS_IPHONE_6)
+                itemSize = CGSizeMake(80., 80.);
+            else
+                itemSize = CGSizeMake(64., 64.);
             break;
         case 2:
             itemSize = CGSizeMake(kScreenWidth, 100.);
@@ -354,6 +361,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     CGFloat itemSpacing = 0.;
     switch (section) {
         case 1:
+            if (IS_IPHONE_6 || IS_IPHONE_6P)
             itemSpacing = 5.;
             break;
             

@@ -91,9 +91,9 @@
         self.emailTextField.font = [UIFont systemFontOfSize:14];
         self.emailTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
-        if (iOS7) {
-            [self.emailTextField setTintColor:UIColorFromRGB(0x6d9acb)];
-        }
+//        if (iOS7) {
+//            [self.emailTextField setTintColor:UIColorFromRGB(0x6d9acb)];
+//        }
         self.emailTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 16., 45.)];
         self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
         
@@ -142,9 +142,9 @@
         //self.passwordTextField.layer.borderColor = UIColorFromRGB(0xdcdcdc).CGColor;
         //self.passwordTextField.layer.borderWidth = 0.5;
         self.passwordTextField.secureTextEntry = YES;
-        if (iOS7) {
-            [self.passwordTextField setTintColor:UIColorFromRGB(0xffffff)];
-        }
+//        if (iOS7) {
+//            [self.passwordTextField setTintColor:UIColorFromRGB(0xffffff)];
+//        }
         {
             UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
             label.textColor = UIColorFromRGB(0xffffff);

@@ -35,9 +35,9 @@
     self.passwordTextField.borderStyle = UITextBorderStyleNone;
     self.passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.passwordTextField.secureTextEntry = YES;
-    if (iOS7) {
-        [self.passwordTextField setTintColor:UIColorFromRGB(0x414243)];
-    }
+//    if (iOS7) {
+//        [self.passwordTextField setTintColor:UIColorFromRGB(0x414243)];
+//    }
     {
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
         label.textColor = UIColorFromRGB(0x9d9e9f);
@@ -71,9 +71,9 @@
     self.passwordTextFieldForNew.borderStyle = UITextBorderStyleNone;
     self.passwordTextFieldForNew.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.passwordTextFieldForNew.secureTextEntry = YES;
-    if (iOS7) {
-        [self.passwordTextFieldForNew setTintColor:UIColorFromRGB(0x414243)];
-    }
+//    if (iOS7) {
+//        [self.passwordTextFieldForNew setTintColor:UIColorFromRGB(0x414243)];
+//    }
     {
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
         label.textColor = UIColorFromRGB(0x9d9e9f);
@@ -106,9 +106,9 @@
     self.passwordTextFieldForSecond.borderStyle = UITextBorderStyleNone;
     self.passwordTextFieldForSecond.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.passwordTextFieldForSecond.secureTextEntry = YES;
-    if (iOS7) {
-        [self.passwordTextFieldForSecond setTintColor:UIColorFromRGB(0x414243)];
-    }
+//    if (iOS7) {
+//        [self.passwordTextFieldForSecond setTintColor:UIColorFromRGB(0x414243)];
+//    }
     {
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
         label.textColor = UIColorFromRGB(0x9d9e9f);

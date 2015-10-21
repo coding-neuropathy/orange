@@ -95,10 +95,10 @@
 #ifndef iOS8
 #define iOS8 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 #endif
-
-#ifndef iOS7
-#define iOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
-#endif
+//
+//#ifndef iOS7
+//#define iOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+//#endif
 
 
 #define kAppDelegate ((AppDelegate *)([UIApplication sharedApplication].delegate))
@@ -123,7 +123,7 @@
 #define AllCategoryArrayKey @"AllCategoryArray"
 
 #ifndef kSeparateLineWidth
-#define kSeparateLineWidth 0.5f
+#define kSeparateLineWidth 1.f
 #endif
 
 

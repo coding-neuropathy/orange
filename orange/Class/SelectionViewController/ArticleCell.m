@@ -99,7 +99,7 @@
     self.titleLabel.text = _article.title;
     
     self.detailLabel.text = _article.content;
-    self.detailLabel.text = [_article.content Trimed];
+    self.detailLabel.text = [_article.content trimed];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.detailLabel.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:7.];

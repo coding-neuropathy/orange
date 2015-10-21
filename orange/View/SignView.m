@@ -82,9 +82,9 @@
         //self.nicknameTextField.layer.borderColor = UIColorFromRGB(0xdcdcdc).CGColor;
         //self.nicknameTextField.layer.borderWidth = 0.5;
 
-        if (iOS7) {
-            [self.nicknameTextField setTintColor:UIColorFromRGB(0xffffff)];
-        }
+//        if (iOS7) {
+//            [self.nicknameTextField setTintColor:UIColorFromRGB(0xffffff)];
+//        }
         
         {
             UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
@@ -123,9 +123,9 @@
         //self.emailTextField.layer.borderWidth = 0.5;
         self.emailTextField.font = [UIFont systemFontOfSize:14];
         self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
-        if (iOS7) {
-            [self.emailTextField setTintColor:UIColorFromRGB(0xffffff)];
-        }
+//        if (iOS7) {
+//            [self.emailTextField setTintColor:UIColorFromRGB(0xffffff)];
+//        }
         {
             UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
             label.textColor = UIColorFromRGB(0xffffff);
@@ -161,9 +161,9 @@
         //self.passwordTextField.layer.borderColor = UIColorFromRGB(0xdcdcdc).CGColor;
         //self.passwordTextField.layer.borderWidth = 0.5;
         self.passwordTextField.secureTextEntry = YES;
-        if (iOS7) {
-            [self.passwordTextField setTintColor:UIColorFromRGB(0xffffff)];
-        }
+//        if (iOS7) {
+//            [self.passwordTextField setTintColor:UIColorFromRGB(0xffffff)];
+//        }
         {
             UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
             label.textColor = UIColorFromRGB(0xffffff);

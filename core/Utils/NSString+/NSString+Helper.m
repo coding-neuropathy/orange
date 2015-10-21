@@ -10,9 +10,15 @@
 
 @implementation NSString (Helper)
 
-- (NSString *)Trimed
+- (NSString *)trimedWithLowercase
 {
     NSString * ret = [[self lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return ret;
+}
+
+- (NSString *)trimed
+{
+    NSString * ret = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     return ret;
 }
 
