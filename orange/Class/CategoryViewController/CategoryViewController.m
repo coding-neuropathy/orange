@@ -11,7 +11,7 @@
 #import "API.h"
 #import "EntityThreeGridCell.h"
 #import "EntitySingleListCell.h"
-#import "CategoryLikeViewController.h"
+//#import "CategoryLikeViewController.h"
 
 @interface CategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSString * sort;
@@ -506,12 +506,12 @@
     
 }
 
--(void)archive
-{
-    CategoryLikeViewController * vc = [[CategoryLikeViewController alloc]init];
-    vc.category = self.category;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//-(void)archive
+//{
+//    CategoryLikeViewController * vc = [[CategoryLikeViewController alloc]init];
+//    vc.category = self.category;
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

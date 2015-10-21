@@ -77,11 +77,8 @@
 		39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C829501AC29089009DE9BE /* libMobClickLibrary.a */; };
 		4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E05AA951B634C2D007596E6 /* EarthLoadingView.m */; };
 		4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */; };
-		4E117B551AB9CBBD00844935 /* CategoryLikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B541AB9CBBD00844935 /* CategoryLikeViewController.m */; };
 		4E117B5E1ABC6FDC00844935 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B5D1ABC6FDC00844935 /* EditViewController.m */; };
 		4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */; };
-		4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */; };
-		4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */; };
 		4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C461A66B86F004C59C4 /* CategoryGridItem.m */; };
 		4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1C36581AB429FE00EA2F00 /* GTScrollNavigationBar.m */; };
 		4E1D30AD1A125FDF00740C17 /* JSQSystemSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D30AC1A125FDF00740C17 /* JSQSystemSoundPlayer.m */; };
@@ -219,6 +216,7 @@
 		4EF508811B49042000C92618 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF508801B49042000C92618 /* ShareView.m */; };
 		8A0345AA1BA15F4A0037BC32 /* HomeArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */; };
 		8A0B16E21BABFDED00469DD6 /* ArticleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B16E11BABFDED00469DD6 /* ArticleListCell.m */; settings = {ASSET_TAGS = (); }; };
+		8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */; settings = {ASSET_TAGS = (); }; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
 		8A5DAEB21BC779A00028C36D /* ALBBFullSecurityGuard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEA31BC7799F0028C36D /* ALBBFullSecurityGuard.framework */; settings = {ASSET_TAGS = (); }; };
 		8A5DAEB31BC779A00028C36D /* ALBBHotpatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEA41BC7799F0028C36D /* ALBBHotpatch.framework */; settings = {ASSET_TAGS = (); }; };
@@ -491,15 +489,9 @@
 		4E05AA951B634C2D007596E6 /* EarthLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthLoadingView.m; sourceTree = "<group>"; };
 		4E066A9D1A5C43E800DFEF65 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
-		4E117B531AB9CBBD00844935 /* CategoryLikeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryLikeViewController.h; sourceTree = "<group>"; };
-		4E117B541AB9CBBD00844935 /* CategoryLikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryLikeViewController.m; sourceTree = "<group>"; };
 		4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FultonsHand Regular.TTF"; sourceTree = "<group>"; };
 		4E117B5C1ABC6FDC00844935 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		4E117B5D1ABC6FDC00844935 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
-		4E198C3D1A65FE6E004C59C4 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
-		4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
-		4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityTwoGridCell.h; sourceTree = "<group>"; };
-		4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityTwoGridCell.m; sourceTree = "<group>"; };
 		4E198C451A66B86F004C59C4 /* CategoryGridItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGridItem.h; sourceTree = "<group>"; };
 		4E198C461A66B86F004C59C4 /* CategoryGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryGridItem.m; sourceTree = "<group>"; };
 		4E1C36571AB429FE00EA2F00 /* GTScrollNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTScrollNavigationBar.h; sourceTree = "<group>"; };
@@ -741,6 +733,8 @@
 		8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeArticleCell.m; sourceTree = "<group>"; };
 		8A0B16E01BABFDED00469DD6 /* ArticleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListCell.h; sourceTree = "<group>"; };
 		8A0B16E11BABFDED00469DD6 /* ArticleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListCell.m; sourceTree = "<group>"; };
+		8A3EAD281BD7C23400E1E447 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
+		8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
 		8A402CC51B69F57A00E54FFF /* CategoryImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryImageView.h; sourceTree = "<group>"; };
 		8A402CC61B69F57A00E54FFF /* CategoryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryImageView.m; sourceTree = "<group>"; };
 		8A5DAEA31BC7799F0028C36D /* ALBBFullSecurityGuard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBFullSecurityGuard.framework; sourceTree = "<group>"; };
@@ -1347,16 +1341,14 @@
 				B749632B1AB28A4700C340FB /* CommentView */,
 				4EA0C45A1A8287780025EC2E /* SignView.h */,
 				4EA0C45B1A8287780025EC2E /* SignView.m */,
+				8A3EAD281BD7C23400E1E447 /* EntityThreeGridCell.h */,
+				8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */,
 				4E2D6D571A6D49F0009E4A17 /* LoginView.h */,
 				4E2D6D581A6D49F0009E4A17 /* LoginView.m */,
 				4E2D6D491A697B82009E4A17 /* EntitySingleListCell.h */,
 				4E2D6D4A1A697B82009E4A17 /* EntitySingleListCell.m */,
 				4E198C451A66B86F004C59C4 /* CategoryGridItem.h */,
 				4E198C461A66B86F004C59C4 /* CategoryGridItem.m */,
-				4E198C3D1A65FE6E004C59C4 /* EntityThreeGridCell.h */,
-				4E198C3E1A65FE6E004C59C4 /* EntityThreeGridCell.m */,
-				4E198C3F1A65FE6E004C59C4 /* EntityTwoGridCell.h */,
-				4E198C401A65FE6E004C59C4 /* EntityTwoGridCell.m */,
 				4E2D6D501A6BF8E0009E4A17 /* MessageCell.h */,
 				4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */,
 				4ECCD0DA1A7297A7009D5A42 /* FeedCell.h */,
@@ -1373,15 +1365,6 @@
 				4E8A34351BB060D700DF3841 /* tipView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		4E117B521AB9CBBD00844935 /* CategoryLikeViewController */ = {
-			isa = PBXGroup;
-			children = (
-				4E117B531AB9CBBD00844935 /* CategoryLikeViewController.h */,
-				4E117B541AB9CBBD00844935 /* CategoryLikeViewController.m */,
-			);
-			path = CategoryLikeViewController;
 			sourceTree = "<group>";
 		};
 		4E117B5B1ABC6FDC00844935 /* EditViewController */ = {
@@ -1746,7 +1729,6 @@
 				DA35B3C31AFEE31200D66671 /* PasswordEditViewController */,
 				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
 				4E117B5B1ABC6FDC00844935 /* EditViewController */,
-				4E117B521AB9CBBD00844935 /* CategoryLikeViewController */,
 				4E934DA51A9AE9FB00374B05 /* GroupViewController */,
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
 				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
@@ -2828,6 +2810,7 @@
 				4E688A0D1BA9C2BA0006AD9B /* JSQLocationMediaItem.m in Sources */,
 				B7C0798B1BC5827E006B7379 /* DDMultiFormatter.m in Sources */,
 				4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */,
+				8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */,
 				B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */,
 				4EC9F7A31A7BBEF20057D736 /* TagViewController.m in Sources */,
 				B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */,
@@ -2850,7 +2833,6 @@
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
 				B766763A1AB805B5002F294C /* NoMessageView.m in Sources */,
 				B7F543FC1BC2457E0044F5E9 /* SDWebImageDownloader.m in Sources */,
-				4E117B551AB9CBBD00844935 /* CategoryLikeViewController.m in Sources */,
 				4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */,
 				B76EE07F1B3D86AE009D8763 /* MessageController.m in Sources */,
 				4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */,
@@ -2874,7 +2856,6 @@
 				8AAA50891BD67614005384CD /* UserTagCell.m in Sources */,
 				B7FE2A0B1B2817FD001C2E33 /* SelectionCell.m in Sources */,
 				4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */,
-				4E198C421A65FE6E004C59C4 /* EntityTwoGridCell.m in Sources */,
 				B769B1181B2ACE91004401FA /* IFTTTAngleAnimation.m in Sources */,
 				B76EE0851B3D8A16009D8763 /* ActiveController.m in Sources */,
 				B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */,
@@ -2925,7 +2906,6 @@
 				4E688A0B1BA9C2BA0006AD9B /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
 				4EB8E2281B9F398B002C7F6F /* SelectionController.m in Sources */,
 				B769B11F1B2ACE91004401FA /* IFTTTConstraintsAnimation.m in Sources */,
-				4E198C411A65FE6E004C59C4 /* EntityThreeGridCell.m in Sources */,
 				B769B11D1B2ACE91004401FA /* IFTTTAnimator.m in Sources */,
 				4EEB29FF1B523C650092A8CF /* GKNotificationHUB.m in Sources */,
 				B769B1241B2ACE91004401FA /* IFTTTScaleAnimation.m in Sources */,
