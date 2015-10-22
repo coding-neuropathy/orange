@@ -400,7 +400,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         {
             GKNote * note = [self.notedataArray objectAtIndex:indexPath.row];
             GKEntity * entity = [GKEntity modelFromDictionary:@{@"entity_id": note.entityId}];
-            [[OpenCenter sharedOpenCenter] openEntity:entity];
+            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
         }
             break;
             
@@ -451,18 +451,21 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         case UserLikeType:
         {
             UserLikeViewController *vc = [[UserLikeViewController alloc] initWithUser:self.user];
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case UserPostType:
         {
             UserPostNoteViewController * vc = [[UserPostNoteViewController alloc] initWithUser:self.user];
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case UserTagType:
         {
             UserTagsViewController * vc = [[UserTagsViewController alloc] initWithUser:self.user];
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
@@ -475,7 +478,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
-    [[OpenCenter sharedOpenCenter] openEntity:entity];
+    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
 }
 
 
