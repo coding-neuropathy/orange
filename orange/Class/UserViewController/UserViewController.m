@@ -14,6 +14,7 @@
 #import "NoteCell.h"
 
 #import "SettingViewController.h"
+#import "EditViewController.h"
 #import "FriendViewController.h"
 #import "FanViewController.h"
 
@@ -441,7 +442,10 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 
 - (void)TapEditBtnWithUser:(GKUser *)user
 {
-    [self settingButtonAction];
+//    [self settingButtonAction];
+    EditViewController * vc = [[EditViewController alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - <UserHeaderSectionViewDelegate>

@@ -153,7 +153,6 @@ static NSString * NoteIdentifier = @"NoteCell";
 {
     NoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NoteIdentifier forIndexPath:indexPath];
     cell.note = [self.noteArray objectAtIndex:indexPath.row];
-    
     return cell;
 }
 
