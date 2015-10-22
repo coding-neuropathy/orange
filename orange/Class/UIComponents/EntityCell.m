@@ -10,7 +10,7 @@
 #import "ImageLoadingView.h"
 
 @interface EntityCell ()
-@property (strong, nonatomic) UIImageView * imageView;
+
 @property (strong, nonatomic) ImageLoadingView * loading;
 @end
 
@@ -62,6 +62,7 @@
     [super layoutSubviews];
     self.layer.masksToBounds = YES;
     self.imageView.frame = CGRectMake(0., 0., self.deFrameWidth, self.deFrameHeight);
+    
     self.loading.center = CGPointMake(self.contentView.deFrameWidth/2, self.contentView.deFrameHeight/2);
     [self.contentView bringSubviewToFront:self.loading];
 }

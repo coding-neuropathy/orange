@@ -124,6 +124,18 @@
 "gender"    = "性别";
 "bio"       = "简介";
 "location"  = "所在地";
+"me like" = "我的喜爱";
+"me note" = "我的点评";
+"me article" = "我的图文";
+"me tag" = "我参与过的标签";
+"me poke" = "我赞过的图文";
+
+"user like" = "TA 的喜爱";
+"user note" = "TA 的点评";
+"user article" = "TA 的图文";
+"user tag" = "TA 参与过的标签";
+"user poke" = "TA 赞过的图文";
+
 
 /*
  setting page

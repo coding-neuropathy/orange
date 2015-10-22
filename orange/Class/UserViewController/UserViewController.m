@@ -269,6 +269,9 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         case 2:
         {
             NoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserNoteIdentifier forIndexPath:indexPath];
+            cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+            cell.imageView.layer.borderWidth = 0.5;
+            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
             cell.note = [self.notedataArray objectAtIndex:indexPath.row];
             return cell;
         }
@@ -277,6 +280,9 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         default:
         {
             EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
+            cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+            cell.imageView.layer.borderWidth = 0.5;
+            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
             cell.entity = [self.likedataArray objectAtIndex:indexPath.row];
             cell.delegate = self;
             return cell;
@@ -394,7 +400,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         {
             GKNote * note = [self.notedataArray objectAtIndex:indexPath.row];
             GKEntity * entity = [GKEntity modelFromDictionary:@{@"entity_id": note.entityId}];
-            [[OpenCenter sharedOpenCenter] openEntity:entity];
+            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
         }
             break;
             
@@ -445,18 +451,21 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         case UserLikeType:
         {
             UserLikeViewController *vc = [[UserLikeViewController alloc] initWithUser:self.user];
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case UserPostType:
         {
             UserPostNoteViewController * vc = [[UserPostNoteViewController alloc] initWithUser:self.user];
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case UserTagType:
         {
             UserTagsViewController * vc = [[UserTagsViewController alloc] initWithUser:self.user];
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
@@ -469,7 +478,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
-    [[OpenCenter sharedOpenCenter] openEntity:entity];
+    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
 }
 
 

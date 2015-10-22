@@ -10,7 +10,7 @@
 
 @interface NoteCell ()
 
-@property (strong, nonatomic) UIImageView * imageView;
+
 @property (strong, nonatomic) UILabel * noteLabel;
 @property (strong, nonatomic) UILabel *timeLabel;
 

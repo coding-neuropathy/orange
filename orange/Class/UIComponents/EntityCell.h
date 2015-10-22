@@ -20,6 +20,7 @@
 @interface EntityCell : UICollectionViewCell
 
 @property (strong, nonatomic) GKEntity * entity;
+@property (strong, nonatomic) UIImageView * imageView;
 @property (strong, nonatomic) id<EntityCellDelegate> delegate;
 
 @end
