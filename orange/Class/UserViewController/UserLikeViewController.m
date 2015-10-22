@@ -8,6 +8,12 @@
 
 #import "UserLikeViewController.h"
 #import "EntityCell.h"
+#import "CSStickyHeaderFlowLayout.h"
+
+
+@interface UserLikeHeaderSectionView : UICollectionReusableView
+
+@end
 
 @interface UserLikeViewController () <EntityCellDelegate>
 
@@ -21,6 +27,7 @@
 @implementation UserLikeViewController
 
 static NSString * EntityIdentifier = @"EntityCell";
+static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
 
 - (instancetype)initWithUser:(GKUser *)user
@@ -36,11 +43,10 @@ static NSString * EntityIdentifier = @"EntityCell";
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
-        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+        UICollectionViewFlowLayout * layout = [[CSStickyHeaderFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
         
-        //        _collectionView.contentInset = UIEdgeInsetsMake(617, 0, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
@@ -83,6 +89,7 @@ static NSString * EntityIdentifier = @"EntityCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
+    [self.collectionView registerClass:[UserLikeHeaderSectionView class] forCellWithReuseIdentifier:HeaderSectionIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -185,5 +192,10 @@ static NSString * EntityIdentifier = @"EntityCell";
 {
     [[OpenCenter sharedOpenCenter] openEntity:entity];
 }
+
+@end
+
+#pragma mark - <UserLikeHeaderSectionView>
+@implementation UserLikeHeaderSectionView
 
 @end
