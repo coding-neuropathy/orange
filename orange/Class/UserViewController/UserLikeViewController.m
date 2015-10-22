@@ -9,18 +9,24 @@
 #import "UserLikeViewController.h"
 #import "EntityCell.h"
 #import "CSStickyHeaderFlowLayout.h"
+#import "UserEntityCategoryController.h"
 
+
+@protocol UserLikeHeaderSectionViewDelegate <NSObject>
+- (void)TapSection:(id)sender;
+@end
 
 @interface UserLikeHeaderSectionView : UICollectionReusableView
 
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) UILabel * indicatorLable;
 @property (strong, nonatomic) GKCategory * category;
+@property (weak, nonatomic) id <UserLikeHeaderSectionViewDelegate> delegate;
 //@property (strong, nonatomic) NSString * title;
 
 @end
 
-@interface UserLikeViewController () <EntityCellDelegate>
+@interface UserLikeViewController () <EntityCellDelegate, UserLikeHeaderSectionViewDelegate>
 
 @property (strong, nonatomic) GKUser * user;
 @property (strong, nonatomic) NSMutableArray * likeEntities;
@@ -159,10 +165,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         UserLikeHeaderSectionView * section = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
-//        section.title = NSLocalizedStringFromTable(@"all", kLocalizedFile, nil);
-        
-        GKCategory * category = [GKCategory modelFromDictionary:@{@"id":@"0", @"title":NSLocalizedStringFromTable(@"all", kLocalizedFile, nil)}];
+        GKCategory * category = [GKCategory modelFromDictionary:@{@"id":@(0), @"title":NSLocalizedStringFromTable(@"all", kLocalizedFile, nil)}];
         section.category = category;
+        section.delegate = self;
         return section;
     }
     return [UICollectionReusableView new];
@@ -218,6 +223,27 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [[OpenCenter sharedOpenCenter] openEntity:entity];
 }
 
+#pragma mark - <UserLikeHeaderSectionViewDelegate>
+- (void)TapSection:(id)sender
+{
+    NSLog(@"OKOKOKOKOK %@", sender);
+    
+    UserEntityCategoryController * vc = [[UserEntityCategoryController alloc] init];
+//    [self addChildViewController:vc];
+    
+    AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
+    [appdelegate.window.rootViewController addChildViewController:vc];
+    [appdelegate.window addSubview:vc.view];
+    
+    
+    __weak __typeof(&*vc)weakVC = vc;
+    vc.tapBlock = ^(GKCategory * category) {
+        [weakVC.view removeFromSuperview];
+        [weakVC removeFromParentViewController];
+    };
+    
+}
+
 @end
 
 #pragma mark - <UserLikeHeaderSectionView>
@@ -262,16 +288,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-
+    if (_delegate && [_delegate respondsToSelector:@selector(TapSection:)]) {
+        [_delegate TapSection:self];
+    }
 }
-
-//- (void)setTitle:(NSString *)title
-//{
-//    _title = title;
-//    
-//    self.titleLabel.text = _title;
-//    [self setNeedsLayout];
-//}
 
 - (void)setCategory:(GKCategory *)category
 {
