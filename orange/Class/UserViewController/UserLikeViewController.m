@@ -13,6 +13,11 @@
 
 @interface UserLikeHeaderSectionView : UICollectionReusableView
 
+@property (strong, nonatomic) UILabel * titleLabel;
+@property (strong, nonatomic) UILabel * indicatorLable;
+@property (strong, nonatomic) GKCategory * category;
+//@property (strong, nonatomic) NSString * title;
+
 @end
 
 @interface UserLikeViewController () <EntityCellDelegate>
@@ -89,7 +94,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
-    [self.collectionView registerClass:[UserLikeHeaderSectionView class] forCellWithReuseIdentifier:HeaderSectionIdentifier];
+    [self.collectionView registerClass:[UserLikeHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -150,6 +155,19 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return self.likeEntities.count;
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        UserLikeHeaderSectionView * section = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
+//        section.title = NSLocalizedStringFromTable(@"all", kLocalizedFile, nil);
+        
+        GKCategory * category = [GKCategory modelFromDictionary:@{@"id":@"0", @"title":NSLocalizedStringFromTable(@"all", kLocalizedFile, nil)}];
+        section.category = category;
+        return section;
+    }
+    return [UICollectionReusableView new];
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityIdentifier forIndexPath:indexPath];
@@ -164,6 +182,13 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     CGSize cellsize = CGSizeMake(0, 0);
     cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
     return cellsize;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    CGSize size = CGSizeMake(kScreenWidth, 44.);
+    
+    return size;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -197,5 +222,89 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
 #pragma mark - <UserLikeHeaderSectionView>
 @implementation UserLikeHeaderSectionView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
+
+- (UILabel *)titleLabel
+{
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _titleLabel.font = [UIFont systemFontOfSize:14.];
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.textColor = UIColorFromRGB(0x414243);
+        [self addSubview:_titleLabel];
+    }
+    return _titleLabel;
+}
+
+
+- (UILabel *)indicatorLable
+{
+    if (!_indicatorLable) {
+        _indicatorLable = [[UILabel alloc] initWithFrame:CGRectZero];
+        _indicatorLable.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        _indicatorLable.textAlignment = NSTextAlignmentLeft;
+        _indicatorLable.textColor = UIColorFromRGB(0x9d9e9f);
+        _indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
+        //        _indicatorLable.hidden = YES;
+        //        _indicatorLable.backgroundColor = [UIColor redColor];
+        [self addSubview:_indicatorLable];
+    }
+    return _indicatorLable;
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+
+}
+
+//- (void)setTitle:(NSString *)title
+//{
+//    _title = title;
+//    
+//    self.titleLabel.text = _title;
+//    [self setNeedsLayout];
+//}
+
+- (void)setCategory:(GKCategory *)category
+{
+    _category = category;
+    self.titleLabel.text = _category.title;
+    
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.titleLabel.frame = CGRectMake(0., 0., 100., self.deFrameHeight);
+    self.titleLabel.deFrameRight += 16.;
+
+    self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
+    self.indicatorLable.center = self.titleLabel.center;
+    self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    CGContextMoveToPoint(context, 0., self.deFrameHeight);
+    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
+    CGContextStrokePath(context);
+    
+}
 
 @end
