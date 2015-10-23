@@ -32,6 +32,9 @@
 @property (strong, nonatomic) NSMutableArray * likeEntities;
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
+@property (strong, nonatomic) GKCategory * category;
+
+@property (strong, nonatomic) UserEntityCategoryController * categoryController;
 
 @end
 
@@ -46,8 +49,17 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     self = [super init];
     if (self) {
         _user = user;
+//        _category = [GKCategory]
     }
     return self;
+}
+
+- (GKCategory *)category
+{
+    if (!_category) {
+        _category = [GKCategory modelFromDictionary:@{@"id":@(0), @"title":NSLocalizedStringFromTable(@"all", kLocalizedFile, nil)}];
+    }
+    return _category;
 }
 
 #pragma mark - init view
@@ -68,7 +80,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - get data
 - (void)refresh
 {
-    [API getUserLikeEntityListWithUserId:self.user.userId timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
+    [API getUserLikeEntityListWithUserId:self.user.userId categoryId:self.category.groupId
+                               timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
         self.likeEntities = [NSMutableArray arrayWithArray:entityArray];
         self.likeTimestamp = timestamp;
         [self.collectionView.pullToRefreshView stopAnimating];
@@ -80,7 +93,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
 - (void)loadMore
 {
-    [API getUserLikeEntityListWithUserId:self.user.userId timestamp:self.likeTimestamp count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
+    [API getUserLikeEntityListWithUserId:self.user.userId categoryId:self.category.groupId timestamp:self.likeTimestamp count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
         [self.likeEntities addObjectsFromArray:entityArray];
         self.likeTimestamp = timestamp;
         [self.collectionView.infiniteScrollingView stopAnimating];
@@ -120,6 +133,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [super viewWillDisappear:animated];
     [AVAnalytics endLogPageView:@"UserLikeView"];
     [MobClick endLogPageView:@"UserLikeView"];
+    
+    [self.categoryController.view removeFromSuperview];
+
+    [self.categoryController removeFromParentViewController];
 }
 
 
@@ -165,8 +182,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         UserLikeHeaderSectionView * section = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
-        GKCategory * category = [GKCategory modelFromDictionary:@{@"id":@(0), @"title":NSLocalizedStringFromTable(@"all", kLocalizedFile, nil)}];
-        section.category = category;
+//        GKCategory * category = [GKCategory modelFromDictionary:@{@"id":@(0), @"title":NSLocalizedStringFromTable(@"all", kLocalizedFile, nil)}];
+        section.category = self.category;
         section.delegate = self;
         return section;
     }
@@ -226,20 +243,28 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <UserLikeHeaderSectionViewDelegate>
 - (void)TapSection:(id)sender
 {
-    NSLog(@"OKOKOKOKOK %@", sender);
     
-    
-    UserEntityCategoryController * vc = [[UserEntityCategoryController alloc] init];
+    UserLikeHeaderSectionView * sectionView = (UserLikeHeaderSectionView *)sender;
+
+    self.categoryController = [[UserEntityCategoryController alloc] init];
     
     AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
-    [appdelegate.window.rootViewController addChildViewController:vc];
-    [appdelegate.window addSubview:vc.view];
+    [appdelegate.window.rootViewController addChildViewController:self.categoryController];
+    [appdelegate.window addSubview:self.categoryController.view];
     
-    
-    __weak __typeof(&*vc)weakVC = vc;
-    vc.tapBlock = ^(GKCategory * category) {
-        [weakVC.view removeFromSuperview];
-        [weakVC removeFromParentViewController];
+    __weak __typeof(&*self)weakSelf = self;
+    self.categoryController.tapBlock = ^(GKCategory * category) {
+        
+        
+        if (category) {
+            sectionView.category = category;
+            weakSelf.category = category;
+        }
+        
+        [weakSelf.categoryController.view removeFromSuperview];
+        [weakSelf.categoryController removeFromParentViewController];
+        
+        [weakSelf.collectionView triggerPullToRefresh];
     };
     
 }
@@ -296,7 +321,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)setCategory:(GKCategory *)category
 {
     _category = category;
-    self.titleLabel.text = _category.title;
+    self.titleLabel.text = _category.title_cn;
     
     [self setNeedsLayout];
 }

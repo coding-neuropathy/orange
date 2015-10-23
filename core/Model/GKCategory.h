@@ -21,6 +21,16 @@
 @property (nonatomic, strong) NSString * title;
 
 /**
+ *  中文名
+ */
+@property (nonatomic, strong) NSString * title_cn;
+
+/**
+ *  英文名
+ */
+@property (nonatomic, strong) NSString * title_en;
+
+/**
  *  分类封面图片 URL
  */
 @property (nonatomic, strong) NSURL *coverURL;

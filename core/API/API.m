@@ -122,6 +122,38 @@
 }
 
 /**
+ *  获取大分类列表
+ *
+ *  success block
+ *  failure block
+ */
++ (void)getGroupCategoryWithSuccess:(void (^)(NSArray * categories))success
+                    failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString * path = @"category/group/";
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSMutableArray * categories = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject) {
+            GKCategory * category = [GKCategory modelFromDictionary:row];
+            [categories addObject:category];
+        }
+        
+        if (success) {
+            success(categories);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
+
+/**
  *  获取分类商品列表
  *  
  *  @param gid 一级分类 id
@@ -638,12 +670,14 @@
  *  获取用户的喜爱商品列表
  *
  *  @param userId    用户ID
+ *  @param categoryId   分类ID
  *  @param timestamp 时间戳
  *  @param count     请求的个数
  *  @param success   成功block
  *  @param failure   失败block
  */
 + (void)getUserLikeEntityListWithUserId:(NSUInteger)userId
+                             categoryId:(NSInteger)categoryId
                               timestamp:(NSTimeInterval)timestamp
                                   count:(NSInteger)count
                                 success:(void (^)(NSTimeInterval timestamp, NSArray *entityArray))success
@@ -657,6 +691,10 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@(timestamp) forKey:@"timestamp"];
     [paraDict setObject:@(count) forKey:@"count"];
+    
+    if (categoryId != 0) {
+        [paraDict setObject:@(categoryId) forKey:@"cid"];
+    }
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;

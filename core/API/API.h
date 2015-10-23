@@ -60,6 +60,15 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                             failure:(void (^)(NSInteger stateCode))failure;
 
 /**
+ *  获取大分类列表
+ *
+ *  success block
+ *  failure block
+ */
++ (void)getGroupCategoryWithSuccess:(void (^)(NSArray * categories))success
+                            failure:(void (^)(NSInteger stateCode))failure;
+
+/**
  *  获取分类商品列表
  *
  *  @param gid 一级分类 id
@@ -211,12 +220,14 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  *  获取用户的喜爱商品列表
  *
  *  @param userId    用户ID
+ *  @param categoryId   分类ID
  *  @param timestamp 时间戳
  *  @param count     请求的个数
  *  @param success   成功block
  *  @param failure   失败block
  */
 + (void)getUserLikeEntityListWithUserId:(NSUInteger)userId
+                            categoryId:(NSInteger)categoryId
                               timestamp:(NSTimeInterval)timestamp
                                   count:(NSInteger)count
                                 success:(void (^)(NSTimeInterval timestamp, NSArray *entityArray))success

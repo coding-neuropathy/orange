@@ -36,4 +36,24 @@
     }
 }
 
+- (NSString *)title_cn
+{
+    NSArray * listString = [self.title componentsSeparatedByString:@" "];
+    //    DDLogInfo(@"string %@", listString);
+    if (listString.count >= 2) {
+        return  listString[0];
+    }
+    return self.title;
+}
+
+- (NSString *)title_en
+{
+    NSArray * listString = [self.title componentsSeparatedByString:@" "];
+    //    DDLogInfo(@"string %@", listString);
+    if (listString.count >= 2) {
+        return  listString[1];
+    }
+    return self.title;
+}
+
 @end
