@@ -228,8 +228,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     NSLog(@"OKOKOKOKOK %@", sender);
     
+    
     UserEntityCategoryController * vc = [[UserEntityCategoryController alloc] init];
-//    [self addChildViewController:vc];
     
     AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
     [appdelegate.window.rootViewController addChildViewController:vc];

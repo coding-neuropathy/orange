@@ -17,31 +17,42 @@
 
 @implementation UserEntityCategoryController
 
+static NSString * CellReuseIdentifiter = @"CellIdentifiter";
+
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 108., kScreenWidth, 220.) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 220.) style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
+}
+
+#pragma mark - get data
+- (void)refresh
+{
+    
 }
 
 - (void)loadView
 {
     [super loadView];
     
-//    self.view.backgroundColor = [UIColor colorWithWhite:.7 alpha:0.8];
+    self.view.backgroundColor = [UIColor colorWithWhite:.7 alpha:0.8];
+    self.view.deFrameTop = 108.;
     [self.view addSubview:self.tableView];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellReuseIdentifiter];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"OKOKOKKO");
+//    NSLog(@"OKOKOKKO");
     if (self.tapBlock) {
         self.tapBlock(nil);
     }
@@ -56,6 +67,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.categoryArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellReuseIdentifiter forIndexPath:indexPath];
+    
+    return cell;
 }
 
 #pragma mark - <UITableViewDelegate>
