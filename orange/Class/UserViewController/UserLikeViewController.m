@@ -254,7 +254,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     __weak __typeof(&*self)weakSelf = self;
     self.categoryController.tapBlock = ^(GKCategory * category) {
-        
+        GKCategory * currentCategory = weakSelf.category;
         
         if (category) {
             sectionView.category = category;
@@ -263,8 +263,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         
         [weakSelf.categoryController.view removeFromSuperview];
         [weakSelf.categoryController removeFromParentViewController];
-        
-        [weakSelf.collectionView triggerPullToRefresh];
+        if (currentCategory.groupId != category.groupId) {
+            [weakSelf.collectionView triggerPullToRefresh];
+        }
     };
     
 }
