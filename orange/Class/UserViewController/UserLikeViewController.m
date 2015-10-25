@@ -114,6 +114,12 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
     [self.collectionView registerClass:[UserLikeHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
+    
+    if (self.user.userId == [Passport sharedInstance].user.userId) {
+        self.navigationItem.title = @"我的喜爱";
+    } else {
+        self.navigationItem.title = @"他的喜爱";
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -244,6 +250,13 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)TapSection:(id)sender
 {
     
+    if (self.categoryController != nil) {
+        [self.categoryController.view removeFromSuperview];
+        [self.categoryController removeFromParentViewController];
+        self.categoryController = nil;
+//        return;
+    } else {
+     
     UserLikeHeaderSectionView * sectionView = (UserLikeHeaderSectionView *)sender;
 
     self.categoryController = [[UserEntityCategoryController alloc] init];
@@ -266,7 +279,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         if (currentCategory.groupId != category.groupId) {
             [weakSelf.collectionView triggerPullToRefresh];
         }
+        
+        weakSelf.categoryController = nil;
     };
+//    self.categoryController = nil;
+    }
     
 }
 
