@@ -46,8 +46,9 @@
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:16.];
         _titleLabel.textColor = UIColorFromRGB(0x414243);
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.numberOfLines = 2;
+        _titleLabel.textAlignment = NSTextAlignmentNatural;
+        _titleLabel.numberOfLines = 3;
+        _titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;
@@ -91,7 +92,7 @@
     self.titleLabel.attributedText = attributedString;
     
 //    self.detailLabel.text = @"精选图文";
-    self.detailLabel.text = @"<font face='Helvetica-Light' color='^9d9e9f' size=12>精选图文</font>";
+//    self.detailLabel.text = @"<font face='Helvetica-Light' color='^9d9e9f' size=12>精选图文</font>";
     [self.coverImageView sd_setImageWithURL:_article.coverURL_300];
 //    
 //    NSDate * date =  [NSDate dateWithTimeIntervalSince1970:_article.pub_time];
@@ -108,13 +109,13 @@
     self.coverImageView.deFrameTop = 16.;
     self.coverImageView.deFrameRight = self.contentView.deFrameRight - 16;
 //
-    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, 50);
+    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, self.contentView.deFrameHeight - 32.);
     self.titleLabel.deFrameTop = 16.;
     self.titleLabel.deFrameLeft = 16.;
 
-    self.detailLabel.frame = CGRectMake(0., 0., self.titleLabel.deFrameWidth, 12.);
-    self.detailLabel.deFrameLeft = 16.;
-    self.detailLabel.deFrameBottom = self.contentView.deFrameBottom - 16;
+//    self.detailLabel.frame = CGRectMake(0., 0., self.titleLabel.deFrameWidth, 12.);
+//    self.detailLabel.deFrameLeft = 16.;
+//    self.detailLabel.deFrameBottom = self.contentView.deFrameBottom - 16;
     
 }
 
