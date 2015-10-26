@@ -48,7 +48,7 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor colorWithWhite:.7 alpha:0.8];
+    self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
     self.view.deFrameTop = 108.;
     [self.view addSubview:self.tableView];
     

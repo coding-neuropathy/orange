@@ -39,7 +39,6 @@
 @property (strong, nonatomic) NSArray * articleArray;
 @property (strong, nonatomic) UITableView * searchLogTableView;
 
-
 @property (strong, nonatomic) SearchResultsViewController * searchResultsVC;
 @end
 
@@ -144,7 +143,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         _searchVC.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
         _searchVC.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _searchVC.searchBar.keyboardType = UIKeyboardTypeDefault;
-        _searchVC.delegate = self;
+        _searchVC.searchBar.delegate = self;
 
     }
     return _searchVC;
@@ -561,9 +560,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
     view.tag = 999;
     
-    UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_search"]];
-    image.center = CGPointMake(kScreenWidth/2, 0);
-    image.deFrameTop = 50+kStatusBarHeight+kNavigationBarHeight;
+//    UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_search"]];
+//    image.center = CGPointMake(kScreenWidth/2, 0);
+//    image.deFrameTop = 50+kStatusBarHeight+kNavigationBarHeight;
     //[view addSubview:image];
     
     if (!self.searchLogTableView) {
@@ -589,7 +588,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 }
 - (void)willDismissSearchController:(UISearchController *)searchController
 {
-    [[self.searchVC.view viewWithTag:999]removeFromSuperview];
+    [[self.searchVC.view viewWithTag:999] removeFromSuperview];
 }
 - (void)didDismissSearchController:(UISearchController *)searchController
 {
@@ -631,16 +630,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
 
@@ -686,10 +675,5 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     self.textLabel.frame = CGRectMake(10., 0., kScreenWidth - 20., 44.);
 }
-
-
-
-
-
 
 @end
