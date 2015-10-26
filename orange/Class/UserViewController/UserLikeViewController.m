@@ -249,45 +249,49 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <UserLikeHeaderSectionViewDelegate>
 - (void)TapSection:(id)sender
 {
-    
+    UserLikeHeaderSectionView * sectionView = (UserLikeHeaderSectionView *)sender;
     if (self.categoryController != nil) {
         [self.categoryController.view removeFromSuperview];
         [self.categoryController removeFromParentViewController];
         self.categoryController = nil;
+        
+        sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
 //        return;
     } else {
-     
-    UserLikeHeaderSectionView * sectionView = (UserLikeHeaderSectionView *)sender;
+        sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
 
-    self.categoryController = [[UserEntityCategoryController alloc] init];
+        self.categoryController = [[UserEntityCategoryController alloc] init];
     
-    AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
-    [appdelegate.window.rootViewController addChildViewController:self.categoryController];
-    [appdelegate.window addSubview:self.categoryController.view];
+        AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
+        [appdelegate.window.rootViewController addChildViewController:self.categoryController];
+        [appdelegate.window addSubview:self.categoryController.view];
     
-    __weak __typeof(&*self)weakSelf = self;
-    self.categoryController.tapBlock = ^(GKCategory * category) {
-        GKCategory * currentCategory = weakSelf.category;
+        __weak __typeof(&*self)weakSelf = self;
+        self.categoryController.tapBlock = ^(GKCategory * category) {
+            GKCategory * currentCategory = weakSelf.category;
         
-        if (category) {
-            sectionView.category = category;
-            weakSelf.category = category;
-        }
+            if (category) {
+                sectionView.category = category;
+                weakSelf.category = category;
+            }
         
-        [weakSelf.categoryController.view removeFromSuperview];
-        [weakSelf.categoryController removeFromParentViewController];
-        if (currentCategory.groupId != category.groupId) {
-            [weakSelf.collectionView triggerPullToRefresh];
-        }
+            [weakSelf.categoryController.view removeFromSuperview];
+            [weakSelf.categoryController removeFromParentViewController];
+//            sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
+            if (currentCategory.groupId != category.groupId) {
+                [weakSelf.collectionView triggerPullToRefresh];
+            }
         
-        weakSelf.categoryController = nil;
-    };
+            weakSelf.categoryController = nil;
+            sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
+        };
 //    self.categoryController = nil;
     }
     
 }
 
 @end
+
 
 #pragma mark - <UserLikeHeaderSectionView>
 @implementation UserLikeHeaderSectionView
