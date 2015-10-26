@@ -165,19 +165,19 @@
 {
     [super drawRect:rect];
     
-    if (CategoryType == self.headertype) {
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        
-        CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-        CGContextSetLineWidth(context, kSeparateLineWidth);
-        
-        CGContextMoveToPoint(context, 0, kSeparateLineWidth);
-        CGContextAddLineToPoint(context, self.frame.size.width, kSeparateLineWidth);
-        
-//        CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
-//        CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
-        CGContextStrokePath(context);
-    }
+//    if (CategoryType == self.headertype) {
+//        CGContextRef context = UIGraphicsGetCurrentContext();
+//        
+//        CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+//        CGContextSetLineWidth(context, kSeparateLineWidth);
+//        
+//        CGContextMoveToPoint(context, 0, kSeparateLineWidth);
+//        CGContextAddLineToPoint(context, self.frame.size.width, kSeparateLineWidth);
+//        
+////        CGContextMoveToPoint(context, 0., self.frame.size.height - kSeparateLineWidth);
+////        CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
+//        CGContextStrokePath(context);
+//    }
     
     if (NoteType == self.headertype) {
         CGContextRef context = UIGraphicsGetCurrentContext();
