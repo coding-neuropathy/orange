@@ -52,7 +52,8 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
     [titleView addSubview:icon];
     
     UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-    [label setText:([self.subcategory.categoryName componentsSeparatedByString:@"-"][0])];
+//    [label setText:([self.subcategory.categoryName componentsSeparatedByString:@"-"][0])];
+    label.text = self.subcategory.categoryName;
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Helvetica" size:17];
     label.textColor = UIColorFromRGB(0x414243);

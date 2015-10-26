@@ -58,4 +58,16 @@
     }
 }
 
+//- (NSString *)categoryName
+- (void)setCategoryName:(NSString *)categoryName
+{
+    _categoryName = categoryName;
+    NSArray * categoryNameList = [categoryName componentsSeparatedByString:@"-"];
+    
+    if (categoryNameList.count > 1) {
+        _categoryName =  categoryNameList[0];
+    }
+//    return _categoryName;
+}
+
 @end

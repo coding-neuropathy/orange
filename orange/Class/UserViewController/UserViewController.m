@@ -23,6 +23,7 @@
 #import "UserTagsViewController.h"
 
 #import "UIScrollView+Slogan.h"
+#import "LoginView.h"
 
 
 //#import "DataStructure.h"
@@ -446,6 +447,56 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     EditViewController * vc = [[EditViewController alloc] init];
     
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)TapFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view
+{
+    DDLogInfo(@"follow with user id %lu", user.userId);
+    if (!k_isLogin) {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+//        [[OpenCenter sharedOpenCenterController] openAccountViewControllerWithSuccessBlock:^(BOOL isLogin) {
+//            //            [self.arrayForUser removeAllObjects];
+//            [self.collectionView triggerPullToRefresh];
+//        }];
+    } else {
+        [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {
+            user.relation = relation;
+            DDLogInfo(@"relation %lu", relation);
+            view.user = user;
+            //            [self.tableView reloadData];
+            [SVProgressHUD showImage:nil status:@"关注成功"];
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:@"关注失败"];
+        }];
+    }
+}
+
+- (void)TapUnFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view
+{
+    DDLogInfo(@"unfollow");
+    UIAlertController * altervc = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ %@?",NSLocalizedStringFromTable(@"unfollow", kLocalizedFile, nil), user.nickname] message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * cacnel = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        //        [altervc dismissViewControllerAnimated:YES completion:nil];
+    }];
+    UIAlertAction * confirm = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"confirm", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [API followUserId:user.userId state:NO success:^(GKUserRelationType relation) {
+            user.relation = relation;
+            //            [self configFollowButton];
+            view.user = user;
+            [SVProgressHUD showImage:nil status:@"取消关注成功"];
+            //            [self.tableView reloadData];
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:@"取消关注失败"];
+        }];
+        
+    }];
+    
+    [altervc addAction:cacnel];
+    [altervc addAction:confirm];
+    [self presentViewController:altervc animated:YES completion:nil];
 }
 
 #pragma mark - <UserHeaderSectionViewDelegate>
