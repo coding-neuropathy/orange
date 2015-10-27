@@ -10,6 +10,7 @@
 
 @interface UserEntityCategoryController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (assign, nonatomic) NSInteger currentIndex;
 @property (nonatomic, copy) void (^tapBlock)(GKCategory * category);
 
 @end

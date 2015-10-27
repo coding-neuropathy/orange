@@ -19,10 +19,16 @@
 
 static NSString * CellReuseIdentifiter = @"CellIdentifiter";
 
+- (void)setCurrentIndex:(NSInteger)currentIndex
+{
+    _currentIndex = currentIndex;
+//    [self.tableView reloadData];
+}
+
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 220.) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 242.) style:UITableViewStylePlain];
 //        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
         _tableView.dataSource = self;
@@ -85,6 +91,12 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
     cell.textLabel.text = category.title_cn;
     cell.textLabel.textColor = UIColorFromRGB(0x9d9e9f);
     cell.textLabel.font = [UIFont systemFontOfSize:14.];
+    cell.textLabel.highlightedTextColor = UIColorFromRGB(0x6eaef0);
+    
+    if (self.currentIndex == category.groupId) {
+        cell.textLabel.textColor = UIColorFromRGB(0x6eaef0);
+    }
+//    [cell setSelectedTextColor:<#(UIColor * _Nullable)#>]
     return cell;
 }
 

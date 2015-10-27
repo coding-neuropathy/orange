@@ -261,7 +261,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
 
         self.categoryController = [[UserEntityCategoryController alloc] init];
-    
+        self.categoryController.currentIndex = self.category.groupId;
+        
         AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
         [appdelegate.window.rootViewController addChildViewController:self.categoryController];
         [appdelegate.window addSubview:self.categoryController.view];

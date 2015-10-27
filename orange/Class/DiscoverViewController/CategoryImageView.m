@@ -67,7 +67,7 @@
 {
     _category = category;
 //    [self sd_setImageWithURL:_categoty.coverURL];
-    self.maskView.alpha = 0.4;
+    self.maskView.alpha = 0.1;
     NSArray * listString = [_category.title componentsSeparatedByString:@" "];
 //    DDLogInfo(@"string %@", listString);
     if (listString.count >= 2) {
