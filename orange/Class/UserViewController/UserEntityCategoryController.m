@@ -43,6 +43,10 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
     [API getGroupCategoryWithSuccess:^(NSArray *categories) {
         
         self.categoryArray = [NSMutableArray arrayWithArray:categories];
+        
+        GKCategory * category = [GKCategory modelFromDictionary:@{@"id":@(0), @"title":NSLocalizedStringFromTable(@"all", kLocalizedFile, nil)}];
+        
+        [self.categoryArray insertObject:category atIndex:0];
 //        NSLog(@"OKOKOKOKOKO %@", self.categoryArray);
         [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
