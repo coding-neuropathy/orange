@@ -255,10 +255,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         [self.categoryController removeFromParentViewController];
         self.categoryController = nil;
         
-        sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
+        sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
 //        return;
     } else {
-        sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
+        sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
 
         self.categoryController = [[UserEntityCategoryController alloc] init];
     
@@ -325,7 +325,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         _indicatorLable.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
         _indicatorLable.textAlignment = NSTextAlignmentLeft;
         _indicatorLable.textColor = UIColorFromRGB(0x9d9e9f);
-        _indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
+        _indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
         //        _indicatorLable.hidden = YES;
         //        _indicatorLable.backgroundColor = [UIColor redColor];
         [self addSubview:_indicatorLable];
