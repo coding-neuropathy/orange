@@ -47,7 +47,7 @@
         [_blockBtn setTitle:[NSString fontAwesomeIconStringForEnum:FATimes] forState:UIControlStateNormal];
         [_blockBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         _blockBtn.hidden = YES;
-        
+        _blockBtn.layer.cornerRadius = 4.;
         [self.contentView addSubview:_blockBtn];
     }
     return _blockBtn;
@@ -59,7 +59,8 @@
         _followButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _followButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
         _followButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-//        button.center = CGPointMake(kScreenWidth - 40, 37);
+//        button.center = CGPointMake(kScreenWidth - 40, 37)
+        _followButton.layer.cornerRadius = 4;
         _followButton.hidden = YES;
         [self.contentView addSubview:_followButton];
     }
