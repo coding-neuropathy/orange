@@ -28,6 +28,10 @@
     if (self)
     {
         self.backgroundColor = UIColorFromRGB(0x111111);
+        UISwipeGestureRecognizer * swip = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(downSwip:)];
+        swip.direction = UISwipeGestureRecognizerDirectionDown;
+        [self addGestureRecognizer:swip];
+        
     }
     return self;
 }
@@ -228,6 +232,20 @@
     }];
 }
 
+- (void)fadeDown
+{
+    [UIView animateWithDuration:0.35 animations:^{
+//        self.transform = CGAffineTransformMakeScale(1.3, 1.3);
+        self.frame = CGRectMake(0., self.deFrameHeight, self.deFrameWidth, self.deFrameHeight);
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished)
+        {
+            [self removeFromSuperview];
+        }
+    }];
+}
+
 #pragma mark - public method 
 - (void)showInWindowWithAnimated:(BOOL)animated
 {
@@ -236,6 +254,12 @@
     {
         [self fadeIn];
     }
+}
+
+#pragma makr - <UISwipeGestureRecognizer>
+- (void)downSwip:(id)sender
+{
+    [self fadeDown];
 }
 
 #pragma mark - button action

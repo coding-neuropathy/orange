@@ -25,8 +25,8 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
 //        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = UIColorFromRGB(0xffffff);
     }
     return self;
 }
@@ -137,9 +137,9 @@
 {
     [super layoutSubviews];
     
-    self.coverImageView.frame = CGRectMake(0., 0., kScreenWidth - 32, (kScreenWidth - 32) / 1.8);
-    self.coverImageView.deFrameTop = 16.;
-    self.coverImageView.deFrameLeft = 16;
+//    self.coverImageView.frame = CGRectMake(0., 0., kScreenWidth - 32, (kScreenWidth - 32) / 1.8);
+//    self.coverImageView.deFrameTop = 16.;
+//    self.coverImageView.deFrameLeft = 16;
     
     CGFloat height = [self.article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.] LineHeight:7];
     
@@ -159,7 +159,7 @@
     self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
     self.timeLabel.deFrameRight = self.contentView.deFrameRight - 10.;
     
-}
+} 
 
 #pragma mark - <RTLabelDelegate>
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
