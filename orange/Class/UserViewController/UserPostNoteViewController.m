@@ -88,7 +88,8 @@ static NSString * NoteIdentifier = @"NoteCell";
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         self.navigationItem.title = @"我的点评";
     } else {
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ 的点评", self.user.nickname];
+//        self.navigationItem.title = [NSString stringWithFormat:@"%@ 的点评", self.user.nickname];
+        self.navigationItem.title = @"他的点评";
     }
 }
 
