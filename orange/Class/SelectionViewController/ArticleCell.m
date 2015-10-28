@@ -137,9 +137,9 @@
 {
     [super layoutSubviews];
     
-//    self.coverImageView.frame = CGRectMake(0., 0., kScreenWidth - 32, (kScreenWidth - 32) / 1.8);
-//    self.coverImageView.deFrameTop = 16.;
-//    self.coverImageView.deFrameLeft = 16;
+    self.coverImageView.frame = CGRectMake(0., 0., kScreenWidth - 32, (kScreenWidth - 32) / 1.8);
+    self.coverImageView.deFrameTop = 16.;
+    self.coverImageView.deFrameLeft = 16;
     
     CGFloat height = [self.article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.] LineHeight:7];
     
