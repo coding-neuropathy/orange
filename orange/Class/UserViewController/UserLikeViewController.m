@@ -143,7 +143,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [MobClick endLogPageView:@"UserLikeView"];
     
     [self.categoryController.view removeFromSuperview];
-
     [self.categoryController removeFromParentViewController];
 }
 
@@ -260,6 +259,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         self.categoryController = nil;
         
         sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
+        
+        [MobClick event:@"click user category" attributes:@{@"action":@"cancel"}];
+        [AVAnalytics event:@"click user category" attributes:@{@"action":@"cancel"}];
 //        return;
     } else {
         sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
@@ -291,6 +293,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
             sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
         };
 //    self.categoryController = nil;
+        
+        [MobClick event:@"click user category" attributes:@{@"action":self.category.title}];
+        [AVAnalytics event:@"click user category" attributes:@{@"action":self.category.title}];
     }
     
 }
@@ -334,8 +339,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         _indicatorLable.textAlignment = NSTextAlignmentLeft;
         _indicatorLable.textColor = UIColorFromRGB(0x9d9e9f);
         _indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
-        //        _indicatorLable.hidden = YES;
-        //        _indicatorLable.backgroundColor = [UIColor redColor];
+
         [self addSubview:_indicatorLable];
     }
     return _indicatorLable;
