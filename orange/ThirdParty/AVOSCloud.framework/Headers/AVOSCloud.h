@@ -17,6 +17,7 @@
 #import "AVUser.h"
 #import "AVRole.h"
 #import "AVFile.h"
+#import "AVFileQuery.h"
 #import "AVAnonymousUtils.h"
 #import "AVACL.h"
 #import "AVInstallation.h"
@@ -25,8 +26,6 @@
 #import "AVRelation.h"
 #import "AVSubclassing.h"
 #import "AVStatus.h"
-#import "AVUserFeedbackThread.h"
-#import "AVUserFeedbackAgent.h"
 #import "AVSession.h"
 #import "AVSignature.h"
 #import "AVLogger.h"
@@ -39,7 +38,7 @@
 /**
  *  Storage Type
  */
-typedef NS_ENUM(int, AVStorageType){
+typedef NS_ENUM(int, AVStorageType) {
     /// QiNiu
     AVStorageTypeQiniu = 0,
     
@@ -67,6 +66,11 @@ typedef enum AVLogLevel : NSUInteger {
  */
 @interface AVOSCloud : NSObject
 
+/*!
+ * Enable logs of all levels and domains.
+ */
++ (void)setAllLogsEnabled:(BOOL)enabled;
+
 /**
  *  设置SDK信息显示
  *  @param verbosePolicy SDK信息显示策略，kAVVerboseShow为显示，
@@ -74,12 +78,12 @@ typedef enum AVLogLevel : NSUInteger {
  */
 + (void)setVerbosePolicy:(AVVerbosePolicy)verbosePolicy;
 
-/** @name Connecting to AVOS Cloud */
+/** @name Connecting to LeanCloud */
 
 /*!
  Sets the applicationId and clientKey of your application.
- @param applicationId The applicaiton id for your AVOS Cloud application.
- @param clientKey The client key for your AVOS Cloud application.
+ @param applicationId The applicaiton id for your LeanCloud application.
+ @param clientKey The client key for your LeanCloud application.
  */
 + (void)setApplicationId:(NSString *)applicationId clientKey:(NSString *)clientKey;
 
@@ -147,6 +151,19 @@ typedef enum AVLogLevel : NSUInteger {
 + (AVLogLevel)logLevel;
 
 #pragma mark Schedule work
+
+/**
+ * Register remote notification with types.
+ * @param types Notification types.
+ * @param categories A set of UIUserNotificationCategory objects that define the groups of actions a notification may include.
+ * NOTE: categories only supported by iOS 8 and later. If application run below iOS 8, categories will be ignored.
+ */
++ (void)registerForRemoteNotificationTypes:(NSUInteger)types categories:(NSSet *)categories;
+
+/**
+ * Register remote notification with all types (badge, alert, sound) and empty categories.
+ */
++ (void)registerForRemoteNotification;
 
 /**
  *  get the query cache expired days
@@ -233,24 +250,15 @@ typedef enum AVLogLevel : NSUInteger {
  */
 +(void)verifySmsCode:(NSString *)code mobilePhoneNumber:(NSString *)phoneNumber callback:(AVBooleanResultBlock)callback;
 
+/*!
+ * 获取服务端时间。
+ */
++ (NSDate *)getServerDate:(NSError **)error;
 
-typedef AVUser PFUser;
-typedef AVObject PFObject;
-typedef AVGeoPoint PFGeoPoint;
-typedef AVQuery PFQuery;
-typedef AVFile PFFile;
-typedef AVAnonymousUtils PFAnonymousUtils;
-typedef AVACL PFACL;
-typedef AVRole PFRole;
-typedef AVInstallation PFInstallation;
-typedef AVPush PFPush;
-typedef AVOSCloud Parse;
-typedef AVCloud PFCloud;
-
-typedef AVRelation PFRelation;
-
-#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
-typedef AVAnalytics PFAnalytics;
-#endif
+/*!
+ * 异步地获取服务端时间。
+ * @param block 回调结果。
+ */
++ (void)getServerDateWithBlock:(void(^)(NSDate *date, NSError *error))block;
 
 @end

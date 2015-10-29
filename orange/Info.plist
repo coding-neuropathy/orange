@@ -29,7 +29,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>guoku</string>
+			<string>weibo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>sinaweibosso.1459383851</string>
@@ -71,11 +71,14 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>guoku</string>
-		<string>weixin</string>
 		<string>sinaweibo</string>
 		<string>tbopen23093827</string>
 		<string>wx59118ccde8270caa</string>
 		<string>sinaweibosso.1459383851</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>weixin</string>
+		<string>sinaweibohdsso</string>
+		<string>sinaweibosso</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
