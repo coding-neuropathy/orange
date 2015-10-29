@@ -96,7 +96,7 @@
     self.imageView.deFrameLeft = 16.;
     
     self.noteLabel.frame = CGRectMake(0., 0., kScreenWidth - 120., 70.);
-    self.noteLabel.deFrameLeft = self.imageView.deFrameRight + 5;
+    self.noteLabel.deFrameLeft = self.imageView.deFrameRight + 10;
     
     self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
     self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 5.;

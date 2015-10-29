@@ -25,8 +25,8 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
 //        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = UIColorFromRGB(0xffffff);
     }
     return self;
 }
@@ -159,7 +159,7 @@
     self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
     self.timeLabel.deFrameRight = self.contentView.deFrameRight - 10.;
     
-}
+} 
 
 #pragma mark - <RTLabelDelegate>
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url

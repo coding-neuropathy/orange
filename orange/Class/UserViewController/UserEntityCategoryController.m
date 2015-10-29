@@ -12,12 +12,24 @@
 
 @property (strong, nonatomic) UITableView * tableView;
 @property (strong, nonatomic) NSMutableArray * categoryArray;
+@property (strong, nonatomic) NSString * language;
 
 @end
 
 @implementation UserEntityCategoryController
 
 static NSString * CellReuseIdentifiter = @"CellIdentifiter";
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        NSArray *languages = [NSLocale preferredLanguages];
+//        NSLog(@"%@", languages);
+        self.language = [languages objectAtIndex:0];
+    }
+    return self;
+}
 
 - (void)setCurrentIndex:(NSInteger)currentIndex
 {
@@ -92,7 +104,11 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
 //    cell.textLabel.text =
     cell.backgroundColor = [UIColor clearColor];
     GKCategory * category = [self.categoryArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = category.title_cn;
+    if ([self.language hasPrefix:@"en"]) {
+        cell.textLabel.text = category.title_en;
+    } else {
+        cell.textLabel.text = category.title_cn;
+    }
     cell.textLabel.textColor = UIColorFromRGB(0x9d9e9f);
     cell.textLabel.font = [UIFont systemFontOfSize:14.];
     cell.textLabel.highlightedTextColor = UIColorFromRGB(0x6eaef0);

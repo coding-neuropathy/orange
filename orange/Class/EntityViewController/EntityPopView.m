@@ -28,6 +28,11 @@
     if (self)
     {
         self.backgroundColor = UIColorFromRGB(0x111111);
+        UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+        
+        [pan setMinimumNumberOfTouches:1];
+        [pan setMaximumNumberOfTouches:1];
+        [self addGestureRecognizer:pan];
     }
     return self;
 }
@@ -228,6 +233,7 @@
     }];
 }
 
+
 #pragma mark - public method 
 - (void)showInWindowWithAnimated:(BOOL)animated
 {
@@ -237,6 +243,46 @@
         [self fadeIn];
     }
 }
+
+#pragma makr - <UISwipeGestureRecognizer>
+- (void)panAction:(UIPanGestureRecognizer *)recognizer
+{
+    CGPoint translation = [recognizer translationInView:self];
+    
+    if (translation.y < 0 && recognizer.view.deFrameTop == 0)
+        return;
+    
+    recognizer.view.center = CGPointMake(recognizer.view.center.x, recognizer.view.center.y + translation.y);
+    NSLog(@"%f", 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight);
+    CGFloat viewAlpha = 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight;
+    if (viewAlpha < 0.3) {
+        recognizer.view.alpha = 0.3;
+    } else {
+        recognizer.view.alpha = viewAlpha;
+    }
+//    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
+//                                         recognizer.view.center.y + translation.y);
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self];
+    
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        if (self.deFrameTop > kScreenHeight / 6) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.deFrameTop = kScreenHeight;
+                self.alpha = 0.;
+            } completion:^(BOOL finished) {
+                [self removeFromSuperview];
+            }];
+        } else {
+            [UIView animateWithDuration:0.35 animations:^{
+                self.alpha = 1.;
+                self.deFrameTop = 0;
+            }];
+        }
+    }
+}
+
 
 #pragma mark - button action
 - (void)closeBtnAction:(id)sender

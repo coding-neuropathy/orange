@@ -21,6 +21,8 @@
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) UILabel * indicatorLable;
 @property (strong, nonatomic) GKCategory * category;
+@property (strong, nonatomic) NSString * language;
+
 @property (weak, nonatomic) id <UserLikeHeaderSectionViewDelegate> delegate;
 //@property (strong, nonatomic) NSString * title;
 
@@ -84,8 +86,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                                timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
         self.likeEntities = [NSMutableArray arrayWithArray:entityArray];
         self.likeTimestamp = timestamp;
-        [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
+        [self.collectionView.pullToRefreshView stopAnimating];
+//        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
         [self.collectionView reloadData];
     }];
@@ -141,7 +144,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [MobClick endLogPageView:@"UserLikeView"];
     
     [self.categoryController.view removeFromSuperview];
-
     [self.categoryController removeFromParentViewController];
 }
 
@@ -199,7 +201,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityIdentifier forIndexPath:indexPath];
-    cell.entity = [self.likeEntities objectAtIndex:indexPath.row];
+    GKEntity * entity = [self.likeEntities objectAtIndex:indexPath.row];
+//    DDLogError(@"entity %@ %ld", entity, indexPath.row);
+    cell.entity = entity;
     cell.delegate = self;
     return cell;
 }
@@ -256,6 +260,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         self.categoryController = nil;
         
         sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
+        
+        [MobClick event:@"click user category" attributes:@{@"action":@"cancel"}];
+        [AVAnalytics event:@"click user category" attributes:@{@"action":@"cancel"}];
 //        return;
     } else {
         sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
@@ -287,6 +294,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
             sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
         };
 //    self.categoryController = nil;
+        
+        [MobClick event:@"click user category" attributes:@{@"action":self.category.title}];
+        [AVAnalytics event:@"click user category" attributes:@{@"action":self.category.title}];
     }
     
 }
@@ -302,6 +312,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xffffff);
+        NSArray *languages = [NSLocale preferredLanguages];
+        //        NSLog(@"%@", languages);
+        self.language = [languages objectAtIndex:0];
     }
     return self;
 }
@@ -327,8 +340,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         _indicatorLable.textAlignment = NSTextAlignmentLeft;
         _indicatorLable.textColor = UIColorFromRGB(0x9d9e9f);
         _indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
-        //        _indicatorLable.hidden = YES;
-        //        _indicatorLable.backgroundColor = [UIColor redColor];
+
         [self addSubview:_indicatorLable];
     }
     return _indicatorLable;
@@ -344,7 +356,12 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)setCategory:(GKCategory *)category
 {
     _category = category;
-    self.titleLabel.text = _category.title_cn;
+    
+    if ([self.language hasPrefix:@"en"]) {
+        self.titleLabel.text = _category.title_en;
+    } else {
+        self.titleLabel.text = _category.title_cn;
+    }
     
     [self setNeedsLayout];
 }
