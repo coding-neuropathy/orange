@@ -86,8 +86,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                                timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
         self.likeEntities = [NSMutableArray arrayWithArray:entityArray];
         self.likeTimestamp = timestamp;
-        [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
+        [self.collectionView.pullToRefreshView stopAnimating];
+//        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
         [self.collectionView reloadData];
     }];

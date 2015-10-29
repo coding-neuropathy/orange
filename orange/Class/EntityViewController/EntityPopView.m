@@ -28,10 +28,11 @@
     if (self)
     {
         self.backgroundColor = UIColorFromRGB(0x111111);
-        UISwipeGestureRecognizer * swip = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(downSwip:)];
-        swip.direction = UISwipeGestureRecognizerDirectionDown;
-        [self addGestureRecognizer:swip];
+        UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
         
+        [pan setMinimumNumberOfTouches:1];
+        [pan setMaximumNumberOfTouches:1];
+        [self addGestureRecognizer:pan];
     }
     return self;
 }
@@ -232,19 +233,6 @@
     }];
 }
 
-- (void)fadeDown
-{
-    [UIView animateWithDuration:0.35 animations:^{
-//        self.transform = CGAffineTransformMakeScale(1.3, 1.3);
-        self.frame = CGRectMake(0., self.deFrameHeight, self.deFrameWidth, self.deFrameHeight);
-        self.alpha = 0;
-    } completion:^(BOOL finished) {
-        if (finished)
-        {
-            [self removeFromSuperview];
-        }
-    }];
-}
 
 #pragma mark - public method 
 - (void)showInWindowWithAnimated:(BOOL)animated
@@ -257,10 +245,38 @@
 }
 
 #pragma makr - <UISwipeGestureRecognizer>
-- (void)downSwip:(id)sender
+- (void)panAction:(UIPanGestureRecognizer *)recognizer
 {
-    [self fadeDown];
+    CGPoint translation = [recognizer translationInView:self];
+    
+    if (translation.y < 0)
+        return;
+    
+    recognizer.view.center = CGPointMake(recognizer.view.center.x, recognizer.view.center.y + translation.y);
+//    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
+//                                         recognizer.view.center.y + translation.y);
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self];
+    
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        if (self.deFrameTop > kScreenHeight / 5) {
+            
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.deFrameTop = kScreenHeight;
+                self.alpha = 0.;
+            } completion:^(BOOL finished) {
+                [self removeFromSuperview];
+            }];
+        } else {
+            [UIView animateWithDuration:0.35 animations:^{
+                self.deFrameTop = 0;
+            }];
+        }
+        
+        
+    }
 }
+
 
 #pragma mark - button action
 - (void)closeBtnAction:(id)sender
