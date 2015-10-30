@@ -253,7 +253,7 @@
         return;
     
     recognizer.view.center = CGPointMake(recognizer.view.center.x, recognizer.view.center.y + translation.y);
-    NSLog(@"%f", 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight);
+//    NSLog(@"%f", 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight);
     CGFloat viewAlpha = 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight;
     if (viewAlpha < 0.3) {
         recognizer.view.alpha = 0.3;
