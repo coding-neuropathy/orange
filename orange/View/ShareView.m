@@ -305,7 +305,7 @@
     [self setNeedsDisplay];
     self.alpha = 0;
     self.board.deFrameTop = kScreenHeight;
-    [kAppDelegate.window addSubview:self];
+    [kAppDelegate.window.rootViewController.view addSubview:self];
     
     [UIView animateWithDuration:0.35 animations:^{
         self.alpha = 1;
@@ -379,17 +379,48 @@
 
 - (void)weiboShare
 {
-    
-    [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:[self.image imageWithSize:CGSizeMake(460.f, 460.f)]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-        
-    } andProgress:^(float percent) {
-        if (percent == 1) {
-            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+
+    if (![AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo]) {
+        [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
+            if (error) {
+                NSLog(@"failed to get authentication from weibo. error: %@", error.description);
+            } else {
+                [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformWeiBo block:^(AVUser *user, NSError *error) {
+                    if (!error) {
+                        [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:[self.image imageWithSize:CGSizeMake(460.f, 460.f)]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+                            NSLog(@"%@",object);
+                            
+                            
+                        } andProgress:^(float percent) {
+                            if (percent == 1) {
+                                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+                                
+                                [AVAnalytics event:@"share to entity to weibo" attributes:@{@"entity":self.title}];
+                                [MobClick event:@"share to entity to weibo" attributes:@{@"entity":self.title}];
+                            }
+                        }];
+                    }
+                }];
+            }
+        } toPlatform:AVOSCloudSNSSinaWeibo];
+    }
+    else
+    {
+        [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:[self.image imageWithSize:CGSizeMake(460.f, 460.f)]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            NSLog(@"%@",object);
             
-            [AVAnalytics event:@"share to entity to weibo" attributes:@{@"entity":self.title}];
-            [MobClick event:@"share to entity to weibo" attributes:@{@"entity":self.title}];
-        }
-    }];
+            
+        } andProgress:^(float percent) {
+            if (percent == 1) {
+                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+                
+                [AVAnalytics event:@"share to entity to weibo" attributes:@{@"entity":self.title}];
+                [MobClick event:@"share to entity to weibo" attributes:@{@"entity":self.title}];
+            }
+        }];
+    }
+
+
 }
 
 #pragma mark - button action

@@ -77,6 +77,7 @@
 		39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C829501AC29089009DE9BE /* libMobClickLibrary.a */; };
 		4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E05AA951B634C2D007596E6 /* EarthLoadingView.m */; };
 		4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */; };
+		4E08C3B61BDFE24B003D6494 /* LeanCloudSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E08C3B51BDFE24B003D6494 /* LeanCloudSocial.framework */; };
 		4E117B5E1ABC6FDC00844935 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E117B5D1ABC6FDC00844935 /* EditViewController.m */; };
 		4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */; };
 		4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C461A66B86F004C59C4 /* CategoryGridItem.m */; };
@@ -256,7 +257,6 @@
 		B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD82E1AEF5B3A00354248 /* IconInfoView.m */; };
 		B736FF2A1BD65D6E000668E4 /* UserTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B736FF291BD65D6E000668E4 /* UserTagsViewController.m */; };
 		B73E90CD1B1C9D5D00616FD7 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73E90CC1B1C9D5D00616FD7 /* AVOSCloud.framework */; };
-		B73E90CF1B1C9D7500616FD7 /* AVOSCloudSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73E90CE1B1C9D7500616FD7 /* AVOSCloudSNS.framework */; };
 		B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */; };
 		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
 		B7662ABD1AC3AD8E00C82B4B /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AA61AC3AD8E00C82B4B /* libUMFeedback.a */; };
@@ -490,6 +490,7 @@
 		4E05AA951B634C2D007596E6 /* EarthLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthLoadingView.m; sourceTree = "<group>"; };
 		4E066A9D1A5C43E800DFEF65 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		4E08C3B51BDFE24B003D6494 /* LeanCloudSocial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LeanCloudSocial.framework; sourceTree = "<group>"; };
 		4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FultonsHand Regular.TTF"; sourceTree = "<group>"; };
 		4E117B5C1ABC6FDC00844935 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		4E117B5D1ABC6FDC00844935 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
@@ -530,6 +531,7 @@
 		4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewcontroller.m; sourceTree = "<group>"; };
 		4E3C41391A9FFBEB0053DB5E /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
 		4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
+		4E4A942B1BDFE87E00130F69 /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
 		4E4F27D11B6F438E003A63C5 /* ImageLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoadingView.h; sourceTree = "<group>"; };
 		4E4F27D21B6F438E003A63C5 /* ImageLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoadingView.m; sourceTree = "<group>"; };
 		4E4F27D41B6F438E003A63C5 /* loading-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-image.png"; sourceTree = "<group>"; };
@@ -1028,7 +1030,6 @@
 				B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */,
 				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
 				8A5DAEBA1BC779A00028C36D /* SecurityGuardSDK.framework in Frameworks */,
-				B73E90CF1B1C9D7500616FD7 /* AVOSCloudSNS.framework in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
 				8A5DAEBD1BC779A00028C36D /* TBAppLinkSDK.framework in Frameworks */,
@@ -1048,6 +1049,7 @@
 				4E56DFCC19D5B83B00263B17 /* CoreGraphics.framework in Frameworks */,
 				B7662ACC1AC3AD8E00C82B4B /* libUMOpus.a in Frameworks */,
 				4E56DFC819D5B82900263B17 /* UIKit.framework in Frameworks */,
+				4E08C3B61BDFE24B003D6494 /* LeanCloudSocial.framework in Frameworks */,
 				8A5DAEB91BC779A00028C36D /* AlipaySDK.framework in Frameworks */,
 				4E56DFC519D5AF3300263B17 /* libicucore.dylib in Frameworks */,
 				4E56DFC319D5AF1E00263B17 /* SystemConfiguration.framework in Frameworks */,
@@ -1698,6 +1700,8 @@
 		4E56DFC619D5AF5600263B17 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				4E4A942B1BDFE87E00130F69 /* AVOSCloud.framework */,
+				4E08C3B51BDFE24B003D6494 /* LeanCloudSocial.framework */,
 				B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */,
 				B7AAFA791AB7039600A2F20D /* Foundation.framework */,
 				B7AAFA771AB7036700A2F20D /* libstdc++.6.0.9.dylib */,
