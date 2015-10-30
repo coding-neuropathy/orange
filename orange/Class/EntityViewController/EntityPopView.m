@@ -8,7 +8,7 @@
 
 #import "EntityPopView.h"
 
-@interface EntityPopView () <UIScrollViewDelegate>
+@interface EntityPopView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIScrollView * scrollView;
 @property (strong, nonatomic) UIPageControl * pageCtr;
@@ -28,11 +28,15 @@
     if (self)
     {
         self.backgroundColor = UIColorFromRGB(0x111111);
-        UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+//        UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+//        
+//        [pan setMinimumNumberOfTouches:1];
+//        [pan setMaximumNumberOfTouches:1];
+//        [self addGestureRecognizer:pan];
         
-        [pan setMinimumNumberOfTouches:1];
-        [pan setMaximumNumberOfTouches:1];
-        [self addGestureRecognizer:pan];
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        tap.delegate = self;
+        [self addGestureRecognizer:tap];
     }
     return self;
 }
@@ -209,7 +213,7 @@
 - (void)fadeIn
 {
     self.alpha = 0;
-    self.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    self.transform = CGAffineTransformMakeScale(0.5, 0.5);
 
     [UIView animateWithDuration:0.35 animations:^{
         self.alpha = 1.;
@@ -244,44 +248,55 @@
     }
 }
 
-#pragma makr - <UISwipeGestureRecognizer>
-- (void)panAction:(UIPanGestureRecognizer *)recognizer
+#pragma mark - <UIGestureRecognizer>
+- (void)tapAction:(UITapGestureRecognizer *)recognizer
 {
-    CGPoint translation = [recognizer translationInView:self];
     
-    if (translation.y < 0 && recognizer.view.deFrameTop == 0)
-        return;
+    CGPoint locationIn = [recognizer locationInView:self];
     
-    recognizer.view.center = CGPointMake(recognizer.view.center.x, recognizer.view.center.y + translation.y);
-//    NSLog(@"%f", 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight);
-    CGFloat viewAlpha = 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight;
-    if (viewAlpha < 0.3) {
-        recognizer.view.alpha = 0.3;
-    } else {
-        recognizer.view.alpha = viewAlpha;
-    }
-//    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
-//                                         recognizer.view.center.y + translation.y);
-    [recognizer setTranslation:CGPointMake(0, 0) inView:self];
-    
-    if (recognizer.state == UIGestureRecognizerStateEnded) {
-        
-        if (self.deFrameTop > kScreenHeight / 6) {
-            
-            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.deFrameTop = kScreenHeight;
-                self.alpha = 0.;
-            } completion:^(BOOL finished) {
-                [self removeFromSuperview];
-            }];
-        } else {
-            [UIView animateWithDuration:0.35 animations:^{
-                self.alpha = 1.;
-                self.deFrameTop = 0;
-            }];
-        }
+    DDLogInfo(@"touch location y %f x %f", locationIn.y, locationIn.x);
+    if (locationIn.y < self.scrollView.deFrameTop) {
+        [self fadeOut];
     }
 }
+//#pragma makr - <UISwipeGestureRecognizer>
+//- (void)panAction:(UIPanGestureRecognizer *)recognizer
+//{
+//    CGPoint translation = [recognizer translationInView:self];
+//    
+//    if (translation.y < 0 && recognizer.view.deFrameTop == 0)
+//        return;
+//    
+//    recognizer.view.center = CGPointMake(recognizer.view.center.x, recognizer.view.center.y + translation.y);
+////    NSLog(@"%f", 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight);
+//    CGFloat viewAlpha = 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight;
+//    if (viewAlpha < 0.3) {
+//        recognizer.view.alpha = 0.3;
+//    } else {
+//        recognizer.view.alpha = viewAlpha;
+//    }
+////    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
+////                                         recognizer.view.center.y + translation.y);
+//    [recognizer setTranslation:CGPointMake(0, 0) inView:self];
+//    
+//    if (recognizer.state == UIGestureRecognizerStateEnded) {
+//        
+//        if (self.deFrameTop > kScreenHeight / 6) {
+//            
+//            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//                self.deFrameTop = kScreenHeight;
+//                self.alpha = 0.;
+//            } completion:^(BOOL finished) {
+//                [self removeFromSuperview];
+//            }];
+//        } else {
+//            [UIView animateWithDuration:0.35 animations:^{
+//                self.alpha = 1.;
+//                self.deFrameTop = 0;
+//            }];
+//        }
+//    }
+//}
 
 
 #pragma mark - button action
@@ -316,6 +331,15 @@
     [self removeFromSuperview];
 }
 
+#pragma mark - <UIGestureRecognizerDelegate>
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
+{
+    if ([touch view] != self) {
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - scroll view delegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -325,12 +349,7 @@
 
 - (void)setImageIndex:(NSInteger)idx
 {
-//    self.pageCtr.currentPage = idx;
-//    NSLog(@"%@", self.pageCtr);
     [self.scrollView setContentOffset:CGPointMake(idx * kScreenWidth, 0.)];
-//    self.pageCtr.currentPage = idx;
-//    NSLog(@"page %d", idx);
-//    [self.pageCtr setCurrentPage:idx];
 }
 
 - (void)setNoteBtnSelected
