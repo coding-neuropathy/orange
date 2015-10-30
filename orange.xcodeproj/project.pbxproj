@@ -98,7 +98,6 @@
 		4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23821A52EC9600037F9C /* SettingManager.m */; };
 		4E3A238D1A52F21800037F9C /* TabBarViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */; };
 		4E3C413B1A9FFBEB0053DB5E /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */; };
-		4E4A942C1BDFE87E00130F69 /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E4A942B1BDFE87E00130F69 /* AVOSCloud.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4E4F27D71B6F438E003A63C5 /* ImageLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4F27D21B6F438E003A63C5 /* ImageLoadingView.m */; };
 		4E4F27D81B6F438E003A63C5 /* loading-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4F27D41B6F438E003A63C5 /* loading-image.png */; };
 		4E4F27D91B6F438E003A63C5 /* loading-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4F27D51B6F438E003A63C5 /* loading-image@2x.png */; };
@@ -1063,7 +1062,6 @@
 				4E56DFC119D5AF1400263B17 /* MobileCoreServices.framework in Frameworks */,
 				8A5DAEBF1BC779A00028C36D /* UTMini.framework in Frameworks */,
 				4E56DFBF19D5AF0900263B17 /* Security.framework in Frameworks */,
-				4E4A942C1BDFE87E00130F69 /* AVOSCloud.framework in Frameworks */,
 				8A5DAEB21BC779A00028C36D /* ALBBFullSecurityGuard.framework in Frameworks */,
 				4E56DFBD19D5AF0000263B17 /* CoreLocation.framework in Frameworks */,
 				4E56DFB919D5AEF300263B17 /* CoreMotion.framework in Frameworks */,
