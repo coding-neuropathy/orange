@@ -119,9 +119,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [self.collectionView registerClass:[UserLikeHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
     
     if (self.user.userId == [Passport sharedInstance].user.userId) {
-        self.navigationItem.title = @"我的喜爱";
+        self.navigationItem.title = NSLocalizedStringFromTable(@"me like", kLocalizedFile, nil);
     } else {
-        self.navigationItem.title = @"TA的喜爱";
+        self.navigationItem.title = NSLocalizedStringFromTable(@"user like", kLocalizedFile, nil);
     }
 }
 

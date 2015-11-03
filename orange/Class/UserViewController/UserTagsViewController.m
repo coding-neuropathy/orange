@@ -70,9 +70,9 @@ static NSString * UserTagIdentifier = @"UserTagCell";
     [self.collectionView registerClass:[UserTagCell class] forCellWithReuseIdentifier:UserTagIdentifier];
     
     if (self.user.userId == [Passport sharedInstance].user.userId) {
-        self.navigationItem.title = @"我参与的标签";
+        self.navigationItem.title = NSLocalizedStringFromTable(@"me tag", kLocalizedFile, nil);
     } else {
-        self.navigationItem.title = @"TA参与的标签";
+        self.navigationItem.title = NSLocalizedStringFromTable(@"user tag", kLocalizedFile, nil);
     }
 }
 

@@ -86,10 +86,10 @@ static NSString * NoteIdentifier = @"NoteCell";
     [self.collectionView registerClass:[NoteCell class] forCellWithReuseIdentifier:NoteIdentifier];
     
     if (self.user.userId == [Passport sharedInstance].user.userId) {
-        self.navigationItem.title = @"我的点评";
+        self.navigationItem.title = NSLocalizedStringFromTable(@"me note", kLocalizedFile, nil);
     } else {
 //        self.navigationItem.title = [NSString stringWithFormat:@"%@ 的点评", self.user.nickname];
-        self.navigationItem.title = @"TA的点评";
+        self.navigationItem.title = NSLocalizedStringFromTable(@"user note", kLocalizedFile, nil);
     }
 }
 
