@@ -89,7 +89,7 @@ static NSString * NoteIdentifier = @"NoteCell";
         self.navigationItem.title = @"我的点评";
     } else {
 //        self.navigationItem.title = [NSString stringWithFormat:@"%@ 的点评", self.user.nickname];
-        self.navigationItem.title = @"他的点评";
+        self.navigationItem.title = @"TA的点评";
     }
 }
 

@@ -72,7 +72,7 @@ static NSString * UserTagIdentifier = @"UserTagCell";
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         self.navigationItem.title = @"我参与的标签";
     } else {
-        self.navigationItem.title = @"他参与的标签";
+        self.navigationItem.title = @"TA参与的标签";
     }
 }
 

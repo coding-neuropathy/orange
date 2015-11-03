@@ -528,7 +528,7 @@ int ddLogLevel;
         [API postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
         
         } Failure:^(NSInteger stateCode) {
-            DDLogError(@"error code %ld", stateCode);
+            DDLogError(@"error code %ld", (long)stateCode);
         }];
     }
 }

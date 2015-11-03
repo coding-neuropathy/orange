@@ -121,7 +121,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         self.navigationItem.title = @"我的喜爱";
     } else {
-        self.navigationItem.title = @"他的喜爱";
+        self.navigationItem.title = @"TA的喜爱";
     }
 }
 
