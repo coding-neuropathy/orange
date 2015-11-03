@@ -10,7 +10,6 @@
 
 @interface NoteCell ()
 
-
 @property (strong, nonatomic) UILabel * noteLabel;
 @property (strong, nonatomic) UILabel *timeLabel;
 
@@ -92,15 +91,20 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.imageView.frame = CGRectMake(0., 0., 80., 80.);
-    self.imageView.deFrameLeft = 16.;
+    if (IS_IPAD) {
     
-    self.noteLabel.frame = CGRectMake(0., 0., kScreenWidth - 120., 70.);
-    self.noteLabel.deFrameLeft = self.imageView.deFrameRight + 10;
     
-    self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
-    self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 5.;
-    self.timeLabel.deFrameRight = self.contentView.deFrameRight - 16.;
+    } else {
+        self.imageView.frame = CGRectMake(0., 0., 80., 80.);
+        self.imageView.deFrameLeft = 16.;
+    
+        self.noteLabel.frame = CGRectMake(0., 0., kScreenWidth - 120., 70.);
+        self.noteLabel.deFrameLeft = self.imageView.deFrameRight + 10;
+    
+        self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
+        self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 5.;
+        self.timeLabel.deFrameRight = self.contentView.deFrameRight - 16.;
+    }
 }
 
 - (void)drawRect:(CGRect)rect
