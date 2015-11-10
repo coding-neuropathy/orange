@@ -847,7 +847,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             }completion:^(BOOL finished) {
                 [image removeFromSuperview];
             }];
-            //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
         
         
@@ -874,7 +874,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             if ([Passport sharedInstance].user) {
                 [self.dataArrayForlikeUser insertObject:[Passport sharedInstance].user atIndex:0];
             }
-            //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         } else {
             [self.dataArrayForlikeUser removeObject:[Passport sharedInstance].user];
             

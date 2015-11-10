@@ -176,17 +176,31 @@
     [self.avatarView sd_setImageWithURL:_user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(self.avatarView.deFrameWidth, self.deFrameWidth)]];
     
     if ([_user.gender isEqualToString:@"M"]) {
-        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>%@</b> <font face='FontAwesome' color='^8cb4ff'>%@</font>", _user.nickname, [NSString fontAwesomeIconStringForEnum:FAmars]];
+        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>   %@</b> <font face='FontAwesome' color='^8cb4ff'>%@</font>", _user.nickname, [NSString fontAwesomeIconStringForEnum:FAmars]];
     } else if ([_user.gender isEqualToString:@"F"]) {
-        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>%@</b> <font face='FontAwesome' color='^ffb9c1'>%@</font>", _user.nickname, [NSString fontAwesomeIconStringForEnum:FAvenus]];
+        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>   %@</b> <font face='FontAwesome' color='^ffb9c1'>%@</font>", _user.nickname, [NSString fontAwesomeIconStringForEnum:FAvenus]];
     } else {
         self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>%@</b>", _user.nickname];
     }
     
     _bioLabel.text = _user.bio;
     
-    [self.friendBtn setTitle:[NSString stringWithFormat:@"%@ %ld",NSLocalizedStringFromTable(@"following", kLocalizedFile, nil), _user.followingCount] forState:UIControlStateNormal];
-    [self.fansBtn setTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil), _user.fanCount] forState:UIControlStateNormal];
+    {
+        NSString * str = [NSString stringWithFormat:@"%@ %ld",NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil), (long)_user.fanCount];
+        NSMutableAttributedString *mutableStr = [[NSMutableAttributedString alloc]initWithString:str];
+        NSRange positionRange = [str rangeOfString:[NSString stringWithFormat:@"%ld",(long)_user.fanCount]];
+        [mutableStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x9d9e9f) range:positionRange];
+        [self.fansBtn setAttributedTitle:mutableStr forState:UIControlStateNormal];
+    }
+    {
+        
+        NSString * str = [NSString stringWithFormat:@"%@ %ld",NSLocalizedStringFromTable(@"following", kLocalizedFile, nil), (long)_user.followingCount];
+        NSMutableAttributedString *mutableStr = [[NSMutableAttributedString alloc]initWithString:str];
+        NSRange positionRange = [str rangeOfString:[NSString stringWithFormat:@"%ld",(long)_user.followingCount]];
+        [mutableStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x9d9e9f) range:positionRange];
+        [self.friendBtn setAttributedTitle:mutableStr forState:UIControlStateNormal];
+    }
+
     
     if (_user.userId == [Passport sharedInstance].user.userId) {
         self.editBtn.hidden = NO;
@@ -289,6 +303,8 @@
         self.relationBtn.center = self.bioLabel.center;
         self.relationBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
     }
+    
+    [self relationBtn];
 }
 
 #pragma mark button action
