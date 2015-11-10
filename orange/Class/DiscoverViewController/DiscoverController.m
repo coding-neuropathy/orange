@@ -560,6 +560,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
     view.tag = 999;
     
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self action:@selector(cancelSearch:)];
+    [view addGestureRecognizer:tap];
+    
+    
 //    UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_search"]];
 //    image.center = CGPointMake(kScreenWidth/2, 0);
 //    image.deFrameTop = 50+kStatusBarHeight+kNavigationBarHeight;
@@ -593,6 +598,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)didDismissSearchController:(UISearchController *)searchController
 {
     
+}
+
+- (void)cancelSearch:(UIView *)view
+{
+    self.searchVC.active = NO;
 }
 
 #pragma mark - <EntityCellDelegate>
