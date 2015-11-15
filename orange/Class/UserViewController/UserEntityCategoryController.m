@@ -112,7 +112,9 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
     cell.textLabel.textColor = UIColorFromRGB(0x9d9e9f);
     cell.textLabel.font = [UIFont systemFontOfSize:14.];
     cell.textLabel.highlightedTextColor = UIColorFromRGB(0x6eaaf0);
-    cell.
+    
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     if (![cell.contentView viewWithTag:10000]) {
         UIView * H = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.5)];
