@@ -10,7 +10,7 @@
 
 @interface UserEntityCategoryController ()
 
-@property (strong, nonatomic) UITableView * tableView;
+
 @property (strong, nonatomic) NSMutableArray * categoryArray;
 @property (strong, nonatomic) NSString * language;
 
@@ -41,8 +41,8 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
 {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 242.) style:UITableViewStylePlain];
-//        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.98];
         _tableView.dataSource = self;
         _tableView.delegate = self;
     }
@@ -111,12 +111,22 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
     }
     cell.textLabel.textColor = UIColorFromRGB(0x9d9e9f);
     cell.textLabel.font = [UIFont systemFontOfSize:14.];
-    cell.textLabel.highlightedTextColor = UIColorFromRGB(0x6eaef0);
+    cell.textLabel.highlightedTextColor = UIColorFromRGB(0x6eaaf0);
+    cell.
+    
+    if (![cell.contentView viewWithTag:10000]) {
+        UIView * H = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.5)];
+        H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+        H.tag = 10000;
+        [cell.contentView addSubview:H];
+        [cell.contentView bringSubviewToFront:H];
+    }
+
     
     if (self.currentIndex == category.groupId) {
-        cell.textLabel.textColor = UIColorFromRGB(0x6eaef0);
+        cell.textLabel.textColor = UIColorFromRGB(0x6eaaf0);
     }
-//    [cell setSelectedTextColor:<#(UIColor * _Nullable)#>]
+
     return cell;
 }
 
