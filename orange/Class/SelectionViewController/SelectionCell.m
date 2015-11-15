@@ -308,13 +308,13 @@
             }completion:^(BOOL finished) {
                 [image removeFromSuperview];
             }];
-            //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
         }
         self.likeButton.selected = liked;
         self.entity.liked = liked;
         
         if (liked) {
-            //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
             UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
             image.frame = self.likeButton.imageView.frame;
             [self.likeButton addSubview:image];

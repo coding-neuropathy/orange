@@ -197,7 +197,7 @@
         badge.tag = 100;
         badge.layer.cornerRadius = 3;
         badge.layer.masksToBounds = YES;
-        badge.center = CGPointMake(kScreenWidth*3/4+18,10);
+        badge.center = CGPointMake(kScreenWidth*3/4+6,10);
         [self.segmentedControl addSubview:badge];
     }
     else
