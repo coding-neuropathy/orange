@@ -15,6 +15,7 @@
 @property (strong, nonatomic) UILabel * detailLabel;
 @property (strong, nonatomic) RTLabel * tagsLabel;
 @property (strong, nonatomic) UILabel * timeLabel;
+@property (strong, nonatomic) UIView * H;
 
 @end
 
@@ -27,6 +28,10 @@
     {
 //        self.backgroundColor = UIColorFromRGB(0xffffff);
         self.backgroundColor = UIColorFromRGB(0xffffff);
+        
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
+        self.H.backgroundColor = UIColorFromRGB(0xe6e6e6);
+        [self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -158,6 +163,8 @@
     self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
     self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
     self.timeLabel.deFrameRight = self.contentView.deFrameRight - 10.;
+    
+    self.H.deFrameBottom = self.deFrameHeight;
     
 } 
 

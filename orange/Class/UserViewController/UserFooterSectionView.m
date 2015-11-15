@@ -11,6 +11,7 @@
 @interface UserFooterSectionView ()
 
 //@property (strong, nonatomic) UIButton * moreBtn;
+@property (strong, nonatomic) UIView * H;
 
 @end
 
@@ -21,6 +22,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
+        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
+        [self addSubview:self.H];
     }
     return self;
 }
@@ -45,6 +49,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    self.H.deFrameTop = 0;
 //    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth, 44.);
 //    self.moreBtn.frame = CGRectMake(0., 0., kScreenWidth, 44.);
     

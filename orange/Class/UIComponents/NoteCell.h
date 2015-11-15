@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) GKNote * note;
 @property (strong, nonatomic) UIImageView * imageView;
+@property (strong, nonatomic) UIView * H;
 
 @end
