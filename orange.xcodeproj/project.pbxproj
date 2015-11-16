@@ -310,6 +310,7 @@
 		B7AAFA761AB7033600A2F20D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA751AB7033600A2F20D /* CFNetwork.framework */; };
 		B7AAFA781AB7036700A2F20D /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA771AB7036700A2F20D /* libstdc++.6.0.9.dylib */; };
 		B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA791AB7039600A2F20D /* Foundation.framework */; };
+		B7B065C81BF985CE001AA30F /* PreviewArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B065C71BF985CE001AA30F /* PreviewArticleController.m */; };
 		B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B6958E1AF05F310016AAB8 /* ImageIO.framework */; };
 		B7BE3E2D1BA9A17A004AD422 /* CategroyGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BE3E2C1BA9A17A004AD422 /* CategroyGroupController.m */; };
 		B7BE3E301BA9B98C004AD422 /* SubCategoryGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BE3E2F1BA9B98C004AD422 /* SubCategoryGroupController.m */; };
@@ -900,6 +901,8 @@
 		B7AAFA751AB7033600A2F20D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B7AAFA771AB7036700A2F20D /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		B7AAFA791AB7039600A2F20D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B7B065C61BF985CE001AA30F /* PreviewArticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewArticleController.h; sourceTree = "<group>"; };
+		B7B065C71BF985CE001AA30F /* PreviewArticleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewArticleController.m; sourceTree = "<group>"; };
 		B7B6958E1AF05F310016AAB8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B7BE3E2B1BA9A17A004AD422 /* CategroyGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategroyGroupController.h; sourceTree = "<group>"; };
 		B7BE3E2C1BA9A17A004AD422 /* CategroyGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategroyGroupController.m; sourceTree = "<group>"; };
@@ -1429,16 +1432,13 @@
 		4E1D701C1A5ADB890032719E /* SelectionViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B7B065C91BF98C4B001AA30F /* ArticlesViewController */,
 				B7FE2A091B2817FD001C2E33 /* SelectionCell.h */,
 				B7FE2A0A1B2817FD001C2E33 /* SelectionCell.m */,
 				4E1D70261A5ADC260032719E /* SelectionViewController.h */,
 				4E1D70271A5ADC260032719E /* SelectionViewController.m */,
 				B72FD82D1AEF5B3A00354248 /* IconInfoView.h */,
 				B72FD82E1AEF5B3A00354248 /* IconInfoView.m */,
-				B783F6601B9AEC46004DF1CB /* ArticlesController.h */,
-				B783F6611B9AEC46004DF1CB /* ArticlesController.m */,
-				B783F6631B9AF26C004DF1CB /* ArticleCell.h */,
-				B783F6641B9AF26C004DF1CB /* ArticleCell.m */,
 				B7180EA21B9D380A004AD9AD /* HomeController.h */,
 				B7180EA31B9D380A004AD9AD /* HomeController.m */,
 				8AE19DCD1B9DE26C007C2872 /* HomeEntityCell.h */,
@@ -2312,6 +2312,19 @@
 			path = UIPlaceHolderTextView;
 			sourceTree = "<group>";
 		};
+		B7B065C91BF98C4B001AA30F /* ArticlesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B783F6601B9AEC46004DF1CB /* ArticlesController.h */,
+				B783F6611B9AEC46004DF1CB /* ArticlesController.m */,
+				B783F6631B9AF26C004DF1CB /* ArticleCell.h */,
+				B783F6641B9AF26C004DF1CB /* ArticleCell.m */,
+				B7B065C61BF985CE001AA30F /* PreviewArticleController.h */,
+				B7B065C71BF985CE001AA30F /* PreviewArticleController.m */,
+			);
+			name = ArticlesViewController;
+			sourceTree = "<group>";
+		};
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2929,6 +2942,7 @@
 				4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */,
 				B769B11C1B2ACE91004401FA /* IFTTTAnimationKeyFrame.m in Sources */,
 				B7F544041BC2457E0044F5E9 /* UIImageView+HighlightedWebCache.m in Sources */,
+				B7B065C81BF985CE001AA30F /* PreviewArticleController.m in Sources */,
 				B7DA97BB1B25E46200C9BC25 /* EntityHeaderView.m in Sources */,
 				4E688A091BA9C2BA0006AD9B /* JSQMessagesBubblesSizeCalculator.m in Sources */,
 				B7C079881BC5827E006B7379 /* DDTTYLogger.m in Sources */,

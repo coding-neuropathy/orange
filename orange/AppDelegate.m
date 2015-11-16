@@ -73,6 +73,12 @@ int ddLogLevel;
     }];
     
     
+    /**
+     *
+     */
+    [self setDynamicAction];
+    
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self customizeAppearance];
 
@@ -167,9 +173,6 @@ int ddLogLevel;
      selector:@selector(showNetworkStatus)
      name:@"GKNetworkReachabilityStatusNotReachable"//表示消息名称，发送跟接收双方都要一致
      object:nil];
-
-
-    
     
     return YES;
 }
@@ -413,6 +416,16 @@ int ddLogLevel;
     }
 }
 
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL succeeded))completionHandler
+{
+//    DDLogInfo(@"OKOKOKOKO");
+    if ([shortcutItem.type isEqualToString:@"com.guoku.iphone.articles"]) {
+        [self.tabbarViewController.selectionController setSelectedWithType:SelectionArticleType];
+    } else if ([shortcutItem.type isEqualToString:@"com.guoku.iphone.discover"]) {
+        [self.tabbarViewController setSelectedIndex:1];
+    }
+}
+
 #pragma mark - spotlight search
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
 {
@@ -501,11 +514,55 @@ int ddLogLevel;
     [hub show:[NSString stringWithFormat:@"%@  无网络链接",[NSString fontAwesomeIconStringForEnum:FAInfoCircle]]];
 }
 
+- (void)setDynamicAction
+{
+    if ([UIApplication sharedApplication].shortcutItems.count > 0) {
+    
+        return;
+    }
+    
+    UIApplicationShortcutIcon *icon1 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"goods"];
+    UIApplicationShortcutIcon *icon2 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"article"];
+    UIApplicationShortcutIcon *icon3 = [UIApplicationShortcutIcon iconWithTemplateImageName:@"discover"];
+    
+    // create several (dynamic) shortcut items
+    UIMutableApplicationShortcutItem *item1 = [[UIMutableApplicationShortcutItem alloc]
+                                               initWithType:@"com.guoku.iphone.goods"
+                                               localizedTitle:NSLocalizedStringFromTable(@"goods", kLocalizedFile, nil)
+                                               localizedSubtitle:nil icon:icon1 userInfo:nil];
+    UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"com.guoku.iphone.articles" localizedTitle:@"articles" localizedSubtitle:nil icon:icon2 userInfo:nil];
+    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"com.guoku.iphone.discover" localizedTitle:@"discover" localizedSubtitle:nil icon:icon3 userInfo:nil];
+    
+    // add all items to an array
+    NSArray *items = @[item3, item2, item1];
+    
+    // add this array to the potentially existing static UIApplicationShortcutItems
+    NSArray *existingItems = [UIApplication sharedApplication].shortcutItems;
+    NSArray *updatedItems = [existingItems arrayByAddingObjectsFromArray:items];
+//    [UIApplication sharedApplication].shortcutItems = updatedItems;
+    [[UIApplication sharedApplication] setShortcutItems:updatedItems];
+}
+
+#pragma mark - notification
+- (void)UpdateJPushID:(NSNotification *)notifier
+{
+    if(!TARGET_IPHONE_SIMULATOR){
+        UIDevice *device = [[UIDevice alloc] init];
+        DDLogInfo(@"jpush rid %@ %@ %@", [APService registrationID], [device model], XcodeAppVersion);
+        
+        [API postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
+            
+        } Failure:^(NSInteger stateCode) {
+            DDLogError(@"error code %ld", (long)stateCode);
+        }];
+    }
+}
+
 #pragma mark - config log
 - (void)configLog
 {
-//    ddLogLevel = DDLogLevelInfo;
-    ddLogLevel = DDLogLevelError;
+    ddLogLevel = DDLogLevelInfo;
+//    ddLogLevel = DDLogLevelError;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;
@@ -518,19 +575,6 @@ int ddLogLevel;
     [DDLog addLogger:fileLogger];
 }
 
-#pragma mark - notification
-- (void)UpdateJPushID:(NSNotification *)notifier
-{
-    if(!TARGET_IPHONE_SIMULATOR){
-        UIDevice *device = [[UIDevice alloc] init];
-        DDLogInfo(@"jpush rid %@ %@ %@", [APService registrationID], [device model], XcodeAppVersion);
-    
-        [API postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
-        
-        } Failure:^(NSInteger stateCode) {
-            DDLogError(@"error code %ld", (long)stateCode);
-        }];
-    }
-}
+
 
 @end

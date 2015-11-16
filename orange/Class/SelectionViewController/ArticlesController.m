@@ -8,12 +8,13 @@
 
 #import "ArticlesController.h"
 #import "ArticleCell.h"
+#import "PreviewArticleController.h"
 
 //#import "WebViewController.h"
 
 @import CoreSpotlight;
 
-@interface ArticlesController ()
+@interface ArticlesController () <UIViewControllerPreviewingDelegate>
 
 @property (strong, nonatomic) NSMutableArray * articleArray;
 @property (strong, nonatomic) UICollectionView * collectionView;
@@ -52,6 +53,15 @@ static NSString * ArticleIdentifier = @"ArticleCell";
         _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     }
     return _collectionView;
+}
+
+-(void)registerPreview{
+    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+        [self registerForPreviewingWithDelegate:self sourceView:self.collectionView];
+    }
+    else {
+        NSLog(@"该设备不支持3D-Touch");
+    }
 }
 
 #pragma mark - get data
@@ -136,6 +146,8 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
+    
+    [self registerPreview];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -232,6 +244,28 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 {
     GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
     [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+}
+
+#pragma mark - <UIViewControllerPreviewingDelegate>
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
+    
+    UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    
+    if (!cell) {
+        return nil;
+    }
+    
+    PreviewArticleController * vc = [[PreviewArticleController alloc] initWIthArticle:[self.articleArray objectAtIndex:indexPath.row]];
+    vc.preferredContentSize = CGSizeMake(0, 0);
+    previewingContext.sourceRect = cell.frame;
+    return vc;
+}
+
+- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
 }
 
 @end

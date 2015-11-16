@@ -213,11 +213,13 @@
 - (void)fadeIn
 {
     self.alpha = 0;
-    self.transform = CGAffineTransformMakeScale(0.5, 0.5);
+//    self.transform = CGAffineTransformMakeScale(0.5, 0.5);
+//    self.scrollView.alpha = 0;
+    self.scrollView.transform = CGAffineTransformMakeScale(0.5, 0.5);
 
     [UIView animateWithDuration:0.35 animations:^{
         self.alpha = 1.;
-        self.transform = CGAffineTransformMakeScale(1., 1.);
+        self.scrollView.transform = CGAffineTransformMakeScale(1., 1.);
     } completion:^(BOOL finished) {
 
     }];
@@ -227,7 +229,7 @@
 - (void)fadeOut
 {
     [UIView animateWithDuration:0.35 animations:^{
-        self.transform = CGAffineTransformMakeScale(1.3, 1.3);
+        self.scrollView.transform = CGAffineTransformMakeScale(0.5, 0.5);
         self.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished)
