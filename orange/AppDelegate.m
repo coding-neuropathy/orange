@@ -420,9 +420,14 @@ int ddLogLevel;
 {
 //    DDLogInfo(@"OKOKOKOKO");
     if ([shortcutItem.type isEqualToString:@"com.guoku.iphone.articles"]) {
+        [self.tabbarViewController setSelectedIndex:0];
         [self.tabbarViewController.selectionController setSelectedWithType:SelectionArticleType];
+        
     } else if ([shortcutItem.type isEqualToString:@"com.guoku.iphone.discover"]) {
         [self.tabbarViewController setSelectedIndex:1];
+    } else {
+        [self.tabbarViewController setSelectedIndex:0];
+        [self.tabbarViewController.selectionController setSelectedWithType:SelectionEntityType];
     }
 }
 
