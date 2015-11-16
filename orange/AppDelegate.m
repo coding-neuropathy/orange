@@ -535,8 +535,14 @@ int ddLogLevel;
                                                initWithType:@"com.guoku.iphone.goods"
                                                localizedTitle:NSLocalizedStringFromTable(@"goods", kLocalizedFile, nil)
                                                localizedSubtitle:nil icon:icon1 userInfo:nil];
-    UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"com.guoku.iphone.articles" localizedTitle:@"articles" localizedSubtitle:nil icon:icon2 userInfo:nil];
-    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"com.guoku.iphone.discover" localizedTitle:@"discover" localizedSubtitle:nil icon:icon3 userInfo:nil];
+    UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]
+                                               initWithType:@"com.guoku.iphone.articles"
+                                               localizedTitle:NSLocalizedStringFromTable(@"articles", kLocalizedFile, nil)
+                                               localizedSubtitle:nil icon:icon2 userInfo:nil];
+    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]
+                                               initWithType:@"com.guoku.iphone.discover"
+                                               localizedTitle:NSLocalizedStringFromTable(@"discover", kLocalizedFile, nil)
+                                               localizedSubtitle:nil icon:icon3 userInfo:nil];
     
     // add all items to an array
     NSArray *items = @[item3, item2, item1];
