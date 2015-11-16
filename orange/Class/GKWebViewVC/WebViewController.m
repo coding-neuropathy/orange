@@ -91,6 +91,14 @@
     self.navigationItem.rightBarButtonItem = moreBarItem;
     
     
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backBtn setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    backBtn.frame = CGRectMake(0., 0., 32., 44.);
+    UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = backBarItem;
+    
+    
     CGFloat progressBarHeight = 2.f;
     CGRect navigaitonBarBounds = self.navigationController.navigationBar.bounds;
     CGRect barFrame = CGRectMake(0, navigaitonBarBounds.size.height - progressBarHeight, navigaitonBarBounds.size.width, progressBarHeight);
@@ -222,6 +230,16 @@
     
     [self presentViewController:alertController animated:YES completion:nil];
      */
+}
+
+#pragma mark - button action 
+- (void)backAction:(id)sender
+{
+    if([self.webView canGoBack]) {
+        [self.webView goBack];
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - webview kvo
