@@ -13,6 +13,7 @@
 @property (strong, nonatomic) UILabel * noteLabel;
 @property (strong, nonatomic) UILabel *timeLabel;
 
+
 @end
 
 @implementation NoteCell
@@ -22,6 +23,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xffffff);
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
+        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
+        [self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -105,21 +109,8 @@
         self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 5.;
         self.timeLabel.deFrameRight = self.contentView.deFrameRight - 16.;
     }
+    
+    self.H.deFrameBottom = self.deFrameHeight;
 }
-
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-    CGContextSetLineWidth(context, kSeparateLineWidth);
-    CGContextMoveToPoint(context, 0., self.deFrameHeight);
-    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
-    CGContextStrokePath(context);
-    
-}
-
 
 @end

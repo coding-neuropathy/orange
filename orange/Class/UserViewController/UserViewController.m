@@ -275,6 +275,11 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             cell.imageView.layer.borderWidth = 0.5;
             cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
             cell.note = [self.notedataArray objectAtIndex:indexPath.row];
+            cell.H.alpha = 0;
+            if (indexPath.row == self.notedataArray.count -1) {
+                cell.H.alpha = 1;
+            }
+            
             return cell;
         }
             break;
@@ -346,16 +351,13 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             
             break;
         case 1:
-            if (self.likedataArray.count > 4)
-                size = CGSizeMake(kScreenWidth, 10.);
+            size = CGSizeMake(kScreenWidth, 10.);
             break;
         case 2:
-            if (self.notedataArray.count > 3)
-                size = CGSizeMake(kScreenWidth, 10.);
+            size = CGSizeMake(kScreenWidth, 10.);
             break;
         case 3:
-            if (self.user.tagCount > 0)
-                size = CGSizeMake(kScreenWidth, 10.);
+            size = CGSizeMake(kScreenWidth, 10.);
             break;
         default:
             break;

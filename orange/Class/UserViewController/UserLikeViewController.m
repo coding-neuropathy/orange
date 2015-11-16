@@ -74,7 +74,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     }
     return _collectionView;
 }
@@ -86,11 +86,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                                timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
         self.likeEntities = [NSMutableArray arrayWithArray:entityArray];
         self.likeTimestamp = timestamp;
-        [self.collectionView reloadData];
         [self.collectionView.pullToRefreshView stopAnimating];
-//        [self.collectionView reloadData];
-    } failure:^(NSInteger stateCode) {
         [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.pullToRefreshView stopAnimating];
     }];
 }
 
@@ -101,6 +100,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         self.likeTimestamp = timestamp;
         [self.collectionView.infiniteScrollingView stopAnimating];
         [self.collectionView reloadData];
+        
     } failure:^(NSInteger stateCode) {
         [self.collectionView.infiniteScrollingView stopAnimating];
     }];
@@ -255,15 +255,19 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     UserLikeHeaderSectionView * sectionView = (UserLikeHeaderSectionView *)sender;
     if (self.categoryController != nil) {
-        [self.categoryController.view removeFromSuperview];
-        [self.categoryController removeFromParentViewController];
-        self.categoryController = nil;
-        
-        sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
-        
-        [MobClick event:@"click user category" attributes:@{@"action":@"cancel"}];
-        [AVAnalytics event:@"click user category" attributes:@{@"action":@"cancel"}];
-//        return;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.categoryController.view.alpha = 0;
+        }completion:^(BOOL finished) {
+            if (finished) {
+                [self.categoryController.view removeFromSuperview];
+                [self.categoryController removeFromParentViewController];
+                self.categoryController = nil;
+                sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
+                [MobClick event:@"click user category" attributes:@{@"action":@"cancel"}];
+                [AVAnalytics event:@"click user category" attributes:@{@"action":@"cancel"}];
+            }
+        }];
+
     } else {
         sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
 
@@ -273,6 +277,13 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
         [appdelegate.window.rootViewController addChildViewController:self.categoryController];
         [appdelegate.window addSubview:self.categoryController.view];
+        self.categoryController.view.alpha = 0;
+        
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            self.categoryController.view.alpha = 1;
+        }];
+        
     
         __weak __typeof(&*self)weakSelf = self;
         self.categoryController.tapBlock = ^(GKCategory * category) {
@@ -282,16 +293,22 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                 sectionView.category = category;
                 weakSelf.category = category;
             }
-        
-            [weakSelf.categoryController.view removeFromSuperview];
-            [weakSelf.categoryController removeFromParentViewController];
-//            sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
+            
+            [UIView animateWithDuration:0.25 animations:^{
+                weakSelf.categoryController.view.alpha = 0;
+            }completion:^(BOOL finished) {
+                [weakSelf.categoryController.view removeFromSuperview];
+                [weakSelf.categoryController removeFromParentViewController];
+            }];
+            
             if (currentCategory.groupId != category.groupId) {
                 [weakSelf.collectionView triggerPullToRefresh];
             }
-        
+            
             weakSelf.categoryController = nil;
             sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleUp];
+        
+
         };
 //    self.categoryController = nil;
         

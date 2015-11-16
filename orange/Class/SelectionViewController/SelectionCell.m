@@ -27,6 +27,7 @@
 @property (nonatomic, strong) UIButton * likeCounterButton;
 @property (nonatomic, strong) UIButton * timeButton;
 @property (nonatomic, strong) UIView *H;
+@property (nonatomic, strong) UIView *H2;
 @property (strong, nonatomic) ImageLoadingView * loading;
 
 @end
@@ -54,6 +55,10 @@
         _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 10)];
         self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
         [self.contentView addSubview:self.H];
+        
+        _H2 = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
+        self.H2.backgroundColor = UIColorFromRGB(0xe6e6e6);
+        [self.contentView addSubview:self.H2];
     }
     return self;
 }
@@ -172,7 +177,7 @@
 //            imageURL = self.entity.imageURL_800x800;
 //        }
 //        NSLog(@"%@", self.entity.imageURL_800x800);
-        [self.image sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
+        [self.image sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
             block_img.image = newimage;
             [weakSelf.loading stopAnimating];
@@ -230,6 +235,7 @@
     self.timeButton.deFrameRight = self.contentLabel.deFrameRight;
     
     self.H.deFrameBottom = self.contentView.deFrameHeight;
+    self.H2.deFrameBottom = self.contentView.deFrameHeight-10;
     
     self.loading.center = CGPointMake(self.image.deFrameWidth/2, self.image.deFrameHeight/2);
     [self.contentView bringSubviewToFront:self.loading];

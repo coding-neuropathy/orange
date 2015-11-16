@@ -124,6 +124,7 @@
 "gender"    = "性别";
 "bio"       = "简介";
 "location"  = "所在地";
+
 "me like" = "我的喜爱";
 "me note" = "我的点评";
 "me article" = "我的图文";

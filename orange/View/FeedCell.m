@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 @property (nonatomic, strong) RTLabel *label;
 @property (nonatomic, strong) RTLabel *contentLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
-//@property (nonatomic, strong) UIView *H;
+@property (nonatomic, strong) UIView *H;
 @end
 
 @implementation FeedCell
@@ -42,6 +42,9 @@ typedef NS_ENUM(NSInteger, FeedType) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
+        _H = [[UIView alloc] initWithFrame:CGRectMake(60,self.frame.size.height-1, kScreenWidth, 0.5)];
+        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
+        [self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -172,9 +175,9 @@ typedef NS_ENUM(NSInteger, FeedType) {
     
     [self configContent];
     
-//    [self bringSubviewToFront:self.H];
-//    self.H.hidden = NO;
-//    _H.deFrameBottom = self.frame.size.height-1;
+    [self bringSubviewToFront:self.H];
+    self.H.hidden = NO;
+    _H.deFrameBottom = self.frame.size.height;
     
 }
 
@@ -416,18 +419,5 @@ typedef NS_ENUM(NSInteger, FeedType) {
     }
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-    CGContextSetLineWidth(context, kSeparateLineWidth);
-    CGContextMoveToPoint(context, 60., self.frame.size.height - kSeparateLineWidth);
-    CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
-    
-    CGContextStrokePath(context);
-}
 
 @end
