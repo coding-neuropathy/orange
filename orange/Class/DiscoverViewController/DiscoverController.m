@@ -30,7 +30,7 @@
 @property (strong, nonatomic) NSString * text;
 @end
 
-@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
@@ -562,13 +562,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self action:@selector(cancelSearch:)];
+    tap.delegate = self;
     [view addGestureRecognizer:tap];
-    
-    
-//    UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_search"]];
-//    image.center = CGPointMake(kScreenWidth/2, 0);
-//    image.deFrameTop = 50+kStatusBarHeight+kNavigationBarHeight;
-    //[view addSubview:image];
     
     if (!self.searchLogTableView) {
         UITableView * searchLogTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
@@ -584,7 +579,14 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [view addSubview:self.searchLogTableView];
     
     [self.searchVC.view addSubview:view];
-    //[self.searchVC.view sendSubviewToBack:view];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)didPresentSearchController:(UISearchController *)searchController
