@@ -103,51 +103,57 @@ int ddLogLevel;
 
 
     application.applicationIconBadgeNumber = 0;
-
-    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV41"])
-    {
-        NewVersionController * vc = [NewVersionController new];
-        [self.window.rootViewController addChildViewController:vc];
-        __weak __typeof(&*vc)weakVC = vc;
-        __weak __typeof(&*self.tabbarViewController.selectionController)weakSelection = self.tabbarViewController.selectionController;
-        vc.finished = ^(void) {
-            [weakVC removeFromParentViewController];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [weakSelection setSelectedWithType:SelectionArticleType];
-            
-            tipView * tip = [[tipView alloc]init];
-            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
-            {
-                [self.window addSubview:tip];
-            }
-        };
+    
+    [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
         
-        vc.closeAction = ^(void) {
-            [weakVC removeFromParentViewController];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+    } failure:^(NSInteger stateCode) {
+        
+    }];
+
+//    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV41"])
+//    {
+//        NewVersionController * vc = [NewVersionController new];
+//        [self.window.rootViewController addChildViewController:vc];
+//        __weak __typeof(&*vc)weakVC = vc;
+//        __weak __typeof(&*self.tabbarViewController.selectionController)weakSelection = self.tabbarViewController.selectionController;
+//        vc.finished = ^(void) {
+//            [weakVC removeFromParentViewController];
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
 //            [weakSelection setSelectedWithType:SelectionArticleType];
-            
-            tipView * tip = [[tipView alloc]init];
-            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
-            {
-                [self.window addSubview:tip];
-            }
-        };
-        
-        [self.window addSubview:vc.view];
-        
-//        self.window.rootViewController.view.hidden = YES;
-
-    }
-    else{
-        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
-        {
-            tipView * tip = [[tipView alloc]init];
-            [self.window addSubview:tip];
-        }
-    }
+//            
+//            tipView * tip = [[tipView alloc]init];
+//            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
+//            {
+//                [self.window addSubview:tip];
+//            }
+//        };
+//        
+//        vc.closeAction = ^(void) {
+//            [weakVC removeFromParentViewController];
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+////            [weakSelection setSelectedWithType:SelectionArticleType];
+//            
+//            tipView * tip = [[tipView alloc]init];
+//            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
+//            {
+//                [self.window addSubview:tip];
+//            }
+//        };
+//        
+//        [self.window addSubview:vc.view];
+//        
+////        self.window.rootViewController.view.hidden = YES;
+//
+//    }
+//    else{
+//        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
+//        {
+//            tipView * tip = [[tipView alloc]init];
+//            [self.window addSubview:tip];
+//        }
+//    }
 
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;

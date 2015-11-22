@@ -236,6 +236,8 @@
 		8A5DAEBE1BC779A00028C36D /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEAF1BC7799F0028C36D /* UTDID.framework */; };
 		8A5DAEBF1BC779A00028C36D /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEB01BC779A00028C36D /* UTMini.framework */; };
 		8A5DAEC01BC779A00028C36D /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A5DAEB11BC779A00028C36D /* yw_1222.jpg */; };
+		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
+		8AAA2D061C01EF1C00B27E49 /* GKLaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */; };
 		8AAA50891BD67614005384CD /* UserTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA50881BD67614005384CD /* UserTagCell.m */; };
 		8AAA508C1BD68FC3005384CD /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA508B1BD68FC3005384CD /* CategoryGridCell.m */; };
 		8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */; };
@@ -761,6 +763,8 @@
 		8A5DAEB01BC779A00028C36D /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
 		8A5DAEB11BC779A00028C36D /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		8A7B791F1BAAB9310089FFD6 /* DataStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructure.h; sourceTree = "<group>"; };
+		8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKLaunch.h; sourceTree = "<group>"; };
+		8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKLaunch.m; sourceTree = "<group>"; };
 		8AAA50871BD67614005384CD /* UserTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTagCell.h; sourceTree = "<group>"; };
 		8AAA50881BD67614005384CD /* UserTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTagCell.m; sourceTree = "<group>"; };
 		8AAA508A1BD68FC3005384CD /* CategoryGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGridCell.h; sourceTree = "<group>"; };
@@ -1230,6 +1234,8 @@
 				B78C4E0D1B676ED5006620F7 /* GKCategory.m */,
 				B783F65C1B9AE5DB004DF1CB /* GKArticle.h */,
 				B783F65D1B9AE5DB004DF1CB /* GKArticle.m */,
+				8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */,
+				8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2508,6 +2514,7 @@
 				39B720631B1F4C16008519E3 /* AFSecurityPolicy.h in Headers */,
 				39B720391B1F4C16008519E3 /* NSObject+App.h in Headers */,
 				39B7205E1B1F4C16008519E3 /* AFHTTPSessionManager.h in Headers */,
+				8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */,
 				B78C4E0E1B676ED5006620F7 /* GKCategory.h in Headers */,
 				39B720711B1F4E78008519E3 /* GKEntity+ImageURLFixes.h in Headers */,
 				39B720601B1F4C16008519E3 /* AFNetworking.h in Headers */,
@@ -2742,6 +2749,7 @@
 				39B720501B1F4C16008519E3 /* GKPurchase.m in Sources */,
 				39B7203A1B1F4C16008519E3 /* NSObject+App.m in Sources */,
 				39B7205F1B1F4C16008519E3 /* AFHTTPSessionManager.m in Sources */,
+				8AAA2D061C01EF1C00B27E49 /* GKLaunch.m in Sources */,
 				39B720721B1F4E78008519E3 /* GKEntity+ImageURLFixes.m in Sources */,
 				39B720401B1F4C16008519E3 /* UIView+DEFrameAdditions.m in Sources */,
 				39B720591B1F4C16008519E3 /* NSString+Helper.m in Sources */,

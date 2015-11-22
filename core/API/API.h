@@ -29,14 +29,14 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)postRegisterID:(NSString *)rid Model:(NSString *)model Version:(NSString *)ver Success:(void (^)())success
                Failure:(void (^)(NSInteger stateCode))failure;
 
-///**
-// *  获取主页信息（banner、hotCategory、hotTag）
-// *
-// *  @param success 成功block
-// *  @param failure 失败block
-// */
-//+ (void)getHomepageWithSuccess:(void (^)(NSDictionary *settingDict, NSArray *bannerArray, NSArray *hotCategoryArray, NSArray *hotTagArray))success
-//                       failure:(void (^)(NSInteger stateCode))failure;
+/**
+ *  获取启动画面
+ *
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getLaunchImageWithSuccess:(void (^)(GKLaunch * launch))success
+                          failure:(void (^)(NSInteger stateCode))failure;
 
 /**
  *  获取全部分类信息

@@ -14,3 +14,4 @@
 #import "GKPurchase.h"
 #import "GKCategory.h"
 #import "GKArticle.h"
+#import "GKLaunch.h"
