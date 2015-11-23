@@ -13,10 +13,7 @@
 #import "UserViewController.h"
 //#import "CategoryViewController.h"
 #import "TagViewController.h"
-//#import "IntruductionVC.h"
-//#import "WelcomeVC.h"
-//#import "WelcomeViewController.h"
-#import "NewVersionController.h"
+
 #import "APService.h"
 #import "GKNotificationHUB.h"
 #import "tipView.h"
@@ -105,13 +102,6 @@ int ddLogLevel;
     application.applicationIconBadgeNumber = 0;
     
     [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
-        
-    } failure:^(NSInteger stateCode) {
-        
-    }];
-
-//    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV41"])
-//    {
 //        NewVersionController * vc = [NewVersionController new];
 //        [self.window.rootViewController addChildViewController:vc];
 //        __weak __typeof(&*vc)weakVC = vc;
@@ -121,39 +111,16 @@ int ddLogLevel;
 //            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
 //            [[NSUserDefaults standardUserDefaults] synchronize];
 //            [weakSelection setSelectedWithType:SelectionArticleType];
-//            
-//            tipView * tip = [[tipView alloc]init];
-//            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
-//            {
-//                [self.window addSubview:tip];
-//            }
+//    
 //        };
-//        
-//        vc.closeAction = ^(void) {
-//            [weakVC removeFromParentViewController];
-//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-////            [weakSelection setSelectedWithType:SelectionArticleType];
-//            
-//            tipView * tip = [[tipView alloc]init];
-//            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
-//            {
-//                [self.window addSubview:tip];
-//            }
-//        };
-//        
+////        DDLogInfo(@"OKOKOK");
 //        [self.window addSubview:vc.view];
-//        
-////        self.window.rootViewController.view.hidden = YES;
-//
-//    }
-//    else{
-//        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
-//        {
-//            tipView * tip = [[tipView alloc]init];
-//            [self.window addSubview:tip];
-//        }
-//    }
+        
+    } failure:^(NSInteger stateCode) {
+        
+    }];
+
+
 
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;

@@ -13,21 +13,18 @@
 + (NSDictionary *)dictionaryForServerAndClientKeys
 {
     NSDictionary *keyDic = @{
+                             @"launch_id"   : @"launchId",
                              @"title"       : @"title",
-                             @"description" : @"description",
+                             @"description" : @"desc",
                              @"action"      : @"action",
-//                             @"comment_id"           : @"commentId",
-//                             @"note_id"              : @"noteId",
-//                             @"entity_id"            : @"entityId",
-//                             @"creator"              : @"creator",
-//                             @"content"              : @"text",
-//                             @"created_time"         : @"createdTime",
-//                             @"updated_time"         : @"updatedTime",
-//                             @"reply_to_comment_id"  : @"repliedCommentId",
-//                             @"reply_to_user"        : @"repliedUser",
                              };
     
     return keyDic;
+}
+
++ (NSArray *)keyNames
+{
+    return @[@"launchId"];
 }
 
 @end

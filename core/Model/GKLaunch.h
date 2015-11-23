@@ -10,4 +10,19 @@
 
 @interface GKLaunch : GKBaseModel
 
+/**
+ *  ID
+ */
+@property (assign, nonatomic) NSInteger launchId;
+
+/**
+ *  title
+ */
+@property (strong, nonatomic) NSString * title;
+
+/**
+ *  description
+ */
+@property (strong, nonatomic) NSString * desc;
+
 @end
