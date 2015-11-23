@@ -35,6 +35,7 @@
     if (!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _imageView.layer.masksToBounds = YES;
         [self.contentView addSubview:_imageView];
     }
     return _imageView;

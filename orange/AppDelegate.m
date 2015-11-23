@@ -9,14 +9,14 @@
 #import "AppDelegate.h"
 #import "WXApi.h"
 #import "TabBarViewController.h"
-#import "EntityViewController.h"
-#import "UserViewController.h"
-//#import "CategoryViewController.h"
+//#import "EntityViewController.h"
+//#import "UserViewController.h"
 #import "TagViewController.h"
+#import "LaunchController.h"
 
 #import "APService.h"
 #import "GKNotificationHUB.h"
-#import "tipView.h"
+//#import "tipView.h"
 
 int ddLogLevel;
 
@@ -102,8 +102,11 @@ int ddLogLevel;
     application.applicationIconBadgeNumber = 0;
     
     [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
+        DDLogInfo(@"OKOKOKOKO");
+        LaunchController * vc = [[LaunchController alloc] initWithLaunch:launch];
+    
 //        NewVersionController * vc = [NewVersionController new];
-//        [self.window.rootViewController addChildViewController:vc];
+        [self.window.rootViewController addChildViewController:vc];
 //        __weak __typeof(&*vc)weakVC = vc;
 //        __weak __typeof(&*self.tabbarViewController.selectionController)weakSelection = self.tabbarViewController.selectionController;
 //        vc.finished = ^(void) {
@@ -114,7 +117,8 @@ int ddLogLevel;
 //    
 //        };
 ////        DDLogInfo(@"OKOKOK");
-//        [self.window addSubview:vc.view];
+//        DDLogInfo(@"view %@", vc);
+        [self.window addSubview:vc.view];
         
     } failure:^(NSInteger stateCode) {
         

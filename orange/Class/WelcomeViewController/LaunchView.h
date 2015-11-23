@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LaunchViewDelegate <NSObject>
+
+- (void)TapActionBtn:(id)sender;
+
+@end
+
 @interface LaunchView : UIView
+
+@property (strong, nonatomic) GKLaunch * launch;
+@property (weak, nonatomic) id<LaunchViewDelegate> delegate;
 
 @end

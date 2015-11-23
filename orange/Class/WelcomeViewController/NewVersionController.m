@@ -79,7 +79,7 @@
     /**
      *  GUID IMAGE
      */
-    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0., 0., 290, 240.)];
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., 290, 240.)];
     self.imageView.image = [UIImage imageNamed:@"Walkthrough"];
     self.imageView.center = self.titleLabel.center;
     self.imageView.deFrameTop = self.detailLabel.deFrameBottom;

@@ -7,10 +7,12 @@
 //
 
 #import "LaunchController.h"
+#import "LaunchView.h"
 
-@interface UIViewController ()
+@interface LaunchController () <LaunchViewDelegate>
 
 @property (strong, nonatomic) GKLaunch * launch;
+@property (strong, nonatomic) LaunchView * launchView;
 
 @end
 
@@ -21,9 +23,38 @@
     self = [super init];
     if (self) {
         self.launch = launch;
+        
+        self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.32];
+//        self.view.backgroundColor = [UIColor redColor];
     }
     
     return self;
+}
+
+- (LaunchView *)launchView
+{
+    if (!_launchView) {
+        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 290.) / 2, (kScreenHeight - 425.) / 2, 290., 425.)];
+        _launchView.backgroundColor = UIColorFromRGB(0xffffff);
+        _launchView.layer.cornerRadius = 4.;
+        _launchView.delegate = self;
+    }
+    return _launchView;
+}
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.launchView.launch = self.launch;
+    [self.view addSubview:self.launchView];
+}
+
+#pragma mark - <LaunchViewDelegate>
+- (void)TapActionBtn:(id)sender
+{
+
 }
 
 @end

@@ -25,4 +25,9 @@
  */
 @property (strong, nonatomic) NSString * desc;
 
+/**
+ * launch image
+ */
+@property (strong, nonatomic) NSURL * launchImageUrl;
+
 @end

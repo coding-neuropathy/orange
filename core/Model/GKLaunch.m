@@ -8,6 +8,12 @@
 
 #import "GKLaunch.h"
 
+@interface GKLaunch ()
+
+@property (strong, nonatomic) NSString * launch_image_url;
+
+@end
+
 @implementation GKLaunch
 
 + (NSDictionary *)dictionaryForServerAndClientKeys
@@ -17,6 +23,7 @@
                              @"title"       : @"title",
                              @"description" : @"desc",
                              @"action"      : @"action",
+                             @"launch_image_url"    : @"launch_image_url",
                              };
     
     return keyDic;
@@ -25,6 +32,13 @@
 + (NSArray *)keyNames
 {
     return @[@"launchId"];
+}
+
+- (NSURL *)launchImageUrl
+{
+    NSURL * image_url = [NSURL URLWithString:self.launch_image_url];
+    
+    return image_url;
 }
 
 @end
