@@ -89,6 +89,30 @@
 }
 
 /**
+ *  获取启动画面
+ *
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getLaunchImageWithSuccess:(void (^)(GKLaunch * launch))success
+                          failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString * path = @"launch/";
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"OKOKO %@", responseObject);
+        GKLaunch * launch = [GKLaunch modelFromDictionary:responseObject];
+        if (success) {
+            success(launch);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
+/**
  *  获取分类统计数据
  *
  *  @param categoryId 商品分类ID

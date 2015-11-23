@@ -8,7 +8,7 @@
 
 #import "ArticlesController.h"
 #import "ArticleCell.h"
-#import "PreviewArticleController.h"
+//#import "PreviewArticleController.h"
 
 //#import "WebViewController.h"
 
@@ -55,14 +55,14 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     return _collectionView;
 }
 
--(void)registerPreview{
-    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
-        [self registerForPreviewingWithDelegate:self sourceView:self.collectionView];
-    }
-    else {
-        NSLog(@"该设备不支持3D-Touch");
-    }
-}
+//- (void)registerPreview{
+//    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+//        [self registerForPreviewingWithDelegate:self sourceView:self.collectionView];
+//    }
+//    else {
+//        DDLogInfo(@"该设备不支持3D-Touch");
+//    }
+//}
 
 #pragma mark - get data
 - (void)refresh
@@ -147,7 +147,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
     
-    [self registerPreview];
+//    [self registerPreview];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -246,26 +246,26 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
 }
 
-#pragma mark - <UIViewControllerPreviewingDelegate>
-- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
-{
-    NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
-    
-    UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-    
-    if (!cell) {
-        return nil;
-    }
-    
-    PreviewArticleController * vc = [[PreviewArticleController alloc] initWIthArticle:[self.articleArray objectAtIndex:indexPath.row]];
-    vc.preferredContentSize = CGSizeMake(0, 0);
-    previewingContext.sourceRect = cell.frame;
-    return vc;
-}
-
-- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
-{
-    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
-}
+//#pragma mark - <UIViewControllerPreviewingDelegate>
+//- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+//{
+//    NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
+//    
+//    UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+//    
+//    if (!cell) {
+//        return nil;
+//    }
+//    
+//    PreviewArticleController * vc = [[PreviewArticleController alloc] initWIthArticle:[self.articleArray objectAtIndex:indexPath.row]];
+//    vc.preferredContentSize = CGSizeMake(0, 0);
+//    previewingContext.sourceRect = cell.frame;
+//    return vc;
+//}
+//
+//- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+//{
+//    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
+//}
 
 @end

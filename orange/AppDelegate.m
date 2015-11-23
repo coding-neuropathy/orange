@@ -13,10 +13,7 @@
 #import "UserViewController.h"
 //#import "CategoryViewController.h"
 #import "TagViewController.h"
-//#import "IntruductionVC.h"
-//#import "WelcomeVC.h"
-//#import "WelcomeViewController.h"
-#import "NewVersionController.h"
+
 #import "APService.h"
 #import "GKNotificationHUB.h"
 #import "tipView.h"
@@ -103,51 +100,27 @@ int ddLogLevel;
 
 
     application.applicationIconBadgeNumber = 0;
-
-    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV41"])
-    {
-        NewVersionController * vc = [NewVersionController new];
-        [self.window.rootViewController addChildViewController:vc];
-        __weak __typeof(&*vc)weakVC = vc;
-        __weak __typeof(&*self.tabbarViewController.selectionController)weakSelection = self.tabbarViewController.selectionController;
-        vc.finished = ^(void) {
-            [weakVC removeFromParentViewController];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [weakSelection setSelectedWithType:SelectionArticleType];
-            
-            tipView * tip = [[tipView alloc]init];
-            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
-            {
-                [self.window addSubview:tip];
-            }
-        };
-        
-        vc.closeAction = ^(void) {
-            [weakVC removeFromParentViewController];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
+//        NewVersionController * vc = [NewVersionController new];
+//        [self.window.rootViewController addChildViewController:vc];
+//        __weak __typeof(&*vc)weakVC = vc;
+//        __weak __typeof(&*self.tabbarViewController.selectionController)weakSelection = self.tabbarViewController.selectionController;
+//        vc.finished = ^(void) {
+//            [weakVC removeFromParentViewController];
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
 //            [weakSelection setSelectedWithType:SelectionArticleType];
-            
-            tipView * tip = [[tipView alloc]init];
-            if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
-            {
-                [self.window addSubview:tip];
-            }
-        };
+//    
+//        };
+////        DDLogInfo(@"OKOKOK");
+//        [self.window addSubview:vc.view];
         
-        [self.window addSubview:vc.view];
+    } failure:^(NSInteger stateCode) {
         
-//        self.window.rootViewController.view.hidden = YES;
+    }];
 
-    }
-    else{
-        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunchV4.10"])
-        {
-            tipView * tip = [[tipView alloc]init];
-            [self.window addSubview:tip];
-        }
-    }
+
 
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;
@@ -348,72 +321,129 @@ int ddLogLevel;
 
 - (void)openLocalURL:(NSURL *)url
 {
-
-    if([[url absoluteString] hasPrefix:@"guoku"])
-    {
+    /**
+     *  open entity page
+     */
+    if ([[url absoluteString] hasPrefix:@"guoku://entity/"]) {
         NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSRange range = [absoluteString rangeOfString:@"entity/"];
-        if (range.location != NSNotFound) {
-            NSString *entityId = [absoluteString substringFromIndex:range.location+range.length];
-            entityId = [entityId stringByReplacingOccurrencesOfString:@"/" withString:@""];
+        NSString * entityId = [absoluteString stringByReplacingOccurrencesOfString:@"guoku://entity/" withString:@""];
+        entityId = [entityId stringByReplacingOccurrencesOfString:@"/" withString:@""];
         
-            EntityViewController *vc = [[EntityViewController alloc] init];
-            vc.entity = [GKEntity modelFromDictionary:@{@"entityId":entityId}];
-            vc.hidesBottomBarWhenPushed = YES;
-            if (self.activeVC.navigationController) {
-                [self.activeVC.navigationController pushViewController:vc animated:YES];
-            }
-        }
-        else
-        {
-            NSRange range = [absoluteString rangeOfString:@"category/"];
-            if (range.location != NSNotFound) {
-                NSString *categoryId = [absoluteString substringFromIndex:range.location+range.length];
-//                CategoryViewController * vc = [[CategoryViewController alloc]init];
-//                vc.category = [GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}];
-//                vc.hidesBottomBarWhenPushed = YES;
-//                GKCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}];
-                [[OpenCenter sharedOpenCenter] openCategory:[GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}]];
-//                if (self.activeVC.navigationController) {
-//                    [self.activeVC.navigationController pushViewController:vc animated:YES];
-//                }
-            }
-            else{
-                NSRange range = [absoluteString rangeOfString:@"tag/"];
-                if (range.location != NSNotFound) {
-                    NSString * tag = [[absoluteString substringFromIndex:range.location+range.length] stringByReplacingOccurrencesOfString:@"/" withString:@""];
-                    NSString *otherString = [absoluteString substringToIndex:range.location];
-                    NSRange otherRange = [otherString rangeOfString:@"user"];
-                    if (otherRange.location != NSNotFound) {
-                        NSString *userId = [[otherString substringFromIndex:otherRange.location+otherRange.length]stringByReplacingOccurrencesOfString:@"/" withString:@""];
-                        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
-                        TagViewController * vc = [[TagViewController alloc]init];
-                        vc.hidesBottomBarWhenPushed = YES;
-                        vc.tagName = tag;
-                        vc.user = user;
-                        if (self.activeVC.navigationController) {
-                            [self.activeVC.navigationController pushViewController:vc animated:YES];
-                        }
-                    }
-                }
-                else
-                {
-                    NSRange range = [absoluteString rangeOfString:@"user/"];
-                    if (range.location != NSNotFound) {
-                        NSString *userId = [absoluteString substringFromIndex:range.location+range.length];
-                        UserViewController * vc = [[UserViewController alloc]init];
-                        vc.hidesBottomBarWhenPushed = YES;
-                        vc.user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
-                        if (self.activeVC.navigationController) {
-                            [self.activeVC.navigationController pushViewController:vc animated:YES];
-                        }
-                    }
-                }
-                
-            }
-        }
-        
+        GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":entityId}];
+        [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
     }
+    
+    /**
+     *  open category page
+     */
+    if ([[url absoluteString] hasPrefix:@"guoku://category"]) {
+        NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *categoryId = [absoluteString stringByReplacingOccurrencesOfString:@"guoku://category" withString:@""];
+        categoryId = [categoryId stringByReplacingOccurrencesOfString:@"/" withString:@""];
+        
+        GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId":categoryId}];
+        [[OpenCenter sharedOpenCenter] openCategory:category];
+    }
+    
+    /**
+     *  open tage page
+     */
+    if ([[url absoluteString] hasPrefix:@"guoku://tag/"]) {
+        NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSRange range = [absoluteString rangeOfString:@"tag/"];
+        if (range.location != NSNotFound) {
+            NSString * tag = [[absoluteString substringFromIndex:range.location+range.length] stringByReplacingOccurrencesOfString:@"/" withString:@""];
+            NSString *otherString = [absoluteString substringToIndex:range.location];
+            NSRange otherRange = [otherString rangeOfString:@"user"];
+            if (otherRange.location != NSNotFound) {
+                NSString *userId = [[otherString substringFromIndex:otherRange.location+otherRange.length]stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                GKUser * user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
+                TagViewController * vc = [[TagViewController alloc]init];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.tagName = tag;
+                vc.user = user;
+                if (self.activeVC.navigationController) {
+                    [self.activeVC.navigationController pushViewController:vc animated:YES];
+                }
+            }
+        }
+    }
+    
+    /**
+     *  open user page
+     */
+    if ([[url absoluteString] hasPrefix:@"guoku://user/"]) {
+        NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString * userId = [absoluteString stringByReplacingOccurrencesOfString:@"guoku://user/" withString:@""];
+        userId = [userId stringByReplacingOccurrencesOfString:@"/" withString:@""];
+        GKUser * user = [GKUser modelFromDictionary:@{@"userId":userId}];
+        [[OpenCenter sharedOpenCenter] openUser:user];
+    }
+//    if([[url absoluteString] hasPrefix:@"guoku"])
+//    {
+//        NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        NSRange range = [absoluteString rangeOfString:@"entity/"];
+//        if (range.location != NSNotFound) {
+//            NSString *entityId = [absoluteString substringFromIndex:range.location+range.length];
+//            entityId = [entityId stringByReplacingOccurrencesOfString:@"/" withString:@""];
+//        
+//            EntityViewController *vc = [[EntityViewController alloc] init];
+//            vc.entity = [GKEntity modelFromDictionary:@{@"entityId":entityId}];
+//            vc.hidesBottomBarWhenPushed = YES;
+//            if (self.activeVC.navigationController) {
+//                [self.activeVC.navigationController pushViewController:vc animated:YES];
+//            }
+//        }
+//        else
+//        {
+//            NSRange range = [absoluteString rangeOfString:@"category/"];
+//            if (range.location != NSNotFound) {
+//                NSString *categoryId = [absoluteString substringFromIndex:range.location+range.length];
+////                CategoryViewController * vc = [[CategoryViewController alloc]init];
+////                vc.category = [GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}];
+////                vc.hidesBottomBarWhenPushed = YES;
+////                GKCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}];
+//                [[OpenCenter sharedOpenCenter] openCategory:[GKEntityCategory modelFromDictionary:@{@"categoryId":@(categoryId.integerValue)}]];
+////                if (self.activeVC.navigationController) {
+////                    [self.activeVC.navigationController pushViewController:vc animated:YES];
+////                }
+//            }
+//            else{
+//                NSRange range = [absoluteString rangeOfString:@"tag/"];
+//                if (range.location != NSNotFound) {
+//                    NSString * tag = [[absoluteString substringFromIndex:range.location+range.length] stringByReplacingOccurrencesOfString:@"/" withString:@""];
+//                    NSString *otherString = [absoluteString substringToIndex:range.location];
+//                    NSRange otherRange = [otherString rangeOfString:@"user"];
+//                    if (otherRange.location != NSNotFound) {
+//                        NSString *userId = [[otherString substringFromIndex:otherRange.location+otherRange.length]stringByReplacingOccurrencesOfString:@"/" withString:@""];
+//                        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
+//                        TagViewController * vc = [[TagViewController alloc]init];
+//                        vc.hidesBottomBarWhenPushed = YES;
+//                        vc.tagName = tag;
+//                        vc.user = user;
+//                        if (self.activeVC.navigationController) {
+//                            [self.activeVC.navigationController pushViewController:vc animated:YES];
+//                        }
+//                    }
+//                }
+//                else
+//                {
+//                    NSRange range = [absoluteString rangeOfString:@"user/"];
+//                    if (range.location != NSNotFound) {
+//                        NSString *userId = [absoluteString substringFromIndex:range.location+range.length];
+//                        UserViewController * vc = [[UserViewController alloc]init];
+//                        vc.hidesBottomBarWhenPushed = YES;
+//                        vc.user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
+//                        if (self.activeVC.navigationController) {
+//                            [self.activeVC.navigationController pushViewController:vc animated:YES];
+//                        }
+//                    }
+//                }
+//                
+//            }
+//        }
+//        
+//    }
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL succeeded))completionHandler
