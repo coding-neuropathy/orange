@@ -387,7 +387,7 @@
             } else {
                 [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformWeiBo block:^(AVUser *user, NSError *error) {
                     if (!error) {
-                        [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:[self.image imageWithSize:CGSizeMake(460.f, 460.f)]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+                        [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:[self shareImage]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
                             NSLog(@"%@",object);
                             
                             
@@ -406,7 +406,7 @@
     }
     else
     {
-        [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:[self.image imageWithSize:CGSizeMake(460.f, 460.f)]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+        [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:[self shareImage]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
             NSLog(@"%@",object);
             
             
@@ -549,6 +549,53 @@
     [self dismiss];
 }
 
+
+-(UIImage *)shareImage
+{
+    
+    UIImageView * view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"weibo_share_bg.jpg"]];
+    
+    UIImageView * entityImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 564, 564)];
+    entityImage.contentMode = UIViewContentModeScaleAspectFit;
+    entityImage.image = self.image;
+    entityImage.deFrameTop = 38;
+    entityImage.deFrameLeft = 38;
+    [view addSubview:entityImage];
+    
+    
+    UILabel * brand = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, view.deFrameWidth, 20)];
+    brand.text = self.entity.brand;
+    brand.textAlignment = NSTextAlignmentCenter;
+    brand.font = [UIFont boldSystemFontOfSize:28];
+    brand.textColor = UIColorFromRGB(0x414243);
+    brand.deFrameTop = entityImage.deFrameBottom + 32;
+    [view addSubview:brand];
+    
+    UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, view.deFrameWidth, 28)];
+    title.text = self.entity.title;
+    title.textAlignment = NSTextAlignmentCenter;
+    title.font = [UIFont systemFontOfSize:28];
+    title.textColor = UIColorFromRGB(0x414243);
+    title.deFrameTop = brand.deFrameBottom + 9;
+    [view addSubview:title];
+    
+    UILabel * price = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, view.deFrameWidth, 28)];
+    price.text = [NSString stringWithFormat:@"￥%0.2f",self.entity.lowestPrice];
+    price.textAlignment = NSTextAlignmentCenter;
+    price.font = [UIFont systemFontOfSize:28];
+    price.textColor = UIColorFromRGB(0x414243);
+    price.deFrameTop = title.deFrameBottom + 9;
+    [view addSubview:price];
+
+    
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, YES, 1);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    UIImage *resultImg = [UIImage imageWithCGImage:CGImageCreateWithImageInRect(img.CGImage, view.bounds)];
+    
+    return resultImg;
+}
 
 
 @end
