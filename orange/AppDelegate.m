@@ -102,7 +102,7 @@ int ddLogLevel;
     application.applicationIconBadgeNumber = 0;
     
     [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
-        DDLogInfo(@"OKOKOKOKO");
+//        DDLogInfo(@"OKOKOKOKO");
         LaunchController * vc = [[LaunchController alloc] initWithLaunch:launch];
     
         [self.window.rootViewController addChildViewController:vc];
@@ -118,6 +118,7 @@ int ddLogLevel;
         };
         
         [self.window addSubview:vc.view];
+        [vc show];
         
     } failure:^(NSInteger stateCode) {
         

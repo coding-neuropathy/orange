@@ -11,10 +11,10 @@
 @interface LaunchController : UIViewController
 
 @property (nonatomic, copy) void (^finished)();
-
 @property (nonatomic, copy) void (^closeAction)();
 
 - (instancetype)initWithLaunch:(GKLaunch *)launch;
 
+- (void)show;
 
 @end

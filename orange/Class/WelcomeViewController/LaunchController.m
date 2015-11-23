@@ -35,7 +35,7 @@
 - (LaunchView *)launchView
 {
     if (!_launchView) {
-        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 290.) / 2, (kScreenHeight - 425.) / 2, 290., 425.)];
+        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 290.) / 2, -425., 290., 425.)];
         _launchView.backgroundColor = UIColorFromRGB(0xffffff);
         _launchView.layer.cornerRadius = 4.;
         _launchView.delegate = self;
@@ -70,17 +70,42 @@
     [self.view insertSubview:self.closeBtn aboveSubview:self.launchView];
 }
 
+- (void)show
+{
+    [self fadeIn];
+}
+
 #pragma mark -
+
+- (void)fadeIn
+{
+    [UIView animateWithDuration:0.35 animations:^{
+        self.launchView.deFrameTop = (kScreenHeight - 425.) / 2.;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 - (void)fadeOutWithAction:(void (^)(void))action
 {
     [UIView animateWithDuration:0.35 animations:^{
-        self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
-        self.view.alpha = 0;
+//        self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
+        self.launchView.transform = CGAffineTransformMakeRotation(M_PI / -36.);
+
+//        self.view.alpha = 0;
     } completion:^(BOOL finished) {
-        if (finished)
-        {
-            action();
+        if (finished){
+
+            [UIView animateWithDuration:0.35 animations:^{
+                self.launchView.deFrameTop = kScreenHeight + 10.;
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    action();
+                }
+            }];
+            
         }
+
     }];
 }
 
