@@ -64,6 +64,7 @@
         _actionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_actionBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
         _actionBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        [_actionBtn setTitle:[NSString stringWithFormat:@"即刻体验 %@", [NSString fontAwesomeIconStringForEnum:FAArrowCircleORight]] forState:UIControlStateNormal];
         [_actionBtn addTarget:self action:@selector(TapActionBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_actionBtn];
     }
