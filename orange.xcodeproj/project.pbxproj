@@ -239,6 +239,7 @@
 		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
 		8AAA2D061C01EF1C00B27E49 /* GKLaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */; };
 		8AAA2D091C02B61400B27E49 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D081C02B61400B27E49 /* LaunchController.m */; };
+		8AAA2D0C1C02BC6700B27E49 /* LaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D0B1C02BC6700B27E49 /* LaunchView.m */; };
 		8AAA50891BD67614005384CD /* UserTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA50881BD67614005384CD /* UserTagCell.m */; };
 		8AAA508C1BD68FC3005384CD /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA508B1BD68FC3005384CD /* CategoryGridCell.m */; };
 		8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */; };
@@ -767,6 +768,8 @@
 		8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKLaunch.m; sourceTree = "<group>"; };
 		8AAA2D071C02B61400B27E49 /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
 		8AAA2D081C02B61400B27E49 /* LaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
+		8AAA2D0A1C02BC6700B27E49 /* LaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchView.h; sourceTree = "<group>"; };
+		8AAA2D0B1C02BC6700B27E49 /* LaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchView.m; sourceTree = "<group>"; };
 		8AAA50871BD67614005384CD /* UserTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTagCell.h; sourceTree = "<group>"; };
 		8AAA50881BD67614005384CD /* UserTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTagCell.m; sourceTree = "<group>"; };
 		8AAA508A1BD68FC3005384CD /* CategoryGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGridCell.h; sourceTree = "<group>"; };
@@ -2272,6 +2275,8 @@
 				B70D3B5F1BB04B55002CDB6B /* NewVersionController.m */,
 				8AAA2D071C02B61400B27E49 /* LaunchController.h */,
 				8AAA2D081C02B61400B27E49 /* LaunchController.m */,
+				8AAA2D0A1C02BC6700B27E49 /* LaunchView.h */,
+				8AAA2D0B1C02BC6700B27E49 /* LaunchView.m */,
 			);
 			path = WelcomeViewController;
 			sourceTree = "<group>";
@@ -2836,6 +2841,7 @@
 				B7F5AA011B08C75A0033BB2D /* WebViewController.m in Sources */,
 				391F5F911B1705A000931533 /* JXFormCell.m in Sources */,
 				B772BE971BD51FFC005C1540 /* UserFooterSectionView.m in Sources */,
+				8AAA2D0C1C02BC6700B27E49 /* LaunchView.m in Sources */,
 				4E6889FC1BA9C2BA0006AD9B /* NSString+JSQMessages.m in Sources */,
 				B7F543FD1BC2457E0044F5E9 /* SDWebImageDownloaderOperation.m in Sources */,
 				4E3A238D1A52F21800037F9C /* TabBarViewcontroller.m in Sources */,
