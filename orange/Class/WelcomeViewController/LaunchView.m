@@ -58,6 +58,18 @@
     return _detialLable;
 }
 
+- (UIButton *)actionBtn
+{
+    if (!_actionBtn) {
+        _actionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_actionBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
+        _actionBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        [_actionBtn addTarget:self action:@selector(TapActionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_actionBtn];
+    }
+    return _actionBtn;
+}
+
 - (void)setLaunch:(GKLaunch *)launch
 {
     _launch = launch;
@@ -84,6 +96,16 @@
     self.launchImage.frame = CGRectMake(0., 0., self.deFrameWidth, 240.);
     self.launchImage.deFrameTop = self.detialLable.deFrameBottom;
     
+    self.actionBtn.frame = CGRectMake(0., 0., self.deFrameWidth, 50.);
+    self.actionBtn.deFrameTop = self.deFrameHeight - 50.;
+}
+
+#pragma mark - button action 
+- (void)TapActionBtn:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(handleActionBtn:)]) {
+        [_delegate handleActionBtn:sender];
+    }
 }
 
 @end

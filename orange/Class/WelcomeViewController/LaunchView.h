@@ -10,7 +10,7 @@
 
 @protocol LaunchViewDelegate <NSObject>
 
-- (void)TapActionBtn:(id)sender;
+- (void)handleActionBtn:(id)sender;
 
 @end
 

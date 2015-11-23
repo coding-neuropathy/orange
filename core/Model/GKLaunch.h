@@ -30,4 +30,9 @@
  */
 @property (strong, nonatomic) NSURL * launchImageUrl;
 
+/**
+ *  action url
+ */
+@property (strong, nonatomic) NSURL * actionURL;
+
 @end

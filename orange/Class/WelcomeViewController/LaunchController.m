@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) GKLaunch * launch;
 @property (strong, nonatomic) LaunchView * launchView;
+@property (strong, nonatomic) UIButton * closeBtn;
 
 @end
 
@@ -42,6 +43,18 @@
     return _launchView;
 }
 
+- (UIButton *)closeBtn
+{
+    if (!_closeBtn) {
+        _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImage *closeimage = [UIImage imageNamed:@"startClose"];
+        _closeBtn.frame = CGRectMake(0., 0., closeimage.size.width, closeimage.size.height);
+
+        [_closeBtn setImage:closeimage forState:UIControlStateNormal];
+        [_closeBtn addTarget:self action:@selector(closeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _closeBtn;
+}
 
 - (void)viewDidLoad
 {
@@ -49,12 +62,49 @@
     
     self.launchView.launch = self.launch;
     [self.view addSubview:self.launchView];
+    
+    
+    self.closeBtn.deFrameRight =  CGRectGetMaxX(self.launchView.frame) + 12.;
+    self.closeBtn.deFrameTop = CGRectGetMinY(self.launchView.frame) - 12.;
+    
+    [self.view insertSubview:self.closeBtn aboveSubview:self.launchView];
+}
+
+#pragma mark -
+- (void)fadeOutWithAction:(void (^)(void))action
+{
+    [UIView animateWithDuration:0.35 animations:^{
+        self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
+        self.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished)
+        {
+            action();
+        }
+    }];
+}
+
+
+#pragma mark - button aciotn 
+- (void)closeBtnAction:(id)sender
+{
+    [self fadeOutWithAction:^{
+        if (self.finished) {
+            [self.view removeFromSuperview];
+            self.closeAction();
+        }
+    }];
 }
 
 #pragma mark - <LaunchViewDelegate>
-- (void)TapActionBtn:(id)sender
+-(void)handleActionBtn:(id)sender
 {
-
+    [self fadeOutWithAction:^{
+        if (self.finished) {
+            [self.view removeFromSuperview];
+            self.finished();
+        }
+    }];
 }
 
 @end

@@ -105,26 +105,23 @@ int ddLogLevel;
         DDLogInfo(@"OKOKOKOKO");
         LaunchController * vc = [[LaunchController alloc] initWithLaunch:launch];
     
-//        NewVersionController * vc = [NewVersionController new];
         [self.window.rootViewController addChildViewController:vc];
-//        __weak __typeof(&*vc)weakVC = vc;
-//        __weak __typeof(&*self.tabbarViewController.selectionController)weakSelection = self.tabbarViewController.selectionController;
-//        vc.finished = ^(void) {
-//            [weakVC removeFromParentViewController];
-//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunchV41"];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-//            [weakSelection setSelectedWithType:SelectionArticleType];
-//    
-//        };
-////        DDLogInfo(@"OKOKOK");
-//        DDLogInfo(@"view %@", vc);
+        __weak __typeof(&*vc)weakVC = vc;
+        vc.finished = ^(void) {
+            [weakVC removeFromParentViewController];
+            [self openLocalURL:launch.actionURL];
+            
+        };
+        
+        vc.closeAction = ^(void) {
+            [weakVC removeFromParentViewController];
+        };
+        
         [self.window addSubview:vc.view];
         
     } failure:^(NSInteger stateCode) {
         
     }];
-
-
 
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;

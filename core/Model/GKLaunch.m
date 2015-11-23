@@ -11,6 +11,7 @@
 @interface GKLaunch ()
 
 @property (strong, nonatomic) NSString * launch_image_url;
+@property (strong, nonatomic) NSString * action;
 
 @end
 
@@ -39,6 +40,11 @@
     NSURL * image_url = [NSURL URLWithString:self.launch_image_url];
     
     return image_url;
+}
+
+- (NSURL *)actionURL
+{
+    return [NSURL URLWithString:self.action];
 }
 
 @end
