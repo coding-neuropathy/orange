@@ -31,8 +31,20 @@
 @property (strong, nonatomic) NSURL * launchImageUrl;
 
 /**
+ *  launch image 580
+ */
+@property (strong, nonatomic) NSURL * launchImageURL_580;
+
+/**
+ *  action_title
+ */
+@property (strong, nonatomic) NSString * action_title;
+
+/**
  *  action url
  */
 @property (strong, nonatomic) NSURL * actionURL;
+
+
 
 @end

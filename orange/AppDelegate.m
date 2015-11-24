@@ -103,6 +103,12 @@ int ddLogLevel;
     
     [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
 //        DDLogInfo(@"OKOKOKOKO");
+        NSInteger launchId = [[[NSUserDefaults standardUserDefaults] objectForKey:@"launchVersion"] integerValue];
+        if (launchId == launch.launchId) {
+            return ;
+        }
+        
+        
         LaunchController * vc = [[LaunchController alloc] initWithLaunch:launch];
     
         [self.window.rootViewController addChildViewController:vc];
@@ -111,6 +117,8 @@ int ddLogLevel;
             [weakVC removeFromParentViewController];
             [self openLocalURL:launch.actionURL];
             
+            [[NSUserDefaults standardUserDefaults] setObject:@(launch.launchId) forKey:@"launchVersion"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         };
         
         vc.closeAction = ^(void) {
