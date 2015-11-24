@@ -92,20 +92,15 @@
 {
     [UIView animateWithDuration:0.35 animations:^{
 //        self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
-        self.launchView.transform = CGAffineTransformMakeRotation(M_PI / -36.);
-
+//        self.launchView.transform = CGAffineTransformMakeRotation(M_PI / -36.);
+//        self.view.transform
 //        self.view.alpha = 0;
+        self.launchView.transform = CGAffineTransformMakeTranslation(self.launchView.transform.tx, self.launchView.transform.ty + 600.);
+        self.closeBtn.transform = CGAffineTransformMakeTranslation(self.closeBtn.transform.tx, self.closeBtn.transform.ty + 600.);
     } completion:^(BOOL finished) {
         if (finished){
+            action();
 
-            [UIView animateWithDuration:0.35 animations:^{
-                self.launchView.deFrameTop = kScreenHeight + 10.;
-            } completion:^(BOOL finished) {
-                if (finished) {
-                    action();
-                }
-            }];
-            
         }
 
     }];
