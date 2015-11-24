@@ -81,6 +81,8 @@
 {
     [UIView animateWithDuration:0.35 animations:^{
         self.launchView.deFrameTop = (kScreenHeight - 425.) / 2.;
+        self.closeBtn.deFrameRight =  CGRectGetMaxX(self.launchView.frame) + 12.;
+        self.closeBtn.deFrameTop = CGRectGetMinY(self.launchView.frame) - 12.;
     } completion:^(BOOL finished) {
         
     }];
