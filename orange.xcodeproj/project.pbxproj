@@ -220,6 +220,7 @@
 		8A0B16E21BABFDED00469DD6 /* ArticleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B16E11BABFDED00469DD6 /* ArticleListCell.m */; };
 		8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
+		8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A418C791C04481000CE01B5 /* EntityPreView.m */; };
 		8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */; };
 		8A5DAEB21BC779A00028C36D /* ALBBFullSecurityGuard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEA31BC7799F0028C36D /* ALBBFullSecurityGuard.framework */; };
 		8A5DAEB31BC779A00028C36D /* ALBBHotpatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEA41BC7799F0028C36D /* ALBBHotpatch.framework */; };
@@ -240,6 +241,7 @@
 		8AAA2D061C01EF1C00B27E49 /* GKLaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */; };
 		8AAA2D091C02B61400B27E49 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D081C02B61400B27E49 /* LaunchController.m */; };
 		8AAA2D0C1C02BC6700B27E49 /* LaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D0B1C02BC6700B27E49 /* LaunchView.m */; };
+		8AAA2D141C04444800B27E49 /* EntityPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D131C04444800B27E49 /* EntityPreViewController.m */; };
 		8AAA50891BD67614005384CD /* UserTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA50881BD67614005384CD /* UserTagCell.m */; };
 		8AAA508C1BD68FC3005384CD /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA508B1BD68FC3005384CD /* CategoryGridCell.m */; };
 		8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */; };
@@ -745,6 +747,8 @@
 		8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
 		8A402CC51B69F57A00E54FFF /* CategoryImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryImageView.h; sourceTree = "<group>"; };
 		8A402CC61B69F57A00E54FFF /* CategoryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryImageView.m; sourceTree = "<group>"; };
+		8A418C781C04481000CE01B5 /* EntityPreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityPreView.h; path = PreViewControllers/EntityPreView.h; sourceTree = "<group>"; };
+		8A418C791C04481000CE01B5 /* EntityPreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityPreView.m; path = PreViewControllers/EntityPreView.m; sourceTree = "<group>"; };
 		8A53D9241BD948F6006EF0D1 /* UserEntityCategoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntityCategoryController.h; sourceTree = "<group>"; };
 		8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntityCategoryController.m; sourceTree = "<group>"; };
 		8A5DAEA31BC7799F0028C36D /* ALBBFullSecurityGuard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBFullSecurityGuard.framework; sourceTree = "<group>"; };
@@ -769,6 +773,8 @@
 		8AAA2D081C02B61400B27E49 /* LaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
 		8AAA2D0A1C02BC6700B27E49 /* LaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchView.h; sourceTree = "<group>"; };
 		8AAA2D0B1C02BC6700B27E49 /* LaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchView.m; sourceTree = "<group>"; };
+		8AAA2D121C04444800B27E49 /* EntityPreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityPreViewController.h; path = PreViewControllers/EntityPreViewController.h; sourceTree = "<group>"; };
+		8AAA2D131C04444800B27E49 /* EntityPreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityPreViewController.m; path = PreViewControllers/EntityPreViewController.m; sourceTree = "<group>"; };
 		8AAA50871BD67614005384CD /* UserTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTagCell.h; sourceTree = "<group>"; };
 		8AAA50881BD67614005384CD /* UserTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTagCell.m; sourceTree = "<group>"; };
 		8AAA508A1BD68FC3005384CD /* CategoryGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGridCell.h; sourceTree = "<group>"; };
@@ -1736,6 +1742,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				8AAA2D111C04442400B27E49 /* PreViewControllers */,
 				391F5F8D1B1705A000931533 /* UIComponents */,
 				4EB8E2251B9F398B002C7F6F /* SelectionController */,
 				B76EE07C1B3D86AE009D8763 /* NotifyController */,
@@ -2139,6 +2146,17 @@
 				B77E00A81B8988DC008BCA55 /* EntityPopView.m */,
 			);
 			path = EntityViewController;
+			sourceTree = "<group>";
+		};
+		8AAA2D111C04442400B27E49 /* PreViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8AAA2D121C04444800B27E49 /* EntityPreViewController.h */,
+				8AAA2D131C04444800B27E49 /* EntityPreViewController.m */,
+				8A418C781C04481000CE01B5 /* EntityPreView.h */,
+				8A418C791C04481000CE01B5 /* EntityPreView.m */,
+			);
+			name = PreViewControllers;
 			sourceTree = "<group>";
 		};
 		B71E49581AC9257700D4DB6D /* SettingsView */ = {
@@ -2916,6 +2934,7 @@
 				4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */,
 				B7174DD91BD4A83D00DEDBDA /* UserViewController.m in Sources */,
 				B7FE2A081B28136B001C2E33 /* UIImage+FontAwesome.m in Sources */,
+				8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */,
 				DA35B3C61AFEE31200D66671 /* EmailEditViewController.m in Sources */,
 				4E688A161BA9C2BA0006AD9B /* JSQMessagesCollectionViewCell.m in Sources */,
 				B7C0798A1BC5827E006B7379 /* DDDispatchQueueLogFormatter.m in Sources */,
@@ -2962,6 +2981,7 @@
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */,
 				4E688A1E1BA9C2BA0006AD9B /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
+				8AAA2D141C04444800B27E49 /* EntityPreViewController.m in Sources */,
 				4E7869691BA70C5A00586BD9 /* EntityHeaderBuyView.m in Sources */,
 				4E6889FD1BA9C2BA0006AD9B /* UIColor+JSQMessages.m in Sources */,
 				B71E495B1AC9259000D4DB6D /* SettingsViewCell.m in Sources */,

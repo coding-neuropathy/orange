@@ -24,13 +24,15 @@
 #import "CategroyGroupController.h"
 #import "SearchResultsViewController.h"
 
+#import "EntityPreViewController.h"
+
 
 @interface DiscoverHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
 @property (strong, nonatomic) NSString * text;
 @end
 
-@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate>
+@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate, UIViewControllerPreviewingDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
@@ -95,6 +97,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.searchLogTableView reloadData];
 }
+
 #pragma mark - init
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -157,6 +160,16 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return _searchResultsVC;
 }
 
+
+- (void)registerPreview{
+    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+        [self registerForPreviewingWithDelegate:self sourceView:self.collectionView];
+    }
+    else {
+        DDLogInfo(@"该设备不支持3D-Touch");
+    }
+}
+
 #pragma mark - data
 - (void)refresh
 {
@@ -192,6 +205,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     self.definesPresentationContext = YES;
     
     [self.collectionView addSloganView];
+    
+    [self registerPreview];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -605,6 +620,36 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)cancelSearch:(UIView *)view
 {
     self.searchVC.active = NO;
+}
+
+#pragma mark - <UIViewControllerPreviewingDelegate>
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
+    
+    if (indexPath.section != 3) {
+        return nil;
+    }
+
+    UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+
+    if (!cell) {
+        return nil;
+    }
+
+//    PreviewArticleController * vc = [[PreviewArticleController alloc] initWIthArticle:[self.articleArray objectAtIndex:indexPath.row]];
+//    vc.preferredContentSize = CGSizeMake(0, 0);
+//    previewingContext.sourceRect = cell.frame;
+//    return vc;
+    EntityPreViewController * vc = [[EntityPreViewController alloc] initWithEntity:[self.entityArray objectAtIndex:indexPath.row]];
+    vc.preferredContentSize = CGSizeMake(0., 0.);
+    previewingContext.sourceRect = cell.frame;
+    return vc;
+}
+
+- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
 }
 
 #pragma mark - <EntityCellDelegate>
