@@ -221,6 +221,7 @@
 		8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
 		8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A418C791C04481000CE01B5 /* EntityPreView.m */; };
+		8A418C7C1C04519C00CE01B5 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A418C7B1C04519C00CE01B5 /* libPushSDK-1.8.8.a */; };
 		8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */; };
 		8A5DAEB21BC779A00028C36D /* ALBBFullSecurityGuard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEA31BC7799F0028C36D /* ALBBFullSecurityGuard.framework */; };
 		8A5DAEB31BC779A00028C36D /* ALBBHotpatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEA41BC7799F0028C36D /* ALBBHotpatch.framework */; };
@@ -256,7 +257,6 @@
 		B71E49521AC923FB00D4DB6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71E49541AC923FB00D4DB6D /* InfoPlist.strings */; };
 		B71E495B1AC9259000D4DB6D /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B71E495A1AC9259000D4DB6D /* SettingsViewCell.m */; };
 		B71E495F1AC98E4700D4DB6D /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B71E495E1AC98E4700D4DB6D /* SettingsFooterView.m */; };
-		B72000B51B0848160001F199 /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B72000B41B0848160001F199 /* libPushSDK-1.8.3.a */; };
 		B72000B71B0849E50001F199 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B72000B61B0849E50001F199 /* PushConfig.plist */; };
 		B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = B72ACCC11B66531E0020E841 /* DiscoverController.m */; };
 		B72ACCC81B666B8C0020E841 /* DiscoverBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72ACCC71B666B8C0020E841 /* DiscoverBannerView.m */; };
@@ -749,6 +749,7 @@
 		8A402CC61B69F57A00E54FFF /* CategoryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryImageView.m; sourceTree = "<group>"; };
 		8A418C781C04481000CE01B5 /* EntityPreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityPreView.h; path = PreViewControllers/EntityPreView.h; sourceTree = "<group>"; };
 		8A418C791C04481000CE01B5 /* EntityPreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityPreView.m; path = PreViewControllers/EntityPreView.m; sourceTree = "<group>"; };
+		8A418C7B1C04519C00CE01B5 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		8A53D9241BD948F6006EF0D1 /* UserEntityCategoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntityCategoryController.h; sourceTree = "<group>"; };
 		8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntityCategoryController.m; sourceTree = "<group>"; };
 		8A5DAEA31BC7799F0028C36D /* ALBBFullSecurityGuard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBFullSecurityGuard.framework; sourceTree = "<group>"; };
@@ -806,7 +807,6 @@
 		B71E495D1AC98E4700D4DB6D /* SettingsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsFooterView.h; path = SettingsView/SettingsFooterView.h; sourceTree = "<group>"; };
 		B71E495E1AC98E4700D4DB6D /* SettingsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsFooterView.m; path = SettingsView/SettingsFooterView.m; sourceTree = "<group>"; };
 		B72000B31B0848160001F199 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
-		B72000B41B0848160001F199 /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
 		B72000B61B0849E50001F199 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		B72985F31BB8E727006E2518 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
 		B72ACCC01B66531E0020E841 /* DiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverController.h; sourceTree = "<group>"; };
@@ -1073,13 +1073,13 @@
 				8A5DAEBE1BC779A00028C36D /* UTDID.framework in Frameworks */,
 				8A5DAEB31BC779A00028C36D /* ALBBHotpatch.framework in Frameworks */,
 				8A5DAEB51BC779A00028C36D /* ALBBRpcPlugin.framework in Frameworks */,
-				B72000B51B0848160001F199 /* libPushSDK-1.8.3.a in Frameworks */,
 				4E56DFC119D5AF1400263B17 /* MobileCoreServices.framework in Frameworks */,
 				8A5DAEBF1BC779A00028C36D /* UTMini.framework in Frameworks */,
 				4E56DFBF19D5AF0900263B17 /* Security.framework in Frameworks */,
 				8A5DAEB21BC779A00028C36D /* ALBBFullSecurityGuard.framework in Frameworks */,
 				4E56DFBD19D5AF0000263B17 /* CoreLocation.framework in Frameworks */,
 				4E56DFB919D5AEF300263B17 /* CoreMotion.framework in Frameworks */,
+				8A418C7C1C04519C00CE01B5 /* libPushSDK-1.8.8.a in Frameworks */,
 				4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2173,8 +2173,8 @@
 		B72000B21B0848160001F199 /* JPush */ = {
 			isa = PBXGroup;
 			children = (
+				8A418C7B1C04519C00CE01B5 /* libPushSDK-1.8.8.a */,
 				B72000B31B0848160001F199 /* APService.h */,
-				B72000B41B0848160001F199 /* libPushSDK-1.8.3.a */,
 			);
 			path = JPush;
 			sourceTree = "<group>";
