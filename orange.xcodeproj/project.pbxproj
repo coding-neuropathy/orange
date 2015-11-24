@@ -247,7 +247,6 @@
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
 		8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */; };
 		8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */; };
-		B70D3B601BB04B55002CDB6B /* NewVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70D3B5F1BB04B55002CDB6B /* NewVersionController.m */; };
 		B7174DD91BD4A83D00DEDBDA /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7174DD81BD4A83D00DEDBDA /* UserViewController.m */; };
 		B7174DDC1BD4A94900DEDBDA /* UserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7174DDB1BD4A94900DEDBDA /* UserHeaderView.m */; };
 		B7180EA41B9D380A004AD9AD /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7180EA31B9D380A004AD9AD /* HomeController.m */; };
@@ -784,8 +783,6 @@
 		8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCategoryEntityController.m; sourceTree = "<group>"; };
 		8AFF0CAB1BAA6C25005FD5CB /* EntityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityListCell.h; sourceTree = "<group>"; };
 		8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityListCell.m; sourceTree = "<group>"; };
-		B70D3B5E1BB04B55002CDB6B /* NewVersionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewVersionController.h; sourceTree = "<group>"; };
-		B70D3B5F1BB04B55002CDB6B /* NewVersionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewVersionController.m; sourceTree = "<group>"; };
 		B7174DD71BD4A83D00DEDBDA /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		B7174DD81BD4A83D00DEDBDA /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		B7174DDA1BD4A94900DEDBDA /* UserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHeaderView.h; sourceTree = "<group>"; };
@@ -2271,8 +2268,6 @@
 		B769B1261B2ACFB3004401FA /* WelcomeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B70D3B5E1BB04B55002CDB6B /* NewVersionController.h */,
-				B70D3B5F1BB04B55002CDB6B /* NewVersionController.m */,
 				8AAA2D071C02B61400B27E49 /* LaunchController.h */,
 				8AAA2D081C02B61400B27E49 /* LaunchController.m */,
 				8AAA2D0A1C02BC6700B27E49 /* LaunchView.h */,
@@ -2875,7 +2870,6 @@
 				B76EE07F1B3D86AE009D8763 /* MessageController.m in Sources */,
 				4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */,
 				4EC9F79F1A7A79800057D736 /* CategoryViewController.m in Sources */,
-				B70D3B601BB04B55002CDB6B /* NewVersionController.m in Sources */,
 				B7F544031BC2457E0044F5E9 /* UIImage+WebP.m in Sources */,
 				B769B1221B2ACE91004401FA /* IFTTTFrameAnimation.m in Sources */,
 				B769B1171B2ACE91004401FA /* IFTTTAlphaAnimation.m in Sources */,

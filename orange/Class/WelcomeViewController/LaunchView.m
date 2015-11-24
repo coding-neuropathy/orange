@@ -26,6 +26,7 @@
         _launchImage = [[UIImageView alloc] initWithFrame:CGRectZero];
         _launchImage.contentMode = UIViewContentModeScaleAspectFill;
         _launchImage.layer.masksToBounds = YES;
+//        _launchImage.backgroundColor = UIColorFromRGB(0xf1f1f1);
 //        _launchImage.layer.cornerRadius = 4.;
         [self addSubview:_launchImage];
     }
@@ -94,11 +95,13 @@
     self.detialLable.frame = CGRectMake(0., 0., self.deFrameWidth, 50);
     self.detialLable.deFrameTop = self.titleLabel.deFrameBottom + 10.;
     
-    self.launchImage.frame = CGRectMake(0., 0., self.deFrameWidth, 240.);
-    self.launchImage.deFrameTop = self.detialLable.deFrameBottom;
+
     
     self.actionBtn.frame = CGRectMake(0., 0., self.deFrameWidth, 50.);
     self.actionBtn.deFrameTop = self.deFrameHeight - 50.;
+    
+    self.launchImage.frame = CGRectMake(0., 0., self.deFrameWidth, 240.);
+    self.launchImage.deFrameBottom = self.actionBtn.deFrameTop;
 }
 
 #pragma mark - button action 
