@@ -233,6 +233,7 @@ int ddLogLevel;
 //    DDLogInfo(@"resp %@", resp);
 //    NSInteger wechatType = [[[NSUserDefaults standardUserDefaults] valueForKeyPath:kWechatType] integerValue];
     if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
+        DDLogError(@"error code %d", resp.errCode);
         switch (resp.errCode) {
             case 0:
             {
@@ -243,7 +244,9 @@ int ddLogLevel;
                 });
             }
                 break;
+            case -2:
                 
+                break;
             default:
             {
                 double delayInSeconds = 0.5;
