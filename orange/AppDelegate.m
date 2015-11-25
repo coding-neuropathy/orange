@@ -233,14 +233,15 @@ int ddLogLevel;
 //    DDLogInfo(@"resp %@", resp);
 //    NSInteger wechatType = [[[NSUserDefaults standardUserDefaults] valueForKeyPath:kWechatType] integerValue];
     if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
-        DDLogError(@"error code %d", resp.errCode);
+//        DDLogError(@"error code %d", resp.errCode);
         switch (resp.errCode) {
             case 0:
             {
                 double delayInSeconds = 0.5;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+//                    [SVProgressHUD showImage:nil status:@"分享成功"];
+                    [SVProgressHUD showSuccessWithStatus:@"分享成功"];
                 });
             }
                 break;
@@ -252,7 +253,8 @@ int ddLogLevel;
                 double delayInSeconds = 0.5;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    [SVProgressHUD showImage:nil status:@"分享失败\U0001F628"];
+//                    [SVProgressHUD showImage:nil status:@"分享失败"];
+                    [SVProgressHUD showErrorWithStatus:@"分享失败"];
                 });
             }
                 break;
