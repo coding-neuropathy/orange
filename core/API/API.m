@@ -2045,8 +2045,8 @@
     [paraDict setValue:@(user_id) forKey:@"user_id"];
     [paraDict setValue:sns_user_name forKey:@"sns_user_name"];
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSInteger stateCode = operation.response.statusCode;
-        NSLog(@"html success %lu", stateCode);
+//        NSInteger stateCode = operation.response.statusCode;
+//        NSLog(@"html success %lu", (long)stateCode);
         if (success) {
             success(YES);
         }
