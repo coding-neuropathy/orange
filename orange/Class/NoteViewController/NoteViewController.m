@@ -309,7 +309,8 @@ static NSString *CellIdentifier = @"CommentCell";
     }
     if (self.inputTextField.tag == 0) {
         [API postCommentWithNoteId:self.note.noteId content:content success:^(GKComment *comment) {
-            [SVProgressHUD showImage:nil status:@"评论成功"];
+//            [SVProgressHUD showImage:nil status:@"评论成功"];
+            [SVProgressHUD showSuccessWithStatus:@"评论成功"];
             self.note.commentCount += 1;
             [self.dataArrayForComment addObject:comment];
             [self.tableView reloadData];
@@ -318,7 +319,8 @@ static NSString *CellIdentifier = @"CommentCell";
             self.tableView.tableFooterView = nil;
             
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"评论失败"];
+//            [SVProgressHUD showImage:nil status:@"评论失败"];
+            [SVProgressHUD showErrorWithStatus:@"评论失败"];
         }];
     }else{
         GKComment *comment = [GKComment modelFromDictionary:@{@"entityId":self.note.entityId, @"noteId":@(self.note.noteId), @"commentId":@(self.inputTextField.tag)}];
@@ -330,9 +332,17 @@ static NSString *CellIdentifier = @"CommentCell";
             [self.dataArrayForComment addObject:comment];
             [self.tableView reloadData];
             [self.tableView scrollsToTop];
-            [SVProgressHUD showImage:nil status:@"回复成功!"];
+//            [SVProgressHUD showImage:nil status:@"回复成功!"];
+            [SVProgressHUD showSuccessWithStatus:@"回复成功"];
+            
+            [MobClick event:@"post reply success"];
+            [AVAnalytics event:@"post reply success"];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"回复失败!"];
+//            [SVProgressHUD showImage:nil status:@"回复失败!"];
+            [SVProgressHUD showErrorWithStatus:@"回复失败"];
+            
+            [MobClick event:@"post reply success"];
+            [AVAnalytics event:@"post reply success"];
         }];
     }
 

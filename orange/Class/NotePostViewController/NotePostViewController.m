@@ -179,21 +179,24 @@ static CGFloat NormalKeyboardHeight = 216.0f;
     if (self.note) {
         [API updateNoteWithNoteId:self.note.noteId content:content score:score imageData:nil success:^(GKNote *note) {
             [self.navigationController popViewControllerAnimated:YES];
-            [SVProgressHUD showImage:nil status:@"修改成功"];
+//            [SVProgressHUD showImage:nil status:@"修改成功"];
+            [SVProgressHUD showSuccessWithStatus:@"修改成功"];
             if (self.successBlock) {
                 self.successBlock(note);
             }
             [AVAnalytics event:@"update note" label:@"success"];
             [MobClick event:@"update note" label:@"success"];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"修改失败"];
+//            [SVProgressHUD showImage:nil status:@"修改失败"];
+            [SVProgressHUD showErrorWithStatus:@"修改失败"];
             [AVAnalytics event:@"update note" label:@"failure"];
             [MobClick event:@"update note" label:@"failure"];
         }];
     } else {
         [API postNoteWithEntityId:self.entity.entityId content:content score:score imageData:nil success:^(GKNote *note) {
             [self.navigationController popViewControllerAnimated:YES];
-            [SVProgressHUD showImage:nil status:@"\U0001F603 发布成功"];
+//            [SVProgressHUD showImage:nil status:@"\U0001F603 发布成功"];
+            [SVProgressHUD showSuccessWithStatus:@"发布成功"];
             [Passport sharedInstance].user.noteCount += 1;
             if (self.successBlock) {
                 self.successBlock(note);
@@ -202,7 +205,8 @@ static CGFloat NormalKeyboardHeight = 216.0f;
             [AVAnalytics event:@"post note" label:@"success"];
             [AVAnalytics event:@"post note" label:@"success"];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"发布失败"];
+//            [SVProgressHUD showImage:nil status:@"发布失败"];
+            [SVProgressHUD showErrorWithStatus:@"发布失败"];
             [AVAnalytics event:@"post note" label:@"failure"];
             [MobClick event:@"post note" label:@"failure"];
         }];
