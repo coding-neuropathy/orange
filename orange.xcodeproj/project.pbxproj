@@ -132,7 +132,6 @@
 		4E56DFBF19D5AF0900263B17 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFBE19D5AF0900263B17 /* Security.framework */; };
 		4E56DFC119D5AF1400263B17 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFC019D5AF1400263B17 /* MobileCoreServices.framework */; };
 		4E56DFC319D5AF1E00263B17 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFC219D5AF1E00263B17 /* SystemConfiguration.framework */; };
-		4E56DFC519D5AF3300263B17 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFC419D5AF3300263B17 /* libicucore.dylib */; };
 		4E56DFC819D5B82900263B17 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFC719D5B82900263B17 /* UIKit.framework */; };
 		4E56DFCB19D5B83B00263B17 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFC919D5B83B00263B17 /* CoreFoundation.framework */; };
 		4E56DFCC19D5B83B00263B17 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFCA19D5B83B00263B17 /* CoreGraphics.framework */; };
@@ -191,9 +190,6 @@
 		4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A941A38B59F00156C17 /* UIButton+FontDiao.m */; };
 		4E8D6A9C1A38B59F00156C17 /* UIFont+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A961A38B59F00156C17 /* UIFont+FontDiao.m */; };
 		4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A981A38B59F00156C17 /* UIImageView+FontDiao.m */; };
-		4E8D6AA81A3B432700156C17 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8D6AA71A3B432700156C17 /* libz.dylib */; };
-		4E8D6AAA1A3B433500156C17 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8D6AA91A3B433500156C17 /* libsqlite3.0.dylib */; };
-		4E8D6AAC1A3B441000156C17 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8D6AAB1A3B441000156C17 /* libc++.dylib */; };
 		4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB61A3B66F900156C17 /* MCPHandler.m */; };
 		4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */; };
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
@@ -246,6 +242,9 @@
 		8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */; };
 		8ABA73351B73A8E7006A8F56 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABA73341B73A8E7006A8F56 /* SearchResultsViewController.m */; };
 		8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */; };
+		8AC3F6831C05909600CCD867 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6821C05909600CCD867 /* libsqlite3.tbd */; };
+		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
+		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
 		8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */; };
 		8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */; };
@@ -311,7 +310,6 @@
 		B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */; };
 		B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */; };
 		B7AAFA761AB7033600A2F20D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA751AB7033600A2F20D /* CFNetwork.framework */; };
-		B7AAFA781AB7036700A2F20D /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA771AB7036700A2F20D /* libstdc++.6.0.9.dylib */; };
 		B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA791AB7039600A2F20D /* Foundation.framework */; };
 		B7B065C81BF985CE001AA30F /* PreviewArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B065C71BF985CE001AA30F /* PreviewArticleController.m */; };
 		B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B6958E1AF05F310016AAB8 /* ImageIO.framework */; };
@@ -580,7 +578,6 @@
 		4E56DFBE19D5AF0900263B17 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4E56DFC019D5AF1400263B17 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4E56DFC219D5AF1E00263B17 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		4E56DFC419D5AF3300263B17 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		4E56DFC719D5B82900263B17 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4E56DFC919D5B83B00263B17 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		4E56DFCA19D5B83B00263B17 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -694,9 +691,6 @@
 		4E8D6A961A38B59F00156C17 /* UIFont+FontDiao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontDiao.m"; sourceTree = "<group>"; };
 		4E8D6A971A38B59F00156C17 /* UIImageView+FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FontDiao.h"; sourceTree = "<group>"; };
 		4E8D6A981A38B59F00156C17 /* UIImageView+FontDiao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FontDiao.m"; sourceTree = "<group>"; };
-		4E8D6AA71A3B432700156C17 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		4E8D6AA91A3B433500156C17 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		4E8D6AAB1A3B441000156C17 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		4E8D6AB51A3B66F900156C17 /* MCPHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPHandler.h; sourceTree = "<group>"; };
 		4E8D6AB61A3B66F900156C17 /* MCPHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPHandler.m; sourceTree = "<group>"; };
 		4EA0C4471A7F03DE0025EC2E /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
@@ -783,6 +777,9 @@
 		8ABC7DDF1C056B6000A15147 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		8ABC7DE01C056B6000A15147 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		8ABC7DE11C056B6000A15147 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		8AC3F6821C05909600CCD867 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		8AC3F6841C0590A500CCD867 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		8AC3F6861C05910A00CCD867 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		8AE19DCD1B9DE26C007C2872 /* HomeEntityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeEntityCell.h; sourceTree = "<group>"; };
 		8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeEntityCell.m; sourceTree = "<group>"; };
 		8AFF0CA81BA9C980005FD5CB /* SubCategoryEntityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategoryEntityController.h; sourceTree = "<group>"; };
@@ -908,7 +905,6 @@
 		B7AAFA611AB69DD200A2F20D /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		B7AAFA751AB7033600A2F20D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		B7AAFA771AB7036700A2F20D /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		B7AAFA791AB7039600A2F20D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B7B065C61BF985CE001AA30F /* PreviewArticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewArticleController.h; sourceTree = "<group>"; };
 		B7B065C71BF985CE001AA30F /* PreviewArticleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewArticleController.m; sourceTree = "<group>"; };
@@ -1039,6 +1035,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */,
+				8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */,
+				8AC3F6831C05909600CCD867 /* libsqlite3.tbd in Frameworks */,
 				4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */,
 				B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */,
 				8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */,
@@ -1048,13 +1047,9 @@
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
 				8A5DAEBD1BC779A00028C36D /* TBAppLinkSDK.framework in Frameworks */,
-				B7AAFA781AB7036700A2F20D /* libstdc++.6.0.9.dylib in Frameworks */,
 				B7AAFA761AB7033600A2F20D /* CFNetwork.framework in Frameworks */,
-				4E8D6AAC1A3B441000156C17 /* libc++.dylib in Frameworks */,
-				4E8D6AAA1A3B433500156C17 /* libsqlite3.0.dylib in Frameworks */,
 				8A5DAEB61BC779A00028C36D /* ALBBTBOpenPlugin.framework in Frameworks */,
 				B73E90CD1B1C9D5D00616FD7 /* AVOSCloud.framework in Frameworks */,
-				4E8D6AA81A3B432700156C17 /* libz.dylib in Frameworks */,
 				8A5DAEB41BC779A00028C36D /* ALBBLoginSDK.framework in Frameworks */,
 				4E56DFCE19D5B84300263B17 /* QuartzCore.framework in Frameworks */,
 				4E56DFCB19D5B83B00263B17 /* CoreFoundation.framework in Frameworks */,
@@ -1065,7 +1060,6 @@
 				4E56DFC819D5B82900263B17 /* UIKit.framework in Frameworks */,
 				4E08C3B61BDFE24B003D6494 /* LeanCloudSocial.framework in Frameworks */,
 				8A5DAEB91BC779A00028C36D /* AlipaySDK.framework in Frameworks */,
-				4E56DFC519D5AF3300263B17 /* libicucore.dylib in Frameworks */,
 				4E56DFC319D5AF1E00263B17 /* SystemConfiguration.framework in Frameworks */,
 				8A5DAEB71BC779A00028C36D /* ALBBTradeSDK.framework in Frameworks */,
 				39C829531AC29089009DE9BE /* libMobClickLibrary.a in Frameworks */,
@@ -1717,16 +1711,11 @@
 				4E08C3B51BDFE24B003D6494 /* LeanCloudSocial.framework */,
 				B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */,
 				B7AAFA791AB7039600A2F20D /* Foundation.framework */,
-				B7AAFA771AB7036700A2F20D /* libstdc++.6.0.9.dylib */,
 				B7AAFA751AB7033600A2F20D /* CFNetwork.framework */,
-				4E8D6AAB1A3B441000156C17 /* libc++.dylib */,
-				4E8D6AA91A3B433500156C17 /* libsqlite3.0.dylib */,
-				4E8D6AA71A3B432700156C17 /* libz.dylib */,
 				4E56DFCD19D5B84300263B17 /* QuartzCore.framework */,
 				4E56DFC919D5B83B00263B17 /* CoreFoundation.framework */,
 				4E56DFCA19D5B83B00263B17 /* CoreGraphics.framework */,
 				4E56DFC719D5B82900263B17 /* UIKit.framework */,
-				4E56DFC419D5AF3300263B17 /* libicucore.dylib */,
 				4E56DFC219D5AF1E00263B17 /* SystemConfiguration.framework */,
 				4E56DFC019D5AF1400263B17 /* MobileCoreServices.framework */,
 				4E56DFBE19D5AF0900263B17 /* Security.framework */,
@@ -2351,6 +2340,9 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AC3F6861C05910A00CCD867 /* libicucore.tbd */,
+				8AC3F6841C0590A500CCD867 /* libz.tbd */,
+				8AC3F6821C05909600CCD867 /* libsqlite3.tbd */,
 				B72985F31BB8E727006E2518 /* CoreSpotlight.framework */,
 				4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */,
 				B7B6958E1AF05F310016AAB8 /* ImageIO.framework */,
