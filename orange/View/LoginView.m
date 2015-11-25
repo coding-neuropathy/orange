@@ -562,10 +562,13 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.alpha = 0;
+    self.deFrameTop = kScreenHeight;
+    
     
     [kAppDelegate.window addSubview:self];
     
-    [UIView animateWithDuration:0.0 animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
+        self.deFrameTop = 0;
         self.alpha = 1;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.0 animations:^{
@@ -595,13 +598,6 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [kAppDelegate.window addSubview:self];
     self.backgroundColor = [UIColor clearColor];
-    whiteBG.alpha = 0;
-    [UIView animateWithDuration:0.0 animations:^{
-        
-    } completion:^(BOOL finished) {
-        whiteBG.alpha = 1;
-        
-    }];
 }
 
 #pragma mark - UIAlertViewDelegate

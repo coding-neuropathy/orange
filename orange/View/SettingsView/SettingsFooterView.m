@@ -35,13 +35,21 @@
 - (UIButton *)signOutBtn
 {
     if (!_signOutBtn) {
-        _signOutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _signOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(-1, 0, kScreenWidth+2, 44)];
         _signOutBtn.backgroundColor = UIColorFromRGB(0xcd1841);
-        _signOutBtn.layer.cornerRadius = 5;
+        _signOutBtn.layer.cornerRadius = 0;
+        _signOutBtn.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
+        _signOutBtn.layer.borderWidth = 0.5;
+        _signOutBtn.backgroundColor = UIColorFromRGB(0xffffff);
         [_signOutBtn setTitle:NSLocalizedStringFromTable(@"sign out", kLocalizedFile, nil) forState:UIControlStateNormal];
-        [_signOutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_signOutBtn setTitleColor:UIColorFromRGB(0x427EC0) forState:UIControlStateNormal];
+        [_signOutBtn setImage:[UIImage imageNamed:@"logout_icon"] forState:UIControlStateNormal];
+        [_signOutBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 28,0 , 0)];
+        [_signOutBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 18,0 , 0)];
         [_signOutBtn addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
         _signOutBtn.hidden = YES;
+        _signOutBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_signOutBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [self addSubview:_signOutBtn];
     }
     return _signOutBtn;
@@ -64,7 +72,7 @@
     
     if (_is_login) {
         self.signOutBtn.hidden = NO;
-        self.signOutBtn.frame = CGRectMake(20., 20., kScreenWidth - 40., 44.);
+        self.signOutBtn.frame = CGRectMake(0, 0, kScreenWidth, 44.);
 
     } else {
         self.signInBtn.hidden = NO;
