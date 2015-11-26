@@ -10,6 +10,12 @@
 "guoku" = "果庫";
 "guide to better living"    = "精英消費者指南";
 
+/**
+ *  3d - touch
+ */
+"articles"  = "文章";
+"goods"     = "商品";
+
 /*
  base infomation
  */

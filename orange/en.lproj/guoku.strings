@@ -10,8 +10,15 @@
 "guoku" = "Guoku";
 "guide to better living" = "Guide to Better Living";
 
-/*
- base infomation
+/**
+ *  3d - touch
+ */
+"articles"  = "Articles";
+"goods"     = "Goods";
+
+
+/**
+ *  base infomation
  */
 "cancel"    = "Cancel";
 "confirm"   = "Confirm";
