@@ -446,13 +446,6 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [kAppDelegate.window addSubview:self];
     self.backgroundColor = [UIColor clearColor];
-    whiteBG.alpha = 0;
-    [UIView animateWithDuration:0.0 animations:^{
-   
-    } completion:^(BOOL finished) {
-        whiteBG.alpha = 1;
-
-    }];
 }
 - (void)dismiss
 {
