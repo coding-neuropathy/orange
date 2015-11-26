@@ -44,7 +44,25 @@
 - (WKWebView *)webView
 {
     if (!_webView) {
-        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        
+        // Javascript that disables pinch-to-zoom by inserting the HTML viewport meta tag into <head>
+        NSString *source = @"var style = document.createElement('style'); \
+        style.type = 'text/css'; \
+        style.innerText = '*:not(input):not(textarea) { -webkit-user-select: none; -webkit-touch-callout: none; }'; \
+        var head = document.getElementsByTagName('head')[0];\
+        head.appendChild(style);";
+        WKUserScript *script = [[WKUserScript alloc] initWithSource:source injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+        
+        // Create the user content controller and add the script to it
+        WKUserContentController *userContentController = [WKUserContentController new];
+        [userContentController addUserScript:script];
+        
+        // Create the configuration with the user content controller
+        WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
+        configuration.userContentController = userContentController;
+        
+        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) configuration:configuration];
+        _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.UIDelegate = self;
         _webView.navigationDelegate = self;
         [_webView sizeToFit];
@@ -95,6 +113,7 @@
     [backBtn setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     backBtn.frame = CGRectMake(0., 0., 32., 44.);
+    backBtn.imageEdgeInsets = UIEdgeInsetsMake(0., 0., 0., 20.);
     UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.leftBarButtonItem = backBarItem;
     
