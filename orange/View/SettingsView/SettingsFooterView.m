@@ -21,7 +21,7 @@
 {
     if (!_signInBtn) {
         _signInBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _signInBtn.backgroundColor = UIColorFromRGB(0x427ec0);
+        _signInBtn.backgroundColor = UIColorFromRGB(0x6EAAF0);
         _signInBtn.layer.cornerRadius = 5;
         [_signInBtn setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_signInBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
