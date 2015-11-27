@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) UIImageView * launchImage;
 @property (strong, nonatomic) UILabel * titleLabel;
-@property (strong, nonatomic) UILabel * detialLable;
+@property (strong, nonatomic) UILabel * detailLabel;
 @property (strong, nonatomic) UIButton * actionBtn;
 @property (strong, nonatomic) UIButton * closeBtn;
 
@@ -45,18 +45,18 @@
     return _titleLabel;
 }
 
-- (UILabel *)detialLable
+- (UILabel *)detailLabel
 {
-    if (!_detialLable) {
-        _detialLable = [[UILabel alloc] initWithFrame:CGRectZero];
-        _detialLable.font = [UIFont systemFontOfSize:14.];
-        _detialLable.textColor = UIColorFromRGB(0x9d9e9f);
-        _detialLable.textAlignment = NSTextAlignmentCenter;
-        _detialLable.numberOfLines = 2;
+    if (!_detailLabel) {
+        _detailLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _detailLabel.font = [UIFont systemFontOfSize:14.];
+        _detailLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _detailLabel.textAlignment = NSTextAlignmentCenter;
+        _detailLabel.numberOfLines = 2;
         
-        [self addSubview:_detialLable];
+        [self addSubview:_detailLabel];
     }
-    return _detialLable;
+    return _detailLabel;
 }
 
 - (UIButton *)actionBtn
@@ -78,7 +78,13 @@
     
     [self.launchImage sd_setImageWithURL:_launch.launchImageURL_580];
     self.titleLabel.text = _launch.title;
-    self.detialLable.text = _launch.desc;
+    self.detailLabel.text = _launch.desc;
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.detailLabel.text];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:7.];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self.detailLabel.text length])];
+    self.detailLabel.attributedText = attributedString;
     
     [self.actionBtn setTitle:[NSString stringWithFormat:@"%@ %@", _launch.action_title, [NSString fontAwesomeIconStringForEnum:FAArrowCircleORight]] forState:UIControlStateNormal];
     
@@ -94,8 +100,8 @@
     self.titleLabel.frame = CGRectMake(0., 0., self.deFrameWidth, 24.);
     self.titleLabel.deFrameTop = 50;
     
-    self.detialLable.frame = CGRectMake(0., 0., self.deFrameWidth, 50);
-    self.detialLable.deFrameTop = self.titleLabel.deFrameBottom + 10.;
+    self.detailLabel.frame = CGRectMake(25., 0., self.deFrameWidth - 50., 60);
+    self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10.;
     
 
     

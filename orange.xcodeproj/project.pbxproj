@@ -232,6 +232,7 @@
 		8A5DAEBE1BC779A00028C36D /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEAF1BC7799F0028C36D /* UTDID.framework */; };
 		8A5DAEBF1BC779A00028C36D /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEB01BC779A00028C36D /* UTMini.framework */; };
 		8A5DAEC01BC779A00028C36D /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A5DAEB11BC779A00028C36D /* yw_1222.jpg */; };
+		8A8418AC1C06FDB900F55FE9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */; };
 		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
 		8AAA2D061C01EF1C00B27E49 /* GKLaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */; };
 		8AAA2D091C02B61400B27E49 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D081C02B61400B27E49 /* LaunchController.m */; };
@@ -242,7 +243,6 @@
 		8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */; };
 		8ABA73351B73A8E7006A8F56 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABA73341B73A8E7006A8F56 /* SearchResultsViewController.m */; };
 		8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */; };
-		8AC3F6831C05909600CCD867 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6821C05909600CCD867 /* libsqlite3.tbd */; };
 		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
@@ -757,6 +757,7 @@
 		8A5DAEB01BC779A00028C36D /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
 		8A5DAEB11BC779A00028C36D /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		8A7B791F1BAAB9310089FFD6 /* DataStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructure.h; sourceTree = "<group>"; };
+		8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKLaunch.h; sourceTree = "<group>"; };
 		8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKLaunch.m; sourceTree = "<group>"; };
 		8AAA2D071C02B61400B27E49 /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
@@ -777,7 +778,6 @@
 		8ABC7DDF1C056B6000A15147 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		8ABC7DE01C056B6000A15147 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		8ABC7DE11C056B6000A15147 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		8AC3F6821C05909600CCD867 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8AC3F6841C0590A500CCD867 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8AC3F6861C05910A00CCD867 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		8AE19DCD1B9DE26C007C2872 /* HomeEntityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeEntityCell.h; sourceTree = "<group>"; };
@@ -1035,9 +1035,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A8418AC1C06FDB900F55FE9 /* libsqlite3.tbd in Frameworks */,
 				8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */,
 				8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */,
-				8AC3F6831C05909600CCD867 /* libsqlite3.tbd in Frameworks */,
 				4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */,
 				B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */,
 				8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */,
@@ -1716,12 +1716,10 @@
 				4E56DFC919D5B83B00263B17 /* CoreFoundation.framework */,
 				4E56DFCA19D5B83B00263B17 /* CoreGraphics.framework */,
 				4E56DFC719D5B82900263B17 /* UIKit.framework */,
-				4E56DFC219D5AF1E00263B17 /* SystemConfiguration.framework */,
 				4E56DFC019D5AF1400263B17 /* MobileCoreServices.framework */,
 				4E56DFBE19D5AF0900263B17 /* Security.framework */,
 				4E56DFBC19D5AF0000263B17 /* CoreLocation.framework */,
 				4E56DFB819D5AEF300263B17 /* CoreMotion.framework */,
-				4E56DFB619D5AEED00263B17 /* CoreTelephony.framework */,
 			);
 			name = Framework;
 			path = ThirdParty;
@@ -2340,9 +2338,11 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */,
 				8AC3F6861C05910A00CCD867 /* libicucore.tbd */,
 				8AC3F6841C0590A500CCD867 /* libz.tbd */,
-				8AC3F6821C05909600CCD867 /* libsqlite3.tbd */,
+				4E56DFC219D5AF1E00263B17 /* SystemConfiguration.framework */,
+				4E56DFB619D5AEED00263B17 /* CoreTelephony.framework */,
 				B72985F31BB8E727006E2518 /* CoreSpotlight.framework */,
 				4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */,
 				B7B6958E1AF05F310016AAB8 /* ImageIO.framework */,
