@@ -116,7 +116,9 @@ static NSString *CellIdentifier = @"CommentCell";
         
         UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(self.inputTextField.deFrameRight + 5.f, 7.f, 50.f, 30.f)];
         [postButton setTitle:@"发送" forState:UIControlStateNormal];
-        [postButton setBackgroundColor:UIColorFromRGB(0x427ec0)];
+        [postButton setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
+        postButton.layer.cornerRadius = 2;
+        postButton.layer.masksToBounds = YES;
         postButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
         [postButton addTarget:self action:@selector(postButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [self.inputBar addSubview:postButton];
