@@ -45,6 +45,10 @@
  */
 @property (strong, nonatomic) NSURL * actionURL;
 
+/**
+ *  md5
+ */
+@property (strong, nonatomic) NSString * urlMD5;
 
 
 @end

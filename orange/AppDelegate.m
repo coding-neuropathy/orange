@@ -102,9 +102,9 @@ int ddLogLevel;
     application.applicationIconBadgeNumber = 0;
     
     [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
-//        DDLogInfo(@"OKOKOKOKO");
-        NSInteger launchId = [[[NSUserDefaults standardUserDefaults] objectForKey:@"launchVersion"] integerValue];
-        if (launchId == launch.launchId) {
+        DDLogInfo(@"OKOK %@", launch.urlMD5);
+        NSString * launch_url_md5 = [[NSUserDefaults standardUserDefaults] objectForKey:@"launchVersion"];
+        if ([launch_url_md5 isEqualToString:launch.urlMD5]) {
             return ;
         }
         
@@ -117,7 +117,7 @@ int ddLogLevel;
             [weakVC removeFromParentViewController];
             [self openLocalURL:launch.actionURL];
             
-            [[NSUserDefaults standardUserDefaults] setObject:@(launch.launchId) forKey:@"launchVersion"];
+            [[NSUserDefaults standardUserDefaults] setObject:launch.urlMD5 forKey:@"launchVersion"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         };
         

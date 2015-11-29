@@ -56,6 +56,12 @@
     return [NSURL URLWithString:self.action];
 }
 
+- (NSString *)urlMD5
+{
+    NSArray * array = [self.launch_image_url componentsSeparatedByString:@"/"];
+    return  [array objectAtIndex:array.count - 1];
+}
+
 
 
 @end
