@@ -330,6 +330,8 @@
 		B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C6847F1ABBC45800A122E8 /* EmptyView.m */; };
 		B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */; };
 		B7C684861ABBD78E00A122E8 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C684851ABBD78E00A122E8 /* ListViewController.m */; };
+		B7C699721C0C6A8D00E7487A /* SignInController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C699711C0C6A8D00E7487A /* SignInController.m */; };
+		B7C699751C0C6AAB00E7487A /* SignUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C699741C0C6AAB00E7487A /* SignUpController.m */; };
 		B7C80D131AEDE26D003AE031 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
 		B7C80D141AEDE387003AE031 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
 		B7C80D151AEDE387003AE031 /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -948,6 +950,10 @@
 		B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoSearchResultView.m; path = DiscoverView/NoSearchResultView.m; sourceTree = "<group>"; };
 		B7C684841ABBD78E00A122E8 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		B7C684851ABBD78E00A122E8 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		B7C699701C0C6A8D00E7487A /* SignInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignInController.h; path = AccountControllers/SignInController.h; sourceTree = "<group>"; };
+		B7C699711C0C6A8D00E7487A /* SignInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInController.m; path = AccountControllers/SignInController.m; sourceTree = "<group>"; };
+		B7C699731C0C6AAB00E7487A /* SignUpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpController.h; path = AccountControllers/SignUpController.h; sourceTree = "<group>"; };
+		B7C699741C0C6AAB00E7487A /* SignUpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpController.m; path = AccountControllers/SignUpController.m; sourceTree = "<group>"; };
 		B7C853211B4780D100CA5F0F /* orange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = orange.entitlements; sourceTree = "<group>"; };
 		B7C853221B47813300CA5F0F /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = today.entitlements; sourceTree = "<group>"; };
 		B7D1B91D1AC12C3500664BDB /* EditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHeaderView.h; path = EditView/EditHeaderView.h; sourceTree = "<group>"; };
@@ -1728,6 +1734,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				B7C6996F1C0C118500E7487A /* AccountControllers */,
 				8AAA2D111C04442400B27E49 /* PreViewControllers */,
 				391F5F8D1B1705A000931533 /* UIComponents */,
 				4EB8E2251B9F398B002C7F6F /* SelectionController */,
@@ -2395,6 +2402,17 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
+		B7C6996F1C0C118500E7487A /* AccountControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B7C699701C0C6A8D00E7487A /* SignInController.h */,
+				B7C699711C0C6A8D00E7487A /* SignInController.m */,
+				B7C699731C0C6AAB00E7487A /* SignUpController.h */,
+				B7C699741C0C6AAB00E7487A /* SignUpController.m */,
+			);
+			name = AccountControllers;
+			sourceTree = "<group>";
+		};
 		B7D1B9191AC12BEF00664BDB /* EditView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2858,6 +2876,7 @@
 				B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */,
 				4EC9F7911A7928520057D736 /* FanViewController.m in Sources */,
 				4E688A061BA9C2BA0006AD9B /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
+				B7C699721C0C6A8D00E7487A /* SignInController.m in Sources */,
 				4E688A0A1BA9C2BA0006AD9B /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */,
 				4E56DF7A19D56EF500263B17 /* FAImageView.m in Sources */,
@@ -2886,6 +2905,7 @@
 				4E688A201BA9C2BA0006AD9B /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */,
 				4E8D6A9C1A38B59F00156C17 /* UIFont+FontDiao.m in Sources */,
+				B7C699751C0C6AAB00E7487A /* SignUpController.m in Sources */,
 				4EC9F7A71A7BD1020057D736 /* NotePostViewController.m in Sources */,
 				B769B1201B2ACE91004401FA /* IFTTTCornerRadiusAnimation.m in Sources */,
 				4E688A001BA9C2BA0006AD9B /* UIView+JSQMessages.m in Sources */,
