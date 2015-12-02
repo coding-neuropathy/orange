@@ -16,7 +16,7 @@
 - (void)TapSection:(id)sender;
 @end
 
-@interface UserLikeHeaderSectionView : UICollectionReusableView
+@interface UserLikeHeaderSectionView : UIView<UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) UILabel * indicatorLable;
@@ -109,14 +109,23 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
 - (void)loadView
 {
-    self.view = self.collectionView;
+    [super loadView];
+    
+    UserLikeHeaderSectionView * v = [[UserLikeHeaderSectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+    v.category = self.category;
+    v.delegate = self;
+    
+    [self.view addSubview:v];
+
+    self.collectionView.deFrameTop = 44;
+    [self.view addSubview:self.collectionView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityIdentifier];
-    [self.collectionView registerClass:[UserLikeHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
+    //[self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
     
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         self.navigationItem.title = NSLocalizedStringFromTable(@"me like", kLocalizedFile, nil);
@@ -186,8 +195,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return self.likeEntities.count;
 }
 
+/*
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
+
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         UserLikeHeaderSectionView * section = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
 //        GKCategory * category = [GKCategory modelFromDictionary:@{@"id":@(0), @"title":NSLocalizedStringFromTable(@"all", kLocalizedFile, nil)}];
@@ -195,8 +206,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         section.delegate = self;
         return section;
     }
-    return [UICollectionReusableView new];
+
+    //return [UICollectionReusableView new];
+    return nil;
 }
+*/
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -218,7 +232,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    CGSize size = CGSizeMake(kScreenWidth, 44.);
+    CGSize size = CGSizeMake(kScreenWidth, 0.);
     
     return size;
 }
@@ -278,10 +292,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         [appdelegate.window.rootViewController addChildViewController:self.categoryController];
         [appdelegate.window addSubview:self.categoryController.view];
         self.categoryController.view.alpha = 0;
-        
+        //self.categoryController.view.deFrameBottom = 0;
         
         [UIView animateWithDuration:0.25 animations:^{
             self.categoryController.view.alpha = 1;
+            //self.categoryController.view.deFrameTop = kStatusBarHeight + kNavigationBarHeight + 44;
         }];
         
     
@@ -332,6 +347,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         NSArray *languages = [NSLocale preferredLanguages];
         //        NSLog(@"%@", languages);
         self.language = [languages objectAtIndex:0];
+        UIButton * button =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+        [button addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
     }
     return self;
 }
@@ -363,7 +381,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return _indicatorLable;
 }
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)click
 {
     if (_delegate && [_delegate respondsToSelector:@selector(TapSection:)]) {
         [_delegate TapSection:self];
@@ -387,12 +405,12 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     [super layoutSubviews];
     
-    self.titleLabel.frame = CGRectMake(0., 0., 100., self.deFrameHeight);
+    self.titleLabel.frame = CGRectMake(0., 0., 100., 44);
     self.titleLabel.deFrameRight += 16.;
 
     self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
     self.indicatorLable.center = self.titleLabel.center;
-    self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
+    self.indicatorLable.deFrameRight = kScreenWidth - 10.;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -403,8 +421,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
-    CGContextMoveToPoint(context, 0., self.deFrameHeight);
-    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
+    CGContextMoveToPoint(context, 0., 44);
+    CGContextAddLineToPoint(context, kScreenWidth, 44);
     CGContextStrokePath(context);
     
 }
