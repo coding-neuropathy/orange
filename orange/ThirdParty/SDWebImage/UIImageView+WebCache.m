@@ -75,6 +75,7 @@ static char TAG_ACTIVITY_SHOW;
                         
                         UIImageView * view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, wself.deFrameWidth, wself.deFrameHeight)];
                         view.image = image;
+                        view.contentMode = wself.contentMode;
                         view.tag = 10101;
                         view.alpha = 0;
                         

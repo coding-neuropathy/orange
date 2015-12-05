@@ -10,6 +10,6 @@
 
 
 @interface UserFooterSectionView : UICollectionReusableView
-
+@property (strong, nonatomic) UIView * H;
 
 @end
