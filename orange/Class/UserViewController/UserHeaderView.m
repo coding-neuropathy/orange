@@ -185,6 +185,11 @@
     
     _bioLabel.text = _user.bio;
     
+    if(!_user.bio.length)
+    {
+        _bioLabel.text = @"暂无个人签名";
+    }
+    
     {
         NSString * str = [NSString stringWithFormat:@"%@ %ld",NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil), (long)_user.fanCount];
         NSMutableAttributedString *mutableStr = [[NSMutableAttributedString alloc]initWithString:str];
@@ -224,7 +229,7 @@
             case GKUserRelationTypeNone:
             {
                 [self.relationBtn setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAPlus], NSLocalizedStringFromTable(@"follow", kLocalizedFile, nil)] forState:UIControlStateNormal];
-                [self.relationBtn setBackgroundColor:UIColorFromRGB(0x427ec0)];
+                [self.relationBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
                 [self.relationBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
                 [self.relationBtn addTarget:self action:@selector(followButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             }
@@ -232,7 +237,7 @@
             case GKUserRelationTypeFan:
             {
                 [self.relationBtn setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAPlus], NSLocalizedStringFromTable(@"follow", kLocalizedFile, nil)]  forState:UIControlStateNormal];
-                [self.relationBtn setBackgroundColor:UIColorFromRGB(0x427ec0)];
+                [self.relationBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
                 [self.relationBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
                 [self.relationBtn addTarget:self action:@selector(followButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             }

@@ -70,8 +70,30 @@ static char TAG_ACTIVITY_SHOW;
                     return;
                 }
                 else if (image) {
-                    wself.image = image;
-                    [wself setNeedsLayout];
+                    
+                    if (cacheType == SDImageCacheTypeNone) {
+                        
+                        UIImageView * view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, wself.deFrameWidth, wself.deFrameHeight)];
+                        view.image = image;
+                        view.contentMode = wself.contentMode;
+                        view.tag = 10101;
+                        view.alpha = 0;
+                        
+                        [wself addSubview:view];
+                        
+                        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            view.alpha = 1;
+                        } completion:^(BOOL finished) {
+                            wself.image = image;
+                            [wself setNeedsLayout];
+                            [[wself viewWithTag:10101]removeFromSuperview];
+                        }];
+                    }
+                    else{
+                        wself.image = image;
+                        [wself setNeedsLayout];
+                    }
+
                 } else {
                     if ((options & SDWebImageDelayPlaceholder)) {
                         wself.image = placeholder;

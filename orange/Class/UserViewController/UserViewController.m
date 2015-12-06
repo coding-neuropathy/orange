@@ -254,7 +254,28 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         }
     } else {
         UserFooterSectionView * footerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UserFooterSectionIdentifer forIndexPath:indexPath];
-//        footerSection.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
+        //footerSection.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
+            footerSection.alpha = 0;
+            switch (indexPath.section) {
+                case 0:
+                    footerSection.alpha = 1;
+                    break;
+                case 1:
+                    if (self.likedataArray.count > 0)
+                        footerSection.alpha = 1;
+                    break;
+                    
+                case 2:
+                    if (self.notedataArray.count > 0)
+                        footerSection.alpha = 1;
+                    break;
+                case 3:
+                    if (self.user.tagCount > 0)
+                        footerSection.alpha = 1;
+                    break;
+            }
+        
+        
         return footerSection;
     }
     
@@ -348,18 +369,20 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-            
+
             break;
         case 1:
-            size = CGSizeMake(kScreenWidth, 10.);
+            if (self.likedataArray.count > 0)
+                size = CGSizeMake(kScreenWidth, 10.);
             break;
+            
         case 2:
-            size = CGSizeMake(kScreenWidth, 10.);
+            if (self.notedataArray.count > 0)
+                size = CGSizeMake(kScreenWidth, 10.);
             break;
         case 3:
-            size = CGSizeMake(kScreenWidth, 10.);
-            break;
-        default:
+            if (self.user.tagCount > 0)
+                size = CGSizeMake(kScreenWidth, 10.);
             break;
     }
     return size;

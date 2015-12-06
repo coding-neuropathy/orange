@@ -11,7 +11,7 @@
 @interface UserFooterSectionView ()
 
 //@property (strong, nonatomic) UIButton * moreBtn;
-@property (strong, nonatomic) UIView * H;
+
 
 @end
 
