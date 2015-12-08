@@ -49,7 +49,8 @@
         
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
-        effectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        effectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.1];
+//        effectview.alpha = 0.9;
         effectview.frame = CGRectMake(0, 0, kScreenWidth ,kScreenHeight);
         [self addSubview:effectview];
         

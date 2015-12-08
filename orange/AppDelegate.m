@@ -361,7 +361,7 @@ int ddLogLevel;
     }
     
     /**
-     *  open tage page
+     *  open tag page
      */
     if ([[url absoluteString] hasPrefix:@"guoku://tag/"]) {
         NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -394,6 +394,17 @@ int ddLogLevel;
         GKUser * user = [GKUser modelFromDictionary:@{@"userId":userId}];
         [[OpenCenter sharedOpenCenter] openUser:user];
     }
+    
+    /**
+     *  open user discover
+     */
+    if([[url absoluteString] hasPrefix:@"guoku://discover"]) {
+        [self.tabbarViewController setSelectedIndex:1];
+    }
+    
+    [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+    
+    
 //    if([[url absoluteString] hasPrefix:@"guoku"])
 //    {
 //        NSString *absoluteString = [[url absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
