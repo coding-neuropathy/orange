@@ -402,7 +402,9 @@ int ddLogLevel;
         [self.tabbarViewController setSelectedIndex:1];
     }
     
-    [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+    
+    if ([[url absoluteString] hasPrefix:@"http"])
+        [[OpenCenter sharedOpenCenter] openWebWithURL:url];
     
     
 //    if([[url absoluteString] hasPrefix:@"guoku"])
