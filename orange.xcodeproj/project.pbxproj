@@ -195,6 +195,11 @@
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C45C1A8287780025EC2E /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C45B1A8287780025EC2E /* SignView.m */; };
+		4EA58ABA1C1720E6003251FB /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58AB91C1720E6003251FB /* SearchController.m */; };
+		4EA58ABD1C172365003251FB /* EntitySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58ABC1C172365003251FB /* EntitySearchViewController.m */; };
+		4EA58AC01C172376003251FB /* ArticleSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58ABF1C172376003251FB /* ArticleSearchViewController.m */; };
+		4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58AC21C17238D003251FB /* CategorySearchViewController.m */; };
+		4EA58AC61C1723AB003251FB /* UserSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58AC51C1723AB003251FB /* UserSearchViewController.m */; };
 		4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */; };
 		4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6ADAE1A77D7220089797A /* BaseViewController.m */; };
 		4EB8E2281B9F398B002C7F6F /* SelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8E2271B9F398B002C7F6F /* SelectionController.m */; };
@@ -701,6 +706,16 @@
 		4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinTools.m; sourceTree = "<group>"; };
 		4EA0C45A1A8287780025EC2E /* SignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
 		4EA0C45B1A8287780025EC2E /* SignView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
+		4EA58AB81C1720E6003251FB /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
+		4EA58AB91C1720E6003251FB /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
+		4EA58ABB1C172365003251FB /* EntitySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySearchViewController.h; sourceTree = "<group>"; };
+		4EA58ABC1C172365003251FB /* EntitySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySearchViewController.m; sourceTree = "<group>"; };
+		4EA58ABE1C172376003251FB /* ArticleSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleSearchViewController.h; sourceTree = "<group>"; };
+		4EA58ABF1C172376003251FB /* ArticleSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleSearchViewController.m; sourceTree = "<group>"; };
+		4EA58AC11C17238D003251FB /* CategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategorySearchViewController.h; sourceTree = "<group>"; };
+		4EA58AC21C17238D003251FB /* CategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategorySearchViewController.m; sourceTree = "<group>"; };
+		4EA58AC41C1723AB003251FB /* UserSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchViewController.h; sourceTree = "<group>"; };
+		4EA58AC51C1723AB003251FB /* UserSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchViewController.m; sourceTree = "<group>"; };
 		4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4EB6ADAD1A77D7220089797A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		4EB6ADAE1A77D7220089797A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
@@ -1728,6 +1743,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4EA58AB71C1720E6003251FB /* SearchController */,
 				8AAA2D111C04442400B27E49 /* PreViewControllers */,
 				391F5F8D1B1705A000931533 /* UIComponents */,
 				4EB8E2251B9F398B002C7F6F /* SelectionController */,
@@ -2015,6 +2031,23 @@
 				4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */,
 			);
 			path = pinyinTools;
+			sourceTree = "<group>";
+		};
+		4EA58AB71C1720E6003251FB /* SearchController */ = {
+			isa = PBXGroup;
+			children = (
+				4EA58AB81C1720E6003251FB /* SearchController.h */,
+				4EA58AB91C1720E6003251FB /* SearchController.m */,
+				4EA58ABB1C172365003251FB /* EntitySearchViewController.h */,
+				4EA58ABC1C172365003251FB /* EntitySearchViewController.m */,
+				4EA58ABE1C172376003251FB /* ArticleSearchViewController.h */,
+				4EA58ABF1C172376003251FB /* ArticleSearchViewController.m */,
+				4EA58AC11C17238D003251FB /* CategorySearchViewController.h */,
+				4EA58AC21C17238D003251FB /* CategorySearchViewController.m */,
+				4EA58AC41C1723AB003251FB /* UserSearchViewController.h */,
+				4EA58AC51C1723AB003251FB /* UserSearchViewController.m */,
+			);
+			path = SearchController;
 			sourceTree = "<group>";
 		};
 		4EB6ADAC1A77D70E0089797A /* BaseViewController */ = {
@@ -2786,6 +2819,7 @@
 				4E688A231BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				B772BEA01BD55861005C1540 /* UserPostNoteViewController.m in Sources */,
 				B7C684861ABBD78E00A122E8 /* ListViewController.m in Sources */,
+				4EA58ABA1C1720E6003251FB /* SearchController.m in Sources */,
 				B769B11A1B2ACE91004401FA /* IFTTTAnimation.m in Sources */,
 				B7C079891BC5827E006B7379 /* DDContextFilterLogFormatter.m in Sources */,
 				B7ED32B51B257F5B009BAF5A /* EntityCell.m in Sources */,
@@ -2877,6 +2911,7 @@
 				4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */,
 				B76EE07F1B3D86AE009D8763 /* MessageController.m in Sources */,
 				4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */,
+				4EA58AC61C1723AB003251FB /* UserSearchViewController.m in Sources */,
 				4EC9F79F1A7A79800057D736 /* CategoryViewController.m in Sources */,
 				B7F544031BC2457E0044F5E9 /* UIImage+WebP.m in Sources */,
 				B769B1221B2ACE91004401FA /* IFTTTFrameAnimation.m in Sources */,
@@ -2890,10 +2925,12 @@
 				B769B1201B2ACE91004401FA /* IFTTTCornerRadiusAnimation.m in Sources */,
 				4E688A001BA9C2BA0006AD9B /* UIView+JSQMessages.m in Sources */,
 				B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */,
+				4EA58ABD1C172365003251FB /* EntitySearchViewController.m in Sources */,
 				8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */,
 				4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */,
 				B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */,
 				4E688A121BA9C2BA0006AD9B /* JSQPhotoMediaItem.m in Sources */,
+				4EA58AC01C172376003251FB /* ArticleSearchViewController.m in Sources */,
 				8AAA50891BD67614005384CD /* UserTagCell.m in Sources */,
 				B7FE2A0B1B2817FD001C2E33 /* SelectionCell.m in Sources */,
 				4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */,
@@ -2902,6 +2939,7 @@
 				B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */,
 				B7F544001BC2457E0044F5E9 /* UIButton+WebCache.m in Sources */,
 				4E6889FA1BA9C2BA0006AD9B /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
+				4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */,
 				4E688A141BA9C2BA0006AD9B /* JSQMessagesCellTextView.m in Sources */,

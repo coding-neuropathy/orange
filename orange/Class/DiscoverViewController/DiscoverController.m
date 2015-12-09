@@ -22,7 +22,7 @@
 #import "GTScrollNavigationBar.h"
 //#import "GroupViewController.h"
 #import "CategroyGroupController.h"
-#import "SearchResultsViewController.h"
+#import "SearchController.h"
 
 #import "EntityPreViewController.h"
 
@@ -41,7 +41,7 @@
 @property (strong, nonatomic) NSArray * articleArray;
 @property (strong, nonatomic) UITableView * searchLogTableView;
 
-@property (strong, nonatomic) SearchResultsViewController * searchResultsVC;
+@property (strong, nonatomic) SearchController * searchResultsVC;
 @end
 
 @implementation DiscoverController
@@ -152,10 +152,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return _searchVC;
 }
 
-- (SearchResultsViewController *)searchResultsVC
+- (SearchController *)searchResultsVC
 {
     if (!_searchResultsVC) {
-        _searchResultsVC = [[SearchResultsViewController alloc] init];
+        _searchResultsVC = [[SearchController alloc] init];
     }
     return _searchResultsVC;
 }
