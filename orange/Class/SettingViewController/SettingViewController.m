@@ -97,6 +97,16 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //    
 //        [self.dataArray addObject:linkSection];
 //    }
+    /**
+     *  账号安全
+     */
+    NSDictionary * accountSection = @{@"section": @"account",
+                                      @"row": @[
+                                          @"mail",
+                                          @"password"
+                                          ]};
+    [self.dataArray addObject:accountSection];
+    
     
     NSDictionary *recommandSection = @{@"section" : @"recommandtion",
                                     @"row"     : @[
