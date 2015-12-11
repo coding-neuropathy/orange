@@ -163,6 +163,8 @@
 "sign up"   = "登記";
 "sign out"  = "退出登錄";
 
+"mail"      = "郵箱";
+
 /*
  * datetime
  */

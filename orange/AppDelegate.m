@@ -71,9 +71,10 @@ int ddLogLevel;
     
     
     /**
-     *
+     *  set 3d touch
      */
-    [self setDynamicAction];
+    if (iOS9)
+        [self setDynamicAction];
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -86,8 +87,8 @@ int ddLogLevel;
     [APService setupWithOption:launchOptions];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateJPushID:) name:kJPFNetworkDidLoginNotification object:nil];
     
-    [SVProgressHUD setBackgroundColor:UIColorFromRGB(0x2b2b2b)];
-    [SVProgressHUD setForegroundColor:UIColorFromRGB(0xffffff)];
+//    [SVProgressHUD setBackgroundColor:UIColorFromRGB(0x2b2b2b)];
+//    [SVProgressHUD setForegroundColor:UIColorFromRGB(0xffffff)];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -474,6 +475,7 @@ int ddLogLevel;
 //    }
 }
 
+#pragma mark - 3d touch
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL succeeded))completionHandler
 {
 //    DDLogInfo(@"OKOKOKOKO");

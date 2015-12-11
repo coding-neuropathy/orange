@@ -86,9 +86,6 @@
 		4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70271A5ADC260032719E /* SelectionViewController.m */; };
 		4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A901A1FA37D009FF11D /* AKSegmentedControl.m */; };
 		4E216A951A2392F2009FF11D /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A941A2392F2009FF11D /* JSBadgeView.m */; };
-		4E2D6D3F1A69601F009E4A17 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D341A69601F009E4A17 /* SVIndefiniteAnimatedView.m */; };
-		4E2D6D401A69601F009E4A17 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4E2D6D361A69601F009E4A17 /* SVProgressHUD.bundle */; };
-		4E2D6D411A69601F009E4A17 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D381A69601F009E4A17 /* SVProgressHUD.m */; };
 		4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D3C1A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m */; };
 		4E2D6D431A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D3E1A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m */; };
 		4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D4A1A697B82009E4A17 /* EntitySingleListCell.m */; };
@@ -221,6 +218,10 @@
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
 		8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A418C791C04481000CE01B5 /* EntityPreView.m */; };
 		8A418C7C1C04519C00CE01B5 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A418C7B1C04519C00CE01B5 /* libPushSDK-1.8.8.a */; };
+		8A4E8F8C1C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E8F851C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m */; };
+		8A4E8F8D1C1A8D5B003EBE95 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8A4E8F871C1A8D5B003EBE95 /* SVProgressHUD.bundle */; };
+		8A4E8F8E1C1A8D5B003EBE95 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E8F891C1A8D5B003EBE95 /* SVProgressHUD.m */; };
+		8A4E8F8F1C1A8D5B003EBE95 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E8F8B1C1A8D5B003EBE95 /* SVRadialGradientLayer.m */; };
 		8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */; };
 		8A5DAEB21BC779A00028C36D /* ALBBFullSecurityGuard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEA31BC7799F0028C36D /* ALBBFullSecurityGuard.framework */; };
 		8A5DAEB31BC779A00028C36D /* ALBBHotpatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DAEA41BC7799F0028C36D /* ALBBHotpatch.framework */; };
@@ -514,12 +515,6 @@
 		4E216A901A1FA37D009FF11D /* AKSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSegmentedControl.m; sourceTree = "<group>"; };
 		4E216A931A2392F2009FF11D /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
 		4E216A941A2392F2009FF11D /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
-		4E2D6D331A69601F009E4A17 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
-		4E2D6D341A69601F009E4A17 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
-		4E2D6D351A69601F009E4A17 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
-		4E2D6D361A69601F009E4A17 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		4E2D6D371A69601F009E4A17 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		4E2D6D381A69601F009E4A17 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		4E2D6D3A1A69601F009E4A17 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
 		4E2D6D3B1A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
 		4E2D6D3C1A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
@@ -754,6 +749,14 @@
 		8A418C781C04481000CE01B5 /* EntityPreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityPreView.h; path = PreViewControllers/EntityPreView.h; sourceTree = "<group>"; };
 		8A418C791C04481000CE01B5 /* EntityPreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityPreView.m; path = PreViewControllers/EntityPreView.m; sourceTree = "<group>"; };
 		8A418C7B1C04519C00CE01B5 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
+		8A4E8F841C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		8A4E8F851C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		8A4E8F861C1A8D5B003EBE95 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		8A4E8F871C1A8D5B003EBE95 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		8A4E8F881C1A8D5B003EBE95 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		8A4E8F891C1A8D5B003EBE95 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		8A4E8F8A1C1A8D5B003EBE95 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		8A4E8F8B1C1A8D5B003EBE95 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		8A53D9241BD948F6006EF0D1 /* UserEntityCategoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntityCategoryController.h; sourceTree = "<group>"; };
 		8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntityCategoryController.m; sourceTree = "<group>"; };
 		8A5DAEA31BC7799F0028C36D /* ALBBFullSecurityGuard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBFullSecurityGuard.framework; sourceTree = "<group>"; };
@@ -1489,19 +1492,6 @@
 			path = JSBadgeView;
 			sourceTree = "<group>";
 		};
-		4E2D6D321A69601F009E4A17 /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				4E2D6D331A69601F009E4A17 /* SVIndefiniteAnimatedView.h */,
-				4E2D6D341A69601F009E4A17 /* SVIndefiniteAnimatedView.m */,
-				4E2D6D351A69601F009E4A17 /* SVProgressHUD-Prefix.pch */,
-				4E2D6D361A69601F009E4A17 /* SVProgressHUD.bundle */,
-				4E2D6D371A69601F009E4A17 /* SVProgressHUD.h */,
-				4E2D6D381A69601F009E4A17 /* SVProgressHUD.m */,
-			);
-			path = SVProgressHUD;
-			sourceTree = "<group>";
-		};
 		4E2D6D391A69601F009E4A17 /* SVPullToRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -1663,6 +1653,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				8A4E8F831C1A8D5B003EBE95 /* SVProgressHUD */,
 				8A0568B91BE4E7AD0046443F /* LeanCloudSocial.framework */,
 				B7F543D51BC2457E0044F5E9 /* SDWebImage */,
 				4E6889981BA9C2BA0006AD9B /* JSQMessagesViewController */,
@@ -1681,7 +1672,6 @@
 				4E3C41381A9FFBEB0053DB5E /* IBActionSheet */,
 				4EA0C44A1A805CBD0025EC2E /* pinyinTools */,
 				4E2D6D531A6BFD77009E4A17 /* RTLabel */,
-				4E2D6D321A69601F009E4A17 /* SVProgressHUD */,
 				4E2D6D391A69601F009E4A17 /* SVPullToRefresh */,
 				4E066A9C1A5C43E800DFEF65 /* HMSegmentedControl */,
 				4E8D6AB41A3B66F900156C17 /* MCPHandler */,
@@ -2165,6 +2155,21 @@
 				B77E00A81B8988DC008BCA55 /* EntityPopView.m */,
 			);
 			path = EntityViewController;
+			sourceTree = "<group>";
+		};
+		8A4E8F831C1A8D5B003EBE95 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				8A4E8F841C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.h */,
+				8A4E8F851C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m */,
+				8A4E8F861C1A8D5B003EBE95 /* SVProgressHUD-Prefix.pch */,
+				8A4E8F871C1A8D5B003EBE95 /* SVProgressHUD.bundle */,
+				8A4E8F881C1A8D5B003EBE95 /* SVProgressHUD.h */,
+				8A4E8F891C1A8D5B003EBE95 /* SVProgressHUD.m */,
+				8A4E8F8A1C1A8D5B003EBE95 /* SVRadialGradientLayer.h */,
+				8A4E8F8B1C1A8D5B003EBE95 /* SVRadialGradientLayer.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		8AAA2D111C04442400B27E49 /* PreViewControllers */ = {
@@ -2743,7 +2748,6 @@
 				4E4F27F31B6F4699003A63C5 /* 15.png in Resources */,
 				4E4F27F41B6F4699003A63C5 /* 16.png in Resources */,
 				4E4F27EF1B6F4699003A63C5 /* 11.png in Resources */,
-				4E2D6D401A69601F009E4A17 /* SVProgressHUD.bundle in Resources */,
 				B72000B71B0849E50001F199 /* PushConfig.plist in Resources */,
 				4E688A1A1BA9C2BA0006AD9B /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				4E56DF7C19D56EF500263B17 /* FontAwesome.ttf in Resources */,
@@ -2754,6 +2758,7 @@
 				B71E494A1AC9207B00D4DB6D /* guoku.strings in Resources */,
 				4E4F27F91B6F4699003A63C5 /* 5.png in Resources */,
 				4E6889F91BA9C2BA0006AD9B /* JSQMessagesAssets.bundle in Resources */,
+				8A4E8F8D1C1A8D5B003EBE95 /* SVProgressHUD.bundle in Resources */,
 				4E4F27D81B6F438E003A63C5 /* loading-image.png in Resources */,
 				4E4F27FB1B6F4699003A63C5 /* 7.png in Resources */,
 				4E688A031BA9C2BA0006AD9B /* JSQMessagesViewController.xib in Resources */,
@@ -2833,6 +2838,7 @@
 				B7F543FB1BC2457E0044F5E9 /* SDWebImageDecoder.m in Sources */,
 				4E56DF7B19D56EF500263B17 /* NSString+FontAwesome.m in Sources */,
 				B769B1231B2ACE91004401FA /* IFTTTHideAnimation.m in Sources */,
+				8A4E8F8E1C1A8D5B003EBE95 /* SVProgressHUD.m in Sources */,
 				B7DA97C11B270BE900C9BC25 /* EntityLikeUserCell.m in Sources */,
 				4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */,
 				B76EE0821B3D86C3009D8763 /* NotifyController.m in Sources */,
@@ -2852,8 +2858,6 @@
 				B7180EA41B9D380A004AD9AD /* HomeController.m in Sources */,
 				394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */,
 				B7ED32BB1B25C8D8009BAF5A /* EntityHeaderSectionView.m in Sources */,
-				4E2D6D3F1A69601F009E4A17 /* SVIndefiniteAnimatedView.m in Sources */,
-				4E2D6D411A69601F009E4A17 /* SVProgressHUD.m in Sources */,
 				B783F6621B9AEC46004DF1CB /* ArticlesController.m in Sources */,
 				B76C69D31BBB981E00BD22E5 /* TagArticlesController.m in Sources */,
 				8A0B16E21BABFDED00469DD6 /* ArticleListCell.m in Sources */,
@@ -2915,6 +2919,7 @@
 				4EC9F79F1A7A79800057D736 /* CategoryViewController.m in Sources */,
 				B7F544031BC2457E0044F5E9 /* UIImage+WebP.m in Sources */,
 				B769B1221B2ACE91004401FA /* IFTTTFrameAnimation.m in Sources */,
+				8A4E8F8C1C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m in Sources */,
 				B769B1171B2ACE91004401FA /* IFTTTAlphaAnimation.m in Sources */,
 				4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */,
 				4E688A111BA9C2BA0006AD9B /* JSQMessagesBubbleImage.m in Sources */,
@@ -2955,6 +2960,7 @@
 				4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */,
 				4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */,
 				B76676411AB81758002F294C /* NoDataView.m in Sources */,
+				8A4E8F8F1C1A8D5B003EBE95 /* SVRadialGradientLayer.m in Sources */,
 				B72ACCC81B666B8C0020E841 /* DiscoverBannerView.m in Sources */,
 				4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */,
 				B769B1251B2ACE91004401FA /* IFTTTTransform3DAnimation.m in Sources */,
