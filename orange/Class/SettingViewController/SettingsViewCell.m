@@ -50,8 +50,9 @@
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Passport sharedInstance].user.taobaoScreenName];
     }
-    else if ([_text isEqualToString:@"account"]) {
+    else if ([_text isEqualToString:@"mail"]) {
 //        self.detailTextLabel.text
+        self.detailTextLabel.text = [Passport sharedInstance].user.email;
     }
     
     
