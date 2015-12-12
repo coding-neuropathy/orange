@@ -50,6 +50,10 @@
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Passport sharedInstance].user.taobaoScreenName];
     }
+    else if ([_text isEqualToString:@"account"]) {
+//        self.detailTextLabel.text
+    }
+    
     
     else {
         [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
