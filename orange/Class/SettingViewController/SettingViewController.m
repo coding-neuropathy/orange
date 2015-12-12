@@ -17,6 +17,9 @@
 //#import "GKWebVC.h"
 #import "WebViewController.h"
 #import "FeedBackViewController.h"
+//#import "UpdateEmailController.h"
+#import "VerifyEmailViewController.h"
+#import "PasswordEditViewController.h"
 
 
 static NSString *SettingTableIdentifier = @"SettingCell";
@@ -100,13 +103,14 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     /**
      *  账号安全
      */
-    NSDictionary * accountSection = @{@"section": @"account",
+    if (k_isLogin) {
+        NSDictionary * accountSection = @{@"section": @"account",
                                       @"row": @[
                                           @"mail",
                                           @"password"
                                           ]};
-    [self.dataArray addObject:accountSection];
-    
+        [self.dataArray addObject:accountSection];
+    }
     
     NSDictionary *recommandSection = @{@"section" : @"recommandtion",
                                     @"row"     : @[
@@ -197,6 +201,9 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     
     NSString * section = [[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"section"];
     
+    /**
+     *  分享
+     */
     if ([section isEqualToString:@"link settings"]) {
         switch (indexPath.row) {
             case 0:
@@ -241,6 +248,32 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         }
     }
     
+    /**
+     *  账号
+     */
+    if ([section isEqualToString:@"account"]) {
+        switch (indexPath.row) {
+            case 0:
+            {
+                VerifyEmailViewController * vc = [[VerifyEmailViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                
+                break;
+            case 1:
+            {
+                PasswordEditViewController * VC = [[PasswordEditViewController alloc] init];
+                [self.navigationController pushViewController:VC animated:YES];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    /**
+     *  推荐果库
+     */
     if ([section isEqualToString:@"recommandtion"])
     {
         if (indexPath.row == 0) {
@@ -257,6 +290,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
         }
     }
+    
+    
     if ([section isEqualToString:@"other"]) {
         switch (indexPath.row) {
 //            case 0:
