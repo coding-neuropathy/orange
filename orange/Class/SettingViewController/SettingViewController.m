@@ -98,17 +98,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 {
     [super loadView];
     
-    //    self.view.backgroundColor = [UIColor whiteColor];
-    
-//    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
-//    self.tableView.delegate = self;
-//    self.tableView.dataSource = self;
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//    self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
-//    [self.view addSubview:self.tableView];
-//    self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
-//    
-//    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.versionLabel];
     self.view.backgroundColor = UIColorFromRGB(0xfafafa);
@@ -130,6 +119,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //    
 //        [self.dataArray addObject:linkSection];
 //    }
+    self.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
+    
     /**
      *  账号安全
      */
