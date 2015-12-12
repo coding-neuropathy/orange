@@ -50,11 +50,6 @@
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Passport sharedInstance].user.taobaoScreenName];
     }
-<<<<<<< HEAD
-    else if ([_text isEqualToString:@"mail"]) {
-//        self.detailTextLabel.text
-        self.detailTextLabel.text = [Passport sharedInstance].user.email;
-=======
     else if ([_text isEqualToString:@"mail"] && k_isLogin) {
 //        self.detailTextLabel.text
 //        [self setAccessoryType:UITableViewCellAccessoryNone];
@@ -62,7 +57,6 @@
     } else if ([_text isEqualToString:@"password"] && k_isLogin) {
 //        [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = NSLocalizedStringFromTable(@"reset password", kLocalizedFile, nil);
->>>>>>> 5b6feefcd12d531f8931652119bf9d1bd0e70a5d
     }
     else {
         [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
