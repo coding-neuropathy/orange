@@ -36,7 +36,7 @@
     self.textLabel.text = NSLocalizedStringFromTable(_text, kLocalizedFile, nil);
     
     if([_text isEqualToString:@"version"]) {
-        DDLogInfo(@"version %@", [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]);
+//        DDLogInfo(@"version %@", [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]);
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -51,9 +51,12 @@
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Passport sharedInstance].user.taobaoScreenName];
     }
     else if ([_text isEqualToString:@"mail"] && k_isLogin) {
-//        self.detailTextLabel.text
-//        [self setAccessoryType:UITableViewCellAccessoryNone];
-        self.detailTextLabel.text = [[Passport sharedInstance].user email];
+        NSString * mail = [[Passport sharedInstance].user email];
+        if ([[Passport sharedInstance].user mail_verified])
+            self.detailTextLabel.text = [NSString stringWithFormat:@"%@ (已验证)", mail];
+        else
+            self.detailTextLabel.text = [NSString stringWithFormat:@"%@ (未验证)", mail];
+        
     } else if ([_text isEqualToString:@"password"] && k_isLogin) {
 //        [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = NSLocalizedStringFromTable(@"reset password", kLocalizedFile, nil);

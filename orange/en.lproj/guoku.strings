@@ -163,7 +163,8 @@
 "sign up"   = "Sign Up";
 "sign out"  = "Sign Out";
 
-"mail"      = "Mail";
+"mail"              = "Mail";
+"reset password"    = "Reset Password";
 
 /*
  * datetime

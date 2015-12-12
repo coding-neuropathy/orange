@@ -164,6 +164,7 @@
 "sign out"  = "退出登录";
 
 "mail"      = "邮箱";
+"reset password"    = "重设密码";
 
 /*
  * datetime

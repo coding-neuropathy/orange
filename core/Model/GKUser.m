@@ -39,6 +39,7 @@
                              @"relation"         : @"relation",
                              @"email"            : @"email",
                              @"location"         : @"location",
+                             @"mail_verified'"   : @"mail_verified",
                              };
     
     return keyDic;

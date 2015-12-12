@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic, strong) UITableView * tableView;
+
 
 @end

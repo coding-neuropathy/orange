@@ -91,6 +91,11 @@ typedef NS_ENUM(NSInteger, GKUserState) {
 @property (nonatomic, strong) NSString *location;
 
 /**
+ *  邮箱验证状态
+ */
+@property (nonatomic, assign) BOOL mail_verified;
+
+/**
  *  头像URL
  */
 @property (nonatomic, strong) NSURL *avatarURL;

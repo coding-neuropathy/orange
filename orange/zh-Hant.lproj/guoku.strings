@@ -164,7 +164,7 @@
 "sign out"  = "退出登錄";
 
 "mail"      = "郵箱";
-
+"reset password"    = "重設密碼";
 /*
  * datetime
  */
