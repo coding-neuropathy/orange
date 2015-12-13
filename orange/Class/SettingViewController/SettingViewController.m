@@ -108,7 +108,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 {
     [super viewDidLoad];
 
-    self.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
+    self.navigationItem.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
     
     /**
      *  账号安全
