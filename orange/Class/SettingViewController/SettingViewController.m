@@ -17,6 +17,9 @@
 //#import "GKWebVC.h"
 #import "WebViewController.h"
 #import "FeedBackViewController.h"
+//#import "UpdateEmailController.h"
+#import "VerifyEmailViewController.h"
+#import "PasswordEditViewController.h"
 
 
 static NSString *SettingTableIdentifier = @"SettingCell";
@@ -24,10 +27,14 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 @interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIActionSheetDelegate, SettingsFooterViewDelegate>
 
+@property(nonatomic, strong) UITableView * tableView;
+
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UISwitch * switch_notification;
 @property (nonatomic, strong) UISwitch * switch_assistant;
 @property (nonatomic, strong) SettingsFooterView * footerView;
+
+@property (nonatomic, strong) UILabel * versionLabel;
 
 @property (nonatomic, strong) id<ALBBLoginService> loginService;
 
@@ -62,24 +69,50 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     return _footerView;
 }
 
+- (UILabel *)versionLabel
+{
+    if (!_versionLabel) {
+        _versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 20)];
+        _versionLabel.font = [UIFont systemFontOfSize:12.];
+        _versionLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _versionLabel.textAlignment = NSTextAlignmentCenter;
+//        _versionLabel.backgroundColor = [UIColor redColor];
+        _versionLabel.text = [NSString stringWithFormat:@"version %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    }
+    return _versionLabel;
+}
+
+- (UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _tableView.separatorColor = UIColorFromRGB(0xebebeb);
+    }
+    return _tableView;
+}
+
 - (void)loadView
 {
     [super loadView];
     
     //    self.view.backgroundColor = [UIColor whiteColor];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
+//    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
+//    self.tableView.delegate = self;
+//    self.tableView.dataSource = self;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//    self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
+//    [self.view addSubview:self.tableView];
+//    self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
+//    
+//    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
     [self.view addSubview:self.tableView];
-    self.tableView.backgroundColor = UIColorFromRGB(0xfafafa);
-    
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
-    
-
-
+    [self.view addSubview:self.versionLabel];
+    self.view.backgroundColor = UIColorFromRGB(0xfafafa);
+    self.versionLabel.deFrameBottom = self.view.deFrameBottom - 80.;
 }
 
 - (void)viewDidLoad
@@ -97,6 +130,17 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //    
 //        [self.dataArray addObject:linkSection];
 //    }
+    /**
+     *  账号安全
+     */
+    if (k_isLogin) {
+        NSDictionary * accountSection = @{@"section": @"account",
+                                      @"row": @[
+                                          @"mail",
+                                          @"password"
+                                          ]};
+        [self.dataArray addObject:accountSection];
+    }
     
     NSDictionary *recommandSection = @{@"section" : @"recommandtion",
                                     @"row"     : @[
@@ -113,7 +157,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //                                           @"agreement",
                                            @"clear image cache",
                                            @"feedback",
-                                           @"version",
+//                                           @"version",
                                            ]};
     [self.dataArray addObject:otherSection];
     
@@ -187,6 +231,9 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     
     NSString * section = [[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"section"];
     
+    /**
+     *  分享
+     */
     if ([section isEqualToString:@"link settings"]) {
         switch (indexPath.row) {
             case 0:
@@ -231,6 +278,32 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         }
     }
     
+    /**
+     *  账号
+     */
+    if ([section isEqualToString:@"account"]) {
+        switch (indexPath.row) {
+            case 0:
+            {
+                VerifyEmailViewController * vc = [[VerifyEmailViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                
+                break;
+            case 1:
+            {
+                PasswordEditViewController * VC = [[PasswordEditViewController alloc] init];
+                [self.navigationController pushViewController:VC animated:YES];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    /**
+     *  推荐果库
+     */
     if ([section isEqualToString:@"recommandtion"])
     {
         if (indexPath.row == 0) {
@@ -247,6 +320,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
         }
     }
+    
+    
     if ([section isEqualToString:@"other"]) {
         switch (indexPath.row) {
 //            case 0:

@@ -49,3 +49,14 @@ typedef NS_ENUM(NSInteger, UserPageType) {
     UserPostType,
     UserTagType,
 };
+
+
+/**
+ *  设置页 cell 类型
+ */
+typedef NS_ENUM(NSInteger, SettingCellType) {
+    AccountType,
+    SNSType,
+    AboutType,
+};
+

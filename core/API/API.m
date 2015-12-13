@@ -99,7 +99,6 @@
 {
     NSString * path = @"launch/";
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"OKOKO %@", responseObject);
         GKLaunch * launch = [GKLaunch modelFromDictionary:responseObject];
         if (success) {
             success(launch);

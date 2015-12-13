@@ -140,7 +140,7 @@ static NSString *CellIdentifier = @"SelectionCell";
         } failure:^(NSInteger stateCode) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
             //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
-            [SVProgressHUD dismiss];
+//            [SVProgressHUD dismiss];
             [self.tableView.pullToRefreshView stopAnimating];
         }];
     }

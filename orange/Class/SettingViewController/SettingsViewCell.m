@@ -36,7 +36,7 @@
     self.textLabel.text = NSLocalizedStringFromTable(_text, kLocalizedFile, nil);
     
     if([_text isEqualToString:@"version"]) {
-        DDLogInfo(@"version %@", [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]);
+//        DDLogInfo(@"version %@", [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]);
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -50,7 +50,17 @@
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@", [Passport sharedInstance].user.taobaoScreenName];
     }
-    
+    else if ([_text isEqualToString:@"mail"] && k_isLogin) {
+        NSString * mail = [[Passport sharedInstance].user email];
+        if ([[Passport sharedInstance].user mail_verified])
+            self.detailTextLabel.text = [NSString stringWithFormat:@"%@ (已验证)", mail];
+        else
+            self.detailTextLabel.text = [NSString stringWithFormat:@"%@ (未验证)", mail];
+        
+    } else if ([_text isEqualToString:@"password"] && k_isLogin) {
+//        [self setAccessoryType:UITableViewCellAccessoryNone];
+        self.detailTextLabel.text = NSLocalizedStringFromTable(@"reset password", kLocalizedFile, nil);
+    }
     else {
         [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         self.detailTextLabel.text = nil;
@@ -66,7 +76,13 @@
     [super layoutSubviews];
     
     self.textLabel.frame = CGRectMake(15., 0., kScreenWidth - 130., self.frame.size.height);
-    self.detailTextLabel.frame = CGRectMake(kScreenWidth - 115., 0., 100, self.frame.size.height);
+    
+    if ([self.text isEqualToString:@"mail"] || [self.text isEqualToString:@"password"]) {
+        self.detailTextLabel.textAlignment = NSTextAlignmentRight;
+        self.detailTextLabel.frame = CGRectMake(kScreenWidth - 240., 0., 200., self.frame.size.height);
+    }
+    else
+        self.detailTextLabel.frame = CGRectMake(kScreenWidth - 115., 0., 100, self.frame.size.height);
 //    NSLog(@"%@", self.accessoryView);
 //    self.accessoryView = self.detailTextLabel;
 }
