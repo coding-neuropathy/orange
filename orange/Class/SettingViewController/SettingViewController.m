@@ -107,32 +107,21 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-//    if (k_isLogin) {
-//        NSDictionary * linkSection = @{@"section"   :   @"link settings",
-//                                   @"row"       :   @[
-//                                           @"weibo",
-////                                           @"taobao",
-////                                           @"wechat",
-//                                           ]};
-//    
-//        [self.dataArray addObject:linkSection];
-//    }
+
     self.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
     
     /**
      *  账号安全
      */
-    if (k_isLogin) {
-        NSDictionary * accountSection = @{@"section": @"account",
-                                      @"row": @[
-                                          @"mail",
-                                          @"password"
-                                          ]};
-        [self.dataArray addObject:accountSection];
-    }
-    
+//    if (k_isLogin) {
+//        NSDictionary * accountSection = @{@"section": @"account",
+//                                      @"row": @[
+//                                          @"mail",
+//                                          @"password"
+//                                          ]};
+//        [self.dataArray addObject:accountSection];
+//    }
+//    
     NSDictionary *recommandSection = @{@"section" : @"recommandtion",
                                     @"row"     : @[
                                             @"share application to wechat",

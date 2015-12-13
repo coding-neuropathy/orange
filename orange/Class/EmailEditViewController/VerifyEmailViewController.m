@@ -135,12 +135,14 @@
         _verifyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _verifyBtn.layer.cornerRadius = 4.;
         _verifyBtn.layer.masksToBounds = YES;
-        _verifyBtn.backgroundColor = UIColorFromRGB(0x427EC0);
+
         [_verifyBtn setTitle:NSLocalizedStringFromTable(@"send mail for verify", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_verifyBtn setTitle:NSLocalizedStringFromTable(@"verified", kLocalizedFile, nil) forState:UIControlStateDisabled];
         _verifyBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
         _verifyBtn.titleLabel.textColor = UIColorFromRGB(0xffffff);
         
         [_verifyBtn addTarget:self action:@selector(verifyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         [self addSubview:_verifyBtn];
     }
     return _verifyBtn;
@@ -189,6 +191,11 @@
     self.verifyBtn.frame = CGRectMake(0., 0., 150., 50.);
     self.verifyBtn.deFrameTop = self.emailLabel.deFrameBottom + 20.;
     self.verifyBtn.deFrameLeft = (kScreenWidth - 150 * 2) / 3.;
+    
+    if ([[Passport sharedInstance].user mail_verified]) {
+        self.verifyBtn.enabled = NO;
+        self.verifyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
+    }
     
     self.updateBtn.frame = CGRectMake(0., 0., 150., 50.);
     self.updateBtn.center = self.verifyBtn.center;

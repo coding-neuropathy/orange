@@ -86,16 +86,16 @@ NSString *SettingTableIdentifier = @"SettingCell";
                                       @"row"     : @[@"nickname", @"gender", @"bio", @"location",]
                                       };
     
-//    NSDictionary *accountSection = @{@"section" : @"帐号",
-//                                      @"row"     : @[@"email", @"password"]};
+    NSDictionary *accountSection = @{@"section" : @"帐号",
+                                      @"row"     : @[@"email", @"password"]};
 
 //    NSLog(@"email %@", [Passport sharedInstance].user.email);
 //    if (k_isLogin) {
 //    [self.dataArray addObject:accountSection];
 //    }
     
-//    self.dataArray = [NSMutableArray arrayWithObjects:profileSection, accountSection, nil];
-    self.dataArray= [NSMutableArray arrayWithObjects:profileSection, nil];
+    self.dataArray = [NSMutableArray arrayWithObjects:profileSection, accountSection, nil];
+//    self.dataArray= [NSMutableArray arrayWithObjects:profileSection, nil];
     
     self.tableView.tableHeaderView = self.headerView;
     self.headerView.avatarURL = [Passport sharedInstance].user.avatarURL;
