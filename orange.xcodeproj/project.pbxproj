@@ -183,6 +183,9 @@
 		4E688A221BA9C2BA0006AD9B /* JSQMessagesToolbarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6889F51BA9C2BA0006AD9B /* JSQMessagesToolbarContentView.xib */; };
 		4E688A231BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6889F71BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.m */; };
 		4E688A241BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6889F81BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.xib */; };
+		4E73E67A1C19361300B604B5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E73E6791C19361300B604B5 /* LoginViewController.m */; };
+		4E73E67D1C1936C100B604B5 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E73E67C1C1936C100B604B5 /* RegisterViewController.m */; };
+		4E73E6801C1936D400B604B5 /* AuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E73E67F1C1936D400B604B5 /* AuthController.m */; };
 		4E7869691BA70C5A00586BD9 /* EntityHeaderBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */; };
 		4E8A34361BB060D700DF3841 /* tipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A34351BB060D700DF3841 /* tipView.m */; };
 		4E8D6A991A38B59F00156C17 /* fontdiao.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */; };
@@ -682,6 +685,12 @@
 		4E6889F61BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTypingIndicatorFooterView.h; sourceTree = "<group>"; };
 		4E6889F71BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTypingIndicatorFooterView.m; sourceTree = "<group>"; };
 		4E6889F81BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesTypingIndicatorFooterView.xib; sourceTree = "<group>"; };
+		4E73E6781C19361300B604B5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		4E73E6791C19361300B604B5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		4E73E67B1C1936C100B604B5 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		4E73E67C1C1936C100B604B5 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		4E73E67E1C1936D400B604B5 /* AuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthController.h; sourceTree = "<group>"; };
+		4E73E67F1C1936D400B604B5 /* AuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthController.m; sourceTree = "<group>"; };
 		4E7869671BA70C5A00586BD9 /* EntityHeaderBuyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHeaderBuyView.h; sourceTree = "<group>"; };
 		4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderBuyView.m; sourceTree = "<group>"; };
 		4E8A34341BB060D700DF3841 /* tipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tipView.h; sourceTree = "<group>"; };
@@ -1743,6 +1752,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4E73E6771C19360400B604B5 /* AuthController */,
 				4EA58AB71C1720E6003251FB /* SearchController */,
 				8AAA2D111C04442400B27E49 /* PreViewControllers */,
 				391F5F8D1B1705A000931533 /* UIComponents */,
@@ -1953,6 +1963,19 @@
 				4E6889F81BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4E73E6771C19360400B604B5 /* AuthController */ = {
+			isa = PBXGroup;
+			children = (
+				4E73E6781C19361300B604B5 /* LoginViewController.h */,
+				4E73E6791C19361300B604B5 /* LoginViewController.m */,
+				4E73E67B1C1936C100B604B5 /* RegisterViewController.h */,
+				4E73E67C1C1936C100B604B5 /* RegisterViewController.m */,
+				4E73E67E1C1936D400B604B5 /* AuthController.h */,
+				4E73E67F1C1936D400B604B5 /* AuthController.m */,
+			);
+			path = AuthController;
 			sourceTree = "<group>";
 		};
 		4E8D6A8D1A38B59F00156C17 /* FontDiao */ = {
@@ -2935,6 +2958,7 @@
 				B7FE2A0B1B2817FD001C2E33 /* SelectionCell.m in Sources */,
 				4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */,
 				B769B1181B2ACE91004401FA /* IFTTTAngleAnimation.m in Sources */,
+				4E73E67D1C1936C100B604B5 /* RegisterViewController.m in Sources */,
 				B76EE0851B3D8A16009D8763 /* ActiveController.m in Sources */,
 				B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */,
 				B7F544001BC2457E0044F5E9 /* UIButton+WebCache.m in Sources */,
@@ -2950,6 +2974,7 @@
 				4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */,
 				4E688A171BA9C2BA0006AD9B /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				B7F543FE1BC2457E0044F5E9 /* SDWebImageManager.m in Sources */,
+				4E73E6801C1936D400B604B5 /* AuthController.m in Sources */,
 				B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */,
 				4E6889FF1BA9C2BA0006AD9B /* UIImage+JSQMessages.m in Sources */,
 				4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */,
@@ -3002,6 +3027,7 @@
 				4E688A091BA9C2BA0006AD9B /* JSQMessagesBubblesSizeCalculator.m in Sources */,
 				B7C079881BC5827E006B7379 /* DDTTYLogger.m in Sources */,
 				B71E495F1AC98E4700D4DB6D /* SettingsFooterView.m in Sources */,
+				4E73E67A1C19361300B604B5 /* LoginViewController.m in Sources */,
 				B769B11E1B2ACE91004401FA /* IFTTTColorAnimation.m in Sources */,
 				4E6889FB1BA9C2BA0006AD9B /* NSBundle+JSQMessages.m in Sources */,
 				4E2D6D5B1A6D49F0009E4A17 /* LoginView.m in Sources */,

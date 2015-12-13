@@ -14,6 +14,7 @@
 //#import "GKTaobaoOAuthViewController.h"
 #import "SignView.h"
 #import "WXApi.h"
+#import "AuthController.h"
 
 @interface LoginView () <UITextFieldDelegate, UIAlertViewDelegate>
 {
@@ -560,6 +561,7 @@
 
 - (void)show
 {
+    /*
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.alpha = 0;
@@ -578,7 +580,14 @@
         }];
     }];
     [AVAnalytics beginLogPageView:@"SignInView"];
-    [MobClick beginLogPageView:@"SignInView"];
+    [MobClick beginLogPageView:@"SignInView"];*/
+    
+    AuthController * vc = [[AuthController alloc]init];
+    [kAppDelegate.window.rootViewController presentViewController:vc animated:YES completion:^{
+        
+    }];
+    
+    
 }
 
 - (void)dismiss
