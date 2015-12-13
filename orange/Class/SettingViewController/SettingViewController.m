@@ -62,7 +62,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (SettingsFooterView *)footerView
 {
     if (!_footerView) {
-        _footerView = [[SettingsFooterView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 100.)];
+        _footerView = [[SettingsFooterView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 120.)];
         _footerView.delegate = self;
         _footerView.is_login = k_isLogin;
     }
@@ -110,9 +110,9 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //    
 //    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.versionLabel];
+    [self.footerView addSubview:self.versionLabel];
     self.view.backgroundColor = UIColorFromRGB(0xfafafa);
-    self.versionLabel.deFrameBottom = self.view.deFrameBottom - 80.;
+    self.versionLabel.deFrameBottom = self.footerView.deFrameHeight - 20.;
 }
 
 - (void)viewDidLoad
