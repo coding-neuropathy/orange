@@ -63,9 +63,22 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             self.tabBarItem = item;
             
             _cartService=[[TaeSDK sharedInstance] getService:@protocol(ALBBCartService)];
+        
+            
+            [self.user addObserver:self forKeyPath:@"avatarURL" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+            [self.user addObserver:self forKeyPath:@"nickname" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
         }
+        
     }
     return self;
+}
+
+- (void)dealloc
+{
+    if (self.user.userId == [Passport sharedInstance].user.userId) {
+        [self.user removeObserver:self forKeyPath:@"avatarURL"];
+        [self.user removeObserver:self forKeyPath:@"nickname"];
+    }
 }
 
 #pragma mark - init view
@@ -559,6 +572,24 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
     [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+}
+
+#pragma mark - UserModel KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (self.user.userId == [Passport sharedInstance].user.userId) {
+        if ([keyPath isEqualToString:@"nickname"]) {
+            DDLogInfo(@"nickname %@", self.user.nickname);
+            //            self.
+            self.user = [Passport sharedInstance].user;
+            [self.collectionView reloadData];
+        }
+        
+        if ([keyPath isEqualToString:@"avatarURL"]) {
+            self.user = [Passport sharedInstance].user;
+            [self.collectionView reloadData];
+        }
+    }
 }
 
 
