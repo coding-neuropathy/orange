@@ -67,25 +67,48 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4120</string>
+	<string>4121</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>guoku</string>
-		<string>sinaweibo</string>
 		<string>tbopen23093827</string>
 		<string>wx59118ccde8270caa</string>
 		<string>sinaweibosso.1459383851</string>
 		<string>mqqOpensdkSSoLogin</string>
 		<string>weixin</string>
+		<string>sinaweibo</string>
 		<string>sinaweibohdsso</string>
 		<string>sinaweibosso</string>
+		<string>weibosdk</string>
+		<string>weibosdk2.5</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSA</key>
+	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>weibo.cn</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+			<key>weibo.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>启动位置服务</string>

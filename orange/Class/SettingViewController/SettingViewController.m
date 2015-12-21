@@ -12,7 +12,8 @@
 
 #import "WXApi.h"
 #import "API.h"
-#import "LoginView.h"
+//#import "LoginView.h"
+#import "AuthController.h"
 
 //#import "GKWebVC.h"
 #import "WebViewController.h"
@@ -113,14 +114,14 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     /**
      *  账号安全
      */
-    if (k_isLogin) {
-        NSDictionary * accountSection = @{@"section": @"account",
-                                      @"row": @[
-                                          @"mail",
-                                          @"password"
-                                          ]};
-        [self.dataArray addObject:accountSection];
-    }
+//    if (k_isLogin) {
+//        NSDictionary * accountSection = @{@"section": @"account",
+//                                      @"row": @[
+//                                          @"mail",
+//                                          @"password"
+//                                          ]};
+//        [self.dataArray addObject:accountSection];
+//    }
 //
     NSDictionary *recommandSection = @{@"section" : @"recommandtion",
                                     @"row"     : @[
@@ -442,8 +443,12 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 - (void)TapLoginBtnAction
 {
-    LoginView * view = [[LoginView alloc] init];
-    [view show];
+//    LoginView * view = [[LoginView alloc] init];
+//    [view show];
+    AuthController * authVC = [[AuthController alloc] init];
+    UIViewController *top = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [top presentViewController:authVC animated:YES completion: nil];
+//    [self presentViewController:authVC animated:YES completion:nil];
 }
 
 - (void)TapLogoutBtnAction

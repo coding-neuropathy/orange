@@ -341,7 +341,7 @@
 
 - (void)configSNS
 {
-    if([WXApi isWXAppInstalled]){
+    if([WXApi isWXAppInstalled] && [AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo]){
         [self.view addSubview:self.taobaoButton];
         self.taobaoButton.center = self.loginButton.center;
         self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
@@ -353,7 +353,7 @@
         self.weixinBtn.center = self.taobaoButton.center;
         self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 20.;
         [self.view addSubview:self.weixinBtn];
-    } else {
+    } else if ([AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo] && ![WXApi isWXAppInstalled]) {
         [self.view addSubview:self.taobaoButton];
         self.taobaoButton.center = self.loginButton.center;
         self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
@@ -362,6 +362,28 @@
         [self.view addSubview:self.sinaWeiboButton];
         self.sinaWeiboButton.center = self.taobaoButton.center;
         self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 40.;
+    } else if ([WXApi isWXAppInstalled] && ![AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo]) {
+        [self.view addSubview:self.taobaoButton];
+        self.taobaoButton.center = self.loginButton.center;
+        self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
+        
+//        [self.view addSubview:self.sinaWeiboButton];
+//        self.sinaWeiboButton.center = self.taobaoButton.center;
+//        self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 20.;
+        
+        self.weixinBtn.center = self.taobaoButton.center;
+        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 40.;
+        [self.view addSubview:self.weixinBtn];
+        
+    } else {
+        [self.view addSubview:self.taobaoButton];
+        self.taobaoButton.center = self.loginButton.center;
+        self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
+//        self.taobaoButton.deFrameLeft = self.taobaoButton.deFrameLeft + 40.;
+        
+//        [self.view addSubview:self.sinaWeiboButton];
+//        self.sinaWeiboButton.center = self.taobaoButton.center;
+//        self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 40.;
     }
 }
 
@@ -464,8 +486,9 @@
 - (void)tapSinaWeiboButton
 {
     //    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
     
+//    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
+    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         if (!error) {
             [API loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] ScreenName:object[@"username"] success:^(GKUser *user, NSString *session) {
@@ -506,7 +529,7 @@
         }
     } toPlatform:AVOSCloudSNSSinaWeibo];
     
-    [self dismiss];
+//    [self dismiss];
 }
 
 - (void)tapTaobaoButton
