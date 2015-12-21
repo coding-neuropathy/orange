@@ -114,15 +114,15 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     /**
      *  账号安全
      */
-//    if (k_isLogin) {
-//        NSDictionary * accountSection = @{@"section": @"account",
-//                                      @"row": @[
-//                                          @"mail",
-//                                          @"password"
-//                                          ]};
-//        [self.dataArray addObject:accountSection];
-//    }
-//
+    if (k_isLogin) {
+        NSDictionary * accountSection = @{@"section": @"account",
+                                      @"row": @[
+                                          @"mail",
+                                          @"password"
+                                          ]};
+        [self.dataArray addObject:accountSection];
+    }
+
     NSDictionary *recommandSection = @{@"section" : @"recommandtion",
                                     @"row"     : @[
                                             @"share application to wechat",
