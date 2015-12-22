@@ -32,10 +32,10 @@
 
 #import "WebViewController.h"
 #import "ShareView.h"
+#import "PNoteViewController.h"
 
 
-
-@interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,EntityHeaderBuyViewDelegate>
+@interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,EntityHeaderBuyViewDelegate,UITextViewDelegate>
 
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -161,6 +161,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     return _likeButton;
 }
 
+//点评按钮
 - (UIButton *)postBtn
 {
     if (!_postBtn) {
@@ -317,6 +318,10 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     [self refreshRandom];
 
 }
+
+
+
+
 
 - (void)refreshRandom
 {
@@ -884,7 +889,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:4]];
         if (btn){
             btn.selected = self.entity.liked;
-            [btn setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount] forState:UIControlStateNormal];
+            [btn setTitle:[NSString stringWithFormat:@"%ld",self.entity.likeCount] forState:UIControlStateNormal];
         }
         [self setNavBarButton:self.flag];
     } failure:^(NSInteger stateCode) {
@@ -892,6 +897,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     }];
 }
 
+//点击评论按钮
 - (void)noteButtonAction
 {
     if(!k_isLogin)
@@ -900,24 +906,39 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         [view show];
         return;
     }
-    NotePostViewController * VC = [[NotePostViewController alloc]init];
-    VC.entity = self.entity;
-    VC.note = self.note;
-    VC.successBlock = ^(GKNote *note) {
+
+#pragma mark ------------ PNoteView ------------------------------
+    
+    PNoteViewController * PNVC = [[PNoteViewController alloc]init];
+    
+    PNVC.entity = self.entity;
+    
+    PNVC.note = self.note;
+    
+    
+    
+    PNVC.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    
+    PNVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    
+    PNVC.successBlock = ^(GKNote *note) {
         if (![self.dataArrayForNote containsObject:note]) {
             [self.dataArrayForNote insertObject:note atIndex:self.dataArrayForNote.count];
         }
-        //[self.noteButton setTitle:NSLocalizedStringFromTable(@"update note", kLocalizedFile, nil) forState:UIControlStateNormal];
-        //[self.noteButton setTitle:@"修改" forState:UIControlStateNormal];
+        
         self.note = note;
         [self.collectionView reloadData];
-        //[self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
-//        [self.tableView reloadData];
+        
     };
-    [self.navigationController pushViewController:VC animated:YES];
-
+    
+    [self presentViewController:PNVC animated:YES completion:^{
+        PNVC.view.superview.backgroundColor = [UIColor clearColor];
+    }];
+   
 }
 
+
+//点击分享按钮
 - (void)shareButtonAction
 {
     
