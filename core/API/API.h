@@ -675,6 +675,18 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 /**
  *  更新当前用户邮箱
  *
+ *  @param email     邮箱
+ *  @param password  密码
+ *  @param success   成功block
+ *  @param failure   失败block
+ */
++ (void)verifiedEmailWithParameters:(NSDictionary *)parameters
+                            success:(void (^)(NSInteger stateCOde))success
+                            failure:(void (^)(NSInteger stateCode, NSString *errorMsg))failure;
+
+/**
+ *  更新当前用户密码
+ *
  *  @param password         密码
  *  @param new_passowrd     新密码
  *  @param confirm_password 确认密码
