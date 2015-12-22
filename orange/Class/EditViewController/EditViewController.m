@@ -79,8 +79,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-//    NSLog(@"location %@", [Passport sharedInstance].user.location);
+
     NSDictionary * profileSection = @{
                                       @"section" : @"profile",
                                       @"row"     : @[@"nickname", @"gender", @"bio", @"location",]

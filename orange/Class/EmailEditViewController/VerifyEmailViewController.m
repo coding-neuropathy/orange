@@ -11,7 +11,7 @@
 
 @protocol VerifyEmailViewDelegate <NSObject>
 
-- (void)TapVerifyEmail;
+- (void)TapVerifyEmail:(id)sender;
 - (void)TapUpdateEmail;
 
 @end
@@ -64,9 +64,20 @@
 }
 
 #pragma mark - verify delegate
-- (void)TapVerifyEmail
+- (void)TapVerifyEmail:(id)sender
 {
-
+    UIButton * verifiedBtn = (UIButton *)sender;
+    
+    [API verifiedEmailWithParameters:[NSDictionary dictionary] success:^(NSInteger stateCode) {
+        if (stateCode == 0) {
+            [verifiedBtn setBackgroundColor:UIColorFromRGB(0x9d9e9f)];
+            [verifiedBtn setTitle:NSLocalizedStringFromTable(@"resend", kLocalizedFile, nil) forState:UIControlStateDisabled];
+            verifiedBtn.enabled = NO;
+        }
+        
+    } failure:^(NSInteger stateCode, NSString *errorMsg) {
+        
+    }];
 }
 
 - (void)TapUpdateEmail
@@ -195,6 +206,9 @@
     if ([[Passport sharedInstance].user mail_verified]) {
         self.verifyBtn.enabled = NO;
         self.verifyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
+    } else {
+        self.verifyBtn.enabled = YES;
+        self.verifyBtn.backgroundColor = UIColorFromRGB(0x427ec0);
     }
     
     self.updateBtn.frame = CGRectMake(0., 0., 150., 50.);
@@ -206,8 +220,8 @@
 #pragma mark - button action
 - (void)verifyBtnAction:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(TapVerifyEmail)]) {
-        [_delegate TapVerifyEmail];
+    if (_delegate && [_delegate respondsToSelector:@selector(TapVerifyEmail:)]) {
+        [_delegate TapVerifyEmail:sender];
     }
 }
 

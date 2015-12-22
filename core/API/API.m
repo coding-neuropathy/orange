@@ -2192,7 +2192,39 @@
 }
 
 /**
- *  更新当前用户邮箱
+ *  验证邮用户箱
+ *  @param success   成功block
+ *  @param failure   失败block
+ */
++ (void)verifiedEmailWithParameters:(NSDictionary *)parameters
+                            success:(void (^)(NSInteger stateCode))success
+                            failure:(void (^)(NSInteger stateCode, NSString *errorMsg))failure
+{
+    NSString *path = @"user/email/verified/";
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *objectDict = (NSDictionary *)responseObject;
+
+        NSLog(@"%@", objectDict);
+        NSInteger statecode = [[objectDict objectForKey:@"error"] integerValue];
+        if (success) {
+            success(statecode);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            
+            NSData * resData = [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"];
+            NSDictionary * messageObj = [NSJSONSerialization JSONObjectWithData:resData options:0 error:nil];
+            failure(stateCode, [messageObj valueForKeyPath:@"message"]);
+        }
+    }];
+}
+
+/**
+ *  更新当前用户密码
  *
  *  @param password         密码
  *  @param new_passowrd     新密码

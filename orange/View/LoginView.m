@@ -616,7 +616,7 @@
     if (buttonIndex == 1) {
         NSString *email = [alertView textFieldAtIndex:0].text;
         if (email && email.length > 0) {
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
             [API forgetPasswordWithEmail:email success:^(BOOL success) {
                 if (success) {
                     [SVProgressHUD showImage:nil status:@"请检查邮箱，重设密码。"];
