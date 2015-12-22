@@ -44,7 +44,7 @@
     CGRect keyboardRect = [aValue CGRectValue];
     _height = keyboardRect.size.height;
     
-    NSLog(@"键盘高度是  %ld",_height);
+//    NSLog(@"键盘高度是  %ld",_height);
     
     [UIView animateWithDuration:0.25 animations:^{
         _PostNotebackgroundview.frame = CGRectMake(0, kScreenHeight - 200 - _height, kScreenWidth, 200);
