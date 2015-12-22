@@ -39,6 +39,7 @@
     return _textLabel;
 }
 
+//navagationBar上右侧的三个指示器
 - (UILabel *)indicatorLable
 {
     if (!_indicatorLable) {
