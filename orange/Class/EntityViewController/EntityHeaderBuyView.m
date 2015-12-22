@@ -45,15 +45,20 @@
         _buyButton.layer.masksToBounds = YES;
         _buyButton.layer.cornerRadius = 4;
         _buyButton.backgroundColor = UIColorFromRGB(0x6eaaf0);
+        //设置购买按钮的字体样式以及字号大小
         _buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:17.f];
+        //设置字体样式居中
         [_buyButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [_buyButton addTarget:self action:@selector(buyButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        
+                  //商品购买链接数组
         if (self.entity.purchaseArray.count > 0) {
+            //购买链接
             GKPurchase * purchase = self.entity.purchaseArray[0];
+                       //上下架状态
             switch (purchase.status) {
+                     //
                 case GKBuyREMOVE:
                 {
                     [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
