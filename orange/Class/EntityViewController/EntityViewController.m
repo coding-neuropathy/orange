@@ -931,9 +931,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         
     };
     
-    [self presentViewController:PNVC animated:YES completion:^{
-        PNVC.view.superview.backgroundColor = [UIColor clearColor];
-    }];
+    //设置模态视图控制器弹出效果为淡入淡出
+    [PNVC setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self presentModalViewController:PNVC animated:YES];
    
 }
 
