@@ -16,7 +16,6 @@
 @property (strong, nonatomic) UIPageViewController * thePageViewController;
 @property (strong, nonatomic) HMSegmentedControl *segmentedControl;
 @property (assign, nonatomic) NSInteger index;
-//@property (strong, nonatomic) NSArray * 
 @property (strong, nonatomic) MessageController * msgController;
 @property (strong, nonatomic) ActiveController * activeController;
 
@@ -30,6 +29,8 @@
     if (self) {
         // Custom initialization
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[UIImage imageNamed:@"tabbar_icon_notifaction"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_notifaction"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        //  UIImageRenderingModeAlwaysTemplate  始终根据Tint Color绘制图片，忽略图片的颜色信息。
+        //  UIImageRenderingModeAlwaysOriginal  始终绘制图片原始状态，不使用Tint Color。
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         
         self.tabBarItem = item;
