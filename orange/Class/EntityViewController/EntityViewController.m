@@ -931,9 +931,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         
     };
     
-    [self presentViewController:PNVC animated:YES completion:^{
-        PNVC.view.superview.backgroundColor = [UIColor clearColor];
-    }];
+    //设置模态视图控制器弹出效果为淡入淡出
+    [PNVC setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self presentModalViewController:PNVC animated:YES];
    
 }
 
@@ -950,7 +950,8 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     view.tapRefreshButtonBlock = ^(){
 
 //        [weakSelf.collectionView setScrollsToTop:YES];
-        [SVProgressHUD showImage:nil status:@"\U0001F603 刷新成功"];
+//        [SVProgressHUD showImage:nil status:@"\U0001F603 刷新成功"];
+        [SVProgressHUD showSuccessWithStatus:@"刷新成功"];
         [weakSelf.collectionView setContentOffset:CGPointMake(0., -self.header.deFrameHeight) animated:YES];
         [weakSelf refresh];
         [weakSelf refreshRandom];

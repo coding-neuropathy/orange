@@ -405,7 +405,8 @@
             self.successBlock();
         }
         [self dismiss];
-        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"注册成功"]];
+//        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"注册成功"]];
+        [SVProgressHUD showSuccessWithStatus:@"注册成功"];
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         
         switch (stateCode) {

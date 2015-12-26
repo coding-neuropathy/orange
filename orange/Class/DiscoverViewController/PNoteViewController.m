@@ -30,8 +30,11 @@
                                                  selector:@selector(keyboardWillShow:)
                                                      name:UIKeyboardWillShowNotification
                                                    object:nil];
-    
-
+       //键盘监听     当键盘隐藏时
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector (keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
     
     
     [self PostNote];
@@ -53,13 +56,20 @@
     
 }
 
+- (void)keyboardWillHide:(NSNotification *)aNotification
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        _PostNotebackgroundview.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 200);
+    }];
+}
+
 
 //评论视图创建
 - (void)PostNote
 {
     
     //后背景
-    _PostNotebackgroundview = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight - 200 - 258, kScreenWidth, 200)];
+    _PostNotebackgroundview = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, 200)];
     
     _PostNotebackgroundview.backgroundColor = [UIColor whiteColor];
     

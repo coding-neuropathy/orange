@@ -449,7 +449,8 @@
         [AVAnalytics event:@"sign in" label:@"success"];
         [MobClick event:@"sign in" label:@"success"];
         
-        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
+//        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
+        [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
         [self dismiss];
         
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {

@@ -433,7 +433,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                 
     } andProgress:^(float percent) {
         if (percent == 1) {
-            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+//            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+            [SVProgressHUD showSuccessWithStatus:@"分享成功"];
         }
     }];
 
@@ -475,7 +476,10 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         [AVUser logOut];
         [self.loginService logout];
         [Passport logout];
-        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
+
+//        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
+        [SVProgressHUD showSuccessWithStatus:@"退出成功"];
+        
     } failure:^(NSInteger stateCode) {
         if(stateCode == 500) {
         
