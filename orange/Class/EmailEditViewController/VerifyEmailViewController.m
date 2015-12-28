@@ -80,10 +80,11 @@
                 verifiedBtn.userInteractionEnabled = YES;
             });
         } else {
-            int seconds = timeout % 60;
-            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+//            int seconds = timeout % 60;
+
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", timeout];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [verifiedBtn setTitle:[NSString stringWithFormat:@"%@秒后重新发送",strTime] forState:UIControlStateNormal];
+                [verifiedBtn setTitle:[NSString stringWithFormat:@"%@ 秒后重新发送",strTime] forState:UIControlStateNormal];
                 verifiedBtn.userInteractionEnabled = NO;
             });
             
