@@ -909,19 +909,19 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 #pragma mark ------------ PNoteView ------------------------------
     
-    PNoteViewController * PNVC = [[PNoteViewController alloc]init];
+    PNoteViewController * pnvc = [[PNoteViewController alloc]init];
     
-    PNVC.entity = self.entity;
+    pnvc.entity = self.entity;
     
-    PNVC.note = self.note;
+    pnvc.note = self.note;
     
     
     
-    PNVC.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    pnvc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
     
-    PNVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    pnvc.modalPresentationStyle = UIModalPresentationOverFullScreen;
     
-    PNVC.successBlock = ^(GKNote *note) {
+    pnvc.successBlock = ^(GKNote *note) {
         if (![self.dataArrayForNote containsObject:note]) {
             [self.dataArrayForNote insertObject:note atIndex:self.dataArrayForNote.count];
         }
@@ -932,9 +932,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     };
     
     //设置模态视图控制器弹出效果为淡入淡出
-    [PNVC setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    [self presentModalViewController:PNVC animated:YES];
-   
+    [pnvc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+//    [self presentModalViewController:pnvc animated:YES];
+    [self presentViewController:pnvc animated:YES completion:nil];
 }
 
 
