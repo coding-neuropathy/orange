@@ -55,7 +55,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = NSLocalizedStringFromTable(@"verify email", kLocalizedFile, nil);
+    self.title = NSLocalizedStringFromTable(@"verify mail", kLocalizedFile, nil);
 }
 
 - (void)didReceiveMemoryWarning {

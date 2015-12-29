@@ -163,8 +163,17 @@
 "sign up"   = "Sign Up";
 "sign out"  = "Sign Out";
 
+/**
+ *  account page
+ */
 "mail"              = "Mail";
+
+/**
+ *  verify mail page
+ */
+"verify mail"       = "Verify Mail";
 "reset password"    = "Reset Password";
+"verified"          = "Verified";
 
 /*
  * datetime

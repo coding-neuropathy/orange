@@ -163,8 +163,18 @@
 "sign up"   = "登記";
 "sign out"  = "退出登錄";
 
-"mail"      = "郵箱";
+/**
+ *  account page
+ */
+"mail"              = "郵箱";
+
+/**
+ *  verify mail page
+ */
+"verify mail"       = "驗證郵箱";
 "reset password"    = "重設密碼";
+"verified"          = "已驗證";
+
 /*
  * datetime
  */
