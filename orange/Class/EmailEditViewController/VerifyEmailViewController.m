@@ -68,6 +68,21 @@
 {
     UIButton * verifiedBtn = (UIButton *)sender;
     
+
+    
+    if(verifiedBtn.enabled) {
+        [API verifiedEmailWithParameters:[NSDictionary dictionary] success:^(NSInteger stateCode) {
+            if (stateCode == 0) {
+                [verifiedBtn setBackgroundColor:UIColorFromRGB(0x9d9e9f)];
+                [verifiedBtn setTitle:NSLocalizedStringFromTable(@"resend", kLocalizedFile, nil) forState:UIControlStateDisabled];
+                verifiedBtn.enabled = NO;
+            }
+        
+        } failure:^(NSInteger stateCode, NSString *errorMsg) {
+            
+        }];
+    }
+    
     __block int timeout=60; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
@@ -79,7 +94,7 @@
                 verifiedBtn.enabled = YES;
                 [verifiedBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
 //                verifiedBtn.userInteractionEnabled = YES;
-                verifiedBtn.enabled = YES;
+//                verifiedBtn.enabled = YES;
             });
         } else {
 //            int seconds = timeout % 60;
@@ -100,16 +115,7 @@
     
     dispatch_resume(_timer);
     
-//    [API verifiedEmailWithParameters:[NSDictionary dictionary] success:^(NSInteger stateCode) {
-//        if (stateCode == 0) {
-//            [verifiedBtn setBackgroundColor:UIColorFromRGB(0x9d9e9f)];
-//            [verifiedBtn setTitle:NSLocalizedStringFromTable(@"resend", kLocalizedFile, nil) forState:UIControlStateDisabled];
-//            verifiedBtn.enabled = NO;
-//        }
-//        
-//    } failure:^(NSInteger stateCode, NSString *errorMsg) {
-//        
-//    }];
+
 }
 
 - (void)TapUpdateEmail
