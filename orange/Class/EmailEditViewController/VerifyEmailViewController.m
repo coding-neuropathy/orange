@@ -57,7 +57,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = NSLocalizedStringFromTable(@"verify email", kLocalizedFile, nil);
+    self.title = NSLocalizedStringFromTable(@"verify mail", kLocalizedFile, nil);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,15 +78,21 @@
         if(timeout<=0){
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
+                verifiedBtn.enabled = YES;
                 [verifiedBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
-                verifiedBtn.userInteractionEnabled = YES;
+//                verifiedBtn.userInteractionEnabled = YES;
+//                verifiedBtn.enabled = YES;
             });
         } else {
-            int seconds = timeout % 60;
-            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+//            int seconds = timeout % 60;
+
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", timeout];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [verifiedBtn setTitle:[NSString stringWithFormat:@"%@秒后重新发送",strTime] forState:UIControlStateNormal];
-                verifiedBtn.userInteractionEnabled = NO;
+                verifiedBtn.enabled = NO;
+                verifiedBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                [verifiedBtn setTitle:[NSString stringWithFormat:@"%@ 秒后重新发送",strTime] forState:UIControlStateNormal];
+//                verifiedBtn.userInteractionEnabled = NO;
+//                verifiedBtn.enabled = NO;
             });
             
             timeout--;
@@ -96,16 +102,7 @@
     
     dispatch_resume(_timer);
     
-//    [API verifiedEmailWithParameters:[NSDictionary dictionary] success:^(NSInteger stateCode) {
-//        if (stateCode == 0) {
-//            [verifiedBtn setBackgroundColor:UIColorFromRGB(0x9d9e9f)];
-//            [verifiedBtn setTitle:NSLocalizedStringFromTable(@"resend", kLocalizedFile, nil) forState:UIControlStateDisabled];
-//            verifiedBtn.enabled = NO;
-//        }
-//        
-//    } failure:^(NSInteger stateCode, NSString *errorMsg) {
-//        
-//    }];
+
 }
 
 - (void)TapUpdateEmail
@@ -176,7 +173,7 @@
         _verifyBtn.layer.masksToBounds = YES;
 
         [_verifyBtn setTitle:NSLocalizedStringFromTable(@"send mail for verify", kLocalizedFile, nil) forState:UIControlStateNormal];
-        [_verifyBtn setTitle:NSLocalizedStringFromTable(@"verified", kLocalizedFile, nil) forState:UIControlStateDisabled];
+        
         _verifyBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
         _verifyBtn.titleLabel.textColor = UIColorFromRGB(0xffffff);
         
@@ -232,6 +229,7 @@
     self.verifyBtn.deFrameLeft = (kScreenWidth - 150 * 2) / 3.;
     
     if ([[Passport sharedInstance].user mail_verified]) {
+        [_verifyBtn setTitle:NSLocalizedStringFromTable(@"verified", kLocalizedFile, nil) forState:UIControlStateDisabled];
         self.verifyBtn.enabled = NO;
         self.verifyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
     } else {

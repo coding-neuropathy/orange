@@ -238,8 +238,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         [self addSearchLog:_searchVC.searchBar.text];
     }
     
-    [AVAnalytics endLogPageView:@"DiscovreView"];
-    [MobClick endLogPageView:@"DiscovreView"];
+    [AVAnalytics endLogPageView:@"DiscoverView"];
+    [MobClick endLogPageView:@"DiscoverView"];
 }
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent

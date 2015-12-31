@@ -99,7 +99,6 @@ int ddLogLevel;
 //    self.window.rootViewController.view.hidden = NO;
     [self.window makeKeyAndVisible];
 
-
     application.applicationIconBadgeNumber = 0;
     
     [API getLaunchImageWithSuccess:^(GKLaunch *launch) {

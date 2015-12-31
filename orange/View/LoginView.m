@@ -637,7 +637,8 @@
 #pragma mark - Notification
 - (void)postWeChatCode:(NSNotification *)notification
 {
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
     SendAuthResp *resp = [notification valueForKey:@"object"];
     
     NSDictionary * json = [API getWeChatAuthWithAppKey:kGK_WeixinShareKey Secret:KGK_WeixinSecret Code:resp.code];
