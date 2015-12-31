@@ -285,7 +285,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         [self.commentBtn setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FACommentO],self.note.commentCount] forState:UIControlStateNormal];
     }
     
-    self.timeLabel.text = [NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithFormat:@"YYYY-MM-dd"]];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithFormat:@"yyyy-MM-dd"]];
     
     [self setNeedsLayout];
 }

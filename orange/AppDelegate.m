@@ -132,7 +132,7 @@ int ddLogLevel;
     } failure:^(NSInteger stateCode) {
         
     }];
-
+    
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;
     UIViewController *vc = [[UIViewController alloc] init];

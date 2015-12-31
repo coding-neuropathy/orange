@@ -27,9 +27,11 @@ static NSDateFormatter *dateFormatter;
     if (!dateFormatter) {
         dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.locale = [NSLocale currentLocale];
+
     }
     dateFormatter.dateFormat = format;
     return [dateFormatter stringFromDate:self];
+    
 }
 
 - (NSString *)stringWithDefaultFormat

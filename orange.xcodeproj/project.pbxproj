@@ -2688,7 +2688,7 @@
 				TargetAttributes = {
 					39B8688D1ACD0CF600A2115D = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = BKXKS4HPNG;
+						DevelopmentTeam = 3UL2927U47;
 					};
 					4E56DF1419D552C000263B17 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -2704,7 +2704,7 @@
 					};
 					B7BFC8FB1ACC27C1009627CA = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = BKXKS4HPNG;
+						DevelopmentTeam = 3UL2927U47;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3164,6 +3164,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.gsdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3175,8 +3176,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guoku Technology Co. Ltd (BKXKS4HPNG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guoku Technology Co. Ltd (BKXKS4HPNG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -3191,6 +3192,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.gsdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

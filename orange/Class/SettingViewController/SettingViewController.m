@@ -28,6 +28,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 @interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIActionSheetDelegate, SettingsFooterViewDelegate>
 
+@property (nonatomic,strong)VerifyEmailViewController * vc;
 @property(nonatomic, strong) UITableView * tableView;
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -266,8 +267,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         switch (indexPath.row) {
             case 0:
             {
-                VerifyEmailViewController * vc = [[VerifyEmailViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
+                
+                [self.navigationController pushViewController:self.vc animated:YES];
             }
                 
                 break;
@@ -489,8 +490,13 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             [Passport logout];
         }
     }];
-    
 }
-
+//将邮箱验证界面设为单例模式
+- (VerifyEmailViewController *)vc{
+    if(!_vc){
+        _vc =[[VerifyEmailViewController alloc]init];
+    }
+    return _vc;
+}
 
 @end
