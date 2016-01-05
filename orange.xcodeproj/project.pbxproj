@@ -2690,7 +2690,7 @@
 					};
 					4E56DF1419D552C000263B17 = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = BKXKS4HPNG;
+						DevelopmentTeam = MCBPH33HLX;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2702,7 +2702,7 @@
 					};
 					B7BFC8FB1ACC27C1009627CA = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 3UL2927U47;
+						DevelopmentTeam = BKXKS4HPNG;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3320,7 +3320,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "edc7199f-1af6-4608-b906-dc0c46df8867";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3365,7 +3365,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "edc7199f-1af6-4608-b906-dc0c46df8867";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

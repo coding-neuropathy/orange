@@ -374,6 +374,11 @@
         return;
     }
     
+    if (nickname.length < 3) {
+        [SVProgressHUD showImage:nil status:@"昵称过短"];
+        return;
+    }
+    
     if (!email || email.length == 0) {
         [SVProgressHUD showImage:nil status:@"请输入邮箱"];
         return;

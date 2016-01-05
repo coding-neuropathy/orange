@@ -644,6 +644,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     EntityPreViewController * vc = [[EntityPreViewController alloc] initWithEntity:[self.entityArray objectAtIndex:indexPath.row]];
     vc.preferredContentSize = CGSizeMake(0., 0.);
     previewingContext.sourceRect = cell.frame;
+    [vc setBackblock:^(UIViewController * vc1){
+        [self.navigationController pushViewController:vc1 animated:YES];
+    }];
+    
     return vc;
 }
 
