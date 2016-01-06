@@ -256,8 +256,8 @@ NSString *SettingTableIdentifier = @"SettingCell";
         if(buttonIndex == 1)
         {
             UITextField *tf=[alertView textFieldAtIndex:0];
-            if (tf.text.length==0) {
-                [SVProgressHUD showImage:nil status:@"昵称不能为空"];
+            if (tf.text.length==0 || tf.text.length <= 2) {
+                [SVProgressHUD showImage:nil status:@"昵称不能为空且必须大于两个字符！"];
             }
             else
             {
@@ -265,10 +265,10 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 [API updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
                     [Passport sharedInstance].user.nickname = user.nickname;
                     [Passport sharedInstance].user = [Passport sharedInstance].user;
-                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                    [SVProgressHUD showSuccessWithStatus:@"修改成功"];
                     [self.tableView reloadData];
                 } failure:^(NSInteger stateCode) {
-                    [SVProgressHUD showImage:nil status:@"修改失败"];
+                    [SVProgressHUD showErrorWithStatus:@"修改失败"];
                 }];
             }
         }
@@ -288,11 +288,11 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 [API updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
                     [Passport sharedInstance].user.bio = user.bio;
                     [Passport sharedInstance].user = [Passport sharedInstance].user;
-                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                    [SVProgressHUD showSuccessWithStatus:@"修改成功"];
                     [self.tableView reloadData];
                     
                 } failure:^(NSInteger stateCode) {
-                    [SVProgressHUD showImage:nil status:@"修改失败"];
+                    [SVProgressHUD showErrorWithStatus:@"修改失败"];
                 }];
                 
             }
@@ -315,7 +315,8 @@ NSString *SettingTableIdentifier = @"SettingCell";
 //                    NSLog(@"update update %@", user.location);
                     [Passport sharedInstance].user.location = user.location;
                     [Passport sharedInstance].user = [Passport sharedInstance].user;
-                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+//                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+                    [SVProgressHUD showSuccessWithStatus:@"修改成功"];
                     [self.tableView reloadData];
                 } failure:^(NSInteger stateCode) {
                     [SVProgressHUD showImage:nil status:@"修改失败"];
@@ -400,10 +401,12 @@ NSString *SettingTableIdentifier = @"SettingCell";
             [Passport sharedInstance].user.gender = user.gender;
             [Passport sharedInstance].user = [Passport sharedInstance].user;
             NSLog(@"geneder %@", user.gender);
-            [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
+
+            [SVProgressHUD showSuccessWithStatus:@"修改成功"];
             [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"修改失败"];
+
+            [SVProgressHUD showErrorWithStatus:@"修改失败"];
         }];
     
     } else {

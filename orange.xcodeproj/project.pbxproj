@@ -2690,7 +2690,7 @@
 					};
 					4E56DF1419D552C000263B17 = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = MCBPH33HLX;
+						DevelopmentTeam = BKXKS4HPNG;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3260,8 +3260,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Guoku Technology Co. Ltd (BKXKS4HPNG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guoku Technology Co. Ltd (BKXKS4HPNG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
@@ -3320,7 +3320,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "edc7199f-1af6-4608-b906-dc0c46df8867";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3365,7 +3365,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "edc7199f-1af6-4608-b906-dc0c46df8867";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
