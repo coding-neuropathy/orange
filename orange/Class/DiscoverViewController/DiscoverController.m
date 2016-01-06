@@ -206,7 +206,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     [self.collectionView addSloganView];
     
-    [self registerPreview];
+    if (iOS9)
+        [self registerPreview];
 }
 
 - (void)didReceiveMemoryWarning {
