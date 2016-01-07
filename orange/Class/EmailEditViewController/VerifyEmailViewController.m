@@ -70,6 +70,23 @@
 {
     UIButton * verifiedBtn = (UIButton *)sender;
     
+    if (verifiedBtn.enabled == YES) {
+        [API verifiedEmailWithParameters:[NSDictionary dictionary] success:^(NSInteger stateCode) {
+
+            if (stateCode == 0) {
+                [self setVerifiedBtn:verifiedBtn];
+            }
+        } failure:^(NSInteger stateCode, NSString *errorMsg) {
+            
+        }];
+    }
+    
+
+
+}
+
+- (void)setVerifiedBtn:(UIButton *)verifiedBtn
+{
     __block int timeout=59; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
@@ -85,15 +102,11 @@
 //                verifiedBtn.enabled = YES;
             });
         } else {
-//            int seconds = timeout % 60;
-
             NSString *strTime = [NSString stringWithFormat:@"%.2d", timeout];
             dispatch_async(dispatch_get_main_queue(), ^{
                 verifiedBtn.enabled = NO;
                 verifiedBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
                 [verifiedBtn setTitle:[NSString stringWithFormat:@"%@ 秒后重新发送",strTime] forState:UIControlStateNormal];
-//                verifiedBtn.userInteractionEnabled = NO;
-//                verifiedBtn.enabled = NO;
             });
             
             timeout--;
@@ -102,8 +115,6 @@
     });
     
     dispatch_resume(_timer);
-    
-
 }
 
 - (void)TapUpdateEmail

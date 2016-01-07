@@ -51,7 +51,7 @@ typedef NS_ENUM (NSUInteger, TaeSDKEnvironment) {
 };
 
 /** 当前TaeSDK的版本号 */
-static NSString * _TAE_SDK_VERSION = @"1.8.0";
+static NSString * _TAE_SDK_VERSION = @"1.8.5";
 
 /** 初始化成功回调 */
 typedef void (^initSuccessCallback)();

@@ -13,7 +13,10 @@
 
 /*此字段无效*/@property(nonatomic, strong) NSString *title ; //顶层 navigatorBar的标题内容
 
-@property(nonatomic, strong) UIImage *backButtonBackgroundImage ; //顶层 navigatorBar的回退按钮的背景图片,图片尺寸参见Tae.bundle里的back@2x.png
+@property(nonatomic, strong) UIButton *backButton; //返回按钮
+@property(nonatomic, strong) UIButton *closeButton;//关闭按钮
+
+@property(nonatomic, strong) UIImage *backButtonBackgroundImage ; //顶层 navigatorBar的回退按钮的背景图片,图片尺寸参见Tae.bundle里的back@2x.png，如果传入backButton，此字段无效
 
 typedef void (^webviewControllerDidDisappearCallback)();
 @property(nonatomic, strong) webviewControllerDidDisappearCallback webviewControllerDidDisappearCallback;

@@ -10,7 +10,7 @@
 
 #import "TaeTradeProcessResult.h"
 #import "TaeTaokeParams.h"
-
+#import <TaeSDK/TaeSDK.h> 
 
 @protocol ALBBTradeService <NSObject>
 
