@@ -52,6 +52,11 @@ extern NSInteger const OPEN_ENUM_SIGN_COMMON_MD5;
 extern NSInteger const OPEN_ENUM_SIGN_ATLAS;
 
 /**
+ *  带模拟器检测功能的hmac-sha1签名
+ */
+extern NSInteger const OPEN_ENUM_SIGN_SIM_HMAC_SHA1;
+
+/**
  *  无效签名类型
  */
 extern NSInteger const OPEN_ENUM_SIGN_INVALID;
