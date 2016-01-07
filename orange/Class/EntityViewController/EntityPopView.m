@@ -142,6 +142,7 @@
     
     [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth) * idx, 0., kScreenWidth, kScreenWidth)];
+        //图片显示方式
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         if (IS_IPHONE_6P) {
             NSURL * imageURL_800;
@@ -165,6 +166,11 @@
             
         }
         [self.scrollView addSubview:imageView];
+#pragma mark ------------添加点击图片返回以及捏合手势 ----------------------
+//        UITapGestureRecognizer * tap
+        
+        
+        
     }];
     
     self.likeBtn.selected = _entity.isLiked;

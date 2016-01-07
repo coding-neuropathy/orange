@@ -80,6 +80,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 verifiedBtn.enabled = YES;
                 [verifiedBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+                verifiedBtn.backgroundColor = UIColorFromRGB(0x427ec0);
 //                verifiedBtn.userInteractionEnabled = YES;
 //                verifiedBtn.enabled = YES;
             });
