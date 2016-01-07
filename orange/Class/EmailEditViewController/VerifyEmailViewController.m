@@ -96,7 +96,7 @@
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 verifiedBtn.enabled = YES;
-                [verifiedBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+                [verifiedBtn setTitle:NSLocalizedStringFromTable(@"verify mail", kLocalizedFile, nil) forState:UIControlStateNormal];
                 verifiedBtn.backgroundColor = UIColorFromRGB(0x427ec0);
 //                verifiedBtn.userInteractionEnabled = YES;
 //                verifiedBtn.enabled = YES;
@@ -230,7 +230,7 @@
     
     self.tipLabel.frame = CGRectMake(16., 0., kScreenWidth - 32., 20.);
     self.tipLabel.deFrameTop = self.titleLabel.deFrameBottom + 20.;
-    self.tipLabel.text = @"发送至当前邮箱：";
+    self.tipLabel.text = NSLocalizedStringFromTable(@"Sent to the current email", kLocalizedFile, nil);
     
     self.emailLabel.frame = CGRectMake(16., 0., kScreenWidth - 32, 20.);
     self.emailLabel.deFrameTop = self.tipLabel.deFrameBottom + 5.;

@@ -171,9 +171,12 @@
 /**
  *  verify mail page
  */
-"verify mail"       = "Verify Mail";
-"reset password"    = "Reset Password";
-"verified"          = "Verified";
+"verify mail"          = "Verify Mail";
+"reset password"       = "Reset Password";
+"verified"             = "Verified";
+"send mail for verify" = "Send Mail For Verify";
+"update email"         = "Update Email";
+"Sent to the current email"         = "Sent To The Current Email";
 
 /*
  * datetime
