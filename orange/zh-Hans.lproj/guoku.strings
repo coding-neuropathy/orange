@@ -171,10 +171,12 @@
 /**
  *  verify  mail page
  */
-"verify mail"       = "验证邮箱";
-"reset password"    = "重设密码";
-"verified"          = "已验证";
-
+"verify mail"          = "验证邮箱";
+"reset password"       = "重设密码";
+"verified"             = "已验证";
+"send mail for verify" = "发送验证邮件";
+"update email"         = "修改邮箱";
+"Sent to the current email"         = "发送至当前邮箱";
 /*
  * datetime
  */
