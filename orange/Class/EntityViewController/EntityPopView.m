@@ -9,7 +9,12 @@
 #import "EntityPopView.h"
 
 @interface EntityPopView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
-
+{
+    //图片拉伸的原始倍数
+    float time;
+    //商品大图
+    UIImageView * _imageView;
+}
 @property (strong, nonatomic) UIScrollView * scrollView;
 @property (strong, nonatomic) UIPageControl * pageCtr;
 @property (strong, nonatomic) UIButton * closeBtn;
@@ -17,6 +22,9 @@
 @property (strong, nonatomic) UIButton * likeBtn;
 @property (strong, nonatomic) UIButton * noteBtn;
 @property (strong, nonatomic) UIButton * buyBtn;
+
+//商品大图
+//@property (strong, nonatomic) UIImageView * imageView;
 
 @end
 
@@ -141,9 +149,11 @@
         [imageArray insertObject:_entity.imageURL atIndex:0];
     
     [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth) * idx, 0., kScreenWidth, kScreenWidth)];
+#warning mark ————————————————给商品大图添加点击手势————————————————————
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth) * idx, 0., kScreenWidth, kScreenWidth)];
+        _imageView.userInteractionEnabled = YES;
         //图片显示方式
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _imageView.contentMode = UIViewContentModeScaleAspectFit;
         if (IS_IPHONE_6P) {
             NSURL * imageURL_800;
             if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
@@ -152,7 +162,7 @@
                 imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
             }
             
-            [imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+            [_imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
             //            [self.scrollView addSubview:imageView];
         } else {
             NSURL * imageURL_640;
@@ -162,14 +172,15 @@
                 imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
             }
             
-            [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+            [_imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
             
         }
-        [self.scrollView addSubview:imageView];
+        [self.scrollView addSubview:_imageView];
 #pragma mark ------------添加点击图片返回以及捏合手势 ----------------------
-//        UITapGestureRecognizer * tap
-        
-        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAmplify:)];
+        [_imageView addGestureRecognizer:tap];
+        UIPinchGestureRecognizer * pinch = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchAction:)];
+        [_imageView addGestureRecognizer:pinch];
         
     }];
     
@@ -179,6 +190,26 @@
     
     [self setNeedsLayout];
 }
+
+//点击图片返回手势
+- (void)tapAmplify:(UITapGestureRecognizer *)tap
+{
+    [self fadeOut];
+}
+//捏合图片放大缩小手势
+- (void)pinchAction:(UIPinchGestureRecognizer *)pinch
+{
+//    if (pinch.state == UIGestureRecognizerStateBegan) {
+//        time = 1;
+//    }
+//    else if (pinch.state == UIGestureRecognizerStateChanged) {
+//        _imageView.transform = CGAffineTransformMakeScale(time * pinch.scale, time * pinch.scale);
+//    }
+//    else if (pinch.state == UIGestureRecognizerStateEnded){
+//        time*=pinch.scale;
+//    }
+}
+
 
 - (void)layoutSubviews
 {
