@@ -393,8 +393,8 @@
                             
                         } andProgress:^(float percent) {
                             if (percent == 1) {
-                                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-                                
+//                                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+                                [SVProgressHUD showSuccessWithStatus:@"分享成功"];
                                 [AVAnalytics event:@"share to entity to weibo" attributes:@{@"entity":self.title}];
                                 [MobClick event:@"share to entity to weibo" attributes:@{@"entity":self.title}];
                             }
