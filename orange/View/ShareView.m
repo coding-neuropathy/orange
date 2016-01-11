@@ -380,6 +380,8 @@
 - (void)weiboShare
 {
 
+
+    
     if (![AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo]) {
         [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
             if (error) {
@@ -387,7 +389,13 @@
             } else {
                 [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformWeiBo block:^(AVUser *user, NSError *error) {
                     if (!error) {
-                        [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:[self shareImage]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+                        UIImage * img = self.image;
+                        if(self.entity)
+                        {
+                            img = [self shareImage];
+                        }
+                        
+                        [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:img  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
                             NSLog(@"%@",object);
                             
                             
@@ -406,7 +414,13 @@
     }
     else
     {
-        [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:[self shareImage]  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+        UIImage * img = self.image;
+        if(self.entity)
+        {
+            img = [self shareImage];
+        }
+        
+        [AVOSCloudSNS shareText:self.title andLink:[self.url stringByAppendingString:@"?from=weibo"] andImage:img  toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
             NSLog(@"%@",object);
             
             

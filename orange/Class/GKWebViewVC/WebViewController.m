@@ -191,17 +191,35 @@
 //    [a sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
 //        self.image = image;
 //    }];
-    [webView evaluateJavaScript:@"document.getElementsByTagName('img')[1].src" completionHandler:^(NSString * imageURL, NSError * error) {
-//        NSString * imageURL = imageURL;
-        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+    
+    [webView evaluateJavaScript:@"document.getElementById('share_img').getElementsByTagName('img')[0].src" completionHandler:^(NSString * imageURL, NSError * error) {
+        
+        if (imageURL) {
+            [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                
+            } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                if (finished) {
+                    self.image = image;
+                }
+            }];
+        }
+        else{
             
-        } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-            if (finished) {
-                self.image = image;
-            }
-        }];
+            [webView evaluateJavaScript:@"document.getElementsByTagName('img')[1].src" completionHandler:^(NSString * imageURL, NSError * error) {
+                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                    
+                } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                    if (finished) {
+                        self.image = image;
+                    }
+                }];
+                
+            }];
+        }
         
     }];
+    
+
     
     [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
         self.title = result;
