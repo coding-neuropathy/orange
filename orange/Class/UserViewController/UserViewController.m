@@ -117,6 +117,12 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     self.view = self.collectionView;
 }
 
+
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    self.navigationItem.title = self.user.nickname;
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

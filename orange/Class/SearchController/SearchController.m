@@ -212,25 +212,39 @@
 #pragma mark -
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
-
+    static NSInteger i =0;
     self.index = segmentedControl.selectedSegmentIndex;
-    
     if (segmentedControl.selectedSegmentIndex == 0){
         [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
     }
     
-    if (segmentedControl.selectedSegmentIndex == 1){
+   else if (segmentedControl.selectedSegmentIndex == 1 && segmentedControl.selectedSegmentIndex>i){
         [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+      
+    }
+    else if (segmentedControl.selectedSegmentIndex == 1 && segmentedControl.selectedSegmentIndex<i)
+    {
+        [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+       
     }
     
-    if (segmentedControl.selectedSegmentIndex == 2){
+   else if (segmentedControl.selectedSegmentIndex == 2 &&segmentedControl.selectedSegmentIndex>i){
         [self.thePageViewController setViewControllers:@[self.categoryVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+      
+    }
+   else if (segmentedControl.selectedSegmentIndex == 2 && segmentedControl.selectedSegmentIndex<i)
+    {
+        [self.thePageViewController setViewControllers:@[self.categoryVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+        
     }
     
-    if (segmentedControl.selectedSegmentIndex == 3){
+   else if (segmentedControl.selectedSegmentIndex == 3){
         [self.thePageViewController setViewControllers:@[self.userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     }
     [self handleSearchText:self.keyword];
+    
+    i = segmentedControl.selectedSegmentIndex;
+    
 }
 
 

@@ -415,6 +415,7 @@
     else
     {
         UIImage * img = self.image;
+        
         if(self.entity)
         {
             img = [self shareImage];

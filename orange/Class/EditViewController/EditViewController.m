@@ -264,7 +264,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 NSDictionary * dict = @{@"nickname": tf.text};
                 [API updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
                     [Passport sharedInstance].user.nickname = user.nickname;
-                    [Passport sharedInstance].user = [Passport sharedInstance].user;
+//                    [Passport sharedInstance].user = [Passport sharedInstance].user;
                     [SVProgressHUD showSuccessWithStatus:@"修改成功"];
                     [self.tableView reloadData];
                 } failure:^(NSInteger stateCode) {
