@@ -114,7 +114,7 @@
 {
     [super viewDidLoad];
     
-    //self.title = NSLocalizedStringFromTable(@"Search", kLocalizedFile, nil);
+//    self.title = NSLocalizedStringFromTable(@"Search", kLocalizedFile, nil);
     
     [self.view addSubview:self.segmentedControl];
     

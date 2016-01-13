@@ -118,11 +118,6 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 }
 
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    self.navigationItem.title = self.user.nickname;
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -319,7 +314,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             if (indexPath.row == self.notedataArray.count -1) {
                 cell.H.alpha = 1;
             }
-            
+
             return cell;
         }
             break;

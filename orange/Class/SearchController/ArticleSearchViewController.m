@@ -28,6 +28,9 @@
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf reFresh];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -164,6 +167,24 @@
         [self.tableView.infiniteScrollingView stopAnimating];
     }];
 
+}
+
+- (void)reFresh
+{
+    [API searchArticlesWithString:self.keyword Page:1 Size:10 success:^(NSArray *articles) {
+        if (articles.count == 0) {
+            self.tableView.tableFooterView = self.noResultView;
+            self.noResultView.type = NoResultType;
+        }
+        else
+        {
+            self.dataArray = [NSMutableArray arrayWithArray:articles];
+        }
+        [self.tableView.pullToRefreshView stopAnimating];
+        [self.tableView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.tableView.pullToRefreshView stopAnimating];
+    }];
 }
 
 @end
