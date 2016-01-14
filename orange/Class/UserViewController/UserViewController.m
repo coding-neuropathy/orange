@@ -584,6 +584,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             //            self.
             self.user = [Passport sharedInstance].user;
             self.navigationItem.title = self.user.nickname;
+//            self.headerView.user = self.user;
             [self.collectionView reloadData];
         }
         
