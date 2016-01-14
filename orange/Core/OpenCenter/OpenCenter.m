@@ -42,6 +42,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 {
     UserViewController * VC = [[UserViewController alloc]init];
     VC.user = user;
+    VC.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
