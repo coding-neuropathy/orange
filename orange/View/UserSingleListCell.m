@@ -241,9 +241,13 @@
 
 - (void)avatarButtonAction
 {
-    UserViewController * VC = [[UserViewController alloc]init];
-    VC.user = self.user;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+//    UserViewController * VC = [[UserViewController alloc]init];
+//    VC.user = self.user;
+//    VC.hidesBottomBarWhenPushed = YES;
+//    
+//    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    
+    [[OpenCenter sharedOpenCenter] openUser:self.user];
 }
 
 + (CGFloat)height
