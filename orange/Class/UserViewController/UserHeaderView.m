@@ -58,9 +58,9 @@
         _nicknameLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
         _nicknameLabel.paragraphReplacement = @"";
         _nicknameLabel.lineSpacing = 7.;
-        //        _nicknameLabel.textColor = UIColorFromRGB(0x414243);
+//        _nicknameLabel.textColor = UIColorFromRGB(0x414243);
         _nicknameLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18.];
-        //        _nicknameLabel.textAlignment = NSTextAlignmentCenter;
+//        _nicknameLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_nicknameLabel];
     }
     return _nicknameLabel;
@@ -276,7 +276,7 @@
     
     self.avatarView.center = CGPointMake(self.frame.size.width / 2, 25+32.);
     
-    self.nicknameLabel.frame = CGRectMake(0., 0., self.nicknameLabel.optimumSize.width, 30.);
+    self.nicknameLabel.frame = CGRectMake(0., 0., self.nicknameLabel.optimumSize.width + 20., 30.);
     self.nicknameLabel.center = self.avatarView.center;
     self.nicknameLabel.deFrameTop = self.avatarView.deFrameBottom + 16.;
     

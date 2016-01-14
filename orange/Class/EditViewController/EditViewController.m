@@ -263,8 +263,10 @@ NSString *SettingTableIdentifier = @"SettingCell";
             {
                 NSDictionary * dict = @{@"nickname": tf.text};
                 [API updateUserProfileWithParameters:dict imageData:nil success:^(GKUser *user) {
-                    [Passport sharedInstance].user.nickname = user.nickname;
-//                    [Passport sharedInstance].user = [Passport sharedInstance].user;
+                    
+//                    DDLogInfo(@"update nickname %@", user.nickname);
+//                    [Passport sharedInstance].user.nickname = user.nickname;
+                    [Passport sharedInstance].user = [Passport sharedInstance].user;
                     [SVProgressHUD showSuccessWithStatus:@"修改成功"];
                     [self.tableView reloadData];
                 } failure:^(NSInteger stateCode) {
@@ -462,7 +464,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
     UIImage * image = (UIImage *)[info valueForKey:UIImagePickerControllerEditedImage];
     [API updateUserProfileWithParameters:nil imageData:[image imageData] success:^(GKUser *user) {
         self.headerView.avatarURL = user.avatarURL;
-        [SVProgressHUD showImage:nil status:@"更新成功"];
+        [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:@"更新失败"];
     }];
