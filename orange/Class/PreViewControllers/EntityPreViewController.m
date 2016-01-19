@@ -18,7 +18,7 @@
 
 @property(nonatomic, strong) id<ALBBItemService> itemService;
 
-
+@property (strong, nonatomic) NSString * seller_id;
 @end
 
 @implementation EntityPreViewController
@@ -26,11 +26,22 @@
     tradeProcessSuccessCallback _tradeProcessSuccessCallback;
     tradeProcessFailedCallback _tradeProcessFailedCallback;
 }
+
 - (instancetype)initWithEntity:(GKEntity *)entity
 {
-    self = [super init];
+    self = [self init];
     if (self) {
         self.entity = entity;
+                self.itemService = [[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
+        
+        if (self.entity.purchaseArray > 0) {
+            GKPurchase * purchase = self.entity.purchaseArray[0];
+            if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"]) {
+                self.seller_id = purchase.seller;
+                //                DDLogError(@"seller %@", self.seller_id);
+            }
+        }
+        
     }
     return self;
 }
@@ -90,14 +101,17 @@
                                               taoKeParams:taoKeParams
                               tradeProcessSuccessCallback:_tradeProcessSuccessCallback
                                tradeProcessFailedCallback:_tradeProcessFailedCallback];
+                [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString] ];
+                
+                [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
+                [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
+            }
+            else{
                 
                 [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString] ];
                 
                 [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
                 [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
-                
-            }
-            else{
                 
             }
         }

@@ -98,6 +98,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //更多按钮
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
     button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -108,7 +109,7 @@
     UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = moreBarItem;
     
-    
+    //返回按钮
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [backBtn setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -154,13 +155,13 @@
 #pragma mark - <WKNavigationDelegate>
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
-    
+   
 }
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
     
     /**
-     *  disable wkwebview zoom
+     *  disable wkwebview zoom  
      */
     NSString *javascript = @"var meta = document.createElement('meta');meta.setAttribute('name', 'viewport');meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');document.getElementsByTagName('head')[0].appendChild(meta);";
     
