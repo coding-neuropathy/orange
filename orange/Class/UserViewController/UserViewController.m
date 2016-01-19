@@ -101,6 +101,11 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 - (void)refresh
 {
     [API getUserDetailWithUserId:self.user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes) {
+//        [Passport sharedInstance].user = user;
+        if (self.user.userId == [Passport sharedInstance].user.userId) {
+            [Passport sharedInstance].user = user;
+        }
+        
         self.user = user;
         self.likedataArray = [NSMutableArray arrayWithArray:lastLikeEntities];
         self.notedataArray = [NSMutableArray arrayWithArray:lastNotes];
@@ -580,10 +585,11 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 {
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         if ([keyPath isEqualToString:@"nickname"]) {
-            DDLogInfo(@"nickname %@", self.user.nickname);
+            DDLogInfo(@"nickname kvo %@", [Passport sharedInstance].user.nickname);
             //            self.
             self.user = [Passport sharedInstance].user;
             self.navigationItem.title = self.user.nickname;
+//            self.headerView.user = self.user;
             [self.collectionView reloadData];
         }
         
