@@ -9,7 +9,8 @@
 #import "CategroyGroupController.h"
 #import "CSStickyHeaderFlowLayout.h"
 #import "EntityCell.h"
-#import "EntityListCell.h"
+//#import "EntityListCell.h"
+#import "EntityDetailCell.h"
 
 #import "SubCategoryGroupController.h"
 #import "SubCategoryEntityController.h"
@@ -42,9 +43,9 @@
 @implementation CategroyGroupController
 
 static NSString * EntityCellIdentifier = @"EntityCell";
-static NSString * EntityListCellIdentifier = @"EntityListCell";
+//static NSString * EntityListCellIdentifier = @"EntityListCell";
 static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
-
+static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (instancetype)initWithGid:(NSInteger)gid
 {
     self = [super init];
@@ -126,11 +127,12 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collectionView];
     
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
-    [self.collectionView registerClass:[EntityListCell class] forCellWithReuseIdentifier:EntityListCellIdentifier];
+//    [self.collectionView registerClass:[EntityListCell class] forCellWithReuseIdentifier:EntityListCellIdentifier];
+    [self.collectionView registerClass:[EntityDetailCell class] forCellWithReuseIdentifier:EntityDetailCellIdentifier];
     [self.collectionView registerClass:[CategroyGroupHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderIdentifier];
     
     
@@ -224,9 +226,10 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
             
         default:
         {
-            EntityListCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityListCellIdentifier forIndexPath:indexPath];
+//            EntityListCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityListCellIdentifier forIndexPath:indexPath];
+//            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+            EntityDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityDetailCellIdentifier forIndexPath:indexPath];
             cell.entity = [self.entityArray objectAtIndex:indexPath.row];
-            
             return cell;
         }
             break;
@@ -243,7 +246,8 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
             break;
             
         default:
-            cellsize = CGSizeMake(kScreenWidth, 110.);
+//            cellsize = CGSizeMake(kScreenWidth, 110.);
+            cellsize = CGSizeMake((kScreenWidth - 48)/2, (kScreenWidth - 48)/2 + 100);
             break;
     }
     
@@ -261,7 +265,8 @@ static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
             break;
             
         default:
-            edge = UIEdgeInsetsMake(3., 0., 0., 0.);
+//            edge = UIEdgeInsetsMake(3., 0., 0., 0.);
+            edge = UIEdgeInsetsMake(16., 16., 16., 16.);
             break;
     }
 

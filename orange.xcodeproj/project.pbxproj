@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
 		23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F1DD951C28020500A71827 /* PNoteViewController.m */; };
 		391F5F911B1705A000931533 /* JXFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F901B1705A000931533 /* JXFormCell.m */; };
 		394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */ = {isa = PBXBuildFile; fileRef = 394104131B294E4C00C40846 /* UIScrollView+Slogan.m */; };
@@ -423,6 +424,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		238F77D81C521CF5002E0E65 /* EntityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDetailCell.h; sourceTree = "<group>"; };
+		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
 		23F1DD941C28020500A71827 /* PNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNoteViewController.h; sourceTree = "<group>"; };
 		23F1DD951C28020500A71827 /* PNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNoteViewController.m; sourceTree = "<group>"; };
 		391F5F8F1B1705A000931533 /* JXFormCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXFormCell.h; sourceTree = "<group>"; };
@@ -1147,6 +1150,8 @@
 				B772BE991BD53CFA005C1540 /* NoteCell.m */,
 				8AAA50871BD67614005384CD /* UserTagCell.h */,
 				8AAA50881BD67614005384CD /* UserTagCell.m */,
+				238F77D81C521CF5002E0E65 /* EntityDetailCell.h */,
+				238F77D91C521CF5002E0E65 /* EntityDetailCell.m */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -3037,6 +3042,7 @@
 				B7F544021BC2457E0044F5E9 /* UIImage+MultiFormat.m in Sources */,
 				4E1D30AD1A125FDF00740C17 /* JSQSystemSoundPlayer.m in Sources */,
 				B7ED32B21B257EFF009BAF5A /* EntityNoteCell.m in Sources */,
+				238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */,
 				4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */,
 				4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */,
 				B769B11C1B2ACE91004401FA /* IFTTTAnimationKeyFrame.m in Sources */,

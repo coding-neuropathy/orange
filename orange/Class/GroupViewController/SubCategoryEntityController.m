@@ -8,8 +8,9 @@
 
 #import "SubCategoryEntityController.h"
 #import "EntityCell.h"
-#import "EntityListCell.h"
+//#import "EntityListCell.h"
 #import "DataStructure.h"
+#import "EntityDetailCell.h"
 
 @interface SubCategoryEntityController () <EntityCellDelegate>
 
@@ -25,7 +26,7 @@
 
 static NSString * EntityCellIdentifier = @"EntityCell";
 static NSString * EntityListCellIdentifier = @"EntityListCell";
-
+static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (instancetype)initWithSubCategory:(GKEntityCategory *)subcategory
 {
     self = [super init];
@@ -128,9 +129,9 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
-    [self.collectionView registerClass:[EntityListCell class] forCellWithReuseIdentifier:EntityListCellIdentifier];
-    
-    
+//    [self.collectionView registerClass:[EntityListCell class] forCellWithReuseIdentifier:EntityListCellIdentifier];
+    [self.collectionView registerClass:[EntityDetailCell class] forCellWithReuseIdentifier:EntityDetailCellIdentifier];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     /**
      * 切换 entity 样式按钮
      */
@@ -211,8 +212,11 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
             
         default:
         {
-            EntityListCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityListCellIdentifier forIndexPath:indexPath];
-            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+//            EntityListCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityListCellIdentifier forIndexPath:indexPath];
+//            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+            
+            EntityDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityDetailCellIdentifier forIndexPath:indexPath];
+            cell.entity = self.entityArray[indexPath.row];
             
             return cell;
         }
@@ -230,7 +234,8 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
             break;
             
         default:
-            cellsize = CGSizeMake(kScreenWidth, 110.);
+//            cellsize = CGSizeMake(kScreenWidth, 110.);
+            cellsize = CGSizeMake((kScreenWidth - 48)/2, (kScreenWidth - 48)/2 + 100);
             break;
     }
     
@@ -248,7 +253,7 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
             break;
             
         default:
-            edge = UIEdgeInsetsMake(3., 0., 0., 0.);
+            edge = UIEdgeInsetsMake(16.,16.,16.,16.);
             break;
     }
     
