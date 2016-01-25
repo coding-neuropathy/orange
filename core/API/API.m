@@ -212,6 +212,46 @@
     }];
 }
 
+/**
+ *  获取分类文章列表
+ *
+ *  @param gid 一级分类
+ */
++ (void)getGroupArticleWithGroupId:(NSInteger)gid Page:(NSInteger)page
+                          success:(void (^)(NSArray * articles, NSInteger count))success
+                          failure:(void (^)(NSInteger stateCode))failure
+{
+    NSParameterAssert(gid > 0);
+    NSString *path = [NSString stringWithFormat:@"category/%ld/articles/", (unsigned long)gid];
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(page) forKey:@"page"];
+    
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableArray * articles = [[NSMutableArray alloc]initWithCapacity:0];
+        
+        NSInteger count = [[[responseObject valueForKeyPath:@"count"] valueForKeyPath:@"all_count"] integerValue];
+        
+        NSArray * article_data = [responseObject valueForKeyPath:@"articles"];
+        for (NSDictionary * row in article_data)
+        {
+            GKArticle * article = [GKArticle modelFromDictionary:row];
+            [articles addObject:article];
+        }
+        if (success) {
+            success(articles, count);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
+
+
 #pragma mark - Entity API
 /**
  *  获取商品详细
