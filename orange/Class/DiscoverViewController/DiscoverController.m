@@ -42,9 +42,16 @@
 @property (strong, nonatomic) UITableView * searchLogTableView;
 
 @property (strong, nonatomic) SearchController * searchResultsVC;
+
+@property(nonatomic, strong) id<ALBBItemService> itemService;
+
 @end
 
 @implementation DiscoverController
+{
+    tradeProcessSuccessCallback _tradeProcessSuccessCallback;
+    tradeProcessFailedCallback _tradeProcessFailedCallback;
+}
 
 static NSString * EntityCellIdentifier = @"EntityCell";
 static NSString * ArticleCellIdentifier = @"ArticleCell";
@@ -106,6 +113,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_discover"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_discover"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
+        
+        self.itemService = [[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
+
         
         //self.title = NSLocalizedStringFromTable(@"discover", kLocalizedFile, nil);
     }
@@ -645,6 +655,22 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     EntityPreViewController * vc = [[EntityPreViewController alloc] initWithEntity:[self.entityArray objectAtIndex:indexPath.row]];
     vc.preferredContentSize = CGSizeMake(0., 0.);
     previewingContext.sourceRect = cell.frame;
+    
+    vc.baichuanblock = ^(GKPurchase * purchase) {
+        NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
+        TaeTaokeParams * taoKeParams = [[TaeTaokeParams alloc]init];
+        taoKeParams.pid = kGK_TaobaoKe_PID;
+        [self.itemService showTaoKeItemDetailByItemId:self
+                                                       isNeedPush:YES
+                                                webViewUISettings:nil
+                                                           itemId:_itemId
+                                                         itemType:1
+                                                           params:nil
+                                                      taoKeParams:taoKeParams
+                                      tradeProcessSuccessCallback:_tradeProcessSuccessCallback
+                                       tradeProcessFailedCallback:_tradeProcessFailedCallback];
+    };
+    
     [vc setBackblock:^(UIViewController * vc1){
         [self.navigationController pushViewController:vc1 animated:YES];
     }];

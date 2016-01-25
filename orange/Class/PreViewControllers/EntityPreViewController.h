@@ -11,8 +11,8 @@
 @interface EntityPreViewController : UIViewController
 
 /** 3d-Touch购买商品界面跳转 */
-@property (nonatomic,copy)void(^backblock)(UIViewController * vc);
-
+@property (nonatomic, copy) void(^backblock)(UIViewController * vc);
+@property (nonatomic, copy) void(^baichuanblock)(GKPurchase * purchase);
 
 
 - (instancetype)initWithEntity:(GKEntity *)entity;

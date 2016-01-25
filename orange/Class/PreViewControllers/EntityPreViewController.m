@@ -16,31 +16,31 @@
 @property (strong, nonatomic) GKEntity * entity;
 @property (strong, nonatomic) EntityPreView * preView;
 
-@property(nonatomic, strong) id<ALBBItemService> itemService;
+//@property(nonatomic, strong) id<ALBBItemService> itemService;
 
 @property (strong, nonatomic) NSString * seller_id;
 @end
 
 @implementation EntityPreViewController
-{
-    tradeProcessSuccessCallback _tradeProcessSuccessCallback;
-    tradeProcessFailedCallback _tradeProcessFailedCallback;
-}
+//{
+//    tradeProcessSuccessCallback _tradeProcessSuccessCallback;
+//    tradeProcessFailedCallback _tradeProcessFailedCallback;
+//}
 
 - (instancetype)initWithEntity:(GKEntity *)entity
 {
     self = [self init];
     if (self) {
         self.entity = entity;
-                self.itemService = [[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
+//        self.itemService = [[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
         
-        if (self.entity.purchaseArray > 0) {
-            GKPurchase * purchase = self.entity.purchaseArray[0];
-            if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"]) {
-                self.seller_id = purchase.seller;
-                //                DDLogError(@"seller %@", self.seller_id);
-            }
-        }
+//        if (self.entity.purchaseArray > 0) {
+//            GKPurchase * purchase = self.entity.purchaseArray[0];
+//            if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"]) {
+//                self.seller_id = purchase.seller;
+//                //                DDLogError(@"seller %@", self.seller_id);
+//            }
+//        }
         
     }
     return self;
@@ -88,32 +88,30 @@
         if (self.entity.purchaseArray.count > 0) {
             GKPurchase * purchase = self.entity.purchaseArray[0];
             
+            
             if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"]) {
-                NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-                TaeTaokeParams * taoKeParams = [[TaeTaokeParams alloc]init];
-                taoKeParams.pid = kGK_TaobaoKe_PID;
-                [_itemService showTaoKeItemDetailByItemId:self
-                                               isNeedPush:YES
-                                        webViewUISettings:nil
-                                                   itemId:_itemId
-                                                 itemType:1
-                                                   params:nil
-                                              taoKeParams:taoKeParams
-                              tradeProcessSuccessCallback:_tradeProcessSuccessCallback
-                               tradeProcessFailedCallback:_tradeProcessFailedCallback];
-                [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString] ];
-                
-                [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
-                [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
+                self.baichuanblock(purchase);
+//                NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
+//                TaeTaokeParams * taoKeParams = [[TaeTaokeParams alloc]init];
+//                taoKeParams.pid = kGK_TaobaoKe_PID;
+//                [self.itemService showTaoKeItemDetailByItemId:self
+//                                               isNeedPush:YES
+//                                        webViewUISettings:nil
+//                                                   itemId:_itemId
+//                                                 itemType:1
+//                                                   params:nil
+//                                              taoKeParams:taoKeParams
+//                              tradeProcessSuccessCallback:_tradeProcessSuccessCallback
+//                               tradeProcessFailedCallback:_tradeProcessFailedCallback];
+
             }
             else{
                 
                 [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString] ];
-                
-                [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
-                [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
-                
             }
+            [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
+            [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
+
         }
         
     }];
@@ -136,9 +134,9 @@
     }
 
     WebViewController *webVC =[[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
+    webVC.title = @"宝贝详情";
+    webVC.hidesBottomBarWhenPushed = YES;
     
-        webVC.title = @"宝贝详情";
-        webVC.hidesBottomBarWhenPushed = YES;
     if(self.backblock){
         self.backblock(webVC);
     }
