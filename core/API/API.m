@@ -251,6 +251,42 @@
 }
 
 
+/**
+ *  获取子分类文章列表
+ *
+ *  @param sid 一级分类
+ */
++ (void)getSubCategoryArticlesWithCategroyId:(NSInteger)sid Page:(NSInteger)page
+                                    success:(void (^)(NSArray * articles, NSInteger count))success
+                                    failure:(void (^)(NSInteger stateCode))failure
+{
+    NSParameterAssert(sid > 0);
+    NSString *path = [NSString stringWithFormat:@"category/sub/%ld/articles/", (unsigned long)sid];
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(page) forKey:@"page"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableArray * articles = [[NSMutableArray alloc]initWithCapacity:0];
+        
+        NSInteger count = [[[responseObject valueForKeyPath:@"count"] valueForKeyPath:@"all_count"] integerValue];
+        
+        NSArray * article_data = [responseObject valueForKeyPath:@"articles"];
+        for (NSDictionary * row in article_data)
+        {
+            GKArticle * article = [GKArticle modelFromDictionary:row];
+            [articles addObject:article];
+        }
+        if (success) {
+            success(articles, count);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
 
 #pragma mark - Entity API
 /**

@@ -87,6 +87,15 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                            success:(void (^)(NSArray * articles, NSInteger count))success
                            failure:(void (^)(NSInteger stateCode))failure;
 
+/**
+ *  获取子分类文章列表
+ *
+ *  @param sid 一级分类
+ */
++ (void)getSubCategoryArticlesWithCategroyId:(NSInteger)sid Page:(NSInteger)page
+                                     success:(void (^)(NSArray * articles, NSInteger count))success
+                                     failure:(void (^)(NSInteger stateCode))failure;
+
 
 #pragma mark - Entity API
 /**
