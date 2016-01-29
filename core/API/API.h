@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 /**
  *  获取子分类文章列表
  *
- *  @param sid 一级分类
+ *  @param sid 二级分类
  */
 + (void)getSubCategoryArticlesWithCategroyId:(NSInteger)sid Page:(NSInteger)page
                                      success:(void (^)(NSArray * articles, NSInteger count))success
