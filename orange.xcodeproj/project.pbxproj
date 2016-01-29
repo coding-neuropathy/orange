@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
 		23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F1DD951C28020500A71827 /* PNoteViewController.m */; };
+		23F424041C59BFA7005E1318 /* CategoryArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F424031C59BFA7005E1318 /* CategoryArticleCell.m */; };
 		391F5F911B1705A000931533 /* JXFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F901B1705A000931533 /* JXFormCell.m */; };
 		394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */ = {isa = PBXBuildFile; fileRef = 394104131B294E4C00C40846 /* UIScrollView+Slogan.m */; };
 		399916CE1B11A9DB006826FD /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 399916CD1B11A9DB006826FD /* UIDevice-Hardware.m */; };
@@ -428,6 +429,8 @@
 		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
 		23F1DD941C28020500A71827 /* PNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNoteViewController.h; sourceTree = "<group>"; };
 		23F1DD951C28020500A71827 /* PNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNoteViewController.m; sourceTree = "<group>"; };
+		23F424021C59BFA7005E1318 /* CategoryArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryArticleCell.h; sourceTree = "<group>"; };
+		23F424031C59BFA7005E1318 /* CategoryArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryArticleCell.m; sourceTree = "<group>"; };
 		391F5F8F1B1705A000931533 /* JXFormCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXFormCell.h; sourceTree = "<group>"; };
 		391F5F901B1705A000931533 /* JXFormCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXFormCell.m; sourceTree = "<group>"; };
 		394104121B294E4C00C40846 /* UIScrollView+Slogan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Slogan.h"; sourceTree = "<group>"; };
@@ -1152,6 +1155,8 @@
 				8AAA50881BD67614005384CD /* UserTagCell.m */,
 				238F77D81C521CF5002E0E65 /* EntityDetailCell.h */,
 				238F77D91C521CF5002E0E65 /* EntityDetailCell.m */,
+				23F424021C59BFA7005E1318 /* CategoryArticleCell.h */,
+				23F424031C59BFA7005E1318 /* CategoryArticleCell.m */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -3020,6 +3025,7 @@
 				4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */,
 				B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */,
 				4E688A0F1BA9C2BA0006AD9B /* JSQMessage.m in Sources */,
+				23F424041C59BFA7005E1318 /* CategoryArticleCell.m in Sources */,
 				8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */,
 				4E688A1D1BA9C2BA0006AD9B /* JSQMessagesLabel.m in Sources */,
 				4E688A0E1BA9C2BA0006AD9B /* JSQMediaItem.m in Sources */,

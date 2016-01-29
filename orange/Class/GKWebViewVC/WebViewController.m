@@ -286,7 +286,8 @@
     if([self.webView canGoBack]) {
         [self.webView goBack];
     } else {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

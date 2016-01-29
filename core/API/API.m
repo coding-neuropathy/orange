@@ -231,7 +231,6 @@
         NSMutableArray * articles = [[NSMutableArray alloc]initWithCapacity:0];
         
         NSInteger count = [[[responseObject valueForKeyPath:@"count"] valueForKeyPath:@"all_count"] integerValue];
-        
         NSArray * article_data = [responseObject valueForKeyPath:@"articles"];
         for (NSDictionary * row in article_data)
         {
@@ -240,6 +239,7 @@
         }
         if (success) {
             success(articles, count);
+            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

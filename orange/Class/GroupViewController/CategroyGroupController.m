@@ -11,9 +11,11 @@
 #import "EntityCell.h"
 //#import "EntityListCell.h"
 #import "EntityDetailCell.h"
+#import "CategoryArticleCell.h"
 
 #import "SubCategoryGroupController.h"
 #import "SubCategoryEntityController.h"
+#import "WebViewController.h"
 
 @interface CategroyGroupHeader : UICollectionReusableView
 
@@ -28,16 +30,18 @@
 @property (strong, nonatomic) UICollectionView * collectionView;
 
 @property (strong, nonatomic) NSMutableArray * entityArray;
+@property (strong, nonatomic) NSMutableArray * ArticleArray;
+
 @property (strong, nonatomic) NSMutableArray * categoryArray;
 @property (strong, nonatomic) NSMutableArray * firstCategoryArray;
 @property (strong, nonatomic) NSMutableArray * secondCategoryArray;
 
-@property (assign, nonatomic) EntityDisplayStyle style;
+//@property (assign, nonatomic) EntityDisplayStyle style;
 
 @property (assign, nonatomic) NSInteger gid;
 @property (assign, nonatomic) NSInteger page;
 @property (strong, nonatomic) NSString * sort;
-
+@property (assign, nonatomic) NSInteger count;
 @end
 
 @implementation CategroyGroupController
@@ -46,6 +50,8 @@ static NSString * EntityCellIdentifier = @"EntityCell";
 //static NSString * EntityListCellIdentifier = @"EntityListCell";
 static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
+static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
+
 - (instancetype)initWithGid:(NSInteger)gid
 {
     self = [super init];
@@ -53,7 +59,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     {
         self.gid = gid;
         self.page = 1;
-        self.style = ListStyle;
+        
+//        self.style = ListStyle;
         self.sort = @"time";
         for (NSDictionary * dic in [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayKey]) {
             NSUInteger gid = [dic[@"GroupId"] integerValue];
@@ -100,6 +107,18 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (void)refresh
 {
     self.page = 1;
+    
+    [API getGroupArticleWithGroupId:self.gid Page:self.page success:^(NSArray *articles, NSInteger count) {
+        self.ArticleArray = [NSMutableArray arrayWithArray:articles];
+        self.page += 1;
+        self.count = count;
+//        NSLog(@"%ld",self.count);
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.pullToRefreshView stopAnimating];
+    }];
+    
     [API getGroupEntityWithGroupId:self.gid Page:self.page Sort:self.sort success:^(NSArray *entities) {
         self.entityArray = [NSMutableArray arrayWithArray:entities];
         self.page += 1;
@@ -133,29 +152,31 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
 //    [self.collectionView registerClass:[EntityListCell class] forCellWithReuseIdentifier:EntityListCellIdentifier];
     [self.collectionView registerClass:[EntityDetailCell class] forCellWithReuseIdentifier:EntityDetailCellIdentifier];
+    [self.collectionView registerClass:[CategoryArticleCell class] forCellWithReuseIdentifier:CategoryArticleCellIdentifier];
+    
     [self.collectionView registerClass:[CategroyGroupHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderIdentifier];
     
-    
-    UIButton * styleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage * grid_image = [UIImage imageNamed:@"grid"];
-    [styleBtn setImage:grid_image forState:UIControlStateNormal];
-    styleBtn.frame = CGRectMake(0., 0., grid_image.size.width, grid_image.size.height);
-//    styleBtn.tag = self.style;
-    [styleBtn addTarget:self action:@selector(styleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * styleBarBtn = [[UIBarButtonItem alloc] initWithCustomView:styleBtn];
-    
-    /**
-     * 切换排序样式按钮
-     */
-    UIButton * ltBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage * time_image = [UIImage imageNamed:@"like top"];
-    [ltBtn setImage:time_image forState:UIControlStateNormal];
-    ltBtn.frame = CGRectMake(0., 0., time_image.size.width, time_image.size.height);
-    [ltBtn addTarget:self action:@selector(ltBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * ltBarBtn = [[UIBarButtonItem alloc] initWithCustomView:ltBtn];
-
-    
-    self.navigationItem.rightBarButtonItems = @[styleBarBtn, ltBarBtn];
+//    
+//    UIButton * styleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    UIImage * grid_image = [UIImage imageNamed:@"grid"];
+//    [styleBtn setImage:grid_image forState:UIControlStateNormal];
+//    styleBtn.frame = CGRectMake(0., 0., grid_image.size.width, grid_image.size.height);
+////    styleBtn.tag = self.style;
+//    [styleBtn addTarget:self action:@selector(styleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem * styleBarBtn = [[UIBarButtonItem alloc] initWithCustomView:styleBtn];
+//    
+//    /**
+//     * 切换排序样式按钮
+//     */
+//    UIButton * ltBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    UIImage * time_image = [UIImage imageNamed:@"like top"];
+//    [ltBtn setImage:time_image forState:UIControlStateNormal];
+//    ltBtn.frame = CGRectMake(0., 0., time_image.size.width, time_image.size.height);
+//    [ltBtn addTarget:self action:@selector(ltBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem * ltBarBtn = [[UIBarButtonItem alloc] initWithCustomView:ltBtn];
+//
+//    
+//    self.navigationItem.rightBarButtonItems = @[styleBarBtn, ltBarBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -179,128 +200,203 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         [self.collectionView triggerPullToRefresh];
     }
 }
+#pragma mark - <UICollectionViewDelegate>
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+//        GKArticle * article = [self.ArticleArray objectAtIndex:indexPath.row];
+//            NSLog(@"%@", article.articleURL);
+//        WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
+//        vc.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+        GKArticle * article = [self.ArticleArray objectAtIndex:indexPath.row];
+        [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+//          GKArticle * article = [self.ArticleArray objectAtIndex:indexPath.row];
+//          [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+    }
+}
 
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+//    return 1;
+    return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.entityArray.count;
+//    return self.entityArray.count;
+    if (section == 0) {
+        return self.ArticleArray.count;
+//        return 3;
+    }
+    else{
+        return self.entityArray.count;
+    }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView * reusableview = [UICollectionReusableView new];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        CategroyGroupHeader * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderIdentifier forIndexPath:indexPath];
-        header.categoryArray = self.firstCategoryArray;
-        header.tapMoreBtnBlock = ^(){
-            SubCategoryGroupController * vc = [[SubCategoryGroupController alloc] initWithSubCategories:self.secondCategoryArray];
-            vc.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
-            [self.navigationController pushViewController:vc animated:YES];
-        };
-        header.tapCategoryBtnBlock = ^(GKEntityCategory * category){
-            SubCategoryEntityController * vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
-            vc.title = category.categoryName;
-            [self.navigationController pushViewController:vc animated:YES];
-        };
-        return header;
+        
+            CategroyGroupHeader * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderIdentifier forIndexPath:indexPath];
+            header.categoryArray = self.firstCategoryArray;
+            header.tapMoreBtnBlock = ^(){
+                SubCategoryGroupController * vc = [[SubCategoryGroupController alloc] initWithSubCategories:self.secondCategoryArray];
+                vc.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
+                [self.navigationController pushViewController:vc animated:YES];
+            };
+            header.tapCategoryBtnBlock = ^(GKEntityCategory * category){
+                SubCategoryEntityController * vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
+                vc.title = category.categoryName;
+                [self.navigationController pushViewController:vc animated:YES];
+            };
+            return header;
+        
     }
     return reusableview;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (self.style) {
-        case GridStyle:
-        {
-            EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityCellIdentifier forIndexPath:indexPath];
-            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
-            cell.delegate = self;
-            return cell;
-        }
-            break;
-            
-        default:
-        {
-//            EntityListCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityListCellIdentifier forIndexPath:indexPath];
+//    switch (self.style) {
+//        case GridStyle:
+//        {
+//            EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityCellIdentifier forIndexPath:indexPath];
 //            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
-            EntityDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityDetailCellIdentifier forIndexPath:indexPath];
-            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
-            return cell;
-        }
-            break;
+//            cell.delegate = self;
+//            return cell;
+//        }
+//            break;
+//            
+//        default:
+//        {
+////            EntityListCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityListCellIdentifier forIndexPath:indexPath];
+////            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+//            EntityDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityDetailCellIdentifier forIndexPath:indexPath];
+//            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+//            return cell;
+//        }
+//            break;
+//    }
+    if (indexPath.section == 0) {
+        CategoryArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CategoryArticleCellIdentifier forIndexPath:indexPath];
+        cell.article = [self.ArticleArray objectAtIndex:indexPath.row];
+        return cell;
+    }
+    else
+    {
+        EntityDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityDetailCellIdentifier forIndexPath:indexPath];
+        cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+        return cell;
     }
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+//    CGSize cellsize = CGSizeMake(0, 0);
+//    switch (self.style) {
+//        case GridStyle:
+//            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+//            break;
+//            
+//        default:
+////            cellsize = CGSizeMake(kScreenWidth, 110.);
+//            cellsize = CGSizeMake((kScreenWidth - 48)/2, (kScreenWidth - 48)/2 + 100);
+//            break;
+//    }
+//    
+//    
+//    return cellsize;
     CGSize cellsize = CGSizeMake(0, 0);
-    switch (self.style) {
-        case GridStyle:
-            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
-            break;
-            
-        default:
-//            cellsize = CGSizeMake(kScreenWidth, 110.);
-            cellsize = CGSizeMake((kScreenWidth - 48)/2, (kScreenWidth - 48)/2 + 100);
-            break;
+    if (indexPath.section == 0) {
+        cellsize = CGSizeMake(kScreenWidth, 110.);
+        return cellsize;
     }
-    
-    
-    return cellsize;
+    else
+    {
+        cellsize = CGSizeMake((kScreenWidth - 48)/2, (kScreenWidth - 48)/2 + 100);
+        return cellsize;
+    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
     
-    switch (self.style) {
-        case GridStyle:
-            edge = UIEdgeInsetsMake(3., 3., 3., 3.);
-            break;
-            
-        default:
-//            edge = UIEdgeInsetsMake(3., 0., 0., 0.);
-            edge = UIEdgeInsetsMake(16., 16., 16., 16.);
-            break;
+//    switch (self.style) {
+//        case GridStyle:
+//            edge = UIEdgeInsetsMake(3., 3., 3., 3.);
+//            break;
+//            
+//        default:
+////            edge = UIEdgeInsetsMake(3., 0., 0., 0.);
+//            edge = UIEdgeInsetsMake(16., 16., 16., 16.);
+//            break;
+//    }
+//
+//    return edge;
+    if (section == 0) {
+        edge = UIEdgeInsetsMake(3., 0., 0., 0.);
+        return edge;
     }
-
-    return edge;
+    else
+    {
+        edge = UIEdgeInsetsMake(16., 16., 16., 16.);
+        return edge;
+    }
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     CGFloat itemSpacing = 0.;
-    switch (self.style) {
-        case GridStyle:
-            itemSpacing = 3.;
-            break;
-            
-        default:
-            break;
+//    switch (self.style) {
+//        case GridStyle:
+//            itemSpacing = 3.;
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//
+//    return itemSpacing;
+    if (section == 0) {
+        itemSpacing = 0;
+        return itemSpacing;
     }
-
-    return itemSpacing;
+    else
+    {
+        itemSpacing = 3.;
+        return itemSpacing;
+    }
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     CGFloat spacing = 0;
-    switch (self.style) {
-        case GridStyle:
-            spacing = 3.;
-            break;
-            
-        default:
-            break;
+//    switch (self.style) {
+//        case GridStyle:
+//            spacing = 3.;
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//    
+//    return spacing;
+    if (section == 0) {
+        spacing = 0;
+        return spacing;
     }
-    
-    return spacing;
+    else
+    {
+        spacing = 3.;
+        return spacing;
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
@@ -319,41 +415,41 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 
 #pragma mark - NavBar Button action
 
-- (void)styleBtnAction:(id)sender
-{
-    UIButton * styleBtn = (UIButton *)sender;
-    switch (self.style) {
-        case ListStyle:
-        {
-            self.style = GridStyle;
-            [styleBtn setImage:[UIImage imageNamed:@"list"] forState:UIControlStateNormal];
-            [self.collectionView reloadData];
-
-        }
-            break;
-            
-        default:
-            self.style = ListStyle;
-            [styleBtn setImage:[UIImage imageNamed:@"grid"] forState:UIControlStateNormal];
-            [self.collectionView reloadData];
-            break;
-    }
-}
-
-- (void)ltBtnAction:(id)sender
-{
-    UIButton * ltBtn = (UIButton *)sender;
-    
-    if ([self.sort isEqualToString:@"time"]) {
-        self.sort = @"like";
-        [self.collectionView triggerPullToRefresh];
-        [ltBtn setImage:[UIImage imageNamed:@"time_top"] forState:UIControlStateNormal];
-    } else {
-        self.sort = @"time";
-        [self.collectionView triggerPullToRefresh];
-        [ltBtn setImage:[UIImage imageNamed:@"like top"] forState:UIControlStateNormal];
-    }
-}
+//- (void)styleBtnAction:(id)sender
+//{
+//    UIButton * styleBtn = (UIButton *)sender;
+//    switch (self.style) {
+//        case ListStyle:
+//        {
+//            self.style = GridStyle;
+//            [styleBtn setImage:[UIImage imageNamed:@"list"] forState:UIControlStateNormal];
+//            [self.collectionView reloadData];
+//
+//        }
+//            break;
+//            
+//        default:
+//            self.style = ListStyle;
+//            [styleBtn setImage:[UIImage imageNamed:@"grid"] forState:UIControlStateNormal];
+//            [self.collectionView reloadData];
+//            break;
+//    }
+//}
+//
+//- (void)ltBtnAction:(id)sender
+//{
+//    UIButton * ltBtn = (UIButton *)sender;
+//    
+//    if ([self.sort isEqualToString:@"time"]) {
+//        self.sort = @"like";
+//        [self.collectionView triggerPullToRefresh];
+//        [ltBtn setImage:[UIImage imageNamed:@"time_top"] forState:UIControlStateNormal];
+//    } else {
+//        self.sort = @"time";
+//        [self.collectionView triggerPullToRefresh];
+//        [ltBtn setImage:[UIImage imageNamed:@"like top"] forState:UIControlStateNormal];
+//    }
+//}
 
 @end
 
