@@ -103,7 +103,7 @@
     __weak __typeof(&*self)weakSelf = self;
     [self.loading startAnimating];
     if (IS_IPHONE_6) {
-        [self.imageView sd_setImageWithPreviousCachedImageWithURL:_entity.imageURL_310x310 andPlaceholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake((SCREEN_WIDTH - 48)/2, (SCREEN_WIDTH - 48)/2)] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        [self.imageView sd_setImageWithPreviousCachedImageWithURL:_entity.imageURL_310x310 andPlaceholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake((SCREEN_WIDTH - 3)/2 - 32, (SCREEN_WIDTH - 3)/2 - 32)] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
             //
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [weakSelf.loading stopAnimating];
@@ -123,19 +123,20 @@
 {
     [super layoutSubviews];
     
-    self.imageView.frame = CGRectMake(0., 0., (SCREEN_WIDTH - 48)/2, (SCREEN_WIDTH - 48)/2);
-    self.imageView.deFrameTop = 0;
-    self.imageView.deFrameLeft = 0;
+    self.imageView.frame = CGRectMake(16., 16., (SCREEN_WIDTH - 48)/2 - 8, (SCREEN_WIDTH - 48)/2 - 8);
+    self.imageView.deFrameTop = 16;
+    self.imageView.deFrameLeft = 16;
     
-    self.brandLabel.frame = CGRectMake(0., 0., (SCREEN_WIDTH - 48)/2, 17);
+    
+    self.brandLabel.frame = CGRectMake(16., 16., (SCREEN_WIDTH - 48)/2, 17);
     self.brandLabel.deFrameTop = self.imageView.deFrameBottom + 5;
     self.brandLabel.deFrameLeft = self.imageView.deFrameLeft;
     
-    self.titleLabel.frame = CGRectMake(0., 0., (SCREEN_WIDTH - 48)/2., 30);
+    self.titleLabel.frame = CGRectMake(16., 16., (SCREEN_WIDTH - 48)/2., 30);
     self.titleLabel.deFrameTop = self.brandLabel.deFrameBottom + 5;
     self.titleLabel.deFrameLeft = self.brandLabel.deFrameLeft;
     
-    self.priceLabel.frame = CGRectMake(0., 0., 100, 20);
+    self.priceLabel.frame = CGRectMake(16., 16., 100, 20);
     self.priceLabel.deFrameTop = self.titleLabel.deFrameBottom + 15;
     self.priceLabel.deFrameLeft = self.titleLabel.deFrameLeft;
     

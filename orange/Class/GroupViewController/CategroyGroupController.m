@@ -9,7 +9,6 @@
 #import "CategroyGroupController.h"
 #import "CSStickyHeaderFlowLayout.h"
 #import "EntityCell.h"
-//#import "EntityListCell.h"
 #import "EntityDetailCell.h"
 #import "CategoryArticleCell.h"
 
@@ -25,6 +24,13 @@
 @property (nonatomic, copy) void (^tapCategoryBtnBlock)(GKEntityCategory * category);
 @end
 
+@interface CategoryHeaderSection : UICollectionReusableView
+
+@property (nonatomic , strong) UILabel * textLabel;
+@property (nonatomic , strong) NSString * text;
+
+@end
+
 @interface CategroyGroupController () <EntityCellDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
@@ -36,7 +42,7 @@
 @property (strong, nonatomic) NSMutableArray * firstCategoryArray;
 @property (strong, nonatomic) NSMutableArray * secondCategoryArray;
 
-//@property (assign, nonatomic) EntityDisplayStyle style;
+
 
 @property (assign, nonatomic) NSInteger gid;
 @property (assign, nonatomic) NSInteger page;
@@ -47,10 +53,10 @@
 @implementation CategroyGroupController
 
 static NSString * EntityCellIdentifier = @"EntityCell";
-//static NSString * EntityListCellIdentifier = @"EntityListCell";
 static NSString * CategoryHeaderIdentifier = @"CategoryHeader";
 static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
+static NSString * CategoryHeaderSectionIdentifier = @"CategoryHeaderCell";
 
 - (instancetype)initWithGid:(NSInteger)gid
 {
@@ -112,7 +118,7 @@ static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
         self.ArticleArray = [NSMutableArray arrayWithArray:articles];
         self.page += 1;
         self.count = count;
-//        NSLog(@"%ld",self.count);
+    
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
@@ -146,7 +152,7 @@ static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+//    self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collectionView];
     
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
@@ -156,6 +162,7 @@ static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
     
     [self.collectionView registerClass:[CategroyGroupHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderIdentifier];
     
+    [self.collectionView registerClass:[CategoryHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderSectionIdentifier];
 //    
 //    UIButton * styleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    UIImage * grid_image = [UIImage imageNamed:@"grid"];
@@ -205,56 +212,70 @@ static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-//        GKArticle * article = [self.ArticleArray objectAtIndex:indexPath.row];
-//            NSLog(@"%@", article.articleURL);
-//        WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
-//        vc.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:vc animated:YES];
         
         GKArticle * article = [self.ArticleArray objectAtIndex:indexPath.row];
         [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
-//          GKArticle * article = [self.ArticleArray objectAtIndex:indexPath.row];
-//          [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+
     }
 }
 
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-//    return 1;
+
     return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    return self.entityArray.count;
+
     if (section == 0) {
-        return self.ArticleArray.count;
-//        return 3;
+        if (self.count <= 3) {
+            return self.count;
+        }
+        else
+        {
+            return 3;
+        }
     }
     else{
         return self.entityArray.count;
     }
-}
 
+}
+#pragma mark --------------------------------8-8-8-8-8-8-8----------------------------------
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView * reusableview = [UICollectionReusableView new];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        switch (indexPath.section) {
+            case 0:
+            {
+                CategroyGroupHeader * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderIdentifier forIndexPath:indexPath];
+                header.categoryArray = self.firstCategoryArray;
+                header.tapMoreBtnBlock = ^(){
+                    SubCategoryGroupController * vc = [[SubCategoryGroupController alloc] initWithSubCategories:self.secondCategoryArray];
+                    vc.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
+                    [self.navigationController pushViewController:vc animated:YES];
+                };
+                header.tapCategoryBtnBlock = ^(GKEntityCategory * category){
+                    SubCategoryEntityController * vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
+                    vc.title = category.categoryName;
+                    [self.navigationController pushViewController:vc animated:YES];
+                };
+                return header;
+            }
+                break;
+            default:
+            {
+                
+                CategoryHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderSectionIdentifier forIndexPath:indexPath];
+                header.text = NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil);
+                return header;
+            }
+                break;
+        }
         
-            CategroyGroupHeader * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderIdentifier forIndexPath:indexPath];
-            header.categoryArray = self.firstCategoryArray;
-            header.tapMoreBtnBlock = ^(){
-                SubCategoryGroupController * vc = [[SubCategoryGroupController alloc] initWithSubCategories:self.secondCategoryArray];
-                vc.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
-                [self.navigationController pushViewController:vc animated:YES];
-            };
-            header.tapCategoryBtnBlock = ^(GKEntityCategory * category){
-                SubCategoryEntityController * vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
-                vc.title = category.categoryName;
-                [self.navigationController pushViewController:vc animated:YES];
-            };
-            return header;
         
     }
     return reusableview;
@@ -293,6 +314,26 @@ static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
         cell.entity = [self.entityArray objectAtIndex:indexPath.row];
         return cell;
     }
+//    switch (indexPath.section) {
+//        case 0:
+//        {
+//            return nil;
+//        }
+//            break;
+//        case 1:
+//        {
+//            CategoryArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CategoryArticleCellIdentifier forIndexPath:indexPath];
+//            cell.article = [self.ArticleArray objectAtIndex:indexPath.row];
+//            return cell;
+//        }
+//        default:
+//        {
+//            EntityDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityDetailCellIdentifier forIndexPath:indexPath];
+//            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+//            return cell;
+//        }
+//            break;
+//    }
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
@@ -313,14 +354,25 @@ static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
 //    
 //    return cellsize;
     CGSize cellsize = CGSizeMake(0, 0);
-    if (indexPath.section == 0) {
-        cellsize = CGSizeMake(kScreenWidth, 110.);
-        return cellsize;
-    }
-    else
-    {
-        cellsize = CGSizeMake((kScreenWidth - 48)/2, (kScreenWidth - 48)/2 + 100);
-        return cellsize;
+
+    switch (indexPath.section) {
+//        case 0:
+//        {
+//            cellsize = CGSizeMake(0, 0);
+//            return cellsize;
+//        }
+//            break;
+        case 0:
+        {
+            cellsize = CGSizeMake(kScreenWidth, 110.);
+            return cellsize;
+        }
+        default:
+        {
+            cellsize = CGSizeMake((kScreenWidth  )/2, (kScreenWidth  )/2 + 100);
+            return cellsize;
+        }
+            break;
     }
 }
 
@@ -328,74 +380,102 @@ static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
     
-//    switch (self.style) {
-//        case GridStyle:
-//            edge = UIEdgeInsetsMake(3., 3., 3., 3.);
-//            break;
-//            
-//        default:
-////            edge = UIEdgeInsetsMake(3., 0., 0., 0.);
-//            edge = UIEdgeInsetsMake(16., 16., 16., 16.);
-//            break;
+//    if (section == 0) {
+//        edge = UIEdgeInsetsMake(3., 0., 0., 0.);
+//        return edge;
 //    }
-//
-//    return edge;
-    if (section == 0) {
-        edge = UIEdgeInsetsMake(3., 0., 0., 0.);
-        return edge;
+//    else
+//    {
+//        edge = UIEdgeInsetsMake(16., 16., 16., 16.);
+//        return edge;
+//    }
+    switch (section) {
+//        case 0:
+//        {
+//            edge = UIEdgeInsetsMake(0., 0., 0., 0.);
+//            return edge;
+//        }
+//            break;
+        case 0:
+        {
+            edge = UIEdgeInsetsMake(3., 0., 0., 0.);
+            return edge;
+        }
+        default:
+        {
+            edge = UIEdgeInsetsMake(0., 0., 0., 0.);
+            return edge;
+        }
+            break;
     }
-    else
-    {
-        edge = UIEdgeInsetsMake(16., 16., 16., 16.);
-        return edge;
-    }
+    
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     CGFloat itemSpacing = 0.;
-//    switch (self.style) {
-//        case GridStyle:
-//            itemSpacing = 3.;
-//            break;
-//            
-//        default:
-//            break;
+
+//    if (section == 0) {
+//        itemSpacing = 0;
+//        return itemSpacing;
 //    }
-//
-//    return itemSpacing;
-    if (section == 0) {
-        itemSpacing = 0;
-        return itemSpacing;
-    }
-    else
-    {
-        itemSpacing = 3.;
-        return itemSpacing;
+//    else
+//    {
+//        itemSpacing = 3.;
+//        return itemSpacing;
+//    }
+    switch (section) {
+//        case 0:
+//        {
+//            itemSpacing = 0.;
+//            return itemSpacing;
+//        }
+            break;
+        case 0:
+        {
+            itemSpacing = 0.;
+            return itemSpacing;
+        }
+        default:
+        {
+            itemSpacing = 0.;
+            return itemSpacing;
+        }
+            break;
     }
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     CGFloat spacing = 0;
-//    switch (self.style) {
-//        case GridStyle:
-//            spacing = 3.;
-//            break;
-//            
-//        default:
-//            break;
+
+//    if (section == 0) {
+//        spacing = 0;
+//        return spacing;
 //    }
-//    
-//    return spacing;
-    if (section == 0) {
-        spacing = 0;
-        return spacing;
-    }
-    else
-    {
-        spacing = 3.;
-        return spacing;
+//    else
+//    {
+//        spacing = 3.;
+//        return spacing;
+//    }
+    switch (section) {
+//        case 0:
+//        {
+//            spacing = 0;
+//            return 0;
+//        }
+//            break;
+        case 0:
+        {
+            spacing = 0;
+            return spacing;
+        }
+        default:
+        {
+            spacing = 0.;
+            return spacing;
+        }
+            break;
     }
 }
 
@@ -541,4 +621,50 @@ static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
     }
 }
 
+
 @end
+
+#pragma mark - Category Header
+@implementation CategoryHeaderSection
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
+
+- (UILabel *)textLabel
+{
+    if (!_textLabel)
+    {
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _textLabel.font = [UIFont systemFontOfSize:14.];
+        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textAlignment = NSTextAlignmentLeft;
+        _textLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:_textLabel];
+    }
+    return _textLabel;
+}
+
+- (void)setText:(NSString *)text
+{
+    _text = text;
+    self.textLabel.text = _text;
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    //    self.backgroundColor = UIColorFromRGB(0xf8f8f8);
+    
+    self.textLabel.frame = CGRectMake(10., 0., kScreenWidth - 20., 44.);
+}
+
+@end
+

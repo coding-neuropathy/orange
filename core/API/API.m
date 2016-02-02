@@ -230,7 +230,8 @@
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableArray * articles = [[NSMutableArray alloc]initWithCapacity:0];
         
-        NSInteger count = [[[responseObject valueForKeyPath:@"count"] valueForKeyPath:@"all_count"] integerValue];
+        NSInteger count = [[[responseObject valueForKeyPath:@"stat"] valueForKeyPath:@"all_count"] integerValue];
+        
         NSArray * article_data = [responseObject valueForKeyPath:@"articles"];
         for (NSDictionary * row in article_data)
         {
