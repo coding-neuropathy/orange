@@ -109,6 +109,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         self.user = user;
         self.likedataArray = [NSMutableArray arrayWithArray:lastLikeEntities];
         self.notedataArray = [NSMutableArray arrayWithArray:lastNotes];
+//        [self.collectionView reloadData];
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
@@ -589,13 +590,14 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             //            self.
             self.user = [Passport sharedInstance].user;
             self.navigationItem.title = self.user.nickname;
-//            self.headerView.user = self.user;
-            [self.collectionView reloadData];
+            self.headerView.user = self.user;
+//            [self.collectionView reloadData];
         }
         
         if ([keyPath isEqualToString:@"avatarURL"]) {
             self.user = [Passport sharedInstance].user;
-            [self.collectionView reloadData];
+            self.headerView.user = self.user;
+//            [self.collectionView reloadData];
         }
     }
 }
