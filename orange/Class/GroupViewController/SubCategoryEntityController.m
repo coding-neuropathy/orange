@@ -14,6 +14,22 @@
 #import "CategoryArticleCell.h"
 #import "MoreArticlesViewController.h"
 
+@interface ArticleHeader : UICollectionReusableView
+
+@property (nonatomic , strong) UILabel * textLabel;
+@property (nonatomic , copy) NSString * text;
+@property (nonatomic , strong) UIButton * moreBtn;
+@property (nonatomic , strong) void (^moreBtnBlock)();
+
+@end
+
+//商品头
+@interface EntityHeader : UICollectionReusableView
+
+@property (nonatomic , strong) UILabel * textLabel2;
+@property (nonatomic , copy) NSString * text2;
+
+@end
 
 @interface SubCategoryEntityController () <EntityCellDelegate>
 
@@ -35,8 +51,8 @@ static NSString * EntityListCellIdentifier = @"EntityListCell";
 static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 static NSString * CategoryArticleCellIdentifier = @"CategoryArticleCell";
 
-static NSString * CategoryHeaderSectionIdentifier = @"CategoryHeaderCell";
-static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
+static NSString * ArticleHeaderIdentifier = @"CategoryHeaderCell";
+static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 
 - (instancetype)initWithSubCategory:(GKEntityCategory *)subcategory
 {
@@ -157,8 +173,8 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
 //    [self.collectionView registerClass:[EntityListCell class] forCellWithReuseIdentifier:EntityListCellIdentifier];
     [self.collectionView registerClass:[EntityDetailCell class] forCellWithReuseIdentifier:EntityDetailCellIdentifier];
     [self.collectionView registerClass:[CategoryArticleCell class] forCellWithReuseIdentifier:CategoryArticleCellIdentifier];
-    
-
+    [self.collectionView registerClass:[ArticleHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:ArticleHeaderIdentifier];
+    [self.collectionView registerClass:[EntityHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityHeaderIdentifier];
     /**
      * 切换 entity 样式按钮
      */
@@ -245,43 +261,43 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     }
 }
 
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-//{
-//    UICollectionReusableView * reusableview = [UICollectionReusableView new];
-//    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-//        switch (indexPath.section) {
-//            case 0:
-//            {
-//                CategoryHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderSectionIdentifier forIndexPath:indexPath];
-//                header.text = NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil);
-//                if (self.count < 3) {
-//                    header.moreBtn.hidden = YES;
-//                }
-//                else{
-//                    header.moreBtn.hidden = NO;
-//                }
-//                header.moreBtnBlock = ^(){
-//                    
-//                  MoreArticlesViewController * vc = [[MoreArticlesViewController alloc]initWithDataSource:self.articleArray];
-//                    vc.title = NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil);
-//                    [self.navigationController pushViewController:vc animated:YES];
-//                };
-//                return header;
-//            }
-//                break;
-//                
-//            default:
-//            {
-//                CategoryHeaderSection2 * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderSectionIdentifier2 forIndexPath:indexPath];
-//                header.text2 = NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil);
-//                
-//                return header;
-//            }
-//                break;
-//        }
-//    }
-//    return reusableview;
-//}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView * reusableview = [UICollectionReusableView new];
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        switch (indexPath.section) {
+            case 0:
+            {
+                ArticleHeader * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:ArticleHeaderIdentifier forIndexPath:indexPath];
+                header.text = NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil);
+                if (self.count < 3) {
+                    header.moreBtn.hidden = YES;
+                }
+                else{
+                    header.moreBtn.hidden = NO;
+                }
+                header.moreBtnBlock = ^(){
+                    
+                  MoreArticlesViewController * vc = [[MoreArticlesViewController alloc]initWithDataSource:self.articleArray];
+                    vc.title = NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil);
+                    [self.navigationController pushViewController:vc animated:YES];
+                };
+                return header;
+            }
+                break;
+                
+            default:
+            {
+                EntityHeader * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityHeaderIdentifier forIndexPath:indexPath];
+                header.text2 = NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil);
+                
+                return header;
+            }
+                break;
+        }
+    }
+    return reusableview;
+}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -488,5 +504,112 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
 //    }
 //}
 
+@end
+
+@implementation ArticleHeader
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
+
+- (UILabel *)textLabel
+{
+    if (!_textLabel)
+    {
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _textLabel.font = [UIFont systemFontOfSize:14.];
+        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textAlignment = NSTextAlignmentLeft;
+        _textLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:_textLabel];
+    }
+    return _textLabel;
+}
+
+- (void)setText:(NSString *)text
+{
+    _text = text;
+    self.textLabel.text = _text;
+    [self setNeedsLayout];
+}
+
+- (UIButton *)moreBtn
+{
+    if (!_moreBtn) {
+        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_moreBtn setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedStringFromTable(@"more", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FAAngleRight]] forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        _moreBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        [_moreBtn addTarget:self action:@selector(MoreBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_moreBtn];
+    }
+    return _moreBtn;
+}
+
+- (void)MoreBtnAction:(UIButton *)button
+{
+    if (self.moreBtnBlock)
+    {
+        self.moreBtnBlock();
+    }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.textLabel.frame = CGRectMake(10., 0., kScreenWidth - 20., 44.);
+    self.moreBtn.frame = CGRectMake(0., 0., 50., 40.);
+    self.moreBtn.deFrameTop = 2;
+    self.moreBtn.deFrameRight = self.deFrameRight - 16;
+    
+}
+
+@end
+
+#pragma mark - Category EntityHeader
+@implementation EntityHeader
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
+
+- (UILabel *)textLabel2
+{
+    if (!_textLabel2)
+    {
+        _textLabel2 = [[UILabel alloc] initWithFrame:CGRectZero];
+        _textLabel2.font = [UIFont systemFontOfSize:14.];
+        _textLabel2.textColor = UIColorFromRGB(0x414243);
+        _textLabel2.textAlignment = NSTextAlignmentLeft;
+        _textLabel2.backgroundColor = [UIColor clearColor];
+        [self addSubview:_textLabel2];
+    }
+    return _textLabel2;
+}
+
+- (void)setText2:(NSString *)text2
+{
+    _text2 = text2;
+    self.textLabel2.text = _text2;
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.textLabel2.frame = CGRectMake(10., 0., kScreenWidth - 20., 44.);
+}
 @end
 
