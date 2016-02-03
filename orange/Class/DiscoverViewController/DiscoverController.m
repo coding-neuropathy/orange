@@ -493,15 +493,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
         case 3:
         {
-            /*
-            if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                itemSpacing = 3.;
-            } else if (IS_IPHONE_6) {
-                itemSpacing = 3.;
-            } else {
-                itemSpacing = 3.;
-            }
-             */
             itemSpacing = 3.;
         }
             break;
