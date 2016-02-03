@@ -81,7 +81,6 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
         self.gid = gid;
         self.page = 1;
         
-//        self.style = ListStyle;
         self.sort = @"time";
         for (NSDictionary * dic in [NSObject objectFromUserDefaultsByKey:CategoryGroupArrayKey]) {
             NSUInteger gid = [dic[@"GroupId"] integerValue];
@@ -180,26 +179,6 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     
     [self.collectionView registerClass:[CategoryHeaderSection2 class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderSectionIdentifier2];
     
-//    UIButton * styleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    UIImage * grid_image = [UIImage imageNamed:@"grid"];
-//    [styleBtn setImage:grid_image forState:UIControlStateNormal];
-//    styleBtn.frame = CGRectMake(0., 0., grid_image.size.width, grid_image.size.height);
-////    styleBtn.tag = self.style;
-//    [styleBtn addTarget:self action:@selector(styleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem * styleBarBtn = [[UIBarButtonItem alloc] initWithCustomView:styleBtn];
-//    
-//    /**
-//     * 切换排序样式按钮
-//     */
-//    UIButton * ltBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    UIImage * time_image = [UIImage imageNamed:@"like top"];
-//    [ltBtn setImage:time_image forState:UIControlStateNormal];
-//    ltBtn.frame = CGRectMake(0., 0., time_image.size.width, time_image.size.height);
-//    [ltBtn addTarget:self action:@selector(ltBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem * ltBarBtn = [[UIBarButtonItem alloc] initWithCustomView:ltBtn];
-//
-//    
-//    self.navigationItem.rightBarButtonItems = @[styleBarBtn, ltBarBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -464,42 +443,6 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
 
 #pragma mark - NavBar Button action
 
-//- (void)styleBtnAction:(id)sender
-//{
-//    UIButton * styleBtn = (UIButton *)sender;
-//    switch (self.style) {
-//        case ListStyle:
-//        {
-//            self.style = GridStyle;
-//            [styleBtn setImage:[UIImage imageNamed:@"list"] forState:UIControlStateNormal];
-//            [self.collectionView reloadData];
-//
-//        }
-//            break;
-//            
-//        default:
-//            self.style = ListStyle;
-//            [styleBtn setImage:[UIImage imageNamed:@"grid"] forState:UIControlStateNormal];
-//            [self.collectionView reloadData];
-//            break;
-//    }
-//}
-//
-//- (void)ltBtnAction:(id)sender
-//{
-//    UIButton * ltBtn = (UIButton *)sender;
-//    
-//    if ([self.sort isEqualToString:@"time"]) {
-//        self.sort = @"like";
-//        [self.collectionView triggerPullToRefresh];
-//        [ltBtn setImage:[UIImage imageNamed:@"time_top"] forState:UIControlStateNormal];
-//    } else {
-//        self.sort = @"time";
-//        [self.collectionView triggerPullToRefresh];
-//        [ltBtn setImage:[UIImage imageNamed:@"like top"] forState:UIControlStateNormal];
-//    }
-//}
-
 @end
 
 @implementation CategroyGroupHeader
@@ -629,8 +572,8 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
 {
     if (!_moreBtn) {
         _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_moreBtn setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedStringFromTable(@"more", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FAAngleRight]] forState:UIControlStateNormal];
-        [_moreBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_moreBtn setTitle:[NSString stringWithFormat:@"%@", NSLocalizedStringFromTable(@"more", kLocalizedFile, nil)] forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:UIColorFromRGB(0x9D9E9F) forState:UIControlStateNormal];
         _moreBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
         [_moreBtn addTarget:self action:@selector(MoreBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_moreBtn];
@@ -653,7 +596,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     self.textLabel.frame = CGRectMake(10., 0., kScreenWidth - 20., 44.);
     self.moreBtn.frame = CGRectMake(0., 0., 50., 40.);
     self.moreBtn.deFrameTop = 2;
-    self.moreBtn.deFrameRight = self.deFrameRight - 16;
+    self.moreBtn.deFrameRight = self.deFrameRight - 6;
     
 }
 

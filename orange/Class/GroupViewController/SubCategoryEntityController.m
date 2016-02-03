@@ -14,6 +14,7 @@
 #import "CategoryArticleCell.h"
 #import "MoreArticlesViewController.h"
 
+//图文头
 @interface ArticleHeader : UICollectionReusableView
 
 @property (nonatomic , strong) UILabel * textLabel;
@@ -62,9 +63,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
         self.sort = @"time";
         
         self.page = 1;
-//        self.style = ListStyle;
-        
-//        self.title = _subcategory.categoryName;
+
         [self setTitleView];
     }
     return self;
@@ -82,7 +81,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
     [titleView addSubview:icon];
     
     UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-//    [label setText:([self.subcategory.categoryName componentsSeparatedByString:@"-"][0])];
+
     label.text = self.subcategory.categoryName;
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Helvetica" size:17];
@@ -168,34 +167,14 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
-//    [self.collectionView registerClass:[EntityListCell class] forCellWithReuseIdentifier:EntityListCellIdentifier];
+
     [self.collectionView registerClass:[EntityDetailCell class] forCellWithReuseIdentifier:EntityDetailCellIdentifier];
     [self.collectionView registerClass:[CategoryArticleCell class] forCellWithReuseIdentifier:CategoryArticleCellIdentifier];
     [self.collectionView registerClass:[ArticleHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:ArticleHeaderIdentifier];
     [self.collectionView registerClass:[EntityHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityHeaderIdentifier];
-    /**
-     * 切换 entity 样式按钮
-     */
-//    UIButton * styleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    UIImage * grid_image = [UIImage imageNamed:@"grid"];
-//    [styleBtn setImage:grid_image forState:UIControlStateNormal];
-//    styleBtn.frame = CGRectMake(0., 0., grid_image.size.width, grid_image.size.height);
-//    [styleBtn addTarget:self action:@selector(styleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem * styleBarBtn = [[UIBarButtonItem alloc] initWithCustomView:styleBtn];
     
-    /**
-     * 切换排序样式按钮
-     */
-//    UIButton * ltBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    UIImage * time_image = [UIImage imageNamed:@"like top"];
-//    [ltBtn setImage:time_image forState:UIControlStateNormal];
-//    ltBtn.frame = CGRectMake(0., 0., time_image.size.width, time_image.size.height);
-//    [ltBtn addTarget:self action:@selector(ltBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem * ltBarBtn = [[UIBarButtonItem alloc] initWithCustomView:ltBtn];
-//
-//    self.navigationItem.rightBarButtonItems = @[styleBarBtn, ltBarBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -229,17 +208,26 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
         [self.collectionView triggerPullToRefresh];
     }
 }
-
+#pragma mark - <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        
+        GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
+        [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+        
+    }
+}
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-//    return 1;
+
     return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    return self.entityArray.count;
+
     switch (section) {
         case 0:
         {
@@ -301,28 +289,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    switch (self.style) {
-//        case GridStyle:
-//        {
-//            EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityCellIdentifier forIndexPath:indexPath];
-//            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
-//            cell.delegate = self;
-//            return cell;
-//        }
-//            break;
-//            
-//        default:
-//        {
-////            EntityListCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityListCellIdentifier forIndexPath:indexPath];
-////            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
-//            
-//            EntityDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityDetailCellIdentifier forIndexPath:indexPath];
-//            cell.entity = self.entityArray[indexPath.row];
-//            
-//            return cell;
-//        }
-//            break;
-//    }
+
     switch (indexPath.section) {
         case 0:
         {
@@ -365,17 +332,6 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
     
-//    switch (self.style) {
-//        case GridStyle:
-//            edge = UIEdgeInsetsMake(3., 3., 3., 3.);
-//            break;
-//            
-//        default:
-//            edge = UIEdgeInsetsMake(16.,16.,16.,16.);
-//            break;
-//    }
-//    
-//    return edge;
     switch (section) {
         case 0:
         {
@@ -396,16 +352,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     CGFloat itemSpacing = 0.;
-//    switch (self.style) {
-//        case GridStyle:
-//            itemSpacing = 3.;
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//    return itemSpacing;
+
     switch (section) {
         case 0:
         {
@@ -427,16 +374,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     CGFloat spacing = 0;
-//    switch (self.style) {
-//        case GridStyle:
-//            spacing = 3.;
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//    return spacing;
+    
     switch (section) {
         case 0:
         {
@@ -464,45 +402,6 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 {
     [[OpenCenter sharedOpenCenter] openEntity:entity];
 }
-
-
-#pragma mark - button action
-//- (void)styleBtnAction:(id)sender
-//{
-//    UIButton * styleBtn = (UIButton *)sender;
-//    
-//    switch (self.style) {
-//        case ListStyle:
-//        {
-//            self.style = GridStyle;
-//            [styleBtn setImage:[UIImage imageNamed:@"list"] forState:UIControlStateNormal];
-//            [self.collectionView reloadData];
-//            
-//        }
-//            break;
-//            
-//        default:
-//            self.style = ListStyle;
-//            [styleBtn setImage:[UIImage imageNamed:@"grid"] forState:UIControlStateNormal];
-//            [self.collectionView reloadData];
-//            break;
-//    }
-//}
-//
-//- (void)ltBtnAction:(id)sender
-//{
-//    UIButton * ltBtn = (UIButton *)sender;
-//    
-//    if ([self.sort isEqualToString:@"time"]) {
-//        self.sort = @"like";
-//        [self.collectionView triggerPullToRefresh];
-//        [ltBtn setImage:[UIImage imageNamed:@"time_top"] forState:UIControlStateNormal];
-//    } else {
-//        self.sort = @"time";
-//        [self.collectionView triggerPullToRefresh];
-//        [ltBtn setImage:[UIImage imageNamed:@"like top"] forState:UIControlStateNormal];
-//    }
-//}
 
 @end
 
@@ -542,8 +441,8 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 {
     if (!_moreBtn) {
         _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_moreBtn setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedStringFromTable(@"more", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FAAngleRight]] forState:UIControlStateNormal];
-        [_moreBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_moreBtn setTitle:[NSString stringWithFormat:@"%@", NSLocalizedStringFromTable(@"more", kLocalizedFile, nil)] forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:UIColorFromRGB(0x9D9E9F) forState:UIControlStateNormal];
         _moreBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
         [_moreBtn addTarget:self action:@selector(MoreBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_moreBtn];
