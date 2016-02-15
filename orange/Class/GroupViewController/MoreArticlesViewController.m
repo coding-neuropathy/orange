@@ -11,6 +11,7 @@
 @interface MoreArticlesViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic ,strong)UITableView * tableView;
+@property (nonatomic ,assign)NSInteger page;
 
 @end
 
@@ -26,6 +27,7 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -33,6 +35,38 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
 //    [self tableView];
     
     [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:ArticleCellIdentifier];
+}
+
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refresh];
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
+    }];
+    
+    if (self.dataSource == 0) {
+        [self.tableView triggerPullToRefresh];
+    }
+}
+
+- (void)refresh
+{
+    [self.tableView.pullToRefreshView startAnimating];
+    [self.tableView reloadData];
+    [self.tableView.pullToRefreshView stopAnimating];
+    
+}
+
+- (void)loadMore
+{
+    [self.tableView.infiniteScrollingView stopAnimating];
+    [self.tableView reloadData];
+    
 }
 
 #pragma mark -----------tableView懒加载 ---------------
@@ -43,6 +77,8 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight -kStatusBarHeight-kNavigationBarHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
         
     }
     return _tableView;

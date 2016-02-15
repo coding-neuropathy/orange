@@ -149,7 +149,6 @@
         [imageArray insertObject:_entity.imageURL atIndex:0];
     
     [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
-#warning mark ————————————————给商品大图添加点击手势————————————————————
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth) * idx, 0., kScreenWidth, kScreenWidth)];
         _imageView.userInteractionEnabled = YES;
         //图片显示方式

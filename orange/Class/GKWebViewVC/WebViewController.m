@@ -100,10 +100,11 @@
     
     //更多按钮
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-    button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
+//    button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
+    [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-    [button setTitle:[NSString fontAwesomeIconStringForEnum:FAEllipsisH] forState:UIControlStateNormal];
+//    [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+//    [button setTitle:[NSString fontAwesomeIconStringForEnum:FAEllipsisH] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor clearColor];
     UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:button];

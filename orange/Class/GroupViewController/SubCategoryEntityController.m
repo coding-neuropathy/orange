@@ -211,7 +211,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
         
         GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
         [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];

@@ -178,7 +178,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 16.0;
+    return 20.0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -320,7 +320,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                 UIAlertController * clearCacheAlert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"clear image cache", kLocalizedFile, nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
                 
                 UIAlertAction * cancel = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-                    
+                
                 }];
                 UIAlertAction * confirm = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"confirm", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [[SDImageCache sharedImageCache] clearMemory];
@@ -360,14 +360,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             [self wxShare:1];
         }
     }
-    
-//    if(alertView.tag ==20008)
-//    {
-//        if(buttonIndex == 1)
-//        {
-//            [self clearPicCache];
-//        }
-//    }
+
     
     if (alertView.tag == 40001) {
         if (buttonIndex == 1) {

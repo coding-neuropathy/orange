@@ -277,17 +277,18 @@
 {
     if(!_loginButton)
     {
-        UIButton *loginButton = [[UIButton alloc]init];
-        loginButton.frame = CGRectMake(0, 0,90, 40.f);
-        loginButton.center = CGPointMake(kScreenWidth/2, 0);
-        loginButton.layer.cornerRadius = 4;
-        loginButton.layer.masksToBounds = YES;
-        loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        loginButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
-        [loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
-        [loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
-        _loginButton = loginButton;
+        _loginButton = [[UIButton alloc]init];
+        _loginButton.frame = CGRectMake(0, 0,90, 40.f);
+        _loginButton.center = CGPointMake(kScreenWidth/2, 0);
+        _loginButton.layer.cornerRadius = 4;
+        _loginButton.layer.masksToBounds = YES;
+        _loginButton.enabled = NO;
+        _loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _loginButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
+        [_loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_loginButton setTitleColor:[UIColor colorWithRed:255.f green:255.f blue:255.f alpha:0.45] forState:UIControlStateNormal];
+        [_loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     return _loginButton;
 }

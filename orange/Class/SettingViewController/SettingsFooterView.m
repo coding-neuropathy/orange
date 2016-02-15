@@ -72,7 +72,7 @@
     
     if (_is_login) {
         self.signOutBtn.hidden = NO;
-        self.signOutBtn.frame = CGRectMake(0, 0, kScreenWidth, 44.);
+        self.signOutBtn.frame = CGRectMake(0, 20, kScreenWidth, 44.);
 
     } else {
         self.signInBtn.hidden = NO;
