@@ -91,6 +91,7 @@
     
 }
 
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -282,7 +283,7 @@
         _loginButton.center = CGPointMake(kScreenWidth/2, 0);
         _loginButton.layer.cornerRadius = 4;
         _loginButton.layer.masksToBounds = YES;
-        _loginButton.enabled = NO;
+//        _loginButton.enabled = NO;
         _loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
         _loginButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
         [_loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
@@ -603,12 +604,19 @@
 {
     if ([string isEqualToString:@"\n"]) {
         if (textField == self.emailTextField) {
+            
             [self.passwordTextField becomeFirstResponder];
-        } else {
+            [_loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+            _loginButton.enabled = YES;
+        }
+        else
+        {
             [self tapLoginButton];
         }
     }
     return YES;
+   
+    
 }
 
 #pragma mark - UIAlertViewDelegate
