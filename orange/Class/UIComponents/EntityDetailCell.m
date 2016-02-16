@@ -52,7 +52,7 @@
 {
     if (!_brandLabel) {
         _brandLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _brandLabel.font = [UIFont boldSystemFontOfSize:15.];
+        _brandLabel.font = [UIFont boldSystemFontOfSize:14.];
         _brandLabel.textColor = UIColorFromRGB(0x9d9e9f);
         _brandLabel.numberOfLines = 0;
         _brandLabel.textAlignment = NSTextAlignmentLeft;
@@ -65,7 +65,7 @@
 {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:16.];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:14.];
         _titleLabel.textColor = UIColorFromRGB(0x414243);
         _titleLabel.numberOfLines = 0;
         _titleLabel.textAlignment = NSTextAlignmentLeft;
@@ -78,8 +78,8 @@
 {
     if (!_priceLabel) {
         _priceLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _priceLabel.font = [UIFont fontWithName:@"Georgia" size:14.];
-        _priceLabel.textColor = UIColorFromRGB(0x427ec0);
+        _priceLabel.font = [UIFont boldSystemFontOfSize:14.];
+        _priceLabel.textColor = UIColorFromRGB(0x6eaaf0);
         _priceLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:_priceLabel];
     }
@@ -128,16 +128,16 @@
     self.imageView.deFrameLeft = 16;
     
     
-    self.brandLabel.frame = CGRectMake(16., 16., (SCREEN_WIDTH - 48)/2, 17);
-    self.brandLabel.deFrameTop = self.imageView.deFrameBottom + 5;
+    self.brandLabel.frame = CGRectMake(16., 16., (SCREEN_WIDTH - 48)/2, 21);
+    self.brandLabel.deFrameTop = self.imageView.deFrameBottom + 3;
     self.brandLabel.deFrameLeft = self.imageView.deFrameLeft;
     
-    self.titleLabel.frame = CGRectMake(16., 16., (SCREEN_WIDTH - 48)/2., 30);
-    self.titleLabel.deFrameTop = self.brandLabel.deFrameBottom + 5;
+    self.titleLabel.frame = CGRectMake(16., 16., (SCREEN_WIDTH - 48)/2., 42);
+    self.titleLabel.deFrameTop = self.brandLabel.deFrameBottom - 10;
     self.titleLabel.deFrameLeft = self.brandLabel.deFrameLeft;
     
-    self.priceLabel.frame = CGRectMake(16., 16., 100, 20);
-    self.priceLabel.deFrameTop = self.titleLabel.deFrameBottom + 15;
+    self.priceLabel.frame = CGRectMake(16., 16., 100, 21);
+    self.priceLabel.deFrameTop = self.titleLabel.deFrameBottom + 8;
     self.priceLabel.deFrameLeft = self.titleLabel.deFrameLeft;
     
 }

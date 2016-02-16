@@ -111,7 +111,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
-        UICollectionViewFlowLayout * layout = [[CSStickyHeaderFlowLayout alloc] init];
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
         
@@ -278,6 +278,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
             {
                 CategoryHeaderSection2 * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderSectionIdentifier2 forIndexPath:indexPath];
                 header.text2 = NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil);
+                header.backgroundColor = UIColorFromRGB(0xf8f8f8);
 
                 return header;
             }
@@ -343,7 +344,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
         }
         default:
         {
-            cellsize = CGSizeMake((kScreenWidth  )/2, (kScreenWidth  )/2 + 100);
+            cellsize = CGSizeMake((kScreenWidth  )/2 - 1, (kScreenWidth  )/2 + 77);
             return cellsize;
         }
             break;
@@ -367,7 +368,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
         }
         default:
         {
-            edge = UIEdgeInsetsMake(0., 0., 0., 0.);
+            edge = UIEdgeInsetsMake(0.5, 0.5, 0.5, 0.5);
             return edge;
         }
             break;
@@ -387,7 +388,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
         }
         default:
         {
-            itemSpacing = 0.;
+            itemSpacing = 1.;
             return itemSpacing;
         }
             break;
@@ -406,7 +407,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
         }
         default:
         {
-            spacing = 0.;
+            spacing = 1;
             return spacing;
         }
             break;
