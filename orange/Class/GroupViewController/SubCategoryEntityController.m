@@ -12,7 +12,7 @@
 #import "DataStructure.h"
 #import "EntityDetailCell.h"
 #import "CategoryArticleCell.h"
-#import "MoreArticlesViewController.h"
+#import "MoreArticlesSubCategoryViewController.h"
 
 //图文头
 @interface ArticleHeader : UICollectionReusableView
@@ -266,7 +266,8 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
                 }
                 header.moreBtnBlock = ^(){
                     
-                  MoreArticlesViewController * vc = [[MoreArticlesViewController alloc]initWithDataSource:self.articleArray];
+                  MoreArticlesSubCategoryViewController * vc = [[MoreArticlesSubCategoryViewController alloc]initWithDataSource:self.articleArray];
+                    vc.cid = self.subcategory.categoryId;
                     vc.title = NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil);
                     [self.navigationController pushViewController:vc animated:YES];
                 };

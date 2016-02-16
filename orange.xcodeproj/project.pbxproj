@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
 		23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F1DD951C28020500A71827 /* PNoteViewController.m */; };
+		23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */; };
 		23F424041C59BFA7005E1318 /* CategoryArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F424031C59BFA7005E1318 /* CategoryArticleCell.m */; };
 		23F7F0081C61AF100079A753 /* MoreArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */; };
 		391F5F911B1705A000931533 /* JXFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F901B1705A000931533 /* JXFormCell.m */; };
@@ -430,6 +431,8 @@
 		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
 		23F1DD941C28020500A71827 /* PNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNoteViewController.h; sourceTree = "<group>"; };
 		23F1DD951C28020500A71827 /* PNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNoteViewController.m; sourceTree = "<group>"; };
+		23F2743F1C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticlesSubCategoryViewController.h; sourceTree = "<group>"; };
+		23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticlesSubCategoryViewController.m; sourceTree = "<group>"; };
 		23F424021C59BFA7005E1318 /* CategoryArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryArticleCell.h; sourceTree = "<group>"; };
 		23F424031C59BFA7005E1318 /* CategoryArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryArticleCell.m; sourceTree = "<group>"; };
 		23F7F0061C61AF100079A753 /* MoreArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticlesViewController.h; sourceTree = "<group>"; };
@@ -2055,6 +2058,8 @@
 				8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */,
 				23F7F0061C61AF100079A753 /* MoreArticlesViewController.h */,
 				23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */,
+				23F2743F1C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.h */,
+				23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */,
 			);
 			path = GroupViewController;
 			sourceTree = "<group>";
@@ -3035,6 +3040,7 @@
 				8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */,
 				4E688A1D1BA9C2BA0006AD9B /* JSQMessagesLabel.m in Sources */,
 				4E688A0E1BA9C2BA0006AD9B /* JSQMediaItem.m in Sources */,
+				23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */,
 				B7F543FA1BC2457E0044F5E9 /* SDWebImageCompat.m in Sources */,
 				B7174DDC1BD4A94900DEDBDA /* UserHeaderView.m in Sources */,
 				4E56DF1B19D552C000263B17 /* main.m in Sources */,
