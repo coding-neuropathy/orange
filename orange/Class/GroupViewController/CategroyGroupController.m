@@ -130,7 +130,6 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     
     [API getGroupArticleWithGroupId:self.gid Page:self.page success:^(NSArray *articles, NSInteger count) {
         self.ArticleArray = [NSMutableArray arrayWithArray:articles];
-        self.page += 1;
         self.count = count;
     
         [self.collectionView.pullToRefreshView stopAnimating];
@@ -268,6 +267,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
                     
                     _maVC = [[MoreArticlesViewController alloc]initWithDataSource:self.ArticleArray];
                     _maVC.title = NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil);
+                    _maVC.gid = self.gid;
                     [self.navigationController pushViewController:_maVC animated:YES];
                     
                 };

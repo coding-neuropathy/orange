@@ -11,15 +11,17 @@
 @interface MoreArticlesViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic ,strong)UITableView * tableView;
+
 @property (nonatomic ,assign)NSInteger page;
 
+//@property (assign, nonatomic) NSInteger count;
 @end
 
 @implementation MoreArticlesViewController
 
 static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
 
-- (instancetype)initWithDataSource:(NSArray *)dataSource
+- (instancetype)initWithDataSource:(NSMutableArray *)dataSource
 {
     if (self = [super init]) {
         self.dataSource = dataSource;
@@ -32,7 +34,6 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
     [super viewDidLoad];
     
     [self.view addSubview:self.tableView];
-//    [self tableView];
     
     [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:ArticleCellIdentifier];
 }
@@ -56,16 +57,33 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
 
 - (void)refresh
 {
-    [self.tableView.pullToRefreshView startAnimating];
-    [self.tableView reloadData];
-    [self.tableView.pullToRefreshView stopAnimating];
+    self.page = 1;
+    
+    [API getGroupArticleWithGroupId:self.gid Page:self.page success:^(NSArray *articles, NSInteger count) {
+        self.dataSource = [NSMutableArray arrayWithArray:articles];
+        self.page += 1;
+//        self.count = count;
+        
+        [self.tableView.pullToRefreshView stopAnimating];
+        [self.tableView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.tableView.pullToRefreshView stopAnimating];
+    }];
     
 }
 
 - (void)loadMore
 {
-    [self.tableView.infiniteScrollingView stopAnimating];
-    [self.tableView reloadData];
+    [API getGroupArticleWithGroupId:self.gid Page:self.page success:^(NSArray *articles, NSInteger count) {
+        [self.dataSource addObjectsFromArray:articles];
+        self.page += 1;
+//        self.count = count;
+        
+        [self.tableView.infiniteScrollingView stopAnimating];
+        [self.tableView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.tableView.infiniteScrollingView stopAnimating];
+    }];
     
 }
 

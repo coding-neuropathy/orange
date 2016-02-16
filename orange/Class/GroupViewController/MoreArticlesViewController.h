@@ -10,9 +10,11 @@
 
 @interface MoreArticlesViewController : UIViewController
 
-/* 图文数据源数组 */
-@property (nonatomic , strong)NSArray * dataSource;
+@property (assign, nonatomic) NSInteger gid;
 
-- (instancetype)initWithDataSource:(NSArray *)dataSource;
+/* 图文数据源数组 */
+@property (nonatomic , strong)NSMutableArray * dataSource;
+
+- (instancetype)initWithDataSource:(NSMutableArray *)dataSource;
 
 @end
