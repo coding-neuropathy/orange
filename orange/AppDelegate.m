@@ -32,6 +32,7 @@ int ddLogLevel;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self configLog];
     
+    //AVOS
     [AVOSCloud setApplicationId:@"laier6ulcszfjkn08448ng37nwc71ux4uv6yc6vi529v29a0" clientKey:@"6ad7o8urhbw4q5kx8hfoiaxjjtme205ohodgoy6ltwts8b1i"];
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
 //    [AVPush setProductionMode:YES];
@@ -77,6 +78,7 @@ int ddLogLevel;
         [self setDynamicAction];
     
     
+    //设置整体风格
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self customizeAppearance];
 
@@ -87,16 +89,13 @@ int ddLogLevel;
     [APService setupWithOption:launchOptions];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateJPushID:) name:kJPFNetworkDidLoginNotification object:nil];
     
-//    [SVProgressHUD setBackgroundColor:UIColorFromRGB(0x2b2b2b)];
-//    [SVProgressHUD setForegroundColor:UIColorFromRGB(0xffffff)];
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.tabbarViewController = [[TabBarViewcontroller alloc] init];
-//    self.window.rootViewController = [[TabBarViewcontroller alloc] init];
+
     self.window.rootViewController = self.tabbarViewController;
     
-//    self.window.rootViewController.view.hidden = NO;
+
     [self.window makeKeyAndVisible];
 
     application.applicationIconBadgeNumber = 0;
@@ -517,7 +516,7 @@ int ddLogLevel;
 
 - (void)refreshCategory
 {
-    
+    //获取全部分类信息
     [API getAllCategoryWithSuccess:^(NSArray *fullCategoryGroupArray) {
         
         NSMutableArray *categoryGroupArray = [NSMutableArray array];
@@ -579,6 +578,7 @@ int ddLogLevel;
     [hub show:[NSString stringWithFormat:@"%@  无网络链接",[NSString fontAwesomeIconStringForEnum:FAInfoCircle]]];
 }
 
+/** 3D-Touch */
 - (void)setDynamicAction
 {
     if ([UIApplication sharedApplication].shortcutItems.count > 0) {
