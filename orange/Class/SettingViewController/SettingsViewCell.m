@@ -53,7 +53,7 @@
     else if ([_text isEqualToString:@"mail"] && k_isLogin) {
         NSString * mail = [[Passport sharedInstance].user email];
         if ([[Passport sharedInstance].user mail_verified])
-            self.detailTextLabel.text = [NSString stringWithFormat:@"%@ (已验证)", mail];
+            self.detailTextLabel.text = [NSString stringWithFormat:@"%@", mail];
         else
             self.detailTextLabel.text = [NSString stringWithFormat:@"%@ (未验证)", mail];
         
@@ -79,7 +79,7 @@
     
     if ([self.text isEqualToString:@"mail"] || [self.text isEqualToString:@"password"]) {
         self.detailTextLabel.textAlignment = NSTextAlignmentRight;
-        self.detailTextLabel.frame = CGRectMake(kScreenWidth - 240., 0., 200., self.frame.size.height);
+        self.detailTextLabel.frame = CGRectMake(kScreenWidth - 260., 0., 220., self.frame.size.height);
     }
     else
         self.detailTextLabel.frame = CGRectMake(kScreenWidth - 115., 0., 100, self.frame.size.height);

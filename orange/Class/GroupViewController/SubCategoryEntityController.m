@@ -8,7 +8,6 @@
 
 #import "SubCategoryEntityController.h"
 #import "EntityCell.h"
-#import "CSStickyHeaderFlowLayout.h"
 #import "DataStructure.h"
 #import "EntityDetailCell.h"
 #import "CategoryArticleCell.h"
@@ -111,7 +110,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
-        UICollectionViewFlowLayout * layout = [[CSStickyHeaderFlowLayout alloc] init];
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
         
@@ -258,15 +257,43 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
             {
                 ArticleHeader * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:ArticleHeaderIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil);
-                if (self.count < 3) {
-                    header.moreBtn.hidden = YES;
+                switch (self.count) {
+                    case 0:
+                    {
+                        header.text = @"";
+                        header.backgroundColor = UIColorFromRGB(0xf8f8f8);
+                        header.moreBtn.hidden = YES;
+                        self.collectionView.contentOffset = CGPointMake(0, 40);
+                    }
+                        break;
+                    case 1:
+                    {
+                        header.moreBtn.hidden = YES;
+                        header.backgroundColor = [UIColor whiteColor];
+                    }
+                        break;
+                    case 2:
+                    {
+                        header.moreBtn.hidden = YES;
+                        header.backgroundColor = [UIColor whiteColor];
+                    }
+                        break;
+                    case 3:
+                    {
+                        header.moreBtn.hidden = YES;
+                        header.backgroundColor = [UIColor whiteColor];
+                    }
+                    default:
+                    {
+                        header.moreBtn.hidden = NO;
+                        header.backgroundColor = [UIColor whiteColor];
+                    }
+                        break;
                 }
-                else{
-                    header.moreBtn.hidden = NO;
-                }
+                
                 header.moreBtnBlock = ^(){
                     
-                  MoreArticlesSubCategoryViewController * vc = [[MoreArticlesSubCategoryViewController alloc]initWithDataSource:self.articleArray];
+                    MoreArticlesSubCategoryViewController * vc = [[MoreArticlesSubCategoryViewController alloc]initWithDataSource:self.articleArray];
                     vc.cid = self.subcategory.categoryId;
                     vc.title = NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil);
                     [self.navigationController pushViewController:vc animated:YES];
@@ -279,6 +306,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
             {
                 EntityHeader * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityHeaderIdentifier forIndexPath:indexPath];
                 header.text2 = NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil);
+                header.backgroundColor = UIColorFromRGB(0xf8f8f8);
                 
                 return header;
             }
@@ -322,7 +350,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
             break;
             
         default:
-            cellsize = CGSizeMake((kScreenWidth  )/2, (kScreenWidth  )/2 + 100);
+            cellsize = CGSizeMake((kScreenWidth  )/2 - 1, (kScreenWidth  )/2 + 77);
             return cellsize;
             break;
     }
@@ -343,7 +371,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
             
         default:
         {
-            edge = UIEdgeInsetsMake(0., 0., 0., 0.);
+            edge = UIEdgeInsetsMake(0.5, 0.5, 0.5, 0.5);
             return edge;
         }
             break;
@@ -364,7 +392,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
             
         default:
         {
-            itemSpacing = 0;
+            itemSpacing = 1.;
             return itemSpacing;
         }
             break;
@@ -386,7 +414,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
             
         default:
         {
-            spacing = 0.;
+            spacing = 1.;
             return spacing;
         }
             break;
