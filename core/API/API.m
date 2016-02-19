@@ -2161,7 +2161,7 @@
  *  @param failure 失败block
  */
 + (void)getUserDetailWithUserId:(NSUInteger)userId
-                        success:(void (^)(GKUser *user, NSArray *lastLikeEntities, NSArray  *lastNotes))success
+                        success:(void (^)(GKUser *user, NSArray *lastLikeEntities, NSArray  *lastNotes, NSArray * lastArticles))success
                         failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(userId > 0);
@@ -2184,10 +2184,17 @@
             [notes addObject:note];
         }
         
+        NSMutableArray * articles = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in objectDict[@"last_post_article"]) {
+            GKArticle * article = [GKArticle modelFromDictionary:row];
+            [articles addObject:article];
+        }
+        
+        
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
 //        NSLog(@"user %ld", user.relation);
         if (success) {
-            success(user, entities, notes);
+            success(user, entities, notes, articles);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
