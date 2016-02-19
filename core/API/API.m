@@ -629,7 +629,8 @@
 /**
  *  获取发现数据
  */
-+ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * artilces))success
++ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories,
+                                         NSArray * artilces, NSArray * users))success
                        failure:(void (^)(NSInteger stateCode))failure
 {
     NSString * path = @"discover/";
@@ -660,9 +661,15 @@
             [articles addObject:article];
         }
 
+        NSMutableArray * users = [NSMutableArray arrayWithCapacity:0];
+        
+        for (NSDictionary * row in responseObject[@"authorizeduser"]) {
+            GKUser * user = [GKUser modelFromDictionary:row[@"user"]];
+            [users addObject:user];
+        }
         
         if (success) {
-            success(bannerArray, entityArray, categories, articles);
+            success(bannerArray, entityArray, categories, articles, users);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
