@@ -183,7 +183,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - data
 - (void)refresh
 {
-    [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * articles) {
+    [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * articles, NSArray * users) {
         self.bannerArray = banners;
         self.categoryArray = categories;
         self.entityArray = entities;
