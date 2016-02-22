@@ -209,6 +209,17 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * articles, NSArray * users))success
                        failure:(void (^)(NSInteger stateCode))failure;
 
+
+/**
+ *  获取认证用户列表
+ *
+ *  @param page     页数
+ *  @param size     每页长度
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getAuthorizedUserWithPage:(NSInteger)page Size:(NSInteger)size success:(void (^)(NSArray * users, NSInteger page))success failure:(void (^)(NSInteger stateCode))failure;
+
 /**
  *  获取热门商品列表
  *

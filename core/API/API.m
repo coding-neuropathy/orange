@@ -692,7 +692,7 @@
  *  @param success    成功block
  *  @param failure    失败block
  */
-+ (void)getAuthorizedUserWithPage:(NSInteger)page Size:(NSInteger)size success:(void (^)(NSArray * users))success failure:(void (^)(NSInteger stateCode))failure
++ (void)getAuthorizedUserWithPage:(NSInteger)page Size:(NSInteger)size success:(void (^)(NSArray * users, NSInteger page))success failure:(void (^)(NSInteger stateCode))failure
 {
     NSString * path = @"authorized/users/";
     
@@ -702,8 +702,23 @@
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSInteger page = [responseObject[@"page"] integerValue];
+        NSMutableArray * userArray = [NSMutableArray arrayWithCapacity:0];
         
+        for (NSDictionary *row in responseObject[@"authorized_user"]) {
+            GKUser * user = [GKUser modelFromDictionary:row];
+            [userArray addObject:user];
+        }
+        
+        if(success) {
+            success(userArray, page);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
     }];
 }
 
