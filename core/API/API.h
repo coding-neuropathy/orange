@@ -189,6 +189,11 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 
 /**
  *  获取图文列表
+ *  @param timestamp    时间戳
+ *  @param page         翻页
+ *  @param size         每页数量
+ *  @param success      成功block
+ *  @param failure      失败block
  */
 + (void)getArticlesWithTimestamp:(NSTimeInterval)timestamp
                             Page:(NSInteger)page
@@ -198,6 +203,8 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 
 /**
  *  获取发现数据
+ *  @param success    成功block
+ *  @param failure    失败block
  */
 + (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * articles, NSArray * users))success
                        failure:(void (^)(NSInteger stateCode))failure;

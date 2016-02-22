@@ -587,9 +587,11 @@
 
 /**
  *  获取图文列表
- *  @param timestamp 时间戳
- *  @param page 翻页
- *  @param size 每页数量
+ *  @param timestamp    时间戳
+ *  @param page         翻页
+ *  @param size         每页数量
+ *  @param success      成功block
+ *  @param failure      失败block
  */
 + (void)getArticlesWithTimestamp:(NSTimeInterval)timestamp
             Page:(NSInteger)page
@@ -628,6 +630,8 @@
 
 /**
  *  获取发现数据
+ *  @param success    成功block
+ *  @param failure    失败block
  */
 + (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories,
                                          NSArray * artilces, NSArray * users))success
@@ -677,6 +681,29 @@
             NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
+    }];
+}
+
+/**
+ *  获取认证用户列表
+ *
+ *  @param page     页数
+ *  @param size     每页长度
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getAuthorizedUserWithPage:(NSInteger)page Size:(NSInteger)size success:(void (^)(NSArray * users))success failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString * path = @"authorized/users/";
+    
+    NSMutableDictionary * paraDict = [NSMutableDictionary dictionaryWithCapacity:0];
+    [paraDict setObject:@(page) forKey:@"page"];
+    [paraDict setObject:@(size) forKey:@"size"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
     }];
 }
 
