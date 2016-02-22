@@ -100,7 +100,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 #pragma mark - get data
 - (void)refresh
 {
-    [API getUserDetailWithUserId:self.user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes) {
+    [API getUserDetailWithUserId:self.user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray * lastArticles) {
 //        [Passport sharedInstance].user = user;
         if (self.user.userId == [Passport sharedInstance].user.userId) {
             [Passport sharedInstance].user = user;
