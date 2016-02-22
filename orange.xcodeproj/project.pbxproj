@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
+		23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */; };
 		23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F1DD951C28020500A71827 /* PNoteViewController.m */; };
 		23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */; };
 		23F424041C59BFA7005E1318 /* CategoryArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F424031C59BFA7005E1318 /* CategoryArticleCell.m */; };
@@ -429,6 +430,8 @@
 /* Begin PBXFileReference section */
 		238F77D81C521CF5002E0E65 /* EntityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDetailCell.h; sourceTree = "<group>"; };
 		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
+		23EEFFB71C7ABAFA0061F45F /* DiscoverUsersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverUsersView.h; sourceTree = "<group>"; };
+		23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverUsersView.m; sourceTree = "<group>"; };
 		23F1DD941C28020500A71827 /* PNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNoteViewController.h; sourceTree = "<group>"; };
 		23F1DD951C28020500A71827 /* PNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNoteViewController.m; sourceTree = "<group>"; };
 		23F2743F1C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticlesSubCategoryViewController.h; sourceTree = "<group>"; };
@@ -1486,6 +1489,8 @@
 				B76FAE951B67B5FA002AC4C7 /* DiscoverCategoryView.m */,
 				8A402CC51B69F57A00E54FFF /* CategoryImageView.h */,
 				8A402CC61B69F57A00E54FFF /* CategoryImageView.m */,
+				23EEFFB71C7ABAFA0061F45F /* DiscoverUsersView.h */,
+				23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */,
 			);
 			path = DiscoverViewController;
 			sourceTree = "<group>";
@@ -3004,6 +3009,7 @@
 				4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */,
+				23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */,
 				4E688A141BA9C2BA0006AD9B /* JSQMessagesCellTextView.m in Sources */,
 				4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */,
 				4E688A041BA9C2BA0006AD9B /* JSQMessagesAvatarImageFactory.m in Sources */,
