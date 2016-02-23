@@ -9,10 +9,14 @@
 #import "ArticlePreViewController.h"
 #import <WebKit/WebKit.h>
 
-@interface ArticlePreViewController ()
+#import "WXApi.h"
+
+@interface ArticlePreViewController () <WKNavigationDelegate, WKUIDelegate>
 
 @property (strong, nonatomic) GKArticle * article;
 @property (strong, nonatomic) WKWebView * webView;
+@property (strong, nonatomic) UIImage * image;
+
 @end
 
 @implementation ArticlePreViewController
@@ -48,8 +52,8 @@
         
         _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) configuration:configuration];
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
-//        _webView.UIDelegate = self;
-//        _webView.navigationDelegate = self;
+        _webView.UIDelegate = self;
+        _webView.navigationDelegate = self;
         [_webView sizeToFit];
     }
     return _webView;
@@ -70,11 +74,11 @@
 - (NSArray <id <UIPreviewActionItem>> *)previewActionItems
 {
     UIPreviewAction *action = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"share to wechat", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-
+        [self wxShare:0];
     }];
     
     UIPreviewAction *action2 = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"share to moment", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        
+        [self wxShare:1];
     }];
 
     UIPreviewAction *action3 = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"share to weibo", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
@@ -82,6 +86,112 @@
     }];
     
     return @[action, action2, action3];
+}
+
+#pragma mark - <WKNavigationDelegate>
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
+{
+    
+}
+
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
+    
+    /**
+     *  disable wkwebview zoom
+     */
+    NSString *javascript = @"var meta = document.createElement('meta');meta.setAttribute('name', 'viewport');meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');document.getElementsByTagName('head')[0].appendChild(meta);";
+    
+    [webView evaluateJavaScript:javascript completionHandler:nil];
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    //    NSLog(@"%@", navigationAction.request.URL.absoluteString);
+    if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
+        NSURL *url = navigationAction.request.URL;
+        UIApplication *app = [UIApplication sharedApplication];
+        if ([app canOpenURL:url]) {
+            [app openURL:url];
+        }
+    }
+    //this is a 'new window action' (aka target="_blank") > open this URL externally. If we´re doing nothing here, WKWebView will also just do nothing. Maybe this will change in a later stage of the iOS 8 Beta
+    else if (!navigationAction.targetFrame) {
+        [self.webView loadRequest:navigationAction.request];
+    }
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+    //    NSString * imageURL = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('img')[1].src"];
+    //    UIImageView * a = [[UIImageView alloc]init];
+    //    [a sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    //        self.image = image;
+    //    }];
+    
+    [webView evaluateJavaScript:@"document.getElementById('share_img').getElementsByTagName('img')[0].src" completionHandler:^(NSString * imageURL, NSError * error) {
+        
+        if (imageURL) {
+            [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                
+            } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                if (finished) {
+                    self.image = image;
+                }
+            }];
+        }
+        else{
+            
+            [webView evaluateJavaScript:@"document.getElementsByTagName('img')[1].src" completionHandler:^(NSString * imageURL, NSError * error) {
+                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                    
+                } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                    if (finished) {
+                        self.image = image;
+                    }
+                }];
+                
+            }];
+        }
+        
+    }];
+    
+    
+    
+    [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
+        self.title = result;
+    }];
+}
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
+{
+    
+}
+
+#pragma mark - share to sns
+-(void)wxShare:(int)scene
+{
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = self.article.title;
+    message.description= @"";
+    if (self.image) {
+        [message setThumbImage:[UIImage imageWithData:[self.image imageDataLessThan_10K]]];
+    }
+    else
+    {
+        [message setThumbImage:[UIImage imageNamed:@"wxshare"]];
+    }
+
+
+    WXAppExtendObject *ext = [WXAppExtendObject object];
+    ext.url = [self.webView.URL absoluteString];
+
+    message.mediaObject = ext;
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = scene;
+
+    [WXApi sendReq:req];
 }
 
 @end
