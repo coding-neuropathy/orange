@@ -159,9 +159,9 @@
     
     
     
-    [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
-        self.title = result;
-    }];
+//    [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
+//        self.title = result;
+//    }];
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
