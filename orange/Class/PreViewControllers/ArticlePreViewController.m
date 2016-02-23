@@ -82,7 +82,7 @@
     }];
 
     UIPreviewAction *action3 = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"share to weibo", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        
+        [self weiboShare];
     }];
     
     return @[action, action2, action3];
@@ -123,38 +123,39 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    //    NSString * imageURL = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('img')[1].src"];
-    //    UIImageView * a = [[UIImageView alloc]init];
-    //    [a sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    //        self.image = image;
-    //    }];
-    
-    [webView evaluateJavaScript:@"document.getElementById('share_img').getElementsByTagName('img')[0].src" completionHandler:^(NSString * imageURL, NSError * error) {
+    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.article.coverURL options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         
-        if (imageURL) {
-            [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                
-            } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                if (finished) {
-                    self.image = image;
-                }
-            }];
+    } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+        if (finished) {
+            self.image = image;
         }
-        else{
-            
-            [webView evaluateJavaScript:@"document.getElementsByTagName('img')[1].src" completionHandler:^(NSString * imageURL, NSError * error) {
-                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                    
-                } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                    if (finished) {
-                        self.image = image;
-                    }
-                }];
-                
-            }];
-        }
-        
     }];
+//    [webView evaluateJavaScript:@"document.getElementById('share_img').getElementsByTagName('img')[0].src" completionHandler:^(NSString * imageURL, NSError * error) {
+//        
+//        if (imageURL) {
+//            [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//                
+//            } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+//                if (finished) {
+//                    self.image = image;
+//                }
+//            }];
+//        }
+//        else{
+//            
+//            [webView evaluateJavaScript:@"document.getElementsByTagName('img')[1].src" completionHandler:^(NSString * imageURL, NSError * error) {
+//                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//                    
+//                } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+//                    if (finished) {
+//                        self.image = image;
+//                    }
+//                }];
+//                
+//            }];
+//        }
+//        
+//    }];
     
     
     
@@ -168,6 +169,32 @@
 }
 
 #pragma mark - share to sns
+-(void)weiboShare
+{
+    if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
+    {
+        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            [AVOSCloudSNS shareText:self.article.title andLink:[self.webView.URL absoluteString] andImage:self.image toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+
+            } andProgress:^(float percent) {
+                if (percent == 1) {
+                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+                }
+            }];
+        }];
+    }
+    else
+    {
+        [AVOSCloudSNS shareText:self.article.title andLink:[self.webView.URL absoluteString] andImage:self.image toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+
+        } andProgress:^(float percent) {
+            if (percent == 1) {
+                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+            }
+        }];
+    }
+}
+
 -(void)wxShare:(int)scene
 {
     WXMediaMessage *message = [WXMediaMessage message];
