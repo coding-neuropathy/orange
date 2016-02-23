@@ -225,6 +225,7 @@
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
 		8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A418C791C04481000CE01B5 /* EntityPreView.m */; };
 		8A418C7C1C04519C00CE01B5 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A418C7B1C04519C00CE01B5 /* libPushSDK-1.8.8.a */; };
+		8A44F5991C7C066500D1DC19 /* ArticlePreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A44F5981C7C066500D1DC19 /* ArticlePreViewController.m */; };
 		8A4E8F8C1C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E8F851C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m */; };
 		8A4E8F8D1C1A8D5B003EBE95 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8A4E8F871C1A8D5B003EBE95 /* SVProgressHUD.bundle */; };
 		8A4E8F8E1C1A8D5B003EBE95 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E8F891C1A8D5B003EBE95 /* SVProgressHUD.m */; };
@@ -773,6 +774,8 @@
 		8A418C781C04481000CE01B5 /* EntityPreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityPreView.h; path = PreViewControllers/EntityPreView.h; sourceTree = "<group>"; };
 		8A418C791C04481000CE01B5 /* EntityPreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityPreView.m; path = PreViewControllers/EntityPreView.m; sourceTree = "<group>"; };
 		8A418C7B1C04519C00CE01B5 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
+		8A44F5971C7C066500D1DC19 /* ArticlePreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticlePreViewController.h; path = PreViewControllers/ArticlePreViewController.h; sourceTree = "<group>"; };
+		8A44F5981C7C066500D1DC19 /* ArticlePreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticlePreViewController.m; path = PreViewControllers/ArticlePreViewController.m; sourceTree = "<group>"; };
 		8A4E8F841C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
 		8A4E8F851C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		8A4E8F861C1A8D5B003EBE95 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
@@ -2240,6 +2243,8 @@
 				8AAA2D131C04444800B27E49 /* EntityPreViewController.m */,
 				8A418C781C04481000CE01B5 /* EntityPreView.h */,
 				8A418C791C04481000CE01B5 /* EntityPreView.m */,
+				8A44F5971C7C066500D1DC19 /* ArticlePreViewController.h */,
+				8A44F5981C7C066500D1DC19 /* ArticlePreViewController.m */,
 			);
 			name = PreViewControllers;
 			sourceTree = "<group>";
@@ -3093,6 +3098,7 @@
 				4E8A34361BB060D700DF3841 /* tipView.m in Sources */,
 				B736FF2A1BD65D6E000668E4 /* UserTagsViewController.m in Sources */,
 				4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */,
+				8A44F5991C7C066500D1DC19 /* ArticlePreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
