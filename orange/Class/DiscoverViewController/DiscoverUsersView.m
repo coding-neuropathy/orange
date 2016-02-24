@@ -8,10 +8,24 @@
 
 #import "DiscoverUsersView.h"
 
+#import "RecUserController.h"
+
+@interface UserImageView : UIImageView
+
+@property (nonatomic , strong)GKUser * user;
+
+@property (nonatomic , strong)UIImageView * avatarView;
+
+@end
+
 
 @interface DiscoverUsersView ()
 
 @property (nonatomic , strong) UILabel * userLabel;
+
+@property (nonatomic , strong) UIButton * moreBtn;
+
+
 
 @property (nonatomic , strong) UIScrollView * userScrollView;
 
@@ -42,6 +56,27 @@
     return _userLabel;
 }
 
+- (UIButton *)moreBtn
+{
+    if (!_moreBtn) {
+        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_moreBtn setTitle:[NSString stringWithFormat:@"%@", [NSString fontAwesomeIconStringForEnum:FAAngleRight]] forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        _moreBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        [_moreBtn addTarget:self action:@selector(tapMorebtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_moreBtn];
+    }
+    return _moreBtn;
+}
+
+- (void)tapMorebtnAction:(id)sender
+{
+    if (self.tapMoreUserBlock) {
+        self.tapMoreUserBlock();
+    }
+    
+}
+
 - (UIScrollView *)userScrollView
 {
     if (!_userScrollView) {
@@ -60,7 +95,7 @@
     
     self.userLabel.text = NSLocalizedStringFromTable(@"recommendation user", kLocalizedFile, nil);
     
-    self.userScrollView.contentSize = CGSizeMake(50 * _users.count + 8 * (_users.count - 1), 100.);
+    self.userScrollView.contentSize = CGSizeMake(50 * _users.count + 8 * (_users.count - 1), 50.);
     
     for (UIView * view in self.userScrollView.subviews) {
         [view removeFromSuperview];
@@ -68,7 +103,7 @@
     
     for (int i = 0; i < _users.count; i ++) {
         GKUser * user = _users[i];
-        UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i * 50.+ i * 8, 0, 50., 50.)];
+        UserImageView * imageView = [[UserImageView alloc]initWithFrame:CGRectMake(i * 50.+ i * 8, 0, 50., 50.)];
         [imageView sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(50., 50.)]];
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userBtnAction:)];
@@ -84,9 +119,10 @@
 
 - (void)userBtnAction:(id)sender
 {
-    
+    UITapGestureRecognizer * tap = (UITapGestureRecognizer *)sender;
+    UserImageView * imageView = (UserImageView *)tap.view;
     if (self.tapUserBlock) {
-        self.tapUserBlock();
+        self.tapUserBlock(imageView.user);
     }
 }
 
@@ -94,10 +130,14 @@
 {
     [super layoutSubviews];
     
-    self.userLabel.frame = CGRectMake(10., 5., kScreenWidth - 20., 30.);
+    self.userLabel.frame = CGRectMake(10., 5.,kScreenWidth - 20., 30.);
+    
     self.userScrollView.frame = CGRectMake(10., 45., kScreenWidth - 20., 50.);
-    self.userScrollView.layer.cornerRadius = 25;
+    self.userScrollView.layer.cornerRadius = 4;
     self.userScrollView.layer.masksToBounds = YES;
+    
+    self.moreBtn.frame = CGRectMake(10., 5., 20., 30.);
+    self.moreBtn.deFrameRight = self.userScrollView.deFrameRight;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -116,3 +156,40 @@
 
 
 @end
+
+@implementation UserImageView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.userInteractionEnabled = YES;
+        self.layer.cornerRadius = 25.;
+        self.layer.masksToBounds = YES;
+    }
+    return self;
+}
+
+- (UIImageView *)avatarView
+{
+    if (!_avatarView) {
+        _avatarView = [[UIImageView alloc]initWithImage:[UIImage imageWithColor:UIColorFromRGB(0x000000) andSize:CGSizeMake(50., 50.)]];
+        [self addSubview:_avatarView];
+    }
+    return _avatarView;
+}
+
+//- (void)setUser:(GKUser *)user
+//{
+//    _user = user;
+//    [self setNeedsLayout];
+//}
+//
+//- (void)layoutSubviews
+//{
+//    [super layoutSubviews];
+//    
+//}
+
+@end
+

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
+		239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239231B01C7D96FA00B49A88 /* RecUserController.m */; };
 		23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */; };
 		23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F1DD951C28020500A71827 /* PNoteViewController.m */; };
 		23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */; };
@@ -430,6 +431,8 @@
 /* Begin PBXFileReference section */
 		238F77D81C521CF5002E0E65 /* EntityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDetailCell.h; sourceTree = "<group>"; };
 		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
+		239231AF1C7D96FA00B49A88 /* RecUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecUserController.h; sourceTree = "<group>"; };
+		239231B01C7D96FA00B49A88 /* RecUserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecUserController.m; sourceTree = "<group>"; };
 		23EEFFB71C7ABAFA0061F45F /* DiscoverUsersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverUsersView.h; sourceTree = "<group>"; };
 		23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverUsersView.m; sourceTree = "<group>"; };
 		23F1DD941C28020500A71827 /* PNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNoteViewController.h; sourceTree = "<group>"; };
@@ -1135,6 +1138,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		239231AE1C7D967E00B49A88 /* RecommendationuserController */ = {
+			isa = PBXGroup;
+			children = (
+				239231AF1C7D96FA00B49A88 /* RecUserController.h */,
+				239231B01C7D96FA00B49A88 /* RecUserController.m */,
+			);
+			name = RecommendationuserController;
+			path = DiscoverViewController;
+			sourceTree = "<group>";
+		};
 		23F1DD971C28046100A71827 /* PNoteViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1801,6 +1814,7 @@
 				4EB6ADAC1A77D70E0089797A /* BaseViewController */,
 				4ECCD0DD1A7348AF009D5A42 /* EntityViewController */,
 				23F1DD971C28046100A71827 /* PNoteViewController */,
+				239231AE1C7D967E00B49A88 /* RecommendationuserController */,
 				4E1D70191A5ADB890032719E /* DiscoverViewController */,
 				4E1D701C1A5ADB890032719E /* SelectionViewController */,
 				4E3A238A1A52F21800037F9C /* TabBarViewcontroller */,
@@ -3009,6 +3023,7 @@
 				4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */,
+				239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */,
 				23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */,
 				4E688A141BA9C2BA0006AD9B /* JSQMessagesCellTextView.m in Sources */,
 				4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */,

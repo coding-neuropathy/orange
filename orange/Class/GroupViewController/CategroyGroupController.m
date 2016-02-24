@@ -247,7 +247,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     }
 
 }
-#pragma mark --------------------------------8-8-8-8-8-8-8----------------------------------
+
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView * reusableview = [UICollectionReusableView new];
@@ -344,7 +344,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
         }
         default:
         {
-            cellsize = CGSizeMake((kScreenWidth  )/2 - 1, (kScreenWidth  )/2 + 77);
+            cellsize = CGSizeMake((kScreenWidth  )/2 - 1, (kScreenWidth  )/2 + 85);
             return cellsize;
         }
             break;

@@ -18,10 +18,13 @@
 #import "EntityCell.h"
 #import "HomeArticleCell.h"
 
+#import "DiscoverUsersView.h"
+#import "RecUserController.h"
 
 #import "GTScrollNavigationBar.h"
 //#import "GroupViewController.h"
 #import "CategroyGroupController.h"
+#import "UserViewController.h"
 #import "SearchController.h"
 
 #import "EntityPreViewController.h"
@@ -39,6 +42,7 @@
 @property (strong, nonatomic) NSArray * categoryArray;
 @property (strong, nonatomic) NSArray * entityArray;
 @property (strong, nonatomic) NSArray * articleArray;
+@property (strong, nonatomic) NSArray * userArray;
 @property (strong, nonatomic) UITableView * searchLogTableView;
 
 @property (strong, nonatomic) SearchController * searchResultsVC;
@@ -58,6 +62,7 @@ static NSString * ArticleCellIdentifier = @"ArticleCell";
 static NSString * BannerIdentifier = @"BannerView";
 static NSString * CategoryIdentifier = @"CategoryView";
 static NSString * HeaderSectionIdentifier = @"HeaderSection";
+static NSString * UserIdentifier = @"UserView";
 
 #pragma mark - search log
 - (void)addSearchLog:(NSString *)text
@@ -188,6 +193,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         self.categoryArray = categories;
         self.entityArray = entities;
         self.articleArray = articles;
+        self.userArray = users;
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
 //        [self.collectionView addSloganView];
@@ -210,6 +216,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [self.collectionView registerClass:[DiscoverCategoryView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier];
     
     [self.collectionView registerClass:[DiscoverHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
+    
+    [self.collectionView registerClass:[DiscoverUsersView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserIdentifier];
     
     self.navigationItem.titleView = self.searchVC.searchBar;
     self.definesPresentationContext = YES;
@@ -347,17 +355,17 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSInteger count = 0;
     switch (section) {
-        case 2:
+        case 3:
             count = self.articleArray.count;
             break;
-        case 3:
+        case 4:
             count = self.entityArray.count;
             break;
             
@@ -371,7 +379,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 2:
+        case 3:
         {
             HomeArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleCellIdentifier forIndexPath:indexPath];
             cell.article = [self.articleArray objectAtIndex:indexPath.row];
@@ -412,6 +420,20 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                 break;
             case 1:
             {
+                DiscoverUsersView * userView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserIdentifier forIndexPath:indexPath];
+                userView.users = self.userArray;
+                [userView setTapMoreUserBlock:^{
+                    RecUserController * vc = [[RecUserController alloc]init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }];
+                [userView setTapUserBlock:^(GKUser *user) {
+                    [[OpenCenter sharedOpenCenter] openUser:user];
+                }];
+                return userView;
+            }
+                break;
+            case 2:
+            {
                 DiscoverCategoryView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier forIndexPath:indexPath];
                 categoryView.categories = self.categoryArray;
                 categoryView.tapBlock = ^(GKCategory * category){
@@ -423,7 +445,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                 return categoryView;
             }
                 break;
-            case 2:
+            case 3:
             {
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"popular articles", kLocalizedFile, nil);
@@ -432,7 +454,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                 break;
             default:
             {
-
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"popular", kLocalizedFile, nil);
                 return header;
@@ -449,10 +470,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
-        case 2:
+        case 3:
             cellsize = CGSizeMake(kScreenWidth, 84 *kScreenWidth/375 + 32);;
             break;
-        case 3:
+        case 4:
         {
             cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
         }
@@ -467,7 +488,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0, 0.);
+    UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
     switch (section) {
         case 1:
             edge = UIEdgeInsetsMake(0., 0., 10., 0.);
@@ -476,6 +497,9 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
             edge = UIEdgeInsetsMake(0., 0., 10., 0.);
             break;
         case 3:
+            edge = UIEdgeInsetsMake(0., 0., 10., 0);
+            break;
+        case 4:
         {
             edge = UIEdgeInsetsMake(0., 3., 3., 3.);
         }
@@ -491,7 +515,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     CGFloat itemSpacing = 0.;
     switch (section) {
 
-        case 3:
+        case 4:
         {
             itemSpacing = 3.;
         }
@@ -510,7 +534,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         case 2:
 //            spacing =5;
             break;
-        case 3:
+        case 4:
         {
             spacing = 3.;
         }
@@ -532,18 +556,28 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
             headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
             break;
         case 1:
+            if (self.userArray.count) {
+                headerSize = CGSizeMake(kScreenWidth, 100.);
+            }
+            break;
+        case 2:
             if (self.categoryArray.count) {
                 headerSize = CGSizeMake(kScreenWidth, 155.);
             }
             break;
-        case 2:
         case 3:
         {
-            if(self.entityArray.count) {
+            if(self.articleArray.count) {
                 headerSize = CGSizeMake(kScreenWidth, 44.);
             }
         }
             break;
+        case 4:
+        {
+            if (self.entityArray.count) {
+                headerSize = CGSizeMake(kScreenWidth, 44.);
+            }
+        }
         default:
             
             break;
@@ -555,7 +589,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 2:
+        case 3:
         {
             GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
             //    NSLog(@"%@", article.articleURL);

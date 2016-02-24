@@ -14,6 +14,8 @@
 @property (nonatomic , strong) NSArray * users;
 
 /** 用户头像点击事件 */
-@property (nonatomic , copy) void (^tapUserBlock)();
+@property (nonatomic , copy) void (^tapUserBlock)(GKUser * user);
+
+@property (nonatomic , copy)void (^tapMoreUserBlock)();
 
 @end

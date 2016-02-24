@@ -1,0 +1,173 @@
+//
+//  RecUserController.m
+//  orange
+//
+//  Created by D_Collin on 16/2/24.
+//  Copyright © 2016年 guoku.com. All rights reserved.
+//
+
+#import "RecUserController.h"
+
+#import "UserSingleListCell.h"
+#import "NoDataView.h"
+
+static NSString * CellIdentifier = @"UserSingleListCell";
+
+@interface RecUserController ()<UITableViewDelegate , UITableViewDataSource>
+
+@property (nonatomic , strong)UITableView * tableView;
+
+@property (nonatomic , strong)NSMutableArray * dataArrayForUser;
+
+@property (nonatomic , strong)NoDataView * noDataView;
+
+@property (nonatomic , assign)NSInteger page;
+
+@end
+
+@implementation RecUserController
+
+- (NoDataView *)noDataView
+{
+    if (!_noDataView) {
+        _noDataView = [[NoDataView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 44.)];
+        _noDataView.backgroundColor = [UIColor clearColor];
+    }
+    return _noDataView;
+}
+
+- (UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.backgroundColor = UIColorFromRGB(0xffffff);
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.showsVerticalScrollIndicator = YES;
+        
+    }
+    return _tableView;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
+    self.title = NSLocalizedStringFromTable(@"recommendation user", kLocalizedFile, nil);
+    [self.view addSubview:self.tableView];
+    
+    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    [self.tableView registerClass:[UserSingleListCell class] forCellReuseIdentifier:CellIdentifier];
+    
+    __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refresh];
+    }];
+    
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
+    }];
+    
+    
+    [self.tableView.pullToRefreshView startAnimating];
+    [self refresh];
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Data
+- (void)refresh
+{
+    self.page = 1;
+//    [API getUserFollowingListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
+//        self.dataArrayForUser = [NSMutableArray arrayWithArray:userArray];
+//        if (self.dataArrayForUser.count == 0) {
+//            self.tableView.tableFooterView = self.noDataView;
+//            self.noDataView.text = @"没有关注任何人";
+//        } else {
+//            self.tableView.tableFooterView = nil;
+//        }
+//        [self.tableView reloadData];
+//        [self.tableView.pullToRefreshView stopAnimating];
+//    } failure:^(NSInteger stateCode) {
+//        
+//        [SVProgressHUD dismiss];
+//        [self.tableView.pullToRefreshView stopAnimating];
+//    }];
+    [API getAuthorizedUserWithPage:self.page Size:30 success:^(NSArray *users, NSInteger page) {
+        self.dataArrayForUser = [NSMutableArray arrayWithArray:users];
+        self.page += 1;
+        if (self.dataArrayForUser.count == 0) {
+            self.tableView.tableFooterView = self.noDataView;
+            self.noDataView.text = @"暂无认证用户";
+        }
+        else
+        {
+            self.tableView.tableFooterView = nil;
+        }
+        [self.tableView reloadData];
+        [self.tableView.pullToRefreshView stopAnimating];
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD dismiss];
+        [self.tableView.pullToRefreshView stopAnimating];
+    }];
+    
+}
+- (void)loadMore
+{
+
+    [API getAuthorizedUserWithPage:self.page Size:30 success:^(NSArray *users, NSInteger page) {
+        [self.dataArrayForUser addObjectsFromArray:users];
+        
+        [self.tableView reloadData];
+        [self.tableView.infiniteScrollingView stopAnimating];
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD dismiss];
+        [self.tableView.infiniteScrollingView stopAnimating];
+    }];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataArrayForUser.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UserSingleListCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.user = [self.dataArrayForUser objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [UserSingleListCell height];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [UIView new];
+}
+
+
+@end

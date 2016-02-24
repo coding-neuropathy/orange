@@ -100,8 +100,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 #pragma mark - get data
 - (void)refresh
 {
-#warning ------------- 用户图文 ----------------
-    [API getUserDetailWithUserId:self.user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes,NSArray * lastAtticles) {
+    [API getUserDetailWithUserId:self.user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray * lastArticles) {
 //        [Passport sharedInstance].user = user;
         if (self.user.userId == [Passport sharedInstance].user.userId) {
             [Passport sharedInstance].user = user;
@@ -332,6 +331,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
             cell.imageView.layer.borderWidth = 0.5;
             cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+            cell.imageView.clipsToBounds = YES;
             cell.entity = [self.likedataArray objectAtIndex:indexPath.row];
             cell.delegate = self;
             return cell;
