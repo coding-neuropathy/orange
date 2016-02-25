@@ -105,7 +105,7 @@
         GKUser * user = _users[i];
         UserImageView * imageView = [[UserImageView alloc]initWithFrame:CGRectMake(i * 50.+ i * 8, 0, 50., 50.)];
         [imageView sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(50., 50.)]];
-        
+        imageView.user = user;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userBtnAction:)];
         [imageView addGestureRecognizer:tap];
         

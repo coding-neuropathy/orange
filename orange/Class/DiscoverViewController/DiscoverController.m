@@ -427,7 +427,9 @@ static NSString * UserIdentifier = @"UserView";
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
                 [userView setTapUserBlock:^(GKUser *user) {
-                    [[OpenCenter sharedOpenCenter] openUser:user];
+                    
+                    [[OpenCenter sharedOpenCenter]openUser:user];
+                    
                 }];
                 return userView;
             }
