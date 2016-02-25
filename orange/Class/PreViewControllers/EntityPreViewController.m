@@ -91,19 +91,6 @@
             
             if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"]) {
                 self.baichuanblock(purchase);
-//                NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-//                TaeTaokeParams * taoKeParams = [[TaeTaokeParams alloc]init];
-//                taoKeParams.pid = kGK_TaobaoKe_PID;
-//                [self.itemService showTaoKeItemDetailByItemId:self
-//                                               isNeedPush:YES
-//                                        webViewUISettings:nil
-//                                                   itemId:_itemId
-//                                                 itemType:1
-//                                                   params:nil
-//                                              taoKeParams:taoKeParams
-//                              tradeProcessSuccessCallback:_tradeProcessSuccessCallback
-//                               tradeProcessFailedCallback:_tradeProcessFailedCallback];
-
             }
             else{
                 

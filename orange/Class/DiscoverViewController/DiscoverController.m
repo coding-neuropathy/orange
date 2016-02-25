@@ -28,6 +28,7 @@
 #import "SearchController.h"
 
 #import "EntityPreViewController.h"
+#import "ArticlePreViewController.h"
 
 
 @interface DiscoverHeaderSection : UICollectionReusableView
@@ -665,9 +666,9 @@ static NSString * UserIdentifier = @"UserView";
 {
     NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
     
-    if (indexPath.section != 3) {
-        return nil;
-    }
+//    if (indexPath.section != 3) {
+//        return nil;
+//    }
 
     UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
 
@@ -675,34 +676,54 @@ static NSString * UserIdentifier = @"UserView";
         return nil;
     }
 
-//    PreviewArticleController * vc = [[PreviewArticleController alloc] initWIthArticle:[self.articleArray objectAtIndex:indexPath.row]];
-//    vc.preferredContentSize = CGSizeMake(0, 0);
-//    previewingContext.sourceRect = cell.frame;
-//    return vc;
-    EntityPreViewController * vc = [[EntityPreViewController alloc] initWithEntity:[self.entityArray objectAtIndex:indexPath.row]];
-    vc.preferredContentSize = CGSizeMake(0., 0.);
-    previewingContext.sourceRect = cell.frame;
+
+
     
-    vc.baichuanblock = ^(GKPurchase * purchase) {
-        NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-        TaeTaokeParams * taoKeParams = [[TaeTaokeParams alloc]init];
-        taoKeParams.pid = kGK_TaobaoKe_PID;
-        [self.itemService showTaoKeItemDetailByItemId:self
-                                                       isNeedPush:YES
-                                                webViewUISettings:nil
-                                                           itemId:_itemId
-                                                         itemType:1
-                                                           params:nil
-                                                      taoKeParams:taoKeParams
-                                      tradeProcessSuccessCallback:_tradeProcessSuccessCallback
-                                       tradeProcessFailedCallback:_tradeProcessFailedCallback];
-    };
+    switch (indexPath.section) {
+        case 2:
+        {
+                ArticlePreViewController * vc = [[ArticlePreViewController alloc] initWithArticle:[self.articleArray objectAtIndex:indexPath.row]];
+                vc.preferredContentSize = CGSizeMake(0, 0);
+                previewingContext.sourceRect = cell.frame;
+                return vc;
+        }
+            break;
+        case 3:
+        {
+            EntityPreViewController * vc = [[EntityPreViewController alloc] initWithEntity:[self.entityArray objectAtIndex:indexPath.row]];
+            vc.preferredContentSize = CGSizeMake(0., 0.);
+            previewingContext.sourceRect = cell.frame;
+            
+            vc.baichuanblock = ^(GKPurchase * purchase) {
+                NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
+                TaeTaokeParams * taoKeParams = [[TaeTaokeParams alloc]init];
+                taoKeParams.pid = kGK_TaobaoKe_PID;
+                [self.itemService showTaoKeItemDetailByItemId:self
+                                                   isNeedPush:YES
+                                            webViewUISettings:nil
+                                                       itemId:_itemId
+                                                     itemType:1
+                                                       params:nil
+                                                  taoKeParams:taoKeParams
+                                  tradeProcessSuccessCallback:_tradeProcessSuccessCallback
+                                   tradeProcessFailedCallback:_tradeProcessFailedCallback];
+            };
+            
+            [vc setBackblock:^(UIViewController * vc1){
+                [self.navigationController pushViewController:vc1 animated:YES];
+            }];
+            
+            return vc;
+        }
+            break;
+            
+        default:
+            break;
+    }
     
-    [vc setBackblock:^(UIViewController * vc1){
-        [self.navigationController pushViewController:vc1 animated:YES];
-    }];
+    return nil;
     
-    return vc;
+
 }
 
 - (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
