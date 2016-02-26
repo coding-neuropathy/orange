@@ -155,6 +155,11 @@ typedef NS_ENUM(NSInteger, GKUserState) {
 @property (nonatomic, assign) NSInteger likeCount;
 
 /**
+ *  图文数
+ */
+@property (nonatomic, assign) NSInteger articleCount;
+
+/**
  *  点评数
  */
 @property (nonatomic, assign) NSInteger noteCount;

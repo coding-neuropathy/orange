@@ -12,6 +12,7 @@
 #import "UserFooterSectionView.h"
 #import "EntityCell.h"
 #import "NoteCell.h"
+#import "CategoryArticleCell.h"
 
 #import "SettingViewController.h"
 #import "EditViewController.h"
@@ -32,6 +33,8 @@
 
 @property (strong, nonatomic) NSMutableArray * likedataArray;
 @property (strong, nonatomic) NSMutableArray * notedataArray;
+@property (strong, nonatomic) NSMutableArray * articledataArray;
+
 @property (strong, nonatomic) UserHeaderView * headerView;
 @property (strong, nonatomic) UICollectionView * collectionView;
 
@@ -50,7 +53,7 @@ static NSString * UserHeaderSectionIdentifer = @"UserHeaderSection";
 static NSString * UserFooterSectionIdentifer = @"UserFooterSection";
 static NSString * UserLikeEntityIdentifer = @"EntityCell";
 static NSString * UserNoteIdentifier = @"NoteCell";
-
+static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (instancetype)initWithUser:(GKUser *)user
 {
@@ -109,6 +112,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         self.user = user;
         self.likedataArray = [NSMutableArray arrayWithArray:lastLikeEntities];
         self.notedataArray = [NSMutableArray arrayWithArray:lastNotes];
+        self.articledataArray = [NSMutableArray arrayWithArray:lastArticles];
 //        [self.collectionView reloadData];
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
@@ -137,7 +141,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
     
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:UserLikeEntityIdentifer];
     [self.collectionView registerClass:[NoteCell class] forCellWithReuseIdentifier:UserNoteIdentifier];
-    
+    [self.collectionView registerClass:[CategoryArticleCell class] forCellWithReuseIdentifier:UserArticleIdentifier];
     
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         NSMutableArray * array = [NSMutableArray array];
@@ -205,7 +209,7 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -215,10 +219,13 @@ static NSString * UserNoteIdentifier = @"NoteCell";
         case 1:
         {
             count = self.likedataArray.count > 4 ? 4 : self.likedataArray.count;
-            
         }
             break;
         case 2:
+        {
+            count = self.articledataArray.count > 3 ? 3 : self.articledataArray.count;
+        }
+        case 3:
             count = self.notedataArray.count > 3 ? 3 : self.notedataArray.count;
             break;
         default:
@@ -251,12 +258,20 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             case 2:
             {
                 UserHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer forIndexPath:indexPath];
-                [headerSection setUser:self.user WithType:UserPostType];
+                [headerSection setUser:self.user WithType:UserArticleType];
                 headerSection.delegate = self;
                 return headerSection;
             }
                 break;
             case 3:
+            {
+                UserHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer forIndexPath:indexPath];
+                [headerSection setUser:self.user WithType:UserPostType];
+                headerSection.delegate = self;
+                return headerSection;
+            }
+                break;
+            case 4:
             {
                 UserHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer forIndexPath:indexPath];
                 [headerSection setUser:self.user WithType:UserTagType];
@@ -293,6 +308,10 @@ static NSString * UserNoteIdentifier = @"NoteCell";
                     if (self.user.tagCount > 0)
                         footerSection.alpha = 1;
                     break;
+                case 4:
+                    if (self.user.tagCount > 0)
+                        footerSection.alpha = 1;
+                    break;
             }
         
         
@@ -304,12 +323,17 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
-//    cell.entity = [self.likedataArray objectAtIndex:indexPath.row];
-//    cell.delegate = self;
-//    return cell;
+
     switch (indexPath.section) {
         case 2:
+        {
+            CategoryArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserArticleIdentifier forIndexPath:indexPath];
+            
+            cell.article = [self.articledataArray objectAtIndex:indexPath.row];
+            return cell;
+            
+        }
+        case 3:
         {
             NoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserNoteIdentifier forIndexPath:indexPath];
             cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
@@ -352,6 +376,9 @@ static NSString * UserNoteIdentifier = @"NoteCell";
                 itemSize = CGSizeMake(64., 64.);
             break;
         case 2:
+            itemSize = CGSizeMake(kScreenWidth, 110.);
+            break;
+        case 3:
             itemSize = CGSizeMake(kScreenWidth, 100.);
             break;
         default:
@@ -372,12 +399,16 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             if (self.likedataArray.count > 0)
                 size = CGSizeMake(kScreenWidth, 44.);
             break;
-            
         case 2:
+            if (self.articledataArray.count > 0) {
+                size = CGSizeMake(kScreenWidth, 44.);
+            }
+            break;
+        case 3:
             if (self.notedataArray.count > 0)
                 size = CGSizeMake(kScreenWidth, 44.);
             break;
-        case 3:
+        case 4:
             if (self.user.tagCount > 0)
                 size = CGSizeMake(kScreenWidth, 44.);
             break;
@@ -396,12 +427,15 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             if (self.likedataArray.count > 0)
                 size = CGSizeMake(kScreenWidth, 10.);
             break;
-            
         case 2:
+            if (self.articledataArray.count > 0) {
+                size = CGSizeMake(kScreenWidth, 10.);
+            }
+        case 3:
             if (self.notedataArray.count > 0)
                 size = CGSizeMake(kScreenWidth, 10.);
             break;
-        case 3:
+        case 4:
             if (self.user.tagCount > 0)
                 size = CGSizeMake(kScreenWidth, 10.);
             break;
@@ -445,6 +479,11 @@ static NSString * UserNoteIdentifier = @"NoteCell";
 {
     switch (indexPath.section) {
         case 2:
+        {
+            GKArticle * article = [self.articledataArray objectAtIndex:indexPath.row];
+            [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+        }
+        case 3:
         {
             GKNote * note = [self.notedataArray objectAtIndex:indexPath.row];
             GKEntity * entity = [GKEntity modelFromDictionary:@{@"entity_id": note.entityId}];
@@ -554,6 +593,11 @@ static NSString * UserNoteIdentifier = @"NoteCell";
             UserLikeViewController *vc = [[UserLikeViewController alloc] initWithUser:self.user];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case UserArticleType:
+        {
+#warning 8-8-8-8-8-8-8-8--8-8-8-8
         }
             break;
         case UserPostType:

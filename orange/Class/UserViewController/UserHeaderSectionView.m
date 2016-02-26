@@ -83,6 +83,10 @@
                 self.titleLabel.text = NSLocalizedStringFromTable(@"me like", kLocalizedFile, nil);
                 self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.likeCount];
                 break;
+            case UserArticleType:
+                self.titleLabel.text = NSLocalizedStringFromTable(@"me article", kLocalizedFile, nil);
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.articleCount];
+                break;
             case UserPostType:
                 self.titleLabel.text = NSLocalizedStringFromTable(@"me note", kLocalizedFile, nil);
                 self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.noteCount];
@@ -99,6 +103,10 @@
             case UserLikeType:
                 self.titleLabel.text = NSLocalizedStringFromTable(@"user like", kLocalizedFile, nil);
                 self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.likeCount];
+                break;
+            case UserArticleType:
+                self.titleLabel.text = NSLocalizedStringFromTable(@"user article", kLocalizedFile, nil);
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.articleCount];
                 break;
             case UserPostType:
                 self.titleLabel.text = NSLocalizedStringFromTable(@"user note", kLocalizedFile, nil);

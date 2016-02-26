@@ -560,7 +560,7 @@ static NSString * UserIdentifier = @"UserView";
             break;
         case 1:
             if (self.userArray.count) {
-                headerSize = CGSizeMake(kScreenWidth, 100.);
+                headerSize = CGSizeMake(kScreenWidth, 106.);
             }
             break;
         case 2:
