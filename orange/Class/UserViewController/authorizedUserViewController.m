@@ -79,21 +79,22 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 #pragma mark - get data
 - (void)refresh
 {
-    [API getUserDetailWithUserId:self.user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray * lastArticles) {
-        
-        if (self.user.userId == [Passport sharedInstance].user.userId) {
-            [Passport sharedInstance].user = user;
-        }
-        
-        self.user = user;
-        
-        self.articledataArray = [NSMutableArray arrayWithArray:lastArticles];
-        
-        [self.collectionView.pullToRefreshView stopAnimating];
-        [self.collectionView reloadData];
-    } failure:^(NSInteger stateCode) {
-        [self.collectionView.pullToRefreshView stopAnimating];
-    }];
+//    [API getUserDetailWithUserId:self.user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray * lastArticles) {
+//        
+//        if (self.user.userId == [Passport sharedInstance].user.userId) {
+//            [Passport sharedInstance].user = user;
+//        }
+//        
+//        self.user = user;
+//        
+//        self.articledataArray = [NSMutableArray arrayWithArray:lastArticles];
+//        
+//        [self.collectionView.pullToRefreshView stopAnimating];
+//        [self.collectionView reloadData];
+//    } failure:^(NSInteger stateCode) {
+//        [self.collectionView.pullToRefreshView stopAnimating];
+//    }];
+    
     
     
 }
