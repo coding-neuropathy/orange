@@ -705,6 +705,9 @@
             } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
                 [SVProgressHUD showErrorWithStatus:message];
             }];
+        } else {
+            DDLogError(@"%@", [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            [SVProgressHUD showErrorWithStatus:[[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"]];
         }
     }];
 }
