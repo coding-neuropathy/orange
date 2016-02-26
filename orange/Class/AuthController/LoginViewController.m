@@ -693,7 +693,7 @@
     [SVProgressHUD show];
 //    DDLogError(@"user info %@", [notification valueForKey:@"object"]);
     NSDictionary * WBUserInfo = [notification valueForKey:@"object"];
-    NSString * access_token = [WBUserInfo valueForKey:@"access_token"];
+    NSString * access_token = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
     
     [WBHttpRequest requestForUserProfile:[WBUserInfo valueForKey:@"uid"] withAccessToken:access_token andOtherProperties:nil queue:nil withCompletionHandler:^(WBHttpRequest *httpRequest, id result, NSError *error) {
 
