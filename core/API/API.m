@@ -2247,6 +2247,16 @@
 }
 
 /**
+ *  获取用户图文
+ */
+- (void)getUserArticlesWithUserId:(NSInteger)user_id Page:(NSInteger)page Size:(NSInteger)size
+            success:(void (^)(NSArray * articles))success
+                                failure:(void (^)(NSInteger stateCode))failure
+{
+
+}
+
+/**
  *  更新当前用户信息
  *
  *  @param nickname  昵称
