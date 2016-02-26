@@ -26,7 +26,7 @@
 static NSString *SettingTableIdentifier = @"SettingCell";
 
 
-@interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIActionSheetDelegate, SettingsFooterViewDelegate>
+@interface SettingViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIActionSheetDelegate, SettingsFooterViewDelegate, WBHttpRequestDelegate>
 
 @property (nonatomic,strong)VerifyEmailViewController * vc;
 @property(nonatomic, strong) UITableView * tableView;
@@ -465,10 +465,11 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 - (void)logout
 {
-
+    NSString * wbtoken = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
     [API logoutWithSuccess:^{
 //        [AVUser logOut];
         [self.loginService logout];
+        [WeiboSDK logOutWithToken:wbtoken delegate:self withTag:@"wb_sign_out"];
         [Passport logout];
 
 //        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
@@ -480,9 +481,12 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         } else {
 //            [AVUser logOut];
             [self.loginService logout];
+            [WeiboSDK logOutWithToken:wbtoken delegate:self withTag:@"wb_sign_out"];
             [Passport logout];
         }
     }];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"wbtoken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 //将邮箱验证界面设为单例模式
 - (VerifyEmailViewController *)vc{

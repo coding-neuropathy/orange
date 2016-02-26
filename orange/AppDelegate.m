@@ -259,6 +259,10 @@ int ddLogLevel;
 {
     if ([response isKindOfClass:WBAuthorizeResponse.class])
     {
+//        WBSendMessageToWeiboResponse* sendMessageToWeiboResponse = (WBSendMessageToWeiboResponse*)response;
+        NSString* accessToken = [(WBAuthorizeResponse *)response accessToken];
+        [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"wbtoken"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"WBAuthResp" object:response.userInfo];
     }
 
