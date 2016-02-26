@@ -2248,12 +2248,47 @@
 
 /**
  *  获取用户图文
+ *
+ *  @param  userId      用户 ID
+ *  @param  page        页码
+ *  @param  size        每页长度
+ *  @param  success     成功block
+ *  @param  failure     失败block
  */
-- (void)getUserArticlesWithUserId:(NSInteger)user_id Page:(NSInteger)page Size:(NSInteger)size
-            success:(void (^)(NSArray * articles))success
+- (void)getUserArticlesWithUserId:(NSInteger)userId Page:(NSInteger)page Size:(NSInteger)size
+            success:(void (^)(NSArray * articles, NSInteger page, NSInteger count))success
                                 failure:(void (^)(NSInteger stateCode))failure
 {
-
+    NSParameterAssert(userId > 0);
+    
+    NSString *path = [NSString stringWithFormat:@"user/%ld/articles/", (unsigned long)userId];
+    
+    NSMutableDictionary * paraDict  = [NSMutableDictionary dictionaryWithCapacity:0];
+    [paraDict setObject:@(page) forKey:@"page"];
+    [paraDict setObject:@(size) forKey:@"size"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSMutableArray * articles = [NSMutableArray arrayWithCapacity:0];
+        NSInteger page = [[responseObject valueForKey:@"page"] integerValue];
+        NSInteger count = [[responseObject valueForKey:@"count"] integerValue];
+        
+        for (NSDictionary * row in responseObject[@"articles"]) {
+            GKArticle * article = [GKArticle modelFromDictionary:row];
+            
+            [articles addObject:article];
+        }
+        
+        if (success) {
+            success(articles, page, count);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
 }
 
 /**

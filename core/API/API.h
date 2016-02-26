@@ -681,6 +681,19 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                         failure:(void (^)(NSInteger stateCode))failure;
 
 /**
+ *  获取用户图文
+ *
+ *  @param  userId      用户 ID
+ *  @param  page        页码
+ *  @param  size        每页长度
+ *  @param  success     成功block
+ *  @param  failure     失败block
+ */
+- (void)getUserArticlesWithUserId:(NSInteger)userId Page:(NSInteger)page Size:(NSInteger)size
+                          success:(void (^)(NSArray * articles, NSInteger page, NSInteger count))success
+                          failure:(void (^)(NSInteger stateCode))failure;
+
+/**
  *  更新当前用户信息
  *
  *  @param nickname  昵称
