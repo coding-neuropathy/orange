@@ -19,6 +19,8 @@
 
 @property (nonatomic , strong)UILabel * priceLabel;
 
+@property (nonatomic , strong)UIView  * placeholderView;
+
 @property (nonatomic , strong)ImageLoadingView * loading;
 
 @end
@@ -40,7 +42,7 @@
     if (!_imageView) {
         _imageView = [[UIImageView alloc]initWithFrame:CGRectZero];
         _imageView.userInteractionEnabled = YES;
-        
+        _imageView.contentMode = UIViewContentModeScaleAspectFit;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapImageAction:)];
         [_imageView addGestureRecognizer:tap];
         [self.contentView addSubview:_imageView];
@@ -52,7 +54,7 @@
 {
     if (!_brandLabel) {
         _brandLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _brandLabel.font = [UIFont boldSystemFontOfSize:14.];
+        _brandLabel.font = [UIFont boldSystemFontOfSize:13.];
         _brandLabel.textColor = UIColorFromRGB(0x9d9e9f);
         _brandLabel.numberOfLines = 0;
         _brandLabel.textAlignment = NSTextAlignmentLeft;
@@ -61,17 +63,36 @@
     return _brandLabel;
 }
 
+
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:14.];
+        _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        
+        CGSize size = [_titleLabel sizeThatFits:CGSizeMake(_titleLabel.frame.size.width, MAXFLOAT)];
+        
+        self.titleLabel.frame = CGRectMake(0., 0., (SCREEN_WIDTH - 48)/2 - 8., size.height);
+        self.titleLabel.deFrameTop = self.placeholderView.deFrameTop;
+        self.titleLabel.deFrameLeft = self.placeholderView.deFrameLeft;
+        
         _titleLabel.textColor = UIColorFromRGB(0x414243);
-        _titleLabel.numberOfLines = 0;
+        _titleLabel.numberOfLines = 2;
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;
+}
+
+
+- (UIView *)placeholderView
+{
+    if (!_placeholderView) {
+        _placeholderView = [[UIView alloc]initWithFrame:CGRectZero];
+        [self.contentView addSubview:_placeholderView];
+    }
+    return _placeholderView;
 }
 
 - (UILabel *)priceLabel
@@ -128,17 +149,24 @@
     self.imageView.deFrameLeft = 16;
     
     
-    self.brandLabel.frame = CGRectMake(16., 16., (SCREEN_WIDTH - 48)/2, 21);
-    self.brandLabel.deFrameTop = self.imageView.deFrameBottom + 3;
+    self.brandLabel.frame = CGRectMake(0., 0., (SCREEN_WIDTH - 48)/2 - 8, 21);
+    self.brandLabel.deFrameTop = self.imageView.deFrameBottom + 8;
     self.brandLabel.deFrameLeft = self.imageView.deFrameLeft;
     
-    self.titleLabel.frame = CGRectMake(16., 16., (SCREEN_WIDTH - 48)/2., 42);
-    self.titleLabel.deFrameTop = self.brandLabel.deFrameBottom - 10;
-    self.titleLabel.deFrameLeft = self.brandLabel.deFrameLeft;
+    CGSize size = [_titleLabel sizeThatFits:CGSizeMake(_titleLabel.frame.size.width, MAXFLOAT)];
     
-    self.priceLabel.frame = CGRectMake(16., 16., 100, 21);
-    self.priceLabel.deFrameTop = self.titleLabel.deFrameBottom + 8;
-    self.priceLabel.deFrameLeft = self.titleLabel.deFrameLeft;
+    self.titleLabel.frame = CGRectMake(0., 0., (SCREEN_WIDTH - 48)/2 - 8., size.height);
+    self.titleLabel.deFrameTop = self.brandLabel.deFrameBottom;
+    self.titleLabel.deFrameLeft = self.brandLabel.deFrameLeft;
+   
+    
+    self.placeholderView.frame = CGRectMake(0., 0., (SCREEN_WIDTH - 48)/2 - 8., 21);
+    self.placeholderView.deFrameTop = self.brandLabel.deFrameBottom + 21;
+    self.placeholderView.deFrameLeft = self.brandLabel.deFrameLeft;
+    
+    self.priceLabel.frame = CGRectMake(16., 16.,(SCREEN_WIDTH - 48)/2 - 8., 21);
+    self.priceLabel.deFrameTop = self.brandLabel.deFrameBottom + 42;
+    self.priceLabel.deFrameLeft = self.brandLabel.deFrameLeft;
     
 }
 

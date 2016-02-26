@@ -61,6 +61,7 @@
 "search"                    = "搜索";
 "recommendation category"   = "推薦品類";
 "popular articles"          = "熱門圖文";
+"recommendation user"       = "推薦用戶";
 
 /*
  * entity page

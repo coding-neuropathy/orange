@@ -39,7 +39,7 @@ static NSString *CellIdentifier = @"UserSingleListCell";
     self.title = NSLocalizedStringFromTable(@"following", kLocalizedFile, nil);
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor whiteColor];
+//    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundView = nil;

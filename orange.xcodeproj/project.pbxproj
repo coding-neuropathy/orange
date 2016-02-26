@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2309032E1C803B1500AD26D6 /* authorizedUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */; };
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
+		239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239231B01C7D96FA00B49A88 /* RecUserController.m */; };
+		23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */; };
 		23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F1DD951C28020500A71827 /* PNoteViewController.m */; };
 		23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */; };
 		23F424041C59BFA7005E1318 /* CategoryArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F424031C59BFA7005E1318 /* CategoryArticleCell.m */; };
@@ -429,8 +432,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2309032C1C803B1500AD26D6 /* authorizedUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = authorizedUserViewController.h; sourceTree = "<group>"; };
+		2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = authorizedUserViewController.m; sourceTree = "<group>"; };
 		238F77D81C521CF5002E0E65 /* EntityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDetailCell.h; sourceTree = "<group>"; };
 		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
+		239231AF1C7D96FA00B49A88 /* RecUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecUserController.h; sourceTree = "<group>"; };
+		239231B01C7D96FA00B49A88 /* RecUserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecUserController.m; sourceTree = "<group>"; };
+		23EEFFB71C7ABAFA0061F45F /* DiscoverUsersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverUsersView.h; sourceTree = "<group>"; };
+		23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverUsersView.m; sourceTree = "<group>"; };
 		23F1DD941C28020500A71827 /* PNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNoteViewController.h; sourceTree = "<group>"; };
 		23F1DD951C28020500A71827 /* PNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNoteViewController.m; sourceTree = "<group>"; };
 		23F2743F1C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticlesSubCategoryViewController.h; sourceTree = "<group>"; };
@@ -1146,6 +1155,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		239231AE1C7D967E00B49A88 /* RecommendationuserController */ = {
+			isa = PBXGroup;
+			children = (
+				239231AF1C7D96FA00B49A88 /* RecUserController.h */,
+				239231B01C7D96FA00B49A88 /* RecUserController.m */,
+			);
+			name = RecommendationuserController;
+			path = DiscoverViewController;
+			sourceTree = "<group>";
+		};
 		23F1DD971C28046100A71827 /* PNoteViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1500,6 +1519,8 @@
 				B76FAE951B67B5FA002AC4C7 /* DiscoverCategoryView.m */,
 				8A402CC51B69F57A00E54FFF /* CategoryImageView.h */,
 				8A402CC61B69F57A00E54FFF /* CategoryImageView.m */,
+				23EEFFB71C7ABAFA0061F45F /* DiscoverUsersView.h */,
+				23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */,
 			);
 			path = DiscoverViewController;
 			sourceTree = "<group>";
@@ -1796,6 +1817,7 @@
 				4EB6ADAC1A77D70E0089797A /* BaseViewController */,
 				4ECCD0DD1A7348AF009D5A42 /* EntityViewController */,
 				23F1DD971C28046100A71827 /* PNoteViewController */,
+				239231AE1C7D967E00B49A88 /* RecommendationuserController */,
 				4E1D70191A5ADB890032719E /* DiscoverViewController */,
 				4E1D701C1A5ADB890032719E /* SelectionViewController */,
 				4E3A238A1A52F21800037F9C /* TabBarViewcontroller */,
@@ -2158,6 +2180,8 @@
 				B736FF291BD65D6E000668E4 /* UserTagsViewController.m */,
 				8A53D9241BD948F6006EF0D1 /* UserEntityCategoryController.h */,
 				8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */,
+				2309032C1C803B1500AD26D6 /* authorizedUserViewController.h */,
+				2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */,
 			);
 			path = UserViewController;
 			sourceTree = "<group>";
@@ -2994,6 +3018,7 @@
 				B7F543F91BC2457E0044F5E9 /* SDImageCache.m in Sources */,
 				4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */,
 				4E688A191BA9C2BA0006AD9B /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
+				2309032E1C803B1500AD26D6 /* authorizedUserViewController.m in Sources */,
 				B769B1211B2ACE91004401FA /* IFTTTEasingFunction.m in Sources */,
 				4EA0C45C1A8287780025EC2E /* SignView.m in Sources */,
 				B7C079861BC5827E006B7379 /* DDFileLogger.m in Sources */,
@@ -3039,6 +3064,8 @@
 				4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */,
+				239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */,
+				23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */,
 				4E688A141BA9C2BA0006AD9B /* JSQMessagesCellTextView.m in Sources */,
 				4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */,
 				4E688A041BA9C2BA0006AD9B /* JSQMessagesAvatarImageFactory.m in Sources */,

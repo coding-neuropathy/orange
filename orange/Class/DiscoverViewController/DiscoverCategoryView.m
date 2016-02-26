@@ -115,10 +115,9 @@
 {
     
     UITapGestureRecognizer * tap = (UITapGestureRecognizer *)sender;
-//    DDLogInfo(@"tap tap %@", tap.view);
-    
+
     CategoryImageView * imageview = (CategoryImageView *)tap.view;
-//    DDLogInfo(@"%@", imageview.category);
+
     if (self.tapBlock) {
         self.tapBlock(imageview.category);
     }
