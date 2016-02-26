@@ -116,7 +116,8 @@ NSString *SettingTableIdentifier = @"SettingCell";
 {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
-    [AVAnalytics beginLogPageView:@"EditView"];
+//    [AVAnalytics beginLogPageView:@"EditView"];
+    [MobClick beginLogPageView:@"editView"];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -126,7 +127,8 @@ NSString *SettingTableIdentifier = @"SettingCell";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"EditView"];
+//    [AVAnalytics endLogPageView:@"EditView"];
+    [MobClick endLogPageView:@"editView"];
 }
 
 #pragma mark - UITableViewDataSource

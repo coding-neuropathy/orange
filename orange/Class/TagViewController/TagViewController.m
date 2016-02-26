@@ -87,14 +87,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"TagView"];
+//    [AVAnalytics beginLogPageView:@"TagView"];
     [MobClick beginLogPageView:@"TagView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"TagView"];
+//    [AVAnalytics endLogPageView:@"TagView"];
     [MobClick endLogPageView:@"TagView"];
 }
 

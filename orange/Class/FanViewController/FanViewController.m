@@ -70,14 +70,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"fanView"];
+//    [AVAnalytics beginLogPageView:@"fanView"];
     [MobClick beginLogPageView:@"fanView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"fanView"];
+//    [AVAnalytics endLogPageView:@"fanView"];
     [MobClick endLogPageView:@"fanView"];
 }
 

@@ -142,14 +142,14 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"UserLikeView"];
+//    [AVAnalytics beginLogPageView:@"UserLikeView"];
     [MobClick beginLogPageView:@"UserLikeView"];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"UserLikeView"];
+//    [AVAnalytics endLogPageView:@"UserLikeView"];
     [MobClick endLogPageView:@"UserLikeView"];
     
     [self.categoryController.view removeFromSuperview];
@@ -278,7 +278,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
                 self.categoryController = nil;
                 sectionView.indicatorLable.text = [NSString fontAwesomeIconStringForEnum:FAAngleDown];
                 [MobClick event:@"click user category" attributes:@{@"action":@"cancel"}];
-                [AVAnalytics event:@"click user category" attributes:@{@"action":@"cancel"}];
+//                [AVAnalytics event:@"click user category" attributes:@{@"action":@"cancel"}];
             }
         }];
 
@@ -328,7 +328,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 //    self.categoryController = nil;
         
         [MobClick event:@"click user category" attributes:@{@"action":self.category.title}];
-        [AVAnalytics event:@"click user category" attributes:@{@"action":self.category.title}];
+//        [AVAnalytics event:@"click user category" attributes:@{@"action":self.category.title}];
     }
     
 }

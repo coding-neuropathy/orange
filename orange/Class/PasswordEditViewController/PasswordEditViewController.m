@@ -160,14 +160,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"PasswordEditView"];
+//    [AVAnalytics beginLogPageView:@"PasswordEditView"];
     [MobClick beginLogPageView:@"PasswordEditView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"PasswordEditView"];
+//    [AVAnalytics endLogPageView:@"PasswordEditView"];
     [MobClick endLogPageView:@"PasswordEditView"];
 }
 

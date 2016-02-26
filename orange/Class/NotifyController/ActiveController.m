@@ -59,7 +59,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 {
     [super viewWillAppear:animated];
     self.tableView.scrollsToTop = YES;
-    [AVAnalytics beginLogPageView:@"ActiveView"];
+//    [AVAnalytics beginLogPageView:@"ActiveView"];
     [MobClick beginLogPageView:@"ActiveView"];
 }
 
@@ -68,7 +68,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
     [super viewWillDisappear:animated];
     self.tableView.scrollsToTop = NO;
     
-    [AVAnalytics endLogPageView:@"ActiveView"];
+//    [AVAnalytics endLogPageView:@"ActiveView"];
     [MobClick endLogPageView:@"ActiveView"];
 }
 

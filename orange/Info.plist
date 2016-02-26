@@ -29,10 +29,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>weibo</string>
+			<string>com.weibo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>sinaweibosso.1459383851</string>
+				<string>wb1459383851</string>
 			</array>
 		</dict>
 		<dict>

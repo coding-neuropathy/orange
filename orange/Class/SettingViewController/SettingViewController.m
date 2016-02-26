@@ -159,14 +159,14 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"SettingView"];
+//    [AVAnalytics beginLogPageView:@"SettingView"];
     [MobClick beginLogPageView:@"SettingView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"SettingView"];
+//    [AVAnalytics endLogPageView:@"SettingView"];
     [MobClick endLogPageView:@"SettingView"];
 }
 
@@ -228,25 +228,25 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                     break;
                 }
                 
-                [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
-                [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
-                    NSLog(@"%.0f", [object[@"expires_at"] timeIntervalSince1970]);
-                    
-                    
-                    if (!error) {
-                        [API bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] ExpiresIn:object[@"expires_at"]  success:^(GKUser *user) {
-                            [Passport sharedInstance].user = user;
-                            [Passport sharedInstance].screenName = user.sinaScreenName;
-//                            [Passport sharedInstance].sinaUserID = user.
-                            [self.tableView reloadData];
-                            [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"bind success", kLocalizedFile, nil)];
-                        } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
-                            [SVProgressHUD showErrorWithStatus:message];
-                        }];
-                    } else {
-                        DDLogError(@"error %@", error);
-                    }
-                } toPlatform:AVOSCloudSNSSinaWeibo];
+//                [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
+//                [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
+//                    NSLog(@"%.0f", [object[@"expires_at"] timeIntervalSince1970]);
+//                    
+//                    
+//                    if (!error) {
+//                        [API bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] ExpiresIn:object[@"expires_at"]  success:^(GKUser *user) {
+//                            [Passport sharedInstance].user = user;
+//                            [Passport sharedInstance].screenName = user.sinaScreenName;
+////                            [Passport sharedInstance].sinaUserID = user.
+//                            [self.tableView reloadData];
+//                            [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"bind success", kLocalizedFile, nil)];
+//                        } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+//                            [SVProgressHUD showErrorWithStatus:message];
+//                        }];
+//                    } else {
+//                        DDLogError(@"error %@", error);
+//                    }
+//                } toPlatform:AVOSCloudSNSSinaWeibo];
                 
             }
                 break;
@@ -423,14 +423,14 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 -(void)weiboShare
 {
 
-    [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-                
-    } andProgress:^(float percent) {
-        if (percent == 1) {
-//            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-            [SVProgressHUD showSuccessWithStatus:@"分享成功"];
-        }
-    }];
+//    [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+//                
+//    } andProgress:^(float percent) {
+//        if (percent == 1) {
+////            [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+//            [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+//        }
+//    }];
 
 }
 
@@ -467,7 +467,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 {
 
     [API logoutWithSuccess:^{
-        [AVUser logOut];
+//        [AVUser logOut];
         [self.loginService logout];
         [Passport logout];
 
@@ -478,7 +478,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         if(stateCode == 500) {
         
         } else {
-            [AVUser logOut];
+//            [AVUser logOut];
             [self.loginService logout];
             [Passport logout];
         }

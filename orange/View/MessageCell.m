@@ -600,7 +600,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
     }
     VC.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-    [AVAnalytics event:@"message_forward_user"];
+//    [AVAnalytics event:@"message_forward_user"];
     [MobClick event:@"message_forward_user"];
 }
 
@@ -620,7 +620,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         VC.entity = [GKEntity modelFromDictionary:@{@"entityId":@([note.entityId integerValue])}];
     }
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-    [AVAnalytics event:@"message_forward_entity"];
+//    [AVAnalytics event:@"message_forward_entity"];
     [MobClick event:@"message_forward_entity"];
 }
 @end

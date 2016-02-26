@@ -184,4 +184,9 @@ typedef NS_ENUM(NSInteger, GKUserState) {
  */
 @property (nonatomic, assign) GKUserRelationType relation;
 
+/**
+ *  授权用户
+ */
+@property (nonatomic, assign) BOOL authorized_author;
+
 @end

@@ -329,7 +329,7 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
 - (void)TapBannerImageAction:(NSDictionary *)dict
 {
     NSString * url = dict[@"url"];
-    [AVAnalytics event:@"banner" attributes:@{@"url": url}];
+//    [AVAnalytics event:@"banner" attributes:@{@"url": url}];
     [MobClick event:@"banner" attributes:@{@"url": url}];
     if ([url hasPrefix:@"http://"]) {
         if (k_isLogin) {

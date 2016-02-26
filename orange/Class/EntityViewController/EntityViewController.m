@@ -338,14 +338,14 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"EntityView"];
+//    [AVAnalytics beginLogPageView:@"EntityView"];
     [MobClick beginLogPageView:@"EntityView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"EntityView"];
+//    [AVAnalytics endLogPageView:@"EntityView"];
     [MobClick endLogPageView:@"EntityView"];
 }
 
@@ -672,8 +672,8 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:VC animated:YES];
             
-            [AVAnalytics event:@"entity_forward_user"];
-            [AVAnalytics event:@"entity_forward_user"];
+//            [AVAnalytics event:@"entity_forward_user"];
+            [MobClick event:@"entity_forward_user"];
         }
             break;
         case 5:
@@ -719,7 +719,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)handelTapImageWithIndex:(NSUInteger)idx
 {
 //    DDLogInfo(@"OKOKOKOK");
-    [AVAnalytics event:@"click entiyt image view"];
+//    [AVAnalytics event:@"click entiyt image view"];
     [MobClick event:@"click entiyt image view"];
     EntityPopView * popView = [[EntityPopView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
     popView.entity = self.entity;
@@ -808,10 +808,10 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         }
         note.poked = poked;
         
-        [AVAnalytics event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} durations:(int)note.pokeCount];
+//        [AVAnalytics event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} durations:(int)note.pokeCount];
         [MobClick event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} counter:(int)note.pokeCount];
     } failure:^(NSInteger stateCode) {
-        [AVAnalytics event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
+//        [AVAnalytics event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
         [MobClick event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
     }];
 }
@@ -837,7 +837,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         return;
     }
     
-    [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
+//    [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
     [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
     
     [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
@@ -981,7 +981,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         } else
             [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
         
-        [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
+//        [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
         [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
     }
 }
@@ -1017,7 +1017,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     SubCategoryEntityController * VC = [[SubCategoryEntityController alloc] initWithSubCategory:category];
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     
-    [AVAnalytics event:@"entity_forward_categoty"];
+//    [AVAnalytics event:@"entity_forward_categoty"];
     [MobClick event:@"entity_forward_categoty"];
 }
 

@@ -101,14 +101,14 @@ static NSString * NoteIdentifier = @"NoteCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"UserNoteView"];
+//    [AVAnalytics beginLogPageView:@"UserNoteView"];
     [MobClick beginLogPageView:@"UserNoteView"];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"UserNoteView"];
+//    [AVAnalytics endLogPageView:@"UserNoteView"];
     [MobClick endLogPageView:@"UserNoteView"];
 }
 

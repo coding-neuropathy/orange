@@ -169,7 +169,7 @@ static CGFloat LeftMargin = 16.;
 {
     [super viewWillAppear:animated];
     
-    [AVAnalytics beginLogPageView:@"TipOffView"];
+//    [AVAnalytics beginLogPageView:@"TipOffView"];
     [MobClick beginLogPageView:@"TipOffView"];
 }
 
@@ -177,7 +177,7 @@ static CGFloat LeftMargin = 16.;
 {
     [super viewWillDisappear:YES];
     
-    [AVAnalytics endLogPageView:@"TipOffView"];
+//    [AVAnalytics endLogPageView:@"TipOffView"];
     [MobClick endLogPageView:@"TipOffView"];
 }
 

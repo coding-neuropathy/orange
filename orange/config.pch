@@ -20,10 +20,10 @@
 
 
 // AVOS
-#import <AVOSCloud/AVOSCloud.h>
-#import <LeanCloudSocial/AVOSCloudSNS.h>
-#import <LeanCloudSocial//AVUser+SNS.h>
-
+//#import <AVOSCloud/AVOSCloud.h>
+//#import <LeanCloudSocial/AVOSCloudSNS.h>
+//#import <LeanCloudSocial//AVUser+SNS.h>
+#import "WeiboSDK.h"
 
 // Umeng
 #import "MobClick.h"

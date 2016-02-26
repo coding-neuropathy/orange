@@ -115,7 +115,7 @@
     
     self.tableView.scrollsToTop = YES;
     
-    [AVAnalytics beginLogPageView:@"SearchResultView"];
+//    [AVAnalytics beginLogPageView:@"SearchResultView"];
     [MobClick beginLogPageView:@"SearchResultView"];
 }
 
@@ -125,7 +125,7 @@
     
     self.tableView.scrollsToTop = NO;
     
-    [AVAnalytics endLogPageView:@"SearchResultView"];
+//    [AVAnalytics endLogPageView:@"SearchResultView"];
     [MobClick endLogPageView:@"SearchResultView"];
 }
 

@@ -20,7 +20,7 @@
 
 int ddLogLevel;
 
-@interface AppDelegate ()<WXApiDelegate>
+@interface AppDelegate ()<WXApiDelegate, WeiboSDKDelegate>
 
 @property (strong, nonatomic) TabBarViewcontroller * tabbarViewController;
 
@@ -32,14 +32,6 @@ int ddLogLevel;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self configLog];
     
-    //AVOS
-    [AVOSCloud setApplicationId:@"laier6ulcszfjkn08448ng37nwc71ux4uv6yc6vi529v29a0" clientKey:@"6ad7o8urhbw4q5kx8hfoiaxjjtme205ohodgoy6ltwts8b1i"];
-    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
-//    [AVPush setProductionMode:YES];
-    [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-//    [AVAnalytics setCrashReportEnabled:YES];
-//    [AVAnalytics setChannel:@"tongbu"];
-    
     // umeng
     [MobClick setAppVersion:XcodeAppVersion];
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
@@ -50,10 +42,15 @@ int ddLogLevel;
     // wechat
     [WXApi registerApp:kGK_WeixinShareKey withDescription:NSLocalizedStringFromTable(@"guide to better living", kLocalizedFile, nil)];
     
+    // weibo sdk
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:kGK_WeiboAPPKey];
+    
+    //sdk初始化
     [[TaeSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
     [[TaeSDK sharedInstance] setAppVersion:XcodeAppVersion];
     [[TaeSDK sharedInstance] setDebugLogOpen:NO];
-    //sdk初始化
+    
     [[TaeSDK sharedInstance] asyncInit:^{
         DDLogInfo(@"初始化成功");
     } failedCallback:^(NSError *error) {
@@ -190,18 +187,19 @@ int ddLogLevel;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"Save" object:nil userInfo:nil];
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
     if([[url absoluteString]hasPrefix:@"wx"])
     {
         return [WXApi handleOpenURL:url delegate:self];
     }
-    return [AVOSCloudSNS handleOpenURL:url];
+//    return [AVOSCloudSNS handleOpenURL:url];
+    return [WeiboSDK handleOpenURL:url delegate:self ];
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     [APService registerDeviceToken:deviceToken];
-
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -226,7 +224,45 @@ int ddLogLevel;
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
+#pragma mark - config appearance
+-(void)customizeAppearance
+{
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+    //[[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth, 0.5)]];
+    //[[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x414243)];
+    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x414243)];
+    //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
+    UIFont* font = [UIFont boldSystemFontOfSize:17];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}];
+    [[UINavigationBar appearance] setAlpha:0.97];
+    
+    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back"]];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back"]];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, 0) forBarMetrics:UIBarMetricsDefault];
+    
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x232323) andSize:CGSizeMake(kScreenWidth, 49)]];
+    //[[UITabBar appearance]setSelectionIndicatorImage:[UIImage imageWithColor:UIColorFromRGB(0x0f0f0f) andSize:CGSizeMake(kScreenWidth/4, 49)]];
+    //    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
+    [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
+    [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
+}
 
+#pragma mark - weibo delegate
+- (void)didReceiveWeiboRequest:(WBBaseRequest *)request
+{
+    
+}
+
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
+{
+    if ([response isKindOfClass:WBAuthorizeResponse.class])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"WBAuthResp" object:response.userInfo];
+    }
+
+}
 
 - (void)onResp:(BaseResp *)resp
 {
@@ -276,43 +312,16 @@ int ddLogLevel;
 
 }
 
--(void)customizeAppearance
-{
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
-    //[[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth, 0.5)]];
-    //[[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
-    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x414243)];
-    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x414243)];
-    //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
-    UIFont* font = [UIFont boldSystemFontOfSize:17];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}];
-    [[UINavigationBar appearance] setAlpha:0.97];
-    
-    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back"]];
-    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back"]];
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, 0) forBarMetrics:UIBarMetricsDefault];
 
-    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x232323) andSize:CGSizeMake(kScreenWidth, 49)]];
-    //[[UITabBar appearance]setSelectionIndicatorImage:[UIImage imageWithColor:UIColorFromRGB(0x0f0f0f) andSize:CGSizeMake(kScreenWidth/4, 49)]];
-//    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
-    [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
-    [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
-    
-
-}
-
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     if([[url absoluteString]hasPrefix:@"wx"])
     {
         return [WXApi handleOpenURL:url delegate:self];
     }
-    if([[url absoluteString]hasPrefix:@"sinaweibosso"])
+    if([[url absoluteString] hasPrefix:@"wb1459383851"])
     {
-        return [AVOSCloudSNS handleOpenURL:url];
+        return [WeiboSDK handleOpenURL:url delegate:self];
     }
     
     if ([[url absoluteString] hasPrefix:@"tbopen23093827"]) {

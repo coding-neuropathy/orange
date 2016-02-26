@@ -22,9 +22,6 @@
                              @"avatar_large"     : @"avatarURL",
                              @"avatar_small"     : @"avatarURL_s",
                              @"is_active"        : @"user_state",
-//                             @"verified"         : @"verified",
-//                             @"verified_type"    : @"verifiedType",
-//                             @"verified_reason"  : @"verifiedReason",
                              @"gender"           : @"gender",
                              @"bio"              : @"bio",
                              @"following_count"  : @"followingCount",
@@ -40,6 +37,7 @@
                              @"email"            : @"email",
                              @"location"         : @"location",
                              @"mail_verified'"   : @"mail_verified",
+                             @"authorized_author": @"authorized_author",
                              };
     
     return keyDic;

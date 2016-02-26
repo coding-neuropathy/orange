@@ -99,14 +99,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"CategoryView"];
+//    [AVAnalytics beginLogPageView:@"CategoryView"];
     [MobClick beginLogPageView:@"CategoryView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"CategoryView"];
+//    [AVAnalytics endLogPageView:@"CategoryView"];
     [MobClick endLogPageView:@"CategoryView"];
 }
 

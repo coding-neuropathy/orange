@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DBB8603C3A555E49B8D6EBE5EC2240EF9499317C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "DBB8603C3A555E49B8D6EBE5EC2240EF9499317C" : 0,
+    "607455898F648DBE5169CC7F626C6A329CE4179E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7B1D2A1C-72A0-413C-A164-0F5FC91AC9C1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "DBB8603C3A555E49B8D6EBE5EC2240EF9499317C" : "orange\/",
+    "607455898F648DBE5169CC7F626C6A329CE4179E" : "weibo_ios_sdk\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "orange",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "orange.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/sinaweibosdk\/weibo_ios_sdk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "607455898F648DBE5169CC7F626C6A329CE4179E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/guoku\/orange.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DBB8603C3A555E49B8D6EBE5EC2240EF9499317C"
+    }
+  ]
+}
