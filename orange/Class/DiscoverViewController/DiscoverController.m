@@ -26,7 +26,7 @@
 #import "CategroyGroupController.h"
 #import "UserViewController.h"
 #import "SearchController.h"
-
+#import "authorizedUserViewController.h"
 #import "EntityPreViewController.h"
 #import "ArticlePreViewController.h"
 
@@ -428,8 +428,17 @@ static NSString * UserIdentifier = @"UserView";
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
                 [userView setTapUserBlock:^(GKUser *user) {
+                    if (user.authorized_author == NO) {
+                        [[OpenCenter sharedOpenCenter]openUser:user];
+                    }
+                    else
+                    {
+                        authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
+                        vc.user = user;
+                        vc.hidesBottomBarWhenPushed = YES;
+                        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+                    }
                     
-                    [[OpenCenter sharedOpenCenter]openUser:user];
                     
                 }];
                 return userView;
@@ -595,7 +604,6 @@ static NSString * UserIdentifier = @"UserView";
         case 3:
         {
             GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
-            //    NSLog(@"%@", article.articleURL);
             WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];

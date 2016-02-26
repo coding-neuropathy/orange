@@ -92,7 +92,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
         
-        //        _collectionView.contentInset = UIEdgeInsetsMake(617, 0, 0, 0);
+        
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
@@ -104,7 +104,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (void)refresh
 {
     [API getUserDetailWithUserId:self.user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray * lastArticles) {
-//        [Passport sharedInstance].user = user;
+
         if (self.user.userId == [Passport sharedInstance].user.userId) {
             [Passport sharedInstance].user = user;
         }
@@ -113,7 +113,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         self.likedataArray = [NSMutableArray arrayWithArray:lastLikeEntities];
         self.notedataArray = [NSMutableArray arrayWithArray:lastNotes];
         self.articledataArray = [NSMutableArray arrayWithArray:lastArticles];
-//        [self.collectionView reloadData];
+
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
@@ -130,7 +130,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.navigationItem.title = self.user.nickname;
     
     [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
@@ -225,8 +225,11 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         {
             count = self.articledataArray.count > 3 ? 3 : self.articledataArray.count;
         }
+            break;
         case 3:
+        {
             count = self.notedataArray.count > 3 ? 3 : self.notedataArray.count;
+        }
             break;
         default:
             break;
@@ -301,13 +304,15 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                     break;
                     
                 case 2:
-                    if (self.notedataArray.count > 0)
+                    if (self.articledataArray.count > 0)
                         footerSection.alpha = 1;
                     break;
+                    
                 case 3:
-                    if (self.user.tagCount > 0)
+                    if (self.user.noteCount > 0)
                         footerSection.alpha = 1;
                     break;
+                    
                 case 4:
                     if (self.user.tagCount > 0)
                         footerSection.alpha = 1;
@@ -387,7 +392,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     return itemSize;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
@@ -431,6 +436,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             if (self.articledataArray.count > 0) {
                 size = CGSizeMake(kScreenWidth, 10.);
             }
+            break;
         case 3:
             if (self.notedataArray.count > 0)
                 size = CGSizeMake(kScreenWidth, 10.);
@@ -482,7 +488,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         {
             GKArticle * article = [self.articledataArray objectAtIndex:indexPath.row];
             [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+            
         }
+            break;
         case 3:
         {
             GKNote * note = [self.notedataArray objectAtIndex:indexPath.row];
