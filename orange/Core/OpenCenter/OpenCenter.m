@@ -8,6 +8,7 @@
 
 #import "OpenCenter.h"
 #import "UserViewController.h"
+#import "authorizedUserViewController.h"
 #import "EntityViewController.h"
 #import "NoteViewController.h"
 //#import "CategoryViewController.h"
@@ -40,10 +41,19 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
 - (void)openUser:(GKUser *)user
 {
-    UserViewController * VC = [[UserViewController alloc]init];
-    VC.user = user;
-    VC.hidesBottomBarWhenPushed = YES;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    if (user.authorized_author == NO) {
+        UserViewController * VC = [[UserViewController alloc]init];
+        VC.user = user;
+        VC.hidesBottomBarWhenPushed = YES;
+        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    }
+    else
+    {
+        authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
+        vc.user = user;
+        vc.hidesBottomBarWhenPushed = YES;
+        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)openEntity:(GKEntity *)entity

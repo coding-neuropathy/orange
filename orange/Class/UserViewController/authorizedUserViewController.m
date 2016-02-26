@@ -79,24 +79,32 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 #pragma mark - get data
 - (void)refresh
 {
-//    [API getUserDetailWithUserId:self.user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray * lastArticles) {
-//        
-//        if (self.user.userId == [Passport sharedInstance].user.userId) {
-//            [Passport sharedInstance].user = user;
-//        }
-//        
-//        self.user = user;
-//        
-//        self.articledataArray = [NSMutableArray arrayWithArray:lastArticles];
-//        
-//        [self.collectionView.pullToRefreshView stopAnimating];
-//        [self.collectionView reloadData];
-//    } failure:^(NSInteger stateCode) {
-//        [self.collectionView.pullToRefreshView stopAnimating];
-//    }];
+//    NSLog(@"%ld",self.user.userId);
+    self.page = 1;
+    
+    [API getUserArticlesWithUserId:self.user.userId Page:self.page Size:10 success:^(NSArray *articles, NSInteger page, NSInteger count) {
+        
+        self.articledataArray = [NSMutableArray arrayWithArray:articles];
+        self.page += 1;
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.infiniteScrollingView stopAnimating];
+    }];
     
     
-    
+}
+
+- (void)loadMore
+{
+    [API getUserArticlesWithUserId:self.user.userId Page:self.page Size:10 success:^(NSArray *articles, NSInteger page, NSInteger count) {
+        [self.articledataArray addObjectsFromArray:articles];
+        self.page += 1;
+        [self.collectionView.infiniteScrollingView stopAnimating];
+        [self.collectionView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.infiniteScrollingView stopAnimating];
+    }];
 }
 
 - (void)loadView
@@ -128,9 +136,16 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         [weakSelf refresh];
     }];
     
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
+    }];
+    
     [self.collectionView addSloganView];
     
-    if (self.user) {
+//    if (self.user) {
+//        [self.collectionView triggerPullToRefresh];
+//    }
+    if (self.articledataArray == 0) {
         [self.collectionView triggerPullToRefresh];
     }
 }

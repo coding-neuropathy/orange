@@ -428,17 +428,8 @@ static NSString * UserIdentifier = @"UserView";
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
                 [userView setTapUserBlock:^(GKUser *user) {
-                    if (user.authorized_author == NO) {
-                        [[OpenCenter sharedOpenCenter]openUser:user];
-                    }
-                    else
-                    {
-                        authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
-                        vc.user = user;
-                        vc.hidesBottomBarWhenPushed = YES;
-                        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-                    }
                     
+                   [[OpenCenter sharedOpenCenter]openUser:user];
                     
                 }];
                 return userView;
