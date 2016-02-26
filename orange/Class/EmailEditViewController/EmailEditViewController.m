@@ -163,14 +163,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"EmailEditView"];
+//    [AVAnalytics beginLogPageView:@"EmailEditView"];
     [MobClick beginLogPageView:@"EmailEditView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"EmailEditView"];
+//    [AVAnalytics endLogPageView:@"EmailEditView"];
     [MobClick endLogPageView:@"EmailEditView"];
 }
 

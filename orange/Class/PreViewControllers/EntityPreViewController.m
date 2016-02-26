@@ -72,7 +72,7 @@
             return;
         }
         
-        [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
+//        [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
         [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
         
         [API likeEntityWithEntityId:self.entity.entityId isLike:YES success:^(BOOL liked) {
@@ -96,7 +96,7 @@
                 
                 [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString] ];
             }
-            [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
+//            [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
             [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
 
         }

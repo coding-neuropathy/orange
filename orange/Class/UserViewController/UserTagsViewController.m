@@ -84,14 +84,14 @@ static NSString * UserTagIdentifier = @"UserTagCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"UserTagView"];
+//    [AVAnalytics beginLogPageView:@"UserTagView"];
     [MobClick beginLogPageView:@"UserTagView"];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"UserTagView"];
+//    [AVAnalytics endLogPageView:@"UserTagView"];
     [MobClick endLogPageView:@"UserTagView"];
 }
 

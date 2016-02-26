@@ -139,7 +139,7 @@
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar addSubview:self.progressView];
 
-    [AVAnalytics beginLogPageView:@"webView"];
+//    [AVAnalytics beginLogPageView:@"webView"];
     [MobClick beginLogPageView:@"webView"];
 }
 
@@ -149,7 +149,7 @@
     [self.progressView removeFromSuperview];
     //    [SVProgressHUD dismiss];
     //    [self.activityIndicator stopAnimating];
-    [AVAnalytics endLogPageView:@"webView"];
+//    [AVAnalytics endLogPageView:@"webView"];
     [MobClick endLogPageView:@"webView"];
 }
 

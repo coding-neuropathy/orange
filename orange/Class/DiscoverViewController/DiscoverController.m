@@ -244,7 +244,7 @@ static NSString * UserIdentifier = @"UserView";
     
     self.collectionView.scrollsToTop = YES;
     
-    [AVAnalytics beginLogPageView:@"DiscoverView"];
+//    [AVAnalytics beginLogPageView:@"DiscoverView"];
     [MobClick beginLogPageView:@"DiscoverView"];
 }
 
@@ -258,7 +258,7 @@ static NSString * UserIdentifier = @"UserView";
         [self addSearchLog:_searchVC.searchBar.text];
     }
     
-    [AVAnalytics endLogPageView:@"DiscoverView"];
+//    [AVAnalytics endLogPageView:@"DiscoverView"];
     [MobClick endLogPageView:@"DiscoverView"];
 }
 
@@ -741,7 +741,7 @@ static NSString * UserIdentifier = @"UserView";
 - (void)TapBannerImageAction:(NSDictionary *)dict
 {
     NSString * url = dict[@"url"];
-    [AVAnalytics event:@"banner" attributes:@{@"url": url}];
+//    [AVAnalytics event:@"banner" attributes:@{@"url": url}];
     [MobClick event:@"banner" attributes:@{@"url": url}];
     if ([url hasPrefix:@"http://"]) {
         if (k_isLogin) {

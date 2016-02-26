@@ -338,13 +338,13 @@ static NSString *CellIdentifier = @"CommentCell";
             [SVProgressHUD showSuccessWithStatus:@"回复成功"];
             
             [MobClick event:@"post reply success"];
-            [AVAnalytics event:@"post reply success"];
+//            [AVAnalytics event:@"post reply success"];
         } failure:^(NSInteger stateCode) {
 //            [SVProgressHUD showImage:nil status:@"回复失败!"];
             [SVProgressHUD showErrorWithStatus:@"回复失败"];
             
             [MobClick event:@"post reply success"];
-            [AVAnalytics event:@"post reply success"];
+//            [AVAnalytics event:@"post reply success"];
         }];
     }
 
@@ -357,7 +357,7 @@ static NSString *CellIdentifier = @"CommentCell";
     VC.user = self.note.creator;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     
-    [AVAnalytics event:@"note_forward_user"];
+//    [AVAnalytics event:@"note_forward_user"];
     [MobClick event:@"note_forward_user"];
 }
 
@@ -383,10 +383,10 @@ static NSString *CellIdentifier = @"CommentCell";
         [pokeBtn setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
         pokeBtn.selected = self.note.poked;
         
-        [AVAnalytics event:@"poke note" attributes:@{@"note": @(self.note.noteId), @"status":@"success"} durations:(int)self.note.pokeCount];
+//        [AVAnalytics event:@"poke note" attributes:@{@"note": @(self.note.noteId), @"status":@"success"} durations:(int)self.note.pokeCount];
         [MobClick event:@"poke note" attributes:@{@"note": @(self.note.noteId), @"status":@"success"} counter:(int)self.note.pokeCount];
     } failure:^(NSInteger stateCode) {
-        [AVAnalytics event:@"poke note" attributes:@{@"note":@(self.note.noteId), @"status":@"failure"}];
+//        [AVAnalytics event:@"poke note" attributes:@{@"note":@(self.note.noteId), @"status":@"failure"}];
         [MobClick event:@"poke note" attributes:@{@"note":@(self.note.noteId), @"status":@"failure"}];
     }];
 }

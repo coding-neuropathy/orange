@@ -150,14 +150,14 @@ static CGFloat NormalKeyboardHeight = 216.0f;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [AVAnalytics beginLogPageView:@"PostNoteView"];
+//    [AVAnalytics beginLogPageView:@"PostNoteView"];
     [MobClick beginLogPageView:@"PostNoteView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [AVAnalytics endLogPageView:@"PostNoteView"];
+//    [AVAnalytics endLogPageView:@"PostNoteView"];
     [MobClick endLogPageView:@"PostNoteView"];
 }
 
@@ -207,12 +207,12 @@ static CGFloat NormalKeyboardHeight = 216.0f;
              *
              *  稳定实时的数据统计分析服务，从用户量，用户行为，渠道效果，自定义事件等多个维度，帮助您更清楚的了解用户习惯，提高用户黏性和活跃度
              */               //event:自定义的事件Id   label:分类标签。不同的标签会分别进行统计，方便同一事件的不同标签的对比,为nil或空字符串时后台会生成和eventId同名的标签.
-            [AVAnalytics event:@"update note" label:@"success"];
+//            [AVAnalytics event:@"update note" label:@"success"];
             [MobClick event:@"update note" label:@"success"];
         } failure:^(NSInteger stateCode) {
 //            [SVProgressHUD showImage:nil status:@"修改失败"];
             [SVProgressHUD showErrorWithStatus:@"修改失败"];
-            [AVAnalytics event:@"update note" label:@"failure"];
+//            [AVAnalytics event:@"update note" label:@"failure"];
             [MobClick event:@"update note" label:@"failure"];
         }];
     } else {
@@ -226,12 +226,12 @@ static CGFloat NormalKeyboardHeight = 216.0f;
                 self.successBlock(note);
             }
             
-            [AVAnalytics event:@"post note" label:@"success"];
-            [AVAnalytics event:@"post note" label:@"success"];
+//            [AVAnalytics event:@"post note" label:@"success"];
+            [MobClick event:@"post note" label:@"success"];
         } failure:^(NSInteger stateCode) {
 //            [SVProgressHUD showImage:nil status:@"发布失败"];
             [SVProgressHUD showErrorWithStatus:@"发布失败"];
-            [AVAnalytics event:@"post note" label:@"failure"];
+//            [AVAnalytics event:@"post note" label:@"failure"];
             [MobClick event:@"post note" label:@"failure"];
         }];
     }

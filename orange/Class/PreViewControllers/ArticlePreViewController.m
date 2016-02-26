@@ -171,28 +171,28 @@
 #pragma mark - share to sns
 -(void)weiboShare
 {
-    if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
-    {
-        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-            [AVOSCloudSNS shareText:self.article.title andLink:[self.webView.URL absoluteString] andImage:self.image toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-
-            } andProgress:^(float percent) {
-                if (percent == 1) {
-                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-                }
-            }];
-        }];
-    }
-    else
-    {
-        [AVOSCloudSNS shareText:self.article.title andLink:[self.webView.URL absoluteString] andImage:self.image toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-
-        } andProgress:^(float percent) {
-            if (percent == 1) {
-                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-            }
-        }];
-    }
+//    if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
+//    {
+//        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+//            [AVOSCloudSNS shareText:self.article.title andLink:[self.webView.URL absoluteString] andImage:self.image toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+//
+//            } andProgress:^(float percent) {
+//                if (percent == 1) {
+//                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+//                }
+//            }];
+//        }];
+//    }
+//    else
+//    {
+//        [AVOSCloudSNS shareText:self.article.title andLink:[self.webView.URL absoluteString] andImage:self.image toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+//
+//        } andProgress:^(float percent) {
+//            if (percent == 1) {
+//                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
+//            }
+//        }];
+//    }
 }
 
 -(void)wxShare:(int)scene

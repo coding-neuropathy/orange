@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "API.h"
 #import "WXApi.h"
+#import "WeiboUser.h"
 
 @interface LoginViewController ()<UITextFieldDelegate, UIAlertViewDelegate>
 
@@ -53,7 +54,7 @@
     
     _loginService = [[TaeSDK sharedInstance]getService:@protocol(ALBBLoginService)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWeChatCode:) name:@"WechatAuthResp" object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWBCode:) name:@"WBAuthResp" object:nil];
     
     [self.view addSubview:self.close];
     [self.view addSubview:self.registerButton];
@@ -318,8 +319,6 @@
         _taobaoButton.deFrameSize = CGSizeMake(44., 44.);
         _taobaoButton.backgroundColor = UIColorFromRGB(0xf4f4f4);
         _taobaoButton.layer.cornerRadius = 22;
-        //        self.taobaoButton.deFrameTop = self.passwordTextField.deFrameBottom+28;
-        //        self.taobaoButton.deFrameLeft = self.sinaWeiboButton.deFrameRight + 15.f;
         [_taobaoButton addTarget:self action:@selector(tapTaobaoButton) forControlEvents:UIControlEventTouchUpInside];
         [_taobaoButton setImage:[UIImage imageNamed:@"login_icon_taobao.png"] forState:UIControlStateNormal];
     }
@@ -343,7 +342,7 @@
 
 - (void)configSNS
 {
-    if([WXApi isWXAppInstalled] && [AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo]){
+    if ([WXApi isWXAppInstalled]) {
         [self.view addSubview:self.taobaoButton];
         self.taobaoButton.center = self.loginButton.center;
         self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
@@ -355,7 +354,7 @@
         self.weixinBtn.center = self.taobaoButton.center;
         self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 20.;
         [self.view addSubview:self.weixinBtn];
-    } else if ([AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo] && ![WXApi isWXAppInstalled]) {
+    } else {
         [self.view addSubview:self.taobaoButton];
         self.taobaoButton.center = self.loginButton.center;
         self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
@@ -364,29 +363,42 @@
         [self.view addSubview:self.sinaWeiboButton];
         self.sinaWeiboButton.center = self.taobaoButton.center;
         self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 40.;
-    } else if ([WXApi isWXAppInstalled] && ![AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo]) {
-        [self.view addSubview:self.taobaoButton];
-        self.taobaoButton.center = self.loginButton.center;
-        self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
-        
+    }
+//    if([WXApi isWXAppInstalled] && [AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo]){
+//        [self.view addSubview:self.taobaoButton];
+//        self.taobaoButton.center = self.loginButton.center;
+//        self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
+//        
 //        [self.view addSubview:self.sinaWeiboButton];
 //        self.sinaWeiboButton.center = self.taobaoButton.center;
 //        self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 20.;
-        
-        self.weixinBtn.center = self.taobaoButton.center;
-        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 40.;
-        [self.view addSubview:self.weixinBtn];
-        
-    } else {
-        [self.view addSubview:self.taobaoButton];
-        self.taobaoButton.center = self.loginButton.center;
-        self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
+//        
+//        self.weixinBtn.center = self.taobaoButton.center;
+//        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 20.;
+//        [self.view addSubview:self.weixinBtn];
+//    } else if ([AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo] && ![WXApi isWXAppInstalled]) {
+//        [self.view addSubview:self.taobaoButton];
+//        self.taobaoButton.center = self.loginButton.center;
+//        self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
 //        self.taobaoButton.deFrameLeft = self.taobaoButton.deFrameLeft + 40.;
-        
+//        
 //        [self.view addSubview:self.sinaWeiboButton];
 //        self.sinaWeiboButton.center = self.taobaoButton.center;
 //        self.sinaWeiboButton.deFrameRight = self.taobaoButton.deFrameLeft - 40.;
-    }
+//    } else if ([WXApi isWXAppInstalled] && ![AVOSCloudSNS isAppInstalledForType:AVOSCloudSNSSinaWeibo]) {
+//        [self.view addSubview:self.taobaoButton];
+//        self.taobaoButton.center = self.loginButton.center;
+//        self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
+//        
+//        self.weixinBtn.center = self.taobaoButton.center;
+//        self.weixinBtn.deFrameLeft = self.taobaoButton.deFrameRight + 40.;
+//        [self.view addSubview:self.weixinBtn];
+//        
+//    } else {
+//        [self.view addSubview:self.taobaoButton];
+//        self.taobaoButton.center = self.loginButton.center;
+//        self.taobaoButton.deFrameTop = self.loginButton.deFrameBottom + 40.;
+//    }
 }
 
 
@@ -448,7 +460,7 @@
         }
         
         // analytics
-        [AVAnalytics event:@"sign in" label:@"success"];
+//        [AVAnalytics event:@"sign in" label:@"success"];
         [MobClick event:@"sign in" label:@"success"];
         
 //        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
@@ -456,7 +468,7 @@
         [self dismiss];
         
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
-        [AVAnalytics event:@"sign in" label:@"failure"];
+//        [AVAnalytics event:@"sign in" label:@"failure"];
         [MobClick event:@"sign in" label:@"failure"];
         
         switch (stateCode) {
@@ -488,49 +500,56 @@
 #pragma mark - three part
 - (void)tapSinaWeiboButton
 {
-    //    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    
+    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
+    request.redirectURI = kGK_WeiboRedirectURL;
+    request.scope = @"all";
+    request.userInfo = @{@"SSO_From": @"LoginViewController",
+                         @"Other_Info_1": [NSNumber numberWithInt:123],
+                         @"Other_Info_2": @[@"obj1", @"obj2"],
+                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+    [WeiboSDK sendRequest:request];
+//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
 //    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
-    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
-    [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
-        if (!error) {
-            [API loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] ScreenName:object[@"username"] success:^(GKUser *user, NSString *session) {
-                if (self.successBlock) {
-                    self.successBlock();
-                }
-                [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
-                [self dismiss];
-            } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
-                switch (stateCode) {
-                    case 500:
-                    {
-                        [SVProgressHUD showImage:nil status:@"服务器出错!"];
-                        break;
-                    }
-                    case 409:
-                    {
-                        [Passport sharedInstance].sinaAvatarURL = [object objectForKey:@"avatar"];
-                        [Passport sharedInstance].screenName = [object objectForKey:@"username"];
-                        [Passport sharedInstance].sinaUserID = [object objectForKey:@"id"];
-                        [Passport sharedInstance].sinaToken = [object objectForKey:@"access_token"];
-                        [self tapRegisterButton];
-                        [SVProgressHUD showImage:nil status:@"补全信息"];
-                        break;
-                    }
-                        
-                    default:
-                        
-                        
-                        [SVProgressHUD dismiss];
-                        break;
-                }
-            }];
-        }
-        else
-        {
-            [SVProgressHUD showImage:nil status:@"登录失败"];
-        }
-    } toPlatform:AVOSCloudSNSSinaWeibo];
+//    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
+//    [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
+//        if (!error) {
+//            [API loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] ScreenName:object[@"username"] success:^(GKUser *user, NSString *session) {
+//                if (self.successBlock) {
+//                    self.successBlock();
+//                }
+//                [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
+//                [self dismiss];
+//            } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+//                switch (stateCode) {
+//                    case 500:
+//                    {
+//                        [SVProgressHUD showImage:nil status:@"服务器出错!"];
+//                        break;
+//                    }
+//                    case 409:
+//                    {
+//                        [Passport sharedInstance].sinaAvatarURL = [object objectForKey:@"avatar"];
+//                        [Passport sharedInstance].screenName = [object objectForKey:@"username"];
+//                        [Passport sharedInstance].sinaUserID = [object objectForKey:@"id"];
+//                        [Passport sharedInstance].sinaToken = [object objectForKey:@"access_token"];
+//                        [self tapRegisterButton];
+//                        [SVProgressHUD showImage:nil status:@"补全信息"];
+//                        break;
+//                    }
+//                        
+//                    default:
+//                        
+//                        
+//                        [SVProgressHUD dismiss];
+//                        break;
+//                }
+//            }];
+//        }
+//        else
+//        {
+//            [SVProgressHUD showImage:nil status:@"登录失败"];
+//        }
+//    } toPlatform:AVOSCloudSNSSinaWeibo];
     
 //    [self dismiss];
 }
@@ -654,7 +673,7 @@
     
     NSDictionary * userInfo = [API getWeChatUserInfoWithAccessToken:[json valueForKey:@"access_token"] OpenID:[json valueForKey:@"openid"]];
     
-    DDLogInfo(@"user info %@", userInfo);
+//    DDLogInfo(@"user info %@", userInfo);
     
     [API loginWithWeChatWithUnionid:[userInfo valueForKey:@"unionid"] Nickname:[userInfo valueForKey:@"nickname"] HeaderImgURL:[userInfo valueForKey:@"headimgurl"] success:^(GKUser *user, NSString *session) {
         if (self.successBlock) {
@@ -666,6 +685,28 @@
         [SVProgressHUD showErrorWithStatus:message];
     }];
     
+}
+
+- (void)postWBCode:(NSNotification *)notification
+{
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD show];
+//    DDLogError(@"user info %@", [notification valueForKey:@"object"]);
+    NSDictionary * WBUserInfo = [notification valueForKey:@"object"];
+    NSString * access_token = [WBUserInfo valueForKey:@"access_token"];
+    
+    [WBHttpRequest requestForUserProfile:[WBUserInfo valueForKey:@"uid"] withAccessToken:access_token andOtherProperties:nil queue:nil withCompletionHandler:^(WBHttpRequest *httpRequest, id result, NSError *error) {
+
+        if (!error) {
+            WeiboUser * wb_user = (WeiboUser *)result;
+            [API loginWithSinaUserId:wb_user.userID sinaToken:access_token ScreenName:wb_user.screenName success:^(GKUser *user, NSString *session) {
+                [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"登录成功"]];
+                [self dismiss];
+            } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+                [SVProgressHUD showErrorWithStatus:message];
+            }];
+        }
+    }];
 }
 
 @end
