@@ -397,7 +397,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-            size = CGSizeMake(kScreenWidth, 260.);
+            size = CGSizeMake(kScreenWidth, 300);
             break;
             
         case 1:

@@ -70,13 +70,6 @@
         _titleLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:14.];
         _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        
-        CGSize size = [_titleLabel sizeThatFits:CGSizeMake(_titleLabel.frame.size.width, MAXFLOAT)];
-        
-        self.titleLabel.frame = CGRectMake(0., 0., (SCREEN_WIDTH - 48)/2 - 8., size.height);
-        self.titleLabel.deFrameTop = self.placeholderView.deFrameTop;
-        self.titleLabel.deFrameLeft = self.placeholderView.deFrameLeft;
-        
         _titleLabel.textColor = UIColorFromRGB(0x414243);
         _titleLabel.numberOfLines = 2;
         _titleLabel.textAlignment = NSTextAlignmentLeft;

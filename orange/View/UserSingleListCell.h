@@ -16,6 +16,8 @@
 @property (nonatomic, strong) RTLabel *contentLabel;
 @property (nonatomic, strong) UIButton *followButton;
 @property (nonatomic, strong) UIView *H;
+/** 认证用户标记 */
+@property (nonatomic, strong) UIImageView * staffImageView;
 
 + (CGFloat)height;
 @end

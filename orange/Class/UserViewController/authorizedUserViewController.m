@@ -26,6 +26,8 @@
 
 @property (nonatomic , assign)NSInteger page;
 
+@property (nonatomic , assign)NSInteger height;
+
 @end
 
 @implementation authorizedUserViewController
@@ -179,7 +181,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         self.headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer forIndexPath:indexPath];
         self.headerView.user = self.user;
         self.headerView.delegate = self;
-        
         return self.headerView;
 }
 
@@ -199,7 +200,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenWidth, 260.);
+    return CGSizeMake(kScreenWidth, 300);
 }
 
 #pragma mark - <UICollectionViewDelegate>
@@ -276,6 +277,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [altervc addAction:confirm];
     [self presentViewController:altervc animated:YES completion:nil];
 }
+
 
 #pragma mark - UserModel KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

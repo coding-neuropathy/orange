@@ -73,6 +73,13 @@
         [self removeObserver];
     }
     _user = user;
+    if (_user.authorized_author == YES) {
+        self.staffImageView.image = [UIImage imageNamed:@"official"];
+    }
+    else
+    {
+        self.staffImageView.image = [UIImage imageNamed:@""];
+    }
     [self addObserver];
     
     if (_user.user_state == GKUserBlockState) {
@@ -112,17 +119,23 @@
     [self.avatar addGestureRecognizer:tap];
     
     
-    self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
-        
+//    self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
+    
     if(!self.label) {
-        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 19, kScreenWidth - 70, 20)];
+        
+        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 19, 100, 20)];
         self.label.paragraphReplacement = @"";
-        self.label.lineSpacing = 4.0;
+        self.label.lineSpacing = 1;
         self.label.delegate = self;
         [self.contentView addSubview:self.label];
     }
     self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^414243' size=14>%@ </font></a>", (unsigned long)self.user.userId, self.user.nickname];
-    
+    if (!_staffImageView) {
+        _staffImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0., 0., 15., 15.)];
+        [self.contentView addSubview:_staffImageView];
+    }
+    self.staffImageView.deFrameTop = self.label.deFrameTop;
+    self.staffImageView.deFrameLeft = self.label.deFrameRight;
     if(!self.contentLabel) {
         _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 27, kScreenWidth - 70, 20)];
         self.contentLabel.paragraphReplacement = @"";

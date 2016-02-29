@@ -20,6 +20,7 @@
 - (void)TapFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view;
 - (void)TapUnFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view;
 
+
 @end
 
 @interface UserHeaderView : UICollectionReusableView
