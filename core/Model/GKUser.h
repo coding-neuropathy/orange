@@ -172,6 +172,7 @@ typedef NS_ENUM(NSInteger, GKUserState) {
 /**
  *  共同关注
  */
+
 @property (nonatomic, strong) NSArray *sameFollowArray;
 
 /**
