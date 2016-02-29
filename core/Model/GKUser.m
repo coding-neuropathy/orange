@@ -26,6 +26,7 @@
                              @"bio"              : @"bio",
                              @"following_count"  : @"followingCount",
                              @"fan_count"        : @"fanCount",
+                             @"article_count"    : @"articleCount",
                              @"money_i_need"     : @"totalMoney",
                              @"like_count"       : @"likeCount",
                              @"entity_note_count": @"noteCount",
