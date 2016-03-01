@@ -11,7 +11,7 @@
 #import "UserSingleListCell.h"
 #import "NoDataView.h"
 
-static NSString * CellIdentifier = @"UserSingleListCell";
+
 
 @interface RecUserController ()<UITableViewDelegate , UITableViewDataSource>
 
@@ -26,6 +26,8 @@ static NSString * CellIdentifier = @"UserSingleListCell";
 @end
 
 @implementation RecUserController
+
+static NSString * CellIdentifier = @"UserSingleListCell";
 
 - (NoDataView *)noDataView
 {
@@ -50,6 +52,7 @@ static NSString * CellIdentifier = @"UserSingleListCell";
     return _tableView;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
@@ -58,47 +61,32 @@ static NSString * CellIdentifier = @"UserSingleListCell";
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.tableView registerClass:[UserSingleListCell class] forCellReuseIdentifier:CellIdentifier];
-    
+
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
     
-    
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
     
-    
-    [self.tableView.pullToRefreshView startAnimating];
     [self refresh];
+    if (self.dataArrayForUser == 0) {
+        [self.tableView triggerPullToRefresh];
+    }
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Data
 - (void)refresh
 {
     self.page = 1;
-//    [API getUserFollowingListWithUserId:self.user.userId offset:0 count:30 success:^(NSArray *userArray) {
-//        self.dataArrayForUser = [NSMutableArray arrayWithArray:userArray];
-//        if (self.dataArrayForUser.count == 0) {
-//            self.tableView.tableFooterView = self.noDataView;
-//            self.noDataView.text = @"没有关注任何人";
-//        } else {
-//            self.tableView.tableFooterView = nil;
-//        }
-//        [self.tableView reloadData];
-//        [self.tableView.pullToRefreshView stopAnimating];
-//    } failure:^(NSInteger stateCode) {
-//        
-//        [SVProgressHUD dismiss];
-//        [self.tableView.pullToRefreshView stopAnimating];
-//    }];
+    
     [API getAuthorizedUserWithPage:self.page Size:30 success:^(NSArray *users, NSInteger page) {
         self.dataArrayForUser = [NSMutableArray arrayWithArray:users];
         self.page += 1;
@@ -120,10 +108,10 @@ static NSString * CellIdentifier = @"UserSingleListCell";
 }
 - (void)loadMore
 {
-
+    
     [API getAuthorizedUserWithPage:self.page Size:30 success:^(NSArray *users, NSInteger page) {
         [self.dataArrayForUser addObjectsFromArray:users];
-        
+        self.page += 1;
         [self.tableView reloadData];
         [self.tableView.infiniteScrollingView stopAnimating];
     } failure:^(NSInteger stateCode) {
@@ -131,6 +119,16 @@ static NSString * CellIdentifier = @"UserSingleListCell";
         [self.tableView.infiniteScrollingView stopAnimating];
     }];
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+
+
 
 #pragma mark - UITableViewDataSource
 

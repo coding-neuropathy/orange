@@ -73,13 +73,7 @@
         [self removeObserver];
     }
     _user = user;
-    if (_user.authorized_author == YES) {
-        self.staffImageView.image = [UIImage imageNamed:@"official"];
-    }
-    else
-    {
-        self.staffImageView.image = [UIImage imageNamed:@""];
-    }
+    
     [self addObserver];
     
     if (_user.user_state == GKUserBlockState) {
@@ -89,6 +83,17 @@
         self.followButton.hidden = NO;
         self.blockBtn.hidden = YES;
     }
+    
+    if (_user.authorized_author == YES) {
+        self.label.text = [NSString stringWithFormat:@"%@",_user.nickname];
+        self.staffImageView.image = [UIImage imageNamed:@"official"];
+    }
+    else
+    {
+        self.label.text = [NSString stringWithFormat:@"%@",_user.nickname];
+        self.staffImageView.image = [UIImage imageNamed:@""];
+    }
+    
     
     [self setNeedsLayout];
 }
@@ -123,10 +128,13 @@
     
     if(!self.label) {
         
-        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 19, 100, 20)];
-        self.label.paragraphReplacement = @"";
+        _label = [[RTLabel alloc] initWithFrame:CGRectZero];
+        self.label.font = [UIFont boldSystemFontOfSize:14.];
+        self.label.lineBreakMode = NSLineBreakByWordWrapping;
+//        self.label.paragraphReplacement = @"";
         self.label.lineSpacing = 1;
         self.label.delegate = self;
+        self.label.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.label];
     }
     self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^414243' size=14>%@ </font></a>", (unsigned long)self.user.userId, self.user.nickname];
@@ -134,8 +142,13 @@
         _staffImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0., 0., 15., 15.)];
         [self.contentView addSubview:_staffImageView];
     }
-    self.staffImageView.deFrameTop = self.label.deFrameTop;
-    self.staffImageView.deFrameLeft = self.label.deFrameRight;
+    self.label.frame = CGRectMake(0., 0., kScreenWidth - 70, 20);
+    self.label.deFrameTop = 19.;
+    self.label.deFrameLeft = 60.;
+    
+    
+    self.staffImageView.deFrameTop = self.avatar.deFrameBottom - 10.;
+    self.staffImageView.deFrameLeft = self.avatar.deFrameRight - 10.;
     if(!self.contentLabel) {
         _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 27, kScreenWidth - 70, 20)];
         self.contentLabel.paragraphReplacement = @"";
