@@ -118,6 +118,7 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
         cell = [[ArticleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.article = [self.dataSource objectAtIndex:indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

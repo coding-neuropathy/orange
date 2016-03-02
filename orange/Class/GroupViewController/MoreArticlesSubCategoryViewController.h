@@ -6,9 +6,11 @@
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
 
-@interface MoreArticlesSubCategoryViewController : UIViewController
+#import "BaseViewController.h"
+
+@interface MoreArticlesSubCategoryViewController : BaseViewController
 
 @property (assign, nonatomic) NSInteger cid;
 

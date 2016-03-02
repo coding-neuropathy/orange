@@ -142,8 +142,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         [weakSelf loadMore];
     }];
     
-    [self.collectionView addSloganView];
-    
 
     if (self.articledataArray == 0) {
         [self.collectionView triggerPullToRefresh];

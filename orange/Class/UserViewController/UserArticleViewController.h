@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface UserArticleViewController : UIViewController
+
+@interface UserArticleViewController : BaseViewController
 
 @property (nonatomic , assign)NSInteger Uid;
 
