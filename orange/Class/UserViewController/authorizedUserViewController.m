@@ -41,9 +41,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     if (self) {
         self.user = user;
         if (self.user.userId == [Passport sharedInstance].user.userId) {
-            UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_me"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_me"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-            item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-            self.tabBarItem = item;
+//            UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_me"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_me"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+//            item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+//            self.tabBarItem = item;
             
             
             [self.user addObserver:self forKeyPath:@"avatarURL" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
@@ -144,9 +144,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     
     [self.collectionView addSloganView];
     
-//    if (self.user) {
-//        [self.collectionView triggerPullToRefresh];
-//    }
+
     if (self.articledataArray == 0) {
         [self.collectionView triggerPullToRefresh];
     }
@@ -207,7 +205,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     GKArticle * article = [self.articledataArray objectAtIndex:indexPath.row];
-    NSLog(@"%@",article.articleURL);
+    
     [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
 }
 

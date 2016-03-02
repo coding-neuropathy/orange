@@ -18,6 +18,7 @@
 #import "EditViewController.h"
 #import "FriendViewController.h"
 #import "FanViewController.h"
+#import "UserArticleViewController.h"
 
 #import "UserLikeViewController.h"
 #import "UserPostNoteViewController.h"
@@ -605,7 +606,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             break;
         case UserArticleType:
         {
-#warning 8-8-8-8-8-8-8-8--8-8-8-8
+            UserArticleViewController * vc = [[UserArticleViewController alloc]init];
+            vc.Uid = self.user.userId;
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case UserPostType:
