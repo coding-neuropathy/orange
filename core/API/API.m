@@ -1383,7 +1383,7 @@
     NSParameterAssert(noteId > 0);
     NSParameterAssert(commentId >= 0);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/comment/%ld/del/", noteId, commentId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/comment/%ld/del/", (unsigned long)noteId, commentId];
     
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
