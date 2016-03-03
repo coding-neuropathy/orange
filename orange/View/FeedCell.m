@@ -389,10 +389,11 @@ typedef NS_ENUM(NSInteger, FeedType) {
 //    NSDictionary * feed = self.feed;
     //GKNote *note = feed[@"object"][@"note"];
     GKEntity *entity = self.feed[@"object"][@"entity"];
-    EntityViewController * VC = [[EntityViewController alloc]init];
-    VC.hidesBottomBarWhenPushed = YES;
-    VC.entity = entity;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    [[OpenCenter sharedOpenCenter] openEntity:entity];
+//    EntityViewController * VC = [[EntityViewController alloc]init];
+//    VC.hidesBottomBarWhenPushed = YES;
+//    VC.entity = entity;
+//    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     
 //    [AVAnalytics event:@"feed_forward_entity"];
     [MobClick event:@"feed_forward_entity"];
@@ -404,10 +405,11 @@ typedef NS_ENUM(NSInteger, FeedType) {
     if([array[0] isEqualToString:@"user"])
     {
         GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
-        UserViewController * VC = [[UserViewController alloc]init];
-        VC.hidesBottomBarWhenPushed = YES;
-        VC.user = user;
-        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+        [[OpenCenter sharedOpenCenter] openUser:user];
+        //        UserViewController * VC = [[UserViewController alloc]init];
+//        VC.hidesBottomBarWhenPushed = YES;
+//        VC.user = user;
+//        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
     if([array[0] isEqualToString:@"entity"])
     {
