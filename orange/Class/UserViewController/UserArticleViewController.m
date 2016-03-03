@@ -114,7 +114,7 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
-    NSLog(@"%@",article.articleURL);
+//    NSLog(@"%@",article.articleURL);
     [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
 }
 

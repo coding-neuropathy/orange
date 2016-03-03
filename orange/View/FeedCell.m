@@ -404,19 +404,8 @@ typedef NS_ENUM(NSInteger, FeedType) {
     NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
     if([array[0] isEqualToString:@"user"])
     {
-        GKUser * user;
-        if (self.type == FeedUserFollower) {
-            user = self.feed[@"object"][@"target"];
-            DDLogError(@"feed user %d", user.authorized_author);
-        } else {
-            user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
-        }
-        
+        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
         [[OpenCenter sharedOpenCenter] openUser:user];
-        //        UserViewController * VC = [[UserViewController alloc]init];
-//        VC.hidesBottomBarWhenPushed = YES;
-//        VC.user = user;
-//        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
     if([array[0] isEqualToString:@"entity"])
     {

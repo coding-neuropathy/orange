@@ -643,7 +643,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         if ([keyPath isEqualToString:@"nickname"]) {
             DDLogInfo(@"nickname kvo %@", [Passport sharedInstance].user.nickname);
-            //            self.
             self.user = [Passport sharedInstance].user;
             self.navigationItem.title = self.user.nickname;
             self.headerView.user = self.user;
