@@ -61,7 +61,7 @@
     if (!_moreBtn) {
         _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_moreBtn setTitle:[NSString stringWithFormat:@"%@", [NSString fontAwesomeIconStringForEnum:FAAngleRight]] forState:UIControlStateNormal];
-        [_moreBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
         _moreBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
         [_moreBtn addTarget:self action:@selector(tapMorebtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_moreBtn];
