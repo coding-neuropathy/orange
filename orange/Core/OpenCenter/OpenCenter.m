@@ -41,7 +41,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
 - (void)openUser:(GKUser *)user
 {
-    if (user.authorized_author == NO) {
+    if (!user.authorized_author) {
         UserViewController * VC = [[UserViewController alloc]init];
         VC.user = user;
         VC.hidesBottomBarWhenPushed = YES;

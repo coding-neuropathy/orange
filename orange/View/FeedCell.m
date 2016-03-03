@@ -374,11 +374,11 @@ typedef NS_ENUM(NSInteger, FeedType) {
     }
 
     if (user) {
-
-        UserViewController * VC = [[UserViewController alloc]init];
-        VC.hidesBottomBarWhenPushed = YES;
-        VC.user=user;
-        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+        [[OpenCenter sharedOpenCenter] openUser:user];
+//        UserViewController * VC = [[UserViewController alloc]init];
+//        VC.hidesBottomBarWhenPushed = YES;
+//        VC.user=user;
+//        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
 //    [AVAnalytics event:@"feed_forward_user"];
     [MobClick event:@"feed_forward_user"];
@@ -406,10 +406,6 @@ typedef NS_ENUM(NSInteger, FeedType) {
     {
         GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
         [[OpenCenter sharedOpenCenter] openUser:user];
-        //        UserViewController * VC = [[UserViewController alloc]init];
-//        VC.hidesBottomBarWhenPushed = YES;
-//        VC.user = user;
-//        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
     if([array[0] isEqualToString:@"entity"])
     {

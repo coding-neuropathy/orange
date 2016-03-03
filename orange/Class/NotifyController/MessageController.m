@@ -59,7 +59,6 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 {
     [super viewWillAppear:animated];
     self.tableView.scrollsToTop = YES;
-    
 //    [AVAnalytics beginLogPageView:@"MessageView"];
     [MobClick beginLogPageView:@"MessageView"];
 }
