@@ -52,14 +52,16 @@
         [weakSelf refresh];
     }];
     
-    
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
     
-    
-    [self.tableView.pullToRefreshView startAnimating];
     [self refresh];
+    
+    if (self.dataArrayForUser == 0)
+    {
+        [self.tableView.pullToRefreshView startAnimating];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

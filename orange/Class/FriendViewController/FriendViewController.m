@@ -61,9 +61,12 @@ static NSString *CellIdentifier = @"UserSingleListCell";
         [weakSelf loadMore];
     }];
     
-    
-    [self.tableView.pullToRefreshView startAnimating];
     [self refresh];
+    
+    if (self.dataArrayForUser == 0) {
+        [self.tableView triggerPullToRefresh];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

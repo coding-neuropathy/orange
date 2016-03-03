@@ -59,42 +59,31 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 {
     
     
-    if (!user.nickname) {
+    if (!user.nickname)
+    {
         [API getUserDetailWithUserId:user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray *lastArticles) {
-//            vc.user = user;
-            if (user.authorized_author) {
+
+            if (user.authorized_author)
+            {
                 [self openAuthUser:user];
-//                authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
-//                vc.hidesBottomBarWhenPushed = YES;
-//                [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-            } else {
+            }
+            else
+            {
                 [self openNormalUser:user];
-//                UserViewController * VC = [[UserViewController alloc]init];
-//                VC.user = user;
-//                VC.hidesBottomBarWhenPushed = YES;
-//                [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
             }
         } failure:^(NSInteger stateCode) {
             [self openNormalUser:user];
-//            vc.user = user;
-//            UserViewController * VC = [[UserViewController alloc]init];
-//            VC.user = user;
-//            VC.hidesBottomBarWhenPushed = YES;
-//            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
         }];
-    
-    } else {
-        if (!user.authorized_author) {
+    }
+    else
+    {
+        if (!user.authorized_author)
+        {
             [self openNormalUser:user];
-//            UserViewController * VC = [[UserViewController alloc]init];
-//            VC.user = user;
-//            VC.hidesBottomBarWhenPushed = YES;
-//            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-        } else {
+        }
+        else
+        {
             [self openAuthUser:user];
-//            authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
-//            vc.hidesBottomBarWhenPushed = YES;
-//            [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
         }
     }
 }
