@@ -6,9 +6,10 @@
 //  Copyright (c) 2015年 guoku.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface EntityLikerController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface EntityLikerController : BaseViewController <UITableViewDelegate, UITableViewDataSource>
 
 - (instancetype)initWithEntity:(GKEntity *)entity;
 

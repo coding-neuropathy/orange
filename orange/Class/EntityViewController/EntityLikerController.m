@@ -100,7 +100,7 @@ static NSString *CellIdentifier = @"UserCell";
         [weakSelf loadMore];
     }];
     //
-    if (self.dataArray.count <= 0) {
+    if (self.dataArray.count == 0) {
         [self.tableView triggerPullToRefresh];
     }
     
