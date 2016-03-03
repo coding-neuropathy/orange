@@ -39,24 +39,63 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     return self;
 }
 
+
+- (void)openAuthUser:(GKUser *)user
+{
+    authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
+    vc.hidesBottomBarWhenPushed = YES;
+    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)openNormalUser:(GKUser *)user
+{
+    UserViewController * VC = [[UserViewController alloc]init];
+    VC.user = user;
+    VC.hidesBottomBarWhenPushed = YES;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+}
+
 - (void)openUser:(GKUser *)user
 {
-    if (!user.authorized_author) {
-        UserViewController * VC = [[UserViewController alloc]init];
-        VC.user = user;
-        VC.hidesBottomBarWhenPushed = YES;
-        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-    }
-    else
-    {
-        authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
+    
+    
+    if (!user.nickname) {
         [API getUserDetailWithUserId:user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray *lastArticles) {
-            vc.user = user;
+//            vc.user = user;
+            if (user.authorized_author) {
+                [self openAuthUser:user];
+//                authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
+//                vc.hidesBottomBarWhenPushed = YES;
+//                [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+            } else {
+                [self openNormalUser:user];
+//                UserViewController * VC = [[UserViewController alloc]init];
+//                VC.user = user;
+//                VC.hidesBottomBarWhenPushed = YES;
+//                [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+            }
         } failure:^(NSInteger stateCode) {
-            vc.user = user;
+            [self openNormalUser:user];
+//            vc.user = user;
+//            UserViewController * VC = [[UserViewController alloc]init];
+//            VC.user = user;
+//            VC.hidesBottomBarWhenPushed = YES;
+//            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
         }];
-        vc.hidesBottomBarWhenPushed = YES;
-        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    
+    } else {
+        if (!user.authorized_author) {
+            [self openNormalUser:user];
+//            UserViewController * VC = [[UserViewController alloc]init];
+//            VC.user = user;
+//            VC.hidesBottomBarWhenPushed = YES;
+//            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+        } else {
+            [self openAuthUser:user];
+//            authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 
