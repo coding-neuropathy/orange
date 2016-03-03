@@ -422,7 +422,35 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 -(void)weiboShare
 {
-
+    WBMessageObject *message = [WBMessageObject message];
+    //    message.text = self.title;
+    WBImageObject *image = [WBImageObject object];
+    message.text = @"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。 http://www.guoku.com?from=weibo";
+    image.imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"weibo_share.jpg"], 1.0);
+    message.imageObject = image;
+    
+    
+    //    WBWebpageObject *webpage = [WBWebpageObject object];
+    //    webpage.objectID = [self.title md5];
+    //    webpage.title = self.title;
+    ////    webpage.description = [NSString stringWithFormat:NSLocalizedString(@"分享网页内容简介-%.0f", nil), [[NSDate date] timeIntervalSince1970]];
+    ////    webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"image_2" ofType:@"jpg"]];
+    //    webpage.thumbnailData = UIImageJPEGRepresentation(self.image, 0.5);
+    //    webpage.webpageUrl = [self.url stringByAppendingString:@"?from=weibo"];
+    //
+    //    message.mediaObject = webpage;
+    
+    NSString * wbtoken = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
+    
+    WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
+    authRequest.redirectURI = kGK_WeiboRedirectURL;
+    authRequest.scope = @"all";
+    
+    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:wbtoken];
+    request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",};
+    //    request.shouldOpenWeiboAppInstallPageIfNotInstalled = NO;
+    [WeiboSDK sendRequest:request];
+    
 //    [AVOSCloudSNS shareText:@"果库 - 精英消费指南。帮助你发现互联网上最有趣、最人气、最实用的好商品，恪守选品标准和美学格调，开拓精英视野与生活想象。" andLink:@"http://www.guoku.com" andImage:[UIImage imageNamed:@"weibo_share.jpg"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
 //                
 //    } andProgress:^(float percent) {

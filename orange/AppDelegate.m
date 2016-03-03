@@ -43,7 +43,7 @@ int ddLogLevel;
     [WXApi registerApp:kGK_WeixinShareKey withDescription:NSLocalizedStringFromTable(@"guide to better living", kLocalizedFile, nil)];
     
     // weibo sdk
-    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK enableDebugMode:NO];
     [WeiboSDK registerApp:kGK_WeiboAPPKey];
     
     //sdk初始化
