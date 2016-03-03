@@ -50,7 +50,11 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     else
     {
         authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
-        vc.user = user;
+        [API getUserDetailWithUserId:user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray *lastArticles) {
+            vc.user = user;
+        } failure:^(NSInteger stateCode) {
+            vc.user = user;
+        }];
         vc.hidesBottomBarWhenPushed = YES;
         [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
     }
