@@ -675,11 +675,8 @@ static NSString * UserIdentifier = @"UserView";
         return nil;
     }
 
-
-
-    
     switch (indexPath.section) {
-        case 2:
+        case 3:
         {
                 ArticlePreViewController * vc = [[ArticlePreViewController alloc] initWithArticle:[self.articleArray objectAtIndex:indexPath.row]];
                 vc.preferredContentSize = CGSizeMake(0, 0);
@@ -687,7 +684,7 @@ static NSString * UserIdentifier = @"UserView";
                 return vc;
         }
             break;
-        case 3:
+        case 4:
         {
             EntityPreViewController * vc = [[EntityPreViewController alloc] initWithEntity:[self.entityArray objectAtIndex:indexPath.row]];
             vc.preferredContentSize = CGSizeMake(0., 0.);
