@@ -311,9 +311,9 @@ static CGFloat bioLabelHeight;
     self.nicknameLabel.center = self.avatarView.center;
     self.nicknameLabel.deFrameTop = self.avatarView.deFrameBottom + 16.;
     
-    self.staffImage.frame = CGRectMake(0., 0., 18., 18.);
-    self.staffImage.deFrameTop = self.nicknameLabel.deFrameTop + 4;
-    self.staffImage.deFrameLeft = self.nicknameLabel.deFrameRight - 16;
+    self.staffImage.frame = CGRectMake(0., 0., 14., 14.);
+    self.staffImage.deFrameTop = self.nicknameLabel.deFrameTop + 6;
+    self.staffImage.deFrameLeft = self.nicknameLabel.deFrameRight - 18;
     
     CGSize size = [_bioLabel sizeThatFits:CGSizeMake(kScreenWidth * 0.8, MAXFLOAT)];
     self.bioLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.8, size.height);
