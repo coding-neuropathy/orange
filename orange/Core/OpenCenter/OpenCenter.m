@@ -57,14 +57,8 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
 - (void)openUser:(GKUser *)user
 {
-<<<<<<< HEAD
-    if (!user.nickname) {
-=======
-    
-    
     if (!user.nickname)
     {
->>>>>>> b64095999429f96d8f7daf0651df42cf2bf4bcc4
         [API getUserDetailWithUserId:user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray *lastArticles) {
 
             if (user.authorized_author)
