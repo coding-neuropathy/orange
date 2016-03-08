@@ -35,8 +35,8 @@
 - (LaunchView *)launchView
 {
     if (!_launchView) {
-        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 290.) / 2, -425., 290., 425.)];
-//        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 300.) / 2, -425., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3)];
+//        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 290.) / 2, -425., 290., 425.)];
+        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 300.) / 2, -425., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3)];
         _launchView.backgroundColor = UIColorFromRGB(0xffffff);
         _launchView.layer.cornerRadius = 4.;
         _launchView.delegate = self;

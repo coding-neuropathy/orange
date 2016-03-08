@@ -26,6 +26,9 @@
         _launchImage = [[UIImageView alloc] initWithFrame:CGRectZero];
         _launchImage.contentMode = UIViewContentModeScaleAspectFill;
         _launchImage.layer.masksToBounds = YES;
+        _launchImage.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TapActionBtn:)];
+        [self.launchImage addGestureRecognizer:tap];
 //        _launchImage.backgroundColor = UIColorFromRGB(0xf1f1f1);
 //        _launchImage.layer.cornerRadius = 4.;
         [self addSubview:_launchImage];
@@ -59,18 +62,18 @@
     return _detailLabel;
 }
 
-- (UIButton *)actionBtn
-{
-    if (!_actionBtn) {
-        _actionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_actionBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
-        _actionBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
-
-        [_actionBtn addTarget:self action:@selector(TapActionBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_actionBtn];
-    }
-    return _actionBtn;
-}
+//- (UIButton *)actionBtn
+//{
+//    if (!_actionBtn) {
+//        _actionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_actionBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
+//        _actionBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+//
+//        [_actionBtn addTarget:self action:@selector(TapActionBtn:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:_actionBtn];
+//    }
+//    return _actionBtn;
+//}
 
 - (void)setLaunch:(GKLaunch *)launch
 {
@@ -105,11 +108,12 @@
     
 
     
-    self.actionBtn.frame = CGRectMake(0., 0., self.deFrameWidth, 50.);
-    self.actionBtn.deFrameTop = self.deFrameHeight - 50.;
+//    self.actionBtn.frame = CGRectMake(0., 0., self.deFrameWidth, 50.);
+//    self.actionBtn.deFrameTop = self.deFrameHeight - 50.;
     
-    self.launchImage.frame = CGRectMake(0., 0., self.deFrameWidth, 240.);
-    self.launchImage.deFrameBottom = self.actionBtn.deFrameTop;
+    self.launchImage.frame = CGRectMake(0., 0., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3);
+//    self.launchImage.deFrameBottom = self.actionBtn.deFrameTop;
+    
 }
 
 #pragma mark - button action 
