@@ -104,7 +104,6 @@ int ddLogLevel;
             return ;
         }
         
-        
         LaunchController * vc = [[LaunchController alloc] initWithLaunch:launch];
     
         [self.window.rootViewController addChildViewController:vc];
