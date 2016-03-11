@@ -15,6 +15,7 @@
 #import "EntityViewController.h"
 //#import "WebViewProgress.h"
 #import "ShareView.h"
+#import "LoginView.h"
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate>
 
@@ -98,17 +99,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSMutableArray * BtnArray = [NSMutableArray array];
+    
     //更多按钮
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-//    button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
     [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-//    [button setTitle:[NSString fontAwesomeIconStringForEnum:FAEllipsisH] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor clearColor];
     UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = moreBarItem;
+//    self.navigationItem.rightBarButtonItem = moreBarItem;
+    [BtnArray addObject:moreBarItem];
+    
+    //点赞按钮
+    UIButton * likeBtn = [[UIButton alloc]initWithFrame:CGRectMake(0., 0., 32, 44)];
+    [likeBtn setImage:[UIImage imageNamed:@"thumb"] forState:UIControlStateNormal];
+    [likeBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateSelected];
+    [likeBtn addTarget:self action:@selector(likeBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 0.)];
+    likeBtn.backgroundColor = [UIColor clearColor];
+    UIBarButtonItem * likeBarItem = [[UIBarButtonItem alloc]initWithCustomView:likeBtn];
+    [BtnArray addObject:likeBarItem];
+    [self.navigationItem setRightBarButtonItems:BtnArray animated:YES];
+    
     
     //返回按钮
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -281,7 +294,22 @@
      */
 }
 
-#pragma mark - button action 
+#pragma mark - button action
+- (void)likeBtnAction
+{
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
+    else
+    {
+        
+    }
+}
+
+#pragma mark - button action
 - (void)backAction:(id)sender
 {
     if([self.webView canGoBack]) {
