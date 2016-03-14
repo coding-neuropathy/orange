@@ -1573,6 +1573,20 @@
                                            @"time"   :  @(timestamp)};
                 [dataArray addObject:dataDict];
             }
+            
+            if ([type isEqualToString:@"article_dig"]) {
+                GKUser * user = [GKUser modelFromDictionary:objectDict[@"digger"]];
+                GKArticle * article = [GKArticle modelFromDictionary:objectDict[@"article"]];
+                NSDictionary * dataDict = @{
+                                            @"object" : @{
+                                                        @"article"  : article,
+                                                        @"user"     : user,
+                                                    },
+                                            @"type" :   type,
+                                            @"time" :   @(timestamp)
+                                            };
+                [dataArray addObject:dataDict];
+            }
         }
         
         if (success) {
