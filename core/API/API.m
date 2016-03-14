@@ -470,6 +470,39 @@
     }];
 }
 
+/**
+ *  图文点赞
+ *  @param  article_id  图文 ID
+ *  @param  isDig       图文状态
+ *  @param  success     成功block
+ *  @param  failure     失败block
+ */
++ (void)digArticleWithArticleId:(NSInteger)article_id isDig:(BOOL)isdig
+                        success:(void (^)(NSArray *dataArray))success
+                        failure:(void (^)(NSInteger stateCode))failure
+{
+    NSString * path;
+    if (isdig) {
+        path = @"articles/undig/";
+    } else {
+        path = @"articles/dig/";
+    }
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(article_id) forKey:@"aid"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POSt" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSInteger statusCode = operation.response.statusCode;
+        if (failure) {
+            failure(statusCode);
+        }
+    }];
+    
+}
+
 #pragma mark - get main list
 /**
  *  获取首页信息

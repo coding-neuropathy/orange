@@ -164,6 +164,16 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                        success:(void (^)(NSArray *dataArray))success
                        failure:(void (^)(NSInteger stateCode))failure;
 
+/**
+ *  图文点赞
+ *  @param  article_id  图文 ID
+ *  @param  isDig       图文状态
+ *  @param  success     成功block
+ *  @param  failure     失败block
+ */
++ (void)digArticleWithArticleId:(NSInteger)article_id isDig:(BOOL)isdig
+                        success:(void (^)(NSArray *dataArray))success
+                        failure:(void (^)(NSInteger stateCode))failure;
 
 #pragma mark - get main list
 /**
