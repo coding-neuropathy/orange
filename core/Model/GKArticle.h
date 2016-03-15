@@ -50,4 +50,9 @@
  */
 @property (assign, nonatomic) NSTimeInterval pub_time;
 
+/**
+ *  文章点赞数
+ */
+@property (assign, nonatomic) NSInteger dig_count;
+
 @end
