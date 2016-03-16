@@ -33,6 +33,8 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
                             @"url"          :   @"url_string",
                             @"creator"      :   @"creator",
                             @"pub_time"     :   @"pub_time",
+                            @"dig_count"    :   @"dig_count",
+                            @"is_dig"       :   @"IsDig",
                     };
     
     return keyDic;

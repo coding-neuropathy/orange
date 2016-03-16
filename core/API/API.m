@@ -478,7 +478,7 @@
  *  @param  failure     失败block
  */
 + (void)digArticleWithArticleId:(NSInteger)article_id isDig:(BOOL)isdig
-                        success:(void (^)(NSArray *dataArray))success
+                        success:(void (^)(BOOL IsDig))success
                         failure:(void (^)(NSInteger stateCode))failure
 {
     NSString * path;
