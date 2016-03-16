@@ -1,12 +1,12 @@
 //
-//  WebViewController.m
+//  ArticleWebViewController.m
 //  orange
 //
-//  Created by 谢家欣 on 15/5/17.
-//  Copyright (c) 2015年 guoku.com. All rights reserved.
+//  Created by D_Collin on 16/3/15.
+//  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import "WebViewController.h"
+#import "ArticleWebViewController.h"
 #import "WXApi.h"
 
 #import <WebKit/WebKit.h>
@@ -17,29 +17,33 @@
 #import "ShareView.h"
 #import "LoginView.h"
 
-@interface WebViewController () <WKNavigationDelegate, WKUIDelegate>
+@interface ArticleWebViewController ()<WKNavigationDelegate , WKUIDelegate>
 
-@property (strong, nonatomic) NSURL * url;
-@property (strong, nonatomic) WKWebView * webView;
+@property (nonatomic , strong)NSURL * url;
+@property (nonatomic , strong)WKWebView * webView;
+@property (nonatomic , strong)WebViewProgressView * progressView;
+@property (nonatomic , strong)UIImage * image;
+@property (nonatomic , strong)UIButton * likeBtn;
+@property (nonatomic , strong)UIButton * moreBtn;
 
-//@property (strong, nonatomic) WebViewProgress * progressProxy;
-@property (strong, nonatomic) WebViewProgressView * progressView;
-@property (strong, nonatomic) UIImage * image;
-//@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 @end
 
-@implementation WebViewController
+@implementation ArticleWebViewController
 
 - (instancetype)initWithURL:(NSURL *)url
 {
     if (self) {
         self.url = url;
-//        self.progressProxy = [[WebViewProgress alloc] init];
-//        self.progressProxy.webViewProxyDelegate = self;
-//        self.progressProxy.progressDelegate = self;
     }
     return self;
+}
+
+- (void)setArticle:(GKArticle *)article
+{
+    
+    _article = article;
+    
 }
 
 - (WKWebView *)webView
@@ -70,17 +74,6 @@
     }
     return _webView;
 }
-//
-//- (UIActivityIndicatorView *)activityIndicator
-//{
-//    if (!_activityIndicator) {
-//        _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-//        _activityIndicator.color = [UIColor grayColor];
-//        _activityIndicator.center = CGPointMake(kScreenWidth / 2., kScreenHeight / 2. - 100.);
-//        
-//    }
-//    return _activityIndicator;
-//}
 
 - (void)dealloc
 {
@@ -91,7 +84,7 @@
 {
     self.view = self.webView;
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
-//    [self.view addSubview:self.activityIndicator];
+    
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
@@ -102,23 +95,23 @@
     NSMutableArray * BtnArray = [NSMutableArray array];
     
     //更多按钮
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-    [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-    button.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [button addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor clearColor];
-    UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:button];
-//    self.navigationItem.rightBarButtonItem = moreBarItem;
+    _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+    [_moreBtn setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+    _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    _moreBtn.backgroundColor = [UIColor clearColor];
+    UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:_moreBtn];
+    
     [BtnArray addObject:moreBarItem];
     
     //点赞按钮
-    UIButton * likeBtn = [[UIButton alloc]initWithFrame:CGRectMake(0., 0., 32, 44)];
-    [likeBtn setImage:[UIImage imageNamed:@"thumb"] forState:UIControlStateNormal];
-    [likeBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateSelected];
-    [likeBtn addTarget:self action:@selector(likeBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 0.)];
-    likeBtn.backgroundColor = [UIColor clearColor];
-    UIBarButtonItem * likeBarItem = [[UIBarButtonItem alloc]initWithCustomView:likeBtn];
+    _likeBtn = [[UIButton alloc]initWithFrame:CGRectMake(0., 0., 32, 44)];
+    [_likeBtn setImage:[UIImage imageNamed:@"thumb"] forState:UIControlStateNormal];
+    [_likeBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateSelected];
+    [_likeBtn addTarget:self action:@selector(likeBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [_likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 0.)];
+    _likeBtn.backgroundColor = [UIColor clearColor];
+    UIBarButtonItem * likeBarItem = [[UIBarButtonItem alloc]initWithCustomView:_likeBtn];
     [BtnArray addObject:likeBarItem];
     [self.navigationItem setRightBarButtonItems:BtnArray animated:YES];
     
@@ -151,8 +144,8 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar addSubview:self.progressView];
-
-//    [AVAnalytics beginLogPageView:@"webView"];
+    
+    //    [AVAnalytics beginLogPageView:@"webView"];
     [MobClick beginLogPageView:@"webView"];
 }
 
@@ -160,22 +153,20 @@
 {
     [super viewWillDisappear:animated];
     [self.progressView removeFromSuperview];
-    //    [SVProgressHUD dismiss];
-    //    [self.activityIndicator stopAnimating];
-//    [AVAnalytics endLogPageView:@"webView"];
+    
     [MobClick endLogPageView:@"webView"];
 }
 
 #pragma mark - <WKNavigationDelegate>
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
-   
+    
 }
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
     
     /**
-     *  disable wkwebview zoom  
+     *  disable wkwebview zoom
      */
     NSString *javascript = @"var meta = document.createElement('meta');meta.setAttribute('name', 'viewport');meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');document.getElementsByTagName('head')[0].appendChild(meta);";
     
@@ -184,7 +175,7 @@
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-//    NSLog(@"%@", navigationAction.request.URL.absoluteString);
+    //    NSLog(@"%@", navigationAction.request.URL.absoluteString);
     if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
         NSURL *url = navigationAction.request.URL;
         UIApplication *app = [UIApplication sharedApplication];
@@ -201,11 +192,6 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-//    NSString * imageURL = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('img')[1].src"];
-//    UIImageView * a = [[UIImageView alloc]init];
-//    [a sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        self.image = image;
-//    }];
     
     [webView evaluateJavaScript:@"document.getElementById('share_img').getElementsByTagName('img')[0].src" completionHandler:^(NSString * imageURL, NSError * error) {
         
@@ -234,7 +220,7 @@
         
     }];
     
-
+    
     
     [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
         self.title = result;
@@ -260,38 +246,6 @@
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     };
     [view show];
-    /*
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        NSLog(@"The \"Okay/Cancel\" alert action sheet's cancel action occured.");
-    }];
-    
-    UIAlertAction * shareWeiboAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"share to weibo", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self weiboShare];
-    }];
-    
-    UIAlertAction * shareWechatAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"share to wechat", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self wxShare:0];
-    }];
-    
-    UIAlertAction * shareMomentAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"share to moment", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self wxShare:1];
-    }];
-    
-    UIAlertAction * openInSafariAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"open in safari", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [[UIApplication sharedApplication]openURL:self.webView.URL];
-    }];
-    
-    [alertController addAction:cancelAction];
-    
-    [alertController addAction:shareWeiboAction];
-    [alertController addAction:shareWechatAction];
-    [alertController addAction:shareMomentAction];
-    [alertController addAction:openInSafariAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
-     */
 }
 
 #pragma mark - button action
@@ -305,11 +259,11 @@
     }
     else
     {
-//        [API digArticleWithArticleId:<#(NSInteger)#> isDig:<#(BOOL)#> success:^(NSArray *dataArray) {
-//            <#code#>
-//        } failure:^(NSInteger stateCode) {
-//            <#code#>
-//        }];
+                [API digArticleWithArticleId:self.article.articleId isDig:!self.likeBtn.selected success:^(NSArray *dataArray) {
+                    //
+                } failure:^(NSInteger stateCode) {
+                    //
+                }];
     }
 }
 
@@ -319,7 +273,7 @@
     if([self.webView canGoBack]) {
         [self.webView goBack];
     } else {
-//        [self.navigationController popToRootViewControllerAnimated:YES];
+        //        [self.navigationController popToRootViewControllerAnimated:YES];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -334,58 +288,4 @@
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
-//
-//#pragma mark - share to sns
-//-(void)weiboShare
-//{
-//    if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
-//    {
-//        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//            [AVOSCloudSNS shareText:self.title andLink:[self.webView.URL absoluteString] andImage:[UIImage imageNamed:@"wxshare"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//                
-//            } andProgress:^(float percent) {
-//                if (percent == 1) {
-//                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-//                }
-//            }];
-//        }];
-//    }
-//    else
-//    {
-//        [AVOSCloudSNS shareText:self.title andLink:[self.webView.URL absoluteString] andImage:[UIImage imageNamed:@"wxshare"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//            
-//        } andProgress:^(float percent) {
-//            if (percent == 1) {
-//                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-//            }
-//        }];
-//    }
-//}
-//
-//-(void)wxShare:(int)scene
-//{
-//    WXMediaMessage *message = [WXMediaMessage message];
-//    message.title = self.title;
-//    message.description= @"";
-//    if (self.image) {
-//        [message setThumbImage:[UIImage imageWithData:[self.image imageDataLessThan_10K]]];
-//    }
-//    else
-//    {
-//        [message setThumbImage:[UIImage imageNamed:@"wxshare"]];
-//    }
-//    
-//    
-//    WXAppExtendObject *ext = [WXAppExtendObject object];
-//    ext.url = [self.webView.URL absoluteString];
-//    
-//    message.mediaObject = ext;
-//    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-//    req.bText = NO;
-//    req.message = message;
-//    req.scene = scene;
-//    
-//    [WXApi sendReq:req];
-//}
-
 @end

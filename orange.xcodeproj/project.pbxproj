@@ -12,6 +12,7 @@
 		239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239231B01C7D96FA00B49A88 /* RecUserController.m */; };
 		23E0CB7E1C855B3400E351CB /* UserArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E0CB7D1C855B3400E351CB /* UserArticleViewController.m */; };
 		23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */; };
+		23F000221C97B5750033BAA4 /* ArticleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F000211C97B5750033BAA4 /* ArticleWebViewController.m */; };
 		23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F1DD951C28020500A71827 /* PNoteViewController.m */; };
 		23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */; };
 		23F424041C59BFA7005E1318 /* CategoryArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F424031C59BFA7005E1318 /* CategoryArticleCell.m */; };
@@ -443,6 +444,8 @@
 		23E0CB7D1C855B3400E351CB /* UserArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserArticleViewController.m; sourceTree = "<group>"; };
 		23EEFFB71C7ABAFA0061F45F /* DiscoverUsersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverUsersView.h; sourceTree = "<group>"; };
 		23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverUsersView.m; sourceTree = "<group>"; };
+		23F000201C97B5750033BAA4 /* ArticleWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleWebViewController.h; sourceTree = "<group>"; };
+		23F000211C97B5750033BAA4 /* ArticleWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleWebViewController.m; sourceTree = "<group>"; };
 		23F1DD941C28020500A71827 /* PNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNoteViewController.h; sourceTree = "<group>"; };
 		23F1DD951C28020500A71827 /* PNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNoteViewController.m; sourceTree = "<group>"; };
 		23F2743F1C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticlesSubCategoryViewController.h; sourceTree = "<group>"; };
@@ -1168,6 +1171,16 @@
 			path = DiscoverViewController;
 			sourceTree = "<group>";
 		};
+		23F0001F1C97B5200033BAA4 /* ArticleWebViewVC */ = {
+			isa = PBXGroup;
+			children = (
+				23F000201C97B5750033BAA4 /* ArticleWebViewController.h */,
+				23F000211C97B5750033BAA4 /* ArticleWebViewController.m */,
+			);
+			name = ArticleWebViewVC;
+			path = GKWebViewVC;
+			sourceTree = "<group>";
+		};
 		23F1DD971C28046100A71827 /* PNoteViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1810,6 +1823,7 @@
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
 				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
 				4E66C1DE1A7CBD2F00F31A90 /* GKWebViewVC */,
+				23F0001F1C97B5200033BAA4 /* ArticleWebViewVC */,
 				4E66C1D81A7C8B2500F31A90 /* SettingViewController */,
 				4EC9F7A41A7BD0EE0057D736 /* NotePostViewController */,
 				4EC9F7A01A7BBED20057D736 /* TagViewController */,
@@ -3095,6 +3109,7 @@
 				23F7F0081C61AF100079A753 /* MoreArticlesViewController.m in Sources */,
 				B7174DD91BD4A83D00DEDBDA /* UserViewController.m in Sources */,
 				B7FE2A081B28136B001C2E33 /* UIImage+FontAwesome.m in Sources */,
+				23F000221C97B5750033BAA4 /* ArticleWebViewController.m in Sources */,
 				8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */,
 				DA35B3C61AFEE31200D66671 /* EmailEditViewController.m in Sources */,
 				4E688A161BA9C2BA0006AD9B /* JSQMessagesCollectionViewCell.m in Sources */,
