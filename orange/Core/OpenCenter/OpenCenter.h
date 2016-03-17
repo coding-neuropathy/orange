@@ -23,4 +23,6 @@ DEFINE_SINGLETON_FOR_HEADER(OpenCenter);
 
 - (void)openWebWithURL:(NSURL *)url;
 
+- (void)openArticleWebWithArticle:(GKArticle *)article;
+
 @end

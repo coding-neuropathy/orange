@@ -22,10 +22,10 @@
 @property (strong, nonatomic) NSURL * url;
 @property (strong, nonatomic) WKWebView * webView;
 
-//@property (strong, nonatomic) WebViewProgress * progressProxy;
+
 @property (strong, nonatomic) WebViewProgressView * progressView;
 @property (strong, nonatomic) UIImage * image;
-//@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+
 
 @end
 

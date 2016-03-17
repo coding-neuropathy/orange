@@ -17,7 +17,7 @@
 #import "TagArticlesController.h"
 
 #import "WebViewController.h"
-
+#import "ArticleWebViewController.h"
 #import "AppDelegate.h"
 
 @interface OpenCenter ()
@@ -141,6 +141,13 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 - (void)openWebWithURL:(NSURL *)url
 {
     WebViewController * vc = [[WebViewController alloc] initWithURL:url];
+    vc.hidesBottomBarWhenPushed = YES;
+    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)openArticleWebWithArticle:(GKArticle *)article
+{
+    ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithURL:article.articleURL];
     vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }

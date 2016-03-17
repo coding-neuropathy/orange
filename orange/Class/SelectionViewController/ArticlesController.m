@@ -243,7 +243,8 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
-    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+//    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
 
 //#pragma mark - <UIViewControllerPreviewingDelegate>

@@ -23,7 +23,7 @@
 @property (nonatomic , strong)WKWebView * webView;
 @property (nonatomic , strong)WebViewProgressView * progressView;
 @property (nonatomic , strong)UIImage * image;
-@property (nonatomic , strong)UIButton * likeBtn;
+@property (nonatomic , strong)UIButton * digBtn;
 @property (nonatomic , strong)UIButton * moreBtn;
 
 
@@ -75,10 +75,6 @@
     return _webView;
 }
 
-- (void)dealloc
-{
-    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
-}
 
 - (void)loadView
 {
@@ -105,13 +101,19 @@
     [BtnArray addObject:moreBarItem];
     
     //点赞按钮
-    _likeBtn = [[UIButton alloc]initWithFrame:CGRectMake(0., 0., 32, 44)];
-    [_likeBtn setImage:[UIImage imageNamed:@"thumb"] forState:UIControlStateNormal];
-    [_likeBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateSelected];
-    [_likeBtn addTarget:self action:@selector(likeBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [_likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 0.)];
-    _likeBtn.backgroundColor = [UIColor clearColor];
-    UIBarButtonItem * likeBarItem = [[UIBarButtonItem alloc]initWithCustomView:_likeBtn];
+     _digBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+     _digBtn.frame = CGRectMake(0., 0., 32, 44);
+     _digBtn.tintColor = UIColorFromRGB(0xffffff);
+    [_digBtn setImage:[UIImage imageNamed:@"thumb"] forState:UIControlStateNormal];
+    [_digBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateHighlighted];
+    [_digBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateSelected];
+    [_digBtn addTarget:self action:@selector(digBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_digBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 0.)];
+    _digBtn.backgroundColor = [UIColor clearColor];
+    if (self.article.IsDig) {
+        _digBtn.selected = YES;
+    }
+    UIBarButtonItem * likeBarItem = [[UIBarButtonItem alloc]initWithCustomView:_digBtn];
     [BtnArray addObject:likeBarItem];
     [self.navigationItem setRightBarButtonItems:BtnArray animated:YES];
     
@@ -249,7 +251,7 @@
 }
 
 #pragma mark - button action
-- (void)likeBtnAction
+- (void)digBtnAction:(UIButton *)btn
 {
     if(!k_isLogin)
     {
@@ -259,10 +261,32 @@
     }
     else
     {
-                [API digArticleWithArticleId:self.article.articleId isDig:!self.likeBtn.selected success:^(NSArray *dataArray) {
-                    //
+       
+        [API digArticleWithArticleId:self.article.articleId isDig:!self.digBtn.selected success:^(BOOL IsDig) {
+    
+            if (IsDig == self.digBtn.selected)
+            {
+                [SVProgressHUD showImage:nil status:@"点赞成功"];
+            }
+                    self.digBtn.selected = IsDig;
+                    self.article.IsDig = IsDig;
+                    
+                    if (IsDig)
+                    {
+                        self.article.dig_count += 1;
+                        NSLog(@"%ld",self.article.dig_count);
+                    }
+                    else
+                    {
+                        self.article.dig_count -= 1;
+                        NSLog(@"%ld",self.article.dig_count);
+                    }
+                    if (btn) {
+                        btn.selected = self.article.IsDig;
+                    }
+                    
                 } failure:^(NSInteger stateCode) {
-                    //
+                    [SVProgressHUD showImage:nil status:@"点赞失败"];
                 }];
     }
 }
