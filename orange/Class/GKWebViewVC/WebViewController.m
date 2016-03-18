@@ -108,19 +108,8 @@
     [button addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor clearColor];
     UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:button];
-//    self.navigationItem.rightBarButtonItem = moreBarItem;
+    self.navigationItem.rightBarButtonItem = moreBarItem;
     [BtnArray addObject:moreBarItem];
-    
-    //点赞按钮
-    UIButton * likeBtn = [[UIButton alloc]initWithFrame:CGRectMake(0., 0., 32, 44)];
-    [likeBtn setImage:[UIImage imageNamed:@"thumb"] forState:UIControlStateNormal];
-    [likeBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateSelected];
-    [likeBtn addTarget:self action:@selector(likeBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 0.)];
-    likeBtn.backgroundColor = [UIColor clearColor];
-    UIBarButtonItem * likeBarItem = [[UIBarButtonItem alloc]initWithCustomView:likeBtn];
-    [BtnArray addObject:likeBarItem];
-    [self.navigationItem setRightBarButtonItems:BtnArray animated:YES];
     
     
     //返回按钮

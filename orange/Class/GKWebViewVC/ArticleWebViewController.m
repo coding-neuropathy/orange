@@ -39,13 +39,6 @@
     return self;
 }
 
-- (void)setArticle:(GKArticle *)article
-{
-    
-    _article = article;
-    
-}
-
 - (WKWebView *)webView
 {
     if (!_webView) {
@@ -76,14 +69,6 @@
 }
 
 
-- (void)loadView
-{
-    self.view = self.webView;
-    self.view.backgroundColor = UIColorFromRGB(0xffffff);
-    
-    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -105,7 +90,7 @@
      _digBtn.frame = CGRectMake(0., 0., 32, 44);
      _digBtn.tintColor = UIColorFromRGB(0xffffff);
     [_digBtn setImage:[UIImage imageNamed:@"thumb"] forState:UIControlStateNormal];
-    [_digBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateHighlighted];
+//    [_digBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateHighlighted];
     [_digBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateSelected];
     [_digBtn addTarget:self action:@selector(digBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [_digBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 0.)];
@@ -261,9 +246,8 @@
     }
     else
     {
-       
         [API digArticleWithArticleId:self.article.articleId isDig:!self.digBtn.selected success:^(BOOL IsDig) {
-    
+            
             if (IsDig == self.digBtn.selected)
             {
                 [SVProgressHUD showImage:nil status:@"点赞成功"];
