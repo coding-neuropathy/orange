@@ -12,5 +12,6 @@
 
 @property (nonatomic , strong)GKArticle * article;
 
+- (instancetype)initWithArticle:(GKArticle *)article;
 
 @end

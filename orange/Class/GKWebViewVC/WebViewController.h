@@ -7,8 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import <WebKit/WebKit.h>
 
-@interface WebViewController : BaseViewController
+@interface WebViewController : BaseViewController <WKNavigationDelegate, WKUIDelegate>
+
+@property (strong, nonatomic) WKWebView * webView;
+@property (strong, nonatomic) NSURL * url;
 
 - (instancetype)initWithURL:(NSURL *)url;
 

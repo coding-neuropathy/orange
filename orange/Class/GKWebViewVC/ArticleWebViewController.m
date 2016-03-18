@@ -19,8 +19,8 @@
 
 @interface ArticleWebViewController ()<WKNavigationDelegate , WKUIDelegate>
 
-@property (nonatomic , strong)NSURL * url;
-@property (nonatomic , strong)WKWebView * webView;
+//@property (nonatomic , strong)NSURL * url;
+//@property (nonatomic , strong)WKWebView * webView;
 @property (nonatomic , strong)WebViewProgressView * progressView;
 @property (nonatomic , strong)UIImage * image;
 @property (nonatomic , strong)UIButton * digBtn;
@@ -31,10 +31,11 @@
 
 @implementation ArticleWebViewController
 
-- (instancetype)initWithURL:(NSURL *)url
+- (instancetype)initWithArticle:(GKArticle *)article
 {
     if (self) {
-        self.url = url;
+        self.article = article;
+        self.url = self.article.articleURL;
     }
     return self;
 }
@@ -65,7 +66,7 @@
         _webView.navigationDelegate = self;
         [_webView sizeToFit];
     }
-    return _webView;
+    return _digBtn;
 }
 
 
@@ -130,93 +131,20 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar addSubview:self.progressView];
+//    [self.navigationController.navigationBar addSubview:self.progressView];
     
     //    [AVAnalytics beginLogPageView:@"webView"];
-    [MobClick beginLogPageView:@"webView"];
+    [MobClick beginLogPageView:@"articleWebView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.progressView removeFromSuperview];
+//    [self.progressView removeFromSuperview];
     
-    [MobClick endLogPageView:@"webView"];
+    [MobClick endLogPageView:@"articleWebView"];
 }
 
-#pragma mark - <WKNavigationDelegate>
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
-{
-    
-}
-
-- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
-    
-    /**
-     *  disable wkwebview zoom
-     */
-    NSString *javascript = @"var meta = document.createElement('meta');meta.setAttribute('name', 'viewport');meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');document.getElementsByTagName('head')[0].appendChild(meta);";
-    
-    [webView evaluateJavaScript:javascript completionHandler:nil];
-}
-
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
-{
-    //    NSLog(@"%@", navigationAction.request.URL.absoluteString);
-    if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
-        NSURL *url = navigationAction.request.URL;
-        UIApplication *app = [UIApplication sharedApplication];
-        if ([app canOpenURL:url]) {
-            [app openURL:url];
-        }
-    }
-    //this is a 'new window action' (aka target="_blank") > open this URL externally. If we´re doing nothing here, WKWebView will also just do nothing. Maybe this will change in a later stage of the iOS 8 Beta
-    else if (!navigationAction.targetFrame) {
-        [self.webView loadRequest:navigationAction.request];
-    }
-    decisionHandler(WKNavigationActionPolicyAllow);
-}
-
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
-{
-    
-    [webView evaluateJavaScript:@"document.getElementById('share_img').getElementsByTagName('img')[0].src" completionHandler:^(NSString * imageURL, NSError * error) {
-        
-        if (imageURL) {
-            [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                
-            } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                if (finished) {
-                    self.image = image;
-                }
-            }];
-        }
-        else{
-            
-            [webView evaluateJavaScript:@"document.getElementsByTagName('img')[1].src" completionHandler:^(NSString * imageURL, NSError * error) {
-                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                    
-                } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                    if (finished) {
-                        self.image = image;
-                    }
-                }];
-                
-            }];
-        }
-        
-    }];
-    
-    
-    
-    [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
-        self.title = result;
-    }];
-}
-- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
-{
-    
-}
 
 #pragma mark - button action
 - (void)moreButtonAction:(id)sender
@@ -238,6 +166,7 @@
 #pragma mark - button action
 - (void)digBtnAction:(UIButton *)btn
 {
+//    NSLog(@"OKOKOKOKO");
     if(!k_isLogin)
     {
         LoginView * view = [[LoginView alloc]init];
@@ -269,9 +198,9 @@
                         btn.selected = self.article.IsDig;
                     }
                     
-                } failure:^(NSInteger stateCode) {
-                    [SVProgressHUD showImage:nil status:@"点赞失败"];
-                }];
+            } failure:^(NSInteger stateCode) {
+                [SVProgressHUD showImage:nil status:@"点赞失败"];
+            }];
     }
 }
 
@@ -286,14 +215,14 @@
     }
 }
 
-#pragma mark - webview kvo
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"estimatedProgress"] && object == self.webView) {
-        [self.progressView setProgress:self.webView.estimatedProgress animated:YES];
-    }
-    else {
-        // Make sure to call the superclass's implementation in the else block in case it is also implementing KVO
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
+//#pragma mark - webview kvo
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+//    if ([keyPath isEqualToString:@"estimatedProgress"] && object == self.webView) {
+//        [self.progressView setProgress:self.webView.estimatedProgress animated:YES];
+//    }
+//    else {
+//        // Make sure to call the superclass's implementation in the else block in case it is also implementing KVO
+//        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+//    }
+//}
 @end

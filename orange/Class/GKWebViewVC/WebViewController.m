@@ -9,7 +9,7 @@
 #import "WebViewController.h"
 #import "WXApi.h"
 
-#import <WebKit/WebKit.h>
+
 #import "WebViewProgressView.h"
 #import "SDWebImageDownloader.h"
 #import "EntityViewController.h"
@@ -17,11 +17,7 @@
 #import "ShareView.h"
 #import "LoginView.h"
 
-@interface WebViewController () <WKNavigationDelegate, WKUIDelegate>
-
-@property (strong, nonatomic) NSURL * url;
-@property (strong, nonatomic) WKWebView * webView;
-
+@interface WebViewController () 
 
 @property (strong, nonatomic) WebViewProgressView * progressView;
 @property (strong, nonatomic) UIImage * image;
@@ -149,9 +145,7 @@
 {
     [super viewWillDisappear:animated];
     [self.progressView removeFromSuperview];
-    //    [SVProgressHUD dismiss];
-    //    [self.activityIndicator stopAnimating];
-//    [AVAnalytics endLogPageView:@"webView"];
+    
     [MobClick endLogPageView:@"webView"];
 }
 
