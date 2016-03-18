@@ -147,7 +147,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
 - (void)openArticleWebWithArticle:(GKArticle *)article
 {
-    ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithURL:article.articleURL];
+    ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithArticle:article];
     vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
