@@ -483,9 +483,9 @@
 {
     NSString * path;
     if (isdig) {
-        path = @"articles/undig/";
-    } else {
         path = @"articles/dig/";
+    } else {
+        path = @"articles/undig/";
     }
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:@(article_id) forKey:@"aid"];
@@ -493,9 +493,14 @@
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
 //        NSLog(@"%@", responseObject);
+        BOOL IsDig = [[responseObject valueForKey:@"status"] boolValue];
+        
+        if (success) {
+            success(IsDig);
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error.localizedDescription);
+//        NSLog(@"%@", error.localizedDescription);
         NSInteger statusCode = operation.response.statusCode;
         if (failure) {
             failure(statusCode);
