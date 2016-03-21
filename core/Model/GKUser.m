@@ -31,6 +31,7 @@
                              @"like_count"       : @"likeCount",
                              @"entity_note_count": @"noteCount",
                              @"tag_count"        : @"tagCount",
+                             @"dig_count"        : @"digCount",
                              @"same_follow"      : @"sameFollowArray",
                              @"like_statistics"  : @"likeStatisticsDic",
                              @"expert_statistics": @"expertStatisticsDic",
