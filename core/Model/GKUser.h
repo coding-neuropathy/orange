@@ -170,6 +170,11 @@ typedef NS_ENUM(NSInteger, GKUserState) {
 @property (nonatomic, assign) NSInteger tagCount;
 
 /**
+ *  图文点赞数
+ */
+@property (nonatomic, assign) NSInteger digCount;
+
+/**
  *  共同关注
  */
 
