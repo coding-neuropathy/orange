@@ -595,9 +595,10 @@ static NSString * UserIdentifier = @"UserView";
         case 3:
         {
             GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
-            WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
+//            WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
+            [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
         }
             break;
             

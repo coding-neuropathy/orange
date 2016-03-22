@@ -204,7 +204,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
     GKArticle * article = [self.articledataArray objectAtIndex:indexPath.row];
     
-    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
 
 #pragma mark - <UserHeaderViewDelegate>

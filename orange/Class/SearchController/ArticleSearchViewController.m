@@ -121,7 +121,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GKArticle * article = [self.dataArray objectAtIndex:indexPath.row];
-    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
 
 
