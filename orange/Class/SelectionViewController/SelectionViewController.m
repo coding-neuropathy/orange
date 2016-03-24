@@ -21,6 +21,8 @@
 
 static NSString *CellIdentifier = @"SelectionCell";
 
+static int lastContentOffset;
+
 @interface SelectionViewController ()<UITableViewDataSource, UITableViewDelegate>
 // 商品数据源数组
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
@@ -32,6 +34,13 @@ static NSString *CellIdentifier = @"SelectionCell";
 @property (nonatomic, strong) IconInfoView * iconInfoView;
 //@property (nonatomic, strong) PopoverView * selection_pv;
 @property (nonatomic, assign) NSInteger cateId;
+
+
+@property (nonatomic ,strong)UIView * updateView;
+@property (nonatomic ,strong)UILabel * updateLabel;
+@property (nonatomic , assign)NSInteger updateNum;
+@property (nonatomic , strong)UIButton * closeBtn;
+
 @end
 
 @implementation SelectionViewController
@@ -58,6 +67,56 @@ static NSString *CellIdentifier = @"SelectionCell";
 }
 
 
+
+- (UIView *)updateView
+{
+    if (!_updateView) {
+        _updateView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 49.)];
+        _updateView.backgroundColor = UIColorFromRGB(0x6eaaf0);
+//        _updateView.userInteractionEnabled = YES;
+        
+    }
+    return _updateView;
+}
+
+
+- (UILabel *)updateLabel
+{
+    if (!_updateLabel) {
+        _updateLabel = [[UILabel alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 49.)];
+        _updateLabel.backgroundColor = UIColorFromRGB(0x6eaaf0);
+        _updateLabel.textColor = [UIColor whiteColor];
+        _updateLabel.font = [UIFont boldSystemFontOfSize:16.5];
+        _updateLabel.textAlignment = NSTextAlignmentCenter;
+        _updateLabel.text = [NSString stringWithFormat:@"查看 %ld 个更新",self.updateNum];
+        _updateLabel.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapUpdateLabel)];
+        [_updateLabel addGestureRecognizer:tap];
+    }
+    return _updateLabel;
+}
+
+- (void)tapUpdateLabel
+{
+    //点击提示条更新商品数据
+}
+
+- (UIButton *)closeBtn
+{
+    if (!_closeBtn) {
+        _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _closeBtn.frame = CGRectMake(kScreenWidth - 42, 8., 32., 32.);
+        [_closeBtn setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+        [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _closeBtn;
+}
+
+- (void)closeAction:(UIButton *)button
+{
+    [self.updateView removeFromSuperview];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -66,6 +125,10 @@ static NSString *CellIdentifier = @"SelectionCell";
     [self.view addSubview:self.tableView];
     
     self.navigationItem.titleView = self.iconInfoView;
+    
+    [self.view addSubview:self.updateView];
+    [self.updateView addSubview:self.updateLabel];
+    [self.updateView addSubview:self.closeBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -359,9 +422,30 @@ static NSString *CellIdentifier = @"SelectionCell";
     return [UIView new];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    
+    
+    lastContentOffset = scrollView.contentOffset.y;
+    
+}
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [[NSUserDefaults standardUserDefaults] setObject:@(scrollView.contentOffset.y) forKey:@"selection-offset-y"];
+    
+    if (scrollView.contentOffset.y < lastContentOffset)
+    {
+        [UIView animateWithDuration:1 animations:^{
+            self.updateView.frame = CGRectMake(0.,0., kScreenWidth, 49);
+        }];
+    }
+    else if (scrollView.contentOffset.y > lastContentOffset)
+    {
+        [UIView animateWithDuration:1 animations:^{
+            self.updateView.frame = CGRectMake(0.,-49., kScreenWidth, 49);
+        }];
+    }
 
 }
 

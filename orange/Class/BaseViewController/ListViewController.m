@@ -19,7 +19,7 @@ static NSString * CellIdentifer = @"Cell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - 48.) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
         _tableView.delegate = self;
         _tableView.dataSource = self;
