@@ -22,9 +22,9 @@
 static NSString *CellIdentifier = @"SelectionCell";
 
 @interface SelectionViewController ()<UITableViewDataSource, UITableViewDelegate>
-//@property (nonatomic, strong) UITableView *tableView;
+// 商品数据源数组
 @property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
-//@property(nonatomic, strong) NSMutableArray * dataArrayForArticle;
+
 @property(nonatomic, assign) NSInteger index;
 
 @property (nonatomic, strong) UILabel * SelectionCountLabel;

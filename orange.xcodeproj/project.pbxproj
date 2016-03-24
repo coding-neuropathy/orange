@@ -16,6 +16,8 @@
 		23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F1DD951C28020500A71827 /* PNoteViewController.m */; };
 		23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */; };
 		23F424041C59BFA7005E1318 /* CategoryArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F424031C59BFA7005E1318 /* CategoryArticleCell.m */; };
+		23F56AA71CA397C6000EC4B0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23F56AA61CA397C6000EC4B0 /* CoreData.framework */; };
+		23F56AAA1CA39ABB000EC4B0 /* CollinCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23F56AA81CA39ABB000EC4B0 /* CollinCoreData.xcdatamodeld */; };
 		23F7F0081C61AF100079A753 /* MoreArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */; };
 		391F5F911B1705A000931533 /* JXFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F901B1705A000931533 /* JXFormCell.m */; };
 		394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */ = {isa = PBXBuildFile; fileRef = 394104131B294E4C00C40846 /* UIScrollView+Slogan.m */; };
@@ -452,6 +454,8 @@
 		23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticlesSubCategoryViewController.m; sourceTree = "<group>"; };
 		23F424021C59BFA7005E1318 /* CategoryArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryArticleCell.h; sourceTree = "<group>"; };
 		23F424031C59BFA7005E1318 /* CategoryArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryArticleCell.m; sourceTree = "<group>"; };
+		23F56AA61CA397C6000EC4B0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		23F56AA91CA39ABB000EC4B0 /* CollinCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CollinCoreData.xcdatamodel; sourceTree = "<group>"; };
 		23F7F0061C61AF100079A753 /* MoreArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticlesViewController.h; sourceTree = "<group>"; };
 		23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticlesViewController.m; sourceTree = "<group>"; };
 		391F5F8F1B1705A000931533 /* JXFormCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXFormCell.h; sourceTree = "<group>"; };
@@ -1108,6 +1112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23F56AA71CA397C6000EC4B0 /* CoreData.framework in Frameworks */,
 				4E56DFCE19D5B84300263B17 /* QuartzCore.framework in Frameworks */,
 				4E56DFC819D5B82900263B17 /* UIKit.framework in Frameworks */,
 				4E56DFCC19D5B83B00263B17 /* CoreGraphics.framework in Frameworks */,
@@ -1718,6 +1723,7 @@
 				4E56DF9119D570DA00263B17 /* Config.h */,
 				4E56DF1C19D552C000263B17 /* AppDelegate.h */,
 				4E56DF1D19D552C000263B17 /* AppDelegate.m */,
+				23F56AA81CA39ABB000EC4B0 /* CollinCoreData.xcdatamodeld */,
 				4E56DF2519D552C000263B17 /* Images.xcassets */,
 				4E56DF3E19D56EF500263B17 /* ThirdParty */,
 				4E56DFC619D5AF5600263B17 /* Framework */,
@@ -2491,6 +2497,7 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				23F56AA61CA397C6000EC4B0 /* CoreData.framework */,
 				B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */,
 				B7AAFA791AB7039600A2F20D /* Foundation.framework */,
 				B7AAFA751AB7033600A2F20D /* CFNetwork.framework */,
@@ -3176,6 +3183,7 @@
 				4E8A34361BB060D700DF3841 /* tipView.m in Sources */,
 				B736FF2A1BD65D6E000668E4 /* UserTagsViewController.m in Sources */,
 				4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */,
+				23F56AAA1CA39ABB000EC4B0 /* CollinCoreData.xcdatamodeld in Sources */,
 				8A44F5991C7C066500D1DC19 /* ArticlePreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3561,6 +3569,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		23F56AA81CA39ABB000EC4B0 /* CollinCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				23F56AA91CA39ABB000EC4B0 /* CollinCoreData.xcdatamodel */,
+			);
+			currentVersion = 23F56AA91CA39ABB000EC4B0 /* CollinCoreData.xcdatamodel */;
+			path = CollinCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4E56DF0D19D552C000263B17 /* Project object */;
 }

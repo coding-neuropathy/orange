@@ -173,13 +173,9 @@
     [self.loading startAnimating];
     {
         NSURL * imageURL = self.entity.imageURL_640x640;
-//        if (IS_IPHONE_6P) {
-//            imageURL = self.entity.imageURL_800x800;
-//        }
-//        NSLog(@"%@", self.entity.imageURL_800x800);
+
         [self.image sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
-            //UIImage * newimage = [UIImage imageWithCGImage:image.CGImage scale:2 orientation:UIImageOrientationUp];
-            //block_img.image = newimage;
+            
             [weakSelf.loading stopAnimating];
         }];
     }
@@ -203,11 +199,11 @@
     self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth - 32, kScreenWidth - 32);
 
     self.contentLabel.deFrameHeight = [self.note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.] LineHeight:7];
-//    self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
+
     if (self.contentLabel.deFrameHeight > 65.) {
         self.contentLabel.deFrameHeight = 65.;
     }
-//    DDLogInfo(@"content label %f", self.contentLabel.deFrameHeight);
+
     
     self.likeButton.frame = CGRectMake(0, 0, 40, 40.);
     self.likeButton.deFrameLeft = self.contentLabel.deFrameLeft-8;
@@ -245,10 +241,7 @@
 
 + (CGFloat)height:(GKNote *)note
 {
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 32, 20)];
-//    label.paragraphReplacement = @"";
-//    label.lineSpacing = 7.0;
-//    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
+
     CGFloat height =  [note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.] LineHeight:7.];
     if (height > 65) {
         return 65. + kScreenWidth + 65;
@@ -299,7 +292,6 @@
         return;
     }
     
-//    [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
     [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
     
     [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
@@ -314,13 +306,13 @@
             }completion:^(BOOL finished) {
                 [image removeFromSuperview];
             }];
-            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+           
         }
         self.likeButton.selected = liked;
         self.entity.liked = liked;
         
         if (liked) {
-            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+            
             UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
             image.frame = self.likeButton.imageView.frame;
             [self.likeButton addSubview:image];
@@ -346,10 +338,11 @@
 #pragma mark - button action
 - (void)imageButtonAction
 {
-    EntityViewController * VC = [[EntityViewController alloc] initWithEntity:self.entity];
-    VC.hidesBottomBarWhenPushed = YES;
-//    VC.entity = self.entity;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+//    EntityViewController * VC = [[EntityViewController alloc] initWithEntity:self.entity];
+//    VC.hidesBottomBarWhenPushed = YES;
+//
+//    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    [[OpenCenter sharedOpenCenter]openEntity:self.entity hideButtomBar:YES];
 }
 
 
