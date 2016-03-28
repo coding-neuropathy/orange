@@ -175,9 +175,5 @@
     return [NSURL URLWithString:[self.imageURL.absoluteString stringByAppendingString:@"_120x120.jpg"]];
 }
 
-- (void)saveToCache
-{
-//    NSManagedObjectContext * context = [se]
-}
 
 @end
