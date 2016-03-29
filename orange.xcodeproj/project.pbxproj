@@ -2521,10 +2521,6 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				8A2754601CA5060200073E78 /* CoreData.framework */,
-=======
->>>>>>> 4824eae338e39831672c6b582a67ddb7828ef88c
 				B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */,
 				B7AAFA791AB7039600A2F20D /* Foundation.framework */,
 				B7AAFA751AB7033600A2F20D /* CFNetwork.framework */,
