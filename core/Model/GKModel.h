@@ -15,3 +15,4 @@
 #import "GKCategory.h"
 #import "GKArticle.h"
 #import "GKLaunch.h"
+#import "GKSelectionEntity.h"

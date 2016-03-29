@@ -576,7 +576,7 @@
                                cateId:(NSUInteger)cateId
                                 count:(NSInteger)count
                               success:(void (^)(NSArray *dataArray))success
-                              failure:(void (^)(NSInteger stateCode))failure
+                              failure:(void (^)(NSInteger stateCode, NSError * error))failure
 {
     NSParameterAssert(count > 0);
     NSParameterAssert(cateId >= 0 && cateId <= 11);
@@ -619,7 +619,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
             NSInteger stateCode = operation.response.statusCode;
-            failure(stateCode);
+            failure(stateCode, error);
         }
     }];
 }

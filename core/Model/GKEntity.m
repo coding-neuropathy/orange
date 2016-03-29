@@ -11,6 +11,8 @@
 #import "GKNote.h"
 #import "NSString+Helper.h"
 
+#import <CoreData/CoreData.h>
+
 @implementation GKEntity
 
 + (NSDictionary *)dictionaryForServerAndClientKeys
@@ -172,5 +174,6 @@
     }
     return [NSURL URLWithString:[self.imageURL.absoluteString stringByAppendingString:@"_120x120.jpg"]];
 }
+
 
 @end

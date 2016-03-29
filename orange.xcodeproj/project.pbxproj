@@ -317,6 +317,8 @@
 		B772BE9A1BD53CFA005C1540 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B772BE991BD53CFA005C1540 /* NoteCell.m */; };
 		B772BE9D1BD55848005C1540 /* UserLikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B772BE9C1BD55848005C1540 /* UserLikeViewController.m */; };
 		B772BEA01BD55861005C1540 /* UserPostNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B772BE9F1BD55861005C1540 /* UserPostNoteViewController.m */; };
+		B776A0A91CA65FA40021FFAB /* GKBaseData.h in Headers */ = {isa = PBXBuildFile; fileRef = B776A0A71CA65FA40021FFAB /* GKBaseData.h */; };
+		B776A0AA1CA65FA40021FFAB /* GKBaseData.m in Sources */ = {isa = PBXBuildFile; fileRef = B776A0A81CA65FA40021FFAB /* GKBaseData.m */; };
 		B77E00A91B8988DC008BCA55 /* EntityPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77E00A81B8988DC008BCA55 /* EntityPopView.m */; };
 		B783F65E1B9AE5DB004DF1CB /* GKArticle.h in Headers */ = {isa = PBXBuildFile; fileRef = B783F65C1B9AE5DB004DF1CB /* GKArticle.h */; };
 		B783F65F1B9AE5DB004DF1CB /* GKArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F65D1B9AE5DB004DF1CB /* GKArticle.m */; };
@@ -327,6 +329,8 @@
 		B78C4E0F1B676ED5006620F7 /* GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B78C4E0D1B676ED5006620F7 /* GKCategory.m */; };
 		B78D350C1BA7F80C005D53CF /* (null) in Sources */ = {isa = PBXBuildFile; };
 		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
+		B7930F961CA8D8CF009FDD9F /* GKSelectionEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = B7930F941CA8D8CF009FDD9F /* GKSelectionEntity.h */; };
+		B7930F971CA8D8CF009FDD9F /* GKSelectionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = B7930F951CA8D8CF009FDD9F /* GKSelectionEntity.m */; };
 		B796C0881BC17D8E006F4DE1 /* ImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B796C0861BC17D8E006F4DE1 /* ImageCache.h */; };
 		B796C0891BC17D8E006F4DE1 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B796C0871BC17D8E006F4DE1 /* ImageCache.m */; };
 		B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA5E1AB67E5600A2F20D /* RadioButton.m */; };
@@ -961,6 +965,8 @@
 		B772BE9C1BD55848005C1540 /* UserLikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLikeViewController.m; sourceTree = "<group>"; };
 		B772BE9E1BD55861005C1540 /* UserPostNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPostNoteViewController.h; sourceTree = "<group>"; };
 		B772BE9F1BD55861005C1540 /* UserPostNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPostNoteViewController.m; sourceTree = "<group>"; };
+		B776A0A71CA65FA40021FFAB /* GKBaseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKBaseData.h; sourceTree = "<group>"; };
+		B776A0A81CA65FA40021FFAB /* GKBaseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKBaseData.m; sourceTree = "<group>"; };
 		B77E00A71B8988DC008BCA55 /* EntityPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityPopView.h; sourceTree = "<group>"; };
 		B77E00A81B8988DC008BCA55 /* EntityPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityPopView.m; sourceTree = "<group>"; };
 		B783F65C1B9AE5DB004DF1CB /* GKArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKArticle.h; sourceTree = "<group>"; };
@@ -973,6 +979,8 @@
 		B78C4E0D1B676ED5006620F7 /* GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKCategory.m; sourceTree = "<group>"; };
 		B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = DiscoverView/DiscoverHeaderView.h; sourceTree = "<group>"; };
 		B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverHeaderView.m; path = DiscoverView/DiscoverHeaderView.m; sourceTree = "<group>"; };
+		B7930F941CA8D8CF009FDD9F /* GKSelectionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKSelectionEntity.h; path = SelectionEntity/GKSelectionEntity.h; sourceTree = "<group>"; };
+		B7930F951CA8D8CF009FDD9F /* GKSelectionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKSelectionEntity.m; path = SelectionEntity/GKSelectionEntity.m; sourceTree = "<group>"; };
 		B796C0861BC17D8E006F4DE1 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
 		B796C0871BC17D8E006F4DE1 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		B7AAFA5D1AB67E5600A2F20D /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioButton.h; path = RadioButton/RadioButton.h; sourceTree = "<group>"; };
@@ -1324,12 +1332,12 @@
 		39B720021B1F4C16008519E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B7930F931CA8D89F009FDD9F /* SelectionEntity */,
+				B776A0AB1CA6645F0021FFAB /* Entity */,
 				39B720031B1F4C16008519E3 /* GKBaseModel.h */,
 				39B720041B1F4C16008519E3 /* GKBaseModel.m */,
 				39B720051B1F4C16008519E3 /* GKComment.h */,
 				39B720061B1F4C16008519E3 /* GKComment.m */,
-				39B720071B1F4C16008519E3 /* GKEntity.h */,
-				39B720081B1F4C16008519E3 /* GKEntity.m */,
 				39B720091B1F4C16008519E3 /* GKEntityCategory.h */,
 				39B7200A1B1F4C16008519E3 /* GKEntityCategory.m */,
 				39B7200B1B1F4C16008519E3 /* GKModel.h */,
@@ -1345,6 +1353,8 @@
 				B783F65D1B9AE5DB004DF1CB /* GKArticle.m */,
 				8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */,
 				8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */,
+				B776A0A71CA65FA40021FFAB /* GKBaseData.h */,
+				B776A0A81CA65FA40021FFAB /* GKBaseData.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2448,6 +2458,15 @@
 			path = NotifyController;
 			sourceTree = "<group>";
 		};
+		B776A0AB1CA6645F0021FFAB /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				39B720071B1F4C16008519E3 /* GKEntity.h */,
+				39B720081B1F4C16008519E3 /* GKEntity.m */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
 		B79270921AB3D8E800FD7371 /* DiscoverView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2457,6 +2476,15 @@
 				B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */,
 			);
 			name = DiscoverView;
+			sourceTree = "<group>";
+		};
+		B7930F931CA8D89F009FDD9F /* SelectionEntity */ = {
+			isa = PBXGroup;
+			children = (
+				B7930F941CA8D8CF009FDD9F /* GKSelectionEntity.h */,
+				B7930F951CA8D8CF009FDD9F /* GKSelectionEntity.m */,
+			);
+			name = SelectionEntity;
 			sourceTree = "<group>";
 		};
 		B7AAFA5C1AB67E2300A2F20D /* RadioButton */ = {
@@ -2493,7 +2521,10 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				8A2754601CA5060200073E78 /* CoreData.framework */,
+=======
+>>>>>>> 4824eae338e39831672c6b582a67ddb7828ef88c
 				B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */,
 				B7AAFA791AB7039600A2F20D /* Foundation.framework */,
 				B7AAFA751AB7033600A2F20D /* CFNetwork.framework */,
@@ -2684,6 +2715,7 @@
 				39B7204F1B1F4C16008519E3 /* GKPurchase.h in Headers */,
 				39B720651B1F4C16008519E3 /* AFURLConnectionOperation.h in Headers */,
 				39B720371B1F4C16008519E3 /* NSDate+App.h in Headers */,
+				B7930F961CA8D8CF009FDD9F /* GKSelectionEntity.h in Headers */,
 				B796C0881BC17D8E006F4DE1 /* ImageCache.h in Headers */,
 				39B720461B1F4C16008519E3 /* GKComment.h in Headers */,
 				39B7203B1B1F4C16008519E3 /* NSString+App.h in Headers */,
@@ -2691,6 +2723,7 @@
 				39B7204D1B1F4C16008519E3 /* GKNote.h in Headers */,
 				39B720671B1F4C16008519E3 /* AFURLRequestSerialization.h in Headers */,
 				39B720631B1F4C16008519E3 /* AFSecurityPolicy.h in Headers */,
+				B776A0A91CA65FA40021FFAB /* GKBaseData.h in Headers */,
 				39B720391B1F4C16008519E3 /* NSObject+App.h in Headers */,
 				39B7205E1B1F4C16008519E3 /* AFHTTPSessionManager.h in Headers */,
 				8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */,
@@ -2915,6 +2948,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39B7204E1B1F4C16008519E3 /* GKNote.m in Sources */,
+				B7930F971CA8D8CF009FDD9F /* GKSelectionEntity.m in Sources */,
 				39B720641B1F4C16008519E3 /* AFSecurityPolicy.m in Sources */,
 				39B7205D1B1F4C16008519E3 /* AFHTTPRequestOperationManager.m in Sources */,
 				39B7205B1B1F4C16008519E3 /* AFHTTPRequestOperation.m in Sources */,
@@ -2942,6 +2976,7 @@
 				B78C4E0F1B676ED5006620F7 /* GKCategory.m in Sources */,
 				39B720381B1F4C16008519E3 /* NSDate+App.m in Sources */,
 				39B720491B1F4C16008519E3 /* GKEntity.m in Sources */,
+				B776A0AA1CA65FA40021FFAB /* GKBaseData.m in Sources */,
 				39B720741B1F4E78008519E3 /* GKNote+ImageURLFixes.m in Sources */,
 				39B720341B1F4C16008519E3 /* BaseHttpClient.m in Sources */,
 				39B720621B1F4C16008519E3 /* AFNetworkReachabilityManager.m in Sources */,

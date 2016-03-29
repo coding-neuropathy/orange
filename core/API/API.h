@@ -195,7 +195,7 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                                cateId:(NSUInteger)cateId
                                 count:(NSInteger)count
                               success:(void (^)(NSArray *dataArray))success
-                              failure:(void (^)(NSInteger stateCode))failure;
+                              failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 /**
  *  获取图文列表
