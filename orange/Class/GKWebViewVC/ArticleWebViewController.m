@@ -57,19 +57,6 @@
     return _digBtn;
 }
 
-//- (UILabel *)label
-//{
-//    if (!_label) {
-//        _label = [[UILabel alloc]initWithFrame:CGRectMake(0.,0, kScreenWidth, 49.)];
-//        _label.backgroundColor = UIColorFromRGB(0x6eaaf0);
-//        _label.text = @"赞过的图文，可以在个人页找到。";
-//        _label.textColor = [UIColor whiteColor];
-//        _label.font = [UIFont boldSystemFontOfSize:16.5];
-//        _label.textAlignment = NSTextAlignmentCenter;
-//        
-//    }
-//    return _label;
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -116,6 +103,8 @@
     self.progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    
+    self.title = self.article.title;
 }
 
 - (void)touchWebView:(UITapGestureRecognizer *)tap
