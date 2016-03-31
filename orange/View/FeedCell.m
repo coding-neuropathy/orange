@@ -411,14 +411,11 @@ typedef NS_ENUM(NSInteger, FeedType) {
             break;
     }
 
-    if (user) {
+    if (user)
+    {
         [[OpenCenter sharedOpenCenter] openUser:user];
-//        UserViewController * VC = [[UserViewController alloc]init];
-//        VC.hidesBottomBarWhenPushed = YES;
-//        VC.user=user;
-//        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
-//    [AVAnalytics event:@"feed_forward_user"];
+
     [MobClick event:@"feed_forward_user"];
 }
 
