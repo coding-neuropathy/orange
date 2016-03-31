@@ -109,7 +109,7 @@
 
 - (void)touchWebView:(UITapGestureRecognizer *)tap
 {
-    NSLog(@"123123123123");
+//    NSLog(@"123123123123");
 }
 
 - (void)didReceiveMemoryWarning {
