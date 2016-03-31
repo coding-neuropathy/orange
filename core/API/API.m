@@ -1690,6 +1690,10 @@
                 NSDictionary *entityDict = contentDict[@"entity"];
                 GKEntity *entity = [GKEntity modelFromDictionary:entityDict];
                 content = @{@"note":note, @"entity":entity};
+            } else if ([type isEqualToString:@"dig_article_message"]) {
+                GKUser * user = [GKUser modelFromDictionary:contentDict[@"digger"]];
+                GKArticle * article = [GKArticle modelFromDictionary:contentDict[@"article"]];
+                content = @{@"article":article, @"user":user};
             } else {
                 type = @"undefined_type";
                 content = @{};
