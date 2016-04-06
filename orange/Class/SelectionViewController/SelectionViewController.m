@@ -164,9 +164,20 @@ static int lastContentOffset;
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
+    
+    
+    NSData * data = [[NSUserDefaults standardUserDefaults] objectForKey:@"data"];
+
+    if (data)
+    {
+        self.entityList = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        return ;
+    }
+    
+    
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
-//        [weakSelf refresh];
+        
         [weakSelf.entityList refreshWithCategoryId:weakSelf.cateId];
     }];
     

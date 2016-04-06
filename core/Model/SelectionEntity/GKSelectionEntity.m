@@ -18,33 +18,36 @@
 
 @implementation GKSelectionEntity
 
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeInteger:self.categoryId forKey:@"caID"];
+    [aCoder encodeObject:self.dataArray forKey:@"dataArray"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+        [aDecoder decodeObjectForKey:@"caID"];
+        [aDecoder decodeObjectForKey:@"dataArray"];
+    }
+    return self;
+}
+
 - (void)refresh
 {
     [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
     [API getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:self.categoryId count:30 success:^(NSArray *dataArray) {
         self.dataArray = [NSMutableArray arrayWithArray:dataArray];
         
-//        for (NSDictionary * dict in dataArray) {
-//            GKEntity * entity = [[dict objectForKey:@"content"] objectForKey:@"entity"];
-//            
-////            [self.manager setValue:entity.entityId forKey:@"Entity.entityId"];
-//        }
-        //        [self save];
-        //        NSMutableArray* imageArray = [NSMutableArray array];
-        //        for (NSDictionary * dic in dataArray) {
-        //            GKEntity * entity = [[dic objectForKey:@"content"] objectForKey:@"entity"];
-        //
-        //            [imageArray addObject:entity.imageURL_640x640];
-        //        }
-        //        [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:imageArray];
-        
-        //        [self.tableView reloadData];
-        //        [self.tableView.pullToRefreshView stopAnimating];
-        //
-        //        [self saveEntityToIndexWithData:dataArray];
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
         
         [self saveEntityToIndexWithData:dataArray];
+        
+        //缓存
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"data"];
+        
+        
         
     } failure:^(NSInteger stateCode, NSError * error) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
@@ -85,6 +88,11 @@
         [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
         
         [self saveEntityToIndexWithData:dataArray];
+        
+        //缓存
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"data"];
+        
     } failure:^(NSInteger stateCode, NSError * error) {
         self.error = error;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];

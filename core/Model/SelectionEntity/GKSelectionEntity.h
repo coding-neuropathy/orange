@@ -8,7 +8,7 @@
 
 #import "GKBaseData.h"
 
-@interface GKSelectionEntity : GKBaseData
+@interface GKSelectionEntity : GKBaseData<NSCoding>
 
 @property (assign, nonatomic) NSInteger categoryId;
 
