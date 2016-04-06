@@ -166,14 +166,15 @@ static int lastContentOffset;
 {
     
     
-    NSData * data = [[NSUserDefaults standardUserDefaults] objectForKey:@"data"];
-
+    NSData * data = [[NSUserDefaults standardUserDefaults] objectForKey:@"selection.entity.data"];
+//    DDLogError(@"data data%@", data);
     if (data)
     {
-        self.entityList = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        DDLogError(@"data data%@", [NSKeyedUnarchiver unarchiveObjectWithData:data]);
+        self.entityList.dataArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         return ;
     }
-    
+//
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{

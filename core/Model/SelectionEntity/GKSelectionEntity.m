@@ -44,9 +44,9 @@
         [self saveEntityToIndexWithData:dataArray];
         
         //缓存
-        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self];
-        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"data"];
-        
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.dataArray];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"selection.entity.data"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         
     } failure:^(NSInteger stateCode, NSError * error) {
@@ -90,8 +90,9 @@
         [self saveEntityToIndexWithData:dataArray];
         
         //缓存
-        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self];
-        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"data"];
+//        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.dataArray];
+//        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"selection.entity.data"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
         
     } failure:^(NSInteger stateCode, NSError * error) {
         self.error = error;
