@@ -64,7 +64,7 @@
 {
     self.categoryId = cateId;
     [self refresh];
-//    [self loadFromCache];
+
 }
 
 - (void)load
@@ -74,41 +74,19 @@
     NSTimeInterval timestamp = (NSTimeInterval)[self.dataArray.lastObject[@"time"] doubleValue];
     [API getSelectionListWithTimestamp:timestamp cateId:self.categoryId count:30 success:^(NSArray *dataArray) {
         [self.dataArray addObjectsFromArray:[NSMutableArray arrayWithArray:dataArray]];
-        //            NSMutableArray* imageArray = [NSMutableArray array];
-        //            for (NSDictionary * dic in dataArray) {
-        //                GKEntity * entity = [[dic objectForKey:@"content"]objectForKey:@"entity"];
-        //                [imageArray addObject:entity.imageURL_640x640];
-        //            }
-        //            [[SDWebImagePrefetcher sharedImagePrefetcher]prefetchURLs:imageArray];
-        //            [self save];
-        //            [self.tableView reloadData];
-        //            [self.tableView.infiniteScrollingView stopAnimating];
-        //
-        //            [self saveEntityToIndexWithData:dataArray];
+        
         [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
         
         [self saveEntityToIndexWithData:dataArray];
         
-        //缓存
-//        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.dataArray];
-//        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"selection.entity.data"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
         
     } failure:^(NSInteger stateCode, NSError * error) {
         self.error = error;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
         [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
-        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
-        //            [SVProgressHUD dismiss];
-        //            [self.tableView.infiniteScrollingView stopAnimating];
+       
     }];
-    //    }
-    //    else if (self.index == 1)
-    //    {
-    //        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
-    //        [SVProgressHUD dismiss];
-    //        [self.tableView.infiniteScrollingView stopAnimating];
-    //    }
+    
 }
 
 - (void)loadWithCategoryId:(NSInteger)cateId
@@ -116,6 +94,22 @@
     self.categoryId = cateId;
     [self load];
 }
+
+- (BOOL)loadFromCache
+{
+    
+    NSData * data = [[NSUserDefaults standardUserDefaults] objectForKey:@"selection.entity.data"];
+    if (data) {
+        self.dataArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+
 
 #pragma mark - save to index
 

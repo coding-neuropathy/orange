@@ -39,6 +39,7 @@ static int lastContentOffset;
 
 @property (nonatomic ,strong)UIView * updateView;
 @property (nonatomic ,strong)UILabel * updateLabel;
+//更新数
 @property (nonatomic , assign)NSInteger updateNum;
 @property (nonatomic , strong)UIButton * closeBtn;
 
@@ -96,7 +97,7 @@ static int lastContentOffset;
         _updateLabel.textColor = [UIColor whiteColor];
         _updateLabel.font = [UIFont boldSystemFontOfSize:16.5];
         _updateLabel.textAlignment = NSTextAlignmentCenter;
-        _updateLabel.text = [NSString stringWithFormat:@"查看 %ld 个更新",self.updateNum];
+        [self getUpdateNumber];
         _updateLabel.userInteractionEnabled = YES;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapUpdateLabel)];
         [_updateLabel addGestureRecognizer:tap];
@@ -106,7 +107,8 @@ static int lastContentOffset;
 
 - (void)tapUpdateLabel
 {
-    //点击提示条更新商品数据
+    [self.tableView triggerPullToRefresh];
+    [self.updateView removeFromSuperview];
 }
 
 - (UIButton *)closeBtn
@@ -137,6 +139,7 @@ static int lastContentOffset;
     [self.view addSubview:self.updateView];
     [self.updateView addSubview:self.updateLabel];
     [self.updateView addSubview:self.closeBtn];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -161,20 +164,20 @@ static int lastContentOffset;
     [MobClick endLogPageView:@"SelectionView"];
 }
 
+- (void)getUpdateNumber
+{
+    [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
+        self.updateNum = [[dictionary objectForKey:@"unread_selection_count"] integerValue];
+        self.updateLabel.text = [NSString stringWithFormat:@"查看 %ld 个更新",self.updateNum];
+    } failure:^(NSInteger stateCode) {
+        
+    }];
+}
+
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
     
-    
-    NSData * data = [[NSUserDefaults standardUserDefaults] objectForKey:@"selection.entity.data"];
-//    DDLogError(@"data data%@", data);
-    if (data)
-    {
-        DDLogError(@"data data%@", [NSKeyedUnarchiver unarchiveObjectWithData:data]);
-        self.entityList.dataArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        return ;
-    }
-//
     
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -185,158 +188,17 @@ static int lastContentOffset;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf.entityList loadWithCategoryId:weakSelf.cateId];
     }];
-    //
-    if (self.entityList.count == 0)
-    {
+    
+//    if (self.entityList.count == 0)
+//    {
+//        [self.tableView triggerPullToRefresh];
+//    }
+    BOOL isCache = [weakSelf.entityList loadFromCache];
+    if (!isCache) {
         [self.tableView triggerPullToRefresh];
     }
     
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-#pragma mark - Data
-//- (void)refresh
-//{
-//    if (self.index == 0) {
-//        [API getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:self.cateId count:30 success:^(NSArray *dataArray) {
-//            self.dataArrayForEntity = [NSMutableArray arrayWithArray:dataArray];
-//            [self save];
-//            NSMutableArray* imageArray = [NSMutableArray array];
-//            for (NSDictionary * dic in dataArray) {
-//               GKEntity * entity = [[dic objectForKey:@"content"] objectForKey:@"entity"];
-//                
-//                [imageArray addObject:entity.imageURL_640x640];
-//            }
-//            [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:imageArray];
-//            
-//            [self.tableView reloadData];
-//            [self.tableView.pullToRefreshView stopAnimating];
-//            
-//            [self saveEntityToIndexWithData:dataArray];
-//        } failure:^(NSInteger stateCode) {
-//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
-//            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
-////            [SVProgressHUD dismiss];
-//            [self.tableView.pullToRefreshView stopAnimating];
-//        }];
-//    }
-//    else if (self.index == 1)
-//    {
-//        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
-//            [SVProgressHUD dismiss];
-//        [self.tableView.pullToRefreshView stopAnimating];
-//    }
-//    return;
-//}
-//
-//- (void)loadMore
-//{
-//    if (self.index == 0) {
-//        NSTimeInterval timestamp = (NSTimeInterval)[self.dataArrayForEntity.lastObject[@"time"] doubleValue];
-//        [API getSelectionListWithTimestamp:timestamp cateId:self.cateId count:30 success:^(NSArray *dataArray) {
-//            [self.dataArrayForEntity addObjectsFromArray:[NSMutableArray arrayWithArray:dataArray]];
-//            NSMutableArray* imageArray = [NSMutableArray array];
-//            for (NSDictionary * dic in dataArray) {
-//                GKEntity * entity = [[dic objectForKey:@"content"]objectForKey:@"entity"];
-//                [imageArray addObject:entity.imageURL_640x640];
-//            }
-//            [[SDWebImagePrefetcher sharedImagePrefetcher]prefetchURLs:imageArray];
-//            [self save];
-//            [self.tableView reloadData];
-//            [self.tableView.infiniteScrollingView stopAnimating];
-//            
-//            [self saveEntityToIndexWithData:dataArray];
-//        } failure:^(NSInteger stateCode) {
-//            //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
-//            [SVProgressHUD dismiss];
-//            [self.tableView.infiniteScrollingView stopAnimating];
-//        }];
-//    }
-//    else if (self.index == 1)
-//    {
-//        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
-//            [SVProgressHUD dismiss];
-//        [self.tableView.infiniteScrollingView stopAnimating];
-//    }
-//    return;
-//}
-
-//#pragma mark - save to index
-//
-//- (void)saveEntityToIndexWithData:(NSArray *)data
-//{
-//    if (![CSSearchableIndex isIndexingAvailable]) {
-//        return;
-//    }
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSMutableArray<CSSearchableItem *> *searchableItems = [NSMutableArray array];
-//        
-//        for (NSDictionary * row in data) {
-//            CSSearchableItemAttributeSet *attributedSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"entity"];
-//            GKEntity * entity = [[row objectForKey:@"content"] objectForKey:@"entity"];
-//            GKNote * note = [[row objectForKey:@"content"] objectForKey:@"note"];
-//            
-//            attributedSet.title = entity.entityName;
-//            attributedSet.contentDescription = note.text;
-//            attributedSet.identifier = @"entity";
-//        
-//            /**
-//             *  set image data
-//             */
-//            NSData * imagedata = [ImageCache readImageWithURL:entity.imageURL_240x240];
-//            if (imagedata) {
-//                attributedSet.thumbnailData = imagedata;
-//            } else {
-//                attributedSet.thumbnailData = [NSData dataWithContentsOfURL:entity.imageURL_240x240];
-//                [ImageCache saveImageWhthData:attributedSet.thumbnailData URL:entity.imageURL_240x240];
-//            }
-//            
-//            
-//            CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"entity:%@", entity.entityId] domainIdentifier:@"com.guoku.iphone.search.entity" attributeSet:attributedSet];
-//            
-//            [searchableItems addObject:item];
-//        }
-//        dispatch_async(dispatch_get_main_queue(), ^{
-////            [self.entityImageView setImage:placeholder];
-//            [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
-//                if (error != nil) {
-//                    NSLog(@"index Error %@",error.localizedDescription);
-//                }
-//            }];
-//        });
-//    });
-//}
-
-//- (BOOL)saveImageWhthData:(NSData *)data URL:(NSURL *)url
-//{
-//    //    NSError * err = nil;
-//    NSString * imagefile = [url.absoluteString md5];
-//    
-//    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
-//    //    NSLog(@"url %@", containerURL);
-//    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
-//    BOOL result = [data writeToURL:containerURL atomically:YES];
-//    return result;
-//}
-//
-//- (NSData *)readImageWithURL:(NSURL *)url
-//{
-//    NSString * imagefile = [url.absoluteString md5];
-//    NSURL * containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.guoku.iphone"];
-//    containerURL = [containerURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@", imagefile]];
-//    
-//    return [NSData dataWithContentsOfURL:containerURL];
-//    //    return data;
-//}
-
 
 #pragma mark - UITableViewDataSource
 
@@ -468,11 +330,6 @@ static int lastContentOffset;
         }
 }
 
-//- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
-//{
-//    [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
-//    [self dismissTip];
-//}
 
 
 #pragma mark - HMSegmentedControl
@@ -497,32 +354,6 @@ static int lastContentOffset;
     }
 }
 
-
-//- (void)load
-//{
-//    NSMutableArray * selectionArray;
-//    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"selection"];
-//    if (data) {
-//        selectionArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//    }
-//    
-//    if (!self.dataArrayForEntity) {
-//        self.dataArrayForEntity = [NSMutableArray array];
-//    }
-//    for (NSDictionary * dic in selectionArray) {
-//        GKNote * note = [GKNote modelFromDictionary:[[dic objectForKey:@"content"]objectForKey:@"note"]];
-//        GKEntity * entity = [GKEntity modelFromDictionary:[[dic objectForKey:@"content"]objectForKey:@"entity"]];
-//        NSDictionary * content = [NSMutableDictionary dictionaryWithObjectsAndKeys:entity,@"entity",note,@"note", nil];
-//        NSString * time = [dic objectForKey:@"time"];
-//        [self.dataArrayForEntity addObject:[NSDictionary dictionaryWithObjectsAndKeys:time,@"time",content,@"content",nil]];
-//    }
-//    [self.tableView reloadData];
-//    //[self.tableView setContentOffset:CGPointMake(0,[[[NSUserDefaults standardUserDefaults] objectForKey:@"selection-offset-y"] floatValue]  )];
-//    
-//    if (self.tableView.indexPathsForVisibleRows.firstObject) {
-//        [self.tableView selectRowAtIndexPath:self.tableView.indexPathsForVisibleRows.firstObject animated:YES scrollPosition:UITableViewScrollPositionTop];
-//    }
-//}
 
 -(void)save
 {

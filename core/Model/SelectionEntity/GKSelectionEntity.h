@@ -16,5 +16,5 @@
 
 - (void)refreshWithCategoryId:(NSInteger)cateId;
 - (void)loadWithCategoryId:(NSInteger)cateId;
-
+- (BOOL)loadFromCache;
 @end
