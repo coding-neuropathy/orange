@@ -97,7 +97,6 @@ static int lastContentOffset;
         _updateLabel.textColor = [UIColor whiteColor];
         _updateLabel.font = [UIFont boldSystemFontOfSize:16.5];
         _updateLabel.textAlignment = NSTextAlignmentCenter;
-        [self getUpdateNumber];
         _updateLabel.userInteractionEnabled = YES;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapUpdateLabel)];
         [_updateLabel addGestureRecognizer:tap];
@@ -139,7 +138,7 @@ static int lastContentOffset;
     [self.view addSubview:self.updateView];
     [self.updateView addSubview:self.updateLabel];
     [self.updateView addSubview:self.closeBtn];
-    
+    [self getUpdateNumber];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -168,7 +167,13 @@ static int lastContentOffset;
 {
     [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
         self.updateNum = [[dictionary objectForKey:@"unread_selection_count"] integerValue];
-        self.updateLabel.text = [NSString stringWithFormat:@"查看 %ld 个更新",self.updateNum];
+        if (self.updateNum == 0) {
+            [self.updateView removeFromSuperview];
+        }
+        else
+        {
+           self.updateLabel.text = [NSString stringWithFormat:@"查看 %ld 个更新",self.updateNum];
+        }
     } failure:^(NSInteger stateCode) {
         
     }];
