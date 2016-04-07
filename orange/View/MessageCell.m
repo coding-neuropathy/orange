@@ -46,6 +46,10 @@ typedef NS_ENUM(NSInteger, MessageType) {
      *  点评入精选
      */
     MessageNoteSelection,
+    /**
+     *  图文被赞
+     */
+    MessageArticlePoke,
 };
 
 @interface MessageCell()<RTLabelDelegate>
@@ -243,6 +247,32 @@ typedef NS_ENUM(NSInteger, MessageType) {
             
             break;
         }
+        case MessageArticlePoke:
+        {
+            //图文被赞
+            GKArticle * article = message[@"content"][@"article"];
+            GKUser * user = message[@"content"][@"user"];
+            [self.avatar sd_setImageWithURL:user.avatarURL];
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+                               user.userId,
+                               user.nickname,
+                               NSLocalizedStringFromTable(@"bumped your article", kLocalizedFile, nil),
+                               time];
+            self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
+            
+            self.image.frame = CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42);
+            __block UIImageView *block_img = self.image;
+            [self.image sd_setImageWithURL:article.coverURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
+                if (image && cacheType == SDImageCacheTypeNone) {
+                    block_img.alpha = 0.0;
+                    [UIView animateWithDuration:0.25 animations:^{
+                        block_img.alpha = 1.0;
+                    }];
+                }
+            }];
+            
+            break;
+        }
             //商品被点评
         case MessageEntityNote:
         {
@@ -394,6 +424,8 @@ typedef NS_ENUM(NSInteger, MessageType) {
         type = MessageEntityLike;
     } else if ([typeString isEqualToString:@"note_selection_message"]) {
         type = MessageNoteSelection;
+    } else if ([typeString isEqualToString:@"dig_article_message"]){
+        type = MessageArticlePoke;
     }
     
     return type;
@@ -480,6 +512,23 @@ typedef NS_ENUM(NSInteger, MessageType) {
             if (height < 40) {
                 height = 40;
             }
+            break;
+        }
+            //图文被赞
+        case MessageArticlePoke:
+        {
+            GKUser * user = message[@"content"][@"user"];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+                          user.userId,
+                          user.nickname,
+                          NSLocalizedStringFromTable(@"bumped your article", kLocalizedFile, nil),
+                          time];
+            CGFloat y = label.optimumSize.height + 5.f;
+            height = y;
+            if (height < 40) {
+                height = 40;
+            }
+            
             break;
         }
             //商品被点评
@@ -572,6 +621,13 @@ typedef NS_ENUM(NSInteger, MessageType) {
             
             break;
         }
+            //图文被点赞
+        case MessageArticlePoke:
+        {
+            GKUser * user = message[@"content"][@"user"];
+            VC.user = user;
+
+        }
             //商品被点评
         case MessageEntityNote:
         {
@@ -607,20 +663,34 @@ typedef NS_ENUM(NSInteger, MessageType) {
 - (void)imageButtonAction
 {
     NSDictionary * message = self.message;
-    GKNote *note = message[@"content"][@"note"];
-    GKEntity *entity = message[@"content"][@"entity"];
-    EntityViewController * VC = [[EntityViewController alloc]init];
-    VC.hidesBottomBarWhenPushed = YES;
-    if(entity)
-    {
-        VC.entity = entity;
+    switch (self.type) {
+        case MessageArticlePoke:
+        {
+            GKArticle * article = message[@"content"][@"article"];
+            [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+        }
+            break;
+            
+        default:
+        {
+            GKNote *note = message[@"content"][@"note"];
+            GKEntity *entity = message[@"content"][@"entity"];
+            EntityViewController * VC = [[EntityViewController alloc]init];
+            VC.hidesBottomBarWhenPushed = YES;
+            if(entity)
+            {
+                VC.entity = entity;
+            }
+            else
+            {
+                VC.entity = [GKEntity modelFromDictionary:@{@"entityId":@([note.entityId integerValue])}];
+            }
+            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+            //    [AVAnalytics event:@"message_forward_entity"];
+            [MobClick event:@"message_forward_entity"];
+        }
+            break;
     }
-    else
-    {
-        VC.entity = [GKEntity modelFromDictionary:@{@"entityId":@([note.entityId integerValue])}];
-    }
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-//    [AVAnalytics event:@"message_forward_entity"];
-    [MobClick event:@"message_forward_entity"];
+    
 }
 @end

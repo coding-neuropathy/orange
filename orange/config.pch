@@ -80,9 +80,6 @@
 
 #import "UIDevice-Hardware.h"
 
-////CoreData
-//#import <CoreData/CoreData.h>
-
 
 // Log
 //#import "DDTTYLogger.h"

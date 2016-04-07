@@ -488,7 +488,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         case 2:
         {
             GKArticle * article = [self.articledataArray objectAtIndex:indexPath.row];
-            [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+            [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
             
         }
             break;

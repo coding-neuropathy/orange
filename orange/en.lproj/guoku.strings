@@ -81,6 +81,7 @@
 
 "started following" = "started following";
 "liked 1 item" = "liked 1 item";
+"bumped 1 item" = "bumped 1 item";
 "noted 1 item:" = "noted 1 item : ";
 "commented" = "commented";
 "'s note:" = "'s note : ";
@@ -104,6 +105,7 @@
 "started following you" = "started following you";
 "commented your note" = "commented your note";
 "bumped your note" = "bumped your note";
+"bumped your article" = "bumped your article";
 "noted 1 item your added" = "noted 1 item your added";
 "liked 1 item your added" = "liked 1 item your added";
 "reply to your comment:" = "reply to your comment : ";

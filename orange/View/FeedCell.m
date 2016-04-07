@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
     FeedEntityNote,
     FeedUserFollower,
     FeedUserLike,
+    FeedArticleDig,
 };
 
 @interface FeedCell()<RTLabelDelegate>
@@ -192,6 +193,8 @@ typedef NS_ENUM(NSInteger, FeedType) {
         type = FeedUserFollower;
     } else if ([typeString isEqualToString:@"user_like"]) {
         type = FeedUserLike;
+    } else if ([typeString isEqualToString:@"article_dig"]){
+        type = FeedArticleDig;
     }
     
     return type;
@@ -258,7 +261,21 @@ typedef NS_ENUM(NSInteger, FeedType) {
             self.image.hidden = YES;
         }
             break;
-//        case FEE:
+        case FeedArticleDig:
+        {
+            GKUser * user = self.feed[@"object"][@"user"];
+            GKArticle * article = self.feed[@"object"][@"article"];
+            [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60., 60.)]];
+            self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> %@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",
+                                      (unsigned long)user.userId,
+                                      user.nickname,
+                                      NSLocalizedStringFromTable(@"bumped 1 item", kLocalizedFile, nil),
+                                      time];
+            self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
+            
+            [self.image sd_setImageWithURL:article.coverURL_300 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(100, 100)]];
+            self.image.deFrameLeft = self.contentLabel.deFrameRight + 12.;
+        }
         default:
             break;
             
@@ -325,6 +342,23 @@ typedef NS_ENUM(NSInteger, FeedType) {
             }
         }
             break;
+        case FeedArticleDig:
+        {
+            GKUser * user = feed[@"object"][@"user"];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> %@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",
+                          (unsigned long)user.userId,
+                          user.nickname,
+                          NSLocalizedStringFromTable(@"bumped 1 item", kLocalizedFile, nil),
+                          time];
+            
+            
+            CGFloat y = label.optimumSize.height + 5.;
+            height = y;
+            if (height < 40) {
+                height = 40;
+            }
+            
+        }
         default:
 //            height = 0;
             break;
@@ -369,34 +403,43 @@ typedef NS_ENUM(NSInteger, FeedType) {
             user = self.feed[@"object"][@"user"];
         }
             break;
+        case FeedArticleDig:
+        {
+            user = self.feed[@"object"][@"user"];
+        }
         default:
             break;
     }
 
-    if (user) {
+    if (user)
+    {
         [[OpenCenter sharedOpenCenter] openUser:user];
-//        UserViewController * VC = [[UserViewController alloc]init];
-//        VC.hidesBottomBarWhenPushed = YES;
-//        VC.user=user;
-//        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
-//    [AVAnalytics event:@"feed_forward_user"];
+
     [MobClick event:@"feed_forward_user"];
 }
 
 - (void)imageButtonAction
 {
-//    NSDictionary * feed = self.feed;
-    //GKNote *note = feed[@"object"][@"note"];
-    GKEntity *entity = self.feed[@"object"][@"entity"];
-    [[OpenCenter sharedOpenCenter] openEntity:entity];
-//    EntityViewController * VC = [[EntityViewController alloc]init];
-//    VC.hidesBottomBarWhenPushed = YES;
-//    VC.entity = entity;
-//    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     
-//    [AVAnalytics event:@"feed_forward_entity"];
-    [MobClick event:@"feed_forward_entity"];
+    switch ([FeedCell typeFromFeed:self.feed]) {
+        case FeedArticleDig:
+        {
+            GKArticle * article = self.feed[@"object"][@"article"];
+            [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+        }
+            break;
+        case FeedUserLike:
+        {
+            GKEntity *entity = self.feed[@"object"][@"entity"];
+            [[OpenCenter sharedOpenCenter] openEntity:entity];
+            
+            [MobClick event:@"feed_forward_entity"];
+        }
+        default:
+            break;
+    }
+    
 }
 
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url

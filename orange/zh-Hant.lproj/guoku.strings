@@ -82,6 +82,7 @@
 
 "started following" = "開始關注";
 "liked 1 item" = "喜愛了1件商品";
+"bumped 1 item" = "贊了1篇圖文";
 "noted 1 item:" = "點評了1件商品：";
 "commented" = "評論了";
 "'s note:" = "的點評";
@@ -105,6 +106,7 @@
 "started following you" = "關注了你";
 "commented your note" = "評論了你撰寫的點評";
 "bumped your note" = "贊了你撰寫的點評";
+"bumped your article" = "贊了你撰寫的圖文";
 "noted 1 item your added" = "點評了你添加的商品";
 "liked 1 item your added" = "喜愛了你添加的商品";
 "reply to your comment:" = "回复了你的評論：";
