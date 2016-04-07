@@ -594,6 +594,7 @@ static int lastContentOffset;
             if (!self.entityList.error) {
                 [self.tableView reloadData];
                 [self.tableView.pullToRefreshView stopAnimating];
+                [self save];
 //                [self saveEntityToIndexWithData:(NSArray *)self.entityList];
 //                [self.tableView.infiniteScrollingView stopAnimating];
 //                if (_dataList.total == 0) {

@@ -80,8 +80,8 @@
 
 #import "UIDevice-Hardware.h"
 
-//CoreData
-#import <CoreData/CoreData.h>
+////CoreData
+//#import <CoreData/CoreData.h>
 
 
 // Log
