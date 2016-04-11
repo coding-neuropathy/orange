@@ -1164,6 +1164,51 @@
     }];
 }
 
+/**
+ *  获取用户赞过的图文
+ *
+ *  @param  page        页码
+ *  @param  success     成功block
+ *  @param  failure     失败block
+ */
+
++ (void)getUserDigArticleWithUserId:(NSInteger)userId Page:(NSInteger)page
+                            success:(void (^)(NSArray *articles, NSInteger size, NSInteger total))success
+                            failure:(void (^)(NSInteger stateCode))failure
+{
+    NSParameterAssert(userId);
+    
+    NSString * path = [NSString stringWithFormat:@"user/%ld/dig/article/", userId];
+    
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(page) forKey:@"page"];
+//    [paraDict setValue:@(size) forKey:@"size"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GEt" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary * objectDict = (NSDictionary *)responseObject;
+        
+        NSMutableArray * articles = [NSMutableArray arrayWithCapacity:0];
+        
+        for (NSDictionary * row in [objectDict valueForKey:@"articles"]) {
+            GKArticle * article = [GKArticle modelFromDictionary:row];
+            [articles addObject:article];
+        }
+        
+        NSInteger total = [[objectDict valueForKey:@"count"] integerValue];
+        NSInteger size = [[objectDict valueForKey:@"size"] integerValue];
+        if (success) {
+            success(articles, size, total);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
 #pragma mark - entity note
 /**
  *  发点评
