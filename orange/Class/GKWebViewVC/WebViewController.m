@@ -107,7 +107,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-
     
     
     NSMutableArray * BtnArray = [NSMutableArray array];
@@ -235,7 +234,8 @@
 
     
     [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
-        self.title = result;
+//        self.title = result;
+        self.title = @"图文";
     }];
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
