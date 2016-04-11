@@ -362,6 +362,18 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                        failure:(void (^)(NSInteger stateCode))failure;
 
 
+/**
+ *  获取用户赞过的图文
+ *
+ *  @param  page        页码
+ *  @param  success     成功block
+ *  @param  failure     失败block
+ */
++ (void)getUserDigArticleWithUserId:(NSInteger)userId Page:(NSInteger)page
+                            success:(void (^)(NSArray *articles, NSInteger size, NSInteger total))success
+                            failure:(void (^)(NSInteger stateCode))failure;
+
+
 #pragma mark - entity note 
 
 /**
