@@ -1177,14 +1177,14 @@
                             failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(userId);
-    
-    NSString * path = [NSString stringWithFormat:@"user/%ld/dig/article/", userId];
+    NSString * path = [NSString stringWithFormat:@"user/%ld/dig/articles/", userId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
-    [paraDict setValue:@(page) forKey:@"page"];
-//    [paraDict setValue:@(size) forKey:@"size"];
-    
-    [[HttpClient sharedClient] requestPath:path method:@"GEt" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//    [paraDict setValue:@(page) forKey:@"page"];
+    [paraDict setObject:@(page) forKey:@"page"];
+    [paraDict setObject:@(30) forKey:@"size"];
+
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary * objectDict = (NSDictionary *)responseObject;
         
@@ -1194,7 +1194,7 @@
             GKArticle * article = [GKArticle modelFromDictionary:row];
             [articles addObject:article];
         }
-        
+        NSLog(@"%@", articles);
         NSInteger total = [[objectDict valueForKey:@"count"] integerValue];
         NSInteger size = [[objectDict valueForKey:@"size"] integerValue];
         if (success) {
