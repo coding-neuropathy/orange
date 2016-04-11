@@ -43,11 +43,19 @@
     if (!_webView) {
         
         // Javascript that disables pinch-to-zoom by inserting the HTML viewport meta tag into <head>
-        NSString *source = @"var style = document.createElement('style'); \
-        style.type = 'text/css'; \
-        style.innerText = '*:not(input):not(textarea) { -webkit-user-select: none; -webkit-touch-callout: none; }'; \
+//        NSString *source = @"var style = document.createElement('style'); \
+//        style.type = 'text/css'; \
+//        style.innerText = '*:not(input):not(textarea) { -webkit-user-select: none; -webkit-touch-callout: none; }'; \
+//        var head = document.getElementsByTagName('head')[0];\
+//        head.appendChild(style);";
+//        WKUserScript *script = [[WKUserScript alloc] initWithSource:source injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+        
+        // Javascript that disables pinch-to-zoom by inserting the HTML viewport meta tag into <head>
+        NSString *source = @"var meta = document.createElement('meta'); \
+        meta.name = 'viewport'; \
+        meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; \
         var head = document.getElementsByTagName('head')[0];\
-        head.appendChild(style);";
+        head.appendChild(meta);";
         WKUserScript *script = [[WKUserScript alloc] initWithSource:source injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
         
         // Create the user content controller and add the script to it
@@ -58,7 +66,8 @@
         WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
         configuration.userContentController = userContentController;
         
-        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) configuration:configuration];
+//        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) configuration:configuration];
+        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.UIDelegate = self;
         _webView.navigationDelegate = self;
@@ -85,15 +94,21 @@
 
 - (void)loadView
 {
+//    [self.view addSubview:self.webView];
     self.view = self.webView;
     self.view.backgroundColor = UIColorFromRGB(0xffffff);
-//    [self.view addSubview:self.activityIndicator];
+    //    [self.view addSubview:self.activityIndicator];
+    
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+
+    
     
     NSMutableArray * BtnArray = [NSMutableArray array];
     
