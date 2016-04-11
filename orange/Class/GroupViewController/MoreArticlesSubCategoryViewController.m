@@ -125,7 +125,7 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
-    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

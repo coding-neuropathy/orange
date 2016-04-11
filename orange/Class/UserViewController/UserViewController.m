@@ -23,6 +23,7 @@
 #import "UserLikeViewController.h"
 #import "UserPostNoteViewController.h"
 #import "UserTagsViewController.h"
+#import "UserDigArticlesViewController.h"
 
 #import "UIScrollView+Slogan.h"
 #import "LoginView.h"
@@ -210,7 +211,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -283,6 +284,14 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                 return headerSection;
             }
                 break;
+            case 5:
+            {
+                UserHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer forIndexPath:indexPath];
+                [headerSection setUser:self.user WithType:UserDigArticleType];
+                headerSection.delegate = self;
+                return headerSection;
+            }
+                break;
             default:
             {
                 UserHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer forIndexPath:indexPath];
@@ -316,6 +325,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                     
                 case 4:
                     if (self.user.tagCount > 0)
+                        footerSection.alpha = 1;
+                    break;
+                case 5:
+                    if (self.user.digCount > 0)
                         footerSection.alpha = 1;
                     break;
             }
@@ -418,6 +431,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             if (self.user.tagCount > 0)
                 size = CGSizeMake(kScreenWidth, 44.);
             break;
+        case 5:
+            if (self.user.digCount > 0)
+                size = CGSizeMake(kScreenWidth, 44.);
+            break;
     }
     return size;
 }
@@ -444,6 +461,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             break;
         case 4:
             if (self.user.tagCount > 0)
+                size = CGSizeMake(kScreenWidth, 10.);
+            break;
+        case 5:
+            if (self.user.digCount > 0)
                 size = CGSizeMake(kScreenWidth, 10.);
             break;
     }
@@ -621,6 +642,13 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         case UserTagType:
         {
             UserTagsViewController * vc = [[UserTagsViewController alloc] initWithUser:self.user];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case UserDigArticleType:
+        {
+            UserDigArticlesViewController * vc = [[UserDigArticlesViewController alloc]initWithUser:self.user];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }

@@ -208,7 +208,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     if (indexPath.section == 1) {
         
         GKArticle * article = [self.ArticleArray objectAtIndex:indexPath.row];
-        [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+        [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 
     }
 }

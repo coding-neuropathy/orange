@@ -188,6 +188,7 @@ static int lastContentOffset;
     [self.tableView addPullToRefreshWithActionHandler:^{
         
         [weakSelf.entityList refreshWithCategoryId:weakSelf.cateId];
+        [weakSelf.updateView removeFromSuperview];
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
