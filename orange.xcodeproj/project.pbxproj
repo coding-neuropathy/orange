@@ -17,6 +17,7 @@
 		23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */; };
 		23F424041C59BFA7005E1318 /* CategoryArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F424031C59BFA7005E1318 /* CategoryArticleCell.m */; };
 		23F7F0081C61AF100079A753 /* MoreArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */; };
+		23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FA3BE41CB6611400B8F810 /* UserDigArticlesViewController.m */; };
 		391F5F911B1705A000931533 /* JXFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F901B1705A000931533 /* JXFormCell.m */; };
 		394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */ = {isa = PBXBuildFile; fileRef = 394104131B294E4C00C40846 /* UIScrollView+Slogan.m */; };
 		399916CE1B11A9DB006826FD /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 399916CD1B11A9DB006826FD /* UIDevice-Hardware.m */; };
@@ -459,6 +460,8 @@
 		23F424031C59BFA7005E1318 /* CategoryArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryArticleCell.m; sourceTree = "<group>"; };
 		23F7F0061C61AF100079A753 /* MoreArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticlesViewController.h; sourceTree = "<group>"; };
 		23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticlesViewController.m; sourceTree = "<group>"; };
+		23FA3BE31CB6611400B8F810 /* UserDigArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDigArticlesViewController.h; sourceTree = "<group>"; };
+		23FA3BE41CB6611400B8F810 /* UserDigArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDigArticlesViewController.m; sourceTree = "<group>"; };
 		391F5F8F1B1705A000931533 /* JXFormCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXFormCell.h; sourceTree = "<group>"; };
 		391F5F901B1705A000931533 /* JXFormCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXFormCell.m; sourceTree = "<group>"; };
 		394104121B294E4C00C40846 /* UIScrollView+Slogan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Slogan.h"; sourceTree = "<group>"; };
@@ -2200,6 +2203,8 @@
 				B772BE9F1BD55861005C1540 /* UserPostNoteViewController.m */,
 				B736FF281BD65D6E000668E4 /* UserTagsViewController.h */,
 				B736FF291BD65D6E000668E4 /* UserTagsViewController.m */,
+				23FA3BE31CB6611400B8F810 /* UserDigArticlesViewController.h */,
+				23FA3BE41CB6611400B8F810 /* UserDigArticlesViewController.m */,
 				8A53D9241BD948F6006EF0D1 /* UserEntityCategoryController.h */,
 				8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */,
 				2309032C1C803B1500AD26D6 /* authorizedUserViewController.h */,
@@ -3101,6 +3106,7 @@
 				B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */,
 				4EA58ABD1C172365003251FB /* EntitySearchViewController.m in Sources */,
 				8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */,
+				23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */,
 				4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */,
 				B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */,
 				4E688A121BA9C2BA0006AD9B /* JSQPhotoMediaItem.m in Sources */,

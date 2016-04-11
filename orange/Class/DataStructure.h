@@ -49,6 +49,7 @@ typedef NS_ENUM(NSInteger, UserPageType) {
     UserPostType,
     UserTagType,
     UserArticleType,
+    UserDigArticleType,
 };
 
 

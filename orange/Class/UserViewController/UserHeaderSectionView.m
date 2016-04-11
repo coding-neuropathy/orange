@@ -95,6 +95,10 @@
                 self.titleLabel.text = NSLocalizedStringFromTable(@"me tag", kLocalizedFile, nil);
                 self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.tagCount];
                 break;
+            case UserDigArticleType:
+                self.titleLabel.text = NSLocalizedStringFromTable(@"me poke", kLocalizedFile, nil);
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.digCount];
+                break;
             default:
                 break;
         }
@@ -115,6 +119,10 @@
             case UserTagType:
                 self.titleLabel.text = NSLocalizedStringFromTable(@"user tag", kLocalizedFile, nil);
                 self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.tagCount];
+                break;
+            case UserDigArticleType:
+                self.titleLabel.text = NSLocalizedStringFromTable(@"user poke", kLocalizedFile, nil);
+                self.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_user.digCount];
                 break;
             default:
                 break;
