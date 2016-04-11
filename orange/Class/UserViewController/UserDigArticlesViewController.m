@@ -14,6 +14,9 @@
 @property (strong , nonatomic)UITableView * tableView;
 @property (strong , nonatomic)NSMutableArray * ArticleArray;
 
+@property (nonatomic ,assign)NSInteger page;
+
+
 @end
 
 @implementation UserDigArticlesViewController
@@ -28,13 +31,21 @@ static NSString * UserDigArticleIdentifier = @"UserDigCell";
     return self;
 }
 
+- (void)loadView
+{
+    self.view = self.tableView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.tableView];
-    
     [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:UserDigArticleIdentifier];
     
+    if (self.user.userId == [Passport sharedInstance].user.userId) {
+        self.navigationItem.title = NSLocalizedStringFromTable(@"me poke", kLocalizedFile, nil);
+    } else {
+        self.navigationItem.title = NSLocalizedStringFromTable(@"user poke", kLocalizedFile, nil);
+    }
 }
 
 #pragma mark -----------tableView懒加载 ---------------
@@ -50,6 +61,50 @@ static NSString * UserDigArticleIdentifier = @"UserDigCell";
         
     }
     return _tableView;
+}
+
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refresh];
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
+    }];
+    
+    if (self.ArticleArray == 0) {
+        [self.tableView triggerPullToRefresh];
+    }
+}
+
+
+
+- (void)refresh
+{
+    self.page = 1;
+    [API getUserDigArticleWithUserId:self.user.userId Page:self.page success:^(NSArray *articles, NSInteger size, NSInteger total) {
+        self.ArticleArray = [NSMutableArray arrayWithArray:articles];
+        self.page += 1;
+        [self.tableView.pullToRefreshView stopAnimating];
+        [self.tableView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.tableView.pullToRefreshView stopAnimating];
+    }];
+}
+
+- (void)loadMore
+{
+    [API getUserDigArticleWithUserId:self.user.userId Page:self.page success:^(NSArray *articles, NSInteger size, NSInteger total) {
+        [self.ArticleArray addObjectsFromArray:articles];
+        self.page += 1;
+        [self.tableView.infiniteScrollingView stopAnimating];
+        [self.tableView reloadData];
+    } failure:^(NSInteger stateCode) {
+        [self.tableView.infiniteScrollingView stopAnimating];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
