@@ -77,54 +77,54 @@ static int lastContentOffset;
 }
 
 #pragma mark - init view
-- (UIView *)updateView
-{
-    if (!_updateView) {
-        _updateView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 49.)];
-        _updateView.backgroundColor = UIColorFromRGB(0x6eaaf0);
-//        _updateView.userInteractionEnabled = YES;
-        
-    }
-    return _updateView;
-}
+//- (UIView *)updateView
+//{
+//    if (!_updateView) {
+//        _updateView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 49.)];
+//        _updateView.backgroundColor = UIColorFromRGB(0x6eaaf0);
+////        _updateView.userInteractionEnabled = YES;
+//        
+//    }
+//    return _updateView;
+//}
 
 
-- (UILabel *)updateLabel
-{
-    if (!_updateLabel) {
-        _updateLabel = [[UILabel alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 49.)];
-        _updateLabel.backgroundColor = UIColorFromRGB(0x6eaaf0);
-        _updateLabel.textColor = [UIColor whiteColor];
-        _updateLabel.font = [UIFont boldSystemFontOfSize:16.5];
-        _updateLabel.textAlignment = NSTextAlignmentCenter;
-        _updateLabel.userInteractionEnabled = YES;
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapUpdateLabel)];
-        [_updateLabel addGestureRecognizer:tap];
-    }
-    return _updateLabel;
-}
+//- (UILabel *)updateLabel
+//{
+//    if (!_updateLabel) {
+//        _updateLabel = [[UILabel alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 49.)];
+//        _updateLabel.backgroundColor = UIColorFromRGB(0x6eaaf0);
+//        _updateLabel.textColor = [UIColor whiteColor];
+//        _updateLabel.font = [UIFont boldSystemFontOfSize:16.5];
+//        _updateLabel.textAlignment = NSTextAlignmentCenter;
+//        _updateLabel.userInteractionEnabled = YES;
+//        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapUpdateLabel)];
+//        [_updateLabel addGestureRecognizer:tap];
+//    }
+//    return _updateLabel;
+//}
+//
+//- (void)tapUpdateLabel
+//{
+//    [self.tableView triggerPullToRefresh];
+//    [self.updateView removeFromSuperview];
+//}
 
-- (void)tapUpdateLabel
-{
-    [self.tableView triggerPullToRefresh];
-    [self.updateView removeFromSuperview];
-}
+//- (UIButton *)closeBtn
+//{
+//    if (!_closeBtn) {
+//        _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _closeBtn.frame = CGRectMake(kScreenWidth - 42, 8., 32., 32.);
+//        [_closeBtn setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+//        [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    return _closeBtn;
+//}
 
-- (UIButton *)closeBtn
-{
-    if (!_closeBtn) {
-        _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _closeBtn.frame = CGRectMake(kScreenWidth - 42, 8., 32., 32.);
-        [_closeBtn setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-        [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _closeBtn;
-}
-
-- (void)closeAction:(UIButton *)button
-{
-    [self.updateView removeFromSuperview];
-}
+//- (void)closeAction:(UIButton *)button
+//{
+//    [self.updateView removeFromSuperview];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -135,10 +135,10 @@ static int lastContentOffset;
     
     self.navigationItem.titleView = self.iconInfoView;
     
-    [self.view addSubview:self.updateView];
-    [self.updateView addSubview:self.updateLabel];
-    [self.updateView addSubview:self.closeBtn];
-    [self getUpdateNumber];
+//    [self.view addSubview:self.updateView];
+//    [self.updateView addSubview:self.updateLabel];
+//    [self.updateView addSubview:self.closeBtn];
+//    [self getUpdateNumber];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -163,21 +163,22 @@ static int lastContentOffset;
     [MobClick endLogPageView:@"SelectionView"];
 }
 
-- (void)getUpdateNumber
-{
-    [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
-        self.updateNum = [[dictionary objectForKey:@"unread_selection_count"] integerValue];
-        if (self.updateNum == 0) {
-            [self.updateView removeFromSuperview];
-        }
-        else
-        {
-           self.updateLabel.text = [NSString stringWithFormat:@"查看 %ld 个更新",self.updateNum];
-        }
-    } failure:^(NSInteger stateCode) {
-        
-    }];
-}
+////获取更新数
+//- (void)getUpdateNumber
+//{
+//    [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
+//        self.updateNum = [[dictionary objectForKey:@"unread_selection_count"] integerValue];
+//        if (self.updateNum == 0) {
+//            [self.updateView removeFromSuperview];
+//        }
+//        else
+//        {
+//           self.updateLabel.text = [NSString stringWithFormat:@"查看 %ld 个更新",self.updateNum];
+//        }
+//    } failure:^(NSInteger stateCode) {
+//        
+//    }];
+//}
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
@@ -188,21 +189,21 @@ static int lastContentOffset;
     [self.tableView addPullToRefreshWithActionHandler:^{
         
         [weakSelf.entityList refreshWithCategoryId:weakSelf.cateId];
-        [weakSelf.updateView removeFromSuperview];
+        
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf.entityList loadWithCategoryId:weakSelf.cateId];
     }];
     
-//    if (self.entityList.count == 0)
-//    {
-//        [self.tableView triggerPullToRefresh];
-//    }
-    BOOL isCache = [weakSelf.entityList loadFromCache];
-    if (!isCache) {
+    if (self.entityList.count == 0)
+    {
         [self.tableView triggerPullToRefresh];
     }
+//    BOOL isCache = [weakSelf.entityList loadFromCache];
+//    if (!isCache) {
+//        [self.tableView triggerPullToRefresh];
+//    }
     
 }
 

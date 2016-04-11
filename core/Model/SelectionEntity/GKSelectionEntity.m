@@ -18,20 +18,20 @@
 
 @implementation GKSelectionEntity
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [aCoder encodeInteger:self.categoryId forKey:@"caID"];
-    [aCoder encodeObject:self.dataArray forKey:@"dataArray"];
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super init]) {
-        [aDecoder decodeObjectForKey:@"caID"];
-        [aDecoder decodeObjectForKey:@"dataArray"];
-    }
-    return self;
-}
+//- (void)encodeWithCoder:(NSCoder *)aCoder
+//{
+//    [aCoder encodeInteger:self.categoryId forKey:@"caID"];
+//    [aCoder encodeObject:self.dataArray forKey:@"dataArray"];
+//}
+//
+//- (instancetype)initWithCoder:(NSCoder *)aDecoder
+//{
+//    if (self = [super init]) {
+//        [aDecoder decodeObjectForKey:@"caID"];
+//        [aDecoder decodeObjectForKey:@"dataArray"];
+//    }
+//    return self;
+//}
 
 - (void)refresh
 {
@@ -44,9 +44,9 @@
         [self saveEntityToIndexWithData:dataArray];
         
         //缓存
-        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.dataArray];
-        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"selection.entity.data"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+//        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.dataArray];
+//        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"selection.entity.data"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
         
         
     } failure:^(NSInteger stateCode, NSError * error) {
@@ -95,19 +95,19 @@
     [self load];
 }
 
-- (BOOL)loadFromCache
-{
-    
-    NSData * data = [[NSUserDefaults standardUserDefaults] objectForKey:@"selection.entity.data"];
-    if (data) {
-        self.dataArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-}
+//- (BOOL)loadFromCache
+//{
+//    
+//    NSData * data = [[NSUserDefaults standardUserDefaults] objectForKey:@"selection.entity.data"];
+//    if (data) {
+//        self.dataArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//        return YES;
+//    }
+//    else
+//    {
+//        return NO;
+//    }
+//}
 
 
 

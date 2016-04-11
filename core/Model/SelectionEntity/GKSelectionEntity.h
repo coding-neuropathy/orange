@@ -8,7 +8,7 @@
 
 #import "GKBaseData.h"
 
-@interface GKSelectionEntity : GKBaseData<NSCoding>
+@interface GKSelectionEntity : GKBaseData
 
 @property (assign, nonatomic) NSInteger categoryId;
 
@@ -16,5 +16,5 @@
 
 - (void)refreshWithCategoryId:(NSInteger)cateId;
 - (void)loadWithCategoryId:(NSInteger)cateId;
-- (BOOL)loadFromCache;
+//- (BOOL)loadFromCache;
 @end
