@@ -43,20 +43,20 @@
     if (!_webView) {
         
         // Javascript that disables pinch-to-zoom by inserting the HTML viewport meta tag into <head>
-//        NSString *source = @"var style = document.createElement('style'); \
-//        style.type = 'text/css'; \
-//        style.innerText = '*:not(input):not(textarea) { -webkit-user-select: none; -webkit-touch-callout: none; }'; \
-//        var head = document.getElementsByTagName('head')[0];\
-//        head.appendChild(style);";
-//        WKUserScript *script = [[WKUserScript alloc] initWithSource:source injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+        NSString *source = @"var style = document.createElement('style'); \
+        style.type = 'text/css'; \
+        style.innerText = '*:not(input):not(textarea) { -webkit-user-select: none; -webkit-touch-callout: none; }'; \
+        var head = document.getElementsByTagName('head')[0];\
+        head.appendChild(style);";
+        WKUserScript *script = [[WKUserScript alloc] initWithSource:source injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
         
         // Javascript that disables pinch-to-zoom by inserting the HTML viewport meta tag into <head>
-        NSString *source = @"var meta = document.createElement('meta'); \
-        meta.name = 'viewport'; \
-        meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; \
-        var head = document.getElementsByTagName('head')[0];\
-        head.appendChild(meta);";
-        WKUserScript *script = [[WKUserScript alloc] initWithSource:source injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+//        NSString *source = @"var meta = document.createElement('meta'); \
+//        meta.name = 'viewport'; \
+//        meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; \
+//        var head = document.getElementsByTagName('head')[0];\
+//        head.appendChild(meta);";
+//        WKUserScript *script = [[WKUserScript alloc] initWithSource:source injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
         
         // Create the user content controller and add the script to it
         WKUserContentController *userContentController = [WKUserContentController new];
