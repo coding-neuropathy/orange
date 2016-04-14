@@ -1194,7 +1194,7 @@
             GKArticle * article = [GKArticle modelFromDictionary:row];
             [articles addObject:article];
         }
-        NSLog(@"%@", articles);
+//        NSLog(@"%@", articles);
         NSInteger total = [[objectDict valueForKey:@"count"] integerValue];
         NSInteger size = [[objectDict valueForKey:@"size"] integerValue];
         if (success) {
