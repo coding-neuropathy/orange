@@ -21,7 +21,7 @@
 
 @property (strong, nonatomic) WebViewProgressView * progressView;
 @property (strong, nonatomic) UIImage * image;
-
+@property (nonatomic , assign)NSString * shareTitle;
 
 @end
 
@@ -236,6 +236,8 @@
     [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
 //        self.title = result;
         self.title = @"图文";
+        self.shareTitle = result;
+//        NSLog(@"%@",self.shareTitle);
     }];
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
@@ -252,7 +254,7 @@
     }
     
     
-    ShareView * view = [[ShareView alloc]initWithTitle:self.title SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
+    ShareView * view = [[ShareView alloc]initWithTitle:self.shareTitle SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
     view.type = @"url";
     view.tapRefreshButtonBlock = ^(){
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
