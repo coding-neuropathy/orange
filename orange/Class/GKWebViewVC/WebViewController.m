@@ -71,6 +71,7 @@
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.UIDelegate = self;
         _webView.navigationDelegate = self;
+        
         [_webView sizeToFit];
     }
     return _webView;
@@ -332,58 +333,6 @@
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
-//
-//#pragma mark - share to sns
-//-(void)weiboShare
-//{
-//    if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
-//    {
-//        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//            [AVOSCloudSNS shareText:self.title andLink:[self.webView.URL absoluteString] andImage:[UIImage imageNamed:@"wxshare"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//                
-//            } andProgress:^(float percent) {
-//                if (percent == 1) {
-//                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-//                }
-//            }];
-//        }];
-//    }
-//    else
-//    {
-//        [AVOSCloudSNS shareText:self.title andLink:[self.webView.URL absoluteString] andImage:[UIImage imageNamed:@"wxshare"] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//            
-//        } andProgress:^(float percent) {
-//            if (percent == 1) {
-//                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-//            }
-//        }];
-//    }
-//}
-//
-//-(void)wxShare:(int)scene
-//{
-//    WXMediaMessage *message = [WXMediaMessage message];
-//    message.title = self.title;
-//    message.description= @"";
-//    if (self.image) {
-//        [message setThumbImage:[UIImage imageWithData:[self.image imageDataLessThan_10K]]];
-//    }
-//    else
-//    {
-//        [message setThumbImage:[UIImage imageNamed:@"wxshare"]];
-//    }
-//    
-//    
-//    WXAppExtendObject *ext = [WXAppExtendObject object];
-//    ext.url = [self.webView.URL absoluteString];
-//    
-//    message.mediaObject = ext;
-//    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-//    req.bText = NO;
-//    req.message = message;
-//    req.scene = scene;
-//    
-//    [WXApi sendReq:req];
-//}
+
 
 @end
