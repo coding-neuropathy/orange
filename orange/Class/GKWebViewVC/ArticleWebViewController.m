@@ -161,7 +161,7 @@
     }
     
     
-    ShareView * view = [[ShareView alloc]initWithTitle:self.title SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
+    ShareView * view = [[ShareView alloc]initWithTitle:self.article.title SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
     view.type = @"url";
     view.tapRefreshButtonBlock = ^(){
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
@@ -169,7 +169,6 @@
     [view show];
 }
 
-#pragma mark - button action
 - (void)digBtnAction:(UIButton *)btn
 {
     //    NSLog(@"OKOKOKOKO");
@@ -211,12 +210,7 @@
     }
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-  
-}
-
-#pragma mark - button action
+//#pragma mark - button action
 - (void)backAction:(id)sender
 {
     if([self.webView canGoBack]) {
@@ -226,4 +220,12 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+  
+}
+
+
+
 @end
