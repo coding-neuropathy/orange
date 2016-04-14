@@ -154,7 +154,6 @@ typedef NS_ENUM(NSInteger, FeedType) {
 {
     _feed = feed;
     
-//    NSLog(@"%@", _feed);
     self.type = [FeedCell typeFromFeed:self.feed];
 }
 
@@ -435,6 +434,12 @@ typedef NS_ENUM(NSInteger, FeedType) {
             [[OpenCenter sharedOpenCenter] openEntity:entity];
             
             [MobClick event:@"feed_forward_entity"];
+        }
+            break;
+        case FeedEntityNote:
+        {
+            GKEntity * entity = self.feed[@"object"][@"entity"];
+            [[OpenCenter sharedOpenCenter] openEntity:entity];
         }
         default:
             break;
