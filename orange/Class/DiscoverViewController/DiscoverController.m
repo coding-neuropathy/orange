@@ -234,9 +234,21 @@ static NSString * UserIdentifier = @"UserView";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    kAppDelegate.activeVC = self;
+}
+
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if([self.navigationController.scrollNavigationBar respondsToSelector:@selector(setScrollView:)])
+    {
+        self.navigationController.scrollNavigationBar.scrollView = nil;
+    }
     
     //self.navigationController.scrollNavigationBar.scrollView = self.collectionView;
     [self.navigationController.navigationBar setAlpha:1];

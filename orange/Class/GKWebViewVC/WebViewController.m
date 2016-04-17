@@ -73,6 +73,8 @@
         _webView.navigationDelegate = self;
         
         [_webView sizeToFit];
+    
+        
     }
     return _webView;
 }
@@ -205,6 +207,8 @@
 //        self.image = image;
 //    }];
     
+
+    
     [webView evaluateJavaScript:@"document.getElementById('share_img').getElementsByTagName('img')[0].src" completionHandler:^(NSString * imageURL, NSError * error) {
         
         if (imageURL) {
@@ -236,7 +240,6 @@
     
     [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
 //        self.title = result;
-        self.title = @"图文";
         self.shareTitle = result;
 //        NSLog(@"%@",self.shareTitle);
     }];

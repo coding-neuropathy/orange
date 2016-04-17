@@ -178,6 +178,13 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     
     [self.collectionView registerClass:[CategoryHeaderSection2 class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderSectionIdentifier2];
     
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationController.navigationItem.leftBarButtonItem = item;
+    
+}
+
+- (void)back{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

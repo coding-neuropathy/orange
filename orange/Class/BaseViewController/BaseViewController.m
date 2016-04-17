@@ -17,8 +17,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (self.navigationItem) {
+        UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [backBtn setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+        [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+        backBtn.frame = CGRectMake(0., 0., 32., 44.);
+        backBtn.imageEdgeInsets = UIEdgeInsetsMake(0., 0., 0., 20.);
+        UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+        self.navigationItem.leftBarButtonItem = backBarItem;
+    }
+
+   
+    
     // Do any additional setup after loading the view.
 }
+
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -41,6 +56,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)backAction:(UIButton *)button{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 /*
 #pragma mark - Navigation
 

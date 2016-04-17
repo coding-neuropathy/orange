@@ -17,7 +17,13 @@
 #import "ShareView.h"
 #import "LoginView.h"
 
-@interface ArticleWebViewController ()<WKNavigationDelegate , WKUIDelegate>
+@interface ArticleWebViewController ()<WKNavigationDelegate , WKUIDelegate>{
+    UIBarButtonItem *_moreButton;
+    UIBarButtonItem *_digButton;
+}
+
+//是否是外链
+@property (nonatomic , assign)int linkCount;
 
 @property (nonatomic , strong)WebViewProgressView * progressView;
 @property (nonatomic , strong)UIImage * image;
@@ -58,11 +64,14 @@
 }
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
     [self.webView addSubview:self.label];
+    _linkCount = 1;
     
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchWebView:)];
     
@@ -77,12 +86,15 @@
     [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     _moreBtn.backgroundColor = [UIColor clearColor];
     UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:_moreBtn];
-    
+#warning ...
+    _moreButton = moreBarItem;
     [BtnArray addObject:moreBarItem];
     
     //点赞按钮
     
     UIBarButtonItem * likeBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.digBtn];
+#warning ...
+    _digButton = likeBarItem;
     [BtnArray addObject:likeBarItem];
     [self.navigationItem setRightBarButtonItems:BtnArray animated:YES];
     
@@ -105,7 +117,7 @@
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     
-    self.title = self.article.title;
+    self.title = @"正在加载...";
 }
 
 - (void)touchWebView:(UITapGestureRecognizer *)tap
@@ -135,10 +147,21 @@
     [MobClick endLogPageView:@"articleWebView"];
 }
 
+- (void)setDigBtnIsShow:(BOOL)isShow{
+    if (isShow) {
+        self.navigationItem.rightBarButtonItems = @[_moreButton,_digButton];
+    }else{
+        self.navigationItem.rightBarButtonItems = @[_moreButton];
+    }
+}
+
 #pragma mark - <WKNavigationDelegate>
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
+    self.title = @"正在加载...";
     
+    
+
 }
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
@@ -146,9 +169,15 @@
     /**
      *  disable wkwebview zoom
      */
+    
     NSString *javascript = @"var meta = document.createElement('meta');meta.setAttribute('name', 'viewport');meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');document.getElementsByTagName('head')[0].appendChild(meta);";
     
     [webView evaluateJavaScript:javascript completionHandler:nil];
+    
+    
+//    [webView evaluateJavaScript:javascript completionHandler:^(id _Nullable object, NSError * _Nullable error) {
+//        
+//    }];
 }
 
 
@@ -167,6 +196,66 @@
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     };
     [view show];
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+    //    NSString * imageURL = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('img')[1].src"];
+    //    UIImageView * a = [[UIImageView alloc]init];
+    //    [a sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    //        self.image = image;
+    //    }];
+    
+    [webView evaluateJavaScript:@"document.getElementById('share_img').getElementsByTagName('img')[0].src" completionHandler:^(NSString * imageURL, NSError * error) {
+   
+        if (imageURL) {
+            [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                
+            } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                if (finished) {
+                    self.image = image;
+                }
+            }];
+            
+            [self showNavBarMessage];
+        }
+        else{
+            
+            [webView evaluateJavaScript:@"document.getElementsByTagName('img')[1].src" completionHandler:^(NSString * imageURL, NSError * error) {
+                
+                _linkCount ++;
+                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                    
+                } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                    if (finished) {
+                        self.image = image;
+                    }
+                }];
+                
+                [self showNavBarMessage];
+                
+            }];
+        }
+
+    }];
+    
+    
+    
+  
+}
+
+- (void)showNavBarMessage{
+    [self.webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
+        
+        if (_linkCount == 1) {
+            self.title = @"图文";
+            [self setDigBtnIsShow:YES];
+        }else{
+            self.title = result;
+            [self setDigBtnIsShow:NO];
+        }
+    }];
+
 }
 
 - (void)digBtnAction:(UIButton *)btn
@@ -215,10 +304,17 @@
 {
     if([self.webView canGoBack]) {
         [self.webView goBack];
+        _linkCount --;
+        [self showNavBarMessage];
     } else {
         //        [self.navigationController popToRootViewControllerAnimated:YES];
         [self.navigationController popViewControllerAnimated:YES];
+    
+       
     }
+    
+  
+
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
