@@ -86,14 +86,12 @@
     [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     _moreBtn.backgroundColor = [UIColor clearColor];
     UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:_moreBtn];
-#warning ...
     _moreButton = moreBarItem;
     [BtnArray addObject:moreBarItem];
     
     //点赞按钮
     
     UIBarButtonItem * likeBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.digBtn];
-#warning ...
     _digButton = likeBarItem;
     [BtnArray addObject:likeBarItem];
     [self.navigationItem setRightBarButtonItems:BtnArray animated:YES];

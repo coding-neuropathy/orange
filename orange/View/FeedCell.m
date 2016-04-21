@@ -431,7 +431,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         case FeedUserLike:
         {
             GKEntity *entity = self.feed[@"object"][@"entity"];
-            [[OpenCenter sharedOpenCenter] openEntity:entity];
+            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
             
             [MobClick event:@"feed_forward_entity"];
         }
@@ -439,7 +439,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         case FeedEntityNote:
         {
             GKEntity * entity = self.feed[@"object"][@"entity"];
-            [[OpenCenter sharedOpenCenter] openEntity:entity];
+            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
         }
         default:
             break;
