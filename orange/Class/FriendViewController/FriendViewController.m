@@ -17,7 +17,8 @@ static NSString *CellIdentifier = @"UserSingleListCell";
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray * dataArrayForUser;
 @property (nonatomic, strong) NoDataView * noDataView;
-
+/* 下拉刷新次数 */
+@property (nonatomic, assign) NSInteger refreshNum;
 @end
 
 @implementation FriendViewController
@@ -113,6 +114,8 @@ static NSString *CellIdentifier = @"UserSingleListCell";
             }
             [self.tableView reloadData];
             [self.tableView.pullToRefreshView stopAnimating];
+            self.refreshNum = 1;
+            
         } failure:^(NSInteger stateCode) {
             //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
             [SVProgressHUD dismiss];
@@ -122,10 +125,13 @@ static NSString *CellIdentifier = @"UserSingleListCell";
 }
 - (void)loadMore
 {
-    [API getUserFollowingListWithUserId:self.user.userId offset:self.dataArrayForUser.count count:30 success:^(NSArray *userArray) {
+    [API getUserFollowingListWithUserId:self.user.userId offset:self.refreshNum * 30 count:30 success:^(NSArray *userArray) {
         [self.dataArrayForUser addObjectsFromArray:userArray];
     
         [self.tableView reloadData];
+        
+        self.refreshNum += 1;
+        
         [self.tableView.infiniteScrollingView stopAnimating];
     } failure:^(NSInteger stateCode) {
         //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
