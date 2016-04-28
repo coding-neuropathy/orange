@@ -79,7 +79,7 @@
         _contentLabel.textColor = UIColorFromRGB(0x9d9e9f);
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         _contentLabel.numberOfLines = 2.;
-        _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+//        _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 //        _contentLabel.backgroundColor = [UIColor greenColor];
         [self.contentView addSubview:_contentLabel];
     }
@@ -123,6 +123,7 @@
         y = 4;
     }
     [paragraphStyle2 setLineSpacing:y];
+    paragraphStyle2.lineBreakMode = NSLineBreakByTruncatingTail;
     [attributedString2 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [_article.digest length])];
     self.contentLabel.attributedText = attributedString2;
     

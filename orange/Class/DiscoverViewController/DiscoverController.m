@@ -160,7 +160,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         [_searchVC.searchBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 48)] stretchableImageWithLeftCapWidth:5 topCapHeight:5]  forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
         [_searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(10, 28)]  forState:UIControlStateNormal];
         
-        _searchVC.searchBar.searchTextPositionAdjustment = UIOffsetMake(2.f, 0.f);
+        _searchVC.searchBar.searchTextPositionAdjustment = UIOffsetMake(6.f, 0.f);
         _searchVC.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
         _searchVC.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _searchVC.searchBar.keyboardType = UIKeyboardTypeDefault;

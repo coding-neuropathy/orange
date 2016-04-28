@@ -103,7 +103,7 @@
     
     self.userLabel.text = NSLocalizedStringFromTable(@"recommendation user", kLocalizedFile, nil);
     
-    self.userScrollView.contentSize = CGSizeMake(50 * _users.count + 8 * (_users.count - 1), 50.);
+    self.userScrollView.contentSize = CGSizeMake(50 * _users.count + 18 * (_users.count - 1), 50.);
     
     for (UIView * view in self.userScrollView.subviews) {
         [view removeFromSuperview];
@@ -111,10 +111,10 @@
     
     for (int i = 0; i < _users.count; i ++) {
         GKUser * user = _users[i];
-        UserImageView * imageView = [[UserImageView alloc]initWithFrame:CGRectMake(i * 50.+ i * 8, 0, 50., 50.)];
+        UserImageView * imageView = [[UserImageView alloc]initWithFrame:CGRectMake(i * 50.+ i * 18, 0, 50., 50.)];
         [imageView sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(50., 50.)]];
         imageView.user = user;
-        UserNameLabel * label = [[UserNameLabel alloc]initWithFrame:CGRectMake(i * 50.+ i * 8, 58., 50., 10.)];
+        UserNameLabel * label = [[UserNameLabel alloc]initWithFrame:CGRectMake(i * 50.+ i * 18, 58., 50., 10.)];
         label.user = user;
         label.text = user.nickname;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userBtnAction:)];

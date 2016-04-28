@@ -133,8 +133,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = self.user.nickname;
-    
+    self.navigationItem.title = self.user.nick;
+    NSLog(@"%@",self.navigationItem.title);
     [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
     
     [self.collectionView registerClass:[UserHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer];
@@ -683,7 +683,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         if ([keyPath isEqualToString:@"nickname"]) {
             DDLogInfo(@"nickname kvo %@", [Passport sharedInstance].user.nickname);
             self.user = [Passport sharedInstance].user;
-            self.navigationItem.title = self.user.nickname;
+            self.navigationItem.title = self.user.nick;
             self.headerView.user = self.user;
 //            [self.collectionView reloadData];
         }
