@@ -713,6 +713,7 @@
         
         if (success) {
             success(bannerArray, entityArray, categories, articles, users);
+            NSLog(@"%@",operation.response.URL);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -93,13 +93,13 @@
     
     self.titleLabel.text = _article.title;
     
-    self.contentLabel.text = _article.content;
+    self.contentLabel.text = _article.digest;
     
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_article.title];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     
-    NSMutableAttributedString * attributedString2 = [[NSMutableAttributedString alloc] initWithString:_article.content];
+    NSMutableAttributedString * attributedString2 = [[NSMutableAttributedString alloc] initWithString:_article.digest];
     NSMutableParagraphStyle * paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
     
     NSInteger x = 4;
@@ -123,7 +123,7 @@
         y = 4;
     }
     [paragraphStyle2 setLineSpacing:y];
-    [attributedString2 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [_article.content length])];
+    [attributedString2 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [_article.digest length])];
     self.contentLabel.attributedText = attributedString2;
     
     
