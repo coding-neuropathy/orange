@@ -19,6 +19,14 @@
 @end
 
 
+@interface UserNameLabel : UILabel
+
+@property (nonatomic , strong)GKUser * user;
+
+@property (nonatomic , strong)UILabel * userName;
+
+@end
+
 @interface DiscoverUsersView ()
 
 @property (nonatomic , strong) UILabel * userLabel;
@@ -106,10 +114,14 @@
         UserImageView * imageView = [[UserImageView alloc]initWithFrame:CGRectMake(i * 50.+ i * 8, 0, 50., 50.)];
         [imageView sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(50., 50.)]];
         imageView.user = user;
+        UserNameLabel * label = [[UserNameLabel alloc]initWithFrame:CGRectMake(i * 50.+ i * 8, 58., 50., 10.)];
+        label.user = user;
+        label.text = user.nickname;
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userBtnAction:)];
         [imageView addGestureRecognizer:tap];
         
         [self.userScrollView addSubview:imageView];
+        [self.userScrollView addSubview:label];
     }
     
     [self setNeedsLayout];
@@ -132,7 +144,7 @@
     
     self.userLabel.frame = CGRectMake(10., 5.,kScreenWidth - 20., 30.);
     
-    self.userScrollView.frame = CGRectMake(10., 45., kScreenWidth - 20., 50.);
+    self.userScrollView.frame = CGRectMake(10., 45., kScreenWidth - 20., 80.);
     self.userScrollView.layer.cornerRadius = 4;
     self.userScrollView.layer.masksToBounds = YES;
     
@@ -179,17 +191,37 @@
     return _avatarView;
 }
 
-//- (void)setUser:(GKUser *)user
-//{
-//    _user = user;
-//    [self setNeedsLayout];
-//}
-//
-//- (void)layoutSubviews
-//{
-//    [super layoutSubviews];
-//    
-//}
-
 @end
 
+
+@implementation UserNameLabel
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        self.layer.cornerRadius = 2.;
+        self.layer.masksToBounds = YES;
+        self.font = [UIFont systemFontOfSize:10.];
+        self.textColor = UIColorFromRGB(0x414243);
+        self.textAlignment = NSTextAlignmentCenter;
+    }
+    return self;
+}
+
+- (UILabel *)userName
+{
+    if (!_userName) {
+        _userName = [[UILabel alloc]initWithFrame:CGRectMake(0., 0., 50., 10.)];
+        _userName.font = [UIFont boldSystemFontOfSize:10.];
+        _userName.lineBreakMode = NSLineBreakByWordWrapping;
+        _userName.textColor = UIColorFromRGB(0x414243);
+        _userName.textAlignment = NSTextAlignmentCenter;
+        _userName.backgroundColor = [UIColor redColor];
+        [self addSubview:_userName];
+    }
+    return _userName;
+}
+
+@end

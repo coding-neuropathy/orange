@@ -218,7 +218,7 @@ static CGFloat bioLabelHeight;
     
     if(!_user.bio.length)
     {
-        _bioLabel.text = @"暂无个人签名";
+        _bioLabel.text = @"";
     }
     
     {
@@ -307,7 +307,7 @@ static CGFloat bioLabelHeight;
     
     self.avatarView.center = CGPointMake(self.frame.size.width / 2, 25+32.);
     
-    self.nicknameLabel.frame = CGRectMake(0., 0., self.nicknameLabel.optimumSize.width + 20., 30.);
+    self.nicknameLabel.frame = CGRectMake(0., 0.,self.nicknameLabel.optimumSize.width + 20., 30.);
     self.nicknameLabel.center = self.avatarView.center;
     self.nicknameLabel.deFrameTop = self.avatarView.deFrameBottom + 16.;
     
