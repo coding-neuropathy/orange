@@ -200,4 +200,8 @@ typedef NS_ENUM(NSInteger, GKUserState) {
  */
 @property (nonatomic, assign) BOOL authorized_author;
 
+/**
+ *  截断处理后的用户名
+ */
+@property (nonatomic, strong)NSString * nick;
 @end

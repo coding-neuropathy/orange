@@ -13,6 +13,7 @@
 @property (strong, nonatomic) UIImageView * coverImageView;
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) RTLabel * detailLabel;
+@property (strong, nonatomic) UILabel * contentLabel;
 
 @end
 
@@ -46,9 +47,10 @@
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:16.];
         _titleLabel.textColor = UIColorFromRGB(0x414243);
-        _titleLabel.textAlignment = NSTextAlignmentNatural;
-        _titleLabel.numberOfLines = 3;
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.numberOfLines = 2;
         _titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+//        _titleLabel.backgroundColor = [UIColor greenColor];
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;
@@ -69,6 +71,21 @@
     return _detailLabel;
 }
 
+- (UILabel *)contentLabel
+{
+    if (!_contentLabel) {
+        _contentLabel = [[UILabel alloc]initWithFrame:CGRectZero];
+        _contentLabel.font = [UIFont systemFontOfSize:13.];
+        _contentLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _contentLabel.textAlignment = NSTextAlignmentLeft;
+        _contentLabel.numberOfLines = 2.;
+//        _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+//        _contentLabel.backgroundColor = [UIColor greenColor];
+        [self.contentView addSubview:_contentLabel];
+    }
+    return _contentLabel;
+}
+
 
 - (void)setArticle:(GKArticle *)article
 {
@@ -76,25 +93,45 @@
     
     self.titleLabel.text = _article.title;
     
+    self.contentLabel.text = _article.digest;
+    
+    
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_article.title];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     
-    NSInteger x = 6;
+    NSMutableAttributedString * attributedString2 = [[NSMutableAttributedString alloc] initWithString:_article.digest];
+    NSMutableParagraphStyle * paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
+    
+    NSInteger x = 4;
     if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
-        x = 6;
+        x = 2;
     }
     else{
-        x = 8;
+        x = 2;
     }
     
     [paragraphStyle setLineSpacing:x];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [_article.title length])];
     self.titleLabel.attributedText = attributedString;
     
+    NSInteger y = 4;
+    if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
+        y = 2;
+    }
+    else
+    {
+        y = 4;
+    }
+    [paragraphStyle2 setLineSpacing:y];
+    paragraphStyle2.lineBreakMode = NSLineBreakByTruncatingTail;
+    [attributedString2 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [_article.digest length])];
+    self.contentLabel.attributedText = attributedString2;
+    
+    
 //    self.detailLabel.text = @"精选图文";
 //    self.detailLabel.text = @"<font face='Helvetica-Light' color='^9d9e9f' size=12>精选图文</font>";
     [self.coverImageView sd_setImageWithURL:_article.coverURL_300];
-//    
+//
 //    NSDate * date =  [NSDate dateWithTimeIntervalSince1970:_article.pub_time];
 //    self.timeLabel.text = [NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForEnum:FAClockO], [date stringWithDefaultFormat]];
     
@@ -107,16 +144,18 @@
 //    
     self.coverImageView.frame = CGRectMake(0., 0., 112*kScreenWidth/375, 84*kScreenWidth/375);
     self.coverImageView.deFrameTop = 16.;
-    self.coverImageView.deFrameRight = self.contentView.deFrameRight - 16;
+    self.coverImageView.deFrameLeft = self.contentView.deFrameLeft + 16;
 //
     self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, self.contentView.deFrameHeight - 32.);
-    self.titleLabel.deFrameTop = 16.;
-    self.titleLabel.deFrameLeft = 16.;
+    self.titleLabel.deFrameTop = -5.;
+    self.titleLabel.deFrameLeft = self.coverImageView.deFrameRight + 12;
 
 //    self.detailLabel.frame = CGRectMake(0., 0., self.titleLabel.deFrameWidth, 12.);
 //    self.detailLabel.deFrameLeft = 16.;
 //    self.detailLabel.deFrameBottom = self.contentView.deFrameBottom - 16;
-    
+    self.contentLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, 50);
+    self.contentLabel.deFrameLeft = self.titleLabel.deFrameLeft;
+    self.contentLabel.deFrameTop = self.titleLabel.deFrameBottom - 19.;
 }
 
 - (void)drawRect:(CGRect)rect

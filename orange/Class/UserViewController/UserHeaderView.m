@@ -200,25 +200,25 @@ static CGFloat bioLabelHeight;
     
     if ([_user.gender isEqualToString:@"M"]) {
 //        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>   %@</b> <font face='FontAwesome' color='^8cb4ff'>%@</font>", _user.nickname, [NSString fontAwesom             eIconStringForEnum:FAmars]];
-        self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nickname];
+        self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
         self.staffImage.image = [UIImage imageNamed:@"user_icon_male"];
     } else if ([_user.gender isEqualToString:@"F"]) {
 //        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>   %@</b> <font face='FontAwesome' color='^ffb9c1'>%@</font>", _user.nickname, [NSString fontAwesomeIconStringForEnum:FAvenus]];
-        self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nickname];
+        self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
         self.staffImage.image = [UIImage imageNamed:@"user_icon_famale"];
     }
     else {
-        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>%@</b>", _user.nickname];
+        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>%@</b>", _user.nick];
     }
     if (_user.authorized_author == YES) {
-        self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nickname];
+        self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
         self.staffImage.image = [UIImage imageNamed:@"official"];
     }
     _bioLabel.text = _user.bio;
     
     if(!_user.bio.length)
     {
-        _bioLabel.text = @"暂无个人签名";
+        _bioLabel.text = @"";
     }
     
     {
@@ -307,7 +307,7 @@ static CGFloat bioLabelHeight;
     
     self.avatarView.center = CGPointMake(self.frame.size.width / 2, 25+32.);
     
-    self.nicknameLabel.frame = CGRectMake(0., 0., self.nicknameLabel.optimumSize.width + 20., 30.);
+    self.nicknameLabel.frame = CGRectMake(0., 0.,self.nicknameLabel.optimumSize.width + 20., 30.);
     self.nicknameLabel.center = self.avatarView.center;
     self.nicknameLabel.deFrameTop = self.avatarView.deFrameBottom + 16.;
     

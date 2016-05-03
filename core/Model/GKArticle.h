@@ -60,4 +60,9 @@
  */
 @property (assign, nonatomic) BOOL IsDig;
 
+/**
+ *  图文副标题
+ */
+@property (nonatomic , strong) NSString * digest;
+
 @end

@@ -17,6 +17,7 @@
 #import "DiscoverCategoryView.h"
 #import "EntityCell.h"
 #import "HomeArticleCell.h"
+#import "EntityDetailCell.h"
 
 #import "DiscoverUsersView.h"
 #import "RecUserController.h"
@@ -64,6 +65,7 @@ static NSString * BannerIdentifier = @"BannerView";
 static NSString * CategoryIdentifier = @"CategoryView";
 static NSString * HeaderSectionIdentifier = @"HeaderSection";
 static NSString * UserIdentifier = @"UserView";
+static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 
 #pragma mark - search log
 - (void)addSearchLog:(NSString *)text
@@ -158,7 +160,7 @@ static NSString * UserIdentifier = @"UserView";
         [_searchVC.searchBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 48)] stretchableImageWithLeftCapWidth:5 topCapHeight:5]  forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
         [_searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(10, 28)]  forState:UIControlStateNormal];
         
-        _searchVC.searchBar.searchTextPositionAdjustment = UIOffsetMake(2.f, 0.f);
+        _searchVC.searchBar.searchTextPositionAdjustment = UIOffsetMake(6.f, 0.f);
         _searchVC.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
         _searchVC.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _searchVC.searchBar.keyboardType = UIKeyboardTypeDefault;
@@ -212,6 +214,8 @@ static NSString * UserIdentifier = @"UserView";
     [self.view addSubview:self.collectionView];
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
     [self.collectionView registerClass:[HomeArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
+    
+    [self.collectionView registerClass:[EntityDetailCell class] forCellWithReuseIdentifier:EntityDetailCellIdentifier];
     
     [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
     [self.collectionView registerClass:[DiscoverCategoryView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier];
@@ -402,10 +406,15 @@ static NSString * UserIdentifier = @"UserView";
             
         default:
         {
-            EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityCellIdentifier forIndexPath:indexPath];
+//            EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityCellIdentifier forIndexPath:indexPath];
+//            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+//            cell.delegate = self;
+//            return cell;
+            EntityDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityDetailCellIdentifier forIndexPath:indexPath];
             cell.entity = [self.entityArray objectAtIndex:indexPath.row];
-            cell.delegate = self;
+//            cell.delegate = self;
             return cell;
+            
         }
             break;
     }
@@ -440,7 +449,7 @@ static NSString * UserIdentifier = @"UserView";
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
                 [userView setTapUserBlock:^(GKUser *user) {
-                    
+            
                    [[OpenCenter sharedOpenCenter]openUser:user];
                     
                 }];
@@ -490,7 +499,8 @@ static NSString * UserIdentifier = @"UserView";
             break;
         case 4:
         {
-            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+//            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+            cellsize = CGSizeMake((kScreenWidth  )/2 - 1, (kScreenWidth  )/2 + 85);
         }
             break;
             
@@ -516,7 +526,8 @@ static NSString * UserIdentifier = @"UserView";
             break;
         case 4:
         {
-            edge = UIEdgeInsetsMake(0., 3., 3., 3.);
+//            edge = UIEdgeInsetsMake(0., 3., 3., 3.);
+            edge = UIEdgeInsetsMake(0.5, 0.5, 0.5, 0.5);
         }
             break;
         default:
@@ -532,7 +543,8 @@ static NSString * UserIdentifier = @"UserView";
 
         case 4:
         {
-            itemSpacing = 3.;
+//            itemSpacing = 3.;
+            itemSpacing = 1.;
         }
             break;
         default:
@@ -551,7 +563,8 @@ static NSString * UserIdentifier = @"UserView";
             break;
         case 4:
         {
-            spacing = 3.;
+//            spacing = 3.;
+            spacing = 1.;
         }
             break;
             
@@ -572,7 +585,7 @@ static NSString * UserIdentifier = @"UserView";
             break;
         case 1:
             if (self.userArray.count) {
-                headerSize = CGSizeMake(kScreenWidth, 106.);
+                headerSize = CGSizeMake(kScreenWidth, 126.);
             }
             break;
         case 2:

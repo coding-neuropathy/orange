@@ -116,13 +116,13 @@
     _entity = entity;
     __weak __typeof(&*self)weakSelf = self;
     [self.loading startAnimating];
-//    if (IS_IPHONE_6) {
+
         [self.imageView sd_setImageWithPreviousCachedImageWithURL:_entity.imageURL_310x310 andPlaceholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake((SCREEN_WIDTH - 3)/2 - 32, (SCREEN_WIDTH - 3)/2 - 32)] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
             //
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [weakSelf.loading stopAnimating];
         }];
-//    }
+
 
     self.brandLabel.text = _entity.brand;
     self.titleLabel.text = _entity.title;

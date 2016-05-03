@@ -40,6 +40,7 @@
                              @"location"         : @"location",
                              @"mail_verified'"   : @"mail_verified",
                              @"authorized_author": @"authorized_author",
+                             @"nick"             : @"nick",
                              };
     
     return keyDic;
