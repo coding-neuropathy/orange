@@ -62,7 +62,8 @@
 - (void)successLogWithOperation:(AFHTTPRequestOperation *)operation responseObject:(id)responseObject
 {
     // NSInteger stateCode = operation.response.statusCode;
-    // NSString *urlString = operation.response.URL.absoluteString;
+    NSString *urlString = operation.response.URL.absoluteString;
+    NSLog(@"url %@", urlString);
 }
 
 - (void)failureLogWithOperation:(AFHTTPRequestOperation *)operation responseObject:(NSError *)error
