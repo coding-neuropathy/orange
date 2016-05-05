@@ -566,7 +566,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
 }
-#warning edit--------------------------
+
 - (void)TapEditBtnWithUser:(GKUser *)user
 {
 //    [self settingButtonAction];
