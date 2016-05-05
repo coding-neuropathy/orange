@@ -129,6 +129,7 @@
  personal settings
  */
 "edit your profile" = "编辑个人资料";
+"profile Photo" = "头像";
 "nickname"  = "昵称";
 "gender"    = "性别";
 "bio"       = "简介";

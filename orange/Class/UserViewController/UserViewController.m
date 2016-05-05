@@ -16,6 +16,7 @@
 
 #import "SettingViewController.h"
 #import "EditViewController.h"
+#import "NewEditViewController.h"
 #import "FriendViewController.h"
 #import "FanViewController.h"
 #import "UserArticleViewController.h"
@@ -134,7 +135,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [super viewDidLoad];
     
     self.navigationItem.title = self.user.nick;
-    NSLog(@"%@",self.navigationItem.title);
     [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
     
     [self.collectionView registerClass:[UserHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer];
@@ -566,12 +566,14 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
 }
-
+#warning edit--------------------------
 - (void)TapEditBtnWithUser:(GKUser *)user
 {
 //    [self settingButtonAction];
-    EditViewController * vc = [[EditViewController alloc] init];
-    
+//    EditViewController * vc = [[EditViewController alloc] init];
+//    
+//    [self.navigationController pushViewController:vc animated:YES];
+    NewEditViewController * vc = [[NewEditViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

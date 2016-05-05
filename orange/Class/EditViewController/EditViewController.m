@@ -153,8 +153,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
 {
     
     EditViewCell * cell  = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier forIndexPath:indexPath];
-//    cell.dict = [[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row];
-//    NSLog(@"string %@", [[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row]);
+
     cell.string = [[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 
@@ -217,14 +216,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
         switch (indexPath.row) {
             case 0:
             {
-                /*
-                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"修改邮箱" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
-                alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-                alertView.tag = 30000;
-                UITextField *textField = [alertView textFieldAtIndex:0];
-                textField.text = [Passport sharedInstance].user.email;
-                [alertView show];
-                 */
+                
                 EmailEditViewController * VC = [[EmailEditViewController alloc]init];
                 [self.navigationController pushViewController:VC animated:YES];
                 
@@ -232,15 +224,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
                 break;
             case 1:
             {
-                /*
-                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"修改密码" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
-                alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-                alertView.tag = 30001;
-                UITextField *textField = [alertView textFieldAtIndex:0];
-                textField.secureTextEntry = YES;
-//                textField.text = [Passport sharedInstance].user.email;
-                [alertView show];
-                 */
+                
                 PasswordEditViewController * VC = [[PasswordEditViewController alloc]init];
                 [self.navigationController pushViewController:VC animated:YES];
             }
@@ -333,15 +317,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
         if (buttonIndex == 1) {
             UITextField *tf=[alertView textFieldAtIndex:0];
             if ([tf.text validateEmail]) {
-//                NSDictionary *dict = @{@"email": tf.text};
-//                [API updateaccountWithParameters:dict success:^(GKUser *user) {
-//                    [Passport sharedInstance].user.email = user.email;
-//                    [Passport sharedInstance].user = [Passport sharedInstance].user;
-//                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
-//                    [self.tableView reloadData];
-//                } failure:^(NSInteger stateCode) {
-//                    [SVProgressHUD showImage:nil status:@"修改失败"];
-//                }];
+
             } else {
                 [SVProgressHUD showImage:nil status:@"邮箱格式错误"];
             }
@@ -355,12 +331,7 @@ NSString *SettingTableIdentifier = @"SettingCell";
             if (tf.text.length < 6) {
                 [SVProgressHUD showImage:nil status:@"密码不能小于6位"];
             } else {
-//                NSDictionary *dict = @{@"password":tf.text};
-//                [API updateaccountWithParameters:dict success:^(GKUser *user) {
-//                    [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
-//                } failure:^(NSInteger stateCode) {
-//                    [SVProgressHUD showImage:nil status:@"修改失败"];
-//                }];
+
             }
         }
     }

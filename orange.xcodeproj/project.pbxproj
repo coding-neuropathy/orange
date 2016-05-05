@@ -10,12 +10,18 @@
 		2309032E1C803B1500AD26D6 /* authorizedUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */; };
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
 		239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239231B01C7D96FA00B49A88 /* RecUserController.m */; };
+		23B3164D1CD9D4F600A83CDB /* NewEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164C1CD9D4F600A83CDB /* NewEditViewController.m */; };
+		23B316501CD9E4C800A83CDB /* NewEditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164F1CD9E4C800A83CDB /* NewEditHeaderView.m */; };
 		23E0CB7E1C855B3400E351CB /* UserArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E0CB7D1C855B3400E351CB /* UserArticleViewController.m */; };
 		23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */; };
 		23F000221C97B5750033BAA4 /* ArticleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F000211C97B5750033BAA4 /* ArticleWebViewController.m */; };
 		23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F1DD951C28020500A71827 /* PNoteViewController.m */; };
 		23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */; };
 		23F424041C59BFA7005E1318 /* CategoryArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F424031C59BFA7005E1318 /* CategoryArticleCell.m */; };
+		23F612FA1CDAEF120074E8C8 /* NicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F612F91CDAEF120074E8C8 /* NicknameViewController.m */; };
+		23F613011CDB0E0A0074E8C8 /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23F612FE1CDB0E0A0074E8C8 /* Address.plist */; };
+		23F613021CDB0E0A0074E8C8 /* AddressPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F613001CDB0E0A0074E8C8 /* AddressPickView.m */; };
+		23F6130A1CDB1B310074E8C8 /* BioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F613091CDB1B310074E8C8 /* BioViewController.m */; };
 		23F7F0081C61AF100079A753 /* MoreArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */; };
 		23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FA3BE41CB6611400B8F810 /* UserDigArticlesViewController.m */; };
 		391F5F911B1705A000931533 /* JXFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F901B1705A000931533 /* JXFormCell.m */; };
@@ -446,6 +452,10 @@
 		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
 		239231AF1C7D96FA00B49A88 /* RecUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecUserController.h; sourceTree = "<group>"; };
 		239231B01C7D96FA00B49A88 /* RecUserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecUserController.m; sourceTree = "<group>"; };
+		23B3164B1CD9D4F600A83CDB /* NewEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEditViewController.h; sourceTree = "<group>"; };
+		23B3164C1CD9D4F600A83CDB /* NewEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEditViewController.m; sourceTree = "<group>"; };
+		23B3164E1CD9E4C800A83CDB /* NewEditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEditHeaderView.h; sourceTree = "<group>"; };
+		23B3164F1CD9E4C800A83CDB /* NewEditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEditHeaderView.m; sourceTree = "<group>"; };
 		23E0CB7C1C855B3400E351CB /* UserArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserArticleViewController.h; sourceTree = "<group>"; };
 		23E0CB7D1C855B3400E351CB /* UserArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserArticleViewController.m; sourceTree = "<group>"; };
 		23EEFFB71C7ABAFA0061F45F /* DiscoverUsersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverUsersView.h; sourceTree = "<group>"; };
@@ -458,6 +468,13 @@
 		23F274401C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticlesSubCategoryViewController.m; sourceTree = "<group>"; };
 		23F424021C59BFA7005E1318 /* CategoryArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryArticleCell.h; sourceTree = "<group>"; };
 		23F424031C59BFA7005E1318 /* CategoryArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryArticleCell.m; sourceTree = "<group>"; };
+		23F612F81CDAEF120074E8C8 /* NicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NicknameViewController.h; sourceTree = "<group>"; };
+		23F612F91CDAEF120074E8C8 /* NicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NicknameViewController.m; sourceTree = "<group>"; };
+		23F612FE1CDB0E0A0074E8C8 /* Address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Address.plist; sourceTree = "<group>"; };
+		23F612FF1CDB0E0A0074E8C8 /* AddressPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPickView.h; sourceTree = "<group>"; };
+		23F613001CDB0E0A0074E8C8 /* AddressPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickView.m; sourceTree = "<group>"; };
+		23F613081CDB1B310074E8C8 /* BioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BioViewController.h; sourceTree = "<group>"; };
+		23F613091CDB1B310074E8C8 /* BioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BioViewController.m; sourceTree = "<group>"; };
 		23F7F0061C61AF100079A753 /* MoreArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticlesViewController.h; sourceTree = "<group>"; };
 		23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticlesViewController.m; sourceTree = "<group>"; };
 		23FA3BE31CB6611400B8F810 /* UserDigArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDigArticlesViewController.h; sourceTree = "<group>"; };
@@ -1185,6 +1202,23 @@
 			path = DiscoverViewController;
 			sourceTree = "<group>";
 		};
+		23B3164A1CD9D4C200A83CDB /* NewEditViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23F612FD1CDB0E0A0074E8C8 /* AddressPick */,
+				23B3164B1CD9D4F600A83CDB /* NewEditViewController.h */,
+				23B3164C1CD9D4F600A83CDB /* NewEditViewController.m */,
+				23B3164E1CD9E4C800A83CDB /* NewEditHeaderView.h */,
+				23B3164F1CD9E4C800A83CDB /* NewEditHeaderView.m */,
+				23F612F81CDAEF120074E8C8 /* NicknameViewController.h */,
+				23F612F91CDAEF120074E8C8 /* NicknameViewController.m */,
+				23F613081CDB1B310074E8C8 /* BioViewController.h */,
+				23F613091CDB1B310074E8C8 /* BioViewController.m */,
+			);
+			name = NewEditViewController;
+			path = EditViewController;
+			sourceTree = "<group>";
+		};
 		23F0001F1C97B5200033BAA4 /* ArticleWebViewVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1203,6 +1237,16 @@
 			);
 			name = PNoteViewController;
 			path = DiscoverViewController;
+			sourceTree = "<group>";
+		};
+		23F612FD1CDB0E0A0074E8C8 /* AddressPick */ = {
+			isa = PBXGroup;
+			children = (
+				23F612FE1CDB0E0A0074E8C8 /* Address.plist */,
+				23F612FF1CDB0E0A0074E8C8 /* AddressPickView.h */,
+				23F613001CDB0E0A0074E8C8 /* AddressPickView.m */,
+			);
+			path = AddressPick;
 			sourceTree = "<group>";
 		};
 		391F5F8D1B1705A000931533 /* UIComponents */ = {
@@ -1826,6 +1870,7 @@
 				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
 				DA35B3C31AFEE31200D66671 /* PasswordEditViewController */,
 				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
+				23B3164A1CD9D4C200A83CDB /* NewEditViewController */,
 				4E117B5B1ABC6FDC00844935 /* EditViewController */,
 				4E934DA51A9AE9FB00374B05 /* GroupViewController */,
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
@@ -2897,6 +2942,7 @@
 				8A5DAEB81BC779A00028C36D /* AlipaySDK.bundle in Resources */,
 				4E4F27F71B6F4699003A63C5 /* 3.png in Resources */,
 				4E688A1F1BA9C2BA0006AD9B /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
+				23F613011CDB0E0A0074E8C8 /* Address.plist in Resources */,
 				8AA0FE711C7DC6C0000BD702 /* WeiboSDK.bundle in Resources */,
 				4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */,
 				4E4F27F01B6F4699003A63C5 /* 12.png in Resources */,
@@ -3063,6 +3109,7 @@
 				8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */,
 				8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */,
 				B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */,
+				23B316501CD9E4C800A83CDB /* NewEditHeaderView.m in Sources */,
 				4EC9F7A31A7BBEF20057D736 /* TagViewController.m in Sources */,
 				B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */,
 				4EC9F7911A7928520057D736 /* FanViewController.m in Sources */,
@@ -3089,6 +3136,7 @@
 				B76EE07F1B3D86AE009D8763 /* MessageController.m in Sources */,
 				4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */,
 				4EA58AC61C1723AB003251FB /* UserSearchViewController.m in Sources */,
+				23F613021CDB0E0A0074E8C8 /* AddressPickView.m in Sources */,
 				4EC9F79F1A7A79800057D736 /* CategoryViewController.m in Sources */,
 				B7F544031BC2457E0044F5E9 /* UIImage+WebP.m in Sources */,
 				B769B1221B2ACE91004401FA /* IFTTTFrameAnimation.m in Sources */,
@@ -3107,6 +3155,7 @@
 				4EA58ABD1C172365003251FB /* EntitySearchViewController.m in Sources */,
 				8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */,
 				23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */,
+				23B3164D1CD9D4F600A83CDB /* NewEditViewController.m in Sources */,
 				4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */,
 				B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */,
 				4E688A121BA9C2BA0006AD9B /* JSQPhotoMediaItem.m in Sources */,
@@ -3122,6 +3171,7 @@
 				4E6889FA1BA9C2BA0006AD9B /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
+				23F6130A1CDB1B310074E8C8 /* BioViewController.m in Sources */,
 				B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */,
 				239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */,
 				23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */,
@@ -3200,6 +3250,7 @@
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */,
 				4E688A1E1BA9C2BA0006AD9B /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
+				23F612FA1CDAEF120074E8C8 /* NicknameViewController.m in Sources */,
 				8AAA2D141C04444800B27E49 /* EntityPreViewController.m in Sources */,
 				4E7869691BA70C5A00586BD9 /* EntityHeaderBuyView.m in Sources */,
 				4E6889FD1BA9C2BA0006AD9B /* UIColor+JSQMessages.m in Sources */,

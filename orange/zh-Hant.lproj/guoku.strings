@@ -142,6 +142,7 @@
  personal settings
  */
 "edit your profile" = "編輯個人資料";
+"profile Photo" = "頭像";
 "nickname"  = "暱稱";
 "gender"    = "性別";
 "bio"       = "簡介";

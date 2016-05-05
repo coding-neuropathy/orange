@@ -142,6 +142,7 @@
   personal settings
  */
 "edit your profile" = "Edit Your Profile";
+"profile Photo" = "Profile Photo";
 "nickname"  = "Nickname";
 "gender"    = "Gender";
 "bio"       = "Bio";
