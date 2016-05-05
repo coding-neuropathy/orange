@@ -62,6 +62,8 @@
 //        button.center = CGPointMake(kScreenWidth - 40, 37)
         _followButton.layer.cornerRadius = 4;
         _followButton.hidden = YES;
+        _followButton.layer.borderWidth = 1.0;
+        _followButton.layer.borderColor = UIColorFromRGB(0x6192ff).CGColor;
         [self.contentView addSubview:_followButton];
     }
     return _followButton;
@@ -85,12 +87,12 @@
     }
     
     if (_user.authorized_author == YES) {
-        self.label.text = [NSString stringWithFormat:@"%@",_user.nickname];
+        self.label.text = [NSString stringWithFormat:@"%@",_user.nick];
         self.staffImageView.image = [UIImage imageNamed:@"official"];
     }
     else
     {
-        self.label.text = [NSString stringWithFormat:@"%@",_user.nickname];
+        self.label.text = [NSString stringWithFormat:@"%@",_user.nick];
         self.staffImageView.image = [UIImage imageNamed:@""];
     }
     
@@ -179,7 +181,7 @@
         self.blockBtn.frame = CGRectMake(0., 0., 40., 24.);
         self.blockBtn.center = CGPointMake(kScreenWidth - 40, 37);
     } else {
-        self.followButton.frame = CGRectMake(0., 0., 40., 24.);
+        self.followButton.frame = CGRectMake(0., 0., 24., 24.);
         self.followButton.center = CGPointMake(kScreenWidth - 40, 37);
         [self configFollowButton];
     }
@@ -195,26 +197,26 @@
     self.followButton.hidden = NO;
     if (self.user.relation == GKUserRelationTypeNone) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAPlus]] forState:UIControlStateNormal];
-        [self.followButton setBackgroundColor:UIColorFromRGB(0x6EAAF0)];
-        [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [self.followButton setBackgroundColor:UIColorFromRGB(0xffffff)];
+        [self.followButton setTitleColor:UIColorFromRGB(0x6192ff) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(followButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeFan) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAPlus]]  forState:UIControlStateNormal];
-        [self.followButton setBackgroundColor:UIColorFromRGB(0x6EAAF0)];
+        [self.followButton setBackgroundColor:UIColorFromRGB(0x6192ff)];
         [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(followButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeFollowing) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACheck]]  forState:UIControlStateNormal];
-        [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-        [self.followButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [self.followButton setBackgroundColor:UIColorFromRGB(0x6192ff)];
+        [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeBoth) {
         [self.followButton setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAExchange]]  forState:UIControlStateNormal];
-        [self.followButton setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-        [self.followButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [self.followButton setBackgroundColor:UIColorFromRGB(0x6192ff)];
+        [self.followButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [self.followButton addTarget:self action:@selector(unfollowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.user.relation == GKUserRelationTypeSelf) {

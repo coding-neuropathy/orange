@@ -8,6 +8,7 @@
 
 #import "UserViewController.h"
 #import "UserHeaderView.h"
+#import "NewUserHeaderView.h"
 #import "UserHeaderSectionView.h"
 #import "UserFooterSectionView.h"
 #import "EntityCell.h"
@@ -32,7 +33,7 @@
 
 //#import "DataStructure.h"
 
-@interface UserViewController () <EntityCellDelegate, UserHeaderViewDelegate, UserHeaderSectionViewDelegate>
+@interface UserViewController () <EntityCellDelegate, UserHeaderViewDelegate, UserHeaderSectionViewDelegate,NewUserHeaderViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray * likedataArray;
 @property (strong, nonatomic) NSMutableArray * notedataArray;
@@ -40,6 +41,8 @@
 
 @property (strong, nonatomic) UserHeaderView * headerView;
 @property (strong, nonatomic) UICollectionView * collectionView;
+
+@property (strong, nonatomic) NewUserHeaderView * newheaderView;
 
 @property (assign, nonatomic) UserPageType type;
 
@@ -52,6 +55,7 @@
 @implementation UserViewController
 
 static NSString * UserHeaderIdentifer = @"UserHeader";
+static NSString * NewUserHeaderIdentifer = @"NewUserHeader";
 static NSString * UserHeaderSectionIdentifer = @"UserHeaderSection";
 static NSString * UserFooterSectionIdentifer = @"UserFooterSection";
 static NSString * UserLikeEntityIdentifer = @"EntityCell";
@@ -136,6 +140,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     
     self.navigationItem.title = self.user.nick;
     [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
+    
+    [self.collectionView registerClass:[NewUserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NewUserHeaderIdentifer];
     
     [self.collectionView registerClass:[UserHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer];
     
@@ -235,14 +241,14 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         }
             break;
         case 2:
-        {
-            count = self.articledataArray.count > 3 ? 3 : self.articledataArray.count;
-        }
+//        {
+//            count = self.articledataArray.count > 3 ? 3 : self.articledataArray.count;
+//        }
             break;
         case 3:
-        {
-            count = self.notedataArray.count > 3 ? 3 : self.notedataArray.count;
-        }
+//        {
+//            count = self.notedataArray.count > 3 ? 3 : self.notedataArray.count;
+//        }
             break;
         default:
             break;
@@ -256,10 +262,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         switch (indexPath.section) {
             case 0:
             {
-                self.headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer forIndexPath:indexPath];
-                self.headerView.user = self.user;
-                self.headerView.delegate = self;
-                return self.headerView;
+                self.newheaderView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NewUserHeaderIdentifer forIndexPath:indexPath];
+                self.newheaderView.user = self.user;
+                self.newheaderView.delegate = self;
+                return self.newheaderView;
             }
                 break;
                 
@@ -422,7 +428,13 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-            size = CGSizeMake(kScreenWidth, 300);
+            if (self.user.bio.length == 0) {
+                size = CGSizeMake(kScreenWidth, 144.);
+            }
+            else
+            {
+                size = CGSizeMake(kScreenWidth, 224.);
+            }
             break;
             
         case 1:
@@ -455,7 +467,13 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-
+            if (self.user.bio.length == 0) {
+                size = CGSizeMake(kScreenWidth, 10.);
+            }
+            else
+            {
+                size = CGSizeMake(0., 0.);
+            }
             break;
         case 1:
             if (self.likedataArray.count > 0)
@@ -577,7 +595,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)TapFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view
+- (void)TapFollowBtnWithUser:(GKUser *)user View:(NewUserHeaderView *)view
 {
     DDLogInfo(@"follow with user id %lu", user.userId);
     if (!k_isLogin) {
@@ -601,7 +619,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     }
 }
 
-- (void)TapUnFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view
+- (void)TapUnFollowBtnWithUser:(GKUser *)user View:(NewUserHeaderView *)view
 {
     DDLogInfo(@"unfollow");
     UIAlertController * altervc = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ %@?",NSLocalizedStringFromTable(@"unfollow", kLocalizedFile, nil), user.nickname] message:nil preferredStyle:UIAlertControllerStyleAlert];

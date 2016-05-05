@@ -22,6 +22,7 @@
 		23F613011CDB0E0A0074E8C8 /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23F612FE1CDB0E0A0074E8C8 /* Address.plist */; };
 		23F613021CDB0E0A0074E8C8 /* AddressPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F613001CDB0E0A0074E8C8 /* AddressPickView.m */; };
 		23F6130A1CDB1B310074E8C8 /* BioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F613091CDB1B310074E8C8 /* BioViewController.m */; };
+		23F6130D1CDB4BF60074E8C8 /* NewUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F6130C1CDB4BF60074E8C8 /* NewUserHeaderView.m */; };
 		23F7F0081C61AF100079A753 /* MoreArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */; };
 		23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FA3BE41CB6611400B8F810 /* UserDigArticlesViewController.m */; };
 		391F5F911B1705A000931533 /* JXFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F901B1705A000931533 /* JXFormCell.m */; };
@@ -475,6 +476,8 @@
 		23F613001CDB0E0A0074E8C8 /* AddressPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPickView.m; sourceTree = "<group>"; };
 		23F613081CDB1B310074E8C8 /* BioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BioViewController.h; sourceTree = "<group>"; };
 		23F613091CDB1B310074E8C8 /* BioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BioViewController.m; sourceTree = "<group>"; };
+		23F6130B1CDB4BF60074E8C8 /* NewUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserHeaderView.h; sourceTree = "<group>"; };
+		23F6130C1CDB4BF60074E8C8 /* NewUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserHeaderView.m; sourceTree = "<group>"; };
 		23F7F0061C61AF100079A753 /* MoreArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticlesViewController.h; sourceTree = "<group>"; };
 		23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticlesViewController.m; sourceTree = "<group>"; };
 		23FA3BE31CB6611400B8F810 /* UserDigArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDigArticlesViewController.h; sourceTree = "<group>"; };
@@ -2237,6 +2240,8 @@
 				B7174DD81BD4A83D00DEDBDA /* UserViewController.m */,
 				B7174DDA1BD4A94900DEDBDA /* UserHeaderView.h */,
 				B7174DDB1BD4A94900DEDBDA /* UserHeaderView.m */,
+				23F6130B1CDB4BF60074E8C8 /* NewUserHeaderView.h */,
+				23F6130C1CDB4BF60074E8C8 /* NewUserHeaderView.m */,
 				B772BE921BD50605005C1540 /* UserHeaderSectionView.h */,
 				B772BE931BD50605005C1540 /* UserHeaderSectionView.m */,
 				B772BE951BD51FFC005C1540 /* UserFooterSectionView.h */,
@@ -3159,6 +3164,7 @@
 				4E73E67D1C1936C100B604B5 /* RegisterViewController.m in Sources */,
 				B76EE0851B3D8A16009D8763 /* ActiveController.m in Sources */,
 				B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */,
+				23F6130D1CDB4BF60074E8C8 /* NewUserHeaderView.m in Sources */,
 				B7F544001BC2457E0044F5E9 /* UIButton+WebCache.m in Sources */,
 				4E6889FA1BA9C2BA0006AD9B /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */,
