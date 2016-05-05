@@ -1320,7 +1320,6 @@
 		39B71FEB1B1F4C16008519E3 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				8A2754621CA5062F00073E78 /* ModelManager */,
 				39B720751B1F50E0008519E3 /* Passport */,
 				39B71FEC1B1F4C16008519E3 /* API */,
 				39B71FF41B1F4C16008519E3 /* Category */,
@@ -2314,13 +2313,6 @@
 				B77E00A81B8988DC008BCA55 /* EntityPopView.m */,
 			);
 			path = EntityViewController;
-			sourceTree = "<group>";
-		};
-		8A2754621CA5062F00073E78 /* ModelManager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ModelManager;
 			sourceTree = "<group>";
 		};
 		8A4E8F831C1A8D5B003EBE95 /* SVProgressHUD */ = {
