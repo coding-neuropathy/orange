@@ -19,9 +19,12 @@
 @property(nonatomic,strong)NSArray *selectedArray;
 @property(nonatomic,strong)NSArray *cityArray;
 @property(nonatomic,strong)NSArray *townArray;
-@property(nonatomic,strong)UIView *bottomView;//包括导航视图和地址选择视图
-@property(nonatomic,strong)UIPickerView *pickView;//地址选择视图
-@property(nonatomic,strong)UIView *navigationView;//上面的导航视图
+//包括导航视图和地址选择视图
+@property(nonatomic,strong)UIView *bottomView;
+//地址选择视图
+@property(nonatomic,strong)UIPickerView *pickView;
+//上面的导航视图
+@property(nonatomic,strong)UIView *navigationView;
 
 @end
 
@@ -76,11 +79,19 @@
 -(void)createView
 {
     
-    _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, navigationViewHeight+pickViewViewHeight)];
+    _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight - 10, kScreenWidth, navigationViewHeight+pickViewViewHeight - 10)];
     [self addSubview:_bottomView];
+
+    _pickView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, -10., kScreenWidth, pickViewViewHeight - 10.)];
+    _pickView.backgroundColor = [UIColor whiteColor];
+    _pickView.dataSource = self;
+    _pickView.delegate =self;
+    _pickView.showsSelectionIndicator = NO;
+    [_bottomView addSubview:_pickView];
+    
     //导航视图
-    _navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, navigationViewHeight)];
-    _navigationView.backgroundColor = [UIColor lightGrayColor];
+    _navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, -10., kScreenWidth, navigationViewHeight)];
+    _navigationView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     [_bottomView addSubview:_navigationView];
     
     UITapGestureRecognizer *tapNavigationView = [[UITapGestureRecognizer alloc]initWithTarget:self action:nil];
@@ -95,14 +106,14 @@
         button.tag = i;
         [button addTarget:self action:@selector(tapButton:) forControlEvents:UIControlEventTouchUpInside];
         
-
     }
-    _pickView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, navigationViewHeight, kScreenWidth, pickViewViewHeight)];
-    _pickView.backgroundColor = [UIColor whiteColor];
-    _pickView.dataSource = self;
-    _pickView.delegate =self;
-    [_bottomView addSubview:_pickView];
-    
+    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0., 0., 100., 40.)];
+    label.text = @"选择地点";
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont fontWithName:@"Helvetica" size:15.];
+    label.deFrameTop = _navigationView.deFrameTop + 13;
+    label.deFrameRight = kScreenWidth/2 + 50;
+    [_navigationView addSubview:label];
     
 }
 -(void)tapButton:(UIButton*)button
@@ -163,7 +174,7 @@
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel *lable=[[UILabel alloc]init];
     lable.textAlignment=NSTextAlignmentCenter;
-    lable.font=[UIFont systemFontOfSize:16.0f];
+    lable.font=[UIFont systemFontOfSize:17.0f];
     if (component == 0) {
         lable.text=[self.provinceArray objectAtIndex:row];
     } else if (component == 1) {

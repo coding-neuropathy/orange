@@ -8,11 +8,14 @@
 
 #import "BioViewController.h"
 
-@interface BioViewController ()
+@interface BioViewController ()<UITextViewDelegate>
 
 @property (nonatomic , strong)UIView * backView;
 
 @property (nonatomic , strong)UITextView * textView;
+
+//占位文字
+@property (nonatomic, strong) UILabel *tipLabel;
 
 @end
 
@@ -69,7 +72,9 @@
         
         _textView.tintColor = UIColorFromRGB(0x6d9acb);
         
-//        _textView.delegate = self;
+        _textView.text = [Passport sharedInstance].user.bio;
+        
+        _textView.delegate = self;
         
         _textView.spellCheckingType = UITextSpellCheckingTypeNo;
         
@@ -78,9 +83,40 @@
         _textView.autocapitalizationType = UITextAutocorrectionTypeNo;
         
         [_textView becomeFirstResponder];
+        
     }
     
     return _textView;
+}
+
+- (UILabel *)tipLabel
+{
+    if (!_tipLabel) {
+        //占位label
+        _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, kScreenWidth, 15)];
+        //左距中
+        self.tipLabel.textAlignment = NSTextAlignmentLeft;
+        //背景色透明
+        self.tipLabel.backgroundColor = [UIColor clearColor];
+        //设置字体样式与大小
+        [self.tipLabel setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
+        self.tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        self.tipLabel.text = @"请填写您的个人简介";
+        
+        [self.textView addSubview:self.tipLabel];
+    }
+    return _tipLabel;
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView.text.length >0) {
+        self.tipLabel.hidden = YES;
+    }
+    else
+    {
+        self.tipLabel.hidden = NO;
+    }
 }
 
 - (void)createSaveBtn
