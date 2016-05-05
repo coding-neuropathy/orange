@@ -37,6 +37,7 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
 {
     _addressPickView = [AddressPickView shareInstance];
     [self.view addSubview:_addressPickView];
+    __weak __typeof(&*self)weakSelf = self;
     _addressPickView.block = ^(NSString *province,NSString *city,NSString *town){
         NSString * locationStr = [NSString stringWithFormat:@"%@ %@ %@",province,city,town];
         NSDictionary *dict = @{@"location":locationStr};
@@ -46,7 +47,7 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
             [Passport sharedInstance].user.location = user.location;
             [Passport sharedInstance].user = [Passport sharedInstance].user;
             [SVProgressHUD showSuccessWithStatus:@"修改成功"];
-            [self.tableView reloadData];
+            [weakSelf.tableView reloadData];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"修改失败"];
         }];
