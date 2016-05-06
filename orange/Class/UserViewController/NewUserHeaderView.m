@@ -76,6 +76,7 @@
 {
     if (!_nicknameLabel) {
         _nicknameLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
+//        _nicknameLabel.backgroundColor = [UIColor yellowColor];
         _nicknameLabel.paragraphReplacement = @"";
         _nicknameLabel.lineSpacing = 7.;
         //        _nicknameLabel.textColor = UIColorFromRGB(0x414243);
@@ -94,7 +95,7 @@
         UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 1.)];
         line.backgroundColor = UIColorFromRGB(0xf1f1f1);
         [_bioBackView addSubview:line];
-        _bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(15., 20., kScreenWidth - 15., 40.)];
+        _bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(15., 10., kScreenWidth - 15., 40.)];
         _bioLabel.font = [UIFont systemFontOfSize:14.];
         _bioLabel.lineBreakMode = NSLineBreakByWordWrapping;
         
@@ -123,10 +124,11 @@
 {
     if (!_friendBtn) {
         _friendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _friendBtn.backgroundColor = [UIColor redColor];
         _friendBtn.titleLabel.font = [UIFont systemFontOfSize:15.];
         [_friendBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-        [_friendBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-        [_friendBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 20.)];
+        [_friendBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+//        [_friendBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 20.)];
         [_friendBtn addTarget:self action:@selector(friendBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:_friendBtn];
@@ -138,11 +140,13 @@
 {
     if (!_fansBtn) {
         _fansBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _fansBtn.backgroundColor = [UIColor greenColor];
         _fansBtn.titleLabel.font = [UIFont systemFontOfSize:15.];
         [_fansBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
         [_fansBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [_fansBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 10., 0., 0.)];
+//        [_fansBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 20., 0., 0.)];
         [_fansBtn addTarget:self action:@selector(fansBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         [self addSubview:_fansBtn];
     }
     return _fansBtn;
@@ -235,7 +239,9 @@
         NSMutableAttributedString *mutableStr = [[NSMutableAttributedString alloc]initWithString:str];
         NSRange positionRange = [str rangeOfString:[NSString stringWithFormat:@"%ld",(long)_user.fanCount]];
         [mutableStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x9d9e9f) range:positionRange];
+        
         [self.fansBtn setAttributedTitle:mutableStr forState:UIControlStateNormal];
+        [self.fansBtn sizeToFit];
     }
     {
         
@@ -244,6 +250,7 @@
         NSRange positionRange = [str rangeOfString:[NSString stringWithFormat:@"%ld",(long)_user.followingCount]];
         [mutableStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x9d9e9f) range:positionRange];
         [self.friendBtn setAttributedTitle:mutableStr forState:UIControlStateNormal];
+        [self.friendBtn sizeToFit];
     }
     
     
@@ -326,7 +333,7 @@
 //    self.staffImage.frame = CGRectMake(0., 0., 14., 14.);
 //    self.staffImage.deFrameTop = self.nicknameLabel.deFrameTop + 6;
 //    self.staffImage.deFrameLeft = self.nicknameLabel.deFrameRight - 14;
-    self.bioBackView.frame = CGRectMake(0., 0., kScreenWidth, 80);
+    self.bioBackView.frame = CGRectMake(0., 0., kScreenWidth, 60.);
     self.bioBackView.deFrameLeft = self.deFrameLeft;
     self.bioBackView.deFrameBottom = self.deFrameBottom;
     
@@ -338,40 +345,39 @@
 //    self.bioLabel.center = self.nicknameLabel.center;
 //    self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom;
     
-    self.friendBtn.frame = CGRectMake(0., 0., 100., 20.);
-    self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft - 28.;
+//    self.friendBtn.frame = CGRectMake(0., 0.,100., 20.);
+    self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
     
-    self.fansBtn.frame = CGRectMake(0., 0., 100., 20.);
-    self.fansBtn.deFrameLeft     = self.friendBtn.deFrameRight;
+//    self.fansBtn.frame = CGRectMake(0., 0.,100., 20.);
+    self.fansBtn.deFrameLeft     = self.friendBtn.deFrameRight + 43;
     
     if (_user.userId == [Passport sharedInstance].user.userId) {
         self.editBtn.frame = CGRectMake(0., 0., 130., 30.);
         self.editBtn.deFrameLeft = self.avatarView.deFrameRight + 24.;
         self.editBtn.deFrameTop = self.nicknameLabel.deFrameBottom + 5.;
-        self.v.frame = CGRectMake(0., 0., 1, 15.);
-        self.v.center = CGPointMake(self.editBtn.center.x, self.editBtn.center.y + 40.);
-//        self.friendBtn.frame = CGRectMake(0., 0., 100., 20.);
+//        self.v.frame = CGRectMake(0., 0., 1, 15.);
+//        self.v.center = CGPointMake(self.editBtn.center.x, self.editBtn.center.y + 40.);
         self.friendBtn.deFrameTop = self.editBtn.deFrameBottom + 16.;
         self.fansBtn.deFrameTop   = self.editBtn.deFrameBottom + 16.;
     } else if (_user.user_state == GKUserBlockState) {
         self.blockBtn.frame = CGRectMake(0., 0., 130., 30.);
         self.blockBtn.deFrameLeft = self.avatarView.deFrameRight + 24.;
         self.blockBtn.deFrameTop = self.nicknameLabel.deFrameBottom + 5.;
-        self.v.frame = CGRectMake(0., 0., 1, 15.);
-        self.v.center = CGPointMake(self.blockBtn.center.x, self.blockBtn.center.y + 40.);
+//        self.v.frame = CGRectMake(0., 0., 1, 15.);
+//        self.v.center = CGPointMake(self.blockBtn.center.x, self.blockBtn.center.y + 40.);
         self.fansBtn.deFrameTop   = self.blockBtn.deFrameBottom + 16.;
         self.friendBtn.deFrameTop = self.blockBtn.deFrameBottom + 16.;
     } else {
         self.relationBtn.frame = CGRectMake(0., 0., 130., 30.);
         self.relationBtn.deFrameLeft = self.avatarView.deFrameRight + 24.;
         self.relationBtn.deFrameTop = self.nicknameLabel.deFrameBottom + 5.;
-        self.v.frame = CGRectMake(0., 0., 1, 15.);
-        self.v.center = CGPointMake(self.relationBtn.center.x, self.relationBtn.center.y + 40.);
+//        self.v.frame = CGRectMake(0., 0., 1, 15.);
+//        self.v.center = CGPointMake(self.relationBtn.center.x, self.relationBtn.center.y + 40.);
         self.fansBtn.deFrameTop   = self.relationBtn.deFrameBottom + 16.;
         self.friendBtn.deFrameTop = self.relationBtn.deFrameBottom + 16.;
     }
     
-    
+    self.v.frame = CGRectMake(CGRectGetMaxX(self.friendBtn.frame) + 20, self.friendBtn.frame.origin.y + 7, 1., 15.);
     
     [self relationBtn];
 }

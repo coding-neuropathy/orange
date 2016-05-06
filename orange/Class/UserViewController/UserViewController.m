@@ -182,6 +182,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         
         self.navigationItem.rightBarButtonItems = array;
     }
+    
+    self.collectionView.alwaysBounceVertical = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -433,7 +435,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             }
             else
             {
-                size = CGSizeMake(kScreenWidth, 224.);
+                size = CGSizeMake(kScreenWidth, 204.);
             }
             break;
             
