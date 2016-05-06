@@ -584,8 +584,8 @@
 		4E2D6D3E1A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		4E2D6D491A697B82009E4A17 /* EntitySingleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySingleListCell.h; sourceTree = "<group>"; };
 		4E2D6D4A1A697B82009E4A17 /* EntitySingleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySingleListCell.m; sourceTree = "<group>"; };
-		4E2D6D501A6BF8E0009E4A17 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
-		4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		4E2D6D501A6BF8E0009E4A17 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCell.h; path = ../../View/MessageCell.h; sourceTree = "<group>"; };
+		4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = ../../View/MessageCell.m; sourceTree = "<group>"; };
 		4E2D6D541A6BFD77009E4A17 /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
 		4E2D6D551A6BFD77009E4A17 /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
 		4E2D6D571A6D49F0009E4A17 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
@@ -795,8 +795,8 @@
 		4EC9F7A21A7BBEF20057D736 /* TagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagViewController.m; sourceTree = "<group>"; };
 		4EC9F7A51A7BD1020057D736 /* NotePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePostViewController.h; sourceTree = "<group>"; };
 		4EC9F7A61A7BD1020057D736 /* NotePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotePostViewController.m; sourceTree = "<group>"; };
-		4ECCD0DA1A7297A7009D5A42 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
-		4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
+		4ECCD0DA1A7297A7009D5A42 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCell.h; path = ../../View/FeedCell.h; sourceTree = "<group>"; };
+		4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCell.m; path = ../../View/FeedCell.m; sourceTree = "<group>"; };
 		4ECCD0DE1A7349CF009D5A42 /* EntityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityViewController.h; sourceTree = "<group>"; };
 		4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityViewController.m; sourceTree = "<group>"; };
 		4ED768591B7248A600AA3BF7 /* loading-static.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-static.png"; sourceTree = "<group>"; };
@@ -1532,10 +1532,6 @@
 				4E2D6D4A1A697B82009E4A17 /* EntitySingleListCell.m */,
 				4E198C451A66B86F004C59C4 /* CategoryGridItem.h */,
 				4E198C461A66B86F004C59C4 /* CategoryGridItem.m */,
-				4E2D6D501A6BF8E0009E4A17 /* MessageCell.h */,
-				4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */,
-				4ECCD0DA1A7297A7009D5A42 /* FeedCell.h */,
-				4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */,
 				4EC9F7951A7928C70057D736 /* UserSingleListCell.h */,
 				4EC9F7961A7928C70057D736 /* UserSingleListCell.m */,
 				4E66C1E61A7DBAB400F31A90 /* CommentCell.h */,
@@ -2495,6 +2491,10 @@
 		B76EE07C1B3D86AE009D8763 /* NotifyController */ = {
 			isa = PBXGroup;
 			children = (
+				4E2D6D501A6BF8E0009E4A17 /* MessageCell.h */,
+				4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */,
+				4ECCD0DA1A7297A7009D5A42 /* FeedCell.h */,
+				4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */,
 				B76EE0831B3D8A16009D8763 /* ActiveController.h */,
 				B76EE0841B3D8A16009D8763 /* ActiveController.m */,
 				B76EE07D1B3D86AE009D8763 /* MessageController.h */,

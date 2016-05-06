@@ -20,6 +20,8 @@
 /**
  *  base infomation
  */
+"you"       = "You";
+
 "cancel"    = "Cancel";
 "confirm"   = "Confirm";
 

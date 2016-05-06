@@ -19,6 +19,7 @@
 /*
  * Base Infomation
  */
+"you"       = "你";
 
 "cancel"    = "取消";
 "confirm"   = "确定";
