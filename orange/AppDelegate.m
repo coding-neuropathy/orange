@@ -14,7 +14,7 @@
 #import "TagViewController.h"
 #import "LaunchController.h"
 
-#import "APService.h"
+#import "JPUSHService.h"
 #import "GKNotificationHUB.h"
 //#import "tipView.h"
 
@@ -28,17 +28,20 @@ int ddLogLevel;
 
 @implementation AppDelegate
 
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    /**
+     *  配置日志
+     */
     [self configLog];
     
     // umeng
     [MobClick setAppVersion:XcodeAppVersion];
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
-//    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:@"tongbu"];
+    //    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:@"tongbu"];
     [MobClick setLogEnabled:NO];
     [MobClick updateOnlineConfig];
-   
+    
     // wechat
     [WXApi registerApp:kGK_WeixinShareKey withDescription:NSLocalizedStringFromTable(@"guide to better living", kLocalizedFile, nil)];
     
@@ -67,6 +70,12 @@ int ddLogLevel;
         }
     }];
     
+    return YES;
+}
+
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     
     /**
      *  set 3d touch
@@ -82,8 +91,13 @@ int ddLogLevel;
     // Override point for customization after application launch.
 
     // jpush config
-    [APService registerForRemoteNotificationTypes:UIUserNotificationTypeAlert| UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
-    [APService setupWithOption:launchOptions];
+    [JPUSHService registerForRemoteNotificationTypes:UIUserNotificationTypeAlert| UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
+    [JPUSHService setupWithOption:launchOptions appKey:@"f9e153a53791659b9541eb37"
+                          channel:@"app store"
+                 apsForProduction:YES
+            advertisingIdentifier:nil];
+//    [JPUSHService setupWithOption:launchOptions];
+//    [JPUSHService setupWithOption:launchOptions appKey: channel:<#(NSString *)#> apsForProduction:<#(BOOL)#>]
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateJPushID:) name:kJPFNetworkDidLoginNotification object:nil];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -198,7 +212,7 @@ int ddLogLevel;
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
-    [APService registerDeviceToken:deviceToken];
+    [JPUSHService registerDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -209,7 +223,7 @@ int ddLogLevel;
         [self openLocalURL:[NSURL URLWithString:url]];
     }
     application.applicationIconBadgeNumber = 0;
-    [APService handleRemoteNotification:userInfo];
+    [JPUSHService handleRemoteNotification:userInfo];
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
@@ -219,7 +233,7 @@ int ddLogLevel;
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler
 {
-    [APService handleRemoteNotification:userInfo];
+    [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
@@ -566,9 +580,9 @@ int ddLogLevel;
 {
     if(!TARGET_IPHONE_SIMULATOR){
         UIDevice *device = [[UIDevice alloc] init];
-        DDLogInfo(@"jpush rid %@ %@ %@", [APService registrationID], [device model], XcodeAppVersion);
+        DDLogInfo(@"jpush rid %@ %@ %@", [JPUSHService registrationID], [device model], XcodeAppVersion);
         
-        [API postRegisterID:[APService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
+        [API postRegisterID:[JPUSHService registrationID] Model:[device model] Version:XcodeAppVersion Success:^{
             
         } Failure:^(NSInteger stateCode) {
             DDLogError(@"error code %ld", (long)stateCode);

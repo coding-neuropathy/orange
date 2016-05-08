@@ -238,7 +238,6 @@
 		8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
 		8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A418C791C04481000CE01B5 /* EntityPreView.m */; };
-		8A418C7C1C04519C00CE01B5 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A418C7B1C04519C00CE01B5 /* libPushSDK-1.8.8.a */; };
 		8A44F5991C7C066500D1DC19 /* ArticlePreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A44F5981C7C066500D1DC19 /* ArticlePreViewController.m */; };
 		8A4E8F8C1C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E8F851C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m */; };
 		8A4E8F8D1C1A8D5B003EBE95 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8A4E8F871C1A8D5B003EBE95 /* SVProgressHUD.bundle */; };
@@ -277,6 +276,7 @@
 		8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */; };
 		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
+		8ACFAAB61CDF1DF8000830B9 /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
 		8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */; };
 		8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */; };
@@ -816,7 +816,6 @@
 		8A402CC61B69F57A00E54FFF /* CategoryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryImageView.m; sourceTree = "<group>"; };
 		8A418C781C04481000CE01B5 /* EntityPreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityPreView.h; path = PreViewControllers/EntityPreView.h; sourceTree = "<group>"; };
 		8A418C791C04481000CE01B5 /* EntityPreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityPreView.m; path = PreViewControllers/EntityPreView.m; sourceTree = "<group>"; };
-		8A418C7B1C04519C00CE01B5 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		8A44F5971C7C066500D1DC19 /* ArticlePreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticlePreViewController.h; path = PreViewControllers/ArticlePreViewController.h; sourceTree = "<group>"; };
 		8A44F5981C7C066500D1DC19 /* ArticlePreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticlePreViewController.m; path = PreViewControllers/ArticlePreViewController.m; sourceTree = "<group>"; };
 		8A4E8F841C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
@@ -885,6 +884,8 @@
 		8ABC7DE11C056B6000A15147 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		8AC3F6841C0590A500CCD867 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8AC3F6861C05910A00CCD867 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.6.a"; sourceTree = "<group>"; };
+		8ACFAAB51CDF1DF8000830B9 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		8AE19DCD1B9DE26C007C2872 /* HomeEntityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeEntityCell.h; sourceTree = "<group>"; };
 		8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeEntityCell.m; sourceTree = "<group>"; };
 		8AFF0CA81BA9C980005FD5CB /* SubCategoryEntityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategoryEntityController.h; sourceTree = "<group>"; };
@@ -903,7 +904,6 @@
 		B71E49551AC923FE00D4DB6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B71E49561AC9240000D4DB6D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B71E495C1AC92AD600D4DB6D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/guoku.strings"; sourceTree = "<group>"; };
-		B72000B31B0848160001F199 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B72000B61B0849E50001F199 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		B72985F31BB8E727006E2518 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
 		B72ACCC01B66531E0020E841 /* DiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverController.h; sourceTree = "<group>"; };
@@ -1142,6 +1142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ACFAAB61CDF1DF8000830B9 /* jpush-ios-2.1.6.a in Frameworks */,
 				4E56DFCE19D5B84300263B17 /* QuartzCore.framework in Frameworks */,
 				4E56DFC819D5B82900263B17 /* UIKit.framework in Frameworks */,
 				4E56DFCC19D5B83B00263B17 /* CoreGraphics.framework in Frameworks */,
@@ -1178,7 +1179,6 @@
 				8A5DAEB21BC779A00028C36D /* ALBBFullSecurityGuard.framework in Frameworks */,
 				4E56DFBD19D5AF0000263B17 /* CoreLocation.framework in Frameworks */,
 				4E56DFB919D5AEF300263B17 /* CoreMotion.framework in Frameworks */,
-				8A418C7C1C04519C00CE01B5 /* libPushSDK-1.8.8.a in Frameworks */,
 				4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2367,8 +2367,8 @@
 		B72000B21B0848160001F199 /* JPush */ = {
 			isa = PBXGroup;
 			children = (
-				8A418C7B1C04519C00CE01B5 /* libPushSDK-1.8.8.a */,
-				B72000B31B0848160001F199 /* APService.h */,
+				8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */,
+				8ACFAAB51CDF1DF8000830B9 /* JPUSHService.h */,
 			);
 			path = JPush;
 			sourceTree = "<group>";
