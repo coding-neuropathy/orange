@@ -680,9 +680,8 @@
 
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *bannerArray = responseObject[@"banner"];
-        
+//        NSLog(@"res %@", responseObject[@"banner"]);
         NSMutableArray * categories = [NSMutableArray arrayWithCapacity:0];
-//        NSArray * categoryContent = responseObject[@"categories"];
         for (NSDictionary * objectDict in responseObject[@"categories"])
         {
             GKCategory * category = [GKCategory modelFromDictionary:objectDict[@"category"]];
