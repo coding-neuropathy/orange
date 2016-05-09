@@ -213,7 +213,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
     if (indexPath.section == 0) {
         
         GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
-        [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+        [[OpenCenter sharedOpenCenter]openArticleWebWithArticle:article];
         
     }
 }

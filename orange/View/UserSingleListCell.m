@@ -191,7 +191,8 @@
 
 -(void)configFollowButton
 {
-    for (id target in [self.followButton allTargets]) {
+    for (id target in [self.followButton allTargets])
+    {
         [self.followButton removeTarget:target action:NULL forControlEvents:UIControlEventAllEvents];
     }
     self.followButton.hidden = NO;

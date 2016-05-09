@@ -151,6 +151,8 @@ static CGFloat bioLabelHeight;
         //        _relationBtn.
         _relationBtn.layer.masksToBounds = YES;
         _relationBtn.layer.cornerRadius = 4.;
+        [_relationBtn.layer setBorderWidth:1.0];
+        _relationBtn.layer.borderColor=UIColorFromRGB(0x6192ff).CGColor;
         _relationBtn.hidden = YES;
         [self addSubview:_relationBtn];
     }
@@ -260,15 +262,15 @@ static CGFloat bioLabelHeight;
             case GKUserRelationTypeNone:
             {
                 [self.relationBtn setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAPlus], NSLocalizedStringFromTable(@"follow", kLocalizedFile, nil)] forState:UIControlStateNormal];
-                [self.relationBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
-                [self.relationBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+                [self.relationBtn setBackgroundColor:UIColorFromRGB(0xffffff)];
+                [self.relationBtn setTitleColor:UIColorFromRGB(0x6192ff) forState:UIControlStateNormal];
                 [self.relationBtn addTarget:self action:@selector(followButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             }
                 break;
             case GKUserRelationTypeFan:
             {
                 [self.relationBtn setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAPlus], NSLocalizedStringFromTable(@"follow", kLocalizedFile, nil)]  forState:UIControlStateNormal];
-                [self.relationBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
+                [self.relationBtn setBackgroundColor:UIColorFromRGB(0x6192ff)];
                 [self.relationBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
                 [self.relationBtn addTarget:self action:@selector(followButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             }
@@ -276,15 +278,15 @@ static CGFloat bioLabelHeight;
             case GKUserRelationTypeFollowing:
             {
                 [self.relationBtn setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FACheck], NSLocalizedStringFromTable(@"following", kLocalizedFile, nil)]  forState:UIControlStateNormal];
-                [self.relationBtn setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-                [self.relationBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+                [self.relationBtn setBackgroundColor:UIColorFromRGB(0x6192ff)];
+                [self.relationBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
                 [self.relationBtn addTarget:self action:@selector(unfollowButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             }
                 break;
             case GKUserRelationTypeBoth: {
                 [self.relationBtn setTitle:[NSString stringWithFormat:@"%@ 互相关注",[NSString fontAwesomeIconStringForEnum:FAExchange]]  forState:UIControlStateNormal];
-                [self.relationBtn setBackgroundColor:UIColorFromRGB(0xf6f6f6)];
-                [self.relationBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+                [self.relationBtn setBackgroundColor:UIColorFromRGB(0x6192ff)];
+                [self.relationBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
                 [self.relationBtn addTarget:self action:@selector(unfollowButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             }
                 break;
