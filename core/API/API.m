@@ -456,7 +456,7 @@
             //            NSLog(@"%@", dict);
             GKArticle * article = [GKArticle modelFromDictionary:dict];
             [articleList addObject:article];
-            NSLog(@"url %@", article.title);
+//            NSLog(@"url %@", article.title);
         }
         if (success){
             success([NSArray arrayWithArray:articleList]);
@@ -680,9 +680,8 @@
 
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *bannerArray = responseObject[@"banner"];
-        
+//        NSLog(@"res %@", responseObject[@"banner"]);
         NSMutableArray * categories = [NSMutableArray arrayWithCapacity:0];
-//        NSArray * categoryContent = responseObject[@"categories"];
         for (NSDictionary * objectDict in responseObject[@"categories"])
         {
             GKCategory * category = [GKCategory modelFromDictionary:objectDict[@"category"]];
@@ -2173,8 +2172,8 @@
             NSData *objectData = [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"];
             NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
 //            NSLog(@"error %@", [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"]);
-            NSString * string = [[NSString alloc] initWithData:[[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSASCIIStringEncoding];
-            NSLog(@"error %@", string);
+//            NSString * string = [[NSString alloc] initWithData:[[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSASCIIStringEncoding];
+//            NSLog(@"error %@ url %@", string, operation.response.URL);
             
             message = dict[@"message"];
             type = dict[@"type"];
@@ -2464,7 +2463,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
             NSInteger stateCode = operation.response.statusCode;
-//            NSLog(@"error %@", [[error userInfo] allKeys]);
             NSData * resData = [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"];
             NSDictionary * messageObj = [NSJSONSerialization JSONObjectWithData:resData options:0 error:nil];
             failure(stateCode, [messageObj valueForKeyPath:@"message"]);
@@ -2487,7 +2485,7 @@
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
 
-        NSLog(@"%@", objectDict);
+//        NSLog(@"%@", objectDict);
         NSInteger statecode = [[objectDict objectForKey:@"error"] integerValue];
         if (success) {
             success(statecode);

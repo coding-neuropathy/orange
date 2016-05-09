@@ -191,7 +191,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 #pragma mark - data
 - (void)refresh
 {
-    [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * articles, NSArray * users) {
+    [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities,
+                                  NSArray * categories, NSArray * articles, NSArray * users) {
         self.bannerArray = banners;
         self.categoryArray = categories;
         self.entityArray = entities;
@@ -762,9 +763,16 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 #pragma mark - <DiscoverBannerViewDelegate>
 - (void)TapBannerImageAction:(NSDictionary *)dict
 {
+    
     NSString * url = dict[@"url"];
-//    [AVAnalytics event:@"banner" attributes:@{@"url": url}];
     [MobClick event:@"banner" attributes:@{@"url": url}];
+    
+    if ([dict objectForKey:@"article"]) {
+        GKArticle * article = [GKArticle modelFromDictionary:dict[@"article"]];
+        [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+        return;
+    }
+    
     if ([url hasPrefix:@"http://"]) {
         if (k_isLogin) {
             NSRange range = [url rangeOfString:@"?"];
@@ -787,6 +795,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     }
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    
+    
 }
 
 @end
