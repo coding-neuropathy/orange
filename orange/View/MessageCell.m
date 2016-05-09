@@ -169,7 +169,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser * user = replying_comment.creator;
             
             [self.avatar sd_setImageWithURL:user.avatarURL];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nickname,NSLocalizedStringFromTable(@"reply to your comment:", kLocalizedFile, nil),replying_comment.text,time];
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nick,NSLocalizedStringFromTable(@"reply to your comment:", kLocalizedFile, nil),replying_comment.text,time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
             break;
@@ -184,7 +184,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             [self.avatar sd_setImageWithURL:user.avatarURL];
             self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
-                               user.nickname,
+                               user.nick,
                                NSLocalizedStringFromTable(@"commented your note", kLocalizedFile, nil),
                                time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
@@ -212,7 +212,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             self.image.hidden = YES;
             self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
-                               user.nickname,
+                               user.nick,
                                NSLocalizedStringFromTable(@"started following you", kLocalizedFile, nil),
                                time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
@@ -228,7 +228,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             [self.avatar sd_setImageWithURL:user.avatarURL];
             self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
-                               user.nickname,
+                               user.nick,
                                NSLocalizedStringFromTable(@"bumped your note", kLocalizedFile, nil),
                                time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
@@ -254,7 +254,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             [self.avatar sd_setImageWithURL:user.avatarURL];
             self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
-                               user.nickname,
+                               user.nick,
                                NSLocalizedStringFromTable(@"bumped your article", kLocalizedFile, nil),
                                time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
@@ -282,7 +282,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             [self.avatar sd_setImageWithURL:user.avatarURL];
             self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
-                               user.nickname,
+                               user.nick,
                                NSLocalizedStringFromTable(@"noted 1 item your added", kLocalizedFile, nil),
                                time];
             
@@ -311,7 +311,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             [self.avatar sd_setImageWithURL:user.avatarURL];
             self.label.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
-                               user.nickname,
+                               user.nick,
                                NSLocalizedStringFromTable(@"liked 1 item your added", kLocalizedFile, nil),
                                time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
@@ -447,7 +447,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         {
             GKComment *replying_comment = message[@"content"][@"replying_comment"];
             GKUser * user = replying_comment.creator;
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nickname,NSLocalizedStringFromTable(@"reply to your comment:", kLocalizedFile, nil),replying_comment.text,time];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nick,NSLocalizedStringFromTable(@"reply to your comment:", kLocalizedFile, nil),replying_comment.text,time];
             CGFloat y = label.optimumSize.height + 5.f;
             /*
             RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
@@ -471,7 +471,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser * user = comment.creator;
             label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,
-                          user.nickname,
+                          user.nick,
                           NSLocalizedStringFromTable(@"commented your note", kLocalizedFile, nil),
                           time];
             CGFloat y = label.optimumSize.height + 5.f;
@@ -503,7 +503,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser * user = message[@"content"][@"user"];
             label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,
-                          user.nickname,
+                          user.nick,
                           NSLocalizedStringFromTable(@"bumped your note", kLocalizedFile, nil),
                           time];
             CGFloat y = label.optimumSize.height + 5.f;
@@ -519,7 +519,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser * user = message[@"content"][@"user"];
             label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,
-                          user.nickname,
+                          user.nick,
                           NSLocalizedStringFromTable(@"bumped your article", kLocalizedFile, nil),
                           time];
             CGFloat y = label.optimumSize.height + 5.f;
@@ -537,7 +537,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser *user   = note.creator;
             label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,
-                          user.nickname,
+                          user.nick,
                           NSLocalizedStringFromTable(@"noted 1 item your added", kLocalizedFile, nil),
                           time];
             CGFloat y = label.optimumSize.height + 5.f;
@@ -553,7 +553,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser * user = message[@"content"][@"user"];
             label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@ </font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,
-                          user.nickname,
+                          user.nick,
                           NSLocalizedStringFromTable(@"liked 1 item your added", kLocalizedFile, nil),
                           time];
             CGFloat y =  label.optimumSize.height + 5.f;
