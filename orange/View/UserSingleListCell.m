@@ -139,7 +139,7 @@
         self.label.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.label];
     }
-    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^414243' size=14>%@ </font></a>", (unsigned long)self.user.userId, self.user.nickname];
+    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^414243' size=14>%@ </font></a>", (unsigned long)self.user.userId, self.user.nick];
     if (!_staffImageView) {
         _staffImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0., 0., 15., 15.)];
         [self.contentView addSubview:_staffImageView];
