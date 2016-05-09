@@ -224,7 +224,7 @@
         self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>%@</b>", _user.nick];
     }
     if (_user.authorized_author == YES) {
-        self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nickname];
+        self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
 //        self.staffImage.image = [UIImage imageNamed:@"official"];
     }
     _bioLabel.text = _user.bio;
