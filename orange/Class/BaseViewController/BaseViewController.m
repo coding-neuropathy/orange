@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import "GTScrollNavigationBar.h"
 
-@interface BaseViewController ()
+@interface BaseViewController ()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -26,6 +26,7 @@
         backBtn.imageEdgeInsets = UIEdgeInsetsMake(0., 0., 0., 20.);
         UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
         self.navigationItem.leftBarButtonItem = backBarItem;
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
     }
 
    

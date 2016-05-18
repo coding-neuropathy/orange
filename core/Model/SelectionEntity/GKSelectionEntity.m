@@ -43,7 +43,7 @@
         
         [self saveEntityToIndexWithData:dataArray];
         
-        //缓存
+//        缓存
 //        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.dataArray];
 //        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"selection.entity.data"];
 //        [[NSUserDefaults standardUserDefaults] synchronize];
