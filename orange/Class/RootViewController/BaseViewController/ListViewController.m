@@ -16,27 +16,29 @@ static NSString * CellIdentifer = @"Cell";
 
 @implementation ListViewController
 
-- (UITableView *)tableView
+
+- (UICollectionView *)collectionView
 {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
-        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.backgroundView = nil;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.showsVerticalScrollIndicator = YES;
-//        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
-//        [self.view addSubview:self.tableView];
+    if (!_collectionView) {
+        
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        //        layout.itemSize = CGSizeMake(342., 465);
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
+        
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        
     }
-    return _tableView;
+    return _collectionView;
 }
 
 - (void)loadView
 {
     [super loadView];
     
-    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.collectionView];
     
 }
 
@@ -45,21 +47,22 @@ static NSString * CellIdentifer = @"Cell";
 {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifer];
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellIdentifer];
+    self.collectionView.alwaysBounceVertical = YES;
 
 }
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-- (UITableViewCell * )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifer forIndexPath:indexPath];
+    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifer forIndexPath:indexPath];
     return cell;
+    
 }
 
 

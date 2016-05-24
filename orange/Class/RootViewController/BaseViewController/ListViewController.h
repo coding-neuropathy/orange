@@ -8,9 +8,9 @@
 
 #import "BaseViewController.h"
 
-@interface ListViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ListViewController : BaseViewController <UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
-@property (strong, nonatomic) UITableView * tableView;
 
+@property (nonatomic, strong) UICollectionView * collectionView;
 
 @end

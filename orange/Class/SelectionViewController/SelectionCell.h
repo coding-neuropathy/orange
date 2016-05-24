@@ -8,7 +8,7 @@
 
 
 
-@interface SelectionCell : UITableViewCell
+@interface SelectionCell : UICollectionViewCell
 
 @property (nonatomic, strong) GKEntity *entity;
 @property (nonatomic, strong) GKNote *note;

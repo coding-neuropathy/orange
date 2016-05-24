@@ -23,7 +23,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 
 static int lastContentOffset;
 
-@interface SelectionViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface SelectionViewController ()
 // 商品数据源数组
 //@property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property (nonatomic, strong) GKSelectionEntity * entityList;
@@ -62,7 +62,13 @@ static int lastContentOffset;
         //self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
         self.cateId = 0;
         
-        self.tableView.frame = CGRectMake(0, 0,kScreenWidth , kScreenHeight-kStatusBarHeight-kNavigationBarHeight - kTabBarHeight);
+        if (IS_IPHONE) {
+            self.collectionView.frame = CGRectMake(0, 0,kScreenWidth , kScreenHeight-kStatusBarHeight-kNavigationBarHeight - kTabBarHeight);
+        }
+        else
+        {
+            self.collectionView.frame = CGRectMake(0, 0,kScreenWidth - kTabBarWidth , kScreenHeight-kStatusBarHeight-kNavigationBarHeight - kTabBarHeight);
+        }
         
         self.entityList = [[GKSelectionEntity alloc] init];
         [self.entityList addTheObserverWithObject:self];
@@ -130,8 +136,9 @@ static int lastContentOffset;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    [self.tableView registerClass:[SelectionCell class] forCellReuseIdentifier:CellIdentifier];
-    [self.view addSubview:self.tableView];
+//    [self.collectionView registerClass:[SelectionCell class] forCellReuseIdentifier:CellIdentifier];
+      [self.collectionView registerClass:[SelectionCell class] forCellWithReuseIdentifier:CellIdentifier];
+    [self.view addSubview:self.collectionView];
     
     self.navigationItem.titleView = self.iconInfoView;
     
@@ -149,7 +156,7 @@ static int lastContentOffset;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.tableView.scrollsToTop = YES;
+    self.collectionView.scrollsToTop = YES;
     //self.navigationController.scrollNavigationBar.scrollView = self.tableView;
 //    [AVAnalytics beginLogPageView:@"SelectionView"];
     [MobClick beginLogPageView:@"SelectionView"];
@@ -158,7 +165,7 @@ static int lastContentOffset;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.tableView.scrollsToTop = NO;
+    self.collectionView.scrollsToTop = NO;
 //    [AVAnalytics endLogPageView:@"SelectionView"];
     [MobClick endLogPageView:@"SelectionView"];
 }
@@ -186,19 +193,19 @@ static int lastContentOffset;
     
     
     __weak __typeof(&*self)weakSelf = self;
-    [self.tableView addPullToRefreshWithActionHandler:^{
+    [self.collectionView addPullToRefreshWithActionHandler:^{
         
         [weakSelf.entityList refreshWithCategoryId:weakSelf.cateId];
         
     }];
     
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
         [weakSelf.entityList loadWithCategoryId:weakSelf.cateId];
     }];
     
     if (self.entityList.count == 0)
     {
-        [self.tableView triggerPullToRefresh];
+        [self.collectionView triggerPullToRefresh];
     }
 //    BOOL isCache = [weakSelf.entityList loadFromCache];
 //    if (!isCache) {
@@ -209,99 +216,87 @@ static int lastContentOffset;
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.index == 0) {
+
+        SelectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+        cell.dict = [self.entityList objectAtIndex:indexPath.row];
+        return cell;
+
+        
+    }
+    
+    return [[UICollectionViewCell alloc] init];
+}
+
+
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    //    [self.collectionView.collectionViewLayout invalidateLayout];
     if (self.index == 0) {
         return ceil(self.entityList.count / (CGFloat)1);
     }
-//    else if (self.index == 1)
-//    {
-//         return ceil(self.dataArrayForArticle.count / (CGFloat)1);
-//    }
+    
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.index == 0) {
-        
-//        if (1) {
-            SelectionCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-            cell.dict = [self.entityList objectAtIndex:indexPath.row];
-            return cell;
-//        }
-//        else
-//        {
-//            return [[UITableViewCell alloc] init];
-//        }
-
+    CGSize cellSize = CGSizeMake(342., 465.);
+    if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+        cellSize = CGSizeMake(313., 436.);
     }
-//    else if (self.index == 1)
-//    {
-//        return [[UITableViewCell alloc] init];
-//    }
-    return [[UITableViewCell alloc] init];
-
+    return cellSize;
 }
 
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    if (self.index == 0) {
-        if (1) {
-            GKNote * note = [[self.entityList.dataArray [indexPath.row] objectForKey:@"content"] objectForKey:@"note"];
-            return [SelectionCell height:note];
-        }
-        else
-        {
-            return [EntitySingleListCell height];
-        }
-
-    }
-    else if (self.index == 1)
-    {
-        return 100;
-    }
+    return 0;
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
     return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    if (self.index == 0) {
-        return 0.f;
-    }
-    else
-    {
-        return 0.f;
-    }
+    //    if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight)
+    //    {
+    //        return UIEdgeInsetsMake(0., 128., 0., 128.);
+    //    }
+    return UIEdgeInsetsMake(0., 0., 0., 0.);
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+//{
+//    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+//
+//}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    if (self.index == 0) {
-        
-        _SelectionCountLabel= [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, CGRectGetWidth(self.tableView.frame), 36.f)];
-        self.SelectionCountLabel.text = [NSString stringWithFormat:@"%d 条未读精选",10];
-        self.SelectionCountLabel.textAlignment = NSTextAlignmentCenter;
-        self.SelectionCountLabel.textColor = UIColorFromRGB(0xFF1F77);
-        self.SelectionCountLabel.backgroundColor = [UIColor clearColor];
-        self.SelectionCountLabel.font = [UIFont systemFontOfSize:14];
-        
-        _SelectionCountLabelBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 36)];
-        self.SelectionCountLabelBgView.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self.SelectionCountLabelBgView addSubview:self.SelectionCountLabel];
-        self.SelectionCountLabelBgView.alpha = 0.97;
-        
-        //return self.SelectionCountLabelBgView;
-    }
-    return [UIView new];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         //         UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+         // do whatever
+         //         [self.tableView reloadData];
+         [self.collectionView performBatchUpdates:nil completion:nil];
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
+
+
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -343,7 +338,7 @@ static int lastContentOffset;
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSUInteger index = segmentedControl.selectedSegmentIndex;
     self.index = index;
-    [self.tableView reloadData];
+    [self.collectionView reloadData];
     switch (index) {
         case 0:
         {
@@ -374,7 +369,7 @@ static int lastContentOffset;
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:@"selection"];
-    [[NSUserDefaults standardUserDefaults] setObject:@(self.tableView.contentOffset.y) forKey:@"selection-offset-y"];
+    [[NSUserDefaults standardUserDefaults] setObject:@(self.collectionView.contentOffset.y) forKey:@"selection-offset-y"];
 }
 
 - (void)tapStatusBar:(id)sender
@@ -442,8 +437,8 @@ static int lastContentOffset;
         if( ![[change valueForKeyPath:@"new"] integerValue])
         {
             if (!self.entityList.error) {
-                [self.tableView reloadData];
-                [self.tableView.pullToRefreshView stopAnimating];
+                [self.collectionView reloadData];
+                [self.collectionView.pullToRefreshView stopAnimating];
                 [self save];
 //                [self saveEntityToIndexWithData:(NSArray *)self.entityList];
 //                [self.tableView.infiniteScrollingView stopAnimating];
@@ -458,8 +453,8 @@ static int lastContentOffset;
         if( ![[change valueForKeyPath:@"new"] integerValue])
         {
             if (!self.entityList.error) {
-                [self.tableView reloadData];
-                [self.tableView.infiniteScrollingView stopAnimating];
+                [self.collectionView reloadData];
+                [self.collectionView.infiniteScrollingView stopAnimating];
 //                [self saveEntityToIndexWithData:(NSArray *)self.entityList];
 //                if (_dataList.total == 0) {
                     //[SVProgressHUD showSuccessWithStatus:@"没有了！！！"];
