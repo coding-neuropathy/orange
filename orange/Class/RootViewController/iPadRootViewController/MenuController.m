@@ -9,7 +9,7 @@
 #import "MenuController.h"
 #import "MenuHeaderView.h"
 #import "MenuCell.h"
-
+#import "LoginView.h"
 static NSString * const CellReuseIdentifier = @"MenuCell";
 
 @interface MenuController () <UITableViewDelegate, UITableViewDataSource, MenuHeaderViewDelegate>
@@ -110,6 +110,17 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
     return cell;
 }
 
+#pragma mark <UITableViewDelegate>
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(MenuController:didSelectRowAtIndexPath:)]) {
+        [_delegate MenuController:self didSelectRowAtIndexPath:indexPath];
+    }
+    
+    
+}
+
 #pragma mark - <MasterHeaderViewDelegate>
 - (void)TapAvatarBtn
 {
@@ -118,14 +129,13 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
     
     if (k_isLogin) {
         DDLogError(@"login login");
-//        if (_delegate && [_delegate respondsToSelector:@selector(masterViewController:didSelectRowAtIndexPath:)]) {
-//            [self.delegate masterViewController:self didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.titleArray.count inSection:0]];
-//        }
+        if (_delegate && [_delegate respondsToSelector:@selector(MenuController:didSelectRowAtIndexPath:)]) {
+            [self.delegate MenuController:self didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.titleArray.count inSection:0]];
+        }
     } else {
-//        [[OpenCenterController sharedOpenCenterController] openAccountViewControllerWithSuccessBlock:^(BOOL isLogin) {
-//            [self.delegate masterViewController:self didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.titleArray.count inSection:0]];
-//            [self.headerView layoutSubviews];
-//        }];
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
     }
 }
 

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserViewController.h"
 
 @interface MainController : UITabBarController
+
+@property (strong, nonatomic) UserViewController * userVC;
 
 @end

@@ -9,7 +9,7 @@
 #import "iPadRootViewController.h"
 #import "MenuController.h"
 #import "MainController.h"
-
+#import "LoginView.h"
 
 @interface iPadRootViewController () <MenuControllerDelegate>
 
@@ -94,7 +94,36 @@
 #pragma mark - <MasterViewControllerDelegate>
 - (void)MenuController:(MenuController *)menucontroller didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    DDLogInfo(@"index %lu", indexPath.row);
+    if (self.mainController.selectedIndex == indexPath.row) {
+        UINavigationController * nav = [self.mainController.viewControllers objectAtIndex:indexPath.row];
+        [nav popToRootViewControllerAnimated:YES];
+    } else {
+        switch (indexPath.row) {
+            case 3:
+            case 4:
+            {
+                if (!k_isLogin)
+                {
+                    LoginView * view = [[LoginView alloc]init];
+                    [view show];
+                    break;
+                } else {
+                    self.mainController.selectedIndex = indexPath.row;
+                }
+            }
+                break;
+            case 6:
+            {
+                self.mainController.userVC.user = [Passport sharedInstance].user;
+                self.mainController.selectedIndex = indexPath.row;
+            }
+                break;
+            default:
+                self.mainController.selectedIndex = indexPath.row;
+                break;
+        }
+    }
 }
 
 @end
