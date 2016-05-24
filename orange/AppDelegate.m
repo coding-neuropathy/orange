@@ -9,14 +9,14 @@
 #import "AppDelegate.h"
 #import "WXApi.h"
 #import "TabBarViewController.h"
-//#import "EntityViewController.h"
-//#import "UserViewController.h"
+#import "iPadRootViewController.h"
+
 #import "TagViewController.h"
 #import "LaunchController.h"
 
 #import "JPUSHService.h"
 #import "GKNotificationHUB.h"
-//#import "tipView.h"
+
 
 int ddLogLevel;
 
@@ -33,8 +33,6 @@ int ddLogLevel;
     [MobClick setLogEnabled:NO];
     
     UMConfigInstance.appKey = UMENG_APPKEY;
-//    UMConfigInstance.secret = @"secretstringaldfkals";
-    //    UMConfigInstance.eSType = E_UM_GAME;
     [MobClick startWithConfigure:UMConfigInstance];
 
 }
@@ -48,7 +46,6 @@ int ddLogLevel;
     
     // umeng
     [self umengTrack];
-\
     
     // wechat
     [WXApi registerApp:kGK_WeixinShareKey withDescription:NSLocalizedStringFromTable(@"guide to better living", kLocalizedFile, nil)];
@@ -110,9 +107,15 @@ int ddLogLevel;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.tabbarViewController = [[TabBarViewcontroller alloc] init];
+    
+    if (IS_IPHONE) {
+        self.tabbarViewController = [[TabBarViewcontroller alloc] init];
+        self.window.rootViewController = self.tabbarViewController;
+    } else {
 
-    self.window.rootViewController = self.tabbarViewController;
+        self.window.rootViewController = [[iPadRootViewController alloc] init];
+    }
+
     
 
     [self.window makeKeyAndVisible];

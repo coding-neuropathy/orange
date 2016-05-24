@@ -109,7 +109,6 @@
 		4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D551A6BFD77009E4A17 /* RTLabel.m */; };
 		4E2D6D5B1A6D49F0009E4A17 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D581A6D49F0009E4A17 /* LoginView.m */; };
 		4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23821A52EC9600037F9C /* SettingManager.m */; };
-		4E3A238D1A52F21800037F9C /* TabBarViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */; };
 		4E3C413B1A9FFBEB0053DB5E /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */; };
 		4E4F27D71B6F438E003A63C5 /* ImageLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4F27D21B6F438E003A63C5 /* ImageLoadingView.m */; };
 		4E4F27D81B6F438E003A63C5 /* loading-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4F27D41B6F438E003A63C5 /* loading-image.png */; };
@@ -217,7 +216,6 @@
 		4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58AC21C17238D003251FB /* CategorySearchViewController.m */; };
 		4EA58AC61C1723AB003251FB /* UserSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58AC51C1723AB003251FB /* UserSearchViewController.m */; };
 		4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */; };
-		4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6ADAE1A77D7220089797A /* BaseViewController.m */; };
 		4EB8E2281B9F398B002C7F6F /* SelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8E2271B9F398B002C7F6F /* SelectionController.m */; };
 		4EC9F7911A7928520057D736 /* FanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7901A7928520057D736 /* FanViewController.m */; };
 		4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7931A79286A0057D736 /* FriendViewController.m */; };
@@ -280,6 +278,15 @@
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
 		8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */; };
 		8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */; };
+		B706868D1CF41E7D00C40825 /* TabBarViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = B706868C1CF41E7D00C40825 /* TabBarViewcontroller.m */; };
+		B70686931CF41ECA00C40825 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686901CF41ECA00C40825 /* BaseViewController.m */; };
+		B70686941CF41ECA00C40825 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686921CF41ECA00C40825 /* ListViewController.m */; };
+		B706869F1CF4222600C40825 /* iPadRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B706869E1CF4222600C40825 /* iPadRootViewController.m */; };
+		B70686A51CF422F100C40825 /* MenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686A41CF422F100C40825 /* MenuController.m */; };
+		B70686A81CF423F900C40825 /* MenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686A71CF423F900C40825 /* MenuHeaderView.m */; };
+		B70686AB1CF425AE00C40825 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686AA1CF425AE00C40825 /* MenuCell.m */; };
+		B70686AE1CF42A9500C40825 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686AD1CF42A9500C40825 /* MainController.m */; };
+		B70686B11CF42C4000C40825 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686B01CF42C4000C40825 /* BaseNavigationController.m */; };
 		B7174DD91BD4A83D00DEDBDA /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7174DD81BD4A83D00DEDBDA /* UserViewController.m */; };
 		B7174DDC1BD4A94900DEDBDA /* UserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7174DDB1BD4A94900DEDBDA /* UserHeaderView.m */; };
 		B7180EA41B9D380A004AD9AD /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7180EA31B9D380A004AD9AD /* HomeController.m */; };
@@ -363,7 +370,6 @@
 		B7C0798B1BC5827E006B7379 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C079811BC5827E006B7379 /* DDMultiFormatter.m */; };
 		B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C6847F1ABBC45800A122E8 /* EmptyView.m */; };
 		B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */; };
-		B7C684861ABBD78E00A122E8 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C684851ABBD78E00A122E8 /* ListViewController.m */; };
 		B7C80D131AEDE26D003AE031 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
 		B7C80D141AEDE387003AE031 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
 		B7C80D151AEDE387003AE031 /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -589,8 +595,6 @@
 		4E2D6D581A6D49F0009E4A17 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		4E3A23811A52EC9600037F9C /* SettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingManager.h; sourceTree = "<group>"; };
 		4E3A23821A52EC9600037F9C /* SettingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingManager.m; sourceTree = "<group>"; };
-		4E3A238B1A52F21800037F9C /* TabBarViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewcontroller.h; sourceTree = "<group>"; };
-		4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewcontroller.m; sourceTree = "<group>"; };
 		4E3C41391A9FFBEB0053DB5E /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
 		4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
 		4E4F27D11B6F438E003A63C5 /* ImageLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoadingView.h; sourceTree = "<group>"; };
@@ -776,8 +780,6 @@
 		4EA58AC41C1723AB003251FB /* UserSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchViewController.h; sourceTree = "<group>"; };
 		4EA58AC51C1723AB003251FB /* UserSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchViewController.m; sourceTree = "<group>"; };
 		4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		4EB6ADAD1A77D7220089797A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		4EB6ADAE1A77D7220089797A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		4EB8E2261B9F398B002C7F6F /* SelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionController.h; sourceTree = "<group>"; };
 		4EB8E2271B9F398B002C7F6F /* SelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionController.m; sourceTree = "<group>"; };
 		4EC9F78F1A7928520057D736 /* FanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FanViewController.h; sourceTree = "<group>"; };
@@ -890,6 +892,24 @@
 		8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCategoryEntityController.m; sourceTree = "<group>"; };
 		8AFF0CAB1BAA6C25005FD5CB /* EntityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityListCell.h; sourceTree = "<group>"; };
 		8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityListCell.m; sourceTree = "<group>"; };
+		B706868B1CF41E7D00C40825 /* TabBarViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewcontroller.h; sourceTree = "<group>"; };
+		B706868C1CF41E7D00C40825 /* TabBarViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewcontroller.m; sourceTree = "<group>"; };
+		B706868F1CF41ECA00C40825 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		B70686901CF41ECA00C40825 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		B70686911CF41ECA00C40825 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		B70686921CF41ECA00C40825 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		B706869D1CF4222600C40825 /* iPadRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iPadRootViewController.h; path = RootViewController/iPadRootViewController/iPadRootViewController.h; sourceTree = "<group>"; };
+		B706869E1CF4222600C40825 /* iPadRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iPadRootViewController.m; path = RootViewController/iPadRootViewController/iPadRootViewController.m; sourceTree = "<group>"; };
+		B70686A31CF422F100C40825 /* MenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuController.h; path = RootViewController/iPadRootViewController/MenuController.h; sourceTree = "<group>"; };
+		B70686A41CF422F100C40825 /* MenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuController.m; path = RootViewController/iPadRootViewController/MenuController.m; sourceTree = "<group>"; };
+		B70686A61CF423F900C40825 /* MenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuHeaderView.h; path = RootViewController/iPadRootViewController/MenuHeaderView.h; sourceTree = "<group>"; };
+		B70686A71CF423F900C40825 /* MenuHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuHeaderView.m; path = RootViewController/iPadRootViewController/MenuHeaderView.m; sourceTree = "<group>"; };
+		B70686A91CF425AE00C40825 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuCell.h; path = RootViewController/iPadRootViewController/MenuCell.h; sourceTree = "<group>"; };
+		B70686AA1CF425AE00C40825 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuCell.m; path = RootViewController/iPadRootViewController/MenuCell.m; sourceTree = "<group>"; };
+		B70686AC1CF42A9500C40825 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = RootViewController/iPadRootViewController/MainController.h; sourceTree = "<group>"; };
+		B70686AD1CF42A9500C40825 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainController.m; path = RootViewController/iPadRootViewController/MainController.m; sourceTree = "<group>"; };
+		B70686AF1CF42C4000C40825 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		B70686B01CF42C4000C40825 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		B7174DD71BD4A83D00DEDBDA /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		B7174DD81BD4A83D00DEDBDA /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		B7174DDA1BD4A94900DEDBDA /* UserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHeaderView.h; sourceTree = "<group>"; };
@@ -1050,8 +1070,6 @@
 		B7C6847F1ABBC45800A122E8 /* EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmptyView.m; path = Components/EmptyView.m; sourceTree = "<group>"; };
 		B7C684811ABBC63C00A122E8 /* NoSearchResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoSearchResultView.h; path = DiscoverView/NoSearchResultView.h; sourceTree = "<group>"; };
 		B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoSearchResultView.m; path = DiscoverView/NoSearchResultView.m; sourceTree = "<group>"; };
-		B7C684841ABBD78E00A122E8 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
-		B7C684851ABBD78E00A122E8 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		B7C853211B4780D100CA5F0F /* orange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = orange.entitlements; sourceTree = "<group>"; };
 		B7C853221B47813300CA5F0F /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = today.entitlements; sourceTree = "<group>"; };
 		B7D1B91D1AC12C3500664BDB /* EditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHeaderView.h; path = EditView/EditHeaderView.h; sourceTree = "<group>"; };
@@ -1671,15 +1689,6 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		4E3A238A1A52F21800037F9C /* TabBarViewcontroller */ = {
-			isa = PBXGroup;
-			children = (
-				4E3A238B1A52F21800037F9C /* TabBarViewcontroller.h */,
-				4E3A238C1A52F21800037F9C /* TabBarViewcontroller.m */,
-			);
-			path = TabBarViewcontroller;
-			sourceTree = "<group>";
-		};
 		4E3C41381A9FFBEB0053DB5E /* IBActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -1846,6 +1855,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				B70686721CF41D5E00C40825 /* RootViewController */,
 				4E73E6771C19360400B604B5 /* AuthController */,
 				4EA58AB71C1720E6003251FB /* SearchController */,
 				8AAA2D111C04442400B27E49 /* PreViewControllers */,
@@ -1870,13 +1880,11 @@
 				4EC9F7981A7937AE0057D736 /* UserViewController */,
 				4EC9F78D1A7928300057D736 /* FanViewController */,
 				4EC9F78E1A7928300057D736 /* FriendViewController */,
-				4EB6ADAC1A77D70E0089797A /* BaseViewController */,
 				4ECCD0DD1A7348AF009D5A42 /* EntityViewController */,
 				23F1DD971C28046100A71827 /* PNoteViewController */,
 				239231AE1C7D967E00B49A88 /* RecommendationuserController */,
 				4E1D70191A5ADB890032719E /* DiscoverViewController */,
 				4E1D701C1A5ADB890032719E /* SelectionViewController */,
-				4E3A238A1A52F21800037F9C /* TabBarViewcontroller */,
 				8A7B791F1BAAB9310089FFD6 /* DataStructure.h */,
 			);
 			path = Class;
@@ -2179,17 +2187,6 @@
 			path = SearchController;
 			sourceTree = "<group>";
 		};
-		4EB6ADAC1A77D70E0089797A /* BaseViewController */ = {
-			isa = PBXGroup;
-			children = (
-				4EB6ADAD1A77D7220089797A /* BaseViewController.h */,
-				4EB6ADAE1A77D7220089797A /* BaseViewController.m */,
-				B7C684841ABBD78E00A122E8 /* ListViewController.h */,
-				B7C684851ABBD78E00A122E8 /* ListViewController.m */,
-			);
-			path = BaseViewController;
-			sourceTree = "<group>";
-		};
 		4EB8E2251B9F398B002C7F6F /* SelectionController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2350,6 +2347,57 @@
 				8A44F5981C7C066500D1DC19 /* ArticlePreViewController.m */,
 			);
 			name = PreViewControllers;
+			sourceTree = "<group>";
+		};
+		B70686721CF41D5E00C40825 /* RootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B70686951CF41F0700C40825 /* iPadRootViewController */,
+				B706868E1CF41ECA00C40825 /* BaseViewController */,
+				B706868A1CF41E7D00C40825 /* TabBarViewcontroller */,
+			);
+			name = RootViewController;
+			sourceTree = "<group>";
+		};
+		B706868A1CF41E7D00C40825 /* TabBarViewcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				B706868B1CF41E7D00C40825 /* TabBarViewcontroller.h */,
+				B706868C1CF41E7D00C40825 /* TabBarViewcontroller.m */,
+			);
+			name = TabBarViewcontroller;
+			path = RootViewController/TabBarViewcontroller;
+			sourceTree = "<group>";
+		};
+		B706868E1CF41ECA00C40825 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B70686AF1CF42C4000C40825 /* BaseNavigationController.h */,
+				B70686B01CF42C4000C40825 /* BaseNavigationController.m */,
+				B706868F1CF41ECA00C40825 /* BaseViewController.h */,
+				B70686901CF41ECA00C40825 /* BaseViewController.m */,
+				B70686911CF41ECA00C40825 /* ListViewController.h */,
+				B70686921CF41ECA00C40825 /* ListViewController.m */,
+			);
+			name = BaseViewController;
+			path = RootViewController/BaseViewController;
+			sourceTree = "<group>";
+		};
+		B70686951CF41F0700C40825 /* iPadRootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B706869D1CF4222600C40825 /* iPadRootViewController.h */,
+				B706869E1CF4222600C40825 /* iPadRootViewController.m */,
+				B70686A31CF422F100C40825 /* MenuController.h */,
+				B70686A41CF422F100C40825 /* MenuController.m */,
+				B70686A61CF423F900C40825 /* MenuHeaderView.h */,
+				B70686A71CF423F900C40825 /* MenuHeaderView.m */,
+				B70686A91CF425AE00C40825 /* MenuCell.h */,
+				B70686AA1CF425AE00C40825 /* MenuCell.m */,
+				B70686AC1CF42A9500C40825 /* MainController.h */,
+				B70686AD1CF42A9500C40825 /* MainController.m */,
+			);
+			name = iPadRootViewController;
 			sourceTree = "<group>";
 		};
 		B72000B21B0848160001F199 /* JPush */ = {
@@ -3023,7 +3071,6 @@
 			files = (
 				4E688A231BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				B772BEA01BD55861005C1540 /* UserPostNoteViewController.m in Sources */,
-				B7C684861ABBD78E00A122E8 /* ListViewController.m in Sources */,
 				4EA58ABA1C1720E6003251FB /* SearchController.m in Sources */,
 				B769B11A1B2ACE91004401FA /* IFTTTAnimation.m in Sources */,
 				B7C079891BC5827E006B7379 /* DDContextFilterLogFormatter.m in Sources */,
@@ -3052,6 +3099,7 @@
 				B772BE941BD50605005C1540 /* UserHeaderSectionView.m in Sources */,
 				8ABA73351B73A8E7006A8F56 /* SearchResultsViewController.m in Sources */,
 				B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */,
+				B706868D1CF41E7D00C40825 /* TabBarViewcontroller.m in Sources */,
 				B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */,
 				B7BE3E301BA9B98C004AD422 /* SubCategoryGroupController.m in Sources */,
 				399916CE1B11A9DB006826FD /* UIDevice-Hardware.m in Sources */,
@@ -3061,6 +3109,7 @@
 				B7ED32BB1B25C8D8009BAF5A /* EntityHeaderSectionView.m in Sources */,
 				B783F6621B9AEC46004DF1CB /* ArticlesController.m in Sources */,
 				B76C69D31BBB981E00BD22E5 /* TagArticlesController.m in Sources */,
+				B70686AE1CF42A9500C40825 /* MainController.m in Sources */,
 				8A0B16E21BABFDED00469DD6 /* ArticleListCell.m in Sources */,
 				B769B11B1B2ACE91004401FA /* IFTTTAnimationFrame.m in Sources */,
 				8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */,
@@ -3068,6 +3117,7 @@
 				B7F543FF1BC2457E0044F5E9 /* SDWebImagePrefetcher.m in Sources */,
 				B7F544011BC2457E0044F5E9 /* UIImage+GIF.m in Sources */,
 				4E688A151BA9C2BA0006AD9B /* JSQMessagesCollectionView.m in Sources */,
+				B70686AB1CF425AE00C40825 /* MenuCell.m in Sources */,
 				B769B1191B2ACE91004401FA /* IFTTTAnimatedScrollViewController.m in Sources */,
 				B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */,
 				B7F544051BC2457E0044F5E9 /* UIImageView+WebCache.m in Sources */,
@@ -3086,7 +3136,6 @@
 				8AAA2D0C1C02BC6700B27E49 /* LaunchView.m in Sources */,
 				4E6889FC1BA9C2BA0006AD9B /* NSString+JSQMessages.m in Sources */,
 				B7F543FD1BC2457E0044F5E9 /* SDWebImageDownloaderOperation.m in Sources */,
-				4E3A238D1A52F21800037F9C /* TabBarViewcontroller.m in Sources */,
 				4E688A1C1BA9C2BA0006AD9B /* JSQMessagesInputToolbar.m in Sources */,
 				4E688A0D1BA9C2BA0006AD9B /* JSQLocationMediaItem.m in Sources */,
 				B7C0798B1BC5827E006B7379 /* DDMultiFormatter.m in Sources */,
@@ -3098,11 +3147,13 @@
 				4EC9F7A31A7BBEF20057D736 /* TagViewController.m in Sources */,
 				B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */,
 				4EC9F7911A7928520057D736 /* FanViewController.m in Sources */,
+				B70686941CF41ECA00C40825 /* ListViewController.m in Sources */,
 				4E688A061BA9C2BA0006AD9B /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
 				4E688A0A1BA9C2BA0006AD9B /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */,
 				4E56DF7A19D56EF500263B17 /* FAImageView.m in Sources */,
 				B7ED32B81B25C662009BAF5A /* OpenCenter.m in Sources */,
+				B70686B11CF42C4000C40825 /* BaseNavigationController.m in Sources */,
 				8A0345AA1BA15F4A0037BC32 /* HomeArticleCell.m in Sources */,
 				4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */,
 				B7F543F91BC2457E0044F5E9 /* SDImageCache.m in Sources */,
@@ -3128,7 +3179,6 @@
 				23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */,
 				8A4E8F8C1C1A8D5B003EBE95 /* SVIndefiniteAnimatedView.m in Sources */,
 				B769B1171B2ACE91004401FA /* IFTTTAlphaAnimation.m in Sources */,
-				4EB6ADAF1A77D7220089797A /* BaseViewController.m in Sources */,
 				4E688A111BA9C2BA0006AD9B /* JSQMessagesBubbleImage.m in Sources */,
 				4E688A201BA9C2BA0006AD9B /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */,
@@ -3144,6 +3194,7 @@
 				4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */,
 				B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */,
 				4E688A121BA9C2BA0006AD9B /* JSQPhotoMediaItem.m in Sources */,
+				B70686931CF41ECA00C40825 /* BaseViewController.m in Sources */,
 				4EA58AC01C172376003251FB /* ArticleSearchViewController.m in Sources */,
 				8AAA50891BD67614005384CD /* UserTagCell.m in Sources */,
 				B7FE2A0B1B2817FD001C2E33 /* SelectionCell.m in Sources */,
@@ -3173,6 +3224,7 @@
 				4E73E6801C1936D400B604B5 /* AuthController.m in Sources */,
 				B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */,
 				4E6889FF1BA9C2BA0006AD9B /* UIImage+JSQMessages.m in Sources */,
+				B706869F1CF4222600C40825 /* iPadRootViewController.m in Sources */,
 				4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */,
 				4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */,
 				B76676411AB81758002F294C /* NoDataView.m in Sources */,
@@ -3224,6 +3276,7 @@
 				4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */,
 				B769B11C1B2ACE91004401FA /* IFTTTAnimationKeyFrame.m in Sources */,
 				B7F544041BC2457E0044F5E9 /* UIImageView+HighlightedWebCache.m in Sources */,
+				B70686A81CF423F900C40825 /* MenuHeaderView.m in Sources */,
 				B7B065C81BF985CE001AA30F /* PreviewArticleController.m in Sources */,
 				B7DA97BB1B25E46200C9BC25 /* EntityHeaderView.m in Sources */,
 				4E688A091BA9C2BA0006AD9B /* JSQMessagesBubblesSizeCalculator.m in Sources */,
@@ -3242,6 +3295,7 @@
 				4E6889FD1BA9C2BA0006AD9B /* UIColor+JSQMessages.m in Sources */,
 				B7F9EB101B28894B00887582 /* EntityLikerController.m in Sources */,
 				4E688A131BA9C2BA0006AD9B /* JSQVideoMediaItem.m in Sources */,
+				B70686A51CF422F100C40825 /* MenuController.m in Sources */,
 				4E3C413B1A9FFBEB0053DB5E /* IBActionSheet.m in Sources */,
 				4E2D6D431A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				4EF508811B49042000C92618 /* ShareView.m in Sources */,
@@ -3508,7 +3562,7 @@
 				PRODUCT_NAME = orange;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -3553,7 +3607,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
