@@ -28,6 +28,17 @@ int ddLogLevel;
 
 @implementation AppDelegate
 
+- (void)umengTrack {
+    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    [MobClick setLogEnabled:YES];
+    
+    UMConfigInstance.appKey = UMENG_APPKEY;
+//    UMConfigInstance.secret = @"secretstringaldfkals";
+    //    UMConfigInstance.eSType = E_UM_GAME;
+    [MobClick startWithConfigure:UMConfigInstance];
+
+}
+
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     /**
@@ -36,11 +47,8 @@ int ddLogLevel;
     [self configLog];
     
     // umeng
-    [MobClick setAppVersion:XcodeAppVersion];
-    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
-    //    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:@"tongbu"];
-    [MobClick setLogEnabled:NO];
-    [MobClick updateOnlineConfig];
+    [self umengTrack];
+\
     
     // wechat
     [WXApi registerApp:kGK_WeixinShareKey withDescription:NSLocalizedStringFromTable(@"guide to better living", kLocalizedFile, nil)];

@@ -26,7 +26,7 @@
 #import "WeiboSDK.h"
 
 // Umeng
-#import "MobClick.h"
+#import <UMMobClick/MobClick.h>
 //#import "UMFeedback.h"
 //#import "UMessage.h"
 //#import "UMOpus.h"
