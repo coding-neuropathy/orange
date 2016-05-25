@@ -142,37 +142,57 @@
 {
     [super layoutSubviews];
     
-    self.coverImageView.frame = CGRectMake(0., 0., kScreenWidth - 32, (kScreenWidth - 32) / 1.8);
-    self.coverImageView.deFrameTop = 16.;
-    self.coverImageView.deFrameLeft = 16;
+    if (IS_IPAD) {
+#pragma mark - layout ipad
+        self.coverImageView.frame = CGRectMake(0., 0., self.contentView.deFrameWidth - 32, (self.contentView.deFrameWidth - 32) / 1.8);
+        self.coverImageView.deFrameTop = 16.;
+        self.coverImageView.deFrameLeft = 16;
+        
+        CGFloat height = [self.article.title heightWithLineWidth:self.contentView.deFrameWidth - 32 Font:[UIFont systemFontOfSize:17.] LineHeight:7];
+        self.titleLabel.frame = CGRectMake(0., 0., self.contentView.deFrameWidth - 32., height);
+        self.titleLabel.deFrameLeft = 16.;
+        self.titleLabel.deFrameTop = self.coverImageView.deFrameBottom + 10.;
+        
+        self.detailLabel.frame = CGRectMake(0., 0., self.contentView.deFrameWidth - 32, 70);
+        self.detailLabel.center = self.titleLabel.center;
+        self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 5;
+        
+        self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
+        self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
+        self.timeLabel.deFrameRight = self.contentView.deFrameRight - 16.;
     
-    CGFloat height = [self.article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.] LineHeight:7];
+    } else {
+#pragma mark - layout iphone
+        self.coverImageView.frame = CGRectMake(0., 0., kScreenWidth - 32, (kScreenWidth - 32) / 1.8);
+        self.coverImageView.deFrameTop = 16.;
+        self.coverImageView.deFrameLeft = 16;
     
-    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 32., height);
-    self.titleLabel.deFrameLeft = 16.;
-    self.titleLabel.deFrameTop = self.coverImageView.deFrameBottom + 16;
+        CGFloat height = [self.article.title heightWithLineWidth:kScreenWidth - 32 Font:[UIFont systemFontOfSize:17.] LineHeight:7];
     
-    self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth -32, 45);
-    self.detailLabel.center = self.titleLabel.center;
-    self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
+        self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 32., height);
+        self.titleLabel.deFrameLeft = 16.;
+        self.titleLabel.deFrameTop = self.coverImageView.deFrameBottom + 16;
+    
+        self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth -32, 45);
+        self.detailLabel.center = self.titleLabel.center;
+        self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
     
 //    self.tagsLabel.frame = CGRectMake(0., 0., 200., 20.);
 //    self.tagsLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
 //    self.tagsLabel.deFrameLeft = self.contentView.deFrameLeft + 16.;
     
-    self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
-    self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
-    self.timeLabel.deFrameRight = self.contentView.deFrameRight - 10.;
+        self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
+        self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
+        self.timeLabel.deFrameRight = self.contentView.deFrameRight - 10.;
     
-    self.H.deFrameBottom = self.deFrameHeight;
+        self.H.deFrameBottom = self.deFrameHeight;
+    }
     
 } 
 
 #pragma mark - <RTLabelDelegate>
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
 {
-//    NSLog(@"url %@", url.absoluteString);
-//    [[UIApplication sharedApplication] openURL:url];
     [[OpenCenter sharedOpenCenter] openArticleTagWithName:url.absoluteString];
 }
 
