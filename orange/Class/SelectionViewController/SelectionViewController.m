@@ -67,7 +67,7 @@ static int lastContentOffset;
         }
         else
         {
-            self.collectionView.frame = CGRectMake(0, 0,kScreenWidth - kTabBarWidth , kScreenHeight-kStatusBarHeight-kNavigationBarHeight - kTabBarHeight);
+            self.collectionView.frame = CGRectMake(0, 0,kScreenWidth - kTabBarWidth , kScreenHeight);
         }
         
         self.entityList = [[GKSelectionEntity alloc] init];
@@ -136,8 +136,11 @@ static int lastContentOffset;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//    [self.collectionView registerClass:[SelectionCell class] forCellReuseIdentifier:CellIdentifier];
       [self.collectionView registerClass:[SelectionCell class] forCellWithReuseIdentifier:CellIdentifier];
+    
+    self.collectionView.alwaysBounceVertical = YES;
+    
+    
     [self.view addSubview:self.collectionView];
     
     self.navigationItem.titleView = self.iconInfoView;
@@ -223,16 +226,12 @@ static int lastContentOffset;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.index == 0) {
+    
 
         SelectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.dict = [self.entityList objectAtIndex:indexPath.row];
-        return cell;
-
-        
-    }
     
-    return [[UICollectionViewCell alloc] init];
+        return cell;
 }
 
 
@@ -240,11 +239,12 @@ static int lastContentOffset;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //    [self.collectionView.collectionViewLayout invalidateLayout];
-    if (self.index == 0) {
-        return ceil(self.entityList.count / (CGFloat)1);
-    }
-    
-    return 0;
+//    if (self.index == 0) {
+//        return ceil(self.entityList.count / (CGFloat)1);
+//    }
+//    
+//    return 0;
+    return self.entityList.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

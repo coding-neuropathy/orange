@@ -65,7 +65,10 @@ static NSString * CellIdentifer = @"Cell";
     
 }
 
-
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 1;
+}
 
 @end
 

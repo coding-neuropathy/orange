@@ -68,13 +68,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xffffff);
+        if (IS_IPHONE) {
             _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 10)];
             self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
             [self.contentView addSubview:self.H];
-    
+            
             _H2 = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
             self.H2.backgroundColor = UIColorFromRGB(0xe6e6e6);
             [self.contentView addSubview:self.H2];
+        }
     }
     return self;
 }
