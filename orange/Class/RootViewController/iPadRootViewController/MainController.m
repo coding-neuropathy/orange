@@ -21,7 +21,17 @@
     BaseNavigationController * first = [[BaseNavigationController alloc] initWithRootViewController:selected];
     
     
-    self.viewControllers = @[first];
+    Class articlesClass = NSClassFromString(@"ArticlesController");
+    UIViewController * articles = [[articlesClass alloc] init];
+    BaseNavigationController * second = [[BaseNavigationController alloc] initWithRootViewController:articles];
+    
+    
+    Class discoverClass = NSClassFromString(@"DiscoverController");
+    UIViewController * discover = [[discoverClass alloc] init];
+    BaseNavigationController * third = [[BaseNavigationController alloc] initWithRootViewController:discover];
+    
+    
+    self.viewControllers = @[first, second, third];
 }
 
 #pragma mark - <UITabBarControllerDelegate>

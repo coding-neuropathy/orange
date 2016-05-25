@@ -45,9 +45,13 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        //        layout.parallaxHeaderAlwaysOnTop = YES;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
-
+//        layout.parallaxHeaderAlwaysOnTop = YES;
+        
+        if (IS_IPAD) {
+            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
+        } else {
+            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+        }
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
@@ -162,7 +166,6 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 {
     [super viewWillDisappear:animated];
     self.collectionView.scrollsToTop = NO;
-//    [AVAnalytics endLogPageView:@"ArticlesView"];
     [MobClick endLogPageView:@"ArticlesView"];
 }
 
@@ -222,12 +225,36 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    CGSize cellSize = CGSizeMake(kScreenWidth, 140 + 174* kScreenWidth/(375-32) );
+    CGSize cellsize  = CGSizeMake(0., 0.);
+    if (IS_IPAD) {
+        cellsize = CGSizeMake(342., 360.);
+        
+        if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight){
+            cellsize = CGSizeMake(313., 344.);
+        }
+//        return cellsize;
+    } else {
+        GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
     
-    GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
-    
-    return [ArticleCell CellSizeWithArticle:article ];
+        cellsize = [ArticleCell CellSizeWithArticle:article ];
+    }
+    return cellsize;
 }
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    //    if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight)
+    //    {
+    //        return UIEdgeInsetsMake(0., 128., 0., 128.);
+    //    }
+    return UIEdgeInsetsMake(0., 0., 0., 0.);
+}
+
 
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 //{
@@ -236,7 +263,25 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 10.;
+    CGFloat linespacing = 0.;
+    
+    if (IS_IPHONE) {
+        linespacing =  10;
+    }
+    return linespacing;
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [self.collectionView performBatchUpdates:nil completion:nil];
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 #pragma mark - <UICollectionViewDelegate>

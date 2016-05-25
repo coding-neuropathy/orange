@@ -91,10 +91,44 @@
     }
 }
 
-#pragma mark - <MasterViewControllerDelegate>
+#pragma mark - <MenuControllerDelegate>
 - (void)MenuController:(MenuController *)menucontroller didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (self.mainController.selectedIndex == indexPath.row) {
+        UINavigationController * nav = [self.mainController.viewControllers objectAtIndex:indexPath.row];
+        [nav popToRootViewControllerAnimated:YES];
+    } else {
+        switch (indexPath.row) {
+            case 3:
+            case 4:
+            {
+                if (!k_isLogin) {
+//                    [[OpenCenterController sharedOpenCenterController] openAccountViewControllerWithSuccessBlock:^(BOOL isLogin) {
+//                        if (isLogin) {
+//                            
+//                        }
+//                    }];
+                } else {
+                    self.mainController.selectedIndex = indexPath.row;
+                }
+            }
+                break;
+            case 6:
+            {
+                //                UserViewController * vc = [self.detailVC.viewControllers objectAtIndex:indexPath.row];
+                //                vc.user = [Passport sharedInstance].user;
+                //                UserViewController * vc = [[UserViewController alloc] initWithUser:[Passport sharedInstance].user];
+                //                self.detailVC.userVC = vc;
+//                self.mainController.userVC.user = [Passport sharedInstance].user;
+//                self.mainController.selectedIndex = indexPath.row;
+            }
+                break;
+            default:
+                
+                self.mainController.selectedIndex = indexPath.row;
+                break;
+        }
+    }
 }
 
 @end

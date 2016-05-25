@@ -110,6 +110,16 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
     return cell;
 }
 
+
+#pragma mark <UITableViewDelegate>
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(MenuController:didSelectRowAtIndexPath:)]) {
+        [_delegate MenuController:self didSelectRowAtIndexPath:indexPath];
+    }    
+}
+
 #pragma mark - <MasterHeaderViewDelegate>
 - (void)TapAvatarBtn
 {
