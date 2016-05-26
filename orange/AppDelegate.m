@@ -151,6 +151,12 @@ int ddLogLevel;
     } failure:^(NSInteger stateCode) {
         
     }];
+
+#pragma mark - status bar config
+    if (IS_IPAD) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(kScreenWidth - kTabBarWidth, 44.)] forBarMetrics:UIBarMetricsDefault];
+    }
     
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;

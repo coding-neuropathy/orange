@@ -494,12 +494,12 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
         case 3:
-            cellsize = CGSizeMake(kScreenWidth, 84 *kScreenWidth/375 + 32);;
+            cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);;
             break;
         case 4:
         {
 //            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
-            cellsize = CGSizeMake((kScreenWidth  )/2 - 1, (kScreenWidth  )/2 + 85);
+            cellsize = CGSizeMake((self.collectionView.deFrameWidth  ) / 2 - 1, self.collectionView.deFrameWidth / 2 + 85);
         }
             break;
             

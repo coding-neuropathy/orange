@@ -85,9 +85,9 @@
     
     //    DDLogInfo(@"OKOKOKO");
     if (toInterfaceOrientation == UIDeviceOrientationPortrait || toInterfaceOrientation == UIDeviceOrientationPortraitUpsideDown) {
-        self.menuController.view.frame = CGRectMake(0., 20., kTabBarWidth, 1004);
+        self.menuController.view.frame = CGRectMake(0., 0., kTabBarWidth, 1024.);
     } else {
-        self.menuController.view.frame = CGRectMake(0., 20., kTabBarWidth, 748);
+        self.menuController.view.frame = CGRectMake(0., 0., kTabBarWidth, 768.);
     }
 }
 

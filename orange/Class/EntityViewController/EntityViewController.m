@@ -45,7 +45,7 @@
 @property (nonatomic, strong) UIButton *noteButton;
 @property (nonatomic, strong) UIButton * moreBtn;
 
-@property (nonatomic, strong) UICollectionView * collectionView;
+//@property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) EntityHeaderView * header;
 @property (nonatomic, strong) EntityHeaderActionView * actionView;
 @property (nonatomic, strong) EntityHeaderBuyView * buyView;
@@ -123,22 +123,22 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     return [EntityHeaderView headerViewHightWithEntity:self.entity];
 }
 
-#pragma mark - View
-- (UICollectionView *)collectionView
-{
-    if (!_collectionView) {
-        EntityStickyHeaderFlowLayout * layout = [[EntityStickyHeaderFlowLayout alloc] init];
-        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-//        layout.parallaxHeaderAlwaysOnTop = YES;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
-        
-//        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
-    }
-    return _collectionView;
-}
+//#pragma mark - View
+//- (UICollectionView *)collectionView
+//{
+//    if (!_collectionView) {
+//        EntityStickyHeaderFlowLayout * layout = [[EntityStickyHeaderFlowLayout alloc] init];
+//        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+////        layout.parallaxHeaderAlwaysOnTop = YES;
+//        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+//        
+////        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
+//        _collectionView.delegate = self;
+//        _collectionView.dataSource = self;
+//        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+//    }
+//    return _collectionView;
+//}
 
 
 - (UIButton *)likeButton
@@ -270,10 +270,10 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     }];
 }
 
-- (void)loadView
-{
-    self.view = self.collectionView;
-}
+//- (void)loadView
+//{
+//    self.view = self.collectionView;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
