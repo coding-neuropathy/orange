@@ -69,7 +69,7 @@ static int lastContentOffset;
         }
         else
         {
-            self.collectionView.frame = CGRectMake(0, 0,kScreenWidth - kTabBarWidth , kScreenHeight);
+            self.collectionView.frame = CGRectMake(0, 0, kScreenWidth - kTabBarWidth , kScreenHeight);
         }
         
         self.entityList = [[GKSelectionEntity alloc] init];
@@ -138,12 +138,9 @@ static int lastContentOffset;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
-      [self.collectionView registerClass:[SelectionCell class] forCellWithReuseIdentifier:CellIdentifier];
+    [self.collectionView registerClass:[SelectionCell class] forCellWithReuseIdentifier:CellIdentifier];
     
     self.collectionView.alwaysBounceVertical = YES;
-    
-    
-    [self.view addSubview:self.collectionView];
     
     self.navigationItem.titleView = self.iconInfoView;
     
@@ -161,6 +158,8 @@ static int lastContentOffset;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+//    [UIView setAnimationsEnabled:NO];
+    
     self.collectionView.scrollsToTop = YES;
     //self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     [MobClick beginLogPageView:@"SelectionView"];
@@ -217,51 +216,41 @@ static int lastContentOffset;
     
 }
 
-#pragma mark - UITableViewDataSource
+#pragma mark - <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-
-        SelectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-        cell.dict = [self.entityList objectAtIndex:indexPath.row];
-        cell.delegate = self;
-        return cell;
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.entityList.count;
 }
 
-
-
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    //    [self.collectionView.collectionViewLayout invalidateLayout];
-//    if (self.index == 0) {
-//        return ceil(self.entityList.count / (CGFloat)1);
-//    }
-//    
-//    return 0;
-    return self.entityList.count;
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SelectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.dict = [self.entityList objectAtIndex:indexPath.row];
+    cell.delegate = self;
+    return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    CGSize cellSize = CGSizeMake(0., 0.);
     if (IS_IPAD) {
-        CGSize cellSize = CGSizeMake(342., 465.);
+        cellSize = CGSizeMake(342., 465.);
         if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
             cellSize = CGSizeMake(313., 436.);
         }
-        return cellSize;
     }
     else
     {
-        
-                GKNote * note = [[self.entityList.dataArray[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
-                return CGSizeMake(kScreenWidth, [SelectionCell height:note]);
+        GKNote * note = [[self.entityList.dataArray[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
+        cellSize =  CGSizeMake(kScreenWidth, [SelectionCell height:note]);
     }
+    
+    return cellSize;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
@@ -282,35 +271,29 @@ static int lastContentOffset;
     return UIEdgeInsetsMake(0., 0., 0., 0.);
 }
 
+
 //- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 //{
 //    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-//
 //}
+
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-         //         UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-         // do whatever
-         //         [self.tableView reloadData];
-         [self.collectionView performBatchUpdates:nil completion:nil];
+        [self.collectionView performBatchUpdates:nil completion:nil];
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-         
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
      }];
     
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    
-    
     lastContentOffset = scrollView.contentOffset.y;
-    
 }
 
 
@@ -326,7 +309,7 @@ static int lastContentOffset;
     else if (scrollView.contentOffset.y > lastContentOffset)
     {
         [UIView animateWithDuration:1 animations:^{
-            self.updateView.frame = CGRectMake(0.,-49., kScreenWidth, 49);
+            self.updateView.frame = CGRectMake(0., -49., kScreenWidth, 49);
         }];
     }
 
@@ -357,7 +340,6 @@ static int lastContentOffset;
 
         }
             break;
-            
         default:
             break;
     }
@@ -444,8 +426,11 @@ static int lastContentOffset;
         if( ![[change valueForKeyPath:@"new"] integerValue])
         {
             if (!self.entityList.error) {
+                [UIView setAnimationsEnabled:NO];
                 [self.collectionView reloadData];
+                
                 [self.collectionView.pullToRefreshView stopAnimating];
+                [UIView setAnimationsEnabled:YES];
                 [self save];
 //                [self saveEntityToIndexWithData:(NSArray *)self.entityList];
 //                [self.tableView.infiniteScrollingView stopAnimating];

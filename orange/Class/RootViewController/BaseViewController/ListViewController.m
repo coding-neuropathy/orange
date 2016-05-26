@@ -36,9 +36,10 @@ static NSString * CellIdentifer = @"Cell";
 
 - (void)loadView
 {
-    [super loadView];
+//    [super loadView];
     
-    [self.view addSubview:self.collectionView];
+//    [self.view addSubview:self.collectionView];
+    self.view = self.collectionView;
     
 }
 
@@ -47,8 +48,8 @@ static NSString * CellIdentifer = @"Cell";
 {
     [super viewDidLoad];
     
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellIdentifer];
-    self.collectionView.alwaysBounceVertical = YES;
+//    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellIdentifer];
+//    self.collectionView.alwaysBounceVertical = YES;
 
 }
 

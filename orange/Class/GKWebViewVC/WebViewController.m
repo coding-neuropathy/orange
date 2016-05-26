@@ -257,8 +257,8 @@
         image = [UIImage imageWithData:[self.image imageDataLessThan_10K]];
     }
     
-    
-    ShareView * view = [[ShareView alloc]initWithTitle:self.shareTitle SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
+//    DDLogError(@"title %@", self.shareTitle);
+    ShareView * view = [[ShareView alloc] initWithTitle:self.shareTitle SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
     view.type = @"url";
     view.tapRefreshButtonBlock = ^(){
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];

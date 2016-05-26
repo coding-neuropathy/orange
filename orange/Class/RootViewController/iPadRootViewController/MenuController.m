@@ -154,7 +154,7 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
 #pragma mark - Passport KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    DDLogInfo(@"key key %@", keyPath);
+//    DDLogInfo(@"key key %@", keyPath);
     if ([keyPath isEqualToString:@"avatarURL"]) {
         [self.headerView layoutSubviews];
     }
