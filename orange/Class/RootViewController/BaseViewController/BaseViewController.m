@@ -30,7 +30,6 @@
         self.navigationItem.leftBarButtonItem = backBarItem;
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
     }
-
     // Do any additional setup after loading the view.
 }
 

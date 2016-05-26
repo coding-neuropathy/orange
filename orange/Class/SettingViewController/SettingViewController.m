@@ -64,7 +64,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (SettingsFooterView *)footerView
 {
     if (!_footerView) {
-        _footerView = [[SettingsFooterView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 120.)];
+        _footerView = [[SettingsFooterView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, 120.)];
         _footerView.delegate = self;
         _footerView.is_login = k_isLogin;
     }
@@ -74,7 +74,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (UILabel *)versionLabel
 {
     if (!_versionLabel) {
-        _versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 20)];
+        _versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, 20)];
         _versionLabel.font = [UIFont systemFontOfSize:12.];
         _versionLabel.textColor = UIColorFromRGB(0x9d9e9f);
         _versionLabel.textAlignment = NSTextAlignmentCenter;
@@ -87,7 +87,12 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
+        
+        if (IS_IPHONE) {
+            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
+        } else {
+            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStyleGrouped];
+        }
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;

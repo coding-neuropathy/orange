@@ -102,7 +102,7 @@
     
     if (!self.categroyText) {
         self.iconView.frame = CGRectMake(0., 0., 43., 25.);
-        self.arrowLabel.frame = CGRectMake(0., 0., 16., 25.);
+//        self.arrowLabel.frame = CGRectMake(0., 0., 16., 25.);
         self.iconView.center = CGPointMake(self.frame.size.width / 2., self.frame.size.height / 2.);
         
         self.arrowLabel.deFrameLeft = self.iconView.deFrameRight + 8.;
@@ -111,7 +111,7 @@
         CGFloat width = [self.categroyText widthWithLineWidth:0 Font:[UIFont boldSystemFontOfSize:17.]];
         self.infoLabel.frame = CGRectMake(0., 0., width, 25.);
         self.infoLabel.center = CGPointMake(self.frame.size.width / 2., self.frame.size.height / 2.);
-        self.arrowLabel.deFrameLeft = self.infoLabel.deFrameRight + 8.;
+//        self.arrowLabel.deFrameLeft = self.infoLabel.deFrameRight + 8.;
     }
 }
 

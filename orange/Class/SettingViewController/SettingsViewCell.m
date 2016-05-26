@@ -75,14 +75,14 @@
 {
     [super layoutSubviews];
     
-    self.textLabel.frame = CGRectMake(15., 0., kScreenWidth - 130., self.frame.size.height);
+    self.textLabel.frame = CGRectMake(15., 0., self.deFrameWidth - 130., self.frame.size.height);
     
     if ([self.text isEqualToString:@"mail"] || [self.text isEqualToString:@"password"]) {
         self.detailTextLabel.textAlignment = NSTextAlignmentRight;
-        self.detailTextLabel.frame = CGRectMake(kScreenWidth - 260., 0., 220., self.frame.size.height);
+        self.detailTextLabel.frame = CGRectMake(self.deFrameWidth - 260., 0., 220., self.frame.size.height);
     }
     else
-        self.detailTextLabel.frame = CGRectMake(kScreenWidth - 115., 0., 100, self.frame.size.height);
+        self.detailTextLabel.frame = CGRectMake(self.deFrameWidth - 115., 0., 100, self.frame.size.height);
 //    NSLog(@"%@", self.accessoryView);
 //    self.accessoryView = self.detailTextLabel;
 }

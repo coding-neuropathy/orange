@@ -35,7 +35,7 @@
 - (UIButton *)signOutBtn
 {
     if (!_signOutBtn) {
-        _signOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(-1, 0, kScreenWidth+2, 44)];
+        _signOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(-1, 0, self.deFrameWidth + 2, 44)];
         _signOutBtn.backgroundColor = UIColorFromRGB(0xcd1841);
         _signOutBtn.layer.cornerRadius = 0;
         _signOutBtn.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
