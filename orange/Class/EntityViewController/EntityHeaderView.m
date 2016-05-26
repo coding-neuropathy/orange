@@ -142,15 +142,12 @@ static CGFloat kEntityViewMarginLeft = 16.;
 
     CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font LineHeight:7];
     
-
-    
     self.scrollView.frame = CGRectMake(0., 0., kScreenWidth - 32., kScreenWidth - 32.);
     self.scrollView.deFrameLeft = 16.;
     self.scrollView.deFrameTop =  16.;
     self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 16. + self.scrollView.deFrameBottom, kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
     
     if ([_entity.imageURLArray count] > 0) {
-        
         self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
         self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom -10);
         self.pageCtr.bounds = CGRectMake(0.0, 0.0, 32 * (_pageCtr.numberOfPages - 1) + 32, 32);

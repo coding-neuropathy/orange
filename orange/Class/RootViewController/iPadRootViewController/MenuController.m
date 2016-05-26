@@ -44,7 +44,7 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
 - (MenuHeaderView *)headerView
 {
     if (!_headerView) {
-        _headerView = [[MenuHeaderView alloc] initWithFrame:CGRectMake(0., 0., kTabBarWidth, kTabBarWidth)];
+        _headerView = [[MenuHeaderView alloc] initWithFrame:CGRectMake(0., 0., kTabBarWidth, kTabBarWidth + 20)];
         _headerView.delegate = self;
     }
     return _headerView;
@@ -54,7 +54,7 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 20., 84., kScreenHeight - 20.) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., 84., kScreenHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.scrollsToTop = NO;

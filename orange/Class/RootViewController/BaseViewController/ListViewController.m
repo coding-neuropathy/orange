@@ -89,7 +89,7 @@ static NSString * CellIdentifer = @"Cell";
     return 1;
 }
 
-
+#pragma mark - 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)

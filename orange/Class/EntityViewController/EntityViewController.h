@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListViewController.h"
 
-@interface EntityViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
-
+@interface EntityViewController :  ListViewController
 //@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) GKEntity *entity;
 

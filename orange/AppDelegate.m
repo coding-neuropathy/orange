@@ -151,6 +151,12 @@ int ddLogLevel;
     } failure:^(NSInteger stateCode) {
         
     }];
+
+#pragma mark - status bar config
+    if (IS_IPAD) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(kScreenWidth - kTabBarWidth, 44.)] forBarMetrics:UIBarMetricsDefault];
+    }
     
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;
@@ -177,8 +183,16 @@ int ddLogLevel;
      name:@"GKNetworkReachabilityStatusNotReachable"//表示消息名称，发送跟接收双方都要一致
      object:nil];
     
-    
     return YES;
+}
+
+#pragma mark - disable rotation in iphone
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    if (IS_IPHONE)
+        return UIInterfaceOrientationMaskPortrait;
+    else
+        return UIInterfaceOrientationMaskAll;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
