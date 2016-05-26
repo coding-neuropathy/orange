@@ -44,7 +44,7 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
 - (MenuHeaderView *)headerView
 {
     if (!_headerView) {
-        _headerView = [[MenuHeaderView alloc] initWithFrame:CGRectMake(0., 0., kTabBarWidth, kTabBarWidth)];
+        _headerView = [[MenuHeaderView alloc] initWithFrame:CGRectMake(0., 0., kTabBarWidth, kTabBarWidth + 20)];
         _headerView.delegate = self;
     }
     return _headerView;

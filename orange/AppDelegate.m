@@ -183,8 +183,16 @@ int ddLogLevel;
      name:@"GKNetworkReachabilityStatusNotReachable"//表示消息名称，发送跟接收双方都要一致
      object:nil];
     
-    
     return YES;
+}
+
+#pragma mark - disable rotation in iphone
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    if (IS_IPHONE)
+        return UIInterfaceOrientationMaskPortrait;
+    else
+        return UIInterfaceOrientationMaskAll;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

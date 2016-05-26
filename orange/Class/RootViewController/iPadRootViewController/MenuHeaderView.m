@@ -40,7 +40,7 @@
         [self.avatarBtn setImage:[UIImage imageNamed:@"profile_icon"] forState:UIControlStateNormal];
     }
     
-    self.avatarBtn.frame = CGRectMake(0., 0., 36., 36.);
+    self.avatarBtn.frame = CGRectMake(0., 20., 36., 36.);
     self.avatarBtn.center = self.center;
 }
 
