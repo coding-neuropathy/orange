@@ -16,14 +16,14 @@
 #import "GTScrollNavigationBar.h"
 //#import "SelectionCategoryView.h"
 #import "IconInfoView.h"
-
+#import "EntityViewController.h"
 //@import CoreSpotlight;
 
 static NSString *CellIdentifier = @"SelectionCell";
 
 static int lastContentOffset;
 
-@interface SelectionViewController ()
+@interface SelectionViewController ()<SelectionCellDelegate>
 // 商品数据源数组
 //@property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property (nonatomic, strong) GKSelectionEntity * entityList;
@@ -42,6 +42,8 @@ static int lastContentOffset;
 //更新数
 @property (nonatomic , assign)NSInteger updateNum;
 @property (nonatomic , strong)UIButton * closeBtn;
+
+
 
 @end
 
@@ -229,7 +231,7 @@ static int lastContentOffset;
 
         SelectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.dict = [self.entityList objectAtIndex:indexPath.row];
-    
+        cell.delegate = self;
         return cell;
 }
 
@@ -248,11 +250,19 @@ static int lastContentOffset;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSize = CGSizeMake(342., 465.);
-    if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
-        cellSize = CGSizeMake(313., 436.);
+    if (IS_IPAD) {
+        CGSize cellSize = CGSizeMake(342., 465.);
+        if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+            cellSize = CGSizeMake(313., 436.);
+        }
+        return cellSize;
     }
-    return cellSize;
+    else
+    {
+        
+                GKNote * note = [[self.entityList.dataArray[indexPath.row] objectForKey:@"content"]objectForKey:@"note"];
+                return CGSizeMake(kScreenWidth, [SelectionCell height:note]);
+    }
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
@@ -294,7 +304,6 @@ static int lastContentOffset;
     
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
-
 
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -464,4 +473,15 @@ static int lastContentOffset;
     }
 
 }
+
+#pragma mark <SelectionViewCellDelegate>
+- (void)TapEntityImage:(GKEntity *)entity
+{
+    EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
+    //    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+//    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+}
+
 @end

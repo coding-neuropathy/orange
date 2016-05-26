@@ -96,7 +96,7 @@
         _image.userInteractionEnabled = YES;
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self action:@selector(imageButtonAction)];
+                                       initWithTarget:self action:@selector(imageViewButtonAction)];
         [_image addGestureRecognizer:tap];
         [self.contentView addSubview:_image];
     }
@@ -106,9 +106,9 @@
 - (UILabel *)contentLabel
 {
     if (!_contentLabel) {
-//        _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
-        
-        _contentLabel = [[UILabel  alloc] initWithFrame:CGRectZero];
+        _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
+//        _contentLabel.backgroundColor = [UIColor redColor];
+//        _contentLabel = [[UILabel  alloc] initWithFrame:CGRectZero];
 
         _contentLabel.font = [UIFont fontWithName:@"Helvetica" size:14.];
         _contentLabel.textColor = UIColorFromRGB(0x414243);
@@ -157,7 +157,7 @@
 - (UILabel *)timeLabel
 {
     if (!_timeLabel) {
-        _timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];
         self.timeLabel.layer.masksToBounds = YES;
                 self.timeLabel.layer.cornerRadius = 2;
                 self.timeLabel.backgroundColor = [UIColor clearColor];
@@ -231,7 +231,8 @@
     
     self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth - 32, kScreenWidth - 32);
     if (IS_IPHONE) {
-        _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
+//        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
+        
         self.contentLabel.deFrameHeight = [self.note.text heightWithLineWidth:kScreenWidth - 32 Font:[UIFont fontWithName:@"Helvetica" size:14.] LineHeight:7];
         
         if (self.contentLabel.deFrameHeight > 65.) {
@@ -245,7 +246,7 @@
         self.likeCounterButton.center = self.likeButton.center;
         self.likeCounterButton.deFrameLeft = self.likeButton.deFrameRight;
         
-        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];
+//        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];
 
         self.timeLabel.center = self.likeButton.center;
         self.timeLabel.deFrameRight = self.contentLabel.deFrameRight;
@@ -421,13 +422,18 @@
 }
 
 #pragma mark - button action
-- (void)imageButtonAction
+- (void)imageViewButtonAction
 {
-//    EntityViewController * VC = [[EntityViewController alloc] initWithEntity:self.entity];
-//    VC.hidesBottomBarWhenPushed = YES;
-//
-//    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-    [[OpenCenter sharedOpenCenter]openEntity:self.entity hideButtomBar:YES];
+////    EntityViewController * VC = [[EntityViewController alloc] initWithEntity:self.entity];
+////    VC.hidesBottomBarWhenPushed = YES;
+////
+////    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+//    [[OpenCenter sharedOpenCenter]openEntity:self.entity hideButtomBar:YES];
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(TapEntityImage:)]) {
+        [_delegate TapEntityImage:self.entity];
+    }
+    
 }
 
 
