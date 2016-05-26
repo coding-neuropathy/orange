@@ -135,8 +135,12 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight-kTabBarHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
-        
+        if (IS_IPHONE) {
+            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth,
+                                                                                 kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
+        } else {
+            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
+        }
         _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -244,8 +248,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     [super viewDidAppear:animated];
     kAppDelegate.activeVC = self;
 }
-
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -407,10 +409,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
             
         default:
         {
-//            EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityCellIdentifier forIndexPath:indexPath];
-//            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
-//            cell.delegate = self;
-//            return cell;
             EntityDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityDetailCellIdentifier forIndexPath:indexPath];
             cell.entity = [self.entityArray objectAtIndex:indexPath.row];
 //            cell.delegate = self;
@@ -582,29 +580,36 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     CGSize headerSize = CGSizeMake(0, 0);
     switch (section) {
         case 0:
-            headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
+        {
+            if (IS_IPHONE) {
+                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
+            }
+            else {
+                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f* (kScreenWidth  - kTabBarWidth)/320);
+            }
+        }
             break;
         case 1:
             if (self.userArray.count) {
-                headerSize = CGSizeMake(kScreenWidth, 126.);
+                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 126.);
             }
             break;
         case 2:
             if (self.categoryArray.count) {
-                headerSize = CGSizeMake(kScreenWidth, 155.);
+                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 155.);
             }
             break;
         case 3:
         {
             if(self.articleArray.count) {
-                headerSize = CGSizeMake(kScreenWidth, 44.);
+                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 44.);
             }
         }
             break;
         case 4:
         {
             if (self.entityArray.count) {
-                headerSize = CGSizeMake(kScreenWidth, 44.);
+                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 44.);
             }
         }
         default:

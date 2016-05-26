@@ -36,7 +36,9 @@
     NSURL *imageURL = [NSURL URLWithString:[dict valueForKey:@"img"]];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    imageView.frame = CGRectMake(position * (kScreenWidth), 0, kScreenWidth, 145 * kScreenWidth / 320);
+
+    imageView.frame = CGRectMake(position * (self.deFrameWidth), 0, self.deFrameWidth, 145 * self.deFrameWidth / 320);
+    
     //    BCMAd * ad = [_ADList objectAtIndex:position];
     imageView.userInteractionEnabled = YES;
     imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -80,7 +82,7 @@
 {
     [super layoutSubviews];
     //    self.bannerScrollView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height-32);
-    self.bannerScrollView.frame = CGRectMake(0., 0., kScreenWidth, 145 * kScreenWidth / 320);
+    self.bannerScrollView.frame = CGRectMake(0., 0., self.deFrameWidth, 145 * self.deFrameWidth / 320);
     [self.bannerScrollView scrollRectToVisible:CGRectMake(self.bannerScrollView.frame.size.width, 0, self.bannerScrollView.frame.size.width, self.bannerScrollView.frame.size.width) animated:NO];
     [self.bannerScrollView startScrolling];
 }
