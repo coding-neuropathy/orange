@@ -63,7 +63,8 @@ static int lastContentOffset;
         self.cateId = 0;
         
         if (IS_IPHONE) {
-            self.collectionView.frame = CGRectMake(0, 0,kScreenWidth , kScreenHeight-kStatusBarHeight-kNavigationBarHeight - kTabBarHeight);
+            self.collectionView.frame = CGRectMake(0, 0, kScreenWidth ,
+                                                   kScreenHeight - kStatusBarHeight - kNavigationBarHeight - kTabBarHeight);
         }
         else
         {
@@ -161,7 +162,6 @@ static int lastContentOffset;
     [super viewWillAppear:animated];
     self.collectionView.scrollsToTop = YES;
     //self.navigationController.scrollNavigationBar.scrollView = self.tableView;
-//    [AVAnalytics beginLogPageView:@"SelectionView"];
     [MobClick beginLogPageView:@"SelectionView"];
 }
 
@@ -169,7 +169,6 @@ static int lastContentOffset;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.collectionView.scrollsToTop = NO;
-//    [AVAnalytics endLogPageView:@"SelectionView"];
     [MobClick endLogPageView:@"SelectionView"];
 }
 
