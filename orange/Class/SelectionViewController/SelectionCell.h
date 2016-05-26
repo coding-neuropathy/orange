@@ -6,7 +6,11 @@
 //  Copyright (c) 2013年 GuoKu. All rights reserved.
 //
 
+@protocol SelectionCellDelegate <NSObject>
 
+- (void)TapEntityImage:(GKEntity *)entity;
+
+@end
 
 @interface SelectionCell : UICollectionViewCell
 
@@ -17,6 +21,10 @@
 
 @property (nonatomic, strong) NSDictionary * dict;
 
+@property (assign, nonatomic) id<SelectionCellDelegate> delegate;
+
 + (CGFloat)height:(GKNote *)note;
+
+
 
 @end

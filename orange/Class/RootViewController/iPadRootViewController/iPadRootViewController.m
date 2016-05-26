@@ -91,7 +91,7 @@
     }
 }
 
-#pragma mark - <MenuControllerDelegate>
+#pragma mark - <MasterViewControllerDelegate>
 - (void)MenuController:(MenuController *)menucontroller didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DDLogInfo(@"index %lu", indexPath.row);
