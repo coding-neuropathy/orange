@@ -17,7 +17,7 @@
 @interface ArticlesController () <UIViewControllerPreviewingDelegate>
 
 @property (strong, nonatomic) NSMutableArray * articleArray;
-@property (strong, nonatomic) UICollectionView * collectionView;
+//@property (strong, nonatomic) UICollectionView * collectionView;
 @property (assign, nonatomic) NSInteger page;
 @property (assign, nonatomic) NSInteger size;
 @property (assign, nonatomic) NSTimeInterval timestamp;
@@ -39,25 +39,25 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     return self;
 }
 
-#pragma mark - init View
-- (UICollectionView *)collectionView
-{
-    if (!_collectionView) {
-        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-//        layout.parallaxHeaderAlwaysOnTop = YES;
-        
-        if (IS_IPAD) {
-            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
-        } else {
-            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
-        }
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    }
-    return _collectionView;
-}
+//#pragma mark - init View
+//- (UICollectionView *)collectionView
+//{
+//    if (!_collectionView) {
+//        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+//        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+////        layout.parallaxHeaderAlwaysOnTop = YES;
+//        
+//        if (IS_IPAD) {
+//            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
+//        } else {
+//            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+//        }
+//        _collectionView.delegate = self;
+//        _collectionView.dataSource = self;
+//        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//    }
+//    return _collectionView;
+//}
 
 //- (void)registerPreview{
 //    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
@@ -141,10 +141,10 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 }
 
 
-- (void)loadView
-{
-    self.view = self.collectionView;
-}
+//- (void)loadView
+//{
+//    self.view = self.collectionView;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -271,18 +271,18 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     return linespacing;
 }
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
-     {
-         [self.collectionView performBatchUpdates:nil completion:nil];
-     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
-     {
-         
-     }];
-    
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-}
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+//{
+//    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+//     {
+//         [self.collectionView performBatchUpdates:nil completion:nil];
+//     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+//     {
+//         
+//     }];
+//    
+//    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+//}
 
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

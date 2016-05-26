@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 guoku.com. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "ListViewController.h"
 
-@interface ArticlesController : BaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface ArticlesController : ListViewController
 
 @end

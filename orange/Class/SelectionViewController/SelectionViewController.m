@@ -14,7 +14,7 @@
 //#import "SDWebImagePrefetcher.h"
 #import "GTScrollNavigationBar.h"
 //#import "SelectionCategoryView.h"
-#import "IconInfoView.h"
+//#import "IconInfoView.h"
 #import "EntityViewController.h"
 //@import CoreSpotlight;
 
@@ -31,7 +31,7 @@ static int lastContentOffset;
 
 @property (nonatomic, strong) UILabel * SelectionCountLabel;
 @property (nonatomic, strong) UIView * SelectionCountLabelBgView;
-@property (nonatomic, strong) IconInfoView * iconInfoView;
+//@property (nonatomic, strong) IconInfoView * iconInfoView;
 //@property (nonatomic, strong) PopoverView * selection_pv;
 @property (nonatomic, assign) NSInteger cateId;
 
@@ -142,7 +142,7 @@ static int lastContentOffset;
     
     self.collectionView.alwaysBounceVertical = YES;
     
-    self.navigationItem.titleView = self.iconInfoView;
+//    self.navigationItem.titleView = self.iconInfoView;
     
 //    [self.view addSubview:self.updateView];
 //    [self.updateView addSubview:self.updateLabel];
@@ -278,17 +278,17 @@ static int lastContentOffset;
 //}
 
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
-     {
-        [self.collectionView performBatchUpdates:nil completion:nil];
-     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
-     {
-         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-     }];
-    
-}
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+//{
+//    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+//     {
+//        [self.collectionView performBatchUpdates:nil completion:nil];
+//     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+//     {
+//         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+//     }];
+//    
+//}
 
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -428,7 +428,6 @@ static int lastContentOffset;
             if (!self.entityList.error) {
                 [UIView setAnimationsEnabled:NO];
                 [self.collectionView reloadData];
-                
                 [self.collectionView.pullToRefreshView stopAnimating];
                 [UIView setAnimationsEnabled:YES];
                 [self save];

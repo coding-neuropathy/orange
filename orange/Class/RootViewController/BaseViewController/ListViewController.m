@@ -7,16 +7,19 @@
 //
 
 #import "ListViewController.h"
+#import "IconInfoView.h"
 
 static NSString * CellIdentifer = @"Cell";
 
 @interface ListViewController ()
 
+@property (nonatomic, strong) IconInfoView * iconInfoView;
+
 @end
 
 @implementation ListViewController
 
-
+#pragma mark - init collction view
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
@@ -34,10 +37,23 @@ static NSString * CellIdentifer = @"Cell";
     return _collectionView;
 }
 
+#pragma mark - init icon info view
+- (IconInfoView *)iconInfoView
+{
+    if (!_iconInfoView) {
+        
+        _iconInfoView = [[IconInfoView alloc] initWithFrame:CGRectMake(0., 7., 100., 25.)];
+        _iconInfoView.categroyText = nil;
+        
+        //        UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTitleView:)];
+        //        [_iconInfoView addGestureRecognizer:Tap];
+        
+    }
+    return _iconInfoView;
+}
+
 - (void)loadView
 {
-//    [super loadView];
-    
 //    [self.view addSubview:self.collectionView];
     self.view = self.collectionView;
     
@@ -48,12 +64,14 @@ static NSString * CellIdentifer = @"Cell";
 {
     [super viewDidLoad];
     
+    self.navigationItem.titleView = self.iconInfoView;
+    
 //    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellIdentifer];
 //    self.collectionView.alwaysBounceVertical = YES;
 
 }
 
-#pragma mark - UITableViewDataSource
+#pragma mark - <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -69,6 +87,19 @@ static NSString * CellIdentifer = @"Cell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 1;
+}
+
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [self.collectionView performBatchUpdates:nil completion:nil];
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
+    
 }
 
 @end

@@ -11,9 +11,11 @@
 
 @interface BaseViewController ()<UIGestureRecognizerDelegate>
 
+
 @end
 
 @implementation BaseViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,12 +31,8 @@
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
     }
 
-   
-    
     // Do any additional setup after loading the view.
 }
-
-
 
 - (void)viewDidAppear:(BOOL)animated
 {
