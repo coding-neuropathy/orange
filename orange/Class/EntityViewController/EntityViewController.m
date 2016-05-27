@@ -181,7 +181,13 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
     if (!_buyButton) {
         _buyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _buyButton.frame = CGRectMake(0., 0., kScreenWidth/3, 44.);
+        if (IS_IPHONE) {
+            _buyButton.frame = CGRectMake(0., 0., kScreenWidth/3, 44.);
+        }
+        else
+        {
+            _buyButton.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth/3, 44.);
+        }
         _buyButton.layer.masksToBounds = YES;
         _buyButton.layer.cornerRadius = 0;
         _buyButton.backgroundColor = UIColorFromRGB(0x2a5393);
@@ -538,12 +544,24 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         case 5:
         {
             CGFloat height = [EntityNoteCell height:[self.dataArrayForNote objectAtIndex:indexPath.row]];
-            cellsize = CGSizeMake(kScreenWidth, height);
+            if (IS_IPAD) {
+                cellsize = CGSizeMake(kScreenWidth - kTabBarWidth, height);
+            }
+            else
+            {
+                cellsize = CGSizeMake(kScreenWidth, height);
+            }
         }
             break;
         case 6:
         {
-            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+            if (IS_IPHONE) {
+                cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+            }
+            else
+            {
+                cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/3, (kScreenWidth-12)/3);
+            }
         }
             break;
             

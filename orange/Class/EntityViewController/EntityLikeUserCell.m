@@ -37,7 +37,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.avatarView.frame = CGRectMake(0., 0., 36., 36.);
+    self.avatarView.frame = CGRectMake(0., 10., 36., 36.);
 }
 
 

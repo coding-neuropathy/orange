@@ -306,9 +306,21 @@ static inline NSRegularExpression * UrlRegularExpression() {
     
     self.starLabel.frame = CGRectMake(0., 0., 160., 20.);
     self.starLabel.center = self.nameLabel.center;
-    self.starLabel.deFrameRight = kScreenWidth - 16.;
+    if (IS_IPHONE) {
+        self.starLabel.deFrameRight = kScreenWidth - 16.;
+    }
+    else
+    {
+        self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16.;
+    }
     
-    self.contentLabel.frame = CGRectMake(0, 0., kScreenWidth - 78., 20);
+    if (IS_IPHONE) {
+        self.contentLabel.frame = CGRectMake(0, 0., kScreenWidth - 78., 20);
+    }
+    else
+    {
+        self.contentLabel.frame = CGRectMake(0, 0., kScreenWidth - kTabBarWidth - 78., 20);
+    }
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     self.contentLabel.deFrameTop = self.nameLabel.deFrameBottom + 10.;
     self.contentLabel.deFrameLeft = self.avatarImageView.deFrameRight + 10;
@@ -324,7 +336,13 @@ static inline NSRegularExpression * UrlRegularExpression() {
     
     self.timeLabel.frame = CGRectMake(0, 0, 160, 20);
     self.timeLabel.center = self.commentBtn.center;
-    self.timeLabel.deFrameRight = kScreenWidth - 16.;
+    if (IS_IPHONE) {
+        self.timeLabel.deFrameRight = kScreenWidth - 16.;
+    }
+    else
+    {
+        self.timeLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16.;
+    }
     
     self.separateLine.frame = CGRectMake(0, self.contentView.deFrameHeight - kSeparateLineWidth, kScreenWidth, kSeparateLineWidth);
 }
