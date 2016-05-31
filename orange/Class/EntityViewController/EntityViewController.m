@@ -651,10 +651,22 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-            size = CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
+            if (IS_IPHONE) {
+                size = CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
+            }
+            else
+            {
+                size = CGSizeMake(kScreenWidth, 550);
+            }
             break;
         case 2:
-            size =  CGSizeMake(kScreenWidth, 60);
+            if (IS_IPHONE) {
+                size =  CGSizeMake(kScreenWidth, 60);
+            }
+            else
+            {
+                size =  CGSizeMake(kScreenWidth - kTabBarWidth, 60);
+            }
             break;
         case 3:
             size =  CGSizeMake(kScreenWidth, 0);

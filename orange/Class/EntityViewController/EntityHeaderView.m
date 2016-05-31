@@ -8,13 +8,17 @@
 
 #import "EntityHeaderView.h"
 #import "NSString+Helper.h"
+#import "iCarousel.h"
 
-@interface EntityHeaderView () <UIScrollViewDelegate>
+@interface EntityHeaderView () <UIScrollViewDelegate,iCarouselDelegate,iCarouselDataSource>
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) UIScrollView * scrollView;
 @property (strong, nonatomic) UIPageControl * pageCtr;
-//@property (strong, nonatomic) UIButton * likeBtn;
-//@property (strong, nonatomic) UIButton * buyBtn;
+
+//iPad
+@property (strong, nonatomic) iCarousel * imagesView;
+@property (strong, nonatomic) NSMutableArray * imageURLArray;
+@property (assign, nonatomic) BOOL warp;
 
 @end
 
@@ -28,6 +32,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.warp = NO;
         self.backgroundColor = UIColorFromRGB(0xffffff);
     }
     return self;
@@ -55,10 +60,23 @@ static CGFloat kEntityViewMarginLeft = 16.;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.delegate = self;
         [self addSubview:_scrollView];
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TapBuyBtn:)];
-//        [_scrollView addGestureRecognizer:tap];
+
     }
     return _scrollView;
+}
+
+- (iCarousel *)imagesView
+{
+    if (!_imagesView) {
+        _imagesView = [[iCarousel alloc] initWithFrame:CGRectZero];
+        _imagesView.type = iCarouselTypeLinear;
+        _imagesView.pagingEnabled = YES;
+        
+        _imagesView.dataSource = self;
+        _imagesView.delegate = self;
+        [self addSubview:_imagesView];
+    }
+    return _imagesView;
 }
 
 - (UIPageControl *)pageCtr
@@ -77,60 +95,75 @@ static CGFloat kEntityViewMarginLeft = 16.;
     return _pageCtr;
 }
 
+- (void)dealloc
+{
+    self.imagesView.delegate = nil;
+    self.imagesView.dataSource = nil;
+}
+
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
 //    NSLog(@"images %@", _entity.imageURLArray);
     
-    if((![_entity.brand isEqual:[NSNull null]])&&(![_entity.brand isEqualToString:@""])&&(_entity.brand))
-    {
-        self.titleLabel.text = [NSString stringWithFormat:@"%@ - %@", _entity.brand, _entity.title];
-    }
-    else if((![_entity.title isEqual:[NSNull null]])&&(_entity.title))
-    {
-        self.titleLabel.text = _entity.title;
-    }
-    
-    
-    self.scrollView.contentSize = CGSizeMake((kScreenWidth - 32) * ([_entity.imageURLArray count] + 1), kScreenWidth - 32);
-    
-    NSMutableArray * imageArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
-    
-    if (_entity.imageURL)
-        [imageArray insertObject:_entity.imageURL atIndex:0];
-    
-//    NSLog(@"images %@", imageArray);
-    [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 32) * idx, 0., kScreenWidth - 32, kScreenWidth - 32)];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.tag = idx;
-        imageView.userInteractionEnabled = YES;
-//        if (IS_IPHONE_6P) {
-//            NSURL * imageURL_800;
-//            if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
-//                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:800]];
-//            } else {
-//                imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
-//            }
-//            
-//            [imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
-////            [self.scrollView addSubview:imageView];
-//        } else {
+    if (IS_IPHONE) {
+        if((![_entity.brand isEqual:[NSNull null]])&&(![_entity.brand isEqualToString:@""])&&(_entity.brand))
+        {
+            self.titleLabel.text = [NSString stringWithFormat:@"%@ - %@", _entity.brand, _entity.title];
+        }
+        else if((![_entity.title isEqual:[NSNull null]])&&(_entity.title))
+        {
+            self.titleLabel.text = _entity.title;
+        }
+        
+        
+        self.scrollView.contentSize = CGSizeMake((kScreenWidth - 32) * ([_entity.imageURLArray count] + 1), kScreenWidth - 32);
+        
+        NSMutableArray * imageArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
+        
+        if (_entity.imageURL)
+            [imageArray insertObject:_entity.imageURL atIndex:0];
+        
+        //    NSLog(@"images %@", imageArray);
+        [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
+            UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 32) * idx, 0., kScreenWidth - 32, kScreenWidth - 32)];
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
+            imageView.tag = idx;
+            imageView.userInteractionEnabled = YES;
+            
             NSURL * imageURL_640;
             if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
                 imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:640]];
             } else {
                 imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
             }
-        
+            
             [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
             
-//        }
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+            //        }
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+            
+            [imageView addGestureRecognizer:tap];
+            [self.scrollView addSubview:imageView];
+        }];
+    }
+    else
+    {
+        self.titleLabel.text = self.entity.entityName;
         
-        [imageView addGestureRecognizer:tap];
-        [self.scrollView addSubview:imageView];
-    }];
+        self.imageURLArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
+        if (_entity.imageURL)
+            [self.imageURLArray insertObject:_entity.imageURL atIndex:0];
+        
+        if (self.imageURLArray.count > 1) {
+            
+            self.imagesView.scrollEnabled = YES;
+        } else {
+            self.imagesView.scrollEnabled = NO;
+        }
+        
+        [self.imagesView reloadData];
+    }
     
     
     [self setNeedsLayout];
@@ -140,20 +173,100 @@ static CGFloat kEntityViewMarginLeft = 16.;
 {
     [super layoutSubviews];
 
-    CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font LineHeight:7];
-    
-    self.scrollView.frame = CGRectMake(0., 0., kScreenWidth - 32., kScreenWidth - 32.);
-    self.scrollView.deFrameLeft = 16.;
-    self.scrollView.deFrameTop =  16.;
-    self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 16. + self.scrollView.deFrameBottom, kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
-    
-    if ([_entity.imageURLArray count] > 0) {
-        self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
-        self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom -10);
-        self.pageCtr.bounds = CGRectMake(0.0, 0.0, 32 * (_pageCtr.numberOfPages - 1) + 32, 32);
-        self.pageCtr.hidden = NO;
+    if (IS_IPHONE) {
+        CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font LineHeight:7];
+        
+        self.scrollView.frame = CGRectMake(0., 0., kScreenWidth - 32., kScreenWidth - 32.);
+        self.scrollView.deFrameLeft = 16.;
+        self.scrollView.deFrameTop =  16.;
+        self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 16. + self.scrollView.deFrameBottom, kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
+        
+        if ([_entity.imageURLArray count] > 0) {
+            self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
+            self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom -10);
+            self.pageCtr.bounds = CGRectMake(0.0, 0.0, 32 * (_pageCtr.numberOfPages - 1) + 32, 32);
+            self.pageCtr.hidden = NO;
+        }
+    }
+    else
+    {
+        self.imagesView.frame = CGRectMake(0., 20., kScreenWidth - kTabBarWidth, 460.);
+        self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth - 40., 20);
+        self.titleLabel.deFrameLeft = 20.;
+        self.titleLabel.deFrameTop = self.imagesView.deFrameBottom + 31.;
+        
+        
     }
 }
+
+#pragma mark - <iCarouselDataSource>
+- (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
+{
+    return self.imageURLArray.count;
+}
+
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+{
+    if (!view) {
+        view = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., 460., 460.)];
+        view.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    NSURL * imageURL_800;
+    NSURL * url = [self.imageURLArray objectAtIndex:index];
+    
+    if ([url.absoluteString hasPrefix:@"http://imgcdn.guoku.com/images/"]) {
+        imageURL_800 = [NSURL URLWithString:[url.absoluteString imageURLWithSize:800]];
+    } else {
+        //        imageURL_800 = [NSURL URLWithString:[url.absoluteString stringByAppendingString:@"_800x800.jpg"]];
+        imageURL_800 = [NSURL URLWithString:url.absoluteString];
+    }
+    DDLogInfo(@"url %lu %@ ", (long)index, imageURL_800);
+    [(UIImageView *)view sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(460., 460.)]];
+    
+    return view;
+}
+
+- (CGFloat)carousel:(__unused iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
+{
+    //customize carousel display
+    switch (option)
+    {
+        case iCarouselOptionWrap:
+        {
+            //normally you would hard-code this to YES or NO
+            return self.warp;
+        }
+        case iCarouselOptionSpacing:
+        {
+            //add a bit of spacing between the item views
+            return value * 1.03f;
+        }
+        case iCarouselOptionFadeMax:
+        {
+            if (self.imagesView.type == iCarouselTypeCustom)
+            {
+                //set opacity based on distance from camera
+                return 0.0f;
+            }
+            return value;
+        }
+        case iCarouselOptionShowBackfaces:
+        case iCarouselOptionRadius:
+        case iCarouselOptionAngle:
+        case iCarouselOptionArc:
+        case iCarouselOptionTilt:
+        case iCarouselOptionCount:
+        case iCarouselOptionFadeMin:
+        case iCarouselOptionFadeMinAlpha:
+        case iCarouselOptionFadeRange:
+        case iCarouselOptionOffsetMultiplier:
+        case iCarouselOptionVisibleItems:
+        {
+            return value;
+        }
+    }
+}
+
 
 #pragma mark - button action
 - (void)tapAction:(id)sender

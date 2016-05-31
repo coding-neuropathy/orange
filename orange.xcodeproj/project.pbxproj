@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230448A31CFD6CC9000A6B3C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 230448A21CFD6CC9000A6B3C /* iCarousel.m */; };
 		2309032E1C803B1500AD26D6 /* authorizedUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */; };
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
 		239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239231B01C7D96FA00B49A88 /* RecUserController.m */; };
@@ -453,6 +454,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		230448A11CFD6CC9000A6B3C /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		230448A21CFD6CC9000A6B3C /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		2309032C1C803B1500AD26D6 /* authorizedUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = authorizedUserViewController.h; sourceTree = "<group>"; };
 		2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = authorizedUserViewController.m; sourceTree = "<group>"; };
 		238F77D81C521CF5002E0E65 /* EntityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDetailCell.h; sourceTree = "<group>"; };
@@ -1211,6 +1214,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		230448A01CFD6CC9000A6B3C /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				230448A11CFD6CC9000A6B3C /* iCarousel.h */,
+				230448A21CFD6CC9000A6B3C /* iCarousel.m */,
+			);
+			path = iCarousel;
+			sourceTree = "<group>";
+		};
 		239231AE1C7D967E00B49A88 /* RecommendationuserController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1797,6 +1809,7 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				230448A01CFD6CC9000A6B3C /* iCarousel */,
 				8A195F0A1CF3FD3A00F2A954 /* UMMobClick.framework */,
 				8AA0FE621C7DC6C0000BD702 /* libWeiboSDK */,
 				8A4E8F831C1A8D5B003EBE95 /* SVProgressHUD */,
@@ -3210,6 +3223,7 @@
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				23F6130A1CDB1B310074E8C8 /* BioViewController.m in Sources */,
 				B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */,
+				230448A31CFD6CC9000A6B3C /* iCarousel.m in Sources */,
 				239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */,
 				23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */,
 				4E688A141BA9C2BA0006AD9B /* JSQMessagesCellTextView.m in Sources */,

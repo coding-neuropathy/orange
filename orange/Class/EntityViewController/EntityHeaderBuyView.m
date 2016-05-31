@@ -92,7 +92,13 @@
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
-    self.buyButton.frame = CGRectMake(15., 10., kScreenWidth -20., 40.);
+    if (IS_IPHONE) {
+        self.buyButton.frame = CGRectMake(15., 10., kScreenWidth -20., 40.);
+    }
+    else
+    {
+        self.buyButton.frame = CGRectMake(15., 10., kScreenWidth - kTabBarWidth -20., 40.);
+    }
     
     if (_entity.purchaseArray.count > 0) {
         GKPurchase * purchase = self.entity.purchaseArray[0];
@@ -133,7 +139,13 @@
 {
     [super layoutSubviews];
     
-    self.buyButton.center = CGPointMake(kScreenWidth * 3/6, self.deFrameHeight/2);
+    if (IS_IPHONE) {
+        self.buyButton.center = CGPointMake(kScreenWidth * 3/6, self.deFrameHeight/2);
+    }
+    else
+    {
+        self.buyButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6, self.deFrameHeight/2);
+    }
     self.H.deFrameBottom = self.deFrameHeight;
 }
 
