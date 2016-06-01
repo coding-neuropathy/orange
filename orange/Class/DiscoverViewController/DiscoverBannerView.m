@@ -28,9 +28,12 @@
     if (!_bannerView) {
         _bannerView = [[iCarousel alloc] initWithFrame:CGRectZero];
         _bannerView.type = iCarouselTypeLinear;
+        NSLog(@"%@", self);
         _bannerView.delegate = self;
         _bannerView.dataSource = self;
         _bannerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _bannerView.pagingEnabled = IS_IPAD ? NO : YES;
+        _bannerView.autoscroll = IS_IPAD ? 0.0 : 0.3;
         [self addSubview:_bannerView];
     }
     
@@ -85,7 +88,7 @@
         case iCarouselOptionSpacing:
         {
             //add a bit of spacing between the item views
-            return value * 1.03f;
+            return IS_IPAD ? value * 1.03f : value;
         }
         case iCarouselOptionFadeMax:
         {
