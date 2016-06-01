@@ -210,13 +210,18 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     }];
 }
 
+- (void)loadView
+{
+    self.view = self.collectionView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //self.edgesForExtendedLayout = UIRectEdgeAll;
     //self.extendedLayoutIncludesOpaqueBars = YES;
     
-    [self.view addSubview:self.collectionView];
+//    [self.view addSubview:self.collectionView];
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
     [self.collectionView registerClass:[HomeArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
     
@@ -585,7 +590,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                 headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
             }
             else {
-                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f* (kScreenWidth  - kTabBarWidth)/320);
+                headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 228);
+//                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f* (kScreenWidth  - kTabBarWidth)/320);
             }
         }
             break;
