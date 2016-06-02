@@ -210,13 +210,18 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     }];
 }
 
+- (void)loadView
+{
+    self.view = self.collectionView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //self.edgesForExtendedLayout = UIRectEdgeAll;
     //self.extendedLayoutIncludesOpaqueBars = YES;
     
-    [self.view addSubview:self.collectionView];
+//    [self.view addSubview:self.collectionView];
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
     [self.collectionView registerClass:[HomeArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
     
@@ -277,7 +282,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         [self addSearchLog:_searchVC.searchBar.text];
     }
     
-//    [AVAnalytics endLogPageView:@"DiscoverView"];
     [MobClick endLogPageView:@"DiscoverView"];
 }
 
@@ -499,7 +503,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         case 4:
         {
 //            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
-            cellsize = CGSizeMake((self.collectionView.deFrameWidth  ) / 2 - 1, self.collectionView.deFrameWidth / 2 + 85);
+            cellsize = IS_IPAD ? CGSizeMake(340, 340 + 85) : CGSizeMake((self.collectionView.deFrameWidth  ) / 2 - 2 , self.collectionView.deFrameWidth / 2 + 85);
         }
             break;
             
@@ -513,6 +517,9 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
+//    if (IS_IPAD)
+//        return  UIEdgeInsetsMake(0., 20., 0., 20.);
+    
     switch (section) {
         case 1:
             edge = UIEdgeInsetsMake(0., 0., 10., 0.);
@@ -526,7 +533,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         case 4:
         {
 //            edge = UIEdgeInsetsMake(0., 3., 3., 3.);
-            edge = UIEdgeInsetsMake(0.5, 0.5, 0.5, 0.5);
+            edge = UIEdgeInsetsMake(1, 1, 1, 1);
         }
             break;
         default:
@@ -581,28 +588,30 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     switch (section) {
         case 0:
         {
-            if (IS_IPHONE) {
-                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
-            }
-            else {
-                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f* (kScreenWidth  - kTabBarWidth)/320);
-            }
+            headerSize = IS_IPAD ? headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 228) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
+//            if (IS_IPHONE) {
+//                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
+//            }
+//            else {
+//                headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 228);
+////                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f* (kScreenWidth  - kTabBarWidth)/320);
+//            }
         }
             break;
         case 1:
             if (self.userArray.count) {
-                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 126.);
+                headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 126.)  :CGSizeMake(CGRectGetWidth(self.collectionView.frame), 126.);
             }
             break;
         case 2:
             if (self.categoryArray.count) {
-                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 155.);
+                headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 155.) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 155.);
             }
             break;
         case 3:
         {
             if(self.articleArray.count) {
-                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 44.);
+                headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 44.) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 44.);
             }
         }
             break;
@@ -618,6 +627,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     }
     return headerSize;
 }
+
+
 
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

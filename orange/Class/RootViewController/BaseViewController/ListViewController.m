@@ -64,7 +64,8 @@ static NSString * CellIdentifer = @"Cell";
 {
     [super viewDidLoad];
     
-    self.navigationItem.titleView = self.iconInfoView;
+    if (IS_IPAD)
+        self.navigationItem.titleView = self.iconInfoView;
     
 //    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellIdentifer];
 //    self.collectionView.alwaysBounceVertical = YES;

@@ -137,7 +137,7 @@
 {
     [super layoutSubviews];
     
-    self.imageView.frame = CGRectMake(16., 16., (SCREEN_WIDTH - 48)/2 - 8, (SCREEN_WIDTH - 48)/2 - 8);
+    self.imageView.frame = CGRectMake(0., 0., self.deFrameWidth - 32., self.deFrameWidth - 32.);
     self.imageView.deFrameTop = 16;
     self.imageView.deFrameLeft = 16;
     
