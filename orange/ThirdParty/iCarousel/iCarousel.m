@@ -320,8 +320,15 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
 
 - (void)enableAutoscroll
 {
-    [NSTimer scheduledTimerWithTimeInterval:5. target:self selector:@selector(autostep) userInfo:nil repeats:YES];
+    self.autoScrollTimer = [NSTimer scheduledTimerWithTimeInterval:5. target:self selector:@selector(autostep) userInfo:nil repeats:YES];
 }
+
+- (void)disableAutoscroll
+{
+    [self.autoScrollTimer invalidate];
+    self.autoScrollTimer = nil;
+}
+
 - (void)autostep
 {
     [self scrollToItemAtIndex:self.currentItemIndex + 1 animated:YES];

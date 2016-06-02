@@ -23,6 +23,11 @@
 
 @implementation DiscoverBannerView
 
+- (void)dealloc
+{
+    if (IS_IPHONE) [self.bannerView disableAutoscroll];
+}
+
 - (iCarousel *)bannerView
 {
     if (!_bannerView) {
@@ -39,7 +44,6 @@
     
     return _bannerView;
 }
-
 
 - (void)setBannerArray:(NSMutableArray *)bannerArray
 {
