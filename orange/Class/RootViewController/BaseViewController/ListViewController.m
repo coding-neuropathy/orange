@@ -64,7 +64,7 @@ static NSString * CellIdentifer = @"Cell";
 {
     [super viewDidLoad];
     
-    if (IS_IPAD)
+    if (IS_IPAD && self.navigationController.viewControllers.count < 2)
         self.navigationItem.titleView = self.iconInfoView;
     
 //    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellIdentifer];

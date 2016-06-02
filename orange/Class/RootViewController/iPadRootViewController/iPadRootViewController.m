@@ -39,6 +39,7 @@
         _mainController.view.backgroundColor = [UIColor whiteColor];
         _mainController.view.frame = CGRectMake(84., 0., kScreenWidth - 84., kScreenHeight);
         _mainController.tabBar.hidden = YES;
+        _mainController.tabBar.translucent = YES;
         [self.view addSubview:_mainController.view];
     }
     return _mainController;
@@ -52,6 +53,13 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+//    self.mainController.tabBar.hidden = YES;
+//    self.mainController.tabBar.translucent = YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -61,7 +69,8 @@
 {
     [super updateViewConstraints];
     
-    if (self.interfaceOrientation == UIDeviceOrientationPortrait || self.interfaceOrientation == UIDeviceOrientationPortraitUpsideDown) {
+    if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationPortrait ||
+        [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationPortraitUpsideDown) {
         //        DDLogInfo(@"OKOKOKOKO");
         self.menuController.view.frame = CGRectMake(0., 0., kTabBarWidth, kScreenHeight);
         // 竖屏 左边栏宽60.f

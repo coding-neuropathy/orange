@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface ListViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface ListViewController : BaseViewController <UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 
 @property (nonatomic, strong) UICollectionView * collectionView;

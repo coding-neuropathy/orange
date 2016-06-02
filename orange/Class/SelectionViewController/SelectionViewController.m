@@ -7,7 +7,7 @@
 //
 
 #import "SelectionViewController.h"
-#import "HMSegmentedControl.h"
+//#import "HMSegmentedControl.h"
 #import "SelectionCell.h"
 #import "EntitySingleListCell.h"
 //#import "CategoryViewController.h"
@@ -325,25 +325,25 @@ static int lastContentOffset;
 
 
 #pragma mark - HMSegmentedControl
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-    NSUInteger index = segmentedControl.selectedSegmentIndex;
-    self.index = index;
-    [self.collectionView reloadData];
-    switch (index) {
-        case 0:
-        {
-
-        }
-            break;
-        case 1:
-        {
-
-        }
-            break;
-        default:
-            break;
-    }
-}
+//- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+//    NSUInteger index = segmentedControl.selectedSegmentIndex;
+//    self.index = index;
+//    [self.collectionView reloadData];
+//    switch (index) {
+//        case 0:
+//        {
+//
+//        }
+//            break;
+//        case 1:
+//        {
+//
+//        }
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 
 -(void)save
@@ -460,11 +460,11 @@ static int lastContentOffset;
 #pragma mark <SelectionViewCellDelegate>
 - (void)TapEntityImage:(GKEntity *)entity
 {
-    EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
-    //    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-//    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+//    EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
+//    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
 }
 
 @end

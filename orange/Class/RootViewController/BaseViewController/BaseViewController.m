@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (self.navigationItem) {
+    if (self.navigationItem && self.navigationController.viewControllers.count > 1) {
         UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [backBtn setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
         [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];

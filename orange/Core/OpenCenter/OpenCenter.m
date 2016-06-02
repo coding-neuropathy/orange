@@ -43,7 +43,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 - (void)openAuthUser:(GKUser *)user
 {
     authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
-    vc.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
@@ -51,7 +51,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 {
     UserViewController * VC = [[UserViewController alloc]init];
     VC.user = user;
-    VC.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
@@ -97,7 +97,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 {
     EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
 //    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
-    vc.hidesBottomBarWhenPushed = hide;
+    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = hide;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
@@ -106,7 +106,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     SubCategoryEntityController *vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
 //    vc.category = category;
     //    [controller.navigationController pushViewController:vc animated:YES];
-    vc.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
@@ -141,14 +141,14 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 - (void)openWebWithURL:(NSURL *)url
 {
     WebViewController * vc = [[WebViewController alloc] initWithURL:url];
-    vc.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)openArticleWebWithArticle:(GKArticle *)article
 {
     ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithArticle:article];
-    vc.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
