@@ -12,11 +12,13 @@
 
 @property (strong, nonatomic) UIButton * signInBtn;
 @property (strong, nonatomic) UIButton * signOutBtn;
+@property (strong, nonatomic) UILabel * versionLabel;
 
 @end
 
 @implementation SettingsFooterView
 
+#pragma mark -  init subviews
 - (UIButton *)signInBtn
 {
     if (!_signInBtn) {
@@ -55,11 +57,26 @@
     return _signOutBtn;
 }
 
+- (UILabel *)versionLabel
+{
+    if (!_versionLabel) {
+        _versionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _versionLabel.font = [UIFont systemFontOfSize:12.];
+        _versionLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _versionLabel.textAlignment = NSTextAlignmentCenter;
+//        _versionLabel.backgroundColor = [UIColor redColor];
+        _versionLabel.text = [NSString stringWithFormat:@"version %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+        //        _versionLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        //        _versionLabel.autoresizesSubviews = YES;
+        [self addSubview:_versionLabel];
+    }
+    return _versionLabel;
+}
+
 
 - (void)setIs_login:(BOOL)is_login
 {
     _is_login = is_login;
-
     
     [self setNeedsLayout];
 }
@@ -67,8 +84,6 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    
     
     if (_is_login) {
         self.signOutBtn.hidden = NO;
@@ -78,6 +93,14 @@
         self.signInBtn.hidden = NO;
         self.signInBtn.frame = CGRectMake(20., 20., kScreenWidth - 40., 44.);
     }
+    
+    if (IS_IPHONE) {
+        self.versionLabel.frame = CGRectMake(0., 0., kScreenWidth, 20);
+    } else {
+        self.versionLabel.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, 20);
+    }
+    
+    self.versionLabel.deFrameBottom = self.deFrameHeight - 20.;
 }
 
 #pragma mark - button action

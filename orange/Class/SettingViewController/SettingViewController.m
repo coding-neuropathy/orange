@@ -65,26 +65,41 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 {
     if (!_footerView) {
         _footerView = [[SettingsFooterView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, 120.)];
+        if (IS_IPHONE) {
+            _footerView.frame = CGRectMake(0., 0., kScreenWidth, 120.);
+        }
+        
         _footerView.delegate = self;
         _footerView.is_login = k_isLogin;
+//        _footerView.backgroundColor = [UIColor redColor];
+//        _footerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//        _footerView.autoresizesSubviews = YES;
     }
     return _footerView;
 }
 
-- (UILabel *)versionLabel
-{
-    if (!_versionLabel) {
-        _versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, 20)];
-        _versionLabel.font = [UIFont systemFontOfSize:12.];
-        _versionLabel.textColor = UIColorFromRGB(0x9d9e9f);
-        _versionLabel.textAlignment = NSTextAlignmentCenter;
-//        _versionLabel.backgroundColor = [UIColor redColor];
-        _versionLabel.text = [NSString stringWithFormat:@"version %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-        
+//- (UILabel *)versionLabel
+//{
+//    if (!_versionLabel) {
+//        
+//        _versionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+//        if (IS_IPHONE) {
+//            _versionLabel.frame = CGRectMake(0., 0., kScreenWidth, 20);
+//        } else {
+//            _versionLabel.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, 20);
+//        }
+//        
+//        _versionLabel.font = [UIFont systemFontOfSize:12.];
+//        _versionLabel.textColor = UIColorFromRGB(0x9d9e9f);
+//        _versionLabel.textAlignment = NSTextAlignmentCenter;
+////        _versionLabel.backgroundColor = [UIColor redColor];
+//        _versionLabel.text = [NSString stringWithFormat:@"version %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+////        _versionLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+////        _versionLabel.autoresizesSubviews = YES;
 //        [self.footerView addSubview:_versionLabel];
-    }
-    return _versionLabel;
-}
+//    }
+//    return _versionLabel;
+//}
 
 - (UITableView *)tableView
 {
@@ -107,6 +122,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 - (void)loadView
 {
+//    self.view = self.tableView;
     [super loadView];
     
     [self.view addSubview:self.tableView];
@@ -154,12 +170,11 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     
     
     [self.tableView registerClass:[SettingsViewCell class] forCellReuseIdentifier:SettingTableIdentifier];
-    self.tableView.tableFooterView = self.versionLabel;
+    self.tableView.tableFooterView = self.footerView;
+//    self.versionLabel.deFrameBottom = self.footerView.deFrameHeight - 20.;
     
-    self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.view.autoresizesSubviews = YES;
-    
-
+//    self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//    self.view.autoresizesSubviews = YES;
 }
 
 
