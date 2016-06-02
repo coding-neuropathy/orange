@@ -331,9 +331,10 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 - (void)refreshRandom
 {
+    
     [API getRandomEntityListByCategoryId:self.entity.categoryId
                                 entityId:self.entity.entityId
-                                   count:9 success:^(NSArray *entityArray) {
+                                   count:IS_IPHONE ? 9 : 12 success:^(NSArray *entityArray) {
                                        self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
                                        [self.collectionView reloadData];
                                    } failure:^(NSInteger stateCode) {
@@ -543,13 +544,13 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             break;
         case 5:
         {
-            CGFloat height = [EntityNoteCell height:[self.dataArrayForNote objectAtIndex:indexPath.row]];
+            GKNote * note = [self.dataArrayForNote objectAtIndex:indexPath.row];
             if (IS_IPAD) {
-                cellsize = CGSizeMake(kScreenWidth - kTabBarWidth, height);
+                cellsize = CGSizeMake(kScreenWidth - kTabBarWidth, [EntityNoteCell height:note]);
             }
             else
             {
-                cellsize = CGSizeMake(kScreenWidth, height);
+                cellsize = CGSizeMake(kScreenWidth, [EntityNoteCell height:note]);
             }
         }
             break;
@@ -557,14 +558,15 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         {
             if (IS_IPAD)
             {
-                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft ||
-                    [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
-                    cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/4, (kScreenWidth-12)/4);
-                }
-                else
-                {
-                cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/3, (kScreenWidth-12)/3);
-                }
+//                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft ||
+//                    [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+//                    cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/4, (kScreenWidth-12)/4);
+                    cellsize =  CGSizeMake(204., 204.);
+//                }
+//                else
+//                {
+//                cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/3, (kScreenWidth-12)/3);
+//                }
                 
             }
             else
@@ -597,7 +599,13 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             break;
         case 6:
         {
-            edge = UIEdgeInsetsMake(3, 3, 3, 3);
+            if (IS_IPHONE) {
+                edge = UIEdgeInsetsMake(3, 3, 3, 3);
+            }
+            else
+            {
+                edge =  UIEdgeInsetsMake(0., 20., 0, 20.);
+            }
         }
             break;
         default:
@@ -618,7 +626,13 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             break;
         case 6:
         {
+            if (IS_IPAD)
+            {
+                itemSpacing = 16.;
+            }else
+            {
             itemSpacing = 3;
+            }
         }
             break;
         default:
@@ -643,7 +657,13 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
                 spacing = 10.;
             }
              */
-            spacing = 3.;
+            if (IS_IPHONE) {
+                spacing = 3.;
+            }
+            else
+            {
+                spacing = 16.;
+            }
              
         }
             break;

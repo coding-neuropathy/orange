@@ -319,7 +319,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     }
     else
     {
-        self.contentLabel.frame = CGRectMake(0, 0., kScreenWidth - kTabBarWidth - 78., 20);
+        self.contentLabel.frame = CGRectMake(0, 0., 593, 20);
     }
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     self.contentLabel.deFrameTop = self.nameLabel.deFrameBottom + 10.;
@@ -347,28 +347,39 @@ static inline NSRegularExpression * UrlRegularExpression() {
     self.separateLine.frame = CGRectMake(0, self.contentView.deFrameHeight - kSeparateLineWidth, kScreenWidth, kSeparateLineWidth);
 }
 
-//- (void)drawRect:(CGRect)rect
-//{
-//    [super drawRect:rect];
-//    
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    
-//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-//    CGContextSetLineWidth(context, kSeparateLineWidth);
-//    
-//    CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
-//    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
-//    
-//    CGContextStrokePath(context);
-//}
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    
+    CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    
+    CGContextStrokePath(context);
+}
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(0, 0., kScreenWidth - 78., 20)];
-    label.paragraphReplacement = @"";
-    label.lineSpacing = 7.0;
-    label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
-    return label.optimumSize.height + 96.;
+    if (IS_IPHONE) {
+        RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(0, 0., kScreenWidth - 78., 20)];
+        label.paragraphReplacement = @"";
+        label.lineSpacing = 7.0;
+        label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
+        return label.optimumSize.height + 96.;
+    }
+    else
+    {
+        RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(0, 0., 593, 20)];
+        label.paragraphReplacement = @"";
+        label.lineSpacing = 7.0;
+        label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
+        return label.optimumSize.height + 116.;
+    }
+    
 }
 
 #pragma mark - button action
