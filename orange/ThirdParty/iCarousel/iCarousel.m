@@ -311,8 +311,20 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
 
 - (void)setAutoscroll:(CGFloat)autoscroll
 {
-    _autoscroll = autoscroll;
+    _autoscroll = 0;
     if (autoscroll != 0.0) [self startAnimation];
+//    if (autoscroll != 0.) {
+//        [NSTimer scheduledTimerWithTimeInterval:5. target:self selector:@selector(autostep) userInfo:nil repeats:YES];
+//    }
+}
+
+- (void)enableAutoscroll
+{
+    [NSTimer scheduledTimerWithTimeInterval:5. target:self selector:@selector(autostep) userInfo:nil repeats:YES];
+}
+- (void)autostep
+{
+    [self scrollToItemAtIndex:self.currentItemIndex + 1 animated:YES];
 }
 
 - (void)pushAnimationState:(BOOL)enabled
@@ -1655,7 +1667,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
                                            selector:@selector(step)
                                            userInfo:nil
                                             repeats:YES];
-        
+
         [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
 
 #ifdef ICAROUSEL_IOS
@@ -1813,8 +1825,8 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     else if (_autoscroll && !_dragging)
     {
         //autoscroll goes backwards from what you'd expect, for historical reasons
-//        self.scrollOffset = [self clampedOffset:_scrollOffset + delta * _autoscroll];
-        [self scrollToItemAtIndex:self.currentItemIndex + 1 duration:3.];
+        self.scrollOffset = [self clampedOffset:_scrollOffset + delta * _autoscroll];
+//        [self scrollToItemAtIndex:self.currentItemIndex + 1 duration:1.3];
     }
     else if (fabs(_toggle) > FLOAT_ERROR_MARGIN)
     {

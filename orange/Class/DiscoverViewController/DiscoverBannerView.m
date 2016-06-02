@@ -32,7 +32,8 @@
         _bannerView.dataSource = self;
         _bannerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         _bannerView.pagingEnabled = IS_IPAD ? NO : YES;
-        _bannerView.autoscroll = IS_IPAD ? 0.0 : 0.3;
+//        _bannerView.autoscroll = IS_IPAD ? 0.0 : 0.3;
+        if (IS_IPHONE) [_bannerView enableAutoscroll];
         [self addSubview:_bannerView];
     }
     
