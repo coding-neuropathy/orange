@@ -78,35 +78,13 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     return _footerView;
 }
 
-//- (UILabel *)versionLabel
-//{
-//    if (!_versionLabel) {
-//        
-//        _versionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//        if (IS_IPHONE) {
-//            _versionLabel.frame = CGRectMake(0., 0., kScreenWidth, 20);
-//        } else {
-//            _versionLabel.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, 20);
-//        }
-//        
-//        _versionLabel.font = [UIFont systemFontOfSize:12.];
-//        _versionLabel.textColor = UIColorFromRGB(0x9d9e9f);
-//        _versionLabel.textAlignment = NSTextAlignmentCenter;
-////        _versionLabel.backgroundColor = [UIColor redColor];
-//        _versionLabel.text = [NSString stringWithFormat:@"version %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-////        _versionLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-////        _versionLabel.autoresizesSubviews = YES;
-//        [self.footerView addSubview:_versionLabel];
-//    }
-//    return _versionLabel;
-//}
 
 - (UITableView *)tableView
 {
     if (!_tableView) {
         
         if (IS_IPHONE) {
-            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
+            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
         } else {
             _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
         }
@@ -128,6 +106,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [self.view addSubview:self.tableView];
 //    [self.footerView addSubview:self.versionLabel];
     self.view.backgroundColor = UIColorFromRGB(0xfafafa);
+
 //    self.versionLabel.deFrameBottom = self.footerView.deFrameHeight - 20.;
 }
 
@@ -136,6 +115,10 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [super viewDidLoad];
 
     self.navigationItem.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
+//    if (self.navigationController.viewControllers.count > 1) {
+//        self.tabBarController.tabBar.hidden = YES;
+//        self.tabBarController.tabBar.translucent = YES;
+//    }
     
     /**
      *  账号安全
@@ -278,29 +261,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                     alertView.alertViewStyle = UIAlertViewStyleDefault;
                     alertView.tag = 40001;
                     [alertView show];
-                    break;
+//                    break;
                 }
-                
-//                [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
-//                [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
-//                    NSLog(@"%.0f", [object[@"expires_at"] timeIntervalSince1970]);
-//                    
-//                    
-//                    if (!error) {
-//                        [API bindWeiboWithUserId:[Passport sharedInstance].user.userId sinaUserId:object[@"id"] sinaScreenname:object[@"username"] accessToken:object[@"access_token"] ExpiresIn:object[@"expires_at"]  success:^(GKUser *user) {
-//                            [Passport sharedInstance].user = user;
-//                            [Passport sharedInstance].screenName = user.sinaScreenName;
-////                            [Passport sharedInstance].sinaUserID = user.
-//                            [self.tableView reloadData];
-//                            [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"bind success", kLocalizedFile, nil)];
-//                        } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
-//                            [SVProgressHUD showErrorWithStatus:message];
-//                        }];
-//                    } else {
-//                        DDLogError(@"error %@", error);
-//                    }
-//                } toPlatform:AVOSCloudSNSSinaWeibo];
-                
             }
                 break;
             case 1:
