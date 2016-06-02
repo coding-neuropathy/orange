@@ -141,21 +141,31 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-//    
-    self.coverImageView.frame = CGRectMake(0., 0., 112*kScreenWidth/375, 84*kScreenWidth/375);
-    self.coverImageView.deFrameTop = 16.;
-    self.coverImageView.deFrameLeft = self.contentView.deFrameLeft + 16;
-//
-    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, self.contentView.deFrameHeight - 32.);
-    self.titleLabel.deFrameTop = -5.;
-    self.titleLabel.deFrameLeft = self.coverImageView.deFrameRight + 12;
-
-//    self.detailLabel.frame = CGRectMake(0., 0., self.titleLabel.deFrameWidth, 12.);
-//    self.detailLabel.deFrameLeft = 16.;
-//    self.detailLabel.deFrameBottom = self.contentView.deFrameBottom - 16;
-    self.contentLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, 50);
-    self.contentLabel.deFrameLeft = self.titleLabel.deFrameLeft;
-    self.contentLabel.deFrameTop = self.titleLabel.deFrameBottom - 19.;
+    
+    if (IS_IPHONE) {
+        self.coverImageView.frame = CGRectMake(0., 0., 112*kScreenWidth/375, 84*kScreenWidth/375);
+        self.coverImageView.deFrameTop = 16.;
+        self.coverImageView.deFrameLeft = self.contentView.deFrameLeft + 16;
+        
+        self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, self.contentView.deFrameHeight - 32.);
+        self.titleLabel.deFrameTop = -5.;
+        self.titleLabel.deFrameLeft = self.coverImageView.deFrameRight + 12;
+        
+        self.contentLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, 50);
+        self.contentLabel.deFrameLeft = self.titleLabel.deFrameLeft;
+        self.contentLabel.deFrameTop = self.titleLabel.deFrameBottom - 19.;
+    }
+    else
+    {
+        self.coverImageView.frame = CGRectMake(0., 0., self.contentView.deFrameWidth, self.contentView.deFrameWidth / 1.8);
+        
+        self.titleLabel.frame = CGRectMake(0., 0., self.contentView.deFrameWidth - 20., 45.);
+        self.titleLabel.deFrameLeft = 10.;
+        self.titleLabel.deFrameTop = self.coverImageView.deFrameBottom + 15.;
+        self.contentLabel.frame = CGRectMake(0., 0., self.contentView.deFrameWidth - 20., 45.);
+        self.contentLabel.deFrameLeft = self.titleLabel.deFrameLeft;
+        self.contentLabel.deFrameTop = self.titleLabel.deFrameBottom;
+    }
 }
 
 - (void)drawRect:(CGRect)rect

@@ -482,6 +482,9 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
             {
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"popular articles", kLocalizedFile, nil);
+                if (IS_IPAD) {
+                    header.backgroundColor= UIColorFromRGB(0xf8f8f8);
+                }
                 return header;
             }
                 break;
@@ -489,6 +492,9 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
             {
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"popular", kLocalizedFile, nil);
+                if (IS_IPAD) {
+                    header.backgroundColor= UIColorFromRGB(0xf8f8f8);
+                }
                 return header;
             }
                 break;
@@ -504,7 +510,17 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
         case 3:
-            cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);;
+            if (IS_IPHONE) {
+                cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);
+            }
+            else
+            {
+                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+                    cellsize = CGSizeMake((kScreenWidth - kTabBarWidth - 16 * 5) / 3, 300.);
+                } else {
+                    cellsize = CGSizeMake(204, 232.);
+                }
+            }
             break;
         case 4:
         {
@@ -544,7 +560,13 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
             edge = UIEdgeInsetsMake(0., 0., 10., 0.);
             break;
         case 3:
-            edge = UIEdgeInsetsMake(0., 0., 10., 0);
+            if (IS_IPHONE) {
+                edge = UIEdgeInsetsMake(0., 0., 10., 0);
+            }
+            else
+            {
+                edge = UIEdgeInsetsMake(0., 20., 0., 20.);
+            }
             break;
         case 4:
         {
