@@ -783,9 +783,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         {
             GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
             [[OpenCenter sharedOpenCenter] openCategory:category];
-//            GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId": @(self.entity.categoryId)}];
-//            SubCategoryEntityController * VC = [[SubCategoryEntityController alloc] initWithSubCategory:category];
-//            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+
         }
             break;
         case LikeType:
@@ -971,21 +969,22 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)shareButtonAction
 {
     
-    ShareView * view = [[ShareView alloc]initWithTitle:self.entity.entityName SubTitle:@"" Image:self.image.image URL:[NSString stringWithFormat:@"%@%@/",kGK_WeixinShareURL,self.entity.entityHash]];
-    view.type = @"entity";
-    view.entity = self.entity;
-    __weak __typeof(&*self)weakSelf = self;
-
-    view.tapRefreshButtonBlock = ^(){
-
-//        [weakSelf.collectionView setScrollsToTop:YES];
-//        [SVProgressHUD showImage:nil status:@"\U0001F603 刷新成功"];
-        [SVProgressHUD showSuccessWithStatus:@"刷新成功"];
-        [weakSelf.collectionView setContentOffset:CGPointMake(0., -self.header.deFrameHeight) animated:YES];
-        [weakSelf refresh];
-        [weakSelf refreshRandom];
-    };
-    [view show];
+    
+        ShareView * view = [[ShareView alloc]initWithTitle:self.entity.entityName SubTitle:@"" Image:self.image.image URL:[NSString stringWithFormat:@"%@%@/",kGK_WeixinShareURL,self.entity.entityHash]];
+        view.type = @"entity";
+        view.entity = self.entity;
+        __weak __typeof(&*self)weakSelf = self;
+        
+        view.tapRefreshButtonBlock = ^(){
+            
+            //        [weakSelf.collectionView setScrollsToTop:YES];
+            //        [SVProgressHUD showImage:nil status:@"\U0001F603 刷新成功"];
+            [SVProgressHUD showSuccessWithStatus:@"刷新成功"];
+            [weakSelf.collectionView setContentOffset:CGPointMake(0., -self.header.deFrameHeight) animated:YES];
+            [weakSelf refresh];
+            [weakSelf refreshRandom];
+        };
+        [view show];
 }
 
 - (void)buyButtonAction
