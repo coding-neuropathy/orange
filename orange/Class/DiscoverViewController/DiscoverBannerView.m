@@ -126,17 +126,19 @@
     DDLogInfo(@"%@", [self.bannerArray objectAtIndex:index]);
     NSDictionary * dict = [self.bannerArray objectAtIndex:index];
     NSString *urlString = [dict valueForKey:@"url"];
+    
+//    NSString * url = dict[@"url"];
+    [MobClick event:@"banner" attributes:@{@"url": urlString}];
+    
+//    DDLogError(@"banner %@", dict);
+    
+    if ([dict objectForKey:@"article"]) {
+        GKArticle * article = [GKArticle modelFromDictionary:dict[@"article"]];
+        [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+        return;
+    }
+    
     if ([urlString hasPrefix:@"http://"]) {
-        //        if (k_isLogin) {
-        //            NSRange range = [url rangeOfString:@"?"];
-        //            if (range.location != NSNotFound) {
-        //                url = [url stringByAppendingString:[NSString stringWithFormat:@"&session=%@",[Passport sharedInstance].session]];
-        //            }
-        //            else
-        //            {
-        //                url = [url stringByAppendingString:[NSString stringWithFormat:@"?session=%@",[Passport sharedInstance].session]];
-        //            }
-        //        }
         NSRange range = [urlString rangeOfString:@"out_link"];
         if (range.location == NSNotFound) {
             [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:urlString]];

@@ -35,13 +35,13 @@
     _text = text;
     self.textLabel.text = NSLocalizedStringFromTable(_text, kLocalizedFile, nil);
     
-    if([_text isEqualToString:@"version"]) {
-//        DDLogInfo(@"version %@", [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]);
-        [self setAccessoryType:UITableViewCellAccessoryNone];
-        self.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-    }
-    else if ([_text isEqualToString:@"weibo"] && [Passport sharedInstance].user.sinaScreenName) {
+//    if([_text isEqualToString:@"version"]) {
+////        DDLogInfo(@"version %@", [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]);
+//        [self setAccessoryType:UITableViewCellAccessoryNone];
+//        self.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+//        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+//    }
+    if ([_text isEqualToString:@"weibo"] && [Passport sharedInstance].user.sinaScreenName) {
         [self setAccessoryType:UITableViewCellAccessoryNone];
         self.detailTextLabel.text = [NSString stringWithFormat:@"@%@", [Passport sharedInstance].user.sinaScreenName];
 //        NSLog(@"weibo screen name %@", [Passport sharedInstance].user.sinaScreenName);
@@ -85,6 +85,7 @@
         self.detailTextLabel.frame = CGRectMake(self.deFrameWidth - 115., 0., 100, self.frame.size.height);
 //    NSLog(@"%@", self.accessoryView);
 //    self.accessoryView = self.detailTextLabel;
+    
 }
 
 @end

@@ -80,6 +80,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         _versionLabel.textAlignment = NSTextAlignmentCenter;
 //        _versionLabel.backgroundColor = [UIColor redColor];
         _versionLabel.text = [NSString stringWithFormat:@"version %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+        
+//        [self.footerView addSubview:_versionLabel];
     }
     return _versionLabel;
 }
@@ -91,10 +93,12 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         if (IS_IPHONE) {
             _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight -kNavigationBarHeight -kStatusBarHeight) style:UITableViewStyleGrouped];
         } else {
-            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStyleGrouped];
+            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
         }
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _tableView.autoresizesSubviews = YES;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.separatorColor = UIColorFromRGB(0xebebeb);
     }
@@ -106,9 +110,9 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [super loadView];
     
     [self.view addSubview:self.tableView];
-    [self.footerView addSubview:self.versionLabel];
+//    [self.footerView addSubview:self.versionLabel];
     self.view.backgroundColor = UIColorFromRGB(0xfafafa);
-    self.versionLabel.deFrameBottom = self.footerView.deFrameHeight - 20.;
+//    self.versionLabel.deFrameBottom = self.footerView.deFrameHeight - 20.;
 }
 
 - (void)viewDidLoad
@@ -150,7 +154,11 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     
     
     [self.tableView registerClass:[SettingsViewCell class] forCellReuseIdentifier:SettingTableIdentifier];
-    self.tableView.tableFooterView = self.footerView;
+    self.tableView.tableFooterView = self.versionLabel;
+    
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.view.autoresizesSubviews = YES;
+    
 
 }
 
@@ -179,6 +187,31 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     return UIStatusBarStyleDefault;
 }
 
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         //         UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+         // do whatever
+         //         if (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
+         //             self.tableView.frame = CGRectMake(0., 0., size.width, size.height);
+         //         } else {
+         //             self.tableView.frame = CGRectMake(0., 0., size.width, size.height);
+         //         }
+         self.tableView.frame = CGRectMake(0., 0., size.width - kTabBarWidth, size.height);
+         //         self.tableView.contentSize = size;
+         
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+//                  [self.tableView reloadData];
+         //         DDLogInfo(@"info %f %f", size.width, size.height);
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -203,7 +236,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     SettingsViewCell * cell = [tableView dequeueReusableCellWithIdentifier:SettingTableIdentifier forIndexPath:indexPath];
     
     cell.text = [[[self.dataArray objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row];
-    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
