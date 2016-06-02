@@ -160,7 +160,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reloadData;
 
+
+/**
+ *
+ */
+@property (strong, nonatomic) NSTimer * autoScrollTimer;
 - (void)enableAutoscroll;
+- (void)disableAutoscroll;
 
 @end
 
