@@ -307,12 +307,7 @@
     } else {
         //        [self.navigationController popToRootViewControllerAnimated:YES];
         [self.navigationController popViewControllerAnimated:YES];
-    
-       
     }
-    
-  
-
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

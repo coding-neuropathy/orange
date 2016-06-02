@@ -26,6 +26,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+//        self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+//        self.autoresizesSubviews = YES;
     }
     return self;
 }
@@ -139,7 +141,6 @@ static char UISloganView;
         self.showSloganView = YES;
     }
 }
-
 
 - (void)setSloganView:(SloganView *)sloganView
 {
