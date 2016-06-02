@@ -555,12 +555,21 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             break;
         case 6:
         {
-            if (IS_IPHONE) {
-                cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+            if (IS_IPAD)
+            {
+                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft ||
+                    [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+                    cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/4, (kScreenWidth-12)/4);
+                }
+                else
+                {
+                cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/3, (kScreenWidth-12)/3);
+                }
+                
             }
             else
             {
-                cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/3, (kScreenWidth-12)/3);
+                cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
             }
         }
             break;
