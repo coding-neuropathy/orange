@@ -285,6 +285,11 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     [MobClick endLogPageView:@"DiscoverView"];
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.collectionView performBatchUpdates:nil completion:nil];
+}
+
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -375,6 +380,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     }
     return;
 }
+
 
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -503,7 +509,17 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         case 4:
         {
 //            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
-            cellsize = IS_IPAD ? CGSizeMake(340, 340 + 85) : CGSizeMake((self.collectionView.deFrameWidth  ) / 2 - 2 , self.collectionView.deFrameWidth / 2 + 85);
+            if (IS_IPAD ) {
+            
+                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft ||
+                    [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+                    cellsize = CGSizeMake(312., 312. + 85);
+                } else {
+                    cellsize = CGSizeMake(340, 340 + 85);
+                }
+            } else {
+                cellsize = CGSizeMake((self.collectionView.deFrameWidth  ) / 2 - 2 , self.collectionView.deFrameWidth / 2 + 85);
+            }
         }
             break;
             
