@@ -28,7 +28,6 @@
     if (!_bannerView) {
         _bannerView = [[iCarousel alloc] initWithFrame:CGRectZero];
         _bannerView.type = iCarouselTypeLinear;
-        NSLog(@"%@", self);
         _bannerView.delegate = self;
         _bannerView.dataSource = self;
         _bannerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;

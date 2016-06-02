@@ -338,7 +338,6 @@ NSString *SettingTableIdentifier = @"SettingCell";
 }
 
 #pragma mark - Header View Delegate
-
 - (void)TapPhotoBtn:(id)sender
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
