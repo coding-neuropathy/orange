@@ -11,6 +11,7 @@
 
 
 @interface LoginViewController : UIViewController
+
 @property(weak,nonatomic) AuthController * authController;
 @property (nonatomic, copy) void (^successBlock)();
 

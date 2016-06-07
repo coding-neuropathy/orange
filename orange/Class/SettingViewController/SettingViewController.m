@@ -84,13 +84,13 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     if (!_tableView) {
         
         if (IS_IPHONE) {
-            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
-        } else {
             _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
+        } else {
+            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStyleGrouped];
         }
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//        _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _tableView.autoresizesSubviews = YES;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.separatorColor = UIColorFromRGB(0xebebeb);

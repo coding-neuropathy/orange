@@ -60,29 +60,32 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     if (!user.nickname)
     {
         [API getUserDetailWithUserId:user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray *lastArticles) {
+            
+            user.authorized_author ? [self openAuthUser:user] : [self openUser:user];
 
-            if (user.authorized_author)
-            {
-                [self openAuthUser:user];
-            }
-            else
-            {
-                [self openNormalUser:user];
-            }
+//            if (user.authorized_author)
+//            {
+//                [self openAuthUser:user];
+//            }
+//            else
+//            {
+//                [self openNormalUser:user];
+//            }
         } failure:^(NSInteger stateCode) {
             [self openNormalUser:user];
         }];
     }
     else
     {
-        if (!user.authorized_author)
-        {
-            [self openNormalUser:user];
-        }
-        else
-        {
-            [self openAuthUser:user];
-        }
+        user.authorized_author ? [self openAuthUser:user] : [self openUser:user];
+//        if (!user.authorized_author)
+//        {
+//            [self openNormalUser:user];
+//        }
+//        else
+//        {
+//            [self openAuthUser:user];
+//        }
     }
 }
 
