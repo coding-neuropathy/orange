@@ -351,12 +351,35 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
     CGSize cellsize = CGSizeMake(0, 0);
     switch (indexPath.section) {
         case 0:
-            cellsize = CGSizeMake(kScreenWidth, 110.);
+            if (IS_IPHONE) {
+                cellsize = CGSizeMake(kScreenWidth, 110.);
+            }
+            else
+            {
+                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+                    cellsize = CGSizeMake((kScreenWidth - kTabBarWidth - 16 * 5) / 3, 300.);
+                } else {
+                    cellsize = CGSizeMake(204, 232.);
+                }
+            }
             return cellsize;
             break;
             
         default:
-            cellsize = CGSizeMake((kScreenWidth  )/2 - 1, (kScreenWidth  )/2 + 77);
+            if (IS_IPHONE) {
+                cellsize = CGSizeMake((kScreenWidth  )/2 - 1, (kScreenWidth  )/2 + 85);
+                
+            }
+            else
+            {
+                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft ||
+                    [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+                    cellsize = CGSizeMake(312., 312. + 85);
+                } else {
+                    cellsize = CGSizeMake(340, 340 + 85);
+                }
+                
+            }
             return cellsize;
             break;
     }
@@ -370,14 +393,28 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
     switch (section) {
         case 0:
         {
-            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            if (IS_IPHONE) {
+                edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            }
+            else
+            {
+                edge = UIEdgeInsetsMake(0., 20., 0., 20.);
+            }
             return edge;
         }
             break;
             
         default:
         {
-            edge = UIEdgeInsetsMake(0.5, 0.5, 0.5, 0.5);
+            if (IS_IPHONE) {
+                edge = UIEdgeInsetsMake(0.5, 0.5, 0.5, 0.5);
+                return edge;
+            }
+            else
+            {
+                edge = UIEdgeInsetsMake(1, 1, 1, 1);
+                return edge;
+            }
             return edge;
         }
             break;
@@ -429,7 +466,8 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenWidth, 40.);
+    CGSize headerSize = IS_IPHONE ? CGSizeMake(kScreenWidth, 40.) : CGSizeMake(kScreenWidth - kTabBarWidth, 40.);
+    return headerSize;
 }
 
 #pragma mark - <EntityCellDelegate>

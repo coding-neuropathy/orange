@@ -113,7 +113,13 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
+        if (IS_IPHONE) {
+            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
+        }
+        else
+        {
+            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
+        }
         
         _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _collectionView.delegate = self;
@@ -162,10 +168,16 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     }];
 }
 
+
+- (void)loadView
+{
+    self.view = self.collectionView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.view addSubview:self.collectionView];
+//    [self.view addSubview:self.collectionView];
     
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
 
@@ -263,7 +275,11 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
             case 1:
             {
                 CategoryHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryHeaderSectionIdentifier forIndexPath:indexPath];
+                if (IS_IPAD) {
+                    header.backgroundColor = UIColorFromRGB(0xf8f8f8);
+                }
                 header.text = NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil);
+                
                 if (self.count < 3) {
                     header.moreBtn.hidden = YES;
                 }
@@ -346,12 +362,35 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     switch (indexPath.section) {
         case 1:
         {
-            cellsize = CGSizeMake(kScreenWidth, 110.);
+            if (IS_IPHONE) {
+                cellsize = CGSizeMake(kScreenWidth, 110.);
+            }
+            else
+            {
+                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+                    cellsize = CGSizeMake((kScreenWidth - kTabBarWidth - 16 * 5) / 3, 300.);
+                } else {
+                    cellsize = CGSizeMake(204, 232.);
+                }
+            }
             return cellsize;
         }
         default:
         {
-            cellsize = CGSizeMake((kScreenWidth  )/2 - 1, (kScreenWidth  )/2 + 85);
+            if (IS_IPHONE) {
+                cellsize = CGSizeMake((kScreenWidth  )/2 - 1, (kScreenWidth  )/2 + 85);
+                
+            }
+            else
+            {
+                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft ||
+                    [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
+                    cellsize = CGSizeMake(312., 312. + 85);
+                } else {
+                    cellsize = CGSizeMake(340, 340 + 85);
+                }
+                
+            }
             return cellsize;
         }
             break;
@@ -365,7 +404,13 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     switch (section) {
         case 1:
         {
-            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            if (IS_IPHONE) {
+                edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            }
+            else
+            {
+                edge = UIEdgeInsetsMake(0., 20., 0., 20.);
+            }
             return edge;
         }
         case 0:
@@ -375,8 +420,15 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
         }
         default:
         {
-            edge = UIEdgeInsetsMake(0.5, 0.5, 0.5, 0.5);
-            return edge;
+            if (IS_IPHONE) {
+                edge = UIEdgeInsetsMake(0.5, 0.5, 0.5, 0.5);
+                return edge;
+            }
+            else
+            {
+                edge = UIEdgeInsetsMake(1, 1, 1, 1);
+                return edge;
+            }
         }
             break;
     }
@@ -426,14 +478,14 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     switch (section) {
         case 0:
         {
-            CGSize headerSize = CGSizeMake(kScreenWidth, 55.);
+            CGSize headerSize = IS_IPHONE ? CGSizeMake(kScreenWidth, 55.) : CGSizeMake(kScreenWidth - kTabBarWidth, 55.);
             return headerSize;
         }
             break;
         
         default:
         {
-            CGSize headerSize = CGSizeMake(kScreenWidth, 40.);
+            CGSize headerSize = IS_IPHONE ? CGSizeMake(kScreenWidth, 40.) : CGSizeMake(kScreenWidth - kTabBarWidth, 40.);
             return headerSize;
         }
             break;
@@ -581,7 +633,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     if (!_moreBtn) {
         _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_moreBtn setTitle:[NSString stringWithFormat:@"%@", NSLocalizedStringFromTable(@"more", kLocalizedFile, nil)] forState:UIControlStateNormal];
-        [_moreBtn setTitleColor:UIColorFromRGB(0x9D9E9F) forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:IS_IPHONE ? UIColorFromRGB(0x9D9E9F) : UIColorFromRGB(0x427EC0) forState:UIControlStateNormal];
         _moreBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
         [_moreBtn addTarget:self action:@selector(MoreBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_moreBtn];
