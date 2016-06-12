@@ -842,7 +842,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         if (range.location == NSNotFound) {
             //            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
             WebViewController * VC = [[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
-            VC.hidesBottomBarWhenPushed = YES;
+            if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:VC animated:YES];
             return;
         }
