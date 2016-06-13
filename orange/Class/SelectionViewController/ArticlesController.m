@@ -39,34 +39,6 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     return self;
 }
 
-//#pragma mark - init View
-//- (UICollectionView *)collectionView
-//{
-//    if (!_collectionView) {
-//        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
-//        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-////        layout.parallaxHeaderAlwaysOnTop = YES;
-//        
-//        if (IS_IPAD) {
-//            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
-//        } else {
-//            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
-//        }
-//        _collectionView.delegate = self;
-//        _collectionView.dataSource = self;
-//        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//    }
-//    return _collectionView;
-//}
-
-//- (void)registerPreview{
-//    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
-//        [self registerForPreviewingWithDelegate:self sourceView:self.collectionView];
-//    }
-//    else {
-//        DDLogInfo(@"该设备不支持3D-Touch");
-//    }
-//}
 
 #pragma mark - get data
 - (void)refresh

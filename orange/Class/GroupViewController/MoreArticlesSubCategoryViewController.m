@@ -7,10 +7,10 @@
 //
 
 #import "MoreArticlesSubCategoryViewController.h"
-#import "ArticleListCell.h"
-@interface MoreArticlesSubCategoryViewController ()<UITableViewDataSource,UITableViewDelegate>
+#import "ArticleCell.h"
+@interface MoreArticlesSubCategoryViewController ()
 
-@property (nonatomic ,strong)UITableView * tableView;
+
 
 @property (nonatomic ,assign)NSInteger page;
 
@@ -19,7 +19,7 @@
 
 @implementation MoreArticlesSubCategoryViewController
 
-static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
+static NSString * ArticleIdentifier = @"ArticleCell";
 
 - (instancetype)initWithDataSource:(NSMutableArray *)dataSource
 {
@@ -33,25 +33,26 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.tableView];
-    
-    [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:ArticleCellIdentifier];
+//    [self.view addSubview:self.tableView];
+//    
+//    [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:ArticleCellIdentifier];
+    [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
 }
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
     __weak __typeof(&*self)weakSelf = self;
-    [self.tableView addPullToRefreshWithActionHandler:^{
+    [self.collectionView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
     
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
     
     if (self.dataSource == 0) {
-        [self.tableView triggerPullToRefresh];
+        [self.collectionView triggerPullToRefresh];
     }
 }
 
@@ -62,10 +63,10 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
         self.dataSource = [NSMutableArray arrayWithArray:articles];
         self.page += 1;
         
-        [self.tableView.pullToRefreshView stopAnimating];
-        [self.tableView reloadData];
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
-        [self.tableView.pullToRefreshView stopAnimating];
+        [self.collectionView.pullToRefreshView stopAnimating];
     }];
     
 }
@@ -75,28 +76,28 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
     [API getSubCategoryArticlesWithCategroyId:self.cid Page:self.page success:^(NSArray *articles, NSInteger count) {
         [self.dataSource addObjectsFromArray:articles];
         self.page += 1;
-        [self.tableView.infiniteScrollingView stopAnimating];
-        [self.tableView reloadData];
+        [self.collectionView.infiniteScrollingView stopAnimating];
+        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
-        [self.tableView.infiniteScrollingView stopAnimating];
+        [self.collectionView.infiniteScrollingView stopAnimating];
     }];
     
 }
 
 #pragma mark -----------tableView懒加载 ---------------
 
-- (UITableView *)tableView
-{
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight -kStatusBarHeight-kNavigationBarHeight) style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-        
-    }
-    return _tableView;
-}
+//- (UITableView *)tableView
+//{
+//    if (!_tableView) {
+//        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight -kStatusBarHeight-kNavigationBarHeight) style:UITableViewStylePlain];
+//        _tableView.delegate = self;
+//        _tableView.dataSource = self;
+//        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+//        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//        
+//    }
+//    return _tableView;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -104,33 +105,92 @@ static NSString * ArticleCellIdentifier = @"CategoryArticleCell";
 }
 
 #pragma mark ----------tableView代理协议-----------------
+#pragma mark - <UICollectionViewDataSource>
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.dataSource.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * CellIdentifier = @"ArticleCell";
-    ArticleListCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[ArticleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    ArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleIdentifier forIndexPath:indexPath];
     cell.article = [self.dataSource objectAtIndex:indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
-    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+    CGSize cellsize  = CGSizeMake(0., 0.);
+    if (IS_IPAD) {
+        cellsize = CGSizeMake(342., 360.);
+        
+        if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight){
+            cellsize = CGSizeMake(313., 344.);
+        }
+        //        return cellsize;
+    } else {
+        GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
+        
+        cellsize = [ArticleCell CellSizeWithArticle:article ];
+    }
+    return cellsize;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 110.;
+    return 0;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    //    if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight)
+    //    {
+    //        return UIEdgeInsetsMake(0., 128., 0., 128.);
+    //    }
+    return UIEdgeInsetsMake(0., 0., 0., 0.);
+}
+
+
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+//{
+//    return UIEdgeInsetsMake(0., 0., 5, 0.);
+//}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat linespacing = 0.;
+    
+    if (IS_IPHONE) {
+        linespacing =  10;
+    }
+    return linespacing;
+}
+
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+//{
+//    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+//     {
+//         [self.collectionView performBatchUpdates:nil completion:nil];
+//     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+//     {
+//
+//     }];
+//
+//    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+//}
+
+#pragma mark - <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
+    //    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
 
 /*
