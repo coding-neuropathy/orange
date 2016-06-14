@@ -430,13 +430,18 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-            if (self.user.bio.length == 0) {
-                size = CGSizeMake(kScreenWidth, 144.);
+            if (IS_IPAD) {
+                size = CGSizeMake(kScreenWidth - kTabBarWidth, 346.);
+            } else {
+                size = self.user.bio.length == 0 ? CGSizeMake(kScreenWidth, 144.) : CGSizeMake(kScreenWidth, 204.);
             }
-            else
-            {
-                size = CGSizeMake(kScreenWidth, 204.);
-            }
+//            if (self.user.bio.length == 0) {
+//                size = CGSizeMake(kScreenWidth, 144.);
+//            }
+//            else
+//            {
+//                size = CGSizeMake(kScreenWidth, 204.);
+//            }
             break;
             
         case 1:

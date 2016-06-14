@@ -321,35 +321,58 @@
 {
     [super layoutSubviews];
     
-    self.avatarView.center = CGPointMake(self.frame.size.width / 2, 25+32.);
-    self.avatarView.deFrameTop = self.deFrameTop + 20.;
-    self.avatarView.deFrameLeft = self.deFrameLeft + 24.;
+    if (IS_IPAD) {
     
+        self.avatarView.center = CGPointMake(self.frame.size.width / 2, 104.);
+        
+        self.nicknameLabel.frame = CGRectMake(0., 0., self.nicknameLabel.optimumSize.width, 30.);
+        self.nicknameLabel.center = self.avatarView.center;
+        self.nicknameLabel.deFrameTop = self.avatarView.deFrameBottom + 16.;
+        
+        self.bioLabel.frame = CGRectMake(0., 0., self.frame.size.width, 20.);
+        self.bioLabel.center = self.nicknameLabel.center;
+        self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom + 10.;
+        
+        self.friendBtn.frame = CGRectMake((kScreenWidth - kTabBarWidth) / 2 - 130., 0., 130., 20.);
+        self.friendBtn.deFrameTop = self.bioLabel.deFrameBottom + 10.;
+        
+        self.fansBtn.frame = CGRectMake(0., 0., 130., 20.);
+        self.fansBtn.center = self.friendBtn.center;
+        self.fansBtn.deFrameLeft = self.friendBtn.deFrameRight + 10.;
+    } else {
+        self.avatarView.center = CGPointMake(self.frame.size.width / 2, 25+32.);
+        self.avatarView.deFrameTop = self.deFrameTop + 20.;
+        self.avatarView.deFrameLeft = self.deFrameLeft + 24.;
+        
+        
+        self.nicknameLabel.frame = CGRectMake(0., 0.,self.nicknameLabel.optimumSize.width + 20., 30.);
+        self.nicknameLabel.deFrameTop = self.avatarView.deFrameTop;
+        self.nicknameLabel.deFrameLeft = self.avatarView.deFrameRight + 24.;
+        
+        //    self.staffImage.frame = CGRectMake(0., 0., 14., 14.);
+        //    self.staffImage.deFrameTop = self.nicknameLabel.deFrameTop + 6;
+        //    self.staffImage.deFrameLeft = self.nicknameLabel.deFrameRight - 14;
+        self.bioBackView.frame = CGRectMake(0., 0., kScreenWidth, 60.);
+        self.bioBackView.deFrameLeft = self.deFrameLeft;
+        self.bioBackView.deFrameBottom = self.deFrameBottom;
+        
+        
+        //    CGSize size = [_bioLabel sizeThatFits:CGSizeMake(kScreenWidth * 0.8, MAXFLOAT)];
+        //    self.bioLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.8, size.height);
+        //    bioLabelHeight = size.height;
+        
+        //    self.bioLabel.center = self.nicknameLabel.center;
+        //    self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom;
+        
+        //    self.friendBtn.frame = CGRectMake(0., 0.,100., 20.);
+        self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
+        
+        //    self.fansBtn.frame = CGRectMake(0., 0.,100., 20.);
+        self.fansBtn.deFrameLeft     = self.friendBtn.deFrameRight + 43;
     
-    self.nicknameLabel.frame = CGRectMake(0., 0.,self.nicknameLabel.optimumSize.width + 20., 30.);
-    self.nicknameLabel.deFrameTop = self.avatarView.deFrameTop;
-    self.nicknameLabel.deFrameLeft = self.avatarView.deFrameRight + 24.;
+    }
     
-//    self.staffImage.frame = CGRectMake(0., 0., 14., 14.);
-//    self.staffImage.deFrameTop = self.nicknameLabel.deFrameTop + 6;
-//    self.staffImage.deFrameLeft = self.nicknameLabel.deFrameRight - 14;
-    self.bioBackView.frame = CGRectMake(0., 0., kScreenWidth, 60.);
-    self.bioBackView.deFrameLeft = self.deFrameLeft;
-    self.bioBackView.deFrameBottom = self.deFrameBottom;
-    
-    
-//    CGSize size = [_bioLabel sizeThatFits:CGSizeMake(kScreenWidth * 0.8, MAXFLOAT)];
-//    self.bioLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.8, size.height);
-//    bioLabelHeight = size.height;
-    
-//    self.bioLabel.center = self.nicknameLabel.center;
-//    self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom;
-    
-//    self.friendBtn.frame = CGRectMake(0., 0.,100., 20.);
-    self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
-    
-//    self.fansBtn.frame = CGRectMake(0., 0.,100., 20.);
-    self.fansBtn.deFrameLeft     = self.friendBtn.deFrameRight + 43;
+
     
     if (_user.userId == [Passport sharedInstance].user.userId) {
         self.editBtn.frame = CGRectMake(0., 0., 130., 30.);

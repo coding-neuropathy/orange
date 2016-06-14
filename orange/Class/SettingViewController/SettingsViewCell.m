@@ -74,7 +74,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-//    DDLogError(@"frame %@", self);
+    DDLogInfo(@"frame %@", self.textLabel);
     
     self.textLabel.frame = CGRectMake(15., 0., self.deFrameWidth - 130., self.deFrameHeight);
     
