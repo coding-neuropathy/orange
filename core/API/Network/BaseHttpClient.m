@@ -44,7 +44,7 @@
     
     [self POST:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [dataParameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            [formData appendPartWithFileData:obj name:key fileName:@"fileName" mimeType:@""];
+            [formData appendPartWithFileData:obj name:@"image" fileName:key mimeType:@""];
         }];
     } success:success failure:failure];
 }
