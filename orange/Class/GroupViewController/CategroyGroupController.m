@@ -493,6 +493,12 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.collectionView performBatchUpdates:nil completion:nil];
+}
+
+
 
 #pragma mark - <EntityCellDelegate>
 

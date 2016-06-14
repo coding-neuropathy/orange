@@ -7,9 +7,9 @@
 //
 
 //#import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import "ListViewController.h"
 
-@interface MoreArticlesViewController : BaseViewController
+@interface MoreArticlesViewController : ListViewController
 
 @property (assign, nonatomic) NSInteger gid;
 
