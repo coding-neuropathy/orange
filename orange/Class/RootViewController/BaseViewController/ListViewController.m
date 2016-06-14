@@ -16,7 +16,6 @@ static NSString * CellIdentifer = @"Cell";
 @property (nonatomic, strong) IconInfoView * iconInfoView;
 
 @end
-
 @implementation ListViewController
 
 #pragma mark - init collction view

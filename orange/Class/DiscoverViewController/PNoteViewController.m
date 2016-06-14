@@ -18,6 +18,12 @@
 @property (nonatomic, strong) UILabel *tipLabel;
 //获取键盘动态高度
 @property (nonatomic, assign)NSInteger height;
+//关闭按钮
+@property (nonatomic,strong)UIButton * closeBtn;
+//发送按钮
+@property (nonatomic,strong)UIButton *sendBtn;
+//标题
+@property (nonatomic,strong)UILabel * LbTitle;
 @end
 
 @implementation PNoteViewController
@@ -112,34 +118,34 @@
     
     [_PostNotebackgroundview addSubview:_textView];
     //关闭按钮
-    UIButton * closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    closeBtn.frame = CGRectMake(10, 12, 18, 18);
+    _closeBtn.frame = CGRectMake(10, 12, 18, 18);
     
-    [closeBtn setBackgroundImage:[UIImage imageNamed:@"close-1"] forState:UIControlStateNormal];
+    [_closeBtn setBackgroundImage:[UIImage imageNamed:@"close-1"] forState:UIControlStateNormal];
     
-    [closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    [_PostNotebackgroundview addSubview:closeBtn];
+    [_PostNotebackgroundview addSubview:_closeBtn];
     
     //发送按钮
-    UIButton *sendBtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth - 10 - 32, 0, 32, 44)];
-    sendBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
-    sendBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [sendBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-    [sendBtn setTitle:[NSString fontAwesomeIconStringForEnum:FApaperPlane] forState:UIControlStateNormal];
-        [sendBtn addTarget:self action:@selector(postButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    sendBtn.backgroundColor = [UIColor clearColor];
+    _sendBtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth - 10 - 32, 0, 32, 44)];
+    _sendBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
+    _sendBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [_sendBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+    [_sendBtn setTitle:[NSString fontAwesomeIconStringForEnum:FApaperPlane] forState:UIControlStateNormal];
+        [_sendBtn addTarget:self action:@selector(postButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    _sendBtn.backgroundColor = [UIColor clearColor];
     
-    [_PostNotebackgroundview addSubview:sendBtn];
+    [_PostNotebackgroundview addSubview:_sendBtn];
     
-    UILabel * LbTitle = [[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth/2 - 50, 14, 100, 16)];
+    _LbTitle = [[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth/2 - 50, 14, 100, 16)];
     
-    LbTitle.text = @"撰写点评";
+    _LbTitle.text = @"撰写点评";
     
-    LbTitle.textAlignment = NSTextAlignmentCenter;
+    _LbTitle.textAlignment = NSTextAlignmentCenter;
     
-    [_PostNotebackgroundview addSubview:LbTitle];
+    [_PostNotebackgroundview addSubview:_LbTitle];
     
     
     //占位label
@@ -260,6 +266,15 @@
             [MobClick event:@"post note" label:@"failure"];
         }];
     }
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    self.PostNotebackgroundview.frame =CGRectMake(0, kScreenHeight, kScreenWidth, 200);
+    self.textView.frame = CGRectMake(10, 42, _PostNotebackgroundview.frame.size.width - 20, 148);
+    self.closeBtn.frame = CGRectMake(10, 12, 18, 18);
+    self.sendBtn.frame = CGRectMake(kScreenWidth - 10 - 32, 0, 32, 44);
+    self.LbTitle.frame= CGRectMake(kScreenWidth/2 - 50, 14, 100, 16);
 }
 
 

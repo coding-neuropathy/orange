@@ -29,7 +29,7 @@
 //        self.backgroundColor = UIColorFromRGB(0xffffff);
         self.backgroundColor = UIColorFromRGB(0xffffff);
         
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
         self.H.backgroundColor = UIColorFromRGB(0xe6e6e6);
         [self.contentView addSubview:self.H];
     }
