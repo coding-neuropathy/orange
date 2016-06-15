@@ -61,7 +61,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     {
         [API getUserDetailWithUserId:user.userId success:^(GKUser *user, NSArray *lastLikeEntities, NSArray *lastNotes, NSArray *lastArticles) {
             
-            user.authorized_author ? [self openAuthUser:user] : [self openUser:user];
+            user.authorized_author ? [self openAuthUser:user] : [self openNormalUser:user];
 
 //            if (user.authorized_author)
 //            {
@@ -77,7 +77,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     }
     else
     {
-        user.authorized_author ? [self openAuthUser:user] : [self openUser:user];
+        user.authorized_author ? [self openAuthUser:user] : [self openNormalUser:user];
 //        if (!user.authorized_author)
 //        {
 //            [self openNormalUser:user];
