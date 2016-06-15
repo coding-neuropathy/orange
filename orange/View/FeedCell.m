@@ -468,7 +468,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
     {
         GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
         EntityViewController * VC = [[EntityViewController alloc]init];
-        VC.hidesBottomBarWhenPushed = YES;
+        if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
         VC.entity = entity;
         [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     }
