@@ -409,10 +409,16 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGSize itemSize = CGSizeMake(0, 0);
     switch (indexPath.section) {
         case 1:
-            if (IS_IPHONE_6P || IS_IPHONE_6)
-                itemSize = CGSizeMake(80., 80.);
-            else
-                itemSize = CGSizeMake(64., 64.);
+            if (IS_IPAD) {
+                itemSize = CGSizeMake(120., 120.);
+            } else {
+                itemSize = IS_IPHONE_6P || IS_IPHONE_6 ? CGSizeMake(80., 80.) : CGSizeMake(64., 64.);
+//                if (IS_IPHONE_6P || IS_IPHONE_6)
+//                    itemSize = CGSizeMake(80., 80.);
+//                else
+//                    itemSize = CGSizeMake(64., 64.);
+            }
+
             break;
         case 2:
             itemSize = CGSizeMake(kScreenWidth, 110.);
@@ -514,8 +520,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGFloat itemSpacing = 0.;
     switch (section) {
         case 1:
-            if (IS_IPHONE_6 || IS_IPHONE_6P)
-            itemSpacing = 5.;
+            if (IS_IPHONE_6 || IS_IPHONE_6P) itemSpacing = 5.;
             break;
             
         default:
