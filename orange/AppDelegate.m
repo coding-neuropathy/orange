@@ -425,7 +425,7 @@ int ddLogLevel;
                 NSString *userId = [[otherString substringFromIndex:otherRange.location+otherRange.length]stringByReplacingOccurrencesOfString:@"/" withString:@""];
                 GKUser * user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
                 TagViewController * vc = [[TagViewController alloc]init];
-                vc.hidesBottomBarWhenPushed = YES;
+                if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
                 vc.tagName = tag;
                 vc.user = user;
                 if (self.activeVC.navigationController) {

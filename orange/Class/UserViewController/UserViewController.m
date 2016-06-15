@@ -154,6 +154,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         NSMutableArray * array = [NSMutableArray array];
         
+        if (IS_IPHONE)
         {
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
