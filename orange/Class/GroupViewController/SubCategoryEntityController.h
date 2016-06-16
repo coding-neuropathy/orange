@@ -6,10 +6,10 @@
 //  Copyright © 2015年 guoku.com. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "ListViewController.h"
 
 
-@interface SubCategoryEntityController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface SubCategoryEntityController : ListViewController
 
 - (instancetype)initWithSubCategory:(GKEntityCategory *)subcategory;
 

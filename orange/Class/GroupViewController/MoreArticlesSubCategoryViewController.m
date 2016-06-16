@@ -7,7 +7,7 @@
 //
 
 #import "MoreArticlesSubCategoryViewController.h"
-#import "ArticleCell.h"
+#import "MoreArticleCell.h"
 @interface MoreArticlesSubCategoryViewController ()
 
 
@@ -19,7 +19,7 @@
 
 @implementation MoreArticlesSubCategoryViewController
 
-static NSString * ArticleIdentifier = @"ArticleCell";
+static NSString * ArticleIdentifier = @"MoreArticleCell";
 
 - (instancetype)initWithDataSource:(NSMutableArray *)dataSource
 {
@@ -36,7 +36,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 //    [self.view addSubview:self.tableView];
 //    
 //    [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:ArticleCellIdentifier];
-    [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
+    [self.collectionView registerClass:[MoreArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
 }
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
@@ -118,7 +118,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleIdentifier forIndexPath:indexPath];
+    MoreArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleIdentifier forIndexPath:indexPath];
     cell.article = [self.dataSource objectAtIndex:indexPath.row];
     return cell;
 }
@@ -135,9 +135,9 @@ static NSString * ArticleIdentifier = @"ArticleCell";
         }
         //        return cellsize;
     } else {
-        GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
         
-        cellsize = [ArticleCell CellSizeWithArticle:article ];
+        
+        cellsize = CGSizeMake(kScreenWidth, 110.);
     }
     return cellsize;
 }
@@ -167,7 +167,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     CGFloat linespacing = 0.;
     
     if (IS_IPHONE) {
-        linespacing =  10;
+        linespacing =  1.;
     }
     return linespacing;
 }

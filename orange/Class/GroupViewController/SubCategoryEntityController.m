@@ -33,7 +33,7 @@
 
 @interface SubCategoryEntityController () <EntityCellDelegate>
 
-@property (strong, nonatomic) UICollectionView * collectionView;
+//@property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) GKEntityCategory * subcategory;
 @property (strong, nonatomic) NSMutableArray * entityArray;
 @property (strong, nonatomic) NSMutableArray * articleArray;
@@ -107,26 +107,26 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
     self.navigationItem.titleView = titleView;
 }
 
-- (UICollectionView *)collectionView
-{
-    if (!_collectionView) {
-        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        if (IS_IPHONE) {
-            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
-        }
-        else
-        {
-            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
-        }
-        
-        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    }
-    return _collectionView;
-}
+//- (UICollectionView *)collectionView
+//{
+//    if (!_collectionView) {
+//        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+//        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+//        if (IS_IPHONE) {
+//            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+//        }
+//        else
+//        {
+//            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
+//        }
+//        
+//        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//        _collectionView.delegate = self;
+//        _collectionView.dataSource = self;
+//        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//    }
+//    return _collectionView;
+//}
 
 #pragma mark - get data
 - (void)refresh
