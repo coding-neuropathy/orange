@@ -38,7 +38,7 @@
 {
     if (!_entityImageView) {
         _entityImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _entityImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _entityImageView.contentMode = UIViewContentModeScaleAspectFit;
 //        _entityImageView.image = [UIImage im]
         [self.contentView addSubview:_entityImageView];
     }

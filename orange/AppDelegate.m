@@ -425,7 +425,7 @@ int ddLogLevel;
                 NSString *userId = [[otherString substringFromIndex:otherRange.location+otherRange.length]stringByReplacingOccurrencesOfString:@"/" withString:@""];
                 GKUser * user = [GKUser modelFromDictionary:@{@"userId":@(userId.integerValue)}];
                 TagViewController * vc = [[TagViewController alloc]init];
-                vc.hidesBottomBarWhenPushed = YES;
+                if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
                 vc.tagName = tag;
                 vc.user = user;
                 if (self.activeVC.navigationController) {
@@ -618,8 +618,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-//    ddLogLevel = DDLogLevelInfo;
-    ddLogLevel = DDLogLevelError;
+    ddLogLevel = DDLogLevelInfo;
+//    ddLogLevel = DDLogLevelError;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;

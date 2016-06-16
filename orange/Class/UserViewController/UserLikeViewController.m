@@ -290,7 +290,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         
         AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
         [appdelegate.window.rootViewController addChildViewController:self.categoryController];
-        [appdelegate.window addSubview:self.categoryController.view];
+        [appdelegate.window.rootViewController.view addSubview:self.categoryController.view];
         self.categoryController.view.alpha = 0;
         //self.categoryController.view.deFrameBottom = 0;
         

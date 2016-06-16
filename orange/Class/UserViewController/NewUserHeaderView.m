@@ -87,15 +87,28 @@
     return _nicknameLabel;
 }
 
+- (UILabel *)bioLabel
+{
+    if (!_bioLabel) {
+        _bioLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _bioLabel.font = [UIFont systemFontOfSize:16.];
+        _bioLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _bioLabel.textAlignment = NSTextAlignmentCenter;
+        _bioLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:_bioLabel];
+    }
+    return _bioLabel;
+}
+
 - (UIView *)bioBackView
 {
     if (!_bioBackView) {
         _bioBackView = [[UIView alloc]initWithFrame:CGRectZero];
         _bioBackView.backgroundColor = UIColorFromRGB(0xfafafa);
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 1.)];
+        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0., 0., self.deFrameWidth, 1.)];
         line.backgroundColor = UIColorFromRGB(0xf1f1f1);
         [_bioBackView addSubview:line];
-        _bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(15., 10., kScreenWidth - 15., 40.)];
+        _bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(15., 10., self.deFrameWidth - 15., 40.)];
         _bioLabel.font = [UIFont systemFontOfSize:14.];
         _bioLabel.lineBreakMode = NSLineBreakByWordWrapping;
         
@@ -227,7 +240,7 @@
         self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
 //        self.staffImage.image = [UIImage imageNamed:@"official"];
     }
-    _bioLabel.text = _user.bio;
+    self.bioLabel.text = _user.bio;
     
     if(!_user.bio.length)
     {
@@ -317,10 +330,44 @@
     [self setNeedsLayout];
 }
 
-- (void)layoutSubviews
+
+#pragma mark - layout subviews
+- (void)layoutiPadSubViews
 {
-    [super layoutSubviews];
+    self.avatarView.center = CGPointMake(self.frame.size.width / 2, 104.);
     
+    self.nicknameLabel.frame = CGRectMake(0., 0., self.nicknameLabel.optimumSize.width, 30.);
+    self.nicknameLabel.center = self.avatarView.center;
+    self.nicknameLabel.deFrameTop = self.avatarView.deFrameBottom + 16.;
+    
+    self.bioLabel.frame = CGRectMake(0., 0., self.frame.size.width, 20.);
+    self.bioLabel.center = self.nicknameLabel.center;
+    self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom + 10.;
+    
+    self.friendBtn.frame = CGRectMake(self.deFrameWidth / 2 - 130., 0., 130., 20.);
+    self.friendBtn.deFrameTop = self.bioLabel.deFrameBottom + 10.;
+    
+    self.fansBtn.frame = CGRectMake(0., 0., 130., 20.);
+    self.fansBtn.center = self.friendBtn.center;
+    self.fansBtn.deFrameLeft = self.friendBtn.deFrameRight + 10.;
+    
+    if (_user.userId == [Passport sharedInstance].user.userId) {
+        self.editBtn.frame = CGRectMake(0., 0., 130., 30.);
+        self.editBtn.center = self.bioLabel.center;
+        self.editBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
+    } else if (_user.user_state == GKUserBlockState) {
+        self.blockBtn.frame = CGRectMake(0., 0., 130., 30.);
+        self.blockBtn.center = self.bioLabel.center;
+        self.blockBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
+    } else {
+        self.relationBtn.frame = CGRectMake(0., 0., 130., 30.);
+        self.relationBtn.center = self.bioLabel.center;
+        self.relationBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
+    }
+}
+
+- (void)layoutiPhoneSubViews
+{
     self.avatarView.center = CGPointMake(self.frame.size.width / 2, 25+32.);
     self.avatarView.deFrameTop = self.deFrameTop + 20.;
     self.avatarView.deFrameLeft = self.deFrameLeft + 24.;
@@ -330,56 +377,69 @@
     self.nicknameLabel.deFrameTop = self.avatarView.deFrameTop;
     self.nicknameLabel.deFrameLeft = self.avatarView.deFrameRight + 24.;
     
-//    self.staffImage.frame = CGRectMake(0., 0., 14., 14.);
-//    self.staffImage.deFrameTop = self.nicknameLabel.deFrameTop + 6;
-//    self.staffImage.deFrameLeft = self.nicknameLabel.deFrameRight - 14;
+    //    self.staffImage.frame = CGRectMake(0., 0., 14., 14.);
+    //    self.staffImage.deFrameTop = self.nicknameLabel.deFrameTop + 6;
+    //    self.staffImage.deFrameLeft = self.nicknameLabel.deFrameRight - 14;
     self.bioBackView.frame = CGRectMake(0., 0., kScreenWidth, 60.);
     self.bioBackView.deFrameLeft = self.deFrameLeft;
     self.bioBackView.deFrameBottom = self.deFrameBottom;
     
     
-//    CGSize size = [_bioLabel sizeThatFits:CGSizeMake(kScreenWidth * 0.8, MAXFLOAT)];
-//    self.bioLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.8, size.height);
-//    bioLabelHeight = size.height;
+    //    CGSize size = [_bioLabel sizeThatFits:CGSizeMake(kScreenWidth * 0.8, MAXFLOAT)];
+    //    self.bioLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.8, size.height);
+    //    bioLabelHeight = size.height;
     
-//    self.bioLabel.center = self.nicknameLabel.center;
-//    self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom;
+    //    self.bioLabel.center = self.nicknameLabel.center;
+    //    self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom;
     
-//    self.friendBtn.frame = CGRectMake(0., 0.,100., 20.);
+    //    self.friendBtn.frame = CGRectMake(0., 0.,100., 20.);
     self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
     
-//    self.fansBtn.frame = CGRectMake(0., 0.,100., 20.);
+    //    self.fansBtn.frame = CGRectMake(0., 0.,100., 20.);
     self.fansBtn.deFrameLeft     = self.friendBtn.deFrameRight + 43;
+    
     
     if (_user.userId == [Passport sharedInstance].user.userId) {
         self.editBtn.frame = CGRectMake(0., 0., 130., 30.);
         self.editBtn.deFrameLeft = self.avatarView.deFrameRight + 24.;
         self.editBtn.deFrameTop = self.nicknameLabel.deFrameBottom + 5.;
-//        self.v.frame = CGRectMake(0., 0., 1, 15.);
-//        self.v.center = CGPointMake(self.editBtn.center.x, self.editBtn.center.y + 40.);
+        //        self.v.frame = CGRectMake(0., 0., 1, 15.);
+        //        self.v.center = CGPointMake(self.editBtn.center.x, self.editBtn.center.y + 40.);
         self.friendBtn.deFrameTop = self.editBtn.deFrameBottom + 16.;
         self.fansBtn.deFrameTop   = self.editBtn.deFrameBottom + 16.;
     } else if (_user.user_state == GKUserBlockState) {
         self.blockBtn.frame = CGRectMake(0., 0., 130., 30.);
         self.blockBtn.deFrameLeft = self.avatarView.deFrameRight + 24.;
         self.blockBtn.deFrameTop = self.nicknameLabel.deFrameBottom + 5.;
-//        self.v.frame = CGRectMake(0., 0., 1, 15.);
-//        self.v.center = CGPointMake(self.blockBtn.center.x, self.blockBtn.center.y + 40.);
+        //        self.v.frame = CGRectMake(0., 0., 1, 15.);
+        //        self.v.center = CGPointMake(self.blockBtn.center.x, self.blockBtn.center.y + 40.);
         self.fansBtn.deFrameTop   = self.blockBtn.deFrameBottom + 16.;
         self.friendBtn.deFrameTop = self.blockBtn.deFrameBottom + 16.;
     } else {
         self.relationBtn.frame = CGRectMake(0., 0., 130., 30.);
         self.relationBtn.deFrameLeft = self.avatarView.deFrameRight + 24.;
         self.relationBtn.deFrameTop = self.nicknameLabel.deFrameBottom + 5.;
-//        self.v.frame = CGRectMake(0., 0., 1, 15.);
-//        self.v.center = CGPointMake(self.relationBtn.center.x, self.relationBtn.center.y + 40.);
+        //        self.v.frame = CGRectMake(0., 0., 1, 15.);
+        //        self.v.center = CGPointMake(self.relationBtn.center.x, self.relationBtn.center.y + 40.);
         self.fansBtn.deFrameTop   = self.relationBtn.deFrameBottom + 16.;
         self.friendBtn.deFrameTop = self.relationBtn.deFrameBottom + 16.;
+    }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if (IS_IPAD) {
+        [self layoutiPadSubViews];
+
+    } else {
+        [self layoutiPhoneSubViews];
     }
     
     self.v.frame = CGRectMake(CGRectGetMaxX(self.friendBtn.frame) + 20, self.friendBtn.frame.origin.y + 7, 1., 15.);
     
-    [self relationBtn];
+//    [self relationBtn];
 }
 
 #pragma mark button action

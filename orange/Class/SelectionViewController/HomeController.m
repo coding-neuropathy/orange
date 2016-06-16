@@ -316,7 +316,7 @@ static NSString * CategoryFooterIdentifier = @"CategoryFooter";
             GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
             //    NSLog(@"%@", article.articleURL);
             WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
-            vc.hidesBottomBarWhenPushed = YES;
+            if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

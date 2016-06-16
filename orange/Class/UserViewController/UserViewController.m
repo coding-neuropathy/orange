@@ -154,6 +154,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         NSMutableArray * array = [NSMutableArray array];
         
+        if (IS_IPHONE)
         {
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
@@ -408,10 +409,16 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGSize itemSize = CGSizeMake(0, 0);
     switch (indexPath.section) {
         case 1:
-            if (IS_IPHONE_6P || IS_IPHONE_6)
-                itemSize = CGSizeMake(80., 80.);
-            else
-                itemSize = CGSizeMake(64., 64.);
+            if (IS_IPAD) {
+                itemSize = CGSizeMake(120., 120.);
+            } else {
+                itemSize = IS_IPHONE_6P || IS_IPHONE_6 ? CGSizeMake(80., 80.) : CGSizeMake(64., 64.);
+//                if (IS_IPHONE_6P || IS_IPHONE_6)
+//                    itemSize = CGSizeMake(80., 80.);
+//                else
+//                    itemSize = CGSizeMake(64., 64.);
+            }
+
             break;
         case 2:
             itemSize = CGSizeMake(kScreenWidth, 110.);
@@ -430,13 +437,18 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-            if (self.user.bio.length == 0) {
-                size = CGSizeMake(kScreenWidth, 144.);
+            if (IS_IPAD) {
+                size = CGSizeMake(kScreenWidth - kTabBarWidth, 346.);
+            } else {
+                size = self.user.bio.length == 0 ? CGSizeMake(kScreenWidth, 144.) : CGSizeMake(kScreenWidth, 204.);
             }
-            else
-            {
-                size = CGSizeMake(kScreenWidth, 204.);
-            }
+//            if (self.user.bio.length == 0) {
+//                size = CGSizeMake(kScreenWidth, 144.);
+//            }
+//            else
+//            {
+//                size = CGSizeMake(kScreenWidth, 204.);
+//            }
             break;
             
         case 1:
@@ -508,8 +520,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGFloat itemSpacing = 0.;
     switch (section) {
         case 1:
-            if (IS_IPHONE_6 || IS_IPHONE_6P)
-            itemSpacing = 5.;
+            if (IS_IPHONE_6 || IS_IPHONE_6P) itemSpacing = 5.;
             break;
             
         default:
