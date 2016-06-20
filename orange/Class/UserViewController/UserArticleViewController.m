@@ -109,6 +109,61 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
     return cell;
 }
 
+
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize cellsize  = CGSizeMake(0., 0.);
+    if (IS_IPAD) {
+        cellsize = CGSizeMake(342., 360.);
+        
+        if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight){
+            cellsize = CGSizeMake(313., 344.);
+        }
+        //        return cellsize;
+    } else {
+        GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
+        
+        cellsize = [ArticleCell CellSizeWithArticle:article ];
+    }
+    return cellsize;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0., 0., 0., 0.);
+}
+
+
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+//{
+//    return UIEdgeInsetsMake(0., 0., 5, 0.);
+//}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat linespacing = 0.;
+    
+    if (IS_IPHONE) {
+        linespacing =  10;
+    }
+    return linespacing;
+}
+
+#pragma mark - <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
+    //    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+}
+
+
 //#pragma mark -----------tableView代理协议-------------
 //
 //- (UITableView *)tableView
