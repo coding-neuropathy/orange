@@ -40,7 +40,8 @@
 {
     if (!_coverImageView){
         _coverImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        
+        _coverImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _coverImageView.layer.masksToBounds = YES;
         [self.contentView addSubview:_coverImageView];
     }
     return _coverImageView;

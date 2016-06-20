@@ -302,6 +302,7 @@
 		B737F4101C1C027100286596 /* VerifyEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B737F40F1C1C027100286596 /* VerifyEmailViewController.m */; };
 		B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */; };
 		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
+		B758E84C1D17DB7C00DD01C7 /* UserArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B758E84B1D17DB7C00DD01C7 /* UserArticleCell.m */; };
 		B7662ABD1AC3AD8E00C82B4B /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AA61AC3AD8E00C82B4B /* libUMFeedback.a */; };
 		B7662ACC1AC3AD8E00C82B4B /* libUMOpus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662AB81AC3AD8E00C82B4B /* libUMOpus.a */; };
 		B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */; };
@@ -944,6 +945,8 @@
 		B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+AutoScroll.m"; sourceTree = "<group>"; };
 		B749632C1AB28A6C00C340FB /* CommentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentHeaderView.h; path = CommentView/CommentHeaderView.h; sourceTree = "<group>"; };
 		B749632D1AB28A6C00C340FB /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentHeaderView.m; path = CommentView/CommentHeaderView.m; sourceTree = "<group>"; };
+		B758E84A1D17DB7C00DD01C7 /* UserArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserArticleCell.h; path = UserArticleViewController/UserArticleCell.h; sourceTree = "<group>"; };
+		B758E84B1D17DB7C00DD01C7 /* UserArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserArticleCell.m; path = UserArticleViewController/UserArticleCell.m; sourceTree = "<group>"; };
 		B7662AA51AC3AD8E00C82B4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/UMFeedbackLocalizable.strings; sourceTree = "<group>"; };
 		B7662AA61AC3AD8E00C82B4B /* libUMFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMFeedback.a; sourceTree = "<group>"; };
 		B7662AB61AC3AD8E00C82B4B /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = "<group>"; };
@@ -2235,6 +2238,7 @@
 		4EC9F7981A7937AE0057D736 /* UserViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B758E8491D17CD4B00DD01C7 /* UserArticleViewController */,
 				B7174DD71BD4A83D00DEDBDA /* UserViewController.h */,
 				B7174DD81BD4A83D00DEDBDA /* UserViewController.m */,
 				B7174DDA1BD4A94900DEDBDA /* UserHeaderView.h */,
@@ -2257,8 +2261,6 @@
 				8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */,
 				2309032C1C803B1500AD26D6 /* authorizedUserViewController.h */,
 				2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */,
-				23E0CB7C1C855B3400E351CB /* UserArticleViewController.h */,
-				23E0CB7D1C855B3400E351CB /* UserArticleViewController.m */,
 			);
 			path = UserViewController;
 			sourceTree = "<group>";
@@ -2443,6 +2445,17 @@
 				B749632D1AB28A6C00C340FB /* CommentHeaderView.m */,
 			);
 			name = CommentView;
+			sourceTree = "<group>";
+		};
+		B758E8491D17CD4B00DD01C7 /* UserArticleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23E0CB7C1C855B3400E351CB /* UserArticleViewController.h */,
+				23E0CB7D1C855B3400E351CB /* UserArticleViewController.m */,
+				B758E84A1D17DB7C00DD01C7 /* UserArticleCell.h */,
+				B758E84B1D17DB7C00DD01C7 /* UserArticleCell.m */,
+			);
+			name = UserArticleViewController;
 			sourceTree = "<group>";
 		};
 		B7662AA31AC3AD8E00C82B4B /* UMengFeedback_SDK_2.1.1 */ = {
@@ -3286,6 +3299,7 @@
 				B769B11D1B2ACE91004401FA /* IFTTTAnimator.m in Sources */,
 				4EEB29FF1B523C650092A8CF /* GKNotificationHUB.m in Sources */,
 				B769B1241B2ACE91004401FA /* IFTTTScaleAnimation.m in Sources */,
+				B758E84C1D17DB7C00DD01C7 /* UserArticleCell.m in Sources */,
 				4E688A1B1BA9C2BA0006AD9B /* JSQMessagesComposerTextView.m in Sources */,
 				B7F544021BC2457E0044F5E9 /* UIImage+MultiFormat.m in Sources */,
 				4E1D30AD1A125FDF00740C17 /* JSQSystemSoundPlayer.m in Sources */,
