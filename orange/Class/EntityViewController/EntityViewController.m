@@ -1174,18 +1174,5 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     [self setNavBarButton:self.flag];
 }
     
-//- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-//{
-////    [self.collectionView performBatchUpdates:nil completion:nil];
-//        if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft ||
-//            [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight)
-//        {
-//            self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenWidth - (kScreenWidth - kScreenHeight)/2, kScreenHeight);
-//        }
-//       else
-//       {
-//           self.collectionView.frame = CGRectMake(0., 0., kScreenWidth, kScreenHeight);
-//       }
-//}
 
 @end

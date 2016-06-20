@@ -172,7 +172,9 @@ typedef NS_ENUM(NSInteger, FeedType) {
     self.contentLabel.frame = CGRectMake(60, 15, kScreenWidth - 70 - 58, 20);
 //    self.timeLabel.deFrameSize = CGSizeMake(80.f, 12.f);
     self.image.frame = CGRectMake(0., 13., 42., 42.);
-    
+    if (IS_IPAD) {
+        self.image.deFrameRight = self.contentView.deFrameRight - 20.;
+    }
     [self configContent];
     
     [self bringSubviewToFront:self.H];
@@ -224,7 +226,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 
             
             [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(100, 100)]];
-//            self.image.deFrameTop = self.contentLabel.deFrameBottom +10;
+            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
             self.image.deFrameLeft = self.contentLabel.deFrameRight + 12.;
         }
             break;
@@ -246,7 +248,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             
             [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(100, 100)]];
             self.image.deFrameLeft = self.contentLabel.deFrameRight + 12.;
-            
+            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
         }
             break;
         case FeedUserFollower:
@@ -278,6 +280,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             
             [self.image sd_setImageWithURL:article.coverURL_300 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(100, 100)]];
             self.image.deFrameLeft = self.contentLabel.deFrameRight + 12.;
+            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
         }
         default:
             break;

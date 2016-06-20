@@ -37,7 +37,7 @@ static NSString *CellIdentifier = @"CommentCell";
 - (CommentHeaderView *)headerView
 {
     if (!_headerView) {
-        _headerView = [[CommentHeaderView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, [CommentHeaderView height:self.note])];
+        _headerView = [[CommentHeaderView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, [CommentHeaderView height:self.note]):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, [CommentHeaderView height:self.note])];
         _headerView.backgroundColor = UIColorFromRGB(0xffffff);
         _headerView.delegate = self;
     }
@@ -47,13 +47,14 @@ static NSString *CellIdentifier = @"CommentCell";
 - (UIView *)footerView
 {
     if (!_footerView) {
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 44.)];
+        _footerView = [[UIView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, 44.):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, 44.)];
         _footerView.backgroundColor = [UIColor clearColor];
-        UILabel * footerL = [[UILabel alloc] initWithFrame:CGRectMake(0., 12., kScreenWidth, 20.)];
+        UILabel * footerL = [[UILabel alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 12., kScreenWidth, 20.):CGRectMake(0., 12., kScreenWidth - kTabBarWidth, 20.)];
         footerL.textAlignment = NSTextAlignmentCenter;
         footerL.font = [UIFont systemFontOfSize:14.];
         footerL.textColor = UIColorFromRGB(0x9d9e9f);
         footerL.text = @"暂无评论";
+        footerL.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleRightMargin;
 //        _footerView.backgroundColor = [UIColor redColor];
         [_footerView addSubview:footerL];
     
@@ -92,11 +93,11 @@ static NSString *CellIdentifier = @"CommentCell";
     
     
     if (!self.inputBar) {
-        _inputBar = [[UIView alloc] initWithFrame:CGRectMake(0.f, self.tableView.deFrameBottom, kScreenWidth, kToolBarHeight)];
+        _inputBar = [[UIView alloc] initWithFrame:IS_IPHONE?CGRectMake(0.f, self.tableView.deFrameBottom, kScreenWidth, kToolBarHeight):CGRectMake(0.f, self.tableView.deFrameBottom, kScreenWidth - kTabBarWidth, kToolBarHeight)];
         self.inputBar.backgroundColor = UIColorFromRGB(0xf1f1f1);
         [self.view addSubview:self.inputBar];
         
-        _inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(10.f, 7.f, kScreenWidth -73, 30.f)];
+        _inputTextField = [[UITextField alloc] initWithFrame:IS_IPHONE?CGRectMake(10.f, 7.f, kScreenWidth -73, 30.f):CGRectMake(10.f, 7.f, kScreenWidth - kTabBarWidth -73, 30.f)];
         self.inputTextField.delegate = self;
         _inputTextField.backgroundColor = UIColorFromRGB(0xffffff);
         _inputTextField.textAlignment = NSTextAlignmentLeft;
@@ -109,6 +110,7 @@ static NSString *CellIdentifier = @"CommentCell";
         _inputTextField.font = [UIFont systemFontOfSize:14.0f];
         self.inputTextField.borderStyle = UITextBorderStyleNone;
         self.inputTextField.returnKeyType = UIReturnKeySend;
+        _inputTextField.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight| UIViewAutoresizingFlexibleWidth;
 //        if (iOS7) {
 //            [self.inputTextField setTintColor:UIColorFromRGB(0x6d9acb)];
 //        }
@@ -121,6 +123,7 @@ static NSString *CellIdentifier = @"CommentCell";
         postButton.layer.masksToBounds = YES;
         postButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
         [postButton addTarget:self action:@selector(postButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        postButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleRightMargin;
         [self.inputBar addSubview:postButton];
     }
     
@@ -135,6 +138,24 @@ static NSString *CellIdentifier = @"CommentCell";
         [self.tableView.pullToRefreshView startAnimating];
         [self refresh];
     }
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         
+         self.tableView.frame = CGRectMake(0.f, 0.f, kScreenWidth - kTabBarWidth, kScreenHeight);
+         self.headerView.note = self.note;
+         self.inputBar.frame = CGRectMake(0., self.view.deFrameBottom - 108., kScreenWidth - kTabBarWidth, kToolBarHeight);
+//         self.inputTextField.frame = CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 - (void)didReceiveMemoryWarning {

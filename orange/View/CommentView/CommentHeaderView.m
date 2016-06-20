@@ -25,7 +25,7 @@
 
 + (CGFloat)height:(GKNote *)note
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 0, kScreenWidth -70, 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:IS_IPHONE?CGRectMake(60, 0, kScreenWidth -70, 20):CGRectMake(60, 0, kScreenWidth - kTabBarWidth -70, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 7.0;
     label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=14>%@</font>", note.text];
@@ -154,8 +154,8 @@
     
     self.avatar.frame = CGRectMake(10.f, 20.f, 36.f, 36.f);
     self.avatar.layer.cornerRadius = _avatar.frame.size.width / 2;
-    self.label.frame = CGRectMake(56., 20., kScreenWidth - 70., 20.);
-    self.contentLabel.frame = CGRectMake(56, 20, kScreenWidth - 70, 20);
+    self.label.frame = IS_IPHONE?CGRectMake(56., 20., kScreenWidth - 70., 20.):CGRectMake(56., 20., kScreenWidth - kTabBarWidth - 70., 20.);
+    self.contentLabel.frame = IS_IPHONE?CGRectMake(56, 20, kScreenWidth - 70, 20):CGRectMake(56, 20, kScreenWidth - kTabBarWidth- 70, 20);
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.;
     self.contentLabel.deFrameTop = self.label.deFrameBottom + 5.;
     self.pokeButton.frame = CGRectMake(0, 0, 50, 20);
@@ -163,12 +163,12 @@
     self.pokeButton.deFrameBottom = self.deFrameHeight - 15;
     
     self.timeButton.frame = CGRectMake(0, 0, 160, 20);
-    self.timeButton.deFrameRight = kScreenWidth - 10;
+    self.timeButton.deFrameRight = IS_IPHONE?kScreenWidth - 10:kScreenWidth - kTabBarWidth - 10;
     self.timeButton.deFrameBottom =  self.deFrameHeight -15;
 
     self.starLabel.frame = CGRectMake(0., 0., 160., 20.);
     self.starLabel.center = self.label.center;
-    self.starLabel.deFrameRight = kScreenWidth - 16.;
+    self.starLabel.deFrameRight = IS_IPHONE?kScreenWidth - 16.:kScreenWidth  - kTabBarWidth- 16.;
 }
 
 /*

@@ -25,7 +25,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -37,7 +37,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 - (NoMessageView *)noMessageView
 {
     if (!_noMessageView) {
-        _noMessageView = [[NoMessageView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200)];
+        _noMessageView = [[NoMessageView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - 200)];
         //        _noMessageView.backgroundColor = [UIColor redColor];
     }
     return _noMessageView;

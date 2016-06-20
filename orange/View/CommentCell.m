@@ -69,7 +69,7 @@
     
     
     if(!self.label) {
-        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 70, 20)];
+        _label = [[RTLabel alloc] initWithFrame:IS_IPHONE ? CGRectMake(60, 15, kScreenWidth - 70, 20) : CGRectMake(60, 15, kScreenWidth - kTabBarWidth - 70, 20)];
         self.label.paragraphReplacement = @"";
         self.label.lineSpacing = 4.0;
         self.label.delegate = self;
@@ -78,7 +78,7 @@
     self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^555555' size=14>%@ </font></a>", self.comment.creator.userId, self.comment.creator.nickname];
     
     if(!self.contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 120, 20)];
+        _contentLabel = [[RTLabel alloc] initWithFrame:IS_IPHONE ? CGRectMake(60, 15, kScreenWidth - 120, 20) : CGRectMake(60, 15, kScreenWidth - kTabBarWidth - 120, 20)];
         self.contentLabel.paragraphReplacement = @"";
         self.contentLabel.lineSpacing = 4.0;
         self.contentLabel.delegate = self;
@@ -115,7 +115,7 @@
         [self.timeButton setImage:nil forState:UIControlStateNormal];
 
     [self.timeButton setTitle:[NSString stringWithFormat:@"%@",[self.comment.createdDate stringWithDefaultFormat]] forState:UIControlStateNormal];
-    self.timeButton.deFrameRight = kScreenWidth - 15;
+    self.timeButton.deFrameRight = IS_IPHONE ? kScreenWidth - 15 : kScreenWidth  - kTabBarWidth - 15;
     self.timeButton.deFrameBottom =  self.contentView.deFrameHeight -10;
     
     if (!self.replyButton) {
@@ -144,7 +144,7 @@
 
 + (CGFloat)height:(GKComment *)comment
 {
-    RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -120, 20)];
+    RTLabel *label = [[RTLabel alloc] initWithFrame:IS_IPHONE ? CGRectMake(60, 15, kScreenWidth -120, 20) : CGRectMake(60, 15, kScreenWidth - kTabBarWidth -120, 20)];
     label.paragraphReplacement = @"";
     label.lineSpacing = 4.0;
     if (comment.repliedUser) {

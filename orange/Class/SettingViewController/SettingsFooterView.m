@@ -87,11 +87,13 @@
     
     if (_is_login) {
         self.signOutBtn.hidden = NO;
-        self.signOutBtn.frame = CGRectMake(0, 20, kScreenWidth, 44.);
+        self.signInBtn.hidden = YES;
+        self.signOutBtn.frame = IS_IPHONE?CGRectMake(0, 20, kScreenWidth, 44.):CGRectMake(0, 20, kScreenWidth - kTabBarWidth, 44.);
 
     } else {
         self.signInBtn.hidden = NO;
-        self.signInBtn.frame = CGRectMake(20., 20., kScreenWidth - 40., 44.);
+        self.signOutBtn.hidden = YES;
+        self.signInBtn.frame = IS_IPHONE?CGRectMake(20., 20., kScreenWidth - 40., 44.):CGRectMake(20., 20., kScreenWidth - 40. - kTabBarWidth, 44.);
     }
     
     if (IS_IPHONE) {

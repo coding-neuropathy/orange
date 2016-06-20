@@ -20,6 +20,8 @@
 #import "ArticleWebViewController.h"
 #import "AppDelegate.h"
 
+#import "AuthController.h"
+
 @interface OpenCenter ()
 
 @property (strong, nonatomic) UIViewController * controller;
@@ -139,5 +141,6 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
+
 
 @end

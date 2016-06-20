@@ -33,13 +33,13 @@
 
 //#import "DataStructure.h"
 
-@interface UserViewController () <EntityCellDelegate, UserHeaderViewDelegate, UserHeaderSectionViewDelegate,NewUserHeaderViewDelegate>
+@interface UserViewController () <EntityCellDelegate, UserHeaderSectionViewDelegate,NewUserHeaderViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray * likedataArray;
 @property (strong, nonatomic) NSMutableArray * notedataArray;
 @property (strong, nonatomic) NSMutableArray * articledataArray;
 
-@property (strong, nonatomic) UserHeaderView * headerView;
+//@property (strong, nonatomic) UserHeaderView * headerView;
 @property (strong, nonatomic) UICollectionView * collectionView;
 
 @property (strong, nonatomic) NewUserHeaderView * newheaderView;
@@ -139,7 +139,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [super viewDidLoad];
     
     self.navigationItem.title = self.user.nick;
-    [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
+//    [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
     
     [self.collectionView registerClass:[NewUserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NewUserHeaderIdentifer];
     
@@ -717,13 +717,13 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             DDLogInfo(@"nickname kvo %@", [Passport sharedInstance].user.nickname);
             self.user = [Passport sharedInstance].user;
             self.navigationItem.title = self.user.nick;
-            self.headerView.user = self.user;
+            self.newheaderView.user = self.user;
 //            [self.collectionView reloadData];
         }
         
         if ([keyPath isEqualToString:@"avatarURL"]) {
             self.user = [Passport sharedInstance].user;
-            self.headerView.user = self.user;
+            self.newheaderView.user = self.user;
 //            [self.collectionView reloadData];
         }
     }

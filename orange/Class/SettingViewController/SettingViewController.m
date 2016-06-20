@@ -12,7 +12,7 @@
 
 #import "WXApi.h"
 #import "API.h"
-//#import "LoginView.h"
+#import "LoginView.h"
 #import "AuthController.h"
 
 //#import "GKWebVC.h"
@@ -486,7 +486,9 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     AuthController * authVC = [[AuthController alloc] init];
     UIViewController *top = [UIApplication sharedApplication].keyWindow.rootViewController;
     [top presentViewController:authVC animated:YES completion: nil];
+    
 //    [self presentViewController:authVC animated:YES completion:nil];
+   
 }
 
 - (void)TapLogoutBtnAction
@@ -517,7 +519,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 //        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
         [SVProgressHUD showSuccessWithStatus:@"退出成功"];
-        
+        [self.tableView reloadData];
+        self.footerView.is_login = k_isLogin;
     } failure:^(NSInteger stateCode) {
         if(stateCode == 500) {
         
