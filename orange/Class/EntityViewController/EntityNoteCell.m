@@ -293,6 +293,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    DDLogInfo(@"noe content view frame %@", self);
     
     IS_IPHONE ? [self layoutIphone] : [self layoutIpad];
 }

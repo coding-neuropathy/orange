@@ -281,6 +281,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
     backView.backgroundColor = UIColorFromRGB(0xfafafa);
     self.view = backView;
+    
+//    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    self.view.autoresizesSubviews = YES;
 }
 
 - (void)viewDidLoad {
@@ -399,11 +402,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
     [super viewWillAppear:animated];
 //    [AVAnalytics beginLogPageView:@"EntityView"];
-    [MobClick beginLogPageView:@"EntityView"];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
+    
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     
     if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
@@ -414,9 +413,16 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     {
         self.collectionView.frame = CGRectMake(0., 0., kScreenHeight - kTabBarWidth, kScreenHeight);
     }
-        
-
+    
+    [MobClick beginLogPageView:@"EntityView"];
 }
+
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//
+//        
+//
+//}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
