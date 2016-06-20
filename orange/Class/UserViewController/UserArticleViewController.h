@@ -6,11 +6,12 @@
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+//#import <UIKit/UIKit.h>
+//#import "BaseViewController.h"
+#import "ListViewController.h"
 
 
-@interface UserArticleViewController : BaseViewController
+@interface UserArticleViewController : ListViewController
 
 @property (nonatomic , assign)NSInteger Uid;
 

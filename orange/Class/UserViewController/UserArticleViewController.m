@@ -7,15 +7,18 @@
 //
 
 #import "UserArticleViewController.h"
-#import "ArticleListCell.h"
-@interface UserArticleViewController ()<UITableViewDataSource,UITableViewDelegate>
+//#import "ArticleListCell.h"
+#import "ArticleCell.h"
+
+
+@interface UserArticleViewController ()
 
 /** 用户图文数据源数组 */
-@property (nonatomic , strong)NSMutableArray * dataSource;
+@property (nonatomic , strong) NSMutableArray * dataSource;
 
-@property (nonatomic , strong)UITableView * tableView;
-
-@property (nonatomic , assign)NSInteger page;
+//@property (nonatomic , strong) UITableView * tableView;
+//@property (nonatomic, strong) UICollectionView * collectionView;
+@property (nonatomic , assign) NSInteger page;
 
 @end
 
@@ -23,13 +26,19 @@
 
 static NSString * ArticleCellIdentifier = @"UserArticleCell";
 
+//- (void)loadView
+//{
+//    self.view = self.collectionView;
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.view addSubview:self.tableView];
+//    [self.view addSubview:self.tableView];
     
-    [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:ArticleCellIdentifier];
+//    [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:ArticleCellIdentifier];
+    [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,18 +49,18 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
     __weak __typeof(&*self)weakSelf = self;
-    [self.tableView addPullToRefreshWithActionHandler:^{
+    [self.collectionView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
     }];
     
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
     
     
     
     if (self.dataSource == 0) {
-        [self.tableView triggerPullToRefresh];
+        [self.collectionView triggerPullToRefresh];
     }
 }
 
@@ -62,11 +71,11 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
     [API getUserArticlesWithUserId:self.Uid Page:self.page Size:15 success:^(NSArray *articles, NSInteger page, NSInteger count) {
         self.dataSource = [NSMutableArray arrayWithArray:articles];
         self.page += 1;
-        [self.tableView.pullToRefreshView stopAnimating];
-        [self.tableView reloadData];
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
         
     } failure:^(NSInteger stateCode) {
-        [self.tableView.pullToRefreshView stopAnimating];
+        [self.collectionView.pullToRefreshView stopAnimating];
     }];
 }
 
@@ -75,53 +84,71 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
     [API getUserArticlesWithUserId:self.Uid Page:self.page Size:15 success:^(NSArray *articles, NSInteger page, NSInteger count) {
         [self.dataSource addObjectsFromArray:articles];
         self.page += 1;
-        [self.tableView.infiniteScrollingView stopAnimating];
-        [self.tableView reloadData];
+        [self.collectionView.infiniteScrollingView stopAnimating];
+        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
-        [self.tableView.infiniteScrollingView stopAnimating];
+        [self.collectionView.infiniteScrollingView stopAnimating];
     }];
 }
 
-#pragma mark -----------tableView代理协议-------------
-
-- (UITableView *)tableView
+#pragma mark - <UICollectionViewDataSource>
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight) style:UITableViewStylePlain];
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
-        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.tableView.showsVerticalScrollIndicator = YES;
-    }
-    return _tableView;
+    return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.dataSource.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ArticleListCell * cell = [tableView dequeueReusableCellWithIdentifier:ArticleCellIdentifier];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.article = self.dataSource[indexPath.row];
+    ArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleCellIdentifier forIndexPath:indexPath];
+    cell.article = [self.dataSource objectAtIndex:indexPath.row];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
-//    NSLog(@"%@",article.articleURL);
-    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
-}
+//#pragma mark -----------tableView代理协议-------------
+//
+//- (UITableView *)tableView
+//{
+//    if (!_tableView) {
+//        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight) style:UITableViewStylePlain];
+//        _tableView.dataSource = self;
+//        _tableView.delegate = self;
+//        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        self.tableView.showsVerticalScrollIndicator = YES;
+//    }
+//    return _tableView;
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 110.;
-}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return self.dataSource.count;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    ArticleListCell * cell = [tableView dequeueReusableCellWithIdentifier:ArticleCellIdentifier];
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.article = self.dataSource[indexPath.row];
+//    return cell;
+//}
+//
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
+////    NSLog(@"%@",article.articleURL);
+//    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 110.;
+//}
 
 
 
