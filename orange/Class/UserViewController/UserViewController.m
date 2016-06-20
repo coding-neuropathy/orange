@@ -665,13 +665,13 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         case UserLikeType:
         {
             UserLikeViewController *vc = [[UserLikeViewController alloc] initWithUser:self.user];
-            vc.hidesBottomBarWhenPushed = YES;
+            if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case UserArticleType:
         {
-            UserArticleViewController * vc = [[UserArticleViewController alloc]init];
+            UserArticleViewController * vc = [[UserArticleViewController alloc] init];
             vc.Uid = self.user.userId;
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -679,21 +679,21 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         case UserPostType:
         {
             UserPostNoteViewController * vc = [[UserPostNoteViewController alloc] initWithUser:self.user];
-            vc.hidesBottomBarWhenPushed = YES;
+            if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case UserTagType:
         {
             UserTagsViewController * vc = [[UserTagsViewController alloc] initWithUser:self.user];
-            vc.hidesBottomBarWhenPushed = YES;
+            if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case UserDigArticleType:
         {
             UserDigArticlesViewController * vc = [[UserDigArticlesViewController alloc]initWithUser:self.user];
-            vc.hidesBottomBarWhenPushed = YES;
+            if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
