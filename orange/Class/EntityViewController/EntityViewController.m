@@ -410,6 +410,10 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     {
         self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
     }
+    else
+    {
+        self.collectionView.frame = CGRectMake(0., 0., kScreenHeight - kTabBarWidth, kScreenHeight);
+    }
         
 
 }
