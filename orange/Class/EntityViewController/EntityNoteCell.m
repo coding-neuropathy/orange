@@ -294,10 +294,13 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     [super layoutSubviews];
     
+    IS_IPHONE ? [self layoutIphone] : [self layoutIpad];
+}
+
+- (void)layoutIphone
+{
     self.editBtn.frame = CGRectMake(0., 0., 80., self.deFrameHeight);
     self.editBtn.deFrameRight = self.deFrameRight;
-    
-//    DDLogInfo(@"edit %@", self.editBtn);
     
     self.avatarImageView.frame = CGRectMake(20., 16., 36., 36.);
     self.nameLabel.frame = CGRectMake(0., 0., 200., 20.);
@@ -306,21 +309,8 @@ static inline NSRegularExpression * UrlRegularExpression() {
     
     self.starLabel.frame = CGRectMake(0., 0., 160., 20.);
     self.starLabel.center = self.nameLabel.center;
-    if (IS_IPHONE) {
-        self.starLabel.deFrameRight = kScreenWidth - 16.;
-    }
-    else
-    {
-        self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16.;
-    }
-    
-    if (IS_IPHONE) {
-        self.contentLabel.frame = CGRectMake(0, 0., kScreenWidth - 78., 20);
-    }
-    else
-    {
-        self.contentLabel.frame = CGRectMake(0, 0., 593, 20);
-    }
+    self.starLabel.deFrameRight = kScreenWidth - 16.;
+    self.contentLabel.frame = CGRectMake(0, 0., kScreenWidth - 78., 20);
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     self.contentLabel.deFrameTop = self.nameLabel.deFrameBottom + 10.;
     self.contentLabel.deFrameLeft = self.avatarImageView.deFrameRight + 10;
@@ -332,17 +322,78 @@ static inline NSRegularExpression * UrlRegularExpression() {
     self.commentBtn.frame = CGRectMake(0., 0., 50., 20.);
     self.commentBtn.center = self.pokeBtn.center;
     self.commentBtn.deFrameLeft = self.pokeBtn.deFrameRight + 15.;
-//    self.commentBtn.deFrameBottom = self.contentView.deFrameHeight - 26.;
+
     
     self.timeLabel.frame = CGRectMake(0, 0, 160, 20);
     self.timeLabel.center = self.commentBtn.center;
-    if (IS_IPHONE) {
-        self.timeLabel.deFrameRight = kScreenWidth - 16.;
+    self.timeLabel.deFrameRight = kScreenWidth - 16.;
+    self.separateLine.frame = CGRectMake(0, self.contentView.deFrameHeight - kSeparateLineWidth, kScreenWidth, kSeparateLineWidth);
+}
+
+- (void)layoutIpad
+{
+    self.editBtn.frame = CGRectMake(0., 0., 80., self.deFrameHeight);
+    self.editBtn.deFrameRight = self.deFrameRight;
+    
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        self.avatarImageView.frame = CGRectMake(20 + (kScreenWidth - kScreenHeight)/2, 16., 36., 36.);
+
     }
     else
     {
-        self.timeLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16.;
+        self.avatarImageView.frame = CGRectMake(20., 16., 36., 36.);
+
     }
+    self.nameLabel.frame = CGRectMake(0., 0., 200., 20.);
+    self.nameLabel.deFrameTop = self.avatarImageView.deFrameTop;
+    self.nameLabel.deFrameLeft = self.avatarImageView.deFrameRight + 10;
+    
+    self.starLabel.frame = CGRectMake(0., 0., 160., 20.);
+    self.starLabel.center = self.nameLabel.center;
+//    self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
+    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. - (kScreenWidth - kScreenHeight)/2 ;
+        
+    }
+    else
+    {
+        self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
+        
+    }
+    
+    
+    self.contentLabel.frame = CGRectMake(0, 0., 593, 20);
+    
+    self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
+    self.contentLabel.deFrameTop = self.nameLabel.deFrameBottom + 10.;
+    self.contentLabel.deFrameLeft = self.avatarImageView.deFrameRight + 10;
+    
+    self.pokeBtn.frame = CGRectMake(0., 0., 50., 20.);
+    self.pokeBtn.deFrameLeft = self.contentLabel.deFrameLeft;
+    self.pokeBtn.deFrameBottom = self.contentView.deFrameHeight - 16;
+    
+    self.commentBtn.frame = CGRectMake(0., 0., 50., 20.);
+    self.commentBtn.center = self.pokeBtn.center;
+    self.commentBtn.deFrameLeft = self.pokeBtn.deFrameRight + 15.;
+    
+    self.timeLabel.frame = CGRectMake(0, 0, 160, 20);
+    self.timeLabel.center = self.commentBtn.center;
+//    self.timeLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
+    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        self.timeLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. - (kScreenWidth - kScreenHeight)/2 ;
+        
+    }
+    else
+    {
+        self.timeLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
+        
+    }
+    
     
     self.separateLine.frame = CGRectMake(0, self.contentView.deFrameHeight - kSeparateLineWidth, kScreenWidth, kSeparateLineWidth);
 }

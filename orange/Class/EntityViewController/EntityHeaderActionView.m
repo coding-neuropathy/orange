@@ -97,9 +97,22 @@
     }
     else
     {
-        self.likeButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6-80, self.deFrameHeight/2);
-        self.postBtn.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6, self.deFrameHeight/2);
-        self.moreButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6+80, self.deFrameHeight/2);
+        
+        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+        
+        if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+        {
+            self.likeButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6-80 - (kScreenWidth - kScreenHeight)/2, self.deFrameHeight/2);
+            self.postBtn.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6 - (kScreenWidth - kScreenHeight)/2, self.deFrameHeight/2);
+            self.moreButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6+80 - (kScreenWidth - kScreenHeight)/2, self.deFrameHeight/2);
+        }
+        else
+        {
+            self.likeButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6-80, self.deFrameHeight/2);
+            self.postBtn.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6, self.deFrameHeight/2);
+            self.moreButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6+80, self.deFrameHeight/2);
+        }
+        
     }
     self.H.deFrameBottom = self.deFrameHeight;
 }
