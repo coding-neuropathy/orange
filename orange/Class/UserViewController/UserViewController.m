@@ -624,7 +624,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             user.relation = relation;
             DDLogInfo(@"relation %lu", relation);
             view.user = user;
-            //            [self.tableView reloadData];
             [SVProgressHUD showImage:nil status:@"关注成功"];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"关注失败"];
