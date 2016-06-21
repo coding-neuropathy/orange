@@ -6,10 +6,12 @@
 //  Copyright (c) 2015年 sensoro. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "ListViewController.h"
+//#import <UIKit/UIKit.h>
+//#import "ListViewController.h"
+#import "BaseViewController.h"
 
-@interface EntityViewController :  ListViewController
+
+@interface EntityViewController :  BaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 //@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) GKEntity *entity;
 
