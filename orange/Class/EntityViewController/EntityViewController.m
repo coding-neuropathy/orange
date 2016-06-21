@@ -719,15 +719,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     switch (section) {
         case 6:
         {
-            /*
-            if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                spacing = 5.;
-            } else if (IS_IPHONE_6) {
-                spacing = 5.;
-            } else {
-                spacing = 10.;
-            }
-             */
             if (IS_IPHONE) {
                 spacing = 3.;
             }
@@ -761,7 +752,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             }
             else
             {
-                size =  CGSizeMake(684, 60);
+                size =  CGSizeMake(684, 110);
             }
             break;
         case 3:

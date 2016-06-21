@@ -13,6 +13,8 @@
 @property (strong, nonatomic) UILabel * textLabel;
 @property (strong, nonatomic) UILabel * indicatorLable;
 
+@property (nonatomic, strong, nonnull) UIView * H;
+
 @end
 
 @implementation EntityHeaderSectionView
@@ -23,8 +25,19 @@
     if (self) {
 //        self.backgroundColor = UIColorFromRGB(0xf8f8f8);
 //        self.backgroundColor = UIColorFromRGB(0xffffff);
+        
     }
     return self;
+}
+
+- (UIView *)H
+{
+    if (!_H) {
+        _H = [[UIView alloc]initWithFrame:CGRectZero];
+        _H.backgroundColor = UIColorFromRGB(0xf1f1f1);
+        [self addSubview:_H];
+    }
+    return _H;
 }
 
 - (UILabel *)textLabel
@@ -128,6 +141,7 @@
             self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
             self.indicatorLable.center = self.textLabel.center;
             self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
+            self.H.frame = CGRectMake(0., 0., kScreenWidth, 1.);
         }
             break;
         case NoteType:

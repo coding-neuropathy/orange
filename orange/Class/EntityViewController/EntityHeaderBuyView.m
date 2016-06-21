@@ -165,7 +165,7 @@
     }
     else
     {
-            self.buyButton.frame = CGRectMake(15., 10., 684. - 20., 40.);
+            self.buyButton.frame = CGRectMake(15., 10., 684. - 80., 40.);
             self.buyButton.center = CGPointMake((684.) * 3/6, self.deFrameHeight/2);
 //        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
 //        
