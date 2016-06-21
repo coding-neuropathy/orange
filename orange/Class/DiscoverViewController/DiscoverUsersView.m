@@ -144,7 +144,7 @@
     
     self.userLabel.frame = CGRectMake(10., 5.,kScreenWidth - 20., 30.);
     
-    self.userScrollView.frame = CGRectMake(10., 45., kScreenWidth - 20., 80.);
+    self.userScrollView.frame = IS_IPHONE?CGRectMake(10., 45., kScreenWidth - 20., 80.):CGRectMake(10., 45., kScreenWidth  - kTabBarWidth - 20., 80.);
     self.userScrollView.layer.cornerRadius = 4;
     self.userScrollView.layer.masksToBounds = YES;
     

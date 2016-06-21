@@ -60,7 +60,7 @@ static CGFloat bioLabelHeight;
         if (IS_IPHONE) {
             _avatarView.frame = CGRectMake(0., 0., 64., 64.);
         } else {
-            _avatarView.frame = CGRectMake(0., 0., 120., 120.);
+            _avatarView.frame = CGRectMake(0., 10., 120., 120.);
         }
         
         _avatarView.layer.cornerRadius = _avatarView.deFrameWidth / 2.;
@@ -307,7 +307,7 @@ static CGFloat bioLabelHeight;
 {
     [super layoutSubviews];
     
-    self.avatarView.center = CGPointMake(self.frame.size.width / 2, 25+32.);
+    self.avatarView.center = CGPointMake(self.frame.size.width / 2, 100.);
     
     self.nicknameLabel.frame = CGRectMake(0., 0.,self.nicknameLabel.optimumSize.width + 20., 30.);
     self.nicknameLabel.center = self.avatarView.center;
@@ -325,7 +325,7 @@ static CGFloat bioLabelHeight;
     self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom;
     
     
-    self.friendBtn.frame = CGRectMake((kScreenWidth) / 2 - 130., 0., 130., 20.);
+    self.friendBtn.frame = IS_IPHONE ? CGRectMake((kScreenWidth) / 2 - 130., 0., 130., 20.) : CGRectMake((kScreenWidth - kTabBarWidth) / 2 - 130., 0., 130., 20.);
     self.friendBtn.deFrameTop = self.bioLabel.deFrameBottom + 20.;
     
     self.fansBtn.frame = CGRectMake(0., 0., 130., 20.);

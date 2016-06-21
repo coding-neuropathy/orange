@@ -8,8 +8,8 @@
 
 #import "authorizedUserViewController.h"
 #import "UserHeaderView.h"
-#import "CategoryArticleCell.h"
-
+//#import "CategoryArticleCell.h"
+#import "MoreArticleCell.h"
 #import "FriendViewController.h"
 #import "FanViewController.h"
 
@@ -68,7 +68,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
         
         
         _collectionView.delegate = self;
@@ -121,7 +121,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     
     [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
     
-    [self.collectionView registerClass:[CategoryArticleCell class] forCellWithReuseIdentifier:UserArticleIdentifier];
+    [self.collectionView registerClass:[MoreArticleCell class] forCellWithReuseIdentifier:UserArticleIdentifier];
     
 }
 
@@ -183,7 +183,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-       CategoryArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserArticleIdentifier forIndexPath:indexPath];
+       MoreArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserArticleIdentifier forIndexPath:indexPath];
             
         cell.article = [self.articledataArray objectAtIndex:indexPath.row];
         return cell;
@@ -191,13 +191,52 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(kScreenWidth, 110.);
+    CGSize cellsize  = CGSizeMake(0., 0.);
+    if (IS_IPAD) {
+        cellsize = CGSizeMake(342., 360.);
+        
+        if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight){
+            cellsize = CGSizeMake(313., 344.);
+        }
+        //        return cellsize;
+    } else {
+        
+        cellsize = CGSizeMake(kScreenWidth, 110.);
+    }
+    return cellsize;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    
+    return UIEdgeInsetsMake(0., 0., 0., 0.);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat linespacing = 0.;
+    
+    if (IS_IPHONE) {
+        linespacing =  1.;
+    }
+    return linespacing;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenWidth, 300);
+    return IS_IPHONE ? CGSizeMake(kScreenWidth, 300) : CGSizeMake(kScreenWidth - kTabBarWidth, 380);
 }
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.collectionView performBatchUpdates:nil completion:nil];
+}
+
 
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -273,6 +312,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [altervc addAction:confirm];
     [self presentViewController:altervc animated:YES completion:nil];
 }
+
 
 
 #pragma mark - UserModel KVO
