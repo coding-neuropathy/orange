@@ -35,7 +35,7 @@
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
     self.title = NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil);
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE?CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight):CGRectMake(0.f, 0.f, kScreenWidth - kTabBarWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -81,6 +81,22 @@
     [super viewWillDisappear:animated];
 //    [AVAnalytics endLogPageView:@"fanView"];
     [MobClick endLogPageView:@"fanView"];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         self.tableView.frame = CGRectMake(0., 0., size.width - kTabBarWidth, size.height);
+         
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 /*

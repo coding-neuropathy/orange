@@ -419,21 +419,19 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
+    }
+    
 //    [AVAnalytics beginLogPageView:@"EntityView"];
-    
-//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-//    
-//    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-//    {
-//        self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-//    }
-//    else
-//    {
-//        self.collectionView.frame = CGRectMake(0., 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-//    }
-    
     [MobClick beginLogPageView:@"EntityView"];
 }
+
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -1264,6 +1262,19 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     }
     [self setNavBarButton:self.flag];
 }
-    
+
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+//{
+//    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+//     {
+//         self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
+//         
+//     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+//     {
+//         
+//     }];
+//    
+//    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+//}
 
 @end
