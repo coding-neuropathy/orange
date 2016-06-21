@@ -93,16 +93,19 @@
     } else {
         self.signInBtn.hidden = NO;
         self.signOutBtn.hidden = YES;
-        self.signInBtn.frame = IS_IPHONE?CGRectMake(20., 20., kScreenWidth - 40., 44.):CGRectMake(20., 20., kScreenWidth - 40. - kTabBarWidth, 44.);
+        self.signInBtn.frame = IS_IPAD ? CGRectMake(0., 0., self.deFrameWidth - 40., 40.) : CGRectMake(0., 0., self.deFrameWidth -20., 40.);
+        self.signInBtn.center = CGPointMake(self.deFrameWidth * 3/6, self.deFrameHeight / 2);
     }
     
     if (IS_IPHONE) {
         self.versionLabel.frame = CGRectMake(0., 0., kScreenWidth, 20);
     } else {
         self.versionLabel.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, 20);
+        self.versionLabel.center = CGPointMake(self.deFrameWidth * 3/6, self.deFrameHeight / 2);
     }
     
-    self.versionLabel.deFrameBottom = self.deFrameHeight - 20.;
+    self.versionLabel.deFrameBottom = self.deFrameHeight - 20;
+    
 }
 
 #pragma mark - button action

@@ -68,7 +68,9 @@
 {
     [super layoutSubviews];
     self.textLabel.frame = CGRectMake(20., 0., 100., 44.);
-    self.detailTextLabel.frame = CGRectMake(kScreenWidth - 250., 0., 200., 44.);
+//    self.detailTextLabel.frame = IS_IPHONE ? CGRectMake(kScreenWidth - 250., 0., 200., 44.) : CGRectMake(kScreenWidth - kTabBarWidth - 250., 0., 200., 44.);
+    self.detailTextLabel.frame = CGRectMake(0., 0., 200., 44.);
+    self.detailTextLabel.deFrameRight = self.contentView.deFrameRight;
 }
 
 @end

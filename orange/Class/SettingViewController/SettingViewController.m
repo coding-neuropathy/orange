@@ -40,6 +40,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 @property (nonatomic, strong) id<ALBBLoginService> loginService;
 
+@property (weak, nonatomic) UIApplication * app;
+
 @end
 
 @implementation SettingViewController
@@ -59,6 +61,14 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         _loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
     }
     return self;
+}
+
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
 }
 
 - (SettingsFooterView *)footerView
@@ -155,7 +165,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [self.tableView registerClass:[SettingsViewCell class] forCellReuseIdentifier:SettingTableIdentifier];
     self.tableView.tableFooterView = self.footerView;
 //    self.versionLabel.deFrameBottom = self.footerView.deFrameHeight - 20.;
-    
+//    
 //    self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 //    self.view.autoresizesSubviews = YES;
 }
@@ -170,7 +180,14 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [AVAnalytics beginLogPageView:@"SettingView"];
+    
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        self.tableView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
+    }
+
     [MobClick beginLogPageView:@"SettingView"];
 }
 
@@ -186,28 +203,22 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 }
 
 
+
+
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-         //         UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-         // do whatever
-         //         if (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
-         //             self.tableView.frame = CGRectMake(0., 0., size.width, size.height);
-         //         } else {
-         //             self.tableView.frame = CGRectMake(0., 0., size.width, size.height);
-         //         }
-         self.tableView.frame = CGRectMake(0., 0., size.width - kTabBarWidth, size.height);
-         //         self.tableView.contentSize = size;
          
+         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+             self.tableView.frame = CGRectMake(128., 0., 684., kScreenHeight);
+         else
+             self.tableView.frame = CGRectMake(0., 0., 684., kScreenHeight);
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-//                  [self.tableView reloadData];
-         //         DDLogInfo(@"info %f %f", size.width, size.height);
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
      }];
     
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 #pragma mark - UITableViewDataSource

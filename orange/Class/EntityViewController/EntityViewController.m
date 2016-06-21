@@ -140,18 +140,15 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     if (!_collectionView) {
         EntityStickyHeaderFlowLayout * layout = [[EntityStickyHeaderFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-//        layout.parallaxHeaderAlwaysOnTop = YES;
+
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-//        _collectionView = []
+
         _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight);
         
         
         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
             self.collectionView.deFrameLeft = 128.;
-//        else
-//            self.collectionView.frame = CGRectMake(0., 0., 684., kScreenHeight);
-        
-//        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
+
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
@@ -1254,18 +1251,5 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     [self setNavBarButton:self.flag];
 }
 
-//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-//{
-//    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
-//     {
-//         self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-//         
-//     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
-//     {
-//         
-//     }];
-//    
-//    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-//}
 
 @end

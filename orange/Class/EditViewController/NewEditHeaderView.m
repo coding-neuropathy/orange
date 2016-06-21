@@ -61,7 +61,7 @@
     
     self.avatarImageView.frame = CGRectMake(0.f, 0.f, 36, 36);
     self.avatarImageView.deFrameTop = 16.;
-    self.avatarImageView.deFrameRight = kScreenWidth - 50;
+    self.avatarImageView.deFrameRight = IS_IPHONE ? kScreenWidth - 50 : kScreenWidth - kTabBarWidth - 30.;
 }
 
 @end
