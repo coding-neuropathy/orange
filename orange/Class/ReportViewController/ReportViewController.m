@@ -33,7 +33,7 @@ static CGFloat LeftMargin = 16.;
 - (UIScrollView *)scrollView
 {
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        _scrollView = [[UIScrollView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight)];
         _scrollView.delegate = self;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
