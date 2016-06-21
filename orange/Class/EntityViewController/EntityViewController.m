@@ -758,13 +758,14 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 //            DDLogInfo(@"xxxx %f xxxxx", size.width);
             break;
         case 2:
-            if (IS_IPHONE) {
-                size =  CGSizeMake(kScreenWidth, 60);
-            }
-            else
-            {
-                size =  CGSizeMake(684, 60);
-            }
+            size = IS_IPAD ? CGSizeMake(684, 80) :  CGSizeMake(kScreenWidth, 60);
+//            if (IS_IPHONE) {
+//                size =  CGSizeMake(kScreenWidth, 60);
+//            }
+//            else
+//            {
+//                size =  CGSizeMake(684, 60);
+//            }
             break;
         case 3:
             size = IS_IPAD ? CGSizeMake(684, 0.) : CGSizeMake(kScreenWidth, 0);
