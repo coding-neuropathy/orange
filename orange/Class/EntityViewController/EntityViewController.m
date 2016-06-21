@@ -45,7 +45,7 @@
 @property (nonatomic, strong) UIButton *noteButton;
 @property (nonatomic, strong) UIButton * moreBtn;
 
-//@property (nonatomic, strong) UICollectionView * collectionView;
+@property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) EntityHeaderView * header;
 @property (nonatomic, strong) EntityHeaderActionView * actionView;
 @property (nonatomic, strong) EntityHeaderBuyView * buyView;
@@ -134,22 +134,30 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     return [EntityHeaderView headerViewHightWithEntity:self.entity];
 }
 
-//#pragma mark - View
-//- (UICollectionView *)collectionView
-//{
-//    if (!_collectionView) {
-//        EntityStickyHeaderFlowLayout * layout = [[EntityStickyHeaderFlowLayout alloc] init];
-//        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-////        layout.parallaxHeaderAlwaysOnTop = YES;
-//        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
-//        
-////        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
-//        _collectionView.delegate = self;
-//        _collectionView.dataSource = self;
-//        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
-//    }
-//    return _collectionView;
-//}
+#pragma mark - View
+- (UICollectionView *)collectionView
+{
+    if (!_collectionView) {
+        EntityStickyHeaderFlowLayout * layout = [[EntityStickyHeaderFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+//        layout.parallaxHeaderAlwaysOnTop = YES;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+//        _collectionView = []
+        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight);
+        
+        
+        if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+            self.collectionView.deFrameLeft = 128.;
+//        else
+//            self.collectionView.frame = CGRectMake(0., 0., 684., kScreenHeight);
+        
+//        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return _collectionView;
+}
 
 
 - (UIButton *)likeButton
@@ -274,7 +282,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
                     [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     break;
                 default:
-                     [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                    [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
                     break;
             }
@@ -287,22 +295,15 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     }];
 }
 
+
 - (void)loadView
 {
-    [super loadView];
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+    backView.backgroundColor = UIColorFromRGB(0xfafafa);
+    self.view = backView;
     
-//    self.collectionView.headerReferenceSize
+    [self.view addSubview:self.collectionView];
 }
-
-//- (void)loadView
-//{
-//    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-//    backView.backgroundColor = UIColorFromRGB(0xfafafa);
-//    self.view = backView;
-//    
-////    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-////    self.view.autoresizesSubviews = YES;
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -657,7 +658,12 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         case 4:
         {
             if (self.dataArrayForlikeUser.count != 0) {
-                edge = UIEdgeInsetsMake(0., 16., 16., 16.);
+                
+                if (IS_IPHONE)
+                    edge = UIEdgeInsetsMake(0., 16., 16., 16.);
+                else {
+                    edge = UIEdgeInsetsMake(0., 16., 16., 16.);
+                }
             }
         }
             break;
@@ -668,16 +674,12 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             }
             else
             {
-                if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft
-                    || self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight)
-                    edge = UIEdgeInsetsMake(0., 148., 0, 148.);
-                else
-                    edge = UIEdgeInsetsMake(0., 20., 0, 20.);
+                edge = UIEdgeInsetsMake(0., 20., 0, 20.);
             }
         }
             break;
         default:
-            if (IS_IPAD) edge = UIEdgeInsetsMake(0., 128., 0, 128.);
+//            if (IS_IPAD) edge = UIEdgeInsetsMake(0., 128., 0, 128.);
             break;
     }
     return edge;
@@ -751,13 +753,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     switch (section) {
         case 0:
             size = IS_IPAD ? CGSizeMake(684., 550.) : CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
-//            if (IS_IPHONE) {
-//                size = CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
-//            }
-//            else
-//            {
-//                size = CGSizeMake(kScreenWidth - kTabBarWidth, 550);
-//            }
+//            DDLogInfo(@"xxxx %f xxxxx", size.width);
             break;
         case 2:
             if (IS_IPHONE) {
@@ -769,7 +765,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             }
             break;
         case 3:
-            size =  CGSizeMake(kScreenWidth, 0);
+            size = IS_IPAD ? CGSizeMake(684, 0.) : CGSizeMake(kScreenWidth, 0);
             break;
         case 4:
         {
@@ -781,12 +777,12 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         case 5:
         {
             if (self.dataArrayForNote.count != 0) {
-                size = CGSizeMake(kScreenWidth, 30);
+                size = IS_IPAD ? CGSizeMake(684, 30) : CGSizeMake(kScreenWidth, 30);
             }
         }
             break;
         default:
-            size =  CGSizeMake(kScreenWidth, 50);
+            size = IS_IPAD ? CGSizeMake(684., 50.) : CGSizeMake(kScreenWidth, 50);
             break;
     }
     return size;
@@ -1222,7 +1218,25 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     [self.collectionView performBatchUpdates:nil completion:nil];
 }
 
-#pragma mark - ConfigNavigationItem}
+#pragma mark -
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [self.collectionView performBatchUpdates:nil completion:nil];
+//         self.collectionView.deFrameLeft = 128.;
+         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+             self.collectionView.frame = CGRectMake(128., 0., 684., kScreenHeight);
+         else
+             self.collectionView.frame = CGRectMake(0., 0., 684., kScreenHeight);
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
+    
+}
+
+#pragma mark - ConfigNavigationItem
 -(void)configConfigNavigationItem
 {
     CGRect a =  [self.actionView.superview convertRect:self.actionView.frame toView:kAppDelegate.window];

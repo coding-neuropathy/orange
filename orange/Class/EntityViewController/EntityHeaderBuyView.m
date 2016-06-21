@@ -165,19 +165,21 @@
     }
     else
     {
-        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-        
-        if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-        {
-            self.buyButton.frame = CGRectMake(15.+ (kScreenWidth - kScreenHeight)/2, 10., kScreenWidth - kTabBarWidth -20., 40.);
-            self.buyButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6, self.deFrameHeight/2);
-        }
-        else
-        {
-            self.buyButton.frame = CGRectMake(15., 10., kScreenWidth - kTabBarWidth -20., 40.);
-            self.buyButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6, self.deFrameHeight/2);
-        }
-        
+            self.buyButton.frame = CGRectMake(15., 10., 684. - 20., 40.);
+            self.buyButton.center = CGPointMake((684.) * 3/6, self.deFrameHeight/2);
+//        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//        
+//        if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+//        {
+//            self.buyButton.frame = CGRectMake(15.+ (kScreenWidth - kScreenHeight)/2, 10., kScreenWidth - kTabBarWidth -20., 40.);
+//            self.buyButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6, self.deFrameHeight/2);
+//        }
+//        else
+//        {
+//            self.buyButton.frame = CGRectMake(15., 10., kScreenWidth - kTabBarWidth -20., 40.);
+//            self.buyButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6, self.deFrameHeight/2);
+//        }
+//        
     }
     self.H.deFrameBottom = self.deFrameHeight;
 }
