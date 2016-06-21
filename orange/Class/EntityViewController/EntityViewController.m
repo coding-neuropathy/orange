@@ -71,6 +71,9 @@
 //@property (nonatomic) OneSDKItemType itemType;
 
 
+@property (weak, nonatomic) UIApplication * app;
+
+
 
 @end
 
@@ -116,6 +119,14 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         
     }
     return self;
+}
+
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
 }
 
 - (CGFloat)headerHeight
@@ -278,17 +289,27 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 - (void)loadView
 {
-    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-    backView.backgroundColor = UIColorFromRGB(0xfafafa);
-    self.view = backView;
+    [super loadView];
+    
+//    self.collectionView.headerReferenceSize
 }
+
+//- (void)loadView
+//{
+//    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+//    backView.backgroundColor = UIColorFromRGB(0xfafafa);
+//    self.view = backView;
+//    
+////    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+////    self.view.autoresizesSubviews = YES;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.collectionView];
+//    [self.view addSubview:self.collectionView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
     self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
     [self.collectionView registerClass:[EntityLikeUserCell class] forCellWithReuseIdentifier:LikeUserIdentifier];
@@ -331,49 +352,48 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     [self refreshRandom];
 
 }
-
-- (void)orientChange:(NSNotification *)noti
-
-{
-    
-    UIDeviceOrientation orient = [UIDevice currentDevice].orientation;
-    
-    
-    switch (orient)
-    
-    {
-            
-        case UIDeviceOrientationPortrait:
-        {
-            self.collectionView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
-        }
-            break;
-            
-        case UIDeviceOrientationLandscapeLeft:
-        {
-            self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-        }
-            break;
-            
-        case UIDeviceOrientationPortraitUpsideDown:
-        {
-            self.collectionView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
-        }
-            break;
-            
-        case UIDeviceOrientationLandscapeRight:
-        {
-            self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-        }
-            break;
-            
-        default:
-            
-            break;
-            
-    }
-    
-}
+//
+//- (void)orientChange:(NSNotification *)noti
+//{
+//    
+//    UIDeviceOrientation orient = [UIDevice currentDevice].orientation;
+//    
+//    
+//    switch (orient)
+//    
+//    {
+//            
+//        case UIDeviceOrientationPortrait:
+//        {
+//            self.collectionView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
+//        }
+//            break;
+//            
+//        case UIDeviceOrientationLandscapeLeft:
+//        {
+//            self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
+//        }
+//            break;
+//            
+//        case UIDeviceOrientationPortraitUpsideDown:
+//        {
+//            self.collectionView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
+//        }
+//            break;
+//            
+//        case UIDeviceOrientationLandscapeRight:
+//        {
+//            self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
+//        }
+//            break;
+//            
+//        default:
+//            
+//            break;
+//            
+//    }
+//    
+//}
 
 
 //- (void)loadView
@@ -609,7 +629,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         {
             GKNote * note = [self.dataArrayForNote objectAtIndex:indexPath.row];
             if (IS_IPAD) {
-                cellsize = CGSizeMake(kScreenWidth - kTabBarWidth, [EntityNoteCell height:note]);
+                cellsize = CGSizeMake(684., [EntityNoteCell height:note]);
             }
             else
             {
@@ -619,23 +639,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             break;
         case 6:
         {
-            if (IS_IPAD)
-            {
-//                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft ||
-//                    [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
-//                    cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/4, (kScreenWidth-12)/4);
-                    cellsize =  CGSizeMake(204., 204.);
-//                }
-//                else
-//                {
-//                cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/3, (kScreenWidth-12)/3);
-//                }
-                
-            }
-            else
-            {
-                cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
-            }
+            cellsize = IS_IPAD ? CGSizeMake(204., 204.) : CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
         }
             break;
             
@@ -650,9 +654,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0, 0.);
     switch (section) {
-        case 0:
-            
-            break;
         case 4:
         {
             if (self.dataArrayForlikeUser.count != 0) {
@@ -667,11 +668,16 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             }
             else
             {
-                edge =  UIEdgeInsetsMake(0., 20., 0, 20.);
+                if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft
+                    || self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight)
+                    edge = UIEdgeInsetsMake(0., 148., 0, 148.);
+                else
+                    edge = UIEdgeInsetsMake(0., 20., 0, 20.);
             }
         }
             break;
         default:
+            if (IS_IPAD) edge = UIEdgeInsetsMake(0., 128., 0, 128.);
             break;
     }
     return edge;
@@ -738,18 +744,20 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     return spacing;
 }
 
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-            if (IS_IPHONE) {
-                size = CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
-            }
-            else
-            {
-                size = CGSizeMake(kScreenWidth, 550);
-            }
+            size = IS_IPAD ? CGSizeMake(684., 550.) : CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
+//            if (IS_IPHONE) {
+//                size = CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
+//            }
+//            else
+//            {
+//                size = CGSizeMake(kScreenWidth - kTabBarWidth, 550);
+//            }
             break;
         case 2:
             if (IS_IPHONE) {
@@ -757,7 +765,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             }
             else
             {
-                size =  CGSizeMake(kScreenWidth - kTabBarWidth, 60);
+                size =  CGSizeMake(684, 60);
             }
             break;
         case 3:
@@ -893,7 +901,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)swipLeftWithContentView:(UIView *)view
 {
     [UIView animateWithDuration:0.3 animations:^{
-        view.frame = CGRectMake(-80, 0., view.deFrameWidth, view.deFrameHeight);
+        view.frame = CGRectMake(-80., 0., view.deFrameWidth, view.deFrameHeight);
     } completion:^(BOOL finished) {
         
     }];
@@ -937,9 +945,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 }
 
 
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil);
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil);
+//}
 
 
 #pragma mark - Action

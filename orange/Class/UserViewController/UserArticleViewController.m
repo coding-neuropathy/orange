@@ -8,7 +8,7 @@
 
 #import "UserArticleViewController.h"
 //#import "ArticleListCell.h"
-#import "ArticleCell.h"
+#import "UserArticleCell.h"
 
 
 @interface UserArticleViewController ()
@@ -38,7 +38,7 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 //    [self.view addSubview:self.tableView];
     
 //    [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:ArticleCellIdentifier];
-    [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
+    [self.collectionView registerClass:[UserArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,7 +104,7 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleCellIdentifier forIndexPath:indexPath];
+    UserArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleCellIdentifier forIndexPath:indexPath];
     cell.article = [self.dataSource objectAtIndex:indexPath.row];
     return cell;
 }

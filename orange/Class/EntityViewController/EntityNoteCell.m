@@ -293,6 +293,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    DDLogInfo(@"noe content view frame %@", self);
     
     IS_IPHONE ? [self layoutIphone] : [self layoutIpad];
 }
@@ -333,20 +334,20 @@ static inline NSRegularExpression * UrlRegularExpression() {
 - (void)layoutIpad
 {
     self.editBtn.frame = CGRectMake(0., 0., 80., self.deFrameHeight);
-    self.editBtn.deFrameRight = self.deFrameRight;
+    self.editBtn.deFrameRight = self.contentView.deFrameRight;
     
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    
-    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-    {
-        self.avatarImageView.frame = CGRectMake(20 + (kScreenWidth - kScreenHeight)/2, 16., 36., 36.);
-
-    }
-    else
-    {
+//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//    
+//    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+//    {
+//        self.avatarImageView.frame = CGRectMake(20 + (kScreenWidth - kScreenHeight)/2, 16., 36., 36.);
+//
+//    }
+//    else
+//    {
         self.avatarImageView.frame = CGRectMake(20., 16., 36., 36.);
 
-    }
+//    }
     self.nameLabel.frame = CGRectMake(0., 0., 200., 20.);
     self.nameLabel.deFrameTop = self.avatarImageView.deFrameTop;
     self.nameLabel.deFrameLeft = self.avatarImageView.deFrameRight + 10;
@@ -354,16 +355,16 @@ static inline NSRegularExpression * UrlRegularExpression() {
     self.starLabel.frame = CGRectMake(0., 0., 160., 20.);
     self.starLabel.center = self.nameLabel.center;
 //    self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
-    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-    {
-        self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. - (kScreenWidth - kScreenHeight)/2 ;
+//    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+//    {
+//        self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. - (kScreenWidth - kScreenHeight)/2 ;
+//        
+//    }
+//    else
+//    {
+    self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
         
-    }
-    else
-    {
-        self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
-        
-    }
+//    }
     
     
     self.contentLabel.frame = CGRectMake(0, 0., 593, 20);
@@ -382,20 +383,10 @@ static inline NSRegularExpression * UrlRegularExpression() {
     
     self.timeLabel.frame = CGRectMake(0, 0, 160, 20);
     self.timeLabel.center = self.commentBtn.center;
-//    self.timeLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
-    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-    {
-        self.timeLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. - (kScreenWidth - kScreenHeight)/2 ;
-        
-    }
-    else
-    {
-        self.timeLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
-        
-    }
+//    self.timeLabel.deFrameRight = self.contentView.deFrameWidth - 16. - (kScreenWidth - kScreenHeight)/2 ;
+    self.timeLabel.deFrameRight = self.contentView.deFrameWidth - 16. ;
     
-    
-    self.separateLine.frame = CGRectMake(0, self.contentView.deFrameHeight - kSeparateLineWidth, kScreenWidth, kSeparateLineWidth);
+    self.separateLine.frame = CGRectMake(0, self.contentView.deFrameHeight - kSeparateLineWidth, self.contentView.deFrameWidth, kSeparateLineWidth);
 }
 
 - (void)drawRect:(CGRect)rect
