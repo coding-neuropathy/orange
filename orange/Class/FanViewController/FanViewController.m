@@ -83,6 +83,22 @@
     [MobClick endLogPageView:@"fanView"];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         self.tableView.frame = CGRectMake(0., 0., size.width - kTabBarWidth, size.height);
+         
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
 /*
  #pragma mark - Navigation
  
