@@ -16,7 +16,7 @@
 #import "CategoryArticleCell.h"
 
 #import "SettingViewController.h"
-#import "EditViewController.h"
+
 #import "NewEditViewController.h"
 #import "FriendViewController.h"
 #import "FanViewController.h"

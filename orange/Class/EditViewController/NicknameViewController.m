@@ -38,7 +38,7 @@
 - (UITextField *)textField
 {
     if (!_textField) {
-        _textField = [[UITextField alloc]initWithFrame:CGRectMake(20., 10., kScreenWidth - 20, 44.)];
+        _textField = [[UITextField alloc]initWithFrame:IS_IPHONE ? CGRectMake(20., 10., kScreenWidth - 20, 44.) : CGRectMake(20., 10., kScreenWidth - kTabBarWidth- 20, 44.)];
         _textField.backgroundColor = [UIColor whiteColor];
         _textField.text = [Passport sharedInstance].user.nickname;
         _textField.font = [UIFont systemFontOfSize:17.];
@@ -54,7 +54,7 @@
 - (UIView *)backView
 {
     if (!_backView) {
-        _backView = [[UIView alloc]initWithFrame:CGRectMake(0., 10., kScreenWidth, 44.)];
+        _backView = [[UIView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0., 10., kScreenWidth, 44.) : CGRectMake(0., 10., kScreenWidth - kTabBarWidth, 44.)];
         _backView.backgroundColor = [UIColor whiteColor];
     }
     return _backView;
@@ -72,6 +72,8 @@
     self.navigationItem.rightBarButtonItem = rightItem;
 
 }
+
+
 
 - (void)rightBarButtonAction
 {
@@ -99,6 +101,23 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         self.textField.frame = CGRectMake(20., 10., kScreenWidth - kTabBarWidth - 20, 44.);
+         self.backView.frame = CGRectMake(0., 10., kScreenWidth - kTabBarWidth, 44.);
+         
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 - (void)viewDidAppear:(BOOL)animated

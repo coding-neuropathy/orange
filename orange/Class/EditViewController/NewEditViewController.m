@@ -22,6 +22,8 @@
 
 @property (nonatomic , strong)AddressPickView * addressPickView;
 
+@property (weak, nonatomic) UIApplication * app;
+
 @end
 
 NSString *NewSettingTableIdentifier = @"SettingCell";
@@ -57,10 +59,18 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
     
 }
 
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
+}
+
 - (NewEditHeaderView *)headerView
 {
     if (!_headerView) {
-        _headerView = [[NewEditHeaderView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 70.)];
+        _headerView = [[NewEditHeaderView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0,0, kScreenWidth, 70.) : CGRectMake(0,0, kScreenWidth - kTabBarWidth, 70.)];
         _headerView.backgroundColor = [UIColor whiteColor];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TapAvatar)];
         [self.headerView addGestureRecognizer:tap];
@@ -72,7 +82,8 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"照片库", nil];
     
-    [actionSheet showInView:kAppDelegate.window];
+//    [actionSheet showInView:kAppDelegate.window];
+    [actionSheet showInView:self.view];
 }
 
 #pragma mark - avatar
@@ -174,6 +185,42 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        self.tableView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
+    }
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+             self.tableView.frame = CGRectMake(128., 0., 684., kScreenHeight);
+         else
+             self.tableView.frame = CGRectMake(0., 0., 684., kScreenHeight);
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
+    
+}
+
+
+- (void)loadView
+{
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+    backView.backgroundColor = UIColorFromRGB(0xfafafa);
+    self.view = backView;
+    
+    [self.view addSubview:self.tableView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -203,7 +250,7 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate   = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -235,6 +282,7 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
     cell.string = [[[self.dataSource objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     
     return cell;
 }
@@ -279,6 +327,7 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
         }
     }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
