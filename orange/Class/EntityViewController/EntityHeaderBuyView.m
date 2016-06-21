@@ -159,28 +159,11 @@
 {
     [super layoutSubviews];
     
-    if (IS_IPHONE) {
-        self.buyButton.frame = CGRectMake(15., 10., kScreenWidth -20., 40.);
-        self.buyButton.center = CGPointMake(kScreenWidth * 3/6, self.deFrameHeight/2);
-    }
-    else
-    {
-            self.buyButton.frame = CGRectMake(15., 10., 684. - 80., 40.);
-            self.buyButton.center = CGPointMake((684.) * 3/6, self.deFrameHeight/2);
-//        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-//        
-//        if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-//        {
-//            self.buyButton.frame = CGRectMake(15.+ (kScreenWidth - kScreenHeight)/2, 10., kScreenWidth - kTabBarWidth -20., 40.);
-//            self.buyButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6, self.deFrameHeight/2);
-//        }
-//        else
-//        {
-//            self.buyButton.frame = CGRectMake(15., 10., kScreenWidth - kTabBarWidth -20., 40.);
-//            self.buyButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6, self.deFrameHeight/2);
-//        }
-//        
-    }
+    DDLogInfo(@"entity buy view  %f", self.deFrameHeight);
+    
+    self.buyButton.frame = IS_IPAD ? CGRectMake(0., 0., self.deFrameWidth - 40., 40.) : CGRectMake(0., 0., self.deFrameWidth -20., 40.);
+    
+    self.buyButton.center = CGPointMake(self.deFrameWidth * 3/6, self.deFrameHeight / 2);
     self.H.deFrameBottom = self.deFrameHeight;
 }
 

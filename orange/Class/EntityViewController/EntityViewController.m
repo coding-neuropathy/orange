@@ -408,7 +408,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     
     [API getRandomEntityListByCategoryId:self.entity.categoryId
                                 entityId:self.entity.entityId
-                                   count:IS_IPHONE ? 9 : 12 success:^(NSArray *entityArray) {
+                                   count:9 success:^(NSArray *entityArray) {
                                        self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
                                        [self.collectionView reloadData];
                                    } failure:^(NSInteger stateCode) {
@@ -747,13 +747,14 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 //            DDLogInfo(@"xxxx %f xxxxx", size.width);
             break;
         case 2:
-            if (IS_IPHONE) {
-                size =  CGSizeMake(kScreenWidth, 60);
-            }
-            else
-            {
-                size =  CGSizeMake(684, 110);
-            }
+            size = IS_IPAD ? CGSizeMake(684, 80) :  CGSizeMake(kScreenWidth, 60);
+//            if (IS_IPHONE) {
+//                size =  CGSizeMake(kScreenWidth, 60);
+//            }
+//            else
+//            {
+//                size =  CGSizeMake(684, 60);
+//            }
             break;
         case 3:
             size = IS_IPAD ? CGSizeMake(684, 0.) : CGSizeMake(kScreenWidth, 0);
