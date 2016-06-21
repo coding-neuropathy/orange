@@ -586,7 +586,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
     FriendViewController * VC = [[FriendViewController alloc]init];
     VC.user = self.user;
-    VC.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
@@ -594,7 +594,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
     FanViewController * VC = [[FanViewController alloc]init];
     VC.user = self.user;
-    VC.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
