@@ -40,7 +40,7 @@
 - (UIView *)backView
 {
     if (!_backView) {
-        _backView = [[UIView alloc]initWithFrame:CGRectMake(0. , 10., kScreenWidth, 200)];
+        _backView = [[UIView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0. , 10., kScreenWidth, 200) : CGRectMake(0. , 10., kScreenWidth - kTabBarWidth, 200)];
         _backView.backgroundColor = [UIColor whiteColor];
     }
     return _backView;
@@ -49,7 +49,7 @@
 - (UITextView *)textView
 {
     if (!_textView) {
-        _textView = [[UITextView alloc]initWithFrame:CGRectMake(15., 10., kScreenWidth - 15., 200)];
+        _textView = [[UITextView alloc]initWithFrame:IS_IPHONE ? CGRectMake(15., 10., kScreenWidth - 15., 200) : CGRectMake(15., 10., kScreenWidth - kTabBarWidth - 15., 200)];
         _textView.keyboardType = UIKeyboardTypeDefault;
         
         _textView.returnKeyType = UIReturnKeyDefault;
@@ -93,7 +93,7 @@
 {
     if (!_tipLabel) {
         //占位label
-        _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, kScreenWidth, 15)];
+        _tipLabel = [[UILabel alloc]initWithFrame:IS_IPHONE ? CGRectMake(10, 10, kScreenWidth, 15) : CGRectMake(10, 10, kScreenWidth - kTabBarWidth, 15)];
         //左距中
         self.tipLabel.textAlignment = NSTextAlignmentLeft;
         //背景色透明
@@ -159,6 +159,23 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         self.backView.frame = CGRectMake(0. , 10., kScreenWidth - kTabBarWidth, 200);
+         self.textView.frame = CGRectMake(15., 10., kScreenWidth - kTabBarWidth - 15., 200);
+         
+         
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated
 {

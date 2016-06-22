@@ -45,7 +45,7 @@
 @property (nonatomic, strong) UIButton *noteButton;
 @property (nonatomic, strong) UIButton * moreBtn;
 
-//@property (nonatomic, strong) UICollectionView * collectionView;
+@property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) EntityHeaderView * header;
 @property (nonatomic, strong) EntityHeaderActionView * actionView;
 @property (nonatomic, strong) EntityHeaderBuyView * buyView;
@@ -69,6 +69,9 @@
  */
 @property (strong, nonatomic) NSString * seller_id;
 //@property (nonatomic) OneSDKItemType itemType;
+
+
+@property (weak, nonatomic) UIApplication * app;
 
 
 
@@ -118,27 +121,40 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     return self;
 }
 
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
+}
+
 - (CGFloat)headerHeight
 {
     return [EntityHeaderView headerViewHightWithEntity:self.entity];
 }
 
-//#pragma mark - View
-//- (UICollectionView *)collectionView
-//{
-//    if (!_collectionView) {
-//        EntityStickyHeaderFlowLayout * layout = [[EntityStickyHeaderFlowLayout alloc] init];
-//        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-////        layout.parallaxHeaderAlwaysOnTop = YES;
-//        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
-//        
-////        _collectionView.contentInset = UIEdgeInsetsMake([self headerHeight], 0, 0, 0);
-//        _collectionView.delegate = self;
-//        _collectionView.dataSource = self;
-//        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
-//    }
-//    return _collectionView;
-//}
+#pragma mark - View
+- (UICollectionView *)collectionView
+{
+    if (!_collectionView) {
+        EntityStickyHeaderFlowLayout * layout = [[EntityStickyHeaderFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+
+        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight);
+        
+        
+        if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+            self.collectionView.deFrameLeft = 128.;
+
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return _collectionView;
+}
 
 
 - (UIButton *)likeButton
@@ -263,7 +279,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
                     [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     break;
                 default:
-                     [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                    [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
                     break;
             }
@@ -275,6 +291,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         
     }];
 }
+<<<<<<< HEAD
 //
 //- (void)loadView
 //{
@@ -285,6 +302,18 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 ////    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 ////    self.view.autoresizesSubviews = YES;
 //}
+=======
+
+
+- (void)loadView
+{
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+    backView.backgroundColor = UIColorFromRGB(0xfafafa);
+    self.view = backView;
+    
+    [self.view addSubview:self.collectionView];
+}
+>>>>>>> ea48849dbd89ddb65020f6a1f9d242d4a8b4f219
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -334,9 +363,14 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     [self refreshRandom];
 
 }
+<<<<<<< HEAD
 
 //- (void)orientChange:(NSNotification *)noti
 //
+=======
+//
+//- (void)orientChange:(NSNotification *)noti
+>>>>>>> ea48849dbd89ddb65020f6a1f9d242d4a8b4f219
 //{
 //    
 //    UIDeviceOrientation orient = [UIDevice currentDevice].orientation;
@@ -390,7 +424,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     
     [API getRandomEntityListByCategoryId:self.entity.categoryId
                                 entityId:self.entity.entityId
-                                   count:IS_IPHONE ? 9 : 12 success:^(NSArray *entityArray) {
+                                   count:9 success:^(NSArray *entityArray) {
                                        self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
                                        [self.collectionView reloadData];
                                    } failure:^(NSInteger stateCode) {
@@ -401,7 +435,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [AVAnalytics beginLogPageView:@"EntityView"];
     
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     
@@ -409,20 +442,12 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     {
         self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
     }
-    else
-    {
-        self.collectionView.frame = CGRectMake(0., 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-    }
     
+//    [AVAnalytics beginLogPageView:@"EntityView"];
     [MobClick beginLogPageView:@"EntityView"];
 }
 
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//
-//        
-//
-//}
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -621,7 +646,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         {
             GKNote * note = [self.dataArrayForNote objectAtIndex:indexPath.row];
             if (IS_IPAD) {
-                cellsize = CGSizeMake(kScreenWidth - kTabBarWidth, [EntityNoteCell height:note]);
+                cellsize = CGSizeMake(684., [EntityNoteCell height:note]);
             }
             else
             {
@@ -631,23 +656,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             break;
         case 6:
         {
-            if (IS_IPAD)
-            {
-//                if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft ||
-//                    [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
-//                    cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/4, (kScreenWidth-12)/4);
-                    cellsize =  CGSizeMake(204., 204.);
-//                }
-//                else
-//                {
-//                cellsize = CGSizeMake((kScreenWidth-12 - kTabBarWidth)/3, (kScreenWidth-12)/3);
-//                }
-                
-            }
-            else
-            {
-                cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
-            }
+            cellsize = IS_IPAD ? CGSizeMake(204., 204.) : CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
         }
             break;
             
@@ -662,13 +671,15 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0, 0.);
     switch (section) {
-        case 0:
-            
-            break;
         case 4:
         {
             if (self.dataArrayForlikeUser.count != 0) {
-                edge = UIEdgeInsetsMake(0., 16., 16., 16.);
+                
+                if (IS_IPHONE)
+                    edge = UIEdgeInsetsMake(0., 16., 16., 16.);
+                else {
+                    edge = UIEdgeInsetsMake(0., 16., 16., 16.);
+                }
             }
         }
             break;
@@ -679,11 +690,12 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             }
             else
             {
-                edge =  UIEdgeInsetsMake(0., 20., 0, 20.);
+                edge = UIEdgeInsetsMake(0., 20., 0, 20.);
             }
         }
             break;
         default:
+//            if (IS_IPAD) edge = UIEdgeInsetsMake(0., 128., 0, 128.);
             break;
     }
     return edge;
@@ -723,15 +735,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     switch (section) {
         case 6:
         {
-            /*
-            if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
-                spacing = 5.;
-            } else if (IS_IPHONE_6) {
-                spacing = 5.;
-            } else {
-                spacing = 10.;
-            }
-             */
             if (IS_IPHONE) {
                 spacing = 3.;
             }
@@ -750,30 +753,27 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     return spacing;
 }
 
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-            if (IS_IPHONE) {
-                size = CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
-            }
-            else
-            {
-                size = CGSizeMake(kScreenWidth, 550);
-            }
+            size = IS_IPAD ? CGSizeMake(684., 550.) : CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
+//            DDLogInfo(@"xxxx %f xxxxx", size.width);
             break;
         case 2:
-            if (IS_IPHONE) {
-                size =  CGSizeMake(kScreenWidth, 60);
-            }
-            else
-            {
-                size =  CGSizeMake(kScreenWidth - kTabBarWidth, 60);
-            }
+            size = IS_IPAD ? CGSizeMake(684, 80) :  CGSizeMake(kScreenWidth, 60);
+//            if (IS_IPHONE) {
+//                size =  CGSizeMake(kScreenWidth, 60);
+//            }
+//            else
+//            {
+//                size =  CGSizeMake(684, 60);
+//            }
             break;
         case 3:
-            size =  CGSizeMake(kScreenWidth, 0);
+            size = IS_IPAD ? CGSizeMake(684, 0.) : CGSizeMake(kScreenWidth, 0);
             break;
         case 4:
         {
@@ -785,12 +785,12 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         case 5:
         {
             if (self.dataArrayForNote.count != 0) {
-                size = CGSizeMake(kScreenWidth, 30);
+                size = IS_IPAD ? CGSizeMake(684, 30) : CGSizeMake(kScreenWidth, 30);
             }
         }
             break;
         default:
-            size =  CGSizeMake(kScreenWidth, 50);
+            size = IS_IPAD ? CGSizeMake(684., 50.) : CGSizeMake(kScreenWidth, 50);
             break;
     }
     return size;
@@ -905,7 +905,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)swipLeftWithContentView:(UIView *)view
 {
     [UIView animateWithDuration:0.3 animations:^{
-        view.frame = CGRectMake(-80, 0., view.deFrameWidth, view.deFrameHeight);
+        view.frame = CGRectMake(-80., 0., view.deFrameWidth, view.deFrameHeight);
     } completion:^(BOOL finished) {
         
     }];
@@ -949,9 +949,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 }
 
 
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil);
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil);
+//}
 
 
 #pragma mark - Action
@@ -1226,7 +1226,25 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     [self.collectionView performBatchUpdates:nil completion:nil];
 }
 
-#pragma mark - ConfigNavigationItem}
+#pragma mark -
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [self.collectionView performBatchUpdates:nil completion:nil];
+//         self.collectionView.deFrameLeft = 128.;
+         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+             self.collectionView.frame = CGRectMake(128., 0., 684., kScreenHeight);
+         else
+             self.collectionView.frame = CGRectMake(0., 0., 684., kScreenHeight);
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
+    
+}
+
+#pragma mark - ConfigNavigationItem
 -(void)configConfigNavigationItem
 {
     CGRect a =  [self.actionView.superview convertRect:self.actionView.frame toView:kAppDelegate.window];
@@ -1251,6 +1269,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     }
     [self setNavBarButton:self.flag];
 }
-    
+
 
 @end

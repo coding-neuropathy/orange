@@ -179,10 +179,10 @@
 //    }
     if (self.user.user_state == GKUserBlockState) {
         self.blockBtn.frame = CGRectMake(0., 0., 40., 24.);
-        self.blockBtn.center = CGPointMake(kScreenWidth - 40, 37);
+        self.blockBtn.center = IS_IPHONE?CGPointMake(kScreenWidth - 40, 37):CGPointMake(kScreenWidth - kTabBarWidth - 40, 37);
     } else {
         self.followButton.frame = CGRectMake(0., 0., 24., 24.);
-        self.followButton.center = CGPointMake(kScreenWidth - 40, 37);
+        self.followButton.center = IS_IPHONE?CGPointMake(kScreenWidth - 40, 37):CGPointMake(kScreenWidth - kTabBarWidth - 40, 37);
         [self configFollowButton];
     }
     [self bringSubviewToFront:self.H];

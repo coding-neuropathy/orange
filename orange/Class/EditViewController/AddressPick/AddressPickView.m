@@ -44,7 +44,7 @@
 {
     self = [super init];
     if (self) {
-        self.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+        self.frame = IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, kScreenHeight) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, kScreenHeight);
         [self addTapGestureRecognizerToSelf];
         [self getPickerData];
         [self createView];
@@ -79,10 +79,10 @@
 -(void)createView
 {
     
-    _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight - 10, kScreenWidth, navigationViewHeight+pickViewViewHeight - 10)];
+    _bottomView = [[UIView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, kScreenHeight - 10, kScreenWidth, navigationViewHeight+pickViewViewHeight - 10) : CGRectMake(0, kScreenHeight - 10, kScreenWidth - kTabBarWidth, navigationViewHeight+pickViewViewHeight - 10)];
     [self addSubview:_bottomView];
 
-    _pickView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, -10., kScreenWidth, pickViewViewHeight - 10.)];
+    _pickView = [[UIPickerView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, -10., kScreenWidth, pickViewViewHeight - 10.) : CGRectMake(0, -10., kScreenWidth - kTabBarWidth, pickViewViewHeight - 10.)];
     _pickView.backgroundColor = [UIColor whiteColor];
     _pickView.dataSource = self;
     _pickView.delegate =self;
@@ -90,7 +90,7 @@
     [_bottomView addSubview:_pickView];
     
     //导航视图
-    _navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, -10., kScreenWidth, navigationViewHeight)];
+    _navigationView = [[UIView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, -10., kScreenWidth, navigationViewHeight) : CGRectMake(0, -10., kScreenWidth - kTabBarWidth, navigationViewHeight)];
     _navigationView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     [_bottomView addSubview:_navigationView];
     

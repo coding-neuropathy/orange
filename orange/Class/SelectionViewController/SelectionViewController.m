@@ -85,55 +85,6 @@ static int lastContentOffset;
 }
 
 #pragma mark - init view
-//- (UIView *)updateView
-//{
-//    if (!_updateView) {
-//        _updateView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 49.)];
-//        _updateView.backgroundColor = UIColorFromRGB(0x6eaaf0);
-////        _updateView.userInteractionEnabled = YES;
-//        
-//    }
-//    return _updateView;
-//}
-
-
-//- (UILabel *)updateLabel
-//{
-//    if (!_updateLabel) {
-//        _updateLabel = [[UILabel alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 49.)];
-//        _updateLabel.backgroundColor = UIColorFromRGB(0x6eaaf0);
-//        _updateLabel.textColor = [UIColor whiteColor];
-//        _updateLabel.font = [UIFont boldSystemFontOfSize:16.5];
-//        _updateLabel.textAlignment = NSTextAlignmentCenter;
-//        _updateLabel.userInteractionEnabled = YES;
-//        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapUpdateLabel)];
-//        [_updateLabel addGestureRecognizer:tap];
-//    }
-//    return _updateLabel;
-//}
-//
-//- (void)tapUpdateLabel
-//{
-//    [self.tableView triggerPullToRefresh];
-//    [self.updateView removeFromSuperview];
-//}
-
-//- (UIButton *)closeBtn
-//{
-//    if (!_closeBtn) {
-//        _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        _closeBtn.frame = CGRectMake(kScreenWidth - 42, 8., 32., 32.);
-//        [_closeBtn setBackgroundImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-//        [_closeBtn addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
-//    }
-//    return _closeBtn;
-//}
-
-//- (void)closeAction:(UIButton *)button
-//{
-//    [self.updateView removeFromSuperview];
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

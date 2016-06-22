@@ -25,13 +25,10 @@ static NSString * CellIdentifer = @"Cell";
         
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        //        layout.itemSize = CGSizeMake(342., 465);
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
-        
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-        
     }
     return _collectionView;
 }
@@ -44,8 +41,8 @@ static NSString * CellIdentifer = @"Cell";
         _iconInfoView = [[IconInfoView alloc] initWithFrame:CGRectMake(0., 7., 100., 25.)];
         _iconInfoView.categroyText = nil;
         
-        //        UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTitleView:)];
-        //        [_iconInfoView addGestureRecognizer:Tap];
+//        UITapGestureRecognizer *Tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTitleView:)];
+//        [_iconInfoView addGestureRecognizer:Tap];
         
     }
     return _iconInfoView;
@@ -55,7 +52,6 @@ static NSString * CellIdentifer = @"Cell";
 {
 //    [self.view addSubview:self.collectionView];
     self.view = self.collectionView;
-    
 }
 
 
