@@ -350,55 +350,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     [self refreshRandom];
 
 }
-//
-//- (void)orientChange:(NSNotification *)noti
-//{
-//    
-//    UIDeviceOrientation orient = [UIDevice currentDevice].orientation;
-//    
-//    
-//    switch (orient)
-//    
-//    {
-//            
-//        case UIDeviceOrientationPortrait:
-//        {
-//            self.collectionView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
-//        }
-//            break;
-//            
-//        case UIDeviceOrientationLandscapeLeft:
-//        {
-//            self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-//        }
-//            break;
-//            
-//        case UIDeviceOrientationPortraitUpsideDown:
-//        {
-//            self.collectionView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
-//        }
-//            break;
-//            
-//        case UIDeviceOrientationLandscapeRight:
-//        {
-//            self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-//        }
-//            break;
-//            
-//        default:
-//            
-//            break;
-//            
-//    }
-//    
-//}
-
-
-//- (void)loadView
-//{
-//    self.view = self.collectionView;
-//}
-
 
 - (void)refreshRandom
 {
