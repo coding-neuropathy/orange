@@ -229,7 +229,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return IS_IPHONE ? CGSizeMake(kScreenWidth, 300) : CGSizeMake(kScreenWidth - kTabBarWidth, 380);
+    return IS_IPHONE ? CGSizeMake(kScreenWidth, 350) : CGSizeMake(kScreenWidth - kTabBarWidth, 380);
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

@@ -38,7 +38,7 @@ static NSString * NoteIdentifier = @"NoteCell";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
         
         //        _collectionView.contentInset = UIEdgeInsetsMake(617, 0, 0, 0);
         _collectionView.delegate = self;
@@ -112,6 +112,19 @@ static NSString * NoteIdentifier = @"NoteCell";
     [MobClick endLogPageView:@"UserNoteView"];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [self.collectionView reloadData];
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -160,9 +173,9 @@ static NSString * NoteIdentifier = @"NoteCell";
 #pragma mark <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize itemSize = CGSizeMake(0, 0);
-    itemSize = CGSizeMake(kScreenWidth, 100.);
-    return itemSize;
+//    CGSize itemSize = CGSizeMake(0, 0);
+//    itemSize = CGSizeMake(kScreenWidth, 100.);
+    return IS_IPHONE ? CGSizeMake(kScreenWidth, 100.) : CGSizeMake(kScreenWidth - kTabBarWidth, 144.);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

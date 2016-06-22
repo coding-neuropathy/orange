@@ -430,12 +430,12 @@
 {
     [super layoutSubviews];
     
-    if (IS_IPAD) {
-        [self layoutiPadSubViews];
-
-    } else {
+//    if (IS_IPAD) {
+//        [self layoutiPadSubViews];
+//
+//    } else {
         [self layoutiPhoneSubViews];
-    }
+//    }
     
     self.v.frame = CGRectMake(CGRectGetMaxX(self.friendBtn.frame) + 20, self.friendBtn.frame.origin.y + 7, 1., 15.);
     

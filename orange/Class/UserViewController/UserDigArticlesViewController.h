@@ -6,9 +6,9 @@
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "ListViewController.h"
 
-@interface UserDigArticlesViewController : BaseViewController
+@interface UserDigArticlesViewController : ListViewController
 
 - (instancetype)initWithUser:(GKUser *)user;
 

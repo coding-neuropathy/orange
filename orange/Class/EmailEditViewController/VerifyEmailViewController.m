@@ -238,7 +238,7 @@
     
     self.verifyBtn.frame = CGRectMake(0., 0., 150., 50.);
     self.verifyBtn.deFrameTop = self.emailLabel.deFrameBottom + 20.;
-    self.verifyBtn.deFrameLeft = (kScreenWidth - 150 * 2) / 3.;
+    self.verifyBtn.deFrameLeft = IS_IPHONE ? (kScreenWidth - 150 * 2) / 3. : (kScreenWidth - kTabBarWidth - 180 * 2) / 3.;
     
     if ([[Passport sharedInstance].user mail_verified]) {
         [_verifyBtn setTitle:NSLocalizedStringFromTable(@"verified", kLocalizedFile, nil) forState:UIControlStateDisabled];

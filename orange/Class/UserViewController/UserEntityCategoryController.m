@@ -40,7 +40,7 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, 242.) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, 242.) : CGRectMake(kTabBarWidth, 0., kScreenWidth - kTabBarWidth, 242.) style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.98];
         _tableView.dataSource = self;
@@ -130,6 +130,22 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
     }
 
     return cell;
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         self.tableView.frame = CGRectMake(kTabBarWidth, 0., size.width - kTabBarWidth, size.height);
+         
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 #pragma mark - <UITableViewDelegate>

@@ -8,8 +8,8 @@
 
 #import "UserArticleViewController.h"
 //#import "ArticleListCell.h"
-#import "UserArticleCell.h"
-
+//#import "UserArticleCell.h"
+#import "MoreArticleCell.h"
 
 @interface UserArticleViewController ()
 
@@ -38,7 +38,7 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 //    [self.view addSubview:self.tableView];
     
 //    [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:ArticleCellIdentifier];
-    [self.collectionView registerClass:[UserArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
+    [self.collectionView registerClass:[MoreArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,7 +104,7 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleCellIdentifier forIndexPath:indexPath];
+    MoreArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleCellIdentifier forIndexPath:indexPath];
     cell.article = [self.dataSource objectAtIndex:indexPath.row];
     return cell;
 }
@@ -122,9 +122,8 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
         }
         //        return cellsize;
     } else {
-        GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
         
-        cellsize = [ArticleCell CellSizeWithArticle:article ];
+        cellsize = CGSizeMake(kScreenWidth, 110.);
     }
     return cellsize;
 }

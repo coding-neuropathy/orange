@@ -37,7 +37,7 @@ static NSString * UserTagIdentifier = @"UserTagCell";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
         
         //        _collectionView.contentInset = UIEdgeInsetsMake(617, 0, 0, 0);
         _collectionView.delegate = self;
@@ -144,7 +144,11 @@ static NSString * UserTagIdentifier = @"UserTagCell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CGSize size = CGSizeMake(0., 0.);
-    size = CGSizeMake(kScreenWidth, 44.);
+    if (IS_IPHONE) {
+        size = CGSizeMake(kScreenWidth, 44.);
+    }
+    else
+        size = CGSizeMake(kScreenWidth - kTabBarWidth, 44.);
     return size;
 }
 
