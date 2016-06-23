@@ -165,7 +165,7 @@ static NSString * UserTagIdentifier = @"UserTagCell";
     TagViewController * VC = [[TagViewController alloc]init];
     VC.tagName = [[self.tagArray objectAtIndex:indexPath.row] objectForKey:@"tag"];
     VC.user = self.user;
-    VC.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
