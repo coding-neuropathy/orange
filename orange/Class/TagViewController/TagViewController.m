@@ -11,11 +11,11 @@
 #import "EntitySingleListCell.h"
 //#import "API.h"
 
-@interface TagViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TagViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
-@property(nonatomic, assign) NSUInteger index;
-@property(nonatomic, strong) HMSegmentedControl *segmentedControl;
+@property (nonatomic, strong) NSMutableArray * dataArrayForEntity;
+@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, strong) HMSegmentedControl *segmentedControl;
 
 @end
 
