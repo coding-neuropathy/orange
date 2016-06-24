@@ -50,6 +50,8 @@
 @property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
 @property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
 
+@property (weak, nonatomic) UIApplication * app;
+
 @end
 
 @implementation UserViewController
@@ -107,6 +109,14 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     return _collectionView;
 }
 
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
+}
+
 #pragma mark - get data
 - (void)refresh
 {
@@ -131,7 +141,11 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (void)loadView
 {
-    self.view = self.collectionView;
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+    backView.backgroundColor = UIColorFromRGB(0xfafafa);
+    self.view = backView;
+    
+    [self.view addSubview:self.collectionView];
 }
 
 
@@ -196,6 +210,32 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
+    }
+    
+}
+
+#pragma mark -
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [self.collectionView performBatchUpdates:nil completion:nil];
+         //         self.collectionView.deFrameLeft = 128.;
+         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+             self.collectionView.frame = CGRectMake(128., 0., 684., kScreenHeight);
+         else
+             self.collectionView.frame = CGRectMake(0., 0., 684., kScreenHeight);
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

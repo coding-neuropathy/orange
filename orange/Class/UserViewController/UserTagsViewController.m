@@ -163,10 +163,16 @@ static NSString * UserTagIdentifier = @"UserTagCell";
 //    NSDictionary * dict = [self.tagArray objectAtIndex:indexPath.row];
     
     TagViewController * VC = [[TagViewController alloc]init];
+    
     VC.tagName = [[self.tagArray objectAtIndex:indexPath.row] objectForKey:@"tag"];
     VC.user = self.user;
-    VC.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.collectionView performBatchUpdates:nil completion:nil];
 }
 
 @end
