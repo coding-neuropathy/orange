@@ -52,6 +52,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 {
     [super viewDidLoad];
 //    self.view.backgroundColor = [UIColor greenColor];
+    if (IS_IPAD) self.navigationItem.title = NSLocalizedStringFromTable(@"activity", kLocalizedFile, nil);
     [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:FeedCellIdentifier];
 }
 

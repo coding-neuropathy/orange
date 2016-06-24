@@ -52,6 +52,8 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 {
     [super viewDidLoad];
 //    self.view.backgroundColor = [UIColor redColor];
+    if (IS_IPAD) self.navigationItem.title = NSLocalizedStringFromTable(@"message", kLocalizedFile, nil);
+
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:MessageCellIdentifier];
 }
 
