@@ -99,8 +99,17 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+//        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         
+        if (IS_IPHONE)
+            _collectionView.frame = CGRectMake(0., 0., kScreenWidth, kScreenHeight);
+        else {
+            _collectionView.frame = CGRectMake(0., 0., 684., kScreenHeight);
+            if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft || self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight)
+                _collectionView.center = CGPointMake((kScreenWidth - kTabBarWidth) / 2, kScreenHeight / 2);
+        }
+            
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -144,13 +153,13 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
     backView.backgroundColor = UIColorFromRGB(0xfafafa);
     self.view = backView;
-    
-    [self.view addSubview:self.collectionView];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.view addSubview:self.collectionView];
     
     self.navigationItem.title = self.user.nick;
 //    [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
@@ -211,12 +220,12 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
     [super viewWillAppear:animated];
     
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    
-    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-    {
-        self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-    }
+//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//    
+//    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+//    {
+//        self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
+//    }
     
 }
 
@@ -225,7 +234,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-         [self.collectionView performBatchUpdates:nil completion:nil];
+//         [self.collectionView performBatchUpdates:nil completion:nil];
          //         self.collectionView.deFrameLeft = 128.;
          if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
              self.collectionView.frame = CGRectMake(128., 0., 684., kScreenHeight);
