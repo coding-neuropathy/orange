@@ -48,7 +48,7 @@
 - (HMSegmentedControl *)segmentedControl
 {
     if (!_segmentedControl) {
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, 44) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, 44)];
         [segmentedControl setSectionTitles:@[ @"商品",@"图文",@"品类",@"用户"]];
         [segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
@@ -306,6 +306,22 @@
     }
 }
 
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         self.segmentedControl.frame = CGRectMake(0., 0., size.width - kTabBarWidth, 44.);
+         
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
 
 #pragma mark - <UISearchResultsUpdating>
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController

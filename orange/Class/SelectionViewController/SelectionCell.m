@@ -73,9 +73,9 @@
             self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
             [self.contentView addSubview:self.H];
             
-            _H2 = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-            self.H2.backgroundColor = UIColorFromRGB(0xe6e6e6);
-            [self.contentView addSubview:self.H2];
+//            _H2 = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
+//            self.H2.backgroundColor = UIColorFromRGB(0xe6e6e6);
+//            [self.contentView addSubview:self.H2];
         }
     }
     return self;
@@ -252,7 +252,7 @@
         self.timeLabel.deFrameRight = self.contentLabel.deFrameRight;
         
         self.H.deFrameBottom = self.contentView.deFrameHeight;
-        self.H2.deFrameBottom = self.contentView.deFrameHeight-10;
+//        self.H2.deFrameBottom = self.contentView.deFrameHeight-10;
         
         self.loading.center = CGPointMake(self.image.deFrameWidth/2, self.image.deFrameHeight/2);
         [self.contentView bringSubviewToFront:self.loading];
