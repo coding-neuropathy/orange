@@ -12,8 +12,11 @@
 
 #import "MoreArticleCell.h"
 
-@interface ArticleSearchViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property (strong, nonatomic)UITableView * tableView;
+@interface ArticleSearchViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+//@property (strong, nonatomic)UITableView * tableView;
+
+@property (nonatomic, strong)UICollectionView * collectionView;
+
 @property (nonatomic, strong) NSMutableArray * dataArray;
 @property (nonatomic, strong) NoSearchResultView * noResultView;
 @property (nonatomic, strong) NSString *keyword;
@@ -22,15 +25,21 @@
 
 @implementation ArticleSearchViewController
 
+static NSString * ArticleIdentifier = @"MoreArticleCell";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.view addSubview:self.tableView];
+    
+    [self.view addSubview:self.collectionView];
+    
+    [self.collectionView registerClass:[MoreArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
+    
         __weak __typeof(&*self)weakSelf = self;
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
-    [self.tableView addPullToRefreshWithActionHandler:^{
+    [self.collectionView addPullToRefreshWithActionHandler:^{
         [weakSelf reFresh];
     }];
 }
@@ -40,19 +49,34 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (UITableView *)tableView
+//- (UITableView *)tableView
+//{
+//    if (!_tableView) {
+//        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight-kStatusBarHeight-kNavigationBarHeight-44) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
+//        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//        _tableView.delegate = self;
+//        _tableView.dataSource = self;
+//        _tableView.backgroundView = nil;
+//        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+//        _tableView.showsVerticalScrollIndicator = YES;
+//        
+//    }
+//    return _tableView;
+//}
+
+#pragma mark - init collction view
+- (UICollectionView *)collectionView
 {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight-kStatusBarHeight-kNavigationBarHeight-44) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
-        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.backgroundView = nil;
-        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-        _tableView.showsVerticalScrollIndicator = YES;
+    if (!_collectionView) {
         
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     }
-    return _tableView;
+    return _collectionView;
 }
 
 - (NoSearchResultView *)noResultView
@@ -85,47 +109,100 @@
     return self.dataArray.count;
 }
 
-#pragma mark - <UITableViewDataSource>
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark ----------tableView代理协议-----------------
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    
-    static NSString * CellIdentifier = @"ArticleCell";
-    ArticleListCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[ArticleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    MoreArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleIdentifier forIndexPath:indexPath];
     cell.article = [self.dataArray objectAtIndex:indexPath.row];
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 110.;
+    CGSize cellsize  = CGSizeMake(0., 0.);
+    if (IS_IPAD) {
+        cellsize = CGSizeMake(342., 360.);
+        
+        if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight){
+            cellsize = CGSizeMake(313., 344.);
+        }
+        //        return cellsize;
+    } else {
+        
+        cellsize = CGSizeMake(kScreenWidth, 110.);
+    }
+    return cellsize;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 0;
 }
 
-#pragma mark - <UITableViewDelegate>
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return nil;
+    //    if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight)
+    //    {
+    //        return UIEdgeInsetsMake(0., 128., 0., 128.);
+    //    }
+    return UIEdgeInsetsMake(0., 0., 0., 0.);
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+//{
+//    return UIEdgeInsetsMake(0., 0., 5, 0.);
+//}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 0.01f;
+    CGFloat linespacing = 0.;
+    
+    if (IS_IPHONE) {
+        linespacing =  1.;
+    }
+    return linespacing;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GKArticle * article = [self.dataArray objectAtIndex:indexPath.row];
+    //    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
     [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         self.collectionView.frame = CGRectMake(0., 0., size.width - kTabBarWidth, size.height);
+         
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.collectionView performBatchUpdates:nil completion:nil];
+}
 
 - (void)handleSearchText:(NSString *)searchText
 {
@@ -134,19 +211,20 @@
     }
     
     self.keyword = searchText;
-    self.tableView.tableFooterView = nil;
+#warning footer------------------------------------
+//    self.tableView.tableFooterView = nil;
     
     [API searchArticlesWithString:searchText Page:1 Size:10 success:^(NSArray *articles) {
         if (articles.count == 0) {
-            self.tableView.tableFooterView = self.noResultView;
+//            self.tableView.tableFooterView = self.noResultView;
             self.noResultView.type = NoResultType;
         } else {
             self.dataArray = [NSMutableArray arrayWithArray:articles];
         }
-        [self.tableView.pullToRefreshView stopAnimating];
-        [self.tableView reloadData];
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
-        [self.tableView.pullToRefreshView stopAnimating];
+        [self.collectionView.pullToRefreshView stopAnimating];
     }];
     
 }
@@ -163,10 +241,10 @@
     NSInteger page = ceilf(self.dataArray.count / 10.) + 1;
     [API searchArticlesWithString:self.keyword Page:page Size:10 success:^(NSArray *articles) {
         [self.dataArray addObjectsFromArray:articles];
-        [self.tableView.infiniteScrollingView stopAnimating];
-        [self.tableView reloadData];
+        [self.collectionView.infiniteScrollingView stopAnimating];
+        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
-        [self.tableView.infiniteScrollingView stopAnimating];
+        [self.collectionView.infiniteScrollingView stopAnimating];
     }];
 
 }
@@ -175,17 +253,18 @@
 {
     [API searchArticlesWithString:self.keyword Page:1 Size:10 success:^(NSArray *articles) {
         if (articles.count == 0) {
-            self.tableView.tableFooterView = self.noResultView;
+#warning footer ---------------------
+//            self.tableView.tableFooterView = self.noResultView;
             self.noResultView.type = NoResultType;
         }
         else
         {
             self.dataArray = [NSMutableArray arrayWithArray:articles];
         }
-        [self.tableView.pullToRefreshView stopAnimating];
-        [self.tableView reloadData];
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
-        [self.tableView.pullToRefreshView stopAnimating];
+        [self.collectionView.pullToRefreshView stopAnimating];
     }];
 }
 

@@ -314,6 +314,7 @@
      {
          
          self.segmentedControl.frame = CGRectMake(0., 0., size.width - kTabBarWidth, 44.);
+         self.thePageViewController.view.frame = CGRectMake(0,44, kScreenWidth - kTabBarWidth,  kScreenHeight);
          
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
