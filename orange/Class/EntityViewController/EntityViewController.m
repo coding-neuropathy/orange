@@ -35,7 +35,7 @@
 #import "PNoteViewController.h"
 
 
-@interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,EntityHeaderBuyViewDelegate,UITextViewDelegate>
+@interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,EntityHeaderBuyViewDelegate,UITextViewDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -63,6 +63,8 @@
 @property (nonatomic, strong) NSMutableArray *dataArrayForRecommend;
 
 @property(nonatomic, strong) id<ALBBItemService> itemService;
+
+@property (strong, nonatomic) UIActionSheet * actionSheet;
 
 /**
  * 店家id （仅限淘宝，天猫）
@@ -1107,8 +1109,46 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)tapMoreBtn:(id)sender
 {
     self.moreBtn = (UIButton *)sender;
-    [self shareButtonAction];
+    if (IS_IPHONE) {
+        [self shareButtonAction];
+    }
+//    else
+//    {
+//        CGRect frame = self.moreBtn.frame;
+//        frame.origin.y += 20.f;
+//        self.actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博", NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil), nil];
+//        self.actionSheet.autoresizingMask = UIViewAutoresizingFlexibleTopMargin| UIViewAutoresizingFlexibleRightMargin;
+//        [self.actionSheet showFromRect:frame inView:self.navigationController.view animated:NO];
+//    }
 }
+
+//#pragma mark - <UIActionSheetDelegate>
+//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    //    DDLogInfo(@"btn index %lu", buttonIndex);
+//    switch (buttonIndex) {
+//        case 0:
+//        {
+////            [self wxShare:0];
+//        }
+//            break;
+//        case 1:
+////            [self wxShare:1];
+//            break;
+//        case 2:
+////            [self weiboShare];
+//            break;
+//        case 3:
+//            
+//            //            [self.actionSheet dismissWithClickedButtonIndex:buttonIndex animated:NO];
+//            //            [self openReportVC];
+//            break;
+//        default:
+//            break;
+//    }
+//}
+
+
 
 - (void)setNavBarButton:(BOOL)flag
 {
