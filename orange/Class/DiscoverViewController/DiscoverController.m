@@ -472,7 +472,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                 categoryView.tapBlock = ^(GKCategory * category){
                     CategroyGroupController * groupVC = [[CategroyGroupController alloc] initWithGid:category.groupId];
                     groupVC.title = category.title;
-                    groupVC.hidesBottomBarWhenPushed = YES;
+                    if (IS_IPHONE) groupVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:groupVC animated:YES];
                 };
                 return categoryView;

@@ -149,7 +149,9 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePickerVC.allowsEditing = YES;
         imagePickerVC.delegate = self;
-        [self presentViewController:imagePickerVC animated:YES completion:NULL];
+//        NSLog(@"%@", imagePickerVC);
+        [self presentViewController:imagePickerVC animated:YES completion:nil];
+//        [self.navigationController pushViewController:imagePickerVC animated:YES];
     }
 }
 
@@ -163,7 +165,7 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self presentViewController:imagePickerVC animated:YES completion:NULL];
         });
-        
+    
     }
 }
 
