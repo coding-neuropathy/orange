@@ -70,7 +70,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[CSStickyHeaderFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight) collectionViewLayout:layout];
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;

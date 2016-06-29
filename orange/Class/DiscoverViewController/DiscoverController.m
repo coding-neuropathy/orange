@@ -268,6 +268,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     
     self.collectionView.scrollsToTop = YES;
     
+    [self.collectionView reloadData];
+    
 //    [AVAnalytics beginLogPageView:@"DiscoverView"];
     [MobClick beginLogPageView:@"DiscoverView"];
 }
@@ -285,8 +287,13 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     [MobClick endLogPageView:@"DiscoverView"];
 }
 
+
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    
+    _searchLogTableView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
+    
     [self.collectionView performBatchUpdates:nil completion:nil];
 }
 
@@ -699,21 +706,22 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     tap.delegate = self;
     [view addGestureRecognizer:tap];
     
-    if (!self.searchLogTableView) {
-        UITableView * searchLogTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        searchLogTableView.delegate = self;
-        searchLogTableView.dataSource = self;
-        searchLogTableView.backgroundColor = [UIColor clearColor];
-        searchLogTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        searchLogTableView.scrollEnabled = NO;
+    if (!_searchLogTableView) {
+        _searchLogTableView = [[UITableView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, kScreenHeight) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, kScreenHeight)];
+        _searchLogTableView.delegate = self;
+        _searchLogTableView.dataSource = self;
+        _searchLogTableView.backgroundColor = [UIColor clearColor];
+        _searchLogTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _searchLogTableView.scrollEnabled = NO;
 
-        self.searchLogTableView = searchLogTableView;
+        self.searchLogTableView = _searchLogTableView;
     }
     [self.searchLogTableView reloadData];
     [view addSubview:self.searchLogTableView];
     
     [self.searchVC.view addSubview:view];
 }
+
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
     

@@ -1109,16 +1109,18 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)tapMoreBtn:(id)sender
 {
     self.moreBtn = (UIButton *)sender;
-    if (IS_IPHONE) {
+//    if (IS_IPHONE) {
         [self shareButtonAction];
-    }
+//    }
 //    else
 //    {
-//        CGRect frame = self.moreBtn.frame;
-//        frame.origin.y += 20.f;
+////        CGRect frame = self.moreBtn.frame;
+////        frame.origin.y += 610.f;
+////        frame.origin.x += 120.f;
 //        self.actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博", NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil), nil];
 //        self.actionSheet.autoresizingMask = UIViewAutoresizingFlexibleTopMargin| UIViewAutoresizingFlexibleRightMargin;
-//        [self.actionSheet showFromRect:frame inView:self.navigationController.view animated:NO];
+////        [self.actionSheet showFromRect:frame inView:self.navigationController.view animated:NO];
+//        [self.actionSheet showInView:self.view];
 //    }
 }
 
@@ -1147,6 +1149,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 //            break;
 //    }
 //}
+
 
 
 
