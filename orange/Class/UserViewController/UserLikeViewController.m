@@ -70,7 +70,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[CSStickyHeaderFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight) collectionViewLayout:layout];
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -226,35 +226,34 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CGSize cellsize = CGSizeMake(0, 0);
-    cellsize = IS_IPHONE ? CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3) : CGSizeMake((kScreenWidth - kTabBarWidth-12)/3, (kScreenWidth - kTabBarWidth-12)/3);
     
     if (IS_IPAD ) {
         
-        if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft ||
-            [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {
-            cellsize = CGSizeMake((kScreenWidth - kTabBarWidth-12)/4, (kScreenWidth - kTabBarWidth-12)/4);
-        } else {
-            cellsize = CGSizeMake((kScreenWidth - kTabBarWidth-12)/3, (kScreenWidth - kTabBarWidth-12)/3);
-        }
-    } else {
-        cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
+        cellsize = CGSizeMake(204.,204.);
     }
-    
+    else
+    {
+        cellsize = CGSizeMake((kScreenWidth - 12)/3, (kScreenWidth - 12)/3);
+    }
     return cellsize;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    CGSize size = IS_IPHONE ? CGSizeMake(kScreenWidth, 0.) : CGSizeMake(kScreenWidth - kTabBarWidth, 0.);
-    
-    return size;
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+//{
+//    CGSize size = IS_IPHONE ? CGSizeMake(kScreenWidth, 0.) : CGSizeMake(kScreenWidth - kTabBarWidth, 0.);
+//    
+//    return size;
+//}
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
     if (IS_IPHONE) {
         edge = UIEdgeInsetsMake(3., 3., 3., 3.);
+    }
+    else
+    {
+        edge = UIEdgeInsetsMake(16., 20., 16., 0.);
     }
     
     return edge;
@@ -267,6 +266,10 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (IS_IPHONE) {
         itemSpacing = 3.;
     }
+    else
+    {
+        itemSpacing = 5.;
+    }
 
     return itemSpacing;
 }
@@ -275,7 +278,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     CGFloat spacing = 3.;
     if (IS_IPAD) {
-        spacing = 0.;
+        spacing = 16.;
     }
     return spacing;
 }

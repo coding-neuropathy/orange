@@ -52,7 +52,7 @@
 - (UIView *)board
 {
     if(!_board) {
-        _board = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight - 358, kScreenWidth, 358)];
+        _board = [[UIView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, kScreenHeight - 358, kScreenWidth, 358) : CGRectMake(0, kScreenHeight - 558, kScreenWidth, 558)];
         _board.backgroundColor = UIColorFromRGB(0xf4f4f4);
     }
     return _board;
@@ -76,6 +76,8 @@
     [super layoutSubviews];
     
     [self addSubview:self.board];
+
+    
     {
         UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15, 29 , kScreenWidth - 30, 0.5)];
         line.backgroundColor = UIColorFromRGB(0xe6e6e6);
@@ -92,7 +94,7 @@
     
     {
     
-        NSInteger width = (kScreenWidth -30 - 12*4)/5;
+         NSInteger width = (kScreenWidth -30 - 12*4)/5;
         UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
         [icon setImage:[UIImage imageNamed:@"share_moment.png"] forState:UIControlStateNormal];
         [icon addTarget:self action:@selector(ShareActionForMoment) forControlEvents:UIControlEventTouchUpInside];
@@ -211,9 +213,9 @@
     }
     
     {
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15,  178, kScreenWidth - 30, 0.5)];
-        line.backgroundColor = UIColorFromRGB(0xe6e6e6);
-        [self.board addSubview:line];
+//        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15,  178, kScreenWidth - 30, 0.5)];
+//        line.backgroundColor = UIColorFromRGB(0xe6e6e6);
+//        [self.board addSubview:line];
     }
     
     {
