@@ -9,7 +9,7 @@
 #import "SelectionViewController.h"
 //#import "HMSegmentedControl.h"
 #import "SelectionCell.h"
-#import "EntitySingleListCell.h"
+//#import "EntitySingleListCell.h"
 //#import "CategoryViewController.h"
 //#import "SDWebImagePrefetcher.h"
 #import "GTScrollNavigationBar.h"

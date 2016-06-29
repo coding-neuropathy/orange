@@ -67,7 +67,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
         if (IS_IPHONE) {
             _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 10)];
             self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
@@ -77,6 +77,7 @@
 //            self.H2.backgroundColor = UIColorFromRGB(0xe6e6e6);
 //            [self.contentView addSubview:self.H2];
         }
+        
     }
     return self;
 }
@@ -319,21 +320,23 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    
+    if (IS_IPAD ) {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+    
+        CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+        CGContextSetLineWidth(context, kSeparateLineWidth);
+    
+        CGContextMoveToPoint(context, self.frame.size.width, 0.);
+        CGContextAddLineToPoint(context, self.frame.size.width, self.frame.size.height);
+    
+        CGContextMoveToPoint(context, 0., self.frame.size.height);
+        CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height);
+    
+        CGContextStrokePath(context);
+    }
+    
     [super drawRect:rect];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-    CGContextSetLineWidth(context, kSeparateLineWidth);
-    
-    CGContextMoveToPoint(context, self.frame.size.width, 0.);
-    CGContextAddLineToPoint(context, self.frame.size.width, self.frame.size.height);
-    
-    CGContextMoveToPoint(context, 0., self.frame.size.height);
-    CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height);
-    
-    
-    CGContextStrokePath(context);
 }
 
 #pragma mark - KVO
