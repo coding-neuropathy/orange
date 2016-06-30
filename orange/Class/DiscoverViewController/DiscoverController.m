@@ -781,7 +781,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
             
             vc.baichuanblock = ^(GKPurchase * purchase) {
                 NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-                TaeTaokeParams * taoKeParams = [[TaeTaokeParams alloc]init];
+                ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
                 taoKeParams.pid = kGK_TaobaoKe_PID;
                 [self.itemService showTaoKeItemDetailByItemId:self
                                                    isNeedPush:YES
