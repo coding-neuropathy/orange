@@ -55,18 +55,18 @@ int ddLogLevel;
     [WeiboSDK registerApp:kGK_WeiboAPPKey];
     
     //sdk初始化
-    [[TaeSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
-    [[TaeSDK sharedInstance] setAppVersion:XcodeAppVersion];
-    [[TaeSDK sharedInstance] setDebugLogOpen:NO];
+    [[ALBBSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
+    [[ALBBSDK sharedInstance] setAppVersion:XcodeAppVersion];
+    [[ALBBSDK sharedInstance] setDebugLogOpen:NO];
     
-    [[TaeSDK sharedInstance] asyncInit:^{
+    [[ALBBSDK sharedInstance] asyncInit:^{
         DDLogInfo(@"初始化成功");
     } failedCallback:^(NSError *error) {
         DDLogError(@"初始化失败:%@", error);
     }];
     
     //插件版登录状态监听
-    id<ALBBLoginService> loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
+    id<ALBBLoginService> loginService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBLoginService)];
     [loginService setSessionStateChangedHandler:^(TaeSession *session) {
         if([session isLogin]){//未登录变为已登录
             DDLogInfo(@"【插件版监听：用户login】");
@@ -367,7 +367,7 @@ int ddLogLevel;
     }
     
     if ([[url absoluteString] hasPrefix:@"tbopen23093827"]) {
-        return [[TaeSDK sharedInstance] handleOpenURL:url];
+        return [[ALBBSDK sharedInstance] handleOpenURL:url];
     }
     
     if ([sourceApplication isEqualToString:@"com.guoku.iphone"]) {

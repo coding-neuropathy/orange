@@ -122,7 +122,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         
-        self.itemService = [[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
+        self.itemService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
 
         
         //self.title = NSLocalizedStringFromTable(@"discover", kLocalizedFile, nil);

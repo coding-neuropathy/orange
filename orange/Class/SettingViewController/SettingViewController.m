@@ -58,7 +58,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         
-        _loginService = [[TaeSDK sharedInstance] getService:@protocol(ALBBLoginService)];
+        _loginService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBLoginService)];
     }
     return self;
 }

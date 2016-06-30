@@ -99,7 +99,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 //        self.itemType = OneSDKItemType_TAOBAO1;
         self.flag = false;
         self.image = [[UIImageView alloc] initWithFrame:CGRectZero];
-        self.itemService=[[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
+        self.itemService=[[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
     }
     return self;
 }
@@ -1033,7 +1033,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"])
         {
             NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-            TaeTaokeParams *taoKeParams = [[TaeTaokeParams alloc] init];
+            ALBBTradeTaokeParams *taoKeParams = [[ALBBTradeTaokeParams alloc] init];
             taoKeParams.pid = kGK_TaobaoKe_PID;
             [_itemService showTaoKeItemDetailByItemId:self
                                            isNeedPush:YES

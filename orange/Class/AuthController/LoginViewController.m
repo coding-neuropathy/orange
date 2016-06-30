@@ -52,7 +52,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
     [self.view addGestureRecognizer:tap];
     
-    _loginService = [[TaeSDK sharedInstance]getService:@protocol(ALBBLoginService)];
+    _loginService = [[ALBBSDK sharedInstance]getService:@protocol(ALBBLoginService)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWeChatCode:) name:@"WechatAuthResp" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWBCode:) name:@"WBAuthResp" object:nil];
     

@@ -74,7 +74,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
             self.tabBarItem = item;
             
-            _cartService=[[TaeSDK sharedInstance] getService:@protocol(ALBBCartService)];
+            _cartService=[[ALBBSDK sharedInstance] getService:@protocol(ALBBCartService)];
         
             
             [self.user addObserver:self forKeyPath:@"avatarURL" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
