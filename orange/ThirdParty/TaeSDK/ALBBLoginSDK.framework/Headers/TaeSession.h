@@ -7,50 +7,52 @@
 //
 
 #import <Foundation/Foundation.h>
-@class TaeUser;
+#import "TaeUser.h"
 
 @interface TaeSession : NSObject
 
+/**
+ @return 返回单例
+ */
++ (TaeSession *)sharedInstance;
 
 /**
- *
- *  @return 返回单例
+ 如果未登录或者登录态已经过期,返回NO
+ @return 当前会话是否登录有效
  */
-+ (TaeSession *)sharedInstance ;
-
+- (BOOL)isLogin;
 
 /**
- *  如果未登录或者登录态已经过期,返回NO
- *
- *  @return 当前会话是否登录有效
+ @return 返回User对象
  */
--(BOOL) isLogin;
-
+- (TaeUser *)getUser;
 
 /**
- *
- *  @return 返回User对象
+ @return 用户id
  */
--(TaeUser *) getUser;
-
+- (NSString *)getUserId;
 
 /**
- *
- *  @return 用户id
+ @return 登录时间
  */
--(NSString *) getUserId;
-
+- (NSString *)getLoginTime;
 
 /**
- *
- *  @return 登录时间
+ top授权码
+ @return return value description
  */
--(NSString *) getLoginTime;
+- (NSString *)getAuthorizationCode;
 
 /**
- *  top授权码
- *
- *  @return <#return value description#>
+ top的accessToken
+ @return <#return value description#>
  */
--(NSString *) getAuthorizationCode;
+- (NSString *)getTopAccessToken;
+
+/**
+ 淘宝sessionId
+ @return <#return value description#>
+ */
+- (NSString *)getSessionId;
+
 @end

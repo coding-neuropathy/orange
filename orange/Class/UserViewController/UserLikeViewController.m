@@ -34,7 +34,10 @@
 @property (strong, nonatomic) NSMutableArray * likeEntities;
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
+@property (assign, nonatomic) NSInteger pageSize;
 @property (strong, nonatomic) GKCategory * category;
+
+@property (strong, nonatomic) UserLikeHeaderSectionView * headerSectionView;
 
 
 // for ipad
@@ -57,6 +60,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (self) {
         _user = user;
 //        _category = [GKCategory]
+        self.pageSize = IS_IPAD ? 24 : 30;
     }
     return self;
 }
@@ -75,7 +79,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[CSStickyHeaderFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight) collectionViewLayout:layout];
+//        _collectionView = [[UICollectionView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        
+        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight)
+                                        : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight);
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -84,6 +92,20 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return _collectionView;
 }
 
+// for iphone
+- (UserLikeHeaderSectionView *)headerSectionView
+{
+    if (!_headerSectionView) {
+        _headerSectionView = [[UserLikeHeaderSectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+        _headerSectionView.category = self.category;
+        _headerSectionView.delegate = self;
+        
+    }
+    return _headerSectionView;
+}
+
+
+// for ipad
 - (UIButton *)categoryBtn
 {
     if (!_categoryBtn) {
@@ -133,13 +155,12 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [super loadView];
     
     if (IS_IPHONE) {
-        UserLikeHeaderSectionView * v = [[UserLikeHeaderSectionView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, 44) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, 44)];
-        v.category = self.category;
-        v.delegate = self;
+//        UserLikeHeaderSectionView * v = [[UserLikeHeaderSectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44) ];
+//        v.category = self.category;
+//        v.delegate = self;
     
-        [self.view addSubview:v];
+        [self.view addSubview:self.headerSectionView];
         self.collectionView.deFrameTop = 44;
-
     }
 
     [self.view addSubview:self.collectionView];
@@ -274,28 +295,14 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
-    if (IS_IPHONE) {
-        edge = UIEdgeInsetsMake(3., 3., 3., 3.);
-    }
-    else
-    {
-        edge = UIEdgeInsetsMake(16., 20., 16., 0.);
-    }
-    
+    edge = IS_IPAD ? UIEdgeInsetsMake(16., 20., 16., 16.) : UIEdgeInsetsMake(3., 3., 3., 3.);
     return edge;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     CGFloat itemSpacing = 0.;
-    
-    if (IS_IPHONE) {
-        itemSpacing = 3.;
-    }
-    else
-    {
-        itemSpacing = 5.;
-    }
+    itemSpacing = IS_IPAD ? 5. : 3.;
 
     return itemSpacing;
 }
@@ -303,9 +310,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     CGFloat spacing = 3.;
-    if (IS_IPAD) {
-        spacing = 16.;
-    }
+    if (IS_IPAD) spacing = 16.;
     return spacing;
 }
 

@@ -5,7 +5,6 @@
 //  Created by muhuai on 15/9/2.
 //  Copyright (c) 2015年 MuHuai. All rights reserved.
 //
-#define enumToString(value)  @#value
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSUInteger, TBApplinkErrorTye) {
     APPLINK_ERROR_ITEMID_ILLEGAL = 1,//参数非法,例如itemId为空或含有非数字字符

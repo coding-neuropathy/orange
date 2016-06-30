@@ -8,90 +8,84 @@
 
 #import <Foundation/Foundation.h>
 #import "ALBBTradeService.h"
+#import "ALBBTradeOrderItem.h"
 
-#import "TaeOrderItem.h"
+NS_ASSUME_NONNULL_BEGIN
 
+/** 订单服务 */
 @protocol ALBBOrderService <ALBBTradeService>
 
 /**
- *  打开订单页面
- *
- *  @param parentController  app当前的Controller
- *  @param isNeedPush            是否需要使用parentController进行push
- *  @param webViewUISettings        可以自定义的webview配置项
- *  @param orderItems                      订单请求参数数组，参数类型见 TaeOrderItem
- *  @param tradeProcessSuccessCallback    交易流程成功完成订单支付的回调
- *  @param tradeProcessFailedCallback  交易流程未完成的回调
+ 打开下单页面.
+ @param parentController            当前view controller. 若isNeedPush为YES, 需传入当前UINavigationController.
+ @param isNeedPush                  若为NO, 则在当前view controller上present新页面; 否则在传入的UINavigationController上push新页面.
+ @param webViewUISettings           可以自定义的webview配置项
+ @param orderItems                  订单请求参数
+ @param tradeProcessSuccessCallback 交易流程成功完成订单支付的回调
+ @param tradeProcessFailedCallback  交易流程未完成的回调
  */
--(void)showOrder:(UIViewController*)parentController
-      isNeedPush:(BOOL) isNeedPush
-webViewUISettings:(TaeWebViewUISettings *)webViewUISettings
-      orderItems:(NSArray *)orderItems
-tradeProcessSuccessCallback:(tradeProcessSuccessCallback)tradeProcessSuccessCallback
-tradeProcessFailedCallback:(tradeProcessFailedCallback)tradeProcessFailedCallback;
-
+- (void)            showOrder:(UIViewController *)parentController
+                   isNeedPush:(BOOL)isNeedPush
+            webViewUISettings:(nullable TaeWebViewUISettings *)webViewUISettings
+                   orderItems:(NSArray<ALBBTradeOrderItem *> *)orderItems
+  tradeProcessSuccessCallback:(nullable void (^)(ALBBTradeResult * __nullable result))onSuccess
+   tradeProcessFailedCallback:(nullable void (^)(NSError * __nullable error))onFailure;
 
 /**
- *  以淘客方式打开订单页面
- *
- *  @param parentController  app当前的Controller
- *  @param isNeedPush            是否需要使用parentController进行push
- *  @param webViewUISettings        可以自定义的webview配置项
- *  @param orderItem                      订单请求参数，参数类型见 TaeOrderItem
- *  @param taoKeParams                        淘客参数
- *  @param tradeProcessSuccessCallback    交易流程成功完成订单支付的回调
- *  @param tradeProcessFailedCallback  交易流程未完成的回调
+ 以淘客方式打开下单页面.
+ @param parentController            当前view controller. 若isNeedPush为YES, 需传入当前UINavigationController.
+ @param isNeedPush                  若为NO, 则在当前view controller上present新页面; 否则在传入的UINavigationController上push新页面.
+ @param webViewUISettings           可以自定义的webview配置项
+ @param orderItem                   订单请求参数
+ @param taoKeParams                 淘客参数
+ @param tradeProcessSuccessCallback 交易流程成功完成订单支付的回调
+ @param tradeProcessFailedCallback  交易流程未完成的回调
  */
--(void)showTaoKeOrder:(UIViewController*)parentController
-           isNeedPush:(BOOL) isNeedPush
-    webViewUISettings:(TaeWebViewUISettings *)webViewUISettings
-            orderItem:(TaeOrderItem *)orderItem
-          taoKeParams:(TaeTaokeParams *) taoKeParams
-tradeProcessSuccessCallback:(tradeProcessSuccessCallback)tradeProcessSuccessCallback
-tradeProcessFailedCallback:(tradeProcessFailedCallback)tradeProcessFailedCallback;
-
+- (void)        showTaoKeOrder:(UIViewController *)parentController
+                    isNeedPush:(BOOL)isNeedPush
+             webViewUISettings:(nullable TaeWebViewUISettings *)webViewUISettings
+                     orderItem:(ALBBTradeOrderItem *)orderItem
+                   taoKeParams:(nullable ALBBTradeTaokeParams *)taoKeParams
+   tradeProcessSuccessCallback:(nullable void (^)(ALBBTradeResult * __nullable result))onSuccess
+    tradeProcessFailedCallback:(nullable void (^)(NSError * __nullable error))onFailure;
 
 /**
- *  带sku选择页的商品下单接口
- *
- *  @param parentController            app当前的Controller
- *  @param isNeedPush                  是否需要使用parentController进行push
- *  @param webViewUISettings           可以自定义的webview配置项
- *  @param itemId                      商品混淆id
- *  @param params                      扩展参数
- *  @param tradeProcessSuccessCallback 交易流程成功完成订单支付的回调
- *  @param tradeProcessFailedCallback  交易流程未完成的回调
+ 打开带sku选择页的下单页面.
+ @param parentController            当前view controller. 若isNeedPush为YES, 需传入当前UINavigationController.
+ @param isNeedPush                  若为NO, 则在当前view controller上present新页面; 否则在传入的UINavigationController上push新页面.
+ @param webViewUISettings           可以自定义的webview配置项
+ @param itemId                      商品混淆ID
+ @param params                      扩展参数
+ @param tradeProcessSuccessCallback 交易流程成功完成订单支付的回调
+ @param tradeProcessFailedCallback  交易流程未完成的回调
  */
--(void)showOrderWithSku:(UIViewController*)parentController
-             isNeedPush:(BOOL) isNeedPush
-      webViewUISettings:(TaeWebViewUISettings *)webViewUISettings
-                 itemId:(NSString *)itemId
-                 params:(NSDictionary *)params
-tradeProcessSuccessCallback:(tradeProcessSuccessCallback)tradeProcessSuccessCallback
-tradeProcessFailedCallback:(tradeProcessFailedCallback)tradeProcessFailedCallback;
-
-
-/**
- *  带sku选择页的淘客商品下单接口
- *
- *  @param parentController            app当前的Controller
- *  @param isNeedPush                  是否需要使用parentController进行push
- *  @param webViewUISettings           可以自定义的webview配置项
- *  @param itemId                      商品混淆id
- *  @param params                      扩展参数
- *  @param taoKeParams                  淘客参数
- *  @param tradeProcessSuccessCallback 交易流程成功完成订单支付的回调
- *  @param tradeProcessFailedCallback  交易流程未完成的回调
- */
--(void)showTaoKeOrderWithSku:(UIViewController*)parentController
-                  isNeedPush:(BOOL) isNeedPush
-           webViewUISettings:(TaeWebViewUISettings *)webViewUISettings
+- (void)    showOrderWithSku:(UIViewController *)parentController
+                  isNeedPush:(BOOL)isNeedPush
+           webViewUISettings:(nullable TaeWebViewUISettings *)webViewUISettings
                       itemId:(NSString *)itemId
-                      params:(NSDictionary *)params
-                 taoKeParams:(TaeTaokeParams *) taoKeParams
- tradeProcessSuccessCallback:(tradeProcessSuccessCallback)tradeProcessSuccessCallback
-  tradeProcessFailedCallback:(tradeProcessFailedCallback)tradeProcessFailedCallback;
+                      params:(nullable NSDictionary *)params
+ tradeProcessSuccessCallback:(nullable void (^)(ALBBTradeResult * __nullable result))onSuccess
+  tradeProcessFailedCallback:(nullable void (^)(NSError * __nullable error))onFailure;
 
-
-
+/**
+ 以淘客方式打开带sku选择页的下单页面.
+ @param parentController            当前view controller. 若isNeedPush为YES, 需传入当前UINavigationController.
+ @param isNeedPush                  若为NO, 则在当前view controller上present新页面; 否则在传入的UINavigationController上push新页面.
+ @param webViewUISettings           可以自定义的webview配置项
+ @param itemId                      商品混淆ID
+ @param params                      扩展参数
+ @param taoKeParams                 淘客参数
+ @param tradeProcessSuccessCallback 交易流程成功完成订单支付的回调
+ @param tradeProcessFailedCallback  交易流程未完成的回调
+ */
+- (void)showTaoKeOrderWithSku:(UIViewController *)parentController
+                   isNeedPush:(BOOL)isNeedPush
+            webViewUISettings:(nullable TaeWebViewUISettings *)webViewUISettings
+                       itemId:(NSString *)itemId
+                       params:(nullable NSDictionary *)params
+                  taoKeParams:(nullable ALBBTradeTaokeParams *)taoKeParams
+  tradeProcessSuccessCallback:(nullable void (^)(ALBBTradeResult * __nullable result))onSuccess
+   tradeProcessFailedCallback:(nullable void (^)(NSError * __nullable error))onFailure;
 @end
+
+NS_ASSUME_NONNULL_END

@@ -7,13 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TaeUser.h"
-#import "TaeSession.h"
+#import <ALBBSDK/ALBBSDK.h>
 #import "ALBBLoginService.h"
 
-@interface TaeSDK(ALBBLogin)<ALBBLoginService>
-
-
-
+@interface ALBBSDK (ALBBLogin) <ALBBLoginService>
 
 @end

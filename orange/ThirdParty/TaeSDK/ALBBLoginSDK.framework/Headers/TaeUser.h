@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+/** 用户信息 */
 @interface TaeUser : NSObject
-
-@property(nonatomic, strong) NSString *userId;
-@property(nonatomic, strong) NSString *nick;
-@property(nonatomic, strong) NSString *iconUrl;//头像地址
-
+/** 用户ID */
+@property (nonatomic, copy) NSString *userId;
+/** 昵称 */
+@property (nonatomic, copy) NSString *nick;
+/** 头像地址 */
+@property (nonatomic, copy) NSString *iconUrl;
 @end
 
 

@@ -13,20 +13,19 @@
 #import "TBDetailParam.h"
 #import "TBURIParam.h"
 #import "TBNativeParam.h"
-#import "TBOpenUtils.h"
 #import "TBAuthParam.h"
 #import "TBError.h"
 
 FOUNDATION_EXPORT NSString * const kSDKVersion;
 
 typedef NSString* (^TBAppLinkCreateSignBlock)(NSString *);
-typedef void (^TBAppLinkAuthCompleteBlock)(NSError *error,NSString *mixedNick,NSString *iconURL);
+typedef void (^TBAppLinkAuthCompleteBlock)(NSError *error,NSDictionary *authInfo);
 //跳转手淘失败时（ios设备上只有'手淘未安装'一种场景,andorid上还有'手淘版本低'的场景），可选处理模式
 typedef NS_ENUM(NSUInteger, TBAppLinkJumpFailedMode) {
     
-    TBAppLinkJumpFailedModeDownLoadTaobao,  //跳转到手淘下载页
-    TBAppLinkJumpFailedModeOpenH5,          //降级到h5
-    TBAppLinkJumpFailedModeNone,            //自行处理Jump跳转方法返回为NO的情况，只有设置为该模式，才能屏蔽以上2种模式的实现
+    TBAppLinkJumpFailedModeDownLoadTaobao=0,  //跳转到手淘下载页
+    TBAppLinkJumpFailedModeOpenH5=1,          //降级到h5
+    TBAppLinkJumpFailedModeNone=2,            //自行处理Jump跳转方法返回为NO的情况，只有设置为该模式，才能屏蔽以上2种模式的实现
     
 };
 @interface TBAppLinkSDK : NSObject
@@ -80,12 +79,12 @@ typedef NS_ENUM(NSUInteger, TBAppLinkJumpFailedMode) {
 /**
  *  初始化SDK,传入appkey
  */
-+ (void)initWithAppkey:(NSString *)appKey;
++ (TBAppLinkSDK *)initWithAppkey:(NSString *)appKey;
 
 /**
  *  DESIGNATED INITIALIZER
  */
-+ (void)initWithAppkey:(NSString *)appKey BackURL:(NSString *)backURL pid:(NSString *)pid type:(NSString *)type;
++ (TBAppLinkSDK *)initWithAppkey:(NSString *)appKey BackURL:(NSString *)backURL pid:(NSString *)pid type:(NSString *)type;
 
 /**
  *  设置UIWebView作为AppLink的webview，如果选择使用这种方式使用AppLink JSSDK功能，只需要在第一个UIWebView实例化之前调用该方法

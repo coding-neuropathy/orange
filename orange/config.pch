@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 // baichuan
-#import <TAESDK/TaeSDK.h>
+//#import <TAESDK/TaeSDK.h>
+#import <ALBBSDK/TaeSDK.h>
 #import <ALBBLoginSDK/TaeSDK+ALBBLogin.h>
-#import <ALBBTradeSDK/TaeSDK+ALBBTrade.h>
+#import <ALBBTradeSDK/ALBBTradeSDK.h>
 
 // AFNetworking
 #import <SystemConfiguration/SystemConfiguration.h>

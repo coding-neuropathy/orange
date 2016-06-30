@@ -289,7 +289,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     switch (section) {
         case 1:
         {
-            count = self.likedataArray.count > 4 ? 4 : self.likedataArray.count;
+            if (IS_IPAD) {
+                count = self.likedataArray.count > 6 ? 6 : self.likedataArray.count;
+            } else
+                count = self.likedataArray.count > 4 ? 4 : self.likedataArray.count;
         }
             break;
         case 2:
@@ -459,7 +462,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     switch (indexPath.section) {
         case 1:
             if (IS_IPAD) {
-                itemSize = CGSizeMake(120., 120.);
+                itemSize = CGSizeMake(100., 100.);
             } else {
                 itemSize = IS_IPHONE_6P || IS_IPHONE_6 ? CGSizeMake(80., 80.) : CGSizeMake(64., 64.);
 //                if (IS_IPHONE_6P || IS_IPHONE_6)
