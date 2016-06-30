@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface UserLikeViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface UserLikeViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIPopoverControllerDelegate>
 
 - (instancetype)initWithUser:(GKUser *)user;
 

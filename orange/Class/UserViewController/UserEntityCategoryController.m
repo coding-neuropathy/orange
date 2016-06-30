@@ -40,7 +40,13 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, 242.) : CGRectMake(kTabBarWidth, 0., kScreenWidth - kTabBarWidth, 242.) style:UITableViewStylePlain];
+//        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, 242.) : CGRectMake(kTabBarWidth, 0., kScreenWidth - kTabBarWidth, 242.) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        if (IS_IPAD) {
+            _tableView.frame = CGRectMake(0., 0., kScreenWidth, kScreenHeight);
+        } else {
+            _tableView.frame = CGRectMake(0., 0., kScreenWidth, 242.);
+        }
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.98];
         _tableView.dataSource = self;
@@ -68,13 +74,22 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
 
 - (void)loadView
 {
-    [super loadView];
     
-    self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
-    self.view.deFrameTop = 108.;
-    [self.view addSubview:self.tableView];
+    if (IS_IPAD) {
+        self.view = self.tableView;
+//        [super loadView];
+//        NSLog(@"view view%@", self.view);
+//        self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
+//        self.view.deFrameTop = 108.;
+//        [self.view addSubview:self.tableView];
+    } else {
+        [super loadView];
+        
+        self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
+        self.view.deFrameTop = 108.;
+        [self.view addSubview:self.tableView];
+    }
     
-    [self refresh];
 }
 
 - (void)viewDidLoad
@@ -82,6 +97,8 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellReuseIdentifiter];
+    
+    [self refresh];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

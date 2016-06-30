@@ -36,6 +36,11 @@
 @property (nonatomic, assign) NSTimeInterval likeTimestamp;
 @property (strong, nonatomic) GKCategory * category;
 
+
+// for ipad
+@property (strong, nonatomic) UIButton * categoryBtn;
+@property (strong, nonatomic) UIPopoverController *popover;
+
 @property (strong, nonatomic) UserEntityCategoryController * categoryController;
 
 @end
@@ -79,6 +84,22 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return _collectionView;
 }
 
+- (UIButton *)categoryBtn
+{
+    if (!_categoryBtn) {
+        _categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _categoryBtn.frame = CGRectMake(0., 0., 50., 20.);
+        _categoryBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:17.];
+        //        _categoryBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
+        [_categoryBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_categoryBtn setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedStringFromTable(@"all", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FASortAsc]] forState:UIControlStateNormal];
+        //        [_categoryBtn setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedStringFromTable(@"all", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FASortDesc]] forState:UIControlStateHighlighted];
+        [_categoryBtn addTarget:self action:@selector(categoryBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _categoryBtn;
+}
+
+
 #pragma mark - get data
 - (void)refresh
 {
@@ -111,13 +132,16 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     [super loadView];
     
-    UserLikeHeaderSectionView * v = [[UserLikeHeaderSectionView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, 44) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, 44)];
-    v.category = self.category;
-    v.delegate = self;
+    if (IS_IPHONE) {
+        UserLikeHeaderSectionView * v = [[UserLikeHeaderSectionView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, 44) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, 44)];
+        v.category = self.category;
+        v.delegate = self;
     
-    [self.view addSubview:v];
+        [self.view addSubview:v];
+        self.collectionView.deFrameTop = 44;
 
-    self.collectionView.deFrameTop = 44;
+    }
+
     [self.view addSubview:self.collectionView];
 }
 
@@ -132,6 +156,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     } else {
         self.navigationItem.title = NSLocalizedStringFromTable(@"user like", kLocalizedFile, nil);
     }
+    
+    if (IS_IPAD) self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.categoryBtn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -368,7 +394,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
          
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-         
+//         [self.popover presentPopoverFromRect:self.categoryBtn.frame inView:self.navigationController.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+
      }];
     
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
@@ -379,6 +406,66 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [self.collectionView performBatchUpdates:nil completion:nil];
 }
 
+#pragma mark - button action
+- (void)categoryBtnAction:(id)sender
+{
+    //    DDLogInfo(@"info");
+    //    UIViewController *contentVC = [[UIViewController alloc] init];
+    self.categoryController = [[UserEntityCategoryController alloc] init];
+    self.categoryController.currentIndex = self.category.groupId;
+    self.popover = [[UIPopoverController alloc] initWithContentViewController:self.categoryController];
+    self.popover.delegate = self;
+    //    self.categoryVC.currentIndex = self.cateId;
+//    DDLogInfo(@"cate %lu", self.cateId);
+    UIButton *button = (UIButton *)sender;
+    CGRect frame = button.frame;
+    frame.origin.y += 20.f;
+    
+    __weak __typeof(&*self)weakSelf = self;
+    self.categoryController.tapBlock = ^(GKCategory * category) {
+        GKCategory * currentCategory = weakSelf.category;
+
+        weakSelf.category = category;
+        
+        [weakSelf.popover dismissPopoverAnimated:YES];
+//        [weakSelf.collectionView triggerPullToRefresh];
+        if (currentCategory.groupId != category.groupId) {
+            [weakSelf.collectionView triggerPullToRefresh];
+        }
+//        weakSelf.category = currentCategory;
+    
+        
+        NSString * btnString = [NSString stringWithFormat:@"%@ %@", category.title_en, [NSString fontAwesomeIconStringForEnum:FASortAsc]];
+        CGFloat btnWidth = [btnString widthWithLineWidth:0. Font:button.titleLabel.font];
+        button.frame = CGRectMake(0., 0., btnWidth, 20);
+        [button setTitle:btnString forState:UIControlStateNormal];
+    };
+//    _categoryVC.didSelectedCategory = ^(NSString * catename, NSInteger index) {
+//        weakSelf.cateId = index;
+//        [weakSelf.collectionView triggerPullToRefresh];
+//        
+//        [weakSelf.popover dismissPopoverAnimated:YES];
+//        
+//        NSString * btnString = [NSString stringWithFormat:@"%@ %@", catename, [NSString fontAwesomeIconStringForEnum:FASortAsc]];
+//        CGFloat btnWidth = [btnString widthWithLineWidth:0. Font:button.titleLabel.font];
+//        button.frame = CGRectMake(0., 0., btnWidth, 20);
+//        [button setTitle:btnString forState:UIControlStateNormal];
+//    };
+    
+    self.popover.popoverContentSize = CGSizeMake(190., 530.);
+    [self.popover presentPopoverFromRect:frame inView:self.navigationController.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+}
+
+#pragma mark - <UIPopoverControllerDelegate>
+- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout nonnull CGRect *)rect inView:(inout UIView *__autoreleasing  _Nonnull * _Nonnull)view
+{
+//    NSLog(@"view view %@", popoverController);
+    CGRect rectInView = [self.categoryBtn convertRect:self.categoryBtn.frame toView:self.navigationItem.rightBarButtonItem.customView];
+    
+    *rect = CGRectMake(CGRectGetMidX(rectInView), CGRectGetMaxY(rectInView), 50, 20);
+
+    *view = self.navigationController.view;
+}
 @end
 
 
