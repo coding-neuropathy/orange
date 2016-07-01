@@ -47,7 +47,7 @@
 //    self.navigationItem.rightBarButtonItems = array;
     
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) : CGRectMake(0.f, 0.f, kScreenWidth - kTabBarWidth, kScreenHeight-kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -351,10 +351,10 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (!self.segmentedControl) {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+        UIView *view = [[UIView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, 44) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, 44)];
         view.backgroundColor = UIColorFromRGB(0xffffff);
         {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth -57 , 0, 57, 44)];
+            UIButton *button = [[UIButton alloc]initWithFrame:IS_IPHONE ? CGRectMake(kScreenWidth -57 , 0, 57, 44) : CGRectMake(kScreenWidth - kTabBarWidth -57 , 0, 57, 44)];
             button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
             [button setImage:[UIImage imageNamed:@"icon_list"] forState:UIControlStateNormal];
@@ -371,7 +371,7 @@
         }
 
         {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth-77, 44)];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0,IS_IPHONE? kScreenWidth-77: kScreenWidth - kTabBarWidth -77, 44)];
             button.titleLabel.font = [UIFont systemFontOfSize:14];
             button.titleLabel.textAlignment = NSTextAlignmentCenter;
             [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
@@ -387,7 +387,7 @@
         }
         
         {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(16, 0, kScreenWidth-100, 44)];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(16, 0, IS_IPHONE ? kScreenWidth-100 : kScreenWidth - kTabBarWidth-100, 44)];
             button.titleLabel.font = [UIFont systemFontOfSize:14];
             button.titleLabel.textAlignment = NSTextAlignmentLeft;
             [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
