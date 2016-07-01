@@ -103,7 +103,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         
         if (IS_IPHONE)
-            _collectionView.frame = CGRectMake(0., 0., kScreenWidth, kScreenHeight);
+            _collectionView.frame = CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight);
         else {
             _collectionView.frame = CGRectMake(0., 0., 684., kScreenHeight);
             if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft || self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight)
