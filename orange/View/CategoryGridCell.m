@@ -18,7 +18,7 @@
 
 + (CGFloat)height
 {
-    return kScreenWidth/4-2;
+    return IS_IPHONE ? kScreenWidth/4-2 : (kScreenWidth - kTabBarWidth)/4-2;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -51,16 +51,16 @@
         [self.contentView addSubview:item0];
 
         CategoryGridItem *item1 = [[CategoryGridItem alloc] init];
-        [item1 setDeFrameOrigin:CGPointMake(7+kScreenWidth/4-2, 4)];
+        IS_IPHONE ? [item1 setDeFrameOrigin:CGPointMake(7+kScreenWidth/4-2, 4)] : [item1 setDeFrameOrigin:CGPointMake(7+(kScreenWidth - kTabBarWidth)/4-2, 4)];
         [self.contentView addSubview:item1];
         
         CategoryGridItem *item2 = [[CategoryGridItem alloc] init];
 
-        [item2 setDeFrameOrigin:CGPointMake(7+(kScreenWidth/4-2)*2, 4)];
+        IS_IPHONE ? [item2 setDeFrameOrigin:CGPointMake(7+(kScreenWidth/4-2)*2, 4)] : [item2 setDeFrameOrigin:CGPointMake(7+((kScreenWidth - kTabBarWidth)/4-2)*2, 4)];
         [self.contentView addSubview:item2];
         
         CategoryGridItem *item3 = [[CategoryGridItem alloc] init];
-        [item3 setDeFrameOrigin:CGPointMake(7+(kScreenWidth/4-2)*3, 4)];
+        IS_IPHONE ? [item3 setDeFrameOrigin:CGPointMake(7+(kScreenWidth/4-2)*3, 4)] : [item3 setDeFrameOrigin:CGPointMake(7+((kScreenWidth - kTabBarWidth)/4-2)*3, 4)];
         [self.contentView addSubview:item3];
         self.itemArray = @[item0, item1, item2 ,item3];
         

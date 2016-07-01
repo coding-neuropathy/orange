@@ -27,7 +27,7 @@
 @property (nonatomic, strong) UIButton * likeCounterButton;
 //@property (nonatomic, strong) UIButton * timeButton;
 @property (nonatomic, strong) UIView *H;
-@property (nonatomic, strong) UIView *H2;
+//@property (nonatomic, strong) UIView *H2;
 @property (strong, nonatomic) ImageLoadingView * loading;
 @property (strong, nonatomic) UILabel * timeLabel;
 @end
@@ -68,15 +68,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xffffff);
-        if (IS_IPHONE) {
-            _H = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-1, kScreenWidth, 10)];
-            self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
-            [self.contentView addSubview:self.H];
+        if (IS_IPHONE) self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
+//        if (IS_IPHONE) {
+//            _H = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height, kScreenWidth, 10)];
+//            self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//            [self.contentView addSubview:self.H];
         
 //            _H2 = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-1, kScreenWidth, 0.5)];
 //            self.H2.backgroundColor = UIColorFromRGB(0xe6e6e6);
 //            [self.contentView addSubview:self.H2];
-        }
+//        }
         
     }
     return self;
@@ -88,6 +89,17 @@
 }
 
 #pragma mark - components
+
+- (UIView *)H
+{
+    if (!_H) {
+        _H = [[UIView alloc] initWithFrame:CGRectZero];
+        _H.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        [self.contentView addSubview:_H];
+    }
+    return _H;
+}
+
 - (UIImageView *)image
 {
     if (!_image) {
@@ -281,7 +293,10 @@
     }
     [self.timeLabel setText:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.date stringWithDefaultFormat]]];
 
-    
+    if (IS_IPHONE) {
+        self.H.frame = CGRectMake(0., 0., kScreenWidth, 10);
+        self.H.deFrameBottom = self.contentView.deFrameHeight - 1;
+    }
     
 //    if (!self.timeButton) {
 //        _timeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];

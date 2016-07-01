@@ -23,7 +23,7 @@
 
 + (CGFloat)height
 {
-    return (kScreenWidth)/3-1;
+    return IS_IPHONE ? (kScreenWidth)/3-1 : (kScreenWidth - kTabBarWidth)/3-1;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -49,7 +49,7 @@
     if (!self.itemArray) {
         _itemArray = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < 3; i++) {
-                UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(3+i*((kScreenWidth-3)/3), 3, (kScreenWidth-3)/3-3, (kScreenWidth-3)/3-3)];
+            UIButton * button = [[UIButton alloc]initWithFrame:IS_IPHONE ? CGRectMake(3+i*((kScreenWidth-3)/3), 3, (kScreenWidth-3)/3-3, (kScreenWidth-3)/3-3) : CGRectMake(3+i*((kScreenWidth - kTabBarWidth-3)/3), 3, (kScreenWidth - kTabBarWidth-3)/3-3, (kScreenWidth - kTabBarWidth-3)/3-3)];
                 [self.itemArray addObject:button];
                 //button.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
                 button.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -90,9 +90,11 @@
 {
     
     EntityViewController * VC = [[EntityViewController alloc]init];
-    VC.hidesBottomBarWhenPushed = YES;
+//    VC.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
     VC.entity = [self.entityArray objectAtIndex:button.tag];
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    
 }
 
 @end

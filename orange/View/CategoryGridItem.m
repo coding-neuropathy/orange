@@ -48,21 +48,21 @@
     switch (self.type) {
         case CategoryCridItemTypeForFourWithIcon:
         {
-            self.deFrameSize = CGSizeMake(kScreenWidth/4-8,kScreenWidth/4-8);
+            self.deFrameSize = IS_IPHONE ? CGSizeMake(kScreenWidth/4-8,kScreenWidth/4-8) : CGSizeMake((kScreenWidth - kTabBarWidth)/4-8,(kScreenWidth - kTabBarWidth)/4-8);
             break;
         }
         case CategoryCridItemTypeForFourWithOutIcon:
         {
-            self.deFrameSize = CGSizeMake(kScreenWidth/4-8,kScreenWidth/4-8);
+            self.deFrameSize = IS_IPHONE ? CGSizeMake(kScreenWidth/4-8,kScreenWidth/4-8) : CGSizeMake((kScreenWidth - kTabBarWidth)/4-8,(kScreenWidth - kTabBarWidth)/4-8);
             break;
         }
         case CategoryCridItemTypeForThree:
         {
-            self.deFrameSize = CGSizeMake(kScreenWidth/4-8,kScreenWidth/4+4);
+            self.deFrameSize = IS_IPHONE ? CGSizeMake(kScreenWidth/4-8,kScreenWidth/4+4) : CGSizeMake((kScreenWidth - kTabBarWidth)/4-8,(kScreenWidth - kTabBarWidth)/4+4);
             break;
         }
         default:
-            self.deFrameSize = CGSizeMake(kScreenWidth/4-8,kScreenWidth/4-8);
+            self.deFrameSize =IS_IPHONE ? CGSizeMake(kScreenWidth/4-8,kScreenWidth/4-8) : CGSizeMake((kScreenWidth - kTabBarWidth)/4-8,(kScreenWidth - kTabBarWidth)/4-8);
             break;
     }
     if (!self.categoryImageView) {
@@ -139,7 +139,7 @@
 {
     CategoryViewController * VC = [[CategoryViewController alloc]init];
     VC.category = self.category;
-    VC.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
