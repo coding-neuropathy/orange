@@ -71,11 +71,22 @@ typedef NS_ENUM(NSInteger, MessageType) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
-        _H = [[UIView alloc] initWithFrame:CGRectMake(60,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self.contentView addSubview:self.H];
+//        _H = [[UIView alloc] initWithFrame:CGRectMake(60,self.frame.size.height-1, kScreenWidth, 0.5)];
+//        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
+//        [self.contentView addSubview:self.H];
     }
     return self;
+}
+
+#pragma mark - init view
+- (UIView *)H
+{
+    if (!_H) {
+        _H = [[UIView alloc] initWithFrame:CGRectZero];
+        _H.backgroundColor = UIColorFromRGB(0xebebeb);
+        [self.contentView addSubview:_H];
+    }
+    return _H;
 }
 
 
@@ -151,6 +162,8 @@ typedef NS_ENUM(NSInteger, MessageType) {
     [self configContent];
     
     [self bringSubviewToFront:self.H];
+    
+    self.H.frame = CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth - 60., 0.5);
     self.H.hidden = NO;
     _H.deFrameBottom = self.frame.size.height;
     

@@ -43,9 +43,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
-        _H = [[UIView alloc] initWithFrame:CGRectMake(60,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self.contentView addSubview:self.H];
+
     }
     return self;
 }
@@ -57,8 +55,6 @@ typedef NS_ENUM(NSInteger, FeedType) {
     // Configure the view for the selected state
 }
 
-
-
 - (void)prepareForReuse
 {
     [super prepareForReuse];
@@ -66,6 +62,18 @@ typedef NS_ENUM(NSInteger, FeedType) {
     for (UIView *subView in self.contentView.subviews) {
         subView.hidden = YES;
     }
+}
+
+#pragma mark - init view
+- (UIView *)H
+{
+    if (!_H) {
+//        _H = [[UIView alloc] initWithFrame:CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth, 0.5)];
+        _H = [[UIView alloc] initWithFrame:CGRectZero];
+        _H.backgroundColor = UIColorFromRGB(0xebebeb);
+        [self.contentView addSubview:_H];
+    }
+    return _H;
 }
 
 - (UIImageView *)avatar
@@ -170,6 +178,10 @@ typedef NS_ENUM(NSInteger, FeedType) {
     self.avatar.frame = CGRectMake(12.f, 13.f, 36.f, 36.f);
 //    self.label.frame = CGRectMake(60., 15., kScreenWidth - 70., 20.);
     self.contentLabel.frame = CGRectMake(60, 15, kScreenWidth - 70 - 58, 20);
+    
+    if (IS_IPAD) {
+        self.contentLabel.frame = CGRectMake(60, 15, kScreenWidth - kTabBarWidth - 70 - 58, 20);
+    }
 //    self.timeLabel.deFrameSize = CGSizeMake(80.f, 12.f);
     self.image.frame = CGRectMake(0., 13., 42., 42.);
     if (IS_IPAD) {
@@ -178,6 +190,9 @@ typedef NS_ENUM(NSInteger, FeedType) {
     [self configContent];
     
     [self bringSubviewToFront:self.H];
+    
+    self.H.frame = CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth, 0.5);
+    
     self.H.hidden = NO;
     _H.deFrameBottom = self.frame.size.height;
     
@@ -293,6 +308,12 @@ typedef NS_ENUM(NSInteger, FeedType) {
     CGFloat height = 0.;
 //    NSLog(@"feed %@", feed);
     RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70 - 58., 20)];
+    if (IS_IPAD) {
+        label.frame = CGRectMake(60, 15, kScreenWidth - kTabBarWidth -70 - 58., 20);
+    } else {
+        label.frame = CGRectMake(60, 15, kScreenWidth -70 - 58., 20);
+    }
+    
     label.paragraphReplacement = @"";
     label.lineSpacing = 4.0;
     NSTimeInterval timestamp = [feed[@"time"] doubleValue];
