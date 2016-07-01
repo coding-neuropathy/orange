@@ -264,7 +264,7 @@
             whiteBG.deFrameTop = 50;
         }
         
-        _loginService = [[TaeSDK sharedInstance]getService:@protocol(ALBBLoginService)];
+        _loginService = [[ALBBSDK sharedInstance]getService:@protocol(ALBBLoginService)];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWeChatCode:) name:@"WechatAuthResp" object:nil];
 
