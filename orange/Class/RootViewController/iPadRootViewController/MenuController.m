@@ -85,6 +85,12 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:@"Logout" object:nil];
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Login" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Logout" object:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

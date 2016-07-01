@@ -52,7 +52,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     if (self) {
         // Custom initialization
         //self.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
-        self.dataArray = [NSMutableArray array];
+//        self.dataArray = [NSMutableArray array];
         
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_setting"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_setting"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
@@ -63,6 +63,13 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Login" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Logout" object:nil];
+}
+
+#pragma mark - init view
 - (UIApplication *)app
 {
     if (!_app) {
@@ -81,9 +88,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         
         _footerView.delegate = self;
         _footerView.is_login = k_isLogin;
-//        _footerView.backgroundColor = [UIColor redColor];
-//        _footerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//        _footerView.autoresizesSubviews = YES;
     }
     return _footerView;
 }
@@ -97,11 +101,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         
         _tableView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight);
         
-//        if (IS_IPHONE) {
-//            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
-//        } else {
-//            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStyleGrouped];
-//        }
         UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
         if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
             _tableView.center = CGPointMake((kScreenWidth - kTabBarWidth) / 2, kScreenHeight / 2);
@@ -116,6 +115,45 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     return _tableView;
 }
 
+#pragma mark - set data
+- (void)loaddata
+{
+//    if (self.dataArray) {
+//        self.dataArray = nil;
+//    }
+    self.dataArray = [NSMutableArray array];
+    if (k_isLogin) {
+        NSDictionary * accountSection = @{@"section": @"account",
+                                          @"row": @[
+                                                  @"mail",
+                                                  @"password"
+                                                  ]};
+        [self.dataArray addObject:accountSection];
+    }
+    
+    NSDictionary *recommandSection = @{@"section" : @"recommandtion",
+                                       @"row"     : @[
+                                               @"share application to wechat",
+                                               @"share application to weibo",
+                                               @"app store review",
+                                               ]};
+    [self.dataArray addObject:recommandSection];
+    
+    // 其他
+    NSDictionary *otherSection = @{@"section" : @"other",
+                                   @"row"     : @[
+                                           //                                           @"about",
+                                           //                                           @"agreement",
+                                           @"clear image cache",
+                                           @"feedback",
+                                           //                                           @"version",
+                                           ]};
+    [self.dataArray addObject:otherSection];
+}
+
+
+
+#pragma mark -
 - (void)loadView
 {
 //    self.view = self.tableView;
@@ -137,37 +175,37 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //        self.tabBarController.tabBar.hidden = YES;
 //        self.tabBarController.tabBar.translucent = YES;
 //    }
-    
+    [self loaddata];
     /**
      *  账号安全
      */
-    if (k_isLogin) {
-        NSDictionary * accountSection = @{@"section": @"account",
-                                      @"row": @[
-                                          @"mail",
-                                          @"password"
-                                          ]};
-        [self.dataArray addObject:accountSection];
-    }
-
-    NSDictionary *recommandSection = @{@"section" : @"recommandtion",
-                                    @"row"     : @[
-                                            @"share application to wechat",
-                                            @"share application to weibo",
-                                            @"app store review",
-                                            ]};
-    [self.dataArray addObject:recommandSection];
-    
-    // 其他
-    NSDictionary *otherSection = @{@"section" : @"other",
-                                   @"row"     : @[
-//                                           @"about",
-//                                           @"agreement",
-                                           @"clear image cache",
-                                           @"feedback",
-//                                           @"version",
-                                           ]};
-    [self.dataArray addObject:otherSection];
+//    if (k_isLogin) {
+//        NSDictionary * accountSection = @{@"section": @"account",
+//                                      @"row": @[
+//                                          @"mail",
+//                                          @"password"
+//                                          ]};
+//        [self.dataArray addObject:accountSection];
+//    }
+//
+//    NSDictionary *recommandSection = @{@"section" : @"recommandtion",
+//                                    @"row"     : @[
+//                                            @"share application to wechat",
+//                                            @"share application to weibo",
+//                                            @"app store review",
+//                                            ]};
+//    [self.dataArray addObject:recommandSection];
+//    
+//    // 其他
+//    NSDictionary *otherSection = @{@"section" : @"other",
+//                                   @"row"     : @[
+////                                           @"about",
+////                                           @"agreement",
+//                                           @"clear image cache",
+//                                           @"feedback",
+////                                           @"version",
+//                                           ]};
+//    [self.dataArray addObject:otherSection];
     
     
     [self.tableView registerClass:[SettingsViewCell class] forCellReuseIdentifier:SettingTableIdentifier];
@@ -176,6 +214,27 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //    
 //    self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 //    self.view.autoresizesSubviews = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signin) name:@"Login" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signout) name:@"Logout" object:nil];
+}
+
+/**
+ *  SignIn and SignOut Notification
+ */
+- (void)signin
+{
+    [self loaddata];
+    
+    self.footerView.is_login = k_isLogin;
+    [self.tableView reloadData];
+}
+
+- (void)signout
+{
+    [self loaddata];
+    self.footerView.is_login = k_isLogin;
+    [self.tableView reloadData];
 }
 
 
@@ -188,29 +247,18 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-//    
-//    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-//    {
-//        self.tableView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-//    }
-
     [MobClick beginLogPageView:@"SettingView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-//    [AVAnalytics endLogPageView:@"SettingView"];
     [MobClick endLogPageView:@"SettingView"];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleDefault;
 }
-
-
 
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator

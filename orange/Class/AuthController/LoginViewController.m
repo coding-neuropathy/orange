@@ -508,50 +508,6 @@
                          @"Other_Info_2": @[@"obj1", @"obj2"],
                          @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
     [WeiboSDK sendRequest:request];
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-//    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
-//    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:kGK_WeiboAPPKey andAppSecret:kGK_WeiboSecret andRedirectURI:kGK_WeiboRedirectURL];
-//    [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
-//        if (!error) {
-//            [API loginWithSinaUserId:[object objectForKey:@"id"] sinaToken:[object objectForKey:@"access_token"] ScreenName:object[@"username"] success:^(GKUser *user, NSString *session) {
-//                if (self.successBlock) {
-//                    self.successBlock();
-//                }
-//                [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
-//                [self dismiss];
-//            } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
-//                switch (stateCode) {
-//                    case 500:
-//                    {
-//                        [SVProgressHUD showImage:nil status:@"服务器出错!"];
-//                        break;
-//                    }
-//                    case 409:
-//                    {
-//                        [Passport sharedInstance].sinaAvatarURL = [object objectForKey:@"avatar"];
-//                        [Passport sharedInstance].screenName = [object objectForKey:@"username"];
-//                        [Passport sharedInstance].sinaUserID = [object objectForKey:@"id"];
-//                        [Passport sharedInstance].sinaToken = [object objectForKey:@"access_token"];
-//                        [self tapRegisterButton];
-//                        [SVProgressHUD showImage:nil status:@"补全信息"];
-//                        break;
-//                    }
-//                        
-//                    default:
-//                        
-//                        
-//                        [SVProgressHUD dismiss];
-//                        break;
-//                }
-//            }];
-//        }
-//        else
-//        {
-//            [SVProgressHUD showImage:nil status:@"登录失败"];
-//        }
-//    } toPlatform:AVOSCloudSNSSinaWeibo];
-    
-//    [self dismiss];
 }
 
 - (void)tapTaobaoButton
