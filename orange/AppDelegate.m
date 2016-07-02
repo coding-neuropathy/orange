@@ -379,8 +379,6 @@ int ddLogLevel;
             [self openLocalURL:url];
         });
     }
-
-
     return YES;
 }
 
