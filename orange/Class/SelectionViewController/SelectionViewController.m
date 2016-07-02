@@ -87,6 +87,8 @@ static int lastContentOffset;
 #pragma mark - init view
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
     [self.collectionView registerClass:[SelectionCell class] forCellWithReuseIdentifier:CellIdentifier];

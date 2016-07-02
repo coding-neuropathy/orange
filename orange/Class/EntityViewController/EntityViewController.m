@@ -949,6 +949,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             [self.dataArrayForlikeUser removeObject:[Passport sharedInstance].user];
             
             self.entity.likeCount -= 1;
+            
+            [MobClick event:@"unlike_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.unlikeCount];
+            
             [SVProgressHUD dismiss];
         }
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:4]];
@@ -1102,6 +1105,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 - (void)tapBuyBtn:(id)sender
 {
+    
     self.buyButton = (UIButton *)sender;
     [self buyButtonAction];
 }

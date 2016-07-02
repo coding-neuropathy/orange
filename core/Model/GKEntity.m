@@ -37,6 +37,7 @@
                              @"created_time"     : @"createdTime",
                              @"updated_time"     : @"updatedTime",
                              @"like_count"       : @"likeCount",
+                             @"unlike_count"       : @"unlikeCount",
                              @"note_count"       : @"noteCount",
                              @"status"           : @"status",
                              @"mark"             : @"mark"

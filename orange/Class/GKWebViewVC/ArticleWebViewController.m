@@ -258,7 +258,9 @@
 
 - (void)digBtnAction:(UIButton *)btn
 {
-    //    NSLog(@"OKOKOKOKO");
+    
+    [MobClick event:@"article_dig" attributes:@{@"article": self.article.title} counter:(int)self.article.dig_count];
+
     if(!k_isLogin)
     {
         LoginView * view = [[LoginView alloc]init];

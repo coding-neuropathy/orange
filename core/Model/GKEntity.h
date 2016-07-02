@@ -152,6 +152,10 @@
 @property (nonatomic, assign) NSInteger likeCount;
 
 /**
+ *  取消喜爱数
+ */
+@property (nonatomic, assign) NSInteger unlikeCount;
+/**
  *  总点评数
  */
 @property (nonatomic, assign) NSInteger noteCount;

@@ -9,6 +9,7 @@
 #import "EntityDetailCell.h"
 #import "ImageLoadingView.h"
 #import "LoginView.h"
+
 @interface EntityDetailCell ()
 
 @property (nonatomic , strong)UIImageView * imageView;
@@ -181,6 +182,7 @@
 #pragma mark - button action
 - (void)tapImageAction:(id)sender
 {
+    
     [[OpenCenter sharedOpenCenter] openEntity:self.entity];
 }
 

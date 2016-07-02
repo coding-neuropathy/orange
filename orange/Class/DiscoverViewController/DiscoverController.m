@@ -682,9 +682,9 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         case 3:
         {
             GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
-//            WebViewController * vc = [[WebViewController alloc]initWithURL:article.articleURL];
-//            vc.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:vc animated:YES];
+            
+            [MobClick event:@"rec_article" attributes:@{@"articleid" : @(article.articleId),@"articletitle" : article.title}];
+
             [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
         }
             break;

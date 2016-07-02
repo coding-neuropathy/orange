@@ -189,7 +189,7 @@
         return;
     }
     
-//    [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
+
     [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
     
     [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeBtn.selected success:^(BOOL liked) {
@@ -204,6 +204,8 @@
             self.entity.likeCount = self.entity.likeCount + 1;
         } else {
             self.entity.likeCount = self.entity.likeCount - 1;
+            
+            [MobClick event:@"unlike_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.unlikeCount];
             [SVProgressHUD dismiss];
         }
         

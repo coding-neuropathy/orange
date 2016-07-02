@@ -415,6 +415,7 @@
             self.entity.likeCount = self.entity.likeCount + 1;
         } else {
             self.entity.likeCount = self.entity.likeCount - 1;
+            [MobClick event:@"unlike_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.unlikeCount];
             [SVProgressHUD dismiss];
         }
 

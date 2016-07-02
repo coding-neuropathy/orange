@@ -52,7 +52,7 @@
 - (UIView *)board
 {
     if(!_board) {
-        _board = [[UIView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, kScreenHeight - 358, kScreenWidth, 358) : CGRectMake(0, kScreenHeight - 558, kScreenWidth, 558)];
+        _board = [[UIView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, kScreenHeight - 358, kScreenWidth, 358) : CGRectMake(0, kScreenHeight - 458, kScreenWidth, 458)];
         _board.backgroundColor = UIColorFromRGB(0xf4f4f4);
     }
     return _board;
