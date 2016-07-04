@@ -265,10 +265,16 @@ int ddLogLevel;
 #pragma mark - config appearance
 -(void)customizeAppearance
 {
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];  
     //[[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth, 0.5)]];
-    //[[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
+    
+    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth, 1)]];
+    
+//    [UINavigationBar appearance].layer.shadowColor = [UIColor blackColor].CGColor;
+//    [UINavigationBar appearance].layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
+//    [UINavigationBar appearance].layer.shadowOpacity = 0.5f;
+//    [UINavigationBar appearance].layer.shadowRadius = 4.0f;
+//    [[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x414243)];
     [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x414243)];
     //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
@@ -280,7 +286,7 @@ int ddLogLevel;
     [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back"]];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, 0) forBarMetrics:UIBarMetricsDefault];
     
-    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0x232323) andSize:CGSizeMake(kScreenWidth, 49)]];
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(kScreenWidth, 49)]];
     //[[UITabBar appearance]setSelectionIndicatorImage:[UIImage imageWithColor:UIColorFromRGB(0x0f0f0f) andSize:CGSizeMake(kScreenWidth/4, 49)]];
     //    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
     [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];

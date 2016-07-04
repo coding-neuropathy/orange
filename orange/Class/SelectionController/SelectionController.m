@@ -23,6 +23,7 @@
 @property (strong, nonatomic) SelectionViewController * entityVC;
 @property (strong, nonatomic) ArticlesController * articleVC;
 
+
 @end
 
 @implementation SelectionController
@@ -32,7 +33,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[UIImage imageNamed:@"featured"] selectedImage:[[UIImage imageNamed:@"featured_on"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         self.index = 0;
@@ -52,18 +53,18 @@
         [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
 
-        NSDictionary *dict2 = [NSDictionary dictionaryWithObject:UIColorFromRGB(0xFF1F77) forKey:NSForegroundColorAttributeName];
+        NSDictionary *dict2 = [NSDictionary dictionaryWithObject:UIColorFromRGB(0x212121) forKey:NSForegroundColorAttributeName];
         [_segmentedControl setSelectedTitleTextAttributes:dict2];
         UIFont *font = [UIFont boldSystemFontOfSize:17.];
 //        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
 //                                                               forKey:NSFontAttributeName];
         NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
         [attributes setValue:font forKey:NSFontAttributeName];
-        [attributes setValue:UIColorFromRGB(0x9d9e9f) forKey:NSForegroundColorAttributeName];
+        [attributes setValue:UIColorFromRGB(0x757575) forKey:NSForegroundColorAttributeName];
         [_segmentedControl setTitleTextAttributes:attributes];
         
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
-        [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
+        [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x212121)];
         [_segmentedControl setSelectionIndicatorHeight:2];
         [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [_segmentedControl setTag:2];
@@ -214,4 +215,22 @@
             break;
     }
 }
+
+//#pragma mark - show and hidden segmentcontrol delegate
+//- (void)showSegmentControl
+//{
+//    [UIView animateWithDuration:1 animations:^{
+//        self.segmentedControl.frame = CGRectMake(0, 0, kScreenWidth-40, 32);
+//        
+//    }];
+//}
+//
+//- (void)hideSegmentControl
+//{
+//    [UIView animateWithDuration:1 animations:^{
+//        self.segmentedControl.frame = CGRectMake(0, -32, kScreenWidth-40, 32);
+//        
+//    }];
+//}
+
 @end

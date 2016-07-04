@@ -12,6 +12,8 @@
 
 //#import "WebViewController.h"
 
+static int lastContentOffset;
+
 @import CoreSpotlight;
 
 @interface ArticlesController () <UIViewControllerPreviewingDelegate>
@@ -121,6 +123,13 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if (IS_IPHONE) {
+        self.tabBarController.tabBar.hidden = NO;
+        self.navigationController.hidesBarsOnSwipe = YES;
+        
+    }
+    
     [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
     
 //    [self registerPreview];
@@ -285,5 +294,34 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 //{
 //    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
 //}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    lastContentOffset = scrollView.contentOffset.y;
+}
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [[NSUserDefaults standardUserDefaults] setObject:@(scrollView.contentOffset.y) forKey:@"selection-offset-y"];
+    
+    if (scrollView.contentOffset.y < lastContentOffset)
+    {
+        
+        //        [self.delegate hideSegmentControl];
+        if (IS_IPHONE) {
+            self.tabBarController.tabBar.hidden = NO;
+        }
+    }
+    else if (scrollView.contentOffset.y > lastContentOffset)
+    {
+        
+        //        [self.delegate showSegmentControl];
+        if (IS_IPHONE) {
+            self.tabBarController.tabBar.hidden = YES;
+        }
+    }
+    
+}
+
 
 @end
