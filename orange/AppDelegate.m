@@ -271,9 +271,9 @@ int ddLogLevel;
     [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth, 1)]];
     
 //    [UINavigationBar appearance].layer.shadowColor = [UIColor blackColor].CGColor;
-//    [UINavigationBar appearance].layer.shadowOffset = CGSizeMake(4.0f, 4.0f);
-//    [UINavigationBar appearance].layer.shadowOpacity = 0.5f;
-//    [UINavigationBar appearance].layer.shadowRadius = 4.0f;
+//    [UINavigationBar appearance].layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+//    [UINavigationBar appearance].layer.shadowOpacity = 0.2f;
+//    [UINavigationBar appearance].layer.shadowRadius = 2.0f;
 //    [[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x414243)];
     [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x414243)];

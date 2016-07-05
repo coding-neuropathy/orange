@@ -125,7 +125,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     // Do any additional setup after loading the view.
     
     if (IS_IPHONE) {
-        self.tabBarController.tabBar.hidden = NO;
+        
         self.navigationController.hidesBarsOnSwipe = YES;
         
     }
@@ -308,17 +308,13 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     {
         
         //        [self.delegate hideSegmentControl];
-        if (IS_IPHONE) {
-            self.tabBarController.tabBar.hidden = NO;
-        }
+        
     }
     else if (scrollView.contentOffset.y > lastContentOffset)
     {
         
         //        [self.delegate showSegmentControl];
-        if (IS_IPHONE) {
-            self.tabBarController.tabBar.hidden = YES;
-        }
+        
     }
     
 }
