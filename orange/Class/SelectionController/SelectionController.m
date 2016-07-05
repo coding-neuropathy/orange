@@ -33,11 +33,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-<<<<<<< HEAD
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-=======
+//<<<<<<< HEAD
+//        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+//=======
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[UIImage imageNamed:@"featured"] selectedImage:[[UIImage imageNamed:@"featured_on"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
->>>>>>> 4bf89302cca93e7780edc85f4164d6f91bb94f9a
+//>>>>>>> 4bf89302cca93e7780edc85f4164d6f91bb94f9a
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         self.index = 0;
