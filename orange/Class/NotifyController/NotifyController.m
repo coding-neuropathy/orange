@@ -28,7 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[UIImage imageNamed:@"tabbar_icon_notifaction"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_notifaction"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[UIImage imageNamed:@"notify"] selectedImage:[[UIImage imageNamed:@"notify_on"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
         //  UIImageRenderingModeAlwaysTemplate  始终根据Tint Color绘制图片，忽略图片的颜色信息。
         //  UIImageRenderingModeAlwaysOriginal  始终绘制图片原始状态，不使用Tint Color。
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);

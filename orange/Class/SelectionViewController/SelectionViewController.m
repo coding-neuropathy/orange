@@ -42,7 +42,7 @@ static int lastContentOffset;
 @property (nonatomic , assign)NSInteger updateNum;
 @property (nonatomic , strong)UIButton * closeBtn;
 
-
+//@property (nonatomic , assign)id<SelectionViewControllerDelegate>delegate;
 
 @end
 
@@ -55,7 +55,7 @@ static int lastContentOffset;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:@"Save" object:nil];
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil) image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"featured.png"] selectedImage:[[UIImage imageNamed:@"featured_on.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         
         self.tabBarItem = item;
@@ -89,6 +89,11 @@ static int lastContentOffset;
     [super viewDidLoad];
     
     
+    if (IS_IPHONE) {
+        self.tabBarController.tabBar.hidden = NO;
+        self.navigationController.hidesBarsOnSwipe = YES;
+    
+    }
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
     [self.collectionView registerClass:[SelectionCell class] forCellWithReuseIdentifier:CellIdentifier];
@@ -257,13 +262,24 @@ static int lastContentOffset;
     {
         [UIView animateWithDuration:1 animations:^{
             self.updateView.frame = CGRectMake(0.,0., kScreenWidth, 49);
+            
         }];
+        
+//        [self.delegate hideSegmentControl];
+        if (IS_IPHONE) {
+            self.tabBarController.tabBar.hidden = NO;
+        }
     }
     else if (scrollView.contentOffset.y > lastContentOffset)
     {
         [UIView animateWithDuration:1 animations:^{
             self.updateView.frame = CGRectMake(0., -49., kScreenWidth, 49);
         }];
+        
+//        [self.delegate showSegmentControl];
+        if (IS_IPHONE) {
+            self.tabBarController.tabBar.hidden = YES;
+        }
     }
 
 }
