@@ -90,7 +90,6 @@ static int lastContentOffset;
     
     
     if (IS_IPHONE) {
-        self.tabBarController.tabBar.hidden = NO;
         self.navigationController.hidesBarsOnSwipe = YES;
     
     }
@@ -266,9 +265,7 @@ static int lastContentOffset;
         }];
         
 //        [self.delegate hideSegmentControl];
-        if (IS_IPHONE) {
-            self.tabBarController.tabBar.hidden = NO;
-        }
+        
     }
     else if (scrollView.contentOffset.y > lastContentOffset)
     {
@@ -277,9 +274,6 @@ static int lastContentOffset;
         }];
         
 //        [self.delegate showSegmentControl];
-        if (IS_IPHONE) {
-            self.tabBarController.tabBar.hidden = YES;
-        }
     }
 
 }
