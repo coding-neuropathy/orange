@@ -33,7 +33,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+//<<<<<<< HEAD
+//        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+//=======
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[UIImage imageNamed:@"featured"] selectedImage:[[UIImage imageNamed:@"featured_on"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+//>>>>>>> 4bf89302cca93e7780edc85f4164d6f91bb94f9a
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         self.index = 0;
@@ -45,7 +49,7 @@
 - (HMSegmentedControl *)segmentedControl
 {
     if (!_segmentedControl) {
-        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-40, 32)];
+        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 40, 32)];
     
 //        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"selection-nav-recommend", kLocalizedFile, nil), NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil),NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil)]];
         [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil),NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil)]];
