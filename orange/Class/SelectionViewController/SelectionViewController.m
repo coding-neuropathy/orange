@@ -88,11 +88,8 @@ static int lastContentOffset;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    if (IS_IPHONE) {
-        self.navigationController.hidesBarsOnSwipe = YES;
-    
-    }
+    self.navigationController.hidesBarsOnSwipe = YES;
+    self.navigationController.hidesBarsOnTap = NO;
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
     [self.collectionView registerClass:[SelectionCell class] forCellWithReuseIdentifier:CellIdentifier];
@@ -125,9 +122,11 @@ static int lastContentOffset;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden = NO;
     self.collectionView.scrollsToTop = NO;
     [MobClick endLogPageView:@"SelectionView"];
 }
+
 
 ////获取更新数
 //- (void)getUpdateNumber

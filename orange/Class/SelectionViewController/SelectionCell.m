@@ -27,7 +27,7 @@
 @property (nonatomic, strong) UIButton * likeCounterButton;
 //@property (nonatomic, strong) UIButton * timeButton;
 @property (nonatomic, strong) UIView *H;
-//@property (nonatomic, strong) UIView *H2;
+
 @property (strong, nonatomic) ImageLoadingView * loading;
 @property (strong, nonatomic) UILabel * timeLabel;
 @end
@@ -68,16 +68,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xffffff);
-        if (IS_IPHONE) self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
-//        if (IS_IPHONE) {
-//            _H = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height, kScreenWidth, 10)];
-//            self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//            [self.contentView addSubview:self.H];
-        
-//            _H2 = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-1, kScreenWidth, 0.5)];
-//            self.H2.backgroundColor = UIColorFromRGB(0xe6e6e6);
-//            [self.contentView addSubview:self.H2];
-//        }
+        if (IS_IPHONE)
+            
+            self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
         
     }
     return self;
@@ -264,8 +257,8 @@
         self.timeLabel.center = self.likeButton.center;
         self.timeLabel.deFrameRight = self.contentLabel.deFrameRight;
         
-        self.H.deFrameBottom = self.contentView.deFrameHeight;
-//        self.H2.deFrameBottom = self.contentView.deFrameHeight-10;
+//        self.H.deFrameBottom = self.contentView.deFrameHeight;
+
         
         self.loading.center = CGPointMake(self.image.deFrameWidth/2, self.image.deFrameHeight/2);
         [self.contentView bringSubviewToFront:self.loading];
@@ -294,7 +287,7 @@
     [self.timeLabel setText:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.date stringWithDefaultFormat]]];
 
     if (IS_IPHONE) {
-        self.H.frame = CGRectMake(0., 0., kScreenWidth, 10);
+        self.H.frame = CGRectMake(16., 0., self.deFrameWidth - 32., 1);
         self.H.deFrameBottom = self.contentView.deFrameHeight - 1;
     }
     

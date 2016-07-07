@@ -145,7 +145,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
 
-        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight);
+        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight);
         
         
         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
@@ -310,6 +310,8 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 //    [self.view addSubview:self.collectionView];
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+    self.navigationController.hidesBarsOnSwipe = NO;
     
     self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
     [self.collectionView registerClass:[EntityLikeUserCell class] forCellWithReuseIdentifier:LikeUserIdentifier];

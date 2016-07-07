@@ -124,12 +124,6 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (IS_IPHONE) {
-        
-        self.navigationController.hidesBarsOnSwipe = YES;
-        
-    }
-    
     [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
     
 //    [self registerPreview];
