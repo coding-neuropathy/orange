@@ -115,7 +115,6 @@ int ddLogLevel;
 
         self.window.rootViewController = [[iPadRootViewController alloc] init];
     }
-
     
 
     [self.window makeKeyAndVisible];

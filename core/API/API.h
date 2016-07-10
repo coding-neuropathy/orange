@@ -790,6 +790,16 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 
 #pragma mark - Search API
 /**
+ *  搜索页面 API
+ *
+ *  @param  keyword
+ *  @param success 成功block
+ *  @param failure 失败block
+ */
++ (void)searchWithKeyword:(NSString *)keyword
+                  Success:(void (^)(NSArray *entities, NSArray * articles, NSArray * users))success
+                  failure:(void (^)(NSInteger stateCode))failure;
+/**
  *  搜索商品
  *
  *  @param string  搜索关键字
