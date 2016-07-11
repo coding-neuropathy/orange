@@ -99,10 +99,10 @@
     
     //返回按钮
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backBtn setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"back-1.png"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     backBtn.frame = CGRectMake(0., 0., 32., 44.);
-    backBtn.imageEdgeInsets = UIEdgeInsetsMake(0., 0., 0., 20.);
+//    backBtn.imageEdgeInsets = UIEdgeInsetsMake(0., 0., 0., 20.);
     UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.leftBarButtonItem = backBarItem;
     
