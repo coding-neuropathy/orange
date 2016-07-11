@@ -18,6 +18,7 @@
 @property (nonatomic , strong)NSArray * articleArray;
 
 @property (nonatomic, strong) NSString *keyword;
+@property (nonatomic, weak) UISearchBar * searchBar;
 
 @end
 
@@ -112,6 +113,24 @@
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
     
+    if ([self.keyword isEqualToString:[searchController.searchBar.text trimedWithLowercase]]) {
+        return;
+    }
+    self.searchBar = searchController.searchBar;
+    
+    self.keyword = [searchController.searchBar.text trimedWithLowercase];
+    if (self.keyword.length == 0) {
+        [UIView animateWithDuration:0 animations:^{
+            [self.discoverVC.searchVC.view viewWithTag:999].alpha = 1;
+        }];
+        return;
+    }
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
+    }completion:^(BOOL finished) {
+        //        [self handleSearchText:self.keyword];
+    }];
 }
 
 @end
