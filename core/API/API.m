@@ -2597,6 +2597,59 @@
 
 #pragma mark - Search API
 /**
+ *  搜索页面 API
+ *  
+ *  @param  keyword
+ *  @param success 成功block
+ *  @param failure 失败block
+ */
++ (void)searchWithKeyword:(NSString *)keyword
+                  Success:(void (^)(NSArray *entities, NSArray * articles, NSArray * users))success
+                  failure:(void (^)(NSInteger stateCode))failure
+{
+    NSParameterAssert(keyword);
+    
+    NSString * path = @"search/";
+    
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:keyword forKey:@"q"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@", responseObject);
+        
+        NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject[@"entities"]) {
+            GKEntity * entity = [GKEntity modelFromDictionary:row];
+            [entities addObject:entity];
+        }
+        
+        NSMutableArray * articles = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject[@"articles"]) {
+            GKArticle * article = [GKArticle modelFromDictionary:row];
+            [articles addObject:article];
+        }
+        
+        NSMutableArray * users = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject[@"users"]) {
+            GKUser * user = [GKUser modelFromDictionary:row];
+            [users addObject:user];
+        }
+        
+        
+        if (success) {
+            success([NSArray arrayWithArray:entities],[NSArray arrayWithArray:articles], [NSArray arrayWithArray:users]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            NSInteger stateCode = operation.response.statusCode;
+            failure(stateCode);
+        }
+    }];
+}
+
+
+/**
  *  搜索商品
  *
  *  @param string  搜索关键字
