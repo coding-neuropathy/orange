@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		230448A31CFD6CC9000A6B3C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 230448A21CFD6CC9000A6B3C /* iCarousel.m */; };
 		2309032E1C803B1500AD26D6 /* authorizedUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */; };
+		23568D1E1D349469003F2611 /* EntityResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D1D1D349469003F2611 /* EntityResultCell.m */; };
 		235A2FE01D127D8600109000 /* MoreArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 235A2FDF1D127D8600109000 /* MoreArticleCell.m */; };
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
 		239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239231B01C7D96FA00B49A88 /* RecUserController.m */; };
@@ -460,6 +461,8 @@
 		230448A21CFD6CC9000A6B3C /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		2309032C1C803B1500AD26D6 /* authorizedUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = authorizedUserViewController.h; sourceTree = "<group>"; };
 		2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = authorizedUserViewController.m; sourceTree = "<group>"; };
+		23568D1C1D349469003F2611 /* EntityResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityResultCell.h; sourceTree = "<group>"; };
+		23568D1D1D349469003F2611 /* EntityResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityResultCell.m; sourceTree = "<group>"; };
 		235A2FDE1D127D8600109000 /* MoreArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticleCell.h; sourceTree = "<group>"; };
 		235A2FDF1D127D8600109000 /* MoreArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticleCell.m; sourceTree = "<group>"; };
 		238F77D81C521CF5002E0E65 /* EntityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDetailCell.h; sourceTree = "<group>"; };
@@ -1261,6 +1264,8 @@
 			children = (
 				23E64DAD1D2E381C00A4402C /* NewSearchController.h */,
 				23E64DAE1D2E381C00A4402C /* NewSearchController.m */,
+				23568D1C1D349469003F2611 /* EntityResultCell.h */,
+				23568D1D1D349469003F2611 /* EntityResultCell.m */,
 			);
 			name = NewSearchController;
 			path = SearchController;
@@ -3258,6 +3263,7 @@
 				4E73E6801C1936D400B604B5 /* AuthController.m in Sources */,
 				B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */,
 				4E6889FF1BA9C2BA0006AD9B /* UIImage+JSQMessages.m in Sources */,
+				23568D1E1D349469003F2611 /* EntityResultCell.m in Sources */,
 				B706869F1CF4222600C40825 /* iPadRootViewController.m in Sources */,
 				4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */,
 				4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */,

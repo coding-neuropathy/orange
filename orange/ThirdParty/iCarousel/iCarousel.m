@@ -326,7 +326,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
 - (void)disableAutoscroll
 {
     [self.autoScrollTimer invalidate];
-    self.autoScrollTimer = nil;
+//    self.autoScrollTimer = nil;
 }
 
 - (void)autostep

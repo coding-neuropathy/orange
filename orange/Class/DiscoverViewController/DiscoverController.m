@@ -32,7 +32,7 @@
 #import "ArticlePreViewController.h"
 
 #import "SearchView.h"
-
+#import "NewSearchController.h"
 
 @interface DiscoverHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
@@ -54,7 +54,7 @@
 @property(nonatomic, strong) id<ALBBItemService> itemService;
 
 @property (nonatomic, strong)SearchView * searchView;
-
+@property (nonatomic,strong) NewSearchController * newsearchResultsVC;
 @end
 
 @implementation DiscoverController
@@ -156,9 +156,9 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (UISearchController *)searchVC
 {
     if (!_searchVC) {
-        _searchVC = [[UISearchController alloc] initWithSearchResultsController:self.searchResultsVC];
-        _searchVC.searchResultsUpdater = self.searchResultsVC;
-        self.searchResultsVC.discoverVC = self;
+        _searchVC = [[UISearchController alloc] initWithSearchResultsController:self.newsearchResultsVC];
+        _searchVC.searchResultsUpdater = self.newsearchResultsVC;
+        self.newsearchResultsVC.discoverVC = self;
         _searchVC.delegate = self;
         _searchVC.hidesNavigationBarDuringPresentation = NO;
         
@@ -178,14 +178,22 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     return _searchVC;
 }
 
-- (SearchController *)searchResultsVC
-{
-    if (!_searchResultsVC) {
-        _searchResultsVC = [[SearchController alloc] init];
-    }
-    return _searchResultsVC;
-}
+//- (SearchController *)searchResultsVC
+//{
+//    if (!_searchResultsVC) {
+//        _searchResultsVC = [[SearchController alloc] init];
+//    }
+//    return _searchResultsVC;
+//}
 
+- (NewSearchController *)newsearchResultsVC
+{
+    if (!_newsearchResultsVC)
+    {
+        _newsearchResultsVC = [[NewSearchController alloc]init];
+    }
+    return _newsearchResultsVC;
+}
 
 - (void)registerPreview{
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
@@ -701,33 +709,34 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 #pragma mark - <UISearchControllerDelegate>
 - (void)willPresentSearchController:(UISearchController *)searchController
 {
-    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
-    view.tag = 999;
-    
-    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self action:@selector(cancelSearch:)];
-    tap.delegate = self;
-    [view addGestureRecognizer:tap];
-    
-    if (!_searchLogTableView) {
-        _searchLogTableView = [[UITableView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, kScreenHeight) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, kScreenHeight)];
-        _searchLogTableView.delegate = self;
-        _searchLogTableView.dataSource = self;
-        _searchLogTableView.backgroundColor = [UIColor clearColor];
-        _searchLogTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _searchLogTableView.scrollEnabled = NO;
-
-        self.searchLogTableView = _searchLogTableView;
-    }
-    [self.searchLogTableView reloadData];
-    [view addSubview:self.searchLogTableView];
-    
-    [self.searchVC.view addSubview:view];
-//    if (!_searchView) {
-//        _searchView = [[SearchView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+//    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+//    view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
+//    view.tag = 999;
+//    
+//    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+//                                   initWithTarget:self action:@selector(cancelSearch:)];
+//    tap.delegate = self;
+//    [view addGestureRecognizer:tap];
+//    
+//    if (!_searchLogTableView) {
+//        _searchLogTableView = [[UITableView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, kScreenHeight) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, kScreenHeight)];
+//        _searchLogTableView.delegate = self;
+//        _searchLogTableView.dataSource = self;
+//        _searchLogTableView.backgroundColor = [UIColor clearColor];
+//        _searchLogTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _searchLogTableView.scrollEnabled = NO;
+//
+//        self.searchLogTableView = _searchLogTableView;
 //    }
-//    [self.searchVC.view addSubview:self.searchView];
+//    [self.searchLogTableView reloadData];
+//    [view addSubview:self.searchLogTableView];
+//    
+//    [self.searchVC.view addSubview:view];
+    if (!_searchView) {
+        _searchView = [[SearchView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        _searchView.tag = 999;
+    }
+    [self.searchVC.view addSubview:self.searchView];
 }
 
 
