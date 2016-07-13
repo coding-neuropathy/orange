@@ -8,7 +8,16 @@
 
 #import "NewSearchController.h"
 #import "EntityResultCell.h"
-#import "MoreArticleCell.h"
+#import "ArticleResultCell.h"
+#import "UserResultView.h"
+
+@interface SearchHeaderSection : UICollectionReusableView
+@property (strong, nonatomic) UILabel * textLabel;
+@property (strong, nonatomic) NSString * text;
+@property (strong, nonatomic) UIImageView * imgView;
+@property (strong, nonatomic) NSString * imgName;
+@end
+
 @interface NewSearchController ()<UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic , strong)UICollectionView * collectionView;
@@ -27,6 +36,8 @@
 
 static NSString * EntityResultCellIdentifier = @"EntityResultCell";
 static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
+static NSString * UserResultCellIdentifier = @"UserResultView";
+static NSString * HeaderIdentifier = @"SearchHeaderSection";
 
 - (UICollectionView *)collectionView
 {
@@ -46,7 +57,10 @@ static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
     // Do any additional setup after loading the view.
     
     [self.collectionView registerClass:[EntityResultCell class] forCellWithReuseIdentifier:EntityResultCellIdentifier];
-    [self.collectionView registerClass:[MoreArticleCell class] forCellWithReuseIdentifier:ArticleResultCellIdentifier];
+    [self.collectionView registerClass:[ArticleResultCell class] forCellWithReuseIdentifier:ArticleResultCellIdentifier];
+    
+    [self.collectionView registerClass:[SearchHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier];
+    [self.collectionView registerClass:[UserResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier];
     
     [self.view addSubview:self.collectionView];
     __weak __typeof(&*self)weakSelf = self;
@@ -92,11 +106,11 @@ static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
 //            count = self.userArray.count;
             break;
         case 2:
-            count = self.entityArray.count;
+//            count = self.entityArray.count;
             count = 3;
             break;
         case 3:
-            count = self.articleArray.count;
+//            count = self.articleArray.count;
             count = 3;
             break;
         default:
@@ -111,7 +125,7 @@ static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
       
         case 3:
         {
-            MoreArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleResultCellIdentifier forIndexPath:indexPath];
+            ArticleResultCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleResultCellIdentifier forIndexPath:indexPath];
             cell.article = self.articleArray[indexPath.row];
             return cell;
         }
@@ -125,11 +139,53 @@ static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
     }
 }
 
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-//{
-//    
-//}
-//
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView * reusebleview = [UICollectionReusableView new];
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        switch (indexPath.section) {
+            case 0:
+            {
+                SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
+                header.text = [NSString stringWithFormat:@"品类"];
+                header.imgName = [NSString stringWithFormat:@"yellow"];
+                return header;
+            }
+                break;
+            case 1:
+            {
+                UserResultView * userview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier forIndexPath:indexPath];
+                userview.users = self.userArray;
+                [userview setTapMoreUsersBlock:^{
+                    //查看所有用户结果
+                }];
+                [userview setTapUsersBlock:^(GKUser * user) {
+                    [[OpenCenter sharedOpenCenter]openUser:user];
+                }];
+                return userview;
+            }
+                break;
+             case 2:
+            {
+                SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
+                header.text = [NSString stringWithFormat:@"商品"];
+                header.imgName = [NSString stringWithFormat:@"blue"];
+                return header;
+            }
+                break;
+            default:
+            {
+                SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
+                header.text = [NSString stringWithFormat:@"图文"];
+                header.imgName = [NSString stringWithFormat:@"red"];
+                return header;
+            }
+                break;
+        }
+    }
+    return reusebleview;
+}
+
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -210,10 +266,26 @@ static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
 }
 
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
-//{
-//    
-//}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
+{
+    CGSize headerSize = CGSizeMake(0., 0.);
+    switch (section) {
+        case 0:
+        {
+            headerSize = CGSizeMake(kScreenWidth, 44.);
+        }
+            break;
+        case 1:
+        {
+            headerSize = CGSizeMake(kScreenWidth, 126.);
+        }
+            break;
+        default:
+            headerSize = CGSizeMake(kScreenWidth, 44.);
+            break;
+    }
+    return headerSize;
+}
 
 
 
@@ -283,6 +355,67 @@ static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
     }completion:^(BOOL finished) {
                 [self handleSearchText:self.keyword];
     }];
+}
+
+@end
+
+#pragma mark - SearchView Header
+@implementation SearchHeaderSection
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
+
+- (UILabel *)textLabel
+{
+    if (!_textLabel)
+    {
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _textLabel.font = [UIFont systemFontOfSize:14.];
+        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textAlignment = NSTextAlignmentLeft;
+        _textLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:_textLabel];
+    }
+    return _textLabel;
+}
+
+- (UIImageView *)imgView
+{
+    if (!_imgView) {
+        _imgView = [[UIImageView alloc]initWithFrame:CGRectZero];
+        
+        [self addSubview:_imgView];
+    }
+    return _imgView;
+}
+
+- (void)setText:(NSString *)text
+{
+    _text = text;
+    self.textLabel.text = _text;
+    [self setNeedsLayout];
+}
+
+- (void)setImgName:(NSString *)imgName
+{
+    _imgName = imgName;
+    self.imgView.image = [UIImage imageNamed:_imgName];
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.imgView.frame = CGRectMake(10., 16., 10., 10.);
+    self.textLabel.frame = CGRectMake(26., 10., 100, 25.);
+
 }
 
 @end

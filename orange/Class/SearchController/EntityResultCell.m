@@ -28,29 +28,6 @@
 
 @implementation EntityResultCell
 
-//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-//{
-//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-//    if (self) {
-//        
-//        self.selectionStyle = UITableViewCellSelectionStyleNone;
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonAction)];
-//        [self addGestureRecognizer:tap];
-//        
-//        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-//        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
-//        [self.contentView addSubview:self.H];
-//    }
-//    return self;
-//}
-//
-//- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-//{
-//    [super setSelected:selected animated:animated];
-//    
-//    // Configure the view for the selected state
-//}
-
 - (void)setEntity:(GKEntity *)entity
 {
     if (_entity) {
@@ -64,12 +41,19 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    self.backgroundColor = UIColorFromRGB(0xffffff);
     self.contentView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     if(!self.imageBG)
     {
         self.imageBG = [[UIView alloc]initWithFrame:CGRectMake(0, 1, 114, 113)];
         self.imageBG.backgroundColor = UIColorFromRGB(0xf6f6f6);
         //[self.contentView addSubview:self.imageBG];
+    }
+    
+    if (!_H) {
+        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
+        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
+        [self.contentView addSubview:self.H];
     }
     
     // 商品主图
