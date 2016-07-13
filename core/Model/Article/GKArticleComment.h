@@ -32,4 +32,15 @@
 @property (strong, nonatomic) NSString * content;
 
 
+/**
+ *  创建时间
+ */
+@property (strong, nonatomic) NSDate * createDatetime;
+
+
+/**
+ *  更新时间
+ */
+@property (strong, nonatomic) NSDate * updateDatetime;
+
 @end
