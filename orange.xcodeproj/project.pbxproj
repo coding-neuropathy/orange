@@ -298,6 +298,8 @@
 		B7662AD21AC3B49E00C82B4B /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7662AD11AC3B49E00C82B4B /* FeedBackViewController.m */; };
 		B766763A1AB805B5002F294C /* NoMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676391AB805B5002F294C /* NoMessageView.m */; };
 		B76676411AB81758002F294C /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676401AB81758002F294C /* NoDataView.m */; };
+		B76818C81D34D05B009870C2 /* GKArticleComment.h in Headers */ = {isa = PBXBuildFile; fileRef = B76818C61D34D05B009870C2 /* GKArticleComment.h */; };
+		B76818C91D34D05B009870C2 /* GKArticleComment.m in Sources */ = {isa = PBXBuildFile; fileRef = B76818C71D34D05B009870C2 /* GKArticleComment.m */; };
 		B769B1171B2ACE91004401FA /* IFTTTAlphaAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B0F91B2ACE91004401FA /* IFTTTAlphaAnimation.m */; };
 		B769B1181B2ACE91004401FA /* IFTTTAngleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B0FB1B2ACE91004401FA /* IFTTTAngleAnimation.m */; };
 		B769B1191B2ACE91004401FA /* IFTTTAnimatedScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B769B0FD1B2ACE91004401FA /* IFTTTAnimatedScrollViewController.m */; };
@@ -957,6 +959,8 @@
 		B76676391AB805B5002F294C /* NoMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoMessageView.m; path = NotificationView/NoMessageView.m; sourceTree = "<group>"; };
 		B766763F1AB81758002F294C /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoDataView.h; path = UserView/NoDataView.h; sourceTree = "<group>"; };
 		B76676401AB81758002F294C /* NoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoDataView.m; path = UserView/NoDataView.m; sourceTree = "<group>"; };
+		B76818C61D34D05B009870C2 /* GKArticleComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKArticleComment.h; path = Article/GKArticleComment.h; sourceTree = "<group>"; };
+		B76818C71D34D05B009870C2 /* GKArticleComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKArticleComment.m; path = Article/GKArticleComment.m; sourceTree = "<group>"; };
 		B769B0F81B2ACE91004401FA /* IFTTTAlphaAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTAlphaAnimation.h; sourceTree = "<group>"; };
 		B769B0F91B2ACE91004401FA /* IFTTTAlphaAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFTTTAlphaAnimation.m; sourceTree = "<group>"; };
 		B769B0FA1B2ACE91004401FA /* IFTTTAngleAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFTTTAngleAnimation.h; sourceTree = "<group>"; };
@@ -1442,6 +1446,7 @@
 		39B720021B1F4C16008519E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B76818C51D34CF4B009870C2 /* Article */,
 				B7930F931CA8D89F009FDD9F /* SelectionEntity */,
 				B776A0AB1CA6645F0021FFAB /* Entity */,
 				39B720031B1F4C16008519E3 /* GKBaseModel.h */,
@@ -1459,8 +1464,6 @@
 				39B720111B1F4C16008519E3 /* GKUser.m */,
 				B78C4E0C1B676ED5006620F7 /* GKCategory.h */,
 				B78C4E0D1B676ED5006620F7 /* GKCategory.m */,
-				B783F65C1B9AE5DB004DF1CB /* GKArticle.h */,
-				B783F65D1B9AE5DB004DF1CB /* GKArticle.m */,
 				8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */,
 				8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */,
 				B776A0A71CA65FA40021FFAB /* GKBaseData.h */,
@@ -2524,6 +2527,17 @@
 			name = UserView;
 			sourceTree = "<group>";
 		};
+		B76818C51D34CF4B009870C2 /* Article */ = {
+			isa = PBXGroup;
+			children = (
+				B783F65C1B9AE5DB004DF1CB /* GKArticle.h */,
+				B783F65D1B9AE5DB004DF1CB /* GKArticle.m */,
+				B76818C61D34D05B009870C2 /* GKArticleComment.h */,
+				B76818C71D34D05B009870C2 /* GKArticleComment.m */,
+			);
+			name = Article;
+			sourceTree = "<group>";
+		};
 		B769B0F71B2ACE91004401FA /* JazzHands */ = {
 			isa = PBXGroup;
 			children = (
@@ -2860,6 +2874,7 @@
 				39B720511B1F4C16008519E3 /* GKUser.h in Headers */,
 				39B720731B1F4E78008519E3 /* GKNote+ImageURLFixes.h in Headers */,
 				39B720311B1F4C16008519E3 /* API.h in Headers */,
+				B76818C81D34D05B009870C2 /* GKArticleComment.h in Headers */,
 				39B720581B1F4C16008519E3 /* NSString+Helper.h in Headers */,
 				39B720421B1F4C16008519E3 /* core.h in Headers */,
 				39B7205C1B1F4C16008519E3 /* AFHTTPRequestOperationManager.h in Headers */,
@@ -3105,6 +3120,7 @@
 				39B720381B1F4C16008519E3 /* NSDate+App.m in Sources */,
 				39B720491B1F4C16008519E3 /* GKEntity.m in Sources */,
 				B776A0AA1CA65FA40021FFAB /* GKBaseData.m in Sources */,
+				B76818C91D34D05B009870C2 /* GKArticleComment.m in Sources */,
 				39B720741B1F4E78008519E3 /* GKNote+ImageURLFixes.m in Sources */,
 				39B720341B1F4C16008519E3 /* BaseHttpClient.m in Sources */,
 				39B720621B1F4C16008519E3 /* AFNetworkReachabilityManager.m in Sources */,
