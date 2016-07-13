@@ -737,6 +737,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         _searchView.tag = 999;
     }
     [self.searchVC.view addSubview:self.searchView];
+    
+
 }
 
 
