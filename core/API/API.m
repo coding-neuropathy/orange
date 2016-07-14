@@ -519,7 +519,22 @@
                                    success:(void (^)(GKArticleComment* comment))success
                                    failure:(void (^)(NSInteger stateCode))failure
 {
-
+    NSParameterAssert(article_id);
+    NSString * path = [NSString stringWithFormat:@"articles/%ld/comments/", article_id];
+    
+    NSMutableDictionary * paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:content forKey:@"content"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSInteger statusCode = operation.response.statusCode;
+        if (failure) {
+            failure(statusCode);
+        }
+    }];
+    
 }
 
 
