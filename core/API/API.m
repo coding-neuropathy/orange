@@ -527,6 +527,10 @@
     
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        GKArticleComment * comment = [GKArticleComment modelFromDictionary:responseObject];
+        if (success) {
+            success(comment);
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSInteger statusCode = operation.response.statusCode;
