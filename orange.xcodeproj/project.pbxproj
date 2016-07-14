@@ -13,6 +13,7 @@
 		23568D211D34D3DC003F2611 /* ArticleResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D201D34D3DC003F2611 /* ArticleResultCell.m */; };
 		23568D241D34DCE8003F2611 /* UserResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D231D34DCE8003F2611 /* UserResultView.m */; };
 		235A2FE01D127D8600109000 /* MoreArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 235A2FDF1D127D8600109000 /* MoreArticleCell.m */; };
+		235A4FC61D37652B0039E1CB /* CategoryResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 235A4FC51D37652B0039E1CB /* CategoryResultView.m */; };
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
 		239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239231B01C7D96FA00B49A88 /* RecUserController.m */; };
 		23B3164D1CD9D4F600A83CDB /* NewEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164C1CD9D4F600A83CDB /* NewEditViewController.m */; };
@@ -473,6 +474,8 @@
 		23568D231D34DCE8003F2611 /* UserResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserResultView.m; sourceTree = "<group>"; };
 		235A2FDE1D127D8600109000 /* MoreArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticleCell.h; sourceTree = "<group>"; };
 		235A2FDF1D127D8600109000 /* MoreArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticleCell.m; sourceTree = "<group>"; };
+		235A4FC41D37652B0039E1CB /* CategoryResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryResultView.h; sourceTree = "<group>"; };
+		235A4FC51D37652B0039E1CB /* CategoryResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryResultView.m; sourceTree = "<group>"; };
 		238F77D81C521CF5002E0E65 /* EntityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDetailCell.h; sourceTree = "<group>"; };
 		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
 		239231AF1C7D96FA00B49A88 /* RecUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecUserController.h; sourceTree = "<group>"; };
@@ -1280,6 +1283,8 @@
 				23568D201D34D3DC003F2611 /* ArticleResultCell.m */,
 				23568D221D34DCE8003F2611 /* UserResultView.h */,
 				23568D231D34DCE8003F2611 /* UserResultView.m */,
+				235A4FC41D37652B0039E1CB /* CategoryResultView.h */,
+				235A4FC51D37652B0039E1CB /* CategoryResultView.m */,
 			);
 			name = NewSearchController;
 			path = SearchController;
@@ -3263,6 +3268,7 @@
 				8AAA50891BD67614005384CD /* UserTagCell.m in Sources */,
 				B7FE2A0B1B2817FD001C2E33 /* SelectionCell.m in Sources */,
 				4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */,
+				235A4FC61D37652B0039E1CB /* CategoryResultView.m in Sources */,
 				B769B1181B2ACE91004401FA /* IFTTTAngleAnimation.m in Sources */,
 				4E73E67D1C1936C100B604B5 /* RegisterViewController.m in Sources */,
 				B76EE0851B3D8A16009D8763 /* ActiveController.m in Sources */,

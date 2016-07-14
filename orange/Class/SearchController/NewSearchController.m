@@ -10,12 +10,22 @@
 #import "EntityResultCell.h"
 #import "ArticleResultCell.h"
 #import "UserResultView.h"
+#import "PinyinTools.h"
+#import "CategoryResultView.h"
+#import "SubCategoryEntityController.h"
 
 @interface SearchHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
 @property (strong, nonatomic) NSString * text;
 @property (strong, nonatomic) UIImageView * imgView;
 @property (strong, nonatomic) NSString * imgName;
+@end
+
+@interface SearchFooterSection : UICollectionReusableView
+
+@property (strong, nonatomic)UILabel * textLabel;
+@property (strong, nonatomic)UILabel * moreLabel;
+
 @end
 
 @interface NewSearchController ()<UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout>
@@ -38,6 +48,7 @@ static NSString * EntityResultCellIdentifier = @"EntityResultCell";
 static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
 static NSString * UserResultCellIdentifier = @"UserResultView";
 static NSString * HeaderIdentifier = @"SearchHeaderSection";
+static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
 
 - (UICollectionView *)collectionView
 {
@@ -61,6 +72,8 @@ static NSString * HeaderIdentifier = @"SearchHeaderSection";
     
     [self.collectionView registerClass:[SearchHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier];
     [self.collectionView registerClass:[UserResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier];
+    [self.collectionView registerClass:[CategoryResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier];
+    
     
     [self.view addSubview:self.collectionView];
     __weak __typeof(&*self)weakSelf = self;
@@ -76,6 +89,7 @@ static NSString * HeaderIdentifier = @"SearchHeaderSection";
         self.entityArray = [NSMutableArray arrayWithArray:entities];
         self.userArray = [NSMutableArray arrayWithArray:users];
         self.articleArray = [NSMutableArray arrayWithArray:articles];
+        
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
         
@@ -106,12 +120,26 @@ static NSString * HeaderIdentifier = @"SearchHeaderSection";
 //            count = self.userArray.count;
             break;
         case 2:
-//            count = self.entityArray.count;
-            count = 3;
+        {
+            if (self.entityArray.count > 3) {
+                count = 3;
+            }
+            else
+            {
+                count = self.entityArray.count;
+            }
+        }
             break;
         case 3:
-//            count = self.articleArray.count;
-            count = 3;
+        {
+            if (self.articleArray.count > 3) {
+                count = 3;
+            }
+            else
+            {
+                count = self.articleArray.count;
+            }
+        }
             break;
         default:
             break;
@@ -146,10 +174,16 @@ static NSString * HeaderIdentifier = @"SearchHeaderSection";
         switch (indexPath.section) {
             case 0:
             {
-                SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
-                header.text = [NSString stringWithFormat:@"品类"];
-                header.imgName = [NSString stringWithFormat:@"yellow"];
-                return header;
+                CategoryResultView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier forIndexPath:indexPath];
+                categoryView.categorys = self.categoryArray;
+                [categoryView setTapCategoryBlock:^(GKEntityCategory * category) {
+                    SubCategoryEntityController * vc = [[SubCategoryEntityController alloc]initWithSubCategory:category];
+                    vc.title = category.categoryName;
+                    NSLog(@"即将跳转");
+                    [self.navigationController pushViewController:vc animated:YES];
+                }];
+                
+                return categoryView;
             }
                 break;
             case 1:
@@ -210,6 +244,8 @@ static NSString * HeaderIdentifier = @"SearchHeaderSection";
 {
     UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
     switch (section) {
+        case 0:
+            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
         case 1:
             edge = UIEdgeInsetsMake(0., 0., 10., 0.);
             break;
@@ -272,7 +308,7 @@ static NSString * HeaderIdentifier = @"SearchHeaderSection";
     switch (section) {
         case 0:
         {
-            headerSize = CGSizeMake(kScreenWidth, 44.);
+            headerSize = CGSizeMake(kScreenWidth, 88.);
         }
             break;
         case 1:
@@ -320,17 +356,31 @@ static NSString * HeaderIdentifier = @"SearchHeaderSection";
         return;
     }
     self.keyword = searchText;
+    __weak __typeof(&*self)weakSelf = self;
     [API searchWithKeyword:searchText Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
         
         self.entityArray = [NSMutableArray arrayWithArray:entities];
         self.userArray = [NSMutableArray arrayWithArray:users];
         self.articleArray = [NSMutableArray arrayWithArray:articles];
+        
+        weakSelf.categoryArray = [NSMutableArray array];
+        for (GKEntityCategory * word in kAppDelegate.allCategoryArray) {
+            NSString * screenName = word.categoryName;
+            if ([PinyinTools ifNameString:screenName SearchString:searchText]) {
+                [_categoryArray addObject:word];
+            }
+        }
+        
+        [weakSelf.categoryArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
+        
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
         
     } failure:^(NSInteger stateCode) {
         [self.collectionView.pullToRefreshView stopAnimating];
     }];
+    
+    
 }
 
 #pragma mark - <UISearchResultsUpdating>
@@ -343,17 +393,25 @@ static NSString * HeaderIdentifier = @"SearchHeaderSection";
     self.searchBar = searchController.searchBar;
     
     self.keyword = [searchController.searchBar.text trimedWithLowercase];
-    if (self.keyword.length == 0) {
+    
+    if (self.keyword.length == 0)
+    {
         [UIView animateWithDuration:0 animations:^{
+            
             [self.discoverVC.searchVC.view viewWithTag:999].alpha = 1;
+            
         }];
         return;
     }
     
     [UIView animateWithDuration:0.1 animations:^{
+        
         [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
+        
     }completion:^(BOOL finished) {
-                [self handleSearchText:self.keyword];
+        
+        [self handleSearchText:self.keyword];
+        
     }];
 }
 
@@ -417,5 +475,11 @@ static NSString * HeaderIdentifier = @"SearchHeaderSection";
     self.textLabel.frame = CGRectMake(26., 10., 100, 25.);
 
 }
+
+@end
+
+@implementation SearchFooterSection
+
+
 
 @end

@@ -90,7 +90,7 @@ static CGFloat bioLabelHeight;
     if (!_bioLabel) {
         _bioLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _bioLabel.font = [UIFont systemFontOfSize:16.];
-        _bioLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        _bioLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         
         _bioLabel.textColor = UIColorFromRGB(0x9d9e9f);
         _bioLabel.textAlignment = NSTextAlignmentCenter;
@@ -307,7 +307,7 @@ static CGFloat bioLabelHeight;
 {
     [super layoutSubviews];
     
-    self.avatarView.center = CGPointMake(self.frame.size.width / 2, 100.);
+    self.avatarView.center = CGPointMake(self.frame.size.width / 2, 55.);
     
     self.nicknameLabel.frame = CGRectMake(0., 0.,self.nicknameLabel.optimumSize.width + 20., 30.);
     self.nicknameLabel.center = self.avatarView.center;

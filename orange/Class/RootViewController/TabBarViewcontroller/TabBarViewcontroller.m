@@ -47,7 +47,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBadge) name:@"ShowBadge" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBadge) name:@"HideBadge" object:nil];
     
-    self.tabBar.translucent = YES;
+//    self.tabBar.translucent = YES;
     self.delegate = self;
     [self.tabBar setItemPositioning:UITabBarItemPositioningAutomatic];
     
