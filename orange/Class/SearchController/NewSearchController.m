@@ -179,8 +179,8 @@ static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
                 [categoryView setTapCategoryBlock:^(GKEntityCategory * category) {
                     SubCategoryEntityController * vc = [[SubCategoryEntityController alloc]initWithSubCategory:category];
                     vc.title = category.categoryName;
-                    NSLog(@"即将跳转");
-                    [self.navigationController pushViewController:vc animated:YES];
+//                    NSLog(@"即将跳转");
+                    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
                 
                 return categoryView;
