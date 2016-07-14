@@ -735,6 +735,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     if (!_searchView) {
         _searchView = [[SearchView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
         _searchView.tag = 999;
+        _searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+        
     }
     [self.searchVC.view addSubview:self.searchView];
     

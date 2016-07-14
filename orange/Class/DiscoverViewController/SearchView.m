@@ -190,12 +190,12 @@
     [super layoutSubviews];
     [self addSubview:self.line1];
     [self addSubview:self.line2];
-    self.hotArray = [NSArray arrayWithObjects:@"防晒",@"樱花",@"口红",@"唇膏",@"IKEA",nil];
-    for (NSInteger i = 0; i < self.hotArray.count; i++) {
+//    self.hotArray = [NSArray arrayWithObjects:@"防晒",@"樱花",@"口红",@"唇膏",@"IKEA",nil];
+    for (NSInteger i = 0; i < 5; i++) {
         UIButton * categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //        GKEntityCategory * entitycategory = [self.hotArray objectAtIndex:i];
 //        [categoryBtn setTitle:entitycategory.categoryName forState:UIControlStateNormal];
-        [categoryBtn setTitle:[self.hotArray objectAtIndex:i] forState:UIControlStateNormal];
+        [categoryBtn setTitle:[self.recentArray objectAtIndex:i] forState:UIControlStateNormal];
         [categoryBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
         categoryBtn.layer.cornerRadius = 12.;
         categoryBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
