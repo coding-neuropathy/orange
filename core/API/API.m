@@ -506,8 +506,41 @@
             failure(statusCode);
         }
     }];
+}
+
+/**
+ *  图文评论
+ *  @param  article_id  
+ *  @parma  content
+ *  @param  success     成功block
+ *  @param  failure     失败block
+ */
++ (void)postCommentForArticleWithArticleId:(NSInteger)article_id Content:(NSString *)content
+                                   success:(void (^)(GKArticleComment* comment))success
+                                   failure:(void (^)(NSInteger stateCode))failure
+{
+    NSParameterAssert(article_id);
+    NSString * path = [NSString stringWithFormat:@"articles/%ld/comments/", article_id];
+    
+    NSMutableDictionary * paraDict = [NSMutableDictionary dictionary];
+    [paraDict setValue:content forKey:@"content"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        GKArticleComment * comment = [GKArticleComment modelFromDictionary:responseObject];
+        if (success) {
+            success(comment);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSInteger statusCode = operation.response.statusCode;
+        if (failure) {
+            failure(statusCode);
+        }
+    }];
     
 }
+
 
 #pragma mark - get main list
 /**
@@ -1091,7 +1124,6 @@
  *  @param success 成功block
  *  @param failure 失败block
  */
-
 + (void)getNoteDetailWithNoteId:(NSUInteger)noteId
                         success:(void (^)(GKNote *note, GKEntity *entity, NSArray *commentArray, NSArray *pokerArray))success
                         failure:(void (^)(NSInteger stateCode))failure

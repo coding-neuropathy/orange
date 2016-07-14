@@ -90,14 +90,14 @@
         self.signInBtn.hidden = YES;
         self.signOutBtn.frame = IS_IPHONE   ? CGRectMake(0, 20, kScreenWidth, 44.)
                                             : CGRectMake(0, 20, kScreenWidth - kTabBarWidth, 44.);
-        NSLog(@"OKOKOKOKO");
+//        NSLog(@"OKOKOKOKO");
     } else {
         self.signInBtn.hidden = NO;
         self.signOutBtn.hidden = YES;
         self.signInBtn.frame = IS_IPAD  ? CGRectMake(0., 0., self.deFrameWidth - 40., 40.)
                                         : CGRectMake(0., 0., self.deFrameWidth -20., 40.);
         self.signInBtn.center = CGPointMake(self.deFrameWidth * 3/6, self.deFrameHeight / 2);
-        NSLog(@"OKOKOKOKO----------");
+//        NSLog(@"OKOKOKOKO----------");
     }
     
     if (IS_IPHONE) {

@@ -74,17 +74,10 @@ static NSString * CellReuseIdentifiter = @"CellIdentifiter";
 
 - (void)loadView
 {
-    
     if (IS_IPAD) {
         self.view = self.tableView;
-//        [super loadView];
-//        NSLog(@"view view%@", self.view);
-//        self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
-//        self.view.deFrameTop = 108.;
-//        [self.view addSubview:self.tableView];
     } else {
         [super loadView];
-        
         self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
         self.view.deFrameTop = 108.;
         [self.view addSubview:self.tableView];

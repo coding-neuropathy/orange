@@ -14,5 +14,6 @@
 #import "GKPurchase.h"
 #import "GKCategory.h"
 #import "GKArticle.h"
+#import "GKArticleComment.h"
 #import "GKLaunch.h"
 #import "GKSelectionEntity.h"

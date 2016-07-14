@@ -8,6 +8,13 @@
 
 #import "GKArticleComment.h"
 
+@interface GKArticleComment ()
+
+@property (assign, nonatomic) NSTimeInterval createTime;
+@property (assign, nonatomic) NSTimeInterval updateTime;
+
+@end
+
 
 @implementation GKArticleComment
 
@@ -18,7 +25,8 @@
                                 @"article_id"       :       @"articleId",
                                 @"user"             :       @"user",
                                 @"content"          :       @"content",
-                                @"update_time"      :       @"update_time",
+                                @"create_time"      :       @"createTime",
+                                @"update_time"      :       @"updateTime",
                             };
     
     return keyDic;
@@ -36,6 +44,22 @@
     } else if ([user isKindOfClass:[NSDictionary class]]) {
         _user = [GKUser modelFromDictionary:(NSDictionary *)user];
     }
+}
+
+- (NSDate *)createDatetime
+{
+    if (!_createDatetime) {
+        _createDatetime = [NSDate dateWithTimeIntervalSince1970:self.createTime];
+    }
+    return _createDatetime;
+}
+
+- (NSDate *)updateDatetime
+{
+    if (!_updateDatetime) {
+        _updateDatetime = [NSDate dateWithTimeIntervalSince1970:self.updateTime];
+    }
+    return _updateDatetime;
 }
 
 

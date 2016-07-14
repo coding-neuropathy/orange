@@ -175,6 +175,17 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                         success:(void (^)(BOOL IsDig))success
                         failure:(void (^)(NSInteger stateCode))failure;
 
+/**
+ *  图文评论
+ *  @param  article_id
+ *  @parma  content
+ *  @param  success     成功block
+ *  @param  failure     失败block
+ */
++ (void)postCommentForArticleWithArticleId:(NSInteger)article_id Content:(NSString *)content
+                                   success:(void (^)(GKArticleComment* comment))success
+                                   failure:(void (^)(NSInteger stateCode))failure;
+
 #pragma mark - get main list
 /**
  * 获取首页信息
