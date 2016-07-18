@@ -13,6 +13,7 @@
 #import "PinyinTools.h"
 #import "CategoryResultView.h"
 #import "SubCategoryEntityController.h"
+#import "AlluserResultController.h"
 
 @interface SearchHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
@@ -192,7 +193,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                 UserResultView * userview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier forIndexPath:indexPath];
                 userview.users = self.userArray;
                 [userview setTapMoreUsersBlock:^{
-                    //查看所有用户结果
+                    AlluserResultController * vc = [[AlluserResultController alloc]init];
+                    vc.keyword = self.keyword;
+                    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
                 [userview setTapUsersBlock:^(GKUser * user) {
                     [[OpenCenter sharedOpenCenter]openUser:user];
@@ -577,7 +580,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 
 - (void)checkAllResults
 {
-    //查看所有结果
+    NSLog(@"查看所有结果");
 }
 
 @end
