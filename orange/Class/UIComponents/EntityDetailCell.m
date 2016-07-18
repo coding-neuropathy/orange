@@ -183,7 +183,7 @@
 - (void)tapImageAction:(id)sender
 {
     
-    [[OpenCenter sharedOpenCenter] openEntity:self.entity];
+    [[OpenCenter sharedOpenCenter] openEntity:self.entity hideButtomBar:YES];
 }
 
 @end

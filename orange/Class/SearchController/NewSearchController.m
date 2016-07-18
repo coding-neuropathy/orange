@@ -24,7 +24,7 @@
 @interface SearchFooterSection : UICollectionReusableView
 
 @property (strong, nonatomic)UILabel * textLabel;
-@property (strong, nonatomic)UILabel * moreLabel;
+@property (strong, nonatomic)UIButton * moreBtn;
 
 @end
 
@@ -49,6 +49,7 @@ static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
 static NSString * UserResultCellIdentifier = @"UserResultView";
 static NSString * HeaderIdentifier = @"SearchHeaderSection";
 static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
+static NSString * FooterIdentifier = @"SearchFooterSection";
 
 - (UICollectionView *)collectionView
 {
@@ -73,7 +74,7 @@ static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
     [self.collectionView registerClass:[SearchHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier];
     [self.collectionView registerClass:[UserResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier];
     [self.collectionView registerClass:[CategoryResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier];
-    
+    [self.collectionView registerClass:[SearchFooterSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier];
     
     [self.view addSubview:self.collectionView];
     __weak __typeof(&*self)weakSelf = self;
@@ -169,7 +170,7 @@ static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionReusableView * reusebleview = [UICollectionReusableView new];
+//    UICollectionReusableView * reusebleview = [UICollectionReusableView new];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         switch (indexPath.section) {
             case 0:
@@ -217,7 +218,37 @@ static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
                 break;
         }
     }
-    return reusebleview;
+    else
+    {
+        switch (indexPath.section) {
+            case 0:
+            {
+                SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                return footer;
+            }
+                break;
+            case 1:
+            {
+                SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                return footer;
+            }
+                break;
+            case 2:
+            {
+                SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                return footer;
+            }
+                break;
+           
+            default:
+            {
+                SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                return footer;
+            }
+                break;
+        }
+    }
+    
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
@@ -250,15 +281,15 @@ static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
             edge = UIEdgeInsetsMake(0., 0., 10., 0.);
             break;
         case 2:
-            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            edge = UIEdgeInsetsMake(0., 0., 0., 0.);
             break;
         case 3:
             if (IS_IPHONE) {
-                edge = UIEdgeInsetsMake(0., 0., 10., 0);
+                edge = UIEdgeInsetsMake(0., 0., 0., 0);
             }
             else
             {
-                edge = UIEdgeInsetsMake(0., 20., 0., 20.);
+                edge = UIEdgeInsetsMake(10., 20., 0., 20.);
             }
             break;
         default:
@@ -266,6 +297,7 @@ static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
     }
     return edge;
 }
+
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
@@ -323,7 +355,21 @@ static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
     return headerSize;
 }
 
-
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    CGSize footerSize = CGSizeMake(0., 0.);
+    switch (section) {
+        
+        case 2:
+            footerSize = CGSizeMake(kScreenWidth, 44.);
+            break;
+        case 3:
+            footerSize = CGSizeMake(kScreenWidth, 44.);
+        default:
+            break;
+    }
+    return footerSize;
+}
 
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -480,6 +526,58 @@ static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
 
 @implementation SearchFooterSection
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+//        self.backgroundColor = [UIColor redColor];
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(checkAllResults)];
+        [self addGestureRecognizer:tap];
+    }
+    return self;
+}
 
+- (UILabel *)textLabel
+{
+    if (!_textLabel)
+    {
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _textLabel.font = [UIFont systemFontOfSize:14.];
+        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textAlignment = NSTextAlignmentLeft;
+        _textLabel.backgroundColor = [UIColor clearColor];
+        _textLabel.text = [NSString stringWithFormat:@"查看全部结果"];
+        [self addSubview:_textLabel];
+    }
+    return _textLabel;
+}
+
+- (UIButton *)moreBtn
+{
+    if (!_moreBtn) {
+        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_moreBtn setTitle:[NSString stringWithFormat:@"%@", [NSString fontAwesomeIconStringForEnum:FAAngleRight]] forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        _moreBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        [self addSubview:_moreBtn];
+    }
+    return _moreBtn;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.textLabel.frame = CGRectMake(0., 0., 100., 40.);
+    self.textLabel.deFrameLeft = self.deFrameLeft + 10.;
+    self.moreBtn.frame = CGRectMake(0., 0., 20., 30.);
+    self.moreBtn.deFrameRight = self.deFrameRight;
+    self.moreBtn.deFrameTop = self.textLabel.deFrameTop + 6;
+}
+
+- (void)checkAllResults
+{
+    //查看所有结果
+}
 
 @end
