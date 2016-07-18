@@ -33,7 +33,7 @@
 
 #import "SearchView.h"
 #import "NewSearchController.h"
-
+#import "SubCategoryEntityController.h"
 @interface DiscoverHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
 @property (strong, nonatomic) NSString * text;
@@ -732,12 +732,29 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 //    [view addSubview:self.searchLogTableView];
 //    
 //    [self.searchVC.view addSubview:view];
+//    _searchView.alpha = 1;
     if (!_searchView) {
         _searchView = [[SearchView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
         _searchView.tag = 999;
         _searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-        
+        [_searchView setTaphotCategoryBtnBlock:^(GKEntityCategory *category) {
+            SubCategoryEntityController * vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
+            vc.title = category.categoryName;
+            [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+        }];
+        [_searchView setTapRecordBtnBlock:^(NSString *keyword) {
+         
+        //
+
+        }];
     }
+    else
+    {
+        self.searchView.alpha = 1;
+        self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    
+    }
+     NSLog(@"%@",self.searchView.recentArray);
     [self.searchVC.view addSubview:self.searchView];
     
 

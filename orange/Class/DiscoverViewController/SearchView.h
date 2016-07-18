@@ -16,4 +16,6 @@
 
 @property (nonatomic, copy) void (^taphotCategoryBtnBlock)(GKEntityCategory * category);
 
+@property (nonatomic, copy) void (^tapRecordBtnBlock)(NSString * keyword);
+
 @end
