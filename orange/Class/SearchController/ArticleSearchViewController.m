@@ -230,7 +230,7 @@ static NSString * ArticleIdentifier = @"MoreArticleCell";
     }
     
     self.keyword = searchText;
-#warning footer------------------------------------
+
 //    self.tableView.tableFooterView = nil;
     
     [API searchArticlesWithString:searchText Page:1 Size:10 success:^(NSArray *articles) {
@@ -272,7 +272,6 @@ static NSString * ArticleIdentifier = @"MoreArticleCell";
 {
     [API searchArticlesWithString:self.keyword Page:1 Size:10 success:^(NSArray *articles) {
         if (articles.count == 0) {
-#warning footer ---------------------
 //            self.tableView.tableFooterView = self.noResultView;
             self.noResultView.type = NoResultType;
         }

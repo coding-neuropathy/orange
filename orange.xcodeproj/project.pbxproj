@@ -15,6 +15,8 @@
 		235A2FE01D127D8600109000 /* MoreArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 235A2FDF1D127D8600109000 /* MoreArticleCell.m */; };
 		235A4FC61D37652B0039E1CB /* CategoryResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 235A4FC51D37652B0039E1CB /* CategoryResultView.m */; };
 		236EE0271D3C8173003E97D6 /* AlluserResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EE0261D3C8173003E97D6 /* AlluserResultController.m */; };
+		236EE02A1D3CA2D1003E97D6 /* AllEntityResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EE0291D3CA2D1003E97D6 /* AllEntityResultController.m */; };
+		236EE02D1D3CA6C7003E97D6 /* AllArticleResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EE02C1D3CA6C7003E97D6 /* AllArticleResultViewController.m */; };
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
 		239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239231B01C7D96FA00B49A88 /* RecUserController.m */; };
 		23B3164D1CD9D4F600A83CDB /* NewEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164C1CD9D4F600A83CDB /* NewEditViewController.m */; };
@@ -479,6 +481,10 @@
 		235A4FC51D37652B0039E1CB /* CategoryResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryResultView.m; sourceTree = "<group>"; };
 		236EE0251D3C8173003E97D6 /* AlluserResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlluserResultController.h; sourceTree = "<group>"; };
 		236EE0261D3C8173003E97D6 /* AlluserResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlluserResultController.m; sourceTree = "<group>"; };
+		236EE0281D3CA2D1003E97D6 /* AllEntityResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllEntityResultController.h; sourceTree = "<group>"; };
+		236EE0291D3CA2D1003E97D6 /* AllEntityResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllEntityResultController.m; sourceTree = "<group>"; };
+		236EE02B1D3CA6C7003E97D6 /* AllArticleResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllArticleResultViewController.h; sourceTree = "<group>"; };
+		236EE02C1D3CA6C7003E97D6 /* AllArticleResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllArticleResultViewController.m; sourceTree = "<group>"; };
 		238F77D81C521CF5002E0E65 /* EntityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDetailCell.h; sourceTree = "<group>"; };
 		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
 		239231AF1C7D96FA00B49A88 /* RecUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecUserController.h; sourceTree = "<group>"; };
@@ -1290,6 +1296,10 @@
 				235A4FC51D37652B0039E1CB /* CategoryResultView.m */,
 				236EE0251D3C8173003E97D6 /* AlluserResultController.h */,
 				236EE0261D3C8173003E97D6 /* AlluserResultController.m */,
+				236EE0281D3CA2D1003E97D6 /* AllEntityResultController.h */,
+				236EE0291D3CA2D1003E97D6 /* AllEntityResultController.m */,
+				236EE02B1D3CA6C7003E97D6 /* AllArticleResultViewController.h */,
+				236EE02C1D3CA6C7003E97D6 /* AllArticleResultViewController.m */,
 			);
 			name = NewSearchController;
 			path = SearchController;
@@ -3151,6 +3161,7 @@
 				8AB731DA1C1BBDAD0076BACC /* SettingsFooterView.m in Sources */,
 				B7ED32B51B257F5B009BAF5A /* EntityCell.m in Sources */,
 				B7F543F81BC2457E0044F5E9 /* NSData+ImageContentType.m in Sources */,
+				236EE02D1D3CA6C7003E97D6 /* AllArticleResultViewController.m in Sources */,
 				B7ED32AF1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
 				B78D350C1BA7F80C005D53CF /* (null) in Sources */,
 				B78C24321BA862A800EFFEB6 /* (null) in Sources */,
@@ -3285,6 +3296,7 @@
 				4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				23F6130A1CDB1B310074E8C8 /* BioViewController.m in Sources */,
+				236EE02A1D3CA2D1003E97D6 /* AllEntityResultController.m in Sources */,
 				B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */,
 				230448A31CFD6CC9000A6B3C /* iCarousel.m in Sources */,
 				239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */,

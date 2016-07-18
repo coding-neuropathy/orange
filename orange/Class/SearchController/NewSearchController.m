@@ -14,6 +14,8 @@
 #import "CategoryResultView.h"
 #import "SubCategoryEntityController.h"
 #import "AlluserResultController.h"
+#import "AllEntityResultController.h"
+#import "AllArticleResultViewController.h"
 
 @interface SearchHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
@@ -26,6 +28,11 @@
 
 @property (strong, nonatomic)UILabel * textLabel;
 @property (strong, nonatomic)UIButton * moreBtn;
+@property (strong, nonatomic)UIView * separateView;
+@property (nonatomic, copy) void (^tapAllResultsBlock)();
+//- (void)checkAllEntityResults;
+//
+//- (void)checkAllArticleResults;
 
 @end
 
@@ -239,6 +246,11 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             case 2:
             {
                 SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                [footer setTapAllResultsBlock:^{
+                    AllEntityResultController * vc = [[AllEntityResultController alloc]init];
+                    vc.keyword = self.keyword;
+                    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+                }];
                 return footer;
             }
                 break;
@@ -246,6 +258,11 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             default:
             {
                 SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                [footer setTapAllResultsBlock:^{
+                    AllArticleResultViewController * vc = [[AllArticleResultViewController alloc]init];
+                    vc.keyword = self.keyword;
+                    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+                }];
                 return footer;
             }
                 break;
@@ -368,7 +385,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             break;
         case 3:
             footerSize = CGSizeMake(kScreenWidth, 44.);
+            break;
         default:
+            footerSize = CGSizeMake(0., 0.);
             break;
     }
     return footerSize;
@@ -541,6 +560,16 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     return self;
 }
 
+//- (UIView *)separateView
+//{
+//    if (!_separateView) {
+//        _separateView = [[UIView alloc]initWithFrame:CGRectZero];
+//        _separateView.backgroundColor = [UIColor redColor];
+//        [self addSubview:_separateView];
+//    }
+//    return _separateView;
+//}
+
 - (UILabel *)textLabel
 {
     if (!_textLabel)
@@ -573,14 +602,19 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [super layoutSubviews];
     self.textLabel.frame = CGRectMake(0., 0., 100., 40.);
     self.textLabel.deFrameLeft = self.deFrameLeft + 10.;
-    self.moreBtn.frame = CGRectMake(0., 0., 20., 30.);
+    self.moreBtn.frame = CGRectMake(0., 0., 20., 40.);
     self.moreBtn.deFrameRight = self.deFrameRight;
-    self.moreBtn.deFrameTop = self.textLabel.deFrameTop + 6;
+    self.moreBtn.deFrameTop = self.textLabel.deFrameTop;
+//    self.separateView.frame = CGRectMake(0.,40., kScreenWidth, 10.);
+//    self.separateView.deFrameLeft = self.deFrameLeft;
+//    self.separateView.deFrameBottom = self.deFrameBottom;
 }
 
 - (void)checkAllResults
 {
-    NSLog(@"查看所有结果");
+    if (self.tapAllResultsBlock) {
+        self.tapAllResultsBlock();
+    }
 }
 
 @end
