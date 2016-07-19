@@ -38,18 +38,18 @@
     return self;
 }
 
-- (void)setRecentArray:(NSArray *)recentArray
+- (void)setHotArray:(NSArray *)hotArray withRecentArray:(NSArray *)recentArray
 {
+     _hotArray = hotArray;
     _recentArray = recentArray;
     
+//    [self setData];
+    
     [self setNeedsLayout];
-}
-
-- (void)setHotArray:(NSArray *)hotArray
-{
-    _hotArray = hotArray;
+    
     
 }
+
 
 - (UIView *)line1
 {
@@ -185,45 +185,64 @@
     return _label4;
 }
 
+- (void)setData
+{
+    if (self.hotArray.count != 0) {
+        for (NSInteger i = 0; i < 5; i++) {
+            UIButton * categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            GKEntityCategory * entitycategory = [self.hotArray objectAtIndex:i];
+            [categoryBtn setTitle:entitycategory.categoryName forState:UIControlStateNormal];
+            [categoryBtn setTitle:[self.hotArray objectAtIndex:i] forState:UIControlStateNormal];
+            [categoryBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+            categoryBtn.layer.cornerRadius = 12.;
+            categoryBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
+            categoryBtn.layer.masksToBounds = YES;
+            categoryBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+            categoryBtn.tag = i;
+            if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
+                categoryBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
+                categoryBtn.frame = CGRectMake(10. + (55 + 5) * i, 66., 50., 25);
+                categoryBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+            } else
+            {
+                categoryBtn.frame = CGRectMake(20. + (50 + 5) * i, 66., 50., 25);
+            }
+            [categoryBtn addTarget:self action:@selector(hotCategoryBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:categoryBtn];
+        }
+    }
+    
+    if (self.recentArray.count != 0) {
+        for (NSInteger i = 0; i < self.recentArray.count; i ++) {
+            UIButton * recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [recordBtn setTitle:[self.recentArray objectAtIndex:i] forState:UIControlStateNormal];
+            [recordBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+            recordBtn.layer.cornerRadius = 12.;
+            recordBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
+            recordBtn.layer.masksToBounds = YES;
+            recordBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+            recordBtn.tag = i + 324;
+            if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
+                recordBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
+                recordBtn.frame = CGRectMake(10. + (55 + 5) * i, 16., 50., 25);
+                recordBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+            } else
+            {
+                recordBtn.frame = CGRectMake(20. + (50 + 5) * i, 16., 50., 25);
+            }
+            [recordBtn addTarget:self action:@selector(recordBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:recordBtn];
+        }
+    }
+    
+
+}
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    [self setData];
     [self addSubview:self.line1];
     [self addSubview:self.line2];
-//    self.hotArray = [NSArray arrayWithObjects:@"防晒",@"樱花",@"口红",@"唇膏",@"IKEA",nil];
-    for (NSInteger i = 0; i < 5; i++) {
-        UIButton * categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        GKEntityCategory * entitycategory = [self.hotArray objectAtIndex:i];
-//        [categoryBtn setTitle:entitycategory.categoryName forState:UIControlStateNormal];
-        [categoryBtn setTitle:[self.recentArray objectAtIndex:i] forState:UIControlStateNormal];
-        [categoryBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-        categoryBtn.layer.cornerRadius = 12.;
-        categoryBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
-        categoryBtn.layer.masksToBounds = YES;
-        categoryBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
-        categoryBtn.tag = i;
-        if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
-            categoryBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
-            categoryBtn.frame = CGRectMake(10. + (55 + 5) * i, 16., 50., 25);
-            categoryBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
-        } else
-        {
-            categoryBtn.frame = CGRectMake(20. + (50 + 5) * i, 16., 50., 25);
-        }
-        [categoryBtn addTarget:self action:@selector(hotCategoryBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:categoryBtn];
-    }
-//    self.line1.frame = CGRectMake(0., 0., (kScreenWidth - 100)/3, 1);
-//    self.line1.deFrameTop = self.deFrameTop + 100;
-//    self.line1.deFrameLeft = self.deFrameLeft + 50;
-//    
-//    self.label.frame = CGRectMake(0., 0., (kScreenWidth - 100)/3, 30);
-//    self.label.deFrameTop = self.deFrameTop + 148;
-//    self.label.deFrameLeft = self.line1.deFrameRight;
-//    
-//    self.line2.frame = CGRectMake(0., 0., (kScreenWidth - 100)/3, 1);
-//    self.line2.deFrameTop = self.deFrameTop + 163;
-//    self.line2.deFrameLeft = self.label.deFrameRight;
     
     self.img1.frame = CGRectMake(0., 0., 10., 10.);
     self.img2.frame = CGRectMake(0., 0., 10., 10.);
@@ -256,10 +275,8 @@
     self.label4.deFrameTop = self.img4.deFrameTop - 6;
     
     
-    
-    
-    
 }
+
 
 - (void)hotCategoryBtnAction:(id)sender
 {
@@ -268,6 +285,15 @@
     if (self.taphotCategoryBtnBlock) {
         self.taphotCategoryBtnBlock(entitycategory);
     }
+}
+
+- (void)recordBtnAction:(id)sender
+{
+//    UIButton * recordBtn = (UIButton *)sender;
+//    NSString * keyword = [self.recentArray objectAtIndex:recordBtn.tag];
+//    if (self.tapRecordBtnBlock) {
+//        self.tapRecordBtnBlock(keyword);
+//    }
 }
 
 @end
