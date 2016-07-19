@@ -737,14 +737,15 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         _searchView = [[SearchView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
         _searchView.tag = 999;
         _searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-        [_searchView setTaphotCategoryBtnBlock:^(GKEntityCategory *category) {
-            SubCategoryEntityController * vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
-            vc.title = category.categoryName;
-            [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+        __weak __typeof(&*self)weakSelf = self;
+        [_searchView setTaphotCategoryBtnBlock:^(NSString *hotString) {
+            
+           [weakSelf.searchVC.searchBar setText:hotString];
+            
         }];
         [_searchView setTapRecordBtnBlock:^(NSString *keyword) {
          
-        //
+           [weakSelf.searchVC.searchBar setText:keyword];
 
         }];
     }
@@ -754,7 +755,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
     
     }
-     NSLog(@"%@",self.searchView.recentArray);
+    
     [self.searchVC.view addSubview:self.searchView];
     
 

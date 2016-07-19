@@ -481,6 +481,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         [self handleSearchText:self.keyword];
         
     }];
+    
+    
+    
 }
 
 #pragma mark - search log

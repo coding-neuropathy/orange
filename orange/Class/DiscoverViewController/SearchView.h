@@ -14,7 +14,7 @@
 /** 热门搜索推荐 */
 @property (nonatomic , strong) NSArray * hotArray;
 
-@property (nonatomic, copy) void (^taphotCategoryBtnBlock)(GKEntityCategory * category);
+@property (nonatomic, copy) void (^taphotCategoryBtnBlock)(NSString * hotString);
 
 @property (nonatomic, copy) void (^tapRecordBtnBlock)(NSString * keyword);
 

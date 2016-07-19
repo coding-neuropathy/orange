@@ -281,19 +281,19 @@
 - (void)hotCategoryBtnAction:(id)sender
 {
     UIButton * categoryBtn = (UIButton *)sender;
-    GKEntityCategory * entitycategory = [self.hotArray objectAtIndex:categoryBtn.tag];
+    NSString * hotString = [self.hotArray objectAtIndex:categoryBtn.tag];
     if (self.taphotCategoryBtnBlock) {
-        self.taphotCategoryBtnBlock(entitycategory);
+        self.taphotCategoryBtnBlock(hotString);
     }
 }
 
 - (void)recordBtnAction:(id)sender
 {
-//    UIButton * recordBtn = (UIButton *)sender;
-//    NSString * keyword = [self.recentArray objectAtIndex:recordBtn.tag];
-//    if (self.tapRecordBtnBlock) {
-//        self.tapRecordBtnBlock(keyword);
-//    }
+    UIButton * recordBtn = (UIButton *)sender;
+    NSString * keyword = [self.recentArray objectAtIndex:recordBtn.tag - 324];
+    if (self.tapRecordBtnBlock) {
+        self.tapRecordBtnBlock(keyword);
+    }
 }
 
 @end
