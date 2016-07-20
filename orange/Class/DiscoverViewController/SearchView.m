@@ -255,12 +255,10 @@
     self.label4.deFrameLeft = self.img4.deFrameRight + 6;
     self.label4.deFrameTop = self.img4.deFrameTop - 6;
     
-    
-    
-    
-    
 }
 
+
+#pragma mark - button action
 - (void)hotCategoryBtnAction:(id)sender
 {
     UIButton * categoryBtn = (UIButton *)sender;
