@@ -33,7 +33,7 @@
 
 #import "SearchView.h"
 #import "NewSearchController.h"
-
+#import "SubCategoryEntityController.h"
 @interface DiscoverHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
 @property (strong, nonatomic) NSString * text;
@@ -732,12 +732,30 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 //    [view addSubview:self.searchLogTableView];
 //    
 //    [self.searchVC.view addSubview:view];
+//    _searchView.alpha = 1;
     if (!_searchView) {
         _searchView = [[SearchView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
         _searchView.tag = 999;
         _searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-        
+        __weak __typeof(&*self)weakSelf = self;
+        [_searchView setTaphotCategoryBtnBlock:^(NSString *hotString) {
+            
+           [weakSelf.searchVC.searchBar setText:hotString];
+            
+        }];
+        [_searchView setTapRecordBtnBlock:^(NSString *keyword) {
+         
+           [weakSelf.searchVC.searchBar setText:keyword];
+
+        }];
     }
+    else
+    {
+        self.searchView.alpha = 1;
+        self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    
+    }
+    
     [self.searchVC.view addSubview:self.searchView];
     
 

@@ -481,6 +481,35 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         [self handleSearchText:self.keyword];
         
     }];
+    
+    
+    
+}
+
+#pragma mark - search log
+- (void)addSearchLog:(NSString *)text
+{
+    if (text.length == 0) {
+        return;
+    }
+    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    if (!array) {
+        array = [NSMutableArray array];
+    }
+    if (![array containsObject:text]) {
+        [array insertObject:text atIndex:0];
+        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.collectionView.scrollsToTop = NO;
+    if (self.searchBar.text) {
+        [self addSearchLog:self.searchBar.text];
+    }
 }
 
 @end

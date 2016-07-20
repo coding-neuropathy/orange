@@ -324,11 +324,6 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
-//- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-//{
-//    self.segmentedControl.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, 44.);
-//    self.thePageViewController.view.frame = CGRectMake(0,44, kScreenWidth - kTabBarWidth,  kScreenHeight);
-//}
 
 #pragma mark - <UISearchResultsUpdating>
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
