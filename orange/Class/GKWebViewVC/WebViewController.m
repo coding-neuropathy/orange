@@ -87,8 +87,8 @@
         WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
         configuration.userContentController = userContentController;
         
-//        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) configuration:configuration];
-        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
+        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight) configuration:configuration];
+//        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.UIDelegate = self;
         _webView.navigationDelegate = self;
@@ -116,23 +116,23 @@
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 
-- (void)loadView
-{
-//    [self.view addSubview:self.webView];
-    self.view = self.webView;
-    self.view.backgroundColor = UIColorFromRGB(0xffffff);
-    //    [self.view addSubview:self.activityIndicator];
-    
-    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
-
-}
+//- (void)loadView
+//{
+//    
+////    self.view = self.webView;
+////    self.view.backgroundColor = UIColorFromRGB(0xffffff);
+//    //    [self.view addSubview:self.activityIndicator];
+//    
+//    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+//
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-    
+    [self.view addSubview:self.webView];
+    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
 //    NSMutableArray * BtnArray = [NSMutableArray array];
     
 //    //更多按钮

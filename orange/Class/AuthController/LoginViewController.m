@@ -284,9 +284,11 @@
         _loginButton.center = CGPointMake(kScreenWidth/2, 0);
         _loginButton.layer.cornerRadius = 4;
         _loginButton.layer.masksToBounds = YES;
-//        _loginButton.enabled = NO;
+        _loginButton.enabled = NO;
         _loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
         _loginButton.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.15];
+        [_loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateDisabled];
+        [_loginButton setTitleColor:[UIColor colorWithRed:255.f green:255.f blue:255.f alpha:0.45] forState:UIControlStateDisabled];
         [_loginButton setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_loginButton setTitleColor:[UIColor colorWithRed:255.f green:255.f blue:255.f alpha:0.45] forState:UIControlStateNormal];
         [_loginButton addTarget:self action:@selector(tapLoginButton) forControlEvents:UIControlEventTouchUpInside];
@@ -572,6 +574,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    self.loginButton.enabled = YES;
     return YES;
 }
 
@@ -591,6 +594,11 @@
     }
     return YES;
    
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
     
 }
 
