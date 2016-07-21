@@ -18,14 +18,35 @@
 #import "LoginView.h"
 
 @interface WebViewController () 
-
+{
+    UIBarButtonItem *_moreButton;
+}
 @property (strong, nonatomic) WebViewProgressView * progressView;
 @property (strong, nonatomic) UIImage * image;
 @property (nonatomic , assign)NSString * shareTitle;
 
+//@property (nonatomic , strong)UIButton * moreBtn;
+
 @end
 
 @implementation WebViewController
+
+
+#pragma mark ----- UI -----
+//更多按钮
+//- (UIButton *)moreBtn
+//{
+//    if (!_moreBtn) {
+//        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _moreBtn.frame = CGRectMake(0., 0., 32., 44.);
+//        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
+//        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+//        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//        _moreBtn.backgroundColor = [UIColor clearColor];
+//        
+//    }
+//    return _moreBtn;
+//}
 
 - (instancetype)initWithURL:(NSURL *)url
 {
@@ -112,17 +133,17 @@
     
     
     
-    NSMutableArray * BtnArray = [NSMutableArray array];
+//    NSMutableArray * BtnArray = [NSMutableArray array];
     
-    //更多按钮
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-    [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-    button.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [button addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor clearColor];
-    UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = moreBarItem;
-    [BtnArray addObject:moreBarItem];
+//    //更多按钮
+//    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+//    [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+//    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    [button addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//    button.backgroundColor = [UIColor clearColor];
+//    UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+//    self.navigationItem.rightBarButtonItem = moreBarItem;
+//    [BtnArray addObject:moreBarItem];
     
     
     //返回按钮
@@ -133,6 +154,13 @@
 //    backBtn.imageEdgeInsets = UIEdgeInsetsMake(0., 0., 0., 20.);
 //    UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 //    self.navigationItem.leftBarButtonItem = backBarItem;
+    
+//    UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+//    _moreButton = moreItem;
+//    
+//    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+//    [self setToolbarItems:[NSArray arrayWithObjects:flexItem,flexItem,flexItem,flexItem,flexItem,moreItem,nil]];
     
     
     CGFloat progressBarHeight = 2.f;
@@ -158,10 +186,19 @@
     [MobClick beginLogPageView:@"webView"];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.navigationController setToolbarHidden:NO animated:YES];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self.progressView removeFromSuperview];
+    
+    [self.navigationController setToolbarHidden:YES animated:YES];
     
     [MobClick endLogPageView:@"webView"];
 }

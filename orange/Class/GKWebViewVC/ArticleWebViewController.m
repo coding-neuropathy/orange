@@ -17,9 +17,16 @@
 #import "ShareView.h"
 #import "LoginView.h"
 
-@interface ArticleWebViewController ()<WKNavigationDelegate , WKUIDelegate>{
+#import "CommentController.h"
+
+@interface ArticleWebViewController ()<WKNavigationDelegate , WKUIDelegate>
+{
     UIBarButtonItem *_moreButton;
     UIBarButtonItem *_digButton;
+    UIBarButtonItem *_flexItem;
+    UIBarButtonItem *_digLabelItem;
+    UIBarButtonItem *_commentButton;
+    UIBarButtonItem *_commentLabelItem;
 }
 
 //是否是外链
@@ -30,6 +37,12 @@
 @property (nonatomic , strong)UIButton * digBtn;
 @property (nonatomic , strong)UIButton * moreBtn;
 @property (nonatomic , strong)UILabel * label;
+@property (nonatomic , strong)UIButton * commentBtn;
+
+@property (nonatomic , strong)UIButton * digLabel;
+@property (nonatomic , strong)UIButton * commentLabel;
+
+@property (nonatomic , strong)GKArticleComment * comment;
 
 @end
 
@@ -45,16 +58,17 @@
 }
 
 #pragma mark - UI
+//点赞按钮
 - (UIButton *)digBtn
 {
     if (!_digBtn) {
         _digBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _digBtn.frame = CGRectMake(0., 0., 32, 44);
         _digBtn.tintColor = UIColorFromRGB(0xffffff);
-        [_digBtn setImage:[UIImage imageNamed:@"thumb"] forState:UIControlStateNormal];
-        [_digBtn setImage:[UIImage imageNamed:@"thumbed"] forState:UIControlStateSelected];
+        [_digBtn setImage:[UIImage imageNamed:@"Poke"] forState:UIControlStateNormal];
+        [_digBtn setImage:[UIImage imageNamed:@"Poked"] forState:UIControlStateSelected];
         [_digBtn addTarget:self action:@selector(digBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_digBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 0.)];
+//        [_digBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 0.)];
         _digBtn.backgroundColor = [UIColor clearColor];
         if (self.article.IsDig) {
             _digBtn.selected = YES;
@@ -62,39 +76,98 @@
     }
     return _digBtn;
 }
+//更多按钮
+- (UIButton *)moreBtn
+{
+    if (!_moreBtn) {
+        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _moreBtn.frame = CGRectMake(0., 0., 32., 44.);
+        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
+        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        _moreBtn.backgroundColor = [UIColor clearColor];
+        
+    }
+    return _moreBtn;
+}
+//点赞字样
+- (UIButton *)digLabel
+{
+    if (!_digLabel) {
+        _digLabel = [UIButton buttonWithType:UIButtonTypeCustom];
+        _digLabel.frame =CGRectMake(0., 0., 20., 44.);
+        _digLabel.titleLabel.font = [UIFont systemFontOfSize:12.];
+        [_digLabel setTitle:[NSString stringWithFormat:@"赞"] forState:UIControlStateNormal];
+        [_digLabel setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
+        [_digLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -15., 0., 0.)];
+        _digLabel.backgroundColor = [UIColor clearColor];
+    }
+    return _digLabel;
+}
 
+//评论按钮
+- (UIButton *)commentBtn
+{
+    if (!_commentBtn) {
+        _commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _commentBtn.frame = CGRectMake(0., 0., 32., 44.);
+        [_commentBtn setImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
+        [_commentBtn setImageEdgeInsets:UIEdgeInsetsMake(0., -15, 0., 0.)];
+        [_commentBtn addTarget:self action:@selector(commentButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        _commentBtn.backgroundColor = [UIColor clearColor];
+    }
+    return _commentBtn;
+}
 
+//评论字样
+- (UIButton *)commentLabel
+{
+    if (!_commentLabel) {
+        _commentLabel = [UIButton buttonWithType:UIButtonTypeCustom];
+        _commentLabel.frame =CGRectMake(0., 0., 32., 44.);
+        _commentLabel.titleLabel.font = [UIFont systemFontOfSize:12.];
+        [_commentLabel setTitle:[NSString stringWithFormat:@"评论"] forState:UIControlStateNormal];
+        [_commentLabel setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
+        [_commentLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -30., 0., 0.)];
+        _commentLabel.backgroundColor = [UIColor clearColor];
+    }
+    return _commentLabel;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.navigationController setToolbarHidden:NO animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     
+    [self creatBottomBar];
+    
     [self.webView addSubview:self.label];
     _linkCount = 1;
+
     
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchWebView:)];
-    
-    [self.webView addGestureRecognizer:tap];
-    
-    NSMutableArray * BtnArray = [NSMutableArray array];
-    
-    //更多按钮
-    _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-    [_moreBtn setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-    _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    _moreBtn.backgroundColor = [UIColor clearColor];
-    UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:_moreBtn];
-    _moreButton = moreBarItem;
-    [BtnArray addObject:moreBarItem];
+//    //更多按钮
+//    _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+//    [_moreBtn setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+//    _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//    _moreBtn.backgroundColor = [UIColor clearColor];
+//    UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+//    _moreButton = moreBarItem;
+//    [BtnArray addObject:moreBarItem];
     
     //点赞按钮
     
-    UIBarButtonItem * likeBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.digBtn];
-    _digButton = likeBarItem;
-    [BtnArray addObject:likeBarItem];
-    [self.navigationItem setRightBarButtonItems:BtnArray animated:YES];
+//    UIBarButtonItem * likeBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.digBtn];
+//    _digButton = likeBarItem;
+//    [BtnArray addObject:likeBarItem];
+//    [self.navigationItem setRightBarButtonItems:BtnArray animated:YES];
     
     
     //返回按钮
@@ -115,13 +188,9 @@
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     
-    self.title = @"正在加载...";
+//    self.title = @"正在加载...";
 }
 
-- (void)touchWebView:(UITapGestureRecognizer *)tap
-{
-//    NSLog(@"123123123123");
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -131,8 +200,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //    [self.navigationController.navigationBar addSubview:self.progressView];
     
+    
+    //    [self.navigationController.navigationBar addSubview:self.progressView];
     //    [AVAnalytics beginLogPageView:@"webView"];
     [MobClick beginLogPageView:@"articleWebView"];
 }
@@ -141,22 +211,23 @@
 {
     [super viewWillDisappear:animated];
     //    [self.progressView removeFromSuperview];
-    
+    [self.navigationController setToolbarHidden:YES animated:YES];
     [MobClick endLogPageView:@"articleWebView"];
 }
 
 - (void)setDigBtnIsShow:(BOOL)isShow{
     if (isShow) {
-        self.navigationItem.rightBarButtonItems = @[_moreButton,_digButton];
+        self.toolbarItems = @[_digButton,_digLabelItem,_commentButton,_commentLabelItem,_flexItem,_moreButton];
+//        self.navigationItem.rightBarButtonItems = @[_moreButton,_digButton];
     }else{
-        self.navigationItem.rightBarButtonItems = @[_moreButton];
+        self.toolbarItems = @[_flexItem,_flexItem,_flexItem,_flexItem,_flexItem,_moreButton];
     }
 }
 
 #pragma mark - <WKNavigationDelegate>
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
-    self.title = @"正在加载...";
+//    self.title = @"正在加载...";
     
     
 
@@ -194,6 +265,32 @@
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     };
     [view show];
+}
+
+- (void)commentButtonAction:(id)sender
+{
+    CommentController * vc = [[CommentController alloc]init];
+    
+    vc.article = self.article;
+    
+    vc.comment = self.comment;
+    
+    vc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    
+    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+    
+    [vc setCommentSuccessBlock:^(GKArticleComment *comment) {
+       
+        self.comment = comment;
+        
+        [self.webView reload];
+        
+    }];
+    
+    [vc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+
+    [self presentViewController:vc animated:YES completion:nil];
+    
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
@@ -317,6 +414,29 @@
   
 }
 
+#pragma mark ---------- create Bottom Bar -------------
 
+- (void)creatBottomBar
+{
+    UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+    _moreButton = moreItem;
+    
+    UIBarButtonItem * digItem = [[UIBarButtonItem alloc]initWithCustomView:self.digBtn];
+    _digButton = digItem;
+    
+    UIBarButtonItem * digLabelItem = [[UIBarButtonItem alloc]initWithCustomView:self.digLabel];
+    _digLabelItem = digLabelItem;
+    
+    UIBarButtonItem * commentItem = [[UIBarButtonItem alloc]initWithCustomView:self.commentBtn];
+    _commentButton = commentItem;
+    
+    UIBarButtonItem * commentLabelItem = [[UIBarButtonItem alloc]initWithCustomView:self.commentLabel];
+    _commentLabelItem = commentLabelItem;
+    
+
+    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    _flexItem = flexItem;
+    [self setToolbarItems:[NSArray arrayWithObjects:digItem,digLabelItem,commentItem,commentLabelItem,flexItem,moreItem,nil]];
+}
 
 @end

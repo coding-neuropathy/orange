@@ -512,6 +512,11 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     }
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.searchBar resignFirstResponder];
+}
+
 @end
 
 #pragma mark - SearchView Header
@@ -568,8 +573,8 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     [super layoutSubviews];
     
-    self.imgView.frame = CGRectMake(10., 16., 10., 10.);
-    self.textLabel.frame = CGRectMake(26., 10., 100, 25.);
+//    self.imgView.frame = CGRectMake(10., 16., 10., 10.);
+    self.textLabel.frame = CGRectMake(15., 10., 100, 25.);
 
 }
 
@@ -630,7 +635,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     [super layoutSubviews];
     self.textLabel.frame = CGRectMake(0., 0., 100., 40.);
-    self.textLabel.deFrameLeft = self.deFrameLeft + 10.;
+    self.textLabel.deFrameLeft = self.deFrameLeft + 15.;
     self.moreBtn.frame = CGRectMake(0., 0., 20., 40.);
     self.moreBtn.deFrameRight = self.deFrameRight;
     self.moreBtn.deFrameTop = self.textLabel.deFrameTop;
