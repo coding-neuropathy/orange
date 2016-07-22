@@ -103,7 +103,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
 - (void)openNoteComment:(GKNote *)note
 {
-    NoteViewController * VC = [[NoteViewController alloc]init];
+    NoteViewController * VC = [[NoteViewController alloc] init];
     VC.note = note;
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
@@ -134,12 +134,13 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     WebViewController * vc = [[WebViewController alloc] initWithURL:url];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    vc.hidesBottomBarWhenPushed = NO;
 }
 
 - (void)openArticleWebWithArticle:(GKArticle *)article
 {
     ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithArticle:article];
-    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
+     vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
