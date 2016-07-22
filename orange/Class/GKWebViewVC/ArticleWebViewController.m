@@ -17,7 +17,7 @@
 #import "ShareView.h"
 #import "LoginView.h"
 
-#import "CommentController.h"
+#import "ArticleCommentController.h"
 
 @interface ArticleWebViewController ()<WKNavigationDelegate , WKUIDelegate>
 {
@@ -269,7 +269,7 @@
 
 - (void)commentButtonAction:(id)sender
 {
-    CommentController * vc = [[CommentController alloc]init];
+    ArticleCommentController * vc = [[ArticleCommentController alloc]init];
     
     vc.article = self.article;
     

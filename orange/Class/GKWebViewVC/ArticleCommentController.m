@@ -6,16 +6,14 @@
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import "CommentController.h"
+#import "ArticleCommentController.h"
 
-@interface CommentController ()<UITextViewDelegate>
+@interface ArticleCommentController ()<UITextViewDelegate>
 
 //评论视窗
 @property (nonatomic ,strong)UIView * PostNotebackgroundview;
 //textView
 @property (nonatomic ,strong)UITextView * textView;
-//占位文字
-//@property (nonatomic, strong) UILabel *tipLabel;
 //获取键盘动态高度
 @property (nonatomic, assign)NSInteger height;
 //关闭按钮
@@ -26,7 +24,7 @@
 @property (nonatomic,strong)UILabel * LbTitle;
 @end
 
-@implementation CommentController
+@implementation ArticleCommentController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

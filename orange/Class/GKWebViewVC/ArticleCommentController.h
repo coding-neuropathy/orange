@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CommentController : UIViewController
+@interface ArticleCommentController : UIViewController
 
 @property (nonatomic , strong)GKArticleComment * comment;
 

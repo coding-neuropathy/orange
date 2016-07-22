@@ -17,7 +17,7 @@
 		236EE0271D3C8173003E97D6 /* AlluserResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EE0261D3C8173003E97D6 /* AlluserResultController.m */; };
 		236EE02A1D3CA2D1003E97D6 /* AllEntityResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EE0291D3CA2D1003E97D6 /* AllEntityResultController.m */; };
 		236EE02D1D3CA6C7003E97D6 /* AllArticleResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EE02C1D3CA6C7003E97D6 /* AllArticleResultViewController.m */; };
-		237FCB731D408ECC0067A1D9 /* CommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 237FCB721D408ECC0067A1D9 /* CommentController.m */; };
+		237FCB731D408ECC0067A1D9 /* ArticleCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 237FCB721D408ECC0067A1D9 /* ArticleCommentController.m */; };
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
 		239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239231B01C7D96FA00B49A88 /* RecUserController.m */; };
 		23B3164D1CD9D4F600A83CDB /* NewEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164C1CD9D4F600A83CDB /* NewEditViewController.m */; };
@@ -486,8 +486,8 @@
 		236EE0291D3CA2D1003E97D6 /* AllEntityResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllEntityResultController.m; sourceTree = "<group>"; };
 		236EE02B1D3CA6C7003E97D6 /* AllArticleResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllArticleResultViewController.h; sourceTree = "<group>"; };
 		236EE02C1D3CA6C7003E97D6 /* AllArticleResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllArticleResultViewController.m; sourceTree = "<group>"; };
-		237FCB711D408ECC0067A1D9 /* CommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentController.h; sourceTree = "<group>"; };
-		237FCB721D408ECC0067A1D9 /* CommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentController.m; sourceTree = "<group>"; };
+		237FCB711D408ECC0067A1D9 /* ArticleCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCommentController.h; sourceTree = "<group>"; };
+		237FCB721D408ECC0067A1D9 /* ArticleCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCommentController.m; sourceTree = "<group>"; };
 		238F77D81C521CF5002E0E65 /* EntityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDetailCell.h; sourceTree = "<group>"; };
 		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
 		239231AF1C7D96FA00B49A88 /* RecUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecUserController.h; sourceTree = "<group>"; };
@@ -1313,8 +1313,8 @@
 			children = (
 				23F000201C97B5750033BAA4 /* ArticleWebViewController.h */,
 				23F000211C97B5750033BAA4 /* ArticleWebViewController.m */,
-				237FCB711D408ECC0067A1D9 /* CommentController.h */,
-				237FCB721D408ECC0067A1D9 /* CommentController.m */,
+				237FCB711D408ECC0067A1D9 /* ArticleCommentController.h */,
+				237FCB721D408ECC0067A1D9 /* ArticleCommentController.m */,
 			);
 			name = ArticleWebViewVC;
 			path = GKWebViewVC;
@@ -3344,7 +3344,7 @@
 				B7C079871BC5827E006B7379 /* DDLog.m in Sources */,
 				4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */,
 				B7AAFA5F1AB67E5600A2F20D /* RadioButton.m in Sources */,
-				237FCB731D408ECC0067A1D9 /* CommentController.m in Sources */,
+				237FCB731D408ECC0067A1D9 /* ArticleCommentController.m in Sources */,
 				4E688A0F1BA9C2BA0006AD9B /* JSQMessage.m in Sources */,
 				23F424041C59BFA7005E1318 /* CategoryArticleCell.m in Sources */,
 				8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */,
