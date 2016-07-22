@@ -274,17 +274,10 @@
     self.label4.deFrameLeft = self.img4.deFrameRight + 6;
     self.label4.deFrameTop = self.img4.deFrameTop - 6;
     
-<<<<<<< HEAD
 }
 
 
 #pragma mark - button action
-=======
-    
-}
-
-
->>>>>>> 1a6c954171a326696a703f521147367ca20832d1
 - (void)hotCategoryBtnAction:(id)sender
 {
     UIButton * categoryBtn = (UIButton *)sender;
