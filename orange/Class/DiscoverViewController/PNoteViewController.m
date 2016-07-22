@@ -67,6 +67,8 @@
     [UIView animateWithDuration:0.25 animations:^{
         _PostNotebackgroundview.frame = CGRectMake(0, kScreenHeight, kScreenWidth, 200);
     }];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
