@@ -134,14 +134,16 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     WebViewController * vc = [[WebViewController alloc] initWithURL:url];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-    vc.hidesBottomBarWhenPushed = NO;
+//    vc.hidesBottomBarWhenPushed = NO;
 }
 
 - (void)openArticleWebWithArticle:(GKArticle *)article
 {
     ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithArticle:article];
-     vc.hidesBottomBarWhenPushed = YES;
+    vc.hidesBottomBarWhenPushed = YES;
+    
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+//    vc.hidesBottomBarWhenPushed = NO;
 }
 
 

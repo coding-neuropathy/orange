@@ -126,7 +126,7 @@
         _commentLabel = [UIButton buttonWithType:UIButtonTypeCustom];
         _commentLabel.frame =CGRectMake(0., 0., 32., 44.);
         _commentLabel.titleLabel.font = [UIFont systemFontOfSize:12.];
-        [_commentLabel setTitle:[NSString stringWithFormat:@"评论"] forState:UIControlStateNormal];
+        [_commentLabel setTitle:NSLocalizedStringFromTable(@"comment", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_commentLabel setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
         [_commentLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -30., 0., 0.)];
         _commentLabel.backgroundColor = [UIColor clearColor];
@@ -215,9 +215,7 @@
     
     [MobClick endLogPageView:@"articleWebView"];
 #warning hidden tabbar in ipad
-    if (IS_IPAD)self.tabBarController.tabBar.hidden = YES;
-    
-    
+    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)setDigBtnIsShow:(BOOL)isShow{
@@ -384,12 +382,10 @@
             if (IsDig)
             {
                 self.article.dig_count += 1;
-                NSLog(@"%ld",self.article.dig_count);
             }
             else
             {
                 self.article.dig_count -= 1;
-                NSLog(@"%ld",self.article.dig_count);
             }
             if (btn) {
                 btn.selected = self.article.IsDig;
