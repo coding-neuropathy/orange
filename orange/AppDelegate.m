@@ -99,7 +99,7 @@ int ddLogLevel;
     [JPUSHService registerForRemoteNotificationTypes:UIUserNotificationTypeAlert| UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
     [JPUSHService setupWithOption:launchOptions appKey:@"f9e153a53791659b9541eb37"
                           channel:@"app store"
-                 apsForProduction:YES
+                 apsForProduction:NO
             advertisingIdentifier:nil];
 //    [JPUSHService setupWithOption:launchOptions];
 //    [JPUSHService setupWithOption:launchOptions appKey: channel:<#(NSString *)#> apsForProduction:<#(BOOL)#>]
@@ -621,8 +621,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-//    ddLogLevel = DDLogLevelInfo;
-    ddLogLevel = DDLogLevelError;
+    ddLogLevel = DDLogLevelInfo;
+//    ddLogLevel = DDLogLevelError;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;

@@ -222,8 +222,8 @@
 //决定是否允许导航响应，如果不允许就不会跳转到该链接的页面
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-    NSLog(@"%@", navigationAction.request.URL.absoluteString);
-    NSLog(@"%@",navigationAction.targetFrame.request.URL.absoluteString);
+    DDLogInfo(@"%@", navigationAction.request.URL.absoluteString);
+//    NSLog(@"%@",navigationAction.targetFrame.request.URL.absoluteString);
     if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
         NSURL *url = navigationAction.request.URL;
         UIApplication *app = [UIApplication sharedApplication];
