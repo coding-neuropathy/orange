@@ -296,4 +296,9 @@
     }
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    self.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
+}
+
 @end

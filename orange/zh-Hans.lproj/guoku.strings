@@ -76,6 +76,12 @@
 //"sold out"          = "已下架";
 
 /*
+ * article page
+ */
+"article"            = "图文";
+"poke"               = "赞";
+"comment"            = "评论";
+/*
  *  activity page
  */
 //"commented on a product"    = "点评了 1 件商品";

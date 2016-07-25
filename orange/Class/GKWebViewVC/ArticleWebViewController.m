@@ -97,7 +97,7 @@
         _digLabel = [UIButton buttonWithType:UIButtonTypeCustom];
         _digLabel.frame =CGRectMake(0., 0., 20., 44.);
         _digLabel.titleLabel.font = [UIFont systemFontOfSize:12.];
-        [_digLabel setTitle:[NSString stringWithFormat:@"赞"] forState:UIControlStateNormal];
+        [_digLabel setTitle:NSLocalizedStringFromTable(@"poke", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_digLabel setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
         [_digLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -15., 0., 0.)];
         _digLabel.backgroundColor = [UIColor clearColor];
@@ -124,11 +124,11 @@
 {
     if (!_commentLabel) {
         _commentLabel = [UIButton buttonWithType:UIButtonTypeCustom];
-        _commentLabel.frame =CGRectMake(0., 0., 32., 44.);
+        _commentLabel.frame =CGRectMake(0., 0., 37., 44.);
         _commentLabel.titleLabel.font = [UIFont systemFontOfSize:12.];
         [_commentLabel setTitle:NSLocalizedStringFromTable(@"comment", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_commentLabel setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
-        [_commentLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -30., 0., 0.)];
+        [_commentLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -20., 0., 0.)];
         _commentLabel.backgroundColor = [UIColor clearColor];
     }
     return _commentLabel;
@@ -272,6 +272,15 @@
 
 - (void)commentButtonAction:(id)sender
 {
+    if(!k_isLogin)
+    {
+        LoginView * view = [[LoginView alloc]init];
+        [view show];
+        return;
+    }
+    else
+    {
+    
     ArticleCommentController * vc = [[ArticleCommentController alloc]init];
     
     vc.article = self.article;
@@ -293,7 +302,8 @@
     [vc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
 
     [self presentViewController:vc animated:YES completion:nil];
-    
+        
+    }
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
@@ -346,7 +356,7 @@
     [self.webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
         
         if (_linkCount == 1) {
-            self.title = @"图文";
+            self.title = NSLocalizedStringFromTable(@"article", kLocalizedFile, nil);
             [self setDigBtnIsShow:YES];
         }else{
             self.title = result;

@@ -87,8 +87,8 @@
         WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
         configuration.userContentController = userContentController;
         
-//        _webView = [[WKWebView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kStatusBarHeight) configuration:configuration];
-        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
+        _webView = [[WKWebView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kStatusBarHeight) configuration:configuration];
+//        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.UIDelegate = self;
         _webView.navigationDelegate = self;
@@ -116,21 +116,56 @@
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 
-- (void)loadView
-{
-    
-    self.view = self.webView;
-    self.view.backgroundColor = UIColorFromRGB(0xffffff);
-    //    [self.view addSubview:self.activityIndicator];
-    
-    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
-
-}
+//- (void)loadView
+//{
+//    
+//    self.view = self.webView;
+//    self.view.backgroundColor = UIColorFromRGB(0xffffff);
+//    //    [self.view addSubview:self.activityIndicator];
+//    
+//    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+//
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+<<<<<<< HEAD
+=======
+    [self.view addSubview:self.webView];
+    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+//    NSMutableArray * BtnArray = [NSMutableArray array];
+    
+//    //更多按钮
+//    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+//    [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+//    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    [button addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//    button.backgroundColor = [UIColor clearColor];
+//    UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+//    self.navigationItem.rightBarButtonItem = moreBarItem;
+//    [BtnArray addObject:moreBarItem];
+    
+    
+    //返回按钮
+//    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [backBtn setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+//    [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+//    backBtn.frame = CGRectMake(0., 0., 32., 44.);
+//    backBtn.imageEdgeInsets = UIEdgeInsetsMake(0., 0., 0., 20.);
+//    UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+//    self.navigationItem.leftBarButtonItem = backBarItem;
+    
+//    UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+//    _moreButton = moreItem;
+//    
+//    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+//    [self setToolbarItems:[NSArray arrayWithObjects:flexItem,flexItem,flexItem,flexItem,flexItem,moreItem,nil]];
+    
+    
+>>>>>>> 7f2e70d7ef850681fced1e3982dc4b6c436a594e
     CGFloat progressBarHeight = 2.f;
     CGRect navigaitonBarBounds = self.navigationController.navigationBar.bounds;
     CGRect barFrame = CGRectMake(0, navigaitonBarBounds.size.height - progressBarHeight, navigaitonBarBounds.size.width, progressBarHeight);
@@ -187,9 +222,11 @@
     [webView evaluateJavaScript:javascript completionHandler:nil];
 }
 
+//决定是否允许导航响应，如果不允许就不会跳转到该链接的页面
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-//    NSLog(@"%@", navigationAction.request.URL.absoluteString);
+    NSLog(@"%@", navigationAction.request.URL.absoluteString);
+    NSLog(@"%@",navigationAction.targetFrame.request.URL.absoluteString);
     if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
         NSURL *url = navigationAction.request.URL;
         UIApplication *app = [UIApplication sharedApplication];
