@@ -215,9 +215,7 @@
     
     [MobClick endLogPageView:@"articleWebView"];
 #warning hidden tabbar in ipad
-    if (IS_IPAD)self.tabBarController.tabBar.hidden = YES;
-    
-    
+    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)setDigBtnIsShow:(BOOL)isShow{
@@ -394,12 +392,10 @@
             if (IsDig)
             {
                 self.article.dig_count += 1;
-                NSLog(@"%ld",self.article.dig_count);
             }
             else
             {
                 self.article.dig_count -= 1;
-                NSLog(@"%ld",self.article.dig_count);
             }
             if (btn) {
                 btn.selected = self.article.IsDig;
