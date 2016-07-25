@@ -76,6 +76,13 @@
 //"sold out"          = "Sold Out";
 
 /*
+ * article page
+ */
+"article"            = "Article";
+"Poke"               = "Poke";
+"comment"            = "Comment";
+
+/*
  *  activity page
  */
 

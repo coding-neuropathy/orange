@@ -77,6 +77,13 @@
 //"sold out"          = "已下架";
 
 /*
+ * article page
+ */
+"article"            = "圖文";
+"poke"               = "贊";
+"comment"            = "評論";
+
+/*
  *  activity page
  */
 //"commented on a product"    = "點評了 1 件商品";

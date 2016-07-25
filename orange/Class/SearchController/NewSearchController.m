@@ -30,9 +30,6 @@
 @property (strong, nonatomic)UIButton * moreBtn;
 @property (strong, nonatomic)UIView * separateView;
 @property (nonatomic, copy) void (^tapAllResultsBlock)();
-//- (void)checkAllEntityResults;
-//
-//- (void)checkAllArticleResults;
 
 @end
 
@@ -64,7 +61,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
@@ -278,7 +275,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     switch (indexPath.section) {
         case 2:
         {
-            cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);
+            if (IS_IPHONE) {
+                cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);
+            }
+            else
+            {
+                cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 684 + 32);
+            }
         }
             break;
             
@@ -515,6 +518,11 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self.searchBar resignFirstResponder];
+}
+#pragma mark ----- About View Rotation -------
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.collectionView performBatchUpdates:nil completion:nil];
 }
 
 @end

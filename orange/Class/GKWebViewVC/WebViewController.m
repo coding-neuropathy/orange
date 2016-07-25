@@ -87,8 +87,8 @@
         WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
         configuration.userContentController = userContentController;
         
-//        _webView = [[WKWebView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kStatusBarHeight) configuration:configuration];
-        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
+        _webView = [[WKWebView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kStatusBarHeight) configuration:configuration];
+//        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.UIDelegate = self;
         _webView.navigationDelegate = self;
@@ -116,23 +116,23 @@
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 
-- (void)loadView
-{
-    
-    self.view = self.webView;
-    self.view.backgroundColor = UIColorFromRGB(0xffffff);
-    //    [self.view addSubview:self.activityIndicator];
-    
-    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
-
-}
+//- (void)loadView
+//{
+//    
+//    self.view = self.webView;
+//    self.view.backgroundColor = UIColorFromRGB(0xffffff);
+//    //    [self.view addSubview:self.activityIndicator];
+//    
+//    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+//
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    [self.view addSubview:self.webView];
-//    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+    [self.view addSubview:self.webView];
+    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
 //    NSMutableArray * BtnArray = [NSMutableArray array];
     
 //    //更多按钮
@@ -219,9 +219,11 @@
     [webView evaluateJavaScript:javascript completionHandler:nil];
 }
 
+//决定是否允许导航响应，如果不允许就不会跳转到该链接的页面
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-//    NSLog(@"%@", navigationAction.request.URL.absoluteString);
+    NSLog(@"%@", navigationAction.request.URL.absoluteString);
+    NSLog(@"%@",navigationAction.targetFrame.request.URL.absoluteString);
     if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
         NSURL *url = navigationAction.request.URL;
         UIApplication *app = [UIApplication sharedApplication];

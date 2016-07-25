@@ -304,7 +304,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     
-    _searchLogTableView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
+    _searchView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
     
     [self.collectionView performBatchUpdates:nil completion:nil];
 }
@@ -734,7 +734,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 //    [self.searchVC.view addSubview:view];
 //    _searchView.alpha = 1;
     if (!_searchView) {
-        _searchView = [[SearchView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        _searchView = [[SearchView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight)];
         _searchView.tag = 999;
         _searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
         __weak __typeof(&*self)weakSelf = self;
