@@ -131,38 +131,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    [self.view addSubview:self.webView];
-//    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
-//    NSMutableArray * BtnArray = [NSMutableArray array];
-    
-//    //更多按钮
-//    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-//    [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-//    button.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [button addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-//    button.backgroundColor = [UIColor clearColor];
-//    UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:button];
-//    self.navigationItem.rightBarButtonItem = moreBarItem;
-//    [BtnArray addObject:moreBarItem];
-    
-    
-    //返回按钮
-//    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [backBtn setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
-//    [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-//    backBtn.frame = CGRectMake(0., 0., 32., 44.);
-//    backBtn.imageEdgeInsets = UIEdgeInsetsMake(0., 0., 0., 20.);
-//    UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-//    self.navigationItem.leftBarButtonItem = backBarItem;
-    
-//    UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
-//    _moreButton = moreItem;
-//    
-//    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-//    [self setToolbarItems:[NSArray arrayWithObjects:flexItem,flexItem,flexItem,flexItem,flexItem,moreItem,nil]];
-    
-    
     CGFloat progressBarHeight = 2.f;
     CGRect navigaitonBarBounds = self.navigationController.navigationBar.bounds;
     CGRect barFrame = CGRectMake(0, navigaitonBarBounds.size.height - progressBarHeight, navigaitonBarBounds.size.width, progressBarHeight);
