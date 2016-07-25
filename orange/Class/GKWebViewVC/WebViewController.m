@@ -23,7 +23,9 @@
 }
 @property (strong, nonatomic) WebViewProgressView * progressView;
 @property (strong, nonatomic) UIImage * image;
-@property (nonatomic , assign)NSString * shareTitle;
+@property (strong, nonatomic) NSString * shareTitle;
+
+@property (strong, nonatomic) UIApplication * app;
 
 //@property (nonatomic , strong)UIButton * moreBtn;
 
@@ -47,6 +49,15 @@
 //    }
 //    return _moreBtn;
 //}
+
+#pragma mark - init view
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
+}
 
 - (instancetype)initWithURL:(NSURL *)url
 {
@@ -95,6 +106,10 @@
         
         [_webView sizeToFit];
     
+//        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight ||
+            self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft)
+            _webView.center = CGPointMake((kScreenWidth - kTabBarWidth) / 2, kScreenHeight / 2);
         
     }
     return _webView;
@@ -212,14 +227,6 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-//    NSString * imageURL = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('img')[1].src"];
-//    UIImageView * a = [[UIImageView alloc]init];
-//    [a sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        self.image = image;
-//    }];
-    
-    
-    
     [webView evaluateJavaScript:@"document.getElementById('share_img').getElementsByTagName('img')[0].src" completionHandler:^(NSString * imageURL, NSError * error) {
         
         if (imageURL) {
@@ -257,6 +264,25 @@
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
+    
+}
+
+#pragma mark -
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+//         [self.collectionView performBatchUpdates:nil completion:nil];
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+//         self.webView.frame = CGRectMake((self.view.deFrameWidth - self.webView.deFrameWidth) /2, 0., 684., self.view.deFrameHeight);
+         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+             self.webView.frame = CGRectMake(128., 0., 684., kScreenHeight);
+         else
+             self.webView.frame = CGRectMake(0., 0., 684., kScreenHeight);
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
     
 }
 
@@ -327,6 +353,8 @@
 //        }];
     }
 }
+
+
 
 #pragma mark - button action
 - (void)backAction:(id)sender
