@@ -20,6 +20,7 @@
 @interface WebViewController () 
 {
     UIBarButtonItem *_moreButton;
+    UIBarButtonItem *_flexItem;
 }
 @property (strong, nonatomic) WebViewProgressView * progressView;
 @property (strong, nonatomic) UIImage * image;
@@ -27,7 +28,7 @@
 
 @property (strong, nonatomic) UIApplication * app;
 
-//@property (nonatomic , strong)UIButton * moreBtn;
+@property (nonatomic , strong)UIButton * moreBtn;
 
 @end
 
@@ -36,19 +37,19 @@
 
 #pragma mark ----- UI -----
 //更多按钮
-//- (UIButton *)moreBtn
-//{
-//    if (!_moreBtn) {
-//        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        _moreBtn.frame = CGRectMake(0., 0., 32., 44.);
-//        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
-//        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-//        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-//        _moreBtn.backgroundColor = [UIColor clearColor];
-//        
-//    }
-//    return _moreBtn;
-//}
+- (UIButton *)moreBtn
+{
+    if (!_moreBtn) {
+        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _moreBtn.frame = CGRectMake(0., 0., 32., 44.);
+        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
+        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        _moreBtn.backgroundColor = [UIColor clearColor];
+        
+    }
+    return _moreBtn;
+}
 
 #pragma mark - init view
 - (UIApplication *)app
@@ -145,6 +146,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self creatBottomBar];
     
     [self.view addSubview:self.webView];
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
@@ -335,24 +338,6 @@
      */
 }
 
-#pragma mark - button action
-- (void)likeBtnAction
-{
-    if(!k_isLogin)
-    {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
-    }
-    else
-    {
-//        [API digArticleWithArticleId:<#(NSInteger)#> isDig:<#(BOOL)#> success:^(NSArray *dataArray) {
-//            <#code#>
-//        } failure:^(NSInteger stateCode) {
-//            <#code#>
-//        }];
-    }
-}
 
 
 
@@ -376,6 +361,20 @@
         // Make sure to call the superclass's implementation in the else block in case it is also implementing KVO
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+#pragma mark ---------- create Bottom Bar -------------
+
+- (void)creatBottomBar
+{
+    UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+    _moreButton = moreItem;
+   
+    
+    
+    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    _flexItem = flexItem;
+    [self setToolbarItems:[NSArray arrayWithObjects:flexItem,flexItem,flexItem,flexItem,flexItem,moreItem,nil]];
 }
 
 
