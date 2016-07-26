@@ -734,7 +734,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 //    [self.searchVC.view addSubview:view];
 //    _searchView.alpha = 1;
     if (!_searchView) {
-        _searchView = [[SearchView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight)];
+        _searchView = [[SearchView alloc]initWithFrame:CGRectZero];
+        _searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
         _searchView.tag = 999;
         _searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
         __weak __typeof(&*self)weakSelf = self;

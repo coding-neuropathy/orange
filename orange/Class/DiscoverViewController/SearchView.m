@@ -54,7 +54,7 @@
 - (UIView *)line1
 {
     if (!_line1) {
-        _line1 = [[UIView alloc]initWithFrame:CGRectMake(50., 178., (kScreenWidth - 100)/3, 1.)];
+        _line1 = [[UIView alloc]initWithFrame:IS_IPHONE ? CGRectMake(50., 178., (kScreenWidth - 100)/3, 1.) : CGRectMake(50., 178., (kScreenWidth  - kTabBarWidth- 100)/3, 1.)];
         _line1.backgroundColor = UIColorFromRGB(0xbdbdbd);
         
     }
@@ -65,7 +65,7 @@
 - (UILabel *)label
 {
     if (!_label) {
-        _label = [[UILabel alloc]initWithFrame:CGRectMake(50. + (kScreenWidth - 100)/3, 163., (kScreenWidth - 100)/3, 30.)];
+        _label = [[UILabel alloc]initWithFrame:IS_IPHONE ? CGRectMake(50. + (kScreenWidth - 100)/3, 163., (kScreenWidth - 100)/3, 30.) : CGRectMake(50. + (kScreenWidth - kTabBarWidth- 100)/3, 163., (kScreenWidth  - kTabBarWidth- 100)/3, 30.)];
         _label.text = [NSString stringWithFormat:@"搜你想要的"];
         _label.font = [UIFont systemFontOfSize:14.];
         _label.textColor = UIColorFromRGB(0xbdbdbd);
@@ -78,7 +78,7 @@
 - (UIView *)line2
 {
     if (!_line2) {
-        _line2 = [[UIView alloc]initWithFrame:CGRectMake(50. + (kScreenWidth - 100)/3 * 2, 178., (kScreenWidth - 100)/3, 1.)];
+        _line2 = [[UIView alloc]initWithFrame:IS_IPHONE ? CGRectMake(50. + (kScreenWidth - 100)/3 * 2, 178., (kScreenWidth - 100)/3, 1.) : CGRectMake(50. + (kScreenWidth - kTabBarWidth - 100)/3 * 2, 178., (kScreenWidth  - kTabBarWidth- 100)/3, 1.)];
         _line2.backgroundColor = UIColorFromRGB(0xbdbdbd);
         
     }
@@ -255,7 +255,13 @@
     self.label4.frame = CGRectMake(0., 0., 30., 25.);
 #pragma mark -----------------
     self.img1.deFrameTop = self.label.deFrameBottom + 50.;
-    self.img1.deFrameLeft = self.deFrameLeft + 40;
+    if (IS_IPHONE) {
+        self.img1.deFrameLeft =self.deFrameLeft + 40.;
+    }
+    else
+    {
+        self.img1.deFrameLeft = self.center.x - 150.;
+    }
     self.label1.deFrameLeft = self.img1.deFrameRight + 6.;
     self.label1.deFrameTop = self.img1.deFrameTop - 6;
     
@@ -299,6 +305,7 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     self.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
+    self.img1.deFrameLeft = self.center.x - 150.;
 }
 
 @end
