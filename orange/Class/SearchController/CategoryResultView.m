@@ -51,7 +51,7 @@
 {
     if (!_cateLabel) {
         _cateLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _cateLabel.font = [UIFont systemFontOfSize:14.];
+        _cateLabel.font = [UIFont fontWithName:@"Semiblod" size:14.];
         _cateLabel.textColor = UIColorFromRGB(0x414243);
         _cateLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_cateLabel];
@@ -76,7 +76,7 @@
 {
     _categorys = categorys;
     
-    self.cateLabel.text = [NSString stringWithFormat:@"品类"];
+    self.cateLabel.text = NSLocalizedStringFromTable(@"category", kLocalizedFile, nil);
     self.cateScrollView.contentSize = CGSizeMake(50 * _categorys.count + 18 * (_categorys.count - 1), 50.);
     for (int i = 0; i < categorys.count; i ++) {
         GKEntityCategory * category = _categorys[i];

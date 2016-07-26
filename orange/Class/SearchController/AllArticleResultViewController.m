@@ -22,7 +22,7 @@ static NSString * ArticleIdentifier = @"MoreArticleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"所有图文结果";
+    self.title = NSLocalizedStringFromTable(@"article",kLocalizedFile, nil);
     
     [self.collectionView registerClass:[MoreArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
 }

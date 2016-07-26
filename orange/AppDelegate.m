@@ -99,7 +99,7 @@ int ddLogLevel;
     [JPUSHService registerForRemoteNotificationTypes:UIUserNotificationTypeAlert| UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
     [JPUSHService setupWithOption:launchOptions appKey:@"f9e153a53791659b9541eb37"
                           channel:@"app store"
-                 apsForProduction:NO
+                 apsForProduction:YES
             advertisingIdentifier:nil];
 //    [JPUSHService setupWithOption:launchOptions];
 //    [JPUSHService setupWithOption:launchOptions appKey: channel:<#(NSString *)#> apsForProduction:<#(BOOL)#>]

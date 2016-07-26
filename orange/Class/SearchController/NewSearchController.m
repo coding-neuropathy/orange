@@ -61,7 +61,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
+        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight)
+        : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight - kNavigationBarHeight);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
@@ -210,7 +212,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
              case 2:
             {
                 SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
-                header.text = [NSString stringWithFormat:@"商品"];
+                header.text = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
                 header.imgName = [NSString stringWithFormat:@"blue"];
                 return header;
             }
@@ -218,7 +220,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             default:
             {
                 SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
-                header.text = [NSString stringWithFormat:@"图文"];
+                header.text = NSLocalizedStringFromTable(@"article", kLocalizedFile, nil);
                 header.imgName = [NSString stringWithFormat:@"red"];
                 return header;
             }
@@ -525,6 +527,22 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [self.collectionView performBatchUpdates:nil completion:nil];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         self.collectionView.frame = CGRectMake(0., 0., size.width - kTabBarWidth, size.height);
+         
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
 @end
 
 #pragma mark - SearchView Header
@@ -544,7 +562,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     if (!_textLabel)
     {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _textLabel.font = [UIFont systemFontOfSize:14.];
+        _textLabel.font = [UIFont fontWithName:@"Semiblod" size:14.];
         _textLabel.textColor = UIColorFromRGB(0x414243);
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.backgroundColor = [UIColor clearColor];
@@ -617,11 +635,11 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     if (!_textLabel)
     {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _textLabel.font = [UIFont systemFontOfSize:14.];
+        _textLabel.font = [UIFont fontWithName:@"Semiblod" size:14.];
         _textLabel.textColor = UIColorFromRGB(0x414243);
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.backgroundColor = [UIColor clearColor];
-        _textLabel.text = [NSString stringWithFormat:@"查看全部结果"];
+        _textLabel.text = NSLocalizedStringFromTable(@"click to view all results", kLocalizedFile, nil);
         [self addSubview:_textLabel];
     }
     return _textLabel;
@@ -642,7 +660,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.textLabel.frame = CGRectMake(0., 0., 100., 40.);
+    self.textLabel.frame = CGRectMake(0., 0., 200., 40.);
     self.textLabel.deFrameLeft = self.deFrameLeft + 15.;
     self.moreBtn.frame = CGRectMake(0., 0., 20., 40.);
     self.moreBtn.deFrameRight = self.deFrameRight;

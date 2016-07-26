@@ -64,6 +64,15 @@
 "recommendation user"       = "recommendation user";
 
 /*
+ * Search Page
+ */
+"users"                     = "User";
+"entity"                    = "Entity";
+"articles"                  = "Article";
+"category"                  = "Category";
+"click to view all results" = "Click To View All Results";
+
+/*
  * entity page
  */
 "from"              = "From";

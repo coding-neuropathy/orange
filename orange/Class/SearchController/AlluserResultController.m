@@ -54,7 +54,7 @@ static NSString * CellIdentifier = @"UserSingleListCell";
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
-    self.title = @"全部用户搜索结果";
+    self.title = NSLocalizedStringFromTable(@"users", kLocalizedFile, nil);
     [self.view addSubview:self.tableView];
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];

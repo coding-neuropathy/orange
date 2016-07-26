@@ -66,7 +66,7 @@
 {
     if (!_userLabel) {
         _userLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _userLabel.font = [UIFont systemFontOfSize:14.];
+        _userLabel.font = [UIFont fontWithName:@"Semiblod" size:14.];
         _userLabel.textColor = UIColorFromRGB(0x414243);
         _userLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_userLabel];
@@ -111,7 +111,7 @@
 {
     _users = users;
     
-    self.userLabel.text = [NSString stringWithFormat:@"用户"];
+    self.userLabel.text = NSLocalizedStringFromTable(@"users", kLocalizedFile, nil);
     
     self.userScrollView.contentSize = CGSizeMake(50 * _users.count + 18 * (_users.count - 1), 50.);
     
