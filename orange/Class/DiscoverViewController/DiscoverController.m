@@ -122,7 +122,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"discover-1"] selectedImage:[[UIImage imageNamed:@"discover_on-1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[[UIImage imageNamed:@"discover-1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]selectedImage:[[UIImage imageNamed:@"discover_on-1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         

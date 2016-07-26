@@ -55,7 +55,7 @@ static int lastContentOffset;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:@"Save" object:nil];
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"featured.png"] selectedImage:[[UIImage imageNamed:@"featured_on.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[[UIImage imageNamed:@"featured.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]selectedImage:[[UIImage imageNamed:@"featured_on.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         
         self.tabBarItem = item;
