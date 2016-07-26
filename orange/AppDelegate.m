@@ -36,7 +36,7 @@ int ddLogLevel;
     [MobClick startWithConfigure:UMConfigInstance];
 
 }
-
+//进程启动但还没进入状态保存
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     /**
@@ -78,7 +78,7 @@ int ddLogLevel;
     return YES;
 }
 
-
+//启动基本完成程序准备开始运行
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
@@ -94,6 +94,21 @@ int ddLogLevel;
     [self customizeAppearance];
 
     // Override point for customization after application launch.
+    
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    if (IS_IPHONE) {
+        self.tabbarViewController = [[TabBarViewcontroller alloc] init];
+        self.window.rootViewController = self.tabbarViewController;
+    } else {
+        
+        self.window.rootViewController = [[iPadRootViewController alloc] init];
+    }
+    
+    
+    [self.window makeKeyAndVisible];
 
     // jpush config
     [JPUSHService registerForRemoteNotificationTypes:UIUserNotificationTypeAlert| UIUserNotificationTypeBadge| UIUserNotificationTypeSound categories:nil];
@@ -105,21 +120,16 @@ int ddLogLevel;
 //    [JPUSHService setupWithOption:launchOptions appKey: channel:<#(NSString *)#> apsForProduction:<#(BOOL)#>]
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateJPushID:) name:kJPFNetworkDidLoginNotification object:nil];
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-    
-    if (IS_IPHONE) {
-        self.tabbarViewController = [[TabBarViewcontroller alloc] init];
-        self.window.rootViewController = self.tabbarViewController;
-    } else {
-
-        self.window.rootViewController = [[iPadRootViewController alloc] init];
+    NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSString * url = [userInfo valueForKey:@"url"];
+    if (url) {
+            [self openLocalURL:[NSURL URLWithString:url]];
+        
+        application.applicationIconBadgeNumber = 0;
+        [JPUSHService handleRemoteNotification:userInfo];
     }
-    
 
-    [self.window makeKeyAndVisible];
-
-    application.applicationIconBadgeNumber = 0;
+        application.applicationIconBadgeNumber = 0;
     
     [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
         DDLogInfo(@"OKOK %@", launch.urlMD5);
@@ -622,8 +632,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-    ddLogLevel = DDLogLevelInfo;
-//    ddLogLevel = DDLogLevelError;
+//    ddLogLevel = DDLogLevelInfo;
+    ddLogLevel = DDLogLevelError;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;
