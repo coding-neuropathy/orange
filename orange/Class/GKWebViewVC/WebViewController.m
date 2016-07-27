@@ -19,8 +19,8 @@
 
 @interface WebViewController () 
 {
-    UIBarButtonItem *_moreButton;
-    UIBarButtonItem *_flexItem;
+    UIBarButtonItem *_more;
+    UIBarButtonItem *_flex;
 }
 @property (strong, nonatomic) WebViewProgressView * progressView;
 @property (strong, nonatomic) UIImage * image;
@@ -37,19 +37,19 @@
 
 #pragma mark ----- UI -----
 //更多按钮
-- (UIButton *)moreBtn
-{
-    if (!_moreBtn) {
-        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _moreBtn.frame = CGRectMake(0., 0., 32., 44.);
-        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
-        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        _moreBtn.backgroundColor = [UIColor clearColor];
-        
-    }
-    return _moreBtn;
-}
+//- (UIButton *)moreBtn
+//{
+//    if (!_moreBtn) {
+//        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _moreBtn.frame = CGRectMake(0., 0., 32., 44.);
+//        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
+//        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+//        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//        _moreBtn.backgroundColor = [UIColor clearColor];
+//        
+//    }
+//    return _moreBtn;
+//}
 
 #pragma mark - init view
 - (UIApplication *)app
@@ -147,11 +147,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self creatBottomBar];
+//    [self creatBottomBar];
     
     [self.view addSubview:self.webView];
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
 
+        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+        [_moreBtn setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        _moreBtn.backgroundColor = [UIColor clearColor];
+        UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+        _more = moreBarItem;
+    
+    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        _flex = flexItem;
+    [self setToolbarItems:[NSArray arrayWithObjects:flexItem,flexItem,flexItem,flexItem,flexItem,moreBarItem,nil]];
+    
+    
     CGFloat progressBarHeight = 2.f;
     CGRect navigaitonBarBounds = self.navigationController.navigationBar.bounds;
     CGRect barFrame = CGRectMake(0, navigaitonBarBounds.size.height - progressBarHeight, navigaitonBarBounds.size.width, progressBarHeight);
@@ -368,12 +381,12 @@
 - (void)creatBottomBar
 {
     UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
-    _moreButton = moreItem;
+//    _moreButton = moreItem;
    
     
     
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    _flexItem = flexItem;
+//    _flexItem = flexItem;
     [self setToolbarItems:[NSArray arrayWithObjects:flexItem,flexItem,flexItem,flexItem,flexItem,moreItem,nil]];
 }
 
