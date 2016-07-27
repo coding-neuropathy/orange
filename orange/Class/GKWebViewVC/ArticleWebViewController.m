@@ -35,7 +35,7 @@
 @property (nonatomic , strong)WebViewProgressView * progressView;
 @property (nonatomic , strong)UIImage * image;
 @property (nonatomic , strong)UIButton * digBtn;
-@property (nonatomic , strong)UIButton * moreBtn;
+@property (nonatomic , strong)UIButton * more;
 @property (nonatomic , strong)UILabel * label;
 @property (nonatomic , strong)UIButton * commentBtn;
 
@@ -77,18 +77,18 @@
     return _digBtn;
 }
 //更多按钮
-- (UIButton *)moreBtn
+- (UIButton *)more
 {
-    if (!_moreBtn) {
-        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _moreBtn.frame = CGRectMake(0., 0., 32., 44.);
-        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
-        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        _moreBtn.backgroundColor = [UIColor clearColor];
+    if (!_more) {
+        _more = [UIButton buttonWithType:UIButtonTypeCustom];
+        _more.frame = CGRectMake(0., 0., 32., 44.);
+        [_more setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
+        _more.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [_more addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        _more.backgroundColor = [UIColor clearColor];
         
     }
-    return _moreBtn;
+    return _more;
 }
 //点赞字样
 - (UIButton *)digLabel
@@ -129,6 +129,7 @@
         [_commentLabel setTitle:NSLocalizedStringFromTable(@"comment", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_commentLabel setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
         [_commentLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -20., 0., 0.)];
+        [_commentLabel addTarget:self action:@selector(commentButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         _commentLabel.backgroundColor = [UIColor clearColor];
     }
     return _commentLabel;
@@ -429,7 +430,7 @@
 
 - (void)creatBottomBar
 {
-    UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+    UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.more];
     _moreButton = moreItem;
     
     UIBarButtonItem * digItem = [[UIBarButtonItem alloc]initWithCustomView:self.digBtn];

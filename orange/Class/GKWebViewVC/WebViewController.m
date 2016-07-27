@@ -37,19 +37,19 @@
 
 #pragma mark ----- UI -----
 //更多按钮
-//- (UIButton *)moreBtn
-//{
-//    if (!_moreBtn) {
-//        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        _moreBtn.frame = CGRectMake(0., 0., 32., 44.);
-//        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
-//        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-//        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-//        _moreBtn.backgroundColor = [UIColor clearColor];
-//        
-//    }
-//    return _moreBtn;
-//}
+- (UIButton *)moreBtn
+{
+    if (!_moreBtn) {
+        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _moreBtn.frame = CGRectMake(0., 0., 32., 44.);
+        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
+        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        _moreBtn.backgroundColor = [UIColor clearColor];
+        
+    }
+    return _moreBtn;
+}
 
 #pragma mark - init view
 - (UIApplication *)app

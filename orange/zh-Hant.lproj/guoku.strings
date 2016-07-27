@@ -91,7 +91,7 @@
 "article"            = "圖文";
 "poke"               = "贊";
 "comment"            = "評論";
-"load"               = "正在加載";
+"load"               = "正在加載...";
 /*
  *  activity page
  */
