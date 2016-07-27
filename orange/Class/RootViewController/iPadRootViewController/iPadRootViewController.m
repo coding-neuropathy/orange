@@ -103,7 +103,7 @@
 #pragma mark - <MasterViewControllerDelegate>
 - (void)MenuController:(MenuController *)menucontroller didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDLogInfo(@"index %lu", indexPath.row);
+    DDLogInfo(@"index %lu", (long)indexPath.row);
     if (self.mainController.selectedIndex == indexPath.row) {
         UINavigationController * nav = [self.mainController.viewControllers objectAtIndex:indexPath.row];
         [nav popToRootViewControllerAnimated:YES];
