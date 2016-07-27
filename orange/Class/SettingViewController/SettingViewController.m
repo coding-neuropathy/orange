@@ -54,7 +54,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         //self.title = NSLocalizedStringFromTable(@"settings", kLocalizedFile, nil);
 //        self.dataArray = [NSMutableArray array];
         
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"setting"] selectedImage:[[UIImage imageNamed:@"setting_on"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[[UIImage imageNamed:@"setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]selectedImage:[[UIImage imageNamed:@"setting_on"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         

@@ -26,13 +26,12 @@
 //#import "GroupViewController.h"
 #import "CategroyGroupController.h"
 #import "UserViewController.h"
-#import "SearchController.h"
 #import "authorizedUserViewController.h"
 #import "EntityPreViewController.h"
 #import "ArticlePreViewController.h"
 
 #import "SearchView.h"
-#import "NewSearchController.h"
+#import "SearchController.h"
 #import "SubCategoryEntityController.h"
 @interface DiscoverHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
@@ -54,7 +53,7 @@
 @property(nonatomic, strong) id<ALBBItemService> itemService;
 
 @property (nonatomic, strong)SearchView * searchView;
-@property (nonatomic,strong) NewSearchController * newsearchResultsVC;
+@property (nonatomic,strong) SearchController * newsearchResultsVC;
 @end
 
 @implementation DiscoverController
@@ -122,7 +121,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"discover-1"] selectedImage:[[UIImage imageNamed:@"discover_on-1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[[UIImage imageNamed:@"discover-1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]selectedImage:[[UIImage imageNamed:@"discover_on-1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         
@@ -186,11 +186,11 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 //    return _searchResultsVC;
 //}
 
-- (NewSearchController *)newsearchResultsVC
+- (SearchController *)newsearchResultsVC
 {
     if (!_newsearchResultsVC)
     {
-        _newsearchResultsVC = [[NewSearchController alloc]init];
+        _newsearchResultsVC = [[SearchController alloc]init];
     }
     return _newsearchResultsVC;
 }

@@ -116,8 +116,7 @@ int ddLogLevel;
                           channel:@"app store"
                  apsForProduction:YES
             advertisingIdentifier:nil];
-//    [JPUSHService setupWithOption:launchOptions];
-//    [JPUSHService setupWithOption:launchOptions appKey: channel:<#(NSString *)#> apsForProduction:<#(BOOL)#>]
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateJPushID:) name:kJPFNetworkDidLoginNotification object:nil];
     
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];

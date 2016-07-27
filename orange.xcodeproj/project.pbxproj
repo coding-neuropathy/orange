@@ -23,7 +23,7 @@
 		23B3164D1CD9D4F600A83CDB /* NewEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164C1CD9D4F600A83CDB /* NewEditViewController.m */; };
 		23B316501CD9E4C800A83CDB /* NewEditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164F1CD9E4C800A83CDB /* NewEditHeaderView.m */; };
 		23E0CB7E1C855B3400E351CB /* UserArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E0CB7D1C855B3400E351CB /* UserArticleViewController.m */; };
-		23E64DAF1D2E381C00A4402C /* NewSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E64DAE1D2E381C00A4402C /* NewSearchController.m */; };
+		23E64DAF1D2E381C00A4402C /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E64DAE1D2E381C00A4402C /* SearchController.m */; };
 		23E64DB21D2E469400A4402C /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E64DB11D2E469400A4402C /* SearchView.m */; };
 		23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */; };
 		23F000221C97B5750033BAA4 /* ArticleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F000211C97B5750033BAA4 /* ArticleWebViewController.m */; };
@@ -221,11 +221,6 @@
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C45C1A8287780025EC2E /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C45B1A8287780025EC2E /* SignView.m */; };
-		4EA58ABA1C1720E6003251FB /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58AB91C1720E6003251FB /* SearchController.m */; };
-		4EA58ABD1C172365003251FB /* EntitySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58ABC1C172365003251FB /* EntitySearchViewController.m */; };
-		4EA58AC01C172376003251FB /* ArticleSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58ABF1C172376003251FB /* ArticleSearchViewController.m */; };
-		4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58AC21C17238D003251FB /* CategorySearchViewController.m */; };
-		4EA58AC61C1723AB003251FB /* UserSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA58AC51C1723AB003251FB /* UserSearchViewController.m */; };
 		4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */; };
 		4EB8E2281B9F398B002C7F6F /* SelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8E2271B9F398B002C7F6F /* SelectionController.m */; };
 		4EC9F7911A7928520057D736 /* FanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7901A7928520057D736 /* FanViewController.m */; };
@@ -498,8 +493,8 @@
 		23B3164F1CD9E4C800A83CDB /* NewEditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEditHeaderView.m; sourceTree = "<group>"; };
 		23E0CB7C1C855B3400E351CB /* UserArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserArticleViewController.h; sourceTree = "<group>"; };
 		23E0CB7D1C855B3400E351CB /* UserArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserArticleViewController.m; sourceTree = "<group>"; };
-		23E64DAD1D2E381C00A4402C /* NewSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewSearchController.h; sourceTree = "<group>"; };
-		23E64DAE1D2E381C00A4402C /* NewSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewSearchController.m; sourceTree = "<group>"; };
+		23E64DAD1D2E381C00A4402C /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
+		23E64DAE1D2E381C00A4402C /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
 		23E64DB01D2E469400A4402C /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		23E64DB11D2E469400A4402C /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		23EEFFB71C7ABAFA0061F45F /* DiscoverUsersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverUsersView.h; sourceTree = "<group>"; };
@@ -804,16 +799,6 @@
 		4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinTools.m; sourceTree = "<group>"; };
 		4EA0C45A1A8287780025EC2E /* SignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
 		4EA0C45B1A8287780025EC2E /* SignView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
-		4EA58AB81C1720E6003251FB /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
-		4EA58AB91C1720E6003251FB /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
-		4EA58ABB1C172365003251FB /* EntitySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySearchViewController.h; sourceTree = "<group>"; };
-		4EA58ABC1C172365003251FB /* EntitySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySearchViewController.m; sourceTree = "<group>"; };
-		4EA58ABE1C172376003251FB /* ArticleSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleSearchViewController.h; sourceTree = "<group>"; };
-		4EA58ABF1C172376003251FB /* ArticleSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleSearchViewController.m; sourceTree = "<group>"; };
-		4EA58AC11C17238D003251FB /* CategorySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategorySearchViewController.h; sourceTree = "<group>"; };
-		4EA58AC21C17238D003251FB /* CategorySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategorySearchViewController.m; sourceTree = "<group>"; };
-		4EA58AC41C1723AB003251FB /* UserSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchViewController.h; sourceTree = "<group>"; };
-		4EA58AC51C1723AB003251FB /* UserSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchViewController.m; sourceTree = "<group>"; };
 		4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4EB8E2261B9F398B002C7F6F /* SelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionController.h; sourceTree = "<group>"; };
 		4EB8E2271B9F398B002C7F6F /* SelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionController.m; sourceTree = "<group>"; };
@@ -1267,7 +1252,7 @@
 			path = DiscoverViewController;
 			sourceTree = "<group>";
 		};
-		23B3164A1CD9D4C200A83CDB /* NewEditViewController */ = {
+		23B3164A1CD9D4C200A83CDB /* EditViewController */ = {
 			isa = PBXGroup;
 			children = (
 				23F612FD1CDB0E0A0074E8C8 /* AddressPick */,
@@ -1280,32 +1265,7 @@
 				23F613081CDB1B310074E8C8 /* BioViewController.h */,
 				23F613091CDB1B310074E8C8 /* BioViewController.m */,
 			);
-			name = NewEditViewController;
 			path = EditViewController;
-			sourceTree = "<group>";
-		};
-		23E64DAC1D2E37A900A4402C /* NewSearchController */ = {
-			isa = PBXGroup;
-			children = (
-				23E64DAD1D2E381C00A4402C /* NewSearchController.h */,
-				23E64DAE1D2E381C00A4402C /* NewSearchController.m */,
-				23568D1C1D349469003F2611 /* EntityResultCell.h */,
-				23568D1D1D349469003F2611 /* EntityResultCell.m */,
-				23568D1F1D34D3DC003F2611 /* ArticleResultCell.h */,
-				23568D201D34D3DC003F2611 /* ArticleResultCell.m */,
-				23568D221D34DCE8003F2611 /* UserResultView.h */,
-				23568D231D34DCE8003F2611 /* UserResultView.m */,
-				235A4FC41D37652B0039E1CB /* CategoryResultView.h */,
-				235A4FC51D37652B0039E1CB /* CategoryResultView.m */,
-				236EE0251D3C8173003E97D6 /* AlluserResultController.h */,
-				236EE0261D3C8173003E97D6 /* AlluserResultController.m */,
-				236EE0281D3CA2D1003E97D6 /* AllEntityResultController.h */,
-				236EE0291D3CA2D1003E97D6 /* AllEntityResultController.m */,
-				236EE02B1D3CA6C7003E97D6 /* AllArticleResultViewController.h */,
-				236EE02C1D3CA6C7003E97D6 /* AllArticleResultViewController.m */,
-			);
-			name = NewSearchController;
-			path = SearchController;
 			sourceTree = "<group>";
 		};
 		23F0001F1C97B5200033BAA4 /* ArticleWebViewVC */ = {
@@ -1924,7 +1884,6 @@
 			children = (
 				B70686721CF41D5E00C40825 /* RootViewController */,
 				4E73E6771C19360400B604B5 /* AuthController */,
-				23E64DAC1D2E37A900A4402C /* NewSearchController */,
 				4EA58AB71C1720E6003251FB /* SearchController */,
 				8AAA2D111C04442400B27E49 /* PreViewControllers */,
 				391F5F8D1B1705A000931533 /* UIComponents */,
@@ -1934,7 +1893,7 @@
 				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
 				DA35B3C31AFEE31200D66671 /* PasswordEditViewController */,
 				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
-				23B3164A1CD9D4C200A83CDB /* NewEditViewController */,
+				23B3164A1CD9D4C200A83CDB /* EditViewController */,
 				4E934DA51A9AE9FB00374B05 /* GroupViewController */,
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
 				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
@@ -2240,16 +2199,22 @@
 		4EA58AB71C1720E6003251FB /* SearchController */ = {
 			isa = PBXGroup;
 			children = (
-				4EA58AB81C1720E6003251FB /* SearchController.h */,
-				4EA58AB91C1720E6003251FB /* SearchController.m */,
-				4EA58ABB1C172365003251FB /* EntitySearchViewController.h */,
-				4EA58ABC1C172365003251FB /* EntitySearchViewController.m */,
-				4EA58ABE1C172376003251FB /* ArticleSearchViewController.h */,
-				4EA58ABF1C172376003251FB /* ArticleSearchViewController.m */,
-				4EA58AC11C17238D003251FB /* CategorySearchViewController.h */,
-				4EA58AC21C17238D003251FB /* CategorySearchViewController.m */,
-				4EA58AC41C1723AB003251FB /* UserSearchViewController.h */,
-				4EA58AC51C1723AB003251FB /* UserSearchViewController.m */,
+				23E64DAD1D2E381C00A4402C /* SearchController.h */,
+				23E64DAE1D2E381C00A4402C /* SearchController.m */,
+				23568D1C1D349469003F2611 /* EntityResultCell.h */,
+				23568D1D1D349469003F2611 /* EntityResultCell.m */,
+				23568D1F1D34D3DC003F2611 /* ArticleResultCell.h */,
+				23568D201D34D3DC003F2611 /* ArticleResultCell.m */,
+				23568D221D34DCE8003F2611 /* UserResultView.h */,
+				23568D231D34DCE8003F2611 /* UserResultView.m */,
+				235A4FC41D37652B0039E1CB /* CategoryResultView.h */,
+				235A4FC51D37652B0039E1CB /* CategoryResultView.m */,
+				236EE0251D3C8173003E97D6 /* AlluserResultController.h */,
+				236EE0261D3C8173003E97D6 /* AlluserResultController.m */,
+				236EE0281D3CA2D1003E97D6 /* AllEntityResultController.h */,
+				236EE0291D3CA2D1003E97D6 /* AllEntityResultController.m */,
+				236EE02B1D3CA6C7003E97D6 /* AllArticleResultViewController.h */,
+				236EE02C1D3CA6C7003E97D6 /* AllArticleResultViewController.m */,
 			);
 			path = SearchController;
 			sourceTree = "<group>";
@@ -3160,7 +3125,6 @@
 			files = (
 				4E688A231BA9C2BA0006AD9B /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				B772BEA01BD55861005C1540 /* UserPostNoteViewController.m in Sources */,
-				4EA58ABA1C1720E6003251FB /* SearchController.m in Sources */,
 				B769B11A1B2ACE91004401FA /* IFTTTAnimation.m in Sources */,
 				B7C079891BC5827E006B7379 /* DDContextFilterLogFormatter.m in Sources */,
 				8AB731DA1C1BBDAD0076BACC /* SettingsFooterView.m in Sources */,
@@ -3262,7 +3226,6 @@
 				B737F4101C1C027100286596 /* VerifyEmailViewController.m in Sources */,
 				B76EE07F1B3D86AE009D8763 /* MessageController.m in Sources */,
 				4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */,
-				4EA58AC61C1723AB003251FB /* UserSearchViewController.m in Sources */,
 				23F613021CDB0E0A0074E8C8 /* AddressPickView.m in Sources */,
 				4EC9F79F1A7A79800057D736 /* CategoryViewController.m in Sources */,
 				B7F544031BC2457E0044F5E9 /* UIImage+WebP.m in Sources */,
@@ -3278,7 +3241,6 @@
 				B769B1201B2ACE91004401FA /* IFTTTCornerRadiusAnimation.m in Sources */,
 				4E688A001BA9C2BA0006AD9B /* UIView+JSQMessages.m in Sources */,
 				B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */,
-				4EA58ABD1C172365003251FB /* EntitySearchViewController.m in Sources */,
 				8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */,
 				23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */,
 				23B3164D1CD9D4F600A83CDB /* NewEditViewController.m in Sources */,
@@ -3286,7 +3248,6 @@
 				B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */,
 				4E688A121BA9C2BA0006AD9B /* JSQPhotoMediaItem.m in Sources */,
 				B70686931CF41ECA00C40825 /* BaseViewController.m in Sources */,
-				4EA58AC01C172376003251FB /* ArticleSearchViewController.m in Sources */,
 				8AAA50891BD67614005384CD /* UserTagCell.m in Sources */,
 				B7FE2A0B1B2817FD001C2E33 /* SelectionCell.m in Sources */,
 				4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */,
@@ -3298,7 +3259,6 @@
 				23F6130D1CDB4BF60074E8C8 /* NewUserHeaderView.m in Sources */,
 				B7F544001BC2457E0044F5E9 /* UIButton+WebCache.m in Sources */,
 				4E6889FA1BA9C2BA0006AD9B /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
-				4EA58AC31C17238D003251FB /* CategorySearchViewController.m in Sources */,
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				23F6130A1CDB1B310074E8C8 /* BioViewController.m in Sources */,
 				236EE02A1D3CA2D1003E97D6 /* AllEntityResultController.m in Sources */,
@@ -3329,7 +3289,7 @@
 				B769B1251B2ACE91004401FA /* IFTTTTransform3DAnimation.m in Sources */,
 				4E688A021BA9C2BA0006AD9B /* JSQMessagesViewController.m in Sources */,
 				4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */,
-				23E64DAF1D2E381C00A4402C /* NewSearchController.m in Sources */,
+				23E64DAF1D2E381C00A4402C /* SearchController.m in Sources */,
 				23F7F0081C61AF100079A753 /* MoreArticlesViewController.m in Sources */,
 				B7174DD91BD4A83D00DEDBDA /* UserViewController.m in Sources */,
 				B7FE2A081B28136B001C2E33 /* UIImage+FontAwesome.m in Sources */,

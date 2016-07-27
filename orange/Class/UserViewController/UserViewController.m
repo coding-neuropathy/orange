@@ -70,7 +70,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     if (self) {
         self.user = user;
         if (self.user.userId == [Passport sharedInstance].user.userId) {
-            UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"profile"] selectedImage:[[UIImage imageNamed:@"profile_on"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+            UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[[UIImage imageNamed:@"profile"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"profile_on"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
             item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
             self.tabBarItem = item;
             

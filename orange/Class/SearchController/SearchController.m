@@ -1,311 +1,531 @@
 //
-//  SearchController.m
+//  NewSearchController.m
 //  orange
 //
-//  Created by 谢家欣 on 15/6/26.
-//  Copyright (c) 2015年 guoku.com. All rights reserved.
+//  Created by D_Collin on 16/7/7.
+//  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
 #import "SearchController.h"
-#import "HMSegmentedControl.h"
-#import "EntitySearchViewController.h"
-#import "ArticleSearchViewController.h"
-#import "CategorySearchViewController.h"
-#import "UserSearchViewController.h"
+#import "EntityResultCell.h"
+#import "ArticleResultCell.h"
+#import "UserResultView.h"
+#import "PinyinTools.h"
+#import "CategoryResultView.h"
+#import "SubCategoryEntityController.h"
+#import "AlluserResultController.h"
+#import "AllEntityResultController.h"
+#import "AllArticleResultViewController.h"
 
+@interface SearchHeaderSection : UICollectionReusableView
+@property (strong, nonatomic) UILabel * textLabel;
+@property (strong, nonatomic) NSString * text;
+@property (strong, nonatomic) UIImageView * imgView;
+@property (strong, nonatomic) NSString * imgName;
+@end
 
-@interface SearchController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface SearchFooterSection : UICollectionReusableView
 
-@property (strong, nonatomic) UIPageViewController * thePageViewController;
-@property (strong, nonatomic) HMSegmentedControl *segmentedControl;
-@property (assign, nonatomic) NSInteger index;
+@property (strong, nonatomic)UILabel * textLabel;
+@property (strong, nonatomic)UIButton * moreBtn;
+@property (strong, nonatomic)UIView * separateView;
+@property (nonatomic, copy) void (^tapAllResultsBlock)();
+
+@end
+
+@interface SearchController ()<UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout>
+
+@property (nonatomic , strong)UICollectionView * collectionView;
+
+@property (nonatomic , strong)NSMutableArray * categoryArray;
+@property (nonatomic , strong)NSMutableArray * userArray;
+@property (nonatomic , strong)NSMutableArray * entityArray;
+@property (nonatomic , strong)NSMutableArray * articleArray;
 
 @property (nonatomic, strong) NSString *keyword;
-@property (strong, nonatomic) EntitySearchViewController * entityVC;
-@property (strong, nonatomic) ArticleSearchViewController * articleVC;
-@property (strong, nonatomic) CategorySearchViewController * categoryVC;
-@property (strong, nonatomic) UserSearchViewController * userVC;
 @property (nonatomic, weak) UISearchBar * searchBar;
 
 @end
 
 @implementation SearchController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+static NSString * EntityResultCellIdentifier = @"EntityResultCell";
+static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
+static NSString * UserResultCellIdentifier = @"UserResultView";
+static NSString * HeaderIdentifier = @"SearchHeaderSection";
+static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
+static NSString * FooterIdentifier = @"SearchFooterSection";
+
+- (UICollectionView *)collectionView
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[UIImage imageNamed:@"tabbar_icon_Search"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_Search"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-        item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-        self.tabBarItem = item;
-        self.index = 0;
+    if (!_collectionView) {
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
+        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight)
+        : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight - kNavigationBarHeight);
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     }
-    return self;
+    return _collectionView;
 }
 
-#pragma mark - init view
-- (HMSegmentedControl *)segmentedControl
-{
-    if (!_segmentedControl) {
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, 44) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, 44)];
-        [segmentedControl setSectionTitles:@[ @"商品",@"图文",@"品类",@"用户"]];
-        [segmentedControl setSelectedSegmentIndex:0 animated:NO];
-        [segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
-        [segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
-        NSDictionary *dict = [NSDictionary dictionaryWithObject:UIColorFromRGB(0x9d9e9f) forKey:NSForegroundColorAttributeName];
-        [segmentedControl setTitleTextAttributes:dict];
-        NSDictionary *dict2 = [NSDictionary dictionaryWithObject:UIColorFromRGB(0xFF1F77) forKey:NSForegroundColorAttributeName];
-        [segmentedControl setSelectedTitleTextAttributes:dict2];
-        [segmentedControl setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0xFF1F77)];
-        [segmentedControl setSelectionIndicatorHeight:1.5];
-        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        _segmentedControl = segmentedControl;
-
-    }
-    return _segmentedControl;
-}
-
-- (EntitySearchViewController *)entityVC
-{
-    if (!_entityVC) {
-        _entityVC = [[EntitySearchViewController alloc] init];
-    }
-    return _entityVC;
-}
-
-- (ArticleSearchViewController *)articleVC
-{
-    if (!_articleVC) {
-        _articleVC = [[ArticleSearchViewController alloc] init];
-    }
-    return _articleVC;
-}
-
-- (CategorySearchViewController *)categoryVC
-{
-    if (!_categoryVC) {
-        _categoryVC = [[CategorySearchViewController alloc] init];
-    }
-    return _categoryVC;
-}
-
-- (UserSearchViewController *)userVC
-{
-    if (!_userVC) {
-        _userVC = [[UserSearchViewController alloc] init];
-    }
-    return _userVC;
-}
-
-- (UIPageViewController *)thePageViewController
-{
-    if (!_thePageViewController) {
-        _thePageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-        _thePageViewController.dataSource = self;
-        _thePageViewController.delegate = self;
-    }
-    return _thePageViewController;
-}
-
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     
-//    self.title = NSLocalizedStringFromTable(@"Search", kLocalizedFile, nil);
+    [self.collectionView registerClass:[EntityResultCell class] forCellWithReuseIdentifier:EntityResultCellIdentifier];
+    [self.collectionView registerClass:[ArticleResultCell class] forCellWithReuseIdentifier:ArticleResultCellIdentifier];
     
-    [self.view addSubview:self.segmentedControl];
+    [self.collectionView registerClass:[SearchHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier];
+    [self.collectionView registerClass:[UserResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier];
+    [self.collectionView registerClass:[CategoryResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier];
+    [self.collectionView registerClass:[SearchFooterSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier];
     
-
-    [self addChildViewController:self.thePageViewController];
+    [self.view addSubview:self.collectionView];
+    __weak __typeof(&*self)weakSelf = self;
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf reFresh];
+    }];
     
-    self.thePageViewController.view.frame = CGRectMake(0,44, kScreenWidth,  kScreenHeight - 44);
-    
-    [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-
-    
-    [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
-    
-    [self setSelectedWithType:EntityType];
-    
-
 }
 
-#pragma mark - <UIPageViewControllerDataSource>
-- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
+- (void)reFresh
+{
+    [API searchWithKeyword:self.keyword Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
+        self.entityArray = [NSMutableArray arrayWithArray:entities];
+        self.userArray = [NSMutableArray arrayWithArray:users];
+        self.articleArray = [NSMutableArray arrayWithArray:articles];
+        
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
+        
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.pullToRefreshView stopAnimating];
+    }];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - <UICollectionViewDataSource>
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 4;
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if ([viewController isKindOfClass:[EntitySearchViewController class]]) {
-        return nil;
-    }
-    if ([viewController isKindOfClass:[ArticleSearchViewController class]]) {
-        return self.entityVC;
-    }
-    if ([viewController isKindOfClass:[CategorySearchViewController class]]) {
-        return self.articleVC;
-    }
-    if ([viewController isKindOfClass:[UserSearchViewController class]]) {
-        return self.categoryVC;
-    }
-
-    return nil;
-}
-
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
-{
-    
-    if ([viewController isKindOfClass:[EntitySearchViewController class]]) {
-        return self.articleVC;
-    }
-    if ([viewController isKindOfClass:[ArticleSearchViewController class]]) {
-        return self.categoryVC;
-    }
-    if ([viewController isKindOfClass:[CategorySearchViewController class]]) {
-        return self.userVC;
-    }
-    if ([viewController isKindOfClass:[UserSearchViewController class]]) {
-        return nil;
-    }
-     return nil;
-}
-
-#pragma mark - <UIPageViewControllerDelegate>
-- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
-{
-    self.index = 0;
-    if (completed) {
-        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[EntitySearchViewController class]]) {
-            self.index = 0;
-        }
-        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[ArticleSearchViewController class]]) {
-            self.index = 1;
-        }
-        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[CategorySearchViewController class]]) {
-            self.index = 2;
-        }
-        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[UserSearchViewController class]]) {
-            self.index = 3;
-        }
+    NSInteger count = 0;
+    switch (section) {
+        case 0:
         
-        [self.segmentedControl setSelectedSegmentIndex:self.index animated:YES];
+            break;
+        case 1:
+//            count = self.userArray.count;
+            break;
+        case 2:
+        {
+            if (self.entityArray.count > 3) {
+                count = 3;
+            }
+            else
+            {
+                count = self.entityArray.count;
+            }
+        }
+            break;
+        case 3:
+        {
+            if (self.articleArray.count > 3) {
+                count = 3;
+            }
+            else
+            {
+                count = self.articleArray.count;
+            }
+        }
+            break;
+        default:
+            break;
     }
+    return count;
 }
 
-- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController
-                   spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation {
-
-    UIViewController *currentViewController = [self.thePageViewController.viewControllers objectAtIndex:0];
-
-    NSArray * view_controllers = [NSArray arrayWithObjects:currentViewController, nil];
-    [self.thePageViewController setViewControllers:view_controllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
-    self.thePageViewController.doubleSided = NO;
-    return UIPageViewControllerSpineLocationMin;
-}
-
-#pragma mark -
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSInteger i =0;
-    self.index = segmentedControl.selectedSegmentIndex;
-    if (segmentedControl.selectedSegmentIndex == 0){
-        [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+    switch (indexPath.section) {
+      
+        case 3:
+        {
+            ArticleResultCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleResultCellIdentifier forIndexPath:indexPath];
+            cell.article = self.articleArray[indexPath.row];
+            return cell;
+        }
+        default:
+        {
+            EntityResultCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityResultCellIdentifier forIndexPath:indexPath];
+            cell.entity = self.entityArray[indexPath.row];
+            return cell;
+        }
+            break;
+    }
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+//    UICollectionReusableView * reusebleview = [UICollectionReusableView new];
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        switch (indexPath.section) {
+            case 0:
+            {
+                CategoryResultView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier forIndexPath:indexPath];
+                categoryView.categorys = self.categoryArray;
+                [categoryView setTapCategoryBlock:^(GKEntityCategory * category) {
+                    SubCategoryEntityController * vc = [[SubCategoryEntityController alloc]initWithSubCategory:category];
+                    vc.title = category.categoryName;
+//                    NSLog(@"即将跳转");
+                    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+                }];
+                
+                return categoryView;
+            }
+                break;
+            case 1:
+            {
+                UserResultView * userview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier forIndexPath:indexPath];
+                userview.users = self.userArray;
+                [userview setTapMoreUsersBlock:^{
+                    AlluserResultController * vc = [[AlluserResultController alloc]init];
+                    vc.keyword = self.keyword;
+                    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+                }];
+                [userview setTapUsersBlock:^(GKUser * user) {
+                    [[OpenCenter sharedOpenCenter]openUser:user];
+                }];
+                return userview;
+            }
+                break;
+             case 2:
+            {
+                SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
+                header.text = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
+                header.imgName = [NSString stringWithFormat:@"blue"];
+                return header;
+            }
+                break;
+            default:
+            {
+                SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
+                header.text = NSLocalizedStringFromTable(@"article", kLocalizedFile, nil);
+                header.imgName = [NSString stringWithFormat:@"red"];
+                return header;
+            }
+                break;
+        }
+    }
+    else
+    {
+        switch (indexPath.section) {
+            case 0:
+            {
+                SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                return footer;
+            }
+                break;
+            case 1:
+            {
+                SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                return footer;
+            }
+                break;
+            case 2:
+            {
+                SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                [footer setTapAllResultsBlock:^{
+                    AllEntityResultController * vc = [[AllEntityResultController alloc]init];
+                    vc.keyword = self.keyword;
+                    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+                }];
+                return footer;
+            }
+                break;
+           
+            default:
+            {
+                SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                [footer setTapAllResultsBlock:^{
+                    AllArticleResultViewController * vc = [[AllArticleResultViewController alloc]init];
+                    vc.keyword = self.keyword;
+                    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+                }];
+                return footer;
+            }
+                break;
+        }
     }
     
-   else if (segmentedControl.selectedSegmentIndex == 1 && segmentedControl.selectedSegmentIndex>i){
-        [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-      
+}
+
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize cellsize = CGSizeMake(0., 0.);
+    switch (indexPath.section) {
+        case 2:
+        {
+            if (IS_IPHONE) {
+                cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);
+            }
+            else
+            {
+                cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 684 + 32);
+            }
+        }
+            break;
+            
+        default:
+        {
+            cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);
+        }
+            break;
     }
-    else if (segmentedControl.selectedSegmentIndex == 1 && segmentedControl.selectedSegmentIndex<i)
-    {
-        [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
-       
+    return cellsize;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
+    switch (section) {
+        case 0:
+            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+        case 1:
+            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            break;
+        case 2:
+            edge = UIEdgeInsetsMake(0., 0., 0., 0.);
+            break;
+        case 3:
+            if (IS_IPHONE) {
+                edge = UIEdgeInsetsMake(0., 0., 0., 0);
+            }
+            else
+            {
+                edge = UIEdgeInsetsMake(10., 20., 0., 20.);
+            }
+            break;
+        default:
+            break;
     }
-    
-   else if (segmentedControl.selectedSegmentIndex == 2 &&segmentedControl.selectedSegmentIndex>i){
-        [self.thePageViewController setViewControllers:@[self.categoryVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-      
-    }
-   else if (segmentedControl.selectedSegmentIndex == 2 && segmentedControl.selectedSegmentIndex<i)
-    {
-        [self.thePageViewController setViewControllers:@[self.categoryVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+    return edge;
+}
+
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    CGFloat itemSpacing = 0.;
+    switch (section) {
+            
+        case 2:
+        {
         
+            itemSpacing = 1.;
+        }
+            break;
+        default:
+            //            itemSpacing = 0;
+            break;
     }
-    
-   else if (segmentedControl.selectedSegmentIndex == 3){
-        [self.thePageViewController setViewControllers:@[self.userVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    }
-    [self handleSearchText:self.keyword];
-    
-    i = segmentedControl.selectedSegmentIndex;
-    
+    return itemSpacing;
 }
 
-
-#pragma mark - set Search type
-- (void)setSelectedWithType:(SearchType)type
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    switch (type) {
-        case EntityType:
-            [self.segmentedControl setSelectedSegmentIndex:0 animated:YES];
+    CGFloat spacing = 0;
+    switch (section) {
+        case 2:
+            
+            spacing = 1.;
+            
             break;
-        case ArticleType:
-            [self.segmentedControl setSelectedSegmentIndex:1 animated:YES];
+        default:
+            
             break;
-        case CategoryType:
-            [self.segmentedControl setSelectedSegmentIndex:2 animated:YES];
+    }
+    return spacing;
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
+{
+    CGSize headerSize = CGSizeMake(0., 0.);
+    switch (section) {
+        case 0:
+        {
+            headerSize = CGSizeMake(kScreenWidth, 88.);
+        }
             break;
-        case UserType:
-            [self.segmentedControl setSelectedSegmentIndex:3 animated:YES];
+        case 1:
+        {
+            headerSize = CGSizeMake(kScreenWidth, 126.);
+        }
             break;
+        default:
+            headerSize = CGSizeMake(kScreenWidth, 44.);
+            break;
+    }
+    return headerSize;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    CGSize footerSize = CGSizeMake(0., 0.);
+    switch (section) {
+        
+        case 2:
+            footerSize = CGSizeMake(kScreenWidth, 44.);
+            break;
+        case 3:
+            footerSize = CGSizeMake(kScreenWidth, 44.);
+            break;
+        default:
+            footerSize = CGSizeMake(0., 0.);
+            break;
+    }
+    return footerSize;
+}
+
+#pragma mark - <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 2:
+        {
+            GKEntity * entity = self.entityArray[indexPath.row];
+            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+        }
+            break;
+            
+        default:
+        {
+            GKArticle * article = self.articleArray[indexPath.row];
+            [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+        }
             break;
     }
 }
 
--(void)searchText:(NSString *)string
+- (void)searchText:(NSString *)string
 {
     [self handleSearchText:string];
 }
-
 
 - (void)handleSearchText:(NSString *)searchText
 {
     if (searchText.length == 0) {
         return;
     }
+    self.keyword = searchText;
+    __weak __typeof(&*self)weakSelf = self;
+    [API searchWithKeyword:searchText Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
+        
+        self.entityArray = [NSMutableArray arrayWithArray:entities];
+        self.userArray = [NSMutableArray arrayWithArray:users];
+        self.articleArray = [NSMutableArray arrayWithArray:articles];
+        
+        weakSelf.categoryArray = [NSMutableArray array];
+        for (GKEntityCategory * word in kAppDelegate.allCategoryArray) {
+            NSString * screenName = word.categoryName;
+            if ([PinyinTools ifNameString:screenName SearchString:searchText]) {
+                [_categoryArray addObject:word];
+            }
+        }
+        
+        [weakSelf.categoryArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
+        
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView reloadData];
+        
+    } failure:^(NSInteger stateCode) {
+        [self.collectionView.pullToRefreshView stopAnimating];
+    }];
     
-    switch (self.segmentedControl.selectedSegmentIndex) {
-        case EntityType:
-        {
-            [self.entityVC handleSearchText:searchText];
-        }
-            break;
+    
+}
+
+#pragma mark - <UISearchResultsUpdating>
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    
+    if ([self.keyword isEqualToString:[searchController.searchBar.text trimedWithLowercase]]) {
+        return;
+    }
+    self.searchBar = searchController.searchBar;
+    
+    self.keyword = [searchController.searchBar.text trimedWithLowercase];
+    
+    if (self.keyword.length == 0)
+    {
+        [UIView animateWithDuration:0 animations:^{
             
-        case ArticleType:
-        {
-            [self.articleVC handleSearchText:searchText];
-        }
-            break;
-        case CategoryType:
-        {
-            [self.categoryVC handleSearchText:searchText];
-        }
-            break;
+            [self.discoverVC.searchVC.view viewWithTag:999].alpha = 1;
             
-        case UserType:
-        {
-            [self.userVC handleSearchText:searchText];
-        }
-            break;
+        }];
+        return;
+    }
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        
+        [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
+        
+    }completion:^(BOOL finished) {
+        
+        [self handleSearchText:self.keyword];
+        
+    }];
+    
+    
+    
+}
+
+#pragma mark - search log
+- (void)addSearchLog:(NSString *)text
+{
+    if (text.length == 0) {
+        return;
+    }
+    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    if (!array) {
+        array = [NSMutableArray array];
+    }
+    if (![array containsObject:text]) {
+        [array insertObject:text atIndex:0];
+        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.collectionView.scrollsToTop = NO;
+    if (self.searchBar.text) {
+        [self addSearchLog:self.searchBar.text];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.searchBar resignFirstResponder];
+}
+#pragma mark ----- About View Rotation -------
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.collectionView performBatchUpdates:nil completion:nil];
+}
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
@@ -313,8 +533,7 @@
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
          
-         self.segmentedControl.frame = CGRectMake(0., 0., size.width - kTabBarWidth, 44.);
-         self.thePageViewController.view.frame = CGRectMake(0,44, kScreenWidth - kTabBarWidth,  kScreenHeight);
+         self.collectionView.frame = CGRectMake(0., 0., size.width - kTabBarWidth, size.height);
          
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
@@ -324,34 +543,138 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
+@end
 
-#pragma mark - <UISearchResultsUpdating>
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+#pragma mark - SearchView Header
+@implementation SearchHeaderSection
+
+- (instancetype)initWithFrame:(CGRect)frame
 {
-
-    if ([self.keyword isEqualToString:[searchController.searchBar.text trimedWithLowercase]]) {
-        return;
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
     }
-    self.searchBar = searchController.searchBar;
-    self.entityVC.searchBar = self.searchBar;
-    self.articleVC.searchBar = self.searchBar;
-    self.categoryVC.searchBar = self.searchBar;
-    self.userVC.searchBar = self.searchBar;
-
-    self.keyword = [searchController.searchBar.text trimedWithLowercase];
-    if (self.keyword.length == 0) {
-        [UIView animateWithDuration:0 animations:^{
-            [self.discoverVC.searchVC.view viewWithTag:999].alpha = 1;
-        }];
-        return;
-    }
-    
-    [UIView animateWithDuration:0.1 animations:^{
-        [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
-    }completion:^(BOOL finished) {
-        [self handleSearchText:self.keyword];
-    }];
+    return self;
 }
 
+- (UILabel *)textLabel
+{
+    if (!_textLabel)
+    {
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _textLabel.font = [UIFont fontWithName:@"Semiblod" size:14.];
+        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textAlignment = NSTextAlignmentLeft;
+        _textLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:_textLabel];
+    }
+    return _textLabel;
+}
+
+- (UIImageView *)imgView
+{
+    if (!_imgView) {
+        _imgView = [[UIImageView alloc]initWithFrame:CGRectZero];
+        
+        [self addSubview:_imgView];
+    }
+    return _imgView;
+}
+
+- (void)setText:(NSString *)text
+{
+    _text = text;
+    self.textLabel.text = _text;
+    [self setNeedsLayout];
+}
+
+- (void)setImgName:(NSString *)imgName
+{
+    _imgName = imgName;
+    self.imgView.image = [UIImage imageNamed:_imgName];
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+//    self.imgView.frame = CGRectMake(10., 16., 10., 10.);
+    self.textLabel.frame = CGRectMake(15., 10., 100, 25.);
+
+}
+
+@end
+
+@implementation SearchFooterSection
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+//        self.backgroundColor = [UIColor redColor];
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(checkAllResults)];
+        [self addGestureRecognizer:tap];
+    }
+    return self;
+}
+
+//- (UIView *)separateView
+//{
+//    if (!_separateView) {
+//        _separateView = [[UIView alloc]initWithFrame:CGRectZero];
+//        _separateView.backgroundColor = [UIColor redColor];
+//        [self addSubview:_separateView];
+//    }
+//    return _separateView;
+//}
+
+- (UILabel *)textLabel
+{
+    if (!_textLabel)
+    {
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _textLabel.font = [UIFont fontWithName:@"Semiblod" size:14.];
+        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textAlignment = NSTextAlignmentLeft;
+        _textLabel.backgroundColor = [UIColor clearColor];
+        _textLabel.text = NSLocalizedStringFromTable(@"click to view all results", kLocalizedFile, nil);
+        [self addSubview:_textLabel];
+    }
+    return _textLabel;
+}
+
+- (UIButton *)moreBtn
+{
+    if (!_moreBtn) {
+        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_moreBtn setTitle:[NSString stringWithFormat:@"%@", [NSString fontAwesomeIconStringForEnum:FAAngleRight]] forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        _moreBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        [self addSubview:_moreBtn];
+    }
+    return _moreBtn;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.textLabel.frame = CGRectMake(0., 0., 200., 40.);
+    self.textLabel.deFrameLeft = self.deFrameLeft + 15.;
+    self.moreBtn.frame = CGRectMake(0., 0., 20., 40.);
+    self.moreBtn.deFrameRight = self.deFrameRight;
+    self.moreBtn.deFrameTop = self.textLabel.deFrameTop;
+//    self.separateView.frame = CGRectMake(0.,40., kScreenWidth, 10.);
+//    self.separateView.deFrameLeft = self.deFrameLeft;
+//    self.separateView.deFrameBottom = self.deFrameBottom;
+}
+
+- (void)checkAllResults
+{
+    if (self.tapAllResultsBlock) {
+        self.tapAllResultsBlock();
+    }
+}
 
 @end
