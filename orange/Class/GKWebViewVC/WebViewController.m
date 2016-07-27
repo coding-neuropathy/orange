@@ -153,7 +153,7 @@
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
 
         _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-        [_moreBtn setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
         _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
         [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         _moreBtn.backgroundColor = [UIColor clearColor];
@@ -274,7 +274,13 @@
     
     [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
 //        self.title = result;
-        self.shareTitle = result;
+        if (result) {
+            self.shareTitle = result;
+        }
+        else
+        {
+            self.shareTitle = @"果库 - 精英消费指南";
+        }
 //        NSLog(@"%@",self.shareTitle);
     }];
 }
