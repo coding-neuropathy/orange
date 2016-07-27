@@ -124,11 +124,11 @@
 {
     if (!_commentLabel) {
         _commentLabel = [UIButton buttonWithType:UIButtonTypeCustom];
-        _commentLabel.frame =CGRectMake(0., 0., 37., 44.);
+        _commentLabel.frame =CGRectMake(0., 0., 42., 44.);
         _commentLabel.titleLabel.font = [UIFont systemFontOfSize:12.];
         [_commentLabel setTitle:NSLocalizedStringFromTable(@"comment", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_commentLabel setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
-        [_commentLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -20., 0., 0.)];
+        [_commentLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -15., 0., 0.)];
         [_commentLabel addTarget:self action:@selector(commentButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         _commentLabel.backgroundColor = [UIColor clearColor];
     }

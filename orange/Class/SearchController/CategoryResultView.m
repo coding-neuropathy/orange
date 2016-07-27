@@ -106,8 +106,8 @@
 {
     [super layoutSubviews];
     
-//    self.imgView.frame = CGRectMake(11., 16., 10., 10.);
-    self.cateLabel.frame = CGRectMake(15., 1., 100., 40.);
+    self.imgView.frame = CGRectMake(11., 16., 10., 10.);
+    self.cateLabel.frame = CGRectMake(27., 1., 100., 40.);
     self.cateScrollView.frame = IS_IPHONE?CGRectMake(10., 45., kScreenWidth - 20., 80.):CGRectMake(10., 45., kScreenWidth  - kTabBarWidth - 20., 80.);
     self.cateScrollView.layer.cornerRadius = 4;
     self.cateScrollView.layer.masksToBounds = YES;

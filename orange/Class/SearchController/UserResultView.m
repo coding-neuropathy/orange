@@ -152,11 +152,11 @@
 {
     [super layoutSubviews];
     
-//    self.imgview.frame = CGRectMake(11., 16., 10., 10.);
+    self.imgview.frame = CGRectMake(11., 16., 10., 10.);
 //    self.imgview.deFrameTop = self.deFrameTop - 12.;
 //    self.imgview.deFrameLeft = self.deFrameLeft - 12.;
     
-    self.userLabel.frame = CGRectMake(15.,1.,100., 40.);
+    self.userLabel.frame = CGRectMake(27.,1.,100., 40.);
 //    self.userLabel.deFrameTop = self.deFrameTop - 12.;
 //    self.userLabel.deFrameLeft = self.imgview.deFrameRight - 10.;
     
