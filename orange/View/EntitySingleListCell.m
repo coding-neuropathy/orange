@@ -140,7 +140,7 @@
         self.tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
        [self.contentView addSubview:self.tipLabel];
     }
-    [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],self.entity.likeCount,[NSString fontAwesomeIconStringForEnum:FAComment],self.entity.noteCount]];
+    [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],(long)self.entity.likeCount,[NSString fontAwesomeIconStringForEnum:FAComment],self.entity.noteCount]];
     self.tipLabel.deFrameTop = self.frame.size.height - 20;
     self.tipLabel.deFrameRight = self.frame.size.width - 10;
     

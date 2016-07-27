@@ -532,7 +532,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             {
                 EntityHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier forIndexPath:indexPath];
                 headerSection.headertype = LikeType;
-                headerSection.text = [NSString stringWithFormat:@"%ld", self.entity.likeCount];
+                headerSection.text = [NSString stringWithFormat:@"%ld", (long)self.entity.likeCount];
                 headerSection.delegate = self;
                 return headerSection;
             }

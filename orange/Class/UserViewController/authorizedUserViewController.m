@@ -277,7 +277,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     } else {
         [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {
             user.relation = relation;
-            DDLogInfo(@"relation %lu", relation);
+            DDLogInfo(@"relation %lu", (long)relation);
             view.user = user;
             //            [self.tableView reloadData];
             [SVProgressHUD showImage:nil status:@"关注成功"];

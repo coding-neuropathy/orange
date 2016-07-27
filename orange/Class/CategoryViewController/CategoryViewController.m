@@ -71,7 +71,7 @@
     
     [API getCategoryStatByCategoryId:self.category.categoryId success:^(NSInteger likeCount, NSInteger noteCount, NSInteger entityCount) {
         UIButton * button = (UIButton *)[self.segmentedControl viewWithTag:1002];
-        [button setTitle:[NSString stringWithFormat:@"%ld 件商品",entityCount] forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"%ld 件商品",(long)entityCount] forState:UIControlStateNormal];
     } failure:^(NSInteger stateCode) {
         
     }];
