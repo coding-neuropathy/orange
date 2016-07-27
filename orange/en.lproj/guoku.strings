@@ -88,7 +88,7 @@
  * article page
  */
 "article"            = "Article";
-"Poke"               = "Poke";
+"poke"               = "Dig";
 "comment"            = "Comment";
 "load"               = "Loading";
 /*
