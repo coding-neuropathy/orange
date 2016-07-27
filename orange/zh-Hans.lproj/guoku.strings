@@ -89,6 +89,7 @@
 "article"            = "图文";
 "poke"               = "赞";
 "comment"            = "评论";
+"load"               = "正在加载";
 /*
  *  activity page
  */

@@ -90,7 +90,7 @@
 "article"            = "Article";
 "Poke"               = "Poke";
 "comment"            = "Comment";
-
+"load"               = "Loading";
 /*
  *  activity page
  */
