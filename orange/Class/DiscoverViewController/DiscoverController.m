@@ -733,31 +733,35 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 //    
 //    [self.searchVC.view addSubview:view];
 //    _searchView.alpha = 1;
-    if (!_searchView) {
-        _searchView = [[SearchView alloc]initWithFrame:CGRectZero];
-        _searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
-        _searchView.tag = 999;
-        _searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    
+    
+    
+    
+        SearchView * searchView = [[SearchView alloc]initWithFrame:CGRectZero];
+//    self.searchView = searchView;
+        searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
+        searchView.tag = 999;
+        searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
         __weak __typeof(&*self)weakSelf = self;
-        [_searchView setTaphotCategoryBtnBlock:^(NSString *hotString) {
+        [searchView setTaphotCategoryBtnBlock:^(NSString *hotString) {
             
            [weakSelf.searchVC.searchBar setText:hotString];
             
         }];
-        [_searchView setTapRecordBtnBlock:^(NSString *keyword) {
+        [searchView setTapRecordBtnBlock:^(NSString *keyword) {
          
            [weakSelf.searchVC.searchBar setText:keyword];
 
         }];
-    }
-    else
-    {
-        self.searchView.alpha = 1;
-        self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
     
-    }
     
-    [self.searchVC.view addSubview:self.searchView];
+       searchView.alpha = 1;
+    
+       searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+
+
+    
+    [self.searchVC.view addSubview:searchView];
     
 
 }
