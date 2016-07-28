@@ -62,7 +62,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight - kNavigationBarHeight)
+        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight)
         : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight - kNavigationBarHeight);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -354,13 +354,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             edge = UIEdgeInsetsMake(0., 0., 0., 0.);
             break;
         case 3:
-            if (IS_IPHONE) {
-                edge = UIEdgeInsetsMake(0., 0., 0., 0);
-            }
-            else
-            {
-                edge = UIEdgeInsetsMake(10., 20., 0., 20.);
-            }
+            edge = UIEdgeInsetsMake(0., 0., 0., 0);
             break;
         default:
             break;
