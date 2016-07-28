@@ -213,7 +213,7 @@
     }
     
     if (self.recentArray.count != 0) {
-        for (NSInteger i = 0; i < self.recentArray.count; i ++) {
+        for (NSInteger i = 0; i < 5; i ++) {
             UIButton * recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [recordBtn setTitle:[self.recentArray objectAtIndex:i] forState:UIControlStateNormal];
             [recordBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];

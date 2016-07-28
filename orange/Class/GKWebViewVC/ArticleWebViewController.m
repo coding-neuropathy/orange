@@ -215,8 +215,9 @@
     [self.navigationController setToolbarHidden:YES animated:YES];
     
     [MobClick endLogPageView:@"articleWebView"];
-#warning hidden tabbar in ipad
+
     if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
+   
 }
 
 - (void)setDigBtnIsShow:(BOOL)isShow{

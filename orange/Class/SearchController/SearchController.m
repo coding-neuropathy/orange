@@ -190,6 +190,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 //                    NSLog(@"即将跳转");
                     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
+                if (self.categoryArray.count == 0) {
+                    categoryView.hidden = YES;
+                }
+                else
+                {
+                    categoryView.hidden = NO;
+                }
                 
                 return categoryView;
             }
@@ -206,6 +213,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                 [userview setTapUsersBlock:^(GKUser * user) {
                     [[OpenCenter sharedOpenCenter]openUser:user];
                 }];
+                if (self.userArray.count == 0) {
+                    userview.hidden = YES;
+                }
+                else
+                {
+                    userview.hidden = NO;
+                }
                 return userview;
             }
                 break;
@@ -222,6 +236,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                 SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"article", kLocalizedFile, nil);
                 header.imgName = [NSString stringWithFormat:@"red"];
+                if (self.articleArray.count == 0) {
+                    header.hidden = YES;
+                }
+                else
+                {
+                    header.hidden = NO;
+                }
                 return header;
             }
                 break;
@@ -262,6 +283,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                     vc.keyword = self.keyword;
                     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
+                if (self.articleArray.count == 0) {
+                    footer.hidden = YES;
+                }
+                else
+                {
+                    footer.hidden = NO;
+                }
                 return footer;
             }
                 break;
