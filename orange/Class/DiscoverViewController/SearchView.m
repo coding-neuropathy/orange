@@ -211,11 +211,39 @@
             [self addSubview:categoryBtn];
         }
     }
-    
-    if (self.recentArray.count != 0) {
-        for (NSInteger i = 0; i < 5; i ++) {
+    NSInteger arrCount = self.recentArray.count;
+    if (arrCount == 0) {
+        return;
+    }
+    else if (arrCount <= 5 && arrCount != 0)
+    {
+        for (NSInteger i = 0; i < self.recentArray.count; i ++) {
             UIButton * recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [recordBtn setTitle:[self.recentArray objectAtIndex:i] forState:UIControlStateNormal];
+            [recordBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+            recordBtn.layer.cornerRadius = 12.;
+            recordBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
+            recordBtn.layer.masksToBounds = YES;
+            recordBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+            recordBtn.tag = i + 324;
+            if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
+                recordBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
+                recordBtn.frame = CGRectMake(10. + (55 + 5) * i, 16., 50., 25);
+                recordBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+            } else
+            {
+                recordBtn.frame = CGRectMake(20. + (50 + 5) * i, 16., 50., 25);
+            }
+            [recordBtn addTarget:self action:@selector(recordBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:recordBtn];
+        }
+    }
+    else
+    {
+        NSArray *Array = [self.recentArray subarrayWithRange:NSMakeRange(0, 5)];
+        for (NSInteger i = 0; i < 5; i ++) {
+            UIButton * recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [recordBtn setTitle:[Array objectAtIndex:i] forState:UIControlStateNormal];
             [recordBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
             recordBtn.layer.cornerRadius = 12.;
             recordBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);

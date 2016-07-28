@@ -228,6 +228,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                 SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
                 header.imgName = [NSString stringWithFormat:@"blue"];
+                if (self.entityArray.count == 0) {
+                    header.hidden = YES;
+                }
+                else
+                {
+                    header.hidden = NO;
+                }
                 return header;
             }
                 break;
@@ -271,6 +278,16 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                     vc.keyword = self.keyword;
                     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
+                
+                                if (self.entityArray.count == 0) {
+                                    footer.hidden = YES;
+                                }
+                                else
+                                {
+                                    footer.hidden = NO;
+                                }
+                
+                
                 return footer;
             }
                 break;
