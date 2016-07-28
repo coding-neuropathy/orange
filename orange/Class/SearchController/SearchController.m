@@ -404,12 +404,20 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     switch (section) {
         case 0:
         {
-            headerSize = CGSizeMake(kScreenWidth, 88.);
+            if (self.categoryArray.count == 0) {
+                headerSize = CGSizeMake(0, 0);
+            }
+            else
+                headerSize = CGSizeMake(kScreenWidth, 88.);
         }
             break;
         case 1:
         {
-            headerSize = CGSizeMake(kScreenWidth, 126.);
+            if (self.userArray.count == 0) {
+                headerSize = CGSizeMake(0, 0);
+            }
+            else
+                headerSize = CGSizeMake(kScreenWidth, 126.);
         }
             break;
         default:
