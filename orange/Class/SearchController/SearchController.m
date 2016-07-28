@@ -62,7 +62,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight)
+        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight - kNavigationBarHeight)
         : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight - kNavigationBarHeight);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
