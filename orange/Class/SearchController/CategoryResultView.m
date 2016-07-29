@@ -51,7 +51,7 @@
 {
     if (!_cateLabel) {
         _cateLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _cateLabel.font = [UIFont fontWithName:@"Semiblod" size:14.];
+        _cateLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
         _cateLabel.textColor = UIColorFromRGB(0x414243);
         _cateLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_cateLabel];
@@ -106,8 +106,8 @@
 {
     [super layoutSubviews];
     
-    self.imgView.frame = CGRectMake(11., 16., 10., 10.);
-    self.cateLabel.frame = CGRectMake(27., 1., 100., 40.);
+//    self.imgView.frame = CGRectMake(11., 16., 10., 10.);
+    self.cateLabel.frame = CGRectMake(12., 10., 28., 20.);
     self.cateScrollView.frame = IS_IPHONE?CGRectMake(10., 45., kScreenWidth - 20., 80.):CGRectMake(10., 45., kScreenWidth  - kTabBarWidth - 20., 80.);
     self.cateScrollView.layer.cornerRadius = 4;
     self.cateScrollView.layer.masksToBounds = YES;

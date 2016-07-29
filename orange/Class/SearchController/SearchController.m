@@ -611,7 +611,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     if (!_textLabel)
     {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _textLabel.font = [UIFont fontWithName:@"Semiblod" size:14.];
+        _textLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
         _textLabel.textColor = UIColorFromRGB(0x414243);
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.backgroundColor = [UIColor clearColor];
@@ -657,9 +657,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     [super layoutSubviews];
     
-    self.imgView.frame = CGRectMake(10., 23., 10., 10.);
-    self.textLabel.frame = CGRectMake(27., 17., 100, 25.);
-    self.grayView.frame = CGRectMake(0, 0, kScreenWidth, 10);
+//    self.imgView.frame = CGRectMake(10., 23., 10., 10.);
+    self.textLabel.frame = CGRectMake(12., 20., 100., 25.);
+    self.grayView.frame = CGRectMake(0, 0, kScreenWidth, 10.);
     
 }
 
@@ -694,11 +694,12 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     if (!_textLabel)
     {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _textLabel.font = [UIFont fontWithName:@"Semiblod" size:14.];
-        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _textLabel.textColor = UIColorFromRGB(0x000000);
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.backgroundColor = [UIColor clearColor];
         _textLabel.text = NSLocalizedStringFromTable(@"click to view all results", kLocalizedFile, nil);
+        _textLabel.alpha = 0.54;
         [self addSubview:_textLabel];
     }
     return _textLabel;
@@ -719,11 +720,16 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.textLabel.frame = CGRectMake(0., 0., 200., 40.);
-    self.textLabel.deFrameLeft = self.deFrameLeft + 15.;
-    self.moreBtn.frame = CGRectMake(0., 0., 20., 40.);
-    self.moreBtn.deFrameRight = self.deFrameRight;
-    self.moreBtn.deFrameTop = self.textLabel.deFrameTop;
+    self.textLabel.frame = CGRectMake(12., 14., 84., 20.);
+//    self.textLabel.deFrameLeft = self.deFrameLeft + 12.;
+//    self.textLabel.deFrameLeft = self.deFrameTop + 14.;
+    if (IS_IPAD) {
+        self.moreBtn.frame = CGRectMake(0., 0., 20., 40.);
+        self.moreBtn.deFrameRight = self.deFrameRight;
+        self.moreBtn.deFrameTop = self.textLabel.deFrameTop;
+    }
+    self.moreBtn.frame = CGRectMake(358., 12., 5., 20.);
+    
     //    self.separateView.frame = CGRectMake(0.,40., kScreenWidth, 10.);
     //    self.separateView.deFrameLeft = self.deFrameLeft;
     //    self.separateView.deFrameBottom = self.deFrameBottom;
