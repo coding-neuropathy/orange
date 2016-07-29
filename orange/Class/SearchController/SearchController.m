@@ -659,7 +659,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     
     self.imgView.frame = CGRectMake(10., 23., 10., 10.);
     self.textLabel.frame = CGRectMake(27., 17., 100, 25.);
-    self.grayView.frame = CGRectMake(0, 0, 375, 10);
+    self.grayView.frame = CGRectMake(0, 0, kScreenWidth, 10);
     
 }
 
