@@ -738,7 +738,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     
     
         SearchView * searchView = [[SearchView alloc]initWithFrame:CGRectZero];
-//    self.searchView = searchView;
+        self.searchView = searchView;
         searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
         searchView.tag = 999;
         searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
@@ -757,7 +757,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     
        searchView.alpha = 1;
     
-       searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+       self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
 
 
     
