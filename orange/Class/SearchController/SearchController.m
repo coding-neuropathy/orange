@@ -34,7 +34,7 @@
 
 @end
 
-@interface SearchController ()<UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout>
+@interface SearchController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic , strong)UICollectionView * collectionView;
 
