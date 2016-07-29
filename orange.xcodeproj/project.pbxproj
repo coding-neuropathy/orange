@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		230448A31CFD6CC9000A6B3C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 230448A21CFD6CC9000A6B3C /* iCarousel.m */; };
 		2309032E1C803B1500AD26D6 /* authorizedUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */; };
+		2354BF2B1D4B2CC300D43556 /* UserResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2354BF2A1D4B2CC300D43556 /* UserResultCell.m */; };
 		23568D1E1D349469003F2611 /* EntityResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D1D1D349469003F2611 /* EntityResultCell.m */; };
 		23568D211D34D3DC003F2611 /* ArticleResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D201D34D3DC003F2611 /* ArticleResultCell.m */; };
 		23568D241D34DCE8003F2611 /* UserResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D231D34DCE8003F2611 /* UserResultView.m */; };
@@ -465,6 +466,8 @@
 		230448A21CFD6CC9000A6B3C /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		2309032C1C803B1500AD26D6 /* authorizedUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = authorizedUserViewController.h; sourceTree = "<group>"; };
 		2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = authorizedUserViewController.m; sourceTree = "<group>"; };
+		2354BF291D4B2CC300D43556 /* UserResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserResultCell.h; sourceTree = "<group>"; };
+		2354BF2A1D4B2CC300D43556 /* UserResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserResultCell.m; sourceTree = "<group>"; };
 		23568D1C1D349469003F2611 /* EntityResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityResultCell.h; sourceTree = "<group>"; };
 		23568D1D1D349469003F2611 /* EntityResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityResultCell.m; sourceTree = "<group>"; };
 		23568D1F1D34D3DC003F2611 /* ArticleResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleResultCell.h; sourceTree = "<group>"; };
@@ -2205,6 +2208,8 @@
 				23568D1D1D349469003F2611 /* EntityResultCell.m */,
 				23568D1F1D34D3DC003F2611 /* ArticleResultCell.h */,
 				23568D201D34D3DC003F2611 /* ArticleResultCell.m */,
+				2354BF291D4B2CC300D43556 /* UserResultCell.h */,
+				2354BF2A1D4B2CC300D43556 /* UserResultCell.m */,
 				23568D221D34DCE8003F2611 /* UserResultView.h */,
 				23568D231D34DCE8003F2611 /* UserResultView.m */,
 				235A4FC41D37652B0039E1CB /* CategoryResultView.h */,
@@ -3324,6 +3329,7 @@
 				4EB8E2281B9F398B002C7F6F /* SelectionController.m in Sources */,
 				B769B11F1B2ACE91004401FA /* IFTTTConstraintsAnimation.m in Sources */,
 				B769B11D1B2ACE91004401FA /* IFTTTAnimator.m in Sources */,
+				2354BF2B1D4B2CC300D43556 /* UserResultCell.m in Sources */,
 				4EEB29FF1B523C650092A8CF /* GKNotificationHUB.m in Sources */,
 				B769B1241B2ACE91004401FA /* IFTTTScaleAnimation.m in Sources */,
 				B758E84C1D17DB7C00DD01C7 /* UserArticleCell.m in Sources */,
