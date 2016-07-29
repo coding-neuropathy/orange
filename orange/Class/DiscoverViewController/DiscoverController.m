@@ -761,7 +761,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 
 
     
-    [self.searchVC.view addSubview:searchView];
+    [self.searchVC.view addSubview:self.searchView];
     
 
 }

@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSString * text;
 @property (strong, nonatomic) UIImageView * imgView;
 @property (strong, nonatomic) NSString * imgName;
+@property (strong, nonatomic) UIView *grayView;
 @end
 
 @interface SearchFooterSection : UICollectionReusableView
@@ -122,10 +123,10 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     NSInteger count = 0;
     switch (section) {
         case 0:
-        
+            
             break;
         case 1:
-//            count = self.userArray.count;
+            //            count = self.userArray.count;
             break;
         case 2:
         {
@@ -158,7 +159,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-      
+            
         case 3:
         {
             ArticleResultCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleResultCellIdentifier forIndexPath:indexPath];
@@ -177,7 +178,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-//    UICollectionReusableView * reusebleview = [UICollectionReusableView new];
+    //    UICollectionReusableView * reusebleview = [UICollectionReusableView new];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         switch (indexPath.section) {
             case 0:
@@ -187,7 +188,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                 [categoryView setTapCategoryBlock:^(GKEntityCategory * category) {
                     SubCategoryEntityController * vc = [[SubCategoryEntityController alloc]initWithSubCategory:category];
                     vc.title = category.categoryName;
-//                    NSLog(@"即将跳转");
+                    //                    NSLog(@"即将跳转");
                     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
                 if (self.categoryArray.count == 0) {
@@ -223,7 +224,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                 return userview;
             }
                 break;
-             case 2:
+            case 2:
             {
                 SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
@@ -279,19 +280,19 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
                 
-                                if (self.entityArray.count == 0) {
-                                    footer.hidden = YES;
-                                }
-                                else
-                                {
-                                    footer.hidden = NO;
-                                }
+                if (self.entityArray.count == 0) {
+                    footer.hidden = YES;
+                }
+                else
+                {
+                    footer.hidden = NO;
+                }
                 
                 
                 return footer;
             }
                 break;
-           
+                
             default:
             {
                 SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
@@ -347,8 +348,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     switch (section) {
         case 0:
             edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            break;
         case 1:
-            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            edge = UIEdgeInsetsMake(0., 0., 0., 0.);
             break;
         case 2:
             edge = UIEdgeInsetsMake(0., 0., 0., 0.);
@@ -370,7 +372,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             
         case 2:
         {
-        
+            
             itemSpacing = 1.;
         }
             break;
@@ -421,7 +423,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         }
             break;
         default:
-            headerSize = CGSizeMake(kScreenWidth, 44.);
+            headerSize = CGSizeMake(kScreenWidth, 54.);
             break;
     }
     return headerSize;
@@ -431,7 +433,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     CGSize footerSize = CGSizeMake(0., 0.);
     switch (section) {
-        
+            
         case 2:
             footerSize = CGSizeMake(kScreenWidth, 44.);
             break;
@@ -642,13 +644,23 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [self setNeedsLayout];
 }
 
+- (UIView *)grayView{
+    if (!_grayView) {
+        _grayView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+        _grayView.backgroundColor = [UIColor colorWithWhite:0.965 alpha:1.000];
+        [self addSubview:_grayView];
+    }
+    return _grayView;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    self.imgView.frame = CGRectMake(10., 16., 10., 10.);
-    self.textLabel.frame = CGRectMake(27., 10., 100, 25.);
-
+    self.imgView.frame = CGRectMake(10., 23., 10., 10.);
+    self.textLabel.frame = CGRectMake(27., 17., 100, 25.);
+    self.grayView.frame = CGRectMake(0, 0, 375, 10);
+    
 }
 
 @end
@@ -660,7 +672,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xffffff);
-//        self.backgroundColor = [UIColor redColor];
+        //        self.backgroundColor = [UIColor redColor];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(checkAllResults)];
         [self addGestureRecognizer:tap];
     }
@@ -712,9 +724,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     self.moreBtn.frame = CGRectMake(0., 0., 20., 40.);
     self.moreBtn.deFrameRight = self.deFrameRight;
     self.moreBtn.deFrameTop = self.textLabel.deFrameTop;
-//    self.separateView.frame = CGRectMake(0.,40., kScreenWidth, 10.);
-//    self.separateView.deFrameLeft = self.deFrameLeft;
-//    self.separateView.deFrameBottom = self.deFrameBottom;
+    //    self.separateView.frame = CGRectMake(0.,40., kScreenWidth, 10.);
+    //    self.separateView.deFrameLeft = self.deFrameLeft;
+    //    self.separateView.deFrameBottom = self.deFrameBottom;
 }
 
 - (void)checkAllResults
