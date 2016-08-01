@@ -86,14 +86,14 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [self.collectionView registerClass:[SearchFooterSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier];
     
     [self.view addSubview:self.collectionView];
-    __weak __typeof(&*self)weakSelf = self;
-    [self.collectionView addInfiniteScrollingWithActionHandler:^{
-        [weakSelf reFresh];
-    }];
-    
+//    __weak __typeof(&*self)weakSelf = self;
+//    [self.collectionView addInfiniteScrollingWithActionHandler:^{
+//        [weakSelf refresh];
+//    }];
 }
 
-- (void)reFresh
+#pragma mark - get search results;
+- (void)refresh
 {
     [API searchWithKeyword:self.keyword Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
         self.entityArray = [NSMutableArray arrayWithArray:entities];
@@ -113,6 +113,15 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.collectionView addPullToRefreshWithActionHandler:^{
+        [weakSelf refresh];
+    }];
+}
+
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -127,7 +136,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             
             break;
         case 1:
-            //            count = self.userArray.count;
+//            count = self.userArray.count;
             break;
         case 2:
         {
@@ -192,13 +201,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                     //                    NSLog(@"即将跳转");
                     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
-                if (self.categoryArray.count == 0) {
-                    categoryView.hidden = YES;
-                }
-                else
-                {
-                    categoryView.hidden = NO;
-                }
+//                if (self.categoryArray.count == 0) {
+//                    categoryView.hidden = YES;
+//                }
+//                else
+//                {
+//                    categoryView.hidden = NO;
+//                }
                 
                 return categoryView;
             }
@@ -276,7 +285,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             {
                 SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
                 [footer setTapAllResultsBlock:^{
-                    AllEntityResultController * vc = [[AllEntityResultController alloc]init];
+                    AllEntityResultController * vc = [[AllEntityResultController alloc] init];
                     vc.keyword = self.keyword;
                     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
@@ -436,8 +445,8 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     switch (section) {
             
         case 2:
-            footerSize = CGSizeMake(kScreenWidth, 44.);
-            break;
+//            footerSize = CGSizeMake(kScreenWidth, 44.);
+//            break;
         case 3:
             footerSize = CGSizeMake(kScreenWidth, 44.);
             break;
@@ -468,6 +477,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     }
 }
 
+#pragma mark - handle Search keyword
 - (void)searchText:(NSString *)string
 {
     [self handleSearchText:string];
@@ -479,37 +489,36 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         return;
     }
     self.keyword = searchText;
-    __weak __typeof(&*self)weakSelf = self;
-    [API searchWithKeyword:searchText Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
-        
-        self.entityArray = [NSMutableArray arrayWithArray:entities];
-        self.userArray = [NSMutableArray arrayWithArray:users];
-        self.articleArray = [NSMutableArray arrayWithArray:articles];
-        
-        weakSelf.categoryArray = [NSMutableArray array];
-        for (GKEntityCategory * word in kAppDelegate.allCategoryArray) {
-            NSString * screenName = word.categoryName;
-            if ([PinyinTools ifNameString:screenName SearchString:searchText]) {
-                [_categoryArray addObject:word];
-            }
-        }
-        
-        [weakSelf.categoryArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
-        
-        [self.collectionView.pullToRefreshView stopAnimating];
-        [self.collectionView reloadData];
-        
-    } failure:^(NSInteger stateCode) {
-        [self.collectionView.pullToRefreshView stopAnimating];
-    }];
-    
-    
+    [self.collectionView triggerPullToRefresh];
+//    __weak __typeof(&*self)weakSelf = self;
+//    [API searchWithKeyword:searchText Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
+//        
+//        self.entityArray = [NSMutableArray arrayWithArray:entities];
+//        self.userArray = [NSMutableArray arrayWithArray:users];
+//        self.articleArray = [NSMutableArray arrayWithArray:articles];
+//        
+//        weakSelf.categoryArray = [NSMutableArray array];
+//        for (GKEntityCategory * word in kAppDelegate.allCategoryArray) {
+//            NSString * screenName = word.categoryName;
+//            if ([PinyinTools ifNameString:screenName SearchString:searchText]) {
+//                [_categoryArray addObject:word];
+//            }
+//        }
+//        
+//        [weakSelf.categoryArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
+//        
+//        [self.collectionView.pullToRefreshView stopAnimating];
+//        [self.collectionView reloadData];
+//        
+//    } failure:^(NSInteger stateCode) {
+//        [self.collectionView.pullToRefreshView stopAnimating];
+//    }];
 }
 
 #pragma mark - <UISearchResultsUpdating>
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    
+
     if ([self.keyword isEqualToString:[searchController.searchBar.text trimedWithLowercase]]) {
         return;
     }
@@ -568,6 +577,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     [self.searchBar resignFirstResponder];
 }
+
 #pragma mark ----- About View Rotation -------
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
@@ -592,7 +602,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 
 @end
 
-#pragma mark - SearchView Header
+#pragma mark - Search Header Section
 @implementation SearchHeaderSection
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -656,13 +666,19 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [super layoutSubviews];
     
 //    self.imgView.frame = CGRectMake(10., 23., 10., 10.);
-    self.textLabel.frame = CGRectMake(12., 20., 100., 25.);
+    CGFloat textWidth = [self.textLabel.text widthWithLineWidth:0. Font:self.textLabel.font];
+    
+    self.textLabel.frame = CGRectMake(0., 0., textWidth, 25.);
+    self.textLabel.deFrameTop = 20.;
+    self.textLabel.deFrameLeft = 12.;
+    
     self.grayView.frame = CGRectMake(0, 0, kScreenWidth, 10.);
     
 }
 
 @end
 
+#pragma mark - Search Footer Section
 @implementation SearchFooterSection
 
 - (instancetype)initWithFrame:(CGRect)frame

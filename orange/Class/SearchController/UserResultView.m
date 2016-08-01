@@ -156,7 +156,9 @@
 //    self.imgview.deFrameTop = self.deFrameTop - 12.;
 //    self.imgview.deFrameLeft = self.deFrameLeft - 12.;
     
-    self.userLabel.frame = CGRectMake(12., 10., 28., 20.);
+    CGFloat userLabelTextWidth = [self.userLabel.text widthWithLineWidth:0. Font:self.userLabel.font];
+    
+    self.userLabel.frame = CGRectMake(12., 10., userLabelTextWidth, 20.);
 //    self.userLabel.deFrameTop = self.deFrameTop - 12.;
 //    self.userLabel.deFrameLeft = self.imgview.deFrameRight - 10.;
     
