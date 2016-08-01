@@ -134,7 +134,7 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     
     if (k_isLogin) {
-        DDLogError(@"login login");
+//        DDLogError(@"login login");
         if (_delegate && [_delegate respondsToSelector:@selector(MenuController:didSelectRowAtIndexPath:)]) {
             [self.delegate MenuController:self didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.titleArray.count inSection:0]];
         }

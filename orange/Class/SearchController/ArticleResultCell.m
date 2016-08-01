@@ -106,10 +106,6 @@
 //    self.tipLabel.deFrameTop = self.frame.size.height - 20;
     self.tipLabel.deFrameRight = self.contentView.deFrameRight - 12.;
     self.tipLabel.deFrameBottom = self.contentView.deFrameBottom - 19.;
-    
-    
-
-    
 
 }
 

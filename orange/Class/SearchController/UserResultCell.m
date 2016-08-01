@@ -176,7 +176,7 @@
     CGFloat followingWidth = [self.followingTip.text widthWithLineWidth:0. Font:self.followingTip.font];
     self.followingTip.frame = CGRectMake(0., 0., followingWidth, 20.);
     self.followingTip.deFrameLeft = self.nickLabel.deFrameLeft;
-    self.followingTip.deFrameBottom = self.contentView.deFrameBottom - 14.;
+    self.followingTip.deFrameBottom = self.contentView.deFrameBottom - 20.;
     
     CGFloat fansWidth = [self.fansTip.text widthWithLineWidth:0. Font:self.fansTip.font];
     self.fansTip.frame = CGRectMake(0., 0., fansWidth, 20.);
@@ -184,8 +184,8 @@
     self.fansTip.deFrameLeft = self.followingTip.deFrameRight + 20.;
     
     self.relationBtn.frame = CGRectMake(0., 0., 24., 24.);
-//    self.relationBtn.center = self.contentView.center;
-    self.relationBtn.deFrameTop = 10.;
+    self.relationBtn.center = self.imageView.center;
+//    self.relationBtn.deFrameTop = 10.;
     self.relationBtn.deFrameRight = self.contentView.deFrameWidth - 10.;
 //    self.relationBtn.center = IS_IPHONE?CGPointMake(kScreenWidth - 40, 37):CGPointMake(kScreenWidth - kTabBarWidth - 40, 37);
     [self configRelationButton];
@@ -194,11 +194,20 @@
 }
 
 
-#pragma mark -
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-}
+//#pragma mark -
+//- (void)drawRect:(CGRect)rect
+//{
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+//    CGContextSetLineWidth(context, kSeparateLineWidth);
+//    
+//    CGContextMoveToPoint(context, self.nickLabel.deFrameLeft, self.deFrameHeight);
+//    CGContextAddLineToPoint(context, self.deFrameWidth, self.deFrameHeight);
+//    
+//    CGContextStrokePath(context);
+//    [super drawRect:rect];
+//}
 
 #pragma mark - button action
 #pragma mark - button action;

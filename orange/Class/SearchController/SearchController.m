@@ -49,6 +49,8 @@
 @property (nonatomic, strong) NSString *keyword;
 @property (nonatomic, weak) UISearchBar * searchBar;
 
+@property (strong, nonatomic) UIApplication * app;
+
 @end
 
 @implementation SearchController
@@ -60,19 +62,39 @@ static NSString * HeaderIdentifier = @"SearchHeaderSection";
 static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
 static NSString * FooterIdentifier = @"SearchFooterSection";
 
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
+}
+
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight)
-        : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight - kNavigationBarHeight);
+        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight)
+                                        : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight - kNavigationBarHeight);
+        
+        if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight ||
+            self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+            self.collectionView.deFrameLeft = 128.;
+        
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
     }
     return _collectionView;
+}
+
+- (void)loadView
+{
+    [super loadView];
+    
+    [self.view addSubview:self.collectionView];
 }
 
 - (void)viewDidLoad {
@@ -84,15 +106,10 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [self.collectionView registerClass:[ArticleResultCell class] forCellWithReuseIdentifier:ArticleResultCellIdentifier];
     
     [self.collectionView registerClass:[SearchHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier];
-//    [self.collectionView registerClass:[UserResultCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier];
     [self.collectionView registerClass:[CategoryResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier];
     [self.collectionView registerClass:[SearchFooterSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier];
     
-    [self.view addSubview:self.collectionView];
-//    __weak __typeof(&*self)weakSelf = self;
-//    [self.collectionView addInfiniteScrollingWithActionHandler:^{
-//        [weakSelf refresh];
-//    }];
+
 }
 
 #pragma mark - get search results;
@@ -301,7 +318,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
         case 1:
-            cellsize = CGSizeMake(kScreenWidth, 72.);
+            cellsize = IS_IPAD ? CGSizeMake(684., 72.) : CGSizeMake(kScreenWidth, 72.);
             break;
         case 2:
         {
@@ -363,14 +380,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     CGFloat spacing = 0;
-//    switch (section) {
-//        case 2:
-            
-//            spacing = 1.;
-//            break;
-//        default:
-//            break;
-//    }
     return spacing;
 }
 
@@ -550,7 +559,10 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
          
-         self.collectionView.frame = CGRectMake(0., 0., size.width - kTabBarWidth, size.height);
+         self.collectionView.frame = CGRectMake(0., 0., 684., size.height);
+         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight ||
+             self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+             self.collectionView.deFrameLeft = 128.;
          
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {

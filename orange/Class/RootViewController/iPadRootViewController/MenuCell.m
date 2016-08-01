@@ -59,7 +59,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.iconView.frame = CGRectMake(32., 10., 20., 20.);
+    self.iconView.frame = CGRectMake(32., 10., 26., 26.);
     self.textLabel.frame = CGRectMake(0., 0., 84, 20.);
     self.textLabel.deFrameTop = self.iconView.deFrameBottom + 5.;
     //    self.textLabel.deFrameLeft = 32.;
