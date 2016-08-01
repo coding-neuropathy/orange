@@ -226,6 +226,8 @@
     
     [self.contentView bringSubviewToFront:self.followButton];
 }
+
+#pragma mark - button action;
 - (void)followButtonAction
 {
     if(!k_isLogin)
@@ -242,6 +244,7 @@
         [SVProgressHUD showImage:nil status:@"关注失败"];
     }];
 }
+
 - (void)unfollowButtonAction
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定取消关注？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];

@@ -66,11 +66,11 @@
 /*
  * Search Page
  */
-"users"                     = "User";
-"entity"                    = "Entity";
-"articles"                  = "Article";
-"category"                  = "Category";
-"click to view all results" = "Click To View All Results";
+"users"                         = "Users";
+"entities"                      = "Entities";
+"articles"                      = "Articles";
+"category"                      = "Category";
+"click to view all results"     = "Click To View All Results";
 
 /*
  * entity page

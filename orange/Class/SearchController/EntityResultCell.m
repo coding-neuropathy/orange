@@ -100,7 +100,8 @@
         _tipLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12.];
 //        [ setBackgroundColor:[UIColor clearColor]];
         _tipLabel.backgroundColor = [UIColor clearColor];
-        _tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
+//        _tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _tipLabel.textColor = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.26];
         [self.contentView addSubview:self.tipLabel];
     }
     return _tipLabel;

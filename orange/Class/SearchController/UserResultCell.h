@@ -10,4 +10,8 @@
 
 @interface UserResultCell : UICollectionViewCell
 
+@property (strong, nonatomic) GKUser * user;
+
+@property (copy, nonatomic) void (^tapRelationAction)(UIAlertController * alertController);
+
 @end

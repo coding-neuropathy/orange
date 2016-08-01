@@ -7,9 +7,11 @@
 //
 
 #import "SearchController.h"
+
+#import "UserResultCell.h"
 #import "EntityResultCell.h"
 #import "ArticleResultCell.h"
-#import "UserResultView.h"
+//#import "UserResultView.h"
 #import "PinyinTools.h"
 #import "CategoryResultView.h"
 #import "SubCategoryEntityController.h"
@@ -20,8 +22,8 @@
 @interface SearchHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
 @property (strong, nonatomic) NSString * text;
-@property (strong, nonatomic) UIImageView * imgView;
-@property (strong, nonatomic) NSString * imgName;
+//@property (strong, nonatomic) UIImageView * imgView;
+//@property (strong, nonatomic) NSString * imgName;
 @property (strong, nonatomic) UIView *grayView;
 @end
 
@@ -53,7 +55,7 @@
 
 static NSString * EntityResultCellIdentifier = @"EntityResultCell";
 static NSString * ArticleResultCellIdentifier = @"ArticleResultCell";
-static NSString * UserResultCellIdentifier = @"UserResultView";
+static NSString * UserResultCellIdentifier = @"UserResultCell";
 static NSString * HeaderIdentifier = @"SearchHeaderSection";
 static NSString * CategoryResultCellIdentifier = @"CategoryResultView";
 static NSString * FooterIdentifier = @"SearchFooterSection";
@@ -77,11 +79,12 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self.collectionView registerClass:[UserResultCell class] forCellWithReuseIdentifier:UserResultCellIdentifier];
     [self.collectionView registerClass:[EntityResultCell class] forCellWithReuseIdentifier:EntityResultCellIdentifier];
     [self.collectionView registerClass:[ArticleResultCell class] forCellWithReuseIdentifier:ArticleResultCellIdentifier];
     
     [self.collectionView registerClass:[SearchHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier];
-    [self.collectionView registerClass:[UserResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier];
+//    [self.collectionView registerClass:[UserResultCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier];
     [self.collectionView registerClass:[CategoryResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier];
     [self.collectionView registerClass:[SearchFooterSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier];
     
@@ -136,7 +139,8 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             
             break;
         case 1:
-//            count = self.userArray.count;
+            count = self.userArray.count;
+            if (count > 3) count = 3;
             break;
         case 2:
         {
@@ -170,6 +174,16 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     switch (indexPath.section) {
             
+        case 1:
+        {
+            UserResultCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserResultCellIdentifier forIndexPath:indexPath];
+            cell.user = [self.userArray objectAtIndex:indexPath.row];
+            cell.tapRelationAction = ^(UIAlertController * ac){
+                [self presentViewController:ac animated:YES completion:nil];
+            };
+            return cell;
+        }
+            break;
         case 3:
         {
             ArticleResultCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleResultCellIdentifier forIndexPath:indexPath];
@@ -201,66 +215,30 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                     //                    NSLog(@"即将跳转");
                     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
-//                if (self.categoryArray.count == 0) {
-//                    categoryView.hidden = YES;
-//                }
-//                else
-//                {
-//                    categoryView.hidden = NO;
-//                }
                 
                 return categoryView;
             }
                 break;
             case 1:
             {
-                UserResultView * userview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserResultCellIdentifier forIndexPath:indexPath];
-                userview.users = self.userArray;
-                [userview setTapMoreUsersBlock:^{
-                    AlluserResultController * vc = [[AlluserResultController alloc]init];
-                    vc.keyword = self.keyword;
-                    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-                }];
-                [userview setTapUsersBlock:^(GKUser * user) {
-                    [[OpenCenter sharedOpenCenter]openUser:user];
-                }];
-                if (self.userArray.count == 0) {
-                    userview.hidden = YES;
-                }
-                else
-                {
-                    userview.hidden = NO;
-                }
-                return userview;
+                SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
+                header.text = NSLocalizedStringFromTable(@"users", kLocalizedFile, nil);
+                return header;
+
             }
                 break;
             case 2:
             {
                 SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
-                header.text = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
-                header.imgName = [NSString stringWithFormat:@"blue"];
-                if (self.entityArray.count == 0) {
-                    header.hidden = YES;
-                }
-                else
-                {
-                    header.hidden = NO;
-                }
+                header.text = NSLocalizedStringFromTable(@"entities", kLocalizedFile, nil);
                 return header;
             }
                 break;
             default:
             {
                 SearchHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
-                header.text = NSLocalizedStringFromTable(@"article", kLocalizedFile, nil);
-                header.imgName = [NSString stringWithFormat:@"red"];
-                if (self.articleArray.count == 0) {
-                    header.hidden = YES;
-                }
-                else
-                {
-                    header.hidden = NO;
-                }
+                header.text = NSLocalizedStringFromTable(@"articles", kLocalizedFile, nil);
+
                 return header;
             }
                 break;
@@ -278,6 +256,12 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             case 1:
             {
                 SearchFooterSection * footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+                footer.tapAllResultsBlock = ^(){
+                    AlluserResultController * vc = [[AlluserResultController alloc] init];
+                    vc.keyword = self.keyword;
+                    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+                };
+                
                 return footer;
             }
                 break;
@@ -289,15 +273,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                     vc.keyword = self.keyword;
                     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
-                
-                if (self.entityArray.count == 0) {
-                    footer.hidden = YES;
-                }
-                else
-                {
-                    footer.hidden = NO;
-                }
-                
                 
                 return footer;
             }
@@ -311,13 +286,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                     vc.keyword = self.keyword;
                     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
                 }];
-                if (self.articleArray.count == 0) {
-                    footer.hidden = YES;
-                }
-                else
-                {
-                    footer.hidden = NO;
-                }
+
                 return footer;
             }
                 break;
@@ -331,6 +300,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
+        case 1:
+            cellsize = CGSizeMake(kScreenWidth, 72.);
+            break;
         case 2:
         {
             cellsize = IS_IPHONE ? CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32) :
@@ -418,15 +390,24 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             break;
         case 1:
         {
-            if (self.userArray.count == 0) {
-                headerSize = CGSizeMake(0, 0);
-            }
-            else
-                headerSize = CGSizeMake(kScreenWidth, 126.);
+            if (self.userArray.count > 0)
+                headerSize = CGSizeMake(kScreenWidth, 50.);
+
+        }
+            break;
+        case 2:
+        {
+            if (self.entityArray.count > 0)
+                headerSize = CGSizeMake(kScreenWidth, 50.);
+        }
+            break;
+        case 3:
+        {
+            if (self.articleArray.count > 0)
+                headerSize = CGSizeMake(kScreenWidth, 50.);
         }
             break;
         default:
-            headerSize = CGSizeMake(kScreenWidth, 54.);
             break;
     }
     return headerSize;
@@ -437,11 +418,14 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     CGSize footerSize = CGSizeMake(0., 0.);
     switch (section) {
             
+        case 1:
+            if (self.userArray.count > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
+            break;
         case 2:
-//            footerSize = CGSizeMake(kScreenWidth, 44.);
-//            break;
+            if (self.entityArray.count > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
+            break;
         case 3:
-            footerSize = CGSizeMake(kScreenWidth, 44.);
+            if (self.articleArray.count > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
             break;
         default:
             footerSize = CGSizeMake(0., 0.);
@@ -454,6 +438,12 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
+        case 1:
+        {
+            GKUser * user = [self.userArray objectAtIndex:indexPath.row];
+            [[OpenCenter sharedOpenCenter] openUser:user];
+        }
+            break;
         case 2:
         {
             GKEntity * entity = self.entityArray[indexPath.row];
@@ -483,29 +473,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     }
     self.keyword = searchText;
     [self.collectionView triggerPullToRefresh];
-//    __weak __typeof(&*self)weakSelf = self;
-//    [API searchWithKeyword:searchText Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
-//        
-//        self.entityArray = [NSMutableArray arrayWithArray:entities];
-//        self.userArray = [NSMutableArray arrayWithArray:users];
-//        self.articleArray = [NSMutableArray arrayWithArray:articles];
-//        
-//        weakSelf.categoryArray = [NSMutableArray array];
-//        for (GKEntityCategory * word in kAppDelegate.allCategoryArray) {
-//            NSString * screenName = word.categoryName;
-//            if ([PinyinTools ifNameString:screenName SearchString:searchText]) {
-//                [_categoryArray addObject:word];
-//            }
-//        }
-//        
-//        [weakSelf.categoryArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:NO]]];
-//        
-//        [self.collectionView.pullToRefreshView stopAnimating];
-//        [self.collectionView reloadData];
-//        
-//    } failure:^(NSInteger stateCode) {
-//        [self.collectionView.pullToRefreshView stopAnimating];
-//    }];
 }
 
 #pragma mark - <UISearchResultsUpdating>
@@ -621,15 +588,15 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     return _textLabel;
 }
 
-- (UIImageView *)imgView
-{
-    if (!_imgView) {
-        _imgView = [[UIImageView alloc]initWithFrame:CGRectZero];
-        
-        [self addSubview:_imgView];
-    }
-    return _imgView;
-}
+//- (UIImageView *)imgView
+//{
+//    if (!_imgView) {
+//        _imgView = [[UIImageView alloc]initWithFrame:CGRectZero];
+//        
+//        [self addSubview:_imgView];
+//    }
+//    return _imgView;
+//}
 
 - (void)setText:(NSString *)text
 {
@@ -638,12 +605,12 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [self setNeedsLayout];
 }
 
-- (void)setImgName:(NSString *)imgName
-{
-    _imgName = imgName;
-    self.imgView.image = [UIImage imageNamed:_imgName];
-    [self setNeedsLayout];
-}
+//- (void)setImgName:(NSString *)imgName
+//{
+//    _imgName = imgName;
+//    self.imgView.image = [UIImage imageNamed:_imgName];
+//    [self setNeedsLayout];
+//}
 
 - (UIView *)grayView{
     if (!_grayView) {
@@ -659,13 +626,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [super layoutSubviews];
     
 //    self.imgView.frame = CGRectMake(10., 23., 10., 10.);
+    self.grayView.frame = CGRectMake(0, 0, kScreenWidth, 10.);
+
     CGFloat textWidth = [self.textLabel.text widthWithLineWidth:0. Font:self.textLabel.font];
-    
-    self.textLabel.frame = CGRectMake(0., 0., textWidth, 25.);
-    self.textLabel.deFrameTop = 20.;
+    self.textLabel.frame = CGRectMake(0., 0., textWidth, 20.);
+    self.textLabel.deFrameTop = self.grayView.deFrameBottom + 10.;
     self.textLabel.deFrameLeft = 12.;
     
-    self.grayView.frame = CGRectMake(0, 0, kScreenWidth, 10.);
     
 }
 

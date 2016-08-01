@@ -67,7 +67,7 @@
  * Search Page
  */
 "users"                     = "用户";
-"entity"                    = "商品";
+"entitie"                   = "商品";
 "articles"                  = "图文";
 "category"                  = "品类";
 "click to view all results" = "查看全部结果";
