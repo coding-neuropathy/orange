@@ -27,9 +27,10 @@
 
 @interface SearchFooterSection : UICollectionReusableView
 
-@property (strong, nonatomic)UILabel * textLabel;
-@property (strong, nonatomic)UIButton * moreBtn;
-@property (strong, nonatomic)UIView * separateView;
+@property (strong, nonatomic) UILabel * textLabel;
+@property (strong, nonatomic) UILabel * indicatorLabel;
+//@property (strong, nonatomic)UIButton * moreBtn;
+//@property (strong, nonatomic)UIView * separateView;
 @property (nonatomic, copy) void (^tapAllResultsBlock)();
 
 @end
@@ -535,9 +536,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         [self handleSearchText:self.keyword];
         
     }];
-    
-    
-    
 }
 
 #pragma mark - search log
@@ -679,16 +677,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     return self;
 }
 
-//- (UIView *)separateView
-//{
-//    if (!_separateView) {
-//        _separateView = [[UIView alloc]initWithFrame:CGRectZero];
-//        _separateView.backgroundColor = [UIColor redColor];
-//        [self addSubview:_separateView];
-//    }
-//    return _separateView;
-//}
-
 - (UILabel *)textLabel
 {
     if (!_textLabel)
@@ -705,34 +693,35 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     return _textLabel;
 }
 
-- (UIButton *)moreBtn
+- (UILabel *)indicatorLabel
 {
-    if (!_moreBtn) {
-        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_moreBtn setTitle:[NSString stringWithFormat:@"%@", [NSString fontAwesomeIconStringForEnum:FAAngleRight]] forState:UIControlStateNormal];
-        [_moreBtn setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-        _moreBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
-        [self addSubview:_moreBtn];
+    if (!_indicatorLabel) {
+        _indicatorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _indicatorLabel.text = [NSString stringWithFormat:@"%@", [NSString fontAwesomeIconStringForEnum:FAAngleRight]];
+        _indicatorLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _indicatorLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        [self addSubview:_indicatorLabel];
     }
-    return _moreBtn;
+    
+    return _indicatorLabel;
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.textLabel.frame = CGRectMake(12., 14., 84., 20.);
-//    self.textLabel.deFrameLeft = self.deFrameLeft + 12.;
-//    self.textLabel.deFrameLeft = self.deFrameTop + 14.;
-    if (IS_IPAD) {
-        self.moreBtn.frame = CGRectMake(0., 0., 20., 40.);
-        self.moreBtn.deFrameRight = self.deFrameRight;
-        self.moreBtn.deFrameTop = self.textLabel.deFrameTop;
-    }
-    self.moreBtn.frame = CGRectMake(358., 12., 5., 20.);
+    CGFloat textWidth = [self.textLabel.text widthWithLineWidth:0. Font:self.textLabel.font];
     
-    //    self.separateView.frame = CGRectMake(0.,40., kScreenWidth, 10.);
-    //    self.separateView.deFrameLeft = self.deFrameLeft;
-    //    self.separateView.deFrameBottom = self.deFrameBottom;
+    self.textLabel.frame = CGRectMake(12., 14., textWidth, 20.);
+    
+    if (IS_IPAD) {
+        self.indicatorLabel.frame = CGRectMake(0., 0., 20., 40.);
+        self.indicatorLabel.deFrameRight = self.deFrameRight;
+        self.indicatorLabel.deFrameTop = self.textLabel.deFrameTop;
+    } else {
+        self.indicatorLabel.frame = CGRectMake(0., 0., 20., 20.);
+        self.indicatorLabel.deFrameTop = 12.;
+        self.indicatorLabel.deFrameRight = self.deFrameWidth - 10.;
+    }
 }
 
 - (void)checkAllResults

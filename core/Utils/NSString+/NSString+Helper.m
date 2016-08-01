@@ -29,17 +29,13 @@
     NSMutableArray * array = [NSMutableArray arrayWithArray:[uri_string componentsSeparatedByString:@"/"]];
     
     [array insertObject:[NSNumber numberWithInteger:size] atIndex:1];
-    //        NSLog(@"%@", array);
     NSString * image_uri_string = [[array valueForKey:@"description"] componentsJoinedByString:@"/"];
-    //    NSLog(@"%@", image_uri_string);
     
     return [NSString stringWithFormat:@"http://imgcdn.guoku.com/%@", image_uri_string];
 }
 
 - (CGFloat)heightWithLineWidth:(CGFloat)width Font:(UIFont *)font LineHeight:(CGFloat)lineHeight
 {
-    
-    //    CGFloat width = 286;
     
     NSMutableAttributedString * attributedText = [[NSMutableAttributedString alloc] initWithString:self attributes:@{NSFontAttributeName: font}];
     
