@@ -290,28 +290,6 @@
         self.H.frame = CGRectMake(16., 0., self.deFrameWidth - 32., 1);
         self.H.deFrameBottom = self.contentView.deFrameHeight - 1;
     }
-    
-//    if (!self.timeButton) {
-//        _timeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];
-//        self.timeButton.layer.masksToBounds = YES;
-//        self.timeButton.layer.cornerRadius = 2;
-//        self.timeButton.backgroundColor = [UIColor clearColor];
-//        self.timeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-//        self.timeButton.titleLabel.textAlignment = NSTextAlignmentRight;
-//        [self.timeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-//        [self.timeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-//        [self.timeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,4, 0, 0)];
-//        [self.contentView addSubview:self.timeButton];
-//    }
-//    [self.timeButton setTitle:[NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.date stringWithDefaultFormat]] forState:UIControlStateNormal];
-//    self.timeButton.center = self.likeButton.center;
-//    self.timeButton.deFrameRight = self.contentLabel.deFrameRight;
-//    
-//    self.H.deFrameBottom = self.contentView.deFrameHeight;
-//    self.H2.deFrameBottom = self.contentView.deFrameHeight-10;
-//    
-//    self.loading.center = CGPointMake(self.image.deFrameWidth/2, self.image.deFrameHeight/2);
-//    [self.contentView bringSubviewToFront:self.loading];
 
 }
 

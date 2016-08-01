@@ -333,13 +333,8 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     switch (indexPath.section) {
         case 2:
         {
-            if (IS_IPHONE) {
-                cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);
-            }
-            else
-            {
-                cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 684 + 32);
-            }
+            cellsize = IS_IPHONE ? CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32) :
+                         CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 684 + 32);
         }
             break;
             
@@ -396,16 +391,14 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     CGFloat spacing = 0;
-    switch (section) {
-        case 2:
+//    switch (section) {
+//        case 2:
             
-            spacing = 1.;
-            
-            break;
-        default:
-            
-            break;
-    }
+//            spacing = 1.;
+//            break;
+//        default:
+//            break;
+//    }
     return spacing;
 }
 
@@ -736,10 +729,32 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     } else {
         self.indicatorLabel.frame = CGRectMake(0., 0., 20., 20.);
         self.indicatorLabel.deFrameTop = 12.;
-        self.indicatorLabel.deFrameRight = self.deFrameWidth - 10.;
+        self.indicatorLabel.deFrameRight = self.deFrameWidth - 12.;
     }
 }
 
+- (void)drawRect:(CGRect)rect
+{
+
+    [super drawRect:rect];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    
+    CGContextMoveToPoint(context, 0., 0.);
+    CGContextAddLineToPoint(context, self.deFrameWidth, 0.);
+    
+    CGContextMoveToPoint(context, 0., self.deFrameHeight);
+    CGContextAddLineToPoint(context, self.deFrameWidth, self.deFrameHeight);
+    
+    CGContextStrokePath(context);
+    
+}
+
+
+#pragma mark - block
 - (void)checkAllResults
 {
     if (self.tapAllResultsBlock) {

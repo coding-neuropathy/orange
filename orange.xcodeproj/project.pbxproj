@@ -2202,10 +2202,9 @@
 		4EA58AB71C1720E6003251FB /* SearchController */ = {
 			isa = PBXGroup;
 			children = (
+				8ACF394E1D4F264200BD7264 /* EntityResultViewController */,
 				23E64DAD1D2E381C00A4402C /* SearchController.h */,
 				23E64DAE1D2E381C00A4402C /* SearchController.m */,
-				23568D1C1D349469003F2611 /* EntityResultCell.h */,
-				23568D1D1D349469003F2611 /* EntityResultCell.m */,
 				23568D1F1D34D3DC003F2611 /* ArticleResultCell.h */,
 				23568D201D34D3DC003F2611 /* ArticleResultCell.m */,
 				2354BF291D4B2CC300D43556 /* UserResultCell.h */,
@@ -2216,8 +2215,6 @@
 				235A4FC51D37652B0039E1CB /* CategoryResultView.m */,
 				236EE0251D3C8173003E97D6 /* AlluserResultController.h */,
 				236EE0261D3C8173003E97D6 /* AlluserResultController.m */,
-				236EE0281D3CA2D1003E97D6 /* AllEntityResultController.h */,
-				236EE0291D3CA2D1003E97D6 /* AllEntityResultController.m */,
 				236EE02B1D3CA6C7003E97D6 /* AllArticleResultViewController.h */,
 				236EE02C1D3CA6C7003E97D6 /* AllArticleResultViewController.m */,
 			);
@@ -2383,6 +2380,17 @@
 				8A44F5981C7C066500D1DC19 /* ArticlePreViewController.m */,
 			);
 			name = PreViewControllers;
+			sourceTree = "<group>";
+		};
+		8ACF394E1D4F264200BD7264 /* EntityResultViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23568D1C1D349469003F2611 /* EntityResultCell.h */,
+				23568D1D1D349469003F2611 /* EntityResultCell.m */,
+				236EE0281D3CA2D1003E97D6 /* AllEntityResultController.h */,
+				236EE0291D3CA2D1003E97D6 /* AllEntityResultController.m */,
+			);
+			name = EntityResultViewController;
 			sourceTree = "<group>";
 		};
 		B70686721CF41D5E00C40825 /* RootViewController */ = {
