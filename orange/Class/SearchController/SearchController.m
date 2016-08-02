@@ -8,11 +8,14 @@
 
 #import "SearchController.h"
 
+#import "NoResultView.h"
+
 #import "UserResultCell.h"
 #import "EntityResultCell.h"
 #import "ArticleResultCell.h"
 //#import "UserResultView.h"
 #import "PinyinTools.h"
+
 #import "CategoryResultView.h"
 #import "SubCategoryEntityController.h"
 #import "AlluserResultController.h"
@@ -21,12 +24,11 @@
 
 #import "GKSearchData.h"
 
+
 #pragma mark - Search Header Section
 @interface SearchHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
 @property (strong, nonatomic) NSString * text;
-//@property (strong, nonatomic) UIImageView * imgView;
-//@property (strong, nonatomic) NSString * imgName;
 @property (strong, nonatomic) UIView *grayView;
 @end
 
@@ -46,6 +48,7 @@
 @interface SearchController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
+@property (strong, nonatomic) NoResultView * noResultView;
 
 @property (strong, nonatomic) NSMutableArray * categoryArray;
 //@property (nonatomic , strong)NSMutableArray * userArray;
@@ -116,17 +119,27 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     return _collectionView;
 }
 
+- (NoResultView *)noResultView
+{
+    if (!_noResultView) {
+        _noResultView = [[NoResultView alloc] initWithFrame:CGRectMake(0., 0., self.collectionView.deFrameWidth, self.collectionView.deFrameHeight)];
+        _noResultView.text = NSLocalizedStringFromTable(@"no-results", kLocalizedFile, nil);
+        _noResultView.hidden = YES;
+    }
+    return _noResultView;
+}
+
 - (void)loadView
 {
     [super loadView];
     
     self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    [self.view addSubview:self.collectionView];
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
+    [self.view addSubview:self.collectionView];
     
     [self.collectionView registerClass:[UserResultCell class] forCellWithReuseIdentifier:UserResultCellIdentifier];
     [self.collectionView registerClass:[EntityResultCell class] forCellWithReuseIdentifier:EntityResultCellIdentifier];
@@ -136,6 +149,10 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [self.collectionView registerClass:[CategoryResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier];
     [self.collectionView registerClass:[SearchFooterSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier];
     
+    [self.view addSubview:self.noResultView];
+    [self.noResultView bringSubviewToFront:self.collectionView];
+ 
+    [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -519,6 +536,10 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         return;
     }
     
+    if (!self.noResultView.hidden) {
+        self.noResultView.hidden = YES;
+    }
+    
     [UIView animateWithDuration:0.1 animations:^{
         
         [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
@@ -584,11 +605,15 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     if ([keyPath isEqualToString:@"isRefreshing"]) {
         if( ![[change valueForKeyPath:@"new"] integerValue])
         {
-            if (!self.searchData.error) {
+            if (!self.searchData.error && self.searchData.count > 0) {
                 [UIView setAnimationsEnabled:NO];
                 [self.collectionView reloadData];
                 [self.collectionView.pullToRefreshView stopAnimating];
                 [UIView setAnimationsEnabled:YES];
+            } else {
+                self.noResultView.hidden = NO;
+                [self.collectionView.pullToRefreshView stopAnimating];
+//                [self.view insertSubview:self.no atIndex:<#(NSInteger)#>]
             }
         }
     }

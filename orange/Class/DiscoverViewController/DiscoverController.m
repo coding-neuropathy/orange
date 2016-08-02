@@ -651,13 +651,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         case 0:
         {
             headerSize = IS_IPAD ? headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 228) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
-//            if (IS_IPHONE) {
-//                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
-//            }
-//            else {
-//                headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 228);
-////                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f* (kScreenWidth  - kTabBarWidth)/320);
-//            }
         }
             break;
         case 1:
@@ -742,28 +735,28 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     
     
     
-        SearchView * searchView = [[SearchView alloc]initWithFrame:CGRectZero];
-        self.searchView = searchView;
-        searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight)
+    SearchView * searchView = [[SearchView alloc]initWithFrame:CGRectZero];
+    self.searchView = searchView;
+    searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight)
                                     : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
-        searchView.tag = 999;
-        searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    searchView.tag = 999;
+    searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
         __weak __typeof(&*self)weakSelf = self;
-        [searchView setTaphotCategoryBtnBlock:^(NSString *hotString) {
+    [searchView setTaphotCategoryBtnBlock:^(NSString *hotString) {
             
            [weakSelf.searchVC.searchBar setText:hotString];
             
-        }];
-        [searchView setTapRecordBtnBlock:^(NSString *keyword) {
+    }];
+    [searchView setTapRecordBtnBlock:^(NSString *keyword) {
          
-           [weakSelf.searchVC.searchBar setText:keyword];
+        [weakSelf.searchVC.searchBar setText:keyword];
 
-        }];
+    }];
     
     
-       searchView.alpha = 1;
+    searchView.alpha = 1;
     
-       self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
 
 
     

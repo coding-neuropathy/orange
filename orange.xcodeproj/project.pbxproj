@@ -253,6 +253,7 @@
 		8A9255F71D50956400E6481F /* GKSelectionArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9255F51D50956400E6481F /* GKSelectionArticle.m */; };
 		8A9255FB1D50A0A800E6481F /* GKSearchData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9255F91D50A0A800E6481F /* GKSearchData.h */; };
 		8A9255FC1D50A0A800E6481F /* GKSearchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9255FA1D50A0A800E6481F /* GKSearchData.m */; };
+		8A9256011D50D1A500E6481F /* NoResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9256001D50D1A500E6481F /* NoResultView.m */; };
 		8AA0FE701C7DC6C0000BD702 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */; };
 		8AA0FE711C7DC6C0000BD702 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AA0FE6D1C7DC6C0000BD702 /* WeiboSDK.bundle */; };
 		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
@@ -857,6 +858,8 @@
 		8A9255F51D50956400E6481F /* GKSelectionArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKSelectionArticle.m; path = SelectionArticle/GKSelectionArticle.m; sourceTree = "<group>"; };
 		8A9255F91D50A0A800E6481F /* GKSearchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKSearchData.h; path = SearchResults/GKSearchData.h; sourceTree = "<group>"; };
 		8A9255FA1D50A0A800E6481F /* GKSearchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKSearchData.m; path = SearchResults/GKSearchData.m; sourceTree = "<group>"; };
+		8A9255FF1D50D1A500E6481F /* NoResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoResultView.h; sourceTree = "<group>"; };
+		8A9256001D50D1A500E6481F /* NoResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoResultView.m; sourceTree = "<group>"; };
 		8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		8AA0FE641C7DC6C0000BD702 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
 		8AA0FE651C7DC6C0000BD702 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
@@ -2201,19 +2204,15 @@
 		4EA58AB71C1720E6003251FB /* SearchController */ = {
 			isa = PBXGroup;
 			children = (
-				8ACF394E1D4F264200BD7264 /* EntityResultViewController */,
+				8A9255FE1D50D16A00E6481F /* UserResultController */,
+				8A9255FD1D50D13A00E6481F /* ArticleResultController */,
+				8ACF394E1D4F264200BD7264 /* EntityResultController */,
 				23E64DAD1D2E381C00A4402C /* SearchController.h */,
 				23E64DAE1D2E381C00A4402C /* SearchController.m */,
-				23568D1F1D34D3DC003F2611 /* ArticleResultCell.h */,
-				23568D201D34D3DC003F2611 /* ArticleResultCell.m */,
-				2354BF291D4B2CC300D43556 /* UserResultCell.h */,
-				2354BF2A1D4B2CC300D43556 /* UserResultCell.m */,
 				235A4FC41D37652B0039E1CB /* CategoryResultView.h */,
 				235A4FC51D37652B0039E1CB /* CategoryResultView.m */,
-				236EE0251D3C8173003E97D6 /* AlluserResultController.h */,
-				236EE0261D3C8173003E97D6 /* AlluserResultController.m */,
-				236EE02B1D3CA6C7003E97D6 /* AllArticleResultViewController.h */,
-				236EE02C1D3CA6C7003E97D6 /* AllArticleResultViewController.m */,
+				8A9255FF1D50D1A500E6481F /* NoResultView.h */,
+				8A9256001D50D1A500E6481F /* NoResultView.m */,
 			);
 			path = SearchController;
 			sourceTree = "<group>";
@@ -2375,6 +2374,28 @@
 			name = SearchResults;
 			sourceTree = "<group>";
 		};
+		8A9255FD1D50D13A00E6481F /* ArticleResultController */ = {
+			isa = PBXGroup;
+			children = (
+				23568D1F1D34D3DC003F2611 /* ArticleResultCell.h */,
+				23568D201D34D3DC003F2611 /* ArticleResultCell.m */,
+				236EE02B1D3CA6C7003E97D6 /* AllArticleResultViewController.h */,
+				236EE02C1D3CA6C7003E97D6 /* AllArticleResultViewController.m */,
+			);
+			name = ArticleResultController;
+			sourceTree = "<group>";
+		};
+		8A9255FE1D50D16A00E6481F /* UserResultController */ = {
+			isa = PBXGroup;
+			children = (
+				2354BF291D4B2CC300D43556 /* UserResultCell.h */,
+				2354BF2A1D4B2CC300D43556 /* UserResultCell.m */,
+				236EE0251D3C8173003E97D6 /* AlluserResultController.h */,
+				236EE0261D3C8173003E97D6 /* AlluserResultController.m */,
+			);
+			name = UserResultController;
+			sourceTree = "<group>";
+		};
 		8AA0FE621C7DC6C0000BD702 /* libWeiboSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -2408,7 +2429,7 @@
 			name = PreViewControllers;
 			sourceTree = "<group>";
 		};
-		8ACF394E1D4F264200BD7264 /* EntityResultViewController */ = {
+		8ACF394E1D4F264200BD7264 /* EntityResultController */ = {
 			isa = PBXGroup;
 			children = (
 				23568D1C1D349469003F2611 /* EntityResultCell.h */,
@@ -2416,7 +2437,7 @@
 				236EE0281D3CA2D1003E97D6 /* AllEntityResultController.h */,
 				236EE0291D3CA2D1003E97D6 /* AllEntityResultController.m */,
 			);
-			name = EntityResultViewController;
+			name = EntityResultController;
 			sourceTree = "<group>";
 		};
 		B70686721CF41D5E00C40825 /* RootViewController */ = {
@@ -3328,6 +3349,7 @@
 				8A4E8F8F1C1A8D5B003EBE95 /* SVRadialGradientLayer.m in Sources */,
 				B72ACCC81B666B8C0020E841 /* DiscoverBannerView.m in Sources */,
 				4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */,
+				8A9256011D50D1A500E6481F /* NoResultView.m in Sources */,
 				B769B1251B2ACE91004401FA /* IFTTTTransform3DAnimation.m in Sources */,
 				4E688A021BA9C2BA0006AD9B /* JSQMessagesViewController.m in Sources */,
 				4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */,

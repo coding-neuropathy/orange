@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "DiscoverController.h"
 
-@interface SearchController : UIViewController<UISearchResultsUpdating>
+@interface SearchController : UIViewController <UISearchResultsUpdating>
 
-@property (nonatomic , weak)DiscoverController * discoverVC;
+@property (nonatomic, weak) DiscoverController * discoverVC;
 
 - (void)searchText:(NSString *)string;
 

@@ -71,6 +71,7 @@
 "articles"                      = "Articles";
 "category"                      = "Category";
 "click to view all results"     = "Click To View All Results";
+"no-results"                    = "No Results";
 
 /*
  * entity page
