@@ -11,7 +11,7 @@
 //#import "PreviewArticleController.h"
 
 
-static int lastContentOffset;
+//static int lastContentOffset;
 
 
 @interface ArticlesController () <UIViewControllerPreviewingDelegate>

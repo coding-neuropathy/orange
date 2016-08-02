@@ -12,7 +12,7 @@
 #import <WebKit/WebKit.h>
 #import "WebViewProgressView.h"
 #import "SDWebImageDownloader.h"
-#import "EntityViewController.h"
+//#import "EntityViewController.h"
 
 #import "ShareView.h"
 #import "LoginView.h"
@@ -76,6 +76,7 @@
     }
     return _digBtn;
 }
+
 //更多按钮
 - (UIButton *)more
 {
@@ -90,6 +91,7 @@
     }
     return _more;
 }
+
 //点赞字样
 - (UIButton *)digLabel
 {
@@ -135,12 +137,12 @@
     return _commentLabel;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self.navigationController setToolbarHidden:NO animated:YES];
-}
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    
+//    
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -200,24 +202,24 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    
 //    if(IS_IPAD) self.tabBarController.tabBar.translucent = YES;
     //    [self.navigationController.navigationBar addSubview:self.progressView];
     //    [AVAnalytics beginLogPageView:@"webView"];
+    [self.navigationController setToolbarHidden:NO animated:NO];
     [MobClick beginLogPageView:@"articleWebView"];
+    [super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
     //    [self.progressView removeFromSuperview];
-    [self.navigationController setToolbarHidden:YES animated:YES];
+    [self.navigationController setToolbarHidden:YES animated:NO];
+    
+    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
     
     [MobClick endLogPageView:@"articleWebView"];
-
-    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
-   
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)setDigBtnIsShow:(BOOL)isShow{
@@ -233,9 +235,6 @@
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
     self.title = NSLocalizedStringFromTable(@"load", kLocalizedFile, nil);
-    
-    
-
 }
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
@@ -276,35 +275,31 @@
 {
     if(!k_isLogin)
     {
-        LoginView * view = [[LoginView alloc]init];
+        LoginView * view = [[LoginView alloc] init];
         [view show];
         return;
     }
     else
     {
     
-    ArticleCommentController * vc = [[ArticleCommentController alloc]init];
+        ArticleCommentController * vc = [[ArticleCommentController alloc]init];
+        vc.article = self.article;
+        vc.comment = self.comment;
     
-    vc.article = self.article;
+        vc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
     
-    vc.comment = self.comment;
-    
-    vc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
-    
-    vc.modalPresentationStyle = UIModalPresentationFullScreen;
-    
-    [vc setCommentSuccessBlock:^(GKArticleComment *comment) {
+        [vc setCommentSuccessBlock:^(GKArticleComment *comment) {
        
-        self.comment = comment;
+            self.comment = comment;
         
-        [self.webView reload];
+            [self.webView reload];
         
-    }];
+        }];
     
-    [vc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        [vc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
 
-    [self presentViewController:vc animated:YES completion:nil];
-        
+        [self presentViewController:vc animated:YES completion:nil];
     }
 }
 
@@ -449,7 +444,9 @@
 
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     _flexItem = flexItem;
-    [self setToolbarItems:[NSArray arrayWithObjects:digItem,digLabelItem,commentItem,commentLabelItem,flexItem,moreItem,nil]];
+    [self setToolbarItems:[NSArray arrayWithObjects:digItem, digLabelItem,
+                                                    commentItem, commentLabelItem,
+                                                    flexItem, moreItem, nil]];
 }
 
 @end

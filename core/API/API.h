@@ -809,7 +809,7 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  */
 + (void)searchWithKeyword:(NSString *)keyword
                   Success:(void (^)(NSArray *entities, NSArray * articles, NSArray * users))success
-                  failure:(void (^)(NSInteger stateCode))failure;
+                  failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 /**
  *  搜索商品
  *

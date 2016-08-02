@@ -19,3 +19,4 @@
 
 #import "GKSelectionEntity.h"
 #import "GKSelectionArticle.h"
+#import "GKSearchData.h"

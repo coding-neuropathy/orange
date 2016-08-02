@@ -12,7 +12,6 @@
 		2354BF2B1D4B2CC300D43556 /* UserResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2354BF2A1D4B2CC300D43556 /* UserResultCell.m */; };
 		23568D1E1D349469003F2611 /* EntityResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D1D1D349469003F2611 /* EntityResultCell.m */; };
 		23568D211D34D3DC003F2611 /* ArticleResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D201D34D3DC003F2611 /* ArticleResultCell.m */; };
-		23568D241D34DCE8003F2611 /* UserResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D231D34DCE8003F2611 /* UserResultView.m */; };
 		235A2FE01D127D8600109000 /* MoreArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 235A2FDF1D127D8600109000 /* MoreArticleCell.m */; };
 		235A4FC61D37652B0039E1CB /* CategoryResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 235A4FC51D37652B0039E1CB /* CategoryResultView.m */; };
 		236EE0271D3C8173003E97D6 /* AlluserResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EE0261D3C8173003E97D6 /* AlluserResultController.m */; };
@@ -250,8 +249,10 @@
 		8A4E8F8F1C1A8D5B003EBE95 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E8F8B1C1A8D5B003EBE95 /* SVRadialGradientLayer.m */; };
 		8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */; };
 		8A8418AC1C06FDB900F55FE9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */; };
-		8A9255F21D508CCB00E6481F /* GKSelectionArticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9255F01D508CCB00E6481F /* GKSelectionArticle.h */; };
-		8A9255F31D508CCB00E6481F /* GKSelectionArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9255F11D508CCB00E6481F /* GKSelectionArticle.m */; };
+		8A9255F61D50956400E6481F /* GKSelectionArticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9255F41D50956400E6481F /* GKSelectionArticle.h */; };
+		8A9255F71D50956400E6481F /* GKSelectionArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9255F51D50956400E6481F /* GKSelectionArticle.m */; };
+		8A9255FB1D50A0A800E6481F /* GKSearchData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9255F91D50A0A800E6481F /* GKSearchData.h */; };
+		8A9255FC1D50A0A800E6481F /* GKSearchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9255FA1D50A0A800E6481F /* GKSearchData.m */; };
 		8AA0FE701C7DC6C0000BD702 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */; };
 		8AA0FE711C7DC6C0000BD702 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AA0FE6D1C7DC6C0000BD702 /* WeiboSDK.bundle */; };
 		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
@@ -264,7 +265,6 @@
 		8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */; };
 		8AB731DA1C1BBDAD0076BACC /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */; };
 		8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D91C1BBDAD0076BACC /* SettingsViewCell.m */; };
-		8ABA73351B73A8E7006A8F56 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABA73341B73A8E7006A8F56 /* SearchResultsViewController.m */; };
 		8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */; };
 		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
@@ -474,8 +474,6 @@
 		23568D1D1D349469003F2611 /* EntityResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityResultCell.m; sourceTree = "<group>"; };
 		23568D1F1D34D3DC003F2611 /* ArticleResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleResultCell.h; sourceTree = "<group>"; };
 		23568D201D34D3DC003F2611 /* ArticleResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleResultCell.m; sourceTree = "<group>"; };
-		23568D221D34DCE8003F2611 /* UserResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserResultView.h; sourceTree = "<group>"; };
-		23568D231D34DCE8003F2611 /* UserResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserResultView.m; sourceTree = "<group>"; };
 		235A2FDE1D127D8600109000 /* MoreArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticleCell.h; sourceTree = "<group>"; };
 		235A2FDF1D127D8600109000 /* MoreArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticleCell.m; sourceTree = "<group>"; };
 		235A4FC41D37652B0039E1CB /* CategoryResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryResultView.h; sourceTree = "<group>"; };
@@ -855,8 +853,10 @@
 		8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntityCategoryController.m; sourceTree = "<group>"; };
 		8A7B791F1BAAB9310089FFD6 /* DataStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructure.h; sourceTree = "<group>"; };
 		8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		8A9255F01D508CCB00E6481F /* GKSelectionArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKSelectionArticle.h; sourceTree = "<group>"; };
-		8A9255F11D508CCB00E6481F /* GKSelectionArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKSelectionArticle.m; sourceTree = "<group>"; };
+		8A9255F41D50956400E6481F /* GKSelectionArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKSelectionArticle.h; path = SelectionArticle/GKSelectionArticle.h; sourceTree = "<group>"; };
+		8A9255F51D50956400E6481F /* GKSelectionArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKSelectionArticle.m; path = SelectionArticle/GKSelectionArticle.m; sourceTree = "<group>"; };
+		8A9255F91D50A0A800E6481F /* GKSearchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKSearchData.h; path = SearchResults/GKSearchData.h; sourceTree = "<group>"; };
+		8A9255FA1D50A0A800E6481F /* GKSearchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKSearchData.m; path = SearchResults/GKSearchData.m; sourceTree = "<group>"; };
 		8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		8AA0FE641C7DC6C0000BD702 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
 		8AA0FE651C7DC6C0000BD702 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
@@ -888,8 +888,6 @@
 		8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsFooterView.m; sourceTree = "<group>"; };
 		8AB731D81C1BBDAD0076BACC /* SettingsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewCell.h; sourceTree = "<group>"; };
 		8AB731D91C1BBDAD0076BACC /* SettingsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewCell.m; sourceTree = "<group>"; };
-		8ABA73331B73A8E7006A8F56 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
-		8ABA73341B73A8E7006A8F56 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		8ABC7DDF1C056B6000A15147 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		8ABC7DE01C056B6000A15147 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -1438,6 +1436,7 @@
 		39B720021B1F4C16008519E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8A9255F81D50A01D00E6481F /* SearchResults */,
 				8A9255EE1D508B3300E6481F /* Base */,
 				B76818C51D34CF4B009870C2 /* Article */,
 				8A9255EF1D508C9E00E6481F /* SelectionArticle */,
@@ -1619,8 +1618,6 @@
 		4E1D70191A5ADB890032719E /* DiscoverViewController */ = {
 			isa = PBXGroup;
 			children = (
-				8ABA73331B73A8E7006A8F56 /* SearchResultsViewController.h */,
-				8ABA73341B73A8E7006A8F56 /* SearchResultsViewController.m */,
 				B72ACCC01B66531E0020E841 /* DiscoverController.h */,
 				B72ACCC11B66531E0020E841 /* DiscoverController.m */,
 				B72ACCC61B666B8C0020E841 /* DiscoverBannerView.h */,
@@ -2211,8 +2208,6 @@
 				23568D201D34D3DC003F2611 /* ArticleResultCell.m */,
 				2354BF291D4B2CC300D43556 /* UserResultCell.h */,
 				2354BF2A1D4B2CC300D43556 /* UserResultCell.m */,
-				23568D221D34DCE8003F2611 /* UserResultView.h */,
-				23568D231D34DCE8003F2611 /* UserResultView.m */,
 				235A4FC41D37652B0039E1CB /* CategoryResultView.h */,
 				235A4FC51D37652B0039E1CB /* CategoryResultView.m */,
 				236EE0251D3C8173003E97D6 /* AlluserResultController.h */,
@@ -2365,10 +2360,19 @@
 		8A9255EF1D508C9E00E6481F /* SelectionArticle */ = {
 			isa = PBXGroup;
 			children = (
-				8A9255F01D508CCB00E6481F /* GKSelectionArticle.h */,
-				8A9255F11D508CCB00E6481F /* GKSelectionArticle.m */,
+				8A9255F41D50956400E6481F /* GKSelectionArticle.h */,
+				8A9255F51D50956400E6481F /* GKSelectionArticle.m */,
 			);
 			name = SelectionArticle;
+			sourceTree = "<group>";
+		};
+		8A9255F81D50A01D00E6481F /* SearchResults */ = {
+			isa = PBXGroup;
+			children = (
+				8A9255F91D50A0A800E6481F /* GKSearchData.h */,
+				8A9255FA1D50A0A800E6481F /* GKSearchData.m */,
+			);
+			name = SearchResults;
 			sourceTree = "<group>";
 		};
 		8AA0FE621C7DC6C0000BD702 /* libWeiboSDK */ = {
@@ -2873,6 +2877,7 @@
 			files = (
 				39B720691B1F4C16008519E3 /* AFURLResponseSerialization.h in Headers */,
 				39B720611B1F4C16008519E3 /* AFNetworkReachabilityManager.h in Headers */,
+				8A9255FB1D50A0A800E6481F /* GKSearchData.h in Headers */,
 				39B7205A1B1F4C16008519E3 /* AFHTTPRequestOperation.h in Headers */,
 				39B720331B1F4C16008519E3 /* BaseHttpClient.h in Headers */,
 				39B7206B1B1F4C16008519E3 /* AFURLSessionManager.h in Headers */,
@@ -2887,7 +2892,7 @@
 				39B7203B1B1F4C16008519E3 /* NSString+App.h in Headers */,
 				39B720441B1F4C16008519E3 /* GKBaseModel.h in Headers */,
 				39B7204D1B1F4C16008519E3 /* GKNote.h in Headers */,
-				8A9255F21D508CCB00E6481F /* GKSelectionArticle.h in Headers */,
+				8A9255F61D50956400E6481F /* GKSelectionArticle.h in Headers */,
 				39B720671B1F4C16008519E3 /* AFURLRequestSerialization.h in Headers */,
 				39B720631B1F4C16008519E3 /* AFSecurityPolicy.h in Headers */,
 				B776A0A91CA65FA40021FFAB /* GKBaseData.h in Headers */,
@@ -3126,7 +3131,7 @@
 				39B720471B1F4C16008519E3 /* GKComment.m in Sources */,
 				39B7204B1B1F4C16008519E3 /* GKEntityCategory.m in Sources */,
 				39B720521B1F4C16008519E3 /* GKUser.m in Sources */,
-				8A9255F31D508CCB00E6481F /* GKSelectionArticle.m in Sources */,
+				8A9255F71D50956400E6481F /* GKSelectionArticle.m in Sources */,
 				39B720321B1F4C16008519E3 /* API.m in Sources */,
 				39B720451B1F4C16008519E3 /* GKBaseModel.m in Sources */,
 				39B720501B1F4C16008519E3 /* GKPurchase.m in Sources */,
@@ -3149,6 +3154,7 @@
 				B776A0AA1CA65FA40021FFAB /* GKBaseData.m in Sources */,
 				B76818C91D34D05B009870C2 /* GKArticleComment.m in Sources */,
 				39B720741B1F4E78008519E3 /* GKNote+ImageURLFixes.m in Sources */,
+				8A9255FC1D50A0A800E6481F /* GKSearchData.m in Sources */,
 				39B720341B1F4C16008519E3 /* BaseHttpClient.m in Sources */,
 				39B720621B1F4C16008519E3 /* AFNetworkReachabilityManager.m in Sources */,
 				B796C0891BC17D8E006F4DE1 /* ImageCache.m in Sources */,
@@ -3188,7 +3194,6 @@
 				8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */,
 				4E688A211BA9C2BA0006AD9B /* JSQMessagesToolbarContentView.m in Sources */,
 				B772BE941BD50605005C1540 /* UserHeaderSectionView.m in Sources */,
-				8ABA73351B73A8E7006A8F56 /* SearchResultsViewController.m in Sources */,
 				B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */,
 				B706868D1CF41E7D00C40825 /* TabBarViewcontroller.m in Sources */,
 				B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */,
@@ -3391,7 +3396,6 @@
 				8AAA2D141C04444800B27E49 /* EntityPreViewController.m in Sources */,
 				4E7869691BA70C5A00586BD9 /* EntityHeaderBuyView.m in Sources */,
 				4E6889FD1BA9C2BA0006AD9B /* UIColor+JSQMessages.m in Sources */,
-				23568D241D34DCE8003F2611 /* UserResultView.m in Sources */,
 				B7F9EB101B28894B00887582 /* EntityLikerController.m in Sources */,
 				4E688A131BA9C2BA0006AD9B /* JSQVideoMediaItem.m in Sources */,
 				B70686A51CF422F100C40825 /* MenuController.m in Sources */,

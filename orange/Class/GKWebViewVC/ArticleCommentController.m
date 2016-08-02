@@ -230,7 +230,6 @@
     
     NSString * content = self.textView.text;
     
-    
         [API postCommentForArticleWithArticleId:self.article.articleId Content:content success:^(GKArticleComment *comment) {
             
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -243,9 +242,6 @@
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showErrorWithStatus:@"发布失败"];
         }];
-    
-    
-    
 }
 
 @end

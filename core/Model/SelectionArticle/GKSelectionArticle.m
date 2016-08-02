@@ -36,7 +36,7 @@
 //        [self.collectionView reloadData];
         [self saveEntityToIndexWithData:articles];
     } failure:^(NSInteger stateCode, NSError * error) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
         self.error = error;
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
     }];
@@ -53,7 +53,7 @@
             [self saveEntityToIndexWithData:articles];
         } failure:^(NSInteger stateCode, NSError * error) {
             self.error = error;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
             [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
         }];
 }

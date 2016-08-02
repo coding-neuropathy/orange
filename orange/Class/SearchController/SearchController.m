@@ -19,6 +19,9 @@
 #import "AllEntityResultController.h"
 #import "AllArticleResultViewController.h"
 
+#import "GKSearchData.h"
+
+#pragma mark - Search Header Section
 @interface SearchHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
 @property (strong, nonatomic) NSString * text;
@@ -27,6 +30,7 @@
 @property (strong, nonatomic) UIView *grayView;
 @end
 
+#pragma mark - Search Footer Section
 @interface SearchFooterSection : UICollectionReusableView
 
 @property (strong, nonatomic) UILabel * textLabel;
@@ -37,17 +41,21 @@
 
 @end
 
+
+#pragma mark - Search View Controller
 @interface SearchController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic , strong)UICollectionView * collectionView;
+@property (strong, nonatomic) UICollectionView * collectionView;
 
-@property (nonatomic , strong)NSMutableArray * categoryArray;
-@property (nonatomic , strong)NSMutableArray * userArray;
-@property (nonatomic , strong)NSMutableArray * entityArray;
-@property (nonatomic , strong)NSMutableArray * articleArray;
+@property (strong, nonatomic) NSMutableArray * categoryArray;
+//@property (nonatomic , strong)NSMutableArray * userArray;
+//@property (nonatomic , strong)NSMutableArray * entityArray;
+//@property (nonatomic , strong)NSMutableArray * articleArray;
 
-@property (nonatomic, strong) NSString *keyword;
-@property (nonatomic, weak) UISearchBar * searchBar;
+@property (strong, nonatomic) GKSearchData * searchData;
+
+@property (strong, nonatomic) NSString *keyword;
+@property (weak, nonatomic) UISearchBar * searchBar;
 
 @property (strong, nonatomic) UIApplication * app;
 
@@ -70,6 +78,24 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     return _app;
 }
 
+- (void)dealloc
+{
+    [self.searchData removeTheObserverWithObject:self];
+}
+
+#pragma mark - init search data
+- (GKSearchData *)searchData
+{
+    if (!_searchData) {
+        _searchData = [[GKSearchData alloc] init];
+        
+        [_searchData addTheObserverWithObject:self];
+    }
+    return _searchData;
+}
+
+
+#pragma mark - init collection view
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
@@ -110,36 +136,52 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [self.collectionView registerClass:[CategoryResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier];
     [self.collectionView registerClass:[SearchFooterSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier];
     
-
 }
 
-#pragma mark - get search results;
-- (void)refresh
+- (void)viewWillAppear:(BOOL)animated
 {
-    [API searchWithKeyword:self.keyword Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
-        self.entityArray = [NSMutableArray arrayWithArray:entities];
-        self.userArray = [NSMutableArray arrayWithArray:users];
-        self.articleArray = [NSMutableArray arrayWithArray:articles];
-        
-        [self.collectionView.pullToRefreshView stopAnimating];
-        [self.collectionView reloadData];
-        
-    } failure:^(NSInteger stateCode) {
-        [self.collectionView.pullToRefreshView stopAnimating];
-    }];
+    [MobClick beginLogPageView:@"SearchView"];
+    [super viewWillAppear:animated];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.collectionView.scrollsToTop = NO;
+    if (self.searchBar.text) {
+        [self addSearchLog:self.searchBar.text];
+    }
+    
+    [MobClick endLogPageView:@"SearchView"];
+    [super viewWillDisappear:animated];
+}
+    
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - get search results;
+//- (void)refresh
+//{
+//    [API searchWithKeyword:self.keyword Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
+//        self.entityArray = [NSMutableArray arrayWithArray:entities];
+//        self.userArray = [NSMutableArray arrayWithArray:users];
+//        self.articleArray = [NSMutableArray arrayWithArray:articles];
+//        
+//        [self.collectionView.pullToRefreshView stopAnimating];
+//        [self.collectionView reloadData];
+//        
+//    } failure:^(NSInteger stateCode) {
+//        [self.collectionView.pullToRefreshView stopAnimating];
+//    }];
+//}
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
     __weak __typeof(&*self)weakSelf = self;
     [self.collectionView addPullToRefreshWithActionHandler:^{
-        [weakSelf refresh];
+        [weakSelf.searchData refreshWithKeyWord:weakSelf.keyword];
     }];
 }
 
@@ -157,30 +199,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             
             break;
         case 1:
-            count = self.userArray.count;
-            if (count > 3) count = 3;
+            count = self.searchData.userCount;
             break;
         case 2:
-        {
-            if (self.entityArray.count > 3) {
-                count = 3;
-            }
-            else
-            {
-                count = self.entityArray.count;
-            }
-        }
+            count = self.searchData.entityCount;
             break;
         case 3:
-        {
-            if (self.articleArray.count > 3) {
-                count = 3;
-            }
-            else
-            {
-                count = self.articleArray.count;
-            }
-        }
+            count = self.searchData.articleCount;
             break;
         default:
             break;
@@ -195,7 +220,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         case 1:
         {
             UserResultCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserResultCellIdentifier forIndexPath:indexPath];
-            cell.user = [self.userArray objectAtIndex:indexPath.row];
+            cell.user = [self.searchData userAtIndex:indexPath.row];
             cell.tapRelationAction = ^(UIAlertController * ac){
                 [self presentViewController:ac animated:YES completion:nil];
             };
@@ -205,13 +230,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         case 3:
         {
             ArticleResultCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleResultCellIdentifier forIndexPath:indexPath];
-            cell.article = self.articleArray[indexPath.row];
+            cell.article = [self.searchData articleAtIndex:indexPath.row];
             return cell;
         }
         default:
         {
             EntityResultCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityResultCellIdentifier forIndexPath:indexPath];
-            cell.entity = self.entityArray[indexPath.row];
+            cell.entity = [self.searchData entityAtIndex:indexPath.row];
             return cell;
         }
             break;
@@ -400,20 +425,20 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             break;
         case 1:
         {
-            if (self.userArray.count > 0)
+            if (self.searchData.userCount > 0)
                 headerSize = CGSizeMake(kScreenWidth, 50.);
 
         }
             break;
         case 2:
         {
-            if (self.entityArray.count > 0)
+            if (self.searchData.entityCount > 0)
                 headerSize = CGSizeMake(kScreenWidth, 50.);
         }
             break;
         case 3:
         {
-            if (self.articleArray.count > 0)
+            if (self.searchData.articleCount > 0)
                 headerSize = CGSizeMake(kScreenWidth, 50.);
         }
             break;
@@ -429,13 +454,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     switch (section) {
             
         case 1:
-            if (self.userArray.count > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
+            if (self.searchData.userCount > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
             break;
         case 2:
-            if (self.entityArray.count > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
+            if (self.searchData.entityCount > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
             break;
         case 3:
-            if (self.articleArray.count > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
+            if (self.searchData.articleCount > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
             break;
         default:
             footerSize = CGSizeMake(0., 0.);
@@ -450,20 +475,20 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     switch (indexPath.section) {
         case 1:
         {
-            GKUser * user = [self.userArray objectAtIndex:indexPath.row];
+            GKUser * user = [self.searchData userAtIndex:indexPath.row];
             [[OpenCenter sharedOpenCenter] openUser:user];
         }
             break;
         case 2:
         {
-            GKEntity * entity = self.entityArray[indexPath.row];
+            GKEntity * entity = [self.searchData entityAtIndex:indexPath.row];
             [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
         }
             break;
             
         default:
         {
-            GKArticle * article = self.articleArray[indexPath.row];
+            GKArticle * article = [self.searchData articleAtIndex:indexPath.row];
             [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
         }
             break;
@@ -534,15 +559,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    self.collectionView.scrollsToTop = NO;
-    if (self.searchBar.text) {
-        [self addSearchLog:self.searchBar.text];
-    }
-}
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -571,6 +587,25 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
      }];
     
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
+
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"isRefreshing"]) {
+        if( ![[change valueForKeyPath:@"new"] integerValue])
+        {
+            if (!self.searchData.error) {
+                [UIView setAnimationsEnabled:NO];
+                [self.collectionView reloadData];
+                [self.collectionView.pullToRefreshView stopAnimating];
+                [UIView setAnimationsEnabled:YES];
+            }
+        }
+    }
+
+    
 }
 
 @end

@@ -50,7 +50,7 @@
         
         
     } failure:^(NSInteger stateCode, NSError * error) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
         //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
         //            [SVProgressHUD dismiss];
         //        [self.tableView.pullToRefreshView stopAnimating];
@@ -82,7 +82,7 @@
         
     } failure:^(NSInteger stateCode, NSError * error) {
         self.error = error;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
         [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
        
     }];

@@ -44,8 +44,10 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
 - (void)openAuthUser:(GKUser *)user
 {
-    authorizedUserViewController * vc = [[authorizedUserViewController alloc]initWithUser:user];
+    authorizedUserViewController * vc = [[authorizedUserViewController alloc] initWithUser:user];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
+    
+    DDLogError(@"OKOKOKOKOKOKO");
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
@@ -141,7 +143,6 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 {
     ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithArticle:article];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
-    
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 //    vc.hidesBottomBarWhenPushed = NO;
 }

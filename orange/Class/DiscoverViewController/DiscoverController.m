@@ -33,12 +33,16 @@
 #import "SearchView.h"
 #import "SearchController.h"
 #import "SubCategoryEntityController.h"
+
+
 @interface DiscoverHeaderSection : UICollectionReusableView
 @property (strong, nonatomic) UILabel * textLabel;
 @property (strong, nonatomic) NSString * text;
 @end
 
-@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate, UISearchControllerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate, UIViewControllerPreviewingDelegate>
+@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate,
+                                    UISearchControllerDelegate, UISearchBarDelegate,
+                                    UIGestureRecognizerDelegate, UIViewControllerPreviewingDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NSArray * bannerArray;
@@ -140,8 +144,9 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         if (IS_IPHONE) {
-            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth,
-                                                                                 kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
+            _collectionView = [[UICollectionView alloc]
+                               initWithFrame:CGRectMake(0., 0., kScreenWidth,
+                                kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
         } else {
             _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
         }
@@ -739,7 +744,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     
         SearchView * searchView = [[SearchView alloc]initWithFrame:CGRectZero];
         self.searchView = searchView;
-        searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
+        searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight)
+                                    : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
         searchView.tag = 999;
         searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
         __weak __typeof(&*self)weakSelf = self;
