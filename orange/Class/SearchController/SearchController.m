@@ -537,6 +537,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
     self.collectionView.scrollsToTop = NO;
     if (self.searchBar.text) {
         [self addSearchLog:self.searchBar.text];
@@ -559,7 +560,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-         
          self.collectionView.frame = CGRectMake(0., 0., 684., size.height);
          if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight ||
              self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
@@ -724,9 +724,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     
     CGContextMoveToPoint(context, 0., self.deFrameHeight);
     CGContextAddLineToPoint(context, self.deFrameWidth, self.deFrameHeight);
-    
     CGContextStrokePath(context);
-    
 }
 
 

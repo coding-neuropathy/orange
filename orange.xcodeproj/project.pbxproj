@@ -250,6 +250,8 @@
 		8A4E8F8F1C1A8D5B003EBE95 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E8F8B1C1A8D5B003EBE95 /* SVRadialGradientLayer.m */; };
 		8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */; };
 		8A8418AC1C06FDB900F55FE9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */; };
+		8A9255F21D508CCB00E6481F /* GKSelectionArticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9255F01D508CCB00E6481F /* GKSelectionArticle.h */; };
+		8A9255F31D508CCB00E6481F /* GKSelectionArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9255F11D508CCB00E6481F /* GKSelectionArticle.m */; };
 		8AA0FE701C7DC6C0000BD702 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */; };
 		8AA0FE711C7DC6C0000BD702 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AA0FE6D1C7DC6C0000BD702 /* WeiboSDK.bundle */; };
 		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
@@ -853,6 +855,8 @@
 		8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntityCategoryController.m; sourceTree = "<group>"; };
 		8A7B791F1BAAB9310089FFD6 /* DataStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructure.h; sourceTree = "<group>"; };
 		8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		8A9255F01D508CCB00E6481F /* GKSelectionArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKSelectionArticle.h; sourceTree = "<group>"; };
+		8A9255F11D508CCB00E6481F /* GKSelectionArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKSelectionArticle.m; sourceTree = "<group>"; };
 		8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		8AA0FE641C7DC6C0000BD702 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
 		8AA0FE651C7DC6C0000BD702 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
@@ -1434,11 +1438,11 @@
 		39B720021B1F4C16008519E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8A9255EE1D508B3300E6481F /* Base */,
 				B76818C51D34CF4B009870C2 /* Article */,
+				8A9255EF1D508C9E00E6481F /* SelectionArticle */,
 				B7930F931CA8D89F009FDD9F /* SelectionEntity */,
 				B776A0AB1CA6645F0021FFAB /* Entity */,
-				39B720031B1F4C16008519E3 /* GKBaseModel.h */,
-				39B720041B1F4C16008519E3 /* GKBaseModel.m */,
 				39B720051B1F4C16008519E3 /* GKComment.h */,
 				39B720061B1F4C16008519E3 /* GKComment.m */,
 				39B720091B1F4C16008519E3 /* GKEntityCategory.h */,
@@ -1454,8 +1458,6 @@
 				B78C4E0D1B676ED5006620F7 /* GKCategory.m */,
 				8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */,
 				8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */,
-				B776A0A71CA65FA40021FFAB /* GKBaseData.h */,
-				B776A0A81CA65FA40021FFAB /* GKBaseData.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2349,6 +2351,26 @@
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
+		8A9255EE1D508B3300E6481F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				39B720031B1F4C16008519E3 /* GKBaseModel.h */,
+				39B720041B1F4C16008519E3 /* GKBaseModel.m */,
+				B776A0A71CA65FA40021FFAB /* GKBaseData.h */,
+				B776A0A81CA65FA40021FFAB /* GKBaseData.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		8A9255EF1D508C9E00E6481F /* SelectionArticle */ = {
+			isa = PBXGroup;
+			children = (
+				8A9255F01D508CCB00E6481F /* GKSelectionArticle.h */,
+				8A9255F11D508CCB00E6481F /* GKSelectionArticle.m */,
+			);
+			name = SelectionArticle;
+			sourceTree = "<group>";
+		};
 		8AA0FE621C7DC6C0000BD702 /* libWeiboSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -2865,6 +2887,7 @@
 				39B7203B1B1F4C16008519E3 /* NSString+App.h in Headers */,
 				39B720441B1F4C16008519E3 /* GKBaseModel.h in Headers */,
 				39B7204D1B1F4C16008519E3 /* GKNote.h in Headers */,
+				8A9255F21D508CCB00E6481F /* GKSelectionArticle.h in Headers */,
 				39B720671B1F4C16008519E3 /* AFURLRequestSerialization.h in Headers */,
 				39B720631B1F4C16008519E3 /* AFSecurityPolicy.h in Headers */,
 				B776A0A91CA65FA40021FFAB /* GKBaseData.h in Headers */,
@@ -3103,6 +3126,7 @@
 				39B720471B1F4C16008519E3 /* GKComment.m in Sources */,
 				39B7204B1B1F4C16008519E3 /* GKEntityCategory.m in Sources */,
 				39B720521B1F4C16008519E3 /* GKUser.m in Sources */,
+				8A9255F31D508CCB00E6481F /* GKSelectionArticle.m in Sources */,
 				39B720321B1F4C16008519E3 /* API.m in Sources */,
 				39B720451B1F4C16008519E3 /* GKBaseModel.m in Sources */,
 				39B720501B1F4C16008519E3 /* GKPurchase.m in Sources */,

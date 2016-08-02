@@ -18,7 +18,7 @@
 
 @implementation GKArticle
 
-static NSString * imageHost = @"http://imgcdn.guoku.com/";
+//static NSString * imageHost = @"http://imgcdn.guoku.com/";
 
 + (NSDictionary *)dictionaryForServerAndClientKeys
 {
@@ -49,7 +49,7 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
 
 - (NSURL *)coverURL
 {
-    NSString * url_stirng = [NSString stringWithFormat:@"%@%@", imageHost, self.cover];
+    NSString * url_stirng = [NSString stringWithFormat:@"%@%@", KImageHost, self.cover];
     ;
     return [NSURL URLWithString:url_stirng];
 //    return [NSURL URLWithString:[url_stirng imageURLWithSize:240.]];
@@ -57,14 +57,14 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
 
 - (NSURL *)coverURL_300
 {
-    NSString * url_stirng = [NSString stringWithFormat:@"%@%@", imageHost, self.cover];
+    NSString * url_stirng = [NSString stringWithFormat:@"%@%@", KImageHost, self.cover];
     ;
     return [NSURL URLWithString:[url_stirng imageURLWithSize:300]];
 }
 
 - (NSURL *)articleURL
 {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"http://m.guoku.com%@", self.url_string]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", KWapURL, self.url_string]];
 }
 
 @end

@@ -15,6 +15,9 @@
     self = [super init];
     if (self) {
         self.dataArray  = [NSMutableArray arrayWithCapacity:0];
+        self.page = 1;
+        self.size = 30;
+        self.timestamp = [[NSDate date] timeIntervalSince1970];
         
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isLoading"];
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];

@@ -11,7 +11,7 @@
 #import "GKNote.h"
 #import "NSString+Helper.h"
 
-#import <CoreData/CoreData.h>
+//#import <CoreData/CoreData.h>
 
 @implementation GKEntity
 

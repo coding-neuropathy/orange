@@ -51,9 +51,9 @@
 /*
  * Selection Page
  */
-"selection-nav-recommend" = "Trending";
-"selection-nav-entity" = "Goods";
-"selection-nav-article" = "Articles";
+"selection-nav-recommend"   = "Trending";
+"selection-nav-entity"      = "Goods";
+"selection-nav-article"     = "Articles";
 
 /*
  * Discover page
@@ -67,7 +67,7 @@
  * Search Page
  */
 "users"                         = "Users";
-"entities"                      = "Entities";
+"entities"                      = "Goods";
 "articles"                      = "Articles";
 "category"                      = "Category";
 "click to view all results"     = "Click To View All Results";

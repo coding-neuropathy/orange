@@ -10,19 +10,14 @@
 #import "ArticleCell.h"
 //#import "PreviewArticleController.h"
 
-//#import "WebViewController.h"
 
 static int lastContentOffset;
 
-@import CoreSpotlight;
 
 @interface ArticlesController () <UIViewControllerPreviewingDelegate>
 
-@property (strong, nonatomic) NSMutableArray * articleArray;
-//@property (strong, nonatomic) UICollectionView * collectionView;
-@property (assign, nonatomic) NSInteger page;
-@property (assign, nonatomic) NSInteger size;
-@property (assign, nonatomic) NSTimeInterval timestamp;
+@property (strong, nonatomic) GKSelectionArticle * articles;
+
 
 @end
 
@@ -34,86 +29,27 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.page = 1;
-        self.size = 20;
-        self.timestamp = [[NSDate date] timeIntervalSince1970];
+//        self.page = 1;
+//        self.size = 20;
+//        self.timestamp = [[NSDate date] timeIntervalSince1970];
+//        self.articles = [[GKSelectionArticle alloc] init];
     }
     return self;
 }
 
-
-#pragma mark - get data
-- (void)refresh
+- (void)dealloc
 {
-    self.page = 1;
-    self.timestamp = [[NSDate date] timeIntervalSince1970];
-    [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
-        self.articleArray = [NSMutableArray arrayWithArray:articles];
-        self.page +=1;
-        [self.collectionView.pullToRefreshView stopAnimating];
-        [self.collectionView reloadData];
-        [self saveEntityToIndexWithData:articles];
-    } failure:^(NSInteger stateCode) {
-        [self.collectionView.pullToRefreshView stopAnimating];
-    }];
+    [self.articles removeTheObserverWithObject:self];
 }
 
-- (void)loadMore
+- (GKSelectionArticle *)articles
 {
-    [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
-        self.page += 1;
-        [self.articleArray addObjectsFromArray:articles];
-        [self.collectionView.infiniteScrollingView stopAnimating];
-        [self.collectionView reloadData];
-        [self saveEntityToIndexWithData:articles];
-    } failure:^(NSInteger stateCode) {
-        [self.collectionView.infiniteScrollingView stopAnimating];
-    }];
-}
-
-#pragma mark - save to index
-- (void)saveEntityToIndexWithData:(NSArray *)data
-{
-    if (![CSSearchableIndex isIndexingAvailable]) {
-        return;
+    if (!_articles) {
+        _articles = [[GKSelectionArticle alloc] init];
+        [_articles addTheObserverWithObject:self];
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSMutableArray<CSSearchableItem *> *searchableItems = [NSMutableArray array];
-        
-        for (NSDictionary * row in data) {
-            CSSearchableItemAttributeSet *attributedSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"article"];
-            GKArticle * article = (GKArticle *)row;
-            attributedSet.title = article.title;
-            attributedSet.contentDescription = article.content;
-            attributedSet.identifier = @"article";
-            
-            /**
-             *  set image data
-             */
-            NSData * imagedata = [ImageCache readImageWithURL:article.coverURL_300];
-            if (imagedata) {
-                attributedSet.thumbnailData = imagedata;
-            } else {
-                attributedSet.thumbnailData = [NSData dataWithContentsOfURL:article.coverURL_300];
-                [ImageCache saveImageWhthData:attributedSet.thumbnailData URL:article.coverURL_300];
-            }
-            
-            
-            CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"article:%ld", (long)article.articleId] domainIdentifier:@"com.guoku.iphone.search.article" attributeSet:attributedSet];
-            
-            [searchableItems addObject:item];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //            [self.entityImageView setImage:placeholder];
-            [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
-                if (error != nil) {
-                    NSLog(@"index Error %@",error.localizedDescription);
-                }
-            }];
-        });
-    });
+    return _articles;
 }
-
 
 //- (void)loadView
 //{
@@ -154,14 +90,14 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 {
     __weak __typeof(&*self)weakSelf = self;
     [self.collectionView addPullToRefreshWithActionHandler:^{
-        [weakSelf refresh];
+        [weakSelf.articles refresh];
     }];
     
     [self.collectionView addInfiniteScrollingWithActionHandler:^{
-        [weakSelf loadMore];
+        [weakSelf.articles load];
     }];
 
-    if (self.articleArray.count == 0)
+    if (self.articles.count == 0)
     {
         [self.collectionView triggerPullToRefresh];
     }
@@ -187,13 +123,13 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.articleArray.count;
+    return self.articles.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleIdentifier forIndexPath:indexPath];
-    cell.article = [self.articleArray objectAtIndex:indexPath.row];
+    cell.article = [self.articles objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -209,7 +145,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
         }
 //        return cellsize;
     } else {
-        GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
+        GKArticle * article = [self.articles objectAtIndex:indexPath.row];
     
         cellsize = [ArticleCell CellSizeWithArticle:article ];
     }
@@ -262,8 +198,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
-//    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
+    GKArticle * article = [self.articles objectAtIndex:indexPath.row];
     [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
 
@@ -289,26 +224,53 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 //    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
 //}
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+//{
+//    lastContentOffset = scrollView.contentOffset.y;
+//}
+//
+//
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    [[NSUserDefaults standardUserDefaults] setObject:@(scrollView.contentOffset.y) forKey:@"selection-offset-y"];
+//    
+//    if (scrollView.contentOffset.y < lastContentOffset)
+//    {
+//        
+//        //        [self.delegate hideSegmentControl];
+//        
+//    }
+//    else if (scrollView.contentOffset.y > lastContentOffset)
+//    {
+//        
+//        //        [self.delegate showSegmentControl];
+//        
+//    }
+//    
+//}
+
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    lastContentOffset = scrollView.contentOffset.y;
-}
-
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [[NSUserDefaults standardUserDefaults] setObject:@(scrollView.contentOffset.y) forKey:@"selection-offset-y"];
-    
-    if (scrollView.contentOffset.y < lastContentOffset)
-    {
-        
-        //        [self.delegate hideSegmentControl];
-        
+    if ([keyPath isEqualToString:@"isRefreshing"]) {
+        if( ![[change valueForKeyPath:@"new"] integerValue])
+        {
+            if (!self.articles.error) {
+                [UIView setAnimationsEnabled:NO];
+                [self.collectionView reloadData];
+                [self.collectionView.pullToRefreshView stopAnimating];
+                [UIView setAnimationsEnabled:YES];
+            }
+        }
     }
-    else if (scrollView.contentOffset.y > lastContentOffset)
-    {
-        
-        //        [self.delegate showSegmentControl];
-        
+    if ([keyPath isEqualToString:@"isLoading"]) {
+        if( ![[change valueForKeyPath:@"new"] integerValue])
+        {
+            if (!self.articles.error) {
+                [self.collectionView reloadData];
+                [self.collectionView.infiniteScrollingView stopAnimating];
+
+            }
+        }
     }
     
 }

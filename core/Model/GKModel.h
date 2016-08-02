@@ -16,4 +16,6 @@
 #import "GKArticle.h"
 #import "GKArticleComment.h"
 #import "GKLaunch.h"
+
 #import "GKSelectionEntity.h"
+#import "GKSelectionArticle.h"

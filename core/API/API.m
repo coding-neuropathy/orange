@@ -669,7 +669,7 @@
             Page:(NSInteger)page
             Size:(NSInteger)size
             success:(void (^)(NSArray *articles))success
-            failure:(void (^)(NSInteger stateCode))failure
+            failure:(void (^)(NSInteger stateCode, NSError * error))failure
 {
     NSString *path = @"articles/";
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
@@ -695,7 +695,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
             NSInteger stateCode = operation.response.statusCode;
-            failure(stateCode);
+            failure(stateCode, error);
         }
     }];
 }

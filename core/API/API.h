@@ -220,7 +220,7 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                             Page:(NSInteger)page
                             Size:(NSInteger)size
                          success:(void (^)(NSArray *articles))success
-                         failure:(void (^)(NSInteger stateCode))failure;
+                         failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 /**
  *  获取发现数据

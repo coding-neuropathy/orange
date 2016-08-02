@@ -17,6 +17,10 @@
 @property (strong, nonatomic) NSMutableArray * dataArray;
 @property (readonly, getter=count) NSInteger count;
 
+@property (assign, nonatomic) NSInteger page;
+@property (assign, nonatomic) NSInteger size;
+@property (assign, nonatomic) NSTimeInterval timestamp;
+
 @property (strong, nonatomic) NSError * error;
 
 - (void)refresh;
