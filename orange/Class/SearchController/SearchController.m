@@ -702,11 +702,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     
     self.textLabel.frame = CGRectMake(12., 14., textWidth, 20.);
     
-//    if (IS_IPAD) {
-//        self.indicatorLabel.frame = CGRectMake(0., 0., 20., 40.);
-//        self.indicatorLabel.deFrameRight = self.deFrameRight;
-//        self.indicatorLabel.deFrameTop = self.textLabel.deFrameTop;
-//    } else {
     self.indicatorLabel.frame = CGRectMake(0., 0., 20., 20.);
     self.indicatorLabel.deFrameTop = 12.;
     

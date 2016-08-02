@@ -23,19 +23,20 @@ static NSString * imageHost = @"http://imgcdn.guoku.com/";
 + (NSDictionary *)dictionaryForServerAndClientKeys
 {
     NSDictionary * keyDic = @{
-                            @"article_id"   :   @"articleId",
-                            @"title"        :   @"title",
-                            @"content"      :   @"content",
+                            @"article_id"       :   @"articleId",
+                            @"title"            :   @"title",
+                            @"content"          :   @"content",
 //                            @"url"          :   @"url",
-                            @"tags"         :   @"tags",
-                            @"read_count"   :   @"read_count",
-                            @"cover"        :   @"cover",
-                            @"url"          :   @"url_string",
-                            @"creator"      :   @"creator",
-                            @"pub_time"     :   @"pub_time",
-                            @"dig_count"    :   @"dig_count",
-                            @"is_dig"       :   @"IsDig",
-                            @"digest"       :   @"digest",
+                            @"tags"             :   @"tags",
+                            @"read_count"       :   @"read_count",
+                            @"cover"            :   @"cover",
+                            @"url"              :   @"url_string",
+                            @"creator"          :   @"creator",
+                            @"pub_time"         :   @"pub_time",
+                            @"dig_count"        :   @"dig_count",
+                            @"is_dig"           :   @"IsDig",
+                            @"digest"           :   @"digest",
+                            @"comment_count"    :   @"commentCount",
                     };
     
     return keyDic;

@@ -63,6 +63,11 @@
 /**
  *  图文副标题
  */
-@property (nonatomic , strong) NSString * digest;
+@property (strong, nonatomic) NSString * digest;
+
+/**
+ *  图文评论数
+ */
+@property (assign, nonatomic) NSInteger commentCount;
 
 @end
