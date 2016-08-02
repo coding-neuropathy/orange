@@ -160,21 +160,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - get search results;
-//- (void)refresh
-//{
-//    [API searchWithKeyword:self.keyword Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
-//        self.entityArray = [NSMutableArray arrayWithArray:entities];
-//        self.userArray = [NSMutableArray arrayWithArray:users];
-//        self.articleArray = [NSMutableArray arrayWithArray:articles];
-//        
-//        [self.collectionView.pullToRefreshView stopAnimating];
-//        [self.collectionView reloadData];
-//        
-//    } failure:^(NSInteger stateCode) {
-//        [self.collectionView.pullToRefreshView stopAnimating];
-//    }];
-//}
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
@@ -344,19 +329,22 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
         case 1:
-            cellsize = IS_IPAD ? CGSizeMake(684., 72.) : CGSizeMake(kScreenWidth, 72.);
+            cellsize = IS_IPAD ? CGSizeMake(self.collectionView.deFrameWidth, 72.)
+                                : CGSizeMake(kScreenWidth, 72.);
             break;
         case 2:
-        {
-            cellsize = IS_IPHONE ? CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32) :
-                         CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 684 + 32);
-        }
+//        {
+//            cellsize = IS_IPHONE ? CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32)
+//                                : CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 684 + 32);
+//        }
+//            break;
+        case 3:
+            cellsize = CGSizeMake(self.collectionView.deFrameWidth, 114.);
             break;
-            
         default:
-        {
-            cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);
-        }
+//        {
+//            cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);
+//        }
             break;
     }
     return cellsize;

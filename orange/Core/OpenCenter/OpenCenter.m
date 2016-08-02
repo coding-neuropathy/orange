@@ -47,7 +47,6 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     authorizedUserViewController * vc = [[authorizedUserViewController alloc] initWithUser:user];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     
-    DDLogError(@"OKOKOKOKOKOKO");
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 

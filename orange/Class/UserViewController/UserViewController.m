@@ -64,6 +64,14 @@ static NSString * UserLikeEntityIdentifer = @"EntityCell";
 static NSString * UserNoteIdentifier = @"NoteCell";
 static NSString * UserArticleIdentifier = @"ArticleCell";
 
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
+}
+
 - (instancetype)initWithUser:(GKUser *)user
 {
     self = [super init];
@@ -118,13 +126,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     return _collectionView;
 }
 
-- (UIApplication *)app
-{
-    if (!_app) {
-        _app = [UIApplication sharedApplication];
-    }
-    return _app;
-}
+
 
 #pragma mark - get data
 - (void)refresh
@@ -150,9 +152,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (void)loadView
 {
-    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-    backView.backgroundColor = UIColorFromRGB(0xfafafa);
-    self.view = backView;
+    [super loadView];
+    self.view.backgroundColor = UIColorFromRGB(0xfafafa);
 }
 
 
@@ -160,6 +161,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [super viewDidLoad];
     
     [self.view addSubview:self.collectionView];
+    
+    if (self.navigationController.viewControllers.count > 1){
+        self.collectionView.deFrameHeight = kScreenHeight;
+    }
     
     self.navigationItem.title = self.user.nick;
 //    [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
