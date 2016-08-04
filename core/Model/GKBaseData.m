@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self) {
-        self.dataArray  = [NSMutableArray arrayWithCapacity:0];
+//        self.dataArray  = [NSMutableArray arrayWithCapacity:0];
         self.page = 1;
         self.size = 30;
         self.timestamp = [[NSDate date] timeIntervalSince1970];
@@ -26,12 +26,22 @@
     return self;
 }
 
+#pragma mark - init data with lazy load
+- (NSMutableArray *)dataArray
+{
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _dataArray;
+}
+
 - (NSInteger)count
 {
     return [self.dataArray count];
 }
 
 
+#pragma mark - data operation
 - (void)refresh
 {
 

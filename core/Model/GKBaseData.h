@@ -31,6 +31,10 @@
 //- (void)removeObjectAtIndex:(NSInteger)index;
 - (void)removeAllObjects;
 
+
+/**
+ *  kvo method
+ */
 - (void)addTheObserverWithObject:(id)obj;
 - (void)removeTheObserverWithObject:(id)obj;
 

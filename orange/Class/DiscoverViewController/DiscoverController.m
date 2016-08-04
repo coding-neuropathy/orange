@@ -40,24 +40,23 @@
 @property (strong, nonatomic) NSString * text;
 @end
 
+#pragma mark - discover controller
 @interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate,
                                     UISearchControllerDelegate, UISearchBarDelegate,
                                     UIGestureRecognizerDelegate, UIViewControllerPreviewingDelegate>
 
 @property (strong, nonatomic) UICollectionView * collectionView;
-@property (strong, nonatomic) NSArray * bannerArray;
-@property (strong, nonatomic) NSArray * categoryArray;
-@property (strong, nonatomic) NSArray * entityArray;
-@property (strong, nonatomic) NSArray * articleArray;
-@property (strong, nonatomic) NSArray * userArray;
-@property (strong, nonatomic) UITableView * searchLogTableView;
+@property (strong, nonatomic) GKDiscover * discoverData;
 
-@property (strong, nonatomic) SearchController * searchResultsVC;
+//@property (strong, nonatomic) UITableView * searchLogTableView;
+
+
 
 @property(nonatomic, strong) id<ALBBItemService> itemService;
 
-@property (nonatomic, strong)SearchView * searchView;
-@property (nonatomic,strong) SearchController * newsearchResultsVC;
+@property (nonatomic, strong) SearchView * searchView;
+@property (strong, nonatomic) SearchController * searchResultsVC;
+//@property (nonatomic, strong) SearchController * newsearchResultsVC;
 @end
 
 @implementation DiscoverController
@@ -117,7 +116,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"SearchLogs"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self.searchLogTableView reloadData];
+//    [self.searchLogTableView reloadData];
 }
 
 #pragma mark - init
@@ -138,6 +137,23 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     return self;
 }
 
+- (void)dealloc
+{
+    [self.discoverData removeTheObserverWithObject:self];
+}
+
+
+#pragma mark - init data
+- (GKDiscover *)discoverData
+{
+    if (!_discoverData) {
+        _discoverData = [[GKDiscover alloc] init];
+        [_discoverData addTheObserverWithObject:self];
+    }
+    return _discoverData;
+}
+
+#pragma mark - init view
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
@@ -161,9 +177,9 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (UISearchController *)searchVC
 {
     if (!_searchVC) {
-        _searchVC = [[UISearchController alloc] initWithSearchResultsController:self.newsearchResultsVC];
-        _searchVC.searchResultsUpdater = self.newsearchResultsVC;
-        self.newsearchResultsVC.discoverVC = self;
+        _searchVC = [[UISearchController alloc] initWithSearchResultsController:self.searchResultsVC];
+        _searchVC.searchResultsUpdater = self.searchResultsVC;
+        self.searchResultsVC.discoverVC = self;
         _searchVC.delegate = self;
         _searchVC.hidesNavigationBarDuringPresentation = NO;
         
@@ -183,22 +199,22 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     return _searchVC;
 }
 
-//- (SearchController *)searchResultsVC
-//{
-//    if (!_searchResultsVC) {
-//        _searchResultsVC = [[SearchController alloc] init];
-//    }
-//    return _searchResultsVC;
-//}
-
-- (SearchController *)newsearchResultsVC
+- (SearchController *)searchResultsVC
 {
-    if (!_newsearchResultsVC)
-    {
-        _newsearchResultsVC = [[SearchController alloc]init];
+    if (!_searchResultsVC) {
+        _searchResultsVC = [[SearchController alloc] init];
     }
-    return _newsearchResultsVC;
+    return _searchResultsVC;
 }
+
+//- (SearchController *)newsearchResultsVC
+//{
+//    if (!_newsearchResultsVC)
+//    {
+//        _newsearchResultsVC = [[SearchController alloc]init];
+//    }
+//    return _newsearchResultsVC;
+//}
 
 - (void)registerPreview{
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
@@ -209,23 +225,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     }
 }
 
-#pragma mark - data
-- (void)refresh
-{
-    [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities,
-                                  NSArray * categories, NSArray * articles, NSArray * users) {
-        self.bannerArray = banners;
-        self.categoryArray = categories;
-        self.entityArray = entities;
-        self.articleArray = articles;
-        self.userArray = users;
-        [self.collectionView.pullToRefreshView stopAnimating];
-        [self.collectionView reloadData];
-//        [self.collectionView addSloganView];
-    } failure:^(NSInteger stateCode) {
-        [self.collectionView.pullToRefreshView stopAnimating];
-    }];
-}
 
 - (void)loadView
 {
@@ -234,11 +233,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    //self.edgesForExtendedLayout = UIRectEdgeAll;
-    //self.extendedLayoutIncludesOpaqueBars = YES;
-    
-//    [self.view addSubview:self.collectionView];
+
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
     [self.collectionView registerClass:[HomeArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
     
@@ -319,10 +314,10 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     __weak __typeof(&*self)weakSelf = self;
     [self.collectionView addPullToRefreshWithActionHandler:^{
-        [weakSelf refresh];
+        [weakSelf.discoverData refresh];
     }];
 
-    if (self.entityArray == 0) {
+    if (self.discoverData.count == 0) {
         [self.collectionView triggerPullToRefresh];
     }
 }
@@ -379,7 +374,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString * text = [[self getSearchLog] objectAtIndex:indexPath.row];
-    [self.searchLogTableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [self.searchLogTableView deselectRowAtIndexPath:indexPath animated:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [_searchVC.searchBar setText:text];
     });
@@ -399,8 +394,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSString * text = [[self getSearchLog] objectAtIndex:indexPath.row];
         [self removeSearchLog:text];
-         [self.searchLogTableView reloadData];
-        [self.searchLogTableView.superview bringSubviewToFront:self.searchLogTableView];
+//         [self.searchLogTableView reloadData];
+//        [self.searchLogTableView.superview bringSubviewToFront:self.searchLogTableView];
     }
     return;
 }
@@ -417,10 +412,12 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     NSInteger count = 0;
     switch (section) {
         case 3:
-            count = self.articleArray.count;
+//            count = self.articleArray.count;
+            count = self.discoverData.articleCount;
             break;
         case 4:
-            count = self.entityArray.count;
+//            count = self.entityArray.count;
+            count = self.discoverData.entityCount;
             break;
             
         default:
@@ -436,7 +433,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         case 3:
         {
             HomeArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleCellIdentifier forIndexPath:indexPath];
-            cell.article = [self.articleArray objectAtIndex:indexPath.row];
+            cell.article = [self.discoverData.articles objectAtIndex:indexPath.row];
             return cell;
         }
             break;
@@ -444,7 +441,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         default:
         {
             EntityDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityDetailCellIdentifier forIndexPath:indexPath];
-            cell.entity = [self.entityArray objectAtIndex:indexPath.row];
+            cell.entity = [self.discoverData.entities objectAtIndex:indexPath.row];
 //            cell.delegate = self;
             return cell;
             
@@ -461,22 +458,23 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
             case 0:
             {
                 DiscoverBannerView * bannerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier forIndexPath:indexPath];
-                bannerView.bannerArray = self.bannerArray;
+                bannerView.bannerArray = self.discoverData.banners;
                 bannerView.delegate = self;
-                if (self.bannerArray.count == 0) {
-                    bannerView.hidden = YES;
-                }
-                else
-                {
-                    bannerView.hidden = NO;
-                }
+                bannerView.hidden = self.discoverData.bannerCount == 0 ? YES : NO;
+//                if (self.bannerArray.count == 0) {
+//                    bannerView.hidden = YES;
+//                }
+//                else
+//                {
+//                    bannerView.hidden = NO;
+//                }
                 return bannerView;
             }
                 break;
             case 1:
             {
                 DiscoverUsersView * userView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserIdentifier forIndexPath:indexPath];
-                userView.users = self.userArray;
+                userView.users = self.discoverData.users;
                 [userView setTapMoreUserBlock:^{
                     RecUserController * vc = [[RecUserController alloc]init];
                     [self.navigationController pushViewController:vc animated:YES];
@@ -492,7 +490,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
             case 2:
             {
                 DiscoverCategoryView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier forIndexPath:indexPath];
-                categoryView.categories = self.categoryArray;
+                categoryView.categories = self.discoverData.categories;
                 categoryView.tapBlock = ^(GKCategory * category){
                     CategroyGroupController * groupVC = [[CategroyGroupController alloc] initWithGid:category.groupId];
                     groupVC.title = category.title;
@@ -654,25 +652,25 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         }
             break;
         case 1:
-            if (self.userArray.count) {
+            if (self.discoverData.userCount) {
                 headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 126.)  :CGSizeMake(CGRectGetWidth(self.collectionView.frame), 126.);
             }
             break;
         case 2:
-            if (self.categoryArray.count) {
+            if (self.discoverData.categoryCount) {
                 headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 155.) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 155.);
             }
             break;
         case 3:
         {
-            if(self.articleArray.count) {
+            if(self.discoverData.articleCount) {
                 headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 44.) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 44.);
             }
         }
             break;
         case 4:
         {
-            if (self.entityArray.count) {
+            if (self.discoverData.entityCount) {
                 headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 44.);
             }
         }
@@ -691,11 +689,9 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     switch (indexPath.section) {
         case 3:
         {
-            GKArticle * article = [self.articleArray objectAtIndex:indexPath.row];
-            
-            [MobClick event:@"rec_article" attributes:@{@"articleid" : @(article.articleId),@"articletitle" : article.title}];
-
+            GKArticle * article = [self.discoverData.articles objectAtIndex:indexPath.row];
             [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+            [MobClick event:@"rec_article" attributes:@{@"articleid" : @(article.articleId),@"articletitle" : article.title}];
         }
             break;
             
@@ -734,8 +730,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     
     
     
-    
-    SearchView * searchView = [[SearchView alloc]initWithFrame:CGRectZero];
+    SearchView * searchView = [[SearchView alloc] initWithFrame:CGRectZero];
     self.searchView = searchView;
     searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight)
                                     : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
@@ -782,6 +777,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     [[self.searchVC.view viewWithTag:999] removeFromSuperview];
 }
+
 - (void)didDismissSearchController:(UISearchController *)searchController
 {
     
@@ -810,7 +806,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     switch (indexPath.section) {
         case 3:
         {
-                ArticlePreViewController * vc = [[ArticlePreViewController alloc] initWithArticle:[self.articleArray objectAtIndex:indexPath.row]];
+                ArticlePreViewController * vc = [[ArticlePreViewController alloc]
+                                                 initWithArticle:[self.discoverData.articles objectAtIndex:indexPath.row]];
                 vc.preferredContentSize = CGSizeMake(0, 0);
                 previewingContext.sourceRect = cell.frame;
                 return vc;
@@ -818,7 +815,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
             break;
         case 4:
         {
-            EntityPreViewController * vc = [[EntityPreViewController alloc] initWithEntity:[self.entityArray objectAtIndex:indexPath.row]];
+            EntityPreViewController * vc = [[EntityPreViewController alloc]
+                                            initWithEntity:[self.discoverData.entities objectAtIndex:indexPath.row]];
             vc.preferredContentSize = CGSizeMake(0., 0.);
             previewingContext.sourceRect = cell.frame;
             
@@ -868,10 +866,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 #pragma mark - <DiscoverBannerViewDelegate>
 - (void)TapBannerImageAction:(NSDictionary *)dict
 {
-    
     NSString * url = dict[@"url"];
-    
-//    NSLog(@"url %@", url);
     
     if ([dict objectForKey:@"article"]) {
         GKArticle * article = [GKArticle modelFromDictionary:dict[@"article"]];
@@ -903,6 +898,27 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     
     [MobClick event:@"banner" attributes:@{@"url": url}];
     
+}
+
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"isRefreshing"]) {
+        if( ![[change valueForKeyPath:@"new"] integerValue])
+        {
+            if (!self.discoverData.error) {
+                [UIView setAnimationsEnabled:NO];
+                [self.collectionView reloadData];
+                [self.collectionView.pullToRefreshView stopAnimating];
+                [UIView setAnimationsEnabled:YES];
+                [self.collectionView addSloganView];
+            } else {
+//                self.noResultView.hidden = NO;
+                [self.collectionView.pullToRefreshView stopAnimating];
+                //                [self.view insertSubview:self.no atIndex:<#(NSInteger)#>]
+            }
+        }
+    }
 }
 
 @end

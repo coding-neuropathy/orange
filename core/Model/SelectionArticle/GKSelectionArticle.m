@@ -26,7 +26,7 @@
 - (void)refresh
 {
 //    self.page = 1;
-    
+    [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
     [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
         self.dataArray = [NSMutableArray arrayWithArray:articles];
         self.page +=1;
@@ -44,6 +44,7 @@
 
 - (void)load
 {
+    [self setValue:[NSNumber numberWithBool:YES] forKey:@"isLoading"];
         [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
             self.page += 1;
             [self.dataArray addObjectsFromArray:articles];

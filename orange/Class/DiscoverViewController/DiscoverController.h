@@ -8,6 +8,10 @@
 
 #import "BaseViewController.h"
 
-@interface DiscoverController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface DiscoverController : UIViewController <UICollectionViewDataSource,
+                                                    UICollectionViewDelegate,
+                                                    UICollectionViewDelegateFlowLayout>
+
 @property (strong, nonatomic) UISearchController * searchVC;
+
 @end

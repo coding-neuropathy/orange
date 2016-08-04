@@ -228,7 +228,7 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  *  @param failure    失败block
  */
 + (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * articles, NSArray * users))success
-                       failure:(void (^)(NSInteger stateCode))failure;
+                       failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 
 /**

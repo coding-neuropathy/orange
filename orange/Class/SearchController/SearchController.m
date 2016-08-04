@@ -617,8 +617,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             }
         }
     }
-
-    
 }
 
 @end

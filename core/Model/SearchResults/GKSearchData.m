@@ -26,6 +26,7 @@
 
 - (void)refreshWithKeyWord:(NSString *)keyword
 {
+    [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
     self.keyword = keyword;
     [API searchWithKeyword:self.keyword Success:^(NSArray *entities, NSArray *articles, NSArray *users) {
         self.entityArray = [NSMutableArray arrayWithArray:entities];

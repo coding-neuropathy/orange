@@ -19,4 +19,5 @@
 
 #import "GKSelectionEntity.h"
 #import "GKSelectionArticle.h"
+#import "GKDiscover.h"
 #import "GKSearchData.h"

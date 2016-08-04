@@ -393,12 +393,6 @@ static int lastContentOffset;
                 [self.collectionView.pullToRefreshView stopAnimating];
                 [UIView setAnimationsEnabled:YES];
                 [self save];
-//                [self saveEntityToIndexWithData:(NSArray *)self.entityList];
-//                [self.tableView.infiniteScrollingView stopAnimating];
-//                if (_dataList.total == 0) {
-//                    [SVProgressHUD showSuccessWithStatus:@"没有了！！！"];
-//                }
-//                _loadMoreflag = NO;
             }
         }
     }
@@ -408,11 +402,6 @@ static int lastContentOffset;
             if (!self.entityList.error) {
                 [self.collectionView reloadData];
                 [self.collectionView.infiniteScrollingView stopAnimating];
-//                [self saveEntityToIndexWithData:(NSArray *)self.entityList];
-//                if (_dataList.total == 0) {
-                    //[SVProgressHUD showSuccessWithStatus:@"没有了！！！"];
-//                }
-//                _loadMoreflag = NO;
             }
         }
     }
@@ -422,10 +411,6 @@ static int lastContentOffset;
 #pragma mark <SelectionViewCellDelegate>
 - (void)TapEntityImage:(GKEntity *)entity
 {
-//    EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
-//    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
-//    vc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:vc animated:YES];
     [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
 }
 
