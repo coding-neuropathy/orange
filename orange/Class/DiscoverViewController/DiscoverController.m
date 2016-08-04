@@ -870,7 +870,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     
     NSString * url = dict[@"url"];
-    [MobClick event:@"banner" attributes:@{@"url": url}];
+    
+//    NSLog(@"url %@", url);
     
     if ([dict objectForKey:@"article"]) {
         GKArticle * article = [GKArticle modelFromDictionary:dict[@"article"]];
@@ -878,7 +879,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         return;
     }
     
-    if ([url hasPrefix:@"http://"]) {
+    if ([url hasPrefix:@"http://"] || [url hasPrefix:@"https://"]) {
         if (k_isLogin) {
             NSRange range = [url rangeOfString:@"?"];
             if (range.location != NSNotFound) {
@@ -891,7 +892,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         }
         NSRange range = [url rangeOfString:@"out_link"];
         if (range.location == NSNotFound) {
-            //            GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
             WebViewController * VC = [[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
             if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:VC animated:YES];
@@ -901,6 +901,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     
+    [MobClick event:@"banner" attributes:@{@"url": url}];
     
 }
 
