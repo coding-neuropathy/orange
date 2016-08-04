@@ -25,10 +25,11 @@
 @property (strong, nonatomic) WebViewProgressView * progressView;
 @property (strong, nonatomic) UIImage * image;
 @property (strong, nonatomic) NSString * shareTitle;
+@property (strong, nonatomic) UIButton * moreBtn;
 
 @property (strong, nonatomic) UIApplication * app;
 
-@property (nonatomic , strong)UIButton * moreBtn;
+
 
 @end
 
@@ -69,6 +70,11 @@
 //        self.progressProxy.progressDelegate = self;
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 
 - (WKWebView *)webView
@@ -116,6 +122,19 @@
     return _webView;
 }
 //
+//- (UIButton *)moreBtn
+//{
+//    if (!_moreBtn)
+//    {
+//        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+//        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
+//        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+//        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//        _moreBtn.backgroundColor = [UIColor clearColor];
+//    }
+//    return _moreBtn;
+//}
+//
 //- (UIActivityIndicatorView *)activityIndicator
 //{
 //    if (!_activityIndicator) {
@@ -127,10 +146,7 @@
 //    return _activityIndicator;
 //}
 
-- (void)dealloc
-{
-    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
-}
+
 
 //- (void)loadView
 //{
@@ -152,17 +168,9 @@
     [self.view addSubview:self.webView];
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
 
-        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
-        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        _moreBtn.backgroundColor = [UIColor clearColor];
-        UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
-        _more = moreBarItem;
-    
-    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        _flex = flexItem;
-    [self setToolbarItems:[NSArray arrayWithObjects:flexItem,flexItem,flexItem,flexItem,flexItem,moreBarItem,nil]];
+
+    UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+    self.navigationItem.rightBarButtonItem = moreBarItem;
     
     
     CGFloat progressBarHeight = 2.f;
@@ -193,7 +201,7 @@
 {
     [super viewDidAppear:animated];
     
-    [self.navigationController setToolbarHidden:NO animated:YES];
+//    [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -201,7 +209,7 @@
     [super viewWillDisappear:animated];
     [self.progressView removeFromSuperview];
     
-    [self.navigationController setToolbarHidden:YES animated:YES];
+//    [self.navigationController setToolbarHidden:YES animated:YES];
     
     [MobClick endLogPageView:@"webView"];
 }
@@ -225,8 +233,6 @@
 //决定是否允许导航响应，如果不允许就不会跳转到该链接的页面
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-//    NSLog(@"%@", navigationAction.request.URL.absoluteString);
-//    DDLogInfo(@"%@",navigationAction.targetFrame.request.URL.absoluteString);
     
     if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
         NSURL *url = navigationAction.request.URL;
@@ -384,18 +390,18 @@
 }
 
 #pragma mark ---------- create Bottom Bar -------------
-
-- (void)creatBottomBar
-{
-    UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
-//    _moreButton = moreItem;
-   
-    
-    
-    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-//    _flexItem = flexItem;
-    [self setToolbarItems:[NSArray arrayWithObjects:flexItem,flexItem,flexItem,flexItem,flexItem,moreItem,nil]];
-}
+//
+//- (void)creatBottomBar
+//{
+//    UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+////    _moreButton = moreItem;
+//   
+//    
+//    
+//    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+////    _flexItem = flexItem;
+//    [self setToolbarItems:[NSArray arrayWithObjects:flexItem,flexItem,flexItem,flexItem,flexItem,moreItem,nil]];
+//}
 
 
 @end

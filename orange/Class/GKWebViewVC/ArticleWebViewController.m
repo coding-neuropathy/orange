@@ -191,6 +191,8 @@
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     
+    self.navigationItem.rightBarButtonItem = nil;
+    
 //    self.title = @"正在加载...";
 }
 

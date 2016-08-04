@@ -207,14 +207,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     return _searchResultsVC;
 }
 
-//- (SearchController *)newsearchResultsVC
-//{
-//    if (!_newsearchResultsVC)
-//    {
-//        _newsearchResultsVC = [[SearchController alloc]init];
-//    }
-//    return _newsearchResultsVC;
-//}
 
 - (void)registerPreview{
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
@@ -323,82 +315,82 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 }
 
 #pragma mark - <UITableViewDelegate>
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self getSearchLog].count;
-}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return [self getSearchLog].count;
+//}
+//
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 1;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    static NSString *CellIdentifier = @"SearchLogCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    if (!cell) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//        cell.backgroundColor = UIColorFromRGB(0xffffff);
+//        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(10,43.5, kScreenWidth, 0.5)];
+//        H.backgroundColor = UIColorFromRGB(0xebebeb);
+//        [cell addSubview:H];
+//        
+//    }
+//    cell.textLabel.text = [[self getSearchLog] objectAtIndex:indexPath.row];
+//    cell.textLabel.font = [UIFont systemFontOfSize:14];
+//    
+//    return cell;
+//}
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"SearchLogCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.backgroundColor = UIColorFromRGB(0xffffff);
-        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(10,43.5, kScreenWidth, 0.5)];
-        H.backgroundColor = UIColorFromRGB(0xebebeb);
-        [cell addSubview:H];
-        
-    }
-    cell.textLabel.text = [[self getSearchLog] objectAtIndex:indexPath.row];
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
-    
-    return cell;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(kScreenWidth, 44)] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf8f8f8) andSize:CGSizeMake(kScreenWidth, 44)] forState:UIControlStateHighlighted];
-    [button addTarget:self action:@selector(clearSearchLogButtonAciton) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"清空历史搜索记录" forState:UIControlStateNormal];
-    [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:14];
-    return button;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    if ([self getSearchLog].count) {
-        return 44;
-    }
-    return 0;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString * text = [[self getSearchLog] objectAtIndex:indexPath.row];
-//    [self.searchLogTableView deselectRowAtIndexPath:indexPath animated:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_searchVC.searchBar setText:text];
-    });
-
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 0) {
-        return YES;
-    }
-    return NO;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSString * text = [[self getSearchLog] objectAtIndex:indexPath.row];
-        [self removeSearchLog:text];
-//         [self.searchLogTableView reloadData];
-//        [self.searchLogTableView.superview bringSubviewToFront:self.searchLogTableView];
-    }
-    return;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+//    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(kScreenWidth, 44)] forState:UIControlStateNormal];
+//    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf8f8f8) andSize:CGSizeMake(kScreenWidth, 44)] forState:UIControlStateHighlighted];
+//    [button addTarget:self action:@selector(clearSearchLogButtonAciton) forControlEvents:UIControlEventTouchUpInside];
+//    [button setTitle:@"清空历史搜索记录" forState:UIControlStateNormal];
+//    [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+//    button.titleLabel.font = [UIFont systemFontOfSize:14];
+//    return button;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    if ([self getSearchLog].count) {
+//        return 44;
+//    }
+//    return 0;
+//}
+//
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSString * text = [[self getSearchLog] objectAtIndex:indexPath.row];
+////    [self.searchLogTableView deselectRowAtIndexPath:indexPath animated:YES];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [_searchVC.searchBar setText:text];
+//    });
+//
+//}
+//
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (indexPath.section == 0) {
+//        return YES;
+//    }
+//    return NO;
+//}
+//
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        NSString * text = [[self getSearchLog] objectAtIndex:indexPath.row];
+//        [self removeSearchLog:text];
+////         [self.searchLogTableView reloadData];
+////        [self.searchLogTableView.superview bringSubviewToFront:self.searchLogTableView];
+//    }
+//    return;
+//}
 
 
 #pragma mark - <UICollectionViewDataSource>
@@ -461,13 +453,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                 bannerView.bannerArray = self.discoverData.banners;
                 bannerView.delegate = self;
                 bannerView.hidden = self.discoverData.bannerCount == 0 ? YES : NO;
-//                if (self.bannerArray.count == 0) {
-//                    bannerView.hidden = YES;
-//                }
-//                else
-//                {
-//                    bannerView.hidden = NO;
-//                }
                 return bannerView;
             }
                 break;
@@ -737,11 +722,11 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     searchView.tag = 999;
     searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
         __weak __typeof(&*self)weakSelf = self;
-    [searchView setTaphotCategoryBtnBlock:^(NSString *hotString) {
-            
-           [weakSelf.searchVC.searchBar setText:hotString];
-            
-    }];
+//    [searchView setTaphotCategoryBtnBlock:^(NSString *hotString) {
+//            
+//           [weakSelf.searchVC.searchBar setText:hotString];
+//            
+//    }];
     [searchView setTapRecordBtnBlock:^(NSString *keyword) {
          
         [weakSelf.searchVC.searchBar setText:keyword];

@@ -40,10 +40,9 @@
 
 - (void)setHotArray:(NSArray *)hotArray withRecentArray:(NSArray *)recentArray
 {
-     _hotArray = hotArray;
+//     _hotArray = hotArray;
     _recentArray = recentArray;
     
-//    [self setData];
     
     [self setNeedsLayout];
     
@@ -187,30 +186,30 @@
 
 - (void)setData
 {
-    if (self.hotArray.count != 0) {
-        for (NSInteger i = 0; i < 5; i++) {
-            UIButton * categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            GKEntityCategory * entitycategory = [self.hotArray objectAtIndex:i];
-            [categoryBtn setTitle:entitycategory.categoryName forState:UIControlStateNormal];
-            [categoryBtn setTitle:[self.hotArray objectAtIndex:i] forState:UIControlStateNormal];
-            [categoryBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-            categoryBtn.layer.cornerRadius = 12.;
-            categoryBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
-            categoryBtn.layer.masksToBounds = YES;
-            categoryBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
-            categoryBtn.tag = i;
-            if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
-                categoryBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
-                categoryBtn.frame = CGRectMake(10. + (55 + 5) * i, 66., 50., 25);
-                categoryBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
-            } else
-            {
-                categoryBtn.frame = CGRectMake(20. + (50 + 5) * i, 66., 50., 25);
-            }
-            [categoryBtn addTarget:self action:@selector(hotCategoryBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-            [self addSubview:categoryBtn];
-        }
-    }
+//    if (self.hotArray.count != 0) {
+//        for (NSInteger i = 0; i < 5; i++) {
+//            UIButton * categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//            GKEntityCategory * entitycategory = [self.hotArray objectAtIndex:i];
+//            [categoryBtn setTitle:entitycategory.categoryName forState:UIControlStateNormal];
+//            [categoryBtn setTitle:[self.hotArray objectAtIndex:i] forState:UIControlStateNormal];
+//            [categoryBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+//            categoryBtn.layer.cornerRadius = 12.;
+//            categoryBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
+//            categoryBtn.layer.masksToBounds = YES;
+//            categoryBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+//            categoryBtn.tag = i;
+//            if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
+//                categoryBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
+//                categoryBtn.frame = CGRectMake(10. + (55 + 5) * i, 66., 50., 25);
+//                categoryBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+//            } else
+//            {
+//                categoryBtn.frame = CGRectMake(20. + (50 + 5) * i, 66., 50., 25);
+//            }
+//            [categoryBtn addTarget:self action:@selector(hotCategoryBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//            [self addSubview:categoryBtn];
+//        }
+//    }
     NSInteger arrCount = self.recentArray.count;
     NSArray * Arr = [NSArray array];;
     if (arrCount == 0)
@@ -295,15 +294,15 @@
 }
 
 
-#pragma mark - button action
-- (void)hotCategoryBtnAction:(id)sender
-{
-    UIButton * categoryBtn = (UIButton *)sender;
-    NSString * hotString = [self.hotArray objectAtIndex:categoryBtn.tag];
-    if (self.taphotCategoryBtnBlock) {
-        self.taphotCategoryBtnBlock(hotString);
-    }
-}
+//#pragma mark - button action
+//- (void)hotCategoryBtnAction:(id)sender
+//{
+//    UIButton * categoryBtn = (UIButton *)sender;
+//    NSString * hotString = [self.hotArray objectAtIndex:categoryBtn.tag];
+//    if (self.taphotCategoryBtnBlock) {
+//        self.taphotCategoryBtnBlock(hotString);
+//    }
+//}
 
 - (void)recordBtnAction:(id)sender
 {

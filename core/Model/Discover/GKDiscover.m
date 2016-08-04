@@ -50,7 +50,6 @@ static NSString *  BannerIdentifier = @"Banner";
             [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
         } failure:^(NSInteger stateCode, NSError * error) {
             self.error = error;
-//            [self.collectionView.pullToRefreshView stopAnimating];
             [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
         }];
 }

@@ -1289,7 +1289,6 @@
 				237FCB721D408ECC0067A1D9 /* ArticleCommentController.m */,
 			);
 			name = ArticleWebViewVC;
-			path = GKWebViewVC;
 			sourceTree = "<group>";
 		};
 		23F1DD971C28046100A71827 /* PNoteViewController */ = {
@@ -1908,7 +1907,6 @@
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
 				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
 				4E66C1DE1A7CBD2F00F31A90 /* GKWebViewVC */,
-				23F0001F1C97B5200033BAA4 /* ArticleWebViewVC */,
 				4E66C1D81A7C8B2500F31A90 /* SettingViewController */,
 				4EC9F7A41A7BD0EE0057D736 /* NotePostViewController */,
 				4EC9F7A01A7BBED20057D736 /* TagViewController */,
@@ -1942,6 +1940,7 @@
 		4E66C1DE1A7CBD2F00F31A90 /* GKWebViewVC */ = {
 			isa = PBXGroup;
 			children = (
+				23F0001F1C97B5200033BAA4 /* ArticleWebViewVC */,
 				B7F5A9FF1B08C75A0033BB2D /* WebViewController.h */,
 				B7F5AA001B08C75A0033BB2D /* WebViewController.m */,
 				B7F5AA091B08D3320033BB2D /* WebViewProgressView.h */,
