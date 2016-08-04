@@ -366,6 +366,8 @@
 		B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA791AB7039600A2F20D /* Foundation.framework */; };
 		B7B065C81BF985CE001AA30F /* PreviewArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B065C71BF985CE001AA30F /* PreviewArticleController.m */; };
 		B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B6958E1AF05F310016AAB8 /* ImageIO.framework */; };
+		B7B6AD501D52F25800C9B8E0 /* GKDiscover.h in Headers */ = {isa = PBXBuildFile; fileRef = B7B6AD4E1D52F25800C9B8E0 /* GKDiscover.h */; };
+		B7B6AD511D52F25800C9B8E0 /* GKDiscover.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B6AD4F1D52F25800C9B8E0 /* GKDiscover.m */; };
 		B7BE3E2D1BA9A17A004AD422 /* CategroyGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BE3E2C1BA9A17A004AD422 /* CategroyGroupController.m */; };
 		B7BE3E301BA9B98C004AD422 /* SubCategoryGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BE3E2F1BA9B98C004AD422 /* SubCategoryGroupController.m */; };
 		B7BFC8FF1ACC27C2009627CA /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */; };
@@ -1064,6 +1066,8 @@
 		B7B065C61BF985CE001AA30F /* PreviewArticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewArticleController.h; sourceTree = "<group>"; };
 		B7B065C71BF985CE001AA30F /* PreviewArticleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewArticleController.m; sourceTree = "<group>"; };
 		B7B6958E1AF05F310016AAB8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		B7B6AD4E1D52F25800C9B8E0 /* GKDiscover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKDiscover.h; path = Discover/GKDiscover.h; sourceTree = "<group>"; };
+		B7B6AD4F1D52F25800C9B8E0 /* GKDiscover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKDiscover.m; path = Discover/GKDiscover.m; sourceTree = "<group>"; };
 		B7BE3E2B1BA9A17A004AD422 /* CategroyGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategroyGroupController.h; sourceTree = "<group>"; };
 		B7BE3E2C1BA9A17A004AD422 /* CategroyGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategroyGroupController.m; sourceTree = "<group>"; };
 		B7BE3E2E1BA9B98C004AD422 /* SubCategoryGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategoryGroupController.h; sourceTree = "<group>"; };
@@ -1439,6 +1443,7 @@
 		39B720021B1F4C16008519E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B7B6AD491D52F20500C9B8E0 /* Discover */,
 				8A9255F81D50A01D00E6481F /* SearchResults */,
 				8A9255EE1D508B3300E6481F /* Base */,
 				B76818C51D34CF4B009870C2 /* Article */,
@@ -2714,6 +2719,15 @@
 			name = ArticlesViewController;
 			sourceTree = "<group>";
 		};
+		B7B6AD491D52F20500C9B8E0 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				B7B6AD4E1D52F25800C9B8E0 /* GKDiscover.h */,
+				B7B6AD4F1D52F25800C9B8E0 /* GKDiscover.m */,
+			);
+			name = Discover;
+			sourceTree = "<group>";
+		};
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2919,6 +2933,7 @@
 				B776A0A91CA65FA40021FFAB /* GKBaseData.h in Headers */,
 				39B720391B1F4C16008519E3 /* NSObject+App.h in Headers */,
 				39B7205E1B1F4C16008519E3 /* AFHTTPSessionManager.h in Headers */,
+				B7B6AD501D52F25800C9B8E0 /* GKDiscover.h in Headers */,
 				8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */,
 				B78C4E0E1B676ED5006620F7 /* GKCategory.h in Headers */,
 				39B720711B1F4E78008519E3 /* GKEntity+ImageURLFixes.h in Headers */,
@@ -3161,6 +3176,7 @@
 				8AAA2D061C01EF1C00B27E49 /* GKLaunch.m in Sources */,
 				39B720721B1F4E78008519E3 /* GKEntity+ImageURLFixes.m in Sources */,
 				39B720401B1F4C16008519E3 /* UIView+DEFrameAdditions.m in Sources */,
+				B7B6AD511D52F25800C9B8E0 /* GKDiscover.m in Sources */,
 				39B720591B1F4C16008519E3 /* NSString+Helper.m in Sources */,
 				39B720661B1F4C16008519E3 /* AFURLConnectionOperation.m in Sources */,
 				39B720681B1F4C16008519E3 /* AFURLRequestSerialization.m in Sources */,
