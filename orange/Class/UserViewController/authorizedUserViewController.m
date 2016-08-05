@@ -24,9 +24,9 @@
 
 @property (nonatomic , strong) UICollectionView * collectionView;
 
-@property (nonatomic , assign)NSInteger page;
+@property (assign, nonatomic) NSInteger page;
 
-@property (nonatomic , assign)NSInteger height;
+@property (assign, nonatomic) NSInteger height;
 
 @end
 
@@ -40,15 +40,12 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     self = [super init];
     if (self) {
         self.user = user;
-        if (self.user.userId == [Passport sharedInstance].user.userId) {
-//            UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_me"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_me"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-//            item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-//            self.tabBarItem = item;
-            
+        if (self.user.userId == [Passport sharedInstance].user.userId) {            
             
             [self.user addObserver:self forKeyPath:@"avatarURL" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
             [self.user addObserver:self forKeyPath:@"nickname" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
         }
+//        self.page = 1;
         
     }
     return self;

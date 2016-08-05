@@ -332,39 +332,39 @@
 
 
 #pragma mark - layout subviews
-- (void)layoutiPadSubViews
-{
-    self.avatarView.center = CGPointMake(self.frame.size.width / 2, 104.);
-    
-    self.nicknameLabel.frame = CGRectMake(0., 0., self.nicknameLabel.optimumSize.width, 30.);
-    self.nicknameLabel.center = self.avatarView.center;
-    self.nicknameLabel.deFrameTop = self.avatarView.deFrameBottom + 16.;
-    
-    self.bioLabel.frame = CGRectMake(0., 0., self.frame.size.width, 20.);
-    self.bioLabel.center = self.nicknameLabel.center;
-    self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom + 10.;
-    
-    self.friendBtn.frame = CGRectMake(self.deFrameWidth / 2 - 130., 0., 130., 20.);
-    self.friendBtn.deFrameTop = self.bioLabel.deFrameBottom + 10.;
-    
-    self.fansBtn.frame = CGRectMake(0., 0., 130., 20.);
-    self.fansBtn.center = self.friendBtn.center;
-    self.fansBtn.deFrameLeft = self.friendBtn.deFrameRight + 10.;
-    
-    if (_user.userId == [Passport sharedInstance].user.userId) {
-        self.editBtn.frame = CGRectMake(0., 0., 130., 30.);
-        self.editBtn.center = self.bioLabel.center;
-        self.editBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
-    } else if (_user.user_state == GKUserBlockState) {
-        self.blockBtn.frame = CGRectMake(0., 0., 130., 30.);
-        self.blockBtn.center = self.bioLabel.center;
-        self.blockBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
-    } else {
-        self.relationBtn.frame = CGRectMake(0., 0., 130., 30.);
-        self.relationBtn.center = self.bioLabel.center;
-        self.relationBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
-    }
-}
+//- (void)layoutiPadSubViews
+//{
+//    self.avatarView.center = CGPointMake(self.frame.size.width / 2, 104.);
+//    
+//    self.nicknameLabel.frame = CGRectMake(0., 0., self.nicknameLabel.optimumSize.width, 30.);
+//    self.nicknameLabel.center = self.avatarView.center;
+//    self.nicknameLabel.deFrameTop = self.avatarView.deFrameBottom + 16.;
+//    
+//    self.bioLabel.frame = CGRectMake(0., 0., self.frame.size.width, 20.);
+//    self.bioLabel.center = self.nicknameLabel.center;
+//    self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom + 10.;
+//    
+//    self.friendBtn.frame = CGRectMake(self.deFrameWidth / 2 - 130., 0., 130., 20.);
+//    self.friendBtn.deFrameTop = self.bioLabel.deFrameBottom + 10.;
+//    
+//    self.fansBtn.frame = CGRectMake(0., 0., 130., 20.);
+//    self.fansBtn.center = self.friendBtn.center;
+//    self.fansBtn.deFrameLeft = self.friendBtn.deFrameRight + 10.;
+//    
+//    if (_user.userId == [Passport sharedInstance].user.userId) {
+//        self.editBtn.frame = CGRectMake(0., 0., 130., 30.);
+//        self.editBtn.center = self.bioLabel.center;
+//        self.editBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
+//    } else if (_user.user_state == GKUserBlockState) {
+//        self.blockBtn.frame = CGRectMake(0., 0., 130., 30.);
+//        self.blockBtn.center = self.bioLabel.center;
+//        self.blockBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
+//    } else {
+//        self.relationBtn.frame = CGRectMake(0., 0., 130., 30.);
+//        self.relationBtn.center = self.bioLabel.center;
+//        self.relationBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
+//    }
+//}
 
 - (void)layoutiPhoneSubViews
 {
@@ -377,22 +377,11 @@
     self.nicknameLabel.deFrameTop = self.avatarView.deFrameTop;
     self.nicknameLabel.deFrameLeft = self.avatarView.deFrameRight + 24.;
     
-    //    self.staffImage.frame = CGRectMake(0., 0., 14., 14.);
-    //    self.staffImage.deFrameTop = self.nicknameLabel.deFrameTop + 6;
-    //    self.staffImage.deFrameLeft = self.nicknameLabel.deFrameRight - 14;
     self.bioBackView.frame = CGRectMake(0., 0., kScreenWidth, 60.);
     self.bioBackView.deFrameLeft = self.deFrameLeft;
     self.bioBackView.deFrameBottom = self.deFrameBottom;
     
     
-    //    CGSize size = [_bioLabel sizeThatFits:CGSizeMake(kScreenWidth * 0.8, MAXFLOAT)];
-    //    self.bioLabel.frame = CGRectMake(0., 0., kScreenWidth * 0.8, size.height);
-    //    bioLabelHeight = size.height;
-    
-    //    self.bioLabel.center = self.nicknameLabel.center;
-    //    self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom;
-    
-    //    self.friendBtn.frame = CGRectMake(0., 0.,100., 20.);
     self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
     
     //    self.fansBtn.frame = CGRectMake(0., 0.,100., 20.);
@@ -428,17 +417,12 @@
 
 - (void)layoutSubviews
 {
-    [super layoutSubviews];
-    
-//    if (IS_IPAD) {
-//        [self layoutiPadSubViews];
-//
-//    } else {
-        [self layoutiPhoneSubViews];
-//    }
+    [self layoutiPhoneSubViews];
     
     self.v.frame = CGRectMake(CGRectGetMaxX(self.friendBtn.frame) + 20, self.friendBtn.frame.origin.y + 7, 1., 15.);
     
+    [super layoutSubviews];
+
 //    [self relationBtn];
 }
 

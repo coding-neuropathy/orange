@@ -12,15 +12,17 @@
 #import "NicknameViewController.h"
 #import "AddressPick/AddressPickView.h"
 #import "BioViewController.h"
-@interface NewEditViewController ()<UITableViewDataSource , UITableViewDelegate , UIImagePickerControllerDelegate , UINavigationControllerDelegate, UIActionSheetDelegate,NicknameViewControllerDelegate , BioViewControllerDelegate>
 
-@property (nonatomic , strong)UITableView * tableView;
 
-@property (nonatomic , strong)NSMutableArray * dataSource;
+@interface NewEditViewController ()<UIImagePickerControllerDelegate , UINavigationControllerDelegate, UIActionSheetDelegate,NicknameViewControllerDelegate , BioViewControllerDelegate>
 
-@property (nonatomic , strong)NewEditHeaderView * headerView;
+@property (strong, nonatomic) UITableView * tableView;
 
-@property (nonatomic , strong)AddressPickView * addressPickView;
+@property (strong, nonatomic) NSMutableArray * dataSource;
+
+@property (strong, nonatomic) NewEditHeaderView * headerView;
+
+@property (strong, nonatomic) AddressPickView * addressPickView;
 
 @property (weak, nonatomic) UIApplication * app;
 
@@ -53,10 +55,7 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"修改失败"];
         }];
-        
     };
-    
-    
 }
 
 - (UIApplication *)app
@@ -216,14 +215,10 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
     
 }
 
-
 - (void)loadView
 {
-    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-    backView.backgroundColor = UIColorFromRGB(0xfafafa);
-    self.view = backView;
-    
-    [self.view addSubview:self.tableView];
+    [super loadView];
+    self.view.backgroundColor = UIColorFromRGB(0xfafafa);
 }
 
 - (void)viewDidLoad {

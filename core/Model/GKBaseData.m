@@ -44,7 +44,7 @@
 #pragma mark - data operation
 - (void)refresh
 {
-
+    self.page = 1;
 }
 
 - (void)load

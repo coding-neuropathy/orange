@@ -26,6 +26,7 @@
 - (void)refresh
 {
 //    self.page = 1;
+//    [super refresh];
     [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
     [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
         self.dataArray = [NSMutableArray arrayWithArray:articles];

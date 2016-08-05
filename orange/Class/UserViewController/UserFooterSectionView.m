@@ -22,9 +22,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xf8f8f8);
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self addSubview:self.H];
+//        _H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
+//        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
+//        [self addSubview:self.H];
     }
     return self;
 }
@@ -49,32 +49,26 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.H.deFrameTop = 0;
+//    self.H.deFrameTop = 0;
 //    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth, 44.);
 //    self.moreBtn.frame = CGRectMake(0., 0., kScreenWidth, 44.);
     
 }
 
-//- (void)drawRect:(CGRect)rect
-//{
-//    [super drawRect:rect];
-//    
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    
-//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-//    CGContextSetLineWidth(context, kSeparateLineWidth);
-//    CGContextMoveToPoint(context, 0., 0);
-//    CGContextAddLineToPoint(context, kScreenWidth, 0);
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, 0.5);
+    CGContextMoveToPoint(context, 0., 0);
+    CGContextAddLineToPoint(context, kScreenWidth, 0);
+    CGContextStrokePath(context);
+    
 //    CGContextStrokePath(context);
-//    
-////    CGContextRef context = UIGraphicsGetCurrentContext();
-//    
-//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xf8f8f8).CGColor);
-//    CGContextSetLineWidth(context, 20.);
-//    CGContextMoveToPoint(context, 0., self.deFrameHeight);
-//    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
-//    CGContextStrokePath(context);
-//}
+}
 
 
 @end

@@ -35,6 +35,7 @@
 
 - (void)refresh
 {
+//    self.page = 1;
     [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
     [API getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:self.categoryId count:30 success:^(NSArray *dataArray) {
         self.dataArray = [NSMutableArray arrayWithArray:dataArray];

@@ -8,9 +8,9 @@
 
 #import "BaseViewController.h"
 
-@interface authorizedUserViewController : BaseViewController<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface authorizedUserViewController : BaseViewController <UICollectionViewDelegateFlowLayout, UICollectionViewDelegate,UICollectionViewDataSource>
 
-@property (nonatomic , strong)GKUser * user;
+@property (strong, nonatomic)GKUser * user;
 
 - (instancetype)initWithUser:(GKUser *)user;
 
