@@ -7,7 +7,7 @@
 //
 
 #import "UserViewController.h"
-#import "UserHeaderView.h"
+//#import "UserHeaderView.h"
 #import "NewUserHeaderView.h"
 #import "UserHeaderSectionView.h"
 #import "UserFooterSectionView.h"
@@ -33,7 +33,7 @@
 
 //#import "DataStructure.h"
 
-@interface UserViewController () <EntityCellDelegate, UserHeaderSectionViewDelegate,NewUserHeaderViewDelegate>
+@interface UserViewController () <EntityCellDelegate, UserHeaderSectionViewDelegate, NewUserHeaderViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray * likedataArray;
 @property (strong, nonatomic) NSMutableArray * notedataArray;
@@ -82,7 +82,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
             self.tabBarItem = item;
             
-            _cartService=[[ALBBSDK sharedInstance] getService:@protocol(ALBBCartService)];
+            _cartService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBCartService)];
         
             
             [self.user addObserver:self forKeyPath:@"avatarURL" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
@@ -107,7 +107,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-//        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         
         if (IS_IPHONE)
@@ -421,30 +421,30 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
 
     switch (indexPath.section) {
-        case 2:
-        {
-            CategoryArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserArticleIdentifier forIndexPath:indexPath];
-            
-            cell.article = [self.articledataArray objectAtIndex:indexPath.row];
-            return cell;
-            
-        }
-        case 3:
-        {
-            NoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserNoteIdentifier forIndexPath:indexPath];
-            cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
-            cell.imageView.layer.borderWidth = 0.5;
-            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-            cell.note = [self.notedataArray objectAtIndex:indexPath.row];
-            cell.H.alpha = 0;
-            if (indexPath.row == self.notedataArray.count -1) {
-                cell.H.alpha = 1;
-            }
-
-            return cell;
-        }
-            break;
-            
+//        case 2:
+//        {
+//            CategoryArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserArticleIdentifier forIndexPath:indexPath];
+//            
+//            cell.article = [self.articledataArray objectAtIndex:indexPath.row];
+//            return cell;
+//            
+//        }
+//        case 3:
+//        {
+//            NoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserNoteIdentifier forIndexPath:indexPath];
+//            cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+//            cell.imageView.layer.borderWidth = 0.5;
+//            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+//            cell.note = [self.notedataArray objectAtIndex:indexPath.row];
+//            cell.H.alpha = 0;
+//            if (indexPath.row == self.notedataArray.count -1) {
+//                cell.H.alpha = 1;
+//            }
+//
+//            return cell;
+//        }
+//            break;
+//            
         default:
         {
             EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];

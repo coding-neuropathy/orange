@@ -208,6 +208,7 @@
     //    [self.navigationController.navigationBar addSubview:self.progressView];
     //    [AVAnalytics beginLogPageView:@"webView"];
     [self.navigationController setToolbarHidden:NO animated:NO];
+    
     [MobClick beginLogPageView:@"articleWebView"];
     [super viewWillAppear:animated];
 }
@@ -217,7 +218,7 @@
     //    [self.progressView removeFromSuperview];
     [self.navigationController setToolbarHidden:YES animated:NO];
     
-    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
+//    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
     
     [MobClick endLogPageView:@"articleWebView"];
     

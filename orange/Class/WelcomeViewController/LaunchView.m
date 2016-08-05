@@ -24,7 +24,7 @@
 {
     if (!_launchImage) {
         _launchImage = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _launchImage.contentMode = UIViewContentModeScaleAspectFill;
+        _launchImage.contentMode = UIViewContentModeScaleAspectFit;
         _launchImage.layer.cornerRadius = 4.;
         _launchImage.layer.masksToBounds = YES;
         _launchImage.userInteractionEnabled = YES;
@@ -98,7 +98,7 @@
 
 - (void)layoutSubviews
 {
-    [super layoutSubviews];
+    
     
 //    self.launchImage.frame = CGRectMake(0., 0., 290, 240.);
     
@@ -113,8 +113,11 @@
 //    self.actionBtn.frame = CGRectMake(0., 0., self.deFrameWidth, 50.);
 //    self.actionBtn.deFrameTop = self.deFrameHeight - 50.;
     
-    self.launchImage.frame = CGRectMake(0., 0., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3);
+//    self.launchImage.frame = CGRectMake(0., 0., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3);
 //    self.launchImage.deFrameBottom = self.actionBtn.deFrameTop;
+    self.launchImage.frame = CGRectMake(0., 0., self.deFrameWidth, self.deFrameHeight);
+    
+    [super layoutSubviews];
     
 }
 

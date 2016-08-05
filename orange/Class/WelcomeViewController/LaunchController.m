@@ -14,10 +14,19 @@
 @property (strong, nonatomic) GKLaunch * launch;
 @property (strong, nonatomic) LaunchView * launchView;
 @property (strong, nonatomic) UIButton * closeBtn;
+@property (weak, nonatomic) UIApplication * app;
 
 @end
 
 @implementation LaunchController
+
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
+}
 
 - (instancetype)initWithLaunch:(GKLaunch *)launch
 {
@@ -32,11 +41,35 @@
     return self;
 }
 
+#pragma mark - init view
 - (LaunchView *)launchView
 {
     if (!_launchView) {
 //        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 290.) / 2, -425., 290., 425.)];
-        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 300.) / 2, -425., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3)];
+//        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 300.) / 2, -425., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3)];
+        _launchView = [[LaunchView alloc] initWithFrame:CGRectZero];
+        
+        _launchView.frame = CGRectMake(0., 0., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3);
+        _launchView.deFrameTop = - (_launchView.deFrameHeight);
+        _launchView.deFrameLeft = (kScreenWidth - _launchView.deFrameWidth) / 2.;
+        
+        if (IS_IPAD) {
+            _launchView.frame = CGRectMake(0., 0., 360., 480.);
+            _launchView.deFrameTop = - ((kScreenHeight - _launchView.deFrameHeight) / 2. + _launchView.deFrameHeight);
+            
+            _launchView.deFrameLeft = (kScreenWidth - _launchView.deFrameWidth) / 2.;
+        }
+//        if (IS_IPAD) {
+//            
+////            _launchView.center = CGPointMake(kScreenWidth / 2. , kScreenHeight / 2.);
+////            _launchView.deFrameTop = (kScreenHeight - _launchView.deFrameHeight) / 2.;
+//            _launchView.deFrameTop = - (_launchView.deFrameHeight);
+//            _launchView.deFrameLeft = (kScreenWidth - _launchView.deFrameWidth) / 2.;
+//        } else {
+        
+
+//            _launchView.frame = CGRectMake((kScreenWidth - 300.) / 2, -425., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3);
+//        }
         _launchView.backgroundColor = UIColorFromRGB(0xffffff);
         _launchView.layer.cornerRadius = 4.;
         _launchView.delegate = self;
@@ -80,7 +113,9 @@
 - (void)fadeIn
 {
     [UIView animateWithDuration:0.35 animations:^{
-        self.launchView.deFrameTop = (kScreenHeight - 425.) / 2.;
+
+        self.launchView.deFrameTop = (kScreenHeight - self.launchView.deFrameHeight) / 2.;
+            
         self.closeBtn.deFrameRight =  CGRectGetMaxX(self.launchView.frame) + 12.;
         self.closeBtn.deFrameTop = CGRectGetMinY(self.launchView.frame) - 12.;
     } completion:^(BOOL finished) {
@@ -91,10 +126,6 @@
 - (void)fadeOutWithAction:(void (^)(void))action
 {
     [UIView animateWithDuration:0.35 animations:^{
-//        self.view.transform = CGAffineTransformMakeScale(1.3, 1.3);
-//        self.launchView.transform = CGAffineTransformMakeRotation(M_PI / -36.);
-//        self.view.transform
-//        self.view.alpha = 0;
         self.launchView.transform = CGAffineTransformMakeTranslation(self.launchView.transform.tx, self.launchView.transform.ty + 600.);
         self.closeBtn.transform = CGAffineTransformMakeTranslation(self.closeBtn.transform.tx, self.closeBtn.transform.ty + 600.);
     } completion:^(BOOL finished) {
@@ -104,6 +135,22 @@
         }
 
     }];
+}
+
+#pragma mark -
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+        self.launchView.deFrameTop      = (kScreenHeight - _launchView.deFrameHeight) / 2.;
+        self.launchView.deFrameLeft     = (kScreenWidth - _launchView.deFrameWidth) / 2.;
+        self.closeBtn.deFrameRight      = CGRectGetMaxX(self.launchView.frame) + 12.;
+        self.closeBtn.deFrameTop        = CGRectGetMinY(self.launchView.frame) - 12.;
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
+    
 }
 
 
