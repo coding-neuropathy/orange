@@ -239,6 +239,8 @@
 		8A1905221D54378B00B72A79 /* UserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1905211D54378B00B72A79 /* UserHeaderView.m */; };
 		8A19053D1D543F8D00B72A79 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A19053C1D543F8D00B72A79 /* libzbar.a */; };
 		8A19053F1D5444E600B72A79 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A19053E1D5444E600B72A79 /* libiconv.2.4.0.tbd */; };
+		8A1905411D5471EA00B72A79 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1905401D5471EA00B72A79 /* CoreMedia.framework */; };
+		8A1905431D5471F400B72A79 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1905421D5471F300B72A79 /* CoreVideo.framework */; };
 		8A195F0B1CF3FD3A00F2A954 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A195F0A1CF3FD3A00F2A954 /* UMMobClick.framework */; };
 		8A2754611CA5060200073E78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2754601CA5060200073E78 /* CoreData.framework */; };
 		8A3CBBA81C7D870E0002AAE8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */; };
@@ -859,6 +861,8 @@
 		8A19053B1D543F8D00B72A79 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
 		8A19053C1D543F8D00B72A79 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		8A19053E1D5444E600B72A79 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		8A1905401D5471EA00B72A79 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		8A1905421D5471F300B72A79 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		8A195F0A1CF3FD3A00F2A954 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		8A2754601CA5060200073E78 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -1217,6 +1221,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A1905431D5471F400B72A79 /* CoreVideo.framework in Frameworks */,
+				8A1905411D5471EA00B72A79 /* CoreMedia.framework in Frameworks */,
+				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
 				8A19053F1D5444E600B72A79 /* libiconv.2.4.0.tbd in Frameworks */,
 				8ACFAAB61CDF1DF8000830B9 /* jpush-ios-2.1.6.a in Frameworks */,
 				4E56DFCE19D5B84300263B17 /* QuartzCore.framework in Frameworks */,
@@ -1236,7 +1243,6 @@
 				4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */,
 				B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */,
 				8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */,
-				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
 				B78164681D24F8990035DFE4 /* ALBBFullSecurityGuard.framework in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
@@ -2817,6 +2823,8 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A1905421D5471F300B72A79 /* CoreVideo.framework */,
+				8A1905401D5471EA00B72A79 /* CoreMedia.framework */,
 				8A19053E1D5444E600B72A79 /* libiconv.2.4.0.tbd */,
 				B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */,
 				B7AAFA791AB7039600A2F20D /* Foundation.framework */,

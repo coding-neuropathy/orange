@@ -38,8 +38,9 @@ static NSString *  BannerIdentifier = @"Banner";
 
 - (void)refresh
 {
-    [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
-        [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities,
+//    [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
+    [super refresh];
+    [API getDiscoverWithsuccess:^(NSArray *banners, NSArray * entities,
                                       NSArray * categories, NSArray * articles, NSArray * users) {
             self.banners = banners;
             self.categories = categories;
@@ -48,10 +49,10 @@ static NSString *  BannerIdentifier = @"Banner";
             self.entities = entities;
             
             [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
-        } failure:^(NSInteger stateCode, NSError * error) {
+    } failure:^(NSInteger stateCode, NSError * error) {
             self.error = error;
             [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
-        }];
+    }];
 }
 
 

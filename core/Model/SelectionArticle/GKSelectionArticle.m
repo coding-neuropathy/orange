@@ -27,14 +27,14 @@
 {
 //    self.page = 1;
     [super refresh];
-    [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
+    
+//    NSLog(@"refresh");
+//    [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
     [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
         self.dataArray = [NSMutableArray arrayWithArray:articles];
         self.page +=1;
         
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
-//        [self.collectionView.pullToRefreshView stopAnimating];
-//        [self.collectionView reloadData];
         [self saveEntityToIndexWithData:articles];
     } failure:^(NSInteger stateCode, NSError * error) {
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];

@@ -36,8 +36,9 @@
 - (void)refresh
 {
 //    self.page = 1;
-    [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
-    [API getSelectionListWithTimestamp:[[NSDate date] timeIntervalSince1970] cateId:self.categoryId count:30 success:^(NSArray *dataArray) {
+    
+    [super refresh];
+    [API getSelectionListWithTimestamp:self.timestamp cateId:self.categoryId count:30 success:^(NSArray *dataArray) {
         self.dataArray = [NSMutableArray arrayWithArray:dataArray];
         
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
@@ -51,10 +52,6 @@
         
         
     } failure:^(NSInteger stateCode, NSError * error) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
-        //[SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"load failure", kLocalizedFile, nil)];
-        //            [SVProgressHUD dismiss];
-        //        [self.tableView.pullToRefreshView stopAnimating];
         self.error = error;
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
         

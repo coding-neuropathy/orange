@@ -161,7 +161,7 @@
     
     self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=12>%@ %ld   %@ %ld</font>",
                               NSLocalizedStringFromTable(@"following", kLocalizedFile, nil),
-                              self.user.followingCount,
+                              (long)self.user.followingCount,
                               NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil),
                               self.user.fanCount];;
     

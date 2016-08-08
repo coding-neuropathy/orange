@@ -223,15 +223,15 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [MobClick beginLogPageView:@"userView"];
     [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"userView"];
     
-//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-//    
-//    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-//    {
-//        self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-//    }
-    
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark -

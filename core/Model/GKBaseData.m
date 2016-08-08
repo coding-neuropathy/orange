@@ -45,6 +45,9 @@
 - (void)refresh
 {
     self.page = 1;
+    self.timestamp = [[NSDate date] timeIntervalSince1970];
+    
+    [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
 }
 
 - (void)load
