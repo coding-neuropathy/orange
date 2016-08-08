@@ -260,7 +260,7 @@
 		8A9255FB1D50A0A800E6481F /* GKSearchData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9255F91D50A0A800E6481F /* GKSearchData.h */; };
 		8A9255FC1D50A0A800E6481F /* GKSearchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9255FA1D50A0A800E6481F /* GKSearchData.m */; };
 		8A9256011D50D1A500E6481F /* NoResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9256001D50D1A500E6481F /* NoResultView.m */; };
-		8A943BBF1D58920A007C5F52 /* ScanerCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A943BBE1D58920A007C5F52 /* ScanerCropView.m */; };
+		8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A943BBE1D58920A007C5F52 /* ScannerCropView.m */; };
 		8AA0FE701C7DC6C0000BD702 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */; };
 		8AA0FE711C7DC6C0000BD702 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AA0FE6D1C7DC6C0000BD702 /* WeiboSDK.bundle */; };
 		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
@@ -895,8 +895,8 @@
 		8A9255FA1D50A0A800E6481F /* GKSearchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKSearchData.m; path = SearchResults/GKSearchData.m; sourceTree = "<group>"; };
 		8A9255FF1D50D1A500E6481F /* NoResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoResultView.h; sourceTree = "<group>"; };
 		8A9256001D50D1A500E6481F /* NoResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoResultView.m; sourceTree = "<group>"; };
-		8A943BBD1D58920A007C5F52 /* ScanerCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScanerCropView.h; path = QRCodeViewController/ScanerCropView.h; sourceTree = "<group>"; };
-		8A943BBE1D58920A007C5F52 /* ScanerCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScanerCropView.m; path = QRCodeViewController/ScanerCropView.m; sourceTree = "<group>"; };
+		8A943BBD1D58920A007C5F52 /* ScannerCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScannerCropView.h; path = QRCodeViewController/ScannerCropView.h; sourceTree = "<group>"; };
+		8A943BBE1D58920A007C5F52 /* ScannerCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScannerCropView.m; path = QRCodeViewController/ScannerCropView.m; sourceTree = "<group>"; };
 		8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		8AA0FE641C7DC6C0000BD702 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
 		8AA0FE651C7DC6C0000BD702 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
@@ -2401,8 +2401,8 @@
 			children = (
 				8A50453A1D58717B00D66F8A /* EmbedReaderViewController.h */,
 				8A50453B1D58717B00D66F8A /* EmbedReaderViewController.m */,
-				8A943BBD1D58920A007C5F52 /* ScanerCropView.h */,
-				8A943BBE1D58920A007C5F52 /* ScanerCropView.m */,
+				8A943BBD1D58920A007C5F52 /* ScannerCropView.h */,
+				8A943BBE1D58920A007C5F52 /* ScannerCropView.m */,
 			);
 			name = QRCodeViewController;
 			sourceTree = "<group>";
@@ -3532,7 +3532,7 @@
 				4E2D6D5B1A6D49F0009E4A17 /* LoginView.m in Sources */,
 				4E6889FE1BA9C2BA0006AD9B /* UIDevice+JSQMessages.m in Sources */,
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
-				8A943BBF1D58920A007C5F52 /* ScanerCropView.m in Sources */,
+				8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */,
 				B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */,
 				4E688A1E1BA9C2BA0006AD9B /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				23F612FA1CDAEF120074E8C8 /* NicknameViewController.m in Sources */,

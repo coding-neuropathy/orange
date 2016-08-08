@@ -1,5 +1,5 @@
 //
-//  ScanerCropView.h
+//  ScannerCropView.h
 //  orange
 //
 //  Created by 谢家欣 on 16/8/8.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ScanerCropView : UIView
+@interface ScannerCropView : UIView
 
 - (void)startAnimating;
 - (void)stopAnimating;

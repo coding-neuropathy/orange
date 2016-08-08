@@ -8,11 +8,14 @@
 
 #import "EmbedReaderViewController.h"
 #import "ZBarReaderView.h"
-#import "ScanerCropView.h"
+#import "ScannerCropView.h"
 
 @interface EmbedReaderViewController () <ZBarReaderViewDelegate>
-
-@property (strong, nonatomic) ScanerCropView * cropView;
+{
+@private
+    CGFloat yOffset;
+}
+@property (strong, nonatomic) ScannerCropView * cropView;
 @property (strong, nonatomic) ZBarReaderView * reader;
 @property (strong, nonatomic) NSString * text;
 
@@ -21,12 +24,10 @@
 
 @implementation EmbedReaderViewController
 
-- (ScanerCropView *)cropView
+- (ScannerCropView *)cropView
 {
     if (!_cropView) {
-        _cropView = [[ScanerCropView alloc] initWithFrame:CGRectZero];
-        
-        
+        _cropView = [[ScannerCropView alloc] initWithFrame:CGRectZero];
         
     }
     return _cropView;
@@ -43,14 +44,19 @@
         
         [_reader.scanner setSymbology:ZBAR_QRCODE config:ZBAR_CFG_ENABLE to:1];
         
-//        if (TARGET_IPHONE_SIMULATOR) {
-//            
-//        }
-//        float A = scancropView.frame.origin.y / _readerView.bounds.size.height;
-//        float B = 1 - (scancropView.frame.origin.x + scancropView.frame.size.width) / _readerView.bounds.size.width;
-//        float C = (scancropView.frame.origin.y + scancropView.frame.size.height) / _readerView.bounds.size.height;
-//        float D = 1 - scancropView.frame.origin.x / _readerView.bounds.size.width;
-//        [_readerView setScanCrop:CGRectMake(A, B, C, D)];
+        yOffset = 14. * 3 + 64.;
+        
+        [_reader addSubview:self.cropView];
+        
+        self.cropView.frame = CGRectMake(0., 0., 280., 280.);
+        self.cropView.deFrameLeft = (self.view.deFrameWidth - self.cropView.deFrameWidth) / 2.;
+        self.cropView.deFrameTop = yOffset;
+        
+        float A = self.cropView.frame.origin.y / _reader.bounds.size.height;
+        float B = 1 - (self.cropView.frame.origin.x + self.cropView.deFrameWidth) / _reader.bounds.size.width;
+        float C = (self.cropView.frame.origin.y + self.cropView.frame.size.height) / _reader.bounds.size.height;
+        float D = 1 - self.cropView.frame.origin.x / _reader.bounds.size.width;
+        [_reader setScanCrop:CGRectMake(A, B, C, D)];
         
     }
     return _reader;

@@ -1,14 +1,14 @@
 //
-//  ScanerCropView.m
+//  ScannerCropView.m
 //  orange
 //
 //  Created by 谢家欣 on 16/8/8.
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import "ScanerCropView.h"
+#import "ScannerCropView.h"
 
-@interface ScanerCropView ()
+@interface ScannerCropView ()
 {
     BOOL    _isAnimating;
     NSTimer * _timer;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation ScanerCropView
+@implementation ScannerCropView
 
 - (void)setDefaultProperty
 {
