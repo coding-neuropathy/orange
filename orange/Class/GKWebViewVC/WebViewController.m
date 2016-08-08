@@ -189,12 +189,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    
     [self.navigationController.navigationBar addSubview:self.progressView];
     
 
-//    [AVAnalytics beginLogPageView:@"webView"];
     [MobClick beginLogPageView:@"webView"];
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -206,12 +206,13 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    
     [self.progressView removeFromSuperview];
     
 //    [self.navigationController setToolbarHidden:YES animated:YES];
     
     [MobClick endLogPageView:@"webView"];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - <WKNavigationDelegate>

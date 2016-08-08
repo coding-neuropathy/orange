@@ -237,15 +237,40 @@
     return _editBtn;
 }
 
+/**
+ *  seller components
+ */
 - (UIButton *)createOrderBtn
 {
-    if (_createOrderBtn) {
+    if (!_createOrderBtn) {
         _createOrderBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
         
+        [_createOrderBtn setTitle:NSLocalizedStringFromTable(@"create order", kLocalizedFile, nil) forState:UIControlStateNormal];
+//        _createOrderBtn.titleLabel.textColor = UIColorFromRGB(0x212121);
+        [_createOrderBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
+        _createOrderBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+//        [_createOrderBtn setBackgroundColor:[UIColor redColor]];
+        
+        [_createOrderBtn addTarget:self action:@selector(createOrderAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:_createOrderBtn];
     }
     return _createOrderBtn;
+}
+
+- (UIButton *)reviewOrderBtn
+{
+    if (!_reviewOrderBtn) {
+        _reviewOrderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [_reviewOrderBtn setTitle:NSLocalizedStringFromTable(@"review order", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_reviewOrderBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
+        _reviewOrderBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+        
+        [_reviewOrderBtn addTarget:self action:@selector(reviewOrderAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_reviewOrderBtn];
+    }
+    return _reviewOrderBtn;
 }
 
 
@@ -413,9 +438,15 @@
     self.bioBackView.deFrameBottom = self.deFrameBottom;
     
     
-    self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
+//    self.createOrderBtn.frame = CGRectMake(0., 0., self.deFrameWidth / 2., 49.);
+//    self.createOrderBtn.deFrameBottom = self.bioBackView.deFrameTop;
+//    
+//    self.reviewOrderBtn.frame = CGRectMake(0., 0., self.deFrameWidth / 2., 49.);
+//    self.reviewOrderBtn.center = self.createOrderBtn.center;
+//    self.reviewOrderBtn.deFrameLeft = self.createOrderBtn.deFrameRight;
     
-    //    self.fansBtn.frame = CGRectMake(0., 0.,100., 20.);
+    
+    self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
     self.fansBtn.deFrameLeft     = self.friendBtn.deFrameRight + 43;
     
     if (_user.userId == [Passport sharedInstance].user.userId) {
@@ -456,6 +487,31 @@
 //    [self relationBtn];
 }
 
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    CGContextMoveToPoint(context, 0., self.createOrderBtn.deFrameTop);
+    CGContextAddLineToPoint(context, self.deFrameWidth, self.createOrderBtn.deFrameTop);
+    
+    CGContextMoveToPoint(context, self.createOrderBtn.deFrameRight, self.createOrderBtn.deFrameTop);
+    CGContextAddLineToPoint(context, self.createOrderBtn.deFrameRight, self.createOrderBtn.deFrameBottom);
+
+    CGContextStrokePath(context);
+}
+
 #pragma mark button action
 - (void)friendBtnAction:(id)sender
 {
@@ -478,14 +534,8 @@
     }
 }
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
-#pragma mark - button action
+
+//#pragma mark - button action
 - (void)followButtonAction:(id)sender
 {
     if (_delegate && [_delegate respondsToSelector:@selector(TapFollowBtnWithUser:View:)]) {
@@ -498,6 +548,25 @@
     if (_delegate && [_delegate respondsToSelector:@selector(TapUnFollowBtnWithUser:View:)])
     {
         [_delegate TapUnFollowBtnWithUser:self.user View:self];
+    }
+}
+
+/**
+ *  seller button action
+ */
+- (void)createOrderAction:(id)sender
+{
+//    NSLog(@"create create");
+    if (_delegate && [_delegate respondsToSelector:@selector(TapCreateOrder:)]) {
+        [_delegate TapCreateOrder:sender];
+    }
+}
+
+- (void)reviewOrderAction:(id)sender
+{
+//    NSLog(@"review review");
+    if (_delegate && [_delegate respondsToSelector:@selector(TapReviewOrder:)]) {
+        [_delegate TapReviewOrder:sender];
     }
 }
 

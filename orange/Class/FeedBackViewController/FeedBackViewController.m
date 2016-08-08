@@ -76,7 +76,12 @@
     self.inputToolbar.contentView.textView.layer.borderWidth = 0;
 //    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+}
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
+    [super viewDidAppear:animated];
 }
 
 - (void)setType:(FeedBackType)type

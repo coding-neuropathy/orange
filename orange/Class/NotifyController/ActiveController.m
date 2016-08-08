@@ -56,6 +56,12 @@ static NSString *FeedCellIdentifier = @"FeedCell";
     [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:FeedCellIdentifier];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
+    [super viewDidAppear:animated];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

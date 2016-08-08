@@ -474,6 +474,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                 CGFloat userHeaderHeight = self.user.bio.length == 0 ? 144. : 204.;
                 userHeaderHeight += IS_IPAD ? 20. : 0.;
             
+//                userHeaderHeight += self.user.authorized_seller ? 49. : 0.;
+//                userHeaderHeight += 49.;
                 size = CGSizeMake(self.collectionView.deFrameWidth, userHeaderHeight);
             
             }
@@ -676,6 +678,20 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [altervc addAction:confirm];
     [self presentViewController:altervc animated:YES completion:nil];
 }
+
+/**
+ *  seller button action
+ */
+- (void)TapCreateOrder:(id)sender
+{
+
+}
+
+- (void)TapReviewOrder:(id)sender
+{
+
+}
+
 
 #pragma mark - <UserHeaderSectionViewDelegate>
 - (void)TapHeaderViewWithType:(UserPageType)type

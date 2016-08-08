@@ -16,11 +16,13 @@
 - (void)TapFansBtnWithUser:(GKUser *)user;
 
 @optional
-
 - (void)TapEditBtnWithUser:(GKUser *)user;
 - (void)TapFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view;
 - (void)TapUnFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view;
 
+//@optional
+- (void)TapCreateOrder:(id)sender;
+- (void)TapReviewOrder:(id)sender;
 
 @end
 

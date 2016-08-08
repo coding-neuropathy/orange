@@ -59,8 +59,7 @@ static int lastContentOffset;
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         
         self.tabBarItem = item;
-        
-        //self.title = NSLocalizedStringFromTable(@"selected", kLocalizedFile, nil);
+    
         self.cateId = 0;
         
         if (IS_IPHONE) {
@@ -109,14 +108,21 @@ static int lastContentOffset;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
+    [super viewDidAppear:animated];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-//    [UIView setAnimationsEnabled:NO];
+    //    [UIView setAnimationsEnabled:NO];
     
     self.collectionView.scrollsToTop = YES;
     //self.navigationController.scrollNavigationBar.scrollView = self.tableView;
     [MobClick beginLogPageView:@"SelectionView"];
+    [super viewWillAppear:animated];
+
 }
 
 

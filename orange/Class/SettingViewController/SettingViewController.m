@@ -244,6 +244,12 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     // Dispose of any resources that can be recreated.
 }
 
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
+//    [super viewDidAppear:animated];
+//}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

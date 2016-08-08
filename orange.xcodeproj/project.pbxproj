@@ -1931,9 +1931,6 @@
 				4EB8E2251B9F398B002C7F6F /* SelectionController */,
 				B76EE07C1B3D86AE009D8763 /* NotifyController */,
 				B769B1261B2ACFB3004401FA /* WelcomeViewController */,
-				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
-				DA35B3C31AFEE31200D66671 /* PasswordEditViewController */,
-				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
 				4E934DA51A9AE9FB00374B05 /* GroupViewController */,
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
 				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
@@ -1958,6 +1955,9 @@
 		4E66C1D81A7C8B2500F31A90 /* SettingViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
+				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
+				DA35B3C31AFEE31200D66671 /* PasswordEditViewController */,
 				8AB731D61C1BBDAD0076BACC /* SettingsFooterView.h */,
 				8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */,
 				8AB731D81C1BBDAD0076BACC /* SettingsViewCell.h */,
@@ -2653,6 +2653,7 @@
 				B7662AD11AC3B49E00C82B4B /* FeedBackViewController.m */,
 			);
 			name = FeedBackViewController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B76676371AB8058A002F294C /* NotificationView */ = {
@@ -2974,7 +2975,8 @@
 				B737F40E1C1C027100286596 /* VerifyEmailViewController.h */,
 				B737F40F1C1C027100286596 /* VerifyEmailViewController.m */,
 			);
-			path = EmailEditViewController;
+			name = EmailEditViewController;
+			path = ../EmailEditViewController;
 			sourceTree = "<group>";
 		};
 		DA35B3C31AFEE31200D66671 /* PasswordEditViewController */ = {
@@ -2983,7 +2985,8 @@
 				DA35B3C41AFEE31200D66671 /* PasswordEditViewController.h */,
 				DA35B3C51AFEE31200D66671 /* PasswordEditViewController.m */,
 			);
-			path = PasswordEditViewController;
+			name = PasswordEditViewController;
+			path = ../PasswordEditViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

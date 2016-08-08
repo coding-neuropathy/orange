@@ -35,18 +35,20 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
     kAppDelegate.activeVC = self;
+    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    
     
     if([self.navigationController.scrollNavigationBar respondsToSelector:@selector(setScrollView:)])
     {
         self.navigationController.scrollNavigationBar.scrollView = nil;
     }
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

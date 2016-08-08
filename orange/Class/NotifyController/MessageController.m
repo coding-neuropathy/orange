@@ -57,6 +57,12 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:MessageCellIdentifier];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
+    [super viewDidAppear:animated];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

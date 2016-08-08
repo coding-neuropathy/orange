@@ -6,8 +6,9 @@
 //  Copyright © 2015年 guoku.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface VerifyEmailViewController : UIViewController
+@interface VerifyEmailViewController : BaseViewController
 
 @end

@@ -201,6 +201,11 @@ typedef NS_ENUM(NSInteger, GKUserState) {
 @property (nonatomic, assign) BOOL authorized_author;
 
 /**
+ *  授权店家
+ */
+@property (assign, nonatomic) BOOL authorized_seller;
+
+/**
  *  截断处理后的用户名
  */
 @property (nonatomic, strong)NSString * nick;

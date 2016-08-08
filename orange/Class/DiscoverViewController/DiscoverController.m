@@ -251,8 +251,10 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    
     kAppDelegate.activeVC = self;
+    if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated
