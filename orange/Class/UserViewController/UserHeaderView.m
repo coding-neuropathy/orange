@@ -1,39 +1,65 @@
 //
-//  NewUserHeaderView.m
+//  UserHeaderView.m
 //  orange
 //
 //  Created by D_Collin on 16/5/5.
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import "NewUserHeaderView.h"
+#import "UserHeaderView.h"
 
-@interface NewUserHeaderView ()
+@interface UserHeaderView ()
 
-/** 用户头像 */
+/**
+ *  用户头像
+ */
 @property (strong, nonatomic) UIImageView * avatarView;
-/** 用户昵称 */
+
+/**
+ *  用户昵称 
+ */
 @property (strong, nonatomic) RTLabel * nicknameLabel;
-/** 个人签名 */
+
+/**
+ *  个人签名 
+ */
 @property (strong, nonatomic) UILabel * bioLabel;
-/** 签名背景 */
+
+/** 
+ *  签名背景 
+ */
 @property (nonatomic, strong) UIView * bioBackView;
 
-/** 关注 */
+/** 
+ *  关注 
+ */
 @property (strong, nonatomic) UIButton * friendBtn;
-/** 粉丝 */
+
+/** 
+ *  粉丝 
+ */
 @property (strong, nonatomic) UIButton * fansBtn;
+
+/**
+ *  用户关系
+ */
 @property (strong, nonatomic) UIView * v;
 @property (strong, nonatomic) UIButton * relationBtn;
 @property (strong, nonatomic) UIButton * blockBtn;
 @property (strong, nonatomic) UIButton * editBtn;
+
+/**
+ *  seller
+ */
+@property (strong, nonatomic) UIButton * createOrderBtn;
+@property (strong, nonatomic) UIButton * reviewOrderBtn;
 
 /** 身份标记 */
 //@property (nonatomic , strong)UIImageView * staffImage;
 
 @end
 
-@implementation NewUserHeaderView
+@implementation UserHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -44,15 +70,6 @@
     }
     return self;
 }
-
-//- (UIImageView *)staffImage
-//{
-//    if (!_staffImage) {
-//        _staffImage = [[UIImageView alloc]initWithFrame:CGRectZero];
-//        [self addSubview:_staffImage];
-//    }
-//    return _staffImage;
-//}
 
 - (UIImageView *)avatarView
 {
@@ -377,7 +394,7 @@
     self.nicknameLabel.deFrameTop = self.avatarView.deFrameTop;
     self.nicknameLabel.deFrameLeft = self.avatarView.deFrameRight + 24.;
     
-    self.bioBackView.frame = CGRectMake(0., 0., kScreenWidth, 60.);
+    self.bioBackView.frame = CGRectMake(0., 0., self.deFrameWidth, 60.);
     self.bioBackView.deFrameLeft = self.deFrameLeft;
     self.bioBackView.deFrameBottom = self.deFrameBottom;
     
@@ -386,7 +403,6 @@
     
     //    self.fansBtn.frame = CGRectMake(0., 0.,100., 20.);
     self.fansBtn.deFrameLeft     = self.friendBtn.deFrameRight + 43;
-    
     
     if (_user.userId == [Passport sharedInstance].user.userId) {
         self.editBtn.frame = CGRectMake(0., 0., 130., 30.);

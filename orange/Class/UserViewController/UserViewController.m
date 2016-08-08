@@ -8,7 +8,7 @@
 
 #import "UserViewController.h"
 //#import "UserHeaderView.h"
-#import "NewUserHeaderView.h"
+#import "UserHeaderView.h"
 #import "UserHeaderSectionView.h"
 #import "UserFooterSectionView.h"
 #import "EntityCell.h"
@@ -33,7 +33,7 @@
 
 //#import "DataStructure.h"
 
-@interface UserViewController () <EntityCellDelegate, UserHeaderSectionViewDelegate, NewUserHeaderViewDelegate>
+@interface UserViewController () <EntityCellDelegate, UserHeaderSectionViewDelegate, UserHeaderViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray * likedataArray;
 @property (strong, nonatomic) NSMutableArray * notedataArray;
@@ -42,7 +42,7 @@
 //@property (strong, nonatomic) UserHeaderView * headerView;
 @property (strong, nonatomic) UICollectionView * collectionView;
 
-@property (strong, nonatomic) NewUserHeaderView * newheaderView;
+@property (strong, nonatomic) UserHeaderView * headerView;
 
 @property (assign, nonatomic) UserPageType type;
 
@@ -56,8 +56,8 @@
 
 @implementation UserViewController
 
+//static NSString * UserHeaderIdentifer = @"AuthUserHeader";
 static NSString * UserHeaderIdentifer = @"UserHeader";
-static NSString * NewUserHeaderIdentifer = @"NewUserHeader";
 static NSString * UserHeaderSectionIdentifer = @"UserHeaderSection";
 static NSString * UserFooterSectionIdentifer = @"UserFooterSection";
 static NSString * UserLikeEntityIdentifer = @"EntityCell";
@@ -169,7 +169,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     self.navigationItem.title = self.user.nick;
 //    [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
     
-    [self.collectionView registerClass:[NewUserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NewUserHeaderIdentifer];
+    [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
     
     [self.collectionView registerClass:[UserHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderSectionIdentifer];
     
@@ -322,10 +322,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         switch (indexPath.section) {
             case 0:
             {
-                self.newheaderView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NewUserHeaderIdentifer forIndexPath:indexPath];
-                self.newheaderView.user = self.user;
-                self.newheaderView.delegate = self;
-                return self.newheaderView;
+                self.headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer forIndexPath:indexPath];
+                self.headerView.user = self.user;
+                self.headerView.delegate = self;
+                return self.headerView;
             }
                 break;
                 
@@ -637,7 +637,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)TapFollowBtnWithUser:(GKUser *)user View:(NewUserHeaderView *)view
+- (void)TapFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view
 {
 //    DDLogInfo(@"follow with user id %lu", user.userId);
     if (!k_isLogin) {
@@ -656,7 +656,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     }
 }
 
-- (void)TapUnFollowBtnWithUser:(GKUser *)user View:(NewUserHeaderView *)view
+- (void)TapUnFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view
 {
     DDLogInfo(@"unfollow");
     UIAlertController * altervc = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ %@?",NSLocalizedStringFromTable(@"unfollow", kLocalizedFile, nil), user.nickname] message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -741,13 +741,13 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             DDLogInfo(@"nickname kvo %@", [Passport sharedInstance].user.nickname);
             self.user = [Passport sharedInstance].user;
             self.navigationItem.title = self.user.nick;
-            self.newheaderView.user = self.user;
+            self.headerView.user = self.user;
 //            [self.collectionView reloadData];
         }
         
         if ([keyPath isEqualToString:@"avatarURL"]) {
             self.user = [Passport sharedInstance].user;
-            self.newheaderView.user = self.user;
+            self.headerView.user = self.user;
 //            [self.collectionView reloadData];
         }
     }
