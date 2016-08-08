@@ -27,6 +27,15 @@
         _reader.readerDelegate = self;
         _reader.frame = [[UIScreen mainScreen] bounds];
         
+        [_reader.scanner setSymbology:ZBAR_QRCODE config:ZBAR_CFG_ENABLE to:1];
+        
+        
+//        float A = scancropView.frame.origin.y / _readerView.bounds.size.height;
+//        float B = 1 - (scancropView.frame.origin.x + scancropView.frame.size.width) / _readerView.bounds.size.width;
+//        float C = (scancropView.frame.origin.y + scancropView.frame.size.height) / _readerView.bounds.size.height;
+//        float D = 1 - scancropView.frame.origin.x / _readerView.bounds.size.width;
+//        [_readerView setScanCrop:CGRectMake(A, B, C, D)];
+        
     }
     return _reader;
 }
@@ -56,6 +65,7 @@
 {
     for(ZBarSymbol *sym in symbols) {
         self.text = sym.data;
+        DDLogError(@"%@", self.text);
         break;
     }
 }
