@@ -470,40 +470,35 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-            if (IS_IPAD) {
-                size = self.user.bio.length == 0 ? CGSizeMake(kScreenWidth - kTabBarWidth, 164.) : CGSizeMake(kScreenWidth, 224.);
-            } else {
-                size = self.user.bio.length == 0 ? CGSizeMake(kScreenWidth, 144.) : CGSizeMake(kScreenWidth, 204.);
+            {
+                CGFloat userHeaderHeight = self.user.bio.length == 0 ? 144. : 204.;
+                userHeaderHeight += IS_IPAD ? 20. : 0.;
+            
+                size = CGSizeMake(self.collectionView.deFrameWidth, userHeaderHeight);
+            
             }
-//            if (self.user.bio.length == 0) {
-//                size = CGSizeMake(kScreenWidth, 144.);
-//            }
-//            else
-//            {
-//                size = CGSizeMake(kScreenWidth, 204.);
-//            }
             break;
             
         case 1:
             if (self.likedataArray.count > 0)
-                size = CGSizeMake(kScreenWidth, 44.);
+                size = CGSizeMake(self.collectionView.deFrameWidth, 44.);
             break;
         case 2:
             if (self.articledataArray.count > 0) {
-                size = CGSizeMake(kScreenWidth, 44.);
+                size = CGSizeMake(self.collectionView.deFrameWidth, 44.);
             }
             break;
         case 3:
             if (self.notedataArray.count > 0)
-                size = CGSizeMake(kScreenWidth, 44.);
+                size = CGSizeMake(self.collectionView.deFrameWidth, 44.);
             break;
         case 4:
             if (self.user.tagCount > 0)
-                size = CGSizeMake(kScreenWidth, 44.);
+                size = CGSizeMake(self.collectionView.deFrameWidth, 44.);
             break;
         case 5:
             if (self.user.digCount > 0)
-                size = CGSizeMake(kScreenWidth, 44.);
+                size = CGSizeMake(self.collectionView.deFrameWidth, 44.);
             break;
     }
     return size;

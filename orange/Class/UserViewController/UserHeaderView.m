@@ -71,6 +71,7 @@
     return self;
 }
 
+#pragma mark - lazy load subview
 - (UIImageView *)avatarView
 {
     if (!_avatarView) {
@@ -236,6 +237,19 @@
     return _editBtn;
 }
 
+- (UIButton *)createOrderBtn
+{
+    if (_createOrderBtn) {
+        _createOrderBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        
+        [self addSubview:_createOrderBtn];
+    }
+    return _createOrderBtn;
+}
+
+
+#pragma mark - set user data
 - (void)setUser:(GKUser *)user
 {
     _user = user;
