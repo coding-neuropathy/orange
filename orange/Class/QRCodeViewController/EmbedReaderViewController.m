@@ -19,6 +19,7 @@
 
 @implementation EmbedReaderViewController
 
+
 - (ZBarReaderView *)reader
 {
     if (!_reader) {
@@ -29,7 +30,9 @@
         
         [_reader.scanner setSymbology:ZBAR_QRCODE config:ZBAR_CFG_ENABLE to:1];
         
-        
+//        if (TARGET_IPHONE_SIMULATOR) {
+//            
+//        }
 //        float A = scancropView.frame.origin.y / _readerView.bounds.size.height;
 //        float B = 1 - (scancropView.frame.origin.x + scancropView.frame.size.width) / _readerView.bounds.size.width;
 //        float C = (scancropView.frame.origin.y + scancropView.frame.size.height) / _readerView.bounds.size.height;

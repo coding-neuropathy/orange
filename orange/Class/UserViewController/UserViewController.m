@@ -688,8 +688,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
     EmbedReaderViewController * vc = [[EmbedReaderViewController alloc] init];
     
-    [self presentViewController:vc animated:YES completion:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
+//    [self presentViewController:vc animated:YES completion:nil];
+    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)TapReviewOrder:(id)sender
