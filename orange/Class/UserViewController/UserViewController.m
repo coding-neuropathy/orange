@@ -30,6 +30,8 @@
 #import "UIScrollView+Slogan.h"
 #import "LoginView.h"
 
+#import "EmbedReaderViewController.h"
+
 
 //#import "DataStructure.h"
 
@@ -474,8 +476,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                 CGFloat userHeaderHeight = self.user.bio.length == 0 ? 144. : 204.;
                 userHeaderHeight += IS_IPAD ? 20. : 0.;
             
-//                userHeaderHeight += self.user.authorized_seller ? 49. : 0.;
-//                userHeaderHeight += 49.;
+                userHeaderHeight += self.user.authorized_seller ? 49. : 0.;
+                userHeaderHeight += 49.;
                 size = CGSizeMake(self.collectionView.deFrameWidth, userHeaderHeight);
             
             }
@@ -684,14 +686,16 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
  */
 - (void)TapCreateOrder:(id)sender
 {
-
+    EmbedReaderViewController * vc = [[EmbedReaderViewController alloc] init];
+    
+//    [self presentViewController:vc animated:YES completion:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)TapReviewOrder:(id)sender
 {
 
 }
-
 
 #pragma mark - <UserHeaderSectionViewDelegate>
 - (void)TapHeaderViewWithType:(UserPageType)type

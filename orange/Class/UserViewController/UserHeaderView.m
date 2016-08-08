@@ -438,12 +438,12 @@
     self.bioBackView.deFrameBottom = self.deFrameBottom;
     
     
-//    self.createOrderBtn.frame = CGRectMake(0., 0., self.deFrameWidth / 2., 49.);
-//    self.createOrderBtn.deFrameBottom = self.bioBackView.deFrameTop;
-//    
-//    self.reviewOrderBtn.frame = CGRectMake(0., 0., self.deFrameWidth / 2., 49.);
-//    self.reviewOrderBtn.center = self.createOrderBtn.center;
-//    self.reviewOrderBtn.deFrameLeft = self.createOrderBtn.deFrameRight;
+    self.createOrderBtn.frame = CGRectMake(0., 0., self.deFrameWidth / 2., 49.);
+    self.createOrderBtn.deFrameBottom = self.bioBackView.deFrameTop;
+    
+    self.reviewOrderBtn.frame = CGRectMake(0., 0., self.deFrameWidth / 2., 49.);
+    self.reviewOrderBtn.center = self.createOrderBtn.center;
+    self.reviewOrderBtn.deFrameLeft = self.createOrderBtn.deFrameRight;
     
     
     self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
