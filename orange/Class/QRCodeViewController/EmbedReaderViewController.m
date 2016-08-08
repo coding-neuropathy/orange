@@ -8,9 +8,11 @@
 
 #import "EmbedReaderViewController.h"
 #import "ZBarReaderView.h"
+#import "ScanerCropView.h"
 
 @interface EmbedReaderViewController () <ZBarReaderViewDelegate>
 
+@property (strong, nonatomic) ScanerCropView * cropView;
 @property (strong, nonatomic) ZBarReaderView * reader;
 @property (strong, nonatomic) NSString * text;
 
@@ -18,6 +20,17 @@
 
 
 @implementation EmbedReaderViewController
+
+- (ScanerCropView *)cropView
+{
+    if (!_cropView) {
+        _cropView = [[ScanerCropView alloc] initWithFrame:CGRectZero];
+        
+        
+        
+    }
+    return _cropView;
+}
 
 
 - (ZBarReaderView *)reader

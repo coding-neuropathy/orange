@@ -10,4 +10,8 @@
 
 @interface ScanerCropView : UIView
 
+- (void)startAnimating;
+- (void)stopAnimating;
+- (BOOL)isAnimating;
+
 @end
