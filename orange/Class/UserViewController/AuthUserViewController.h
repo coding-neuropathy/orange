@@ -1,5 +1,5 @@
 //
-//  authorizedUserViewController.h
+//  AuthUserViewController.h
 //  orange
 //
 //  Created by D_Collin on 16/2/26.
@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface authorizedUserViewController : BaseViewController <UICollectionViewDelegateFlowLayout, UICollectionViewDelegate,UICollectionViewDataSource>
+@interface AuthUserViewController : BaseViewController <UICollectionViewDelegateFlowLayout, UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (strong, nonatomic)GKUser * user;
 

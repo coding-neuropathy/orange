@@ -1,13 +1,13 @@
 //
-//  authorizedUserViewController.m
+//  AuthUserViewController.m
 //  orange
 //
 //  Created by D_Collin on 16/2/26.
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import "authorizedUserViewController.h"
-#import "UserHeaderView.h"
+#import "AuthUserViewController.h"
+#import "AuthUserHeaderView.h"
 //#import "CategoryArticleCell.h"
 #import "MoreArticleCell.h"
 #import "FriendViewController.h"
@@ -16,11 +16,11 @@
 #import "UIScrollView+Slogan.h"
 #import "LoginView.h"
 
-@interface authorizedUserViewController ()<UserHeaderViewDelegate>
+@interface AuthUserViewController ()<AuthUserHeaderViewDelegate>
 
 @property (nonatomic , strong) NSMutableArray * articledataArray;
 
-@property (nonatomic , strong) UserHeaderView * headerView;
+@property (nonatomic , strong) AuthUserHeaderView * headerView;
 
 @property (nonatomic , strong) UICollectionView * collectionView;
 
@@ -30,7 +30,7 @@
 
 @end
 
-@implementation authorizedUserViewController
+@implementation AuthUserViewController
 
 static NSString * UserHeaderIdentifer = @"UserHeader";
 static NSString * UserArticleIdentifier = @"ArticleCell";
@@ -116,7 +116,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [super viewDidLoad];
     self.navigationItem.title = self.user.nickname;
     
-    [self.collectionView registerClass:[UserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
+    [self.collectionView registerClass:[AuthUserHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserHeaderIdentifer];
     
     [self.collectionView registerClass:[MoreArticleCell class] forCellWithReuseIdentifier:UserArticleIdentifier];
     
@@ -260,7 +260,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [self.navigationController pushViewController:VC animated:YES];
 }
 
-- (void)TapFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view
+- (void)TapFollowBtnWithUser:(GKUser *)user View:(AuthUserHeaderView *)view
 {
     DDLogInfo(@"follow with user id %lu", user.userId);
     if (!k_isLogin) {
@@ -284,9 +284,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     }
 }
 
-- (void)TapUnFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view
+- (void)TapUnFollowBtnWithUser:(GKUser *)user View:(AuthUserHeaderView *)view
 {
-    DDLogInfo(@"unfollow");
+//    DDLogInfo(@"unfollow");
     UIAlertController * altervc = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ %@?",NSLocalizedStringFromTable(@"unfollow", kLocalizedFile, nil), user.nickname] message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * cacnel = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         //        [altervc dismissViewControllerAnimated:YES completion:nil];

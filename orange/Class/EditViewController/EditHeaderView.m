@@ -1,20 +1,20 @@
 //
-//  NewEditHeaderView.m
+//  EditHeaderView.m
 //  orange
 //
 //  Created by D_Collin on 16/5/4.
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import "NewEditHeaderView.h"
+#import "EditHeaderView.h"
 
-@interface NewEditHeaderView ()
+@interface EditHeaderView ()
 
 @property (nonatomic , strong)UILabel * titleLabel;
 @property (strong, nonatomic) UIImageView * avatarImageView;
 @end
 
-@implementation NewEditHeaderView
+@implementation EditHeaderView
 
 - (UILabel *)titleLabel
 {

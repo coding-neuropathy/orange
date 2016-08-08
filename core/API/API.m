@@ -2346,8 +2346,7 @@
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
-        
-        
+
         NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
         for (NSDictionary * row in objectDict[@"last_user_like"]) {
             GKEntity * entity = [GKEntity modelFromDictionary:row];

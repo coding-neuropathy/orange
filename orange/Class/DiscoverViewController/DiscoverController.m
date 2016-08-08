@@ -26,7 +26,7 @@
 //#import "GroupViewController.h"
 #import "CategroyGroupController.h"
 #import "UserViewController.h"
-#import "authorizedUserViewController.h"
+//#import "AuthUserViewController.h"
 #import "EntityPreViewController.h"
 #import "ArticlePreViewController.h"
 

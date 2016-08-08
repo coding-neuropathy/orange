@@ -8,24 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@class UserHeaderView;
+@class AuthUserHeaderView;
 
-@protocol UserHeaderViewDelegate <NSObject>
+@protocol AuthUserHeaderViewDelegate <NSObject>
 
 - (void)TapFriendBtnWithUser:(GKUser *)user;
 - (void)TapFansBtnWithUser:(GKUser *)user;
 
 @optional
 - (void)TapEditBtnWithUser:(GKUser *)user;
-- (void)TapFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view;
-- (void)TapUnFollowBtnWithUser:(GKUser *)user View:(UserHeaderView *)view;
+- (void)TapFollowBtnWithUser:(GKUser *)user View:(AuthUserHeaderView *)view;
+- (void)TapUnFollowBtnWithUser:(GKUser *)user View:(AuthUserHeaderView *)view;
 
 
 @end
 
-@interface UserHeaderView : UICollectionReusableView
+@interface AuthUserHeaderView : UICollectionReusableView
 
 @property (strong, nonatomic) GKUser * user;
-@property (strong, nonatomic) id<UserHeaderViewDelegate> delegate;
+@property (strong, nonatomic) id<AuthUserHeaderViewDelegate> delegate;
 
 @end

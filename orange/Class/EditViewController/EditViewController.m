@@ -1,26 +1,28 @@
 //
-//  NewEditViewController.m
+//  EditViewController.m
 //  orange
 //
 //  Created by D_Collin on 16/5/4.
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import "NewEditViewController.h"
+#import "EditViewController.h"
 #import "EditViewCell.h"
-#import "NewEditHeaderView.h"
+#import "EditHeaderView.h"
 #import "NicknameViewController.h"
 #import "AddressPick/AddressPickView.h"
 #import "BioViewController.h"
 
 
-@interface NewEditViewController ()<UIImagePickerControllerDelegate , UINavigationControllerDelegate, UIActionSheetDelegate,NicknameViewControllerDelegate , BioViewControllerDelegate>
+@interface EditViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+                                    UIActionSheetDelegate,
+                                    NicknameViewControllerDelegate , BioViewControllerDelegate>
 
 @property (strong, nonatomic) UITableView * tableView;
 
 @property (strong, nonatomic) NSMutableArray * dataSource;
 
-@property (strong, nonatomic) NewEditHeaderView * headerView;
+@property (strong, nonatomic) EditHeaderView * headerView;
 
 @property (strong, nonatomic) AddressPickView * addressPickView;
 
@@ -30,7 +32,7 @@
 
 NSString *NewSettingTableIdentifier = @"SettingCell";
 
-@implementation NewEditViewController
+@implementation EditViewController
 
 - (void)reloadData
 {
@@ -66,10 +68,10 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
     return _app;
 }
 
-- (NewEditHeaderView *)headerView
+- (EditHeaderView *)headerView
 {
     if (!_headerView) {
-        _headerView = [[NewEditHeaderView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0,0, kScreenWidth, 70.) : CGRectMake(0,0, kScreenWidth - kTabBarWidth, 70.)];
+        _headerView = [[EditHeaderView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0,0, kScreenWidth, 70.) : CGRectMake(0,0, kScreenWidth - kTabBarWidth, 70.)];
         _headerView.backgroundColor = [UIColor whiteColor];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TapAvatar)];
         [self.headerView addGestureRecognizer:tap];
@@ -282,7 +284,6 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
     cell.string = [[[self.dataSource objectAtIndex:indexPath.section] objectForKey:@"row"] objectAtIndex:indexPath.row];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     
     return cell;
 }

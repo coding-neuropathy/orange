@@ -8,7 +8,7 @@
 
 #import "OpenCenter.h"
 #import "UserViewController.h"
-#import "authorizedUserViewController.h"
+#import "AuthUserViewController.h"
 #import "EntityViewController.h"
 #import "NoteViewController.h"
 //#import "CategoryViewController.h"
@@ -44,7 +44,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
 - (void)openAuthUser:(GKUser *)user
 {
-    authorizedUserViewController * vc = [[authorizedUserViewController alloc] initWithUser:user];
+    AuthUserViewController * vc = [[AuthUserViewController alloc] initWithUser:user];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];

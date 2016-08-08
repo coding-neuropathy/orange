@@ -17,7 +17,7 @@
 
 #import "SettingViewController.h"
 
-#import "NewEditViewController.h"
+#import "EditViewController.h"
 #import "FriendViewController.h"
 #import "FanViewController.h"
 #import "UserArticleViewController.h"
@@ -420,33 +420,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    switch (indexPath.section) {
-//        case 2:
+//    switch (indexPath.section) {
+//        default:
 //        {
-//            CategoryArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserArticleIdentifier forIndexPath:indexPath];
-//            
-//            cell.article = [self.articledataArray objectAtIndex:indexPath.row];
-//            return cell;
-//            
-//        }
-//        case 3:
-//        {
-//            NoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserNoteIdentifier forIndexPath:indexPath];
-//            cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
-//            cell.imageView.layer.borderWidth = 0.5;
-//            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-//            cell.note = [self.notedataArray objectAtIndex:indexPath.row];
-//            cell.H.alpha = 0;
-//            if (indexPath.row == self.notedataArray.count -1) {
-//                cell.H.alpha = 1;
-//            }
-//
-//            return cell;
-//        }
-//            break;
-//            
-        default:
-        {
             EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
             cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
             cell.imageView.layer.borderWidth = 0.5;
@@ -455,9 +431,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             cell.entity = [self.likedataArray objectAtIndex:indexPath.row];
             cell.delegate = self;
             return cell;
-        }
-            break;
-    }
+//        }
+//            break;
+//    }
 }
 
 #pragma mark <UICollectionViewDelegateFlowLayout>
@@ -629,7 +605,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (void)settingButtonAction
 {
     SettingViewController * VC = [[SettingViewController alloc]init];
-    VC.hidesBottomBarWhenPushed = YES;
+    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
@@ -657,25 +633,17 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (void)TapEditBtnWithUser:(GKUser *)user
 {
-//    [self settingButtonAction];
-//    EditViewController * vc = [[EditViewController alloc] init];
-//    
-//    [self.navigationController pushViewController:vc animated:YES];
-    NewEditViewController * vc = [[NewEditViewController alloc] init];
+    EditViewController * vc = [[EditViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)TapFollowBtnWithUser:(GKUser *)user View:(NewUserHeaderView *)view
 {
-    DDLogInfo(@"follow with user id %lu", user.userId);
+//    DDLogInfo(@"follow with user id %lu", user.userId);
     if (!k_isLogin) {
         LoginView * view = [[LoginView alloc]init];
         [view show];
         return;
-//        [[OpenCenter sharedOpenCenterController] openAccountViewControllerWithSuccessBlock:^(BOOL isLogin) {
-//            //            [self.arrayForUser removeAllObjects];
-//            [self.collectionView triggerPullToRefresh];
-//        }];
     } else {
         [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {
             user.relation = relation;

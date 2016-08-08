@@ -7,8 +7,6 @@
 //
 
 #import "UserArticleViewController.h"
-//#import "ArticleListCell.h"
-//#import "UserArticleCell.h"
 #import "MoreArticleCell.h"
 
 @interface UserArticleViewController ()
@@ -161,49 +159,6 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
     //    [[OpenCenter sharedOpenCenter] openWebWithURL:article.articleURL];
     [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
-
-
-//#pragma mark -----------tableView代理协议-------------
-//
-//- (UITableView *)tableView
-//{
-//    if (!_tableView) {
-//        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight) style:UITableViewStylePlain];
-//        _tableView.dataSource = self;
-//        _tableView.delegate = self;
-//        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        self.tableView.showsVerticalScrollIndicator = YES;
-//    }
-//    return _tableView;
-//}
-
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return self.dataSource.count;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    ArticleListCell * cell = [tableView dequeueReusableCellWithIdentifier:ArticleCellIdentifier];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    cell.article = self.dataSource[indexPath.row];
-//    return cell;
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    GKArticle * article = [self.dataSource objectAtIndex:indexPath.row];
-////    NSLog(@"%@",article.articleURL);
-//    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 110.;
-//}
-
 
 
 /*

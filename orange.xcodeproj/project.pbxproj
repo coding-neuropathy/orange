@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		230448A31CFD6CC9000A6B3C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 230448A21CFD6CC9000A6B3C /* iCarousel.m */; };
-		2309032E1C803B1500AD26D6 /* authorizedUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */; };
+		2309032E1C803B1500AD26D6 /* AuthUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2309032D1C803B1500AD26D6 /* AuthUserViewController.m */; };
 		2354BF2B1D4B2CC300D43556 /* UserResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2354BF2A1D4B2CC300D43556 /* UserResultCell.m */; };
 		23568D1E1D349469003F2611 /* EntityResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D1D1D349469003F2611 /* EntityResultCell.m */; };
 		23568D211D34D3DC003F2611 /* ArticleResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23568D201D34D3DC003F2611 /* ArticleResultCell.m */; };
@@ -20,8 +20,8 @@
 		237FCB731D408ECC0067A1D9 /* ArticleCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 237FCB721D408ECC0067A1D9 /* ArticleCommentController.m */; };
 		238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238F77D91C521CF5002E0E65 /* EntityDetailCell.m */; };
 		239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239231B01C7D96FA00B49A88 /* RecUserController.m */; };
-		23B3164D1CD9D4F600A83CDB /* NewEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164C1CD9D4F600A83CDB /* NewEditViewController.m */; };
-		23B316501CD9E4C800A83CDB /* NewEditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164F1CD9E4C800A83CDB /* NewEditHeaderView.m */; };
+		23B3164D1CD9D4F600A83CDB /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164C1CD9D4F600A83CDB /* EditViewController.m */; };
+		23B316501CD9E4C800A83CDB /* EditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B3164F1CD9E4C800A83CDB /* EditHeaderView.m */; };
 		23E0CB7E1C855B3400E351CB /* UserArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E0CB7D1C855B3400E351CB /* UserArticleViewController.m */; };
 		23E64DAF1D2E381C00A4402C /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E64DAE1D2E381C00A4402C /* SearchController.m */; };
 		23E64DB21D2E469400A4402C /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E64DB11D2E469400A4402C /* SearchView.m */; };
@@ -236,7 +236,7 @@
 		4EF508811B49042000C92618 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF508801B49042000C92618 /* ShareView.m */; };
 		8A0345AA1BA15F4A0037BC32 /* HomeArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */; };
 		8A0B16E21BABFDED00469DD6 /* ArticleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B16E11BABFDED00469DD6 /* ArticleListCell.m */; };
-		8A1905221D54378B00B72A79 /* UserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1905211D54378B00B72A79 /* UserHeaderView.m */; };
+		8A1905221D54378B00B72A79 /* AuthUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1905211D54378B00B72A79 /* AuthUserHeaderView.m */; };
 		8A19053D1D543F8D00B72A79 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A19053C1D543F8D00B72A79 /* libzbar.a */; };
 		8A19053F1D5444E600B72A79 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A19053E1D5444E600B72A79 /* libiconv.2.4.0.tbd */; };
 		8A1905411D5471EA00B72A79 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1905401D5471EA00B72A79 /* CoreMedia.framework */; };
@@ -391,7 +391,6 @@
 		B7C80D131AEDE26D003AE031 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
 		B7C80D141AEDE387003AE031 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
 		B7C80D151AEDE387003AE031 /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */; };
 		B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D1B9211AC142A500664BDB /* EditViewCell.m */; };
 		B7DA97BB1B25E46200C9BC25 /* EntityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DA97BA1B25E46200C9BC25 /* EntityHeaderView.m */; };
 		B7DA97C11B270BE900C9BC25 /* EntityLikeUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DA97C01B270BE900C9BC25 /* EntityLikeUserCell.m */; };
@@ -473,8 +472,8 @@
 /* Begin PBXFileReference section */
 		230448A11CFD6CC9000A6B3C /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		230448A21CFD6CC9000A6B3C /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
-		2309032C1C803B1500AD26D6 /* authorizedUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = authorizedUserViewController.h; sourceTree = "<group>"; };
-		2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = authorizedUserViewController.m; sourceTree = "<group>"; };
+		2309032C1C803B1500AD26D6 /* AuthUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthUserViewController.h; sourceTree = "<group>"; };
+		2309032D1C803B1500AD26D6 /* AuthUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthUserViewController.m; sourceTree = "<group>"; };
 		2354BF291D4B2CC300D43556 /* UserResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserResultCell.h; sourceTree = "<group>"; };
 		2354BF2A1D4B2CC300D43556 /* UserResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserResultCell.m; sourceTree = "<group>"; };
 		23568D1C1D349469003F2611 /* EntityResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityResultCell.h; sourceTree = "<group>"; };
@@ -497,10 +496,10 @@
 		238F77D91C521CF5002E0E65 /* EntityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailCell.m; sourceTree = "<group>"; };
 		239231AF1C7D96FA00B49A88 /* RecUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecUserController.h; sourceTree = "<group>"; };
 		239231B01C7D96FA00B49A88 /* RecUserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecUserController.m; sourceTree = "<group>"; };
-		23B3164B1CD9D4F600A83CDB /* NewEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEditViewController.h; sourceTree = "<group>"; };
-		23B3164C1CD9D4F600A83CDB /* NewEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEditViewController.m; sourceTree = "<group>"; };
-		23B3164E1CD9E4C800A83CDB /* NewEditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEditHeaderView.h; sourceTree = "<group>"; };
-		23B3164F1CD9E4C800A83CDB /* NewEditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEditHeaderView.m; sourceTree = "<group>"; };
+		23B3164B1CD9D4F600A83CDB /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		23B3164C1CD9D4F600A83CDB /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		23B3164E1CD9E4C800A83CDB /* EditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditHeaderView.h; sourceTree = "<group>"; };
+		23B3164F1CD9E4C800A83CDB /* EditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditHeaderView.m; sourceTree = "<group>"; };
 		23E0CB7C1C855B3400E351CB /* UserArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserArticleViewController.h; sourceTree = "<group>"; };
 		23E0CB7D1C855B3400E351CB /* UserArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserArticleViewController.m; sourceTree = "<group>"; };
 		23E64DAD1D2E381C00A4402C /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
@@ -837,8 +836,8 @@
 		8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeArticleCell.m; sourceTree = "<group>"; };
 		8A0B16E01BABFDED00469DD6 /* ArticleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListCell.h; sourceTree = "<group>"; };
 		8A0B16E11BABFDED00469DD6 /* ArticleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListCell.m; sourceTree = "<group>"; };
-		8A1905201D54378B00B72A79 /* UserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHeaderView.h; sourceTree = "<group>"; };
-		8A1905211D54378B00B72A79 /* UserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHeaderView.m; sourceTree = "<group>"; };
+		8A1905201D54378B00B72A79 /* AuthUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthUserHeaderView.h; sourceTree = "<group>"; };
+		8A1905211D54378B00B72A79 /* AuthUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthUserHeaderView.m; sourceTree = "<group>"; };
 		8A1905281D543F8D00B72A79 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
 		8A1905291D543F8D00B72A79 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
 		8A19052A1D543F8D00B72A79 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -1135,10 +1134,8 @@
 		B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoSearchResultView.m; path = DiscoverView/NoSearchResultView.m; sourceTree = "<group>"; };
 		B7C853211B4780D100CA5F0F /* orange.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = orange.entitlements; sourceTree = "<group>"; };
 		B7C853221B47813300CA5F0F /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = today.entitlements; sourceTree = "<group>"; };
-		B7D1B91D1AC12C3500664BDB /* EditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditHeaderView.h; path = EditView/EditHeaderView.h; sourceTree = "<group>"; };
-		B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditHeaderView.m; path = EditView/EditHeaderView.m; sourceTree = "<group>"; };
-		B7D1B9201AC142A500664BDB /* EditViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewCell.h; path = EditView/EditViewCell.h; sourceTree = "<group>"; };
-		B7D1B9211AC142A500664BDB /* EditViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewCell.m; path = EditView/EditViewCell.m; sourceTree = "<group>"; };
+		B7D1B9201AC142A500664BDB /* EditViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewCell.h; path = ../../View/EditView/EditViewCell.h; sourceTree = "<group>"; };
+		B7D1B9211AC142A500664BDB /* EditViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewCell.m; path = ../../View/EditView/EditViewCell.m; sourceTree = "<group>"; };
 		B7DA97B91B25E46200C9BC25 /* EntityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHeaderView.h; sourceTree = "<group>"; };
 		B7DA97BA1B25E46200C9BC25 /* EntityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderView.m; sourceTree = "<group>"; };
 		B7DA97BF1B270BE900C9BC25 /* EntityLikeUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityLikeUserCell.h; sourceTree = "<group>"; };
@@ -1300,16 +1297,19 @@
 			isa = PBXGroup;
 			children = (
 				23F612FD1CDB0E0A0074E8C8 /* AddressPick */,
-				23B3164B1CD9D4F600A83CDB /* NewEditViewController.h */,
-				23B3164C1CD9D4F600A83CDB /* NewEditViewController.m */,
-				23B3164E1CD9E4C800A83CDB /* NewEditHeaderView.h */,
-				23B3164F1CD9E4C800A83CDB /* NewEditHeaderView.m */,
+				B7D1B9201AC142A500664BDB /* EditViewCell.h */,
+				B7D1B9211AC142A500664BDB /* EditViewCell.m */,
+				23B3164B1CD9D4F600A83CDB /* EditViewController.h */,
+				23B3164C1CD9D4F600A83CDB /* EditViewController.m */,
+				23B3164E1CD9E4C800A83CDB /* EditHeaderView.h */,
+				23B3164F1CD9E4C800A83CDB /* EditHeaderView.m */,
 				23F612F81CDAEF120074E8C8 /* NicknameViewController.h */,
 				23F612F91CDAEF120074E8C8 /* NicknameViewController.m */,
 				23F613081CDB1B310074E8C8 /* BioViewController.h */,
 				23F613091CDB1B310074E8C8 /* BioViewController.m */,
 			);
-			path = EditViewController;
+			name = EditViewController;
+			path = ../EditViewController;
 			sourceTree = "<group>";
 		};
 		23F0001F1C97B5200033BAA4 /* ArticleWebViewVC */ = {
@@ -1598,7 +1598,6 @@
 			children = (
 				8AAA508A1BD68FC3005384CD /* CategoryGridCell.h */,
 				8AAA508B1BD68FC3005384CD /* CategoryGridCell.m */,
-				B7D1B9191AC12BEF00664BDB /* EditView */,
 				B7C6847D1ABBC3F500A122E8 /* Components */,
 				B766763E1AB8173B002F294C /* UserView */,
 				B76676371AB8058A002F294C /* NotificationView */,
@@ -1935,7 +1934,6 @@
 				DA35B3C01AFEE31200D66671 /* EmailEditViewController */,
 				DA35B3C31AFEE31200D66671 /* PasswordEditViewController */,
 				B7662ACF1AC3B47000C82B4B /* FeedBackViewController */,
-				23B3164A1CD9D4C200A83CDB /* EditViewController */,
 				4E934DA51A9AE9FB00374B05 /* GroupViewController */,
 				4EA0C4461A7F03CB0025EC2E /* ReportViewController */,
 				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
@@ -2284,6 +2282,7 @@
 		4EC9F7981A7937AE0057D736 /* UserViewController */ = {
 			isa = PBXGroup;
 			children = (
+				23B3164A1CD9D4C200A83CDB /* EditViewController */,
 				8A1905231D5437A000B72A79 /* AuthUserController */,
 				B758E8491D17CD4B00DD01C7 /* UserArticleViewController */,
 				B7174DD71BD4A83D00DEDBDA /* UserViewController.h */,
@@ -2367,10 +2366,10 @@
 		8A1905231D5437A000B72A79 /* AuthUserController */ = {
 			isa = PBXGroup;
 			children = (
-				8A1905201D54378B00B72A79 /* UserHeaderView.h */,
-				8A1905211D54378B00B72A79 /* UserHeaderView.m */,
-				2309032C1C803B1500AD26D6 /* authorizedUserViewController.h */,
-				2309032D1C803B1500AD26D6 /* authorizedUserViewController.m */,
+				8A1905201D54378B00B72A79 /* AuthUserHeaderView.h */,
+				8A1905211D54378B00B72A79 /* AuthUserHeaderView.m */,
+				2309032C1C803B1500AD26D6 /* AuthUserViewController.h */,
+				2309032D1C803B1500AD26D6 /* AuthUserViewController.m */,
 			);
 			name = AuthUserController;
 			sourceTree = "<group>";
@@ -2895,17 +2894,6 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
-		B7D1B9191AC12BEF00664BDB /* EditView */ = {
-			isa = PBXGroup;
-			children = (
-				B7D1B91D1AC12C3500664BDB /* EditHeaderView.h */,
-				B7D1B91E1AC12C3500664BDB /* EditHeaderView.m */,
-				B7D1B9201AC142A500664BDB /* EditViewCell.h */,
-				B7D1B9211AC142A500664BDB /* EditViewCell.m */,
-			);
-			name = EditView;
-			sourceTree = "<group>";
-		};
 		B7ED32A91B25732E009BAF5A /* CSStickyHeaderFlowLayout */ = {
 			isa = PBXGroup;
 			children = (
@@ -3319,7 +3307,6 @@
 				B7DA97C11B270BE900C9BC25 /* EntityLikeUserCell.m in Sources */,
 				4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */,
 				B76EE0821B3D86C3009D8763 /* NotifyController.m in Sources */,
-				B7D1B91F1AC12C3500664BDB /* EditHeaderView.m in Sources */,
 				8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */,
 				4E688A051BA9C2BA0006AD9B /* JSQMessagesBubbleImageFactory.m in Sources */,
 				4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */,
@@ -3372,7 +3359,7 @@
 				8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */,
 				8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */,
 				B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */,
-				23B316501CD9E4C800A83CDB /* NewEditHeaderView.m in Sources */,
+				23B316501CD9E4C800A83CDB /* EditHeaderView.m in Sources */,
 				4EC9F7A31A7BBEF20057D736 /* TagViewController.m in Sources */,
 				B7C684831ABBC63C00A122E8 /* NoSearchResultView.m in Sources */,
 				4EC9F7911A7928520057D736 /* FanViewController.m in Sources */,
@@ -3388,7 +3375,7 @@
 				B7F543F91BC2457E0044F5E9 /* SDImageCache.m in Sources */,
 				4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */,
 				4E688A191BA9C2BA0006AD9B /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
-				2309032E1C803B1500AD26D6 /* authorizedUserViewController.m in Sources */,
+				2309032E1C803B1500AD26D6 /* AuthUserViewController.m in Sources */,
 				B769B1211B2ACE91004401FA /* IFTTTEasingFunction.m in Sources */,
 				4EA0C45C1A8287780025EC2E /* SignView.m in Sources */,
 				B7C079861BC5827E006B7379 /* DDFileLogger.m in Sources */,
@@ -3417,7 +3404,7 @@
 				B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */,
 				8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */,
 				23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */,
-				23B3164D1CD9D4F600A83CDB /* NewEditViewController.m in Sources */,
+				23B3164D1CD9D4F600A83CDB /* EditViewController.m in Sources */,
 				4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */,
 				B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */,
 				4E688A121BA9C2BA0006AD9B /* JSQPhotoMediaItem.m in Sources */,
@@ -3504,7 +3491,7 @@
 				B758E84C1D17DB7C00DD01C7 /* UserArticleCell.m in Sources */,
 				4E688A1B1BA9C2BA0006AD9B /* JSQMessagesComposerTextView.m in Sources */,
 				B7F544021BC2457E0044F5E9 /* UIImage+MultiFormat.m in Sources */,
-				8A1905221D54378B00B72A79 /* UserHeaderView.m in Sources */,
+				8A1905221D54378B00B72A79 /* AuthUserHeaderView.m in Sources */,
 				4E1D30AD1A125FDF00740C17 /* JSQSystemSoundPlayer.m in Sources */,
 				B7ED32B21B257EFF009BAF5A /* EntityNoteCell.m in Sources */,
 				238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */,

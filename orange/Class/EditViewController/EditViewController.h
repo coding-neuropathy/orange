@@ -1,5 +1,5 @@
 //
-//  NewEditHeaderView.h
+//  EditViewController.h
 //  orange
 //
 //  Created by D_Collin on 16/5/4.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-
-@interface NewEditHeaderView : UIView
-
-@property (strong, nonatomic) NSURL * avatarURL;
+@interface EditViewController : BaseViewController < UITableViewDelegate, UITableViewDataSource>
 
 @end

@@ -6,9 +6,9 @@
 //  Copyright © 2015年 guoku.com. All rights reserved.
 //
 
-#import "UserHeaderView.h"
+#import "AuthUserHeaderView.h"
 
-@interface UserHeaderView ()
+@interface AuthUserHeaderView ()
 
 /** 用户头像 */
 @property (strong, nonatomic) UIImageView * avatarView;
@@ -30,7 +30,7 @@
 
 @end
 
-@implementation UserHeaderView
+@implementation AuthUserHeaderView
 
 static CGFloat bioLabelHeight;
 
