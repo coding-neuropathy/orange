@@ -25,6 +25,7 @@
         _reader = [ZBarReaderView new];
         
         _reader.readerDelegate = self;
+        _reader.frame = [[UIScreen mainScreen] bounds];
         
     }
     return _reader;
