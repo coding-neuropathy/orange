@@ -45,7 +45,7 @@
         [_reader.scanner setSymbology:ZBAR_QRCODE config:ZBAR_CFG_ENABLE to:1];
         
         [_reader addSubview:self.cropView];
-        
+    
 //        if ()
         self.cropView.frame = CGRectMake(0., 0., 258, 258.);
         self.cropView.deFrameLeft = (self.view.deFrameWidth - self.cropView.deFrameWidth) / 2.;
