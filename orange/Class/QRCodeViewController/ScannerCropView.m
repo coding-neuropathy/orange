@@ -78,30 +78,32 @@
 {
     // Drawing code
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(ctx, 2.0);
+    CGContextSetLineWidth(ctx, 1.0);
+    
     CGContextMoveToPoint(ctx, 0.0, rect.size.height / 2.);
     CGContextAddLineToPoint(ctx, 0. + rect.size.width, rect.size.height / 2.);
     CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
     CGContextStrokePath(ctx);
     
-    CGContextMoveToPoint(ctx, 0., 40.);
+    CGContextMoveToPoint(ctx, 0., 20.);
     CGContextAddLineToPoint(ctx, 0., 0.);
-    CGContextAddLineToPoint(ctx, 40., 0);
+    CGContextAddLineToPoint(ctx, 20., 0);
     
-    CGContextMoveToPoint(ctx, rect.size.width - 40, 0.);
+    CGContextMoveToPoint(ctx, rect.size.width - 20, 0.);
     CGContextAddLineToPoint(ctx, rect.size.width, 0.0);
-    CGContextAddLineToPoint(ctx, rect.size.width, 40.);
+    CGContextAddLineToPoint(ctx, rect.size.width, 20.);
     
-    CGContextMoveToPoint(ctx, rect.size.width, rect.size.height - 40);
+    CGContextMoveToPoint(ctx, rect.size.width, rect.size.height - 20);
     CGContextAddLineToPoint(ctx, rect.size.width, rect.size.height);
-    CGContextAddLineToPoint(ctx, rect.size.width - 40., rect.size.height);
+    CGContextAddLineToPoint(ctx, rect.size.width - 20., rect.size.height);
     
-    CGContextMoveToPoint(ctx, 0 + 40, rect.size.height);
+    CGContextMoveToPoint(ctx, 0 + 20, rect.size.height);
     CGContextAddLineToPoint(ctx, 0, rect.size.height);
-    CGContextAddLineToPoint(ctx, 0, rect.size.height - 40);
+    CGContextAddLineToPoint(ctx, 0, rect.size.height - 20);
     
-    CGContextSetStrokeColorWithColor(ctx, [UIColor greenColor].CGColor);
-    CGContextSetLineWidth(ctx, 3.0);
+    CGContextSetStrokeColorWithColor(ctx, UIColorFromRGB(0x6192ff).CGColor);
+    CGContextSetLineWidth(ctx, 2.0);
+    
     CGContextStrokePath(ctx);
 }
 

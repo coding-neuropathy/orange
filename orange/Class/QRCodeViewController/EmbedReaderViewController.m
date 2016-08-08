@@ -44,12 +44,13 @@
         
         [_reader.scanner setSymbology:ZBAR_QRCODE config:ZBAR_CFG_ENABLE to:1];
         
-        yOffset = 14. * 3 + 64.;
-        
         [_reader addSubview:self.cropView];
         
-        self.cropView.frame = CGRectMake(0., 0., 280., 280.);
+//        if ()
+        self.cropView.frame = CGRectMake(0., 0., 258, 258.);
         self.cropView.deFrameLeft = (self.view.deFrameWidth - self.cropView.deFrameWidth) / 2.;
+        yOffset = (kScreenHeight - 64 - self.cropView.deFrameHeight) / 2.;
+        
         self.cropView.deFrameTop = yOffset;
         
         float A = self.cropView.frame.origin.y / _reader.bounds.size.height;
@@ -66,6 +67,7 @@
 {
     [super loadView];
     
+    self.view.backgroundColor = [UIColor colorWithHue:0. saturation:0. brightness:0. alpha:0.8];
     [self.view addSubview:self.reader];
 }
 
@@ -88,6 +90,7 @@
     for(ZBarSymbol *sym in symbols) {
         self.text = sym.data;
         DDLogError(@"%@", self.text);
+        
         break;
     }
 }
