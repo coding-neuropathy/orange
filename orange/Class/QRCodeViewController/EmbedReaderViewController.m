@@ -9,6 +9,7 @@
 #import "EmbedReaderViewController.h"
 #import "ZBarReaderView.h"
 #import "ScannerCropView.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface EmbedReaderViewController () <ZBarReaderViewDelegate>
 {
@@ -18,6 +19,8 @@
 @property (strong, nonatomic) ScannerCropView * cropView;
 @property (strong, nonatomic) ZBarReaderView * reader;
 @property (strong, nonatomic) NSString * text;
+
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
 @end
 
@@ -32,8 +35,28 @@
     }
     return _cropView;
 }
+#pragma mark
+- (AVAudioPlayer *)audioPlayer
+{
+    if (!_audioPlayer) {
+//        _audioPlayer =
+        NSString *beepFilePath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"mp3"];
+//        NSLog(@"url %@", beepFilePath);
+        NSURL *beepURL = [NSURL URLWithString:beepFilePath];
+        NSError *error;
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
+        
+        if (error) {
+//            NSLog(@"Could not play beep file.");
+            DDLogError(@"Error: %@", [error localizedDescription]);
+        } else
+            [_audioPlayer prepareToPlay];
+    }
+    return _audioPlayer;
+}
 
 
+#pragma mark - init view
 - (ZBarReaderView *)reader
 {
     if (!_reader) {
@@ -90,7 +113,8 @@
     for(ZBarSymbol *sym in symbols) {
         self.text = sym.data;
         DDLogError(@"%@", self.text);
-        
+        [self.audioPlayer play];
+//        AudioServicesPlaySystemSound(1005);
         break;
     }
 }

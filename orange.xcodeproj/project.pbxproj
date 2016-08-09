@@ -241,6 +241,7 @@
 		8A1905431D5471F400B72A79 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1905421D5471F300B72A79 /* CoreVideo.framework */; };
 		8A195F0B1CF3FD3A00F2A954 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A195F0A1CF3FD3A00F2A954 /* UMMobClick.framework */; };
 		8A2754611CA5060200073E78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2754601CA5060200073E78 /* CoreData.framework */; };
+		8A3911D11D597F440029E529 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A3911D01D597F440029E529 /* beep.mp3 */; };
 		8A3CBBA81C7D870E0002AAE8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */; };
 		8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
@@ -844,6 +845,7 @@
 		8A1905421D5471F300B72A79 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		8A195F0A1CF3FD3A00F2A954 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		8A2754601CA5060200073E78 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		8A3911D01D597F440029E529 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beep.mp3; path = ../../../Desktop/beep.mp3; sourceTree = "<group>"; };
 		8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		8A3EAD281BD7C23400E1E447 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
 		8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
@@ -1839,6 +1841,7 @@
 		4E56DF1719D552C000263B17 /* orange */ = {
 			isa = PBXGroup;
 			children = (
+				8A3911D01D597F440029E529 /* beep.mp3 */,
 				B7C853211B4780D100CA5F0F /* orange.entitlements */,
 				4E066AA01A5C56C600DFEF65 /* View */,
 				4E3A232B1A51A7C500037F9C /* Core */,
@@ -2841,7 +2844,6 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8A7D91061D58827900D67458 /* libiconv.tbd */,
 				8A1905421D5471F300B72A79 /* CoreVideo.framework */,
 				8A1905401D5471EA00B72A79 /* CoreMedia.framework */,
 				B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */,
@@ -2859,6 +2861,7 @@
 				8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */,
 				8AC3F6861C05910A00CCD867 /* libicucore.tbd */,
 				8AC3F6841C0590A500CCD867 /* libz.tbd */,
+				8A7D91061D58827900D67458 /* libiconv.tbd */,
 				4E56DFC219D5AF1E00263B17 /* SystemConfiguration.framework */,
 				4E56DFB619D5AEED00263B17 /* CoreTelephony.framework */,
 				B72985F31BB8E727006E2518 /* CoreSpotlight.framework */,
@@ -3228,6 +3231,7 @@
 				4E4F27F31B6F4699003A63C5 /* 15.png in Resources */,
 				4E4F27F41B6F4699003A63C5 /* 16.png in Resources */,
 				4E4F27EF1B6F4699003A63C5 /* 11.png in Resources */,
+				8A3911D11D597F440029E529 /* beep.mp3 in Resources */,
 				B72000B71B0849E50001F199 /* PushConfig.plist in Resources */,
 				4E688A1A1BA9C2BA0006AD9B /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				4E56DF7C19D56EF500263B17 /* FontAwesome.ttf in Resources */,
