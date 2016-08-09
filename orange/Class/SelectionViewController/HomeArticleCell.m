@@ -143,11 +143,11 @@
     [super layoutSubviews];
     
     if (IS_IPHONE) {
-        self.coverImageView.frame = CGRectMake(0., 0., 112*kScreenWidth/375, 84*kScreenWidth/375);
+        self.coverImageView.frame = CGRectMake(0., 0., 112 * kScreeenScale, 84 * kScreeenScale);
         self.coverImageView.deFrameTop = 16.;
         self.coverImageView.deFrameLeft = self.contentView.deFrameLeft + 16;
         
-        self.titleLabel.frame = CGRectMake(0., 0., self.contentView.deFrameWidth - 48 - 112*kScreenWidth/375, self.contentView.deFrameHeight - 32.);
+        self.titleLabel.frame = CGRectMake(0., 0., self.contentView.deFrameWidth - 48 - 112 * kScreeenScale, self.contentView.deFrameHeight - 32.);
         self.titleLabel.deFrameTop = -5.;
         self.titleLabel.deFrameLeft = self.coverImageView.deFrameRight + 12;
         

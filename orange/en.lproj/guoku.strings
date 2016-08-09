@@ -59,7 +59,7 @@
  * Discover page
  */
 "search"                    = "Search";
-"recommendation category"   = "Recommendation Category";
+"recommendation category"   = "Trending Category";
 "popular articles"          = "Popular Articles";
 "recommendation user"       = "Trending User";
 
@@ -220,9 +220,9 @@
  *  category
  */
 "all"           = "ALL";
-"woman"         = "WOMEN'S";
-"man"           = "MEN'S";
-"kid"           = "KIDS'";
+"women's"       = "WOMEN'S";
+"men's"         = "MEN'S";
+"kids"          = "KIDS'";
 "accessories"   = "ACCESSORIES";
 "beauty"        = "BEAUTY";
 "tech"          = "TECH";
@@ -231,6 +231,7 @@
 "culture"       = "CULTURE";
 "food"          = "FOOD";
 "fun"           = "FUN";
+"health"        = "HEALTH";
 
 "items"         = "Items";
 

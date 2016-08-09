@@ -172,8 +172,12 @@
     
     CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
-    CGContextMoveToPoint(context, kScreenWidth, self.deFrameHeight);
-    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
+    
+    CGContextMoveToPoint(context, 0., self.deFrameHeight);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    
+    CGContextMoveToPoint(context, self.contentView.deFrameWidth, 0.);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
     
     CGContextStrokePath(context);
 }

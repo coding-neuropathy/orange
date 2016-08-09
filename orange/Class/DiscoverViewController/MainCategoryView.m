@@ -45,7 +45,8 @@
 {
     _category = category;
     DDLogInfo(@"%@", [_category.title_en lowercaseString]);
-    self.titleLabel.text = _category.title_cn;
+    self.titleLabel.text = NSLocalizedStringFromTable([category.title_en lowercaseString],
+                                                      kLocalizedFile, nil);;
     self.categoryImageView.image = [UIImage imageNamed:[_category.title_en lowercaseString]];
     
     [self setNeedsLayout];

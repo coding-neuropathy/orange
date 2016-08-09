@@ -218,9 +218,9 @@
  *  category
  */
 "all"           = "所有";
-"woman"         = "女装";
-"man"           = "男装";
-"kid"           = "孩童";
+"women's"       = "女装";
+"men's"         = "男装";
+"kids"          = "孩童";
 "accessories"   = "配饰";
 "beauty"        = "美容";
 "tech"          = "科技";
@@ -229,6 +229,7 @@
 "culture"       = "文化";
 "food"          = "美食";
 "fun"           = "玩乐";
+"health"        = "健康";
 
 "items"         = "件商品";
 

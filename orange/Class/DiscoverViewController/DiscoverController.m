@@ -15,7 +15,9 @@
 
 #import "DiscoverBannerView.h"
 #import "DiscoverCategoryView.h"
-#import "EntityCell.h"
+
+#import "DiscoverCategoryCell.h"
+//#import "EntityCell.h"
 #import "HomeArticleCell.h"
 #import "EntityDetailCell.h"
 
@@ -41,7 +43,7 @@
 @end
 
 #pragma mark - discover controller
-@interface DiscoverController () <EntityCellDelegate, DiscoverBannerViewDelegate,
+@interface DiscoverController () <DiscoverBannerViewDelegate,
                                     UISearchControllerDelegate, UISearchBarDelegate,
                                     UIGestureRecognizerDelegate, UIViewControllerPreviewingDelegate>
 
@@ -65,13 +67,25 @@
     tradeProcessFailedCallback _tradeProcessFailedCallback;
 }
 
-static NSString * EntityCellIdentifier = @"EntityCell";
+//static NSString * EntityCellIdentifier = @"EntityCell";
 static NSString * ArticleCellIdentifier = @"ArticleCell";
 static NSString * BannerIdentifier = @"BannerView";
 static NSString * CategoryIdentifier = @"CategoryView";
+static NSString * DiscoverCategoryIdentifier = @"DiscoverCategoryCell";
 static NSString * HeaderSectionIdentifier = @"HeaderSection";
 static NSString * UserIdentifier = @"UserView";
 static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
+
+/**
+ *  collection section num
+ */
+typedef NS_ENUM(NSInteger, DiscoverSectionType) {
+    BannerSection,
+    CategorySection,
+    ArticleSection,
+    UserSection,
+    EntitySection,
+};
 
 #pragma mark - search log
 - (void)addSearchLog:(NSString *)text
@@ -166,7 +180,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
         _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
     }
     return _collectionView;
 }
@@ -223,11 +237,17 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
+//    [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
+    /**
+     *  register cell
+     */
+    [self.collectionView registerClass:[DiscoverCategoryCell class] forCellWithReuseIdentifier:DiscoverCategoryIdentifier];
     [self.collectionView registerClass:[HomeArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
-    
     [self.collectionView registerClass:[EntityDetailCell class] forCellWithReuseIdentifier:EntityDetailCellIdentifier];
     
+    /**
+     *  register header section
+     */
     [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
     [self.collectionView registerClass:[DiscoverCategoryView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier];
     
@@ -251,7 +271,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
     kAppDelegate.activeVC = self;
     if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
     [super viewDidAppear:animated];
@@ -270,10 +289,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     [self.navigationController.navigationBar setTranslucent:NO];
     
     self.collectionView.scrollsToTop = YES;
+//    [self.collectionView reloadData];
     
-    [self.collectionView reloadData];
-    
-//    [AVAnalytics beginLogPageView:@"DiscoverView"];
     [MobClick beginLogPageView:@"DiscoverView"];
 }
 
@@ -289,7 +306,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     
     [MobClick endLogPageView:@"DiscoverView"];
 }
-
 
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -313,84 +329,6 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     }
 }
 
-#pragma mark - <UITableViewDelegate>
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return [self getSearchLog].count;
-//}
-//
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 1;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellIdentifier = @"SearchLogCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//        cell.backgroundColor = UIColorFromRGB(0xffffff);
-//        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(10,43.5, kScreenWidth, 0.5)];
-//        H.backgroundColor = UIColorFromRGB(0xebebeb);
-//        [cell addSubview:H];
-//        
-//    }
-//    cell.textLabel.text = [[self getSearchLog] objectAtIndex:indexPath.row];
-//    cell.textLabel.font = [UIFont systemFontOfSize:14];
-//    
-//    return cell;
-//}
-
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-//{
-//    UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
-//    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(kScreenWidth, 44)] forState:UIControlStateNormal];
-//    [button setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf8f8f8) andSize:CGSizeMake(kScreenWidth, 44)] forState:UIControlStateHighlighted];
-//    [button addTarget:self action:@selector(clearSearchLogButtonAciton) forControlEvents:UIControlEventTouchUpInside];
-//    [button setTitle:@"清空历史搜索记录" forState:UIControlStateNormal];
-//    [button setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-//    button.titleLabel.font = [UIFont systemFontOfSize:14];
-//    return button;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    if ([self getSearchLog].count) {
-//        return 44;
-//    }
-//    return 0;
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSString * text = [[self getSearchLog] objectAtIndex:indexPath.row];
-////    [self.searchLogTableView deselectRowAtIndexPath:indexPath animated:YES];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [_searchVC.searchBar setText:text];
-//    });
-//
-//}
-//
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 0) {
-//        return YES;
-//    }
-//    return NO;
-//}
-//
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        NSString * text = [[self getSearchLog] objectAtIndex:indexPath.row];
-//        [self removeSearchLog:text];
-////         [self.searchLogTableView reloadData];
-////        [self.searchLogTableView.superview bringSubviewToFront:self.searchLogTableView];
-//    }
-//    return;
-//}
-
 
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -402,12 +340,18 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     NSInteger count = 0;
     switch (section) {
-        case 2:
-//            count = self.articleArray.count;
+        case CategorySection:
+            if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS))
+                count = self.discoverData.categoryCount;
+            break;
+//        case 1:
+//            if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS))
+//                count = self.discoverData.categoryCount;
+//            break;
+        case ArticleSection:
             count = self.discoverData.articleCount;
             break;
-        case 4:
-//            count = self.entityArray.count;
+        case EntitySection:
             count = self.discoverData.entityCount;
             break;
             
@@ -421,7 +365,14 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 2:
+        case CategorySection:
+        {
+            DiscoverCategoryCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:DiscoverCategoryIdentifier forIndexPath:indexPath];
+            cell.category = [self.discoverData.categories objectAtIndex:indexPath.row];
+            return cell;
+        }
+            break;
+        case ArticleSection:
         {
             HomeArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleCellIdentifier forIndexPath:indexPath];
             cell.article = [self.discoverData.articles objectAtIndex:indexPath.row];
@@ -446,7 +397,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     UICollectionReusableView * reuseableview = [UICollectionReusableView new];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         switch (indexPath.section) {
-            case 0:
+            case BannerSection:
             {
                 DiscoverBannerView * bannerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier forIndexPath:indexPath];
                 bannerView.bannerArray = self.discoverData.banners;
@@ -455,8 +406,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                 return bannerView;
             }
                 break;
-
-            case 1:
+            case CategorySection:
             {
                 DiscoverCategoryView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier forIndexPath:indexPath];
                 categoryView.categories = self.discoverData.categories;
@@ -469,7 +419,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                 return categoryView;
             }
                 break;
-            case 2:
+            case ArticleSection:
             {
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"popular articles", kLocalizedFile, nil);
@@ -479,7 +429,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                 return header;
             }
                 break;
-            case 3:
+            case UserSection:
             {
                 DiscoverUsersView * userView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserIdentifier forIndexPath:indexPath];
                 userView.users = self.discoverData.users;
@@ -489,7 +439,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                 }];
                 [userView setTapUserBlock:^(GKUser *user) {
                     
-                    [[OpenCenter sharedOpenCenter]openUser:user];
+                    [[OpenCenter sharedOpenCenter] openUser:user];
                     
                 }];
                 return userView;
@@ -516,9 +466,14 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
-        case 2:
+        case CategorySection:
+            if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS)) {
+                cellsize = CGSizeMake(50. * kScreeenScale, 64. * kScreeenScale);
+            }
+            break;
+        case ArticleSection:
             if (IS_IPHONE) {
-                cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);
+                cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * kScreeenScale + 32);
             }
             else
             {
@@ -529,7 +484,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                 }
             }
             break;
-        case 4:
+        case EntitySection:
         {
 //            cellsize = CGSizeMake((kScreenWidth-12)/3, (kScreenWidth-12)/3);
             if (IS_IPAD ) {
@@ -541,7 +496,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                     cellsize = CGSizeMake(340, 340 + 85);
                 }
             } else {
-                cellsize = CGSizeMake((self.collectionView.deFrameWidth  ) / 2 - 2 , self.collectionView.deFrameWidth / 2 + 85);
+                cellsize = CGSizeMake((self.collectionView.deFrameWidth  ) / 2, self.collectionView.deFrameWidth / 2 + 85);
             }
         }
             break;
@@ -560,26 +515,20 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 //        return  UIEdgeInsetsMake(0., 20., 0., 20.);
     
     switch (section) {
-        case 3:
+        case UserSection:
 //            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
             break;
-        case 1:
-//            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+        case CategorySection:
+            if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS))
+                edge = UIEdgeInsetsMake(0., 16., 20., 16.);
             break;
-        case 2:
+        case ArticleSection:
             if (IS_IPAD) edge = UIEdgeInsetsMake(0., 20., 0., 20.);
-//            if (IS_IPHONE) {
-//                edge = UIEdgeInsetsMake(0., 0., 10., 0);
-//            }
-//            else
-//            {
-//                edge = UIEdgeInsetsMake(0., 20., 0., 20.);
-//            }
             break;
-        case 4:
+        case EntitySection:
         {
 //            edge = UIEdgeInsetsMake(0., 3., 3., 3.);
-            edge = UIEdgeInsetsMake(1, 1, 1, 1);
+//            edge = UIEdgeInsetsMake(1, 0, 1, 0);
         }
             break;
         default:
@@ -593,10 +542,10 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     CGFloat itemSpacing = 0.;
     switch (section) {
 
-        case 4:
+        case EntitySection:
         {
 //            itemSpacing = 3.;
-            itemSpacing = 1.;
+//            itemSpacing = 1.;
         }
             break;
         default:
@@ -613,10 +562,10 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 //        case 2:
 //            spacing =5;
 //            break;
-        case 4:
+        case EntitySection:
         {
 //            spacing = 3.;
-            spacing = 1.;
+//            spacing = 1.;
         }
             break;
             
@@ -632,30 +581,29 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     CGSize headerSize = CGSizeMake(0, 0);
     switch (section) {
-        case 0:
+        case BannerSection:
         {
             headerSize = IS_IPAD ? headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 228) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
         }
             break;
-
-        case 1:
-            if (self.discoverData.categoryCount) {
-                headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 155.) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 127.);
+        case CategorySection:
+            if (kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS) {
+                headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 127.);
             }
             break;
-        case 2:
+        case ArticleSection:
         {
             if(self.discoverData.articleCount) {
                 headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 44.) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 44.);
             }
         }
             break;
-        case 3:
+        case UserSection:
             if (self.discoverData.userCount) {
                 headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 126.)  :CGSizeMake(CGRectGetWidth(self.collectionView.frame), 126.);
             }
             break;
-        case 4:
+        case EntitySection:
         {
             if (self.discoverData.entityCount) {
                 headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 44.);
@@ -674,11 +622,27 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 3:
+        case CategorySection:
+        {
+            GKCategory * category = [self.discoverData.categories objectAtIndex:indexPath.row];
+//            [[OpenCenter sharedOpenCenter] ope]
+            CategroyGroupController * groupVC = [[CategroyGroupController alloc] initWithGid:category.groupId];
+            groupVC.title = category.title;
+            if (IS_IPHONE) groupVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:groupVC animated:YES];
+            [MobClick event:@"discover to category" attributes:@{
+                                                                 @"categoryId": @(category.groupId),
+                                                                 @"categoryTitle": category.title_cn,
+                                                                 }];
+        }
+            break;
+        case ArticleSection:
         {
             GKArticle * article = [self.discoverData.articles objectAtIndex:indexPath.row];
             [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
-            [MobClick event:@"rec_article" attributes:@{@"articleid" : @(article.articleId),@"articletitle" : article.title}];
+            [MobClick event:@"rec_article" attributes:@{
+                                                        @"articleid" : @(article.articleId),
+                                                        @"articletitle" : article.title}];
         }
             break;
             
@@ -739,12 +703,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     searchView.alpha = 1;
     
     self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-
-
     
     [self.searchVC.view addSubview:self.searchView];
-    
-
 }
 
 
@@ -780,18 +740,14 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
     
-//    if (indexPath.section != 3) {
+    UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+
+//    if (!cell) {
 //        return nil;
 //    }
 
-    UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-
-    if (!cell) {
-        return nil;
-    }
-
     switch (indexPath.section) {
-        case 3:
+        case 2:
         {
                 ArticlePreViewController * vc = [[ArticlePreViewController alloc]
                                                  initWithArticle:[self.discoverData.articles objectAtIndex:indexPath.row]];

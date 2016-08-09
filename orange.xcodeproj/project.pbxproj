@@ -279,6 +279,7 @@
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
 		8ACFAAB61CDF1DF8000830B9 /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */; };
 		8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */; };
+		8ADEA30E1D5A223B00D522A2 /* DiscoverCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
 		8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */; };
 		8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */; };
@@ -941,6 +942,8 @@
 		8ACFAAB51CDF1DF8000830B9 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		8ADEA3091D59CB9200D522A2 /* MainCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCategoryView.h; sourceTree = "<group>"; };
 		8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCategoryView.m; sourceTree = "<group>"; };
+		8ADEA30C1D5A223B00D522A2 /* DiscoverCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverCategoryCell.h; sourceTree = "<group>"; };
+		8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverCategoryCell.m; sourceTree = "<group>"; };
 		8AE19DCD1B9DE26C007C2872 /* HomeEntityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeEntityCell.h; sourceTree = "<group>"; };
 		8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeEntityCell.m; sourceTree = "<group>"; };
 		8AFF0CA81BA9C980005FD5CB /* SubCategoryEntityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategoryEntityController.h; sourceTree = "<group>"; };
@@ -1681,6 +1684,8 @@
 				23E64DB11D2E469400A4402C /* SearchView.m */,
 				8ADEA3091D59CB9200D522A2 /* MainCategoryView.h */,
 				8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */,
+				8ADEA30C1D5A223B00D522A2 /* DiscoverCategoryCell.h */,
+				8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */,
 			);
 			path = DiscoverViewController;
 			sourceTree = "<group>";
@@ -3448,6 +3453,7 @@
 				B769B1181B2ACE91004401FA /* IFTTTAngleAnimation.m in Sources */,
 				4E73E67D1C1936C100B604B5 /* RegisterViewController.m in Sources */,
 				B76EE0851B3D8A16009D8763 /* ActiveController.m in Sources */,
+				8ADEA30E1D5A223B00D522A2 /* DiscoverCategoryCell.m in Sources */,
 				B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */,
 				23F6130D1CDB4BF60074E8C8 /* UserHeaderView.m in Sources */,
 				B7F544001BC2457E0044F5E9 /* UIButton+WebCache.m in Sources */,
@@ -3804,7 +3810,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
-					"$(PROJECT_DIR)/orange/ThirdParty/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1",
 					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1/UMOpus",
 					"$(PROJECT_DIR)/orange/ThirdParty/JPush",
@@ -3852,7 +3857,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
-					"$(PROJECT_DIR)/orange/ThirdParty/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1",
 					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1/UMOpus",
 					"$(PROJECT_DIR)/orange/ThirdParty/JPush",
