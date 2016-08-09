@@ -246,7 +246,7 @@
         _createOrderBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
         NSString * titleString = [NSString stringWithFormat:@"%@ %@",
                             [NSString fontAwesomeIconStringForEnum:FAPlusSquareO],
-                            NSLocalizedStringFromTable(@"create order", kLocalizedFile, nil)];
+                            NSLocalizedStringFromTable(@"create-order", kLocalizedFile, nil)];
         [_createOrderBtn setTitle:titleString forState:UIControlStateNormal];
 //        _createOrderBtn.titleLabel.textColor = UIColorFromRGB(0x212121);
         [_createOrderBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
@@ -267,7 +267,7 @@
         
         NSString * titleString = [NSString stringWithFormat:@"%@ %@",
                                   [NSString fontAwesomeIconStringForEnum:FAFileTextO],
-                                  NSLocalizedStringFromTable(@"review order", kLocalizedFile, nil)];
+                                  NSLocalizedStringFromTable(@"review-order", kLocalizedFile, nil)];
         [_reviewOrderBtn setTitle:titleString forState:UIControlStateNormal];
         [_reviewOrderBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         _reviewOrderBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];;

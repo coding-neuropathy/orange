@@ -190,6 +190,12 @@
 "mail"              = "邮箱";
 
 /**
+ *  seller
+ */
+"create-order"      = "创建订单";
+"review-order"      = "查看订单";
+
+/**
  *  verify  mail page
  */
 "verify mail"          = "验证邮箱";

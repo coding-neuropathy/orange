@@ -23,6 +23,8 @@
 @property (nonatomic, assign)NSInteger dotCount;
 @property (nonatomic, assign)CGFloat duration;
 
+@property (strong, nonatomic) UIImageView * scanningLine;
+
 @end
 
 @implementation ScannerCropView
@@ -36,14 +38,47 @@
     _hidesWhenStopped = YES;
 }
 
+- (UIImageView *)scanningLine
+{
+    if (!_scanningLine) {
+        _scanningLine = [[UIImageView alloc] initWithFrame:CGRectZero];
+        UIImage * lineImage = [UIImage imageNamed:@"scanning"];
+        _scanningLine.frame = CGRectMake(0., 0., lineImage.size.width, lineImage.size.height);
+        _scanningLine.image = lineImage;
+        _scanningLine.hidden = YES;
+        [self addSubview:_scanningLine];
+    }
+    return _scanningLine;
+}
+
+- (void)layoutSubviews
+{
+//    NSLog(@"%@", self.scanningLine);
+    [super layoutSubviews];
+}
+
 #pragma mark - pubilc
 - (void)startAnimating
 {
+    if (_isAnimating) {
+        return;
+    }
     
+    self.scanningLine.hidden = NO;
+    [self repeatAnimation];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:2.
+                                              target:self
+                                            selector:@selector(repeatAnimation)
+                                            userInfo:nil
+                                             repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    _isAnimating = YES;
 }
 
 - (void)stopAnimating
 {
+//    [UIView setAnimationsEnabled:NO];
+
     if (_timer)
     {
         [_timer invalidate];
@@ -54,13 +89,28 @@
     
     if (_hidesWhenStopped)
     {
-        self.hidden = YES;
+        self.scanningLine.hidden = YES;
     }
 }
 
 - (BOOL)isAnimating
 {
     return _isAnimating;
+}
+
+- (void)repeatAnimation
+{
+//        [UIView animateWithDuration:2. delay:0.1 options:UIViewAnimationOptionAutoreverse animations:^{
+//            self.scanningLine.frame = CGRectMake(0, self.deFrameWidth,
+//                                                self.scanningLine.deFrameWidth, self.scanningLine.deFrameHeight);
+//        } completion:nil];
+    self.scanningLine.frame = CGRectMake(0, 0,
+                                         self.scanningLine.deFrameWidth, self.scanningLine.deFrameHeight);
+    [UIView animateWithDuration:2. animations:^{
+        self.scanningLine.frame = CGRectMake(0, self.deFrameWidth,
+                                                self.scanningLine.deFrameWidth, self.scanningLine.deFrameHeight);
+
+    }];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -80,10 +130,10 @@
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(ctx, 1.0);
     
-    CGContextMoveToPoint(ctx, 0.0, rect.size.height / 2.);
-    CGContextAddLineToPoint(ctx, 0. + rect.size.width, rect.size.height / 2.);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
-    CGContextStrokePath(ctx);
+//    CGContextMoveToPoint(ctx, 0.0, rect.size.height / 2.);
+//    CGContextAddLineToPoint(ctx, 0. + rect.size.width, rect.size.height / 2.);
+//    CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
+//    CGContextStrokePath(ctx);
     
     CGContextMoveToPoint(ctx, 0., 20.);
     CGContextAddLineToPoint(ctx, 0., 0.);

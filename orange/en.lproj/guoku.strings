@@ -192,6 +192,12 @@
 "mail"              = "Mail";
 
 /**
+ *  seller
+ */
+"create-order"      = "Create Order";
+"review-order"      = "Review Order";
+
+/**
  *  verify mail page
  */
 "verify mail"          = "Verify Mail";

@@ -19,6 +19,7 @@
 }
 @property (strong, nonatomic) ScannerCropView * cropView;
 @property (strong, nonatomic) ZBarReaderView * reader;
+@property (strong, nonatomic) UILabel * infoLabel;
 @property (strong, nonatomic) NSString * text;
 
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
@@ -86,24 +87,49 @@
     return _reader;
 }
 
+- (UILabel *)infoLabel
+{
+    if (!_infoLabel) {
+        _infoLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _infoLabel.font = [UIFont systemFontOfSize:14.];
+        _infoLabel.textColor = UIColorFromRGB(0xbdbdbd);
+        _infoLabel.textAlignment = NSTextAlignmentCenter;
+        _infoLabel.text = @"将二维码放入框内，即可扫描";
+        
+    }
+    return _infoLabel;
+}
+
 - (void)loadView
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor colorWithHue:0. saturation:0. brightness:0. alpha:0.8];
+//    self.view.backgroundColor = [UIColor colorWithHue:0. saturation:0. brightness:0. alpha:0.8];
     [self.view addSubview:self.reader];
+    
+    [self.view insertSubview:self.infoLabel aboveSubview:self.reader];
+    self.infoLabel.frame = CGRectMake(0., 0., kScreenWidth, 20.);
+    self.infoLabel.deFrameTop = self.cropView.deFrameBottom + 22.;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.title = NSLocalizedStringFromTable(@"scanner", kLocalizedFile, nil);
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [self.reader start];
+    [self.cropView startAnimating];
     [super viewDidAppear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self.reader stop];
-    [self.audioPlayer stop];
+    [self.cropView stopAnimating];
     [super viewDidDisappear:animated];
 }
 
@@ -113,9 +139,8 @@
 {
     for(ZBarSymbol *sym in symbols) {
         self.text = sym.data;
-//        DDLogError(@"%@", self.text);
         [self.audioPlayer play];
-        
+        [self.cropView stopAnimating];
         [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:self.text]];
         break;
     }

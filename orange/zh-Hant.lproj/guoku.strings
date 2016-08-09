@@ -191,6 +191,12 @@
 "mail"              = "郵箱";
 
 /**
+ *  seller
+ */
+"create-order"      = "創建訂單";
+"review-order"      = "查看訂單";
+
+/**
  *  verify mail page
  */
 "verify mail"       = "驗證郵箱";
