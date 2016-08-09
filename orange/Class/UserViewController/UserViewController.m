@@ -476,7 +476,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                 CGFloat userHeaderHeight = self.user.bio.length == 0 ? 144. : 204.;
                 userHeaderHeight += IS_IPAD ? 20. : 0.;
             
-                userHeaderHeight += self.user.authorized_seller ? 49. : 0.;
+                userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
                 userHeaderHeight += 49.;
                 size = CGSizeMake(self.collectionView.deFrameWidth, userHeaderHeight);
             

@@ -402,7 +402,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     NSInteger count = 0;
     switch (section) {
-        case 3:
+        case 2:
 //            count = self.articleArray.count;
             count = self.discoverData.articleCount;
             break;
@@ -421,7 +421,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 3:
+        case 2:
         {
             HomeArticleCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ArticleCellIdentifier forIndexPath:indexPath];
             cell.article = [self.discoverData.articles objectAtIndex:indexPath.row];
@@ -455,23 +455,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                 return bannerView;
             }
                 break;
+
             case 1:
-            {
-                DiscoverUsersView * userView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserIdentifier forIndexPath:indexPath];
-                userView.users = self.discoverData.users;
-                [userView setTapMoreUserBlock:^{
-                    RecUserController * vc = [[RecUserController alloc]init];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }];
-                [userView setTapUserBlock:^(GKUser *user) {
-            
-                   [[OpenCenter sharedOpenCenter]openUser:user];
-                    
-                }];
-                return userView;
-            }
-                break;
-            case 2:
             {
                 DiscoverCategoryView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier forIndexPath:indexPath];
                 categoryView.categories = self.discoverData.categories;
@@ -484,7 +469,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                 return categoryView;
             }
                 break;
-            case 3:
+            case 2:
             {
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"popular articles", kLocalizedFile, nil);
@@ -492,6 +477,22 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
                     header.backgroundColor= UIColorFromRGB(0xf8f8f8);
                 }
                 return header;
+            }
+                break;
+            case 3:
+            {
+                DiscoverUsersView * userView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserIdentifier forIndexPath:indexPath];
+                userView.users = self.discoverData.users;
+                [userView setTapMoreUserBlock:^{
+                    RecUserController * vc = [[RecUserController alloc]init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }];
+                [userView setTapUserBlock:^(GKUser *user) {
+                    
+                    [[OpenCenter sharedOpenCenter]openUser:user];
+                    
+                }];
+                return userView;
             }
                 break;
             default:
@@ -515,7 +516,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
-        case 3:
+        case 2:
             if (IS_IPHONE) {
                 cellsize = CGSizeMake(self.collectionView.deFrameWidth, 84 * self.collectionView.deFrameWidth / 375 + 32);
             }
@@ -559,20 +560,21 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 //        return  UIEdgeInsetsMake(0., 20., 0., 20.);
     
     switch (section) {
+        case 3:
+//            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+            break;
         case 1:
-            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
+//            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
             break;
         case 2:
-            edge = UIEdgeInsetsMake(0., 0., 10., 0.);
-            break;
-        case 3:
-            if (IS_IPHONE) {
-                edge = UIEdgeInsetsMake(0., 0., 10., 0);
-            }
-            else
-            {
-                edge = UIEdgeInsetsMake(0., 20., 0., 20.);
-            }
+            if (IS_IPAD) edge = UIEdgeInsetsMake(0., 20., 0., 20.);
+//            if (IS_IPHONE) {
+//                edge = UIEdgeInsetsMake(0., 0., 10., 0);
+//            }
+//            else
+//            {
+//                edge = UIEdgeInsetsMake(0., 20., 0., 20.);
+//            }
             break;
         case 4:
         {
@@ -608,9 +610,9 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     CGFloat spacing = 0;
     switch (section) {
-        case 2:
+//        case 2:
 //            spacing =5;
-            break;
+//            break;
         case 4:
         {
 //            spacing = 3.;
@@ -635,22 +637,23 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
             headerSize = IS_IPAD ? headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 228) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
         }
             break;
+
         case 1:
-            if (self.discoverData.userCount) {
-                headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 126.)  :CGSizeMake(CGRectGetWidth(self.collectionView.frame), 126.);
+            if (self.discoverData.categoryCount) {
+                headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 155.) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 127.);
             }
             break;
         case 2:
-            if (self.discoverData.categoryCount) {
-                headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 155.) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 155.);
-            }
-            break;
-        case 3:
         {
             if(self.discoverData.articleCount) {
                 headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 44.) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 44.);
             }
         }
+            break;
+        case 3:
+            if (self.discoverData.userCount) {
+                headerSize = IS_IPAD ? CGSizeMake(CGRectGetWidth(self.collectionView.frame) - kTabBarWidth, 126.)  :CGSizeMake(CGRectGetWidth(self.collectionView.frame), 126.);
+            }
             break;
         case 4:
         {
@@ -925,7 +928,8 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
     if (!_textLabel)
     {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _textLabel.font = [UIFont systemFontOfSize:14.];
+//        _textLabel.font = [UIFont systemFontOfSize:14.];
+        _textLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
         _textLabel.textColor = UIColorFromRGB(0x414243);
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.backgroundColor = [UIColor clearColor];
@@ -945,9 +949,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 {
     [super layoutSubviews];
     
-//    self.backgroundColor = UIColorFromRGB(0xf8f8f8);
-    
-    self.textLabel.frame = CGRectMake(10., 0., kScreenWidth - 20., 44.);
+    self.textLabel.frame = CGRectMake(10., 12., self.deFrameWidth - 20., 20.);
 }
 
 @end

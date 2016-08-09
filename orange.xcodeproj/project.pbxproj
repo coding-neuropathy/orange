@@ -278,6 +278,7 @@
 		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
 		8ACFAAB61CDF1DF8000830B9 /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */; };
+		8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
 		8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */; };
 		8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */; };
@@ -938,6 +939,8 @@
 		8AC3F6861C05910A00CCD867 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.6.a"; sourceTree = "<group>"; };
 		8ACFAAB51CDF1DF8000830B9 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		8ADEA3091D59CB9200D522A2 /* MainCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCategoryView.h; sourceTree = "<group>"; };
+		8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCategoryView.m; sourceTree = "<group>"; };
 		8AE19DCD1B9DE26C007C2872 /* HomeEntityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeEntityCell.h; sourceTree = "<group>"; };
 		8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeEntityCell.m; sourceTree = "<group>"; };
 		8AFF0CA81BA9C980005FD5CB /* SubCategoryEntityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategoryEntityController.h; sourceTree = "<group>"; };
@@ -1676,6 +1679,8 @@
 				23EEFFB81C7ABAFA0061F45F /* DiscoverUsersView.m */,
 				23E64DB01D2E469400A4402C /* SearchView.h */,
 				23E64DB11D2E469400A4402C /* SearchView.m */,
+				8ADEA3091D59CB9200D522A2 /* MainCategoryView.h */,
+				8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */,
 			);
 			path = DiscoverViewController;
 			sourceTree = "<group>";
@@ -3370,6 +3375,7 @@
 				4EC9F7971A7928C70057D736 /* UserSingleListCell.m in Sources */,
 				B772BE9D1BD55848005C1540 /* UserLikeViewController.m in Sources */,
 				4E688A101BA9C2BA0006AD9B /* JSQMessagesAvatarImage.m in Sources */,
+				8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */,
 				B7F5AA011B08C75A0033BB2D /* WebViewController.m in Sources */,
 				391F5F911B1705A000931533 /* JXFormCell.m in Sources */,
 				236EE0271D3C8173003E97D6 /* AlluserResultController.m in Sources */,

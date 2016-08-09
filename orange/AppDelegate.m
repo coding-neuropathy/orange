@@ -631,8 +631,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-//    ddLogLevel = DDLogLevelInfo;
-    ddLogLevel = DDLogLevelError;
+    ddLogLevel = DDLogLevelInfo;
+//    ddLogLevel = DDLogLevelError;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;

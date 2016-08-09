@@ -55,8 +55,9 @@
 - (UILabel *)userLabel
 {
     if (!_userLabel) {
-        _userLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _userLabel.font = [UIFont systemFontOfSize:14.];
+        _userLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+//        _userLabel.font = [UIFont systemFontOfSize:14.];
+        _userLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
         _userLabel.textColor = UIColorFromRGB(0x414243);
         _userLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_userLabel];
@@ -152,19 +153,19 @@
     self.moreBtn.deFrameRight = self.userScrollView.deFrameRight;
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-    CGContextSetLineWidth(context, kSeparateLineWidth);
-    CGContextMoveToPoint(context, 0., self.deFrameHeight);
-    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
-    CGContextStrokePath(context);
-    
-}
+//- (void)drawRect:(CGRect)rect
+//{
+//    [super drawRect:rect];
+//    
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+//    CGContextSetLineWidth(context, kSeparateLineWidth);
+//    CGContextMoveToPoint(context, 0., self.deFrameHeight);
+//    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
+//    CGContextStrokePath(context);
+//    
+//}
 
 
 @end

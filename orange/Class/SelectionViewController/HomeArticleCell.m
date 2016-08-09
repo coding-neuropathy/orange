@@ -147,11 +147,11 @@
         self.coverImageView.deFrameTop = 16.;
         self.coverImageView.deFrameLeft = self.contentView.deFrameLeft + 16;
         
-        self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, self.contentView.deFrameHeight - 32.);
+        self.titleLabel.frame = CGRectMake(0., 0., self.contentView.deFrameWidth - 48 - 112*kScreenWidth/375, self.contentView.deFrameHeight - 32.);
         self.titleLabel.deFrameTop = -5.;
         self.titleLabel.deFrameLeft = self.coverImageView.deFrameRight + 12;
         
-        self.contentLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, 50);
+        self.contentLabel.frame = CGRectMake(0., 0., self.contentView.deFrameWidth - 48 - 112*kScreenWidth/375, 50);
         self.contentLabel.deFrameLeft = self.titleLabel.deFrameLeft;
         self.contentLabel.deFrameTop = self.titleLabel.deFrameBottom - 19.;
     }
@@ -176,8 +176,8 @@
     
     CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
-    CGContextMoveToPoint(context, 0., self.deFrameHeight);
-    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
+    CGContextMoveToPoint(context, 16., self.deFrameHeight);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth - 16., self.deFrameHeight);
     
     CGContextStrokePath(context);
 }
