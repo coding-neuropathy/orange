@@ -6,9 +6,10 @@
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface EmbedReaderViewController : UIViewController
+@interface EmbedReaderViewController : BaseViewController
 
 
 @end

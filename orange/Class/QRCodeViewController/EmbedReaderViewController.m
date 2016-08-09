@@ -11,6 +11,7 @@
 #import "ScannerCropView.h"
 #import <AVFoundation/AVFoundation.h>
 
+
 @interface EmbedReaderViewController () <ZBarReaderViewDelegate>
 {
 @private
@@ -47,7 +48,6 @@
         _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:beepURL error:&error];
         
         if (error) {
-//            NSLog(@"Could not play beep file.");
             DDLogError(@"Error: %@", [error localizedDescription]);
         } else
             [_audioPlayer prepareToPlay];
@@ -103,6 +103,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self.reader stop];
+    [self.audioPlayer stop];
     [super viewDidDisappear:animated];
 }
 
@@ -112,9 +113,10 @@
 {
     for(ZBarSymbol *sym in symbols) {
         self.text = sym.data;
-        DDLogError(@"%@", self.text);
+//        DDLogError(@"%@", self.text);
         [self.audioPlayer play];
-//        AudioServicesPlaySystemSound(1005);
+        
+        [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:self.text]];
         break;
     }
 }

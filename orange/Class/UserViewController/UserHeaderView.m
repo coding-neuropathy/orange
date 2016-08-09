@@ -244,11 +244,13 @@
 {
     if (!_createOrderBtn) {
         _createOrderBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        [_createOrderBtn setTitle:NSLocalizedStringFromTable(@"create order", kLocalizedFile, nil) forState:UIControlStateNormal];
+        NSString * titleString = [NSString stringWithFormat:@"%@ %@",
+                            [NSString fontAwesomeIconStringForEnum:FAPlusSquareO],
+                            NSLocalizedStringFromTable(@"create order", kLocalizedFile, nil)];
+        [_createOrderBtn setTitle:titleString forState:UIControlStateNormal];
 //        _createOrderBtn.titleLabel.textColor = UIColorFromRGB(0x212121);
         [_createOrderBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
-        _createOrderBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+        _createOrderBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];;
 //        [_createOrderBtn setBackgroundColor:[UIColor redColor]];
         
         [_createOrderBtn addTarget:self action:@selector(createOrderAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -263,9 +265,12 @@
     if (!_reviewOrderBtn) {
         _reviewOrderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        [_reviewOrderBtn setTitle:NSLocalizedStringFromTable(@"review order", kLocalizedFile, nil) forState:UIControlStateNormal];
+        NSString * titleString = [NSString stringWithFormat:@"%@ %@",
+                                  [NSString fontAwesomeIconStringForEnum:FAFileTextO],
+                                  NSLocalizedStringFromTable(@"review order", kLocalizedFile, nil)];
+        [_reviewOrderBtn setTitle:titleString forState:UIControlStateNormal];
         [_reviewOrderBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
-        _reviewOrderBtn.titleLabel.font = [UIFont systemFontOfSize:14.];
+        _reviewOrderBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];;
         
         [_reviewOrderBtn addTarget:self action:@selector(reviewOrderAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_reviewOrderBtn];
@@ -293,7 +298,7 @@
         self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>%@</b>", _user.nick];
     }
     if (_user.authorized_author == YES) {
-        self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
+        self.nicknameLabel.text = [NSString stringWithFormat:@"%@", _user.nick];
 //        self.staffImage.image = [UIImage imageNamed:@"official"];
     }
     self.bioLabel.text = _user.bio;

@@ -646,7 +646,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     } else {
         [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {
             user.relation = relation;
-            DDLogInfo(@"relation %lu", relation);
+//            DDLogInfo(@"relation %lu", relation);
             view.user = user;
             [SVProgressHUD showImage:nil status:@"关注成功"];
         } failure:^(NSInteger stateCode) {
@@ -688,7 +688,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
     EmbedReaderViewController * vc = [[EmbedReaderViewController alloc] init];
     
-//    [self presentViewController:vc animated:YES completion:nil];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

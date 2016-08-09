@@ -242,6 +242,7 @@
 		8A195F0B1CF3FD3A00F2A954 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A195F0A1CF3FD3A00F2A954 /* UMMobClick.framework */; };
 		8A2754611CA5060200073E78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2754601CA5060200073E78 /* CoreData.framework */; };
 		8A3911D11D597F440029E529 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A3911D01D597F440029E529 /* beep.mp3 */; };
+		8A3911D71D598A680029E529 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3911D61D598A680029E529 /* libzbar.a */; };
 		8A3CBBA81C7D870E0002AAE8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */; };
 		8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
@@ -254,7 +255,6 @@
 		8A50453C1D58717B00D66F8A /* EmbedReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50453B1D58717B00D66F8A /* EmbedReaderViewController.m */; };
 		8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */; };
 		8A7D91071D58827900D67458 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7D91061D58827900D67458 /* libiconv.tbd */; };
-		8A7D91091D5884A100D67458 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7D91081D5884A100D67458 /* libzbar.a */; };
 		8A8418AC1C06FDB900F55FE9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */; };
 		8A9255F61D50956400E6481F /* GKSelectionArticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9255F41D50956400E6481F /* GKSelectionArticle.h */; };
 		8A9255F71D50956400E6481F /* GKSelectionArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9255F51D50956400E6481F /* GKSelectionArticle.m */; };
@@ -846,6 +846,7 @@
 		8A195F0A1CF3FD3A00F2A954 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		8A2754601CA5060200073E78 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8A3911D01D597F440029E529 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beep.mp3; path = ../../../Desktop/beep.mp3; sourceTree = "<group>"; };
+		8A3911D61D598A680029E529 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		8A3EAD281BD7C23400E1E447 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
 		8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
@@ -889,7 +890,6 @@
 		8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntityCategoryController.m; sourceTree = "<group>"; };
 		8A7B791F1BAAB9310089FFD6 /* DataStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructure.h; sourceTree = "<group>"; };
 		8A7D91061D58827900D67458 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		8A7D91081D5884A100D67458 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8A9255F41D50956400E6481F /* GKSelectionArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKSelectionArticle.h; path = SelectionArticle/GKSelectionArticle.h; sourceTree = "<group>"; };
 		8A9255F51D50956400E6481F /* GKSelectionArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKSelectionArticle.m; path = SelectionArticle/GKSelectionArticle.m; sourceTree = "<group>"; };
@@ -1234,7 +1234,7 @@
 				4E56DFCE19D5B84300263B17 /* QuartzCore.framework in Frameworks */,
 				B78164731D24F8990035DFE4 /* UTMini.framework in Frameworks */,
 				4E56DFC819D5B82900263B17 /* UIKit.framework in Frameworks */,
-				8A7D91091D5884A100D67458 /* libzbar.a in Frameworks */,
+				8A3911D71D598A680029E529 /* libzbar.a in Frameworks */,
 				B781646F1D24F8990035DFE4 /* SecurityGuardSDK.framework in Frameworks */,
 				4E56DFCC19D5B83B00263B17 /* CoreGraphics.framework in Frameworks */,
 				B781646A1D24F8990035DFE4 /* ALBBSDK.framework in Frameworks */,
@@ -2413,7 +2413,7 @@
 		8A5045561D5873CA00D66F8A /* ZBarSDK */ = {
 			isa = PBXGroup;
 			children = (
-				8A7D91081D5884A100D67458 /* libzbar.a */,
+				8A3911D61D598A680029E529 /* libzbar.a */,
 				8A5045571D5873CA00D66F8A /* Headers */,
 			);
 			path = ZBarSDK;
