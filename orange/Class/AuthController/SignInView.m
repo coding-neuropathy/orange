@@ -111,9 +111,38 @@
 - (UIButton *)signBtn
 {
     if (!_signBtn) {
-    
+        _signBtn                            = [UIButton buttonWithType:UIButtonTypeCustom];
+        _signBtn.layer.borderColor          = UIColorFromRGB(0x6192ff).CGColor;
+        _signBtn.layer.borderWidth          = 0.5;
+        _signBtn.layer.masksToBounds        = YES;
+        _signBtn.titleLabel.textAlignment   = NSTextAlignmentCenter;
+        _signBtn.titleLabel.font            = [UIFont fontWithName:@"PingFangSC-Medium" size:18.];
+        
+        [_signBtn setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_signBtn setTitleColor:UIColorFromRGB(0x6192ff) forState:UIControlStateNormal];
+        
+        [_signBtn addTarget:self action:@selector(signBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_signBtn];
     }
     return _signBtn;
+}
+
+- (UIButton *)forgetBtn
+{
+    if (!_forgetBtn) {
+        _forgetBtn                          = [UIButton buttonWithType:UIButtonTypeCustom];
+        _forgetBtn.titleLabel.font          = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _forgetBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        
+        [_forgetBtn setTitle:NSLocalizedStringFromTable(@"forget-password", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_forgetBtn setTitleColor:UIColorFromRGB(0x5976c1) forState:UIControlStateNormal];
+        
+        [_forgetBtn addTarget:self action:@selector(forgetBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_forgetBtn];
+    }
+    return _forgetBtn;
 }
 
 #pragma mark - layout subviews
@@ -128,7 +157,17 @@
     self.passwordTextField.frame        = self.emailTextField.frame;
     self.passwordTextField.center       = self.emailTextField.center;
     self.passwordTextField.deFrameTop   = self.emailTextField.deFrameBottom + 1.;
+    
+    self.signBtn.frame                  = CGRectMake(0., 0., 290 * kScreeenScale, 44. * kScreeenScale);
+    self.signBtn.center                 = self.passwordTextField.center;
+    self.signBtn.layer.cornerRadius     = self.signBtn.deFrameHeight / 2.;
+    self.signBtn.deFrameTop             = self.passwordTextField.deFrameBottom + 16.;
+    
+    self.forgetBtn.frame                = CGRectMake(0., 0., 144. * kScreeenScale, 20. * kScreeenScale);
+    self.forgetBtn.center               = self.signBtn.center;
+    self.forgetBtn.deFrameTop           = self.signBtn.deFrameBottom + 24.;
 }
+
 
 - (void)drawRect:(CGRect)rect
 {
@@ -145,12 +184,25 @@
     
     CGContextMoveToPoint(context, self.passwordTextField.deFrameLeft, self.passwordTextField.deFrameBottom);
     CGContextAddLineToPoint(context, self.passwordTextField.deFrameRight, self.passwordTextField.deFrameBottom);
-//    CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
-//    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
     
     CGContextStrokePath(context);
     
     [super drawRect:rect];
+}
+
+#pragma mark - button action
+- (void)signBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapSignBtnWithEmail:Password:)]) {
+        [_delegate tapSignBtnWithEmail:self.emailTextField.text Password:self.passwordTextField.text];
+    }
+}
+
+- (void)forgetBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapForgetBtn:)]) {
+        [_delegate tapForgetBtn:sender];
+    }
 }
 
 @end

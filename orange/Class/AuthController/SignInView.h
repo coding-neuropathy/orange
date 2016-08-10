@@ -10,7 +10,8 @@
 
 @protocol SignInViewDelegate <NSObject>
 
-
+- (void)tapSignBtnWithEmail:(NSString *)email Password:(NSString *)password;
+- (void)tapForgetBtn:(id)sender;
 
 @end
 

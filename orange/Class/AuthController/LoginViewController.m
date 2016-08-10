@@ -15,7 +15,7 @@
 
 #import "SignInView.h"
 
-@interface LoginViewController ()<UITextFieldDelegate, UIAlertViewDelegate>
+@interface LoginViewController ()<UITextFieldDelegate, UIAlertViewDelegate, SignInViewDelegate>
 
 @property (nonatomic, strong) UIImageView *logo;
 @property (nonatomic, strong) UILabel *solgen;
@@ -45,6 +45,7 @@
     if (!_signView) {
         _signView = [[SignInView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
 //        _signView.backgroundColor = UIColorFromRGB(0xffffff);
+        _signView.delegate = self;
         
     }
     return _signView;
@@ -701,6 +702,17 @@
             [SVProgressHUD showErrorWithStatus:[[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"]];
         }
     }];
+}
+
+#pragma mark - <SignInViewDelegate>
+- (void)tapSignBtnWithEmail:(NSString *)email Password:(NSString *)password
+{
+
+}
+
+- (void)tapForgetBtn:(id)sender
+{
+
 }
 
 @end
