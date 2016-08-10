@@ -10,20 +10,35 @@
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
 
-@interface AuthController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+#import "AuthView.h"
+
+@interface AuthController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate, AuthViewDelegate>
 @property(strong,nonatomic) LoginViewController * loginVC;
 @property(strong,nonatomic) RegisterViewController * registerVC;
 
 @property (strong, nonatomic) UIPageViewController * thePageViewController;
 @property (assign, nonatomic) NSInteger index;
 
+@property (strong, nonatomic) AuthView * authView;
+
 @end
 
 @implementation AuthController
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - lazy load view
+- (AuthView *)authView
+{
+    if (!_authView) {
+        _authView = [[AuthView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        _authView.delegate = self;
+    }
+    return _authView;
 }
 
 /*
@@ -36,20 +51,25 @@
 }
 */
 
+- (void)loadView
+{
+    self.view = self.authView;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     /* Present 后，底层页面还隐藏。这里对屏幕截图进行效果拟补。*/
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(kScreenWidth, kScreenHeight), YES, 1);
-    [kAppDelegate.window.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    UIImageView * v = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    v.image = img;
-    [self.view addSubview:v];
-    [self.view sendSubviewToBack:v];
+//    UIGraphicsBeginImageContextWithOptions(CGSizeMake(kScreenWidth, kScreenHeight), YES, 1);
+//    [kAppDelegate.window.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+//    UIImageView * v = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+//    v.image = img;
+//    [self.view addSubview:v];
+//    [self.view sendSubviewToBack:v];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -98,14 +118,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor clearColor];
-         [self addChildViewController:self.thePageViewController];
-    
-    self.thePageViewController.view.frame = CGRectMake(0,0, kScreenWidth,  kScreenHeight);
-    
-    [self.thePageViewController setViewControllers:@[self.loginVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
-    [self.view addSubview:self.thePageViewController.view];
+//    self.view.backgroundColor = [UIColor clearColor];
+//         [self addChildViewController:self.thePageViewController];
+//    
+//    self.thePageViewController.view.frame = CGRectMake(0,0, kScreenWidth,  kScreenHeight);
+//    
+//    [self.thePageViewController setViewControllers:@[self.loginVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+//    
+//    [self.view addSubview:self.thePageViewController.view];
     
 }
 
@@ -175,6 +195,20 @@
     }
 }
 
+#pragma mark - <AuthViewDelegate>
+- (void)tapDismissButton
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
+- (void)tapSignInButton:(id)sender
+{
+    
+}
+
+- (void)tapSignUpButton:(id)sender
+{
+
+}
 
 @end

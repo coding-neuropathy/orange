@@ -115,7 +115,7 @@
 //    self.categoryScrollView.layer.masksToBounds = YES;
 
     
-    self.pageCtr.bounds = CGRectMake(0.0, 0.0, 6 * (_pageCtr.numberOfPages - 1) + 6, 6);
+    self.pageCtr.bounds = CGRectMake(0.0, 0.0, 6 * (self.pageCtr.numberOfPages - 1) + 6, 6);
     self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.categoryScrollView.deFrameBottom + 20.);
 
 //    self.pageCtr.hidden = NO;
