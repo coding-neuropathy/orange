@@ -14,6 +14,7 @@
 #import "WeiboUser.h"
 
 #import "SignInView.h"
+#import "ForgetPasswdController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate, UIAlertViewDelegate, SignInViewDelegate>
 
@@ -712,7 +713,9 @@
 
 - (void)tapForgetBtn:(id)sender
 {
-
+    ForgetPasswdController * fpController = [[ForgetPasswdController alloc] init];
+    
+    [self.navigationController pushViewController:fpController animated:YES];
 }
 
 @end

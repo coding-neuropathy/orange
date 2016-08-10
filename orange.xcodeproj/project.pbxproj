@@ -215,6 +215,7 @@
 		4ED7685A1B7248A600AA3BF7 /* loading-static.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED768591B7248A600AA3BF7 /* loading-static.png */; };
 		4EEB29FF1B523C650092A8CF /* GKNotificationHUB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB29FE1B523C650092A8CF /* GKNotificationHUB.m */; };
 		4EF508811B49042000C92618 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF508801B49042000C92618 /* ShareView.m */; };
+		8A0176221D5B9429004E7A81 /* ForgetPasswdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0176211D5B9429004E7A81 /* ForgetPasswdController.m */; };
 		8A0345AA1BA15F4A0037BC32 /* HomeArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */; };
 		8A0B16E21BABFDED00469DD6 /* ArticleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B16E11BABFDED00469DD6 /* ArticleListCell.m */; };
 		8A1905221D54378B00B72A79 /* AuthUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1905211D54378B00B72A79 /* AuthUserHeaderView.m */; };
@@ -815,6 +816,8 @@
 		4EEB29FE1B523C650092A8CF /* GKNotificationHUB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKNotificationHUB.m; sourceTree = "<group>"; };
 		4EF5087F1B49042000C92618 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		4EF508801B49042000C92618 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		8A0176201D5B9429004E7A81 /* ForgetPasswdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgetPasswdController.h; path = ForgetPassowrdController/ForgetPasswdController.h; sourceTree = "<group>"; };
+		8A0176211D5B9429004E7A81 /* ForgetPasswdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgetPasswdController.m; path = ForgetPassowrdController/ForgetPasswdController.m; sourceTree = "<group>"; };
 		8A0345A81BA15F4A0037BC32 /* HomeArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeArticleCell.h; sourceTree = "<group>"; };
 		8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeArticleCell.m; sourceTree = "<group>"; };
 		8A0B16E01BABFDED00469DD6 /* ArticleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListCell.h; sourceTree = "<group>"; };
@@ -2135,18 +2138,13 @@
 		4E73E6771C19360400B604B5 /* AuthController */ = {
 			isa = PBXGroup;
 			children = (
-				4E73E6781C19361300B604B5 /* LoginViewController.h */,
-				4E73E6791C19361300B604B5 /* LoginViewController.m */,
-				4E73E67B1C1936C100B604B5 /* RegisterViewController.h */,
-				4E73E67C1C1936C100B604B5 /* RegisterViewController.m */,
+				8A01761F1D5B93DC004E7A81 /* ForgetPasswordController */,
+				8A01761E1D5B93B9004E7A81 /* SignUpViewController */,
+				8A01761D1D5B93A5004E7A81 /* SignInViewController */,
 				4E73E67E1C1936D400B604B5 /* AuthController.h */,
 				4E73E67F1C1936D400B604B5 /* AuthController.m */,
 				8A1B632E1D5AFA93009CF222 /* AuthView.h */,
 				8A1B632F1D5AFA93009CF222 /* AuthView.m */,
-				8A1B63311D5B2551009CF222 /* SignInView.h */,
-				8A1B63321D5B2551009CF222 /* SignInView.m */,
-				8A1B63341D5B255E009CF222 /* SignUpView.h */,
-				8A1B63351D5B255E009CF222 /* SignUpView.m */,
 			);
 			path = AuthController;
 			sourceTree = "<group>";
@@ -2358,6 +2356,37 @@
 				B77E00A81B8988DC008BCA55 /* EntityPopView.m */,
 			);
 			path = EntityViewController;
+			sourceTree = "<group>";
+		};
+		8A01761D1D5B93A5004E7A81 /* SignInViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E73E6781C19361300B604B5 /* LoginViewController.h */,
+				4E73E6791C19361300B604B5 /* LoginViewController.m */,
+				8A1B63311D5B2551009CF222 /* SignInView.h */,
+				8A1B63321D5B2551009CF222 /* SignInView.m */,
+			);
+			name = SignInViewController;
+			sourceTree = "<group>";
+		};
+		8A01761E1D5B93B9004E7A81 /* SignUpViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4E73E67B1C1936C100B604B5 /* RegisterViewController.h */,
+				4E73E67C1C1936C100B604B5 /* RegisterViewController.m */,
+				8A1B63341D5B255E009CF222 /* SignUpView.h */,
+				8A1B63351D5B255E009CF222 /* SignUpView.m */,
+			);
+			name = SignUpViewController;
+			sourceTree = "<group>";
+		};
+		8A01761F1D5B93DC004E7A81 /* ForgetPasswordController */ = {
+			isa = PBXGroup;
+			children = (
+				8A0176201D5B9429004E7A81 /* ForgetPasswdController.h */,
+				8A0176211D5B9429004E7A81 /* ForgetPasswdController.m */,
+			);
+			name = ForgetPasswordController;
 			sourceTree = "<group>";
 		};
 		8A1905231D5437A000B72A79 /* AuthUserController */ = {
@@ -3455,6 +3484,7 @@
 				4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */,
 				23F6130A1CDB1B310074E8C8 /* BioViewController.m in Sources */,
 				236EE02A1D3CA2D1003E97D6 /* AllEntityResultController.m in Sources */,
+				8A0176221D5B9429004E7A81 /* ForgetPasswdController.m in Sources */,
 				B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */,
 				230448A31CFD6CC9000A6B3C /* iCarousel.m in Sources */,
 				239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */,
