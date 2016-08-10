@@ -27,13 +27,13 @@
     [paraDict setValue:model forKey:@"model"];
     [paraDict setValue:ver forKey:@"version"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         //        DDLogError(@"status code %lu", operation.response.statusCode);
         if (failure) {
-            NSInteger statusCode = operation.response.statusCode;
-            failure(statusCode);
+//            NSInteger statusCode = operation.response.statusCode;
+            failure(stateCode);
         }
     }];
 }
@@ -50,7 +50,7 @@
 {
     NSString *path = @"category/";
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             NSArray *objectArray = (NSArray *)responseObject;
             
@@ -80,9 +80,9 @@
                 }
             });
         });
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -98,14 +98,14 @@
                           failure:(void (^)(NSInteger stateCode))failure
 {
     NSString * path = @"launch/";
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         GKLaunch * launch = [GKLaunch modelFromDictionary:responseObject];
         if (success) {
             success(launch);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -126,7 +126,7 @@
     
     NSString *path = [NSString stringWithFormat:@"category/%ld/stat", (unsigned long)categoryId];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         NSInteger likeCount = [objectDict[@"like_count"] integerValue];
@@ -136,9 +136,9 @@
         if (success) {
             success(likeCount, noteCount, entityCount);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -155,7 +155,7 @@
 {
     NSString * path = @"category/group/";
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         
         NSMutableArray * categories = [NSMutableArray arrayWithCapacity:0];
         for (NSDictionary * row in responseObject) {
@@ -167,9 +167,9 @@
             success(categories);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -193,7 +193,7 @@
     [paraDict setValue:@(page) forKey:@"page"];
     [paraDict setValue:sort forKey:@"sort"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSMutableArray * entities = [[NSMutableArray alloc]initWithCapacity:0];
         for (NSDictionary * row in responseObject)
         {
@@ -204,9 +204,9 @@
             success(entities);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -227,7 +227,7 @@
     [paraDict setValue:@(page) forKey:@"page"];
     
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSMutableArray * articles = [[NSMutableArray alloc]initWithCapacity:0];
         
         NSInteger count = [[[responseObject valueForKeyPath:@"stat"] valueForKeyPath:@"all_count"] integerValue];
@@ -243,9 +243,9 @@
             
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -266,7 +266,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:@(page) forKey:@"page"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSMutableArray * articles = [[NSMutableArray alloc]initWithCapacity:0];
         
         NSInteger count = [[[responseObject valueForKeyPath:@"stat"] valueForKeyPath:@"all_count"] integerValue];
@@ -280,9 +280,9 @@
         if (success) {
             success(articles, count);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -305,7 +305,7 @@
     
     NSString *path = [NSString stringWithFormat:@"entity/%@/", entityId];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
@@ -327,9 +327,9 @@
         if (success) {
             success(entity, likeUserArray, noteArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -362,7 +362,7 @@
     [paraDict setObject:@(count) forKey:@"count"];
     [paraDict setObject:entityId forKey:@"eid"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
         
         NSMutableArray *entityArray = [NSMutableArray array];
@@ -374,9 +374,9 @@
         if (success) {
             success(entityArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -402,7 +402,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:@(page) forKey:@"page"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
 //        NSLog(@"%@", responseObject);
         
         NSMutableArray * dataArray = [NSMutableArray array];
@@ -417,11 +417,11 @@
             success(dataArray, page);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
 //        NSLog(@"%ld %@", operation.response.statusCode,  [error userInfo]);
-        NSInteger statusCode = operation.response.statusCode;
+//        NSInteger statusCode = operation.response.statusCode;
         if (failure) {
-            failure(statusCode);
+            failure(stateCode);
         }
     }];
 }
@@ -446,7 +446,7 @@
     [paraDict setObject:@(page) forKey:@"page"];
     [paraDict setObject:@(size) forKey:@"size"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         
 //        NSLog(@"%@", responseObject);
         
@@ -462,10 +462,10 @@
             success([NSArray arrayWithArray:articleList]);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSInteger statusCode = operation.response.statusCode;
+    } failure:^(NSInteger stateCode, NSError *error) {
+//        NSInteger statusCode = operation.response.statusCode;
         if (failure) {
-            failure(statusCode);
+            failure(stateCode);
         }
     }];
 }
@@ -490,7 +490,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:@(article_id) forKey:@"aid"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         
 //        NSLog(@"%@", responseObject);
         BOOL IsDig = [[responseObject valueForKey:@"status"] boolValue];
@@ -499,11 +499,11 @@
             success(IsDig);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
 //        NSLog(@"%@", error.localizedDescription);
-        NSInteger statusCode = operation.response.statusCode;
+//        NSInteger statusCode = operation.response.statusCode;
         if (failure) {
-            failure(statusCode);
+            failure(stateCode);
         }
     }];
 }
@@ -525,17 +525,17 @@
     NSMutableDictionary * paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:content forKey:@"content"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         
         GKArticleComment * comment = [GKArticleComment modelFromDictionary:responseObject];
         if (success) {
             success(comment);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSInteger statusCode = operation.response.statusCode;
+    } failure:^(NSInteger stateCode, NSError *error) {
+//        NSInteger statusCode = operation.response.statusCode;
         if (failure) {
-            failure(statusCode);
+            failure(stateCode);
         }
     }];
     
@@ -552,7 +552,7 @@
                    failure:(void (^)(NSInteger stateCode))failure
 {
     NSString * path = @"home/";
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
 //        NSLog(@"%@", responseObject);
         NSArray *banners = responseObject[@"banner"];
 //        NSLog(@"%@", responseObject[@"articles"]);
@@ -585,11 +585,11 @@
         if (success) {
             success(banners, articles, categories, entities);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger statusCode = operation.response.statusCode;
+//            NSInteger statusCode = operation.response.statusCode;
             if (failure) {
-                failure(statusCode);
+                failure(stateCode);
             }
         }
     }];
@@ -621,7 +621,7 @@
     [paraDict setObject:@(count) forKey:@"count"];
     [paraDict setObject:@(cateId) forKey:@"rcat"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
 //        NSLog(@"%@", responseObject);
         NSMutableArray *selectionArray = [NSMutableArray array];
@@ -649,9 +649,9 @@
         if (success) {
             success(selectionArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode, error);
         }
     }];
@@ -678,7 +678,7 @@
     [paraDict setObject:@(page) forKey:@"page"];
     [paraDict setObject:@(size) forKey:@"size"];
 //    [paraDict setObject:@(cateId) forKey:@"rcat"];
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionaryWithDictionary:paraDict] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionaryWithDictionary:paraDict] success:^(NSURLSessionDataTask *operation, id responseObject) {
         
         NSMutableArray * articleList = [NSMutableArray arrayWithCapacity:0];
         for (NSDictionary *dict in responseObject)
@@ -692,9 +692,9 @@
             success([NSArray arrayWithArray:articleList]);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode, error);
         }
     }];
@@ -711,7 +711,7 @@
 {
     NSString * path = @"discover/";
 
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *bannerArray = responseObject[@"banner"];
 //        NSLog(@"res %@", responseObject[@"banner"]);
         NSMutableArray * categories = [NSMutableArray arrayWithCapacity:0];
@@ -747,9 +747,9 @@
             success(bannerArray, entityArray, categories, articles, users);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode, error);
         }
     }];
@@ -771,7 +771,7 @@
     [paraDict setObject:@(page) forKey:@"page"];
     [paraDict setObject:@(size) forKey:@"size"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         
         NSInteger page = [responseObject[@"page"] integerValue];
         NSMutableArray * userArray = [NSMutableArray arrayWithCapacity:0];
@@ -785,9 +785,9 @@
             success(userArray, page);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -812,7 +812,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:type forKey:@"scale"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         NSMutableArray *entityArray = [NSMutableArray array];
@@ -825,9 +825,9 @@
         if (success) {
             success(entityArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -866,7 +866,7 @@
     [paraDict setObject:@(offset) forKey:@"offset"];
     [paraDict setObject:@(count) forKey:@"count"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
         
         NSMutableArray *entityArray = [NSMutableArray array];
@@ -878,9 +878,9 @@
         if (success) {
             success(entityArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -916,7 +916,7 @@
         [paraDict setObject:@(categoryId) forKey:@"cid"];
     }
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         NSTimeInterval timestamp = [objectDict[@"timestamp"] doubleValue];
@@ -929,9 +929,9 @@
         if (success) {
             success(timestamp, entityArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -966,7 +966,7 @@
     [paraDict setObject:@(offset) forKey:@"offset"];
     [paraDict setObject:@(count) forKey:@"count"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
         
         NSMutableArray *entityArray = [[NSMutableArray alloc] init];
@@ -977,9 +977,9 @@
         if (success) {
             success(entityArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1010,7 +1010,7 @@
     [paraDict setObject:@(count) forKey:@"count"];
     
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
 //        NSArray *objectArray = (NSArray *)responseObject;
         NSTimeInterval timestamp = [responseObject[@"timestamp"] doubleValue];
         NSMutableArray *dataArray = [NSMutableArray array];
@@ -1023,9 +1023,9 @@
         if (success) {
             success(dataArray, timestamp);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1050,7 +1050,7 @@
     
     NSString *path = [NSString stringWithFormat:@"user/%ld/tag/", (unsigned long)userId];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSMutableDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSMutableDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         NSDictionary *userDict = objectDict[@"user"];
@@ -1061,9 +1061,9 @@
         if (success) {
             success(user, tagArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1095,7 +1095,7 @@
     [paraDict setObject:@(offset) forKey:@"offset"];
     [paraDict setObject:@(count) forKey:@"count"];
     
-    [[HttpClient sharedClient] requestPath:[path encodedUrl] method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:[path encodedUrl] method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = [(NSDictionary *)responseObject objectForKey:@"entity_list"];
         GKUser *user = [GKUser modelFromDictionary:[(NSDictionary *)responseObject objectForKey:@"user"]];
         
@@ -1109,9 +1109,9 @@
         if (success) {
             success(user,entityArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1132,7 +1132,7 @@
     
     NSString *path = [NSString stringWithFormat:@"entity/note/%ld/", (unsigned long)noteId];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKNote *note = [GKNote modelFromDictionary:objectDict[@"note"]];
@@ -1155,9 +1155,9 @@
         if (success) {
             success(note, entity, commentArray, pokerArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1179,7 +1179,7 @@
     NSParameterAssert(entityId);
     
     NSString *path = [NSString stringWithFormat:@"entity/%@/like/%d/", entityId, isLike];
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         BOOL liked = [objectDict[@"like_already"] boolValue];
@@ -1187,9 +1187,9 @@
         if (success) {
             success(liked);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1215,7 +1215,7 @@
     [paraDict setObject:@(page) forKey:@"page"];
     [paraDict setObject:@(30) forKey:@"size"];
 
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         
         NSDictionary * objectDict = (NSDictionary *)responseObject;
         
@@ -1232,9 +1232,9 @@
             success(articles, size, total);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1273,7 +1273,7 @@
         dataParameters = @{@"image":imageData};
     }
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict dataParameters:dataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict dataParameters:dataParameters success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKNote *note = [GKNote modelFromDictionary:objectDict];
@@ -1281,9 +1281,9 @@
         if (success) {
             success(note);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1320,7 +1320,7 @@
     if (imageData) {
         dataParameters = @{@"image":imageData};
     }
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict dataParameters:dataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict dataParameters:dataParameters success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKNote *note = [GKNote modelFromDictionary:objectDict];
@@ -1328,9 +1328,9 @@
         if (success) {
             success(note);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1351,13 +1351,13 @@
     
     NSString *path = [NSString stringWithFormat:@"entity/note/%ld/del/", (unsigned long)noteId];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         if (success) {
             success();
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1380,7 +1380,7 @@
     
     NSString *path = [NSString stringWithFormat:@"entity/note/%ld/poke/%d/", (unsigned long)noteId, state];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         NSString *entityId = objectDict[@"entity_id"];
@@ -1390,9 +1390,9 @@
         if (success) {
             success(entityId, noteId, state);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1419,7 +1419,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:content forKey:@"comment"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKComment *comment = [GKComment modelFromDictionary:objectDict];
@@ -1427,9 +1427,9 @@
         if (success) {
             success(comment);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1466,7 +1466,7 @@
         [paraDict setObject:@(commentCreatorId) forKey:@"reply_to_user"];
     }
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKComment *comment = [GKComment modelFromDictionary:objectDict];
@@ -1474,9 +1474,9 @@
         if (success) {
             success(comment);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1500,13 +1500,13 @@
     
     NSString *path = [NSString stringWithFormat:@"entity/note/%ld/comment/%ld/del/", (unsigned long)noteId, commentId];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         if (success) {
             success(YES);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1537,7 +1537,7 @@
     [paraDict setObject:comment forKey:@"comment"];
     [paraDict setObject:[NSNumber numberWithInteger:type] forKey:@"type"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         BOOL state = [objectDict[@"status"] boolValue];
@@ -1545,9 +1545,9 @@
         if (success) {
             success(state);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1574,7 +1574,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:comment forKey:@"comment"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         BOOL state = [objectDict[@"status"] boolValue];
@@ -1582,9 +1582,9 @@
         if (success) {
             success(state);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1616,7 +1616,7 @@
     [paraDict setObject:scale forKey:@"scale"];
     [paraDict setObject:@(timestamp) forKey:@"timestamp"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
         
         NSMutableArray *dataArray = [NSMutableArray array];
@@ -1674,9 +1674,9 @@
         if (success) {
             success(dataArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1703,7 +1703,7 @@
     [paraDict setObject:@(timestamp) forKey:@"timestamp"];
     [paraDict setObject:@(count) forKey:@"count"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
         
         NSMutableArray *messageArray = [NSMutableArray array];
@@ -1785,9 +1785,9 @@
         if (success) {
             success(messageArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1811,7 +1811,7 @@
     
     NSString *path = [NSString stringWithFormat:@"user/%ld/follow/%d/", (unsigned long)userId, state];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKUserRelationType relation = [objectDict[@"relation"] integerValue];
@@ -1819,9 +1819,9 @@
         if (success) {
             success(relation);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1852,7 +1852,7 @@
     [paraDict setObject:@(offset) forKey:@"offset"];
     [paraDict setObject:@(count) forKey:@"count"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
         
         NSMutableArray *userArray = [NSMutableArray array];
@@ -1864,9 +1864,9 @@
         if (success) {
             success(userArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1897,7 +1897,7 @@
     [paraDict setObject:@(offset) forKey:@"offset"];
     [paraDict setObject:@(count) forKey:@"count"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
         
         NSMutableArray *userArray = [NSMutableArray array];
@@ -1909,9 +1909,9 @@
         if (success) {
             success(userArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -1973,7 +1973,7 @@
         dataParameters = @{@"image":imageData};
     }
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict dataParameters:dataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict dataParameters:dataParameters success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         NSString *session = objectDict[@"session"];
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
@@ -1983,9 +1983,9 @@
         if (success) {
             success(user, session);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             NSString *message, *type;
             
             switch (stateCode) {
@@ -2026,7 +2026,7 @@
     [paraDict setObject:email forKey:@"email"];
     [paraDict setObject:password forKey:@"password"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         NSString *session = objectDict[@"session"];
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
@@ -2037,9 +2037,9 @@
             success(user, session);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             NSString *message;
             NSString *type;
             switch (stateCode) {
@@ -2086,7 +2086,7 @@
     //        [paraDict setObject:[Passport sharedInstance].screenName forKey:@"screen_name"];
     //    }
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         NSString *session = objectDict[@"session"];
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
@@ -2097,9 +2097,9 @@
             success(user, session);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             NSString *message;
             NSString *type;
             
@@ -2143,7 +2143,7 @@
     [paraDict setObject:uid forKey:@"user_id"];
     [paraDict setObject:nick forKey:@"nick"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         NSString *session = objectDict[@"session"];
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
@@ -2153,9 +2153,9 @@
         if (success) {
             success(user, session);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             NSString *message, *type;
             NSData *objectData = [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"];
             NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
@@ -2187,7 +2187,7 @@
     [paraDict setObject:nickname forKey:@"nickname"];
     [paraDict setObject:headimgurl forKey:@"headimgurl"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         NSString *session = objectDict[@"session"];
         GKUser *user = [GKUser modelFromDictionary:objectDict[@"user"]];
@@ -2197,9 +2197,9 @@
         if (success) {
             success(user, session);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             NSString *message, *type;
             NSData *objectData = [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"];
             NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingAllowFragments error:nil];
@@ -2246,7 +2246,7 @@
     [paraDict setValue:@((NSInteger)[expires_in timeIntervalSince1970]) forKey:@"expires_in"];
     [paraDict setValue:access_token forKey:@"sina_token"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         GKUser *user = [GKUser modelFromDictionary:objectDict];
         //        NSLog(@"%@", responseObject);
@@ -2254,9 +2254,9 @@
             success(user);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
             //            NSLog(@"html %@", htmlString);
             //            NSDictionary *dict = [htmlString objectFromJSONString];
@@ -2303,15 +2303,15 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:@(user_id) forKey:@"user_id"];
     [paraDict setValue:sns_user_name forKey:@"sns_user_name"];
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
 //        NSInteger stateCode = operation.response.statusCode;
 //        NSLog(@"html success %lu", (long)stateCode);
         if (success) {
             success(YES);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             NSString *htmlString = [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"];
             //            NSLog(@"html %lu", stateCode);
             NSData *objectData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
@@ -2344,7 +2344,7 @@
     
     NSString *path = [NSString stringWithFormat:@"user/%ld/", (unsigned long)userId];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
 
         NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
@@ -2371,9 +2371,9 @@
         if (success) {
             success(user, entities, notes, articles);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -2400,7 +2400,7 @@
     [paraDict setObject:@(page) forKey:@"page"];
     [paraDict setObject:@(size) forKey:@"size"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         
         NSMutableArray * articles = [NSMutableArray arrayWithCapacity:0];
         NSInteger page = [[responseObject valueForKey:@"page"] integerValue];
@@ -2416,9 +2416,9 @@
             success(articles, page, count);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -2451,7 +2451,7 @@
     if (parameters)
         paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict dataParameters:dataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict dataParameters:dataParameters success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKUser *user = [GKUser modelFromDictionary:objectDict];
@@ -2459,9 +2459,9 @@
         if (success) {
             success(user);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -2483,7 +2483,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     if (parameters)
         paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict  success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKUser *user = [GKUser modelFromDictionary:objectDict];
@@ -2491,9 +2491,9 @@
         if (success) {
             success(user);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             NSData * resData = [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"];
             NSDictionary * messageObj = [NSJSONSerialization JSONObjectWithData:resData options:0 error:nil];
             failure(stateCode, [messageObj valueForKeyPath:@"message"]);
@@ -2513,7 +2513,7 @@
     NSString *path = @"user/email/verified/";
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
 
 //        NSLog(@"%@", objectDict);
@@ -2522,9 +2522,9 @@
             success(statecode);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             
             NSData * resData = [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"];
             NSDictionary * messageObj = [NSJSONSerialization JSONObjectWithData:resData options:0 error:nil];
@@ -2550,7 +2550,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     if (parameters)
         paraDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict  success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         GKUser *user = [GKUser modelFromDictionary:objectDict];
@@ -2558,9 +2558,9 @@
         if (success) {
             success(user);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             NSData * resData = [[error userInfo] valueForKey:@"com.alamofire.serialization.response.error.data"];
             NSDictionary * messageObj = [NSJSONSerialization JSONObjectWithData:resData options:0 error:nil];
 //            NSLog(@"message %@", messageObj);
@@ -2587,7 +2587,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:email forKey:@"email"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         
         BOOL state = [objectDict[@"success"] boolValue];
@@ -2595,9 +2595,9 @@
         if (success) {
             success(state);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -2614,13 +2614,13 @@
 {
     NSString *path = @"logout/";
     
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         if (success) {
             success();
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -2645,7 +2645,7 @@
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:keyword forKey:@"q"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
 //        NSLog(@"%@", responseObject);
         
         NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
@@ -2671,9 +2671,9 @@
             success([NSArray arrayWithArray:entities],[NSArray arrayWithArray:articles], [NSArray arrayWithArray:users]);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode, error);
         }
     }];
@@ -2707,7 +2707,7 @@
     [paraDict setObject:@(offset) forKey:@"offset"];
     [paraDict setObject:@(count) forKey:@"count"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = [(NSDictionary *)responseObject objectForKey:@"entity_list"];
         NSDictionary *stat = [(NSDictionary *)responseObject objectForKey:@"stat"];
         NSMutableArray *entityArray = [NSMutableArray array];
@@ -2719,9 +2719,9 @@
         if (success) {
             success(stat,entityArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -2751,7 +2751,7 @@
     [paraDict setObject:@(page) forKey:@"page"];
     [paraDict setObject:@(size) forKey:@"size"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
 //        NSLog(@"%@", responseObject);
         NSMutableArray *articles = [NSMutableArray array];
         
@@ -2764,9 +2764,9 @@
             success(articles);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -2796,7 +2796,7 @@
     [paraDict setObject:@(offset) forKey:@"offset"];
     [paraDict setObject:@(count) forKey:@"count"];
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
         
         NSMutableArray *userArray = [NSMutableArray array];
@@ -2808,9 +2808,9 @@
         if (success) {
             success(userArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -2826,14 +2826,14 @@
                           failure:(void (^)(NSInteger stateCode))failure
 {
     NSString *path = @"unread/";
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;
         if (success) {
             success(objectDict);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -2914,7 +2914,7 @@
     NSString *path = @"toppopular/";
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:@(count) forKey:@"count"];
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSArray *objectArray = (NSArray *)responseObject;
         
         NSMutableArray *dataArray = [NSMutableArray array];
@@ -2933,12 +2933,12 @@
         if (success) {
             success(dataArray);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
             //            NSLog(@"%@", [[error userInfo] allKeys]);
             //            NSLog(@"url %@", [[error userInfo] valueForKey:@"NSErrorFailingURLKey"]);
             
-            NSInteger stateCode = operation.response.statusCode;
+//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];

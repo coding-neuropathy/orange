@@ -59,16 +59,20 @@
 }
 
 
-- (void)successLogWithOperation:(AFHTTPRequestOperation *)operation responseObject:(id)responseObject
+- (void)successLogWithOperation:(NSURLSessionDataTask *)operation responseObject:(id)responseObject
 {
     // NSInteger stateCode = operation.response.statusCode;
     NSString *urlString = operation.response.URL.absoluteString;
     NSLog(@"url %@", urlString);
 }
 
-- (void)failureLogWithOperation:(AFHTTPRequestOperation *)operation responseObject:(NSError *)error
+- (NSInteger)failureLogWithOperation:(NSURLSessionDataTask *)operation responseObject:(NSError *)error
 {
-    NSInteger stateCode = operation.response.statusCode;
+//    NSInteger stateCode = operation.response.statusCode;
+    NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)operation.response;
+    
+    NSInteger stateCode = httpResponse.statusCode;
+    
     NSString *urlString = [[error userInfo] valueForKey:@"NSErrorFailingURLKey"];
     if (!urlString) {
         urlString = operation.response.URL.absoluteString;
@@ -77,47 +81,56 @@
     if (stateCode == 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
     }
+    
+    return stateCode;
 }
 
-- (void)requestPath:(NSString *)path method:(NSString *)method parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+- (void)requestPath:(NSString *)path method:(NSString *)method
+                parameters:(NSDictionary *)parameters
+                success:(void (^)(NSURLSessionDataTask *operation, id responseObject))success
+                failure:(void (^)(NSInteger, NSError *error))failure
 {
 #ifndef TARGET_OS_IOS
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 #endif
-    [super requestPath:path method:method parameters:[parameters configParameters] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [super requestPath:path method:method parameters:[parameters configParameters] success:^(NSURLSessionDataTask *operation, id responseObject) {
 #ifdef DDLogInfo
         [self successLogWithOperation:operation responseObject:responseObject];
 #endif
         if (success) {
             success(operation, responseObject);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self failureLogWithOperation:operation responseObject:error];
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+         NSInteger stateCode = [self failureLogWithOperation:operation responseObject:error];
 //        NSLog(@"error %@", [[error userInfo] allKeys]);
 //        NSLog(@"error %@", [[error userInfo] objectForKey:@"NSErrorFailingURLKey"]);
 //        NSData * data = [[error userInfo] objectForKey:@"com.alamofire.serialization.response.error.data"];
 //        NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 //        NSLog(@"%@", string);
         if (failure) {
-            failure(operation, error);
+            failure(stateCode, error);
         }
     }];
 }
 
-- (void)requestPath:(NSString *)path method:(NSString *)method parameters:(NSDictionary *)parameters dataParameters:(NSDictionary *)dataParameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+- (void)requestPath:(NSString *)path method:(NSString *)method
+                parameters:(NSDictionary *)parameters
+                dataParameters:(NSDictionary *)dataParameters
+                success:(void (^)(NSURLSessionDataTask *, id))success
+                failure:(void (^)(NSInteger, NSError *))failure
 {
-    [super requestPath:path method:method parameters:[parameters configParameters] dataParameters:dataParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [super requestPath:path method:method parameters:[parameters configParameters] dataParameters:dataParameters success:^(NSURLSessionDataTask *operation, id responseObject) {
 #ifdef DDLogInfo
         [self successLogWithOperation:operation responseObject:responseObject];
 #endif
         if (success) {
             success(operation, responseObject);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self failureLogWithOperation:operation responseObject:error];
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        NSInteger stateCode = [self failureLogWithOperation:operation responseObject:error];
         
         if (failure) {
-            failure(operation, error);
+            failure(stateCode, error);
         }
     }];
 }

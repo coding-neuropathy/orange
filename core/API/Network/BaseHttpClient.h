@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 guoku.com. All rights reserved.
 //
 
-#import "AFHTTPRequestOperationManager.h"
+#import "AFHTTPSessionManager.h"
 
-@interface BaseHttpClient : AFHTTPRequestOperationManager
+@interface BaseHttpClient : AFHTTPSessionManager
 
 /**
  *  发起网络请求
@@ -22,8 +22,8 @@
 - (void)requestPath:(NSString *)path
              method:(NSString *)method
          parameters:(NSDictionary *)parameters
-            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+            success:(void (^)(NSURLSessionDataTask *operation, id responseObject))success
+            failure:(void (^)(NSURLSessionDataTask *operation, NSError *error))failure;
 
 /**
  *  发起网络请求(带二进制数据)
@@ -39,8 +39,8 @@
              method:(NSString *)method
          parameters:(NSDictionary *)parameters
      dataParameters:(NSDictionary *)dataParameters
-            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+            success:(void (^)(NSURLSessionDataTask *operation, id responseObject))success
+            failure:(void (^)(NSURLSessionDataTask *operation, NSError *error))failure;
 
 
 @end
