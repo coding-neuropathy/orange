@@ -468,7 +468,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     switch (indexPath.section) {
         case CategorySection:
             if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS)) {
-                cellsize = CGSizeMake(50. * kScreeenScale, 64. * kScreeenScale);
+                cellsize = CGSizeMake(50. * kScreeenScale, 80. * kScreeenScale);
             }
             break;
         case ArticleSection:
@@ -520,7 +520,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             break;
         case CategorySection:
             if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS))
-                edge = UIEdgeInsetsMake(0., 16., 20., 16.);
+                edge = UIEdgeInsetsMake(0., 16., 5., 16.);
             break;
         case ArticleSection:
             if (IS_IPAD) edge = UIEdgeInsetsMake(0., 20., 0., 20.);
