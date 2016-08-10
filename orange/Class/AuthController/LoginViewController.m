@@ -13,6 +13,8 @@
 #import "WXApi.h"
 #import "WeiboUser.h"
 
+#import "SignInView.h"
+
 @interface LoginViewController ()<UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIImageView *logo;
@@ -27,6 +29,9 @@
 @property (nonatomic, strong) UIButton * weixinBtn;
 @property (nonatomic, strong) UIButton * close;
 
+
+@property (strong, nonatomic) SignInView * signView;
+
 @property(nonatomic, strong) id<ALBBLoginService> loginService;
 @property(nonatomic, strong) loginSuccessCallback loginSuccessCallback;
 @property(nonatomic, strong) loginFailedCallback loginFailedCallback;
@@ -35,63 +40,85 @@
 
 @implementation LoginViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    self.view.backgroundColor = [UIColor clearColor];
-    
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
-    effectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.05];
-    effectview.frame = CGRectMake(0, 0, kScreenWidth ,kScreenHeight);
-    [self.view addSubview:effectview];
-    
-    
-
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
-    [self.view addGestureRecognizer:tap];
-    
-    _loginService = [[ALBBSDK sharedInstance]getService:@protocol(ALBBLoginService)];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWeChatCode:) name:@"WechatAuthResp" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWBCode:) name:@"WBAuthResp" object:nil];
-    
-    [self.view addSubview:self.close];
-    [self.view addSubview:self.registerButton];
-    [self.view addSubview:self.logo];
-    [self.view addSubview:self.solgen];
-    
-    
-    if(kScreenHeight >= 548)
-    {
-        self.logo.deFrameTop = 140;
-        self.solgen.deFrameTop = 180;
+- (SignInView *)signView
+{
+    if (!_signView) {
+        _signView = [[SignInView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+//        _signView.backgroundColor = UIColorFromRGB(0xffffff);
+        
     }
-    else
-    {
-        self.logo.deFrameTop = 80;
-        self.solgen.deFrameTop = 120;
-    }
-    
-
-    
-    self.emailTextField.deFrameTop = self.solgen.deFrameBottom + 20;
-    [self.view addSubview:self.emailTextField];
-    
-    self.passwordTextField.deFrameTop = self.emailTextField.deFrameBottom + 10;
-    [self.view addSubview:self.passwordTextField];
-    
-    
-    self.loginButton.center = CGPointMake(kScreenWidth/2, 20);
-    self.loginButton.deFrameTop = self.passwordTextField.deFrameBottom +30;
-    [self.view addSubview:self.loginButton];
-    
-    
-    [self configSNS];
-    
-    
+    return _signView;
 }
 
+- (void)loadView
+{
+    self.view = self.signView;
+    
+    self.title = NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil);
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+//    [self.view addSubview:self.signView];
+    // Do any additional setup after loading the view.
+    
+//    self.view.backgroundColor = [UIColor clearColor];
+//    
+//    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+//    UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
+//    effectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.05];
+//    effectview.frame = CGRectMake(0, 0, kScreenWidth ,kScreenHeight);
+//    [self.view addSubview:effectview];
+//    
+//    
+//
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
+//    [self.view addGestureRecognizer:tap];
+//    
+//    _loginService = [[ALBBSDK sharedInstance]getService:@protocol(ALBBLoginService)];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWeChatCode:) name:@"WechatAuthResp" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWBCode:) name:@"WBAuthResp" object:nil];
+//    
+//    [self.view addSubview:self.close];
+//    [self.view addSubview:self.registerButton];
+//    [self.view addSubview:self.logo];
+//    [self.view addSubview:self.solgen];
+//    
+//    
+//    if(kScreenHeight >= 548)
+//    {
+//        self.logo.deFrameTop = 140;
+//        self.solgen.deFrameTop = 180;
+//    }
+//    else
+//    {
+//        self.logo.deFrameTop = 80;
+//        self.solgen.deFrameTop = 120;
+//    }
+//    
+//
+//    
+//    self.emailTextField.deFrameTop = self.solgen.deFrameBottom + 20;
+//    [self.view addSubview:self.emailTextField];
+//    
+//    self.passwordTextField.deFrameTop = self.emailTextField.deFrameBottom + 10;
+//    [self.view addSubview:self.passwordTextField];
+//    
+//    
+//    self.loginButton.center = CGPointMake(kScreenWidth/2, 20);
+//    self.loginButton.deFrameTop = self.passwordTextField.deFrameBottom +30;
+//    [self.view addSubview:self.loginButton];
+//    
+//    
+//    [self configSNS];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.hidden = NO;
+    [super viewWillAppear:animated];
+}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -239,7 +266,7 @@
         _passwordTextField.rightViewMode = UITextFieldViewModeAlways;
         _passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         _passwordTextField.placeholder = @"";
-        _passwordTextField.font = [UIFont systemFontOfSize:14];
+        _passwordTextField.font = [UIFont systemFontOfSize:14.];
         _passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _passwordTextField.returnKeyType = UIReturnKeyGo;
         [_passwordTextField setTextColor:UIColorFromRGB(0xffffff)];

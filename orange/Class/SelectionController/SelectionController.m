@@ -33,11 +33,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-//<<<<<<< HEAD
-//        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"tabbar_icon_selection"] selectedImage:[[UIImage imageNamed:@"tabbar_icon_selection"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-//=======
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[[UIImage imageNamed:@"featured"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"featured_on"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-//>>>>>>> 4bf89302cca93e7780edc85f4164d6f91bb94f9a
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         self.index = 0;
@@ -66,12 +62,14 @@
         [attributes setValue:font forKey:NSFontAttributeName];
         [attributes setValue:UIColorFromRGB(0x757575) forKey:NSForegroundColorAttributeName];
         [_segmentedControl setTitleTextAttributes:attributes];
-        
+    
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
         [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x212121)];
         [_segmentedControl setSelectionIndicatorHeight:2];
         [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [_segmentedControl setTag:2];
+        
+//        _segmentedControl.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
     }
     return _segmentedControl;
 }
@@ -110,14 +108,13 @@
     //self.title = NSLocalizedStringFromTable(@"Selection", kLocalizedFile, nil);
     
     self.navigationItem.titleView = self.segmentedControl;
-
+    
     [self addChildViewController:self.thePageViewController];
     
     self.thePageViewController.view.frame = CGRectMake(0, 0, kScreenWidth,  kScreenHeight);
 
     [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 
-    
     [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
 }
 
@@ -135,10 +132,6 @@
     if ([viewController isKindOfClass:[SelectionViewController class]]) {
 //        return self.homeVC;
     }
-//    if ([viewController isKindOfClass:[HomeController class]]) {
-//        //return self.articleVC;
-//    }
-
     return nil;
 }
 

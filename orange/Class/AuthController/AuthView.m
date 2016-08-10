@@ -9,7 +9,7 @@
 #import "AuthView.h"
 #import "RTLabel.h"
 
-@interface AuthView () <RTLabelDelegate>
+@interface AuthView () <RTLabelDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIButton * dismissBtn;
 @property (strong, nonatomic) UIScrollView * scrollView;

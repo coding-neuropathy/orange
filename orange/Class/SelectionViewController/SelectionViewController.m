@@ -87,10 +87,6 @@ static int lastContentOffset;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.navigationController.hidesBarsOnSwipe = YES;
-//    self.navigationController.hidesBarsOnTap = NO;
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
     [self.collectionView registerClass:[SelectionCell class] forCellWithReuseIdentifier:CellIdentifier];
     
     self.collectionView.alwaysBounceVertical = YES;

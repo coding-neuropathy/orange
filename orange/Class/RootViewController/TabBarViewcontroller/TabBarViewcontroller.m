@@ -75,7 +75,6 @@
 
     self.viewControllers = @[first,second,third,fourth];
     
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -98,18 +97,19 @@
 {
     if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[NotifyController class]]) {
         if (!k_isLogin) {
-            LoginView * view = [[LoginView alloc]init];
-            [view show];
+//            LoginView * view = [[LoginView alloc]init];
+//            [view show];
+            [[OpenCenter sharedOpenCenter] openAuthPage];
             return NO;
         }
     }
-    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[UserViewController class]]) {
-        if (!k_isLogin) {
-            LoginView * view = [[LoginView alloc]init];
-            [view show];
-            return NO;
-        }
-    }
+//    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[UserViewController class]]) {
+//        if (!k_isLogin) {
+//            LoginView * view = [[LoginView alloc]init];
+//            [view show];
+//            return NO;
+//        }
+//    }
     return YES;
 }
 

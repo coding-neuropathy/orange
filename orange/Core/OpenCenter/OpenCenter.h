@@ -12,6 +12,8 @@
 
 DEFINE_SINGLETON_FOR_HEADER(OpenCenter);
 
+- (void)openAuthPage;
+
 - (void)openUser:(GKUser *)user;
 - (void)openEntity:(GKEntity *)entity;
 - (void)openEntity:(GKEntity *)entity hideButtomBar:(BOOL)hide;

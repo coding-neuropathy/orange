@@ -56,10 +56,9 @@
     self.view = self.authView;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
     /* Present 后，底层页面还隐藏。这里对屏幕截图进行效果拟补。*/
 //    UIGraphicsBeginImageContextWithOptions(CGSizeMake(kScreenWidth, kScreenHeight), YES, 1);
 //    [kAppDelegate.window.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -70,49 +69,37 @@
 //    v.image = img;
 //    [self.view addSubview:v];
 //    [self.view sendSubviewToBack:v];
-}
+//}
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if (IS_IPHONE)
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-}
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    if (IS_IPHONE)
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-}
 
-- (LoginViewController *)loginVC
-{
-    if (!_loginVC) {
-        _loginVC = [[LoginViewController alloc] init];
-        _loginVC.authController = self;
-    }
-    return _loginVC;
-}
+//- (LoginViewController *)loginVC
+//{
+//    if (!_loginVC) {
+//        _loginVC = [[LoginViewController alloc] init];
+//        _loginVC.authController = self;
+//    }
+//    return _loginVC;
+//}
+//
+//- (RegisterViewController *)registerVC
+//{
+//    if (!_registerVC) {
+//        _registerVC = [[RegisterViewController alloc] init];
+//        _registerVC.authController = self;
+//    }
+//    return _registerVC;
+//}
 
-- (RegisterViewController *)registerVC
-{
-    if (!_registerVC) {
-        _registerVC = [[RegisterViewController alloc] init];
-        _registerVC.authController = self;
-    }
-    return _registerVC;
-}
-
-- (UIPageViewController *)thePageViewController
-{
-    if (!_thePageViewController) {
-        _thePageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-        _thePageViewController.dataSource = self;
-        _thePageViewController.delegate = self;
-    }
-    return _thePageViewController;
-}
+//- (UIPageViewController *)thePageViewController
+//{
+//    if (!_thePageViewController) {
+//        _thePageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+//        _thePageViewController.dataSource = self;
+//        _thePageViewController.delegate = self;
+//    }
+//    return _thePageViewController;
+//}
 
 
 - (void)viewDidLoad
@@ -129,71 +116,102 @@
     
 }
 
-#pragma mark - <UIPageViewControllerDataSource>
-- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
+- (void)viewDidAppear:(BOOL)animated
 {
-    return 2;
+    [super viewDidAppear:animated];
+    if (IS_IPHONE)
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+- (void)viewWillAppear:(BOOL)animated
 {
-    if ([viewController isKindOfClass:[RegisterViewController class]]) {
-        return self.loginVC;
-    }
-
-    
-    return nil;
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.navigationBar.translucent = YES;
+    /* Present 后，底层页面还隐藏。这里对屏幕截图进行效果拟补。*/
+    //    UIGraphicsBeginImageContextWithOptions(CGSizeMake(kScreenWidth, kScreenHeight), YES, 1);
+    //    [kAppDelegate.window.layer renderInContext:UIGraphicsGetCurrentContext()];
+    //    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    //    UIGraphicsEndImageContext();
+    //
+    //    UIImageView * v = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    //    v.image = img;
+    //    [self.view addSubview:v];
+    //    [self.view sendSubviewToBack:v];
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+-(void)viewWillDisappear:(BOOL)animated
 {
-    
-    if ([viewController isKindOfClass:[LoginViewController class]]) {
-        return self.registerVC;
-    }
-
-
-    return nil;
+    [super viewWillDisappear:animated];
+    if (IS_IPHONE)
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
-#pragma mark - <UIPageViewControllerDelegate>
-- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
-{
-    self.index = 0;
-    if (completed) {
-        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[LoginViewController class]]) {
-            self.index = 0;
-        }
-        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[RegisterViewController class]]) {
-            self.index = 1;
-        }
-    }
-    
-}
+//#pragma mark - <UIPageViewControllerDataSource>
+//- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
+//{
+//    return 2;
+//}
+//
+//- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+//{
+//    if ([viewController isKindOfClass:[RegisterViewController class]]) {
+//        return self.loginVC;
+//    }
+//
+//    
+//    return nil;
+//}
+//
+//- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+//{
+//    
+//    if ([viewController isKindOfClass:[LoginViewController class]]) {
+//        return self.registerVC;
+//    }
+//
+//
+//    return nil;
+//}
+//
+//#pragma mark - <UIPageViewControllerDelegate>
+//- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+//{
+//    self.index = 0;
+//    if (completed) {
+//        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[LoginViewController class]]) {
+//            self.index = 0;
+//        }
+//        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[RegisterViewController class]]) {
+//            self.index = 1;
+//        }
+//    }
+//    
+//}
+//
+//- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController
+//                   spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation {
+//    
+//    UIViewController *currentViewController = [self.thePageViewController.viewControllers objectAtIndex:0];
+//    
+//    NSArray * view_controllers = [NSArray arrayWithObjects:currentViewController, nil];
+//    [self.thePageViewController setViewControllers:view_controllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+//    
+//    self.thePageViewController.doubleSided = NO;
+//    return UIPageViewControllerSpineLocationMin;
+//}
 
-- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController
-                   spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    
-    UIViewController *currentViewController = [self.thePageViewController.viewControllers objectAtIndex:0];
-    
-    NSArray * view_controllers = [NSArray arrayWithObjects:currentViewController, nil];
-    [self.thePageViewController setViewControllers:view_controllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
-    self.thePageViewController.doubleSided = NO;
-    return UIPageViewControllerSpineLocationMin;
-}
 
-
-- (void)setSelectedWithType:(NSString *)type
-{
-    if ([type isEqualToString:@"login"]) {
-        [self.thePageViewController setViewControllers:@[self.loginVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    }
-    
-    else if ([type isEqualToString:@"register"]) {
-        [self.thePageViewController setViewControllers:@[self.registerVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    }
-}
+//- (void)setSelectedWithType:(NSString *)type
+//{
+//    if ([type isEqualToString:@"login"]) {
+//        [self.thePageViewController setViewControllers:@[self.loginVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+//    }
+//    
+//    else if ([type isEqualToString:@"register"]) {
+//        [self.thePageViewController setViewControllers:@[self.registerVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+//    }
+//}
 
 #pragma mark - <AuthViewDelegate>
 - (void)tapDismissButton
@@ -203,12 +221,16 @@
 
 - (void)tapSignInButton:(id)sender
 {
+    LoginViewController * vc = [[LoginViewController alloc] init];
     
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)tapSignUpButton:(id)sender
 {
-
+    RegisterViewController * vc = [[RegisterViewController alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

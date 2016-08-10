@@ -32,15 +32,29 @@
 
 DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
-- (instancetype)init
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        _controller = [[UIApplication sharedApplication] keyWindow].rootViewController;
+//    }
+//    return self;
+//}
+
+- (UIViewController *)controller
 {
-    self = [super init];
-    if (self) {
+    if (!_controller) {
         _controller = [[UIApplication sharedApplication] keyWindow].rootViewController;
     }
-    return self;
+    return _controller;
 }
 
+- (void)openAuthPage
+{
+    AuthController * vc = [[AuthController alloc] init];
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.controller presentViewController:nav animated:YES completion:nil];
+}
 
 - (void)openAuthUser:(GKUser *)user
 {

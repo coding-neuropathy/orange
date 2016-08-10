@@ -44,34 +44,17 @@
 }
 
 
-//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-//{
-//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-//    if (self) {
-//        // Initialization code
-//        self.selectionStyle = UITableViewCellSelectionStyleNone;
-//        self.clipsToBounds = YES;
-//        self.backgroundColor = UIColorFromRGB(0xffffff);
-//        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 10)];
-//        self.H.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//        [self.contentView addSubview:self.H];
-//        
-//        _H2 = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-//        self.H2.backgroundColor = UIColorFromRGB(0xe6e6e6);
-//        [self.contentView addSubview:self.H2];
-//    }
-//    return self;
-//}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xffffff);
-        if (IS_IPHONE)
-            
+//        self.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
+        if (IS_IPHONE) {
             self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
-        
+//            self.contentView.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
+        }
     }
     return self;
 }
@@ -113,16 +96,11 @@
 {
     if (!_contentLabel) {
         _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
-//        _contentLabel.backgroundColor = [UIColor redColor];
-//        _contentLabel = [[UILabel  alloc] initWithFrame:CGRectZero];
-
         _contentLabel.font = [UIFont fontWithName:@"Helvetica" size:14.];
         _contentLabel.textColor = UIColorFromRGB(0x414243);
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         _contentLabel.numberOfLines = 3;
         _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        
-//        _contentLabel.delegate = self;
         [self.contentView addSubview:_contentLabel];
     }
     return _contentLabel;
