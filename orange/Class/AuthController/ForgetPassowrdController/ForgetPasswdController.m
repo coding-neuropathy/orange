@@ -14,6 +14,8 @@
 @property (strong, nonatomic) UITextField * emailTextField;
 @property (strong, nonatomic) UIButton * foundBtn;
 
+@property (copy, nonatomic) void (^tapForgetPasswdBtn)(NSString * email);
+
 @end
 
 @interface ForgetPasswdController ()
@@ -28,6 +30,24 @@
 {
     if (!_fpView) {
         _fpView = [[FoundPasswdView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        _fpView.tapForgetPasswdBtn = ^(NSString * email) {
+            if ([email isValidEmail]) {
+                [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+                [API forgetPasswordWithEmail:email success:^(BOOL success) {
+                    if (success) {
+                        [SVProgressHUD showImage:nil status:@"请检查邮箱，重设密码。"];
+                    }
+                } failure:^(NSInteger stateCode) {
+                    if (stateCode == 400) {
+                        [SVProgressHUD showImage:nil status:@"该邮箱不存在!"];
+                    } else {
+                        [SVProgressHUD showImage:nil status:@"请求失败!"];
+                    }
+                }];
+            } else {
+                [SVProgressHUD showImage:nil status:@"请输入注册时使用的邮箱"];
+            }
+        };
     }
     return _fpView;
 }
@@ -47,6 +67,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:@"FoundPasswdView"];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"FoundPasswdView"];
+    [super viewWillDisappear:animated];
 }
 
 /*
@@ -83,7 +115,7 @@
         _emailLabel.textAlignment   = NSTextAlignmentLeft;
         
         //        CGFloat width               = [_emailLabel.text widthWithLineWidth:0. Font:_emailLabel.font];
-        _emailLabel.frame           = CGRectMake(0., 0., 80., 20.);
+        _emailLabel.frame           = CGRectMake(0., 0., 60., 20.);
     }
     return _emailLabel;
 }
@@ -91,20 +123,21 @@
 - (UITextField *)emailTextField
 {
     if (!_emailTextField) {
-        _emailTextField                         = [[UITextField alloc] initWithFrame:CGRectZero];
-        _emailTextField.textColor               = UIColorFromRGB(0xbdbdbd);
-        _emailTextField.font                    = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
-        _emailTextField.leftView                = self.emailLabel;
-        _emailTextField.leftViewMode            = UITextFieldViewModeAlways;
-        _emailTextField.autocorrectionType      = UITextAutocorrectionTypeNo;
-        _emailTextField.autocapitalizationType  = UITextAutocapitalizationTypeNone;
-        _emailTextField.placeholder             = @"example@guoku.com";
-        _emailTextField.clearButtonMode         = UITextFieldViewModeWhileEditing;
-        _emailTextField.returnKeyType           = UIReturnKeySend;
-        _emailTextField.keyboardType            = UIKeyboardTypeEmailAddress;
-        _emailTextField.textAlignment           = NSTextAlignmentLeft;
-        _emailTextField.backgroundColor         = [UIColor clearColor];
-        _emailTextField.delegate                = self;
+        _emailTextField                             = [[UITextField alloc] initWithFrame:CGRectZero];
+        _emailTextField.textColor                   = UIColorFromRGB(0xbdbdbd);
+        _emailTextField.font                        = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _emailTextField.adjustsFontSizeToFitWidth   = YES;
+        _emailTextField.leftView                    = self.emailLabel;
+        _emailTextField.leftViewMode                = UITextFieldViewModeAlways;
+        _emailTextField.autocorrectionType          = UITextAutocorrectionTypeNo;
+        _emailTextField.autocapitalizationType      = UITextAutocapitalizationTypeNone;
+        _emailTextField.placeholder                 = @"example@guoku.com";
+        _emailTextField.clearButtonMode             = UITextFieldViewModeWhileEditing;
+        _emailTextField.returnKeyType               = UIReturnKeySend;
+        _emailTextField.keyboardType                = UIKeyboardTypeEmailAddress;
+        _emailTextField.textAlignment               = NSTextAlignmentLeft;
+        _emailTextField.backgroundColor             = [UIColor clearColor];
+        _emailTextField.delegate                    = self;
         [self addSubview:_emailTextField];
     }
     return _emailTextField;
@@ -170,6 +203,10 @@
 - (void)foundBtnAction:(id)sender
 {
     DDLogInfo(@"send send");
+//    if ()
+    if (self.tapForgetPasswdBtn) {
+        self.tapForgetPasswdBtn(self.emailTextField.text);
+    }
 }
 
 @end

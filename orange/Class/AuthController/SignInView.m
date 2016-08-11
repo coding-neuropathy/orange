@@ -70,7 +70,6 @@
         _emailTextField.backgroundColor             = [UIColor clearColor];
         _emailTextField.delegate                    = self;
         
-        
         [self addSubview:_emailTextField];
     }
     return _emailTextField;
