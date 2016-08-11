@@ -7,7 +7,7 @@
 //
 
 #import "ShareView.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 #import <MessageUI/MFMailComposeViewController.h>
 @interface ShareView () <UIGestureRecognizerDelegate,MFMailComposeViewControllerDelegate>
 @property(nonatomic, strong) UIView * mask;
@@ -529,14 +529,16 @@
 {
     if(!k_isLogin)
     {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
+//        LoginView * view = [[LoginView alloc]init];
+//        [view show];
+        [[OpenCenter sharedOpenCenter] openAuthPage];
+//        return;
+    } else {
+        ReportViewController * VC = [[ReportViewController alloc] init];
+        VC.entity = self.entity;
+        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+        [self dismiss];
     }
-    ReportViewController * VC = [[ReportViewController alloc] init];
-    VC.entity = self.entity;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-    [self dismiss];
 }
 
 

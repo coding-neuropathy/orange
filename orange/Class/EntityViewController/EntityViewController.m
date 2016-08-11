@@ -28,7 +28,7 @@
 #import "UIScrollView+Slogan.h"
 
 #import "ReportViewController.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 #import "WebViewController.h"
 #import "ShareView.h"

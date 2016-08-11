@@ -13,7 +13,7 @@
 
 @property (copy, nonatomic) void (^successBlock)();
 
-- (void)setSelectedWithType:(NSString *)type;
+//- (void)setSelectedWithType:(NSString *)type;
 
 
 @end

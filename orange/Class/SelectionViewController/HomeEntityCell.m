@@ -9,7 +9,7 @@
 #import "HomeEntityCell.h"
 #import "NSString+Helper.h"
 #import "EntityViewController.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 @interface HomeEntityCell ()
 
@@ -174,24 +174,9 @@
     CGContextStrokePath(context);
 }
 
-#pragma mark - button action
-- (void)imageViewAction:(id)sender
+#pragma mark - action
+- (void)likeAction
 {
-    [[OpenCenter sharedOpenCenter] openEntity:self.entity hideButtomBar:YES];
-}
-
-- (void)likeBtnAction:(id)sender
-{
-    if(!k_isLogin)
-    {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
-    }
-    
-
-    [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
-    
     [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeBtn.selected success:^(BOOL liked) {
         if (liked == self.likeBtn.selected) {
             //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
@@ -202,6 +187,7 @@
         if (liked) {
             //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
             self.entity.likeCount = self.entity.likeCount + 1;
+            [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
         } else {
             self.entity.likeCount = self.entity.likeCount - 1;
             
@@ -213,6 +199,25 @@
         [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
         
     }];
+}
+
+
+#pragma mark - button action
+- (void)imageViewAction:(id)sender
+{
+    [[OpenCenter sharedOpenCenter] openEntity:self.entity hideButtomBar:YES];
+}
+
+- (void)likeBtnAction:(id)sender
+{
+    if(!k_isLogin)
+    {
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            [self likeAction];
+        }];
+    } else {
+        [self likeAction];
+    }
 }
 
 #pragma mark - KVO

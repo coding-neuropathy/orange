@@ -13,6 +13,11 @@
 - (void)tapSignBtnWithEmail:(NSString *)email Password:(NSString *)password;
 - (void)tapForgetBtn:(id)sender;
 
+@optional
+- (void)tapWeiBoBtn:(id)sender;
+- (void)tapTaobaoBtn:(id)sender;
+- (void)tapWeChatBtn:(id)sender;
+
 @end
 
 @interface SignInView : UIView

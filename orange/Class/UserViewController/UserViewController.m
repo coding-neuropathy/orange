@@ -28,7 +28,7 @@
 #import "UserDigArticlesViewController.h"
 
 #import "UIScrollView+Slogan.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 #import "EmbedReaderViewController.h"
 
@@ -640,8 +640,11 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
 //    DDLogInfo(@"follow with user id %lu", user.userId);
     if (!k_isLogin) {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
+//        LoginView * view = [[LoginView alloc]init];
+//        [view show];
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            
+        }];
         return;
     } else {
         [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {

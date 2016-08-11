@@ -14,7 +14,7 @@
 #import "FanViewController.h"
 
 #import "UIScrollView+Slogan.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 @interface AuthUserViewController ()<AuthUserHeaderViewDelegate>
 
@@ -258,6 +258,22 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
 
+#pragma mark - action
+- (void)followActionWithUser:(GKUser *)user View:(AuthUserHeaderView *)view
+{
+    [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {
+        user.relation = relation;
+        DDLogInfo(@"relation %lu", (long)relation);
+        view.user = user;
+        //            [self.tableView reloadData];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"follow-success", kLocalizedFile, nil)];
+        [MobClick event:@"follow-user-success" attributes:@{@"userId":@(user.userId)}];
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"follow-failure", kLocalizedFile, nil)];
+        [MobClick event:@"follow-user-failure" attributes:@{@"userId":@(user.userId)}];
+    }];
+}
+
 #pragma mark - <UserHeaderViewDelegate>
 - (void)TapFriendBtnWithUser:(GKUser *)user
 {
@@ -279,23 +295,11 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
     DDLogInfo(@"follow with user id %lu", user.userId);
     if (!k_isLogin) {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
-        //        [[OpenCenter sharedOpenCenterController] openAccountViewControllerWithSuccessBlock:^(BOOL isLogin) {
-        //            //            [self.arrayForUser removeAllObjects];
-        //            [self.collectionView triggerPullToRefresh];
-        //        }];
-    } else {
-        [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {
-            user.relation = relation;
-            DDLogInfo(@"relation %lu", (long)relation);
-            view.user = user;
-            //            [self.tableView reloadData];
-            [SVProgressHUD showImage:nil status:@"关注成功"];
-        } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"关注失败"];
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            [self followActionWithUser:user View:view];
         }];
+    } else {
+        [self followActionWithUser:user View:view];
     }
 }
 

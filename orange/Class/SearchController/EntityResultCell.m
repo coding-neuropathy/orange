@@ -8,7 +8,7 @@
 
 #import "EntityResultCell.h"
 #import "EntityViewController.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 
 @interface EntityResultCell ()

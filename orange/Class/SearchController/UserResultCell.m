@@ -7,7 +7,7 @@
 //
 
 #import "UserResultCell.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 @interface UserResultCell ()
 
@@ -215,9 +215,11 @@
 {
     if(!k_isLogin)
     {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        
+//        LoginView * view = [[LoginView alloc]init];
+//        [view show];
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            
+        }];
         return;
     }
     [API followUserId:self.user.userId state:YES success:^(GKUserRelationType relation) {
@@ -253,8 +255,11 @@
 {
     if(!k_isLogin)
     {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
+//        LoginView * view = [[LoginView alloc]init];
+//        [view show];
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            
+        }];
         return;
     }
     [API followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {

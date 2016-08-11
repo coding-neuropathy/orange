@@ -9,7 +9,7 @@
 #import "UserSingleListCell.h"
 #import "UserViewController.h"
 #import "API.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 @interface UserSingleListCell ()
 
@@ -18,6 +18,12 @@
 @end
 
 @implementation UserSingleListCell
+
+#pragma mark - class method
++ (CGFloat)height
+{
+    return 74;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -227,22 +233,29 @@
     [self.contentView bringSubviewToFront:self.followButton];
 }
 
-#pragma mark - button action;
-- (void)followButtonAction
+#pragma mark - action
+- (void)followAction
 {
-    if(!k_isLogin)
-    {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
-    }
     [API followUserId:self.user.userId state:YES success:^(GKUserRelationType relation) {
         self.user.relation = relation;
         [self configFollowButton];
-        [SVProgressHUD showImage:nil status:@"关注成功"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"follow-success", kLocalizedFile, nil)];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"关注失败"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"follow-failure", kLocalizedFile, nil)];
     }];
+}
+
+#pragma mark - button action;
+- (void)followButtonAction
+{
+    if(!k_isLogin) {
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            [self followAction];
+        }];
+    } else {
+        [self followAction];
+    }
+
 }
 
 - (void)unfollowButtonAction
@@ -255,19 +268,17 @@
 
 - (void)unfollow
 {
-    if(!k_isLogin)
-    {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
-    }
-    [API followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
-        self.user.relation = relation;
-        [self configFollowButton];
+    if(!k_isLogin) {
+        [[OpenCenter sharedOpenCenter] openAuthPage];
+    } else {
+        [API followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
+            self.user.relation = relation;
+            [self configFollowButton];
         //[SVProgressHUD showImage:nil status:@"取关成功"];
-    } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"取消关注失败"];
-    }];
+        } failure:^(NSInteger stateCode) {
+            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"unfollow-failure", kLocalizedFile, nil)];
+        }];
+    }
 }
 
 
@@ -276,10 +287,7 @@
      [[OpenCenter sharedOpenCenter] openUser:self.user];
 }
 
-+ (CGFloat)height
-{
-    return 74;
-}
+
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];

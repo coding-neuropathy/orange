@@ -8,7 +8,7 @@
 
 #import "EntityDetailCell.h"
 #import "ImageLoadingView.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 @interface EntityDetailCell ()
 

@@ -99,7 +99,6 @@
 		4E2D6D4B1A697B82009E4A17 /* EntitySingleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D4A1A697B82009E4A17 /* EntitySingleListCell.m */; };
 		4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */; };
 		4E2D6D561A6BFD77009E4A17 /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D551A6BFD77009E4A17 /* RTLabel.m */; };
-		4E2D6D5B1A6D49F0009E4A17 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D581A6D49F0009E4A17 /* LoginView.m */; };
 		4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A23821A52EC9600037F9C /* SettingManager.m */; };
 		4E3C413B1A9FFBEB0053DB5E /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3C413A1A9FFBEB0053DB5E /* IBActionSheet.m */; };
 		4E4F27D71B6F438E003A63C5 /* ImageLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4F27D21B6F438E003A63C5 /* ImageLoadingView.m */; };
@@ -201,7 +200,6 @@
 		4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */; };
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
-		4EA0C45C1A8287780025EC2E /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C45B1A8287780025EC2E /* SignView.m */; };
 		4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */; };
 		4EB8E2281B9F398B002C7F6F /* SelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8E2271B9F398B002C7F6F /* SelectionController.m */; };
 		4EC9F7911A7928520057D736 /* FanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7901A7928520057D736 /* FanViewController.m */; };
@@ -614,8 +612,6 @@
 		4E2D6D511A6BF8E0009E4A17 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = ../../View/MessageCell.m; sourceTree = "<group>"; };
 		4E2D6D541A6BFD77009E4A17 /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
 		4E2D6D551A6BFD77009E4A17 /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
-		4E2D6D571A6D49F0009E4A17 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
-		4E2D6D581A6D49F0009E4A17 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		4E3A23811A52EC9600037F9C /* SettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingManager.h; sourceTree = "<group>"; };
 		4E3A23821A52EC9600037F9C /* SettingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingManager.m; sourceTree = "<group>"; };
 		4E3C41391A9FFBEB0053DB5E /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
@@ -790,8 +786,6 @@
 		4EA0C44C1A805CBD0025EC2E /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		4EA0C44D1A805CBD0025EC2E /* PinyinTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinyinTools.h; sourceTree = "<group>"; };
 		4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinTools.m; sourceTree = "<group>"; };
-		4EA0C45A1A8287780025EC2E /* SignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
-		4EA0C45B1A8287780025EC2E /* SignView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
 		4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4EB8E2261B9F398B002C7F6F /* SelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionController.h; sourceTree = "<group>"; };
 		4EB8E2271B9F398B002C7F6F /* SelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionController.m; sourceTree = "<group>"; };
@@ -1591,12 +1585,8 @@
 				B76676371AB8058A002F294C /* NotificationView */,
 				B79270921AB3D8E800FD7371 /* DiscoverView */,
 				B749632B1AB28A4700C340FB /* CommentView */,
-				4EA0C45A1A8287780025EC2E /* SignView.h */,
-				4EA0C45B1A8287780025EC2E /* SignView.m */,
 				8A3EAD281BD7C23400E1E447 /* EntityThreeGridCell.h */,
 				8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */,
-				4E2D6D571A6D49F0009E4A17 /* LoginView.h */,
-				4E2D6D581A6D49F0009E4A17 /* LoginView.m */,
 				4E2D6D491A697B82009E4A17 /* EntitySingleListCell.h */,
 				4E2D6D4A1A697B82009E4A17 /* EntitySingleListCell.m */,
 				4E198C451A66B86F004C59C4 /* CategoryGridItem.h */,
@@ -3436,7 +3426,6 @@
 				4E688A191BA9C2BA0006AD9B /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				2309032E1C803B1500AD26D6 /* AuthUserViewController.m in Sources */,
 				B769B1211B2ACE91004401FA /* IFTTTEasingFunction.m in Sources */,
-				4EA0C45C1A8287780025EC2E /* SignView.m in Sources */,
 				B7C079861BC5827E006B7379 /* DDFileLogger.m in Sources */,
 				4E688A011BA9C2BA0006AD9B /* JSQMessagesKeyboardController.m in Sources */,
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
@@ -3570,7 +3559,6 @@
 				4E73E67A1C19361300B604B5 /* LoginViewController.m in Sources */,
 				B769B11E1B2ACE91004401FA /* IFTTTColorAnimation.m in Sources */,
 				4E6889FB1BA9C2BA0006AD9B /* NSBundle+JSQMessages.m in Sources */,
-				4E2D6D5B1A6D49F0009E4A17 /* LoginView.m in Sources */,
 				4E6889FE1BA9C2BA0006AD9B /* UIDevice+JSQMessages.m in Sources */,
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */,

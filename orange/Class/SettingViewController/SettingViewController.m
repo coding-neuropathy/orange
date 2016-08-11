@@ -12,8 +12,8 @@
 
 #import "WXApi.h"
 #import "API.h"
-#import "LoginView.h"
-#import "AuthController.h"
+//#import "LoginView.h"
+//#import "AuthController.h"
 
 //#import "GKWebVC.h"
 #import "WebViewController.h"

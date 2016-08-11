@@ -9,7 +9,7 @@
 #import "MenuController.h"
 #import "MenuHeaderView.h"
 #import "MenuCell.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 static NSString * const CellReuseIdentifier = @"MenuCell";
 
 @interface MenuController () <UITableViewDelegate, UITableViewDataSource, MenuHeaderViewDelegate>
@@ -139,9 +139,10 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
             [self.delegate MenuController:self didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.titleArray.count inSection:0]];
         }
     } else {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
+//        LoginView * view = [[LoginView alloc]init];
+//        [view show];
+//        return;
+        [[OpenCenter sharedOpenCenter] openAuthPage];
     }
 }
 

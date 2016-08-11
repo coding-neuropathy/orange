@@ -385,17 +385,17 @@
     [self.authController dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)resignResponder
-{
-    [self.nicknameTextField resignFirstResponder];
-    [self.emailTextField resignFirstResponder];
-    [self.passwordTextField resignFirstResponder];
-}
-
-- (void)tapLoginButton
-{
-    [self.authController setSelectedWithType:@"login"];
-}
+//- (void)resignResponder
+//{
+//    [self.nicknameTextField resignFirstResponder];
+//    [self.emailTextField resignFirstResponder];
+//    [self.passwordTextField resignFirstResponder];
+//}
+//
+//- (void)tapLoginButton
+//{
+//    [self.authController setSelectedWithType:@"login"];
+//}
 
 - (void)tapRegisterButton
 {

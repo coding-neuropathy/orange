@@ -8,7 +8,7 @@
 
 #import "EntityListCell.h"
 #import "ImageLoadingView.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 @interface EntityListCell ()
 
@@ -187,8 +187,11 @@
 {
     if(!k_isLogin)
     {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
+//        LoginView * view = [[LoginView alloc]init];
+//        [view show];
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            
+        }];
         return;
     }
     

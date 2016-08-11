@@ -9,7 +9,7 @@
 #import "iPadRootViewController.h"
 #import "MenuController.h"
 #import "MainController.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 @interface iPadRootViewController () <MenuControllerDelegate>
 
@@ -114,9 +114,12 @@
             {
                 if (!k_isLogin)
                 {
-                    LoginView * view = [[LoginView alloc]init];
-                    [view show];
-                    break;
+//                    LoginView * view = [[LoginView alloc]init];
+//                    [view show];
+                    [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+                        self.mainController.selectedIndex = indexPath.row;
+                    }];
+//                    break;
                 } else {
                     self.mainController.selectedIndex = indexPath.row;
                 }

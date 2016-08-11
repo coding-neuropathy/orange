@@ -14,7 +14,7 @@
 //#import "MeViewController.h"
 #import "UserViewController.h"
 #import "SettingViewController.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 #import "GTScrollNavigationBar.h"
 
 @interface TabBarViewcontroller ()<UITabBarControllerDelegate>

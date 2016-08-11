@@ -8,7 +8,7 @@
 
 #import "EntityPreViewController.h"
 #import "EntityPreView.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 #import "WebViewController.h"
 @interface EntityPreViewController ()
@@ -61,26 +61,41 @@
     self.view = self.preView;
 }
 
+#pragma mark - action
+- (void)likeAction
+{
+    [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
+    
+    [API likeEntityWithEntityId:self.entity.entityId isLike:YES success:^(BOOL liked) {
+        self.entity.liked = liked;
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like-failure", kLocalizedFile, nil)];
+    }];
+}
+
 #pragma mark -
 - (NSArray <id <UIPreviewActionItem>> *)previewActionItems
 {
     UIPreviewAction *action = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
         if(!k_isLogin)
         {
-            LoginView * view = [[LoginView alloc]init];
-            [view show];
-            return;
+//            LoginView * view = [[LoginView alloc]init];
+//            [view show];
+//            return;
+//            [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            
+//            }];
+//            return;
+            [[OpenCenter sharedOpenCenter] openAuthPage];
+        } else {
+            [self likeAction];
         }
         
 //        [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
-        [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
-        
-        [API likeEntityWithEntityId:self.entity.entityId isLike:YES success:^(BOOL liked) {
-            self.entity.liked = liked;
-        } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"喜爱失败"];
-        }];
+
     }];
+    
+    
 #pragma mark --------------- 点击跳转至购买页 ---------------------
     UIPreviewAction * action2 = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"buy", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
         //code signing

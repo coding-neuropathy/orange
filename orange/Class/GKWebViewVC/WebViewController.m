@@ -15,7 +15,7 @@
 #import "EntityViewController.h"
 
 #import "ShareView.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 
 @interface WebViewController () 
 {

@@ -12,12 +12,12 @@
 
 #import "AuthView.h"
 
-@interface AuthController ()<UIPageViewControllerDataSource, UIPageViewControllerDelegate, AuthViewDelegate>
+@interface AuthController () <AuthViewDelegate>
 @property(strong,nonatomic) LoginViewController * loginVC;
 @property(strong,nonatomic) RegisterViewController * registerVC;
 
-@property (strong, nonatomic) UIPageViewController * thePageViewController;
-@property (assign, nonatomic) NSInteger index;
+//@property (strong, nonatomic) UIPageViewController * thePageViewController;
+//@property (assign, nonatomic) NSInteger index;
 
 @property (strong, nonatomic) AuthView * authView;
 

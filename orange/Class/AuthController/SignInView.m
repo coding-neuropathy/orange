@@ -7,6 +7,7 @@
 //
 
 #import "SignInView.h"
+#import "WXApi.h"
 
 @interface SignInView () <UITextFieldDelegate>
 
@@ -149,6 +150,85 @@
     return _forgetBtn;
 }
 
+
+- (UIButton *)sinaWeiboBtn
+{
+    if (!_sinaWeiboBtn) {
+        _sinaWeiboBtn                       = [UIButton buttonWithType:UIButtonTypeCustom];
+        _sinaWeiboBtn.deFrameSize           = CGSizeMake(40. * kScreeenScale, 40. * kScreeenScale);
+        _sinaWeiboBtn.layer.cornerRadius    = _sinaWeiboBtn.deFrameHeight / 2.;
+        _sinaWeiboBtn.backgroundColor       = UIColorFromRGB(0xf8f8f8);
+        
+        [_sinaWeiboBtn setImage:[UIImage imageNamed:@"login_icon_weibo.png"] forState:UIControlStateNormal];
+        [_sinaWeiboBtn addTarget:self action:@selector(weiboBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_sinaWeiboBtn];
+    }
+    return _sinaWeiboBtn;
+}
+
+- (UIButton *)taobaoBtn
+{
+    if (!_taobaoBtn) {
+        _taobaoBtn                          = [UIButton buttonWithType:UIButtonTypeCustom];
+        _taobaoBtn.deFrameSize              = CGSizeMake(40. * kScreeenScale, 40. * kScreeenScale);
+        _taobaoBtn.layer.cornerRadius       = _taobaoBtn.deFrameHeight / 2.;
+        _taobaoBtn.backgroundColor          = UIColorFromRGB(0xf8f8f8);
+        
+        [_taobaoBtn setImage:[UIImage imageNamed:@"login_icon_taobao.png"] forState:UIControlStateNormal];
+        [_taobaoBtn addTarget:self action:@selector(taobaoBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_taobaoBtn];
+    }
+    return _taobaoBtn;
+}
+
+- (UIButton *)weixinBtn
+{
+    if (!_weixinBtn) {
+        _weixinBtn                          = [UIButton buttonWithType:UIButtonTypeCustom];
+        _weixinBtn.deFrameSize              = CGSizeMake(40. * kScreeenScale, 40. * kScreeenScale);
+        _weixinBtn.layer.cornerRadius       = _weixinBtn.deFrameHeight / 2.;
+        _weixinBtn.layer.masksToBounds      = YES;
+        _weixinBtn.backgroundColor          = UIColorFromRGB(0xf8f8f8);
+        
+        [_weixinBtn setImage:[UIImage imageNamed:@"login_icon_weixin"] forState:UIControlStateNormal];
+        [_weixinBtn addTarget:self action:@selector(wechatBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_weixinBtn];
+    }
+    return _weixinBtn;
+}
+
+- (void)configSNS
+{
+    if ([WXApi isWXAppInstalled]) {
+        
+        self.taobaoBtn.center               = self.signBtn.center;
+        self.taobaoBtn.deFrameTop           = self.forgetBtn.deFrameBottom + 120.;
+        
+        self.sinaWeiboBtn.center            = self.taobaoBtn.center;
+        self.sinaWeiboBtn.deFrameRight      = self.taobaoBtn.deFrameLeft - 12.;
+        
+        self.weixinBtn.center               = self.taobaoBtn.center;
+        self.weixinBtn.deFrameLeft          = self.taobaoBtn.deFrameRight + 12.;
+        
+    } else {
+    
+        self.taobaoBtn.center               = self.forgetBtn.center;
+        self.taobaoBtn.deFrameTop           = self.forgetBtn.deFrameBottom + 120.;
+        
+        self.sinaWeiboBtn.center            = self.taobaoBtn.center;
+        self.sinaWeiboBtn.deFrameLeft       = ( kScreenWidth - (self.weixinBtn.deFrameWidth * 2 + 10) )/ 2.;
+        
+        self.taobaoBtn.deFrameLeft          = self.sinaWeiboBtn.deFrameRight + 10.;
+        
+        self.weixinBtn.hidden               = YES;
+//        self.sinaWeiboBtn.deFrameRight      = self.taobaoBtn.deFrameLeft - 10.;
+        
+    }
+}
+
 #pragma mark - layout subviews
 - (void)layoutSubviews
 {
@@ -170,6 +250,8 @@
     self.forgetBtn.frame                = CGRectMake(0., 0., 144. * kScreeenScale, 20. * kScreeenScale);
     self.forgetBtn.center               = self.signBtn.center;
     self.forgetBtn.deFrameTop           = self.signBtn.deFrameBottom + 24.;
+    
+    [self configSNS];
 }
 
 
@@ -217,6 +299,27 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(tapForgetBtn:)]) {
         [_delegate tapForgetBtn:sender];
+    }
+}
+
+- (void)weiboBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapWeiBoBtn:)]) {
+        [_delegate tapWeiBoBtn:sender];
+    }
+}
+
+- (void)taobaoBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapTaobaoBtn:)]) {
+        [_delegate tapTaobaoBtn:sender];
+    }
+}
+
+- (void)wechatBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapWeChatBtn:)]) {
+        [_delegate tapWeChatBtn:sender];
     }
 }
 

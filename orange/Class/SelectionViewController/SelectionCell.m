@@ -10,7 +10,7 @@
 #import "RTLabel.h"
 #import "API.h"
 #import "EntityViewController.h"
-#import "LoginView.h"
+//#import "LoginView.h"
 //#import "NewEntityViewController.h"
 #import "EntityViewController.h"
 #import "GKNotificationHUB.h"
