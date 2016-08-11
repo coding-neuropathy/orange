@@ -120,7 +120,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 //    self.navigationController.navigationBar.hidden = NO;'
-    [MobClick beginLogPageView:@"sign in View"];
+    [MobClick beginLogPageView:@"SignInView"];
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [super viewWillAppear:animated];
 }
@@ -128,7 +128,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleLight];
-    [MobClick endLogPageView:@"sign in View"];
+    [MobClick endLogPageView:@"SignInView"];
     [super viewWillDisappear:animated];
 }
 

@@ -554,19 +554,13 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 - (void)TapLoginBtnAction
 {
-//    LoginView * view = [[LoginView alloc] init];
-//    [view show];
-    AuthController * authVC = [[AuthController alloc] init];
-    UIViewController *top = [UIApplication sharedApplication].keyWindow.rootViewController;
-    [top presentViewController:authVC animated:YES completion: nil];
-    
-//    [self presentViewController:authVC animated:YES completion:nil];
-   
+    [[OpenCenter sharedOpenCenter] openAuthPage];
 }
 
 - (void)TapLogoutBtnAction
 {
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"确定退出登录？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"you-want-sign-out", kLocalizedFile, nil)
+                                                                    message:nil preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction * cacnel = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         //        [altervc dismissViewControllerAnimated:YES completion:nil];
@@ -591,7 +585,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         [Passport logout];
 
 //        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"退出成功"]];
-        [SVProgressHUD showSuccessWithStatus:@"退出成功"];
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"signout-success", kLocalizedFile, nil)];
         [self.tableView reloadData];
         self.footerView.is_login = k_isLogin;
     } failure:^(NSInteger stateCode) {

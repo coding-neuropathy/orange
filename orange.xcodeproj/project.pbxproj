@@ -1667,6 +1667,7 @@
 		4E1D701C1A5ADB890032719E /* SelectionViewController */ = {
 			isa = PBXGroup;
 			children = (
+				4EB8E2251B9F398B002C7F6F /* SelectionController */,
 				B7B065C91BF98C4B001AA30F /* ArticlesViewController */,
 				B7FE2A091B2817FD001C2E33 /* SelectionCell.h */,
 				B7FE2A0A1B2817FD001C2E33 /* SelectionCell.m */,
@@ -1922,7 +1923,6 @@
 				4EA58AB71C1720E6003251FB /* SearchController */,
 				8AAA2D111C04442400B27E49 /* PreViewControllers */,
 				391F5F8D1B1705A000931533 /* UIComponents */,
-				4EB8E2251B9F398B002C7F6F /* SelectionController */,
 				B76EE07C1B3D86AE009D8763 /* NotifyController */,
 				B769B1261B2ACFB3004401FA /* WelcomeViewController */,
 				4E934DA51A9AE9FB00374B05 /* GroupViewController */,
@@ -2253,7 +2253,8 @@
 				4EB8E2261B9F398B002C7F6F /* SelectionController.h */,
 				4EB8E2271B9F398B002C7F6F /* SelectionController.m */,
 			);
-			path = SelectionController;
+			name = SelectionController;
+			path = ../SelectionController;
 			sourceTree = "<group>";
 		};
 		4EC9F78D1A7928300057D736 /* FanViewController */ = {

@@ -116,7 +116,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 //    self.navigationController.navigationBar.hidden = NO;
+    [MobClick beginLogPageView:@"SignUpView"];
     [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"SignUpView"];
+    [super viewWillDisappear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated

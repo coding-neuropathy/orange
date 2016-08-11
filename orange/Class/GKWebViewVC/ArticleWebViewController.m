@@ -254,54 +254,7 @@
 }
 
 
-#pragma mark - button action
-- (void)moreButtonAction:(id)sender
-{
-    UIImage * image = [UIImage imageNamed:@"wxshare"];
-    if (self.image) {
-        image = [UIImage imageWithData:[self.image imageDataLessThan_10K]];
-    }
-    
-    
-    ShareView * view = [[ShareView alloc]initWithTitle:self.article.title SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
-    view.type = @"url";
-    view.tapRefreshButtonBlock = ^(){
-        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-    };
-    [view show];
-}
 
-- (void)commentButtonAction:(id)sender
-{
-    if(!k_isLogin)
-    {
-        LoginView * view = [[LoginView alloc] init];
-        [view show];
-        return;
-    }
-    else
-    {
-    
-        ArticleCommentController * vc = [[ArticleCommentController alloc]init];
-        vc.article = self.article;
-        vc.comment = self.comment;
-    
-        vc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
-        vc.modalPresentationStyle = UIModalPresentationFullScreen;
-    
-        [vc setCommentSuccessBlock:^(GKArticleComment *comment) {
-       
-            self.comment = comment;
-        
-            [self.webView reload];
-        
-        }];
-    
-        [vc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-
-        [self presentViewController:vc animated:YES completion:nil];
-    }
-}
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
@@ -363,48 +316,98 @@
 
 }
 
+
+#pragma mark - action
+- (void)digAction
+{
+    [API digArticleWithArticleId:self.article.articleId isDig:!self.digBtn.selected success:^(BOOL IsDig) {
+        
+        self.article.dig_count = IsDig ? ++self.article.dig_count : --self.article.dig_count;
+        self.digBtn.selected = IsDig;
+        self.article.IsDig = IsDig;
+        
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"dig-failure", kLocalizedFile, nil)];
+    }];
+}
+
+- (void)openArticleComment
+{
+    ArticleCommentController * vc = [[ArticleCommentController alloc] init];
+    vc.article = self.article;
+    vc.comment = self.comment;
+    
+    vc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+//    vc.commentSuccessBlock = ^(GKArticleComment * comment) {
+//        self.comment = comment;
+//        [self.webView reload];
+//    };
+//    [vc setCommentSuccessBlock:^(GKArticleComment *comment) {
+//        
+//        self.comment = comment;
+//        
+//        [self.webView reload];
+//        
+//    }];
+    
+    [vc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+
+#pragma mark - button action
 - (void)digBtnAction:(UIButton *)btn
 {
     
-    [MobClick event:@"article_dig" attributes:@{@"article": self.article.title} counter:(int)self.article.dig_count];
+    self.digBtn = btn;
 
     if(!k_isLogin)
     {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            [self digAction];
+        }];
     }
     else
     {
-        
-        [API digArticleWithArticleId:self.article.articleId isDig:!self.digBtn.selected success:^(BOOL IsDig) {
-            
-            if (IsDig == self.digBtn.selected)
-            {
-                [SVProgressHUD showImage:nil status:@"点赞成功"];
-            }
-            self.digBtn.selected = IsDig;
-            self.article.IsDig = IsDig;
-            
-            if (IsDig)
-            {
-                self.article.dig_count += 1;
-            }
-            else
-            {
-                self.article.dig_count -= 1;
-            }
-            if (btn) {
-                btn.selected = self.article.IsDig;
-            }
-            
-        } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"点赞失败"];
-        }];
+        [self digAction];
     }
+    [MobClick event:@"article_dig" attributes:@{@"article": self.article.title} counter:(int)self.article.dig_count];
 }
 
 //#pragma mark - button action
+- (void)moreButtonAction:(id)sender
+{
+    UIImage * image = [UIImage imageNamed:@"wxshare"];
+    if (self.image) {
+        image = [UIImage imageWithData:[self.image imageDataLessThan_10K]];
+    }
+    
+    
+    ShareView * view = [[ShareView alloc]initWithTitle:self.article.title SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
+    view.type = @"url";
+    view.tapRefreshButtonBlock = ^(){
+        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    };
+    [view show];
+}
+
+- (void)commentButtonAction:(id)sender
+{
+#warning open article comment failure
+    if(!k_isLogin)
+    {
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            [self openArticleComment];
+        }];
+    }
+    else
+    {
+        [self openArticleComment];
+    }
+}
+
 - (void)backAction:(id)sender
 {
     if([self.webView canGoBack]) {
@@ -417,10 +420,10 @@
     }
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-  
-}
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+//{
+//  
+//}
 
 #pragma mark ---------- create Bottom Bar -------------
 
