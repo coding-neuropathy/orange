@@ -19,6 +19,8 @@
 @property (strong, nonatomic) UIButton      * signBtn;
 @property (strong, nonatomic) UIButton      * forgetBtn;
 
+@property (strong, nonatomic) UILabel       * infoLabel;
+
 @property (strong, nonatomic) UIButton      * sinaWeiboBtn;
 @property (strong, nonatomic) UIButton      * taobaoBtn;
 @property (strong, nonatomic) UIButton      * weixinBtn;
@@ -151,6 +153,20 @@
     return _forgetBtn;
 }
 
+- (UILabel *)infoLabel
+{
+    if (!_infoLabel) {
+        _infoLabel                          = [[UILabel alloc] initWithFrame:CGRectZero];
+        _infoLabel.deFrameSize              = CGSizeMake(24. * kScreeenScale, 24. * kScreeenScale);
+        _infoLabel.font                     = [UIFont fontWithName:@"HelveticaNeue" size:12.];
+        _infoLabel.textColor                = UIColorFromRGB(0xbdbdbd);
+        _infoLabel.textAlignment            = NSTextAlignmentCenter;
+        _infoLabel.text                     = @"or";
+        [self addSubview:_infoLabel];
+    }
+    return _infoLabel;
+}
+
 
 - (UIButton *)sinaWeiboBtn
 {
@@ -252,6 +268,9 @@
     self.forgetBtn.center               = self.signBtn.center;
     self.forgetBtn.deFrameTop           = self.signBtn.deFrameBottom + 24.;
     
+    self.infoLabel.center               = self.forgetBtn.center;
+    self.infoLabel.deFrameTop           = self.forgetBtn.deFrameBottom + 75.;
+    
     [self configSNS];
 }
 
@@ -271,6 +290,13 @@
     
     CGContextMoveToPoint(context, self.passwordTextField.deFrameLeft, self.passwordTextField.deFrameBottom);
     CGContextAddLineToPoint(context, self.passwordTextField.deFrameRight, self.passwordTextField.deFrameBottom);
+    
+    CGFloat linePosition = self.infoLabel.deFrameTop + self.infoLabel.deFrameHeight / 2.;
+    CGContextMoveToPoint(context, self.emailTextField.deFrameLeft, linePosition);
+    CGContextAddLineToPoint(context, self.infoLabel.deFrameLeft, linePosition);
+    
+    CGContextMoveToPoint(context, self.infoLabel.deFrameRight, linePosition);
+    CGContextAddLineToPoint(context, self.emailTextField.deFrameRight, linePosition);
     
     CGContextStrokePath(context);
     
