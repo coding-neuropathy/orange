@@ -24,4 +24,6 @@
 
 @property (weak, nonatomic) id<SignInViewDelegate> delegate;
 
+- (void)resignResponder;
+
 @end

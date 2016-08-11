@@ -46,7 +46,7 @@
         _emailLabel.textAlignment   = NSTextAlignmentLeft;
         
 //        CGFloat width               = [_emailLabel.text widthWithLineWidth:0. Font:_emailLabel.font];
-        _emailLabel.frame           = CGRectMake(0., 0., 80., 20.);
+        _emailLabel.frame           = CGRectMake(0., 0., 60., 20.);
     }
     return _emailLabel;
 }
@@ -54,20 +54,22 @@
 - (UITextField *)emailTextField
 {
     if (!_emailTextField) {
-        _emailTextField                         = [[UITextField alloc] initWithFrame:CGRectZero];
-        _emailTextField.textColor               = UIColorFromRGB(0xbdbdbd);
-        _emailTextField.font                    = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
-        _emailTextField.leftView                = self.emailLabel;
-        _emailTextField.leftViewMode            = UITextFieldViewModeAlways;
-        _emailTextField.autocorrectionType      = UITextAutocorrectionTypeNo;
-        _emailTextField.autocapitalizationType  = UITextAutocapitalizationTypeNone;
-        _emailTextField.placeholder             = @"example@guoku.com";
-        _emailTextField.clearButtonMode         = UITextFieldViewModeWhileEditing;
-        _emailTextField.returnKeyType           = UIReturnKeyNext;
-        _emailTextField.keyboardType            = UIKeyboardTypeEmailAddress;
-        _emailTextField.textAlignment           = NSTextAlignmentLeft;
-        _emailTextField.backgroundColor         = [UIColor clearColor];
-        _emailTextField.delegate                = self;
+        _emailTextField                             = [[UITextField alloc] initWithFrame:CGRectZero];
+        _emailTextField.textColor                   = UIColorFromRGB(0xbdbdbd);
+        _emailTextField.font                        = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _emailTextField.adjustsFontSizeToFitWidth   = YES;
+        _emailTextField.leftView                    = self.emailLabel;
+        _emailTextField.leftViewMode                = UITextFieldViewModeAlways;
+        _emailTextField.autocorrectionType          = UITextAutocorrectionTypeNo;
+        _emailTextField.autocapitalizationType      = UITextAutocapitalizationTypeNone;
+        _emailTextField.placeholder                 = @"example@guoku.com";
+        _emailTextField.clearButtonMode             = UITextFieldViewModeWhileEditing;
+        _emailTextField.returnKeyType               = UIReturnKeyNext;
+        _emailTextField.keyboardType                = UIKeyboardTypeEmailAddress;
+        _emailTextField.textAlignment               = NSTextAlignmentLeft;
+        _emailTextField.backgroundColor             = [UIColor clearColor];
+        _emailTextField.delegate                    = self;
+        
         
         [self addSubview:_emailTextField];
     }
@@ -84,7 +86,7 @@
         _passwordLabel.textAlignment    = NSTextAlignmentLeft;
         
 //        CGFloat width                   = [_passwordLabel.text widthWithLineWidth:0. Font:_passwordLabel.font];
-        _passwordLabel.frame            = CGRectMake(0., 0., 80., 20.);
+        _passwordLabel.frame            = CGRectMake(0., 0., 60., 20.);
     }
     return _passwordLabel;
 }
@@ -321,6 +323,13 @@
     if (_delegate && [_delegate respondsToSelector:@selector(tapWeChatBtn:)]) {
         [_delegate tapWeChatBtn:sender];
     }
+}
+
+#pragma mark - public method
+- (void)resignResponder
+{
+    [self.emailTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
 }
 
 @end

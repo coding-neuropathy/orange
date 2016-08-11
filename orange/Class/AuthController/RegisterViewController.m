@@ -63,9 +63,9 @@
 //    
 //    
 //    
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
-//    [self.view addGestureRecognizer:tap];
-//    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder:)];
+    [self.signUpView addGestureRecognizer:tap];
+//
 //    
 //    [self.view addSubview:self.close];
 //    [self.view addSubview:self.loginButton];
@@ -474,7 +474,13 @@
 //        [MobClick event:@"sign up" label:@"failure"];
 //    }];
 //}
+#pragma mark -
+- (void)resignResponder:(id)sender
+{
+    [self.signUpView resignResponder];
+}
 
+#pragma mark -
 - (BOOL)checkInfoWithNickname:(NSString *)nickname Email:(NSString *)email Password:(NSString *)passwd
 {
     if (!nickname || nickname.length == 0) {

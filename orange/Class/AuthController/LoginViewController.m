@@ -61,8 +61,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
-//    [self.view addGestureRecognizer:tap];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder:)];
+    [self.signView addGestureRecognizer:tap];
 //
     _loginService = [[ALBBSDK sharedInstance]getService:@protocol(ALBBLoginService)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWeChatCode:) name:@"WechatAuthResp" object:nil];
@@ -95,6 +95,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - 
+- (void)resignResponder:(id)sender
+{
+    [self.signView resignResponder];
+}
 
 /*
 #pragma mark - Navigation

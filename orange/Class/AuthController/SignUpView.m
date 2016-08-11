@@ -250,6 +250,12 @@
     }
 }
 
-
+#pragma mark - 
+- (void)resignResponder
+{
+    [self.nicknameTextField resignFirstResponder];
+    [self.emailTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+}
 
 @end

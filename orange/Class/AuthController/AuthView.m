@@ -160,7 +160,7 @@
     self.signUpBtn.center = self.signInBtn.center;
     self.signUpBtn.deFrameTop = self.signInBtn.deFrameBottom + 8.;
     
-    self.agreementLabel.frame = CGRectMake(0., 0., 184. * kScreeenScale, 18.);
+    self.agreementLabel.frame = CGRectMake(0., 0., 230. * kScreeenScale, 20.);
     self.agreementLabel.center = self.signUpBtn.center;
     self.agreementLabel.deFrameBottom = self.deFrameBottom - 20.;
     
