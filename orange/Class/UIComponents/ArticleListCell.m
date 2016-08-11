@@ -100,11 +100,11 @@
 {
     [super layoutSubviews];
 
-    self.coverImageView.frame = CGRectMake(0., 0., 112*kScreenWidth/375, 84*kScreenWidth/375);
+    self.coverImageView.frame = CGRectMake(0., 0., 112 * kScreeenScale, 84 * kScreeenScale);
     self.coverImageView.deFrameTop = 16.;
     self.coverImageView.deFrameRight = self.contentView.deFrameRight - 16;
     //
-    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, 50);
+    self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112 * kScreeenScale, 50);
     self.titleLabel.deFrameTop = 16.;
     self.titleLabel.deFrameLeft = 16.;
     

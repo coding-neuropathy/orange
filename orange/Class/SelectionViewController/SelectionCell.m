@@ -18,7 +18,7 @@
 
 
 #define kWidth (kScreenWidth - 20)
-@interface SelectionCell()<RTLabelDelegate>
+@interface SelectionCell () <RTLabelDelegate>
 @property (nonatomic, strong) UIImageView *image;
 //@property (nonatomic, strong) UIImageView *tmp;
 

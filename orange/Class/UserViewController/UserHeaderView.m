@@ -429,6 +429,20 @@
 //    }
 //}
 
+- (void)layoutOrderButton
+{
+    if ([self.user.bio length] > 0) {
+        self.createOrderBtn.deFrameBottom       = self.bioBackView.deFrameTop;
+        self.reviewOrderBtn.center              = self.createOrderBtn.center;
+        self.reviewOrderBtn.deFrameLeft         = self.createOrderBtn.deFrameRight;
+    } else {
+        self.createOrderBtn.deFrameBottom       = self.deFrameBottom;
+        
+        self.reviewOrderBtn.center              = self.createOrderBtn.center;
+        self.reviewOrderBtn.deFrameLeft         = self.createOrderBtn.deFrameRight;
+    }
+}
+
 - (void)layoutiPhoneSubViews
 {
     self.avatarView.center = CGPointMake(self.frame.size.width / 2, 25+32.);
@@ -444,16 +458,7 @@
     self.bioBackView.deFrameLeft = self.deFrameLeft;
     self.bioBackView.deFrameBottom = self.deFrameBottom;
     
-    if ([self.user.bio length] > 0) {
-        self.createOrderBtn.deFrameBottom       = self.bioBackView.deFrameTop;
-        self.reviewOrderBtn.center              = self.createOrderBtn.center;
-        self.reviewOrderBtn.deFrameLeft         = self.createOrderBtn.deFrameRight;
-    } else {
-        self.createOrderBtn.deFrameBottom       = self.deFrameBottom;
-        
-        self.reviewOrderBtn.center              = self.createOrderBtn.center;
-        self.reviewOrderBtn.deFrameLeft         = self.createOrderBtn.deFrameRight;
-    }
+    if (IS_IPHONE) [self layoutOrderButton];
     
     self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
     self.fansBtn.deFrameLeft     = self.friendBtn.deFrameRight + 43;

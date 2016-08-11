@@ -35,7 +35,8 @@
 - (UIButton *)dismissBtn
 {
     if (!_dismissBtn) {
-        _dismissBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _dismissBtn                 = [UIButton buttonWithType:UIButtonTypeCustom];
+        _dismissBtn.deFrameSize     = CGSizeMake(32., 32.);
         [_dismissBtn setImage:[UIImage imageNamed:@"close-dark"] forState:UIControlStateNormal];
         
         [_dismissBtn addTarget:self action:@selector(dismissBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -48,17 +49,24 @@
 - (UIScrollView *)scrollView
 {
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
-        _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.showsHorizontalScrollIndicator = NO;
-        _scrollView.pagingEnabled = YES;
-        _scrollView.delegate = self;
-//        _scrollView.contentSize = CGSizeMake(kScreenWidth * 3, 360. * kScreeenScale);
+        _scrollView                                 = [[UIScrollView alloc] initWithFrame:CGRectZero];
+        _scrollView.deFrameSize                     = IS_IPAD   ? CGSizeMake(564., 540.)
+                                                                : CGSizeMake(kScreenWidth, 360 * kScreeenScale);
+        _scrollView.showsVerticalScrollIndicator    = NO;
+        _scrollView.showsHorizontalScrollIndicator  = NO;
+        _scrollView.pagingEnabled                   = YES;
+        _scrollView.delegate                        = self;
+        _scrollView.contentSize                     = CGSizeMake(_scrollView.deFrameWidth * 3, _scrollView.deFrameHeight);
         for (int i = 0; i < 3; i ++) {
-            UIImageView * introView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth * i, 0., kScreenWidth, 360. * kScreeenScale)];
-            introView.image = [UIImage imageNamed:[NSString stringWithFormat:@"auth-%d", i + 1]];
-            introView.contentMode = UIViewContentModeScaleAspectFill;
-            introView.layer.masksToBounds = YES;
+//            UIImageView * introView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth * i, 0., kScreenWidth, 360. * kScreeenScale)];
+            UIImageView * introView         = [[UIImageView alloc] initWithFrame:CGRectZero];
+            introView.deFrameSize           = _scrollView.deFrameSize;
+            introView.deFrameLeft           = _scrollView.deFrameWidth * i;
+            
+            introView.image                 = IS_IPAD   ? [UIImage imageNamed:[NSString stringWithFormat:@"auth-%d-iPad", i + 1]]
+                                                        : [UIImage imageNamed:[NSString stringWithFormat:@"auth-%d", i + 1]];
+            introView.contentMode           = UIViewContentModeScaleAspectFill;
+            introView.layer.masksToBounds   = YES;
             [_scrollView addSubview:introView];
         }
         
@@ -122,28 +130,29 @@
 - (RTLabel *)agreementLabel
 {
     if (!_agreementLabel) {
-        _agreementLabel             = [[RTLabel alloc] initWithFrame:CGRectZero];
-        _agreementLabel.font        = [UIFont fontWithName:@"PingFangSC-Medium" size:12.];
-        _agreementLabel.textColor   = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.54];
-        _agreementLabel.text        = @"使用果库，表示你已同意 <a href='http://www.guoku.com/agreement/'><u color='^5192ff'><font color='^5192ff'>使用协议</font></u></a>";
-        _agreementLabel.delegate    = self;
+        _agreementLabel                 = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _agreementLabel.deFrameSize     = CGSizeMake(230. * kScreeenScale, 20.);
+        _agreementLabel.font            = [UIFont fontWithName:@"PingFangSC-Medium" size:12.];
+        _agreementLabel.textColor       = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.54];
+        _agreementLabel.text            = @"使用果库，表示你已同意 <a href='http://www.guoku.com/agreement/'><u color='^5192ff'><font color='^5192ff'>使用协议</font></u></a>";
+        _agreementLabel.textAlignment   = kCTCenterTextAlignment;
+        _agreementLabel.delegate        = self;
+//        _agreementLabel
         [self addSubview:_agreementLabel];
     }
     
     return _agreementLabel;
 }
 
-
-- (void)layoutSubviews
+#pragma mark -
+- (void)layoutiPhoneSubViews
 {
-    [super layoutSubviews];
-    
     self.dismissBtn.frame = CGRectMake(0., 0., 32., 32.);
     self.dismissBtn.deFrameTop = 16.;
     self.dismissBtn.deFrameRight = self.deFrameWidth - 16.;
     
-    self.scrollView.frame = CGRectMake(0., 0., kScreenWidth, 360. * kScreeenScale);
-    self.scrollView.contentSize = CGSizeMake(kScreenWidth * 3, 360. * kScreeenScale);
+//    self.scrollView.frame = CGRectMake(0., 0., kScreenWidth, 360. * kScreeenScale);
+//    self.scrollView.contentSize = CGSizeMake(kScreenWidth * 3, 360. * kScreeenScale);
     self.scrollView.deFrameTop = 64.;
     
     self.pageCtl.bounds = CGRectMake(0.0, 0.0, 8 * (self.pageCtl.numberOfPages - 1) + 8, 8);
@@ -160,10 +169,53 @@
     self.signUpBtn.center = self.signInBtn.center;
     self.signUpBtn.deFrameTop = self.signInBtn.deFrameBottom + 8.;
     
-    self.agreementLabel.frame = CGRectMake(0., 0., 230. * kScreeenScale, 20.);
+    
+    //    self.agreementLabel.frame = CGRectMake(0., 0., 230. * kScreeenScale, 20.);
+    //    self.agreementLabel.opt
     self.agreementLabel.center = self.signUpBtn.center;
     self.agreementLabel.deFrameBottom = self.deFrameBottom - 20.;
+}
+
+- (void)layoutiPadSubviews
+{
+//    self.dismissBtn.frame = CGRectMake(0., 0., 32., 32.);
+    self.dismissBtn.deFrameTop      = 32.;
+    self.dismissBtn.deFrameRight    = self.deFrameWidth - 32.;
     
+    //    self.scrollView.frame = CGRectMake(0., 0., kScreenWidth, 360. * kScreeenScale);
+    //    self.scrollView.contentSize = CGSizeMake(kScreenWidth * 3, 360. * kScreeenScale);
+    self.scrollView.deFrameLeft     = ( kScreenWidth - self.scrollView.deFrameWidth ) / 2.;
+    self.scrollView.deFrameTop      = 140.;
+    
+    self.pageCtl.bounds = CGRectMake(0.0, 0.0, 8 * (self.pageCtl.numberOfPages - 1) + 8, 8);
+    self.pageCtl.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom + 37.);
+    
+    
+    self.signInBtn.frame = CGRectMake(0., 0., 230., 44.);
+    self.signInBtn.layer.cornerRadius = self.signInBtn.deFrameHeight / 2.;
+    self.signInBtn.deFrameTop = self.scrollView.deFrameBottom + 86.;
+    self.signInBtn.deFrameLeft = (self.deFrameWidth - self.signInBtn.deFrameWidth) / 2.;
+    
+    self.signUpBtn.frame = CGRectMake(0., 0., 230., 44.);
+    self.signUpBtn.layer.cornerRadius = self.signUpBtn.deFrameHeight / 2.;
+    self.signUpBtn.center = self.signInBtn.center;
+    self.signUpBtn.deFrameTop = self.signInBtn.deFrameBottom + 8.;
+    
+    
+    //    self.agreementLabel.frame = CGRectMake(0., 0., 230. * kScreeenScale, 20.);
+    //    self.agreementLabel.opt
+    self.agreementLabel.center = self.signUpBtn.center;
+    self.agreementLabel.deFrameBottom = self.deFrameBottom - 80.;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if (IS_IPAD)
+        [self layoutiPadSubviews];
+    else
+        [self layoutiPhoneSubViews];
 }
 
 #pragma mark - button action
