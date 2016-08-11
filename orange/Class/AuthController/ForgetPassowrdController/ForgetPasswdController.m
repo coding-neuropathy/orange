@@ -112,9 +112,16 @@
 - (UIButton *)foundBtn
 {
     if (!_foundBtn) {
-        _foundBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _foundBtn                               = [UIButton buttonWithType:UIButtonTypeCustom];
+        _foundBtn.titleLabel.font               = [UIFont fontWithName:@"PingFangSC-Medium" size:18.];
+        _foundBtn.titleLabel.textAlignment      = NSTextAlignmentCenter;
+        _foundBtn.layer.borderColor             = UIColorFromRGB(0x5192ff).CGColor;
+        _foundBtn.layer.borderWidth             = 0.5;
         
+        [_foundBtn setTitle:NSLocalizedStringFromTable(@"found-password", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_foundBtn setTitleColor:UIColorFromRGB(0x6192ff) forState:UIControlStateNormal];
         
+        [_foundBtn addTarget:self action:@selector(foundBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_foundBtn];
     }
     return _foundBtn;
@@ -129,26 +136,32 @@
     self.emailTextField.deFrameTop      = 33. + kNavigationBarHeight + kStatusBarHeight;
     self.emailTextField.deFrameLeft     = ( kScreenWidth - self.emailTextField.deFrameWidth ) / 2.;
 
+    self.foundBtn.frame                 = CGRectMake(0., 0., 290. * kScreeenScale, 44. * kScreeenScale);
+    self.foundBtn.center                = self.emailTextField.center;
+    self.foundBtn.deFrameTop            = self.emailTextField.deFrameBottom + 22.;
+    self.foundBtn.layer.cornerRadius    = self.foundBtn.deFrameHeight / 2.;
 }
 
 
 - (void)drawRect:(CGRect)rect
 {
-    //    [super drawRect:rect];
-    
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-    //    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
     
     CGContextMoveToPoint(context, self.emailTextField.deFrameLeft, self.emailTextField.deFrameBottom);
     CGContextAddLineToPoint(context, self.emailTextField.deFrameRight, self.emailTextField.deFrameBottom);
     
-    
     CGContextStrokePath(context);
     
     [super drawRect:rect];
+}
+
+#pragma mark - button action
+- (void)foundBtnAction:(id)sender
+{
+    
 }
 
 @end

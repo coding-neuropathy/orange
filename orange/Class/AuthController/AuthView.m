@@ -55,7 +55,7 @@
         _scrollView.delegate = self;
 //        _scrollView.contentSize = CGSizeMake(kScreenWidth * 3, 360. * kScreeenScale);
         for (int i = 0; i < 3; i ++) {
-            UIImageView * introView = [[UIImageView alloc] initWithFrame:CGRectMake(360 * kScreeenScale * i, 0., kScreenWidth, 360. * kScreeenScale)];
+            UIImageView * introView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth * i, 0., kScreenWidth, 360. * kScreeenScale)];
             introView.image = [UIImage imageNamed:[NSString stringWithFormat:@"auth-%d", i + 1]];
             introView.contentMode = UIViewContentModeScaleAspectFill;
             introView.layer.masksToBounds = YES;

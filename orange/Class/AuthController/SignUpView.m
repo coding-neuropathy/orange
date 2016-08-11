@@ -8,6 +8,207 @@
 
 #import "SignUpView.h"
 
+@interface SignUpView () <RTLabelDelegate>
+
+@property (strong, nonatomic) UILabel       * emailLabel;
+@property (strong, nonatomic) UITextField   * emailTextField;
+@property (strong, nonatomic) UILabel       * passwordLabel;
+@property (strong, nonatomic) UITextField   * passwordTextField;
+@property (strong, nonatomic) UILabel       * nicknameLable;
+@property (strong, nonatomic) UITextField   * nicknameTextField;
+
+@property (strong, nonatomic) UIButton      * signUpBtn;
+
+@property (strong, nonatomic) RTLabel       * agreementLabel;
+
+@end
+
 @implementation SignUpView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = UIColorFromRGB(0xffffff);
+    }
+    return self;
+}
+
+- (UILabel *)emailLabel
+{
+    if (!_emailLabel) {
+        _emailLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
+        _emailLabel.font            = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _emailLabel.text            = NSLocalizedStringFromTable(@"email", kLocalizedFile, nil);
+        _emailLabel.textColor       = UIColorFromRGB(0x212121);
+        _emailLabel.textAlignment   = NSTextAlignmentLeft;
+        
+        //        CGFloat width               = [_emailLabel.text widthWithLineWidth:0. Font:_emailLabel.font];
+        _emailLabel.frame           = CGRectMake(0., 0., 80., 20.);
+    }
+    return _emailLabel;
+}
+
+- (UITextField *)emailTextField
+{
+    if (!_emailTextField) {
+        _emailTextField                         = [[UITextField alloc] initWithFrame:CGRectZero];
+        _emailTextField.textColor               = UIColorFromRGB(0xbdbdbd);
+        _emailTextField.font                    = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _emailTextField.leftView                = self.emailLabel;
+        _emailTextField.leftViewMode            = UITextFieldViewModeAlways;
+        _emailTextField.autocorrectionType      = UITextAutocorrectionTypeNo;
+        _emailTextField.autocapitalizationType  = UITextAutocapitalizationTypeNone;
+        _emailTextField.placeholder             = @"example@guoku.com";
+        _emailTextField.clearButtonMode         = UITextFieldViewModeWhileEditing;
+        _emailTextField.returnKeyType           = UIReturnKeyNext;
+        _emailTextField.keyboardType            = UIKeyboardTypeEmailAddress;
+        _emailTextField.textAlignment           = NSTextAlignmentLeft;
+        _emailTextField.backgroundColor         = [UIColor clearColor];
+        [self addSubview:_emailTextField];
+    }
+    return _emailTextField;
+}
+
+- (UILabel *)passwordLabel
+{
+    if (!_passwordLabel) {
+        _passwordLabel                  = [[UILabel alloc] initWithFrame:CGRectZero];
+        _passwordLabel.font             = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _passwordLabel.text             = NSLocalizedStringFromTable(@"password", kLocalizedFile, nil);
+        _passwordLabel.textColor        = UIColorFromRGB(0x212121);
+        _passwordLabel.textAlignment    = NSTextAlignmentLeft;
+        
+        //        CGFloat width                   = [_passwordLabel.text widthWithLineWidth:0. Font:_passwordLabel.font];
+        _passwordLabel.frame            = CGRectMake(0., 0., 80., 20.);
+    }
+    return _passwordLabel;
+}
+
+- (UITextField *)passwordTextField
+{
+    if (!_passwordTextField) {
+        _passwordTextField                          = [[UITextField alloc] initWithFrame:CGRectZero];
+        _passwordTextField.textColor                = UIColorFromRGB(0xbdbdbd);
+        _passwordTextField.font                     = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _passwordTextField.leftView                 = self.passwordLabel;
+        _passwordTextField.leftViewMode             = UITextFieldViewModeAlways;
+        _passwordTextField.autocorrectionType       = UITextAutocorrectionTypeNo;
+        _passwordTextField.autocapitalizationType   = UITextAutocapitalizationTypeNone;
+        _passwordTextField.secureTextEntry          = YES;
+        _passwordTextField.placeholder              = @"";
+        _passwordTextField.clearButtonMode          = UITextFieldViewModeWhileEditing;
+        _passwordTextField.keyboardType             = UIKeyboardTypeAlphabet;
+        _passwordTextField.returnKeyType            = UIReturnKeyNext;
+        _passwordTextField.textAlignment            = NSTextAlignmentLeft;
+        
+        [self addSubview:_passwordTextField];
+    }
+    return _passwordTextField;
+}
+
+- (UILabel *)nicknameLable
+{
+    if (!_nicknameLable) {
+        _nicknameLable                              = [[UILabel alloc] initWithFrame:CGRectZero];
+        _nicknameLable.font                         = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _nicknameLable.text                         = NSLocalizedStringFromTable(@"nickname", kLocalizedFile, nil);
+        _nicknameLable.textColor                    = UIColorFromRGB(0x212121);
+        _nicknameLable.textAlignment                = NSTextAlignmentLeft;
+        
+        _nicknameLable.frame                        = CGRectMake(0., 0., 80., 20.);
+        
+        [self addSubview:_nicknameLable];
+    }
+    return _nicknameLable;
+}
+
+- (UITextField *)nicknameTextField
+{
+    if (!_nicknameTextField) {
+        _nicknameTextField                          = [[UITextField alloc] initWithFrame:CGRectZero];
+        _nicknameTextField.textColor                = UIColorFromRGB(0xbdbdbd);
+        _nicknameTextField.font                     = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _nicknameTextField.leftView                 = self.nicknameLable;
+        _nicknameTextField.leftViewMode             = UITextFieldViewModeAlways;
+        _nicknameTextField.autocorrectionType       = UITextAutocorrectionTypeNo;
+        _nicknameTextField.autocapitalizationType   = UITextAutocapitalizationTypeNone;
+        _nicknameTextField.placeholder              = NSLocalizedStringFromTable(@"nickname", kLocalizedFile, nil);
+        _nicknameTextField.clearButtonMode          = UITextFieldViewModeWhileEditing;
+        _nicknameTextField.keyboardType             = UIKeyboardTypeDefault;
+        _nicknameTextField.returnKeyType            = UIReturnKeyNext;
+        _nicknameTextField.textAlignment            = NSTextAlignmentLeft;
+        
+        [self addSubview:_nicknameTextField];
+    }
+    return _nicknameTextField;
+}
+
+- (UIButton *)signUpBtn
+{
+    if (!_signUpBtn) {
+        _signUpBtn                                  = [UIButton buttonWithType:UIButtonTypeCustom];
+        _signUpBtn.layer.borderColor                = UIColorFromRGB(0x5192ff).CGColor;
+        _signUpBtn.layer.borderWidth                = 0.5;
+        _signUpBtn.titleLabel.textAlignment         = NSTextAlignmentCenter;
+        _signUpBtn.titleLabel.font                  = [UIFont fontWithName:@"PingFangSC-Medium" size:18.];
+        
+        [_signUpBtn setTitle:NSLocalizedStringFromTable(@"sign up", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_signUpBtn setTitleColor:UIColorFromRGB(0x6192ff) forState:UIControlStateNormal];
+        
+        [self addSubview:_signUpBtn];
+    }
+    return _signUpBtn;
+}
+
+#pragma mark - layout subviews
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.emailTextField.frame           = CGRectMake(0., 0., 290 * kScreeenScale, 46. * kScreeenScale);
+    self.emailTextField.deFrameTop      = 33. + kNavigationBarHeight + kStatusBarHeight;
+    self.emailTextField.deFrameLeft     = ( kScreenWidth - self.emailTextField.deFrameWidth ) / 2.;
+    
+    self.passwordTextField.frame        = self.emailTextField.frame;
+    self.passwordTextField.center       = self.emailTextField.center;
+    self.passwordTextField.deFrameTop   = self.emailTextField.deFrameBottom + 1.;
+    
+    self.nicknameTextField.frame        = self.passwordTextField.frame;
+    self.nicknameTextField.center       = self.passwordTextField.center;
+    self.nicknameTextField.deFrameTop   = self.passwordTextField.deFrameBottom + 1;
+    
+    self.signUpBtn.frame                = CGRectMake(0., 0., 290. * kScreeenScale, 44 * kScreeenScale);
+    self.signUpBtn.layer.cornerRadius   = self.nicknameTextField.deFrameHeight / 2.;
+    self.signUpBtn.center               = self.nicknameTextField.center;
+    self.signUpBtn.deFrameTop           = self.nicknameTextField.deFrameBottom + 16.;
+    
+}
+
+
+- (void)drawRect:(CGRect)rect
+{
+    //    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    //    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    
+    CGContextMoveToPoint(context, self.emailTextField.deFrameLeft, self.emailTextField.deFrameBottom);
+    CGContextAddLineToPoint(context, self.emailTextField.deFrameRight, self.emailTextField.deFrameBottom);
+    
+    CGContextMoveToPoint(context, self.passwordTextField.deFrameLeft, self.passwordTextField.deFrameBottom);
+    CGContextAddLineToPoint(context, self.passwordTextField.deFrameRight, self.passwordTextField.deFrameBottom);
+    
+    CGContextMoveToPoint(context, self.nicknameTextField.deFrameLeft, self.nicknameTextField.deFrameBottom);
+    CGContextAddLineToPoint(context, self.nicknameTextField.deFrameRight, self.nicknameTextField.deFrameBottom);
+    
+    CGContextStrokePath(context);
+    
+    [super drawRect:rect];
+}
+
 
 @end

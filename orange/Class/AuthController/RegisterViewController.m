@@ -9,6 +9,8 @@
 #import "RegisterViewController.h"
 #import "WXApi.h"
 
+#import "SignUpView.h"
+
 @interface RegisterViewController ()<UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIImageView *logo;
@@ -24,57 +26,75 @@
 @property (nonatomic, strong) UIButton * weixinBtn;
 @property (nonatomic, strong) UIButton * close;
 
+@property (strong, nonatomic) SignUpView * signUpView;
+
 @end
 
 @implementation RegisterViewController
+
+#pragma mark - lazy load view
+- (SignUpView *)signUpView
+{
+    if (!_signUpView) {
+        _signUpView = [[SignUpView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+    }
+    return _signUpView;
+}
+
+- (void)loadView
+{
+    self.view = self.signUpView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor clearColor];
+    self.title = NSLocalizedStringFromTable(@"sign up", kLocalizedFile, nil);
     
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
-    effectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.05];
-    effectview.frame = CGRectMake(0, 0, kScreenWidth ,kScreenHeight);
-    [self.view addSubview:effectview];
-    
-    
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
-    [self.view addGestureRecognizer:tap];
-    
-    
-    [self.view addSubview:self.close];
-    [self.view addSubview:self.loginButton];
-    [self.view addSubview:self.logo];
-    [self.view addSubview:self.solgen];
-    
-    if(kScreenHeight >= 548)
-    {
-        self.logo.deFrameTop = 140;
-        self.solgen.deFrameTop = 180;
-    }
-    else
-    {
-        self.logo.deFrameTop = 80;
-        self.solgen.deFrameTop = 120;
-    }
-    
-    self.nicknameTextField.deFrameTop = self.solgen.deFrameBottom + 20;
-    [self.view addSubview:self.nicknameTextField];
-    
-    self.emailTextField.deFrameTop = self.nicknameTextField.deFrameBottom + 10;
-    [self.view addSubview:self.emailTextField];
-    
-    self.passwordTextField.deFrameTop = self.emailTextField.deFrameBottom + 10;
-    [self.view addSubview:self.passwordTextField];
-    
-    
-    self.registerButton.center = CGPointMake(kScreenWidth/2, 20);
-    self.registerButton.deFrameTop = self.passwordTextField.deFrameBottom +30;
-    [self.view addSubview:self.registerButton];
+//    self.view.backgroundColor = [UIColor clearColor];
+//    
+//    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+//    UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
+//    effectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.05];
+//    effectview.frame = CGRectMake(0, 0, kScreenWidth ,kScreenHeight);
+//    [self.view addSubview:effectview];
+//    
+//    
+//    
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder)];
+//    [self.view addGestureRecognizer:tap];
+//    
+//    
+//    [self.view addSubview:self.close];
+//    [self.view addSubview:self.loginButton];
+//    [self.view addSubview:self.logo];
+//    [self.view addSubview:self.solgen];
+//    
+//    if(kScreenHeight >= 548)
+//    {
+//        self.logo.deFrameTop = 140;
+//        self.solgen.deFrameTop = 180;
+//    }
+//    else
+//    {
+//        self.logo.deFrameTop = 80;
+//        self.solgen.deFrameTop = 120;
+//    }
+//    
+//    self.nicknameTextField.deFrameTop = self.solgen.deFrameBottom + 20;
+//    [self.view addSubview:self.nicknameTextField];
+//    
+//    self.emailTextField.deFrameTop = self.nicknameTextField.deFrameBottom + 10;
+//    [self.view addSubview:self.emailTextField];
+//    
+//    self.passwordTextField.deFrameTop = self.emailTextField.deFrameBottom + 10;
+//    [self.view addSubview:self.passwordTextField];
+//    
+//    
+//    self.registerButton.center = CGPointMake(kScreenWidth/2, 20);
+//    self.registerButton.deFrameTop = self.passwordTextField.deFrameBottom +30;
+//    [self.view addSubview:self.registerButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,6 +111,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.hidden = NO;
+    [super viewWillAppear:animated];
+}
 
 -(void)viewDidAppear:(BOOL)animated
 {
