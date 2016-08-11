@@ -195,9 +195,14 @@
 }
 
 #pragma mark - <UITextFieldDelegate>
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    
+    if (textField == self.passwordTextField) {
+        [self signBtnAction:nil];
+    } else {
+        [self.passwordTextField becomeFirstResponder];
+    }
+    return YES;
 }
 
 #pragma mark - button action

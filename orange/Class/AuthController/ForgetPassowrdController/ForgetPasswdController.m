@@ -8,7 +8,7 @@
 
 #import "ForgetPasswdController.h"
 
-@interface FoundPasswdView : UIView
+@interface FoundPasswdView : UIView <UITextFieldDelegate>
 
 @property (strong, nonatomic) UILabel * emailLabel;
 @property (strong, nonatomic) UITextField * emailTextField;
@@ -100,10 +100,11 @@
         _emailTextField.autocapitalizationType  = UITextAutocapitalizationTypeNone;
         _emailTextField.placeholder             = @"example@guoku.com";
         _emailTextField.clearButtonMode         = UITextFieldViewModeWhileEditing;
-        _emailTextField.returnKeyType           = UIReturnKeyNext;
+        _emailTextField.returnKeyType           = UIReturnKeySend;
         _emailTextField.keyboardType            = UIKeyboardTypeEmailAddress;
         _emailTextField.textAlignment           = NSTextAlignmentLeft;
         _emailTextField.backgroundColor         = [UIColor clearColor];
+        _emailTextField.delegate                = self;
         [self addSubview:_emailTextField];
     }
     return _emailTextField;
@@ -158,10 +159,17 @@
     [super drawRect:rect];
 }
 
+#pragma mark - <UITextFieldDelegate>
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self foundBtnAction:nil];
+    return YES;
+}
+
 #pragma mark - button action
 - (void)foundBtnAction:(id)sender
 {
-    
+    DDLogInfo(@"send send");
 }
 
 @end

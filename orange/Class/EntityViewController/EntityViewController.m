@@ -327,28 +327,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     
     [self.collectionView registerClass:[EntityHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier];
     
-    /*
-    NSMutableArray * array = [NSMutableArray array];
-    {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
-        button.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [button setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-        [button setTitle:[NSString fontAwesomeIconStringForEnum:FAEllipsisH] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(shareButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitleEdgeInsets:UIEdgeInsetsMake(8, 0, 0, 0)];
-        button.backgroundColor = [UIColor clearColor];
-        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-        [array addObject:item];
-    }
-    self.navigationItem.rightBarButtonItems = array;
-    */
-    
-//    {
-//        UIBarButtonItem * item = [[UIBarButtonItem alloc]init];
-//        item.title =NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
-//        self.navigationItem.backBarButtonItem = item;
-//    }
 
     [self refresh];
     [self refreshRandom];
@@ -378,12 +356,8 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     {
         self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
     }
-    
-//    [AVAnalytics beginLogPageView:@"EntityView"];
     [MobClick beginLogPageView:@"EntityView"];
 }
-
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -837,6 +811,100 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     }
 }
 
+#pragma mark - action
+- (void)likeAction
+{
+    [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
+        
+        self.likeButton.selected = liked;
+        self.entity.liked = liked;
+        
+        DDLogInfo(@"entity view %d", self.likeButton.selected);
+        
+        if (liked) {
+            self.entity.likeCount += 1;
+            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
+            image.frame = self.likeButton.imageView.frame;
+            [self.likeButton addSubview:image];
+            
+            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
+                image.deFrameTop = image.deFrameTop - 10;
+                image.alpha = 0.1;
+            }completion:^(BOOL finished) {
+                [image removeFromSuperview];
+            }];
+            
+            if ([Passport sharedInstance].user) {
+                [self.dataArrayForlikeUser insertObject:[Passport sharedInstance].user atIndex:0];
+            }
+            [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
+            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+        } else {
+            [self.dataArrayForlikeUser removeObject:[Passport sharedInstance].user];
+            self.entity.likeCount -= 1;
+            [MobClick event:@"unlike_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.unlikeCount];
+            [SVProgressHUD dismiss];
+        }
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:4]];
+        self.likeButton.selected = self.entity.liked;
+        //        [self.likeButton setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount]
+        //                         forState:UIControlStateNormal];
+        [self setNavBarButton:self.flag];
+    } failure:^(NSInteger stateCode) {
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like-failure", kLocalizedFile, nil)];
+    }];
+}
+
+- (void)openEntityNote
+{
+    PNoteViewController * pnvc = [[PNoteViewController alloc]init];
+    
+    pnvc.entity = self.entity;
+    pnvc.note = self.note;
+    
+    pnvc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    
+    pnvc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    
+    pnvc.successBlock = ^(GKNote *note) {
+        if (![self.dataArrayForNote containsObject:note]) {
+            [self.dataArrayForNote insertObject:note atIndex:self.dataArrayForNote.count];
+        }
+        
+        self.note = note;
+        [self.collectionView reloadData];
+        
+    };
+    
+    //设置模态视图控制器弹出效果为淡入淡出
+    [pnvc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    //    [self presentModalViewController:pnvc animated:YES];
+    [self presentViewController:pnvc animated:YES completion:nil];
+}
+
+- (void)pokeNoteWithPokeBtn:(UIButton *)pokeBtn Note:(GKNote *)note
+{
+    [API pokeWithNoteId:note.noteId state:!pokeBtn.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
+        
+        if (poked == pokeBtn.selected) {
+            
+        }
+        else if (poked) {
+            note.pokeCount = note.pokeCount + 1;
+        } else {
+            note.pokeCount = note.pokeCount - 1;
+        }
+        note.poked = poked;
+        
+        //        [AVAnalytics event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} durations:(int)note.pokeCount];
+        [MobClick event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} counter:(int)note.pokeCount];
+    } failure:^(NSInteger stateCode) {
+        //        [AVAnalytics event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
+        [MobClick event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
+    }];
+}
+
 #pragma mark - <EntityNoteCellDelegate>
 - (void)swipLeftWithContentView:(UIView *)view
 {
@@ -856,32 +924,15 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 - (void)tapPokeNoteBtn:(id)sender Note:(GKNote *)note
 {
-    if(!k_isLogin)
-    {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
-    }
-    UIButton * pokeBtn = (UIButton *)sender;
     
-    [API pokeWithNoteId:note.noteId state:!pokeBtn.selected success:^(NSString *entityId, NSUInteger noteId, BOOL poked) {
-        
-        if (poked == pokeBtn.selected) {
-            
-        }
-        else if (poked) {
-            note.pokeCount = note.pokeCount + 1;
-        } else {
-            note.pokeCount = note.pokeCount - 1;
-        }
-        note.poked = poked;
-        
-//        [AVAnalytics event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} durations:(int)note.pokeCount];
-        [MobClick event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} counter:(int)note.pokeCount];
-    } failure:^(NSInteger stateCode) {
-//        [AVAnalytics event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
-        [MobClick event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
-    }];
+    UIButton * pokeBtn = (UIButton *)sender;
+    if(!k_isLogin) {
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            [self pokeNoteWithPokeBtn:pokeBtn Note:note];
+        }];
+    } else {
+        [self pokeNoteWithPokeBtn:pokeBtn Note:note];
+    }
 }
 
 
@@ -889,130 +940,44 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 //    return NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil);
 //}
 
-
-#pragma mark - Action
-- (void)likeButtonAction
-{
-    [self likeButtonActionWithBtn:nil];
-}
+#pragma mark - Button Action
+//- (void)likeButtonAction
+//{
+//    [self likeButtonActionWithBtn:nil];
+//}
 
 - (void)likeButtonActionWithBtn:(UIButton *)btn
 {
-    if(!k_isLogin)
-    {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
+    self.likeButton = btn;
+    if (!k_isLogin) {
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            [self likeAction];
+        }];
+    } else {
+        [self likeAction];
     }
-//    [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
-    [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
-    
-    [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
-        if (liked == self.likeButton.selected) {
-            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
-            image.frame = self.likeButton.imageView.frame;
-            [self.likeButton addSubview:image];
-            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
-                image.deFrameTop = image.deFrameTop - 10;
-                image.alpha = 0.1;
-            }completion:^(BOOL finished) {
-                [image removeFromSuperview];
-            }];
-            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
-        }
-        
-        
-        self.likeButton.selected = liked;
-        self.entity.liked = liked;
-        
-        DDLogInfo(@"entity view %d", self.likeButton.selected);
-
-        
-        if (liked) {
-            self.entity.likeCount += 1;
-            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
-            image.frame = self.likeButton.imageView.frame;
-            [self.likeButton addSubview:image];
-            
-            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
-                image.deFrameTop = image.deFrameTop - 10;
-                image.alpha = 0.1;
-            }completion:^(BOOL finished) {
-                [image removeFromSuperview];
-            }];
-            
-            if ([Passport sharedInstance].user) {
-                [self.dataArrayForlikeUser insertObject:[Passport sharedInstance].user atIndex:0];
-            }
-            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
-        } else {
-            [self.dataArrayForlikeUser removeObject:[Passport sharedInstance].user];
-            
-            self.entity.likeCount -= 1;
-            
-            [MobClick event:@"unlike_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.unlikeCount];
-            
-            [SVProgressHUD dismiss];
-        }
-        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:4]];
-        if (btn){
-            btn.selected = self.entity.liked;
-            [btn setTitle:[NSString stringWithFormat:@"%ld",self.entity.likeCount] forState:UIControlStateNormal];
-        }
-        [self setNavBarButton:self.flag];
-    } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"喜爱失败"];
-    }];
 }
 
 //点击评论按钮
 - (void)noteButtonAction
 {
-    if(!k_isLogin)
-    {
-        LoginView * view = [[LoginView alloc] init];
-        [view show];
-        return;
+    if (!k_isLogin) {
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            [self openEntityNote];
+        }];
+    } else {
+        [self openEntityNote];
     }
 
 #pragma mark ------------ PNoteView ------------------------------
     
-    PNoteViewController * pnvc = [[PNoteViewController alloc]init];
-    
-    pnvc.entity = self.entity;
-    
-    pnvc.note = self.note;
-    
-    
-    
-    pnvc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
-    
-    pnvc.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    
-    pnvc.successBlock = ^(GKNote *note) {
-        if (![self.dataArrayForNote containsObject:note]) {
-            [self.dataArrayForNote insertObject:note atIndex:self.dataArrayForNote.count];
-        }
-        
-        self.note = note;
-        [self.collectionView reloadData];
-        
-    };
-    
-    //设置模态视图控制器弹出效果为淡入淡出
-    [pnvc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-//    [self presentModalViewController:pnvc animated:YES];
-    [self presentViewController:pnvc animated:YES completion:nil];
+
 }
 
 
 //点击分享按钮
 - (void)shareButtonAction
 {
-    
-    
         ShareView * view = [[ShareView alloc]initWithTitle:self.entity.entityName SubTitle:@"" Image:self.image.image URL:[NSString stringWithFormat:@"%@%@/",kGK_WeixinShareURL,self.entity.entityHash]];
         view.type = @"entity";
         view.entity = self.entity;
@@ -1095,8 +1060,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 #pragma mark - <EntityHeaderActionViewDelegate>
 - (void)tapLikeBtn:(id)sender
 {
-    self.likeButton = (UIButton *)sender;
-    [self likeButtonAction];
+    [self likeButtonActionWithBtn:sender];
 }
 
 - (void)tapPostNoteBtn:(id)sender
@@ -1115,48 +1079,8 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)tapMoreBtn:(id)sender
 {
     self.moreBtn = (UIButton *)sender;
-//    if (IS_IPHONE) {
-        [self shareButtonAction];
-//    }
-//    else
-//    {
-////        CGRect frame = self.moreBtn.frame;
-////        frame.origin.y += 610.f;
-////        frame.origin.x += 120.f;
-//        self.actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) destructiveButtonTitle:nil otherButtonTitles:@"分享到微信",@"分享到朋友圈",@"分享到新浪微博", NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil), nil];
-//        self.actionSheet.autoresizingMask = UIViewAutoresizingFlexibleTopMargin| UIViewAutoresizingFlexibleRightMargin;
-////        [self.actionSheet showFromRect:frame inView:self.navigationController.view animated:NO];
-//        [self.actionSheet showInView:self.view];
-//    }
+    [self shareButtonAction];
 }
-
-//#pragma mark - <UIActionSheetDelegate>
-//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    //    DDLogInfo(@"btn index %lu", buttonIndex);
-//    switch (buttonIndex) {
-//        case 0:
-//        {
-////            [self wxShare:0];
-//        }
-//            break;
-//        case 1:
-////            [self wxShare:1];
-//            break;
-//        case 2:
-////            [self weiboShare];
-//            break;
-//        case 3:
-//            
-//            //            [self.actionSheet dismissWithClickedButtonIndex:buttonIndex animated:NO];
-//            //            [self openReportVC];
-//            break;
-//        default:
-//            break;
-//    }
-//}
-
-
 
 
 - (void)setNavBarButton:(BOOL)flag
@@ -1185,7 +1109,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
             [button setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
-            [button addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(tapLikeBtn:) forControlEvents:UIControlEventTouchUpInside];
             [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
             button.backgroundColor = [UIColor clearColor];
             UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
@@ -1202,10 +1126,10 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 }
 
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [self.collectionView performBatchUpdates:nil completion:nil];
-}
+//- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+//{
+//    [self.collectionView performBatchUpdates:nil completion:nil];
+//}
 
 #pragma mark -
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator

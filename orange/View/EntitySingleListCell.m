@@ -280,17 +280,9 @@
     [self removeObserver];
 }
 
-#pragma mark - Action
-- (void)likeButtonAction
+#pragma mark - action
+- (void)likeAction
 {
-    if(!k_isLogin)
-    {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
-    }
-    
-
     [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
@@ -300,17 +292,31 @@
         if (liked) {
             //[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
             self.entity.likeCount = self.entity.likeCount + 1;
+            [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
+            
         } else {
             self.entity.likeCount = self.entity.likeCount - 1;
+            
+            [MobClick event:@"unlike_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
             [SVProgressHUD dismiss];
         }
         //[self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:@"喜爱失败"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like-failure", kLocalizedFile, nil)];
         
     }];
-    
-    
+}
+
+#pragma mark - Button Action
+- (void)likeButtonAction
+{
+    if (!k_isLogin) {
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            [self likeAction];
+        }];
+    } else {
+        [self likeAction];
+    }
 }
 
 - (void)buttonAction
