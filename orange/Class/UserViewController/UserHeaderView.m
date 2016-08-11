@@ -243,10 +243,11 @@
 - (UIButton *)createOrderBtn
 {
     if (!_createOrderBtn) {
-        _createOrderBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
-        NSString * titleString = [NSString stringWithFormat:@"%@ %@",
-                            [NSString fontAwesomeIconStringForEnum:FAPlusSquareO],
-                            NSLocalizedStringFromTable(@"create-order", kLocalizedFile, nil)];
+        _createOrderBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
+        _createOrderBtn.deFrameSize         = CGSizeMake(kScreenWidth / 2., 49.);
+        NSString * titleString              = [NSString stringWithFormat:@"%@ %@",
+                                                        [NSString fontAwesomeIconStringForEnum:FAPlusSquareO],
+                                                        NSLocalizedStringFromTable(@"create-order", kLocalizedFile, nil)];
         [_createOrderBtn setTitle:titleString forState:UIControlStateNormal];
 //        _createOrderBtn.titleLabel.textColor = UIColorFromRGB(0x212121);
         [_createOrderBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
@@ -263,11 +264,12 @@
 - (UIButton *)reviewOrderBtn
 {
     if (!_reviewOrderBtn) {
-        _reviewOrderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _reviewOrderBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        NSString * titleString = [NSString stringWithFormat:@"%@ %@",
-                                  [NSString fontAwesomeIconStringForEnum:FAFileTextO],
-                                  NSLocalizedStringFromTable(@"review-order", kLocalizedFile, nil)];
+        _reviewOrderBtn.deFrameSize         = CGSizeMake(kScreenWidth / 2., 49.);
+        NSString * titleString              = [NSString stringWithFormat:@"%@ %@",
+                                                        [NSString fontAwesomeIconStringForEnum:FAFileTextO],
+                                                        NSLocalizedStringFromTable(@"review-order", kLocalizedFile, nil)];
         [_reviewOrderBtn setTitle:titleString forState:UIControlStateNormal];
         [_reviewOrderBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         _reviewOrderBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];;
@@ -442,14 +444,16 @@
     self.bioBackView.deFrameLeft = self.deFrameLeft;
     self.bioBackView.deFrameBottom = self.deFrameBottom;
     
-    
-    self.createOrderBtn.frame = CGRectMake(0., 0., self.deFrameWidth / 2., 49.);
-    self.createOrderBtn.deFrameBottom = self.bioBackView.deFrameTop;
-    
-    self.reviewOrderBtn.frame = CGRectMake(0., 0., self.deFrameWidth / 2., 49.);
-    self.reviewOrderBtn.center = self.createOrderBtn.center;
-    self.reviewOrderBtn.deFrameLeft = self.createOrderBtn.deFrameRight;
-    
+    if ([self.user.bio length] > 0) {
+        self.createOrderBtn.deFrameBottom       = self.bioBackView.deFrameTop;
+        self.reviewOrderBtn.center              = self.createOrderBtn.center;
+        self.reviewOrderBtn.deFrameLeft         = self.createOrderBtn.deFrameRight;
+    } else {
+        self.createOrderBtn.deFrameBottom       = self.deFrameBottom;
+        
+        self.reviewOrderBtn.center              = self.createOrderBtn.center;
+        self.reviewOrderBtn.deFrameLeft         = self.createOrderBtn.deFrameRight;
+    }
     
     self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
     self.fansBtn.deFrameLeft     = self.friendBtn.deFrameRight + 43;

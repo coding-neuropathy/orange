@@ -190,6 +190,8 @@
  *  account page
  */
 "mail"              = "Mail";
+"forget-password"   = "Forget Password";
+"found-password"    = "Found Password";
 
 /**
  *  seller

@@ -600,6 +600,21 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     }
 }
 
+#pragma mark - action
+- (void)followActionWithUser:(GKUser *)user HeaderView:(UserHeaderView *)view
+{
+    [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {
+        user.relation = relation;
+        //            DDLogInfo(@"relation %lu", relation);
+        view.user = user;
+        [MobClick event:@"follow action" label:@"success"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"follow-success", kLocalizedFile, nil)];
+    } failure:^(NSInteger stateCode) {
+        [MobClick event:@"follow action" label:@"failure"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"follow-failure", kLocalizedFile, nil)];
+    }];
+}
+
 #pragma mark - button action
 - (void)settingButtonAction
 {
@@ -643,18 +658,20 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 //        LoginView * view = [[LoginView alloc]init];
 //        [view show];
         [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
-            
+//            [self followActionWithUser:user HeaderView:view];
+            [self.collectionView triggerPullToRefresh];
         }];
-        return;
+//        return;
     } else {
-        [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {
-            user.relation = relation;
-//            DDLogInfo(@"relation %lu", relation);
-            view.user = user;
-            [SVProgressHUD showImage:nil status:@"关注成功"];
-        } failure:^(NSInteger stateCode) {
-            [SVProgressHUD showImage:nil status:@"关注失败"];
-        }];
+        [self followActionWithUser:user HeaderView:view];
+//        [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {
+//            user.relation = relation;
+////            DDLogInfo(@"relation %lu", relation);
+//            view.user = user;
+//            [SVProgressHUD showImage:nil status:@"关注成功"];
+//        } failure:^(NSInteger stateCode) {
+//            [SVProgressHUD showImage:nil status:@"关注失败"];
+//        }];
     }
 }
 

@@ -188,6 +188,8 @@
  *  account page
  */
 "mail"              = "邮箱";
+"forget-password"   = "忘记密码";
+"found-password"    = "找回密码";
 
 /**
  *  seller

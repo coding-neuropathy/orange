@@ -189,6 +189,8 @@
  *  account page
  */
 "mail"              = "郵箱";
+"forget-password"   = "忘記密碼";
+"found-password"    = "找回密碼";
 
 /**
  *  seller

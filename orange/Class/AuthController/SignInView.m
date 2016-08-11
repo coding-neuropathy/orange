@@ -78,14 +78,14 @@
 - (UILabel *)passwordLabel
 {
     if (!_passwordLabel) {
-        _passwordLabel                  = [[UILabel alloc] initWithFrame:CGRectZero];
-        _passwordLabel.font             = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
-        _passwordLabel.text             = NSLocalizedStringFromTable(@"password", kLocalizedFile, nil);
-        _passwordLabel.textColor        = UIColorFromRGB(0x212121);
-        _passwordLabel.textAlignment    = NSTextAlignmentLeft;
-        
+        _passwordLabel                              = [[UILabel alloc] initWithFrame:CGRectZero];
+        _passwordLabel.font                         = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _passwordLabel.text                         = NSLocalizedStringFromTable(@"password", kLocalizedFile, nil);
+        _passwordLabel.textColor                    = UIColorFromRGB(0x212121);
+        _passwordLabel.textAlignment                = NSTextAlignmentLeft;
+        _passwordLabel.adjustsFontSizeToFitWidth    = YES;
 //        CGFloat width                   = [_passwordLabel.text widthWithLineWidth:0. Font:_passwordLabel.font];
-        _passwordLabel.frame            = CGRectMake(0., 0., 60., 20.);
+        _passwordLabel.frame                        = CGRectMake(0., 0., 60., 20.);
     }
     return _passwordLabel;
 }
