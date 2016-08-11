@@ -55,12 +55,13 @@
 - (void)loadView
 {
     self.view = self.signView;
-    
     self.title = NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     
 //    [self.view addSubview:self.signView];
     // Do any additional setup after loading the view.
@@ -118,13 +119,17 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBar.hidden = NO;
+//    self.navigationController.navigationBar.hidden = NO;'
+    [MobClick beginLogPageView:@"sign in View"];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [super viewWillAppear:animated];
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleLight];
+    [MobClick endLogPageView:@"sign in View"];
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -447,10 +452,10 @@
 }
 */
 
-- (void)dismiss
-{
-    [self.authController dismissViewControllerAnimated:YES completion:NULL];
-}
+//- (void)dismiss
+//{
+//    [self.authController dismissViewControllerAnimated:YES completion:NULL];
+//}
 
 - (void)resignResponder
 {
@@ -496,7 +501,7 @@
         
 //        [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
         [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
-        [self dismiss];
+//        [self dismiss];
         
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
 //        [AVAnalytics event:@"sign in" label:@"failure"];
@@ -575,7 +580,7 @@
             self.successBlock();
         }
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
-        [self dismiss];
+//        [self dismiss];
         
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         
@@ -601,30 +606,28 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    self.loginButton.enabled = YES;
-    return YES;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if ([string isEqualToString:@"\n"]) {
-        if (textField == self.emailTextField) {
-            
-            [self.passwordTextField becomeFirstResponder];
-            [_loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-            _loginButton.enabled = YES;
-        }
-        else
-        {
-            [self tapLoginButton];
-        }
-    }
-    return YES;
-   
-    
-}
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+//{
+//    self.loginButton.enabled = YES;
+//    return YES;
+//}
+//
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    if ([string isEqualToString:@"\n"]) {
+//        if (textField == self.emailTextField) {
+//            
+//            [self.passwordTextField becomeFirstResponder];
+//            [_loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+//            _loginButton.enabled = YES;
+//        }
+//        else
+//        {
+//            [self tapLoginButton];
+//        }
+//    }
+//    return YES;
+//}
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
@@ -658,7 +661,6 @@
 #pragma mark - Notification
 - (void)postWeChatCode:(NSNotification *)notification
 {
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
     SendAuthResp *resp = [notification valueForKey:@"object"];
     
@@ -673,7 +675,7 @@
             self.successBlock();
         }
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"登录成功"]];
-        [self dismiss];
+//        [self dismiss];
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         [SVProgressHUD showErrorWithStatus:message];
     }];
@@ -694,7 +696,7 @@
             WeiboUser * wb_user = (WeiboUser *)result;
             [API loginWithSinaUserId:wb_user.userID sinaToken:access_token ScreenName:wb_user.screenName success:^(GKUser *user, NSString *session) {
                 [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"登录成功"]];
-                [self dismiss];
+//                [self dismiss];
             } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
                 [SVProgressHUD showErrorWithStatus:message];
             }];
@@ -708,7 +710,47 @@
 #pragma mark - <SignInViewDelegate>
 - (void)tapSignBtnWithEmail:(NSString *)email Password:(NSString *)password
 {
-
+//    NSString *email = self.emailTextField.text;
+//    NSString *password = self.passwordTextField.text;
+    
+    if (!email || email.length == 0) {
+        [SVProgressHUD showImage:nil status:@"请输入邮箱"];
+        return;
+    }
+    
+    if (![email isValidEmail]) {
+        [SVProgressHUD showImage:nil status:@"请输入正确格式的邮箱"];
+        return;
+    }
+    
+    if (!password || password.length == 0) {
+        [SVProgressHUD showImage:nil status:@"请输入密码"];
+        return;
+    }
+    
+    [API loginWithEmail:email password:password success:^(GKUser *user, NSString *session) {
+        if (self.signInSuccessBlock) {
+            self.signInSuccessBlock(YES);
+        }
+        [MobClick event:@"sign in" label:@"success"];
+        [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
+        
+    } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+        [MobClick event:@"sign in" label:@"failure"];
+        
+        switch (stateCode) {
+            case 500:
+            {
+                [SVProgressHUD showImage:nil status:@"服务器出错!"];
+                break;
+            }
+            case 400:
+            default:
+                [SVProgressHUD showErrorWithStatus:message];
+                break;
+        }
+        
+    }];
 }
 
 - (void)tapForgetBtn:(id)sender

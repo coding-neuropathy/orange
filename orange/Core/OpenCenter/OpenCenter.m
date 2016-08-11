@@ -51,7 +51,13 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 
 - (void)openAuthPage
 {
+    [self openAuthPageWithSuccess:nil];
+}
+
+- (void)openAuthPageWithSuccess:(void (^)())success
+{
     AuthController * vc = [[AuthController alloc] init];
+    vc.successBlock = success;
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
     [self.controller presentViewController:nav animated:YES completion:nil];
 }

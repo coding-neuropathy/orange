@@ -15,4 +15,6 @@
 @property(weak,nonatomic) AuthController * authController;
 @property (nonatomic, copy) void (^successBlock)();
 
+@property (copy, nonatomic) void (^signInSuccessBlock)(BOOL finished);
+
 @end

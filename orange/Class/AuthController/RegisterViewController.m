@@ -11,7 +11,7 @@
 
 #import "SignUpView.h"
 
-@interface RegisterViewController ()<UITextFieldDelegate, UIAlertViewDelegate>
+@interface RegisterViewController ()<UITextFieldDelegate, UIAlertViewDelegate, SignUpViewDelegate>
 
 @property (nonatomic, strong) UIImageView *logo;
 @property (nonatomic, strong) UILabel *solgen;
@@ -37,6 +37,7 @@
 {
     if (!_signUpView) {
         _signUpView = [[SignUpView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+        _signUpView.delegate = self;
     }
     return _signUpView;
 }
@@ -114,7 +115,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBar.hidden = NO;
+//    self.navigationController.navigationBar.hidden = NO;
     [super viewWillAppear:animated];
 }
 
@@ -466,6 +467,20 @@
 //        [AVAnalytics event:@"sign up" label:@"failure"];
         [MobClick event:@"sign up" label:@"failure"];
     }];
+}
+
+
+#pragma mark - <SignUpViewDelegate>
+- (void)tapSignUpBtnWithNickname:(NSString *)nickname Email:(NSString *)email Passwd:(NSString *)passwd
+{
+#warning TODO signup
+
+
+}
+
+- (void)gotoAgreementWithURL:(NSURL *)url
+{
+    [[OpenCenter sharedOpenCenter] openWebWithURL:url];
 }
 
 

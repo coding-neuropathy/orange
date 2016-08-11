@@ -151,7 +151,7 @@
     [super layoutSubviews];
     
     self.emailTextField.frame           = CGRectMake(0., 0., 290 * kScreeenScale, 46. * kScreeenScale);
-    self.emailTextField.deFrameTop      = 33. + kNavigationBarHeight + kStatusBarHeight;
+    self.emailTextField.deFrameTop      = 33.;
     self.emailTextField.deFrameLeft     = ( kScreenWidth - self.emailTextField.deFrameWidth ) / 2.;
     
     self.passwordTextField.frame        = self.emailTextField.frame;

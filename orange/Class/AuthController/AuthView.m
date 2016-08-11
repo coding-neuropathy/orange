@@ -40,7 +40,7 @@
         
         [_dismissBtn addTarget:self action:@selector(dismissBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        [self addSubview:_dismissBtn];
+        [self addSubview:_dismissBtn]; 
     }
     return _dismissBtn;
 }
@@ -122,10 +122,11 @@
 - (RTLabel *)agreementLabel
 {
     if (!_agreementLabel) {
-        _agreementLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
-        _agreementLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:12.];
-        
-        
+        _agreementLabel             = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _agreementLabel.font        = [UIFont fontWithName:@"PingFangSC-Medium" size:12.];
+        _agreementLabel.textColor   = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.54];
+        _agreementLabel.text        = @"使用果库，表示你已同意 <a href='http://www.guoku.com/agreement/'><u color='^5192ff'><font color='^5192ff'>使用协议</font></u></a>";
+        _agreementLabel.delegate    = self;
         [self addSubview:_agreementLabel];
     }
     
@@ -159,6 +160,9 @@
     self.signUpBtn.center = self.signInBtn.center;
     self.signUpBtn.deFrameTop = self.signInBtn.deFrameBottom + 8.;
     
+    self.agreementLabel.frame = CGRectMake(0., 0., 184. * kScreeenScale, 18.);
+    self.agreementLabel.center = self.signUpBtn.center;
+    self.agreementLabel.deFrameBottom = self.deFrameBottom - 20.;
     
 }
 
@@ -188,8 +192,10 @@
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
 {
     DDLogInfo(@"url %@", url.absoluteString);
-    
-    
+//    if (_de)
+    if (_delegate && [_delegate respondsToSelector:@selector(gotoAgreementWithURL:)]) {
+        [_delegate gotoAgreementWithURL:url];
+    }
 }
 
 #pragma mark - <UIScrollViewDelegate>

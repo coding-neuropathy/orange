@@ -156,9 +156,25 @@
         [_signUpBtn setTitle:NSLocalizedStringFromTable(@"sign up", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_signUpBtn setTitleColor:UIColorFromRGB(0x6192ff) forState:UIControlStateNormal];
         
+        [_signUpBtn addTarget:self action:@selector(signUpBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         [self addSubview:_signUpBtn];
     }
     return _signUpBtn;
+}
+
+- (RTLabel *)agreementLabel
+{
+    if (!_agreementLabel) {
+        _agreementLabel             = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _agreementLabel.font        = [UIFont fontWithName:@"PingFangSC-Medium" size:14.];
+        _agreementLabel.textColor   = UIColorFromRGB(0x212121);
+        _agreementLabel.text        = @"使用果库，表示你已同意 <a href='http://www.guoku.com/agreement/'><u color='^5192ff'><font color='^5192ff'>使用协议</font></u></a>";
+        _agreementLabel.delegate    = self;
+        [self addSubview:_agreementLabel];
+    }
+    
+    return _agreementLabel;
 }
 
 #pragma mark - layout subviews
@@ -166,22 +182,27 @@
 {
     [super layoutSubviews];
     
-    self.emailTextField.frame           = CGRectMake(0., 0., 290 * kScreeenScale, 46. * kScreeenScale);
-    self.emailTextField.deFrameTop      = 33. + kNavigationBarHeight + kStatusBarHeight;
-    self.emailTextField.deFrameLeft     = ( kScreenWidth - self.emailTextField.deFrameWidth ) / 2.;
+    self.nicknameTextField.frame            = CGRectMake(0., 0., 290 * kScreeenScale, 46. * kScreeenScale);
+    self.nicknameTextField.deFrameTop       = 33.;
+    self.nicknameTextField.deFrameLeft      = ( kScreenWidth - self.emailTextField.deFrameWidth ) / 2.;
     
-    self.passwordTextField.frame        = self.emailTextField.frame;
-    self.passwordTextField.center       = self.emailTextField.center;
-    self.passwordTextField.deFrameTop   = self.emailTextField.deFrameBottom + 1.;
+    self.emailTextField.frame               = self.nicknameTextField.frame;
+    self.emailTextField.center              = self.nicknameTextField.center;
+    self.emailTextField.deFrameTop          = self.nicknameTextField.deFrameBottom + 1.;
     
-    self.nicknameTextField.frame        = self.passwordTextField.frame;
-    self.nicknameTextField.center       = self.passwordTextField.center;
-    self.nicknameTextField.deFrameTop   = self.passwordTextField.deFrameBottom + 1;
+    self.passwordTextField.frame            = self.emailTextField.frame;
+    self.passwordTextField.center           = self.emailTextField.center;
+    self.passwordTextField.deFrameTop       = self.emailTextField.deFrameBottom + 1;
     
-    self.signUpBtn.frame                = CGRectMake(0., 0., 290. * kScreeenScale, 44 * kScreeenScale);
-    self.signUpBtn.layer.cornerRadius   = self.nicknameTextField.deFrameHeight / 2.;
-    self.signUpBtn.center               = self.nicknameTextField.center;
-    self.signUpBtn.deFrameTop           = self.nicknameTextField.deFrameBottom + 16.;
+    self.signUpBtn.frame                    = CGRectMake(0., 0., 290. * kScreeenScale, 44 * kScreeenScale);
+    self.signUpBtn.layer.cornerRadius       = self.passwordTextField.deFrameHeight / 2.;
+    self.signUpBtn.center                   = self.passwordTextField.center;
+    self.signUpBtn.deFrameTop               = self.passwordTextField.deFrameBottom + 16.;
+    
+    
+    self.agreementLabel.frame               = CGRectMake(0., 0., 220. * kScreeenScale, 20.);
+    self.agreementLabel.center              = self.signUpBtn.center;
+    self.agreementLabel.deFrameTop          = self.signUpBtn.deFrameBottom + 24.;
     
 }
 
@@ -209,6 +230,26 @@
     
     [super drawRect:rect];
 }
+
+#pragma mark - button action
+- (void)signUpBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapSignUpBtnWithNickname:Email:Passwd:)]) {
+        [_delegate tapSignUpBtnWithNickname:self.nicknameTextField.text
+                                    Email:self.emailLabel.text
+                                    Passwd:self.passwordTextField.text];
+    }
+}
+
+#pragma mark - <RTLabelDelegate>
+- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
+{
+    DDLogInfo(@"url %@", url.absoluteString);
+    if (_delegate && [_delegate respondsToSelector:@selector(gotoAgreementWithURL:)]) {
+        [_delegate gotoAgreementWithURL:url];
+    }
+}
+
 
 
 @end

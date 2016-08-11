@@ -335,18 +335,8 @@
     
 }
 
-#pragma mark - Action
-- (void)likeButtonAction
-{    
-    if(!k_isLogin)
-    {
-        LoginView * view = [[LoginView alloc]init];
-        [view show];
-        return;
-    }
-    
-    [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
-    
+- (void)likeAction
+{
     [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
         if (liked == self.likeButton.selected) {
             UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
@@ -359,7 +349,7 @@
             }completion:^(BOOL finished) {
                 [image removeFromSuperview];
             }];
-           
+            
         }
         self.likeButton.selected = liked;
         self.entity.liked = liked;
@@ -377,16 +367,32 @@
                 [image removeFromSuperview];
             }];
             self.entity.likeCount = self.entity.likeCount + 1;
+            [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
         } else {
             self.entity.likeCount = self.entity.likeCount - 1;
             [MobClick event:@"unlike_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.unlikeCount];
             [SVProgressHUD dismiss];
         }
-
+        
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
-  
+        
     }];
+}
+
+#pragma mark - Action
+- (void)likeButtonAction
+{    
+    if(!k_isLogin)
+    {
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            [self likeAction];
+        }];
+    } else {
+        [self likeAction];
+    }
+    
+    
 }
 
 #pragma mark - button action

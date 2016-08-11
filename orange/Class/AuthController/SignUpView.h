@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SignUpViewDelegate <NSObject>
+
+- (void)tapSignUpBtnWithNickname:(NSString *)nickname
+                           Email:(NSString *)email
+                            Passwd:(NSString *)passwd;
+
+@optional
+- (void)gotoAgreementWithURL:(NSURL *)url;
+
+@end
+
 @interface SignUpView : UIView
+
+@property (weak, nonatomic) id<SignUpViewDelegate> delegate;
 
 @end

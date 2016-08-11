@@ -14,6 +14,9 @@
 - (void)tapSignInButton:(id)sender;
 - (void)tapSignUpButton:(id)sender;
 
+@optional
+- (void)gotoAgreementWithURL:(NSURL *)url;
+
 @end
 
 @interface AuthView : UIView

@@ -119,8 +119,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (IS_IPHONE)
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    if (IS_IPHONE)
+//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -143,8 +143,10 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    if (IS_IPHONE)
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
+//    if (IS_IPHONE)
+//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 //#pragma mark - <UIPageViewControllerDataSource>
@@ -222,7 +224,15 @@
 - (void)tapSignInButton:(id)sender
 {
     LoginViewController * vc = [[LoginViewController alloc] init];
-    
+    vc.signInSuccessBlock = ^(BOOL finished) {
+        if (finished) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.successBlock) {
+                    self.successBlock();
+                }
+            }];
+        }
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -231,6 +241,11 @@
     RegisterViewController * vc = [[RegisterViewController alloc] init];
     
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)gotoAgreementWithURL:(NSURL *)url
+{
+    [[OpenCenter sharedOpenCenter] openWebWithURL:url];
 }
 
 @end

@@ -6,8 +6,14 @@
 //  Copyright © 2015年 guoku.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface AuthController : UIViewController
+@interface AuthController : BaseViewController
+
+@property (copy, nonatomic) void (^successBlock)();
+
 - (void)setSelectedWithType:(NSString *)type;
+
+
 @end
