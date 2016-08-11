@@ -239,7 +239,15 @@
 - (void)tapSignUpButton:(id)sender
 {
     RegisterViewController * vc = [[RegisterViewController alloc] init];
-    
+    vc.signUpSuccessBlock = ^(BOOL finished) {
+        if (finished) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.successBlock) {
+                    self.successBlock();
+                }
+            }];
+        }
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 

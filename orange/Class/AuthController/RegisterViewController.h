@@ -10,6 +10,8 @@
 #import "AuthController.h"
 @interface RegisterViewController : UIViewController
 @property(weak,nonatomic) AuthController * authController;
+
 @property (nonatomic, copy) void (^successBlock)();
+@property (copy, nonatomic) void (^signUpSuccessBlock)(BOOL finished);
 
 @end

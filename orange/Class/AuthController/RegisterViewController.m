@@ -464,9 +464,43 @@
                 [SVProgressHUD dismiss];
                 break;
         }
-//        [AVAnalytics event:@"sign up" label:@"failure"];
         [MobClick event:@"sign up" label:@"failure"];
     }];
+}
+
+- (BOOL)checkInfoWithNickname:(NSString *)nickname Email:(NSString *)email Password:(NSString *)passwd
+{
+    if (!nickname || nickname.length == 0) {
+        [SVProgressHUD showImage:nil status:@"请输入昵称"];
+        return NO;
+    }
+    
+    if (nickname.length < 3) {
+        [SVProgressHUD showImage:nil status:@"昵称过短"];
+        return NO;
+    }
+    
+    if (!email || email.length == 0) {
+        [SVProgressHUD showImage:nil status:@"请输入邮箱"];
+        return NO;
+    }
+    
+    if (![email isValidEmail]) {
+        [SVProgressHUD showImage:nil status:@"请输入正确格式的邮箱"];
+        return NO;
+    }
+    
+    if (!passwd || passwd.length == 0) {
+        [SVProgressHUD showImage:nil status:@"请输入密码"];
+        return NO;
+    }
+    
+    if (passwd.length < 8) {
+        [SVProgressHUD showImage:nil status:@"密码至少6位"];
+        return NO;
+    }
+    
+    return YES;
 }
 
 
@@ -474,7 +508,51 @@
 - (void)tapSignUpBtnWithNickname:(NSString *)nickname Email:(NSString *)email Passwd:(NSString *)passwd
 {
 #warning TODO signup
+    if (![self checkInfoWithNickname:nickname Email:email Password:passwd])
+        return;
+    
+//    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+    [API registerWithEmail:email password:passwd nickname:nickname imageData:nil sinaUserId:[Passport sharedInstance].sinaUserID sinaToken:[Passport sharedInstance].sinaToken                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    taobaoUserId:[Passport sharedInstance].taobaoId taobaoToken:[Passport sharedInstance].taobaoToken screenName:[Passport sharedInstance].screenName success:^(GKUser *user, NSString *session) {
 
+        
+        if (self.signUpSuccessBlock) {
+            self.signUpSuccessBlock(YES);
+        }
+        // analytics
+        [MobClick event:@"sign up" label:@"success"];
+        
+//        if (self.successBlock) {
+//            self.successBlock();
+//        }
+
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"sign-up-success", kLocalizedFile, nickname)];
+    } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
+        
+        switch (stateCode) {
+            case 409:
+            {
+                if ([type isEqualToString:@"email"]) {
+                    [SVProgressHUD showImage:nil status:@"该邮箱已被占用!"];
+                } else if ([type isEqualToString:@"nickname"]) {
+                    [SVProgressHUD showImage:nil status:@"该昵称已被占用!"];
+                } else if ([type isEqualToString:@"sina_id"]) {
+                    [SVProgressHUD showImage:nil status:@"该新浪微博帐号已被占用!"];
+                }
+                break;
+            }
+                
+            case 500:
+            {
+                [SVProgressHUD showImage:nil status:@"服务器出错!"];
+                break;
+            }
+                
+            default:
+                [SVProgressHUD dismiss];
+                break;
+        }
+        [MobClick event:@"sign up" label:@"failure"];
+    }];
 
 }
 

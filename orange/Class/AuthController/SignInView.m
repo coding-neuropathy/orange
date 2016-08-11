@@ -8,7 +8,7 @@
 
 #import "SignInView.h"
 
-@interface SignInView ()
+@interface SignInView () <UITextFieldDelegate>
 
 @property (strong, nonatomic) UILabel       * emailLabel;
 @property (strong, nonatomic) UITextField   * emailTextField;
@@ -66,6 +66,8 @@
         _emailTextField.keyboardType            = UIKeyboardTypeEmailAddress;
         _emailTextField.textAlignment           = NSTextAlignmentLeft;
         _emailTextField.backgroundColor         = [UIColor clearColor];
+        _emailTextField.delegate                = self;
+        
         [self addSubview:_emailTextField];
     }
     return _emailTextField;
@@ -102,6 +104,8 @@
         _passwordTextField.keyboardType             = UIKeyboardTypeAlphabet;
         _passwordTextField.returnKeyType            = UIReturnKeyGo;
         _passwordTextField.textAlignment            = NSTextAlignmentLeft;
+        
+        _passwordTextField.delegate                 = self;
         
         [self addSubview:_passwordTextField];
     }
@@ -188,6 +192,12 @@
     CGContextStrokePath(context);
     
     [super drawRect:rect];
+}
+
+#pragma mark - <UITextFieldDelegate>
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
 }
 
 #pragma mark - button action
