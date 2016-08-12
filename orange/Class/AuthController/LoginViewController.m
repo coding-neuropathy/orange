@@ -111,59 +111,6 @@
 }
 */
 
-//- (void)dismiss
-//{
-//    [self.authController dismissViewControllerAnimated:YES completion:NULL];
-//}
-
-//- (void)resignResponder
-//{
-//    [self.emailTextField resignFirstResponder];
-//    [self.passwordTextField resignFirstResponder];
-//}
-//
-//- (void)tapRegisterButton
-//{
-//    [self.authController setSelectedWithType:@"register"];
-//}
-
-
-
-#pragma mark - sign in from sns
-//- (void)tapSinaWeiboButton
-//{
-//    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
-//    request.redirectURI = kGK_WeiboRedirectURL;
-//    request.scope = @"all";
-//    request.userInfo = @{@"SSO_From": @"LoginViewController",
-//                         @"Other_Info_1": [NSNumber numberWithInt:123],
-//                         @"Other_Info_2": @[@"obj1", @"obj2"],
-//                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
-//    [WeiboSDK sendRequest:request];
-//}
-
-//- (void)tapTaobaoButton
-//{
-//    if(![[TaeSession sharedInstance] isLogin]){
-//        __weak __typeof(&*self)weakSelf = self;
-//        _loginSuccessCallback = ^(TaeSession * session) {
-//            [weakSelf finishedBaichuanWithSession:session];
-//        };
-//        
-//        _loginFailedCallback = ^(NSError * error) {
-//            //            [self closeTaobaoView];
-//            [kAppDelegate.window makeKeyAndVisible];
-//            kAppDelegate.alertWindow.hidden = YES;
-//        };
-//        
-//        [kAppDelegate.alertWindow makeKeyAndVisible];
-//        [_loginService showLogin:kAppDelegate.alertWindow.rootViewController successCallback:_loginSuccessCallback failedCallback:_loginFailedCallback];
-//    }else{
-//        TaeSession *session=[TaeSession sharedInstance];
-//        [self finishedBaichuanWithSession:session];
-//    }
-//}
-
 - (void)finishedBaichuanWithSession:(TaeSession *)session
 {
     [Passport sharedInstance].taobaoId = [session getUser].userId;
@@ -172,13 +119,23 @@
     [API loginWithBaichuanUid:[session getUser].userId nick:[session getUser].nick  success:^(GKUser *user, NSString *session) {
 //        [kAppDelegate.window makeKeyAndVisible];
 //        kAppDelegate.alertWindow.hidden = YES;
-        if (self.signInSuccessBlock) {
-            self.signInSuccessBlock(YES);
-        }
+//        if (self.signInSuccessBlock) {
+//            self.signInSuccessBlock(YES);
+//        }
         [MobClick event:@"sign in from taobao" label:@"success"];
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
 //        [self dismiss];
-        
+        if (IS_IPAD) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.signInSuccessBlock) {
+                    self.signInSuccessBlock(YES);
+                }
+            }];
+        } else {
+            if (self.signInSuccessBlock) {
+                self.signInSuccessBlock(YES);
+            }
+        }
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         [MobClick event:@"sign in from taobao" label:@"failure"];
 //        [kAppDelegate.window makeKeyAndVisible];
@@ -188,72 +145,6 @@
     }];
 }
 
-//- (void)TapWeixinBtn:(id)sender
-//{
-//    if([WXApi isWXAppInstalled])
-//    {
-//        SendAuthReq * req = [[SendAuthReq alloc] init];
-//        req.scope = @"snsapi_userinfo";
-//        req.state = @"guoku_signin_wechat";
-//        [WXApi sendReq:req];
-//    } else {
-//        
-//    }
-//}
-
-#pragma mark - UITextFieldDelegate
-
-//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-//{
-//    self.loginButton.enabled = YES;
-//    return YES;
-//}
-//
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    if ([string isEqualToString:@"\n"]) {
-//        if (textField == self.emailTextField) {
-//            
-//            [self.passwordTextField becomeFirstResponder];
-//            [_loginButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-//            _loginButton.enabled = YES;
-//        }
-//        else
-//        {
-//            [self tapLoginButton];
-//        }
-//    }
-//    return YES;
-//}
-//
-//- (void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//    
-//}
-
-//#pragma mark - UIAlertViewDelegate
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    if (buttonIndex == 1) {
-//        NSString *email = [alertView textFieldAtIndex:0].text;
-//        if (email && email.length > 0) {
-//            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
-//            [API forgetPasswordWithEmail:email success:^(BOOL success) {
-//                if (success) {
-//                    [SVProgressHUD showImage:nil status:@"请检查邮箱，重设密码。"];
-//                }
-//            } failure:^(NSInteger stateCode) {
-//                if (stateCode == 400) {
-//                    [SVProgressHUD showImage:nil status:@"该邮箱不存在!"];
-//                } else {
-//                    [SVProgressHUD showImage:nil status:@"请求失败!"];
-//                }
-//            }];
-//        } else {
-//            [SVProgressHUD showImage:nil status:@"请输入注册时使用的邮箱"];
-//        }
-//    }
-//}
 
 #pragma mark - Notification
 - (void)postWeChatCode:(NSNotification *)notification
@@ -268,12 +159,20 @@
 //    DDLogInfo(@"user info %@", userInfo);
     
     [API loginWithWeChatWithUnionid:[userInfo valueForKey:@"unionid"] Nickname:[userInfo valueForKey:@"nickname"] HeaderImgURL:[userInfo valueForKey:@"headimgurl"] success:^(GKUser *user, NSString *session) {
-        if (self.signInSuccessBlock) {
-            self.signInSuccessBlock(YES);
-        }
         [MobClick event:@"sign in from wechat" label:@"success"];
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"登录成功"]];
 //        [self dismiss];
+        if (IS_IPAD) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.signInSuccessBlock) {
+                    self.signInSuccessBlock(YES);
+                }
+            }];
+        } else {
+            if (self.signInSuccessBlock) {
+                self.signInSuccessBlock(YES);
+            }
+        }
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         [MobClick event:@"sign in from wechat" label:@"failure"];
         [SVProgressHUD showErrorWithStatus:message];
@@ -284,22 +183,30 @@
 - (void)postWBCode:(NSNotification *)notification
 {
 //    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
-//    [SVProgressHUD show];
-//    DDLogError(@"user info %@", [notification valueForKey:@"object"]);
+    [SVProgressHUD showWithStatus:NSLocalizedStringFromTable(@"loading", kLocalizedFile, nil)];
+    
     NSDictionary * WBUserInfo = [notification valueForKey:@"object"];
     NSString * access_token = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
-    
+//    DDLogError(@"user info %@", WBUserInfo);
     [WBHttpRequest requestForUserProfile:[WBUserInfo valueForKey:@"uid"] withAccessToken:access_token andOtherProperties:nil queue:nil withCompletionHandler:^(WBHttpRequest *httpRequest, id result, NSError *error) {
 
         if (!error) {
             WeiboUser * wb_user = (WeiboUser *)result;
+//            DDLogError(@"weibo user id %@", result);
             [API loginWithSinaUserId:wb_user.userID sinaToken:access_token ScreenName:wb_user.screenName success:^(GKUser *user, NSString *session) {
-                if (self.signInSuccessBlock) {
-                    self.signInSuccessBlock(YES);
-                }
-//                [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"登录成功"]];
-//                [self dismiss];
                 [MobClick event:@"sign in from weibo" label:@"success"];
+                if (IS_IPAD) {
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        if (self.signInSuccessBlock) {
+                            self.signInSuccessBlock(YES);
+                        }
+                    }];
+                } else {
+                    if (self.signInSuccessBlock) {
+                        self.signInSuccessBlock(YES);
+                    }
+                }
+                
             } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
                 [SVProgressHUD showErrorWithStatus:message];
                 [MobClick event:@"sign in from weibo" label:@"failure"];
@@ -335,12 +242,22 @@
     }
     
     [API loginWithEmail:email password:password success:^(GKUser *user, NSString *session) {
-        if (self.signInSuccessBlock) {
-            self.signInSuccessBlock(YES);
-        }
+//        if (self.signInSuccessBlock) {
+//            self.signInSuccessBlock(YES);
+//        }
         [MobClick event:@"sign in" label:@"success"];
         [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
-        
+        if (IS_IPAD) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.signInSuccessBlock) {
+                    self.signInSuccessBlock(YES);
+                }
+            }];
+        } else {
+            if (self.signInSuccessBlock) {
+                self.signInSuccessBlock(YES);
+            }
+        }
     } failure:^(NSInteger stateCode, NSString *type, NSString *message) {
         [MobClick event:@"sign in" label:@"failure"];
         switch (stateCode) {

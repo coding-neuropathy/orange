@@ -27,7 +27,7 @@
 @property (strong, nonatomic) NSString * shareTitle;
 @property (strong, nonatomic) UIButton * moreBtn;
 
-@property (strong, nonatomic) UIApplication * app;
+//@property (strong, nonatomic) UIApplication * app;
 
 
 
@@ -52,14 +52,14 @@
     return _moreBtn;
 }
 
-#pragma mark - init view
-- (UIApplication *)app
-{
-    if (!_app) {
-        _app = [UIApplication sharedApplication];
-    }
-    return _app;
-}
+//#pragma mark - init view
+//- (UIApplication *)app
+//{
+//    if (!_app) {
+//        _app = [UIApplication sharedApplication];
+//    }
+//    return _app;
+//}
 
 - (instancetype)initWithURL:(NSURL *)url
 {

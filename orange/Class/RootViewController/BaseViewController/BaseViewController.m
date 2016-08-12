@@ -16,6 +16,14 @@
 
 @implementation BaseViewController
 
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

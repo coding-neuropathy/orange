@@ -149,6 +149,19 @@
 //        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
+#pragma mark -
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         self.authView.deFrameSize = CGSizeMake(size.width, size.height);
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
+    
+}
+
 //#pragma mark - <UIPageViewControllerDataSource>
 //- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 //{
@@ -273,11 +286,20 @@
     LoginViewController * vc = [[LoginViewController alloc] init];
     vc.signInSuccessBlock = ^(BOOL finished) {
         if (finished) {
-            [self dismissViewControllerAnimated:YES completion:^{
+            if (IS_IPHONE) {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    if (self.successBlock) {
+                        self.successBlock();
+                    }
+//                [self dismissViewWithAnimation:YES];
+                }];
+            } else {
                 if (self.successBlock) {
                     self.successBlock();
                 }
-            }];
+                [self dismissViewWithAnimation:YES];
+            }
+            [SVProgressHUD dismiss];
         }
     };
     if (IS_IPHONE)
@@ -288,7 +310,7 @@
         else {
             UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
             nav.modalPresentationStyle = UIModalPresentationFormSheet;
-            nav.preferredContentSize = CGSizeMake(540., 400.);
+            nav.preferredContentSize = CGSizeMake(375., 518.);
             [self presentViewController:nav animated:YES completion:nil];
         }
     }
@@ -303,6 +325,8 @@
                 if (self.successBlock) {
                     self.successBlock();
                 }
+                
+//                [self dismissViewWithAnimation:YES];
             }];
         }
     };
@@ -311,7 +335,7 @@
     else {
         UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
-        nav.preferredContentSize = CGSizeMake(540., 400.);
+        nav.preferredContentSize = CGSizeMake(375., 518.);
         [self presentViewController:nav animated:YES completion:nil];
     }
 }

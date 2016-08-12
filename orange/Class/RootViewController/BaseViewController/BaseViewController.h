@@ -10,4 +10,6 @@
 
 @interface BaseViewController : UIViewController
 
+@property (weak, nonatomic) UIApplication * app;
+
 @end

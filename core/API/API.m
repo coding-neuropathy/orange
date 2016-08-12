@@ -2082,9 +2082,6 @@
     [paraDict setObject:sinaUserId forKey:@"sina_id"];
     [paraDict setObject:sinaToken forKey:@"sina_token"];
     [paraDict setObject:screenname forKey:@"screen_name"];
-    //    if ([Passport sharedInstance].screenName) {
-    //        [paraDict setObject:[Passport sharedInstance].screenName forKey:@"screen_name"];
-    //    }
     
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *objectDict = (NSDictionary *)responseObject;

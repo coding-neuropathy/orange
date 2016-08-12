@@ -173,7 +173,8 @@
 {
     if (!_sinaWeiboBtn) {
         _sinaWeiboBtn                       = [UIButton buttonWithType:UIButtonTypeCustom];
-        _sinaWeiboBtn.deFrameSize           = CGSizeMake(40. * kScreeenScale, 40. * kScreeenScale);
+        _sinaWeiboBtn.deFrameSize           = IS_IPAD   ? CGSizeMake(40., 40.)
+                                                        : CGSizeMake(40. * kScreeenScale, 40. * kScreeenScale);
         _sinaWeiboBtn.layer.cornerRadius    = _sinaWeiboBtn.deFrameHeight / 2.;
         _sinaWeiboBtn.backgroundColor       = UIColorFromRGB(0xf8f8f8);
         
@@ -189,7 +190,8 @@
 {
     if (!_taobaoBtn) {
         _taobaoBtn                          = [UIButton buttonWithType:UIButtonTypeCustom];
-        _taobaoBtn.deFrameSize              = CGSizeMake(40. * kScreeenScale, 40. * kScreeenScale);
+        _taobaoBtn.deFrameSize              = IS_IPAD   ? CGSizeMake(40., 40.)
+                                                        : CGSizeMake(40. * kScreeenScale, 40. * kScreeenScale);
         _taobaoBtn.layer.cornerRadius       = _taobaoBtn.deFrameHeight / 2.;
         _taobaoBtn.backgroundColor          = UIColorFromRGB(0xf8f8f8);
         
@@ -205,7 +207,8 @@
 {
     if (!_weixinBtn) {
         _weixinBtn                          = [UIButton buttonWithType:UIButtonTypeCustom];
-        _weixinBtn.deFrameSize              = CGSizeMake(40. * kScreeenScale, 40. * kScreeenScale);
+        _weixinBtn.deFrameSize              = IS_IPAD   ? CGSizeMake(40., 40.)
+                                                        : CGSizeMake(40. * kScreeenScale, 40. * kScreeenScale);
         _weixinBtn.layer.cornerRadius       = _weixinBtn.deFrameHeight / 2.;
         _weixinBtn.layer.masksToBounds      = YES;
         _weixinBtn.backgroundColor          = UIColorFromRGB(0xf8f8f8);
@@ -237,21 +240,20 @@
         self.taobaoBtn.deFrameTop           = self.forgetBtn.deFrameBottom + 120.;
         
         self.sinaWeiboBtn.center            = self.taobaoBtn.center;
-        self.sinaWeiboBtn.deFrameLeft       = ( kScreenWidth - (self.weixinBtn.deFrameWidth * 2 + 10) )/ 2.;
+        self.sinaWeiboBtn.deFrameLeft       = ( self.deFrameWidth - (self.weixinBtn.deFrameWidth * 2 + 10) )/ 2.;
         
         self.taobaoBtn.deFrameLeft          = self.sinaWeiboBtn.deFrameRight + 10.;
         
         self.weixinBtn.hidden               = YES;
 //        self.sinaWeiboBtn.deFrameRight      = self.taobaoBtn.deFrameLeft - 10.;
-        
     }
 }
 
+
 #pragma mark - layout subviews
-- (void)layoutSubviews
+
+- (void)layoutiPhonetSubviews
 {
-    [super layoutSubviews];
-    
     self.emailTextField.frame           = CGRectMake(0., 0., 290 * kScreeenScale, 46. * kScreeenScale);
     self.emailTextField.deFrameTop      = 33.;
     self.emailTextField.deFrameLeft     = ( kScreenWidth - self.emailTextField.deFrameWidth ) / 2.;
@@ -273,6 +275,41 @@
     self.infoLabel.deFrameTop           = self.forgetBtn.deFrameBottom + 75.;
     
     [self configSNS];
+}
+
+- (void)layoutiPadtSubviews
+{
+    self.emailTextField.frame           = CGRectMake(0., 0., 290, 46.);
+    self.emailTextField.deFrameTop      = 33.;
+    self.emailTextField.deFrameLeft     = ( self.deFrameWidth - self.emailTextField.deFrameWidth ) / 2.;
+    
+    self.passwordTextField.frame        = self.emailTextField.frame;
+    self.passwordTextField.center       = self.emailTextField.center;
+    self.passwordTextField.deFrameTop   = self.emailTextField.deFrameBottom + 1.;
+    
+    self.signBtn.frame                  = CGRectMake(0., 0., 290, 44.);
+    self.signBtn.center                 = self.passwordTextField.center;
+    self.signBtn.layer.cornerRadius     = self.signBtn.deFrameHeight / 2.;
+    self.signBtn.deFrameTop             = self.passwordTextField.deFrameBottom + 16.;
+    
+    self.forgetBtn.frame                = CGRectMake(0., 0., 144., 20.);
+    self.forgetBtn.center               = self.signBtn.center;
+    self.forgetBtn.deFrameTop           = self.signBtn.deFrameBottom + 24.;
+    
+    self.infoLabel.center               = self.forgetBtn.center;
+    self.infoLabel.deFrameTop           = self.forgetBtn.deFrameBottom + 75.;
+    
+    [self configSNS];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if (IS_IPHONE)
+        [self layoutiPhonetSubviews];
+    else
+        [self layoutiPadtSubviews];
 }
 
 

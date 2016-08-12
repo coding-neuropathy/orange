@@ -40,7 +40,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 
 @property (nonatomic, strong) id<ALBBLoginService> loginService;
 
-@property (weak, nonatomic) UIApplication * app;
+//@property (weak, nonatomic) UIApplication * app;
 
 @end
 
@@ -69,14 +69,14 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Logout" object:nil];
 }
 
-#pragma mark - init view
-- (UIApplication *)app
-{
-    if (!_app) {
-        _app = [UIApplication sharedApplication];
-    }
-    return _app;
-}
+//#pragma mark - init view
+//- (UIApplication *)app
+//{
+//    if (!_app) {
+//        _app = [UIApplication sharedApplication];
+//    }
+//    return _app;
+//}
 
 - (SettingsFooterView *)footerView
 {
@@ -101,8 +101,9 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         
         _tableView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight);
         
-        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-        if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+//        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight
+            || self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft)
             _tableView.center = CGPointMake((kScreenWidth - kTabBarWidth) / 2, kScreenHeight / 2);
             
         _tableView.delegate = self;

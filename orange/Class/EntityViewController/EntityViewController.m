@@ -73,7 +73,7 @@
 //@property (nonatomic) OneSDKItemType itemType;
 
 
-@property (weak, nonatomic) UIApplication * app;
+//@property (weak, nonatomic) UIApplication * app;
 
 
 
@@ -123,13 +123,13 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     return self;
 }
 
-- (UIApplication *)app
-{
-    if (!_app) {
-        _app = [UIApplication sharedApplication];
-    }
-    return _app;
-}
+//- (UIApplication *)app
+//{
+//    if (!_app) {
+//        _app = [UIApplication sharedApplication];
+//    }
+//    return _app;
+//}
 
 - (CGFloat)headerHeight
 {

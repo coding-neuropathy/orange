@@ -26,7 +26,7 @@
 
 @property (strong, nonatomic) AddressPickView * addressPickView;
 
-@property (weak, nonatomic) UIApplication * app;
+//@property (weak, nonatomic) UIApplication * app;
 
 @end
 
@@ -60,13 +60,13 @@ NSString *NewSettingTableIdentifier = @"SettingCell";
     };
 }
 
-- (UIApplication *)app
-{
-    if (!_app) {
-        _app = [UIApplication sharedApplication];
-    }
-    return _app;
-}
+//- (UIApplication *)app
+//{
+//    if (!_app) {
+//        _app = [UIApplication sharedApplication];
+//    }
+//    return _app;
+//}
 
 - (EditHeaderView *)headerView
 {

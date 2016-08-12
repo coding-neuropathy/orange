@@ -177,25 +177,50 @@
     self.dismissBtn.deFrameTop      = 32.;
     self.dismissBtn.deFrameRight    = self.deFrameWidth - 32.;
     
-    self.scrollView.deFrameLeft     = ( kScreenWidth - self.scrollView.deFrameWidth ) / 2.;
-    self.scrollView.deFrameTop      = 140.;
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (orientation == UIInterfaceOrientationLandscapeLeft
+        || orientation == UIInterfaceOrientationLandscapeRight) {
     
-    self.pageCtl.bounds = CGRectMake(0.0, 0.0, 8 * (self.pageCtl.numberOfPages - 1) + 8, 8);
-    self.pageCtl.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom + 37.);
+        self.scrollView.deFrameLeft     = ( kScreenWidth - self.scrollView.deFrameWidth ) / 2.;
+        self.scrollView.deFrameTop      = 32.;
+        
+        self.pageCtl.bounds = CGRectMake(0.0, 0.0, 8 * (self.pageCtl.numberOfPages - 1) + 8, 8);
+        self.pageCtl.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom + 4.);
+        
+        self.signInBtn.frame = CGRectMake(0., 0., 230., 44.);
+        self.signInBtn.layer.cornerRadius = self.signInBtn.deFrameHeight / 2.;
+        self.signInBtn.deFrameTop = self.scrollView.deFrameBottom + 36.;
+        self.signInBtn.deFrameLeft = (self.deFrameWidth - self.signInBtn.deFrameWidth) / 2.;
+        
+        self.signUpBtn.frame = CGRectMake(0., 0., 230., 44.);
+        self.signUpBtn.layer.cornerRadius = self.signUpBtn.deFrameHeight / 2.;
+        self.signUpBtn.center = self.signInBtn.center;
+        self.signUpBtn.deFrameTop = self.signInBtn.deFrameBottom + 8.;
+        
+        self.agreementLabel.center = self.signUpBtn.center;
+        self.agreementLabel.deFrameBottom = self.deFrameBottom - 24.;
+        
+    } else {
+        
+        self.scrollView.deFrameLeft     = ( kScreenWidth - self.scrollView.deFrameWidth ) / 2.;
+        self.scrollView.deFrameTop      = 140.;
     
+        self.pageCtl.bounds = CGRectMake(0.0, 0.0, 8 * (self.pageCtl.numberOfPages - 1) + 8, 8);
+        self.pageCtl.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom + 37.);
     
-    self.signInBtn.frame = CGRectMake(0., 0., 230., 44.);
-    self.signInBtn.layer.cornerRadius = self.signInBtn.deFrameHeight / 2.;
-    self.signInBtn.deFrameTop = self.scrollView.deFrameBottom + 86.;
-    self.signInBtn.deFrameLeft = (self.deFrameWidth - self.signInBtn.deFrameWidth) / 2.;
+        self.signInBtn.frame = CGRectMake(0., 0., 230., 44.);
+        self.signInBtn.layer.cornerRadius = self.signInBtn.deFrameHeight / 2.;
+        self.signInBtn.deFrameTop = self.scrollView.deFrameBottom + 86.;
+        self.signInBtn.deFrameLeft = (self.deFrameWidth - self.signInBtn.deFrameWidth) / 2.;
     
-    self.signUpBtn.frame = CGRectMake(0., 0., 230., 44.);
-    self.signUpBtn.layer.cornerRadius = self.signUpBtn.deFrameHeight / 2.;
-    self.signUpBtn.center = self.signInBtn.center;
-    self.signUpBtn.deFrameTop = self.signInBtn.deFrameBottom + 8.;
+        self.signUpBtn.frame = CGRectMake(0., 0., 230., 44.);
+        self.signUpBtn.layer.cornerRadius = self.signUpBtn.deFrameHeight / 2.;
+        self.signUpBtn.center = self.signInBtn.center;
+        self.signUpBtn.deFrameTop = self.signInBtn.deFrameBottom + 8.;
     
-    self.agreementLabel.center = self.signUpBtn.center;
-    self.agreementLabel.deFrameBottom = self.deFrameBottom - 80.;
+        self.agreementLabel.center = self.signUpBtn.center;
+        self.agreementLabel.deFrameBottom = self.deFrameBottom - 80.;
+    }
 }
 
 - (void)layoutSubviews

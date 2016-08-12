@@ -161,19 +161,39 @@
     return _foundBtn;
 }
 
+- (void)layoutiPhoneSubviews
+{
+    self.emailTextField.frame           = CGRectMake(0., 0., 290 * kScreeenScale, 46. * kScreeenScale);
+    self.emailTextField.deFrameTop      = 33. + kNavigationBarHeight + kStatusBarHeight;
+    self.emailTextField.deFrameLeft     = ( self.deFrameWidth - self.emailTextField.deFrameWidth ) / 2.;
+    
+    self.foundBtn.frame                 = CGRectMake(0., 0., 290. * kScreeenScale, 44. * kScreeenScale);
+    self.foundBtn.center                = self.emailTextField.center;
+    self.foundBtn.deFrameTop            = self.emailTextField.deFrameBottom + 22.;
+    self.foundBtn.layer.cornerRadius    = self.foundBtn.deFrameHeight / 2.;
+}
+
+- (void)layoutiPadSubviews
+{
+    self.emailTextField.frame           = CGRectMake(0., 0., 290., 46.);
+    self.emailTextField.deFrameTop      = 33.;
+    self.emailTextField.deFrameLeft     = ( self.deFrameWidth - self.emailTextField.deFrameWidth ) / 2.;
+    
+    self.foundBtn.frame                 = CGRectMake(0., 0., 290., 44.);
+    self.foundBtn.center                = self.emailTextField.center;
+    self.foundBtn.deFrameTop            = self.emailTextField.deFrameBottom + 22.;
+    self.foundBtn.layer.cornerRadius    = self.foundBtn.deFrameHeight / 2.;
+}
+
 #pragma mark - layout subviews
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    self.emailTextField.frame           = CGRectMake(0., 0., 290 * kScreeenScale, 46. * kScreeenScale);
-    self.emailTextField.deFrameTop      = 33. + kNavigationBarHeight + kStatusBarHeight;
-    self.emailTextField.deFrameLeft     = ( kScreenWidth - self.emailTextField.deFrameWidth ) / 2.;
-
-    self.foundBtn.frame                 = CGRectMake(0., 0., 290. * kScreeenScale, 44. * kScreeenScale);
-    self.foundBtn.center                = self.emailTextField.center;
-    self.foundBtn.deFrameTop            = self.emailTextField.deFrameBottom + 22.;
-    self.foundBtn.layer.cornerRadius    = self.foundBtn.deFrameHeight / 2.;
+    if (IS_IPHONE)
+        [self layoutiPhoneSubviews];
+    else
+        [self layoutiPadSubviews];
 }
 
 
