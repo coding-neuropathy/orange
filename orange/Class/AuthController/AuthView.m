@@ -150,9 +150,7 @@
     self.dismissBtn.frame = CGRectMake(0., 0., 32., 32.);
     self.dismissBtn.deFrameTop = 16.;
     self.dismissBtn.deFrameRight = self.deFrameWidth - 16.;
-    
-//    self.scrollView.frame = CGRectMake(0., 0., kScreenWidth, 360. * kScreeenScale);
-//    self.scrollView.contentSize = CGSizeMake(kScreenWidth * 3, 360. * kScreeenScale);
+
     self.scrollView.deFrameTop = 64.;
     
     self.pageCtl.bounds = CGRectMake(0.0, 0.0, 8 * (self.pageCtl.numberOfPages - 1) + 8, 8);
@@ -170,20 +168,15 @@
     self.signUpBtn.deFrameTop = self.signInBtn.deFrameBottom + 8.;
     
     
-    //    self.agreementLabel.frame = CGRectMake(0., 0., 230. * kScreeenScale, 20.);
-    //    self.agreementLabel.opt
     self.agreementLabel.center = self.signUpBtn.center;
     self.agreementLabel.deFrameBottom = self.deFrameBottom - 20.;
 }
 
 - (void)layoutiPadSubviews
 {
-//    self.dismissBtn.frame = CGRectMake(0., 0., 32., 32.);
     self.dismissBtn.deFrameTop      = 32.;
     self.dismissBtn.deFrameRight    = self.deFrameWidth - 32.;
     
-    //    self.scrollView.frame = CGRectMake(0., 0., kScreenWidth, 360. * kScreeenScale);
-    //    self.scrollView.contentSize = CGSizeMake(kScreenWidth * 3, 360. * kScreeenScale);
     self.scrollView.deFrameLeft     = ( kScreenWidth - self.scrollView.deFrameWidth ) / 2.;
     self.scrollView.deFrameTop      = 140.;
     
@@ -201,9 +194,6 @@
     self.signUpBtn.center = self.signInBtn.center;
     self.signUpBtn.deFrameTop = self.signInBtn.deFrameBottom + 8.;
     
-    
-    //    self.agreementLabel.frame = CGRectMake(0., 0., 230. * kScreeenScale, 20.);
-    //    self.agreementLabel.opt
     self.agreementLabel.center = self.signUpBtn.center;
     self.agreementLabel.deFrameBottom = self.deFrameBottom - 80.;
 }

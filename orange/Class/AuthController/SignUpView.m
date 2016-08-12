@@ -56,11 +56,9 @@
         _emailTextField.textColor                   = UIColorFromRGB(0xbdbdbd);
         _emailTextField.font                        = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
         _emailTextField.adjustsFontSizeToFitWidth   = YES;
-        _emailTextField.leftView                    = self.emailLabel;
-        _emailTextField.leftViewMode                = UITextFieldViewModeAlways;
         _emailTextField.autocorrectionType          = UITextAutocorrectionTypeNo;
         _emailTextField.autocapitalizationType      = UITextAutocapitalizationTypeNone;
-        _emailTextField.placeholder                 = @"example@guoku.com";
+        _emailTextField.placeholder                 = NSLocalizedStringFromTable(@"email", kLocalizedFile, nil);
         _emailTextField.clearButtonMode             = UITextFieldViewModeWhileEditing;
         _emailTextField.returnKeyType               = UIReturnKeyNext;
         _emailTextField.keyboardType                = UIKeyboardTypeEmailAddress;
@@ -94,12 +92,12 @@
         _passwordTextField.textColor                    = UIColorFromRGB(0xbdbdbd);
         _passwordTextField.font                         = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
         _passwordTextField.adjustsFontSizeToFitWidth    = YES;
-        _passwordTextField.leftView                     = self.passwordLabel;
-        _passwordTextField.leftViewMode                 = UITextFieldViewModeAlways;
+//        _passwordTextField.leftView                     = self.passwordLabel;
+//        _passwordTextField.leftViewMode                 = UITextFieldViewModeAlways;
         _passwordTextField.autocorrectionType           = UITextAutocorrectionTypeNo;
         _passwordTextField.autocapitalizationType       = UITextAutocapitalizationTypeNone;
         _passwordTextField.secureTextEntry              = YES;
-        _passwordTextField.placeholder                  = @"";
+        _passwordTextField.placeholder                  = NSLocalizedStringFromTable(@"password", kLocalizedFile, nil);
         _passwordTextField.clearButtonMode              = UITextFieldViewModeWhileEditing;
         _passwordTextField.keyboardType                 = UIKeyboardTypeAlphabet;
         _passwordTextField.returnKeyType                = UIReturnKeyJoin;
@@ -133,8 +131,8 @@
         _nicknameTextField                          = [[UITextField alloc] initWithFrame:CGRectZero];
         _nicknameTextField.textColor                = UIColorFromRGB(0xbdbdbd);
         _nicknameTextField.font                     = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
-        _nicknameTextField.leftView                 = self.nicknameLable;
-        _nicknameTextField.leftViewMode             = UITextFieldViewModeAlways;
+//        _nicknameTextField.leftView                 = self.nicknameLable;
+//        _nicknameTextField.leftViewMode             = UITextFieldViewModeAlways;
         _nicknameTextField.autocorrectionType       = UITextAutocorrectionTypeNo;
         _nicknameTextField.autocapitalizationType   = UITextAutocapitalizationTypeNone;
         _nicknameTextField.placeholder              = NSLocalizedStringFromTable(@"nickname", kLocalizedFile, nil);
@@ -189,7 +187,7 @@
     
     self.nicknameTextField.frame            = CGRectMake(0., 0., 290 * kScreeenScale, 46. * kScreeenScale);
     self.nicknameTextField.deFrameTop       = 33.;
-    self.nicknameTextField.deFrameLeft      = ( kScreenWidth - self.emailTextField.deFrameWidth ) / 2.;
+    self.nicknameTextField.deFrameLeft      = ( self.deFrameWidth - self.nicknameTextField.deFrameWidth ) / 2.;
     
     self.emailTextField.frame               = self.nicknameTextField.frame;
     self.emailTextField.center              = self.nicknameTextField.center;

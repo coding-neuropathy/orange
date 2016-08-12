@@ -189,9 +189,11 @@
 /**
  *  account page
  */
-"mail"              = "Mail";
-"forget-password"   = "Forget Password";
-"found-password"    = "Found Password";
+"mail"                  = "Mail";
+"forget-password"       = "Forgot Password";
+"found-password"        = "Found Password";
+"what's-your-email"     = "What's your email (example@guoku.com) ?";
+"what's-your-passowrd"  = "What's your password ?";
 
 /**
  *  seller

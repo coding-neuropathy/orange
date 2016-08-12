@@ -231,29 +231,29 @@
 //    
 //}
 
-#pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
-        NSString *email = [alertView textFieldAtIndex:0].text;
-        if (email && email.length > 0) {
-            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
-            [API forgetPasswordWithEmail:email success:^(BOOL success) {
-                if (success) {
-                    [SVProgressHUD showImage:nil status:@"请检查邮箱，重设密码。"];
-                }
-            } failure:^(NSInteger stateCode) {
-                if (stateCode == 400) {
-                    [SVProgressHUD showImage:nil status:@"该邮箱不存在!"];
-                } else {
-                    [SVProgressHUD showImage:nil status:@"请求失败!"];
-                }
-            }];
-        } else {
-            [SVProgressHUD showImage:nil status:@"请输入注册时使用的邮箱"];
-        }
-    }
-}
+//#pragma mark - UIAlertViewDelegate
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if (buttonIndex == 1) {
+//        NSString *email = [alertView textFieldAtIndex:0].text;
+//        if (email && email.length > 0) {
+//            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+//            [API forgetPasswordWithEmail:email success:^(BOOL success) {
+//                if (success) {
+//                    [SVProgressHUD showImage:nil status:@"请检查邮箱，重设密码。"];
+//                }
+//            } failure:^(NSInteger stateCode) {
+//                if (stateCode == 400) {
+//                    [SVProgressHUD showImage:nil status:@"该邮箱不存在!"];
+//                } else {
+//                    [SVProgressHUD showImage:nil status:@"请求失败!"];
+//                }
+//            }];
+//        } else {
+//            [SVProgressHUD showImage:nil status:@"请输入注册时使用的邮箱"];
+//        }
+//    }
+//}
 
 #pragma mark - Notification
 - (void)postWeChatCode:(NSNotification *)notification
@@ -317,6 +317,7 @@
 {
 //    NSString *email = self.emailTextField.text;
 //    NSString *password = self.passwordTextField.text;
+
     
     if (!email || email.length == 0) {
         [SVProgressHUD showImage:nil status:@"请输入邮箱"];

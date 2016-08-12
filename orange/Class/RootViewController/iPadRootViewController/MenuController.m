@@ -139,10 +139,11 @@ static NSString * const CellReuseIdentifier = @"MenuCell";
             [self.delegate MenuController:self didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.titleArray.count inSection:0]];
         }
     } else {
-//        LoginView * view = [[LoginView alloc]init];
-//        [view show];
-//        return;
-        [[OpenCenter sharedOpenCenter] openAuthPage];
+        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+            if (_delegate && [_delegate respondsToSelector:@selector(MenuController:didSelectRowAtIndexPath:)]) {
+                [self.delegate MenuController:self didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:self.titleArray.count inSection:0]];
+            }
+        }];
     }
 }
 

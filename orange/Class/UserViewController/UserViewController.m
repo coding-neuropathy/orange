@@ -477,7 +477,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                 userHeaderHeight += IS_IPAD ? 20. : 0.;
             
                 userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
-                userHeaderHeight += 49.;
+                userHeaderHeight += IS_IPHONE ? 49. : 0;
                 size = CGSizeMake(self.collectionView.deFrameWidth, userHeaderHeight);
             
             }
@@ -513,13 +513,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case 0:
-            if (self.user.bio.length == 0) {
-                size = CGSizeMake(kScreenWidth, 10.);
-            }
-            else
-            {
-                size = CGSizeMake(0., 0.);
-            }
+            size = self.user.bio.length == 0 ? CGSizeMake(kScreenWidth, 10.)
+                                            : CGSizeMake(0., 0.);
             break;
         case 1:
             if (self.likedataArray.count > 0)

@@ -58,8 +58,16 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 {
     AuthController * vc = [[AuthController alloc] init];
     vc.successBlock = success;
-    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self.controller presentViewController:nav animated:YES completion:nil];
+
+    
+    if (IS_IPHONE) {
+        UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self.controller presentViewController:nav animated:YES completion:nil];
+    } else {
+        [self.controller addChildViewController:vc];
+        [self.controller.view addSubview:vc.view];
+        
+    }
 }
 
 - (void)openAuthUser:(GKUser *)user

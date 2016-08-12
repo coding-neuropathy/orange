@@ -214,11 +214,58 @@
 //        [self.thePageViewController setViewControllers:@[self.registerVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
 //    }
 //}
+#pragma mark - appear or disappear view
+- (void)fadeIn
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.authView.alpha = 1.;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)fadeOut
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        //        self.tableView.frame = CGRectMake(0., HEIGHT, WIDTH, HEIGHT);
+        //        self.blurView.blurRadius = 0;
+        self.authView.alpha = 0;
+        //        self.blurfilter.rangeReductionFactor = 0.;
+    } completion:^(BOOL finished) {
+        [self.view removeFromSuperview];
+        [self removeFromParentViewController];
+    }];
+}
+
+- (void)showViewWithAnimation:(BOOL)animated
+{
+    if (animated) {
+        [self fadeIn];
+    } else {
+        //        self.tableView.frame = CGRectMake(0., 0., WIDTH, HEIGHT);
+    }
+}
+
+- (void)dismissViewWithAnimation:(BOOL)animated
+{
+    if (animated) {
+        [self fadeOut];
+    } else {
+        //        self.tableView.frame = CGRectMake(0., HEIGHT, WIDTH, HEIGHT);
+        //        self
+        [self.view removeFromSuperview];
+        [self removeFromParentViewController];
+    }
+}
 
 #pragma mark - <AuthViewDelegate>
 - (void)tapDismissButton
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (IS_IPHONE)
+        [self dismissViewControllerAnimated:YES completion:nil];
+    else {
+        [self dismissViewWithAnimation:YES];
+    }
 }
 
 - (void)tapSignInButton:(id)sender
@@ -233,7 +280,18 @@
             }];
         }
     };
-    [self.navigationController pushViewController:vc animated:YES];
+    if (IS_IPHONE)
+        [self.navigationController pushViewController:vc animated:YES];
+    else {
+        if (IS_IPHONE)
+            [self.navigationController pushViewController:vc animated:YES];
+        else {
+            UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
+            nav.modalPresentationStyle = UIModalPresentationFormSheet;
+            nav.preferredContentSize = CGSizeMake(540., 400.);
+            [self presentViewController:nav animated:YES completion:nil];
+        }
+    }
 }
 
 - (void)tapSignUpButton:(id)sender
@@ -248,11 +306,19 @@
             }];
         }
     };
-    [self.navigationController pushViewController:vc animated:YES];
+    if (IS_IPHONE)
+        [self.navigationController pushViewController:vc animated:YES];
+    else {
+        UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        nav.preferredContentSize = CGSizeMake(540., 400.);
+        [self presentViewController:nav animated:YES completion:nil];
+    }
 }
 
 - (void)gotoAgreementWithURL:(NSURL *)url
 {
+    
     [[OpenCenter sharedOpenCenter] openWebWithURL:url];
 }
 

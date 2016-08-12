@@ -187,24 +187,26 @@
 /*
  *  account page
  */
-"mail"              = "邮箱";
-"forget-password"   = "忘记密码";
-"found-password"    = "找回密码";
+"mail"                  = "邮箱";
+"forget-password"       = "忘记密码";
+"found-password"        = "找回密码";
+"what's-your-email"     = "电邮 (example@guoku.com)";
+"what's-your-passowrd"  = "密码";
 
 /**
  *  seller
  */
-"create-order"      = "创建订单";
-"review-order"      = "查看订单";
+"create-order"          = "创建订单";
+"review-order"          = "查看订单";
 
 /**
  *  verify  mail page
  */
-"verify mail"          = "验证邮箱";
-"reset password"       = "重设密码";
-"verified"             = "已验证";
-"send mail for verify" = "发送验证邮件";
-"update email"         = "修改邮箱";
+"verify mail"                       = "验证邮箱";
+"reset password"                    = "重设密码";
+"verified"                          = "已验证";
+"send mail for verify"              = "发送验证邮件";
+"update email"                      = "修改邮箱";
 "Sent to the current email"         = "发送至当前邮箱";
 /*
  * datetime

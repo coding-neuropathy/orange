@@ -188,9 +188,11 @@
 /**
  *  account page
  */
-"mail"              = "郵箱";
-"forget-password"   = "忘記密碼";
-"found-password"    = "找回密碼";
+"mail"                  = "郵箱";
+"forget-password"       = "忘記密碼";
+"found-password"        = "找回密碼";
+"what's-your-email"     = "電郵 (example@guoku.com)";
+"what's-your-passowrd"  = "密碼";
 
 /**
  *  seller
