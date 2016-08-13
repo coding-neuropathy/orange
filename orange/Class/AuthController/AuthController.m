@@ -9,12 +9,16 @@
 #import "AuthController.h"
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
+#import "WebViewController.h"
 
 #import "AuthView.h"
 
 @interface AuthController () <AuthViewDelegate>
-@property(strong,nonatomic) LoginViewController * loginVC;
-@property(strong,nonatomic) RegisterViewController * registerVC;
+
+@property (weak, nonatomic) UIApplication * app;
+
+@property (strong,nonatomic) LoginViewController * loginVC;
+@property (strong,nonatomic) RegisterViewController * registerVC;
 
 //@property (strong, nonatomic) UIPageViewController * thePageViewController;
 //@property (assign, nonatomic) NSInteger index;
@@ -24,6 +28,14 @@
 @end
 
 @implementation AuthController
+
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -162,71 +174,6 @@
     
 }
 
-//#pragma mark - <UIPageViewControllerDataSource>
-//- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
-//{
-//    return 2;
-//}
-//
-//- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
-//{
-//    if ([viewController isKindOfClass:[RegisterViewController class]]) {
-//        return self.loginVC;
-//    }
-//
-//    
-//    return nil;
-//}
-//
-//- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
-//{
-//    
-//    if ([viewController isKindOfClass:[LoginViewController class]]) {
-//        return self.registerVC;
-//    }
-//
-//
-//    return nil;
-//}
-//
-//#pragma mark - <UIPageViewControllerDelegate>
-//- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
-//{
-//    self.index = 0;
-//    if (completed) {
-//        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[LoginViewController class]]) {
-//            self.index = 0;
-//        }
-//        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[RegisterViewController class]]) {
-//            self.index = 1;
-//        }
-//    }
-//    
-//}
-//
-//- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController
-//                   spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation {
-//    
-//    UIViewController *currentViewController = [self.thePageViewController.viewControllers objectAtIndex:0];
-//    
-//    NSArray * view_controllers = [NSArray arrayWithObjects:currentViewController, nil];
-//    [self.thePageViewController setViewControllers:view_controllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-//    
-//    self.thePageViewController.doubleSided = NO;
-//    return UIPageViewControllerSpineLocationMin;
-//}
-
-
-//- (void)setSelectedWithType:(NSString *)type
-//{
-//    if ([type isEqualToString:@"login"]) {
-//        [self.thePageViewController setViewControllers:@[self.loginVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-//    }
-//    
-//    else if ([type isEqualToString:@"register"]) {
-//        [self.thePageViewController setViewControllers:@[self.registerVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-//    }
-//}
 #pragma mark - appear or disappear view
 - (void)fadeIn
 {
@@ -342,8 +289,9 @@
 
 - (void)gotoAgreementWithURL:(NSURL *)url
 {
-    
-    [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+    if (IS_IPHONE) {
+        [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+    }
 }
 
 @end

@@ -18,20 +18,8 @@
 
 @interface LoginViewController ()<UIAlertViewDelegate, SignInViewDelegate>
 
-//@property (nonatomic, strong) UIImageView *logo;
-//@property (nonatomic, strong) UILabel *solgen;
-//@property (nonatomic, strong) UITextField *emailTextField;
-//@property (nonatomic, strong) UITextField *passwordTextField;
-//@property (nonatomic, strong) UIButton *registerButton;
-//@property (nonatomic, strong) UIButton *loginButton;
-//@property (nonatomic, strong) UIButton *forgotPasswordButton;
-//@property (nonatomic, strong) UIButton *sinaWeiboButton;
-//@property (nonatomic, strong) UIButton *taobaoButton;
-//@property (nonatomic, strong) UIButton * weixinBtn;
-//@property (nonatomic, strong) UIButton * close;
-
-
-@property (strong, nonatomic) SignInView * signView;
+@property (strong, nonatomic) SignInView    * signView;
+@property (strong, nonatomic) UIButton      * dismissBtn;
 
 @property(nonatomic, strong) id<ALBBLoginService> loginService;
 @property(nonatomic, strong) loginSuccessCallback loginSuccessCallback;
@@ -40,7 +28,8 @@
 @end
 
 @implementation LoginViewController
-
+//
+#pragma mark - lazy load view
 - (SignInView *)signView
 {
     if (!_signView) {
@@ -50,6 +39,18 @@
         
     }
     return _signView;
+}
+
+- (UIButton *)dismissBtn
+{
+    if (!_dismissBtn) {
+        _dismissBtn                 = [UIButton buttonWithType:UIButtonTypeCustom];
+        _dismissBtn.deFrameSize     = CGSizeMake(32., 44.);
+        
+        [_dismissBtn setImage:[UIImage imageNamed:@"back-1"] forState:UIControlStateNormal];
+        [_dismissBtn addTarget:self action:@selector(dismissBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _dismissBtn;
 }
 
 - (void)loadView
@@ -64,6 +65,12 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignResponder:)];
     [self.signView addGestureRecognizer:tap];
 //
+    
+    if (IS_IPAD) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.dismissBtn];
+    }
+    
+#pragma mark - login from sns
     _loginService = [[ALBBSDK sharedInstance]getService:@protocol(ALBBLoginService)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWeChatCode:) name:@"WechatAuthResp" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWBCode:) name:@"WBAuthResp" object:nil];
@@ -155,8 +162,6 @@
     NSDictionary * json = [API getWeChatAuthWithAppKey:kGK_WeixinShareKey Secret:KGK_WeixinSecret Code:resp.code];
     
     NSDictionary * userInfo = [API getWeChatUserInfoWithAccessToken:[json valueForKey:@"access_token"] OpenID:[json valueForKey:@"openid"]];
-    
-//    DDLogInfo(@"user info %@", userInfo);
     
     [API loginWithWeChatWithUnionid:[userInfo valueForKey:@"unionid"] Nickname:[userInfo valueForKey:@"nickname"] HeaderImgURL:[userInfo valueForKey:@"headimgurl"] success:^(GKUser *user, NSString *session) {
         [MobClick event:@"sign in from wechat" label:@"success"];
@@ -273,6 +278,13 @@
         }
         
     }];
+}
+
+#pragma mark - button action
+
+- (void)dismissBtnAction:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)tapForgetBtn:(id)sender

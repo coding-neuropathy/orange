@@ -6,10 +6,10 @@
 //  Copyright © 2015年 guoku.com. All rights reserved.
 //
 
-//#import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import <UIKit/UIKit.h>
+//#import "BaseViewController.h"
 
-@interface AuthController : BaseViewController
+@interface AuthController : UIViewController
 
 @property (copy, nonatomic) void (^successBlock)();
 

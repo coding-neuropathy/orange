@@ -226,9 +226,9 @@
     self.signUpBtn.deFrameTop               = self.passwordTextField.deFrameBottom + 16.;
     
     
-    self.agreementLabel.frame               = CGRectMake(0., 0., 220., 20.);
-    self.agreementLabel.center              = self.signUpBtn.center;
-    self.agreementLabel.deFrameTop          = self.signUpBtn.deFrameBottom + 24.;
+//    self.agreementLabel.frame               = CGRectMake(0., 0., 220., 20.);
+//    self.agreementLabel.center              = self.signUpBtn.center;
+//    self.agreementLabel.deFrameTop          = self.signUpBtn.deFrameBottom + 24.;
 }
 
 #pragma mark - layout subviews

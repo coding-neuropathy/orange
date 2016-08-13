@@ -172,7 +172,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 //    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-    if (IS_IPAD) vc.tabBarController.tabBar.hidden = YES;
+//    if (IS_IPAD) vc.tabBarController.tabBar.hidden = YES;
 //    vc.hidesBottomBarWhenPushed = NO;
 }
 
