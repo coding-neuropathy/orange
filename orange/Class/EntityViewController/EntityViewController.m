@@ -121,21 +121,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     return self;
 }
 
-//- (NSDictionary *)trackParams
-//{
-//    return @{
-//             @"entityID"    : self.entity.entityId,
-//             @"entityTitle" : self.entity.title,
-//             };
-//}
-
-//- (UIApplication *)app
-//{
-//    if (!_app) {
-//        _app = [UIApplication sharedApplication];
-//    }
-//    return _app;
-//}
 
 - (CGFloat)headerHeight
 {
@@ -151,18 +136,19 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
 
-//        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
-        _collectionView.deFrameSize = IS_IPAD   ? CGSizeMake(684., kScreenHeight - kNavigationBarHeight - kStatusBarHeight)
+        _collectionView.deFrameSize = IS_IPAD   ? CGSizeMake(684., kScreenHeight - kStatusBarHeight)
                                                 : CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
-        
-        
-        if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight
-            || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
-            self.collectionView.deFrameLeft = (kScreenWidth - self.collectionView.deFrameWidth ) / 2.;
 
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+        
+        /**
+         *  适配横屏启动
+         */
+        if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight
+            || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+            self.collectionView.deFrameLeft = (kScreenWidth - self.collectionView.deFrameWidth ) / 2.;
     }
     return _collectionView;
 }
