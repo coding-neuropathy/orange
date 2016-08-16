@@ -124,6 +124,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
     
     if (!self.avatar) {
         _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(12.f, 12.f, 36.f, 36.f)];
+        _avatar.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.avatar];
         self.avatar.backgroundColor = UIColorFromRGB(0xf6f6f6);
         self.avatar.layer.cornerRadius = 18;
@@ -301,7 +302,9 @@ typedef NS_ENUM(NSInteger, MessageType) {
             
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth -58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+            self.image.frame = IS_IPHONE    ? CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42)
+                                            : CGRectMake(kScreenWidth -58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+            
             __block UIImageView *block_img = self.image;
 //            DDLogInfo(@"note image %@", entity.imageURL_240x240);
             [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
@@ -329,7 +332,8 @@ typedef NS_ENUM(NSInteger, MessageType) {
                                time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+            self.image.frame = IS_IPHONE    ? CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42)
+                                            : CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
             __block UIImageView *block_img = self.image;
             [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {

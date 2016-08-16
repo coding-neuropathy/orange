@@ -25,7 +25,11 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        
+        _tableView.deFrameSize = IS_IPAD    ? CGSizeMake(kScreenWidth - kTabBarWidth, kScreenHeight)
+                                            : CGSizeMake(kScreenWidth, kScreenHeight);
+        
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

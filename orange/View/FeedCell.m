@@ -144,7 +144,8 @@ typedef NS_ENUM(NSInteger, FeedType) {
 {
     if (!_image) {
         _image = [[UIImageView alloc] initWithFrame:CGRectZero];
-//        _image.contentMode = UIViewContentModeScaleAspectFit;
+        _image.contentMode          = UIViewContentModeScaleAspectFill;
+        _image.layer.masksToBounds  = YES;
         
         [_image addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
         _image.userInteractionEnabled = YES;
