@@ -7,6 +7,7 @@
 //
 
 #import "RegisterViewController.h"
+#import "WebViewController.h"
 //#import "WXApi.h"
 
 #import "SignUpView.h"
@@ -162,15 +163,9 @@
     [API registerWithEmail:email password:passwd nickname:nickname imageData:nil sinaUserId:[Passport sharedInstance].sinaUserID sinaToken:[Passport sharedInstance].sinaToken                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    taobaoUserId:[Passport sharedInstance].taobaoId taobaoToken:[Passport sharedInstance].taobaoToken screenName:[Passport sharedInstance].screenName success:^(GKUser *user, NSString *session) {
 
         
-//        if (self.signUpSuccessBlock) {
-//            self.signUpSuccessBlock(YES);
-//        }
         // analytics
         [MobClick event:@"sign up" label:@"success"];
         
-//        if (self.successBlock) {
-//            self.successBlock();
-//        }
         if (IS_IPAD) {
             [self dismissViewControllerAnimated:YES completion:^{
                 if (self.signUpSuccessBlock) {
@@ -216,7 +211,12 @@
 
 - (void)gotoAgreementWithURL:(NSURL *)url
 {
-    [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+//    [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+    if (IS_IPHONE) {
+        //        [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+        WebViewController * webVC = [[WebViewController alloc] initWithURL:url];
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
 }
 
 

@@ -35,6 +35,7 @@
 #import "PNoteViewController.h"
 
 
+
 @interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,EntityHeaderBuyViewDelegate,UITextViewDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) GKNote *note;
@@ -70,10 +71,6 @@
  * 店家id （仅限淘宝，天猫）
  */
 @property (strong, nonatomic) NSString * seller_id;
-//@property (nonatomic) OneSDKItemType itemType;
-
-
-//@property (weak, nonatomic) UIApplication * app;
 
 
 
@@ -123,6 +120,14 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     return self;
 }
 
+//- (NSDictionary *)trackParams
+//{
+//    return @{
+//             @"entityID"    : self.entity.entityId,
+//             @"entityTitle" : self.entity.title,
+//             };
+//}
+
 //- (UIApplication *)app
 //{
 //    if (!_app) {
@@ -171,7 +176,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
         [_likeButton setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
         _likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [_likeButton addTarget:self action:@selector(likeButtonActionWithBtn:) forControlEvents:UIControlEventTouchUpInside];
         if (self.entity.isLiked) {
             _likeButton.selected = YES;
         }
@@ -307,11 +312,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self.view addSubview:self.collectionView];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
-    
-    self.navigationController.hidesBarsOnSwipe = NO;
+//    self.navigationController.hidesBarsOnSwipe = NO;
     
     self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
     [self.collectionView registerClass:[EntityLikeUserCell class] forCellWithReuseIdentifier:LikeUserIdentifier];
@@ -587,9 +588,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
                 
                 if (IS_IPHONE)
                     edge = UIEdgeInsetsMake(0., 16., 16., 16.);
-                else {
-                    edge = UIEdgeInsetsMake(0., 16., 16., 16.);
-                }
+//                else {
+//                    edge = UIEdgeInsetsMake(0., 16., 16., 16.);
+//                }
             }
         }
             break;
@@ -764,7 +765,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
 //    DDLogInfo(@"OKOKOKOK");
 //    [AVAnalytics event:@"click entiyt image view"];
-    [MobClick event:@"click entiyt image view"];
+    
     EntityPopView * popView = [[EntityPopView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
     popView.entity = self.entity;
     [popView setImageIndex:idx];
@@ -785,6 +786,8 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         [self buyButtonAction];
     };
     [popView showInWindowWithAnimated:YES];
+    
+    [MobClick event:@"click entiyt image view"];
 }
 
 #pragma mark - <EntityHeaderSectionViewDelegate>
@@ -999,9 +1002,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
     if (self.entity.purchaseArray.count >0) {
         GKPurchase * purchase = self.entity.purchaseArray[0];
-//        NSLog(@"%@ %@", purchase.origin_id, purchase.source);
         if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"])
         {
+
             NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
             ALBBTradeTaokeParams *taoKeParams = [[ALBBTradeTaokeParams alloc] init];
             taoKeParams.pid = kGK_TaobaoKe_PID;
@@ -1017,7 +1020,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         } else
             [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
         
-//        [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
         [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
     }
 }

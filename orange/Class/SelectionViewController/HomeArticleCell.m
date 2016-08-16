@@ -25,6 +25,12 @@
     if (self)
     {
         self.backgroundColor = UIColorFromRGB(0xffffff);
+        if (IS_IPAD) {
+            self.layer.cornerRadius     = 4.;
+            self.layer.borderWidth      = 0.5;
+            self.layer.borderColor      = UIColorFromRGB(0xe6e6e6).CGColor;
+            self.layer.masksToBounds    = YES;
+        }
     }
     return self;
 }
@@ -172,14 +178,16 @@
 {
     [super drawRect:rect];
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
+    if (IS_IPHONE) {
+        CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-    CGContextSetLineWidth(context, kSeparateLineWidth);
-    CGContextMoveToPoint(context, 16., self.deFrameHeight);
-    CGContextAddLineToPoint(context, self.contentView.deFrameWidth - 16., self.deFrameHeight);
+        CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+        CGContextSetLineWidth(context, kSeparateLineWidth);
+        CGContextMoveToPoint(context, 16., self.deFrameHeight);
+        CGContextAddLineToPoint(context, self.contentView.deFrameWidth - 16., self.deFrameHeight);
     
-    CGContextStrokePath(context);
+        CGContextStrokePath(context);
+    }
 }
 
 @end

@@ -54,10 +54,12 @@
 
 
 
-@property(nonatomic, strong) id<ALBBItemService> itemService;
+@property (weak, nonatomic) id<ALBBItemService> itemService;
 
-@property (nonatomic, strong) SearchView * searchView;
+@property (strong, nonatomic) SearchView * searchView;
 @property (strong, nonatomic) SearchController * searchResultsVC;
+
+@property (weak, nonatomic) UIApplication * app;
 //@property (nonatomic, strong) SearchController * newsearchResultsVC;
 @end
 
@@ -162,6 +164,14 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         [_discoverData addTheObserverWithObject:self];
     }
     return _discoverData;
+}
+
+- (UIApplication *)app
+{
+    if (!_app) {
+        _app = [UIApplication sharedApplication];
+    }
+    return _app;
 }
 
 #pragma mark - init view
@@ -411,7 +421,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
                 DiscoverCategoryView * categoryView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier forIndexPath:indexPath];
                 categoryView.categories = self.discoverData.categories;
                 categoryView.tapBlock = ^(GKCategory * category){
-                    CategroyGroupController * groupVC = [[CategroyGroupController alloc] initWithGid:category.groupId];
+                CategroyGroupController * groupVC = [[CategroyGroupController alloc] initWithGid:category.groupId];
                     groupVC.title = category.title;
                     if (IS_IPHONE) groupVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:groupVC animated:YES];
@@ -423,9 +433,9 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             {
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"popular articles", kLocalizedFile, nil);
-                if (IS_IPAD) {
-                    header.backgroundColor= UIColorFromRGB(0xf8f8f8);
-                }
+//                if (IS_IPAD) {
+//                    header.backgroundColor= UIColorFromRGB(0xf8f8f8);
+//                }
                 return header;
             }
                 break;
@@ -468,7 +478,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     switch (indexPath.section) {
         case CategorySection:
             if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS)) {
-                cellsize = CGSizeMake(50. * kScreeenScale, 80. * kScreeenScale);
+                cellsize = IS_IPAD ? CGSizeMake(80., 100.) : CGSizeMake(50. * kScreeenScale, 80. * kScreeenScale);
             }
             break;
         case ArticleSection:
@@ -520,7 +530,8 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             break;
         case CategorySection:
             if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS))
-                edge = UIEdgeInsetsMake(0., 16., 5., 16.);
+                edge = IS_IPAD  ? UIEdgeInsetsMake( 0., 32., 5., 32.)
+                                : UIEdgeInsetsMake(0., 16., 5., 16.);
             break;
         case ArticleSection:
             if (IS_IPAD) edge = UIEdgeInsetsMake(0., 20., 0., 20.);
@@ -541,7 +552,18 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 {
     CGFloat itemSpacing = 0.;
     switch (section) {
-
+        case CategorySection:
+        {
+            if (IS_IPAD) {
+                itemSpacing = 28.;
+                if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft ||
+                    self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight)
+                    itemSpacing = 76.;
+            
+            }
+        }
+//            itemSpacing = IS_IPAD ? 28. : 0;
+            break;
         case EntitySection:
         {
 //            itemSpacing = 3.;
@@ -562,6 +584,9 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 //        case 2:
 //            spacing =5;
 //            break;
+        case CategorySection:
+            spacing = IS_IPAD ? 24. : 0;
+            break;
         case EntitySection:
         {
 //            spacing = 3.;

@@ -53,6 +53,13 @@
 #define kGK_WeixinShareURL @"http://www.guoku.com/detail/"  //apisent
 #endif
 
+/**
+ *  baichuan appkey
+ */
+#ifndef kGK_Taobao_BaiChuan_appkey
+#define kGK_Taobao_BaiChuan_appkey @"23093827"
+#endif
+
 //taobaoke
 #ifndef kGK_TaobaoKe_PID
 #define kGK_TaobaoKe_PID @"mm_28514026_4132785_24810648"

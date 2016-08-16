@@ -14,23 +14,21 @@
 #import <ALBBLoginSDK/TaeSDK+ALBBLogin.h>
 #import <ALBBTradeSDK/ALBBTradeSDK.h>
 
+
 // AFNetworking
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "UIImageView+WebCache.h"
 
 
-// AVOS
-//#import <AVOSCloud/AVOSCloud.h>
-//#import <LeanCloudSocial/AVOSCloudSNS.h>
-//#import <LeanCloudSocial//AVUser+SNS.h>
+/**
+ *  weibo sdk
+ */
 #import "WeiboSDK.h"
 
 // Umeng
 #import <UMMobClick/MobClick.h>
-//#import "UMFeedback.h"
-//#import "UMessage.h"
-//#import "UMOpus.h"
+
 
 ////Emoji
 //#import "EmojiOne.h"

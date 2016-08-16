@@ -59,7 +59,7 @@
 /*
  * Discover page
  */
-"search"                    = "搜索";
+"search"                    = "搜索商品，圖文";
 "recommendation category"   = "推薦品類";
 "popular articles"          = "熱門圖文";
 "recommendation user"       = "推薦用戶";
@@ -193,6 +193,8 @@
 "found-password"        = "找回密碼";
 "what's-your-email"     = "電郵 (example@guoku.com)";
 "what's-your-passowrd"  = "密碼";
+"you-want-sign-out"     = "退出登錄?";
+
 
 /**
  *  seller
@@ -254,3 +256,9 @@
 "miss category"             = "分類錯誤";
 "meaningless information"   = "垃圾或詐騙信息";
 "malicious information"     = "不良信息";
+
+
+/**
+ *  order
+ */
+"scanner"                   = "掃描二維碼";

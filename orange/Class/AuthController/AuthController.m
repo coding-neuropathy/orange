@@ -290,7 +290,9 @@
 - (void)gotoAgreementWithURL:(NSURL *)url
 {
     if (IS_IPHONE) {
-        [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+//        [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+        WebViewController * webVC = [[WebViewController alloc] initWithURL:url];
+        [self.navigationController pushViewController:webVC animated:YES];
     }
 }
 

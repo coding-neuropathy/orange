@@ -17,10 +17,12 @@
 
 //#import "GKWebVC.h"
 #import "WebViewController.h"
-#import "FeedBackViewController.h"
+//#import "FeedBackViewController.h"
 //#import "UpdateEmailController.h"
 #import "VerifyEmailViewController.h"
 #import "PasswordEditViewController.h"
+
+#import <YWFeedbackFMWK/YWFeedbackKit.h>
 
 
 static NSString *SettingTableIdentifier = @"SettingCell";
@@ -31,7 +33,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 @property (nonatomic,strong)VerifyEmailViewController * vc;
 @property(nonatomic, strong) UITableView * tableView;
 
-@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray * dataArray;
 @property (nonatomic, strong) UISwitch * switch_notification;
 @property (nonatomic, strong) UISwitch * switch_assistant;
 @property (nonatomic, strong) SettingsFooterView * footerView;
@@ -39,6 +41,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 @property (nonatomic, strong) UILabel * versionLabel;
 
 @property (nonatomic, strong) id<ALBBLoginService> loginService;
+
+@property (nonatomic, strong) YWFeedbackKit * feedbackKit;
 
 //@property (weak, nonatomic) UIApplication * app;
 
@@ -180,33 +184,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     /**
      *  账号安全
      */
-//    if (k_isLogin) {
-//        NSDictionary * accountSection = @{@"section": @"account",
-//                                      @"row": @[
-//                                          @"mail",
-//                                          @"password"
-//                                          ]};
-//        [self.dataArray addObject:accountSection];
-//    }
-//
-//    NSDictionary *recommandSection = @{@"section" : @"recommandtion",
-//                                    @"row"     : @[
-//                                            @"share application to wechat",
-//                                            @"share application to weibo",
-//                                            @"app store review",
-//                                            ]};
-//    [self.dataArray addObject:recommandSection];
-//    
-//    // 其他
-//    NSDictionary *otherSection = @{@"section" : @"other",
-//                                   @"row"     : @[
-////                                           @"about",
-////                                           @"agreement",
-//                                           @"clear image cache",
-//                                           @"feedback",
-////                                           @"version",
-//                                           ]};
-//    [self.dataArray addObject:otherSection];
+
     
     
     [self.tableView registerClass:[SettingsViewCell class] forCellReuseIdentifier:SettingTableIdentifier];
@@ -425,8 +403,34 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             
             case 1:
             {
-                
-                [self presentViewController:[FeedBackViewController feedbackModalViewController] animated:YES completion:nil];
+                self.feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kGK_Taobao_BaiChuan_appkey];
+                __weak typeof(self) weakSelf = self;
+                [self.feedbackKit makeFeedbackViewControllerWithCompletionBlock:^(YWLightFeedbackViewController *viewController, NSError *error) {
+                    if ( viewController != nil ) {
+                        viewController.title = NSLocalizedStringFromTable(@"feedback", kLocalizedFile, nil);
+                    
+                        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+                        [weakSelf presentViewController:nav animated:YES completion:nil];
+                        
+                        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:weakSelf action:@selector(actionQuitFeedback)];
+                        
+                        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"清除缓存" style:UIBarButtonItemStylePlain
+                                                                                                          target:weakSelf action:@selector(actionCleanMemory:)];
+                        
+                        __weak typeof(nav) weakNav = nav;
+                        
+                        [viewController setOpenURLBlock:^(NSString *aURLString, UIViewController *aParentController) {
+                            UIViewController *webVC = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+                            UIWebView *webView = [[UIWebView alloc] initWithFrame:webVC.view.bounds];
+                            webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+                            
+                            [webVC.view addSubview:webView];
+                            [weakNav pushViewController:webVC animated:YES];
+                            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:aURLString]]];
+                        }];
+                    }
+                }];
+//                [self presentViewController:[FeedBackViewController feedbackModalViewController] animated:YES completion:nil];
             }
                 break;
                 
@@ -453,7 +457,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     
     if (alertView.tag == 40001) {
         if (buttonIndex == 1) {
-//            NSLog(@"unbind weibo %@", [Passport sharedInstance].user.sinaScreenName);
             [API unbindSNSWithUserId:[Passport sharedInstance].user.userId SNSUserName:[Passport sharedInstance].user.sinaScreenName setPlatform:GKSinaWeibo success:^(bool status) {
                 if (status) {
 //                    [Passport sharedInstance].screenName = nil;
@@ -518,16 +521,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     image.imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"weibo_share.jpg"], 1.0);
     message.imageObject = image;
     
-    
-    //    WBWebpageObject *webpage = [WBWebpageObject object];
-    //    webpage.objectID = [self.title md5];
-    //    webpage.title = self.title;
-    ////    webpage.description = [NSString stringWithFormat:NSLocalizedString(@"分享网页内容简介-%.0f", nil), [[NSDate date] timeIntervalSince1970]];
-    ////    webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"image_2" ofType:@"jpg"]];
-    //    webpage.thumbnailData = UIImageJPEGRepresentation(self.image, 0.5);
-    //    webpage.webpageUrl = [self.url stringByAppendingString:@"?from=weibo"];
-    //
-    //    message.mediaObject = webpage;
     
     NSString * wbtoken = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
     
@@ -602,10 +595,23 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"wbtoken"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+#pragma mark - feedViewController button action
+- (void)actionQuitFeedback
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)actionCleanMemory:(id)sender
+{
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+}
+
+
 //将邮箱验证界面设为单例模式
-- (VerifyEmailViewController *)vc{
+- (VerifyEmailViewController *)vc {
     if(!_vc){
-        _vc =[[VerifyEmailViewController alloc]init];
+        _vc =[[VerifyEmailViewController alloc] init];
     }
     return _vc;
 }

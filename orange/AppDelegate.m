@@ -28,6 +28,9 @@ int ddLogLevel;
 
 @implementation AppDelegate
 
+/**
+ *  config umeng track
+ */
 - (void)umengTrack {
     [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
     [MobClick setLogEnabled:NO];
@@ -36,6 +39,24 @@ int ddLogLevel;
     [MobClick startWithConfigure:UMConfigInstance];
 
 }
+
+/**
+ *  config ali baichuan
+ */
+- (void)configBaiChuan
+{
+        [[ALBBSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
+        [[ALBBSDK sharedInstance] setAppVersion:XcodeAppVersion];
+        [[ALBBSDK sharedInstance] setDebugLogOpen:NO];
+    
+        [[ALBBSDK sharedInstance] asyncInit:^{
+            DDLogInfo(@"初始化成功");
+        } failedCallback:^(NSError *error) {
+            DDLogError(@"初始化失败:%@", error);
+        }];
+}
+
+
 //进程启动但还没进入状态保存
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -54,16 +75,11 @@ int ddLogLevel;
     [WeiboSDK enableDebugMode:NO];
     [WeiboSDK registerApp:kGK_WeiboAPPKey];
     
-    //sdk初始化
-    [[ALBBSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
-    [[ALBBSDK sharedInstance] setAppVersion:XcodeAppVersion];
-    [[ALBBSDK sharedInstance] setDebugLogOpen:NO];
-    
-    [[ALBBSDK sharedInstance] asyncInit:^{
-        DDLogInfo(@"初始化成功");
-    } failedCallback:^(NSError *error) {
-        DDLogError(@"初始化失败:%@", error);
-    }];
+    /**
+     *  taobao baichuan sdk init
+     */
+    [self configBaiChuan];
+
     
     //插件版登录状态监听
     id<ALBBLoginService> loginService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBLoginService)];
@@ -473,6 +489,8 @@ int ddLogLevel;
     
 }
 
+
+
 #pragma mark - 3d touch
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL succeeded))completionHandler
 {
@@ -512,7 +530,6 @@ int ddLogLevel;
 }
 
 #pragma mark - get init data
-
 - (void)refreshCategory
 {
     //获取全部分类信息
@@ -644,7 +661,6 @@ int ddLogLevel;
     fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
     [DDLog addLogger:fileLogger];
 }
-
 
 
 @end

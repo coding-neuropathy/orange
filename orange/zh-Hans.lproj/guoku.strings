@@ -58,7 +58,7 @@
 /*
  * Discover Page
  */
-"search"                    = "搜索";
+"search"                    = "搜索商品，图文";
 "recommendation category"   = "推荐品类";
 "popular articles"          = "热门图文";
 "recommendation user"       = "推荐用户";
@@ -192,6 +192,7 @@
 "found-password"        = "找回密码";
 "what's-your-email"     = "电邮 (example@guoku.com)";
 "what's-your-passowrd"  = "密码";
+"you-want-sign-out"     = "退出登录?";
 
 /**
  *  seller
@@ -253,4 +254,9 @@
 "miss category"             = "分类错误";
 "meaningless information"   = "垃圾或诈骗信息";
 "malicious information"     = "不良信息";
+
+/**
+ *  order
+ */
+"scanner"                   = "扫描二维码";
 

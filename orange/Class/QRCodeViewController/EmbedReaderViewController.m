@@ -9,6 +9,9 @@
 #import "EmbedReaderViewController.h"
 #import "ZBarReaderView.h"
 #import "ScannerCropView.h"
+
+#import "EntitySKUController.h"
+
 #import <AVFoundation/AVFoundation.h>
 
 
@@ -141,7 +144,25 @@
         self.text = sym.data;
         [self.audioPlayer play];
         [self.cropView stopAnimating];
-        [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:self.text]];
+        DDLogInfo(@"scanner result %@", self.text);
+        
+//        [self.text has]
+        NSString *parten = @"^http://\\w+.guoku.com/detail/(\\w+)/";
+        NSError * error;
+        NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:parten options:NSRegularExpressionCaseInsensitive error:&error];
+
+        NSTextCheckingResult *match = [reg firstMatchInString:self.text options:0. range:NSMakeRange(0., [self.text length])];
+        if (match) {
+            NSRange firstHalfRange = [match rangeAtIndex:1];
+            DDLogInfo(@"first %@", [self.text substringWithRange:firstHalfRange]);
+            NSString * entity_hash = [self.text substringWithRange:firstHalfRange];
+            EntitySKUController * vc = [[EntitySKUController alloc] initWithEntityHash:entity_hash];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        } else {
+            [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:self.text]];
+        }
         break;
     }
 }

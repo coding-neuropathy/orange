@@ -194,6 +194,7 @@
 "found-password"        = "Found Password";
 "what's-your-email"     = "What's your email (example@guoku.com) ?";
 "what's-your-passowrd"  = "What's your password ?";
+"you-want-sign-out"     = "You want sign out ?";
 
 /**
  *  seller
@@ -256,4 +257,10 @@
 "miss category"             = "Miss Category";
 "meaningless information"   = "Meaningless Information";
 "malicious information"     = "Maliciou Informaion";
+
+/**
+ *  order
+ */
+"scanner"                   = "Scanner";
+
 
