@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
 #import "WebViewController.h"
+#import "BaseNavigationController.h"
 
 #import "AuthView.h"
 
@@ -289,10 +290,14 @@
 
 - (void)gotoAgreementWithURL:(NSURL *)url
 {
+    WebViewController * webVC = [[WebViewController alloc] initWithURL:url];
     if (IS_IPHONE) {
 //        [[OpenCenter sharedOpenCenter] openWebWithURL:url];
-        WebViewController * webVC = [[WebViewController alloc] initWithURL:url];
+        
         [self.navigationController pushViewController:webVC animated:YES];
+    } else {
+//        BaseNavigationController * nav = [[BaseNavigationController alloc] initWithRootViewController:webVC];
+//        [self presentViewController:nav animated:YES completion:nil];
     }
 }
 
