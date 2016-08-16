@@ -293,7 +293,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (void)TapFollowBtnWithUser:(GKUser *)user View:(AuthUserHeaderView *)view
 {
-    DDLogInfo(@"follow with user id %lu", user.userId);
+    DDLogInfo(@"follow with user id %lu", (unsigned long)user.userId);
     if (!k_isLogin) {
         [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
             [self followActionWithUser:user View:view];

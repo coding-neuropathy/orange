@@ -407,7 +407,7 @@ static NSString *CellIdentifier = @"CommentCell";
             self.note.pokeCount = self.note.pokeCount-1;
         }
         self.note.poked = poked;
-        [pokeBtn setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+        [pokeBtn setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],(unsigned long)self.note.pokeCount] forState:UIControlStateNormal];
         pokeBtn.selected = self.note.poked;
         
 //        [AVAnalytics event:@"poke note" attributes:@{@"note": @(self.note.noteId), @"status":@"success"} durations:(int)self.note.pokeCount];

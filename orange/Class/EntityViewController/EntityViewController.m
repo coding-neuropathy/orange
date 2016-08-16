@@ -506,7 +506,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             {
                 EntityHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier forIndexPath:indexPath];
                 headerSection.headertype = NoteType;
-                headerSection.text = [NSString stringWithFormat:@"%ld", self.dataArrayForNote.count];
+                headerSection.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.dataArrayForNote.count];
                 return headerSection;
             }
                 break;
@@ -1019,7 +1019,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     GKUser *user = [Passport sharedInstance].user;
     if(user)
     {
-        url = [NSString stringWithFormat:@"%@%lu",url,user.userId];
+        url = [NSString stringWithFormat:@"%@%lu",url,(unsigned long)user.userId];
     }
 
 //    GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];

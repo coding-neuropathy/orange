@@ -86,7 +86,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             
             _cartService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBCartService)];
         
-            
             [self.user addObserver:self forKeyPath:@"avatarURL" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
             [self.user addObserver:self forKeyPath:@"nickname" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
         }
@@ -475,9 +474,11 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             {
                 CGFloat userHeaderHeight = self.user.bio.length == 0 ? 144. : 204.;
                 userHeaderHeight += IS_IPAD ? 20. : 0.;
-            
-                userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
-                userHeaderHeight += IS_IPHONE ? 49. : 0;
+#warning todo create order
+//                if (self.user.userId == [Passport sharedInstance].user.userId) {
+//                    userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
+//                    userHeaderHeight += IS_IPHONE ? 49. : 0;
+//                }
                 size = CGSizeMake(self.collectionView.deFrameWidth, userHeaderHeight);
             
             }

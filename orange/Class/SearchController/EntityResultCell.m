@@ -126,8 +126,8 @@
     
     // set entity like and dig number
     self.tipLabel.text = [NSString stringWithFormat:@"%@ %ld  %@ %ld",
-                          [NSString fontAwesomeIconStringForEnum:FAHeart], _entity.likeCount,
-                          [NSString fontAwesomeIconStringForEnum:FAComment], _entity.noteCount];
+                          [NSString fontAwesomeIconStringForEnum:FAHeart], (long)_entity.likeCount,
+                          [NSString fontAwesomeIconStringForEnum:FAComment], (long)_entity.noteCount];
     
     // setup activiyIndicator for imageView
     self.activityIndicator.center = self.imageView.center;

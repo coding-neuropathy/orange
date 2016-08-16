@@ -169,7 +169,7 @@
                               NSLocalizedStringFromTable(@"following", kLocalizedFile, nil),
                               (long)self.user.followingCount,
                               NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil),
-                              self.user.fanCount];;
+                              (long)self.user.fanCount];;
     
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
     self.contentLabel.deFrameTop = self.label.deFrameBottom;

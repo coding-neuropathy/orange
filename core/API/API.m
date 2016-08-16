@@ -520,7 +520,7 @@
                                    failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(article_id);
-    NSString * path = [NSString stringWithFormat:@"articles/%ld/comments/", article_id];
+    NSString * path = [NSString stringWithFormat:@"articles/%ld/comments/", (long)article_id];
     
     NSMutableDictionary * paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:content forKey:@"content"];
@@ -1208,7 +1208,7 @@
                             failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(userId);
-    NSString * path = [NSString stringWithFormat:@"user/%ld/dig/articles/", userId];
+    NSString * path = [NSString stringWithFormat:@"user/%ld/dig/articles/", (long)userId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
 //    [paraDict setValue:@(page) forKey:@"page"];
@@ -1498,7 +1498,7 @@
     NSParameterAssert(noteId > 0);
     NSParameterAssert(commentId >= 0);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/comment/%ld/del/", (unsigned long)noteId, commentId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%ld/comment/%ld/del/", (unsigned long)noteId, (unsigned long)commentId];
     
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         if (success) {
@@ -1569,7 +1569,7 @@
     NSParameterAssert(noteId > 0);
     NSParameterAssert(comment);
     
-    NSString *path = [NSString stringWithFormat:@"entity/note/%lu/report/", noteId];
+    NSString *path = [NSString stringWithFormat:@"entity/note/%lu/report/", (unsigned long)noteId];
     
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
     [paraDict setObject:comment forKey:@"comment"];

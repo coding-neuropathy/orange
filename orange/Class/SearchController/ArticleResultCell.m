@@ -76,7 +76,7 @@
     self.titleLabel.text = _article.title;
 
     [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",
-                            [NSString fontAwesomeIconStringForEnum:FAThumbsOUp], _article.dig_count,
+                            [NSString fontAwesomeIconStringForEnum:FAThumbsOUp], (long)_article.dig_count,
                             [NSString fontAwesomeIconStringForEnum:FAComment], _article.commentCount]];
     
      //  设置图片
