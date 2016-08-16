@@ -195,6 +195,7 @@
 "what's-your-email"     = "What's your email (example@guoku.com) ?";
 "what's-your-passowrd"  = "What's your password ?";
 "you-want-sign-out"     = "You want sign out ?";
+"signout-success"       = "Sign Out";
 
 /**
  *  seller

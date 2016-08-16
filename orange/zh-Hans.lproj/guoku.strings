@@ -193,6 +193,7 @@
 "what's-your-email"     = "电邮 (example@guoku.com)";
 "what's-your-passowrd"  = "密码";
 "you-want-sign-out"     = "退出登录?";
+"signout-success"       = "登出成功";
 
 /**
  *  seller

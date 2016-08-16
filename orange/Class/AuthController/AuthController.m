@@ -296,8 +296,8 @@
         
         [self.navigationController pushViewController:webVC animated:YES];
     } else {
-//        BaseNavigationController * nav = [[BaseNavigationController alloc] initWithRootViewController:webVC];
-//        [self presentViewController:nav animated:YES completion:nil];
+        BaseNavigationController * nav = [[BaseNavigationController alloc] initWithRootViewController:webVC];
+        [self presentViewController:nav animated:YES completion:nil];
     }
 }
 

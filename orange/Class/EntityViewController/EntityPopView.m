@@ -347,7 +347,9 @@
 {
     if (self.tapLikeBtn) {
         self.tapLikeBtn((UIButton *)sender);
+        [self removeFromSuperview];
     }
+    
 }
 
 - (void)noteBtnAction:(id)sender
@@ -355,18 +357,18 @@
     if(self.tapNoteBtn)
     {
         self.tapNoteBtn((UIButton *)sender);
+        [self removeFromSuperview];
     }
-    [self removeFromSuperview];
+    
 }
 
 - (void)buyBtnAction:(id)sender
 {
-    
     if (self.tapBuyBtn)
     {
         self.tapBuyBtn((UIButton *)sender);
+        [self removeFromSuperview];
     }
-    [self removeFromSuperview];
 }
 
 #pragma mark - <UIGestureRecognizerDelegate>

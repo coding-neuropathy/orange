@@ -194,7 +194,7 @@
 "what's-your-email"     = "電郵 (example@guoku.com)";
 "what's-your-passowrd"  = "密碼";
 "you-want-sign-out"     = "退出登錄?";
-
+"signout-success"       = "登出成功";
 
 /**
  *  seller
@@ -205,11 +205,11 @@
 /**
  *  verify mail page
  */
-"verify mail"       = "驗證郵箱";
-"reset password"    = "重設密碼";
-"verified"          = "已驗證";
-"send mail for verify" = "發送驗證郵件";
-"update email"         = "修改郵箱";
+"verify mail"                       = "驗證郵箱";
+"reset password"                    = "重設密碼";
+"verified"                          = "已驗證";
+"send mail for verify"              = "發送驗證郵件";
+"update email"                      = "修改郵箱";
 "Sent to the current email"         = "發送至當前郵箱";
 
 /*

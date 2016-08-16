@@ -41,10 +41,11 @@
 - (UIButton *)moreBtn
 {
     if (!_moreBtn) {
-        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _moreBtn.frame = CGRectMake(0., 0., 32., 44.);
+        _moreBtn                            = [UIButton buttonWithType:UIButtonTypeCustom];
+        _moreBtn.deFrameSize                = CGSizeMake(32., 44.);
+        _moreBtn.titleLabel.textAlignment   = NSTextAlignmentCenter;
+        
         [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
-        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
         [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         _moreBtn.backgroundColor = [UIColor clearColor];
         
@@ -86,14 +87,6 @@
         head.appendChild(style);";
         WKUserScript *script = [[WKUserScript alloc] initWithSource:source injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
         
-        // Javascript that disables pinch-to-zoom by inserting the HTML viewport meta tag into <head>
-//        NSString *source = @"var meta = document.createElement('meta'); \
-//        meta.name = 'viewport'; \
-//        meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; \
-//        var head = document.getElementsByTagName('head')[0];\
-//        head.appendChild(meta);";
-//        WKUserScript *script = [[WKUserScript alloc] initWithSource:source injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-        
         // Create the user content controller and add the script to it
         WKUserContentController *userContentController = [WKUserContentController new];
         [userContentController addUserScript:script];
@@ -103,6 +96,9 @@
         configuration.userContentController = userContentController;
         
         _webView = [[WKWebView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kStatusBarHeight) configuration:configuration];
+        
+        _webView.deFrameSize = IS_IPAD  ? CGSizeMake(kScreenWidth - kTabBarWidth, kScreenHeight)
+                                        : CGSizeMake(kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight);
 //        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.UIDelegate = self;
@@ -118,43 +114,7 @@
     }
     return _webView;
 }
-//
-//- (UIButton *)moreBtn
-//{
-//    if (!_moreBtn)
-//    {
-//        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-//        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
-//        _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-//        [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-//        _moreBtn.backgroundColor = [UIColor clearColor];
-//    }
-//    return _moreBtn;
-//}
-//
-//- (UIActivityIndicatorView *)activityIndicator
-//{
-//    if (!_activityIndicator) {
-//        _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-//        _activityIndicator.color = [UIColor grayColor];
-//        _activityIndicator.center = CGPointMake(kScreenWidth / 2., kScreenHeight / 2. - 100.);
-//        
-//    }
-//    return _activityIndicator;
-//}
 
-
-
-//- (void)loadView
-//{
-//    
-//    self.view = self.webView;
-//    self.view.backgroundColor = UIColorFromRGB(0xffffff);
-//    //    [self.view addSubview:self.activityIndicator];
-//    
-//    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
-//
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -166,9 +126,14 @@
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
 
 
-    UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
-    self.navigationItem.rightBarButtonItem = moreBarItem;
-    
+    if (self.navigationController.viewControllers.count <= 1) {
+        UIBarButtonItem * dismissBarItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIBarButtonItemStylePlain target:self action:@selector(dismissBtnAction:)];
+        self.navigationItem.leftBarButtonItem = dismissBarItem;
+        
+    } else {
+        UIBarButtonItem * moreBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+        self.navigationItem.rightBarButtonItem = moreBarItem;
+    }
     
     CGFloat progressBarHeight = 2.f;
     CGRect navigaitonBarBounds = self.navigationController.navigationBar.bounds;
@@ -276,16 +241,17 @@
     }];
     
 
-    
     [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
 //        self.title = result;
-        if (result) {
-            self.shareTitle = result;
-        }
-        else
-        {
-            self.shareTitle = @"果库 - 精英消费指南";
-        }
+//        if (result) {
+        self.shareTitle = [result length] > 0 ? result : @"果库 - 精英消费指南";
+//        }
+//        else
+//        {
+//            self.shareTitle = @"果库 - 精英消费指南";
+//        }
+        
+        self.title = self.shareTitle;
 //        NSLog(@"%@",self.shareTitle);
     }];
 }
@@ -320,8 +286,6 @@
     if (self.image) {
         image = [UIImage imageWithData:[self.image imageDataLessThan_10K]];
     }
-    
-//    DDLogError(@"title %@", self.shareTitle);
     ShareView * view = [[ShareView alloc] initWithTitle:self.shareTitle SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
     view.type = @"url";
     view.tapRefreshButtonBlock = ^(){
@@ -376,6 +340,11 @@
     }
 }
 
+- (void)dismissBtnAction:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - webview kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"estimatedProgress"] && object == self.webView) {
@@ -387,7 +356,7 @@
     }
 }
 
-#pragma mark ---------- create Bottom Bar -------------
+//#pragma mark ---------- create Bottom Bar -------------
 //
 //- (void)creatBottomBar
 //{

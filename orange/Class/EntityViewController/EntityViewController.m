@@ -36,7 +36,8 @@
 
 
 
-@interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate, EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,EntityHeaderBuyViewDelegate,UITextViewDelegate,UIActionSheetDelegate>
+@interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate,
+                                    EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,EntityHeaderBuyViewDelegate, UITextViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -150,11 +151,14 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
 
-        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
+//        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
+        _collectionView.deFrameSize = IS_IPAD   ? CGSizeMake(684., kScreenHeight - kNavigationBarHeight - kStatusBarHeight)
+                                                : CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
         
         
-        if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
-            self.collectionView.deFrameLeft = 128.;
+        if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight
+            || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+            self.collectionView.deFrameLeft = (kScreenWidth - self.collectionView.deFrameWidth ) / 2.;
 
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -351,12 +355,12 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
     [super viewWillAppear:animated];
     
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    
-    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-    {
-        self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-    }
+//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//    
+//    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+//    {
+//        self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
+//    }
     [MobClick beginLogPageView:@"EntityView"];
 }
 
@@ -556,13 +560,14 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         case 5:
         {
             GKNote * note = [self.dataArrayForNote objectAtIndex:indexPath.row];
-            if (IS_IPAD) {
-                cellsize = CGSizeMake(684., [EntityNoteCell height:note]);
-            }
-            else
-            {
-                cellsize = CGSizeMake(kScreenWidth, [EntityNoteCell height:note]);
-            }
+            cellsize = CGSizeMake(self.collectionView.deFrameWidth, [EntityNoteCell height:note]);
+//            if (IS_IPAD) {
+//                cellsize = CGSizeMake(684., [EntityNoteCell height:note]);
+//            }
+//            else
+//            {
+//                cellsize = CGSizeMake(kScreenWidth, [EntityNoteCell height:note]);
+//            }
         }
             break;
         case 6:
@@ -586,8 +591,8 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         {
             if (self.dataArrayForlikeUser.count != 0) {
                 
-                if (IS_IPHONE)
-                    edge = UIEdgeInsetsMake(0., 16., 16., 16.);
+//                if (IS_IPHONE)
+                edge = UIEdgeInsetsMake(0., 16., 16., 16.);
 //                else {
 //                    edge = UIEdgeInsetsMake(0., 16., 16., 16.);
 //                }
@@ -763,11 +768,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 #pragma mark - <EntityHeaderViewDelegate>
 - (void)handelTapImageWithIndex:(NSUInteger)idx
 {
-//    DDLogInfo(@"OKOKOKOK");
-//    [AVAnalytics event:@"click entiyt image view"];
-    
-    EntityPopView * popView = [[EntityPopView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-    popView.entity = self.entity;
+    EntityPopView * popView         = [[EntityPopView alloc] initWithFrame:CGRectZero];
+    popView.deFrameSize             = CGSizeMake(kScreenWidth, kScreenHeight);
+    popView.entity                  = self.entity;
     [popView setImageIndex:idx];
     [popView setNoteNumber:self.dataArrayForNote.count];
     
@@ -944,11 +947,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 //}
 
 #pragma mark - Button Action
-//- (void)likeButtonAction
-//{
-//    [self likeButtonActionWithBtn:nil];
-//}
-
 - (void)likeButtonActionWithBtn:(UIButton *)btn
 {
     self.likeButton = btn;
