@@ -606,6 +606,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         if( ![[change valueForKeyPath:@"new"] integerValue])
         {
             if (!self.searchData.error && self.searchData.count > 0) {
+                self.noResultView.hidden = YES;
                 [UIView setAnimationsEnabled:NO];
                 [self.collectionView reloadData];
                 [self.collectionView.pullToRefreshView stopAnimating];

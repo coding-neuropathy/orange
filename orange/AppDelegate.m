@@ -16,6 +16,7 @@
 
 #import "JPUSHService.h"
 #import "GKNotificationHUB.h"
+#import "Appirater.h"
 
 
 int ddLogLevel;
@@ -56,6 +57,19 @@ int ddLogLevel;
         }];
 }
 
+/**
+ *  config appirater
+ */
+- (void)configAppirater
+{
+    [Appirater setAppId:kGK_AppID_iPhone];
+    [Appirater setDaysUntilPrompt:7];
+    [Appirater setUsesUntilPrompt:5];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    [Appirater setTimeBeforeReminding:2];
+    [Appirater setDebug:NO];
+    [Appirater appLaunched:YES];
+}
 
 //进程启动但还没进入状态保存
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -104,6 +118,11 @@ int ddLogLevel;
     if (iOS9)
         [self setDynamicAction];
     
+    /**
+     *
+     */
+    [self configAppirater];
+//    [Appirater appLaunched:YES];
     
     //设置整体风格
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -236,12 +255,7 @@ int ddLogLevel;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-//    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
-//    if (currentInstallation.badge != 0) {
-//        currentInstallation.badge = 0;
-//        [currentInstallation saveEventually];
-//    }
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
