@@ -139,11 +139,13 @@
 /**
  *  personal page
  */
-"following" = "Following";
-"followers"  = "Followers";
+"following"         = "Following";
+"followers"         = "Followers";
 
-"follow"        = "Follow";
-"unfollow"      = "Unfollow";
+"follow"            = "Follow";
+"unfollow"          = "Unfollow";
+
+"unfollow-failure"  = "Unfollow Failure";
 
 "me like" = "Like";
 "me note" = "Note";

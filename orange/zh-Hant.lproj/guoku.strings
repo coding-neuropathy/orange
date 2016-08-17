@@ -139,14 +139,17 @@
 /**
  *  personal page
  */
-"following" = "關注";
-"followers"  = "粉絲";
+"following"         = "關注";
+"followers"         = "粉絲";
 
-"follow"        = "關注";
-"unfollow"      = "取消關注";
-"me like" = "我的喜愛";
-"me note" = "我的點評";
-"me article" = "我的圖文";
+"follow"            = "關注";
+"unfollow"          = "取消關注";
+"unfollow-failure"  = "取消關注失敗";
+
+
+"me like"           = "我的喜愛";
+"me note"           = "我的點評";
+"me article"        = "我的圖文";
 "me tag" = "我參與過的標籤";
 "me poke" = "我贊過的圖文";
 

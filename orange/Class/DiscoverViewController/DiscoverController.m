@@ -203,19 +203,22 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         self.searchResultsVC.discoverVC = self;
         _searchVC.delegate = self;
         _searchVC.hidesNavigationBarDuringPresentation = NO;
+        if (IS_IPHONE)
+            _searchVC.hidesBottomBarWhenPushed = YES;
         
-        _searchVC.searchBar.tintColor = UIColorFromRGB(0x666666);
-        [_searchVC.searchBar sizeToFit];
-        _searchVC.searchBar.placeholder = NSLocalizedStringFromTable(@"search", kLocalizedFile, nil);
+        _searchVC.searchBar.tintColor                       = UIColorFromRGB(0x666666);
+        _searchVC.searchBar.placeholder                     = NSLocalizedStringFromTable(@"search", kLocalizedFile, nil);
         [_searchVC.searchBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 48)] stretchableImageWithLeftCapWidth:5 topCapHeight:5]  forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
         [_searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(10, 28)]  forState:UIControlStateNormal];
         
-        _searchVC.searchBar.searchTextPositionAdjustment = UIOffsetMake(6.f, 0.f);
-        _searchVC.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-        _searchVC.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        _searchVC.searchBar.keyboardType = UIKeyboardTypeDefault;
-        _searchVC.searchBar.delegate = self;
-
+        _searchVC.searchBar.searchTextPositionAdjustment    = UIOffsetMake(6.f, 0.f);
+        _searchVC.searchBar.autocorrectionType              = UITextAutocorrectionTypeNo;
+        _searchVC.searchBar.autocapitalizationType          = UITextAutocapitalizationTypeNone;
+        _searchVC.searchBar.keyboardType                    = UIKeyboardTypeDefault;
+        _searchVC.searchBar.delegate                        = self;
+        
+        [_searchVC.searchBar sizeToFit];
+    
     }
     return _searchVC;
 }
@@ -587,12 +590,12 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         case CategorySection:
             spacing = IS_IPAD ? 24. : 0;
             break;
-        case EntitySection:
-        {
+//        case EntitySection:
+//        {
 //            spacing = 3.;
 //            spacing = 1.;
-        }
-            break;
+//        }
+//            break;
             
         default:
 //            spacing = 0;
@@ -679,57 +682,39 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 #pragma mark - <UISearchControllerDelegate>
 - (void)willPresentSearchController:(UISearchController *)searchController
 {
-//    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-//    view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.32];
-//    view.tag = 999;
-//    
-//    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-//                                   initWithTarget:self action:@selector(cancelSearch:)];
-//    tap.delegate = self;
-//    [view addGestureRecognizer:tap];
-//    
-//    if (!_searchLogTableView) {
-//        _searchLogTableView = [[UITableView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0, 0, kScreenWidth, kScreenHeight) : CGRectMake(0, 0, kScreenWidth - kTabBarWidth, kScreenHeight)];
-//        _searchLogTableView.delegate = self;
-//        _searchLogTableView.dataSource = self;
-//        _searchLogTableView.backgroundColor = [UIColor clearColor];
-//        _searchLogTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        _searchLogTableView.scrollEnabled = NO;
-//
-//        self.searchLogTableView = _searchLogTableView;
-//    }
-//    [self.searchLogTableView reloadData];
-//    [view addSubview:self.searchLogTableView];
-//    
-//    [self.searchVC.view addSubview:view];
-//    _searchView.alpha = 1;
-    
-    
-    
     SearchView * searchView = [[SearchView alloc] initWithFrame:CGRectZero];
     self.searchView = searchView;
     searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight)
                                     : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
     searchView.tag = 999;
-    searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-        __weak __typeof(&*self)weakSelf = self;
-//    [searchView setTaphotCategoryBtnBlock:^(NSString *hotString) {
-//            
-//           [weakSelf.searchVC.searchBar setText:hotString];
-//            
-//    }];
+//    searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    
+    __weak __typeof(&*self)weakSelf = self;
+
     [searchView setTapRecordBtnBlock:^(NSString *keyword) {
          
         [weakSelf.searchVC.searchBar setText:keyword];
 
     }];
     
+    [API getSearchKeywordsWithSuccess:^(NSArray *keywords) {
+        DDLogInfo(@"keywords %@", keywords);
+        [self.searchView setHotArray:keywords withRecentArray:nil];
+    } Failure:^(NSInteger stateCode, NSError *error) {
+        
+    }];
     
-    searchView.alpha = 1;
-    
-    self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+//    self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
     
     [self.searchVC.view addSubview:self.searchView];
+    
+//    self.tabBarController.tabBar.translucent = YES;
+    searchView.alpha = 1;
+    
+//    if (IS_IPHONE) {
+//        self.tabBarController.tabBar.hidden = YES;
+//        self.tabBarController.tabBar.alpha = 0;
+//    }
 }
 
 
@@ -743,11 +728,16 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 
 - (void)didPresentSearchController:(UISearchController *)searchController
 {
-
+//    searchController.searchBar.showsCancelButton = YES;
 }
 - (void)willDismissSearchController:(UISearchController *)searchController
 {
     [[self.searchVC.view viewWithTag:999] removeFromSuperview];
+//    self.tabBarController.tabBar.hidden = NO;
+//    if (IS_IPHONE) {
+//        self.tabBarController.tabBar.hidden = NO;
+//        self.tabBarController.tabBar.alpha = 1;
+//    }
 }
 
 - (void)didDismissSearchController:(UISearchController *)searchController
@@ -760,16 +750,19 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     self.searchVC.active = NO;
 }
 
+#pragma mark - <UISearchBarDelegate>
+//- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+//{
+//    searchBar.showsCancelButton = YES;
+//    return YES;
+//}
+
 #pragma mark - <UIViewControllerPreviewingDelegate>
 - (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
 {
     NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
     
     UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-
-//    if (!cell) {
-//        return nil;
-//    }
 
     switch (indexPath.section) {
         case 2:

@@ -2643,7 +2643,7 @@
     [paraDict setObject:keyword forKey:@"q"];
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
-//        NSLog(@"%@", responseObject);
+        NSLog(@"search %@", responseObject);
         
         NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
         for (NSDictionary * row in responseObject[@"entities"]) {
@@ -2676,6 +2676,29 @@
     }];
 }
 
+/**
+ *  热门搜索关键词
+ *
+ *  @param success 成功block
+ *  @param failure 失败block
+ */
++ (void)getSearchKeywordsWithSuccess:(void (^)(NSArray *keywords))success
+                            Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString * path = @"search/keywords/";
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+//        NSLog(@"array %@", responseObject);
+        if (success) {
+            success([NSArray arrayWithArray:responseObject]);
+        }
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
 
 /**
  *  搜索商品

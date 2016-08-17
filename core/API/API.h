@@ -810,6 +810,16 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)searchWithKeyword:(NSString *)keyword
                   Success:(void (^)(NSArray *entities, NSArray * articles, NSArray * users))success
                   failure:(void (^)(NSInteger stateCode, NSError * error))failure;
+
+/**
+ *  热门搜索关键词
+ *
+ *  @param success 成功block
+ *  @param failure 失败block
+ */
++ (void)getSearchKeywordsWithSuccess:(void (^)(NSArray *keywords))success
+                             Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
+
 /**
  *  搜索商品
  *

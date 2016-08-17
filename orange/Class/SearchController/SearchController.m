@@ -158,6 +158,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (void)viewWillAppear:(BOOL)animated
 {
     [MobClick beginLogPageView:@"SearchView"];
+//    if (IS_IPHONE) {
+//        self.tabBarController.tabBar.alpha = 0;
+//    }
     [super viewWillAppear:animated];
 }
 
@@ -612,6 +615,8 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                 [self.collectionView.pullToRefreshView stopAnimating];
                 [UIView setAnimationsEnabled:YES];
             } else {
+//                DDLogError(@"error %@", self.searchData.error.localizedDescription);
+                
                 self.noResultView.hidden = NO;
                 [self.collectionView.pullToRefreshView stopAnimating];
 //                [self.view insertSubview:self.no atIndex:<#(NSInteger)#>]

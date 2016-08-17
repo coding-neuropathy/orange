@@ -405,7 +405,7 @@ int ddLogLevel;
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    if([[url absoluteString]hasPrefix:@"wx"])
+    if([[url absoluteString] hasPrefix:@"wx"])
     {
         return [WXApi handleOpenURL:url delegate:self];
     }
@@ -502,8 +502,6 @@ int ddLogLevel;
     
     if ([[url absoluteString] hasPrefix:@"http"])
         [[OpenCenter sharedOpenCenter] openWebWithURL:url];
-    
-    
 }
 
 
@@ -608,7 +606,7 @@ int ddLogLevel;
 - (void)showNetworkStatus
 {
     GKNotificationHUB * hub = [[GKNotificationHUB alloc]init];
-    [hub show:[NSString stringWithFormat:@"%@  无网络链接",[NSString fontAwesomeIconStringForEnum:FAInfoCircle]]];
+    [hub show:[NSString stringWithFormat:@"%@ 无网络链接",[NSString fontAwesomeIconStringForEnum:FAInfoCircle]]];
 }
 
 /** 3D-Touch */

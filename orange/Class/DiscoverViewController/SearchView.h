@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchView : UIView
-/** 最近搜索记录 */
-@property (nonatomic , strong) NSArray * recentArray;
-/** 热门搜索推荐 */
-//@property (nonatomic , strong) NSArray * hotArray;
+
 
 //@property (nonatomic, copy) void (^taphotCategoryBtnBlock)(NSString * hotString);
 
 @property (nonatomic, copy) void (^tapRecordBtnBlock)(NSString * keyword);
+
+
+- (void)setHotArray:(NSArray *)hotArray withRecentArray:(NSArray *)recentArray;
 
 @end
