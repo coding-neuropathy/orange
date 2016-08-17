@@ -2643,7 +2643,7 @@
     [paraDict setObject:keyword forKey:@"q"];
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"search %@", responseObject);
+//        NSLog(@"search %@", responseObject);
         
         NSMutableArray * entities = [NSMutableArray arrayWithCapacity:0];
         for (NSDictionary * row in responseObject[@"entities"]) {
