@@ -282,7 +282,10 @@ int ddLogLevel;
 {
     DDLogInfo(@"user info %@", userInfo);
     NSString * url = [userInfo valueForKey:@"url"];
-    if (url && application.applicationState != UIApplicationStateActive) {
+//    if (url && application.applicationState != UIApplicationStateActive) {
+//        [self openLocalURL:[NSURL URLWithString:url]];
+//    }
+    if (url) {
         [self openLocalURL:[NSURL URLWithString:url]];
     }
     application.applicationIconBadgeNumber = 0;

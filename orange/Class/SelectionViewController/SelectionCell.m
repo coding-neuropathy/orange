@@ -79,12 +79,13 @@
 - (UIImageView *)image
 {
     if (!_image) {
-        _image = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _image.contentMode = UIViewContentModeScaleAspectFit;
-        _image.backgroundColor = [UIColor clearColor];
-        _image.userInteractionEnabled = YES;
+        _image                          = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _image.deFrameSize              = CGSizeMake(self.contentView.deFrameWidth - 32., self.contentView.deFrameWidth -32.);
+        _image.contentMode              = UIViewContentModeScaleAspectFit;
+        _image.backgroundColor          = [UIColor clearColor];
+        _image.userInteractionEnabled   = YES;
         
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+        UITapGestureRecognizer* tap     = [[UITapGestureRecognizer alloc]
                                        initWithTarget:self action:@selector(imageViewButtonAction)];
         [_image addGestureRecognizer:tap];
         [self.contentView addSubview:_image];
@@ -209,11 +210,16 @@
     [self setNeedsDisplay];
 }
 
+
+#pragma mark - layout subviews
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    self.image.frame = CGRectMake(16.0f, 16.0f, kScreenWidth - 32, kScreenWidth - 32);
+//    self.image.frame = CGRectMake(16.0f, 16.0f, self.contentView.deFrameWidth - 32, self.contentView.deFrameWidth - 32);
+    self.image.deFrameLeft  = 16.;
+    self.image.deFrameTop   = 16.;
+    
     if (IS_IPHONE) {
 //        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
         
@@ -229,8 +235,6 @@
         self.likeCounterButton.frame = CGRectMake(0., 0., 40., 26.);
         self.likeCounterButton.center = self.likeButton.center;
         self.likeCounterButton.deFrameLeft = self.likeButton.deFrameRight;
-        
-//        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];
 
         self.timeLabel.center = self.likeButton.center;
         self.timeLabel.deFrameRight = self.contentLabel.deFrameRight;
@@ -266,7 +270,7 @@
 
     if (IS_IPHONE) {
         self.H.frame = CGRectMake(16., 0., self.deFrameWidth - 32., 1);
-        self.H.deFrameBottom = self.contentView.deFrameHeight - 1;
+        self.H.deFrameBottom = self.contentView.deFrameHeight;
     }
 
 }

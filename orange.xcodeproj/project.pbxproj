@@ -206,7 +206,6 @@
 		8A4E8F8F1C1A8D5B003EBE95 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E8F8B1C1A8D5B003EBE95 /* SVRadialGradientLayer.m */; };
 		8A50453C1D58717B00D66F8A /* EmbedReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50453B1D58717B00D66F8A /* EmbedReaderViewController.m */; };
 		8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */; };
-		8A5901791D643F1100780C74 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8A5901511D643F1100780C74 /* .gitignore */; };
 		8A59017A1D643F1100780C74 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5901531D643F1100780C74 /* Appirater.m */; };
 		8A59017B1D643F1100780C74 /* Appirater.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A5901541D643F1100780C74 /* Appirater.podspec.json */; };
 		8A59017C1D643F1100780C74 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A5901561D643F1100780C74 /* AppiraterLocalizable.strings */; };
@@ -3037,7 +3036,6 @@
 				4E4F27FC1B6F4699003A63C5 /* 8.png in Resources */,
 				4E4F27FA1B6F4699003A63C5 /* 6.png in Resources */,
 				4E4F27DA1B6F438E003A63C5 /* loading-image@3x.png in Resources */,
-				8A5901791D643F1100780C74 /* .gitignore in Resources */,
 				4E8D6A991A38B59F00156C17 /* fontdiao.ttf in Resources */,
 				B71E49521AC923FB00D4DB6D /* InfoPlist.strings in Resources */,
 				4E4F27ED1B6F4699003A63C5 /* 1.png in Resources */,
