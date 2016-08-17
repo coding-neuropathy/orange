@@ -64,9 +64,9 @@
 {
     [super layoutSubviews];
     
-    self.entityImageView.frame = CGRectMake(kScreenWidth - 84., 9., 76., 76.);
-    self.textLabel.frame = CGRectMake(10, 10., kScreenWidth - 100., 20.);
-    self.detailTextLabel.frame = CGRectMake(10., 40., kScreenWidth - 100., 40.);
+    self.entityImageView.frame = CGRectMake(self.contentView.frame.size.width - 84., 9., 76., 76.);
+    self.textLabel.frame = CGRectMake(10, 10., self.contentView.frame.size.width - 100., 20.);
+    self.detailTextLabel.frame = CGRectMake(10., 40., self.contentView.frame.size.width - 100., 40.);
 
     
     NSData * imageData = [ImageCache readImageWithURL:self.entity.imageURL_120x120];
