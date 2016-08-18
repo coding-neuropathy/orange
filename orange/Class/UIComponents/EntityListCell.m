@@ -138,7 +138,7 @@
     GKPurchase * purchase = [_entity.purchaseArray objectAtIndex:0];
     self.priceLabel.text = [NSString stringWithFormat:@"¥ %.2f", purchase.lowestPrice];
     
-    [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart], _entity.likeCount,[NSString fontAwesomeIconStringForEnum:FAComment], _entity.noteCount]];
+    [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart], (long)_entity.likeCount,[NSString fontAwesomeIconStringForEnum:FAComment], _entity.noteCount]];
 
     [self setNeedsLayout];
 }

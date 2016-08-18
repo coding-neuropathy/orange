@@ -216,7 +216,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     
     [self.avatarImageView sd_setImageWithURL:_note.creator.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(36., 36.)]];
     
-    self.nameLabel.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", _note.creator.userId, _note.creator.nickname];
+    self.nameLabel.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", (unsigned long)_note.creator.userId, _note.creator.nickname];
     
     if(_note.text != nil)
     {
@@ -496,11 +496,6 @@ static inline NSRegularExpression * UrlRegularExpression() {
         if (_delegate && [_delegate respondsToSelector:@selector(swipLeftWithContentView:)]) {
             [_delegate swipLeftWithContentView:self.contentView];
         }
-//        [UIView animateWithDuration:0.3 animations:^{
-//            self.contentView.frame = CGRectMake(-80, 0., self.deFrameWidth, self.deFrameHeight);
-//        } completion:^(BOOL finished) {
-//            
-//        }];
     } else {
         [UIView animateWithDuration:0.3 animations:^{
             self.contentView.frame = CGRectMake(0., 0., self.deFrameWidth, self.deFrameHeight);

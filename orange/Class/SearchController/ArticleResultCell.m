@@ -77,7 +77,7 @@
 
     [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",
                             [NSString fontAwesomeIconStringForEnum:FAThumbsOUp], (long)_article.dig_count,
-                            [NSString fontAwesomeIconStringForEnum:FAComment], _article.commentCount]];
+                            [NSString fontAwesomeIconStringForEnum:FAComment], (long)_article.commentCount]];
     
      //  设置图片
     [self.coverImageView sd_setImageWithURL:_article.coverURL

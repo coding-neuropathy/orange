@@ -209,8 +209,6 @@
 		8A59017A1D643F1100780C74 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5901531D643F1100780C74 /* Appirater.m */; };
 		8A59017B1D643F1100780C74 /* Appirater.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A5901541D643F1100780C74 /* Appirater.podspec.json */; };
 		8A59017C1D643F1100780C74 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A5901561D643F1100780C74 /* AppiraterLocalizable.strings */; };
-		8A59017D1D643F1100780C74 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = 8A5901591D643F1100780C74 /* CHANGELOG.md */; };
-		8A59017E1D643F1100780C74 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 8A59016E1D643F1100780C74 /* README.md */; };
 		8A5901801D643F3700780C74 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A59017F1D643F3700780C74 /* StoreKit.framework */; };
 		8A7D91071D58827900D67458 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7D91061D58827900D67458 /* libiconv.tbd */; };
 		8A8418AC1C06FDB900F55FE9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */; };
@@ -760,14 +758,12 @@
 		8A50456D1D5873CA00D66F8A /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
 		8A53D9241BD948F6006EF0D1 /* UserEntityCategoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntityCategoryController.h; sourceTree = "<group>"; };
 		8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntityCategoryController.m; sourceTree = "<group>"; };
-		8A5901511D643F1100780C74 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8A5901521D643F1100780C74 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		8A5901531D643F1100780C74 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		8A5901541D643F1100780C74 /* Appirater.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Appirater.podspec.json; sourceTree = "<group>"; };
 		8A5901551D643F1100780C74 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
 		8A5901571D643F1100780C74 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		8A5901581D643F1100780C74 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		8A5901591D643F1100780C74 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		8A59015A1D643F1100780C74 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		8A59015B1D643F1100780C74 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		8A59015C1D643F1100780C74 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
@@ -788,7 +784,6 @@
 		8A59016B1D643F1100780C74 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		8A59016C1D643F1100780C74 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
 		8A59016D1D643F1100780C74 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		8A59016E1D643F1100780C74 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8A59016F1D643F1100780C74 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		8A5901701D643F1100780C74 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		8A5901711D643F1100780C74 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
@@ -2262,14 +2257,11 @@
 		8A5901501D643F1100780C74 /* appirater */ = {
 			isa = PBXGroup;
 			children = (
-				8A5901511D643F1100780C74 /* .gitignore */,
 				8A5901521D643F1100780C74 /* Appirater.h */,
 				8A5901531D643F1100780C74 /* Appirater.m */,
 				8A5901541D643F1100780C74 /* Appirater.podspec.json */,
 				8A5901551D643F1100780C74 /* AppiraterDelegate.h */,
 				8A5901561D643F1100780C74 /* AppiraterLocalizable.strings */,
-				8A5901591D643F1100780C74 /* CHANGELOG.md */,
-				8A59016E1D643F1100780C74 /* README.md */,
 			);
 			path = appirater;
 			sourceTree = "<group>";
@@ -3177,7 +3169,6 @@
 				4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */,
 				8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */,
 				8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */,
-				8A59017D1D643F1100780C74 /* CHANGELOG.md in Sources */,
 				B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */,
 				8A50453C1D58717B00D66F8A /* EmbedReaderViewController.m in Sources */,
 				23B316501CD9E4C800A83CDB /* EditHeaderView.m in Sources */,
@@ -3268,7 +3259,6 @@
 				B7174DD91BD4A83D00DEDBDA /* UserViewController.m in Sources */,
 				B7FE2A081B28136B001C2E33 /* UIImage+FontAwesome.m in Sources */,
 				23F000221C97B5750033BAA4 /* ArticleWebViewController.m in Sources */,
-				8A59017E1D643F1100780C74 /* README.md in Sources */,
 				23E64DB21D2E469400A4402C /* SearchView.m in Sources */,
 				8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */,
 				DA35B3C61AFEE31200D66671 /* EmailEditViewController.m in Sources */,
@@ -3581,8 +3571,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3628,8 +3618,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3670,8 +3660,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = today/today.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = today/config.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3693,8 +3683,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = today/today.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = today/config.pch;
