@@ -57,7 +57,7 @@
 {
     if (!_emailTextField) {
         _emailTextField                             = [[UITextField alloc] initWithFrame:CGRectZero];
-        _emailTextField.textColor                   = UIColorFromRGB(0xbdbdbd);
+        _emailTextField.textColor                   = UIColorFromRGB(0x212121);
         _emailTextField.font                        = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
         _emailTextField.adjustsFontSizeToFitWidth   = YES;
 //        _emailTextField.leftView                    = self.emailLabel;
@@ -97,7 +97,7 @@
 {
     if (!_passwordTextField) {
         _passwordTextField                          = [[UITextField alloc] initWithFrame:CGRectZero];
-        _passwordTextField.textColor                = UIColorFromRGB(0xbdbdbd);
+        _passwordTextField.textColor                = UIColorFromRGB(0x212121);
         _passwordTextField.font                     = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
 //        _passwordTextField.leftView                 = self.passwordLabel;
 //        _passwordTextField.leftViewMode             = UITextFieldViewModeAlways;
@@ -105,6 +105,7 @@
         _passwordTextField.autocapitalizationType   = UITextAutocapitalizationTypeNone;
         _passwordTextField.secureTextEntry          = YES;
         _passwordTextField.placeholder              = NSLocalizedStringFromTable(@"what's-your-passowrd", kLocalizedFile, nil);
+        
         _passwordTextField.clearButtonMode          = UITextFieldViewModeWhileEditing;
         _passwordTextField.keyboardType             = UIKeyboardTypeAlphabet;
         _passwordTextField.returnKeyType            = UIReturnKeyGo;

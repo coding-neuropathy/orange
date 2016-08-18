@@ -53,7 +53,7 @@
 {
     if (!_emailTextField) {
         _emailTextField                             = [[UITextField alloc] initWithFrame:CGRectZero];
-        _emailTextField.textColor                   = UIColorFromRGB(0xbdbdbd);
+        _emailTextField.textColor                   = UIColorFromRGB(0x212121);
         _emailTextField.font                        = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
         _emailTextField.adjustsFontSizeToFitWidth   = YES;
         _emailTextField.autocorrectionType          = UITextAutocorrectionTypeNo;
@@ -89,7 +89,7 @@
 {
     if (!_passwordTextField) {
         _passwordTextField                              = [[UITextField alloc] initWithFrame:CGRectZero];
-        _passwordTextField.textColor                    = UIColorFromRGB(0xbdbdbd);
+        _passwordTextField.textColor                    = UIColorFromRGB(0x212121);
         _passwordTextField.font                         = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
         _passwordTextField.adjustsFontSizeToFitWidth    = YES;
 //        _passwordTextField.leftView                     = self.passwordLabel;
@@ -129,7 +129,7 @@
 {
     if (!_nicknameTextField) {
         _nicknameTextField                          = [[UITextField alloc] initWithFrame:CGRectZero];
-        _nicknameTextField.textColor                = UIColorFromRGB(0xbdbdbd);
+        _nicknameTextField.textColor                = UIColorFromRGB(0x212121);
         _nicknameTextField.font                     = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
 //        _nicknameTextField.leftView                 = self.nicknameLable;
 //        _nicknameTextField.leftViewMode             = UITextFieldViewModeAlways;

@@ -93,18 +93,21 @@ typedef NS_ENUM(NSInteger, MessageType) {
 - (UIImageView *)avatar
 {
     if (!_avatar) {
-        _avatar = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _avatar.deFrameSize = CGSizeMake(36., 36.);
-        _avatar.contentMode = UIViewContentModeScaleAspectFit;
+        _avatar                         = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _avatar.deFrameSize             = CGSizeMake(36., 36.);
+        _avatar.contentMode             = UIViewContentModeScaleAspectFit;
+        
+        _avatar.backgroundColor         = UIColorFromRGB(0xf6f6f6);
+        _avatar.layer.cornerRadius      = 18;
+        _avatar.layer.masksToBounds     = YES;
+        
+        _avatar.userInteractionEnabled  = YES;
+        UITapGestureRecognizer* tap     = [[UITapGestureRecognizer alloc]
+                                                initWithTarget:self action:@selector(avatarButtonAction)];
+        [_avatar addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        [_avatar addGestureRecognizer:tap];
         [self.contentView addSubview:self.avatar];
-        self.avatar.backgroundColor = UIColorFromRGB(0xf6f6f6);
-        self.avatar.layer.cornerRadius = 18;
-        self.avatar.layer.masksToBounds = YES;
-        [self.avatar addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-        self.avatar.userInteractionEnabled = YES;
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self action:@selector(avatarButtonAction)];
-        [self.avatar addGestureRecognizer:tap];
+    
     }
     return _avatar;
 }
@@ -113,16 +116,40 @@ typedef NS_ENUM(NSInteger, MessageType) {
 {
     if (!_label) {
 //        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, self.contentView.deFrameWidth - 130, 20)];
-        _label = [[RTLabel alloc] initWithFrame:CGRectZero];
-        _label.deFrameSize = CGSizeMake(self.contentView.deFrameWidth - 130, 20.);
-        self.label.paragraphReplacement = @"";
-        self.label.lineSpacing = 4.0;
-        self.label.delegate = self;
-        [self.contentView addSubview:self.label];
+        _label                      = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _label.deFrameSize          = CGSizeMake(self.contentView.deFrameWidth - 130., 20.);
+        _label.paragraphReplacement = @"";
+        _label.lineSpacing          = 4.0;
+        _label.delegate             = self;
         
-        [self.label addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        [self.contentView addSubview:_label];
+        [_label addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
     }
     return _label;
+}
+
+- (UIImageView *)image
+{
+    if (!_image) {
+        _image = [[UIImageView alloc] initWithFrame:CGRectZero];
+        //        _image.contentMode = UIViewContentModeScaleAspectFit;
+        _image.deFrameSize          = CGSizeMake(42., 42.);
+        _image.deFrameTop           = self.avatar.deFrameTop;
+        _image.deFrameLeft          = 16.;
+        
+        
+        _image.userInteractionEnabled = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(imageButtonAction)];
+        [_image addGestureRecognizer:tap];
+        _image.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+        _image.layer.borderWidth = 0.5;
+        
+        [_image addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        
+        [self.contentView addSubview:_image];
+    }
+    return _image;
 }
 
 
@@ -163,7 +190,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
     self.avatar.deFrameTop = 12.;
 
     
-    self.label.deFrameLeft = 60.;
+    self.label.deFrameLeft = self.avatar.deFrameRight + 12.;
     self.label.deFrameTop = 15.;
 //    if(!self.label) {
 //        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, self.contentView.deFrameWidth - 130, 20)];
@@ -175,29 +202,23 @@ typedef NS_ENUM(NSInteger, MessageType) {
 //        [self.label addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 //    }
     
-    if (!self.image) {
-        _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.f, 12.f, 42.f, 42.f)];
-//        _image.contentMode = UIViewContentModeScaleAspectFit;
-        [self.contentView addSubview:self.image];
-        [self.image addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-        self.image.userInteractionEnabled = YES;
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self action:@selector(imageButtonAction)];
-        [self.image addGestureRecognizer:tap];
-        self.image.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
-        self.image.layer.borderWidth = 0.5;
-    }
+//    if (!self.image) {
+//
+//    }
     
     [self configContent];
     
-    [self bringSubviewToFront:self.H];
-    
-    self.H.frame = CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth - 60., 0.5);
-    self.H.hidden = NO;
-    _H.deFrameBottom = self.frame.size.height;
+//    [self bringSubviewToFront:self.H];
+//    
+//    self.H.frame = CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth - 60., 0.5);
+//    self.H.hidden = NO;
+//    _H.deFrameBottom = self.frame.size.height;
     
 }
 
+/**
+ *
+ */
 - (void)configContent
 {
     NSDictionary * message = self.message;
@@ -276,7 +297,10 @@ typedef NS_ENUM(NSInteger, MessageType) {
                                time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth -58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+//            self.image.frame = CGRectMake(self.contentView.deFrameWidth - 58, self.avatar.deFrameTop, 42, 42);
+            self.image.deFrameLeft = self.contentView.deFrameWidth - 58.;
+            self.image.deFrameTop = self.avatar.deFrameTop;
+            
             __block UIImageView *block_img = self.image;
             [self.image sd_setImageWithURL:note.entityChiefImage_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {
