@@ -131,8 +131,9 @@ typedef NS_ENUM(NSInteger, MessageType) {
 - (UIImageView *)image
 {
     if (!_image) {
-        _image = [[UIImageView alloc] initWithFrame:CGRectZero];
-        //        _image.contentMode = UIViewContentModeScaleAspectFit;
+        _image                      = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _image.contentMode          = UIViewContentModeScaleAspectFill;
+        _image.layer.masksToBounds  = YES;
         _image.deFrameSize          = CGSizeMake(42., 42.);
         _image.deFrameTop           = self.avatar.deFrameTop;
         _image.deFrameLeft          = 16.;
@@ -192,19 +193,6 @@ typedef NS_ENUM(NSInteger, MessageType) {
     
     self.label.deFrameLeft = self.avatar.deFrameRight + 12.;
     self.label.deFrameTop = 15.;
-//    if(!self.label) {
-//        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, self.contentView.deFrameWidth - 130, 20)];
-//        self.label.paragraphReplacement = @"";
-//        self.label.lineSpacing = 4.0;
-//        self.label.delegate = self;
-//        [self.contentView addSubview:self.label];
-//        
-//        [self.label addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-//    }
-    
-//    if (!self.image) {
-//
-//    }
     
     [self configContent];
     

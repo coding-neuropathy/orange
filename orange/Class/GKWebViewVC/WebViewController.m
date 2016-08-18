@@ -54,14 +54,6 @@
 }
 
 #pragma mark - init view
-- (UIApplication *)app
-{
-    if (!_app) {
-        _app = [UIApplication sharedApplication];
-    }
-    return _app;
-}
-
 - (instancetype)initWithURL:(NSURL *)url
 {
     if (self) {
@@ -355,20 +347,6 @@
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
-
-//#pragma mark ---------- create Bottom Bar -------------
-//
-//- (void)creatBottomBar
-//{
-//    UIBarButtonItem * moreItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
-////    _moreButton = moreItem;
-//   
-//    
-//    
-//    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-////    _flexItem = flexItem;
-//    [self setToolbarItems:[NSArray arrayWithObjects:flexItem,flexItem,flexItem,flexItem,flexItem,moreItem,nil]];
-//}
 
 
 @end

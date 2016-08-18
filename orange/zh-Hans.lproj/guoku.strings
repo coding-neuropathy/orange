@@ -59,6 +59,7 @@
  * Discover Page
  */
 "search"                    = "搜索商品，图文";
+"entities"                  = "商品";
 "recommendation category"   = "推荐品类";
 "popular articles"          = "热门图文";
 "recommendation user"       = "推荐用户";

@@ -462,13 +462,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     switch (section) {
             
         case 1:
-            if (self.searchData.userCount > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
+            if (self.searchData.userCount >= 3) footerSize = CGSizeMake(kScreenWidth, 44.);
             break;
         case 2:
-            if (self.searchData.entityCount > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
+            if (self.searchData.entityCount >= 3) footerSize = CGSizeMake(kScreenWidth, 44.);
             break;
         case 3:
-            if (self.searchData.articleCount > 0) footerSize = CGSizeMake(kScreenWidth, 44.);
+            if (self.searchData.articleCount >= 3) footerSize = CGSizeMake(kScreenWidth, 44.);
             break;
         default:
             footerSize = CGSizeMake(0., 0.);

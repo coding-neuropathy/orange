@@ -97,6 +97,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (void)dealloc
 {
     if (self.user.userId == [Passport sharedInstance].user.userId) {
+    
         [self.user removeObserver:self forKeyPath:@"avatarURL"];
         [self.user removeObserver:self forKeyPath:@"nickname"];
     }
