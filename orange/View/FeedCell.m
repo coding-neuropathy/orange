@@ -178,10 +178,10 @@ typedef NS_ENUM(NSInteger, FeedType) {
     
     self.avatar.frame = CGRectMake(12.f, 13.f, 36.f, 36.f);
 //    self.label.frame = CGRectMake(60., 15., kScreenWidth - 70., 20.);
-    self.contentLabel.frame = CGRectMake(60, 15, kScreenWidth - 70 - 58, 20);
+    self.contentLabel.frame = CGRectMake(60, 15, self.contentView.deFrameWidth - 70 - 58, 20);
     
     if (IS_IPAD) {
-        self.contentLabel.frame = CGRectMake(60, 15, kScreenWidth - kTabBarWidth - 70 - 58, 20);
+        self.contentLabel.frame = CGRectMake(60, 15, self.contentView.deFrameWidth - 70 - 58, 20);
     }
 //    self.timeLabel.deFrameSize = CGSizeMake(80.f, 12.f);
     self.image.frame = CGRectMake(0., 13., 42., 42.);

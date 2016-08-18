@@ -101,6 +101,12 @@
 #define kTabBarWidth 84.f
 #endif
 
+
+// Fixed iPad Screen Width
+#ifndef kPadScreenWitdh
+#define kPadScreenWitdh 684.
+#endif
+
 #ifndef k_isLogin
 #define k_isLogin [Passport sharedInstance].user
 #endif
