@@ -28,7 +28,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 //        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.deFrameSize = IS_IPAD    ? CGSizeMake(kPadScreenWitdh, kScreenHeight)
-                                            : CGSizeMake(kScreenWidth, kScreenHeight);
+                                            : CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight - kTabBarHeight);
         
         if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft
             || self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight) {
