@@ -208,11 +208,11 @@ typedef NS_ENUM(NSInteger, MessageType) {
     
     [self configContent];
     
-//    [self bringSubviewToFront:self.H];
-//    
-//    self.H.frame = CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth - 60., 0.5);
-//    self.H.hidden = NO;
-//    _H.deFrameBottom = self.frame.size.height;
+    [self bringSubviewToFront:self.H];
+    
+    self.H.frame = CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth - 60., 0.5);
+    self.H.hidden = NO;
+    _H.deFrameBottom = self.frame.size.height;
     
 }
 
@@ -355,8 +355,10 @@ typedef NS_ENUM(NSInteger, MessageType) {
             
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = IS_IPHONE    ? CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42)
-                                            : CGRectMake(kScreenWidth -58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+//            self.image.frame = IS_IPHONE    ? CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42)
+//                                            : CGRectMake(kScreenWidth -58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+            self.image.deFrameRight = self.contentView.deFrameWidth - 16.;
+            self.image.deFrameTop   = self.avatar.deFrameTop;
             
             __block UIImageView *block_img = self.image;
 //            DDLogInfo(@"note image %@", entity.imageURL_240x240);
@@ -385,8 +387,11 @@ typedef NS_ENUM(NSInteger, MessageType) {
                                time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = IS_IPHONE    ? CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42)
-                                            : CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+//            self.image.frame = IS_IPHONE    ? CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42)
+//                                            : CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+            self.image.deFrameRight = self.contentView.deFrameWidth -16.;
+            self.image.deFrameTop   = self.avatar.deFrameTop;
+            
             __block UIImageView *block_img = self.image;
             [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {

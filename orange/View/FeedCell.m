@@ -43,6 +43,8 @@ typedef NS_ENUM(NSInteger, FeedType) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
+        
+//        self.backgroundColor = UIColorFromRGB(0xffffff);
 
     }
     return self;
@@ -55,13 +57,21 @@ typedef NS_ENUM(NSInteger, FeedType) {
     // Configure the view for the selected state
 }
 
-- (void)prepareForReuse
+//- (void)prepareForReuse
+//{
+//    [super prepareForReuse];
+//    
+//    for (UIView *subView in self.contentView.subviews) {
+//        subView.hidden = YES;
+//    }
+//}
+
+- (void)dealloc
 {
-    [super prepareForReuse];
+    [self.avatar removeObserver:self forKeyPath:@"image"];
+    [self.contentLabel removeObserver:self forKeyPath:@"text"];
+    [self.image removeObserver:self forKeyPath:@"image"];
     
-    for (UIView *subView in self.contentView.subviews) {
-        subView.hidden = YES;
-    }
 }
 
 #pragma mark - init view
@@ -180,11 +190,13 @@ typedef NS_ENUM(NSInteger, FeedType) {
 //    self.label.frame = CGRectMake(60., 15., kScreenWidth - 70., 20.);
     self.contentLabel.frame = CGRectMake(60, 15, self.contentView.deFrameWidth - 70 - 58, 20);
     
-    if (IS_IPAD) {
-        self.contentLabel.frame = CGRectMake(60, 15, self.contentView.deFrameWidth - 70 - 58, 20);
-    }
+//    if (IS_IPAD) {
+//        self.contentLabel.frame = CGRectMake(60, 15, self.contentView.deFrameWidth - 70 - 58, 20);
+//    }
 //    self.timeLabel.deFrameSize = CGSizeMake(80.f, 12.f);
     self.image.frame = CGRectMake(0., 13., 42., 42.);
+    
+    
     if (IS_IPAD) {
         self.image.deFrameRight = self.contentView.deFrameRight - 20.;
     }
@@ -192,12 +204,30 @@ typedef NS_ENUM(NSInteger, FeedType) {
     
     [self bringSubviewToFront:self.H];
     
-    self.H.frame = CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth, 0.5);
+    self.H.frame = CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth, 1);
     
     self.H.hidden = NO;
-    _H.deFrameBottom = self.frame.size.height;
-    
+//    _H.deFrameBottom = self.frame.size.height;
+//
 }
+//
+//- (void)drawRect:(CGRect)rect
+//{
+//    [super drawRect:rect];
+//    
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+//    CGContextSetLineWidth(context, kSeparateLineWidth);
+//    
+//    CGContextMoveToPoint(context, 60., 0.);
+//    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, 0.);
+//    
+////    CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
+////    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+//    
+//    CGContextStrokePath(context);
+//}
 
 + (FeedType)typeFromFeed:(NSDictionary *)feedDict
 {
@@ -230,7 +260,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             GKEntity *entity = self.feed[@"object"][@"entity"];
             GKUser * user = note.creator;
             
-            [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
+            [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(36, 36)]];
             
             self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> %@</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",
                                       (unsigned long)user.userId,
@@ -264,7 +294,9 @@ typedef NS_ENUM(NSInteger, FeedType) {
             
             [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(100, 100)]];
             self.image.deFrameLeft = self.contentLabel.deFrameRight + 12.;
-            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+//            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+            self.image.deFrameRight = self.contentView.deFrameWidth - 16.;
+            self.image.deFrameTop   = self.avatar.deFrameTop;
         }
             break;
         case FeedUserFollower:
@@ -310,7 +342,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 //    NSLog(@"feed %@", feed);
     RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70 - 58., 20)];
     if (IS_IPAD) {
-        label.frame = CGRectMake(60, 15, kScreenWidth - kTabBarWidth -70 - 58., 20);
+        label.frame = CGRectMake(60, 15, kPadScreenWitdh -70 - 58., 20);
     } else {
         label.frame = CGRectMake(60, 15, kScreenWidth -70 - 58., 20);
     }
@@ -400,14 +432,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
     return height+24;
 }
 
-- (void)dealloc
-{
-    [self.avatar removeObserver:self forKeyPath:@"image"];
-    [self.contentLabel removeObserver:self forKeyPath:@"text"];
-    [self.image removeObserver:self forKeyPath:@"image"];
-    
-}
-
+#pragma mark - observe
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     ((UIView *)object).hidden = NO;
@@ -452,6 +477,8 @@ typedef NS_ENUM(NSInteger, FeedType) {
     [MobClick event:@"feed_forward_user"];
 }
 
+
+#pragma mark - button action
 - (void)imageButtonAction
 {
     
@@ -481,6 +508,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
     
 }
 
+#pragma mark - <RTLabelDelegate>
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url
 {
     NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];

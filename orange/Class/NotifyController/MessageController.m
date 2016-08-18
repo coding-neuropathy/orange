@@ -27,8 +27,13 @@ static NSString *MessageCellIdentifier = @"MessageCell";
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         
-        _tableView.deFrameSize = IS_IPAD    ? CGSizeMake(kScreenWidth - kTabBarWidth, kScreenHeight)
-                                            : CGSizeMake(kScreenWidth, kScreenHeight);
+        _tableView.deFrameSize = IS_IPAD    ? CGSizeMake(kPadScreenWitdh, kScreenHeight)
+                                            : CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight - kTabBarHeight);
+        
+        if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft
+            || self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight) {
+            _tableView.deFrameLeft = 128.;
+        }
         
         _tableView.dataSource = self;
         _tableView.delegate = self;
@@ -49,7 +54,10 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 
 - (void)loadView
 {
-    self.view = self.tableView;
+//    self.view = self.tableView;
+    [super loadView];
+    self.view.backgroundColor = UIColorFromRGB(0xfafafa);
+    [self.view addSubview:self.tableView];
 }
 
 - (void)viewDidLoad
@@ -158,4 +166,22 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 {
     return [MessageCell height:self.dataArrayForMessage[indexPath.row]];
 }
+
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+             self.tableView.frame = CGRectMake(128., 0., kPadScreenWitdh, kScreenHeight);
+         else
+             self.tableView.frame = CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight);
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
+    
+}
+
 @end
