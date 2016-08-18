@@ -252,9 +252,9 @@ static NSString *SettingTableIdentifier = @"SettingCell";
      {
          
          if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
-             self.tableView.frame = CGRectMake(128., 0., 684., kScreenHeight);
+             self.tableView.frame = CGRectMake(128., 0., kPadScreenWitdh, kScreenHeight);
          else
-             self.tableView.frame = CGRectMake(0., 0., 684., kScreenHeight);
+             self.tableView.frame = CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight);
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
          [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];

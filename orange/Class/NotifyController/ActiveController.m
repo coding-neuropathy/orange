@@ -25,7 +25,16 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
+//        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.deFrameSize = IS_IPAD    ? CGSizeMake(kPadScreenWitdh, kScreenHeight)
+                                            : CGSizeMake(kScreenWidth, kScreenHeight);
+        
+        if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft
+            || self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight) {
+            _tableView.deFrameLeft = 128.;
+        }
+        
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -37,7 +46,8 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 - (NoMessageView *)noMessageView
 {
     if (!_noMessageView) {
-        _noMessageView = [[NoMessageView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - 200)];
+        _noMessageView = [[NoMessageView alloc] initWithFrame: IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200)
+                                                                        : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - 200)];
         //        _noMessageView.backgroundColor = [UIColor redColor];
     }
     return _noMessageView;
@@ -45,7 +55,11 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 
 - (void)loadView
 {
-    self.view = self.tableView;
+//    self.view = self.tableView;
+    [super loadView];
+    
+    self.view.backgroundColor = UIColorFromRGB(0xfafafa);
+    [self.view addSubview:self.tableView];
 }
 
 - (void)viewDidLoad
@@ -148,6 +162,23 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [FeedCell height:self.dataArrayForFeed[indexPath.row]];
+}
+
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+             self.tableView.frame = CGRectMake(128., 0., kPadScreenWitdh, kScreenHeight);
+         else
+             self.tableView.frame = CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight);
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
+    
 }
 
 @end

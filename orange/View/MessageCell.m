@@ -90,6 +90,43 @@ typedef NS_ENUM(NSInteger, MessageType) {
 }
 
 
+- (UIImageView *)avatar
+{
+    if (!_avatar) {
+        _avatar = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _avatar.deFrameSize = CGSizeMake(36., 36.);
+        _avatar.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:self.avatar];
+        self.avatar.backgroundColor = UIColorFromRGB(0xf6f6f6);
+        self.avatar.layer.cornerRadius = 18;
+        self.avatar.layer.masksToBounds = YES;
+        [self.avatar addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+        self.avatar.userInteractionEnabled = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(avatarButtonAction)];
+        [self.avatar addGestureRecognizer:tap];
+    }
+    return _avatar;
+}
+
+- (RTLabel *)label
+{
+    if (!_label) {
+//        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, self.contentView.deFrameWidth - 130, 20)];
+        _label = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _label.deFrameSize = CGSizeMake(self.contentView.deFrameWidth - 130, 20.);
+        self.label.paragraphReplacement = @"";
+        self.label.lineSpacing = 4.0;
+        self.label.delegate = self;
+        [self.contentView addSubview:self.label];
+        
+        [self.label addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    }
+    return _label;
+}
+
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
@@ -109,43 +146,34 @@ typedef NS_ENUM(NSInteger, MessageType) {
     [self setNeedsLayout];
 }
 
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    
-    for (UIView *subView in self.contentView.subviews) {
-        subView.hidden = YES;
-    }
-}
+//- (void)prepareForReuse
+//{
+//    [super prepareForReuse];
+//    
+//    for (UIView *subView in self.contentView.subviews) {
+//        subView.hidden = YES;
+//    }
+//}
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    if (!self.avatar) {
-        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(12.f, 12.f, 36.f, 36.f)];
-        _avatar.contentMode = UIViewContentModeScaleAspectFill;
-        [self.contentView addSubview:self.avatar];
-        self.avatar.backgroundColor = UIColorFromRGB(0xf6f6f6);
-        self.avatar.layer.cornerRadius = 18;
-        self.avatar.layer.masksToBounds = YES;
-        [self.avatar addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-        self.avatar.userInteractionEnabled = YES;
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self action:@selector(avatarButtonAction)];
-        [self.avatar addGestureRecognizer:tap];
-    }
-    self.avatar.contentMode = UIViewContentModeScaleAspectFit;
+    self.avatar.deFrameLeft = 12.;
+    self.avatar.deFrameTop = 12.;
+
     
-    if(!self.label) {
-        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth - 130, 20)];
-        self.label.paragraphReplacement = @"";
-        self.label.lineSpacing = 4.0;
-        self.label.delegate = self;
-        [self.contentView addSubview:self.label];
-        
-        [self.label addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-    }
+    self.label.deFrameLeft = 60.;
+    self.label.deFrameTop = 15.;
+//    if(!self.label) {
+//        _label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, self.contentView.deFrameWidth - 130, 20)];
+//        self.label.paragraphReplacement = @"";
+//        self.label.lineSpacing = 4.0;
+//        self.label.delegate = self;
+//        [self.contentView addSubview:self.label];
+//        
+//        [self.label addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+//    }
     
     if (!self.image) {
         _image = [[UIImageView alloc] initWithFrame:CGRectMake(16.f, 12.f, 42.f, 42.f)];
@@ -203,7 +231,8 @@ typedef NS_ENUM(NSInteger, MessageType) {
                                time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
-            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - kTabBarWidth -58, self.avatar.deFrameTop, 42, 42);
+//            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth -58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - kTabBarWidth -58, self.avatar.deFrameTop, 42, 42);
+            self.image.frame = CGRectMake(self.contentView.deFrameWidth - 58, self.avatar.deFrameTop, 42, 42);
             __block UIImageView *block_img = self.image;
             [self.image sd_setImageWithURL:note.entityChiefImage_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(30, 30)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                 if (image && cacheType == SDImageCacheTypeNone) {
