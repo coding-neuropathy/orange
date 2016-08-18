@@ -56,7 +56,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 {
 //    self.view = self.tableView;
     [super loadView];
-    self.view.backgroundColor = UIColorFromRGB(0xffffff);
+    self.view.backgroundColor = UIColorFromRGB(0xfafafa);
     [self.view addSubview:self.tableView];
 }
 
