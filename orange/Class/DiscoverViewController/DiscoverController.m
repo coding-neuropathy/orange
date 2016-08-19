@@ -208,20 +208,25 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         
         _searchVC.searchBar.tintColor                       = UIColorFromRGB(0x666666);
         _searchVC.searchBar.placeholder                     = NSLocalizedStringFromTable(@"search", kLocalizedFile, nil);
-        [_searchVC.searchBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 48)] stretchableImageWithLeftCapWidth:5 topCapHeight:5]  forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+        [_searchVC.searchBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 48)] stretchableImageWithLeftCapWidth:5 topCapHeight:5] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
         [_searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(10, 28)]  forState:UIControlStateNormal];
-        
+//
         _searchVC.searchBar.searchTextPositionAdjustment    = UIOffsetMake(6.f, 0.f);
         _searchVC.searchBar.autocorrectionType              = UITextAutocorrectionTypeNo;
         _searchVC.searchBar.autocapitalizationType          = UITextAutocapitalizationTypeNone;
         _searchVC.searchBar.keyboardType                    = UIKeyboardTypeDefault;
         _searchVC.searchBar.delegate                        = self;
+    
+        self.searchVC.searchBar.autoresizingMask            = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
         
         [_searchVC.searchBar sizeToFit];
     
     }
     return _searchVC;
 }
+
+
+
 
 - (SearchController *)searchResultsVC
 {
@@ -231,6 +236,26 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     return _searchResultsVC;
 }
 
+/**
+ *  searchbar cancel can not show in ipad fixed
+ *
+ *  info http://stackoverflow.com/questions/30474494/cancel-button-is-not-shown-in-uisearchbar
+ *
+ *  @return uiview
+ */
+- (UIView *)viewForSearchBar
+{
+//    NSLog(@"frame %@", self.searchVC.searchBar);
+    if (IS_IPAD)
+        self.searchVC.searchBar.deFrameSize = CGSizeMake(kScreenWidth - kTabBarWidth, self.searchVC.searchBar.deFrameHeight);
+    UIView *viewForSearchBar                        = [[UIView alloc] initWithFrame:self.searchVC.searchBar.bounds];
+
+    viewForSearchBar.autoresizesSubviews            = YES;
+    viewForSearchBar.autoresizingMask               = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin
+                                                                                    | UIViewAutoresizingFlexibleLeftMargin;
+    [viewForSearchBar addSubview:self.searchVC.searchBar];
+    return viewForSearchBar;
+}
 
 - (void)registerPreview{
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
@@ -268,7 +293,8 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     
     [self.collectionView registerClass:[DiscoverUsersView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UserIdentifier];
     
-    self.navigationItem.titleView = self.searchVC.searchBar;
+    
+    self.navigationItem.titleView = [self viewForSearchBar];
     self.definesPresentationContext = YES;
     
     [self.collectionView addSloganView];
@@ -298,7 +324,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     }
     
     //self.navigationController.scrollNavigationBar.scrollView = self.collectionView;
-    [self.navigationController.navigationBar setAlpha:1];
+//    [self.navigationController.navigationBar setAlpha:1];
     [self.navigationController.navigationBar setTranslucent:NO];
     
     self.collectionView.scrollsToTop = YES;
@@ -710,11 +736,6 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     
 //    self.tabBarController.tabBar.translucent = YES;
     searchView.alpha = 1;
-    
-//    if (IS_IPHONE) {
-//        self.tabBarController.tabBar.hidden = YES;
-//        self.tabBarController.tabBar.alpha = 0;
-//    }
 }
 
 
