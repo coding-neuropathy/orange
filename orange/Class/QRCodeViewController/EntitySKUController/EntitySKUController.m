@@ -11,6 +11,7 @@
 @interface EntitySKUController ()
 
 @property (strong, nonatomic) NSString * entity_hash;
+@property (strong, nonatomic) GKEntity * entity;
 @property (strong, nonatomic) UIButton * continueAddBtn;
 
 @end
@@ -32,9 +33,10 @@
     if (!_continueAddBtn) {
         _continueAddBtn                         = [UIButton buttonWithType:UIButtonTypeCustom];
         _continueAddBtn.titleLabel.font         = [UIFont fontWithName:@"PingFangSC-Semibold" size:16.];
-        
+        _continueAddBtn.deFrameSize             = CGSizeMake(70., 22.);
         [_continueAddBtn setTitle:NSLocalizedStringFromTable(@"continue-add", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_continueAddBtn setTitleColor:UIColorFromRGB(0x5976c1) forState:UIControlStateNormal];
+        [_continueAddBtn addTarget:self action:@selector(continueAddBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     return _continueAddBtn;
@@ -44,6 +46,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.continueAddBtn];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,5 +67,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - button action
+- (void)continueAddBtnAction:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

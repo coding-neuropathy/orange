@@ -7,6 +7,7 @@
 //
 
 #import "GKEntity.h"
+#import "GKEntitySKU.h"
 #import "GKPurchase.h"
 #import "GKNote.h"
 #import "NSString+Helper.h"
@@ -37,10 +38,11 @@
                              @"created_time"     : @"createdTime",
                              @"updated_time"     : @"updatedTime",
                              @"like_count"       : @"likeCount",
-                             @"unlike_count"       : @"unlikeCount",
+                             @"unlike_count"     : @"unlikeCount",
                              @"note_count"       : @"noteCount",
                              @"status"           : @"status",
-                             @"mark"             : @"mark"
+                             @"mark"             : @"mark",
+                             @"skus"             : @"skuArray",
                              };
     
     return keyDic;
@@ -62,6 +64,24 @@
              ];
 }
 
+- (void)setSkuArray:(NSArray *)skuArray
+{
+    id obj = skuArray.firstObject;
+    if ([obj isKindOfClass:[GKEntitySKU class]]) {
+        _skuArray = skuArray;
+    } else {
+        NSMutableArray * _skuList = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in skuArray) {
+            GKEntitySKU * sku = [GKEntitySKU modelFromDictionary:row];
+            [_skuList addObject:sku];
+        }
+        _skuArray = [NSArray arrayWithArray:_skuList];
+    }
+}
+
+
+
+
 - (void)setImageURL:(NSURL *)imageURL
 {
     if ([imageURL isKindOfClass:[NSURL class]]) {
@@ -80,14 +100,14 @@
     } else if ([obj isKindOfClass:[NSString class]]) {
         NSMutableArray *urlArray = [[NSMutableArray alloc] init];
         for (NSString *urlString in imageURLArray) {
-            if ([urlString isEqual:[NSNull null]]) {
-                
-            }
-            else
-            {
+            if (![urlString isEqual:[NSNull null]]) {
                 NSURL *imageURL = [NSURL URLWithString:urlString];
                 [urlArray addObject:imageURL];
             }
+//            else
+//            {
+//
+//            }
         }
         _imageURLArray = urlArray;
     }

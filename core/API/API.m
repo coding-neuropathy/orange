@@ -8,7 +8,7 @@
 
 #import "API.h"
 #import "HttpClient.h"
-#import "GKModel.h"
+//#import "GKModel.h"
 #import "NSString+Helper.h"
 #import "Passport.h"
 
@@ -333,6 +333,44 @@
             failure(stateCode);
         }
     }];
+}
+
+/**
+ *  获取商品 sku
+ * 
+ *  @param  entity_hash
+ *
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getEntitySKUWithHash:(NSString *)entity_hash
+                     Success:(void (^)(GKEntity * entity))success
+                     Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSParameterAssert(entity_hash);
+    NSString *path = [NSString stringWithFormat:@"entity/sku/%@/", entity_hash];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+//        NSLog(@"%@", responseObject[@"entity"]);
+        GKEntity * entity = [GKEntity modelFromDictionary:responseObject];
+        
+//        for (NSDictionary * row in responseObject[@"skus"]) {
+//            GKEntitySKU * sku = [GKEntitySKU modelFromDictionary:row];
+//            
+//            
+//        }
+        if (success) {
+            success(entity);
+        }
+        
+        
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+
 }
 
 /**

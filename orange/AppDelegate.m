@@ -111,7 +111,6 @@ int ddLogLevel;
 //启动基本完成程序准备开始运行
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
     /**
      *  set 3d touch
      */
@@ -663,8 +662,8 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
-//    ddLogLevel = DDLogLevelInfo;
-    ddLogLevel = DDLogLevelError;
+    ddLogLevel = DDLogLevelInfo;
+//    ddLogLevel = DDLogLevelError;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;

@@ -7,14 +7,18 @@
 //
 
 #import "GKEntity.h"
-#import "GKNote.h"
-#import "GKComment.h"
-#import "GKUser.h"
+#import "GKEntitySKU.h"
 #import "GKEntityCategory.h"
 #import "GKPurchase.h"
+#import "GKNote.h"
+#import "GKComment.h"
+
+#import "GKUser.h"
+
 #import "GKCategory.h"
 #import "GKArticle.h"
 #import "GKArticleComment.h"
+
 #import "GKLaunch.h"
 
 #import "GKSelectionEntity.h"

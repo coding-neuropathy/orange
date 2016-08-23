@@ -476,10 +476,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                 CGFloat userHeaderHeight = self.user.bio.length == 0 ? 144. : 204.;
                 userHeaderHeight += IS_IPAD ? 20. : 0.;
 #warning todo create order
-//                if (self.user.userId == [Passport sharedInstance].user.userId) {
-//                    userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
-//                    userHeaderHeight += IS_IPHONE ? 49. : 0;
-//                }
+                if (self.user.userId == [Passport sharedInstance].user.userId) {
+                    userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
+                    userHeaderHeight += IS_IPHONE ? 49. : 0;
+                }
                 size = CGSizeMake(self.collectionView.deFrameWidth, userHeaderHeight);
             
             }
@@ -768,6 +768,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 #pragma mark - UserModel KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+//    if (!self.isViewLoaded) {
+//        return;
+//    }
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         if ([keyPath isEqualToString:@"nickname"]) {
             DDLogInfo(@"nickname kvo %@", [Passport sharedInstance].user.nickname);

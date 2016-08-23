@@ -170,4 +170,9 @@
  */
 @property (nonatomic, strong) NSString *mark;
 
+/**
+ *  商品 sku 信息
+ */
+@property (strong, nonatomic) NSArray * skuArray;
+
 @end

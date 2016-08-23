@@ -90,7 +90,6 @@
 		4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */; };
 		4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C461A66B86F004C59C4 /* CategoryGridItem.m */; };
 		4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1C36581AB429FE00EA2F00 /* GTScrollNavigationBar.m */; };
-		4E1D30AD1A125FDF00740C17 /* JSQSystemSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D30AC1A125FDF00740C17 /* JSQSystemSoundPlayer.m */; };
 		4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70271A5ADC260032719E /* SelectionViewController.m */; };
 		4E216A911A1FA37D009FF11D /* AKSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A901A1FA37D009FF11D /* AKSegmentedControl.m */; };
 		4E216A951A2392F2009FF11D /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E216A941A2392F2009FF11D /* JSBadgeView.m */; };
@@ -218,6 +217,7 @@
 		8A9255FC1D50A0A800E6481F /* GKSearchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9255FA1D50A0A800E6481F /* GKSearchData.m */; };
 		8A9256011D50D1A500E6481F /* NoResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9256001D50D1A500E6481F /* NoResultView.m */; };
 		8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A943BBE1D58920A007C5F52 /* ScannerCropView.m */; };
+		8A9C8BD71D6BFC71008D4592 /* EntitySKUHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C8BD61D6BFC71008D4592 /* EntitySKUHeaderView.m */; };
 		8AA0FE701C7DC6C0000BD702 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */; };
 		8AA0FE711C7DC6C0000BD702 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AA0FE6D1C7DC6C0000BD702 /* WeiboSDK.bundle */; };
 		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
@@ -233,6 +233,8 @@
 		8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */; };
 		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
+		8ACB1FB71D6AD83000D3AEF3 /* GKEntitySKU.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ACB1FB51D6AD83000D3AEF3 /* GKEntitySKU.h */; };
+		8ACB1FB81D6AD83000D3AEF3 /* GKEntitySKU.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB1FB61D6AD83000D3AEF3 /* GKEntitySKU.m */; };
 		8ACB9E481D61AB1C00C81500 /* EntitySKUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */; };
 		8ACFAAB61CDF1DF8000830B9 /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */; };
 		8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */; };
@@ -556,8 +558,6 @@
 		4E198C461A66B86F004C59C4 /* CategoryGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryGridItem.m; sourceTree = "<group>"; };
 		4E1C36571AB429FE00EA2F00 /* GTScrollNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTScrollNavigationBar.h; sourceTree = "<group>"; };
 		4E1C36581AB429FE00EA2F00 /* GTScrollNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTScrollNavigationBar.m; sourceTree = "<group>"; };
-		4E1D30AB1A125FDF00740C17 /* JSQSystemSoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQSystemSoundPlayer.h; sourceTree = "<group>"; };
-		4E1D30AC1A125FDF00740C17 /* JSQSystemSoundPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQSystemSoundPlayer.m; sourceTree = "<group>"; };
 		4E1D70261A5ADC260032719E /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
 		4E1D70271A5ADC260032719E /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewController.m; sourceTree = "<group>"; };
 		4E216A8F1A1FA37D009FF11D /* AKSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSegmentedControl.h; sourceTree = "<group>"; };
@@ -806,6 +806,8 @@
 		8A9256001D50D1A500E6481F /* NoResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoResultView.m; sourceTree = "<group>"; };
 		8A943BBD1D58920A007C5F52 /* ScannerCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScannerCropView.h; path = QRCodeViewController/ScannerCropView.h; sourceTree = "<group>"; };
 		8A943BBE1D58920A007C5F52 /* ScannerCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScannerCropView.m; path = QRCodeViewController/ScannerCropView.m; sourceTree = "<group>"; };
+		8A9C8BD51D6BFC71008D4592 /* EntitySKUHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUHeaderView.h; path = QRCodeViewController/EntitySKUController/EntitySKUHeaderView.h; sourceTree = "<group>"; };
+		8A9C8BD61D6BFC71008D4592 /* EntitySKUHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntitySKUHeaderView.m; path = QRCodeViewController/EntitySKUController/EntitySKUHeaderView.m; sourceTree = "<group>"; };
 		8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		8AA0FE641C7DC6C0000BD702 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
 		8AA0FE651C7DC6C0000BD702 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
@@ -843,6 +845,8 @@
 		8ABC7DE11C056B6000A15147 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		8AC3F6841C0590A500CCD867 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8AC3F6861C05910A00CCD867 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		8ACB1FB51D6AD83000D3AEF3 /* GKEntitySKU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKEntitySKU.h; path = Entity/GKEntitySKU.h; sourceTree = "<group>"; };
+		8ACB1FB61D6AD83000D3AEF3 /* GKEntitySKU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKEntitySKU.m; path = Entity/GKEntitySKU.m; sourceTree = "<group>"; };
 		8ACB9E461D61AB1C00C81500 /* EntitySKUController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUController.h; path = QRCodeViewController/EntitySKUController/EntitySKUController.h; sourceTree = "<group>"; };
 		8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntitySKUController.m; path = QRCodeViewController/EntitySKUController/EntitySKUController.m; sourceTree = "<group>"; };
 		8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.6.a"; sourceTree = "<group>"; };
@@ -1531,23 +1535,6 @@
 			path = GTScrollNavigationBar;
 			sourceTree = "<group>";
 		};
-		4E1D30A91A125FDF00740C17 /* JSQSystemSoundPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				4E1D30AA1A125FDF00740C17 /* Classes */,
-			);
-			path = JSQSystemSoundPlayer;
-			sourceTree = "<group>";
-		};
-		4E1D30AA1A125FDF00740C17 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				4E1D30AB1A125FDF00740C17 /* JSQSystemSoundPlayer.h */,
-				4E1D30AC1A125FDF00740C17 /* JSQSystemSoundPlayer.m */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		4E1D70191A5ADB890032719E /* DiscoverViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1790,7 +1777,6 @@
 				4E8D6A8D1A38B59F00156C17 /* FontDiao */,
 				4E216A921A2392F2009FF11D /* JSBadgeView */,
 				4E216A8E1A1FA37D009FF11D /* AKSegmentedControl */,
-				4E1D30A91A125FDF00740C17 /* JSQSystemSoundPlayer */,
 				4E56DF4119D56EF500263B17 /* FontAwesome */,
 			);
 			path = ThirdParty;
@@ -2355,6 +2341,8 @@
 			children = (
 				8ACB9E461D61AB1C00C81500 /* EntitySKUController.h */,
 				8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */,
+				8A9C8BD51D6BFC71008D4592 /* EntitySKUHeaderView.h */,
+				8A9C8BD61D6BFC71008D4592 /* EntitySKUHeaderView.m */,
 			);
 			name = EntitySKUController;
 			sourceTree = "<group>";
@@ -2559,6 +2547,8 @@
 			children = (
 				39B720071B1F4C16008519E3 /* GKEntity.h */,
 				39B720081B1F4C16008519E3 /* GKEntity.m */,
+				8ACB1FB51D6AD83000D3AEF3 /* GKEntitySKU.h */,
+				8ACB1FB61D6AD83000D3AEF3 /* GKEntitySKU.m */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -2812,6 +2802,7 @@
 				39B720331B1F4C16008519E3 /* BaseHttpClient.h in Headers */,
 				39B7204A1B1F4C16008519E3 /* GKEntityCategory.h in Headers */,
 				39B720561B1F4C16008519E3 /* NSDictionary+Sign.h in Headers */,
+				8ACB1FB71D6AD83000D3AEF3 /* GKEntitySKU.h in Headers */,
 				39B7204F1B1F4C16008519E3 /* GKPurchase.h in Headers */,
 				39B720371B1F4C16008519E3 /* NSDate+App.h in Headers */,
 				B7930F961CA8D8CF009FDD9F /* GKSelectionEntity.h in Headers */,
@@ -3079,6 +3070,7 @@
 				39B720451B1F4C16008519E3 /* GKBaseModel.m in Sources */,
 				39B720501B1F4C16008519E3 /* GKPurchase.m in Sources */,
 				39B7203A1B1F4C16008519E3 /* NSObject+App.m in Sources */,
+				8ACB1FB81D6AD83000D3AEF3 /* GKEntitySKU.m in Sources */,
 				8AAA2D061C01EF1C00B27E49 /* GKLaunch.m in Sources */,
 				39B720721B1F4E78008519E3 /* GKEntity+ImageURLFixes.m in Sources */,
 				39B720401B1F4C16008519E3 /* UIView+DEFrameAdditions.m in Sources */,
@@ -3287,7 +3279,6 @@
 				B758E84C1D17DB7C00DD01C7 /* UserArticleCell.m in Sources */,
 				B7F544021BC2457E0044F5E9 /* UIImage+MultiFormat.m in Sources */,
 				8A1905221D54378B00B72A79 /* AuthUserHeaderView.m in Sources */,
-				4E1D30AD1A125FDF00740C17 /* JSQSystemSoundPlayer.m in Sources */,
 				B7ED32B21B257EFF009BAF5A /* EntityNoteCell.m in Sources */,
 				238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */,
 				4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */,
@@ -3302,6 +3293,7 @@
 				4E73E67A1C19361300B604B5 /* LoginViewController.m in Sources */,
 				B769B11E1B2ACE91004401FA /* IFTTTColorAnimation.m in Sources */,
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				8A9C8BD71D6BFC71008D4592 /* EntitySKUHeaderView.m in Sources */,
 				8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */,
 				B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */,
 				23F612FA1CDAEF120074E8C8 /* NicknameViewController.m in Sources */,
