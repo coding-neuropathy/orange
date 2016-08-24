@@ -235,8 +235,6 @@
 		8ACB9E481D61AB1C00C81500 /* EntitySKUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */; };
 		8ACFAAB61CDF1DF8000830B9 /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */; };
 		8AD91BAA1D6D4F4800EC9787 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD91BA91D6D4F4800EC9787 /* iCarousel.m */; };
-		8AD91BAC1D6D559600EC9787 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD91BAB1D6D559600EC9787 /* libSDWebImage.a */; };
-		8AD91BAE1D6D569B00EC9787 /* libCocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD91BAD1D6D569B00EC9787 /* libCocoaLumberjack.a */; };
 		8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */; };
 		8ADEA30E1D5A223B00D522A2 /* DiscoverCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
@@ -335,7 +333,6 @@
 		B7AAFA761AB7033600A2F20D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA751AB7033600A2F20D /* CFNetwork.framework */; };
 		B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA791AB7039600A2F20D /* Foundation.framework */; };
 		B7B065C81BF985CE001AA30F /* PreviewArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B065C71BF985CE001AA30F /* PreviewArticleController.m */; };
-		B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B6958E1AF05F310016AAB8 /* ImageIO.framework */; };
 		B7B6AD501D52F25800C9B8E0 /* GKDiscover.h in Headers */ = {isa = PBXBuildFile; fileRef = B7B6AD4E1D52F25800C9B8E0 /* GKDiscover.h */; };
 		B7B6AD511D52F25800C9B8E0 /* GKDiscover.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B6AD4F1D52F25800C9B8E0 /* GKDiscover.m */; };
 		B7BE3E2D1BA9A17A004AD422 /* CategroyGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BE3E2C1BA9A17A004AD422 /* CategroyGroupController.m */; };
@@ -821,8 +818,6 @@
 		8ACFAAB51CDF1DF8000830B9 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		8AD91BA81D6D4F4800EC9787 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		8AD91BA91D6D4F4800EC9787 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
-		8AD91BAB1D6D559600EC9787 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "../../Library/Developer/Xcode/DerivedData/orange-cwzaokuairhfwhdnyntfgefnnvzu/Build/Products/Debug-iphonesimulator/SDWebImage/libSDWebImage.a"; sourceTree = "<group>"; };
-		8AD91BAD1D6D569B00EC9787 /* libCocoaLumberjack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaLumberjack.a; path = "../../Library/Developer/Xcode/DerivedData/orange-cwzaokuairhfwhdnyntfgefnnvzu/Build/Products/Debug-iphonesimulator/CocoaLumberjack/libCocoaLumberjack.a"; sourceTree = "<group>"; };
 		8ADEA3091D59CB9200D522A2 /* MainCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCategoryView.h; sourceTree = "<group>"; };
 		8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCategoryView.m; sourceTree = "<group>"; };
 		8ADEA30C1D5A223B00D522A2 /* DiscoverCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverCategoryCell.h; sourceTree = "<group>"; };
@@ -988,7 +983,6 @@
 		B7AAFA791AB7039600A2F20D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B7B065C61BF985CE001AA30F /* PreviewArticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewArticleController.h; sourceTree = "<group>"; };
 		B7B065C71BF985CE001AA30F /* PreviewArticleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewArticleController.m; sourceTree = "<group>"; };
-		B7B6958E1AF05F310016AAB8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B7B6AD4E1D52F25800C9B8E0 /* GKDiscover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKDiscover.h; path = Discover/GKDiscover.h; sourceTree = "<group>"; };
 		B7B6AD4F1D52F25800C9B8E0 /* GKDiscover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKDiscover.m; path = Discover/GKDiscover.m; sourceTree = "<group>"; };
 		B7BE3E2B1BA9A17A004AD422 /* CategroyGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategroyGroupController.h; sourceTree = "<group>"; };
@@ -1059,8 +1053,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AD91BAE1D6D569B00EC9787 /* libCocoaLumberjack.a in Frameworks */,
-				8AD91BAC1D6D559600EC9787 /* libSDWebImage.a in Frameworks */,
 				4E56DFB919D5AEF300263B17 /* CoreMotion.framework in Frameworks */,
 				8AEDCBB81D62C5230010FDB4 /* UTMini.framework in Frameworks */,
 				8AEDCB511D62BE010010FDB4 /* libc++.tbd in Frameworks */,
@@ -1092,7 +1084,6 @@
 				8AEDCBAD1D62C5230010FDB4 /* ALBBLoginSDK.framework in Frameworks */,
 				8A195F0B1CF3FD3A00F2A954 /* UMMobClick.framework in Frameworks */,
 				4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */,
-				B7B6958F1AF05F310016AAB8 /* ImageIO.framework in Frameworks */,
 				8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
 				8AEDCBB61D62C5230010FDB4 /* TBAppLinkSDK.framework in Frameworks */,
@@ -2490,8 +2481,6 @@
 		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8AD91BAD1D6D569B00EC9787 /* libCocoaLumberjack.a */,
-				8AD91BAB1D6D559600EC9787 /* libSDWebImage.a */,
 				8A59017F1D643F3700780C74 /* StoreKit.framework */,
 				8AEDCB501D62BE010010FDB4 /* libc++.tbd */,
 				8A1905421D5471F300B72A79 /* CoreVideo.framework */,
@@ -2516,7 +2505,6 @@
 				4E56DFB619D5AEED00263B17 /* CoreTelephony.framework */,
 				B72985F31BB8E727006E2518 /* CoreSpotlight.framework */,
 				4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */,
-				B7B6958E1AF05F310016AAB8 /* ImageIO.framework */,
 				B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */,
 				08AA02EF865C28B0B7CE69E9 /* libPods-orange.a */,
 			);
@@ -3441,6 +3429,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lstdc++",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
@@ -3489,6 +3478,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lstdc++",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
