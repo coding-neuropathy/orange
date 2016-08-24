@@ -224,7 +224,6 @@
 		8AAA2D0C1C02BC6700B27E49 /* LaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D0B1C02BC6700B27E49 /* LaunchView.m */; };
 		8AAA2D141C04444800B27E49 /* EntityPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D131C04444800B27E49 /* EntityPreViewController.m */; };
 		8AAA50891BD67614005384CD /* UserTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA50881BD67614005384CD /* UserTagCell.m */; };
-		8AAA508C1BD68FC3005384CD /* CategoryGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA508B1BD68FC3005384CD /* CategoryGridCell.m */; };
 		8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */; };
 		8AB731DA1C1BBDAD0076BACC /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */; };
 		8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D91C1BBDAD0076BACC /* SettingsViewCell.m */; };
@@ -802,8 +801,6 @@
 		8AAA2D131C04444800B27E49 /* EntityPreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityPreViewController.m; path = PreViewControllers/EntityPreViewController.m; sourceTree = "<group>"; };
 		8AAA50871BD67614005384CD /* UserTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTagCell.h; sourceTree = "<group>"; };
 		8AAA50881BD67614005384CD /* UserTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTagCell.m; sourceTree = "<group>"; };
-		8AAA508A1BD68FC3005384CD /* CategoryGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGridCell.h; sourceTree = "<group>"; };
-		8AAA508B1BD68FC3005384CD /* CategoryGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryGridCell.m; sourceTree = "<group>"; };
 		8AB369151BA2FF73009F6572 /* HomeCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCategoryCell.h; sourceTree = "<group>"; };
 		8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCategoryCell.m; sourceTree = "<group>"; };
 		8AB731D61C1BBDAD0076BACC /* SettingsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsFooterView.h; sourceTree = "<group>"; };
@@ -1389,8 +1386,6 @@
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8AAA508A1BD68FC3005384CD /* CategoryGridCell.h */,
-				8AAA508B1BD68FC3005384CD /* CategoryGridCell.m */,
 				B7C6847D1ABBC3F500A122E8 /* Components */,
 				B766763E1AB8173B002F294C /* UserView */,
 				B76676371AB8058A002F294C /* NotificationView */,
@@ -3017,7 +3012,6 @@
 				B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */,
 				B7F5AA0B1B08D3320033BB2D /* WebViewProgressView.m in Sources */,
 				B772BE9A1BD53CFA005C1540 /* NoteCell.m in Sources */,
-				8AAA508C1BD68FC3005384CD /* CategoryGridCell.m in Sources */,
 				B77E00A91B8988DC008BCA55 /* EntityPopView.m in Sources */,
 				4EC9F7971A7928C70057D736 /* UserSingleListCell.m in Sources */,
 				B772BE9D1BD55848005C1540 /* UserLikeViewController.m in Sources */,
