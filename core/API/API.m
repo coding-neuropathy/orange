@@ -351,19 +351,12 @@
     NSString *path = [NSString stringWithFormat:@"entity/sku/%@/", entity_hash];
     
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
-//        NSLog(@"%@", responseObject[@"entity"]);
-        GKEntity * entity = [GKEntity modelFromDictionary:responseObject];
+//        NSLog(@"%@", responseObject);
         
-//        for (NSDictionary * row in responseObject[@"skus"]) {
-//            GKEntitySKU * sku = [GKEntitySKU modelFromDictionary:row];
-//            
-//            
-//        }
+        GKEntity * entity = [GKEntity modelFromDictionary:responseObject];
         if (success) {
             success(entity);
         }
-        
-        
         
     } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {

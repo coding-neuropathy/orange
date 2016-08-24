@@ -218,6 +218,7 @@
 		8A9256011D50D1A500E6481F /* NoResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9256001D50D1A500E6481F /* NoResultView.m */; };
 		8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A943BBE1D58920A007C5F52 /* ScannerCropView.m */; };
 		8A9C8BD71D6BFC71008D4592 /* EntitySKUHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C8BD61D6BFC71008D4592 /* EntitySKUHeaderView.m */; };
+		8A9C8BDA1D6C10BF008D4592 /* EntitySKUCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C8BD91D6C10BF008D4592 /* EntitySKUCell.m */; };
 		8AA0FE701C7DC6C0000BD702 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */; };
 		8AA0FE711C7DC6C0000BD702 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AA0FE6D1C7DC6C0000BD702 /* WeiboSDK.bundle */; };
 		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
@@ -808,6 +809,8 @@
 		8A943BBE1D58920A007C5F52 /* ScannerCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScannerCropView.m; path = QRCodeViewController/ScannerCropView.m; sourceTree = "<group>"; };
 		8A9C8BD51D6BFC71008D4592 /* EntitySKUHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUHeaderView.h; path = QRCodeViewController/EntitySKUController/EntitySKUHeaderView.h; sourceTree = "<group>"; };
 		8A9C8BD61D6BFC71008D4592 /* EntitySKUHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntitySKUHeaderView.m; path = QRCodeViewController/EntitySKUController/EntitySKUHeaderView.m; sourceTree = "<group>"; };
+		8A9C8BD81D6C10BF008D4592 /* EntitySKUCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUCell.h; path = QRCodeViewController/EntitySKUController/EntitySKUCell.h; sourceTree = "<group>"; };
+		8A9C8BD91D6C10BF008D4592 /* EntitySKUCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntitySKUCell.m; path = QRCodeViewController/EntitySKUController/EntitySKUCell.m; sourceTree = "<group>"; };
 		8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		8AA0FE641C7DC6C0000BD702 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
 		8AA0FE651C7DC6C0000BD702 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
@@ -2343,6 +2346,8 @@
 				8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */,
 				8A9C8BD51D6BFC71008D4592 /* EntitySKUHeaderView.h */,
 				8A9C8BD61D6BFC71008D4592 /* EntitySKUHeaderView.m */,
+				8A9C8BD81D6C10BF008D4592 /* EntitySKUCell.h */,
+				8A9C8BD91D6C10BF008D4592 /* EntitySKUCell.m */,
 			);
 			name = EntitySKUController;
 			sourceTree = "<group>";
@@ -3266,6 +3271,7 @@
 				23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */,
 				B7F543FA1BC2457E0044F5E9 /* SDWebImageCompat.m in Sources */,
 				4E56DF1B19D552C000263B17 /* main.m in Sources */,
+				8A9C8BDA1D6C10BF008D4592 /* EntitySKUCell.m in Sources */,
 				4E4F27D71B6F438E003A63C5 /* ImageLoadingView.m in Sources */,
 				B7F544061BC2457E0044F5E9 /* UIView+WebCacheOperation.m in Sources */,
 				4E56DF7D19D56EF500263B17 /* UIFont+FontAwesome.m in Sources */,

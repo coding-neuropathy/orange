@@ -631,7 +631,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 }
 
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     CGSize headerSize = CGSizeMake(0, 0);
     switch (section) {

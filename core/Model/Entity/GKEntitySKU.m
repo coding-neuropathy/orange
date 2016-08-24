@@ -8,6 +8,7 @@
 
 #import "GKEntitySKU.h"
 
+
 @implementation GKEntitySKU
 
 + (NSDictionary *)dictionaryForServerAndClientKeys
@@ -32,16 +33,14 @@
 
 - (void)setAttrs:(id)attrs
 {
+//    NSLog(@"attrs %@", attrs.items());
     if ([attrs isKindOfClass:[NSDictionary class]]) {
         _attrs = attrs;
     } else {
-        NSData * data = [attrs dataUsingEncoding:NSUTF8StringEncoding];
-        NSError * error = nil;
-        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-        if (!json) {
-            // handle error
-        }
+        NSData *data = [attrs dataUsingEncoding:NSUTF8StringEncoding];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         _attrs = json;
+        
     }
 }
 

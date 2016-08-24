@@ -292,9 +292,11 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 - (void)loadView
 {
-    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-    backView.backgroundColor = UIColorFromRGB(0xfafafa);
-    self.view = backView;
+//    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
+//    backView.backgroundColor = UIColorFromRGB(0xfafafa);
+//    self.view = backView;
+    [super loadView];
+    self.view.backgroundColor = UIColorFromRGB(0xfafafa);
     
     [self.view addSubview:self.collectionView];
 }

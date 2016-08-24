@@ -184,8 +184,6 @@
     NSTimeInterval timestamp = [dict[@"time"] doubleValue];
     self.date = [NSDate dateWithTimeIntervalSince1970:timestamp];
     
-    
-    
 //    __block UIImageView *block_img = self.image;
     __weak __typeof(&*self)weakSelf = self;
     [self.loading startAnimating];
