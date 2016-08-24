@@ -122,44 +122,6 @@
     return _more;
 }
 
-////点赞字样
-//- (UIButton *)digLabel
-//{
-//    if (!_digLabel) {
-//        _digLabel = [UIButton buttonWithType:UIButtonTypeCustom];
-//        _digLabel.frame =CGRectMake(0., 0., 20., 44.);
-//        _digLabel.titleLabel.font = [UIFont systemFontOfSize:12.];
-//        [_digLabel setTitle:NSLocalizedStringFromTable(@"poke", kLocalizedFile, nil) forState:UIControlStateNormal];
-//        [_digLabel setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
-//        [_digLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -15., 0., 0.)];
-//        _digLabel.backgroundColor = [UIColor clearColor];
-//    }
-//    return _digLabel;
-//}
-
-
-////评论字样
-//- (UIButton *)commentLabel
-//{
-//    if (!_commentLabel) {
-//        _commentLabel = [UIButton buttonWithType:UIButtonTypeCustom];
-//        _commentLabel.frame =CGRectMake(0., 0., 42., 44.);
-//        _commentLabel.titleLabel.font = [UIFont systemFontOfSize:12.];
-//        [_commentLabel setTitle:NSLocalizedStringFromTable(@"comment", kLocalizedFile, nil) forState:UIControlStateNormal];
-//        [_commentLabel setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
-//        [_commentLabel setTitleEdgeInsets:UIEdgeInsetsMake(0., -15., 0., 0.)];
-//        [_commentLabel addTarget:self action:@selector(commentButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-//        _commentLabel.backgroundColor = [UIColor clearColor];
-//    }
-//    return _commentLabel;
-//}
-
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    
-//    
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

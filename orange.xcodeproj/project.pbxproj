@@ -210,8 +210,6 @@
 		8A9255FC1D50A0A800E6481F /* GKSearchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9255FA1D50A0A800E6481F /* GKSearchData.m */; };
 		8A9256011D50D1A500E6481F /* NoResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9256001D50D1A500E6481F /* NoResultView.m */; };
 		8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A943BBE1D58920A007C5F52 /* ScannerCropView.m */; };
-		8A9C8BD71D6BFC71008D4592 /* EntitySKUHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C8BD61D6BFC71008D4592 /* EntitySKUHeaderView.m */; };
-		8A9C8BDA1D6C10BF008D4592 /* EntitySKUCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C8BD91D6C10BF008D4592 /* EntitySKUCell.m */; };
 		8AA0FE701C7DC6C0000BD702 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */; };
 		8AA0FE711C7DC6C0000BD702 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AA0FE6D1C7DC6C0000BD702 /* WeiboSDK.bundle */; };
 		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
@@ -231,6 +229,7 @@
 		8ACB9E481D61AB1C00C81500 /* EntitySKUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */; };
 		8ACFAAB61CDF1DF8000830B9 /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */; };
 		8AD5D2151D6D72AC000927C7 /* BannerCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D2141D6D72AC000927C7 /* BannerCarousel.m */; };
+		8AD5D2181D6D89B7000927C7 /* SKUToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D2171D6D89B7000927C7 /* SKUToolbar.m */; };
 		8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */; };
 		8ADEA30E1D5A223B00D522A2 /* DiscoverCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
@@ -759,10 +758,6 @@
 		8A9256001D50D1A500E6481F /* NoResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoResultView.m; sourceTree = "<group>"; };
 		8A943BBD1D58920A007C5F52 /* ScannerCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScannerCropView.h; path = QRCodeViewController/ScannerCropView.h; sourceTree = "<group>"; };
 		8A943BBE1D58920A007C5F52 /* ScannerCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScannerCropView.m; path = QRCodeViewController/ScannerCropView.m; sourceTree = "<group>"; };
-		8A9C8BD51D6BFC71008D4592 /* EntitySKUHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUHeaderView.h; path = QRCodeViewController/EntitySKUController/EntitySKUHeaderView.h; sourceTree = "<group>"; };
-		8A9C8BD61D6BFC71008D4592 /* EntitySKUHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntitySKUHeaderView.m; path = QRCodeViewController/EntitySKUController/EntitySKUHeaderView.m; sourceTree = "<group>"; };
-		8A9C8BD81D6C10BF008D4592 /* EntitySKUCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUCell.h; path = QRCodeViewController/EntitySKUController/EntitySKUCell.h; sourceTree = "<group>"; };
-		8A9C8BD91D6C10BF008D4592 /* EntitySKUCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntitySKUCell.m; path = QRCodeViewController/EntitySKUController/EntitySKUCell.m; sourceTree = "<group>"; };
 		8AA0FE631C7DC6C0000BD702 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		8AA0FE641C7DC6C0000BD702 /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
 		8AA0FE651C7DC6C0000BD702 /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
@@ -806,6 +801,8 @@
 		8ACFAAB51CDF1DF8000830B9 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		8AD5D2131D6D72AC000927C7 /* BannerCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BannerCarousel.h; path = BannerCarousel/BannerCarousel.h; sourceTree = "<group>"; };
 		8AD5D2141D6D72AC000927C7 /* BannerCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BannerCarousel.m; path = BannerCarousel/BannerCarousel.m; sourceTree = "<group>"; };
+		8AD5D2161D6D89B7000927C7 /* SKUToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKUToolbar.h; path = QRCodeViewController/EntitySKUController/SKUToolbar.h; sourceTree = "<group>"; };
+		8AD5D2171D6D89B7000927C7 /* SKUToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKUToolbar.m; path = QRCodeViewController/EntitySKUController/SKUToolbar.m; sourceTree = "<group>"; };
 		8ADEA3091D59CB9200D522A2 /* MainCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCategoryView.h; sourceTree = "<group>"; };
 		8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCategoryView.m; sourceTree = "<group>"; };
 		8ADEA30C1D5A223B00D522A2 /* DiscoverCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverCategoryCell.h; sourceTree = "<group>"; };
@@ -2158,10 +2155,8 @@
 			children = (
 				8ACB9E461D61AB1C00C81500 /* EntitySKUController.h */,
 				8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */,
-				8A9C8BD51D6BFC71008D4592 /* EntitySKUHeaderView.h */,
-				8A9C8BD61D6BFC71008D4592 /* EntitySKUHeaderView.m */,
-				8A9C8BD81D6C10BF008D4592 /* EntitySKUCell.h */,
-				8A9C8BD91D6C10BF008D4592 /* EntitySKUCell.m */,
+				8AD5D2161D6D89B7000927C7 /* SKUToolbar.h */,
+				8AD5D2171D6D89B7000927C7 /* SKUToolbar.m */,
 			);
 			name = EntitySKUController;
 			sourceTree = "<group>";
@@ -2949,6 +2944,7 @@
 				8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */,
 				4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */,
 				8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */,
+				8AD5D2181D6D89B7000927C7 /* SKUToolbar.m in Sources */,
 				B772BE941BD50605005C1540 /* UserHeaderSectionView.m in Sources */,
 				B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */,
 				B706868D1CF41E7D00C40825 /* TabBarViewcontroller.m in Sources */,
@@ -3074,7 +3070,6 @@
 				8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */,
 				23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */,
 				4E56DF1B19D552C000263B17 /* main.m in Sources */,
-				8A9C8BDA1D6C10BF008D4592 /* EntitySKUCell.m in Sources */,
 				4E4F27D71B6F438E003A63C5 /* ImageLoadingView.m in Sources */,
 				4E56DF7D19D56EF500263B17 /* UIFont+FontAwesome.m in Sources */,
 				DA35B3C71AFEE31200D66671 /* PasswordEditViewController.m in Sources */,
@@ -3098,7 +3093,6 @@
 				4E73E67A1C19361300B604B5 /* LoginViewController.m in Sources */,
 				B769B11E1B2ACE91004401FA /* IFTTTColorAnimation.m in Sources */,
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
-				8A9C8BD71D6BFC71008D4592 /* EntitySKUHeaderView.m in Sources */,
 				8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */,
 				B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */,
 				23F612FA1CDAEF120074E8C8 /* NicknameViewController.m in Sources */,

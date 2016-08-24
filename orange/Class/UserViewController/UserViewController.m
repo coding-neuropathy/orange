@@ -244,9 +244,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 //         [self.collectionView performBatchUpdates:nil completion:nil];
          //         self.collectionView.deFrameLeft = 128.;
          if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
-             self.collectionView.frame = CGRectMake(128., 0., 684., kScreenHeight);
+             self.collectionView.frame = CGRectMake(128., 0., kPadScreenWitdh, kScreenHeight);
          else
-             self.collectionView.frame = CGRectMake(0., 0., 684., kScreenHeight);
+             self.collectionView.frame = CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight);
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
          [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];

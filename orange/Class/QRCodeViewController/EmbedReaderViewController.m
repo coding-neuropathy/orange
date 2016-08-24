@@ -136,6 +136,18 @@
     [super viewDidDisappear:animated];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:@"QRCodeView"];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"QRCodeView"];
+    [super viewWillDisappear:animated];
+}
+
 
 #pragma mark - <ZBarReaderViewDelegate>
 - (void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
