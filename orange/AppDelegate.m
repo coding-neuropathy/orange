@@ -71,6 +71,15 @@ int ddLogLevel;
     [Appirater appLaunched:YES];
 }
 
+/**
+ *  config SVProgressHUD
+ */
+- (void)configSVProgressHUD
+{
+//    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD setMinimumDismissTimeInterval:1.];
+}
+
 //进程启动但还没进入状态保存
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -81,6 +90,9 @@ int ddLogLevel;
     
     // umeng
     [self umengTrack];
+    
+    //SVProgressHUD
+    [self configSVProgressHUD];
     
     // wechat
     [WXApi registerApp:kGK_WeixinShareKey withDescription:NSLocalizedStringFromTable(@"guide to better living", kLocalizedFile, nil)];
@@ -366,7 +378,7 @@ int ddLogLevel;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 //                    [SVProgressHUD showImage:nil status:@"分享成功"];
-                    [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                    [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"share-success", kLocalizedFile, nil)];
                 });
             }
                 break;
@@ -379,7 +391,7 @@ int ddLogLevel;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 //                    [SVProgressHUD showImage:nil status:@"分享失败"];
-                    [SVProgressHUD showErrorWithStatus:@"分享失败"];
+                    [SVProgressHUD showErrorWithStatus:NSLocalizedStringFromTable(@"share-failure", kLocalizedFile, nil)];
                 });
             }
                 break;
