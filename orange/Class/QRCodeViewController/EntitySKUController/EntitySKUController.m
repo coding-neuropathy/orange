@@ -11,6 +11,13 @@
 #import "EntitySKUHeaderView.h"
 #import "EntitySKUCell.h"
 
+
+@interface SKUHeaderSection : UICollectionReusableView
+
+@property (strong, nonatomic) UILabel *titleLabel;
+
+@end
+
 @interface EntitySKUController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 typedef NS_ENUM(NSInteger, SKUSectionType) {
@@ -32,8 +39,9 @@ typedef NS_ENUM(NSInteger, SKUSectionType) {
 
 
 
-static NSString * SKUCellIdentifier = @"SKUCell";
-static NSString * EntitySKUReuseHeaderIdentifier = @"EntityHeader";
+static NSString * SKUCellIdentifier                 = @"SKUCell";
+static NSString * EntitySKUReuseHeaderIdentifier    = @"EntityHeader";
+static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 
 - (instancetype)initWithEntityHash:(NSString *)hash
 {
@@ -83,6 +91,7 @@ static NSString * EntitySKUReuseHeaderIdentifier = @"EntityHeader";
     
     [self.collectionView registerClass:[EntitySKUCell class] forCellWithReuseIdentifier:SKUCellIdentifier];
     [self.collectionView registerClass:[EntitySKUHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntitySKUReuseHeaderIdentifier];
+    [self.collectionView registerClass:[EntitySKUHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:SKUHeaderIdentifier];
     
     [self.view addSubview:self.collectionView];
     
@@ -142,18 +151,23 @@ static NSString * EntitySKUReuseHeaderIdentifier = @"EntityHeader";
     switch (indexPath.section) {
         case EntitySKUHeaderSection:
         {
-            EntitySKUHeaderView * skuHeaderView             = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntitySKUReuseHeaderIdentifier forIndexPath:indexPath];
-            skuHeaderView.entity                            = self.entity;
+            EntitySKUHeaderView * entityHeaderView          = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntitySKUReuseHeaderIdentifier forIndexPath:indexPath];
+            entityHeaderView.entity                            = self.entity;
             
-            reuseableview                                   = skuHeaderView;
+            reuseableview                                   = entityHeaderView;
             
         }
             break;
+        case SKUSection:
+        {
+            SKUHeaderSection *skuHeaderView                 = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:SKUHeaderIdentifier forIndexPath:indexPath];
             
+            reuseableview                                   = skuHeaderView;
+        }
+            break;
         default:
             break;
     }
-    
     return reuseableview;
 }
 
@@ -178,11 +192,11 @@ static NSString * EntitySKUReuseHeaderIdentifier = @"EntityHeader";
             headerSize              = CGSizeMake(kScreenWidth, 342. * kScreeenScale);
         }
             break;
-//        case SKUSection:
-//        {
-//            headerSize              = CGSizeMake(kScreenWidth, 52.);
-//        }
-//            break;
+        case SKUSection:
+        {
+            headerSize              = CGSizeMake(kScreenWidth, 52.);
+        }
+            break;
         default:
             break;
     }
@@ -264,6 +278,26 @@ static NSString * EntitySKUReuseHeaderIdentifier = @"EntityHeader";
 }
 
 
+@end
+
+
+
+#pragma mark - SKUHeaderSection
+
+@implementation SKUHeaderSection
+
+- (UILabel *)titleLabel
+{
+    if (!_titleLabel) {
+        _titleLabel             = [[UILabel alloc] initWithFrame:CGRectZero];
+        _titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
+        _titleLabel.textColor   = UIColorFromRGB(0x212121);
+        
+        
+        [self addSubview:_titleLabel];
+    }
+    return _titleLabel;
+}
 
 
 @end
