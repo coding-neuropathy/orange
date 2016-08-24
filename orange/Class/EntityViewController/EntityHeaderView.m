@@ -10,7 +10,7 @@
 #import "NSString+Helper.h"
 #import <iCarousel/iCarousel.h>
 
-@interface EntityHeaderView () <UIScrollViewDelegate,iCarouselDelegate,iCarouselDataSource>
+@interface EntityHeaderView () <UIScrollViewDelegate, iCarouselDelegate, iCarouselDataSource>
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) UIScrollView * scrollView;
 @property (strong, nonatomic) UIPageControl * pageCtr;
@@ -194,28 +194,6 @@ static CGFloat kEntityViewMarginLeft = 16.;
         self.titleLabel.frame = CGRectMake(0., 0., self.deFrameWidth - 40., 20);
         self.titleLabel.deFrameLeft = 20.;
         self.titleLabel.deFrameTop = self.imagesView.deFrameBottom + 31.;
-//        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-//        
-//        if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-//        {
-//            self.imagesView.frame = CGRectMake( -(kScreenWidth - kScreenHeight)/2, 20., kScreenWidth - kTabBarWidth, 460.);
-//            self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth - 40., 20);
-//            self.titleLabel.deFrameLeft = 20.-(kScreenWidth - kScreenHeight)/2;
-//            self.titleLabel.deFrameTop = self.imagesView.deFrameBottom + 31.;
-//        }
-//        else
-//        {
-//            self.imagesView.frame = CGRectMake(0., 20., kScreenWidth - kTabBarWidth, 460.);
-//            self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth - 40., 20);
-//            self.titleLabel.deFrameLeft = 20.;
-//            self.titleLabel.deFrameTop = self.imagesView.deFrameBottom + 31.;
-//        }
-//        self.imagesView.frame = CGRectMake(0., 20., kScreenWidth - kTabBarWidth, 460.);
-//        self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth - 40., 20);
-//        self.titleLabel.deFrameLeft = 20.;
-//        self.titleLabel.deFrameTop = self.imagesView.deFrameBottom + 31.;
-        
-        
     }
 }
 
