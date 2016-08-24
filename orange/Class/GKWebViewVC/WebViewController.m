@@ -11,11 +11,10 @@
 
 
 #import "WebViewProgressView.h"
-#import "SDWebImageDownloader.h"
 #import "EntityViewController.h"
 
 #import "ShareView.h"
-//#import "LoginView.h"
+
 
 @interface WebViewController () 
 {
@@ -27,7 +26,7 @@
 @property (strong, nonatomic) NSString * shareTitle;
 @property (strong, nonatomic) UIButton * moreBtn;
 
-@property (strong, nonatomic) UIApplication * app;
+//@property (strong, nonatomic) UIApplication * app;
 
 
 

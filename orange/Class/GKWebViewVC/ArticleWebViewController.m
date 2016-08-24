@@ -11,7 +11,8 @@
 
 #import <WebKit/WebKit.h>
 #import "WebViewProgressView.h"
-#import "SDWebImageDownloader.h"
+//#import "SDWebImageDownloader.h"
+//#import <SDWebImage/SDWebImageDownloader.h>
 #import "ShareView.h"
 
 #import "ArticleCommentController.h"

@@ -475,12 +475,12 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     }
 }
 
-- (void)clearPicCache
-{
-    [[SDImageCache sharedImageCache] clearMemory];
-    [[SDImageCache sharedImageCache] clearDisk];
-    [self performSelectorOnMainThread:@selector(showClearPicCacheFinish) withObject:nil waitUntilDone:YES];
-}
+//- (void)clearPicCache
+//{
+//    [[SDImageCache sharedImageCache] clearMemory];
+//    [[SDImageCache sharedImageCache] clearDisk];
+//    [self performSelectorOnMainThread:@selector(showClearPicCacheFinish) withObject:nil waitUntilDone:YES];
+//}
 - (void)showClearPicCacheFinish
 {
     [SVProgressHUD showSuccessWithStatus:@"清空成功"];
