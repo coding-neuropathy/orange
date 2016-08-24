@@ -8,12 +8,12 @@
 
 #import "EntitySKUController.h"
 
-
+#import "EntitySKUView.h"
 #import "SKUToolbar.h"
 
 
 
-@interface EntitySKUController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface EntitySKUController ()
 
 typedef NS_ENUM(NSInteger, SKUSectionType) {
     EntitySKUHeaderSection = 0,
@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, SKUSectionType) {
 @property (strong, nonatomic) SKUToolbar        *toolbar;
 @property (strong, nonatomic) UIButton          *orderBtn;
 
-@property (strong, nonatomic) UICollectionView  *collectionView;
+@property (strong, nonatomic) EntitySKUView     *entitySKUView;
 
 
 @end
@@ -65,6 +65,17 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     return _continueAddBtn;
 }
 
+- (EntitySKUView *)entitySKUView
+{
+    if (!_entitySKUView) {
+        _entitySKUView                          = [[EntitySKUView alloc] initWithFrame:CGRectZero];
+        
+        _entitySKUView.backgroundColor          = UIColorFromRGB(0xffffff);
+        _entitySKUView.deFrameSize              = CGSizeMake(kScreenWidth, kScreenHeight);
+    }
+    return _entitySKUView;
+}
+
 - (UIView *)toolbar
 {
     if (!_toolbar) {
@@ -78,7 +89,6 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 }
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -86,6 +96,7 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     self.navigationItem.title                   = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
     self.navigationItem.rightBarButtonItem      = [[UIBarButtonItem alloc] initWithCustomView:self.continueAddBtn];
     
+    [self.view addSubview:self.entitySKUView];
     
     /**
      *  config toolbar
@@ -94,9 +105,10 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     
     [API getEntitySKUWithHash:self.entity_hash Success:^(GKEntity *entity) {
         
-        self.entity = entity;
-        self.toolbar.price  = self.entity.lowestPrice;
-        [self.collectionView reloadData];
+        self.entity                 = entity;
+        self.entitySKUView.entity   = self.entity;
+        self.toolbar.price          = self.entity.lowestPrice;
+//        [self.collectionView reloadData];
     } Failure:^(NSInteger stateCode, NSError *error) {
         DDLogError(@"error %@", error.localizedDescription);
     }];
@@ -151,7 +163,7 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     DDLogInfo(@"height %f", self.view.deFrameHeight);
     self.toolbar.deFrameBottom              = self.view.deFrameHeight - kNavigationBarHeight - kStatusBarHeight;
     self.toolbar.price                      = self.entity.lowestPrice;
-    [self.view insertSubview:self.toolbar aboveSubview:self.collectionView];
+    [self.view insertSubview:self.toolbar aboveSubview:self.entitySKUView];
 
 }
 

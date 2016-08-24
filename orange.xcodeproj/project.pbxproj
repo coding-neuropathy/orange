@@ -230,6 +230,7 @@
 		8ACFAAB61CDF1DF8000830B9 /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */; };
 		8AD5D2151D6D72AC000927C7 /* BannerCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D2141D6D72AC000927C7 /* BannerCarousel.m */; };
 		8AD5D2181D6D89B7000927C7 /* SKUToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D2171D6D89B7000927C7 /* SKUToolbar.m */; };
+		8AD5D21B1D6D8FE8000927C7 /* EntitySKUView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D21A1D6D8FE8000927C7 /* EntitySKUView.m */; };
 		8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */; };
 		8ADEA30E1D5A223B00D522A2 /* DiscoverCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
@@ -803,6 +804,8 @@
 		8AD5D2141D6D72AC000927C7 /* BannerCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BannerCarousel.m; path = BannerCarousel/BannerCarousel.m; sourceTree = "<group>"; };
 		8AD5D2161D6D89B7000927C7 /* SKUToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKUToolbar.h; path = QRCodeViewController/EntitySKUController/SKUToolbar.h; sourceTree = "<group>"; };
 		8AD5D2171D6D89B7000927C7 /* SKUToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKUToolbar.m; path = QRCodeViewController/EntitySKUController/SKUToolbar.m; sourceTree = "<group>"; };
+		8AD5D2191D6D8FE8000927C7 /* EntitySKUView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUView.h; path = QRCodeViewController/EntitySKUController/EntitySKUView.h; sourceTree = "<group>"; };
+		8AD5D21A1D6D8FE8000927C7 /* EntitySKUView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntitySKUView.m; path = QRCodeViewController/EntitySKUController/EntitySKUView.m; sourceTree = "<group>"; };
 		8ADEA3091D59CB9200D522A2 /* MainCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCategoryView.h; sourceTree = "<group>"; };
 		8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCategoryView.m; sourceTree = "<group>"; };
 		8ADEA30C1D5A223B00D522A2 /* DiscoverCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverCategoryCell.h; sourceTree = "<group>"; };
@@ -2157,6 +2160,8 @@
 				8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */,
 				8AD5D2161D6D89B7000927C7 /* SKUToolbar.h */,
 				8AD5D2171D6D89B7000927C7 /* SKUToolbar.m */,
+				8AD5D2191D6D8FE8000927C7 /* EntitySKUView.h */,
+				8AD5D21A1D6D8FE8000927C7 /* EntitySKUView.m */,
 			);
 			name = EntitySKUController;
 			sourceTree = "<group>";
@@ -2974,6 +2979,7 @@
 				391F5F911B1705A000931533 /* JXFormCell.m in Sources */,
 				236EE0271D3C8173003E97D6 /* AlluserResultController.m in Sources */,
 				B772BE971BD51FFC005C1540 /* UserFooterSectionView.m in Sources */,
+				8AD5D21B1D6D8FE8000927C7 /* EntitySKUView.m in Sources */,
 				8AAA2D0C1C02BC6700B27E49 /* LaunchView.m in Sources */,
 				4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */,
 				8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */,
