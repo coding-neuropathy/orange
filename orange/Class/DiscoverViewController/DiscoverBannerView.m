@@ -8,17 +8,13 @@
 
 #import "DiscoverBannerView.h"
 #import "UIScrollView+AutoScroll.h"
-#import "iCarousel.h"
+//#import "iCarousel.h"
+#import "BannerCarousel.h"
 
-//@interface DiscoverBannerView () <UIScrollViewDelegate>
-//
-//@property (strong, nonatomic) UIScrollView * bannerScrollView;
-//
-//@end
 
 @interface DiscoverBannerView ()<iCarouselDataSource, iCarouselDelegate>
 
-@property (strong, nonatomic) iCarousel * bannerView;
+@property (strong, nonatomic) BannerCarousel * bannerView;
 
 @end
 
@@ -32,7 +28,7 @@
 - (iCarousel *)bannerView
 {
     if (!_bannerView) {
-        _bannerView = [[iCarousel alloc] initWithFrame:CGRectZero];
+        _bannerView = [[BannerCarousel alloc] initWithFrame:CGRectZero];
         _bannerView.type = iCarouselTypeLinear;
         _bannerView.delegate = self;
         _bannerView.dataSource = self;

@@ -178,7 +178,11 @@ static NSString * EntitySKUReuseHeaderIdentifier = @"EntityHeader";
             headerSize              = CGSizeMake(kScreenWidth, 342. * kScreeenScale);
         }
             break;
-            
+        case SKUSection:
+        {
+            headerSize              = CGSizeMake(kScreenWidth, 52.);
+        }
+            break;
         default:
             break;
     }

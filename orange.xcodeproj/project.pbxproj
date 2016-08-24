@@ -230,7 +230,7 @@
 		8ACB1FB81D6AD83000D3AEF3 /* GKEntitySKU.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB1FB61D6AD83000D3AEF3 /* GKEntitySKU.m */; };
 		8ACB9E481D61AB1C00C81500 /* EntitySKUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */; };
 		8ACFAAB61CDF1DF8000830B9 /* jpush-ios-2.1.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */; };
-		8AD91BAA1D6D4F4800EC9787 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD91BA91D6D4F4800EC9787 /* iCarousel.m */; };
+		8AD5D2151D6D72AC000927C7 /* BannerCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D2141D6D72AC000927C7 /* BannerCarousel.m */; };
 		8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */; };
 		8ADEA30E1D5A223B00D522A2 /* DiscoverCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
@@ -804,8 +804,8 @@
 		8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntitySKUController.m; path = QRCodeViewController/EntitySKUController/EntitySKUController.m; sourceTree = "<group>"; };
 		8ACFAAB41CDF1DF8000830B9 /* jpush-ios-2.1.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.6.a"; sourceTree = "<group>"; };
 		8ACFAAB51CDF1DF8000830B9 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
-		8AD91BA81D6D4F4800EC9787 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
-		8AD91BA91D6D4F4800EC9787 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		8AD5D2131D6D72AC000927C7 /* BannerCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BannerCarousel.h; path = BannerCarousel/BannerCarousel.h; sourceTree = "<group>"; };
+		8AD5D2141D6D72AC000927C7 /* BannerCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BannerCarousel.m; path = BannerCarousel/BannerCarousel.m; sourceTree = "<group>"; };
 		8ADEA3091D59CB9200D522A2 /* MainCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCategoryView.h; sourceTree = "<group>"; };
 		8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCategoryView.m; sourceTree = "<group>"; };
 		8ADEA30C1D5A223B00D522A2 /* DiscoverCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverCategoryCell.h; sourceTree = "<group>"; };
@@ -1479,6 +1479,7 @@
 		4E3A23791A52EC9600037F9C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				8AD5D2121D6D725E000927C7 /* BannerCarousel */,
 				B7AAFA601AB69DD200A2F20D /* UIPlaceHolderTextView */,
 				B7AAFA5C1AB67E2300A2F20D /* RadioButton */,
 				B74266DA1AB3DFE10064A010 /* AutoScroll */,
@@ -1589,7 +1590,6 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				8AD91BA71D6D4F4800EC9787 /* iCarousel */,
 				8A5901501D643F1100780C74 /* appirater */,
 				8A5045561D5873CA00D66F8A /* ZBarSDK */,
 				8A195F0A1CF3FD3A00F2A954 /* UMMobClick.framework */,
@@ -2177,13 +2177,13 @@
 			name = EntityResultController;
 			sourceTree = "<group>";
 		};
-		8AD91BA71D6D4F4800EC9787 /* iCarousel */ = {
+		8AD5D2121D6D725E000927C7 /* BannerCarousel */ = {
 			isa = PBXGroup;
 			children = (
-				8AD91BA81D6D4F4800EC9787 /* iCarousel.h */,
-				8AD91BA91D6D4F4800EC9787 /* iCarousel.m */,
+				8AD5D2131D6D72AC000927C7 /* BannerCarousel.h */,
+				8AD5D2141D6D72AC000927C7 /* BannerCarousel.m */,
 			);
-			path = iCarousel;
+			name = BannerCarousel;
 			sourceTree = "<group>";
 		};
 		A72E4FB92C91BB3F9193D99C /* Pods */ = {
@@ -3002,7 +3002,6 @@
 				B769B1211B2ACE91004401FA /* IFTTTEasingFunction.m in Sources */,
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
 				B766763A1AB805B5002F294C /* NoMessageView.m in Sources */,
-				8AD91BAA1D6D4F4800EC9787 /* iCarousel.m in Sources */,
 				4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */,
 				B737F4101C1C027100286596 /* VerifyEmailViewController.m in Sources */,
 				B76EE07F1B3D86AE009D8763 /* MessageController.m in Sources */,
@@ -3042,6 +3041,7 @@
 				239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */,
 				23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */,
 				4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */,
+				8AD5D2151D6D72AC000927C7 /* BannerCarousel.m in Sources */,
 				B7E668751B77A62100E177E5 /* EntityStickyHeaderFlowLayout.m in Sources */,
 				23E0CB7E1C855B3400E351CB /* UserArticleViewController.m in Sources */,
 				4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */,

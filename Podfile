@@ -3,6 +3,7 @@ platform :ios, '8.0'
 
 target 'orange' do
 #    pod 'Colours'
+    pod 'iCarousel', '1.8.2'
     pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
     pod 'SDWebImage'
     pod 'CocoaLumberjack', '2.2'

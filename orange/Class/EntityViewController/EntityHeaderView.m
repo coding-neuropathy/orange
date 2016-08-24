@@ -8,7 +8,7 @@
 
 #import "EntityHeaderView.h"
 #import "NSString+Helper.h"
-#import "iCarousel.h"
+#import <iCarousel/iCarousel.h>
 
 @interface EntityHeaderView () <UIScrollViewDelegate,iCarouselDelegate,iCarouselDataSource>
 @property (strong, nonatomic) UILabel * titleLabel;

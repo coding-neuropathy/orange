@@ -160,14 +160,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reloadData;
 
-
-/**
- *  hack iCarousel
- */
-@property (strong, nonatomic) NSTimer * autoScrollTimer;
-- (void)enableAutoscroll;
-- (void)disableAutoscroll;
-
 @end
 
 
