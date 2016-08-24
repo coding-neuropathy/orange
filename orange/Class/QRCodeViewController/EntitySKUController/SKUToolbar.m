@@ -92,7 +92,9 @@
 #pragma mark - button action
 - (void)orderBtnAction:(id)sender
 {
-    
+    if (_delegate && [_delegate respondsToSelector:@selector(tapOrderBtn:)]) {
+        [_delegate tapOrderBtn:sender];
+    }
 }
 
 #pragma mark - pubilc method

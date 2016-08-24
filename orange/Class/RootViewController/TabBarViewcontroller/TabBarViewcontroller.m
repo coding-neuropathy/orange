@@ -89,6 +89,7 @@
 
 - (void)didReceiveMemoryWarning
 {
+    [[SDImageCache sharedImageCache] clearMemory];
     [super didReceiveMemoryWarning];
 }
 

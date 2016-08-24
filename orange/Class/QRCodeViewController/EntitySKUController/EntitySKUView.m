@@ -16,6 +16,8 @@
 @property (strong, nonatomic) UILabel       *priceLabel;
 @property (strong, nonatomic) UIButton      *cartBtn;
 
+@property (strong, nonatomic) UILabel       *skuInfoLabel;
+
 @property (assign, nonatomic) BOOL          warp;
 
 @end
@@ -96,6 +98,23 @@
     return _cartBtn;
 }
 
+- (UILabel *)skuInfoLabel
+{
+    if (!_skuInfoLabel) {
+        _skuInfoLabel                   = [[UILabel alloc] initWithFrame:CGRectZero];
+        _skuInfoLabel.deFrameSize       = CGSizeMake(self.deFrameWidth - 48., 20.);
+        _skuInfoLabel.font              = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
+        _skuInfoLabel.textColor         = UIColorFromRGB(0x212121);
+        _skuInfoLabel.textAlignment     = NSTextAlignmentLeft;
+        _skuInfoLabel.text              = NSLocalizedStringFromTable(@"item-sku", kLocalizedFile, nil);
+        
+        [self addSubview:_skuInfoLabel];
+    }
+    
+    return _skuInfoLabel;
+    
+}
+
 #pragma mark - set data
 - (void)setEntity:(GKEntity *)entity
 {
@@ -131,12 +150,121 @@
     self.cartBtn.center                 = self.priceLabel.center;
     self.cartBtn.deFrameRight           = self.deFrameRight - 24.;
 
+    self.skuInfoLabel.deFrameTop        = self.priceLabel.deFrameBottom + 38.;
+    self.skuInfoLabel.deFrameLeft       = self.priceLabel.deFrameLeft;
+    
+    
+    [self setupSKU];
+    
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+//    CGContextSetLineWidth(context, kSeparateLineWidth);
+//    
+//    
+//    CGContextMoveToPoint(context, 24., self.priceLabel.deFrameBottom + 20.);
+//    CGContextAddLineToPoint(context, self.deFrameWidth - 24., self.priceLabel.deFrameBottom + 20.);
+//    
+//    CGContextStrokePath(context);
+}
+
+#pragma mark - setup entity sku
+- (void)setupSKU
+{
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UIButton class]] && view != self.cartBtn) {
+            [view removeFromSuperview];
+        }
+    }
+    CGFloat maxWidth                = self.deFrameWidth - 48.;
+    CGFloat xOffset                 = 0.;
+    CGFloat yOffset                 = self.skuInfoLabel.deFrameBottom + 16.;
+    
+    for (GKEntitySKU * sku in self.entity.skuArray) {
+        DDLogInfo(@"sku sku %@", sku);
+        
+        NSMutableString * skuInfo   = [NSMutableString stringWithCapacity:0];
+        
+        for (NSString * key in sku.attrs) {
+            [skuInfo appendString:[NSString stringWithFormat:@"%@ / %@; ", key, sku.attrs[key]]];
+        }
+        
+        if ([skuInfo length] == 0) continue;
+        
+        UIButton * skuBtn           = [UIButton buttonWithType:UIButtonTypeCustom];
+        skuBtn.backgroundColor      = UIColorFromRGB(0xf1f1f1);
+        skuBtn.titleLabel.font      = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+
+        
+        [skuBtn setTitle:skuInfo forState:UIControlStateNormal];
+        [skuBtn setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
+        [skuBtn setTitleColor:UIColorFromRGB(0x3f6ff0) forState:UIControlStateSelected];
+        [skuBtn addTarget:self action:@selector(skuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        CGFloat btnWidth            = [skuInfo widthWithLineWidth:0. Font:skuBtn.titleLabel.font];
+        skuBtn.deFrameSize          = CGSizeMake(btnWidth + 16., 24.);
+        skuBtn.layer.masksToBounds  = YES;
+        skuBtn.layer.cornerRadius   = skuBtn.deFrameHeight / 2.;
+        
+        /**
+         *  set sku btn layout
+         */
+        if (xOffset == 0) {
+            skuBtn.deFrameLeft      = 24.;
+            skuBtn.deFrameTop       = yOffset;
+        } else {
+            
+            skuBtn.deFrameLeft      = xOffset + 10.;
+            skuBtn.deFrameTop       = yOffset;
+        }
+        xOffset                     = skuBtn.deFrameRight;
+        yOffset                     = skuBtn.deFrameTop;
+        
+        if (xOffset > maxWidth) {
+            yOffset                 += 34.;
+            skuBtn.deFrameLeft      = 24.;
+            skuBtn.deFrameTop       = yOffset;
+            xOffset                 = skuBtn.deFrameRight;
+        }
+        
+        
+        DDLogInfo(@"width %f btn %@", xOffset, skuBtn);
+        
+        [self addSubview:skuBtn];
+    }
+    
 }
 
 #pragma mark - button action
 - (void)cartBtnAction:(id)sender
 {
     
+}
+
+- (void)skuBtnAction:(id)sender
+{
+    UIButton * btn = (UIButton *)sender;
+    
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UIButton class]] && view != self.cartBtn) {
+//            [view removeFromSuperview];
+            UIButton * subBtn           = (UIButton *)view;
+            subBtn.selected             = NO;
+            subBtn.backgroundColor      = UIColorFromRGB(0xf1f1f1);
+            subBtn.layer.borderWidth    = 1.;
+            subBtn.layer.borderColor    = UIColorFromRGB(0xf1f1f1).CGColor;
+        }
+    }
+    btn.selected                = YES;
+    btn.backgroundColor         = UIColorFromRGB(0xe6ecff);
+    btn.layer.borderWidth       = 1.;
+    btn.layer.borderColor       = UIColorFromRGB(0x3f6ff0).CGColor;
 }
 
 

@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SKUToolbarDelegate <NSObject>
+
+- (void)tapOrderBtn:(id)sender;
+
+@end
+
+
 @interface SKUToolbar : UIView
 
 @property (assign, nonatomic) float price;
+@property (weak, nonatomic) id<SKUToolbarDelegate> delegate;
 
 - (void)updatePriceWithprice:(float)price;
 

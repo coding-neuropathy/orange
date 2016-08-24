@@ -61,6 +61,9 @@
 }
 
 - (void)didReceiveMemoryWarning {
+    
+    [[SDImageCache sharedImageCache] clearMemory];
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

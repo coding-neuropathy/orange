@@ -13,7 +13,7 @@
 
 
 
-@interface EntitySKUController ()
+@interface EntitySKUController () <SKUToolbarDelegate>
 
 typedef NS_ENUM(NSInteger, SKUSectionType) {
     EntitySKUHeaderSection = 0,
@@ -71,7 +71,8 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
         _entitySKUView                          = [[EntitySKUView alloc] initWithFrame:CGRectZero];
         
         _entitySKUView.backgroundColor          = UIColorFromRGB(0xffffff);
-        _entitySKUView.deFrameSize              = CGSizeMake(kScreenWidth, kScreenHeight);
+        _entitySKUView.deFrameSize              = CGSizeMake(kScreenWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight - 49.);
+        _entitySKUView.contentSize              = CGSizeMake(kScreenWidth, kScreenHeight);
     }
     return _entitySKUView;
 }
@@ -82,6 +83,7 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
         _toolbar                                = [[SKUToolbar alloc] initWithFrame:CGRectZero];
         _toolbar.deFrameSize                    = CGSizeMake(kScreenWidth, 49.);
         _toolbar.backgroundColor                = UIColorFromRGB(0xffffff);
+        _toolbar.delegate                       = self;
 //        _toolbar.backgroundColor                = [UIColor redColor];
         
     }
@@ -165,6 +167,12 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     self.toolbar.price                      = self.entity.lowestPrice;
     [self.view insertSubview:self.toolbar aboveSubview:self.entitySKUView];
 
+}
+
+#pragma mark - <SKUToolbarDelegate>
+- (void)tapOrderBtn:(id)sender
+{
+    
 }
 
 
