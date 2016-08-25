@@ -17,6 +17,8 @@
 //#import "LoginView.h"
 #import "GTScrollNavigationBar.h"
 
+#import <WZLBadge/WZLBadgeImport.h>
+
 @interface TabBarViewcontroller ()<UITabBarControllerDelegate>
 
 @end
@@ -60,10 +62,14 @@
     
     UINavigationController * second = [[UINavigationController alloc] init];
     [second setViewControllers:@[[[DiscoverController alloc] init]] animated:NO];
+    
     UINavigationController * third = [[UINavigationController alloc] init];
     [third setViewControllers:@[[[NotifyController alloc] init]] animated:NO];
-    UINavigationController * fourth = [[UINavigationController alloc] init];
+//    third.tabBarItem.t
+//    third.tabBarItem.badgeCenterOffset = CGPointMake(0, 0);
+//    [third.tabBarItem showBadgeWithStyle:WBadgeStyleNew value:0 animationType:WBadgeAnimTypeShake];
     
+    UINavigationController * fourth = [[UINavigationController alloc] init];
     if(k_isLogin)
     {
         [fourth setViewControllers:@[[[UserViewController alloc] initWithUser:[Passport sharedInstance].user]] animated:NO];
@@ -75,6 +81,9 @@
 
     self.viewControllers = @[first,second,third,fourth];
     
+//    UITabBarItem * messageItem = [self.tabBar.items objectAtIndex:2];
+//    messageItem.badgeCenterOffset = CGPointMake(-30, 10);
+//    [messageItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeScale];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -104,51 +113,50 @@
             return NO;
         }
     }
-//    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[UserViewController class]]) {
-//        if (!k_isLogin) {
-//            LoginView * view = [[LoginView alloc]init];
-//            [view show];
-//            return NO;
-//        }
-//    }
     return YES;
 }
 
-//- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-//{
-////    NSLog(@"%@", viewController);
-//    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[SelectionController class]]) {
-////        self.selectionController
-//    }
-//}
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+//    NSLog(@"%@", viewController);
+    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[NotifyController class]]) {
+//        self.selectionController
+        [self removeBadge];
+    }
+}
 
 - (void)addBadge
 {
-    [self removeBadge];
-    [self tabBadge:YES];
+//    [self removeBadge];
+//    [self tabBadge:YES];
+    UITabBarItem * messageItem = [self.tabBar.items objectAtIndex:2];
+    messageItem.badgeCenterOffset = CGPointMake(-30, 10);
+    [messageItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeScale];
 }
 
 - (void)removeBadge
 {
-    [self tabBadge:NO];
+//    [self tabBadge:NO];
+    UITabBarItem * messageItem = [self.tabBar.items objectAtIndex:2];
+    [messageItem clearBadge];
 }
 
-- (void)tabBadge:(BOOL)yes
-{
-    if (yes) {
-        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 6, 6)];
-        badge.backgroundColor = UIColorFromRGB(0xFF1F77);
-        badge.tag = 100;
-        badge.layer.cornerRadius = 3;
-        badge.layer.masksToBounds = YES;
-        badge.center = CGPointMake(kScreenWidth*5/8+15,10);
-        [self.tabBar addSubview:badge];
-    }
-    else
-    {
-        [[self.tabBar viewWithTag:100]removeFromSuperview];
-    }
-}
+//- (void)tabBadge:(BOOL)yes
+//{
+//    if (yes) {
+//        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 6, 6)];
+//        badge.backgroundColor = UIColorFromRGB(0xFF1F77);
+//        badge.tag = 100;
+//        badge.layer.cornerRadius = 3;
+//        badge.layer.masksToBounds = YES;
+//        badge.center = CGPointMake(kScreenWidth*5/8+15,10);
+//        [self.tabBar addSubview:badge];
+//    }
+//    else
+//    {
+//        [[self.tabBar viewWithTag:100]removeFromSuperview];
+//    }
+//}
 
 
 - (void)login

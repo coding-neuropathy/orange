@@ -10,6 +10,9 @@
 #import "HMSegmentedControl.h"
 #import "MessageController.h"
 #import "ActiveController.h"
+//#import <>
+#import <WZLBadge/WZLBadgeImport.h>
+
 
 @interface NotifyController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
@@ -98,7 +101,11 @@
     return _thePageViewController;
 }
 
-//- (void)
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ShowBadge" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"HideBadge" object:nil];
+}
 
 - (void)viewDidLoad
 {
@@ -119,6 +126,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBadge) name:@"HideBadge" object:nil];
     
     [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
+    
 }
 
 #pragma mark - <UIPageViewControllerDataSource>
@@ -129,16 +137,10 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-//    DDLogError(@"before %@", viewController);
     if ([viewController isKindOfClass:[MessageController class]]) {
         return self.activeController;
     }
     return nil;
-//    if (self.index == 0) {
-//        return nil;
-//    }
-//    self.index --;
-//    return self.activeController;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
@@ -181,31 +183,35 @@
 #pragma mark badge
 - (void)addBadge
 {
-    [self removeBadge];
-    [self tabBadge:YES];
+//    [self removeBadge];
+//    [self tabBadge:YES];
+
+    self.segmentedControl.badgeCenterOffset = CGPointMake(-60, 5.);
+    [self.segmentedControl showBadge];
 }
 
 - (void)removeBadge
 {
-    [self tabBadge:NO];
+//    [self tabBadge:NO];
+    [self.segmentedControl clearBadge];
 }
 
-- (void)tabBadge:(BOOL)yes
-{
-    if (yes) {
-        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 6, 6)];
-        badge.backgroundColor = UIColorFromRGB(0xFF1F77);
-        badge.tag = 100;
-        badge.layer.cornerRadius = 3;
-        badge.layer.masksToBounds = YES;
-        badge.center = CGPointMake(kScreenWidth*3/4+6,10);
-        [self.segmentedControl addSubview:badge];
-    }
-    else
-    {
-        [[self.segmentedControl viewWithTag:100]removeFromSuperview];
-    }
-}
+//- (void)tabBadge:(BOOL)yes
+//{
+//    if (yes) {
+//        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 6, 6)];
+//        badge.backgroundColor = UIColorFromRGB(0xFF1F77);
+//        badge.tag = 100;
+//        badge.layer.cornerRadius = 3;
+//        badge.layer.masksToBounds = YES;
+//        badge.center = CGPointMake(kScreenWidth*3/4+6,10);
+//        [self.segmentedControl addSubview:badge];
+//    }
+//    else
+//    {
+//        [[self.segmentedControl viewWithTag:100]removeFromSuperview];
+//    }
+//}
 
 #pragma mark -
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
