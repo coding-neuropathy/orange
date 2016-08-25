@@ -693,7 +693,6 @@ int ddLogLevel;
 - (void)configLog
 {
 #if DEBUG
-//#import "FLEXManager.h"
     ddLogLevel = DDLogLevelInfo;
 #else
     ddLogLevel = DDLogLevelError;
