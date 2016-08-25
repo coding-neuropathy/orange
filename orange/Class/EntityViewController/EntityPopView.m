@@ -176,10 +176,10 @@
         }
         [self.scrollView addSubview:_imageView];
 #pragma mark ------------添加点击图片返回以及捏合手势 ----------------------
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAmplify:)];
-        [_imageView addGestureRecognizer:tap];
-        UIPinchGestureRecognizer * pinch = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchAction:)];
-        [_imageView addGestureRecognizer:pinch];
+//        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAmplify:)];
+//        [_imageView addGestureRecognizer:tap];
+//        UIPinchGestureRecognizer * pinch = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchAction:)];
+//        [_imageView addGestureRecognizer:pinch];
         
     }];
     

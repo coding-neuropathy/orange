@@ -3201,10 +3201,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
-					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1",
-					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1/UMOpus",
 					"$(PROJECT_DIR)/orange/ThirdParty/JPush",
-					"$(PROJECT_DIR)/orange/ThirdParty/libWeiboSDK",
 					"$(PROJECT_DIR)/orange/ThirdParty/ZBarSDK",
 					"$(PROJECT_DIR)/orange/ThirdParty",
 				);
@@ -3250,10 +3247,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/orange/ThirdParty/WeChat",
-					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1",
-					"$(PROJECT_DIR)/orange/ThirdParty/UMengFeedback_SDK_2.1.1/UMOpus",
 					"$(PROJECT_DIR)/orange/ThirdParty/JPush",
-					"$(PROJECT_DIR)/orange/ThirdParty/libWeiboSDK",
 					"$(PROJECT_DIR)/orange/ThirdParty/ZBarSDK",
 					"$(PROJECT_DIR)/orange/ThirdParty",
 				);

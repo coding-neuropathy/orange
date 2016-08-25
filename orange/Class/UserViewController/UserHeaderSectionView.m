@@ -34,10 +34,10 @@
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.font = [UIFont systemFontOfSize:14.];
-        _titleLabel.textColor = UIColorFromRGB(0x414243);
-        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
+        _titleLabel.font            = [UIFont fontWithName:@"PingFangTC-Regular" size:14.];
+        _titleLabel.textColor       = [UIColor colorFromHexString:@"#212121"];
+        _titleLabel.textAlignment   = NSTextAlignmentLeft;
 //        _titleLabel.text = NSLocalizedStringFromTable(@"like", kLocalizedFile, nil);
         [self addSubview:_titleLabel];
     }
@@ -47,10 +47,11 @@
 - (UILabel *)numberLabel
 {
     if (!_numberLabel) {
-        _numberLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _numberLabel.font = [UIFont systemFontOfSize:14.];
-        _numberLabel.textColor = UIColorFromRGB(0x9d9e9f);
-        _numberLabel.textAlignment = NSTextAlignmentLeft;
+        _numberLabel                = [[UILabel alloc] initWithFrame:CGRectZero];
+        _numberLabel.font           = [UIFont fontWithName:@"PingFangTC-Regular" size:14.];
+        _numberLabel.textColor      = [UIColor colorFromHexString:@"#212121"];
+        _numberLabel.textAlignment  = NSTextAlignmentLeft;
+        
         [self addSubview:_numberLabel];
     }
     
