@@ -20,7 +20,6 @@
 @property (strong, nonatomic) HMSegmentedControl *segmentedControl;
 @property (assign, nonatomic) NSInteger index;
 
-//@property (strong, nonatomic) HomeController * homeVC;
 @property (strong, nonatomic) SelectionViewController * entityVC;
 @property (strong, nonatomic) ArticlesController * articleVC;
 

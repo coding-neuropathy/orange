@@ -12,4 +12,6 @@
 ```
 cd Workspace/orange
 pod install
+
+open orange.xcworkspace
 ```
