@@ -8,9 +8,16 @@
 
 #import "Passport.h"
 #import "KeyAndTag.h"
+#import <SAMKeychain/SAMKeychain.h>
 
+#define kBundleIdentifier [[NSBundle mainBundle] bundleIdentifier]
 
 @implementation Passport
+
+@synthesize session     = _session;
+@synthesize sinaToken   = _sinaToken;
+
+//static NSString *bundleIdentifier  = [[NSBundle mainBundle] bundleIdentifier];
 
 + (Passport *)sharedInstance
 {
@@ -58,25 +65,47 @@
             self.user = [GKUser modelFromDictionary:@{@"userId":@(user.userId)}];
         }
         
-        NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:SessionKey];
-        self.session = session;
         
-        NSString *sinaUserID = [[NSUserDefaults standardUserDefaults] objectForKey:SinaUserIDKey];
-        self.sinaUserID = sinaUserID;
-        NSString *sinaToken = [[NSUserDefaults standardUserDefaults] objectForKey:SinaTokenKey];
-        self.sinaToken = sinaToken;
-        NSDate *sinaExpirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:SinaExpirationDateKey];
-        self.sinaExpirationDate = sinaExpirationDate;
+//        self.session                    = [SAMKeychain passwordForService:kBundleIdentifier account:SessionKey];
+        
+//        NSString *sinaUserID            = [[NSUserDefaults standardUserDefaults] objectForKey:SinaUserIDKey];
+//        self.sinaUserID                 = sinaUserID;
+        self.sinaUserID                 = [SAMKeychain passwordForService:kBundleIdentifier account:SinaUserIDKey];
+        
+//        NSString *sinaToken             = [[NSUserDefaults standardUserDefaults] objectForKey:SinaTokenKey];
+//        self.sinaToken = sinaToken;
+//        self.sinaToken                  = [SAMKeychain passwordForService:kBundleIdentifier account:SinaTokenKey];
+        
+        NSDate *sinaExpirationDate      = [[NSUserDefaults standardUserDefaults] objectForKey:SinaExpirationDateKey];
+        self.sinaExpirationDate         = sinaExpirationDate;
     }
     return self;
+}
+
+#pragma mark - lazy load
+- (NSString *)session
+{
+    if (!_session) {
+        _session                    = [SAMKeychain passwordForService:kBundleIdentifier account:SessionKey];
+    }
+    return _session;
+}
+
+- (NSString *)sinaToken
+{
+    if (!_sinaToken) {
+        _sinaToken                  = [SAMKeychain passwordForService:kBundleIdentifier account:SinaTokenKey];
+    }
+    return _sinaToken;
 }
 
 - (void)setSession:(NSString *)session
 {
     _session = session;
-    if (self.session) {
-        [[NSUserDefaults standardUserDefaults] setValue:self.session forKey:SessionKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    if (_session) {
+        [SAMKeychain setPassword:_session forService:kBundleIdentifier account:SessionKey];
+    } else {
+        [SAMKeychain deletePasswordForService:kBundleIdentifier account:SessionKey];
     }
 }
 
@@ -91,20 +120,25 @@
 - (void)setSinaUserID:(NSString *)sinaUserID
 {
     _sinaUserID = sinaUserID;
-    if (self.sinaUserID) {
-        [[NSUserDefaults standardUserDefaults] setValue:self.sinaUserID forKey:SinaUserIDKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    if (_sinaUserID) {
+        [SAMKeychain setPassword:_sinaUserID forService:kBundleIdentifier account:SinaUserIDKey];
+//        [[NSUserDefaults standardUserDefaults] setValue:self.sinaUserID forKey:SinaUserIDKey];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [SAMKeychain deletePasswordForService:kBundleIdentifier account:SinaUserIDKey];
     }
 }
 
 - (void)setScreenName:(NSString *)sinaNickName
 {
     _screenName = sinaNickName;
-    if (self.screenName) {
-        [[NSUserDefaults standardUserDefaults] setValue:self.screenName forKey:SinaNickNameKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    if (_screenName) {
+//        [[NSUserDefaults standardUserDefaults] setValue:self.screenName forKey:SinaNickNameKey];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+        [SAMKeychain setPassword:_screenName forService:kBundleIdentifier account:SinaNickNameKey];
     } else {
-        [NSObject removeFromUserDefaultsByKey:SinaNickNameKey];
+//        [NSObject removeFromUserDefaultsByKey:SinaNickNameKey];
+        [SAMKeychain deletePasswordForService:kBundleIdentifier account:SinaNickNameKey];
     }
 }
 
@@ -120,9 +154,12 @@
 - (void)setSinaToken:(NSString *)sinaToken
 {
     _sinaToken = sinaToken;
-    if (self.sinaToken) {
-        [[NSUserDefaults standardUserDefaults] setValue:self.sinaToken forKey:SinaTokenKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    if (_sinaToken) {
+        [SAMKeychain setPassword:_sinaToken forService:kBundleIdentifier account:SinaTokenKey];
+//        [[NSUserDefaults standardUserDefaults] setValue:self.sinaToken forKey:SinaTokenKey];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [SAMKeychain deletePasswordForService:kBundleIdentifier account:SinaTokenKey];
     }
 }
 
@@ -147,9 +184,13 @@
 - (void)setTaobaoToken:(NSString *)taobaoToken
 {
     _taobaoToken = taobaoToken;
-    if (self.taobaoToken) {
-        [[NSUserDefaults standardUserDefaults] setValue:self.taobaoToken forKey:TaobaoTokenKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    if (_taobaoToken) {
+//        [[NSUserDefaults standardUserDefaults] setValue:self.taobaoToken forKey:TaobaoTokenKey];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+        [SAMKeychain setPassword:_taobaoToken forService:kBundleIdentifier account:TaobaoTokenKey];
+    } else {
+        [SAMKeychain deletePasswordForService:kBundleIdentifier account:TaobaoTokenKey];
+        
     }
 }
 

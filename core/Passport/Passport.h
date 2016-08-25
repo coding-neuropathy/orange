@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "GKUser.h"
 
+
 @interface Passport : NSObject
 
 @property (nonatomic, strong) GKUser *user;
-@property (nonatomic, strong) NSString *session;
+@property (nonatomic, strong, getter=session) NSString *session;
 @property (nonatomic, strong) NSString *sinaUserID;
 @property (nonatomic, strong) NSString *screenName;
 @property (nonatomic, strong) NSString *sinaAvatarURL;

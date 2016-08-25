@@ -6,7 +6,8 @@
 //  Copyright (c) 2015年 guoku.com. All rights reserved.
 //
 
-#import "AFHTTPSessionManager.h"
+//#import "AFHTTPSessionManager.h"
+#import <AFNetworking/AFHTTPSessionManager.h>
 
 @interface BaseHttpClient : AFHTTPSessionManager
 
