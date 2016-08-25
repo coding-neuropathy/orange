@@ -81,7 +81,7 @@
     if (!_pageCtr) {
         _pageCtr                                = [[UIPageControl alloc] initWithFrame:CGRectZero];
         _pageCtr.hidden                         = YES;
-//        _pageCtr.currentPage = 0;
+//        _pageCtr.currentPage                    = 2;
         _pageCtr.backgroundColor                = [UIColor clearColor];
         _pageCtr.pageIndicatorTintColor         = [UIColor colorFromHexString:@"#656768"];
         _pageCtr.currentPageIndicatorTintColor  = [UIColor colorFromHexString:@"#ffffff"];
@@ -196,8 +196,8 @@
     [self fadeOut];
 }
 //捏合图片放大缩小手势
-- (void)pinchAction:(UIPinchGestureRecognizer *)pinch
-{
+//- (void)pinchAction:(UIPinchGestureRecognizer *)pinch
+//{
 //    if (pinch.state == UIGestureRecognizerStateBegan) {
 //        time = 1;
 //    }
@@ -207,7 +207,7 @@
 //    else if (pinch.state == UIGestureRecognizerStateEnded){
 //        time*=pinch.scale;
 //    }
-}
+//}
 
 
 - (void)layoutSubviews
@@ -225,9 +225,10 @@
     } else {
         self.scrollView.deFrameTop = 100.;
     }
-    if ([_entity.imageURLArray count] > 0) {
+
+    if ([self.entity.imageURLArray count] > 0) {
         
-        self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
+        self.pageCtr.numberOfPages = [self.entity.imageURLArray count] + 1;
         self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom + 10.);
         self.pageCtr.bounds = CGRectMake(0.0, 0.0, 32 * (_pageCtr.numberOfPages - 1) + 32, 32);
         self.pageCtr.hidden = NO;
@@ -297,45 +298,6 @@
         [self fadeOut];
     }
 }
-//#pragma makr - <UISwipeGestureRecognizer>
-//- (void)panAction:(UIPanGestureRecognizer *)recognizer
-//{
-//    CGPoint translation = [recognizer translationInView:self];
-//    
-//    if (translation.y < 0 && recognizer.view.deFrameTop == 0)
-//        return;
-//    
-//    recognizer.view.center = CGPointMake(recognizer.view.center.x, recognizer.view.center.y + translation.y);
-////    NSLog(@"%f", 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight);
-//    CGFloat viewAlpha = 1 - recognizer.view.deFrameTop / recognizer.view.deFrameHeight;
-//    if (viewAlpha < 0.3) {
-//        recognizer.view.alpha = 0.3;
-//    } else {
-//        recognizer.view.alpha = viewAlpha;
-//    }
-////    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
-////                                         recognizer.view.center.y + translation.y);
-//    [recognizer setTranslation:CGPointMake(0, 0) inView:self];
-//    
-//    if (recognizer.state == UIGestureRecognizerStateEnded) {
-//        
-//        if (self.deFrameTop > kScreenHeight / 6) {
-//            
-//            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//                self.deFrameTop = kScreenHeight;
-//                self.alpha = 0.;
-//            } completion:^(BOOL finished) {
-//                [self removeFromSuperview];
-//            }];
-//        } else {
-//            [UIView animateWithDuration:0.35 animations:^{
-//                self.alpha = 1.;
-//                self.deFrameTop = 0;
-//            }];
-//        }
-//    }
-//}
-
 
 #pragma mark - button action
 - (void)closeBtnAction:(id)sender
@@ -383,13 +345,15 @@
 #pragma mark - scroll view delegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
+    NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.deFrameWidth;
     self.pageCtr.currentPage = index;
+
 }
 
 - (void)setImageIndex:(NSInteger)idx
 {
     [self.scrollView setContentOffset:CGPointMake(idx * kScreenWidth, 0.)];
+    self.pageCtr.currentPage = idx + 1;
 }
 
 - (void)setNoteBtnSelected

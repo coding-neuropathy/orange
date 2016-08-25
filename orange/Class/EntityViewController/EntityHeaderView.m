@@ -10,12 +10,11 @@
 #import "NSString+Helper.h"
 #import <iCarousel/iCarousel.h>
 
-@interface EntityHeaderView () <UIScrollViewDelegate, iCarouselDelegate, iCarouselDataSource>
-@property (strong, nonatomic) UILabel * titleLabel;
-@property (strong, nonatomic) UIScrollView * scrollView;
-@property (strong, nonatomic) UIPageControl * pageCtr;
+@interface EntityHeaderView () <iCarouselDelegate, iCarouselDataSource>
 
-//iPad
+@property (strong, nonatomic) UILabel * titleLabel;
+//@property (strong, nonatomic) UIScrollView * scrollView;
+@property (strong, nonatomic) UIPageControl * pageCtr;
 @property (strong, nonatomic) iCarousel * imagesView;
 @property (strong, nonatomic) NSMutableArray * imageURLArray;
 @property (assign, nonatomic) BOOL warp;
@@ -51,29 +50,29 @@ static CGFloat kEntityViewMarginLeft = 16.;
     return _titleLabel;
 }
 
-- (UIScrollView *)scrollView
-{
-    if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
-        _scrollView.scrollsToTop = NO;
-        _scrollView.pagingEnabled = YES;
-        _scrollView.showsHorizontalScrollIndicator = NO;
-        _scrollView.delegate = self;
-        [self addSubview:_scrollView];
-
-    }
-    return _scrollView;
-}
+//- (UIScrollView *)scrollView
+//{
+//    if (!_scrollView) {
+//        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+//        _scrollView.scrollsToTop = NO;
+//        _scrollView.pagingEnabled = YES;
+//        _scrollView.showsHorizontalScrollIndicator = NO;
+//        _scrollView.delegate = self;
+//        [self addSubview:_scrollView];
+//
+//    }
+//    return _scrollView;
+//}
 
 - (iCarousel *)imagesView
 {
     if (!_imagesView) {
-        _imagesView = [[iCarousel alloc] initWithFrame:CGRectZero];
-        _imagesView.type = iCarouselTypeLinear;
-        _imagesView.pagingEnabled = YES;
+        _imagesView                 = [[iCarousel alloc] initWithFrame:CGRectZero];
+        _imagesView.type            = iCarouselTypeLinear;
+        _imagesView.pagingEnabled   = YES;
+        _imagesView.dataSource      = self;
+        _imagesView.delegate        = self;
         
-        _imagesView.dataSource = self;
-        _imagesView.delegate = self;
         [self addSubview:_imagesView];
     }
     return _imagesView;
@@ -106,50 +105,50 @@ static CGFloat kEntityViewMarginLeft = 16.;
     _entity = entity;
 //    NSLog(@"images %@", _entity.imageURLArray);
     
-    if (IS_IPHONE) {
-        if((![_entity.brand isEqual:[NSNull null]])&&(![_entity.brand isEqualToString:@""])&&(_entity.brand))
-        {
-            self.titleLabel.text = [NSString stringWithFormat:@"%@ - %@", _entity.brand, _entity.title];
-        }
-        else if((![_entity.title isEqual:[NSNull null]])&&(_entity.title))
-        {
-            self.titleLabel.text = _entity.title;
-        }
+//    if (IS_IPHONE) {
+//        if((![_entity.brand isEqual:[NSNull null]])&&(![_entity.brand isEqualToString:@""])&&(_entity.brand))
+//        {
+//            self.titleLabel.text = [NSString stringWithFormat:@"%@ - %@", _entity.brand, _entity.title];
+//        }
+//        else if((![_entity.title isEqual:[NSNull null]])&&(_entity.title))
+//        {
+//            self.titleLabel.text = _entity.title;
+//        }
+    
         
-        
-        self.scrollView.contentSize = CGSizeMake((kScreenWidth - 32) * ([_entity.imageURLArray count] + 1), kScreenWidth - 32);
-        
-        NSMutableArray * imageArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
-        
-        if (_entity.imageURL)
-            [imageArray insertObject:_entity.imageURL atIndex:0];
-        
-        //    NSLog(@"images %@", imageArray);
-        [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
-            UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 32) * idx, 0., kScreenWidth - 32, kScreenWidth - 32)];
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            imageView.tag = idx;
-            imageView.userInteractionEnabled = YES;
-            
-            NSURL * imageURL_640;
-            if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
-                imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:640]];
-            } else {
-                imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
-            }
-            
-            [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
-            
-            //        }
-            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-            
-            [imageView addGestureRecognizer:tap];
-            [self.scrollView addSubview:imageView];
-        }];
-    }
-    else
-    {
-        self.titleLabel.text = self.entity.entityName;
+//        self.scrollView.contentSize = CGSizeMake((kScreenWidth - 32) * ([_entity.imageURLArray count] + 1), kScreenWidth - 32);
+//        
+//        NSMutableArray * imageArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
+//        
+//        if (_entity.imageURL)
+//            [imageArray insertObject:_entity.imageURL atIndex:0];
+//        
+//        //    NSLog(@"images %@", imageArray);
+//        [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
+//            UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 32) * idx, 0., kScreenWidth - 32, kScreenWidth - 32)];
+//            imageView.contentMode = UIViewContentModeScaleAspectFit;
+//            imageView.tag = idx;
+//            imageView.userInteractionEnabled = YES;
+//            
+//            NSURL * imageURL_640;
+//            if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
+//                imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:640]];
+//            } else {
+//                imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
+//            }
+//            
+//            [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+//            
+//            //        }
+//            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+//            
+//            [imageView addGestureRecognizer:tap];
+//            [self.scrollView addSubview:imageView];
+//        }];
+//    }
+//    else
+//    {
+        self.titleLabel.text = _entity.entityName;
         
         self.imageURLArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
         if (_entity.imageURL)
@@ -163,7 +162,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
         }
         
         [self.imagesView reloadData];
-    }
+//    }
     
     
     [self setNeedsLayout];
@@ -176,14 +175,18 @@ static CGFloat kEntityViewMarginLeft = 16.;
     if (IS_IPHONE) {
         CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font LineHeight:7];
         
-        self.scrollView.frame = CGRectMake(0., 0., kScreenWidth - 32., kScreenWidth - 32.);
-        self.scrollView.deFrameLeft = 16.;
-        self.scrollView.deFrameTop =  16.;
-        self.titleLabel.frame = CGRectMake(kEntityViewMarginLeft, 16. + self.scrollView.deFrameBottom, kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
+//        self.scrollView.frame = CGRectMake(0., 0., kScreenWidth - 32., kScreenWidth - 32.);
+//        self.scrollView.deFrameLeft = 16.;
+//        self.scrollView.deFrameTop =  16.;
+        self.imagesView.deFrameSize     = CGSizeMake(kScreenWidth - 32., kScreenWidth - 32.);
+        self.imagesView.deFrameLeft     = 16.;
+        self.imagesView.deFrameTop      = 16.;
+//        self.titleLabel.frame           = CGRectMake(kEntityViewMarginLeft, 16. + self.scrollView.deFrameBottom, kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
+        self.titleLabel.frame           = CGRectMake(16., 16. + self.imagesView.deFrameBottom, self.imagesView.deFrameWidth, titleHeight);
         
         if ([_entity.imageURLArray count] > 0) {
             self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
-            self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom -10);
+            self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.imagesView.deFrameBottom -10);
             self.pageCtr.bounds = CGRectMake(0.0, 0.0, 32 * (_pageCtr.numberOfPages - 1) + 32, 32);
             self.pageCtr.hidden = NO;
         }
@@ -206,7 +209,9 @@ static CGFloat kEntityViewMarginLeft = 16.;
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
     if (!view) {
-        view = [[UIImageView alloc] initWithFrame:CGRectMake(0., 0., 460., 460.)];
+        view = [[UIImageView alloc] initWithFrame:CGRectZero];
+        
+        view.deFrameSize    = IS_IPAD ? CGSizeMake(460., 460.) : CGSizeMake(kScreenWidth - 32, kScreenWidth - 32);
         view.contentMode = UIViewContentModeScaleAspectFit;
     }
     NSURL * imageURL_800;
@@ -219,7 +224,9 @@ static CGFloat kEntityViewMarginLeft = 16.;
         imageURL_800 = [NSURL URLWithString:url.absoluteString];
     }
     DDLogInfo(@"url %lu %@ ", (long)index, imageURL_800);
-    [(UIImageView *)view sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(460., 460.)]];
+    [(UIImageView *)view sd_setImageWithURL:imageURL_800
+                           placeholderImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f7f7f7"]
+                            andSize:view.deFrameSize]];
     
     return view;
 }
@@ -237,7 +244,9 @@ static CGFloat kEntityViewMarginLeft = 16.;
         case iCarouselOptionSpacing:
         {
             //add a bit of spacing between the item views
-            return value * 1.03f;
+            
+            value = IS_IPAD ? value * 1.03 : value * 1.1;
+            return value;
         }
         case iCarouselOptionFadeMax:
         {
@@ -265,23 +274,44 @@ static CGFloat kEntityViewMarginLeft = 16.;
     }
 }
 
-
-#pragma mark - button action
-- (void)tapAction:(id)sender
+#pragma mark - <iCarouselDelegate>
+//- (void)ca
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(handelTapImageWithIndex:)])
-    {
-        [_delegate handelTapImageWithIndex:[(UIGestureRecognizer *)sender view].tag];
+    if (IS_IPHONE) {
+        if (_delegate && [_delegate respondsToSelector:@selector(handelTapImageWithIndex:)]) {
+            DDLogInfo(@"select item index %ld", index);
+            [_delegate handelTapImageWithIndex:index];
+        }
     }
 }
 
-
-#pragma mark - scroll view delegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel
+//- (void)carouselDidEndDecelerating:(iCarousel *)carousel
 {
-    NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
-    _pageCtr.currentPage = index;
+    DDLogInfo(@"offset %f", carousel.scrollOffset);
+    NSInteger index = fabs(carousel.scrollOffset);
+//    self.pageCtr.currentPage = index;
+    
+    [self.pageCtr setCurrentPage:index];
 }
+
+//#pragma mark - button action
+//- (void)tapAction:(id)sender
+//{
+//    if (_delegate && [_delegate respondsToSelector:@selector(handelTapImageWithIndex:)])
+//    {
+//        [_delegate handelTapImageWithIndex:[(UIGestureRecognizer *)sender view].tag];
+//    }
+//}
+//
+//
+//#pragma mark - scroll view delegate
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+//{
+//    NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
+//    self.pageCtr.currentPage = index;
+//}
 
 #pragma mark - class method
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity

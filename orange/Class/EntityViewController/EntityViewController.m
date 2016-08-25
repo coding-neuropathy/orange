@@ -765,10 +765,11 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     if (self.note) {
         [popView setNoteBtnSelected];
     }
+    
     popView.tapLikeBtn = ^(UIButton *likeBtn){
-//        DDLogInfo(@"like btn %@", likeBtn);
         [self likeButtonActionWithBtn:likeBtn];
     };
+    
     popView.tapNoteBtn = ^(UIButton *noteBtn){
         [self noteButtonAction];
     };
@@ -778,7 +779,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     };
     [popView showInWindowWithAnimated:YES];
     
-    [MobClick event:@"click entiyt image view"];
+    [MobClick event:@"click entity image view"];
 }
 
 #pragma mark - <EntityHeaderSectionViewDelegate>
