@@ -18,6 +18,10 @@
 #import "GKNotificationHUB.h"
 #import "Appirater.h"
 
+#if DEBUG
+#import "FLEXManager.h"
+#endif
+
 
 int ddLogLevel;
 
@@ -117,6 +121,18 @@ int ddLogLevel;
         }
     }];
     
+    
+    //  userInfo为收到远程通知的内容
+    NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        // 有推送的消息，处理推送的消息
+        NSString * url = [userInfo valueForKey:@"url"];
+        if (url) {
+            [self openLocalURL:[NSURL URLWithString:url]];
+        }
+        application.applicationIconBadgeNumber = 0;
+    }
+    
     return YES;
 }
 
@@ -138,7 +154,10 @@ int ddLogLevel;
     //设置整体风格
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self customizeAppearance];
-
+    
+#if DEBUG
+[[FLEXManager sharedManager] showExplorer];
+#endif
     // Override point for customization after application launch.
     
     
@@ -280,7 +299,6 @@ int ddLogLevel;
     {
         return [WXApi handleOpenURL:url delegate:self];
     }
-//    return [AVOSCloudSNS handleOpenURL:url];
     return [WeiboSDK handleOpenURL:url delegate:self ];
 }
 
@@ -674,7 +692,13 @@ int ddLogLevel;
 #pragma mark - config log
 - (void)configLog
 {
+#if DEBUG
+//#import "FLEXManager.h"
     ddLogLevel = DDLogLevelInfo;
+#else
+    ddLogLevel = DDLogLevelError;
+#endif
+    
 //    ddLogLevel = DDLogLevelError;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
