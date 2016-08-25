@@ -79,12 +79,12 @@
 - (UIPageControl *)pageCtr
 {
     if (!_pageCtr) {
-        _pageCtr = [[UIPageControl alloc] initWithFrame:CGRectZero];
-        _pageCtr.hidden = YES;
+        _pageCtr                                = [[UIPageControl alloc] initWithFrame:CGRectZero];
+        _pageCtr.hidden                         = YES;
 //        _pageCtr.currentPage = 0;
-        _pageCtr.backgroundColor = [UIColor clearColor];
-        _pageCtr.pageIndicatorTintColor = UIColorFromRGB(0x656768);
-        _pageCtr.currentPageIndicatorTintColor = UIColorFromRGB(0xffffff);
+        _pageCtr.backgroundColor                = [UIColor clearColor];
+        _pageCtr.pageIndicatorTintColor         = [UIColor colorFromHexString:@"#656768"];
+        _pageCtr.currentPageIndicatorTintColor  = [UIColor colorFromHexString:@"#ffffff"];
         _pageCtr.layer.cornerRadius = 16.0;
         [self addSubview:_pageCtr];
     }

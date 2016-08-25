@@ -38,7 +38,7 @@ int ddLogLevel;
  */
 - (void)umengTrack {
     [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
-    [MobClick setLogEnabled:NO];
+    [MobClick setLogEnabled:DEBUG];
     
     UMConfigInstance.appKey = UMENG_APPKEY;
     [MobClick startWithConfigure:UMConfigInstance];
@@ -102,7 +102,7 @@ int ddLogLevel;
     [WXApi registerApp:kGK_WeixinShareKey withDescription:NSLocalizedStringFromTable(@"guide to better living", kLocalizedFile, nil)];
     
     // weibo sdk
-    [WeiboSDK enableDebugMode:NO];
+    [WeiboSDK enableDebugMode:DEBUG];
     [WeiboSDK registerApp:kGK_WeiboAPPKey];
     
     /**
@@ -228,7 +228,7 @@ int ddLogLevel;
 #pragma mark - status bar config
     if (IS_IPAD) {
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(kScreenWidth - kTabBarWidth, 44.)] forBarMetrics:UIBarMetricsDefault];
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(kScreenWidth - kTabBarWidth, 44.)] forBarMetrics:UIBarMetricsDefault];
     }
     
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -335,33 +335,35 @@ int ddLogLevel;
 #pragma mark - config appearance
 -(void)customizeAppearance
 {
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];  
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
     //[[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
     
-    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth, 1)]];
+    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
     
 //    [UINavigationBar appearance].layer.shadowColor = [UIColor blackColor].CGColor;
 //    [UINavigationBar appearance].layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
 //    [UINavigationBar appearance].layer.shadowOpacity = 0.2f;
 //    [UINavigationBar appearance].layer.shadowRadius = 2.0f;
 //    [[UINavigationBar appearance] setShadowImage:[[UIImage imageNamed:@"shadow.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0]];
-    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x414243)];
-    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x414243)];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorFromHexString:@"#414243"]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorFromHexString:@"#414243"]];
     //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
     UIFont* font = [UIFont boldSystemFontOfSize:17];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:UIColorFromRGB(0x414243)}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{ NSFontAttributeName:font,
+                                                            NSForegroundColorAttributeName:[UIColor colorFromHexString:@"#414243"]
+                                                            }];
     [[UINavigationBar appearance] setAlpha:0.97];
     
     [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back"]];
     [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back"]];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, 0) forBarMetrics:UIBarMetricsDefault];
     
-    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(kScreenWidth, 49)]];
-    [[UITabBar appearance]setSelectionIndicatorImage:[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(kScreenWidth/4, 49)]];
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(kScreenWidth, 49)]];
+    [[UITabBar appearance]setSelectionIndicatorImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(kScreenWidth/4, 49)]];
     //    [[UITabBar appearance] setSelectedImageTintColor:UIColorFromRGB(0xffffff)];
-    [[UITabBar appearance] setTintColor:UIColorFromRGB(0xffffff)];
+    [[UITabBar appearance] setTintColor:[UIColor colorFromHexString:@"#ffffff"]];
     //[UIColor colorWithRed:255.0/255.0 green:124.0/255.0 blue:56.0/255.0 alpha:1]
-    [[UITabBar appearance] setBarTintColor:UIColorFromRGB(0xffffff)];
+    [[UITabBar appearance] setBarTintColor:[UIColor colorFromHexString:@"#ffffff"]];
 }
 
 #pragma mark - weibo delegate

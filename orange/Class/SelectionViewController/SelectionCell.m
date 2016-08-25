@@ -98,7 +98,7 @@
     if (!_contentLabel) {
         _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
         _contentLabel.font = [UIFont fontWithName:@"Helvetica" size:14.];
-        _contentLabel.textColor = UIColorFromRGB(0x414243);
+        _contentLabel.textColor = [UIColor colorFromHexString:@"#414243"];
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         _contentLabel.numberOfLines = 3;
         _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -125,11 +125,11 @@
         _likeCounterButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _likeCounterButton.titleLabel.font = [UIFont systemFontOfSize:12.];
 //        _likeCounterButton.titleLabel.textColor = UIColorFromRGB(0x9d9e9f);
-        [_likeCounterButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        [_likeCounterButton setTitleColor:[UIColor colorFromHexString:@"#9d9e9f"] forState:UIControlStateNormal];
         
         UIImage * image =[[UIImage imageNamed:@"counter"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         [_likeCounterButton setBackgroundImage:image forState:UIControlStateNormal];
-        [_likeCounterButton setTintColor:UIColorFromRGB(0xf8f8f8)];
+        [_likeCounterButton setTintColor:[UIColor colorFromHexString:@"#f8f8f8"]];
         [_likeCounterButton setTitleEdgeInsets:UIEdgeInsetsMake(0., 5., 0., 0.)];
 //        _likeCounterButton.enabled = NO;
         _likeCounterButton.userInteractionEnabled = NO;
@@ -142,16 +142,17 @@
 - (UILabel *)timeLabel
 {
     if (!_timeLabel) {
-        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 15)];
-        self.timeLabel.layer.masksToBounds = YES;
-                self.timeLabel.layer.cornerRadius = 2;
-                self.timeLabel.backgroundColor = [UIColor clearColor];
-                self.timeLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-                self.timeLabel.textAlignment = NSTextAlignmentRight;
+        _timeLabel                          = [[UILabel alloc] initWithFrame:CGRectZero];
+        _timeLabel.deFrameSize              = CGSizeMake(160., 15.);
+        _timeLabel.layer.masksToBounds      = YES;
+        _timeLabel.layer.cornerRadius       = 2;
+        _timeLabel.backgroundColor          = [UIColor clearColor];
+        _timeLabel.font                     = [UIFont fontWithName:kFontAwesomeFamilyName size:12.];
+        _timeLabel.textAlignment            = NSTextAlignmentRight;
         
-                self.timeLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _timeLabel.textColor                = [UIColor colorFromHexString:@"#9d9e9f"];
         
-                [self.contentView addSubview:self.timeLabel];
+        [self.contentView addSubview:self.timeLabel];
     }
     return _timeLabel;
 }
@@ -190,8 +191,10 @@
     {
         NSURL * imageURL = self.entity.imageURL_640x640;
 
-        [self.image sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth-32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
-            
+        [self.image sd_setImageWithURL:imageURL
+                      placeholderImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f7f7f7"]
+                            andSize:self.image.deFrameSize] options:SDWebImageRetryFailed
+                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL*imageURL) {
             [weakSelf.loading stopAnimating];
         }];
     }
@@ -290,7 +293,7 @@
     if (IS_IPAD ) {
         CGContextRef context = UIGraphicsGetCurrentContext();
     
-        CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+        CGContextSetStrokeColorWithColor(context, [UIColor colorFromHexString:@"#ebebeb"].CGColor);
         CGContextSetLineWidth(context, kSeparateLineWidth);
     
         CGContextMoveToPoint(context, self.contentView.deFrameWidth, 0.);
@@ -400,16 +403,9 @@
 #pragma mark - button action
 - (void)imageViewButtonAction
 {
-////    EntityViewController * VC = [[EntityViewController alloc] initWithEntity:self.entity];
-////    VC.hidesBottomBarWhenPushed = YES;
-////
-////    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-//    [[OpenCenter sharedOpenCenter]openEntity:self.entity hideButtomBar:YES];
-    
     if (_delegate && [_delegate respondsToSelector:@selector(TapEntityImage:)]) {
         [_delegate TapEntityImage:self.entity];
     }
-    
 }
 
 

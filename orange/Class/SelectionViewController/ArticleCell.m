@@ -13,7 +13,7 @@
 @property (strong, nonatomic) UIImageView * coverImageView;
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) UILabel * detailLabel;
-@property (strong, nonatomic) RTLabel * tagsLabel;
+//@property (strong, nonatomic) RTLabel * tagsLabel;
 @property (strong, nonatomic) UILabel * timeLabel;
 @property (strong, nonatomic) UIView * H;
 
@@ -27,7 +27,7 @@
     if (self)
     {
 //        self.backgroundColor = UIColorFromRGB(0xffffff);
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         
         _H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
         self.H.backgroundColor = UIColorFromRGB(0xe6e6e6);
@@ -50,11 +50,12 @@
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:17.];
-        _titleLabel.textColor = UIColorFromRGB(0x414243);
-        _titleLabel.textAlignment = NSTextAlignmentLeft;
-        _titleLabel.numberOfLines = 2;
+        _titleLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
+        _titleLabel.font            = [UIFont boldSystemFontOfSize:17.];
+        _titleLabel.textColor       = [UIColor colorFromHexString:@"#414243"];
+        _titleLabel.textAlignment   = NSTextAlignmentLeft;
+        _titleLabel.numberOfLines   = 2;
+        
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;
@@ -63,37 +64,36 @@
 - (UILabel *)detailLabel
 {
     if (!_detailLabel) {
-        _detailLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//        _detailLabel.paragraphReplacement = @"";
-//        _detailLabel.lineSpacing = 7.0;
-//        _detailLabel.delegate = self;
-        _detailLabel.font = [UIFont systemFontOfSize:14.];
-        _detailLabel.numberOfLines = 2;
-        _detailLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _detailLabel                = [[UILabel alloc] initWithFrame:CGRectZero];
+        _detailLabel.font           = [UIFont systemFontOfSize:14.];
+        _detailLabel.numberOfLines  = 2;
+        _detailLabel.textColor      = [UIColor colorFromHexString:@"#9d9e9f"];
+        
         [self.contentView addSubview:_detailLabel];
     }
     return _detailLabel;
 }
 
-- (RTLabel *)tagsLabel
-{
-    if (!_tagsLabel) {
-        _tagsLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
-        _tagsLabel.paragraphReplacement = @"";
-        _tagsLabel.lineSpacing = 7.;
-        _tagsLabel.delegate = self;
-        [self.contentView addSubview:_tagsLabel];
-    }
-    return _tagsLabel;
-}
+//- (RTLabel *)tagsLabel
+//{
+//    if (!_tagsLabel) {
+//        _tagsLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
+//        _tagsLabel.paragraphReplacement = @"";
+//        _tagsLabel.lineSpacing = 7.;
+//        _tagsLabel.delegate = self;
+//        [self.contentView addSubview:_tagsLabel];
+//    }
+//    return _tagsLabel;
+//}
 
 - (UILabel *)timeLabel
 {
     if (!_timeLabel) {
-        _timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _timeLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-        _timeLabel.textColor = UIColorFromRGB(0x9d9e9f);
-        _timeLabel.textAlignment = NSTextAlignmentRight;
+        _timeLabel                  = [[UILabel alloc] initWithFrame:CGRectZero];
+        _timeLabel.font             = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+        _timeLabel.textColor        = [UIColor colorFromHexString:@"#9d9e9f"];
+        _timeLabel.textAlignment    = NSTextAlignmentRight;
+        
         [self.contentView addSubview:_timeLabel];
     }
     return _timeLabel;
