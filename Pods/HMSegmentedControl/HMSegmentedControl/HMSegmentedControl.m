@@ -235,12 +235,10 @@
 }
 
 - (NSAttributedString *)attributedTitleAtIndex:(NSUInteger)index {
-    id title = self.sectionTitles[index];
+    NSString *title = self.sectionTitles[index];
     BOOL selected = (index == self.selectedSegmentIndex) ? YES : NO;
     
-    if ([title isKindOfClass:[NSAttributedString class]]) {
-        return (NSAttributedString *)title;
-    } else if (!self.titleFormatter) {
+    if (!self.titleFormatter) {
         NSDictionary *titleAttrs = selected ? [self resultingSelectedTitleTextAttributes] : [self resultingTitleTextAttributes];
         
         // the color should be cast to CGColor in order to avoid invalid context on iOS7
@@ -773,11 +771,11 @@
 #pragma mark - Index Change
 
 - (void)setSelectedSegmentIndex:(NSInteger)index {
-    [self setSelectedSegmentIndex:index animated:NO notify:YES];
+    [self setSelectedSegmentIndex:index animated:NO notify:NO];
 }
 
 - (void)setSelectedSegmentIndex:(NSUInteger)index animated:(BOOL)animated {
-    [self setSelectedSegmentIndex:index animated:animated notify:YES];
+    [self setSelectedSegmentIndex:index animated:animated notify:NO];
 }
 
 - (void)setSelectedSegmentIndex:(NSUInteger)index animated:(BOOL)animated notify:(BOOL)notify {
@@ -861,7 +859,7 @@
 
 - (NSDictionary *)resultingTitleTextAttributes {
     NSDictionary *defaults = @{
-        NSFontAttributeName : [UIFont systemFontOfSize:14.0f],
+        NSFontAttributeName : [UIFont systemFontOfSize:19.0f],
         NSForegroundColorAttributeName : [UIColor blackColor],
     };
     

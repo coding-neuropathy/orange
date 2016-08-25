@@ -7,11 +7,12 @@
 //
 
 #import "SelectionController.h"
-#import "HMSegmentedControl.h"
+//#import "HMSegmentedControl.h"
 //#import "HomeController.h"
 #import "SelectionViewController.h"
 #import "ArticlesController.h"
 
+#import <HMSegmentedControl/HMSegmentedControl.h>
 
 @interface SelectionController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 

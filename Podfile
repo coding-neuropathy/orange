@@ -8,6 +8,7 @@ target 'orange' do
     pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
     pod 'SDWebImage'
     pod 'CocoaLumberjack', '2.2'
+    pod 'HMSegmentedControl'
     pod 'FLEX', '~> 2.0', :configurations => ['Debug'] #An in-app debugging and exploration tool for iOS
 end
 

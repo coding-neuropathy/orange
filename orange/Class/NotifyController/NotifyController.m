@@ -7,12 +7,12 @@
 //
 
 #import "NotifyController.h"
-#import "HMSegmentedControl.h"
+//#import "HMSegmentedControl.h"
 #import "MessageController.h"
 #import "ActiveController.h"
-//#import <>
-#import <WZLBadge/WZLBadgeImport.h>
 
+#import <WZLBadge/WZLBadgeImport.h>
+#import <HMSegmentedControl/HMSegmentedControl.h>
 
 @interface NotifyController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 

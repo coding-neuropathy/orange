@@ -86,7 +86,6 @@
 		39B7207B1B1F50E0008519E3 /* Passport.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B720781B1F50E0008519E3 /* Passport.m */; };
 		39B868181ACCF5DB00A2115D /* TodayViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B868171ACCF5DB00A2115D /* TodayViewCell.m */; };
 		4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E05AA951B634C2D007596E6 /* EarthLoadingView.m */; };
-		4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */; };
 		4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */; };
 		4E198C481A66B86F004C59C4 /* CategoryGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E198C461A66B86F004C59C4 /* CategoryGridItem.m */; };
 		4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1C36581AB429FE00EA2F00 /* GTScrollNavigationBar.m */; };
@@ -504,8 +503,6 @@
 		39B8688E1ACD0CF600A2115D /* core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E05AA941B634C2D007596E6 /* EarthLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthLoadingView.h; sourceTree = "<group>"; };
 		4E05AA951B634C2D007596E6 /* EarthLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthLoadingView.m; sourceTree = "<group>"; };
-		4E066A9D1A5C43E800DFEF65 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
-		4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FultonsHand Regular.TTF"; sourceTree = "<group>"; };
 		4E198C451A66B86F004C59C4 /* CategoryGridItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGridItem.h; sourceTree = "<group>"; };
 		4E198C461A66B86F004C59C4 /* CategoryGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryGridItem.m; sourceTree = "<group>"; };
@@ -1317,15 +1314,6 @@
 			path = EarthLoadingView;
 			sourceTree = "<group>";
 		};
-		4E066A9C1A5C43E800DFEF65 /* HMSegmentedControl */ = {
-			isa = PBXGroup;
-			children = (
-				4E066A9D1A5C43E800DFEF65 /* HMSegmentedControl.h */,
-				4E066A9E1A5C43E800DFEF65 /* HMSegmentedControl.m */,
-			);
-			path = HMSegmentedControl;
-			sourceTree = "<group>";
-		};
 		4E066AA01A5C56C600DFEF65 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1569,7 +1557,6 @@
 				4EA0C44A1A805CBD0025EC2E /* pinyinTools */,
 				4E2D6D531A6BFD77009E4A17 /* RTLabel */,
 				4E2D6D391A69601F009E4A17 /* SVPullToRefresh */,
-				4E066A9C1A5C43E800DFEF65 /* HMSegmentedControl */,
 				4E8D6AB41A3B66F900156C17 /* MCPHandler */,
 				4E8D6A9E1A3B3E2200156C17 /* WeChat */,
 				4E8D6A8D1A38B59F00156C17 /* FontDiao */,
@@ -3055,7 +3042,6 @@
 				B7ED32B21B257EFF009BAF5A /* EntityNoteCell.m in Sources */,
 				238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */,
 				4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */,
-				4E066A9F1A5C43E800DFEF65 /* HMSegmentedControl.m in Sources */,
 				B769B11C1B2ACE91004401FA /* IFTTTAnimationKeyFrame.m in Sources */,
 				B70686A81CF423F900C40825 /* MenuHeaderView.m in Sources */,
 				B7B065C81BF985CE001AA30F /* PreviewArticleController.m in Sources */,
