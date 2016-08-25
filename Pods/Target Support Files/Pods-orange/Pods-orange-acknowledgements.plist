@@ -195,6 +195,14 @@ SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string></string>
+			<key>Title</key>
+			<string>WeiboSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>iCarousel
 
 Version 1.8.2, August 10th, 2015

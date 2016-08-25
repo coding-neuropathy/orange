@@ -620,6 +620,8 @@ int ddLogLevel;
         return;
     } else {
         [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
+            DDLogInfo(@"user stats %@", dictionary);
+            
             if (dictionary[@"unread_message_count"]) {
                 self.messageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
             if (self.messageCount != 0) {
@@ -698,7 +700,6 @@ int ddLogLevel;
     ddLogLevel = DDLogLevelError;
 #endif
     
-//    ddLogLevel = DDLogLevelError;
     // 控制台输出
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDTTYLogger sharedInstance].colorsEnabled = YES;

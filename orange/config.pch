@@ -16,15 +16,14 @@
 
 
 // AFNetworking
-#import <SystemConfiguration/SystemConfiguration.h>
-#import <MobileCoreServices/MobileCoreServices.h>
-//#import "UIImageView+WebCache.h"
+//#import <SystemConfiguration/SystemConfiguration.h>
+//#import <MobileCoreServices/MobileCoreServices.h>
 
 
 /**
  *  weibo sdk
  */
-#import "WeiboSDK.h"
+#import <WeiboSDK/WeiboSDK.h>
 
 // Umeng
 #import <UMMobClick/MobClick.h>
