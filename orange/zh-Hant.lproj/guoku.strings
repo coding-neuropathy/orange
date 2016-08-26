@@ -41,20 +41,23 @@
 "activity"  = "動態";
 "message"   = "消息";
 
+/**
+ *  share
+ */
 "share to weibo"    = "分享到微博";
 "share to wechat"   = "分享到微信";
 "share to moment"   = "分享到朋友圈";
 "open in safari"    = "在 Safari 中打開";
+"share-success"     = "分享成功";
 
-"more"      = "更多";
+"more"              = "更多";
 
 /*
  * Selection Page
  */
-"selection-nav-recommend" = "推薦";
-"selection-nav-entity" = "商品";
-"selection-nav-article" = "圖文";
-
+"selection-nav-recommend"   = "推薦";
+"selection-nav-entity"      = "商品";
+"selection-nav-article"     = "圖文";
 
 /*
  * Discover page

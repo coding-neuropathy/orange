@@ -8,7 +8,6 @@
 
 #import "TodayViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
-//#import "HttpRequest.h"
 #import "core.h"
 #import "TodayViewCell.h"
 //#import "UIImageView+AFNetworking.h"

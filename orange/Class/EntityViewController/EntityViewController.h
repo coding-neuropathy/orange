@@ -11,7 +11,7 @@
 #import "BaseViewController.h"
 
 
-@interface EntityViewController :  BaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface EntityViewController :  BaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate, UIActionSheetDelegate>
 //@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) GKEntity *entity;
 

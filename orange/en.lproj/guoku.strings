@@ -41,12 +41,16 @@
 "activity"  = "Following";
 "message"   = "You";
 
+/**
+ *  share
+ */
 "share to weibo"    = "Share to Weibo";
 "share to wechat"   = "Share to Wechat";
 "share to moment"   = "Share to Moment";
 "open in safari"    = "Open in Safari";
+"share-success"     = "Success";
 
-"more"      = "More";
+"more"              = "More";
 
 /*
  * Selection Page

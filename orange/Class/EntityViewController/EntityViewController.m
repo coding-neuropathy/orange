@@ -38,7 +38,7 @@
 
 
 @interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate,
-                                    EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,EntityHeaderBuyViewDelegate, UITextViewDelegate, UIActionSheetDelegate>
+                                    EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,EntityHeaderBuyViewDelegate>
 
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -350,12 +350,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
     [super viewWillAppear:animated];
     
-//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-//    
-//    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-//    {
-//        self.collectionView.frame = CGRectMake((kScreenWidth - kScreenHeight)/2, 0., kScreenHeight - kTabBarWidth, kScreenHeight);
-//    }
     [MobClick beginLogPageView:@"EntityView"];
 }
 
@@ -556,13 +550,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         {
             GKNote * note = [self.dataArrayForNote objectAtIndex:indexPath.row];
             cellsize = CGSizeMake(self.collectionView.deFrameWidth, [EntityNoteCell height:note]);
-//            if (IS_IPAD) {
-//                cellsize = CGSizeMake(684., [EntityNoteCell height:note]);
-//            }
-//            else
-//            {
-//                cellsize = CGSizeMake(kScreenWidth, [EntityNoteCell height:note]);
-//            }
         }
             break;
         case 6:

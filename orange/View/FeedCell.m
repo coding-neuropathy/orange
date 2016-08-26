@@ -70,6 +70,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 {
     [self.avatar removeObserver:self forKeyPath:@"image"];
     [self.contentLabel removeObserver:self forKeyPath:@"text"];
+//    [self.timeLabel removeObserver:self forKeyPath:@"text"];
     [self.image removeObserver:self forKeyPath:@"image"];
     
 }
@@ -144,7 +145,6 @@ typedef NS_ENUM(NSInteger, FeedType) {
         _timeLabel.textColor = UIColorFromRGB(0x9d9e9f);
         
         [_timeLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
-        
         [self.contentView addSubview:_timeLabel];
     }
     return _timeLabel;
@@ -437,6 +437,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 {
     ((UIView *)object).hidden = NO;
 }
+
 - (void)avatarButtonAction
 {
 

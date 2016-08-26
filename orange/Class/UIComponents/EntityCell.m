@@ -50,8 +50,10 @@
             [weakSelf.loading stopAnimating];
         }];
     } else {
-        [self.imageView sd_setImageWithURL:_entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(120., 120.)] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            [weakSelf.loading stopAnimating];
+        [self.imageView sd_setImageWithURL:_entity.imageURL_240x240
+                          placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:self.imageView.deFrameSize] options:SDWebImageRetryFailed
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                     [weakSelf.loading stopAnimating];
         }];
     }
     [self setNeedsLayout];
