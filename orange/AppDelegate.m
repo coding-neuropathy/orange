@@ -38,8 +38,11 @@ int ddLogLevel;
  */
 - (void)umengTrack {
     [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+#if DEBUG
+    [MobClick setLogEnabled:YES];
+#else
     [MobClick setLogEnabled:NO];
-    
+#endif
     UMConfigInstance.appKey = UMENG_APPKEY;
     [MobClick startWithConfigure:UMConfigInstance];
 
@@ -185,7 +188,7 @@ int ddLogLevel;
     [self customizeAppearance];
     
 #if DEBUG
-//[[FLEXManager sharedManager] showExplorer];
+[[FLEXManager sharedManager] showExplorer];
 #endif
     // Override point for customization after application launch.
     

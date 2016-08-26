@@ -32,15 +32,6 @@
     self = [self init];
     if (self) {
         self.entity = entity;
-//        self.itemService = [[TaeSDK sharedInstance] getService:@protocol(ALBBItemService)];
-        
-//        if (self.entity.purchaseArray > 0) {
-//            GKPurchase * purchase = self.entity.purchaseArray[0];
-//            if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"]) {
-//                self.seller_id = purchase.seller;
-//                //                DDLogError(@"seller %@", self.seller_id);
-//            }
-//        }
         
     }
     return self;
