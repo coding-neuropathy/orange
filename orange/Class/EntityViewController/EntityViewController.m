@@ -34,6 +34,7 @@
 #import "ShareView.h"
 #import "PNoteViewController.h"
 
+#import <SloppySwiper/SloppySwiper.h>
 
 
 @interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate,
@@ -74,6 +75,7 @@
 @property (strong, nonatomic) NSString * seller_id;
 
 
+@property (strong, nonatomic) SloppySwiper *swiper;
 
 @end
 
@@ -299,6 +301,11 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     self.view.backgroundColor = UIColorFromRGB(0xfafafa);
     
     [self.view addSubview:self.collectionView];
+    
+    if (IS_IPHONE) {
+        self.swiper = [[SloppySwiper alloc] initWithNavigationController:self.navigationController];
+        self.navigationController.delegate = self.swiper;
+    }
 }
 
 - (void)viewDidLoad {

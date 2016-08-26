@@ -217,7 +217,7 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 
 - (void)TapAddCartWithSKU:(GKEntitySKU *)sku
 {
-
+    
 }
 
 #pragma mark - <SKUToolbarDelegate>
