@@ -47,8 +47,8 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorFromRGB(0xf8f8f8);
-        self.contentView.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
+        self.contentView.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         
         UISwipeGestureRecognizer * swipLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipAction:)];
         swipLeft.direction = UISwipeGestureRecognizerDirectionLeft;

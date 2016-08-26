@@ -44,7 +44,7 @@
 //        _buyButton.frame = CGRectMake(0., 0., kScreenWidth/3, 44.);
         _buyButton.layer.masksToBounds = YES;
         _buyButton.layer.cornerRadius = 4;
-        _buyButton.backgroundColor = UIColorFromRGB(0x6eaaf0);
+        _buyButton.backgroundColor = [UIColor colorFromHexString:@"#6eaaf0"];
         //设置购买按钮的字体样式以及字号大小
         _buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:17.f];
         //设置字体样式居中

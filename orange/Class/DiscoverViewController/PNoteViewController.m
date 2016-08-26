@@ -42,25 +42,33 @@
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
     
-    
     [self PostNote];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [MobClick beginLogPageView:@"postNoteView"];
     [super viewWillAppear:animated];
+    //    [AVAnalytics beginLogPageView:@"PostNoteView"];
+    [MobClick beginLogPageView:@"PostNoteView"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [MobClick endLogPageView:@"postNoteView"];
     [super viewWillDisappear:animated];
+    //    [AVAnalytics endLogPageView:@"PostNoteView"];
+    [MobClick endLogPageView:@"PostNoteView"];
 }
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
-        NSDictionary *userInfo = [aNotification userInfo];
+    NSDictionary *userInfo = [aNotification userInfo];
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
     _height = keyboardRect.size.height;
@@ -194,25 +202,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-//    [AVAnalytics beginLogPageView:@"PostNoteView"];
-    [MobClick beginLogPageView:@"PostNoteView"];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-//    [AVAnalytics endLogPageView:@"PostNoteView"];
-    [MobClick endLogPageView:@"PostNoteView"];
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (void)textViewDidChange:(UITextView *)textView
 {

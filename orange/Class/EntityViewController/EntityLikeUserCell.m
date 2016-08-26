@@ -19,9 +19,11 @@
 - (UIImageView *)avatarView
 {
     if (!_avatarView) {
-        _avatarView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _avatarView                     = [[UIImageView alloc] initWithFrame:CGRectZero];
 //        _avatarView.layer.cornerRadius = 18.;
+        _avatarView.deFrameSize         = self.contentView.deFrameSize;
         _avatarView.layer.masksToBounds = YES;
+        
         [self.contentView addSubview:_avatarView];
     }
     return _avatarView;
@@ -30,14 +32,15 @@
 - (void)setUser:(GKUser *)user
 {
     _user = user;
-    [self.avatarView sd_setImageWithURL:_user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(64., 64.)]];
+    [self.avatarView sd_setImageWithURL:_user.avatarURL
+                       placeholderImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f1f1f1"] andSize:self.contentView.deFrameSize]];
     [self setNeedsLayout];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.avatarView.deFrameSize         = self.contentView.deFrameSize;
+    
     self.avatarView.layer.cornerRadius  = self.avatarView.deFrameHeight / 2.;
 //    self.avatarView.frame = CGRectMake(0., 0., self.contentView., 36.);
 }
