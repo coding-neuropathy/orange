@@ -75,16 +75,12 @@
 - (UIImageView *)avatarView
 {
     if (!_avatarView) {
-        _avatarView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        if (IS_IPHONE) {
-            _avatarView.frame = CGRectMake(0., 0., 80., 80.);
-        } else {
-            _avatarView.frame = CGRectMake(0., 0., 120., 120.);
-        }
-        
-        _avatarView.layer.cornerRadius = _avatarView.deFrameWidth / 2.;
+        _avatarView                     = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _avatarView.deFrameSize         = IS_IPAD ? CGSizeMake(120., 120.) : CGSizeMake(80., 80.);
+        _avatarView.layer.cornerRadius  = _avatarView.deFrameWidth / 2.;
         _avatarView.layer.masksToBounds = YES;
-        _avatarView.contentMode = UIViewContentModeScaleAspectFit;
+        _avatarView.contentMode         = UIViewContentModeScaleAspectFit;
+        
         [self addSubview:_avatarView];
     }
     return _avatarView;
@@ -93,12 +89,12 @@
 - (RTLabel *)nicknameLabel
 {
     if (!_nicknameLabel) {
-        _nicknameLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _nicknameLabel                  = [[RTLabel alloc] initWithFrame:CGRectZero];
 //        _nicknameLabel.backgroundColor = [UIColor yellowColor];
         _nicknameLabel.paragraphReplacement = @"";
         _nicknameLabel.lineSpacing = 7.;
         //        _nicknameLabel.textColor = UIColorFromRGB(0x414243);
-        _nicknameLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18.];
+        _nicknameLabel.font             = [UIFont fontWithName:kFontAwesomeFamilyName size:18.];
         //        _nicknameLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_nicknameLabel];
     }
@@ -108,11 +104,12 @@
 - (UILabel *)bioLabel
 {
     if (!_bioLabel) {
-        _bioLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _bioLabel.font = [UIFont systemFontOfSize:16.];
-        _bioLabel.textColor = UIColorFromRGB(0x9d9e9f);
-        _bioLabel.textAlignment = NSTextAlignmentCenter;
-        _bioLabel.backgroundColor = [UIColor clearColor];
+        _bioLabel                       = [[UILabel alloc] initWithFrame:CGRectZero];
+        _bioLabel.font                  = [UIFont fontWithName:@"PingFangSC-Regular" size:16.];
+        _bioLabel.textColor             = [UIColor colorFromHexString:@"#9d9e9f"];
+        _bioLabel.textAlignment         = NSTextAlignmentCenter;
+        _bioLabel.backgroundColor       = [UIColor clearColor];
+        
         [self addSubview:_bioLabel];
     }
     return _bioLabel;
