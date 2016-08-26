@@ -386,17 +386,17 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //                [alertView show];
                 UIAlertController * clearCacheAlert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"clear image cache", kLocalizedFile, nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
                 
-                UIAlertAction * cancel = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                UIAlertAction * cancel = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
                 }];
-                UIAlertAction * confirm = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"confirm", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    [[SDImageCache sharedImageCache] clearMemory];
+                UIAlertAction * confirm = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"confirm", kLocalizedFile, nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+//                    [[SDImageCache sharedImageCache] clearMemory];
                     [[SDImageCache sharedImageCache] clearDisk];
                     [self performSelectorOnMainThread:@selector(showClearPicCacheFinish) withObject:nil waitUntilDone:YES];
                 }];
                 
-                [clearCacheAlert addAction:cancel];
                 [clearCacheAlert addAction:confirm];
+                [clearCacheAlert addAction:cancel];
                 [self presentViewController:clearCacheAlert animated:YES completion:nil];
             }
                 break;

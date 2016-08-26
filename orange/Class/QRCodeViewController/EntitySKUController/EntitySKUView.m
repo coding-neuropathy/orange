@@ -186,7 +186,9 @@
     CGFloat xOffset                 = 0.;
     CGFloat yOffset                 = self.skuInfoLabel.deFrameBottom + 16.;
     
-    for (GKEntitySKU * sku in self.entity.skuArray) {
+//    for (GKEntitySKU * sku in self.entity.skuArray)
+    for (NSInteger i = 0; i < self.entity.skuArray.count; i++ ) {
+        GKEntitySKU * sku = [self.entity.skuArray objectAtIndex:i];
         DDLogInfo(@"sku sku %@", sku);
         
         NSMutableString * skuInfo   = [NSMutableString stringWithCapacity:0];
@@ -200,7 +202,7 @@
         UIButton * skuBtn           = [UIButton buttonWithType:UIButtonTypeCustom];
         skuBtn.backgroundColor      = UIColorFromRGB(0xf1f1f1);
         skuBtn.titleLabel.font      = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
-
+        skuBtn.tag                  = i;
         
         [skuBtn setTitle:skuInfo forState:UIControlStateNormal];
         [skuBtn setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
@@ -265,6 +267,15 @@
     btn.backgroundColor         = UIColorFromRGB(0xe6ecff);
     btn.layer.borderWidth       = 1.;
     btn.layer.borderColor       = UIColorFromRGB(0x3f6ff0).CGColor;
+    
+    
+    GKEntitySKU * sku           = [self.entity.skuArray objectAtIndex:btn.tag];
+    
+    self.priceLabel.text        = [NSString stringWithFormat:@"￥ %.2f", sku.discount];
+
+    if (_SKUDelegate && [_SKUDelegate respondsToSelector:@selector(TapSKUTagWithSKU:)]) {
+        [_SKUDelegate TapSKUTagWithSKU:sku];
+    }
 }
 
 

@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol EntitySKUViewDelegate <NSObject>
+
+- (void)TapSKUTagWithSKU:(GKEntitySKU *)sku;
+
+@end
+
 @interface EntitySKUView : UIScrollView
 
-
 @property (strong, nonatomic) GKEntity * entity;
+
+@property (weak, nonatomic) id<EntitySKUViewDelegate> SKUDelegate;
 
 @end

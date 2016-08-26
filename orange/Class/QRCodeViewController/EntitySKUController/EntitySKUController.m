@@ -13,7 +13,7 @@
 
 
 
-@interface EntitySKUController () <SKUToolbarDelegate>
+@interface EntitySKUController () <SKUToolbarDelegate, EntitySKUViewDelegate>
 
 typedef NS_ENUM(NSInteger, SKUSectionType) {
     EntitySKUHeaderSection = 0,
@@ -86,6 +86,7 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
         
         _entitySKUView.backgroundColor          = UIColorFromRGB(0xffffff);
         _entitySKUView.deFrameSize              = CGSizeMake(kScreenWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight - 49.);
+        _entitySKUView.SKUDelegate              = self;
         _entitySKUView.contentSize              = CGSizeMake(kScreenWidth, kScreenHeight);
     }
     return _entitySKUView;
@@ -192,9 +193,6 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     }];
     [actionSheetController addAction:cancelAction];
     
-//    actionSheetController.view.tintColor = [UIColor blackColor];
-
-    
     [self presentViewController:actionSheetController animated:YES completion:nil];
 }
 
@@ -208,6 +206,13 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     self.toolbar.price                      = self.entity.lowestPrice;
     [self.view insertSubview:self.toolbar aboveSubview:self.entitySKUView];
 
+}
+
+#pragma mark - <EntitySKUViewDelegate>
+- (void)TapSKUTagWithSKU:(GKEntitySKU *)sku
+{
+    DDLogInfo(@"OKOKOKO");
+    [self.toolbar updatePriceWithprice:sku.discount];
 }
 
 #pragma mark - <SKUToolbarDelegate>
