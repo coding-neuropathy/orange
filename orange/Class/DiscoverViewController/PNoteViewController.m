@@ -46,6 +46,18 @@
     [self PostNote];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:@"postNoteView"];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"postNoteView"];
+    [super viewWillDisappear:animated];
+}
+
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
         NSDictionary *userInfo = [aNotification userInfo];

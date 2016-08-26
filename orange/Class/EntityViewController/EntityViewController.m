@@ -11,7 +11,7 @@
 
 #import "EntityStickyHeaderFlowLayout.h"
 #import "UserViewController.h"
-#import "NotePostViewController.h"
+//#import "NotePostViewController.h"
 //#import "CategoryViewController.h"
 #import "SubCategoryEntityController.h"
 
@@ -784,7 +784,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
                                    tradeProcessFailedCallback:_tradeProcessFailedCallback];
             };
             
-            [vc setBackblock:^(UIViewController * vc1){
+            [vc setBackblock:^(UIViewController * vc1) {
                 [self.navigationController pushViewController:vc1 animated:YES];
             }];
             

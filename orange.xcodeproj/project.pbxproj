@@ -147,7 +147,6 @@
 		4EC9F7971A7928C70057D736 /* UserSingleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7961A7928C70057D736 /* UserSingleListCell.m */; };
 		4EC9F79F1A7A79800057D736 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F79E1A7A79800057D736 /* CategoryViewController.m */; };
 		4EC9F7A31A7BBEF20057D736 /* TagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7A21A7BBEF20057D736 /* TagViewController.m */; };
-		4EC9F7A71A7BD1020057D736 /* NotePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F7A61A7BD1020057D736 /* NotePostViewController.m */; };
 		4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */; };
 		4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */; };
 		4ED7685A1B7248A600AA3BF7 /* loading-static.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED768591B7248A600AA3BF7 /* loading-static.png */; };
@@ -571,8 +570,6 @@
 		4EC9F79E1A7A79800057D736 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		4EC9F7A11A7BBEF20057D736 /* TagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagViewController.h; sourceTree = "<group>"; };
 		4EC9F7A21A7BBEF20057D736 /* TagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagViewController.m; sourceTree = "<group>"; };
-		4EC9F7A51A7BD1020057D736 /* NotePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePostViewController.h; sourceTree = "<group>"; };
-		4EC9F7A61A7BD1020057D736 /* NotePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotePostViewController.m; sourceTree = "<group>"; };
 		4ECCD0DA1A7297A7009D5A42 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCell.h; path = ../../View/FeedCell.h; sourceTree = "<group>"; };
 		4ECCD0DB1A7297A7009D5A42 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCell.m; path = ../../View/FeedCell.m; sourceTree = "<group>"; };
 		4ECCD0DE1A7349CF009D5A42 /* EntityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityViewController.h; sourceTree = "<group>"; };
@@ -1486,7 +1483,6 @@
 				4E66C1E21A7DB96F00F31A90 /* NoteViewController */,
 				4E66C1DE1A7CBD2F00F31A90 /* GKWebViewController */,
 				4E66C1D81A7C8B2500F31A90 /* SettingViewController */,
-				4EC9F7A41A7BD0EE0057D736 /* NotePostViewController */,
 				4EC9F7A01A7BBED20057D736 /* TagViewController */,
 				4EC9F79C1A7A79670057D736 /* CategoryViewController */,
 				4EC9F7981A7937AE0057D736 /* UserViewController */,
@@ -1699,15 +1695,6 @@
 				B76C69D21BBB981E00BD22E5 /* TagArticlesController.m */,
 			);
 			path = TagViewController;
-			sourceTree = "<group>";
-		};
-		4EC9F7A41A7BD0EE0057D736 /* NotePostViewController */ = {
-			isa = PBXGroup;
-			children = (
-				4EC9F7A51A7BD1020057D736 /* NotePostViewController.h */,
-				4EC9F7A61A7BD1020057D736 /* NotePostViewController.m */,
-			);
-			path = NotePostViewController;
 			sourceTree = "<group>";
 		};
 		4ECCD0DD1A7348AF009D5A42 /* EntityViewController */ = {
@@ -2751,7 +2738,6 @@
 				23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */,
 				8A1B63331D5B2551009CF222 /* SignInView.m in Sources */,
 				8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */,
-				4EC9F7A71A7BD1020057D736 /* NotePostViewController.m in Sources */,
 				B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */,
 				8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */,
 				23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */,

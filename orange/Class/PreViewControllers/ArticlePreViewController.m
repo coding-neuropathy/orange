@@ -61,8 +61,8 @@
 
 - (void)loadView
 {
-    self.view = self.webView;
-    self.view.backgroundColor = UIColorFromRGB(0xffffff);
+    self.view                   = self.webView;
+    self.view.backgroundColor   = [UIColor colorFromHexString:@"#ffffff"];
 }
 
 - (void)viewDidLoad
@@ -130,39 +130,10 @@
             self.image = image;
         }
     }];
-//    [webView evaluateJavaScript:@"document.getElementById('share_img').getElementsByTagName('img')[0].src" completionHandler:^(NSString * imageURL, NSError * error) {
-//        
-//        if (imageURL) {
-//            [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//                
-//            } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-//                if (finished) {
-//                    self.image = image;
-//                }
-//            }];
-//        }
-//        else{
-//            
-//            [webView evaluateJavaScript:@"document.getElementsByTagName('img')[1].src" completionHandler:^(NSString * imageURL, NSError * error) {
-//                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//                    
-//                } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-//                    if (finished) {
-//                        self.image = image;
-//                    }
-//                }];
-//                
-//            }];
-//        }
-//        
-//    }];
-    
-    
-    
-//    [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
-//        self.title = result;
-//    }];
+
 }
+
+
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
     
@@ -179,15 +150,6 @@
     message.imageObject = image;
     
     
-    //    WBWebpageObject *webpage = [WBWebpageObject object];
-    //    webpage.objectID = [self.title md5];
-    //    webpage.title = self.title;
-    ////    webpage.description = [NSString stringWithFormat:NSLocalizedString(@"分享网页内容简介-%.0f", nil), [[NSDate date] timeIntervalSince1970]];
-    ////    webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"image_2" ofType:@"jpg"]];
-    //    webpage.thumbnailData = UIImageJPEGRepresentation(self.image, 0.5);
-    //    webpage.webpageUrl = [self.url stringByAppendingString:@"?from=weibo"];
-    //
-    //    message.mediaObject = webpage;
     
     NSString * wbtoken = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
     
@@ -200,28 +162,6 @@
     //    request.shouldOpenWeiboAppInstallPageIfNotInstalled = NO;
     [WeiboSDK sendRequest:request];
 
-//    if([AVOSCloudSNS doesUserExpireOfPlatform:AVOSCloudSNSSinaWeibo ])
-//    {
-//        [AVOSCloudSNS refreshToken:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//            [AVOSCloudSNS shareText:self.article.title andLink:[self.webView.URL absoluteString] andImage:self.image toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//
-//            } andProgress:^(float percent) {
-//                if (percent == 1) {
-//                    [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-//                }
-//            }];
-//        }];
-//    }
-//    else
-//    {
-//        [AVOSCloudSNS shareText:self.article.title andLink:[self.webView.URL absoluteString] andImage:self.image toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
-//
-//        } andProgress:^(float percent) {
-//            if (percent == 1) {
-//                [SVProgressHUD showImage:nil status:@"分享成功\U0001F603"];
-//            }
-//        }];
-//    }
 }
 
 -(void)wxShare:(int)scene
