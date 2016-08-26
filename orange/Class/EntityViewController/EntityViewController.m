@@ -36,9 +36,12 @@
 
 //#import <SloppySwiper/SloppySwiper.h>
 
+#import "EntityPreViewController.h"
+
 
 @interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate,
-                                    EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,EntityHeaderBuyViewDelegate>
+                                    EntityCellDelegate, EntityNoteCellDelegate,
+                                    EntityHeaderActionViewDelegate, EntityHeaderBuyViewDelegate>
 
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -102,6 +105,11 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         self.itemService=[[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [self removeObserver];
 }
 
 - (instancetype)initWithEntity:(GKEntity *)entity
@@ -291,6 +299,19 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     }];
 }
 
+- (void)refreshRandom
+{
+    
+    [API getRandomEntityListByCategoryId:self.entity.categoryId
+                                entityId:self.entity.entityId
+                                   count:9 success:^(NSArray *entityArray) {
+                                       self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
+                                       [self.collectionView reloadData];
+                                   } failure:^(NSInteger stateCode) {
+                                       
+                                   }];
+}
+
 
 - (void)loadView
 {
@@ -330,21 +351,26 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
     [self refresh];
     [self refreshRandom];
-
-}
-
-- (void)refreshRandom
-{
     
-    [API getRandomEntityListByCategoryId:self.entity.categoryId
-                                entityId:self.entity.entityId
-                                   count:9 success:^(NSArray *entityArray) {
-                                       self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
-                                       [self.collectionView reloadData];
-                                   } failure:^(NSInteger stateCode) {
-                                       
-                                   }];
+    if (iOS9)
+        [self registerPreview];
+
 }
+
+
+/**
+ *  3D-Touch
+ */
+- (void)registerPreview{
+    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+        [self registerForPreviewingWithDelegate:self sourceView:self.collectionView];
+    }
+    else {
+        DDLogInfo(@"该设备不支持3D-Touch");
+    }
+}
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -719,6 +745,69 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     }
 }
 
+#pragma mark - <UIViewControllerPreviewingDelegate>
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
+    
+    UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    switch (indexPath.section) {
+//        case 2:
+//        {
+//            ArticlePreViewController * vc = [[ArticlePreViewController alloc]
+//                                             initWithArticle:[self.discoverData.articles objectAtIndex:indexPath.row]];
+//            vc.preferredContentSize = CGSizeMake(0, 0);
+//            previewingContext.sourceRect = cell.frame;
+//            return vc;
+//        }
+//            break;
+        case 6:
+        {
+
+            GKEntity * entity               = [self.dataArrayForRecommend objectAtIndex:indexPath.row];
+            EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:entity];
+            vc.preferredContentSize = CGSizeMake(0., 0.);
+            previewingContext.sourceRect = cell.frame;
+            
+            vc.baichuanblock = ^(GKPurchase * purchase) {
+                NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
+                ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
+                taoKeParams.pid = kGK_TaobaoKe_PID;
+                [self.itemService showTaoKeItemDetailByItemId:self
+                                                   isNeedPush:YES
+                                            webViewUISettings:nil
+                                                       itemId:_itemId
+                                                     itemType:1
+                                                       params:nil
+                                                  taoKeParams:taoKeParams
+                                  tradeProcessSuccessCallback:_tradeProcessSuccessCallback
+                                   tradeProcessFailedCallback:_tradeProcessFailedCallback];
+            };
+            
+            [vc setBackblock:^(UIViewController * vc1){
+                [self.navigationController pushViewController:vc1 animated:YES];
+            }];
+            
+            [MobClick event:@"3d-touch" attributes:@{
+                                                     @"entity"  : entity.title,
+                                                     @"from"    : @"detail-page-recommend",
+                                                         }];
+            return vc;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    return nil;
+}
+
+- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
+}
+
 #pragma mark - KVO
 - (void)addObserver
 {
@@ -735,10 +824,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     
 }
 
-- (void)dealloc
-{
-    [self removeObserver];
-}
 
 
 #pragma mark - <EntityCellDelegate>

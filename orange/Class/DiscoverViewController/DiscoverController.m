@@ -830,8 +830,6 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     }
     
     return nil;
-    
-
 }
 
 - (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit

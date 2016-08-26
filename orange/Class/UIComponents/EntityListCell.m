@@ -99,10 +99,11 @@
 - (UILabel *)tipLabel
 {
     if (!_tipLabel) {
-        _tipLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _tipLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12.];
-        _tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
-        _tipLabel.textAlignment = NSTextAlignmentRight;
+        _tipLabel                   = [[UILabel alloc] initWithFrame:CGRectZero];
+        _tipLabel.font              = [UIFont fontWithName:kFontAwesomeFamilyName size:12.];
+        _tipLabel.textColor         = [UIColor colorFromHexString:@"#9d9e9f"];
+        _tipLabel.textAlignment     = NSTextAlignmentRight;
+        
         [self.contentView addSubview:_tipLabel];
     }
     return _tipLabel;
@@ -138,7 +139,7 @@
     GKPurchase * purchase = [_entity.purchaseArray objectAtIndex:0];
     self.priceLabel.text = [NSString stringWithFormat:@"¥ %.2f", purchase.lowestPrice];
     
-    [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart], (long)_entity.likeCount,[NSString fontAwesomeIconStringForEnum:FAComment], _entity.noteCount]];
+    [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart], (long)_entity.likeCount, [NSString fontAwesomeIconStringForEnum:FAComment], _entity.noteCount]];
 
     [self setNeedsLayout];
 }
@@ -147,9 +148,9 @@
 {
     [super layoutSubviews];
     
-    self.imageView.frame = CGRectMake(0., 0., 90., 90.);
-    self.imageView.deFrameTop = 10.;
-    self.imageView.deFrameLeft = 10.;
+    self.imageView.frame            = CGRectMake(0., 0., 90., 90.);
+    self.imageView.deFrameTop       = 10.;
+    self.imageView.deFrameLeft      = 10.;
 
     self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth - 180., 44);
     self.titleLabel.deFrameLeft = self.imageView.deFrameRight + 10.;

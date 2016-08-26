@@ -212,13 +212,13 @@ static CGFloat kEntityViewMarginLeft = 16.;
         view = [[UIImageView alloc] initWithFrame:CGRectZero];
         
         view.deFrameSize    = IS_IPAD ? CGSizeMake(460., 460.) : CGSizeMake(kScreenWidth - 32, kScreenWidth - 32);
-        view.contentMode = UIViewContentModeScaleAspectFit;
+        view.contentMode    = UIViewContentModeScaleAspectFit;
     }
     NSURL * imageURL_800;
     NSURL * url = [self.imageURLArray objectAtIndex:index];
     
     if ([url.absoluteString hasPrefix:@"http://imgcdn.guoku.com/images/"]) {
-        imageURL_800 = IS_IPAD  ? [NSURL URLWithString[url.absoluteString imageURLWithSize:800]]
+        imageURL_800 = IS_IPAD  ? [NSURL URLWithString:[url.absoluteString imageURLWithSize:800]]
                                 : [NSURL URLWithString:[url.absoluteString imageURLWithSize:600]];
         
     } else {
