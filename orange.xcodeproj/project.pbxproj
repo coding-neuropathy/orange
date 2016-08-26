@@ -136,11 +136,6 @@
 		4E73E6801C1936D400B604B5 /* AuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E73E67F1C1936D400B604B5 /* AuthController.m */; };
 		4E7869691BA70C5A00586BD9 /* EntityHeaderBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */; };
 		4E8A34361BB060D700DF3841 /* tipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A34351BB060D700DF3841 /* tipView.m */; };
-		4E8D6A991A38B59F00156C17 /* fontdiao.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */; };
-		4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A921A38B59F00156C17 /* NSString+FontDiao.m */; };
-		4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A941A38B59F00156C17 /* UIButton+FontDiao.m */; };
-		4E8D6A9C1A38B59F00156C17 /* UIFont+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A961A38B59F00156C17 /* UIFont+FontDiao.m */; };
-		4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6A981A38B59F00156C17 /* UIImageView+FontDiao.m */; };
 		4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB61A3B66F900156C17 /* MCPHandler.m */; };
 		4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */; };
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
@@ -555,16 +550,6 @@
 		4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderBuyView.m; sourceTree = "<group>"; };
 		4E8A34341BB060D700DF3841 /* tipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tipView.h; sourceTree = "<group>"; };
 		4E8A34351BB060D700DF3841 /* tipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tipView.m; sourceTree = "<group>"; };
-		4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontdiao.ttf; sourceTree = "<group>"; };
-		4E8D6A901A38B59F00156C17 /* FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontDiao.h; sourceTree = "<group>"; };
-		4E8D6A911A38B59F00156C17 /* NSString+FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontDiao.h"; sourceTree = "<group>"; };
-		4E8D6A921A38B59F00156C17 /* NSString+FontDiao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontDiao.m"; sourceTree = "<group>"; };
-		4E8D6A931A38B59F00156C17 /* UIButton+FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+FontDiao.h"; sourceTree = "<group>"; };
-		4E8D6A941A38B59F00156C17 /* UIButton+FontDiao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+FontDiao.m"; sourceTree = "<group>"; };
-		4E8D6A951A38B59F00156C17 /* UIFont+FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontDiao.h"; sourceTree = "<group>"; };
-		4E8D6A961A38B59F00156C17 /* UIFont+FontDiao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontDiao.m"; sourceTree = "<group>"; };
-		4E8D6A971A38B59F00156C17 /* UIImageView+FontDiao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FontDiao.h"; sourceTree = "<group>"; };
-		4E8D6A981A38B59F00156C17 /* UIImageView+FontDiao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FontDiao.m"; sourceTree = "<group>"; };
 		4E8D6AB51A3B66F900156C17 /* MCPHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPHandler.h; sourceTree = "<group>"; };
 		4E8D6AB61A3B66F900156C17 /* MCPHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPHandler.m; sourceTree = "<group>"; };
 		4EA0C4471A7F03DE0025EC2E /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
@@ -1481,7 +1466,6 @@
 				4E2D6D391A69601F009E4A17 /* SVPullToRefresh */,
 				4E8D6AB41A3B66F900156C17 /* MCPHandler */,
 				4E8D6A9E1A3B3E2200156C17 /* WeChat */,
-				4E8D6A8D1A38B59F00156C17 /* FontDiao */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -1567,31 +1551,6 @@
 				8A1B632F1D5AFA93009CF222 /* AuthView.m */,
 			);
 			path = AuthController;
-			sourceTree = "<group>";
-		};
-		4E8D6A8D1A38B59F00156C17 /* FontDiao */ = {
-			isa = PBXGroup;
-			children = (
-				4E8D6A8E1A38B59F00156C17 /* FDAssets */,
-				4E8D6A901A38B59F00156C17 /* FontDiao.h */,
-				4E8D6A911A38B59F00156C17 /* NSString+FontDiao.h */,
-				4E8D6A921A38B59F00156C17 /* NSString+FontDiao.m */,
-				4E8D6A931A38B59F00156C17 /* UIButton+FontDiao.h */,
-				4E8D6A941A38B59F00156C17 /* UIButton+FontDiao.m */,
-				4E8D6A951A38B59F00156C17 /* UIFont+FontDiao.h */,
-				4E8D6A961A38B59F00156C17 /* UIFont+FontDiao.m */,
-				4E8D6A971A38B59F00156C17 /* UIImageView+FontDiao.h */,
-				4E8D6A981A38B59F00156C17 /* UIImageView+FontDiao.m */,
-			);
-			path = FontDiao;
-			sourceTree = "<group>";
-		};
-		4E8D6A8E1A38B59F00156C17 /* FDAssets */ = {
-			isa = PBXGroup;
-			children = (
-				4E8D6A8F1A38B59F00156C17 /* fontdiao.ttf */,
-			);
-			path = FDAssets;
 			sourceTree = "<group>";
 		};
 		4E8D6A9E1A3B3E2200156C17 /* WeChat */ = {
@@ -2572,7 +2531,6 @@
 				4E4F27FC1B6F4699003A63C5 /* 8.png in Resources */,
 				4E4F27FA1B6F4699003A63C5 /* 6.png in Resources */,
 				4E4F27DA1B6F438E003A63C5 /* loading-image@3x.png in Resources */,
-				4E8D6A991A38B59F00156C17 /* fontdiao.ttf in Resources */,
 				B71E49521AC923FB00D4DB6D /* InfoPlist.strings in Resources */,
 				4E4F27ED1B6F4699003A63C5 /* 1.png in Resources */,
 				4ED7685A1B7248A600AA3BF7 /* loading-static.png in Resources */,
@@ -2765,7 +2723,6 @@
 				B772BE971BD51FFC005C1540 /* UserFooterSectionView.m in Sources */,
 				8AD5D21B1D6D8FE8000927C7 /* EntitySKUView.m in Sources */,
 				8AAA2D0C1C02BC6700B27E49 /* LaunchView.m in Sources */,
-				4E8D6A9B1A38B59F00156C17 /* UIButton+FontDiao.m in Sources */,
 				8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */,
 				8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */,
 				B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */,
@@ -2781,7 +2738,6 @@
 				8A0345AA1BA15F4A0037BC32 /* HomeArticleCell.m in Sources */,
 				4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */,
 				8A1B63361D5B255E009CF222 /* SignUpView.m in Sources */,
-				4E8D6A9D1A38B59F00156C17 /* UIImageView+FontDiao.m in Sources */,
 				2309032E1C803B1500AD26D6 /* AuthUserViewController.m in Sources */,
 				8A59017A1D643F1100780C74 /* Appirater.m in Sources */,
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
@@ -2795,7 +2751,6 @@
 				23F1DD961C28020500A71827 /* PNoteViewController.m in Sources */,
 				8A1B63331D5B2551009CF222 /* SignInView.m in Sources */,
 				8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */,
-				4E8D6A9C1A38B59F00156C17 /* UIFont+FontDiao.m in Sources */,
 				4EC9F7A71A7BD1020057D736 /* NotePostViewController.m in Sources */,
 				B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */,
 				8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */,
@@ -2883,7 +2838,6 @@
 				4E8A34361BB060D700DF3841 /* tipView.m in Sources */,
 				235A2FE01D127D8600109000 /* MoreArticleCell.m in Sources */,
 				B736FF2A1BD65D6E000668E4 /* UserTagsViewController.m in Sources */,
-				4E8D6A9A1A38B59F00156C17 /* NSString+FontDiao.m in Sources */,
 				8A44F5991C7C066500D1DC19 /* ArticlePreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

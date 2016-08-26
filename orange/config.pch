@@ -48,9 +48,9 @@
 //#import <FontAwesome/UIImage+FontAwesome.h>
 #import <FontAwesome/FAImageView.h>
 
-#import "FontDiao.h"
-#import "UIFont+FontDiao.h"
-#import "NSString+FontDiao.h"
+//#import "FontDiao.h"
+//#import "UIFont+FontDiao.h"
+//#import "NSString+FontDiao.h"
 
 // SDWebImage
 #import <SDWebImage/UIImageView+WebCache.h>
