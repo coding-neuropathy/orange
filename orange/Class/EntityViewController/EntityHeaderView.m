@@ -219,7 +219,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
     
     if ([url.absoluteString hasPrefix:@"http://imgcdn.guoku.com/images/"]) {
         imageURL_800 = IS_IPAD  ? [NSURL URLWithString:[url.absoluteString imageURLWithSize:800]]
-                                : [NSURL URLWithString:[url.absoluteString imageURLWithSize:600]];
+                                : [NSURL URLWithString:[url.absoluteString imageURLWithSize:640]];
         
     } else {
         //        imageURL_800 = [NSURL URLWithString:[url.absoluteString stringByAppendingString:@"_800x800.jpg"]];
