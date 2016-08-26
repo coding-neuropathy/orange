@@ -11,6 +11,7 @@ target 'orange' do
     pod 'HMSegmentedControl'
     pod 'WeiboSDK', :git => 'https://github.com/sinaweibosdk/weibo_ios_sdk.git'
     
+    pod 'FontAwesome'
     pod 'FLEX', '~> 2.0', :configurations => ['Debug'] #An in-app debugging and exploration tool for iOS
 end
 

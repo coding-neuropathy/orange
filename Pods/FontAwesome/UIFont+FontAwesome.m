@@ -13,9 +13,7 @@
 
 #pragma mark - Public API
 + (UIFont*)fontAwesomeFontOfSize:(CGFloat)size {
-	UIFont *font = [UIFont fontWithName:kFontAwesomeFamilyName size:size];
-    NSAssert(font!=nil, @"%@ couldn't be loaded",kFontAwesomeFamilyName);
-    return font;
+    return [UIFont fontWithName:kFontAwesomeFamilyName size:size];
 }
 
 @end

@@ -120,10 +120,6 @@
 		4E56DF1B19D552C000263B17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF1A19D552C000263B17 /* main.m */; };
 		4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF1D19D552C000263B17 /* AppDelegate.m */; };
 		4E56DF2619D552C000263B17 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E56DF2519D552C000263B17 /* Images.xcassets */; };
-		4E56DF7A19D56EF500263B17 /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF4319D56EF500263B17 /* FAImageView.m */; };
-		4E56DF7B19D56EF500263B17 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF4519D56EF500263B17 /* NSString+FontAwesome.m */; };
-		4E56DF7C19D56EF500263B17 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E56DF4719D56EF500263B17 /* FontAwesome.ttf */; };
-		4E56DF7D19D56EF500263B17 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E56DF4919D56EF500263B17 /* UIFont+FontAwesome.m */; };
 		4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFB619D5AEED00263B17 /* CoreTelephony.framework */; };
 		4E56DFBF19D5AF0900263B17 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFBE19D5AF0900263B17 /* Security.framework */; };
 		4E56DFC119D5AF1400263B17 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E56DFC019D5AF1400263B17 /* MobileCoreServices.framework */; };
@@ -323,7 +319,6 @@
 		B7F5AA011B08C75A0033BB2D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F5AA001B08C75A0033BB2D /* WebViewController.m */; };
 		B7F5AA0B1B08D3320033BB2D /* WebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F5AA0A1B08D3320033BB2D /* WebViewProgressView.m */; };
 		B7F9EB101B28894B00887582 /* EntityLikerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9EB0F1B28894B00887582 /* EntityLikerController.m */; };
-		B7FE2A081B28136B001C2E33 /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FE2A071B28136B001C2E33 /* UIImage+FontAwesome.m */; };
 		B7FE2A0B1B2817FD001C2E33 /* SelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FE2A0A1B2817FD001C2E33 /* SelectionCell.m */; };
 		DA35B3C61AFEE31200D66671 /* EmailEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35B3C21AFEE31200D66671 /* EmailEditViewController.m */; };
 		DA35B3C71AFEE31200D66671 /* PasswordEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA35B3C51AFEE31200D66671 /* PasswordEditViewController.m */; };
@@ -534,13 +529,6 @@
 		4E56DF1C19D552C000263B17 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4E56DF1D19D552C000263B17 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4E56DF2519D552C000263B17 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4E56DF4219D56EF500263B17 /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAImageView.h; sourceTree = "<group>"; };
-		4E56DF4319D56EF500263B17 /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAImageView.m; sourceTree = "<group>"; };
-		4E56DF4419D56EF500263B17 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
-		4E56DF4519D56EF500263B17 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
-		4E56DF4719D56EF500263B17 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
-		4E56DF4819D56EF500263B17 /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
-		4E56DF4919D56EF500263B17 /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
 		4E56DF9119D570DA00263B17 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		4E56DFB519D57ECC00263B17 /* config.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.pch; sourceTree = "<group>"; };
 		4E56DFB619D5AEED00263B17 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -927,8 +915,6 @@
 		B7F5AA0A1B08D3320033BB2D /* WebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewProgressView.m; sourceTree = "<group>"; };
 		B7F9EB0E1B28894B00887582 /* EntityLikerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityLikerController.h; sourceTree = "<group>"; };
 		B7F9EB0F1B28894B00887582 /* EntityLikerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityLikerController.m; sourceTree = "<group>"; };
-		B7FE2A061B28136B001C2E33 /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FontAwesome.h"; sourceTree = "<group>"; };
-		B7FE2A071B28136B001C2E33 /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FontAwesome.m"; sourceTree = "<group>"; };
 		B7FE2A091B2817FD001C2E33 /* SelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionCell.h; sourceTree = "<group>"; };
 		B7FE2A0A1B2817FD001C2E33 /* SelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionCell.m; sourceTree = "<group>"; };
 		DA35B3C11AFEE31200D66671 /* EmailEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailEditViewController.h; sourceTree = "<group>"; };
@@ -1496,33 +1482,8 @@
 				4E8D6AB41A3B66F900156C17 /* MCPHandler */,
 				4E8D6A9E1A3B3E2200156C17 /* WeChat */,
 				4E8D6A8D1A38B59F00156C17 /* FontDiao */,
-				4E56DF4119D56EF500263B17 /* FontAwesome */,
 			);
 			path = ThirdParty;
-			sourceTree = "<group>";
-		};
-		4E56DF4119D56EF500263B17 /* FontAwesome */ = {
-			isa = PBXGroup;
-			children = (
-				B7FE2A061B28136B001C2E33 /* UIImage+FontAwesome.h */,
-				B7FE2A071B28136B001C2E33 /* UIImage+FontAwesome.m */,
-				4E56DF4219D56EF500263B17 /* FAImageView.h */,
-				4E56DF4319D56EF500263B17 /* FAImageView.m */,
-				4E56DF4419D56EF500263B17 /* NSString+FontAwesome.h */,
-				4E56DF4519D56EF500263B17 /* NSString+FontAwesome.m */,
-				4E56DF4619D56EF500263B17 /* Resources */,
-				4E56DF4819D56EF500263B17 /* UIFont+FontAwesome.h */,
-				4E56DF4919D56EF500263B17 /* UIFont+FontAwesome.m */,
-			);
-			path = FontAwesome;
-			sourceTree = "<group>";
-		};
-		4E56DF4619D56EF500263B17 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4E56DF4719D56EF500263B17 /* FontAwesome.ttf */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
@@ -2621,7 +2582,6 @@
 				4E4F27EF1B6F4699003A63C5 /* 11.png in Resources */,
 				8A3249381D5A57CA00354602 /* beep.mp3 in Resources */,
 				B72000B71B0849E50001F199 /* PushConfig.plist in Resources */,
-				4E56DF7C19D56EF500263B17 /* FontAwesome.ttf in Resources */,
 				4E4F27F21B6F4699003A63C5 /* 14.png in Resources */,
 				4E4F27D91B6F438E003A63C5 /* loading-image@2x.png in Resources */,
 				4E4F27FD1B6F4699003A63C5 /* 9.png in Resources */,
@@ -2769,7 +2729,6 @@
 				236EE02D1D3CA6C7003E97D6 /* AllArticleResultViewController.m in Sources */,
 				B7ED32AF1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
 				8AAA2D091C02B61400B27E49 /* LaunchController.m in Sources */,
-				4E56DF7B19D56EF500263B17 /* NSString+FontAwesome.m in Sources */,
 				B7DA97C11B270BE900C9BC25 /* EntityLikeUserCell.m in Sources */,
 				4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */,
 				B76EE0821B3D86C3009D8763 /* NotifyController.m in Sources */,
@@ -2817,7 +2776,6 @@
 				4EC9F7911A7928520057D736 /* FanViewController.m in Sources */,
 				B70686941CF41ECA00C40825 /* ListViewController.m in Sources */,
 				B7D1B9221AC142A500664BDB /* EditViewCell.m in Sources */,
-				4E56DF7A19D56EF500263B17 /* FAImageView.m in Sources */,
 				B7ED32B81B25C662009BAF5A /* OpenCenter.m in Sources */,
 				B70686B11CF42C4000C40825 /* BaseNavigationController.m in Sources */,
 				8A0345AA1BA15F4A0037BC32 /* HomeArticleCell.m in Sources */,
@@ -2881,7 +2839,6 @@
 				23E64DAF1D2E381C00A4402C /* SearchController.m in Sources */,
 				23F7F0081C61AF100079A753 /* MoreArticlesViewController.m in Sources */,
 				B7174DD91BD4A83D00DEDBDA /* UserViewController.m in Sources */,
-				B7FE2A081B28136B001C2E33 /* UIImage+FontAwesome.m in Sources */,
 				23F000221C97B5750033BAA4 /* ArticleWebViewController.m in Sources */,
 				23E64DB21D2E469400A4402C /* SearchView.m in Sources */,
 				8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */,
@@ -2896,7 +2853,6 @@
 				23F274411C72C4CA00B76231 /* MoreArticlesSubCategoryViewController.m in Sources */,
 				4E56DF1B19D552C000263B17 /* main.m in Sources */,
 				4E4F27D71B6F438E003A63C5 /* ImageLoadingView.m in Sources */,
-				4E56DF7D19D56EF500263B17 /* UIFont+FontAwesome.m in Sources */,
 				DA35B3C71AFEE31200D66671 /* PasswordEditViewController.m in Sources */,
 				4EB8E2281B9F398B002C7F6F /* SelectionController.m in Sources */,
 				2354BF2B1D4B2CC300D43556 /* UserResultCell.m in Sources */,

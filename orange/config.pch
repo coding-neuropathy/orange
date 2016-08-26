@@ -41,9 +41,12 @@
 
 
 // FontAwesome
-#import "NSString+FontAwesome.h"
-#import "UIImage+FontAwesome.h"
-#import "FAImageView.h"
+//#import "NSString+FontAwesome.h"
+//#import "UIImage+FontAwesome.h"
+//#import "FAImageView.h"
+#import <FontAwesome/NSString+FontAwesome.h>
+//#import <FontAwesome/UIImage+FontAwesome.h>
+#import <FontAwesome/FAImageView.h>
 
 #import "FontDiao.h"
 #import "UIFont+FontDiao.h"

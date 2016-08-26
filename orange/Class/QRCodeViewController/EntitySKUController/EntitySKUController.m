@@ -178,12 +178,16 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     
 
     
-    UIAlertAction * backAcion = [UIAlertAction actionWithTitle:@"仍然返回" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction * backAcion = [UIAlertAction actionWithTitle:@"仍然返回"
+                                                    style:UIAlertActionStyleDestructive
+                                                       handler:^(UIAlertAction * _Nonnull action) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
     [actionSheetController addAction:backAcion];
     
-    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil)
+                                                style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
         [actionSheetController dismissViewControllerAnimated:YES completion:nil];
     }];
     [actionSheetController addAction:cancelAction];
