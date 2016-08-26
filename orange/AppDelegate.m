@@ -185,7 +185,7 @@ int ddLogLevel;
     [self customizeAppearance];
     
 #if DEBUG
-[[FLEXManager sharedManager] showExplorer];
+//[[FLEXManager sharedManager] showExplorer];
 #endif
     // Override point for customization after application launch.
     

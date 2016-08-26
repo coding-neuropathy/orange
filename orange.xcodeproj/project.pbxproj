@@ -1029,7 +1029,7 @@
 				23F1DD951C28020500A71827 /* PNoteViewController.m */,
 			);
 			name = PNoteViewController;
-			path = DiscoverViewController;
+			path = ../DiscoverViewController;
 			sourceTree = "<group>";
 		};
 		23F612FD1CDB0E0A0074E8C8 /* AddressPick */ = {
@@ -1493,7 +1493,6 @@
 				4EC9F78D1A7928300057D736 /* FanViewController */,
 				4EC9F78E1A7928300057D736 /* FriendViewController */,
 				4ECCD0DD1A7348AF009D5A42 /* EntityViewController */,
-				23F1DD971C28046100A71827 /* PNoteViewController */,
 				239231AE1C7D967E00B49A88 /* RecommendationUserController */,
 				4E1D70191A5ADB890032719E /* DiscoverViewController */,
 				4E1D701C1A5ADB890032719E /* SelectionViewController */,
@@ -1714,6 +1713,7 @@
 		4ECCD0DD1A7348AF009D5A42 /* EntityViewController */ = {
 			isa = PBXGroup;
 			children = (
+				23F1DD971C28046100A71827 /* PNoteViewController */,
 				4E7869671BA70C5A00586BD9 /* EntityHeaderBuyView.h */,
 				4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */,
 				B7DA97B91B25E46200C9BC25 /* EntityHeaderView.h */,
