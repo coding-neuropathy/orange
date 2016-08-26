@@ -38,7 +38,7 @@ int ddLogLevel;
  */
 - (void)umengTrack {
     [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
-    [MobClick setLogEnabled:DEBUG];
+    [MobClick setLogEnabled:NO];
     
     UMConfigInstance.appKey = UMENG_APPKEY;
     [MobClick startWithConfigure:UMConfigInstance];
@@ -131,7 +131,7 @@ int ddLogLevel;
     [WXApi registerApp:kGK_WeixinShareKey withDescription:NSLocalizedStringFromTable(@"guide to better living", kLocalizedFile, nil)];
     
     // weibo sdk
-    [WeiboSDK enableDebugMode:DEBUG];
+    [WeiboSDK enableDebugMode:NO];
     [WeiboSDK registerApp:kGK_WeiboAPPKey];
     
     /**
