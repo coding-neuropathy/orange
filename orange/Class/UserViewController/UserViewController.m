@@ -661,14 +661,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 //        return;
     } else {
         [self followActionWithUser:user HeaderView:view];
-//        [API followUserId:user.userId state:YES success:^(GKUserRelationType relation) {
-//            user.relation = relation;
-////            DDLogInfo(@"relation %lu", relation);
-//            view.user = user;
-//            [SVProgressHUD showImage:nil status:@"关注成功"];
-//        } failure:^(NSInteger stateCode) {
-//            [SVProgressHUD showImage:nil status:@"关注失败"];
-//        }];
     }
 }
 
@@ -703,10 +695,11 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
  */
 - (void)TapCreateOrder:(id)sender
 {
-    EmbedReaderViewController * vc = [[EmbedReaderViewController alloc] init];
+    EmbedReaderViewController * vc  = [[EmbedReaderViewController alloc] init];
+    UINavigationController * nav    = [[UINavigationController alloc] initWithRootViewController:vc];
     
-    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self presentViewController:nav animated:YES completion:nil];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)TapReviewOrder:(id)sender

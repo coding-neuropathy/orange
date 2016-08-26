@@ -20,18 +20,22 @@
 @private
     CGFloat yOffset;
 }
-@property (strong, nonatomic) ScannerCropView * cropView;
-@property (strong, nonatomic) ZBarReaderView * reader;
-@property (strong, nonatomic) UILabel * infoLabel;
-@property (strong, nonatomic) NSString * text;
+@property (strong, nonatomic) ScannerCropView   *cropView;
+@property (strong, nonatomic) ZBarReaderView    *reader;
+@property (strong, nonatomic) UILabel           *infoLabel;
+@property (strong, nonatomic) UIButton          *backBtn;
 
-@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+@property (strong, nonatomic) NSString          *text;
+
+@property (strong, nonatomic) AVAudioPlayer     *audioPlayer;
 
 @end
 
 
 @implementation EmbedReaderViewController
 
+
+#pragma mark - lazy load
 - (ScannerCropView *)cropView
 {
     if (!_cropView) {
@@ -40,7 +44,20 @@
     }
     return _cropView;
 }
-#pragma mark
+
+- (UIButton *)backBtn
+{
+    if (!_backBtn) {
+        _backBtn                    = [UIButton buttonWithType:UIButtonTypeCustom];
+        _backBtn.deFrameSize        = CGSizeMake(32., 44.);
+        
+        [_backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+        
+        [_backBtn addTarget:self action:@selector(backBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _backBtn;
+}
+
 - (AVAudioPlayer *)audioPlayer
 {
     if (!_audioPlayer) {
@@ -120,6 +137,8 @@
     [super viewDidLoad];
     
     self.title = NSLocalizedStringFromTable(@"scanner", kLocalizedFile, nil);
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backBtn];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -148,6 +167,11 @@
     [super viewWillDisappear:animated];
 }
 
+#pragma mark - button action
+- (void)backBtnAction:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - <ZBarReaderViewDelegate>
 - (void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
@@ -170,7 +194,10 @@
             NSString * entity_hash = [self.text substringWithRange:firstHalfRange];
             EntitySKUController * vc = [[EntitySKUController alloc] initWithEntityHash:entity_hash];
             
+            
+//            UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
             [self.navigationController pushViewController:vc animated:YES];
+//            [self presentViewController:nav animated:YES completion:nil];
             
         } else {
             [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:self.text]];

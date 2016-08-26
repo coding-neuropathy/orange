@@ -30,7 +30,7 @@
         
     if (self.navigationItem && self.navigationController.viewControllers.count > 1) {
         UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [backBtn setImage:[UIImage imageNamed:@"back-1"] forState:UIControlStateNormal];
+        [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
         [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
         backBtn.frame = CGRectMake(0., 0., 32., 44.);
 //        backBtn.imageEdgeInsets = UIEdgeInsetsMake(0., 0., 0., 20.);

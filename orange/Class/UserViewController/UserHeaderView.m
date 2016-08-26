@@ -118,14 +118,15 @@
 - (UIView *)bioBackView
 {
     if (!_bioBackView) {
-        _bioBackView = [[UIView alloc]initWithFrame:CGRectZero];
-        _bioBackView.backgroundColor = UIColorFromRGB(0xfafafa);
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0., 0., self.deFrameWidth, 1.)];
-        line.backgroundColor = UIColorFromRGB(0xf1f1f1);
+        _bioBackView                    = [[UIView alloc]initWithFrame:CGRectZero];
+        _bioBackView.backgroundColor    = [UIColor colorFromHexString:@"#fafafa"];
+        UIView * line                   = [[UIView alloc]initWithFrame:CGRectMake(0., 0., self.deFrameWidth, 1.)];
+        line.backgroundColor            = [UIColor colorFromHexString:@"#f1f1f1"];
         [_bioBackView addSubview:line];
-        _bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(15., 10., self.deFrameWidth - 15., 40.)];
-        _bioLabel.font = [UIFont systemFontOfSize:14.];
-        _bioLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        
+        _bioLabel                       = [[UILabel alloc] initWithFrame:CGRectMake(15., 10., self.deFrameWidth - 15., 40.)];
+        _bioLabel.font                  = [UIFont systemFontOfSize:14.];
+        _bioLabel.lineBreakMode         = NSLineBreakByWordWrapping;
         
         _bioLabel.textColor = UIColorFromRGB(0x757575);
         _bioLabel.textAlignment = NSTextAlignmentLeft;
@@ -392,40 +393,6 @@
 
 
 #pragma mark - layout subviews
-//- (void)layoutiPadSubViews
-//{
-//    self.avatarView.center = CGPointMake(self.frame.size.width / 2, 104.);
-//    
-//    self.nicknameLabel.frame = CGRectMake(0., 0., self.nicknameLabel.optimumSize.width, 30.);
-//    self.nicknameLabel.center = self.avatarView.center;
-//    self.nicknameLabel.deFrameTop = self.avatarView.deFrameBottom + 16.;
-//    
-//    self.bioLabel.frame = CGRectMake(0., 0., self.frame.size.width, 20.);
-//    self.bioLabel.center = self.nicknameLabel.center;
-//    self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom + 10.;
-//    
-//    self.friendBtn.frame = CGRectMake(self.deFrameWidth / 2 - 130., 0., 130., 20.);
-//    self.friendBtn.deFrameTop = self.bioLabel.deFrameBottom + 10.;
-//    
-//    self.fansBtn.frame = CGRectMake(0., 0., 130., 20.);
-//    self.fansBtn.center = self.friendBtn.center;
-//    self.fansBtn.deFrameLeft = self.friendBtn.deFrameRight + 10.;
-//    
-//    if (_user.userId == [Passport sharedInstance].user.userId) {
-//        self.editBtn.frame = CGRectMake(0., 0., 130., 30.);
-//        self.editBtn.center = self.bioLabel.center;
-//        self.editBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
-//    } else if (_user.user_state == GKUserBlockState) {
-//        self.blockBtn.frame = CGRectMake(0., 0., 130., 30.);
-//        self.blockBtn.center = self.bioLabel.center;
-//        self.blockBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
-//    } else {
-//        self.relationBtn.frame = CGRectMake(0., 0., 130., 30.);
-//        self.relationBtn.center = self.bioLabel.center;
-//        self.relationBtn.deFrameTop = self.fansBtn.deFrameBottom + 20.;
-//    }
-//}
-
 - (void)layoutOrderButton
 {
     if ([self.user.bio length] > 0) {
@@ -455,10 +422,10 @@
     self.bioBackView.deFrameLeft = self.deFrameLeft;
     self.bioBackView.deFrameBottom = self.deFrameBottom;
     
-    if (IS_IPHONE) [self layoutOrderButton];
+    if (IS_IPHONE && self.user.userId == [Passport sharedInstance].user.userId) [self layoutOrderButton];
     
-    self.friendBtn.deFrameLeft   = self.nicknameLabel.deFrameLeft;
-    self.fansBtn.deFrameLeft     = self.friendBtn.deFrameRight + 43;
+    self.friendBtn.deFrameLeft          = self.nicknameLabel.deFrameLeft;
+    self.fansBtn.deFrameLeft            = self.friendBtn.deFrameRight + 43;
     
     if (_user.userId == [Passport sharedInstance].user.userId) {
         self.editBtn.frame = CGRectMake(0., 0., 130., 30.);
@@ -510,7 +477,7 @@
 {
     [super drawRect:rect];
     
-    if (IS_IPHONE ) {
+    if (IS_IPHONE && self.user.userId == [Passport sharedInstance].user.userId) {
         CGContextRef context = UIGraphicsGetCurrentContext();
     
         CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);

@@ -25,11 +25,12 @@ typedef NS_ENUM(NSInteger, SKUSectionType) {
 @property (strong, nonatomic) GKEntity          *entity;
 
 @property (strong, nonatomic) UIButton          *continueAddBtn;
+@property (strong, nonatomic) UIButton          *backBtn;
 
 @property (strong, nonatomic) SKUToolbar        *toolbar;
 @property (strong, nonatomic) UIButton          *orderBtn;
-
 @property (strong, nonatomic) EntitySKUView     *entitySKUView;
+
 
 
 @end
@@ -65,6 +66,19 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     return _continueAddBtn;
 }
 
+- (UIButton *)backBtn
+{
+    if (!_backBtn) {
+        _backBtn                    = [UIButton buttonWithType:UIButtonTypeCustom];
+        _backBtn.deFrameSize        = CGSizeMake(32., 44.);
+        
+        [_backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+        
+        [_backBtn addTarget:self action:@selector(backBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _backBtn;
+}
+
 - (EntitySKUView *)entitySKUView
 {
     if (!_entitySKUView) {
@@ -96,6 +110,7 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     // Do any additional setup after loading the view.
     
     self.navigationItem.title                   = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
+    self.navigationItem.leftBarButtonItem       = [[UIBarButtonItem alloc] initWithCustomView:self.backBtn];
     self.navigationItem.rightBarButtonItem      = [[UIBarButtonItem alloc] initWithCustomView:self.continueAddBtn];
     
     [self.view addSubview:self.entitySKUView];
@@ -155,6 +170,28 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 - (void)continueAddBtnAction:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)backBtnAction:(id)sender
+{
+    UIAlertController * actionSheetController = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"清空购物袋 ?", kLocalizedFile, nil) message:@"现在返回， 购物袋中的商品将被清空" preferredStyle:UIAlertControllerStyleAlert];
+    
+
+    
+    UIAlertAction * backAcion = [UIAlertAction actionWithTitle:@"仍然返回" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [actionSheetController addAction:backAcion];
+    
+    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [actionSheetController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [actionSheetController addAction:cancelAction];
+    
+//    actionSheetController.view.tintColor = [UIColor blackColor];
+
+    
+    [self presentViewController:actionSheetController animated:YES completion:nil];
 }
 
 
