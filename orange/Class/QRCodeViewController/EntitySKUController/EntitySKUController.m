@@ -211,8 +211,13 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 #pragma mark - <EntitySKUViewDelegate>
 - (void)TapSKUTagWithSKU:(GKEntitySKU *)sku
 {
-    DDLogInfo(@"OKOKOKO");
+//    DDLogInfo(@"OKOKOKO");
     [self.toolbar updatePriceWithprice:sku.discount];
+}
+
+- (void)TapAddCartWithSKU:(GKEntitySKU *)sku
+{
+
 }
 
 #pragma mark - <SKUToolbarDelegate>

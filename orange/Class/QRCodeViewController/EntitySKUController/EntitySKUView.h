@@ -10,7 +10,9 @@
 
 @protocol EntitySKUViewDelegate <NSObject>
 
+- (void)TapAddCartWithSKU:(GKEntitySKU *)sku;
 - (void)TapSKUTagWithSKU:(GKEntitySKU *)sku;
+
 
 @end
 

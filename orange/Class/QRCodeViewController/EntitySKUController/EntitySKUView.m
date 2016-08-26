@@ -18,6 +18,8 @@
 
 @property (strong, nonatomic) UILabel       *skuInfoLabel;
 
+@property (strong, nonatomic) GKEntitySKU   *selectedSKU;
+
 @property (assign, nonatomic) BOOL          warp;
 
 @end
@@ -83,12 +85,14 @@
     if (!_cartBtn) {
         _cartBtn                        = [UIButton buttonWithType:UIButtonTypeCustom];
         _cartBtn.deFrameSize            = CGSizeMake(128., 32.);
-        _cartBtn.backgroundColor        = UIColorFromRGB(0x6192ff);
+        _cartBtn.backgroundColor        = [UIColor colorFromHexString:@"#6192ff"];
         _cartBtn.layer.cornerRadius     = _cartBtn.deFrameHeight / 2.;
         _cartBtn.layer.masksToBounds    = YES;
         
         _cartBtn.titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
-        [_cartBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        _cartBtn.enabled                = NO;
+        [_cartBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor] andSize:_cartBtn.deFrameSize] forState:UIControlStateDisabled];
+        [_cartBtn setTitleColor:[UIColor colorFromHexString:@"#ffffff"] forState:UIControlStateNormal];
         [_cartBtn setTitle:NSLocalizedStringFromTable(@"add-cart", kLocalizedFile, nil) forState:UIControlStateNormal];
         
         [_cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -131,7 +135,7 @@
     self.titleLabel.text        = _entity.title;
     self.priceLabel.text        = [NSString stringWithFormat:@"￥ %.2f", _entity.lowestPrice];
     
-    
+    [self setupSKU];
     [self setNeedsLayout];
 }
 
@@ -153,8 +157,6 @@
     self.skuInfoLabel.deFrameTop        = self.priceLabel.deFrameBottom + 38.;
     self.skuInfoLabel.deFrameLeft       = self.priceLabel.deFrameLeft;
     
-    
-    [self setupSKU];
     
 }
 
@@ -246,7 +248,9 @@
 #pragma mark - button action
 - (void)cartBtnAction:(id)sender
 {
-    
+    if (_SKUDelegate && [_SKUDelegate respondsToSelector:@selector(TapAddCartWithSKU:)]) {
+        [_SKUDelegate TapAddCartWithSKU:self.selectedSKU];
+    }
 }
 
 - (void)skuBtnAction:(id)sender
@@ -268,13 +272,13 @@
     btn.layer.borderWidth       = 1.;
     btn.layer.borderColor       = UIColorFromRGB(0x3f6ff0).CGColor;
     
+    self.cartBtn.enabled        = YES;
+    self.selectedSKU            = [self.entity.skuArray objectAtIndex:btn.tag];
     
-    GKEntitySKU * sku           = [self.entity.skuArray objectAtIndex:btn.tag];
-    
-    self.priceLabel.text        = [NSString stringWithFormat:@"￥ %.2f", sku.discount];
+    self.priceLabel.text        = [NSString stringWithFormat:@"￥ %.2f", self.selectedSKU.discount];
 
     if (_SKUDelegate && [_SKUDelegate respondsToSelector:@selector(TapSKUTagWithSKU:)]) {
-        [_SKUDelegate TapSKUTagWithSKU:sku];
+        [_SKUDelegate TapSKUTagWithSKU:self.selectedSKU];
     }
 }
 
