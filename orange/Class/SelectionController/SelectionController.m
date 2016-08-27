@@ -206,9 +206,11 @@
     switch (type) {
         case SelectionEntityType:
             [self.segmentedControl setSelectedSegmentIndex:0 animated:YES];
+            [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
             break;
         case SelectionArticleType:
             [self.segmentedControl setSelectedSegmentIndex:1 animated:YES];
+            [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
             break;
     }
 }
