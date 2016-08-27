@@ -227,7 +227,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
     }
     DDLogInfo(@"url %lu %@ ", (long)index, imageURL_800);
     [(UIImageView *)view sd_setImageWithURL:imageURL_800
-                           placeholderImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f7f7f7"]
+                           placeholderImage:[UIImage imageWithColor:kPlaceHolderColor
                             andSize:view.deFrameSize]];
     
     return view;

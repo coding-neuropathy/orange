@@ -69,7 +69,7 @@
     self.priceLabel.text        = [NSString stringWithFormat:@"￥ %.2f", _entity.lowestPrice];
     
     [self.entityImage sd_setImageWithURL:_entity.imageURL_640x640
-                        placeholderImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f0f0f0"] andSize:self.entityImage.deFrameSize]];
+                        placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.entityImage.deFrameSize]];
     [self setNeedsLayout];
 }
 

@@ -21,7 +21,7 @@
     if(!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
-        _imageView.backgroundColor = UIColorFromRGB(0xffffff);
+//        _imageView.backgroundColor = UIColorFromRGB(0xffffff);
         _imageView.userInteractionEnabled = YES;
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
                                        initWithTarget:self action:@selector(ImageBtnAction:)];
@@ -46,12 +46,12 @@
     __weak __typeof(&*self)weakSelf = self;
     [self.loading startAnimating];
     if (IS_IPHONE_6P) {
-        [self.imageView sd_setImageWithURL:_entity.imageURL_310x310 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(120., 120.)] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.imageView sd_setImageWithURL:_entity.imageURL_310x310 placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.deFrameSize] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [weakSelf.loading stopAnimating];
         }];
     } else {
         [self.imageView sd_setImageWithURL:_entity.imageURL_240x240
-                          placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:self.imageView.deFrameSize] options:SDWebImageRetryFailed
+                          placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.deFrameSize] options:SDWebImageRetryFailed
                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                      [weakSelf.loading stopAnimating];
         }];

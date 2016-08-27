@@ -62,7 +62,8 @@
                                    initWithTarget:self action:@selector(avatarButtonAction)];
     [self.avatar addGestureRecognizer:tap];
     
-    [self.avatar sd_setImageWithURL:self.comment.creator.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
+    [self.avatar sd_setImageWithURL:self.comment.creator.avatarURL
+                   placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.avatar.deFrameSize]];
     self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
     
     

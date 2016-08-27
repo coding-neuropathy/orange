@@ -113,7 +113,8 @@
     for (int i = 0; i < _users.count; i ++) {
         GKUser * user = _users[i];
         UserImageView * imageView = [[UserImageView alloc]initWithFrame:CGRectMake(i * 50.+ i * 18, 0, 50., 50.)];
-        [imageView sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(50., 50.)]];
+        [imageView sd_setImageWithURL:user.avatarURL
+                     placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:imageView.deFrameSize]];
         imageView.user = user;
         UserNameLabel * label = [[UserNameLabel alloc]initWithFrame:CGRectMake(i * 50.+ i * 18, 58., 50., 10.)];
         label.user = user;

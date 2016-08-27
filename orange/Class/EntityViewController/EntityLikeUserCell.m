@@ -33,7 +33,7 @@
 {
     _user = user;
     [self.avatarView sd_setImageWithURL:_user.avatarURL
-                       placeholderImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f1f1f1"] andSize:self.contentView.deFrameSize]];
+                       placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.contentView.deFrameSize]];
     [self setNeedsLayout];
 }
 

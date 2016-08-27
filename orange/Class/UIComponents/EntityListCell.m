@@ -124,11 +124,13 @@
     __weak __typeof(&*self)weakSelf = self;
     [self.loading startAnimating];
     if (IS_IPHONE_6P) {
-        [self.imageView sd_setImageWithURL:_entity.imageURL_310x310 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(90., 90.)] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.imageView sd_setImageWithURL:_entity.imageURL_310x310
+                          placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(90., 90.)] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [weakSelf.loading stopAnimating];
         }];
     } else {
-        [self.imageView sd_setImageWithURL:_entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(90., 90.)] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.imageView sd_setImageWithURL:_entity.imageURL_240x240
+                          placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(90., 90.)] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [weakSelf.loading stopAnimating];
         }];
     }

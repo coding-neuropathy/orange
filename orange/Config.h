@@ -173,6 +173,8 @@
 
 #define kScreeenScale SCREEN_WIDTH / 375.0
 
+#define kPlaceHolderColor [UIColor colorFromHexString:@"#f7f7f7"]
+
 
 #define DEFINE_SINGLETON_FOR_HEADER(className) \
 \

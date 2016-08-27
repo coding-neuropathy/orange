@@ -95,7 +95,10 @@
         if (self.category.iconURL) {
             self.categoryImageView.hidden = NO;
             self.categoryNameLabel.frame = CGRectMake(0.f, CGRectGetHeight(self.frame) -20-8, CGRectGetWidth(self.frame), 20);
-            [self.categoryImageView sd_setImageWithURL:self.category.iconURL placeholderImage:Nil options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL * imageURL) {
+            [self.categoryImageView sd_setImageWithURL:self.category.iconURL
+                                      placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.categoryImageView.deFrameSize]
+                                               options:SDWebImageRetryFailed
+                                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL * imageURL) {
                 if (!error) {
                     if (image && cacheType == SDImageCacheTypeNone) {
                         block_img.alpha = 0.0;

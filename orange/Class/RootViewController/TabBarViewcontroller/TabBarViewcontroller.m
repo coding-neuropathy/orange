@@ -118,6 +118,11 @@
 //        self.selectionController
         [self removeBadge];
     }
+    
+    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[SelectionController class]]) {
+        //        self.selectionController
+        [self cleanSelectionBadge];
+    }
 }
 
 #pragma mark - notification
@@ -135,13 +140,21 @@
     [selectionItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeBreathe];
 }
 
+- (void)cleanSelectionBadge
+{
+    UITabBarItem * selectionItem = [self.tabBar.items objectAtIndex:0];
+    [selectionItem clearBadge];
+}
+
 - (void)removeBadge
 {
     UITabBarItem * messageItem = [self.tabBar.items objectAtIndex:2];
     [messageItem clearBadge];
 }
 
-
+/**
+ *  account
+ */
 - (void)login
 {
     UINavigationController * fourth = [[UINavigationController alloc] init];

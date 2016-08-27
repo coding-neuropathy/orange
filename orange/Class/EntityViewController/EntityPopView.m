@@ -161,7 +161,7 @@
                 imageURL_800 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
             }
             
-            [_imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+            [_imageView sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
             //            [self.scrollView addSubview:imageView];
         } else {
             NSURL * imageURL_640;
@@ -171,7 +171,8 @@
                 imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
             }
             
-            [_imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
+            [_imageView sd_setImageWithURL:imageURL_640
+                          placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(kScreenWidth, kScreenWidth)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
             
         }
         [self.scrollView addSubview:_imageView];

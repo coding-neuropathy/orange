@@ -136,7 +136,7 @@
     // loading entity image from cdn
     __weak __typeof(&*self)weakSelf = self;
     [self.imageView sd_setImageWithURL:_entity.imageURL_240x240
-                    placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(90., 90.)]
+                    placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(90., 90.)]
                     options:SDWebImageRetryFailed
                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL)
     {

@@ -81,7 +81,7 @@
     
      //  设置图片
     [self.coverImageView sd_setImageWithURL:_article.coverURL
-                           placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(90., 90.)]];
+                           placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(90., 90.)]];
     
     
     [self setNeedsLayout];

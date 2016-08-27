@@ -214,7 +214,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     [self addObserver];
     //    DDLogVerbose(@"cell note creator %@", _note.creator.nickname);
     
-    [self.avatarImageView sd_setImageWithURL:_note.creator.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(36., 36.)]];
+    [self.avatarImageView sd_setImageWithURL:_note.creator.avatarURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(36., 36.)]];
     
     self.nameLabel.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", (unsigned long)_note.creator.userId, _note.creator.nickname];
     

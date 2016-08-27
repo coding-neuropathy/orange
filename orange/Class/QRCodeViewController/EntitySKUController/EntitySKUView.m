@@ -305,7 +305,7 @@
         imageURL_800 = [NSURL URLWithString:url.absoluteString];
     }
     DDLogInfo(@"url %lu %@ ", (long)index, imageURL_800);
-    [(UIImageView *)view sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:view.deFrameSize]];
+    [(UIImageView *)view sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:view.deFrameSize]];
     
     return view;
 }

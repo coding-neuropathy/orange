@@ -39,9 +39,11 @@
 - (UIImageView *)coverImageView
 {
     if (!_coverImageView){
-        _coverImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _coverImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _coverImageView                     = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _coverImageView.deFrameSize         = CGSizeMake(self.contentView.deFrameWidth - 32, (self.contentView.deFrameWidth - 32) / 1.8);
+        _coverImageView.contentMode         = UIViewContentModeScaleAspectFill;
         _coverImageView.layer.masksToBounds = YES;
+        
         [self.contentView addSubview:_coverImageView];
     }
     return _coverImageView;
@@ -117,7 +119,7 @@
     /**
      *  设置图片
      */
-    [self.coverImageView sd_setImageWithURL:_article.coverURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth -32, (kScreenWidth - 32) / 1.8)]];
+    [self.coverImageView sd_setImageWithURL:_article.coverURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.coverImageView.deFrameSize]];
     
     /**
      *  设置图文标签

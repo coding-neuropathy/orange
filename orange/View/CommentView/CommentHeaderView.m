@@ -35,12 +35,14 @@
 - (UIImageView *)avatar
 {
     if(!_avatar) {
-        _avatar = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _avatar.layer.masksToBounds = YES;
+        _avatar                         = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _avatar.deFrameSize             = CGSizeMake(60., 60.);
+        _avatar.layer.masksToBounds     = YES;
+        _avatar.userInteractionEnabled  = YES;
         
-        _avatar.userInteractionEnabled = YES;
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+        UITapGestureRecognizer* tap     = [[UITapGestureRecognizer alloc]
                                        initWithTarget:self action:@selector(avatarButtonAction:)];
+        
         [_avatar addGestureRecognizer:tap];
         [self addSubview:_avatar];
     }
@@ -114,7 +116,7 @@
         _starLabel.textAlignment = NSTextAlignmentRight;
         //        _starLabel.hidden = YES;
         _starLabel.backgroundColor = [UIColor clearColor];
-        _starLabel.textColor = UIColorFromRGB(0xFF9600);
+        _starLabel.textColor = [UIColor colorFromHexString:@"#ff9600"];
         _starLabel.text = [NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAStar]];
         [self addSubview:_starLabel];
     }
@@ -126,7 +128,8 @@
 {
     _note = note;
     
-    [self.avatar sd_setImageWithURL:self.note.creator.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
+    [self.avatar sd_setImageWithURL:self.note.creator.avatarURL
+                   placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.avatar.deFrameSize]];
     
     self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", (unsigned long)self.note.creator.userId, self.note.creator.nickname];
     

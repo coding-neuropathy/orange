@@ -124,7 +124,8 @@
 //            [weakSelf.loading stopAnimating];
 //        }];
 
-    [self.imageView sd_setImageWithPreviousCachedImageWithURL:_entity.imageURL_310x310 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf0f0f0) andSize:self.imageView.deFrameSize] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+    [self.imageView sd_setImageWithPreviousCachedImageWithURL:_entity.imageURL_310x310
+                                             placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.imageView.deFrameSize] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [weakSelf.loading stopAnimating];

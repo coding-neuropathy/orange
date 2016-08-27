@@ -198,7 +198,8 @@ static CGFloat bioLabelHeight;
 - (void)setUser:(GKUser *)user
 {
     _user = user;
-    [self.avatarView sd_setImageWithURL:_user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(self.avatarView.deFrameWidth, self.deFrameWidth)]];
+    [self.avatarView sd_setImageWithURL:_user.avatarURL
+                       placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.avatarView.deFrameSize]];
     
     if ([_user.gender isEqualToString:@"M"]) {
 //        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>   %@</b> <font face='FontAwesome' color='^8cb4ff'>%@</font>", _user.nickname, [NSString fontAwesom             eIconStringForEnum:FAmars]];

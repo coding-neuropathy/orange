@@ -71,7 +71,7 @@
     }
     
     NSURL *imageURL = self.bannerArray[index][@"img"];
-    [((UIImageView *)view) sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:view.frame.size]];
+    [((UIImageView *)view) sd_setImageWithURL:imageURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:view.frame.size]];
     
     return view;
 }
