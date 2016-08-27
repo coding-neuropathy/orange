@@ -114,6 +114,13 @@ int ddLogLevel;
     [[UITabBar appearance] setTintColor:[UIColor colorFromHexString:@"#ffffff"]];
     //[UIColor colorWithRed:255.0/255.0 green:124.0/255.0 blue:56.0/255.0 alpha:1]
     [[UITabBar appearance] setBarTintColor:[UIColor colorFromHexString:@"#ffffff"]];
+    
+    
+#pragma mark - status bar config
+    if (IS_IPAD) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(kScreenWidth - kTabBarWidth, 44.)] forBarMetrics:UIBarMetricsDefault];
+    }
 }
 
 //进程启动但还没进入状态保存
@@ -225,7 +232,7 @@ int ddLogLevel;
         [JPUSHService handleRemoteNotification:userInfo];
     }
 
-        application.applicationIconBadgeNumber = 0;
+//        application.applicationIconBadgeNumber = 0;
     
     [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
 //        DDLogInfo(@"OKOK %@", launch.urlMD5);
@@ -257,11 +264,7 @@ int ddLogLevel;
         
     }];
 
-#pragma mark - status bar config
-    if (IS_IPAD) {
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(kScreenWidth - kTabBarWidth, 44.)] forBarMetrics:UIBarMetricsDefault];
-    }
+
     
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;
@@ -272,7 +275,7 @@ int ddLogLevel;
     [self refreshCategory];
     
     {
-        NSTimer *_timer = [NSTimer scheduledTimerWithTimeInterval:240.0f
+        NSTimer *_timer = [NSTimer scheduledTimerWithTimeInterval:300.0f
                                                              target:self
                                                            selector:@selector(checkNewMessage)
                                                            userInfo:nil
@@ -624,10 +627,18 @@ int ddLogLevel;
             
             if (dictionary[@"unread_message_count"]) {
                 self.messageCount = [dictionary[@"unread_message_count"] unsignedIntegerValue];
-            if (self.messageCount != 0) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBadge" object:nil userInfo:nil];
+                if (self.messageCount != 0) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBadge" object:nil userInfo:nil];
+                }
             }
-        }
+            NSInteger selection_count = [dictionary[@"unread_selection_count"] unsignedIntegerValue];
+            if (selection_count > 0) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowSelectedBadge" object:nil userInfo:nil];
+            }
+//            if (dictionary[@"unread_selection_count"]) {
+//            
+//            }
+            
         } failure:^(NSInteger stateCode) {
         
         }];

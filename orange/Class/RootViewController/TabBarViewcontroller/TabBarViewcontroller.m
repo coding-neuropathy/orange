@@ -34,20 +34,18 @@
     return self;
 }
 
-//- (SelectionController *)selectionController
-//{
-//    if (!_selectionController) {
-//        _selectionController  = [[SelectionController alloc] init]
-//    }
-//    return _selectionController;
-//}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ShowBadge" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ShowSelectedBadge" object:nil];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBadge) name:@"ShowBadge" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBadge) name:@"HideBadge" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSelectionBadge) name:@"ShowSelectedBadge" object:nil];
     
 //    self.tabBar.translucent = YES;
     self.delegate = self;
@@ -81,9 +79,6 @@
 
     self.viewControllers = @[first,second,third,fourth];
     
-//    UITabBarItem * messageItem = [self.tabBar.items objectAtIndex:2];
-//    messageItem.badgeCenterOffset = CGPointMake(-30, 10);
-//    [messageItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeScale];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -125,38 +120,26 @@
     }
 }
 
+#pragma mark - notification
 - (void)addBadge
 {
-//    [self removeBadge];
-//    [self tabBadge:YES];
     UITabBarItem * messageItem = [self.tabBar.items objectAtIndex:2];
     messageItem.badgeCenterOffset = CGPointMake(-30, 10);
-    [messageItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeScale];
+    [messageItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeBreathe];
+}
+
+- (void)showSelectionBadge
+{
+    UITabBarItem * selectionItem = [self.tabBar.items objectAtIndex:0];
+    selectionItem.badgeCenterOffset = CGPointMake(-30, 10);
+    [selectionItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeBreathe];
 }
 
 - (void)removeBadge
 {
-//    [self tabBadge:NO];
     UITabBarItem * messageItem = [self.tabBar.items objectAtIndex:2];
     [messageItem clearBadge];
 }
-
-//- (void)tabBadge:(BOOL)yes
-//{
-//    if (yes) {
-//        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 6, 6)];
-//        badge.backgroundColor = UIColorFromRGB(0xFF1F77);
-//        badge.tag = 100;
-//        badge.layer.cornerRadius = 3;
-//        badge.layer.masksToBounds = YES;
-//        badge.center = CGPointMake(kScreenWidth*5/8+15,10);
-//        [self.tabBar addSubview:badge];
-//    }
-//    else
-//    {
-//        [[self.tabBar viewWithTag:100]removeFromSuperview];
-//    }
-//}
 
 
 - (void)login
