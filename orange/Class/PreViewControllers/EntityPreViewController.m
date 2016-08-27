@@ -60,7 +60,7 @@
     [API likeEntityWithEntityId:self.entity.entityId isLike:YES success:^(BOOL liked) {
         self.entity.liked = liked;
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like-failure", kLocalizedFile, nil)];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
     }];
 }
 

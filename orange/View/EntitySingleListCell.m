@@ -302,7 +302,7 @@
         }
         //[self.likeButton setTitle:[NSString stringWithFormat:@" %ld",self.entity.likeCount] forState:UIControlStateNormal];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like-failure", kLocalizedFile, nil)];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
         
     }];
 }

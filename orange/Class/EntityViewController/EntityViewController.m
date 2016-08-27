@@ -926,7 +926,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         //                         forState:UIControlStateNormal];
         [self setNavBarButton:self.flag];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like-failure", kLocalizedFile, nil)];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
     }];
 }
 
