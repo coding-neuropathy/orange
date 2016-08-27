@@ -109,7 +109,7 @@
     
     [self addObserver];
     
-    [self.imageView sd_setImageWithURL:_entity.imageURL_310x310 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xF0F0F0) andSize:CGSizeMake(self.imageView.deFrameWidth, self.imageView.deFrameHeight)]];
+    [self.imageView sd_setImageWithURL:_entity.imageURL_310x310 placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(self.imageView.deFrameWidth, self.imageView.deFrameHeight)]];
     self.titleLabel.text = _entity.title;
     self.detailLabel.text = _note.text;
     

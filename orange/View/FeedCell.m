@@ -260,7 +260,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             GKEntity *entity = self.feed[@"object"][@"entity"];
             GKUser * user = note.creator;
             
-            [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(36, 36)]];
+            [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(36, 36)]];
             
             self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> %@</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",
                                       (unsigned long)user.userId,
@@ -271,7 +271,8 @@ typedef NS_ENUM(NSInteger, FeedType) {
             self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
 
             
-            [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(100, 100)]];
+            [self.image sd_setImageWithURL:entity.imageURL_240x240
+                          placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(100, 100)]];
             self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
             self.image.deFrameLeft = self.contentLabel.deFrameRight + 12.;
         }
@@ -282,7 +283,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             GKUser * user = self.feed[@"object"][@"user"];
             GKEntity *entity = self.feed[@"object"][@"entity"];
 //            NSLog(@"%@ %@", self.feed[@"type"], user.nickname);
-            [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60., 60.)]];
+            [self.avatar sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(60., 60.)]];
             
             self.contentLabel.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@</font></a><font face='Helvetica' color='^414243' size=14> %@</font><font face='Helvetica' color='^9d9e9f' size=14> %@</font>",
                                       (unsigned long)user.userId,
@@ -292,7 +293,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
             
             self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5;
             
-            [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(100, 100)]];
+            [self.image sd_setImageWithURL:entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(100, 100)]];
             self.image.deFrameLeft = self.contentLabel.deFrameRight + 12.;
 //            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
             self.image.deFrameRight = self.contentView.deFrameWidth - 16.;
