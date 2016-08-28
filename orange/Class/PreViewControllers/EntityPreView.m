@@ -24,8 +24,8 @@
     if (!_entityImage) {
         _entityImage                        = [[UIImageView alloc] initWithFrame:CGRectZero];
         _entityImage.deFrameSize            = CGSizeMake(self.deFrameWidth, self.deFrameWidth);
-        _entityImage.contentMode            = UIViewContentModeScaleAspectFill;
-        _entityImage.layer.masksToBounds    = YES;
+        _entityImage.contentMode            = UIViewContentModeScaleAspectFit;
+//        _entityImage.layer.masksToBounds    = YES;
         
         [self addSubview:_entityImage];
     }
@@ -68,8 +68,13 @@
     self.titleLable.text        = _entity.title;
     self.priceLabel.text        = [NSString stringWithFormat:@"￥ %.2f", _entity.lowestPrice];
     
-    [self.entityImage sd_setImageWithURL:_entity.imageURL_640x640
+    if (self.preImage) {
+        [self.entityImage sd_setImageWithURL:_entity.imageURL_640x640
+                            placeholderImage:self.preImage];
+    } else {
+        [self.entityImage sd_setImageWithURL:_entity.imageURL_640x640
                         placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.entityImage.deFrameSize]];
+    }
     [self setNeedsLayout];
 }
 

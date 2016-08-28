@@ -367,6 +367,40 @@
 }
 
 /**
+ *  商品加入购物车
+ *
+ *  sid     sku id
+ *  volume  商品数量
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)addEntitySKUToCartWithSKUId:(NSInteger)sku_id Volume:(NSInteger)volume
+                            Success:(void (^)(BOOL is_success))success
+                            Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSParameterAssert(sku_id);
+    NSMutableDictionary *paraDict   = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(sku_id) forKey:@"sid"];
+    volume == 0 ? [paraDict setValue:@(1) forKey:@"volume"] : [paraDict setValue:@(volume) forKey:@"volume"];
+    
+    NSString * path                 = @"entity/cart/";
+    
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+    
+}
+
+/**
  *  获取随机商品
  *
  *  @param categoryId 分类ID

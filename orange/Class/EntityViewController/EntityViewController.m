@@ -34,9 +34,6 @@
 #import "ShareView.h"
 #import "PNoteViewController.h"
 
-//#import <SloppySwiper/SloppySwiper.h>
-//#import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
-
 #import "EntityPreViewController.h"
 
 
@@ -751,22 +748,13 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
     NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
     
-    UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    EntityCell * cell = (EntityCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     switch (indexPath.section) {
-//        case 2:
-//        {
-//            ArticlePreViewController * vc = [[ArticlePreViewController alloc]
-//                                             initWithArticle:[self.discoverData.articles objectAtIndex:indexPath.row]];
-//            vc.preferredContentSize = CGSizeMake(0, 0);
-//            previewingContext.sourceRect = cell.frame;
-//            return vc;
-//        }
-//            break;
         case 6:
         {
 
-            GKEntity * entity               = [self.dataArrayForRecommend objectAtIndex:indexPath.row];
-            EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:entity];
+//            GKEntity * entity               = [self.dataArrayForRecommend objectAtIndex:indexPath.row];
+            EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.imageView.image];
             vc.preferredContentSize = CGSizeMake(0., 0.);
             previewingContext.sourceRect = cell.frame;
             
@@ -790,7 +778,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
             }];
             
             [MobClick event:@"3d-touch" attributes:@{
-                                                     @"entity"  : entity.title,
+                                                     @"entity"  : cell.entity.title,
                                                      @"from"    : @"detail-page-recommend",
                                                          }];
             return vc;

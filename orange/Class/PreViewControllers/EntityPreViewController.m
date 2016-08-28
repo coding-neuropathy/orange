@@ -15,10 +15,13 @@
 
 @property (strong, nonatomic) GKEntity * entity;
 @property (strong, nonatomic) EntityPreView * preView;
+@property (weak, nonatomic) UIImage * preImage;
 
 //@property(nonatomic, strong) id<ALBBItemService> itemService;
 
 @property (strong, nonatomic) NSString * seller_id;
+
+
 @end
 
 @implementation EntityPreViewController
@@ -29,20 +32,32 @@
 
 - (instancetype)initWithEntity:(GKEntity *)entity
 {
-    self = [self init];
+    self = [self initWithEntity:entity PreImage:nil];
+//    if (self) {
+//        self.entity     = entity;
+//    }
+    return self;
+}
+
+- (instancetype)initWithEntity:(GKEntity *)entity PreImage:(UIImage *)image
+{
+    self = [super init];
     if (self) {
-        self.entity = entity;
-        
+        self.entity     = entity;
+        self.preImage   = image;
+    
     }
     return self;
 }
+
 
 - (EntityPreView *)preView
 {
     if (!_preView) {
         _preView = [[EntityPreView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-        _preView.entity = self.entity;
-        _preView.backgroundColor = UIColorFromRGB(0xffffff);
+        _preView.preImage           = self.preImage;
+        _preView.entity             = self.entity;
+        _preView.backgroundColor    = UIColorFromRGB(0xf1f1f1);
     }
     return _preView;
 }

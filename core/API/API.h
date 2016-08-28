@@ -122,6 +122,18 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                      Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 /**
+*  商品加入购物车
+*
+*  sid     sku id
+*  volume  商品数量
+*  @param success    成功block
+*  @param failure    失败block
+*/
++ (void)addEntitySKUToCartWithSKUId:(NSInteger)sku_id Volume:(NSInteger)volume
+                            Success:(void (^)(BOOL is_success))success
+                            Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
+
+/**
  *  获取随机商品
  *
  *  @param categoryId 分类ID

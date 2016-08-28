@@ -16,5 +16,6 @@
 
 
 - (instancetype)initWithEntity:(GKEntity *)entity;
+- (instancetype)initWithEntity:(GKEntity *)entity PreImage:(UIImage *)image;
 
 @end

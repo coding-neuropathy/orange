@@ -11,5 +11,6 @@
 @interface EntityPreView : UIView
 
 @property (strong, nonatomic) GKEntity * entity;
+@property (weak, nonatomic) UIImage * preImage;
 
 @end
