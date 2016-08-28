@@ -24,8 +24,8 @@
     if (!_entityImage) {
         _entityImage                        = [[UIImageView alloc] initWithFrame:CGRectZero];
         _entityImage.deFrameSize            = CGSizeMake(self.deFrameWidth, self.deFrameWidth);
-        _entityImage.contentMode            = UIViewContentModeScaleAspectFit;
-//        _entityImage.layer.masksToBounds    = YES;
+        _entityImage.contentMode            = UIViewContentModeScaleAspectFill;
+        _entityImage.layer.masksToBounds    = YES;
         
         [self addSubview:_entityImage];
     }
@@ -36,9 +36,8 @@
 {
     if (!_titleLable) {
         _titleLable                 = [[UILabel alloc] initWithFrame:CGRectZero];
-//        _titleLable.font = [UIFont systemFontOfSize:20.];
         _titleLable.deFrameSize     = CGSizeMake(self.deFrameWidth - 20, 30.);
-        _titleLable.font            = [UIFont fontWithName:@"PingFangSC-Regular" size:20.];
+        _titleLable.font            = [UIFont fontWithName:@"PingFangSC-Bold" size:20.];
         _titleLable.textColor       = [UIColor colorFromHexString:@"#414243"];
         _titleLable.textAlignment   = NSTextAlignmentCenter;
         
@@ -65,7 +64,7 @@
 - (void)setEntity:(GKEntity *)entity
 {
     _entity                     = entity;
-    self.titleLable.text        = _entity.title;
+    self.titleLable.text        = _entity.entityName;
     self.priceLabel.text        = [NSString stringWithFormat:@"￥ %.2f", _entity.lowestPrice];
     
     if (self.preImage) {
@@ -82,9 +81,6 @@
 {
     [super layoutSubviews];
     
-//    self.titleLable.frame = CGRectMake(10., 20., self.deFrameWidth - 20, 30.);
-    
-//    self.entityImage.frame = CGRectMake(0., 0., self.deFrameWidth, self.deFrameWidth);
     self.titleLable.deFrameTop      = 20.;
     self.titleLable.deFrameLeft     = 10.;
     
@@ -92,7 +88,6 @@
     
     self.priceLabel.center          = self.titleLable.center;
     self.priceLabel.deFrameTop      = self.entityImage.deFrameBottom + 20.;
-//    self.priceLabel.deFrameLeft     = 10.;
 }
 
 @end

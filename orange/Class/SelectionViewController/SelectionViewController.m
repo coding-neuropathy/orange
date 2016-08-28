@@ -7,32 +7,31 @@
 //
 
 #import "SelectionViewController.h"
-//#import "HMSegmentedControl.h"
 #import "SelectionCell.h"
-//#import "EntitySingleListCell.h"
-//#import "CategoryViewController.h"
-//#import "SDWebImagePrefetcher.h"
 #import "GTScrollNavigationBar.h"
-//#import "SelectionCategoryView.h"
-//#import "IconInfoView.h"
 #import "EntityViewController.h"
-//@import CoreSpotlight;
+
+
+/**
+ *  3d-touch
+ */
+#import "EntityPreViewController.h"
+
+
 
 static NSString *CellIdentifier = @"SelectionCell";
 
 static int lastContentOffset;
 
-@interface SelectionViewController ()<SelectionCellDelegate>
+@interface SelectionViewController ()<SelectionCellDelegate, UIViewControllerPreviewingDelegate>
 // 商品数据源数组
-//@property(nonatomic, strong) NSMutableArray * dataArrayForEntity;
 @property (nonatomic, strong) GKSelectionEntity * entityList;
 
 @property(nonatomic, assign) NSInteger index;
 
 @property (nonatomic, strong) UILabel * SelectionCountLabel;
 @property (nonatomic, strong) UIView * SelectionCountLabelBgView;
-//@property (nonatomic, strong) IconInfoView * iconInfoView;
-//@property (nonatomic, strong) PopoverView * selection_pv;
+
 @property (nonatomic, assign) NSInteger cateId;
 
 
@@ -42,11 +41,17 @@ static int lastContentOffset;
 @property (nonatomic , assign)NSInteger updateNum;
 @property (nonatomic , strong)UIButton * closeBtn;
 
+
+@property(nonatomic, strong) id<ALBBItemService> itemService;
 //@property (nonatomic , assign)id<SelectionViewControllerDelegate>delegate;
 
 @end
 
 @implementation SelectionViewController
+{
+    tradeProcessSuccessCallback _tradeProcessSuccessCallback;
+    tradeProcessFailedCallback _tradeProcessFailedCallback;
+}
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,6 +79,8 @@ static int lastContentOffset;
         self.entityList = [[GKSelectionEntity alloc] init];
         [self.entityList addTheObserverWithObject:self];
         
+        self.itemService    = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
+        
     }
     return self;
 }
@@ -91,12 +98,8 @@ static int lastContentOffset;
     
     self.collectionView.alwaysBounceVertical = YES;
     
-//    self.navigationItem.titleView = self.iconInfoView;
-    
-//    [self.view addSubview:self.updateView];
-//    [self.updateView addSubview:self.updateLabel];
-//    [self.updateView addSubview:self.closeBtn];
-//    [self getUpdateNumber];
+    if (iOS9)
+        [self registerPreview];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -122,6 +125,7 @@ static int lastContentOffset;
 }
 
 
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.navigationController.navigationBar.hidden = NO;
@@ -129,6 +133,18 @@ static int lastContentOffset;
     [MobClick endLogPageView:@"SelectionView"];
 }
 
+
+/**
+ *  3D-Touch
+ */
+- (void)registerPreview{
+    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+        [self registerForPreviewingWithDelegate:self sourceView:self.collectionView];
+    }
+    else {
+        DDLogInfo(@"该设备不支持3D-Touch");
+    }
+}
 
 ////获取更新数
 //- (void)getUpdateNumber
@@ -288,29 +304,7 @@ static int lastContentOffset;
 
 
 
-#pragma mark - HMSegmentedControl
-//- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-//    NSUInteger index = segmentedControl.selectedSegmentIndex;
-//    self.index = index;
-//    [self.collectionView reloadData];
-//    switch (index) {
-//        case 0:
-//        {
-//
-//        }
-//            break;
-//        case 1:
-//        {
-//
-//        }
-//            break;
-//        default:
-//            break;
-//    }
-//}
-
-
--(void)save
+- (void)save
 {
     NSMutableArray *data = [NSMutableArray array];
     for (NSDictionary * dic in self.entityList.dataArray) {
@@ -414,6 +408,48 @@ static int lastContentOffset;
 - (void)TapEntityImage:(GKEntity *)entity
 {
     [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+}
+
+
+#pragma mark - <UIViewControllerPreviewingDelegate>
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    NSIndexPath * indexPath             = [self.collectionView indexPathForItemAtPoint:location];
+    SelectionCell * cell                = (SelectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    
+    EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.image.image];
+    vc.preferredContentSize = CGSizeMake(0., 0.);
+    previewingContext.sourceRect = cell.frame;
+            
+    vc.baichuanblock = ^(GKPurchase * purchase) {
+        NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
+        ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
+        taoKeParams.pid = kGK_TaobaoKe_PID;
+        [self.itemService showTaoKeItemDetailByItemId:self
+                                                   isNeedPush:YES
+                                            webViewUISettings:nil
+                                                       itemId:_itemId
+                                                     itemType:1
+                                                       params:nil
+                                                  taoKeParams:taoKeParams
+                                  tradeProcessSuccessCallback:_tradeProcessSuccessCallback
+                                   tradeProcessFailedCallback:_tradeProcessFailedCallback];
+    };
+            
+    [vc setBackblock:^(UIViewController * vc1) {
+        [self.navigationController pushViewController:vc1 animated:YES];
+    }];
+            
+    [MobClick event:@"3d-touch" attributes:@{
+                                            @"entity"  : cell.entity.title,
+                                            @"from"    : @"selection-page-recommend",
+                                    }];
+    return vc;
+}
+
+- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
 }
 
 @end

@@ -19,8 +19,13 @@
 
 #define kWidth (kScreenWidth - 20)
 @interface SelectionCell () <RTLabelDelegate>
-@property (nonatomic, strong) UIImageView *image;
+
 //@property (nonatomic, strong) UIImageView *tmp;
+
+
+@property (nonatomic, strong) GKNote *note;
+@property (nonatomic, strong) GKEntityCategory * category;
+@property (nonatomic, strong) NSDate * date;
 
 @property (nonatomic, strong) UILabel * contentLabel;
 @property (nonatomic, strong) UIButton * likeButton;

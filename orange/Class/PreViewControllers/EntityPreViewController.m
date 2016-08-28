@@ -83,16 +83,11 @@
 - (NSArray <id <UIPreviewActionItem>> *)previewActionItems
 {
     UIPreviewAction *action = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        if(!k_isLogin)
+        if (!k_isLogin)
         {
-//            LoginView * view = [[LoginView alloc]init];
-//            [view show];
-//            return;
-//            [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
-            
-//            }];
-//            return;
-            [[OpenCenter sharedOpenCenter] openAuthPage];
+            [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+                [self likeAction];
+            }];
         } else {
             [self likeAction];
         }

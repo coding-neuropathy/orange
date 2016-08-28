@@ -34,6 +34,9 @@
 #import "ShareView.h"
 #import "PNoteViewController.h"
 
+/**
+ *  3d-touch
+ */
 #import "EntityPreViewController.h"
 
 
@@ -98,9 +101,9 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 {
     if (self = [super init]) {
 //        self.itemType = OneSDKItemType_TAOBAO1;
-        self.flag = false;
-        self.image = [[UIImageView alloc] initWithFrame:CGRectZero];
-        self.itemService=[[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
+        self.flag           = false;
+        self.image          = [[UIImageView alloc] initWithFrame:CGRectZero];
+        self.itemService    = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
     }
     return self;
 }
@@ -367,8 +370,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
         DDLogInfo(@"该设备不支持3D-Touch");
     }
 }
-
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
