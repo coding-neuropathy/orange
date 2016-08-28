@@ -35,6 +35,7 @@
 #import "PNoteViewController.h"
 
 //#import <SloppySwiper/SloppySwiper.h>
+//#import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
 
 #import "EntityPreViewController.h"
 
