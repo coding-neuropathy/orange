@@ -11,6 +11,8 @@
 #import "EntitySKUView.h"
 #import "SKUToolbar.h"
 
+#import <WZLBadge/WZLBadgeImport.h>
+
 
 
 @interface EntitySKUController () <SKUToolbarDelegate, EntitySKUViewDelegate>
@@ -32,6 +34,7 @@ typedef NS_ENUM(NSInteger, SKUSectionType) {
 @property (strong, nonatomic) EntitySKUView     *entitySKUView;
 
 @property (strong, nonatomic) UIButton          *cartListBtn;
+@property (assign, nonatomic) NSInteger         cartVolume;
 
 @end
 
@@ -46,7 +49,8 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 {
     self = [super init];
     if (self) {
-        self.entity_hash = hash;
+        self.entity_hash                            = hash;
+        self.cartVolume                             = 0;
     }
     return self;
 }
@@ -55,9 +59,10 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 - (UIButton *)continueAddBtn
 {
     if (!_continueAddBtn) {
-        _continueAddBtn                         = [UIButton buttonWithType:UIButtonTypeCustom];
-        _continueAddBtn.titleLabel.font         = [UIFont fontWithName:@"PingFangSC-Semibold" size:16.];
-        _continueAddBtn.deFrameSize             = CGSizeMake(70., 22.);
+        _continueAddBtn                             = [UIButton buttonWithType:UIButtonTypeCustom];
+        _continueAddBtn.titleLabel.font             = [UIFont fontWithName:@"PingFangSC-Semibold" size:16.];
+        _continueAddBtn.deFrameSize                 = CGSizeMake(70., 22.);
+        
         [_continueAddBtn setTitle:NSLocalizedStringFromTable(@"continue-add", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_continueAddBtn setTitleColor:UIColorFromRGB(0x5976c1) forState:UIControlStateNormal];
         [_continueAddBtn addTarget:self action:@selector(continueAddBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -73,7 +78,6 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
         _backBtn.deFrameSize        = CGSizeMake(32., 44.);
         
         [_backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-        
         [_backBtn addTarget:self action:@selector(backBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backBtn;
@@ -82,7 +86,19 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 - (UIButton *)cartListBtn
 {
     if (!_cartListBtn) {
-        _cartListBtn            = [UIButton buttonWithType:UIButtonTypeCustom];
+        _cartListBtn                        = [UIButton buttonWithType:UIButtonTypeCustom];
+        _cartListBtn.backgroundColor        = [UIColor colorFromHexString:@"#f8f8f8"];
+        _cartListBtn.deFrameSize            = CGSizeMake(56., 56.);
+        _cartListBtn.layer.cornerRadius     = _cartListBtn.deFrameHeight / 2.;
+        _cartListBtn.layer.shadowOffset     = CGSizeMake(0., 2.);
+//        _cartListBtn.layer.shadowColor  = [UIColor colorWithWhite:0. alpha:0.18].CGColor;
+        _cartListBtn.layer.shadowOpacity    = 0.18;
+        
+        _cartListBtn.badgeCenterOffset      = CGPointMake(-8, 8);
+        _cartListBtn.badgeBgColor           = [UIColor colorFromHexString:@"#212121"];
+        
+        [_cartListBtn setImage:[UIImage imageNamed:@"bag"] forState:UIControlStateNormal];
+        [_cartListBtn addTarget:self action:@selector(cartListBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
     }
     return _cartListBtn;
@@ -124,11 +140,17 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     self.navigationItem.rightBarButtonItem      = [[UIBarButtonItem alloc] initWithCustomView:self.continueAddBtn];
     
     [self.view addSubview:self.entitySKUView];
-    
+
     /**
      *  config toolbar
      */
     [self configToolbar];
+    
+    /**
+     *  config cart list btn
+     */
+    [self configCart];
+    
     
     [API getEntitySKUWithHash:self.entity_hash Success:^(GKEntity *entity) {
         
@@ -182,11 +204,14 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)cartListBtnAction:(id)sender
+{
+    
+}
+
 - (void)backBtnAction:(id)sender
 {
     UIAlertController * actionSheetController = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"清空购物袋 ?", kLocalizedFile, nil) message:@"现在返回， 购物袋中的商品将被清空" preferredStyle:UIAlertControllerStyleAlert];
-    
-
     
     UIAlertAction * backAcion = [UIAlertAction actionWithTitle:@"仍然返回"
                                                     style:UIAlertActionStyleDestructive
@@ -217,6 +242,15 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 
 }
 
+- (void)configCart
+{
+
+    self.cartListBtn.deFrameLeft            = 16.;
+    self.cartListBtn.deFrameBottom          = self.view.deFrameHeight - kNavigationBarHeight - kStatusBarHeight - 12.;
+    
+    [self.view insertSubview:self.cartListBtn aboveSubview:self.toolbar];
+}
+
 #pragma mark - <EntitySKUViewDelegate>
 - (void)TapSKUTagWithSKU:(GKEntitySKU *)sku
 {
@@ -228,6 +262,10 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 {
     [API addEntitySKUToCartWithSKUId:sku.skuId Volume:1 Success:^(BOOL is_success) {
         
+        if (is_success) {
+            self.cartVolume += 1;
+            [_cartListBtn showBadgeWithStyle:WBadgeStyleNumber value:self.cartVolume animationType:WBadgeAnimTypeNone];
+        }
     } Failure:^(NSInteger stateCode, NSError *error) {
         DDLogError(@"error: %@", error.localizedDescription);
     }];

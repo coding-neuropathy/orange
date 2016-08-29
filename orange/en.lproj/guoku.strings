@@ -270,4 +270,5 @@
  */
 "scanner"                   = "Scanner";
 "continue-add"              = "Continue";
+"add-cart"                  = "ShoppingCart";
 
