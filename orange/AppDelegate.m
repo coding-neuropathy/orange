@@ -172,6 +172,10 @@ int ddLogLevel;
         application.applicationIconBadgeNumber = 0;
     }
     
+#if DEBUG
+    DDLogInfo(@"session %@", [Passport sharedInstance].session);
+#endif
+    
     return YES;
 }
 

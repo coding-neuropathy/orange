@@ -206,6 +206,38 @@
 //    }];
 }
 
+//决定是否允许导航响应，如果不允许就不会跳转到该链接的页面
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    
+    if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku://user/"]) {
+//        NSURL *url = navigationAction.request.URL;
+        
+        //        UIApplication *app = [UIApplication sharedApplication];
+//        if ([self.app canOpenURL:url]) {
+//            [self.app openURL:url];
+//        }
+        if (self.article.creator.authorized_author)
+            [[OpenCenter sharedOpenCenter] openAuthUser:self.article.creator];
+        else
+            [[OpenCenter sharedOpenCenter] openUser:self.article.creator];
+    }
+    
+     else if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
+        NSURL *url = navigationAction.request.URL;
+        
+        //        UIApplication *app = [UIApplication sharedApplication];
+        if ([self.app canOpenURL:url]) {
+            [self.app openURL:url];
+        }
+    }
+    
+    //this is a 'new window action' (aka target="_blank") > open this URL externally. If we´re doing nothing here, WKWebView will also just do nothing. Maybe this will change in a later stage of the iOS 8 Beta
+    else if (!navigationAction.targetFrame) {
+        [self.webView loadRequest:navigationAction.request];
+    }
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
 
 
 

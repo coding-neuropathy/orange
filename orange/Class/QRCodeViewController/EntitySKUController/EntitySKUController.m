@@ -7,6 +7,7 @@
 //
 
 #import "EntitySKUController.h"
+#import "CartController.h"
 
 #import "EntitySKUView.h"
 #import "SKUToolbar.h"
@@ -206,7 +207,9 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 
 - (void)cartListBtnAction:(id)sender
 {
+    CartController * cartController = [[CartController alloc] init];
     
+    [self.navigationController pushViewController:cartController animated:YES];
 }
 
 - (void)backBtnAction:(id)sender
@@ -260,14 +263,17 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 
 - (void)TapAddCartWithSKU:(GKEntitySKU *)sku
 {
+    [SVProgressHUD showInfoWithStatus:@"add-to-cart"];
     [API addEntitySKUToCartWithSKUId:sku.skuId Volume:1 Success:^(BOOL is_success) {
         
         if (is_success) {
             self.cartVolume += 1;
             [_cartListBtn showBadgeWithStyle:WBadgeStyleNumber value:self.cartVolume animationType:WBadgeAnimTypeNone];
+            [SVProgressHUD showSuccessWithStatus:@"success"];
         }
     } Failure:^(NSInteger stateCode, NSError *error) {
         DDLogError(@"error: %@", error.localizedDescription);
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
 }
 

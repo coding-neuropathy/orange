@@ -383,7 +383,7 @@
     [paraDict setValue:@(sku_id) forKey:@"sid"];
     volume == 0 ? [paraDict setValue:@(1) forKey:@"volume"] : [paraDict setValue:@(volume) forKey:@"volume"];
     
-    NSString * path                 = @"entity/cart/";
+    NSString * path                 = @"cart/add/";
     
     
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {

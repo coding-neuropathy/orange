@@ -227,6 +227,10 @@
 		8AEDCBBC1D62C5230010FDB4 /* YWFeedbackFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA81D62C5230010FDB4 /* YWFeedbackFMWK.framework */; };
 		8AEDCBBD1D62C5230010FDB4 /* YWHybridWebViewFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA91D62C5230010FDB4 /* YWHybridWebViewFMWK.framework */; };
 		8AEDCBBE1D62C5230010FDB4 /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBAA1D62C5230010FDB4 /* ZipArchive.framework */; };
+		8AF7C7571D73EE0600C71499 /* CartController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7C7561D73EE0600C71499 /* CartController.m */; };
+		8AF7C75A1D74025400C71499 /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7C7591D74025400C71499 /* CartCell.m */; };
+		8AF7C75E1D7409D500C71499 /* ShoppingCart.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AF7C75C1D7409D500C71499 /* ShoppingCart.h */; };
+		8AF7C75F1D7409D500C71499 /* ShoppingCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7C75D1D7409D500C71499 /* ShoppingCart.m */; };
 		8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */; };
 		8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */; };
 		B706868D1CF41E7D00C40825 /* TabBarViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = B706868C1CF41E7D00C40825 /* TabBarViewcontroller.m */; };
@@ -744,6 +748,12 @@
 		8AEDCBA81D62C5230010FDB4 /* YWFeedbackFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YWFeedbackFMWK.framework; sourceTree = "<group>"; };
 		8AEDCBA91D62C5230010FDB4 /* YWHybridWebViewFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YWHybridWebViewFMWK.framework; sourceTree = "<group>"; };
 		8AEDCBAA1D62C5230010FDB4 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZipArchive.framework; sourceTree = "<group>"; };
+		8AF7C7551D73EE0600C71499 /* CartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CartController.h; path = QRCodeViewController/CartController/CartController.h; sourceTree = "<group>"; };
+		8AF7C7561D73EE0600C71499 /* CartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CartController.m; path = QRCodeViewController/CartController/CartController.m; sourceTree = "<group>"; };
+		8AF7C7581D74025400C71499 /* CartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CartCell.h; path = QRCodeViewController/CartController/CartCell.h; sourceTree = "<group>"; };
+		8AF7C7591D74025400C71499 /* CartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CartCell.m; path = QRCodeViewController/CartController/CartCell.m; sourceTree = "<group>"; };
+		8AF7C75C1D7409D500C71499 /* ShoppingCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoppingCart.h; path = ShoppingCart/ShoppingCart.h; sourceTree = "<group>"; };
+		8AF7C75D1D7409D500C71499 /* ShoppingCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoppingCart.m; path = ShoppingCart/ShoppingCart.m; sourceTree = "<group>"; };
 		8AFF0CA81BA9C980005FD5CB /* SubCategoryEntityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategoryEntityController.h; sourceTree = "<group>"; };
 		8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCategoryEntityController.m; sourceTree = "<group>"; };
 		8AFF0CAB1BAA6C25005FD5CB /* EntityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityListCell.h; sourceTree = "<group>"; };
@@ -1144,6 +1154,7 @@
 		39B720021B1F4C16008519E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8AF7C75B1D7409A500C71499 /* ShoppingCart */,
 				B7B6AD491D52F20500C9B8E0 /* Discover */,
 				8A9255F81D50A01D00E6481F /* SearchResults */,
 				8A9255EE1D508B3300E6481F /* Base */,
@@ -1770,6 +1781,7 @@
 		8A5045391D58713E00D66F8A /* QRCodeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8AF7C7541D73EDE000C71499 /* CartController */,
 				8ACB9E451D61AA8000C81500 /* EntitySKUController */,
 				8A50453A1D58717B00D66F8A /* EmbedReaderViewController.h */,
 				8A50453B1D58717B00D66F8A /* EmbedReaderViewController.m */,
@@ -1938,6 +1950,26 @@
 				8AD5D2141D6D72AC000927C7 /* BannerCarousel.m */,
 			);
 			name = BannerCarousel;
+			sourceTree = "<group>";
+		};
+		8AF7C7541D73EDE000C71499 /* CartController */ = {
+			isa = PBXGroup;
+			children = (
+				8AF7C7551D73EE0600C71499 /* CartController.h */,
+				8AF7C7561D73EE0600C71499 /* CartController.m */,
+				8AF7C7581D74025400C71499 /* CartCell.h */,
+				8AF7C7591D74025400C71499 /* CartCell.m */,
+			);
+			name = CartController;
+			sourceTree = "<group>";
+		};
+		8AF7C75B1D7409A500C71499 /* ShoppingCart */ = {
+			isa = PBXGroup;
+			children = (
+				8AF7C75C1D7409D500C71499 /* ShoppingCart.h */,
+				8AF7C75D1D7409D500C71499 /* ShoppingCart.m */,
+			);
+			name = ShoppingCart;
 			sourceTree = "<group>";
 		};
 		A72E4FB92C91BB3F9193D99C /* Pods */ = {
@@ -2333,6 +2365,7 @@
 				39B720351B1F4C16008519E3 /* HttpClient.h in Headers */,
 				39B720411B1F4C16008519E3 /* config.pch in Headers */,
 				39B7207A1B1F50E0008519E3 /* Passport.h in Headers */,
+				8AF7C75E1D7409D500C71499 /* ShoppingCart.h in Headers */,
 				39B720791B1F50E0008519E3 /* KeyAndTag.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2657,6 +2690,7 @@
 				B776A0AA1CA65FA40021FFAB /* GKBaseData.m in Sources */,
 				B76818C91D34D05B009870C2 /* GKArticleComment.m in Sources */,
 				39B720741B1F4E78008519E3 /* GKNote+ImageURLFixes.m in Sources */,
+				8AF7C75F1D7409D500C71499 /* ShoppingCart.m in Sources */,
 				8A9255FC1D50A0A800E6481F /* GKSearchData.m in Sources */,
 				39B720341B1F4C16008519E3 /* BaseHttpClient.m in Sources */,
 				B796C0891BC17D8E006F4DE1 /* ImageCache.m in Sources */,
@@ -2685,6 +2719,7 @@
 				B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */,
 				B706868D1CF41E7D00C40825 /* TabBarViewcontroller.m in Sources */,
 				B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */,
+				8AF7C7571D73EE0600C71499 /* CartController.m in Sources */,
 				B7BE3E301BA9B98C004AD422 /* SubCategoryGroupController.m in Sources */,
 				399916CE1B11A9DB006826FD /* UIDevice-Hardware.m in Sources */,
 				B7E668721B779DE900E177E5 /* EntityHeaderActionView.m in Sources */,
@@ -2775,6 +2810,7 @@
 				B76676411AB81758002F294C /* NoDataView.m in Sources */,
 				B72ACCC81B666B8C0020E841 /* DiscoverBannerView.m in Sources */,
 				4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */,
+				8AF7C75A1D74025400C71499 /* CartCell.m in Sources */,
 				8A9256011D50D1A500E6481F /* NoResultView.m in Sources */,
 				4E56DF1E19D552C000263B17 /* AppDelegate.m in Sources */,
 				23E64DAF1D2E381C00A4402C /* SearchController.m in Sources */,

@@ -10,6 +10,7 @@
 #import "GKEntitySKU.h"
 #import "GKEntityCategory.h"
 #import "GKPurchase.h"
+
 #import "GKNote.h"
 #import "GKComment.h"
 
@@ -25,3 +26,6 @@
 #import "GKSelectionArticle.h"
 #import "GKDiscover.h"
 #import "GKSearchData.h"
+
+
+#import "ShoppingCart.h"

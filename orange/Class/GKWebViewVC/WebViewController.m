@@ -234,14 +234,8 @@
     
 
     [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
-//        self.title = result;
-//        if (result) {
+
         self.shareTitle = [result length] > 0 ? result : @"果库 - 精英消费指南";
-//        }
-//        else
-//        {
-//            self.shareTitle = @"果库 - 精英消费指南";
-//        }
         
         self.title = self.shareTitle;
 //        NSLog(@"%@",self.shareTitle);
@@ -284,38 +278,7 @@
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     };
     [view show];
-    /*
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        NSLog(@"The \"Okay/Cancel\" alert action sheet's cancel action occured.");
-    }];
-    
-    UIAlertAction * shareWeiboAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"share to weibo", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self weiboShare];
-    }];
-    
-    UIAlertAction * shareWechatAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"share to wechat", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self wxShare:0];
-    }];
-    
-    UIAlertAction * shareMomentAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"share to moment", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self wxShare:1];
-    }];
-    
-    UIAlertAction * openInSafariAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"open in safari", kLocalizedFile, nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [[UIApplication sharedApplication]openURL:self.webView.URL];
-    }];
-    
-    [alertController addAction:cancelAction];
-    
-    [alertController addAction:shareWeiboAction];
-    [alertController addAction:shareWechatAction];
-    [alertController addAction:shareMomentAction];
-    [alertController addAction:openInSafariAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
-     */
+
 }
 
 
