@@ -18,5 +18,4 @@ end
 target 'core' do
     pod 'AFNetworking'
     pod 'SAMKeychain', :git => 'https://github.com/soffes/SAMKeychain.git'
-#    pod 'PINCache'
 end

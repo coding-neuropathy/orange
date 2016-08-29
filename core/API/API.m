@@ -744,7 +744,7 @@
     [paraDict setObject:@(size) forKey:@"size"];
 //    [paraDict setObject:@(cateId) forKey:@"rcat"];
     [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionaryWithDictionary:paraDict] success:^(NSURLSessionDataTask *operation, id responseObject) {
-        
+//        NSLog(@"log %@", responseObject);
         NSMutableArray * articleList = [NSMutableArray arrayWithCapacity:0];
         for (NSDictionary *dict in responseObject)
         {

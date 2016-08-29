@@ -7,6 +7,7 @@
 //
 
 #import "GKBaseModel.h"
+#import "GKUser.h"
 
 @interface GKArticle : GKBaseModel
 
@@ -24,6 +25,12 @@
  *  文章内容
  */
 @property (strong, nonatomic) NSString * content;
+
+/**
+ *  作者
+ *
+ */
+@property (strong, nonatomic) GKUser * creator;
 
 /**
  *  文章标签

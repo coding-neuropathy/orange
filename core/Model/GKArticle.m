@@ -47,6 +47,15 @@
     return @[@"articleId"];
 }
 
+- (void)setCreator:(id)creator
+{
+    if ([creator isKindOfClass:[GKUser class]]) {
+        _creator    = creator;
+    } else {
+        _creator = [GKUser modelFromDictionary:creator];
+    }
+}
+
 - (NSURL *)coverURL
 {
     NSString * url_stirng = [NSString stringWithFormat:@"%@%@", KImageHost, self.cover];
