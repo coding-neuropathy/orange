@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, SKUSectionType) {
 @property (strong, nonatomic) UIButton          *orderBtn;
 @property (strong, nonatomic) EntitySKUView     *entitySKUView;
 
-
+@property (strong, nonatomic) UIButton          *cartListBtn;
 
 @end
 
@@ -77,6 +77,15 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
         [_backBtn addTarget:self action:@selector(backBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backBtn;
+}
+
+- (UIButton *)cartListBtn
+{
+    if (!_cartListBtn) {
+        _cartListBtn            = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    }
+    return _cartListBtn;
 }
 
 - (EntitySKUView *)entitySKUView
@@ -220,7 +229,7 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     [API addEntitySKUToCartWithSKUId:sku.skuId Volume:1 Success:^(BOOL is_success) {
         
     } Failure:^(NSInteger stateCode, NSError *error) {
-        
+        DDLogError(@"error: %@", error.localizedDescription);
     }];
 }
 
