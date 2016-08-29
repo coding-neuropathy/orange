@@ -190,9 +190,10 @@
     
     if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
         NSURL *url = navigationAction.request.URL;
-        UIApplication *app = [UIApplication sharedApplication];
-        if ([app canOpenURL:url]) {
-            [app openURL:url];
+        
+//        UIApplication *app = [UIApplication sharedApplication];
+        if ([self.app canOpenURL:url]) {
+            [self.app openURL:url];
         }
     }
     //this is a 'new window action' (aka target="_blank") > open this URL externally. If we´re doing nothing here, WKWebView will also just do nothing. Maybe this will change in a later stage of the iOS 8 Beta

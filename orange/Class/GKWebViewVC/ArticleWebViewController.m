@@ -51,6 +51,8 @@
     if (self) {
         self.article = article;
         self.url = self.article.articleURL;
+        
+        DDLogInfo(@"creator %@", self.article.creator);
     }
     return self;
 }

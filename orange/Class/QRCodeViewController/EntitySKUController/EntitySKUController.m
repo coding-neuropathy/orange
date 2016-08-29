@@ -217,7 +217,11 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 
 - (void)TapAddCartWithSKU:(GKEntitySKU *)sku
 {
-    
+    [API addEntitySKUToCartWithSKUId:sku.skuId Volume:1 Success:^(BOOL is_success) {
+        
+    } Failure:^(NSInteger stateCode, NSError *error) {
+        
+    }];
 }
 
 #pragma mark - <SKUToolbarDelegate>

@@ -25,7 +25,7 @@
     if (self)
     {
         
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         
     }
     return self;
@@ -34,7 +34,9 @@
 - (UIImageView *)coverImageView
 {
     if (!_coverImageView){
-        _coverImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _coverImageView                     = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _coverImageView.contentMode         = UIViewContentModeScaleAspectFill;
+        _coverImageView.layer.masksToBounds = YES;
         
         [self.contentView addSubview:_coverImageView];
     }
@@ -44,11 +46,12 @@
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:17.];
-        _titleLabel.textColor = UIColorFromRGB(0x414243);
-        _titleLabel.textAlignment = NSTextAlignmentLeft;
-        _titleLabel.numberOfLines = 2;
+        _titleLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
+        _titleLabel.font            = [UIFont boldSystemFontOfSize:17.];
+        _titleLabel.textColor       = UIColorFromRGB(0x414243);
+        _titleLabel.textAlignment   = NSTextAlignmentLeft;
+        _titleLabel.numberOfLines   = 2;
+        
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;
@@ -57,13 +60,13 @@
 - (UILabel *)detailLabel
 {
     if (!_detailLabel) {
-        _detailLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _detailLabel                    = [[UILabel alloc] initWithFrame:CGRectZero];
         //        _detailLabel.paragraphReplacement = @"";
         //        _detailLabel.lineSpacing = 7.0;
         //        _detailLabel.delegate = self;
-        _detailLabel.font = [UIFont systemFontOfSize:14.];
-        _detailLabel.numberOfLines = 2;
-        _detailLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _detailLabel.font               = [UIFont systemFontOfSize:14.];
+        _detailLabel.numberOfLines      = 2;
+        _detailLabel.textColor          = [UIColor colorFromHexString:@"#9d9e9f"];
         [self.contentView addSubview:_detailLabel];
     }
     return _detailLabel;
@@ -100,7 +103,7 @@
     /**
      *  设置图片
      */
-    [self.coverImageView sd_setImageWithURL:_article.coverURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xebebeb) andSize:CGSizeMake(kScreenWidth -32, (kScreenWidth - 32) / 1.8)]];
+    [self.coverImageView sd_setImageWithURL:_article.coverURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.coverImageView.deFrameSize]];
     
     
     [self setNeedsLayout];
@@ -140,10 +143,7 @@
         self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth - 48 - 112*kScreenWidth/375, 50);
         self.detailLabel.deFrameLeft = self.titleLabel.deFrameLeft;
         self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom - 19.;
-        
-        
     }
-    
 }
 
 #pragma mark - <RTLabelDelegate>
