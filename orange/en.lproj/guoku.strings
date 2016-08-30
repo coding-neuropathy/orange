@@ -271,4 +271,5 @@
 "scanner"                   = "Scanner";
 "continue-add"              = "Continue";
 "add-cart"                  = "ShoppingCart";
+"submit-order"              = "Submit";
 

@@ -7,7 +7,15 @@
 //
 
 #import "GKBaseModel.h"
+#import "GKEntitySKU.h"
+#import "GkEntity.h"
 
 @interface ShoppingCart : GKBaseModel
+
+
+@property (assign, nonatomic) NSInteger     cartId;
+@property (assign, nonatomic) NSInteger     volume;
+@property (strong, nonatomic) GKEntity      *entity;
+@property (strong, nonatomic) GKEntitySKU   *sku;
 
 @end

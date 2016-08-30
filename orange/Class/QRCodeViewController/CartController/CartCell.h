@@ -10,4 +10,6 @@
 
 @interface CartCell : UITableViewCell
 
+@property (strong, nonatomic) ShoppingCart *cartItem;
+
 @end

@@ -397,7 +397,35 @@
             failure(stateCode, error);
         }
     }];
+}
+
+/**
+ *  获取购物车内商品列表
+ *
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getCartItemListWithSuccess:(void (^)(NSArray * shoppingCartArray))success
+                                            Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString *path                  = @"cart/";
     
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        NSMutableArray * cartItems  = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject) {
+            ShoppingCart * cartItem = [ShoppingCart modelFromDictionary:row];
+            [cartItems addObject:cartItem];
+        }
+        if (success) {
+            success([NSArray arrayWithArray:cartItems]);
+        }
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
 }
 
 /**

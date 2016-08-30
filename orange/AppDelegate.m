@@ -173,7 +173,7 @@ int ddLogLevel;
     }
     
 #if DEBUG
-    DDLogInfo(@"session %@", [Passport sharedInstance].session);
+//    DDLogInfo(@"session %@", [Passport sharedInstance].session);
 #endif
     
     return YES;

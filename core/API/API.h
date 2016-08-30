@@ -133,6 +133,15 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                             Success:(void (^)(BOOL is_success))success
                             Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
+
+/**
+ *  获取购物车内商品列表
+ *
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getCartItemListWithSuccess:(void (^)(NSArray * shoppingCartArray))success
+                           Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 /**
  *  获取随机商品
  *

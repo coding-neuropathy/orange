@@ -13,7 +13,7 @@
 @interface CartController ()
 
 @property (strong, nonatomic) UITableView       *tableView;
-@property (strong, nonatomic) NSMutableArray    *entityArray;
+@property (strong, nonatomic) NSMutableArray    *cartItemArray;
 
 @end
 
@@ -42,6 +42,15 @@ static NSString * CellIndetifier = @"CartCell";
     
     [self.tableView registerClass:[CartCell class] forCellReuseIdentifier:CellIndetifier];
     [self.view addSubview:self.tableView];
+    
+    
+    [API getCartItemListWithSuccess:^(NSArray *shoppingCartArray) {
+        DDLogInfo(@"%@", shoppingCartArray);
+        self.cartItemArray = [NSMutableArray arrayWithArray:shoppingCartArray];
+        [self.tableView reloadData];
+    } Failure:^(NSInteger stateCode, NSError *error) {
+        
+    }];
 
     [super viewDidLoad];
 }
@@ -54,7 +63,7 @@ static NSString * CellIndetifier = @"CartCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return self.cartItemArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,7 +72,11 @@ static NSString * CellIndetifier = @"CartCell";
     
 
     return cell;
+}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 101.;
 }
 
 @end
