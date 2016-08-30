@@ -46,5 +46,11 @@
 }
 
 
+- (float)price
+{
+    return self.sku.promoPrice * self.volume;
+}
+
+
 
 @end

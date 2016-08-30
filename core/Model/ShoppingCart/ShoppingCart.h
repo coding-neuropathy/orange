@@ -18,4 +18,6 @@
 @property (strong, nonatomic) GKEntity      *entity;
 @property (strong, nonatomic) GKEntitySKU   *sku;
 
+@property (assign, nonatomic) float         price;
+
 @end

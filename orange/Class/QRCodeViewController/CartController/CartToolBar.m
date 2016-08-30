@@ -25,7 +25,7 @@
         _orderBtn.deFrameSize                   = CGSizeMake(128., self.deFrameHeight);
         _orderBtn.titleLabel.font               = [UIFont fontWithName:@"PingFangSC-Medium" size:16.];
         _orderBtn.titleLabel.textAlignment      = NSTextAlignmentCenter;
-        _orderBtn.enabled                       = NO;
+//        _orderBtn.enabled                       = NO;
         
         [_orderBtn setTitle:NSLocalizedStringFromTable(@"submit-order", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_orderBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
@@ -62,6 +62,11 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    self.orderBtn.deFrameRight                  = self.deFrameRight;
+    
+    self.priceLabel.deFrameTop                  = 16.;
+    self.priceLabel.deFrameLeft                 = 16.;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -93,7 +98,7 @@
 - (void)updatePriceWithprice:(float)price
 {
     self.priceLabel.text    = [NSString stringWithFormat:@"¥ %.2f", price];
-    self.orderBtn.enabled   = YES;
+//    self.orderBtn.enabled   = YES;
 }
 
 @end

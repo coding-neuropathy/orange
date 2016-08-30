@@ -56,6 +56,14 @@ static NSString * CellIndetifier = @"CartCell";
         self.cartItemArray = [NSMutableArray arrayWithArray:shoppingCartArray];
         [self.tableView reloadData];
         
+        CGFloat price = 0.;
+        for (ShoppingCart *cart in self.cartItemArray) {
+            price += cart.price;
+        }
+//        self.toolbar.price = price;
+        
+        [self.toolbar updatePriceWithprice:price];
+        
         [self.tableView.pullToRefreshView stopAnimating];
     } Failure:^(NSInteger stateCode, NSError *error) {
         DDLogError(@"error %@", error.localizedDescription);
@@ -88,7 +96,6 @@ static NSString * CellIndetifier = @"CartCell";
         [weakSelf refresh];
         
     }];
-    
     
     if (self.cartItemArray.count == 0)
     {
@@ -125,10 +132,21 @@ static NSString * CellIndetifier = @"CartCell";
 #pragma mark - config toolbar
 - (void)configToolbar
 {
-    DDLogInfo(@"height %f", self.view.deFrameHeight);
+//    DDLogInfo(@"height %f", self.view.deFrameHeight);
     self.toolbar.deFrameBottom              = self.view.deFrameHeight - kNavigationBarHeight - kStatusBarHeight;
 //    self.toolbar.price                      = self.ca.lowestPrice;
+    CGFloat price = 0.;
+    for (ShoppingCart *cart in self.cartItemArray) {
+        price += cart.price;
+    }
+    self.toolbar.price = price;
     [self.view insertSubview:self.toolbar aboveSubview:self.tableView];
+    
+}
+
+#pragma mark - <CartToolbarDelegate>
+- (void)tapOrderBtn:(id)sender
+{
     
 }
 
