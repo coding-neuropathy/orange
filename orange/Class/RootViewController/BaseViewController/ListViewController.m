@@ -103,6 +103,7 @@ static NSString * CellIdentifer = @"Cell";
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
          [self.collectionView performBatchUpdates:nil completion:nil];
+//         [self.collectionView.collectionViewLayout invalidateLayout];
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
          [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];

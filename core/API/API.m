@@ -429,6 +429,27 @@
 }
 
 /**
+ *  clear Shopping Cart
+ *
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)clearCartWithSuccess:(void (^)(BOOL isClear))success
+                     Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString * path     = @"cart/delete/";
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+
+
+/**
  *  获取随机商品
  *
  *  @param categoryId 分类ID

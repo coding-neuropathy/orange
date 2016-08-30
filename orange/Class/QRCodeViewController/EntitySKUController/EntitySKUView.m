@@ -163,17 +163,6 @@
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
-    
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    
-//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-//    CGContextSetLineWidth(context, kSeparateLineWidth);
-//    
-//    
-//    CGContextMoveToPoint(context, 24., self.priceLabel.deFrameBottom + 20.);
-//    CGContextAddLineToPoint(context, self.deFrameWidth - 24., self.priceLabel.deFrameBottom + 20.);
-//    
-//    CGContextStrokePath(context);
 }
 
 #pragma mark - setup entity sku
@@ -275,7 +264,7 @@
     self.cartBtn.enabled        = YES;
     self.selectedSKU            = [self.entity.skuArray objectAtIndex:btn.tag];
     
-    self.priceLabel.text        = [NSString stringWithFormat:@"￥ %.2f", self.selectedSKU.discount];
+    self.priceLabel.text        = [NSString stringWithFormat:@"￥ %.2f", self.selectedSKU.promoPrice];
 
     if (_SKUDelegate && [_SKUDelegate respondsToSelector:@selector(TapSKUTagWithSKU:)]) {
         [_SKUDelegate TapSKUTagWithSKU:self.selectedSKU];

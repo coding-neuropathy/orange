@@ -85,7 +85,7 @@
 {
     if (!_image) {
         _image                          = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _image.deFrameSize              = CGSizeMake(self.contentView.deFrameWidth - 32., self.contentView.deFrameWidth -32.);
+        _image.deFrameSize              = CGSizeMake(self.contentView.deFrameWidth - 32., self.contentView.deFrameWidth - 32.);
         _image.contentMode              = UIViewContentModeScaleAspectFit;
         _image.backgroundColor          = [UIColor clearColor];
         _image.userInteractionEnabled   = YES;
@@ -401,8 +401,6 @@
     } else {
         [self likeAction];
     }
-    
-    
 }
 
 #pragma mark - button action

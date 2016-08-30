@@ -788,11 +788,11 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     switch (indexPath.section) {
         case 2:
         {
-                ArticlePreViewController * vc = [[ArticlePreViewController alloc]
+            ArticlePreViewController * vc = [[ArticlePreViewController alloc]
                                                  initWithArticle:[self.discoverData.articles objectAtIndex:indexPath.row]];
-                vc.preferredContentSize = CGSizeMake(0, 0);
-                previewingContext.sourceRect = cell.frame;
-                return vc;
+            vc.preferredContentSize = CGSizeMake(0, 0);
+            previewingContext.sourceRect = cell.frame;
+            return vc;
         }
             break;
         case 4:

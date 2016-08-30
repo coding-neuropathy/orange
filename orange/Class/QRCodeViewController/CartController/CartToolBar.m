@@ -1,21 +1,21 @@
 //
-//  SKUToolbar.m
+//  CartToolBar.m
 //  orange
 //
-//  Created by 谢家欣 on 16/8/24.
+//  Created by 谢家欣 on 16/8/30.
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import "SKUToolbar.h"
+#import "CartToolBar.h"
 
-@interface SKUToolbar ()
+@interface CartToolBar ()
 
 @property (strong, nonatomic) UIButton  *orderBtn;
 @property (strong, nonatomic) UILabel   *priceLabel;
 
 @end
 
-@implementation SKUToolbar
+@implementation CartToolBar
 
 - (UIButton *)orderBtn
 {
@@ -51,26 +51,18 @@
     return _priceLabel;
 }
 
-- (void)setPrice:(float)price
+
+- (void)setPrice:(CGFloat)price
 {
-    _price = price;
-    
-//    self.priceLabel.text        =
-//    [self updatePriceWithprice:_price];
-    
-    [self setNeedsLayout];
+    _price      = price;
+
+    [super setNeedsLayout];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    self.orderBtn.deFrameRight                  = self.deFrameRight;
-    
-    self.priceLabel.deFrameTop                  = 16.;
-    self.priceLabel.deFrameLeft                 = 88.;
 }
-
 
 - (void)drawRect:(CGRect)rect
 {
@@ -82,8 +74,6 @@
     CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
     
-    //    CGContextMoveToPoint(context, self.contentView.deFrameWidth, 0.);
-    //    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
     
     CGContextMoveToPoint(context, 0., 0.);
     CGContextAddLineToPoint(context, self.deFrameWidth, 0.);
@@ -105,7 +95,5 @@
     self.priceLabel.text    = [NSString stringWithFormat:@"¥ %.2f", price];
     self.orderBtn.enabled   = YES;
 }
-
-
 
 @end

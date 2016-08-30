@@ -8,12 +8,15 @@
 
 #import "CartController.h"
 #import "CartCell.h"
+#import "CartToolBar.h"
 
 
-@interface CartController ()
+@interface CartController () <CartToolbarDelegate>
 
+@property (strong, nonatomic) CartToolBar       *toolbar;
 @property (strong, nonatomic) UITableView       *tableView;
 @property (strong, nonatomic) NSMutableArray    *cartItemArray;
+
 
 @end
 
@@ -21,6 +24,18 @@
 
 static NSString * CellIndetifier = @"CartCell";
 
+
+- (UIView *)toolbar
+{
+    if (!_toolbar) {
+        _toolbar                                = [[CartToolBar alloc] initWithFrame:CGRectZero];
+        _toolbar.deFrameSize                    = CGSizeMake(kScreenWidth, 49.);
+        _toolbar.backgroundColor                = UIColorFromRGB(0xffffff);
+        _toolbar.delegate                       = self;
+        
+    }
+    return _toolbar;
+}
 
 - (UITableView *)tableView
 {
@@ -34,6 +49,20 @@ static NSString * CellIndetifier = @"CartCell";
     return _tableView;
 }
 
+- (void)refresh
+{
+    [API getCartItemListWithSuccess:^(NSArray *shoppingCartArray) {
+        DDLogInfo(@"%@", shoppingCartArray);
+        self.cartItemArray = [NSMutableArray arrayWithArray:shoppingCartArray];
+        [self.tableView reloadData];
+        
+        [self.tableView.pullToRefreshView stopAnimating];
+    } Failure:^(NSInteger stateCode, NSError *error) {
+        DDLogError(@"error %@", error.localizedDescription);
+        
+        [self.tableView.pullToRefreshView stopAnimating];
+    }];
+}
 
 - (void)viewDidLoad
 {
@@ -43,16 +72,29 @@ static NSString * CellIndetifier = @"CartCell";
     [self.tableView registerClass:[CartCell class] forCellReuseIdentifier:CellIndetifier];
     [self.view addSubview:self.tableView];
     
-    
-    [API getCartItemListWithSuccess:^(NSArray *shoppingCartArray) {
-        DDLogInfo(@"%@", shoppingCartArray);
-        self.cartItemArray = [NSMutableArray arrayWithArray:shoppingCartArray];
-        [self.tableView reloadData];
-    } Failure:^(NSInteger stateCode, NSError *error) {
-        
-    }];
+    [self configToolbar];
 
     [super viewDidLoad];
+}
+
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    
+    
+    __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        
+        [weakSelf refresh];
+        
+    }];
+    
+    
+    if (self.cartItemArray.count == 0)
+    {
+        [self.tableView triggerPullToRefresh];
+    }
+    
 }
 
 #pragma mark - <UITableViewDataSource>
@@ -78,6 +120,16 @@ static NSString * CellIndetifier = @"CartCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 101.;
+}
+
+#pragma mark - config toolbar
+- (void)configToolbar
+{
+    DDLogInfo(@"height %f", self.view.deFrameHeight);
+    self.toolbar.deFrameBottom              = self.view.deFrameHeight - kNavigationBarHeight - kStatusBarHeight;
+//    self.toolbar.price                      = self.ca.lowestPrice;
+    [self.view insertSubview:self.toolbar aboveSubview:self.tableView];
+    
 }
 
 @end

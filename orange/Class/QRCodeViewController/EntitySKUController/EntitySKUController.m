@@ -13,6 +13,7 @@
 #import "SKUToolbar.h"
 
 #import <WZLBadge/WZLBadgeImport.h>
+#import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
 
 
 
@@ -153,6 +154,9 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     [self configCart];
     
     
+    self.navigationController.fd_fullscreenPopGestureRecognizer.enabled = NO;
+    
+    
     [API getEntitySKUWithHash:self.entity_hash Success:^(GKEntity *entity) {
         
         self.entity                 = entity;
@@ -167,18 +171,15 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:animated];
-
-//    [self.navigationController setToolbarHidden:NO animated:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
     
-
-//    [self.navigationController setToolbarHidden:YES animated:NO];
-
+//    self.navigationController.fd_fullscreenPopGestureRecognizer.enabled = YES;
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -219,7 +220,13 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
     UIAlertAction * backAcion = [UIAlertAction actionWithTitle:@"仍然返回"
                                                     style:UIAlertActionStyleDestructive
                                                        handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            [API clearCartWithSuccess:^(BOOL isClear) {
+                
+            } Failure:^(NSInteger stateCode, NSError *error) {
+                DDLogError(@"error; %@", error.localizedDescription);
+            }];
+        }];
     }];
     [actionSheetController addAction:backAcion];
     
@@ -258,7 +265,7 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 - (void)TapSKUTagWithSKU:(GKEntitySKU *)sku
 {
     DDLogInfo(@"sku_id %ld", sku.skuId);
-    [self.toolbar updatePriceWithprice:sku.discount];
+    [self.toolbar updatePriceWithprice:sku.promoPrice];
 }
 
 - (void)TapAddCartWithSKU:(GKEntitySKU *)sku

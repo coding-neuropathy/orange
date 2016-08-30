@@ -11,8 +11,6 @@
 
 #import "EntityStickyHeaderFlowLayout.h"
 #import "UserViewController.h"
-//#import "NotePostViewController.h"
-//#import "CategoryViewController.h"
 #import "SubCategoryEntityController.h"
 
 #import "EntityHeaderView.h"
@@ -1104,9 +1102,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 - (void)categoryButtonAction
 {
-//    CategoryViewController * VC = [[CategoryViewController alloc]init];
-//    VC.category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
-//    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId": @(self.entity.categoryId)}];
     SubCategoryEntityController * VC = [[SubCategoryEntityController alloc] initWithSubCategory:category];
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
