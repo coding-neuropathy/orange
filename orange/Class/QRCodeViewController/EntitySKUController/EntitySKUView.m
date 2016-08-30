@@ -191,27 +191,27 @@
 //    for (GKEntitySKU * sku in self.entity.skuArray)
     for (NSInteger i = 0; i < self.entity.skuArray.count; i++ ) {
         GKEntitySKU * sku = [self.entity.skuArray objectAtIndex:i];
-        DDLogInfo(@"sku sku %@", sku);
+//        DDLogInfo(@"sku sku %@", sku);
+//        
+//        NSMutableString * skuInfo   = [NSMutableString stringWithCapacity:0];
+//        
+//        for (NSString * key in sku.attrs) {
+//            [skuInfo appendString:[NSString stringWithFormat:@"%@ / %@; ", key, sku.attrs[key]]];
+//        }
         
-        NSMutableString * skuInfo   = [NSMutableString stringWithCapacity:0];
-        
-        for (NSString * key in sku.attrs) {
-            [skuInfo appendString:[NSString stringWithFormat:@"%@ / %@; ", key, sku.attrs[key]]];
-        }
-        
-        if ([skuInfo length] == 0) continue;
+        if ([sku.attr_string length] == 0) continue;
         
         UIButton * skuBtn           = [UIButton buttonWithType:UIButtonTypeCustom];
         skuBtn.backgroundColor      = UIColorFromRGB(0xf1f1f1);
         skuBtn.titleLabel.font      = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
         skuBtn.tag                  = i;
         
-        [skuBtn setTitle:skuInfo forState:UIControlStateNormal];
+        [skuBtn setTitle:sku.attr_string forState:UIControlStateNormal];
         [skuBtn setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
         [skuBtn setTitleColor:UIColorFromRGB(0x3f6ff0) forState:UIControlStateSelected];
         [skuBtn addTarget:self action:@selector(skuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        CGFloat btnWidth            = [skuInfo widthWithLineWidth:0. Font:skuBtn.titleLabel.font];
+        CGFloat btnWidth            = [sku.attr_string widthWithLineWidth:0. Font:skuBtn.titleLabel.font];
         skuBtn.deFrameSize          = CGSizeMake(btnWidth + 16., 24.);
         skuBtn.layer.masksToBounds  = YES;
         skuBtn.layer.cornerRadius   = skuBtn.deFrameHeight / 2.;

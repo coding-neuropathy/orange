@@ -33,7 +33,6 @@
 
 - (void)setAttrs:(id)attrs
 {
-//    NSLog(@"attrs %@", attrs.items());
     if ([attrs isKindOfClass:[NSDictionary class]]) {
         _attrs = attrs;
     } else {
@@ -42,6 +41,17 @@
         _attrs = json;
         
     }
+}
+
+- (NSString *)attr_string
+{
+    NSMutableString * skuInfo   = [NSMutableString stringWithCapacity:0];
+    
+    for (NSString * key in self.attrs) {
+        [skuInfo appendString:[NSString stringWithFormat:@"%@ / %@; ", key, self.attrs[key]]];
+    }
+    
+    return [NSString stringWithString:[skuInfo substringToIndex:[skuInfo length] - 2]];
 }
 
 @end

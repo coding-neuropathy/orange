@@ -19,5 +19,6 @@
 @property (assign, nonatomic) NSInteger     stock;
 @property (assign, nonatomic) BOOL          status;
 
+@property (strong, nonatomic, getter=attr_string) NSString      *attr_string;
 
 @end

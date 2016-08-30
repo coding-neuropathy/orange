@@ -70,7 +70,8 @@ static NSString * CellIndetifier = @"CartCell";
 {
     CartCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIndetifier forIndexPath:indexPath];
     
-
+    cell.cartItem   = [self.cartItemArray objectAtIndex:indexPath.row];
+    
     return cell;
 }
 
