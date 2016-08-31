@@ -13,6 +13,7 @@ target 'orange' do
     pod 'FDFullscreenPopGesture', '1.1'
     pod 'FontAwesome'
     pod 'GTScrollNavigationBar'
+    pod 'DZNEmptyDataSet'
     pod 'FLEX', '~> 2.0', :configurations => ['Debug'] #An in-app debugging and exploration tool for iOS
 end
 
