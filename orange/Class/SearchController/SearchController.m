@@ -7,7 +7,7 @@
 //
 
 #import "SearchController.h"
-
+#import "SearchTipsController.h"
 #import "NoResultView.h"
 
 #import "UserResultCell.h"
@@ -37,8 +37,6 @@
 
 @property (strong, nonatomic) UILabel * textLabel;
 @property (strong, nonatomic) UILabel * indicatorLabel;
-//@property (strong, nonatomic)UIButton * moreBtn;
-//@property (strong, nonatomic)UIView * separateView;
 @property (nonatomic, copy) void (^tapAllResultsBlock)();
 
 @end
@@ -51,10 +49,6 @@
 @property (strong, nonatomic) NoResultView * noResultView;
 
 @property (strong, nonatomic) NSMutableArray * categoryArray;
-//@property (nonatomic , strong)NSMutableArray * userArray;
-//@property (nonatomic , strong)NSMutableArray * entityArray;
-//@property (nonatomic , strong)NSMutableArray * articleArray;
-
 @property (strong, nonatomic) GKSearchData * searchData;
 
 @property (strong, nonatomic) NSString *keyword;
@@ -105,7 +99,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight)
+        _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight)
                                         : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight - kNavigationBarHeight);
         
         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight ||
@@ -114,7 +108,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _collectionView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
     }
     return _collectionView;
 }
@@ -133,7 +127,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     [super loadView];
     
-    self.view.backgroundColor = UIColorFromRGB(0xf8f8f8);
+    self.view.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
 }
 
 - (void)viewDidLoad {
@@ -531,11 +525,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     
     if (self.keyword.length == 0)
     {
-        [UIView animateWithDuration:0 animations:^{
-            
-            [self.discoverVC.searchVC.view viewWithTag:999].alpha = 1;
-            
-        }];
         return;
     }
     
@@ -543,15 +532,24 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         self.noResultView.hidden = YES;
     }
     
-    [UIView animateWithDuration:0.1 animations:^{
+//    SearchTipsController * tipsvc;
+//    [UIView animateWithDuration:0.1 animations:^{
+    
+//        [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
+
         
-        [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
-        
-    }completion:^(BOOL finished) {
+//    }completion:^(BOOL finished) {
+    
+        for (UIViewController * vc in self.discoverVC.searchVC.childViewControllers) {
+            if ([vc isKindOfClass:[SearchTipsController class]]) {
+                [vc.view removeFromSuperview];
+                [vc removeFromParentViewController];
+            }
+        }
         
         [self handleSearchText:self.keyword];
         
-    }];
+//    }];
 }
 
 #pragma mark - search log

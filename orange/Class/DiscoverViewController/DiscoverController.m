@@ -10,31 +10,29 @@
 #import "WebViewController.h"
 #import "UIScrollView+Slogan.h"
 
-#import "pinyin.h"
-#import "PinyinTools.h"
-
 #import "DiscoverBannerView.h"
 #import "DiscoverCategoryView.h"
 
 #import "DiscoverCategoryCell.h"
-//#import "EntityCell.h"
 #import "HomeArticleCell.h"
 #import "EntityDetailCell.h"
 
 #import "DiscoverUsersView.h"
 #import "RecUserController.h"
 
-#import "GTScrollNavigationBar.h"
+//#import "GTScrollNavigationBar.h"
 //#import "GroupViewController.h"
 #import "CategroyGroupController.h"
 #import "UserViewController.h"
-//#import "AuthUserViewController.h"
 #import "EntityPreViewController.h"
 #import "ArticlePreViewController.h"
 
-#import "SearchView.h"
+//#import "SearchView.h"
 #import "SearchController.h"
 #import "SubCategoryEntityController.h"
+#import "SearchTipsController.h"
+
+#import <GTScrollNavigationBar/GTScrollNavigationBar.h>
 
 
 @interface DiscoverHeaderSection : UICollectionReusableView
@@ -52,12 +50,12 @@
 
 //@property (strong, nonatomic) UITableView * searchLogTableView;
 
-
-
 @property (weak, nonatomic) id<ALBBItemService> itemService;
 
-@property (strong, nonatomic) SearchView * searchView;
+//@property (strong, nonatomic) SearchView * searchView;
+@property (strong, nonatomic) SearchTipsController *searchTipsVC;
 @property (strong, nonatomic) SearchController * searchResultsVC;
+
 
 @property (weak, nonatomic) UIApplication * app;
 //@property (nonatomic, strong) SearchController * newsearchResultsVC;
@@ -130,9 +128,34 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 
 - (void)clearSearchLogButtonAciton
 {
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"SearchLogs"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SearchLogs"];
+//    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"SearchLogs"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 //    [self.searchLogTableView reloadData];
+}
+
+- (SearchTipsController *)searchTipsVC
+{
+    if (!_searchTipsVC) {
+        _searchTipsVC           = [[SearchTipsController alloc] init];
+        __weak __typeof(&*self)weakSelf = self;
+        
+        [_searchTipsVC setTapRecordBtnBlock:^(NSString *keyword) {
+        
+            [weakSelf.searchVC.searchBar setText:keyword];
+        
+        }];
+
+    }
+    return _searchTipsVC;
+}
+
+- (SearchController *)searchResultsVC
+{
+    if (!_searchResultsVC) {
+        _searchResultsVC = [[SearchController alloc] init];
+    }
+    return _searchResultsVC;
 }
 
 #pragma mark - init
@@ -195,6 +218,8 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     return _collectionView;
 }
 
+
+
 - (UISearchController *)searchVC
 {
     if (!_searchVC) {
@@ -206,10 +231,10 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         if (IS_IPHONE)
             _searchVC.hidesBottomBarWhenPushed = YES;
         
-        _searchVC.searchBar.tintColor                       = UIColorFromRGB(0x666666);
+        _searchVC.searchBar.tintColor                       = [UIColor colorFromHexString:@"#666666"];
         _searchVC.searchBar.placeholder                     = NSLocalizedStringFromTable(@"search", kLocalizedFile, nil);
         [_searchVC.searchBar setBackgroundImage:[[UIImage imageWithColor:UIColorFromRGB(0xffffff) andSize:CGSizeMake(10, 48)] stretchableImageWithLeftCapWidth:5 topCapHeight:5] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
-        [_searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:UIColorFromRGB(0xf6f6f6) andSize:CGSizeMake(10, 28)]  forState:UIControlStateNormal];
+        [_searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f6f6f6"] andSize:CGSizeMake(10, 28)] forState:UIControlStateNormal];
 //
         _searchVC.searchBar.searchTextPositionAdjustment    = UIOffsetMake(6.f, 0.f);
         _searchVC.searchBar.autocorrectionType              = UITextAutocorrectionTypeNo;
@@ -223,17 +248,6 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     
     }
     return _searchVC;
-}
-
-
-
-
-- (SearchController *)searchResultsVC
-{
-    if (!_searchResultsVC) {
-        _searchResultsVC = [[SearchController alloc] init];
-    }
-    return _searchResultsVC;
 }
 
 /**
@@ -350,7 +364,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     
-    _searchView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
+//    _searchView.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
     
     [self.collectionView performBatchUpdates:nil completion:nil];
 }
@@ -708,34 +722,11 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 #pragma mark - <UISearchControllerDelegate>
 - (void)willPresentSearchController:(UISearchController *)searchController
 {
-    SearchView * searchView = [[SearchView alloc] initWithFrame:CGRectZero];
-    self.searchView = searchView;
-    searchView.frame = IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight)
-                                    : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight);
-    searchView.tag = 999;
-//    searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-    
-    __weak __typeof(&*self)weakSelf = self;
 
-    [searchView setTapRecordBtnBlock:^(NSString *keyword) {
-         
-        [weakSelf.searchVC.searchBar setText:keyword];
-
-    }];
+    [searchController.view addSubview:self.searchTipsVC.view];
     
-    [API getSearchKeywordsWithSuccess:^(NSArray *keywords) {
-        DDLogInfo(@"keywords %@", keywords);
-        [self.searchView setHotArray:keywords withRecentArray:nil];
-    } Failure:^(NSInteger stateCode, NSError *error) {
-        
-    }];
+    [searchController addChildViewController:self.searchTipsVC];
     
-//    self.searchView.recentArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-    
-    [self.searchVC.view addSubview:self.searchView];
-    
-//    self.tabBarController.tabBar.translucent = YES;
-    searchView.alpha = 1;
 }
 
 
@@ -751,19 +742,18 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 {
 //    searchController.searchBar.showsCancelButton = YES;
 }
+
 - (void)willDismissSearchController:(UISearchController *)searchController
 {
-    [[self.searchVC.view viewWithTag:999] removeFromSuperview];
-//    self.tabBarController.tabBar.hidden = NO;
-//    if (IS_IPHONE) {
-//        self.tabBarController.tabBar.hidden = NO;
-//        self.tabBarController.tabBar.alpha = 1;
-//    }
+//    [[self.searchVC.view viewWithTag:999] removeFromSuperview];
+//    [self.searchTipsVC.view removeFromSuperview];
+//    [self.searchTipsVC removeFromParentViewController];
 }
 
 - (void)didDismissSearchController:(UISearchController *)searchController
 {
-    
+    [self.searchTipsVC.view removeFromSuperview];
+    [self.searchTipsVC removeFromParentViewController];
 }
 
 - (void)cancelSearch:(UIView *)view

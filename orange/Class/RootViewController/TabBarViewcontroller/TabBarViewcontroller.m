@@ -19,6 +19,8 @@
 
 @interface TabBarViewcontroller ()<UITabBarControllerDelegate>
 
+@property (assign, nonatomic) BOOL newSelection;
+
 @end
 
 @implementation TabBarViewcontroller
@@ -43,7 +45,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBadge) name:@"ShowBadge" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSelectionBadge) name:@"ShowSelectedBadge" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSelectionBadge) name:@"ShowSelectedBadge" object:nil];
     
 //    self.tabBar.translucent = YES;
     self.delegate = self;
@@ -117,10 +119,12 @@
         [self removeBadge];
     }
     
-    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[SelectionController class]]) {
-        //        self.selectionController
-        [self cleanSelectionBadge];
-    }
+//    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[SelectionController class]]) {
+//        //        self.selectionController
+//        if (self.newSelection) {
+//            [self cleanSelectionBadge];
+//        }
+//    }
 }
 
 #pragma mark - notification
@@ -131,24 +135,29 @@
     [messageItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeBreathe];
 }
 
-- (void)showSelectionBadge
-{
-    UITabBarItem * selectionItem = [self.tabBar.items objectAtIndex:0];
-    selectionItem.badgeCenterOffset = CGPointMake(-30, 10);
-    [selectionItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeBreathe];
-}
-
-- (void)cleanSelectionBadge
-{
-    UITabBarItem * selectionItem = [self.tabBar.items objectAtIndex:0];
-    [selectionItem clearBadge];
-}
-
 - (void)removeBadge
 {
     UITabBarItem * messageItem = [self.tabBar.items objectAtIndex:2];
     [messageItem clearBadge];
 }
+
+//- (void)showSelectionBadge
+//{
+//    self.newSelection               = YES;
+//    UITabBarItem * selectionItem    = [self.tabBar.items objectAtIndex:0];
+//    selectionItem.badgeCenterOffset = CGPointMake(-30, 10);
+//    
+//    [selectionItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeBreathe];
+//}
+//
+//- (void)cleanSelectionBadge
+//{
+//    self.newSelection               = NO;
+//    UITabBarItem * selectionItem    = [self.tabBar.items objectAtIndex:0];
+//    
+//    [selectionItem clearBadge];
+//}
+
 
 /**
  *  account

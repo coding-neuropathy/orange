@@ -635,16 +635,13 @@ int ddLogLevel;
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBadge" object:nil userInfo:nil];
                 }
             }
-            NSInteger selection_count = [dictionary[@"unread_selection_count"] unsignedIntegerValue];
-            if (selection_count > 0) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowSelectedBadge" object:nil userInfo:nil];
-            }
-//            if (dictionary[@"unread_selection_count"]) {
-//            
+//            NSInteger selection_count = [dictionary[@"unread_selection_count"] unsignedIntegerValue];
+//            if (selection_count > 0) {
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowSelectedBadge" object:nil userInfo:nil];
 //            }
             
         } failure:^(NSInteger stateCode) {
-        
+            DDLogError(@"error");
         }];
     }
 }

@@ -9,14 +9,8 @@
 //#import <UIKit/UIKit.h>
 #import "ListViewController.h"
 
-//@protocol SelectionViewControllerDelegate <NSObject>
-//
-//- (void)showSegmentControl;
-//
-//- (void)hideSegmentControl;
-//
-//@end
-
 @interface SelectionViewController : ListViewController
+
+//- (void)refreshSelection;
 
 @end

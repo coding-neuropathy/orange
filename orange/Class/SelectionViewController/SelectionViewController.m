@@ -124,14 +124,19 @@ static int lastContentOffset;
 
 }
 
-
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.navigationController.navigationBar.hidden = NO;
     self.collectionView.scrollsToTop = NO;
     [MobClick endLogPageView:@"SelectionView"];
 }
+
+//- (void)refreshSelection
+//{
+////    [self.collectionView scr]
+//    [self.collectionView triggerPullToRefresh];
+//    
+//}
 
 
 /**
@@ -187,7 +192,6 @@ static int lastContentOffset;
 //    if (!isCache) {
 //        [self.tableView triggerPullToRefresh];
 //    }
-    
 }
 
 #pragma mark - <UICollectionViewDataSource>

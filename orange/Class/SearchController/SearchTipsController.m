@@ -1,0 +1,107 @@
+//
+//  SearchTipsController.m
+//  orange
+//
+//  Created by 谢家欣 on 16/8/31.
+//  Copyright © 2016年 guoku.com. All rights reserved.
+//
+
+#import "SearchTipsController.h"
+
+@interface SearchTipsController ()
+
+@property (strong, nonatomic) NSArray       *hotArray;
+@property (strong, nonatomic) UITableView   *tableView;
+
+@end
+
+@implementation SearchTipsController
+
+static NSString * CellIndetifier = @"Cell";
+
+- (UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView                  = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.deFrameSize      = IS_IPAD   ? CGSizeMake(kPadScreenWitdh, kScreenHeight)
+                                                : CGSizeMake(kScreenWidth, kScreenHeight);
+        _tableView.dataSource       = self;
+        _tableView.delegate         = self;
+    }
+    return _tableView;
+}
+
+- (void)loadView
+{
+    self.view       = self.tableView;
+}
+
+- (void)viewDidLoad
+{
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIndetifier];
+    
+    [API getSearchKeywordsWithSuccess:^(NSArray *keywords) {
+//            DDLogInfo(@"keywords %@", keywords);
+            self.hotArray = keywords;
+            [self.tableView reloadData];
+//            [self.searchView setHotArray:keywords withRecentArray:nil];
+    } Failure:^(NSInteger stateCode, NSError *error) {
+    
+    }];
+    [super viewDidLoad];
+}
+
+#pragma mark - <UITableViewDataSource>
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.hotArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell      = [tableView dequeueReusableCellWithIdentifier:CellIndetifier forIndexPath:indexPath];
+    cell.textLabel.text         = [self.hotArray objectAtIndex:indexPath.row];
+    cell.textLabel.font         = [UIFont fontWithName:@"PingFangSC-Regular" size:16.];
+    cell.textLabel.textColor    = [UIColor colorFromHexString:@"#212121"];
+    cell.selectionStyle         = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 44.;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * tipsView       = [[UIView alloc] initWithFrame:CGRectZero];
+//    tipsLabel.text          = @"推荐搜索";
+    UILabel * tipsLabel     = [[UILabel alloc] initWithFrame:CGRectZero];
+    tipsLabel.frame         = CGRectMake(10., 12., 100., 20.);
+    tipsLabel.text          = @"推荐";
+    tipsLabel.textColor     = [UIColor colorFromHexString:@"#212121"];
+    tipsLabel.font          = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+    
+    tipsView.backgroundColor    = [UIColor colorFromHexString:@"#ffffff"];
+    [tipsView addSubview:tipsLabel];
+    return tipsView;
+}
+
+#pragma mark - <UITableViewDelegate>
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (self.tapRecordBtnBlock) {
+        self.tapRecordBtnBlock(cell.textLabel.text);
+//        self.view.alpha = 0;
+        [self.view removeFromSuperview];
+        [self removeFromParentViewController];
+    }
+}
+
+@end

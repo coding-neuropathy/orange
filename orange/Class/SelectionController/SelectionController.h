@@ -12,5 +12,6 @@
 @interface SelectionController : UIViewController
 
 - (void)setSelectedWithType:(SelectionType)type;
+//- (void)refreshSelection;
 
 @end
