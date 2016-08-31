@@ -34,9 +34,8 @@ static NSString * CellIndetifier = @"Cell";
     if (!_tableView) {
         _tableView                  = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.deFrameSize      = IS_IPAD   ? CGSizeMake(kPadScreenWitdh, kScreenHeight)
-                                                : CGSizeMake(kScreenWidth, kScreenHeight);
+                                                : CGSizeMake(kScreenWidth, kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight);
         
-//        if (self.app.statusBarOrientation == uir)
 //        if (IS_IPAD) _tableView.deFrameLeft = (kScreenWidth - kTabBarWidth - kPadScreenWitdh) / 2.;
         if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight
             || self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft)

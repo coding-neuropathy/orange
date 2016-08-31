@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchController : UIViewController <UISearchResultsUpdating>
+@interface SearchController : UIViewController <UISearchResultsUpdating, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 - (void)searchText:(NSString *)string;
 

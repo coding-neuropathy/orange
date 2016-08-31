@@ -31,6 +31,7 @@
 //#import "LoginView.h"
 
 #import "EmbedReaderViewController.h"
+#import "OrderController.h"
 
 
 //#import "DataStructure.h"
@@ -704,7 +705,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (void)TapReviewOrder:(id)sender
 {
-
+    OrderController *vc = [[OrderController alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - <UserHeaderSectionViewDelegate>

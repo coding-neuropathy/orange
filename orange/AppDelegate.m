@@ -94,9 +94,9 @@ int ddLogLevel;
 
     [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
     
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor colorFromHexString:@"#414243"]];
-//    [[UINavigationBar appearance] setTintColor:[UIColor colorFromHexString:@"#414243"]];
-    //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorFromHexString:@"#414243"]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorFromHexString:@"#414243"]];
+//    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
     UIFont* font = [UIFont fontWithName:@"PingFangSC-Semibold" size:17];
     [[UINavigationBar appearance] setTitleTextAttributes:@{ NSFontAttributeName:font,
                                                             NSForegroundColorAttributeName:[UIColor colorFromHexString:@"#212121"]
@@ -104,8 +104,8 @@ int ddLogLevel;
     [[UINavigationBar appearance] setAlpha:0.97];
     
     [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back"]];
-    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back"]];
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, 0) forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back"]];
+//    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, 0) forBarMetrics:UIBarMetricsDefault];
     
     [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(kScreenWidth, 49)]];
     [[UITabBar appearance]setSelectionIndicatorImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(kScreenWidth/4, 49)]];

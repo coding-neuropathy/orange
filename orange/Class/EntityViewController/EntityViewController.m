@@ -150,7 +150,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
         _collectionView.delegate        = self;
         _collectionView.dataSource      = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+        _collectionView.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         
         /**
          *  适配横屏启动

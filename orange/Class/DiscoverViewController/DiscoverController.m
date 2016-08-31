@@ -719,6 +719,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 - (void)willPresentSearchController:(UISearchController *)searchController
 {
 
+//    self.searchTipsVC.view.hidden   = NO;
     [searchController.view addSubview:self.searchTipsVC.view];
     [searchController addChildViewController:self.searchTipsVC];
     

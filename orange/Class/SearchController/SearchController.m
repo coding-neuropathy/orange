@@ -8,7 +8,7 @@
 
 #import "SearchController.h"
 #import "SearchTipsController.h"
-#import "NoResultView.h"
+//#import "NoResultView.h"
 
 #import "UserResultCell.h"
 #import "EntityResultCell.h"
@@ -43,10 +43,10 @@
 
 
 #pragma mark - Search View Controller
-@interface SearchController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface SearchController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
-@property (strong, nonatomic) UICollectionView * collectionView;
-@property (strong, nonatomic) NoResultView * noResultView;
+@property (strong, nonatomic) UICollectionView  *collectionView;
+//@property (strong, nonatomic) NoResultView      *noResultView;
 
 @property (strong, nonatomic) NSMutableArray    *categoryArray;
 @property (strong, nonatomic) GKSearchData      *searchData;
@@ -85,12 +85,96 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     if (!_searchData) {
         _searchData = [[GKSearchData alloc] init];
-        
         [_searchData addTheObserverWithObject:self];
     }
     return _searchData;
 }
 
+#pragma mark - <DZNEmptyDataSetSource>
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = NSLocalizedStringFromTable(@"no-results", kLocalizedFile, nil);;
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:20.0f],
+                                 NSForegroundColorAttributeName: [UIColor colorWithRed:0. green:0. blue:0. alpha:0.27],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+
+//- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+//{
+////    UISearchBar *searchBar = self.searchDisplayController.searchBar;
+//    
+////    NSString *text = [NSString stringWithFormat:@"There are no empty dataset examples for \"%@\".", searchBar.text];
+////    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:text attributes:nil];
+//    
+////    [attributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17.0] range:[attributedString.string rangeOfString:searchBar.text]];
+//    
+////    return attributedString;
+//}
+
+//- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
+//{
+//    NSString *text = @"Search on the App Store";
+//    UIFont *font = [UIFont systemFontOfSize:16.0];
+////    UIColor *textColor = [UIColor colorWithHex:(state == UIControlStateNormal) ? @"007aff" : @"c6def9"];
+//    UIColor * textColor = [UIColor colorFromHexString:@"#007aff"];
+//    NSMutableDictionary *attributes = [NSMutableDictionary new];
+//    [attributes setObject:font forKey:NSFontAttributeName];
+//    [attributes setObject:textColor forKey:NSForegroundColorAttributeName];
+//    
+//    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+//}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIColor colorFromHexString:@"#f8f8f8"];
+}
+
+//- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    return -64.0;
+//}
+
+#pragma mark - DZNEmptyDataSetDelegate Methods
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
+{
+    return NO;
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view
+{
+    NSLog(@"%s",__FUNCTION__);
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button
+{
+    
+//    UISearchBar *searchBar = self.searchDisplayController.searchBar;
+//    
+//    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.com/apps/%@", searchBar.text]];
+//    
+//    if ([[UIApplication sharedApplication] canOpenURL:URL]) {
+//        [[UIApplication sharedApplication] openURL:URL];
+//    }
+}
 
 #pragma mark - init collection view
 - (UICollectionView *)collectionView
@@ -108,20 +192,14 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
+        
+        _collectionView.emptyDataSetSource = self;
+        _collectionView.emptyDataSetDelegate = self;
         _collectionView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
     }
     return _collectionView;
 }
 
-- (NoResultView *)noResultView
-{
-    if (!_noResultView) {
-        _noResultView = [[NoResultView alloc] initWithFrame:CGRectMake(0., 0., self.collectionView.deFrameWidth, self.collectionView.deFrameHeight)];
-        _noResultView.text = NSLocalizedStringFromTable(@"no-results", kLocalizedFile, nil);
-        _noResultView.hidden = YES;
-    }
-    return _noResultView;
-}
 
 - (void)loadView
 {
@@ -132,8 +210,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 
 - (void)viewDidLoad {
     
-    // Do any additional setup after loading the view.
-    [self.view addSubview:self.collectionView];
+    [super viewDidLoad];
     
     [self.collectionView registerClass:[UserResultCell class] forCellWithReuseIdentifier:UserResultCellIdentifier];
     [self.collectionView registerClass:[EntityResultCell class] forCellWithReuseIdentifier:EntityResultCellIdentifier];
@@ -142,28 +219,19 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [self.collectionView registerClass:[SearchHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier];
     [self.collectionView registerClass:[CategoryResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier];
     [self.collectionView registerClass:[SearchFooterSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier];
-    
-    [self.view addSubview:self.noResultView];
-    [self.noResultView bringSubviewToFront:self.collectionView];
- 
-    [super viewDidLoad];
+    [self.view addSubview:self.collectionView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.collectionView.scrollsToTop = YES;
     [MobClick beginLogPageView:@"SearchView"];
-//    if (IS_IPHONE) {
-//        self.tabBarController.tabBar.alpha = 0;
-//    }
     [super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     self.collectionView.scrollsToTop = NO;
-//    if (self.searchBar.text) {
-//        [self addSearchLog:self.searchBar.text];
-//    }
     
     [MobClick endLogPageView:@"SearchView"];
     [super viewWillDisappear:animated];
@@ -515,7 +583,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 #pragma mark - <UISearchResultsUpdating>
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-
+//    DDLogInfo(@"okokokoko %@", searchController.searchBar.text);
     if ([self.keyword isEqualToString:[searchController.searchBar.text trimedWithLowercase]]) {
         return;
     }
@@ -523,17 +591,8 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     
     self.keyword = [searchController.searchBar.text trimedWithLowercase];
     
-    if (self.keyword.length == 0)
-    {
-        return;
-    }
-    
-    if (!self.noResultView.hidden) {
-        self.noResultView.hidden = YES;
-    }
-    
+    if (self.keyword.length == 0) return;
 
-    
     for (UIViewController * vc in searchController.childViewControllers) {
         if ([vc isKindOfClass:[SearchTipsController class]]) {
             [vc.view removeFromSuperview];
@@ -606,7 +665,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         if( ![[change valueForKeyPath:@"new"] integerValue])
         {
             if (!self.searchData.error && self.searchData.count > 0) {
-                self.noResultView.hidden = YES;
+//                self.noResultView.hidden = YES;
                 [UIView setAnimationsEnabled:NO];
                 [self.collectionView reloadData];
                 [self.collectionView.pullToRefreshView stopAnimating];
@@ -619,7 +678,8 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
             } else {
 //                DDLogError(@"error %@", self.searchData.error.localizedDescription);
                 
-                self.noResultView.hidden = NO;
+//                self.noResultView.hidden = NO;
+                [self.collectionView reloadData];
                 [self.collectionView.pullToRefreshView stopAnimating];
 //                [self.view insertSubview:self.no atIndex:<#(NSInteger)#>]
             }
@@ -703,7 +763,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         //        self.backgroundColor = [UIColor redColor];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(checkAllResults)];
         [self addGestureRecognizer:tap];

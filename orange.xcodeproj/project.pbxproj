@@ -185,6 +185,7 @@
 		8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */; };
 		8AB731DA1C1BBDAD0076BACC /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */; };
 		8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D91C1BBDAD0076BACC /* SettingsViewCell.m */; };
+		8ABB83421D7742E700268884 /* OrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB83411D7742E700268884 /* OrderController.m */; };
 		8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */; };
 		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
@@ -686,6 +687,8 @@
 		8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsFooterView.m; sourceTree = "<group>"; };
 		8AB731D81C1BBDAD0076BACC /* SettingsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewCell.h; sourceTree = "<group>"; };
 		8AB731D91C1BBDAD0076BACC /* SettingsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewCell.m; sourceTree = "<group>"; };
+		8ABB83401D7742E700268884 /* OrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderController.h; path = OrderViewController/OrderController.h; sourceTree = "<group>"; };
+		8ABB83411D7742E700268884 /* OrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderController.m; path = OrderViewController/OrderController.m; sourceTree = "<group>"; };
 		8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		8ABC7DDF1C056B6000A15147 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		8ABC7DE01C056B6000A15147 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -1461,6 +1464,7 @@
 		4E56DFCF19D5BB3A00263B17 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				8ABB833F1D7742BC00268884 /* OrderViewController */,
 				8A5045391D58713E00D66F8A /* QRCodeViewController */,
 				B70686721CF41D5E00C40825 /* RootViewController */,
 				4E73E6771C19360400B604B5 /* AuthController */,
@@ -1889,6 +1893,15 @@
 				8A44F5981C7C066500D1DC19 /* ArticlePreViewController.m */,
 			);
 			name = PreViewControllers;
+			sourceTree = "<group>";
+		};
+		8ABB833F1D7742BC00268884 /* OrderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8ABB83401D7742E700268884 /* OrderController.h */,
+				8ABB83411D7742E700268884 /* OrderController.m */,
+			);
+			name = OrderViewController;
 			sourceTree = "<group>";
 		};
 		8ACB9E451D61AA8000C81500 /* EntitySKUController */ = {
@@ -2752,6 +2765,7 @@
 				8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */,
 				23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */,
 				23B3164D1CD9D4F600A83CDB /* EditViewController.m in Sources */,
+				8ABB83421D7742E700268884 /* OrderController.m in Sources */,
 				4E3A23861A52EC9600037F9C /* SettingManager.m in Sources */,
 				B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */,
 				B70686931CF41ECA00C40825 /* BaseViewController.m in Sources */,
