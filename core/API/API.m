@@ -369,10 +369,10 @@
 /**
  *  商品加入购物车
  *
- *  sid     sku id
- *  volume  商品数量
- *  @param success    成功block
- *  @param failure    失败block
+ *  @param sid      sku id
+ *  @param volume   商品数量
+ *  @param success  成功block
+ *  @param failure  失败block
  */
 + (void)addEntitySKUToCartWithSKUId:(NSInteger)sku_id Volume:(NSInteger)volume
                             Success:(void (^)(BOOL is_success))success
@@ -420,6 +420,31 @@
         if (success) {
             success([NSArray arrayWithArray:cartItems]);
         }
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+
+/**
+ *  incr shopping cart item
+ *
+ *  @param sid      sku_id
+ *  @param success  成功block
+ *  @param failure  失败block
+ */
++ (void)incrShoppingCartItemWithSKUId:(NSInteger)sku_id Success:(void (^)(NSInteger volume))success
+                              Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString *path      = @"cart/incr/";
+    NSParameterAssert(sku_id);
+    
+    NSMutableDictionary *paraDict   = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(sku_id) forKey:@"sid"];
+
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         
     } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {

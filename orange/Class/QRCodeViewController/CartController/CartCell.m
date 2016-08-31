@@ -143,9 +143,6 @@
         
     CGContextSetStrokeColorWithColor(context, [UIColor colorFromHexString:@"#ebebeb"].CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
-        
-//    CGContextMoveToPoint(context, self.contentView.deFrameWidth, 0.);
-//    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
     
     CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
     CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
