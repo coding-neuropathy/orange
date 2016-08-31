@@ -96,7 +96,16 @@ static NSString * CellIndetifier = @"Cell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44.;
+    CGFloat height  = 44.;
+    switch (section) {
+        case 0:
+            height  = self.historyArray.count > 0 ? 44. : 0.;
+            break;
+            
+        default:
+            break;
+    }
+    return height;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
