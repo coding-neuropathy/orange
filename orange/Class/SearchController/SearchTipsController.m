@@ -101,15 +101,23 @@ static NSString * CellIndetifier = @"Cell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * tipsView       = [[UIView alloc] initWithFrame:CGRectZero];
+    UIView * tipsView           = [[UIView alloc] initWithFrame:CGRectZero];
 //    tipsLabel.text          = @"推荐搜索";
-    UILabel * tipsLabel     = [[UILabel alloc] initWithFrame:CGRectZero];
-    tipsLabel.frame         = CGRectMake(10., 12., 100., 20.);
-    tipsLabel.text          = @"推荐";
-    tipsLabel.textColor     = [UIColor colorFromHexString:@"#212121"];
-    tipsLabel.font          = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+    UILabel * tipsLabel         = [[UILabel alloc] initWithFrame:CGRectZero];
+    tipsLabel.frame             = CGRectMake(10., 12., 100., 20.);
+    switch (section) {
+        case 0:
+            tipsLabel.text              = @"曾搜过的";
+            break;
+            
+        default:
+            tipsLabel.text              = @"推荐";
+            break;
+    }
+    tipsLabel.textColor         = [UIColor colorFromHexString:@"#212121"];
+    tipsLabel.font              = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+    tipsView.backgroundColor    = [UIColor colorFromHexString:@"#f1f1f1"];
     
-    tipsView.backgroundColor    = [UIColor colorFromHexString:@"#ffffff"];
     [tipsView addSubview:tipsLabel];
     return tipsView;
 }
