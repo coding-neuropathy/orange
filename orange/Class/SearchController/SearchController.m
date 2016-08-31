@@ -48,13 +48,13 @@
 @property (strong, nonatomic) UICollectionView * collectionView;
 @property (strong, nonatomic) NoResultView * noResultView;
 
-@property (strong, nonatomic) NSMutableArray * categoryArray;
-@property (strong, nonatomic) GKSearchData * searchData;
+@property (strong, nonatomic) NSMutableArray    *categoryArray;
+@property (strong, nonatomic) GKSearchData      *searchData;
 
-@property (strong, nonatomic) NSString *keyword;
-@property (weak, nonatomic) UISearchBar * searchBar;
+@property (strong, nonatomic) NSString          *keyword;
+@property (weak,   nonatomic) UISearchBar       *searchBar;
 
-@property (strong, nonatomic) UIApplication * app;
+@property (strong, nonatomic) UIApplication     *app;
 
 @end
 
@@ -161,9 +161,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (void)viewWillDisappear:(BOOL)animated
 {
     self.collectionView.scrollsToTop = NO;
-    if (self.searchBar.text) {
-        [self addSearchLog:self.searchBar.text];
-    }
+//    if (self.searchBar.text) {
+//        [self addSearchLog:self.searchBar.text];
+//    }
     
     [MobClick endLogPageView:@"SearchView"];
     [super viewWillDisappear:animated];
@@ -552,13 +552,13 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     if (text.length == 0) {
         return;
     }
-    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kSearchLogs]];
     if (!array) {
         array = [NSMutableArray array];
     }
     if (![array containsObject:text]) {
         [array insertObject:text atIndex:0];
-        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
+        [[NSUserDefaults standardUserDefaults] setObject:array forKey:kSearchLogs];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -606,6 +606,11 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                 [self.collectionView reloadData];
                 [self.collectionView.pullToRefreshView stopAnimating];
                 [UIView setAnimationsEnabled:YES];
+                
+                if (self.searchBar.text) {
+                    [self addSearchLog:[self.searchBar.text lowercaseString]];
+                }
+                
             } else {
 //                DDLogError(@"error %@", self.searchData.error.localizedDescription);
                 
@@ -626,7 +631,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
     }
     return self;
 }
@@ -637,7 +642,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _textLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
-        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textColor = [UIColor colorFromHexString:@"#414243"];
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_textLabel];
@@ -645,15 +650,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     return _textLabel;
 }
 
-//- (UIImageView *)imgView
-//{
-//    if (!_imgView) {
-//        _imgView = [[UIImageView alloc]initWithFrame:CGRectZero];
-//        
-//        [self addSubview:_imgView];
-//    }
-//    return _imgView;
-//}
 
 - (void)setText:(NSString *)text
 {

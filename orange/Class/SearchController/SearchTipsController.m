@@ -10,6 +10,7 @@
 
 @interface SearchTipsController ()
 
+@property (strong, nonatomic) NSArray       *historyArray;
 @property (strong, nonatomic) NSArray       *hotArray;
 @property (strong, nonatomic) UITableView   *tableView;
 
@@ -42,30 +43,51 @@ static NSString * CellIndetifier = @"Cell";
     
     [API getSearchKeywordsWithSuccess:^(NSArray *keywords) {
 //            DDLogInfo(@"keywords %@", keywords);
-            self.hotArray = keywords;
-            [self.tableView reloadData];
+        self.hotArray       = keywords;
+        self.historyArray   = [[NSUserDefaults standardUserDefaults] objectForKey:kSearchLogs];
+        [self.tableView reloadData];
 //            [self.searchView setHotArray:keywords withRecentArray:nil];
     } Failure:^(NSInteger stateCode, NSError *error) {
     
     }];
+    DDLogInfo(@"log log %@", [[NSUserDefaults standardUserDefaults] objectForKey:kSearchLogs]);
     [super viewDidLoad];
 }
 
 #pragma mark - <UITableViewDataSource>
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.hotArray.count;
+    NSInteger count = 0;
+    switch (section) {
+        case 0:
+            count   = [self.historyArray count] > 0 ? 2 : self.historyArray.count;
+            break;
+        default:
+            count   = self.hotArray.count;
+            break;
+    }
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell      = [tableView dequeueReusableCellWithIdentifier:CellIndetifier forIndexPath:indexPath];
-    cell.textLabel.text         = [self.hotArray objectAtIndex:indexPath.row];
+    
+    switch (indexPath.section) {
+        case 0:
+            cell.textLabel.text         = [self.historyArray objectAtIndex:indexPath.row];
+            break;
+            
+        default:
+            cell.textLabel.text         = [self.hotArray objectAtIndex:indexPath.row];
+            break;
+    }
+    
     cell.textLabel.font         = [UIFont fontWithName:@"PingFangSC-Regular" size:16.];
     cell.textLabel.textColor    = [UIColor colorFromHexString:@"#212121"];
     cell.selectionStyle         = UITableViewCellSelectionStyleNone;

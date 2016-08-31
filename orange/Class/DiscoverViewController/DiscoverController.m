@@ -349,10 +349,6 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     
     self.collectionView.scrollsToTop = NO;
     
-//    if (_searchVC.searchBar.text) {
-//        [self addSearchLog:_searchVC.searchBar.text];
-//    }
-    
     [MobClick endLogPageView:@"DiscoverView"];
 }
 
@@ -393,10 +389,6 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS))
                 count = self.discoverData.categoryCount;
             break;
-//        case 1:
-//            if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS))
-//                count = self.discoverData.categoryCount;
-//            break;
         case ArticleSection:
             count = self.discoverData.articleCount;
             break;
