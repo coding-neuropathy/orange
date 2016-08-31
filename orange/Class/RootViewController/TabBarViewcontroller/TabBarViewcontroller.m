@@ -11,11 +11,9 @@
 #import "DiscoverController.h"
 #import "NotifyController.h"
 
-//#import "MeViewController.h"
 #import "UserViewController.h"
 #import "SettingViewController.h"
-//#import "LoginView.h"
-#import "GTScrollNavigationBar.h"
+//#import "GTScrollNavigationBar.h"
 
 #import <WZLBadge/WZLBadgeImport.h>
 

@@ -222,7 +222,9 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
                                                        handler:^(UIAlertAction * _Nonnull action) {
         [self dismissViewControllerAnimated:YES completion:^{
             [API clearCartWithSuccess:^(BOOL isClear) {
-                
+                if (isClear) {
+                    DDLogInfo(@"clear success");
+                }
             } Failure:^(NSInteger stateCode, NSError *error) {
                 DDLogError(@"error; %@", error.localizedDescription);
             }];

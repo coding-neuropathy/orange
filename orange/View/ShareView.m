@@ -389,16 +389,6 @@
     message.imageObject = image;
     
     
-//    WBWebpageObject *webpage = [WBWebpageObject object];
-//    webpage.objectID = [self.title md5];
-//    webpage.title = self.title;
-////    webpage.description = [NSString stringWithFormat:NSLocalizedString(@"分享网页内容简介-%.0f", nil), [[NSDate date] timeIntervalSince1970]];
-////    webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"image_2" ofType:@"jpg"]];
-//    webpage.thumbnailData = UIImageJPEGRepresentation(self.image, 0.5);
-//    webpage.webpageUrl = [self.url stringByAppendingString:@"?from=weibo"];
-//    
-//    message.mediaObject = webpage;
-    
     NSString * wbtoken = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
     
     WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];

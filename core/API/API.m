@@ -437,7 +437,7 @@
 + (void)clearCartWithSuccess:(void (^)(BOOL isClear))success
                      Failure:(void (^)(NSInteger stateCode, NSError * error))failure
 {
-    NSString * path     = @"cart/delete/";
+    NSString * path     = @"cart/clear/";
     
     [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
         

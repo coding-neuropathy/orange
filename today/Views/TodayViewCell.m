@@ -69,15 +69,15 @@
     self.detailTextLabel.frame = CGRectMake(10., 40., self.contentView.frame.size.width - 100., 40.);
 
     
-    NSData * imageData = [ImageCache readImageWithURL:self.entity.imageURL_120x120];
+    NSData * imageData = [ImageCache readImageWithURL:self.entity.imageURL_240x240];
     
     if (imageData) {
         self.entityImageView.image = [UIImage imageWithData:imageData];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSData *data = [NSData dataWithContentsOfURL:self.entity.imageURL_120x120];
+            NSData *data = [NSData dataWithContentsOfURL:self.entity.imageURL_240x240];
             UIImage *placeholder = [UIImage imageWithData:data];
-            [ImageCache saveImageWhthData:data URL:self.entity.imageURL_120x120];
+            [ImageCache saveImageWhthData:data URL:self.entity.imageURL_240x240];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.entityImageView setImage:placeholder];
             });

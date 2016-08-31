@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
-#import "GTScrollNavigationBar.h"
+//#import "GTScrollNavigationBar.h"
+#import <GTScrollNavigationBar/GTScrollNavigationBar.h>
 
 @interface BaseViewController ()<UIGestureRecognizerDelegate>
 

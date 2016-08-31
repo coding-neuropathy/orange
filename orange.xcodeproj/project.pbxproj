@@ -87,7 +87,6 @@
 		39B868181ACCF5DB00A2115D /* TodayViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B868171ACCF5DB00A2115D /* TodayViewCell.m */; };
 		4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E05AA951B634C2D007596E6 /* EarthLoadingView.m */; };
 		4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */; };
-		4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1C36581AB429FE00EA2F00 /* GTScrollNavigationBar.m */; };
 		4E1D70281A5ADC260032719E /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D70271A5ADC260032719E /* SelectionViewController.m */; };
 		4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D3C1A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m */; };
 		4E2D6D431A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D6D3E1A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m */; };
@@ -479,8 +478,6 @@
 		4E05AA941B634C2D007596E6 /* EarthLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthLoadingView.h; sourceTree = "<group>"; };
 		4E05AA951B634C2D007596E6 /* EarthLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthLoadingView.m; sourceTree = "<group>"; };
 		4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FultonsHand Regular.TTF"; sourceTree = "<group>"; };
-		4E1C36571AB429FE00EA2F00 /* GTScrollNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTScrollNavigationBar.h; sourceTree = "<group>"; };
-		4E1C36581AB429FE00EA2F00 /* GTScrollNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTScrollNavigationBar.m; sourceTree = "<group>"; };
 		4E1D70261A5ADC260032719E /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
 		4E1D70271A5ADC260032719E /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewController.m; sourceTree = "<group>"; };
 		4E2D6D3A1A69601F009E4A17 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
@@ -1254,15 +1251,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		4E1C36561AB429FE00EA2F00 /* GTScrollNavigationBar */ = {
-			isa = PBXGroup;
-			children = (
-				4E1C36571AB429FE00EA2F00 /* GTScrollNavigationBar.h */,
-				4E1C36581AB429FE00EA2F00 /* GTScrollNavigationBar.m */,
-			);
-			path = GTScrollNavigationBar;
-			sourceTree = "<group>";
-		};
 		4E1D70191A5ADB890032719E /* DiscoverViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1463,7 +1451,6 @@
 				B72000B21B0848160001F199 /* JPush */,
 				B7F18B7C1ADF39A400B9AFDD /* TaeSDK */,
 				4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */,
-				4E1C36561AB429FE00EA2F00 /* GTScrollNavigationBar */,
 				4EA0C44A1A805CBD0025EC2E /* pinyinTools */,
 				4E2D6D531A6BFD77009E4A17 /* RTLabel */,
 				4E2D6D391A69601F009E4A17 /* SVPullToRefresh */,
@@ -2791,7 +2778,6 @@
 				B72ACCC21B66531E0020E841 /* DiscoverController.m in Sources */,
 				23568D1E1D349469003F2611 /* EntityResultCell.m in Sources */,
 				B706869F1CF4222600C40825 /* iPadRootViewController.m in Sources */,
-				4E1C36591AB429FE00EA2F00 /* GTScrollNavigationBar.m in Sources */,
 				4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */,
 				B76676411AB81758002F294C /* NoDataView.m in Sources */,
 				B72ACCC81B666B8C0020E841 /* DiscoverBannerView.m in Sources */,

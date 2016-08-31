@@ -53,20 +53,33 @@
         [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
 
-        NSDictionary *dict2 = [NSDictionary dictionaryWithObject:UIColorFromRGB(0x212121) forKey:NSForegroundColorAttributeName];
+        NSDictionary *dict2 = [NSDictionary dictionaryWithObject:[UIColor colorFromHexString:@"#212121"] forKey:NSForegroundColorAttributeName];
         [_segmentedControl setSelectedTitleTextAttributes:dict2];
         UIFont *font = [UIFont boldSystemFontOfSize:17.];
 //        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
 //                                                               forKey:NSFontAttributeName];
         NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
         [attributes setValue:font forKey:NSFontAttributeName];
-        [attributes setValue:UIColorFromRGB(0x757575) forKey:NSForegroundColorAttributeName];
+        [attributes setValue:[UIColor colorFromHexString:@"#757575"] forKey:NSForegroundColorAttributeName];
         [_segmentedControl setTitleTextAttributes:attributes];
     
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
-        [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x212121)];
+        [_segmentedControl setSelectionIndicatorColor:[UIColor colorFromHexString:@"#212121"]];
         [_segmentedControl setSelectionIndicatorHeight:2];
-        [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+//        [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+        __weak __typeof(&*self)weakSelf = self;
+        [_segmentedControl setIndexChangeBlock:^(NSInteger index) {
+            switch (index) {
+                case SelectionArticleType:
+                    [weakSelf.thePageViewController setViewControllers:@[weakSelf.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+                    break;
+                    
+                default:
+                    [weakSelf.thePageViewController setViewControllers:@[weakSelf.entityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+                    break;
+            }
+        }];
+        
         [_segmentedControl setTag:2];
         
 //        _segmentedControl.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
@@ -113,8 +126,11 @@
     
     self.thePageViewController.view.frame = CGRectMake(0, 0, kScreenWidth,  kScreenHeight);
 
-    [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-
+    if (self.segmentedControl.selectedSegmentIndex == SelectionEntityType) {
+        [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    } else {
+        [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    }
     [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
 }
 
@@ -155,14 +171,11 @@
 {
     self.index = 0;
     if (completed) {
-//        if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[HomeController class]]) {
-//            self.index = 0;
-//        }
         if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[SelectionViewController class]]) {
-            self.index = 0;
+            self.index = SelectionEntityType;
         }
         if ([[pageViewController.viewControllers objectAtIndex:0] isKindOfClass:[ArticlesController class]]) {
-            self.index = 1;
+            self.index = SelectionArticleType;
         }
         
         [self.segmentedControl setSelectedSegmentIndex:self.index animated:YES];
@@ -181,56 +194,21 @@
     return UIPageViewControllerSpineLocationMin;
 }
 
-#pragma mark -
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
-{
-
-    self.index = segmentedControl.selectedSegmentIndex;
-//    
-//    if (segmentedControl.selectedSegmentIndex == 0){
-//        [self.thePageViewController setViewControllers:@[self.homeVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
-//    }
-    
-    if (segmentedControl.selectedSegmentIndex == 0){
-        [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
-    }
-    
-    if (segmentedControl.selectedSegmentIndex == 1){
-        [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    }
-}
-
 #pragma mark - set selection type
 - (void)setSelectedWithType:(SelectionType)type
 {
     switch (type) {
         case SelectionEntityType:
             [self.segmentedControl setSelectedSegmentIndex:0 animated:YES];
-//            [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
+            [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+
             break;
         case SelectionArticleType:
-            [self.segmentedControl setSelectedSegmentIndex:1 animated:YES];
-//            [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-            DDLogInfo(@"articles");
+            [self.segmentedControl setSelectedSegmentIndex:1 animated:NO];
+            [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+
             break;
     }
 }
-
-//#pragma mark - show and hidden segmentcontrol delegate
-//- (void)showSegmentControl
-//{
-//    [UIView animateWithDuration:1 animations:^{
-//        self.segmentedControl.frame = CGRectMake(0, 0, kScreenWidth-40, 32);
-//        
-//    }];
-//}
-//
-//- (void)hideSegmentControl
-//{
-//    [UIView animateWithDuration:1 animations:^{
-//        self.segmentedControl.frame = CGRectMake(0, -32, kScreenWidth-40, 32);
-//        
-//    }];
-//}
 
 @end
