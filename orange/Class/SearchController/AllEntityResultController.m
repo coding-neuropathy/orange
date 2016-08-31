@@ -24,14 +24,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
-    self.title = NSLocalizedStringFromTable(@"items", kLocalizedFile, nil);
+    self.title = NSLocalizedStringFromTable(@"entities", kLocalizedFile, nil);
 }
 
 - (UITableView *)tableView
 {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight-kStatusBarHeight-kNavigationBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
-        _tableView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _tableView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundView = nil;

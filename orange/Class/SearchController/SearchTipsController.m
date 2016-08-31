@@ -65,7 +65,7 @@ static NSString * CellIndetifier = @"Cell";
     NSInteger count = 0;
     switch (section) {
         case 0:
-            count   = [self.historyArray count] > 0 ? 2 : self.historyArray.count;
+            count   = [self.historyArray count] > 2 ? 2 : self.historyArray.count;
             break;
         default:
             count   = self.hotArray.count;
@@ -80,6 +80,7 @@ static NSString * CellIndetifier = @"Cell";
     
     switch (indexPath.section) {
         case 0:
+            
             cell.textLabel.text         = [self.historyArray objectAtIndex:indexPath.row];
             break;
             
