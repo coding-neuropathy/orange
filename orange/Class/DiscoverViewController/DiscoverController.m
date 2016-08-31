@@ -87,44 +87,44 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     EntitySection,
 };
 
-#pragma mark - search log
-- (void)addSearchLog:(NSString *)text
-{
-    if (text.length == 0) {
-        return;
-    }
-    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-    if (!array) {
-        array = [NSMutableArray array];
-    }
-    if (![array containsObject:text]) {
-        [array insertObject:text atIndex:0];
-        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-}
-
-- (void)removeSearchLog:(NSString *)text
-{
-    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-    if (!array) {
-        return;
-    }
-    if ([array containsObject:text]) {
-        [array removeObject:text];
-        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-}
-
-- (NSMutableArray *)getSearchLog
-{
-    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-    if (!array) {
-        array = [NSMutableArray array];
-    }
-    return array;
-}
+//#pragma mark - search log
+//- (void)addSearchLog:(NSString *)text
+//{
+//    if (text.length == 0) {
+//        return;
+//    }
+//    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+//    if (!array) {
+//        array = [NSMutableArray array];
+//    }
+//    if (![array containsObject:text]) {
+//        [array insertObject:text atIndex:0];
+//        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }
+//}
+//
+//- (void)removeSearchLog:(NSString *)text
+//{
+//    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+//    if (!array) {
+//        return;
+//    }
+//    if ([array containsObject:text]) {
+//        [array removeObject:text];
+//        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }
+//}
+//
+//- (NSMutableArray *)getSearchLog
+//{
+//    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
+//    if (!array) {
+//        array = [NSMutableArray array];
+//    }
+//    return array;
+//}
 
 - (void)clearSearchLogButtonAciton
 {
@@ -225,7 +225,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     if (!_searchVC) {
         _searchVC = [[UISearchController alloc] initWithSearchResultsController:self.searchResultsVC];
         _searchVC.searchResultsUpdater = self.searchResultsVC;
-        self.searchResultsVC.discoverVC = self;
+//        self.searchResultsVC.discoverVC = self;
         _searchVC.delegate = self;
         _searchVC.hidesNavigationBarDuringPresentation = NO;
         if (IS_IPHONE)
@@ -337,12 +337,8 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         self.navigationController.scrollNavigationBar.scrollView = nil;
     }
     
-    //self.navigationController.scrollNavigationBar.scrollView = self.collectionView;
-//    [self.navigationController.navigationBar setAlpha:1];
     [self.navigationController.navigationBar setTranslucent:NO];
-    
     self.collectionView.scrollsToTop = YES;
-//    [self.collectionView reloadData];
     
     [MobClick beginLogPageView:@"DiscoverView"];
 }
@@ -353,9 +349,9 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     
     self.collectionView.scrollsToTop = NO;
     
-    if (_searchVC.searchBar.text) {
-        [self addSearchLog:_searchVC.searchBar.text];
-    }
+//    if (_searchVC.searchBar.text) {
+//        [self addSearchLog:_searchVC.searchBar.text];
+//    }
     
     [MobClick endLogPageView:@"DiscoverView"];
 }
@@ -760,6 +756,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 {
     self.searchVC.active = NO;
 }
+
 
 #pragma mark - <UISearchBarDelegate>
 //- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar

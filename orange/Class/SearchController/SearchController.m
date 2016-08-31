@@ -532,22 +532,16 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         self.noResultView.hidden = YES;
     }
     
-//    SearchTipsController * tipsvc;
-//    [UIView animateWithDuration:0.1 animations:^{
-    
-//        [self.discoverVC.searchVC.view viewWithTag:999].alpha = 0;
 
-        
-//    }completion:^(BOOL finished) {
     
-        for (UIViewController * vc in self.discoverVC.searchVC.childViewControllers) {
-            if ([vc isKindOfClass:[SearchTipsController class]]) {
-                [vc.view removeFromSuperview];
-                [vc removeFromParentViewController];
-            }
+    for (UIViewController * vc in searchController.childViewControllers) {
+        if ([vc isKindOfClass:[SearchTipsController class]]) {
+            [vc.view removeFromSuperview];
+            [vc removeFromParentViewController];
         }
+    }
         
-        [self handleSearchText:self.keyword];
+    [self handleSearchText:self.keyword];
         
 //    }];
 }
