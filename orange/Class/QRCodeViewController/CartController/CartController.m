@@ -137,11 +137,6 @@ static NSString * CellIndetifier = @"CartCell";
 {
 //    DDLogInfo(@"height %f", self.view.deFrameHeight);
     self.toolbar.deFrameBottom              = self.view.deFrameHeight - kNavigationBarHeight - kStatusBarHeight;
-//    self.toolbar.price                      = self.ca.lowestPrice;
-//    CGFloat price = 0.;
-//    for (ShoppingCart *cart in self.cartItemArray) {
-//        price += cart.price;
-//    }
     self.toolbar.price = [self updateCartItemPrice];
     [self.view insertSubview:self.toolbar aboveSubview:self.tableView];
 }

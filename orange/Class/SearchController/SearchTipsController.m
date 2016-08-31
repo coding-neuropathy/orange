@@ -48,6 +48,13 @@ static NSString * CellIndetifier = @"Cell";
     return _tableView;
 }
 
+- (void)setSearchHistoryWords:(NSArray *)history_words HotWords:(NSArray *)hotwords
+{
+    self.historyArray   = history_words;
+    self.hotArray       = hotwords;
+    [self.tableView reloadData];
+}
+
 - (void)loadView
 {
 //    self.view       = self.tableView;
@@ -60,17 +67,22 @@ static NSString * CellIndetifier = @"Cell";
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIndetifier];
     
-    [API getSearchKeywordsWithSuccess:^(NSArray *keywords) {
-//            DDLogInfo(@"keywords %@", keywords);
-        self.hotArray       = keywords;
-        self.historyArray   = [[NSUserDefaults standardUserDefaults] objectForKey:kSearchLogs];
-        [self.tableView reloadData];
-//            [self.searchView setHotArray:keywords withRecentArray:nil];
-    } Failure:^(NSInteger stateCode, NSError *error) {
-    
-    }];
-    DDLogInfo(@"log log %@", [[NSUserDefaults standardUserDefaults] objectForKey:kSearchLogs]);
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:@"SearchTipsView"];
+    
+
+//    DDLogInfo(@"log log %@", [[NSUserDefaults standardUserDefaults] objectForKey:kSearchLogs]);
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"SearchTipsView"];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - <UITableViewDataSource>

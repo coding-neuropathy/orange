@@ -708,16 +708,6 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 }
 
 #pragma mark - <UISearchControllerDelegate>
-- (void)willPresentSearchController:(UISearchController *)searchController
-{
-
-    [searchController.view addSubview:self.searchTipsVC.view];
-    
-    [searchController addChildViewController:self.searchTipsVC];
-    
-}
-
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
     
     if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
@@ -725,6 +715,26 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     }
     return YES;
 }
+
+- (void)willPresentSearchController:(UISearchController *)searchController
+{
+
+    [searchController.view addSubview:self.searchTipsVC.view];
+    [searchController addChildViewController:self.searchTipsVC];
+    
+    [API getSearchKeywordsWithSuccess:^(NSArray *keywords) {
+        [self.searchTipsVC setSearchHistoryWords:[[NSUserDefaults standardUserDefaults] objectForKey:kSearchLogs]
+                                        HotWords:keywords];
+//        DDLogInfo(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:kSearchLogs]);
+    } Failure:^(NSInteger stateCode, NSError *error) {
+//        self.historyArray   = [[NSUserDefaults standardUserDefaults] objectForKey:kSearchLogs];
+        [self.searchTipsVC setSearchHistoryWords:[[NSUserDefaults standardUserDefaults] objectForKey:kSearchLogs]
+                                        HotWords:nil];
+
+        DDLogInfo(@"error %@", error.localizedDescription);
+    }];
+}
+
 
 - (void)didPresentSearchController:(UISearchController *)searchController
 {

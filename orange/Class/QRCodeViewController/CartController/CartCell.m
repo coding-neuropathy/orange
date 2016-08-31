@@ -159,7 +159,6 @@
         self.cartItem.volume    = volume;
         self.volumeLabel.text   = [NSString stringWithFormat:@"%ld", volume];
         if (self.updateOrderPrice) {
-//            DDLogInfo(@"cart item view %@", self.cartItem);
             self.updateOrderPrice();
         }
     } Failure:^(NSInteger stateCode, NSError *error) {
@@ -169,7 +168,15 @@
 
 - (void)decrBtnAction:(id)sender
 {
-
+    [API descShoppingCartItemWithSKUId:self.cartItem.sku.skuId Success:^(NSInteger volume) {
+        self.cartItem.volume    = volume;
+        self.volumeLabel.text   = [NSString stringWithFormat:@"%ld", volume];
+        if (self.updateOrderPrice) {
+            self.updateOrderPrice();
+        }
+    } Failure:^(NSInteger stateCode, NSError *error) {
+        DDLogInfo(@"error %@", error.localizedDescription);
+    }];
 }
 
 @end

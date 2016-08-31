@@ -153,6 +153,16 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)incrShoppingCartItemWithSKUId:(NSInteger)sku_id Success:(void (^)(NSInteger volume))success
                               Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
+/**
+ *  desc shopping cart item
+ *
+ *  @param sid      sku_id
+ *  @param success  成功block
+ *  @param failure  失败block
+ */
++ (void)descShoppingCartItemWithSKUId:(NSInteger)sku_id Success:(void (^)(NSInteger volume))success
+                              Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
+
 
 /**
  *  clear Shopping Cart

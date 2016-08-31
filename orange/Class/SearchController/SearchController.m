@@ -560,6 +560,11 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         [array insertObject:text atIndex:0];
         [[NSUserDefaults standardUserDefaults] setObject:array forKey:kSearchLogs];
         [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [array removeObject:text];
+        [array insertObject:text atIndex:0];
+        [[NSUserDefaults standardUserDefaults] setObject:array forKey:kSearchLogs];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

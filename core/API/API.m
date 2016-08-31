@@ -457,6 +457,34 @@
 }
 
 /**
+ *  desc shopping cart item
+ *
+ *  @param sid      sku_id
+ *  @param success  成功block
+ *  @param failure  失败block
+ */
++ (void)descShoppingCartItemWithSKUId:(NSInteger)sku_id Success:(void (^)(NSInteger volume))success
+                              Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString *path      = @"cart/desc/";
+    NSParameterAssert(sku_id);
+    
+    NSMutableDictionary *paraDict   = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(sku_id) forKey:@"sid"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSInteger volume = [[responseObject objectForKey:@"volume"] integerValue];
+        if (success) {
+            success(volume);
+        }
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+
+/**
  *  clear Shopping Cart
  *
  *  @param success    成功block

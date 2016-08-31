@@ -12,4 +12,6 @@
 
 @property (nonatomic, copy) void (^tapRecordBtnBlock)(NSString * keyword);
 
+- (void)setSearchHistoryWords:(NSArray *)history_words HotWords:(NSArray *)hotwords;
+
 @end
