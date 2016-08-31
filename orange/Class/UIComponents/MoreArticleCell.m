@@ -35,6 +35,7 @@
 {
     if (!_coverImageView){
         _coverImageView                     = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _coverImageView.deFrameSize         = CGSizeMake(112*kScreenWidth/375, 84*kScreenWidth/375);
         _coverImageView.contentMode         = UIViewContentModeScaleAspectFill;
         _coverImageView.layer.masksToBounds = YES;
         
@@ -132,7 +133,7 @@
         
     } else {
 #pragma mark - layout iphone
-        self.coverImageView.frame = CGRectMake(0., 0., 112*kScreenWidth/375, 84*kScreenWidth/375);
+//        self.coverImageView.frame = CGRectMake(0., 0., 112*kScreenWidth/375, 84*kScreenWidth/375);
         self.coverImageView.deFrameTop = 16.;
         self.coverImageView.deFrameLeft = self.contentView.deFrameLeft + 16;
         

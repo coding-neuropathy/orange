@@ -145,11 +145,11 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
 
-        _collectionView.deFrameSize = IS_IPAD   ? CGSizeMake(684., kScreenHeight - kStatusBarHeight)
+        _collectionView.deFrameSize = IS_IPAD   ? CGSizeMake(kPadScreenWitdh, kScreenHeight - kStatusBarHeight)
                                                 : CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
 
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
+        _collectionView.delegate        = self;
+        _collectionView.dataSource      = self;
         _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
         
         /**
@@ -157,7 +157,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
          */
         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight
             || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
-            self.collectionView.deFrameLeft = (kScreenWidth - self.collectionView.deFrameWidth ) / 2.;
+            self.collectionView.deFrameLeft = (kScreenWidth - kTabBarWidth - self.collectionView.deFrameWidth ) / 2.;
     }
     return _collectionView;
 }
@@ -168,7 +168,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
     if (!_likeButton) {
 //        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40., 35)];
         _likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _likeButton.frame = CGRectMake(0, 0, kScreenWidth/3, 44.);
+        _likeButton.frame = CGRectMake(0, 0, kScreenWidth / 3, 44.);
         UIImage * like = [[UIImage imageNamed:@"like"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _likeButton.tintColor = UIColorFromRGB(0xffffff);
         [_likeButton setImage:like forState:UIControlStateNormal];
@@ -275,12 +275,12 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
                     self.buyButton.enabled = NO;
 //                    self.buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
                     self.buyButton.backgroundColor = [UIColor clearColor];
-                    [self.buyButton setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+                    [self.buyButton setTitleColor:[UIColor colorFromHexString:@"#414243"] forState:UIControlStateNormal];
                      [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     break;
                 case GKBuySOLDOUT:
-                    self.buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                    self.buyButton.backgroundColor = [UIColor colorFromHexString:@"#9d9e9f"];
                      [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     break;
@@ -314,24 +314,16 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 - (void)loadView
 {
-//    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
-//    backView.backgroundColor = UIColorFromRGB(0xfafafa);
-//    self.view = backView;
     [super loadView];
     self.view.backgroundColor = UIColorFromRGB(0xfafafa);
     
-    [self.view addSubview:self.collectionView];
-    
-//    if (IS_IPHONE) {
-//        self.swiper = [[SloppySwiper alloc] initWithNavigationController:self.navigationController];
-//        self.navigationController.delegate = self.swiper;
-//    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
 //    self.navigationController.hidesBarsOnSwipe = NO;
+    [self.view addSubview:self.collectionView];
     
     self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
     [self.collectionView registerClass:[EntityLikeUserCell class] forCellWithReuseIdentifier:LikeUserIdentifier];
@@ -371,16 +363,36 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
     
+//    if (IS_IPHONE) {
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:0. green:0. blue:0. alpha:0.] andSize:CGSizeMake(kScreenWidth, 48.)] forBarMetrics:UIBarMetricsDefault];
+////
+//        self.navigationController.navigationBar.barStyle   = UIBarStyleBlackTranslucent;
+//        self.navigationController.navigationBar.shadowImage = [UIImage new];
+//        self.navigationController.navigationBar.translucent = YES;
+////        self.navigationController.navigationBar.hidden      = YES;
+////        [UIApplication sharedApplication].statusBarStyle    = UIStatusBarStyleDefault;
+//        
+//    }
+
     [MobClick beginLogPageView:@"EntityView"];
+    [super viewWillAppear:animated];
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+//    if (IS_IPHONE) {
+//        [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+//        [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
+//        self.navigationController.navigationBar.translucent = NO;
+        //        self.navigationController.navigationBar.hidden      = YES;
+        //        [UIApplication sharedApplication].statusBarStyle    = UIStatusBarStyleDefault;
+        
+//    }
 //    [AVAnalytics endLogPageView:@"EntityView"];
     [MobClick endLogPageView:@"EntityView"];
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

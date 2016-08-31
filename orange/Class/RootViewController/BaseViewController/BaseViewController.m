@@ -34,7 +34,6 @@
         [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
         [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
         backBtn.frame = CGRectMake(0., 0., 32., 44.);
-//        backBtn.imageEdgeInsets = UIEdgeInsetsMake(0., 0., 0., 20.);
         UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
         self.navigationItem.leftBarButtonItem = backBarItem;
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
