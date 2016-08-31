@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
-    self.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
+    self.title = NSLocalizedStringFromTable(@"items", kLocalizedFile, nil);
 }
 
 - (UITableView *)tableView

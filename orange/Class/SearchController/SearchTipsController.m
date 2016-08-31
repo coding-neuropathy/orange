@@ -88,7 +88,7 @@ static NSString * CellIndetifier = @"Cell";
             break;
     }
     
-    cell.textLabel.font         = [UIFont fontWithName:@"PingFangSC-Regular" size:16.];
+    cell.textLabel.font         = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
     cell.textLabel.textColor    = [UIColor colorFromHexString:@"#212121"];
     cell.selectionStyle         = UITableViewCellSelectionStyleNone;
     return cell;
@@ -116,15 +116,14 @@ static NSString * CellIndetifier = @"Cell";
     tipsLabel.frame             = CGRectMake(10., 12., 100., 20.);
     switch (section) {
         case 0:
-            tipsLabel.text              = @"曾搜过的";
+            tipsLabel.text              = NSLocalizedStringFromTable(@"history-search", kLocalizedFile, nil);
             break;
-            
         default:
-            tipsLabel.text              = @"推荐";
+            tipsLabel.text              = NSLocalizedStringFromTable(@"popular-search", kLocalizedFile, nil);
             break;
     }
     tipsLabel.textColor         = [UIColor colorFromHexString:@"#212121"];
-    tipsLabel.font              = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+    tipsLabel.font              = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
     tipsView.backgroundColor    = [UIColor colorFromHexString:@"#f1f1f1"];
     
     [tipsView addSubview:tipsLabel];
@@ -137,7 +136,6 @@ static NSString * CellIndetifier = @"Cell";
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     if (self.tapRecordBtnBlock) {
         self.tapRecordBtnBlock(cell.textLabel.text);
-//        self.view.alpha = 0;
         [self.view removeFromSuperview];
         [self removeFromParentViewController];
     }

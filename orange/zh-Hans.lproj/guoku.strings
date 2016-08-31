@@ -71,6 +71,8 @@
 /*
  * Search Page
  */
+"history-search"                = "历史搜索";
+"popular-search"                = "热门搜索";
 "users"                         = "用户";
 "entitie"                       = "商品";
 "articles"                      = "图文";

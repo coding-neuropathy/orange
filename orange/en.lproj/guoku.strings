@@ -70,12 +70,15 @@
 /*
  * Search Page
  */
+"history-search"                = "Search History";
+"popular-search"                = "Search Popular";
 "users"                         = "Users";
 "entities"                      = "Goods";
 "articles"                      = "Articles";
 "category"                      = "Category";
 "click to view all results"     = "Click To View All Results";
 "no-results"                    = "No Results";
+
 
 /*
  * entity page
