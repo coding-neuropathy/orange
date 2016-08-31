@@ -155,7 +155,16 @@
 #pragma mark - button action
 - (void)addBtnAction:(id)sender
 {
-
+    [API incrShoppingCartItemWithSKUId:self.cartItem.sku.skuId Success:^(NSInteger volume) {
+        self.cartItem.volume    = volume;
+        self.volumeLabel.text   = [NSString stringWithFormat:@"%ld", volume];
+        if (self.updateOrderPrice) {
+//            DDLogInfo(@"cart item view %@", self.cartItem);
+            self.updateOrderPrice();
+        }
+    } Failure:^(NSInteger stateCode, NSError *error) {
+        DDLogInfo(@"error %@", error.localizedDescription);
+    }];
 }
 
 - (void)decrBtnAction:(id)sender

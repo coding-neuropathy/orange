@@ -55,7 +55,7 @@
 - (void)setPrice:(CGFloat)price
 {
     _price      = price;
-
+    
     [super setNeedsLayout];
 }
 
@@ -64,7 +64,6 @@
     [super layoutSubviews];
     
     self.orderBtn.deFrameRight                  = self.deFrameRight;
-    
     self.priceLabel.deFrameTop                  = 16.;
     self.priceLabel.deFrameLeft                 = 16.;
 }

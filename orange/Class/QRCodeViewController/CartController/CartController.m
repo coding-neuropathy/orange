@@ -56,13 +56,13 @@ static NSString * CellIndetifier = @"CartCell";
         self.cartItemArray = [NSMutableArray arrayWithArray:shoppingCartArray];
         [self.tableView reloadData];
         
-        CGFloat price = 0.;
-        for (ShoppingCart *cart in self.cartItemArray) {
-            price += cart.price;
-        }
+//        CGFloat price = 0.;
+//        for (ShoppingCart *cart in self.cartItemArray) {
+//            price += cart.price;
+//        }
 //        self.toolbar.price = price;
         
-        [self.toolbar updatePriceWithprice:price];
+        [self.toolbar updatePriceWithprice:[self updateCartItemPrice]];
         
         [self.tableView.pullToRefreshView stopAnimating];
     } Failure:^(NSInteger stateCode, NSError *error) {
@@ -117,9 +117,12 @@ static NSString * CellIndetifier = @"CartCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CartCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIndetifier forIndexPath:indexPath];
+    CartCell * cell         = [tableView dequeueReusableCellWithIdentifier:CellIndetifier forIndexPath:indexPath];
     
-    cell.cartItem   = [self.cartItemArray objectAtIndex:indexPath.row];
+    cell.cartItem           = [self.cartItemArray objectAtIndex:indexPath.row];
+    cell.updateOrderPrice   = ^() {
+        [self.toolbar updatePriceWithprice:[self updateCartItemPrice]];
+    };
     
     return cell;
 }
@@ -135,13 +138,21 @@ static NSString * CellIndetifier = @"CartCell";
 //    DDLogInfo(@"height %f", self.view.deFrameHeight);
     self.toolbar.deFrameBottom              = self.view.deFrameHeight - kNavigationBarHeight - kStatusBarHeight;
 //    self.toolbar.price                      = self.ca.lowestPrice;
+//    CGFloat price = 0.;
+//    for (ShoppingCart *cart in self.cartItemArray) {
+//        price += cart.price;
+//    }
+    self.toolbar.price = [self updateCartItemPrice];
+    [self.view insertSubview:self.toolbar aboveSubview:self.tableView];
+}
+
+- (CGFloat)updateCartItemPrice
+{
     CGFloat price = 0.;
     for (ShoppingCart *cart in self.cartItemArray) {
         price += cart.price;
     }
-    self.toolbar.price = price;
-    [self.view insertSubview:self.toolbar aboveSubview:self.tableView];
-    
+    return price;
 }
 
 #pragma mark - <CartToolbarDelegate>

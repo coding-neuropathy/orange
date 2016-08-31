@@ -48,6 +48,9 @@
 
 - (float)price
 {
+#if DEBUG
+    NSLog(@"%ld", self.volume);
+#endif
     return self.sku.promoPrice * self.volume;
 }
 

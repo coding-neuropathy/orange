@@ -10,6 +10,8 @@
 
 @interface CartCell : UITableViewCell
 
-@property (strong, nonatomic) ShoppingCart *cartItem;
+@property (weak, nonatomic) ShoppingCart *cartItem;
+
+@property (nonatomic, copy) void (^updateOrderPrice)();
 
 @end

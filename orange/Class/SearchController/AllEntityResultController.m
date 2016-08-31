@@ -45,14 +45,15 @@
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
     __weak __typeof(&*self)weakSelf = self;
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        [weakSelf loadMore];
-    }];
     
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf reFresh];
     }];
-    [self reFresh];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMore];
+    }];
+    
     if (self.dataArray == 0) {
         [self.tableView triggerPullToRefresh];
     }

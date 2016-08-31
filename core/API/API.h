@@ -144,6 +144,17 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                            Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 /**
+ *  incr shopping cart item
+ *
+ *  @param sid      sku_id
+ *  @param success  成功block
+ *  @param failure  失败block
+ */
++ (void)incrShoppingCartItemWithSKUId:(NSInteger)sku_id Success:(void (^)(NSInteger volume))success
+                              Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
+
+
+/**
  *  clear Shopping Cart
  *
  *  @param success    成功block

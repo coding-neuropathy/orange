@@ -200,12 +200,13 @@ int ddLogLevel;
     
 #if DEBUG
 [[FLEXManager sharedManager] showExplorer];
+    DDLogInfo(@"session id %@", [Passport sharedInstance].session);
 #endif
     // Override point for customization after application launch.
     
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
     
     if (IS_IPHONE) {
         self.tabbarViewController = [[TabBarViewcontroller alloc] init];
