@@ -230,6 +230,10 @@
 		8AF7C75A1D74025400C71499 /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7C7591D74025400C71499 /* CartCell.m */; };
 		8AF7C75E1D7409D500C71499 /* ShoppingCart.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AF7C75C1D7409D500C71499 /* ShoppingCart.h */; };
 		8AF7C75F1D7409D500C71499 /* ShoppingCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7C75D1D7409D500C71499 /* ShoppingCart.m */; };
+		8AFB3B751D785FE600E1D04A /* AllOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB3B741D785FE600E1D04A /* AllOrderController.m */; };
+		8AFB3B791D78601A00E1D04A /* PendingOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB3B781D78601A00E1D04A /* PendingOrderController.m */; };
+		8AFB3B7D1D78604E00E1D04A /* FinishedOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB3B7C1D78604E00E1D04A /* FinishedOrderController.m */; };
+		8AFB3B801D78607100E1D04A /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB3B7F1D78607100E1D04A /* OrderCell.m */; };
 		8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */; };
 		8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */; };
 		B706868D1CF41E7D00C40825 /* TabBarViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = B706868C1CF41E7D00C40825 /* TabBarViewcontroller.m */; };
@@ -751,6 +755,14 @@
 		8AF7C7591D74025400C71499 /* CartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CartCell.m; path = QRCodeViewController/CartController/CartCell.m; sourceTree = "<group>"; };
 		8AF7C75C1D7409D500C71499 /* ShoppingCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoppingCart.h; path = ShoppingCart/ShoppingCart.h; sourceTree = "<group>"; };
 		8AF7C75D1D7409D500C71499 /* ShoppingCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoppingCart.m; path = ShoppingCart/ShoppingCart.m; sourceTree = "<group>"; };
+		8AFB3B731D785FE600E1D04A /* AllOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllOrderController.h; path = OrderViewController/AllOrderController/AllOrderController.h; sourceTree = "<group>"; };
+		8AFB3B741D785FE600E1D04A /* AllOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllOrderController.m; path = OrderViewController/AllOrderController/AllOrderController.m; sourceTree = "<group>"; };
+		8AFB3B771D78601A00E1D04A /* PendingOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PendingOrderController.h; path = OrderViewController/PendingOrderController/PendingOrderController.h; sourceTree = "<group>"; };
+		8AFB3B781D78601A00E1D04A /* PendingOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PendingOrderController.m; path = OrderViewController/PendingOrderController/PendingOrderController.m; sourceTree = "<group>"; };
+		8AFB3B7B1D78604E00E1D04A /* FinishedOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FinishedOrderController.h; path = OrderViewController/FinishedOrderController/FinishedOrderController.h; sourceTree = "<group>"; };
+		8AFB3B7C1D78604E00E1D04A /* FinishedOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FinishedOrderController.m; path = OrderViewController/FinishedOrderController/FinishedOrderController.m; sourceTree = "<group>"; };
+		8AFB3B7E1D78607100E1D04A /* OrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderCell.h; path = OrderViewController/OrderCell.h; sourceTree = "<group>"; };
+		8AFB3B7F1D78607100E1D04A /* OrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderCell.m; path = OrderViewController/OrderCell.m; sourceTree = "<group>"; };
 		8AFF0CA81BA9C980005FD5CB /* SubCategoryEntityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategoryEntityController.h; sourceTree = "<group>"; };
 		8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCategoryEntityController.m; sourceTree = "<group>"; };
 		8AFF0CAB1BAA6C25005FD5CB /* EntityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityListCell.h; sourceTree = "<group>"; };
@@ -1898,8 +1910,13 @@
 		8ABB833F1D7742BC00268884 /* OrderViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8AFB3B7A1D78602700E1D04A /* FinishedOrderControoler */,
+				8AFB3B761D785FEC00E1D04A /* PendingOrderController */,
+				8AFB3B721D785FB500E1D04A /* AllOrderController */,
 				8ABB83401D7742E700268884 /* OrderController.h */,
 				8ABB83411D7742E700268884 /* OrderController.m */,
+				8AFB3B7E1D78607100E1D04A /* OrderCell.h */,
+				8AFB3B7F1D78607100E1D04A /* OrderCell.m */,
 			);
 			name = OrderViewController;
 			sourceTree = "<group>";
@@ -1957,6 +1974,33 @@
 				8AF7C75D1D7409D500C71499 /* ShoppingCart.m */,
 			);
 			name = ShoppingCart;
+			sourceTree = "<group>";
+		};
+		8AFB3B721D785FB500E1D04A /* AllOrderController */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB3B731D785FE600E1D04A /* AllOrderController.h */,
+				8AFB3B741D785FE600E1D04A /* AllOrderController.m */,
+			);
+			name = AllOrderController;
+			sourceTree = "<group>";
+		};
+		8AFB3B761D785FEC00E1D04A /* PendingOrderController */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB3B771D78601A00E1D04A /* PendingOrderController.h */,
+				8AFB3B781D78601A00E1D04A /* PendingOrderController.m */,
+			);
+			name = PendingOrderController;
+			sourceTree = "<group>";
+		};
+		8AFB3B7A1D78602700E1D04A /* FinishedOrderControoler */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB3B7B1D78604E00E1D04A /* FinishedOrderController.h */,
+				8AFB3B7C1D78604E00E1D04A /* FinishedOrderController.m */,
+			);
+			name = FinishedOrderControoler;
 			sourceTree = "<group>";
 		};
 		A72E4FB92C91BB3F9193D99C /* Pods */ = {
@@ -2692,6 +2736,7 @@
 				B772BEA01BD55861005C1540 /* UserPostNoteViewController.m in Sources */,
 				8AB731DA1C1BBDAD0076BACC /* SettingsFooterView.m in Sources */,
 				B7ED32B51B257F5B009BAF5A /* EntityCell.m in Sources */,
+				8AFB3B751D785FE600E1D04A /* AllOrderController.m in Sources */,
 				B7ED32AF1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
 				8AF3D6B21D7671CC007E8C2E /* AllArticleResultViewController.m in Sources */,
 				8AE652A21D7570C300FF7530 /* CartToolBar.m in Sources */,
@@ -2763,6 +2808,7 @@
 				8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */,
 				B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */,
 				8A53D9261BD948F6006EF0D1 /* UserEntityCategoryController.m in Sources */,
+				8AFB3B7D1D78604E00E1D04A /* FinishedOrderController.m in Sources */,
 				23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */,
 				23B3164D1CD9D4F600A83CDB /* EditViewController.m in Sources */,
 				8ABB83421D7742E700268884 /* OrderController.m in Sources */,
@@ -2776,6 +2822,7 @@
 				8A1B63301D5AFA93009CF222 /* AuthView.m in Sources */,
 				4E73E67D1C1936C100B604B5 /* RegisterViewController.m in Sources */,
 				B76EE0851B3D8A16009D8763 /* ActiveController.m in Sources */,
+				8AFB3B791D78601A00E1D04A /* PendingOrderController.m in Sources */,
 				8ADEA30E1D5A223B00D522A2 /* DiscoverCategoryCell.m in Sources */,
 				B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */,
 				23F6130D1CDB4BF60074E8C8 /* UserHeaderView.m in Sources */,
@@ -2830,6 +2877,7 @@
 				B7DA97BB1B25E46200C9BC25 /* EntityHeaderView.m in Sources */,
 				8ACB9E481D61AB1C00C81500 /* EntitySKUController.m in Sources */,
 				4E73E67A1C19361300B604B5 /* LoginViewController.m in Sources */,
+				8AFB3B801D78607100E1D04A /* OrderCell.m in Sources */,
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */,
 				B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */,

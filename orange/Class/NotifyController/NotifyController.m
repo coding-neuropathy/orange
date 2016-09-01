@@ -116,17 +116,18 @@
     
     self.navigationItem.titleView = self.segmentedControl;
 
-    [self addChildViewController:self.thePageViewController];
     
-    self.thePageViewController.view.frame = CGRectMake(0, 0., kScreenWidth, kScreenHeight);
+    
+    self.thePageViewController.view.deFrameSize = CGSizeMake(kScreenWidth, kScreenHeight);
 
     [self.thePageViewController setViewControllers:@[self.activeController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 //    [self.thePageViewController setViewControllers:@[self.activeController, self.msgController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBadge) name:@"ShowBadge" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBadge) name:@"HideBadge" object:nil];
     
-    [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
-    
+//    [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
+    [self.view addSubview:self.thePageViewController.view];
+    [self addChildViewController:self.thePageViewController];
 }
 
 #pragma mark - <UIPageViewControllerDataSource>
@@ -186,32 +187,16 @@
 //    [self removeBadge];
 //    [self tabBadge:YES];
 
-    self.segmentedControl.badgeCenterOffset = CGPointMake(-60, 5.);
+    self.segmentedControl.badgeCenterOffset = CGPointMake(-45, 5.);
+    self.segmentedControl.badgeBgColor      = [UIColor colorFromHexString:@"#f70866"];
     [self.segmentedControl showBadge];
 }
 
 - (void)removeBadge
 {
-//    [self tabBadge:NO];
     [self.segmentedControl clearBadge];
 }
 
-//- (void)tabBadge:(BOOL)yes
-//{
-//    if (yes) {
-//        UILabel * badge = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 6, 6)];
-//        badge.backgroundColor = UIColorFromRGB(0xFF1F77);
-//        badge.tag = 100;
-//        badge.layer.cornerRadius = 3;
-//        badge.layer.masksToBounds = YES;
-//        badge.center = CGPointMake(kScreenWidth*3/4+6,10);
-//        [self.segmentedControl addSubview:badge];
-//    }
-//    else
-//    {
-//        [[self.segmentedControl viewWithTag:100]removeFromSuperview];
-//    }
-//}
 
 #pragma mark -
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl

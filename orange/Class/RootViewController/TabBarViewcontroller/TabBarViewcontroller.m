@@ -130,8 +130,10 @@
 #pragma mark - notification
 - (void)addBadge
 {
-    UITabBarItem * messageItem = [self.tabBar.items objectAtIndex:2];
-    messageItem.badgeCenterOffset = CGPointMake(-30, 10);
+    UITabBarItem * messageItem      = [self.tabBar.items objectAtIndex:2];
+    messageItem.badgeCenterOffset   = CGPointMake(-30, 10);
+    messageItem.badgeBgColor        = [UIColor colorFromHexString:@"#f70866"];
+    
     [messageItem showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeBreathe];
 }
 

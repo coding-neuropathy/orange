@@ -1,5 +1,5 @@
 //
-//  OrderController.h
+//  FinishedOrderController.h
 //  orange
 //
 //  Created by 谢家欣 on 16/9/1.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OrderController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface FinishedOrderController : UIViewController
 
 @end

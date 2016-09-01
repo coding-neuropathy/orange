@@ -271,10 +271,14 @@
 /**
  *  order
  */
+"order"                     = "Order";
+"pending"                   = "Pending";
+"finished"                  = "Finished";
 "scanner"                   = "Scanner";
 "continue-add"              = "Continue";
 "add-cart"                  = "ShoppingCart";
 "submit-order"              = "Submit";
 "shopping-cart"             = "Shopping Cart";
+
 
 

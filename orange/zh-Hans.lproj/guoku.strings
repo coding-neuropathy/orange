@@ -267,6 +267,9 @@
 /**
  *  order
  */
+"order"                     = "订单";
+"pending"                   = "待付款";
+"finished"                  = "交易完成";
 "scanner"                   = "扫描二维码";
 "continue-add"              = "继续添加";
 "add-cart"                  = "加入购物袋";
