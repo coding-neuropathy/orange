@@ -137,6 +137,12 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     return [UIColor colorFromHexString:@"#f8f8f8"];
 }
 
+//- (CGPoint)offsetForEmptyDataSet:(UIScrollView *)scrollView {
+//    CGFloat top = scrollView.contentInset.top / 2;
+//    CGFloat bottom = scrollView.contentInset.bottom / 2;
+//    return CGPointMake(0, top-bottom);
+//}
+
 //- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 //{
 //    return -64.0;
@@ -193,8 +199,9 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         
-        _collectionView.emptyDataSetSource = self;
-        _collectionView.emptyDataSetDelegate = self;
+        _collectionView.emptyDataSetSource      = self;
+//        _collectionView.emptyDataSetDelegate    = self;
+
         _collectionView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
     }
     return _collectionView;
@@ -220,6 +227,10 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     [self.collectionView registerClass:[CategoryResultView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryResultCellIdentifier];
     [self.collectionView registerClass:[SearchFooterSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier];
     [self.view addSubview:self.collectionView];
+    
+//    if (self.collectionView.contentOffset.y < 0 && self.collectionView.emptyDataSetVisible) {
+//        self.collectionView.contentOffset = CGPointZero;
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -662,7 +673,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"isRefreshing"]) {
-        if( ![[change valueForKeyPath:@"new"] integerValue])
+        if(![[change valueForKeyPath:@"new"] integerValue])
         {
             if (!self.searchData.error && self.searchData.count > 0) {
 //                self.noResultView.hidden = YES;
@@ -671,7 +682,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
                 [self.collectionView.pullToRefreshView stopAnimating];
                 [UIView setAnimationsEnabled:YES];
                 
-                if (self.searchBar.text) {
+                if ([self.searchBar.text length] > 0) {
                     [self addSearchLog:[self.searchBar.text lowercaseString]];
                 }
                 
