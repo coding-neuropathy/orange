@@ -10,4 +10,6 @@
 
 @interface ArticlesController : ListViewController
 
+@property (strong, nonatomic) GKSelectionArticle * articles;
+
 @end

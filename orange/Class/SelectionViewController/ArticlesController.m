@@ -16,7 +16,7 @@
 
 @interface ArticlesController () <UIViewControllerPreviewingDelegate>
 
-@property (strong, nonatomic) GKSelectionArticle * articles;
+//@property (strong, nonatomic) GKSelectionArticle * articles;
 
 
 @end

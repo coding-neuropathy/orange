@@ -11,7 +11,6 @@
 #import "GTScrollNavigationBar.h"
 #import "EntityViewController.h"
 
-
 /**
  *  3d-touch
  */
@@ -24,8 +23,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 static int lastContentOffset;
 
 @interface SelectionViewController ()<SelectionCellDelegate, UIViewControllerPreviewingDelegate>
-// 商品数据源数组
-@property (nonatomic, strong) GKSelectionEntity * entityList;
+
 
 @property(nonatomic, assign) NSInteger index;
 

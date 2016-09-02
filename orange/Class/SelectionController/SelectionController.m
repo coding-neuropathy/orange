@@ -222,14 +222,18 @@
     switch (self.index) {
         case SelectionArticleType:
         {
-            [self.articleVC.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+            if (self.articleVC.articles.count > 0) {
+                [self.articleVC.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+            }
         }
 //            [self.articleVC.collectionView triggerPullToRefresh];
             break;
             
         default:
         {
-            [self.entityVC.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+            if (self.entityVC.entityList.count > 0) {
+                [self.entityVC.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+            }
 //            [UIView animateWithDuration:0.5 animations:^{
 //
 //            } completion:^(BOOL finished) {

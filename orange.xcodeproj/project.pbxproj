@@ -293,7 +293,6 @@
 		B7AAFA631AB69DD200A2F20D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */; };
 		B7AAFA761AB7033600A2F20D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA751AB7033600A2F20D /* CFNetwork.framework */; };
 		B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7AAFA791AB7039600A2F20D /* Foundation.framework */; };
-		B7B065C81BF985CE001AA30F /* PreviewArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B065C71BF985CE001AA30F /* PreviewArticleController.m */; };
 		B7B6AD501D52F25800C9B8E0 /* GKDiscover.h in Headers */ = {isa = PBXBuildFile; fileRef = B7B6AD4E1D52F25800C9B8E0 /* GKDiscover.h */; };
 		B7B6AD511D52F25800C9B8E0 /* GKDiscover.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B6AD4F1D52F25800C9B8E0 /* GKDiscover.m */; };
 		B7BE3E2D1BA9A17A004AD422 /* CategroyGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BE3E2C1BA9A17A004AD422 /* CategroyGroupController.m */; };
@@ -868,8 +867,6 @@
 		B7AAFA621AB69DD200A2F20D /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		B7AAFA751AB7033600A2F20D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B7AAFA791AB7039600A2F20D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		B7B065C61BF985CE001AA30F /* PreviewArticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewArticleController.h; sourceTree = "<group>"; };
-		B7B065C71BF985CE001AA30F /* PreviewArticleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewArticleController.m; sourceTree = "<group>"; };
 		B7B6AD4E1D52F25800C9B8E0 /* GKDiscover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKDiscover.h; path = Discover/GKDiscover.h; sourceTree = "<group>"; };
 		B7B6AD4F1D52F25800C9B8E0 /* GKDiscover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKDiscover.m; path = Discover/GKDiscover.m; sourceTree = "<group>"; };
 		B7BE3E2B1BA9A17A004AD422 /* CategroyGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategroyGroupController.h; sourceTree = "<group>"; };
@@ -2224,8 +2221,6 @@
 				B783F6611B9AEC46004DF1CB /* ArticlesController.m */,
 				B783F6631B9AF26C004DF1CB /* ArticleCell.h */,
 				B783F6641B9AF26C004DF1CB /* ArticleCell.m */,
-				B7B065C61BF985CE001AA30F /* PreviewArticleController.h */,
-				B7B065C71BF985CE001AA30F /* PreviewArticleController.m */,
 			);
 			name = ArticlesViewController;
 			sourceTree = "<group>";
@@ -2881,7 +2876,6 @@
 				238F77DA1C521CF5002E0E65 /* EntityDetailCell.m in Sources */,
 				4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */,
 				B70686A81CF423F900C40825 /* MenuHeaderView.m in Sources */,
-				B7B065C81BF985CE001AA30F /* PreviewArticleController.m in Sources */,
 				B7DA97BB1B25E46200C9BC25 /* EntityHeaderView.m in Sources */,
 				8ACB9E481D61AB1C00C81500 /* EntitySKUController.m in Sources */,
 				4E73E67A1C19361300B604B5 /* LoginViewController.m in Sources */,

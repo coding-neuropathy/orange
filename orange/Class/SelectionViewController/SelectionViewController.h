@@ -11,6 +11,7 @@
 
 @interface SelectionViewController : ListViewController
 
-//- (void)refreshSelection;
+// 商品数据源数组
+@property (nonatomic, strong) GKSelectionEntity * entityList;
 
 @end
