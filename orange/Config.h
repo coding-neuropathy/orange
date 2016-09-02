@@ -179,6 +179,8 @@
 
 #define kPlaceHolderColor [UIColor colorFromHexString:@"#f7f7f7"]
 
+#define kDoubleClickTabItemNotification @"TabBarItemDoubleClick"
+
 
 #define DEFINE_SINGLETON_FOR_HEADER(className) \
 \

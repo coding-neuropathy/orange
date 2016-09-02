@@ -1163,6 +1163,7 @@
 		39B720021B1F4C16008519E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8AFB3B811D7897AB00E1D04A /* Order */,
 				8AF7C75B1D7409A500C71499 /* ShoppingCart */,
 				B7B6AD491D52F20500C9B8E0 /* Discover */,
 				8A9255F81D50A01D00E6481F /* SearchResults */,
@@ -2001,6 +2002,13 @@
 				8AFB3B7C1D78604E00E1D04A /* FinishedOrderController.m */,
 			);
 			name = FinishedOrderControoler;
+			sourceTree = "<group>";
+		};
+		8AFB3B811D7897AB00E1D04A /* Order */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Order;
 			sourceTree = "<group>";
 		};
 		A72E4FB92C91BB3F9193D99C /* Pods */ = {

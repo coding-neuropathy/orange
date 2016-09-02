@@ -71,10 +71,12 @@
         [_segmentedControl setIndexChangeBlock:^(NSInteger index) {
             switch (index) {
                 case SelectionArticleType:
+                    weakSelf.index  = SelectionArticleType;
                     [weakSelf.thePageViewController setViewControllers:@[weakSelf.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
                     break;
                     
                 default:
+                    weakSelf.index  = SelectionEntityType;
                     [weakSelf.thePageViewController setViewControllers:@[weakSelf.entityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
                     break;
             }
@@ -132,6 +134,9 @@
         [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     }
     [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(DoubleClickAction:) name:kDoubleClickTabItemNotification object:nil];
 }
 
 #pragma mark - <UIPageViewControllerDataSource>
@@ -143,24 +148,23 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
     if ([viewController isKindOfClass:[ArticlesController class]]) {
+        self.index  = SelectionEntityType;
         return self.entityVC;
     }
-    if ([viewController isKindOfClass:[SelectionViewController class]]) {
+//    if ([viewController isKindOfClass:[SelectionViewController class]]) {
 //        return self.homeVC;
-    }
+//    }
     return nil;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     
-     if ([viewController isKindOfClass:[ArticlesController class]]) {
+//     if ([viewController isKindOfClass:[ArticlesController class]]) {
          //return self.homeVC;
-     }
-//     if ([viewController isKindOfClass:[HomeController class]]) {
-//         return self.entityVC;
 //     }
      if ([viewController isKindOfClass:[SelectionViewController class]]) {
+         self.index = SelectionArticleType;
          return self.articleVC;
      }
      return nil;
@@ -201,12 +205,37 @@
         case SelectionEntityType:
             [self.segmentedControl setSelectedSegmentIndex:0 animated:YES];
             [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
-
+            
             break;
         case SelectionArticleType:
             [self.segmentedControl setSelectedSegmentIndex:1 animated:NO];
             [self.thePageViewController setViewControllers:@[self.articleVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
 
+            break;
+    }
+    self.index = type;
+}
+
+#pragma mark - notification
+- (void)DoubleClickAction:(NSNotification *)notify
+{
+    switch (self.index) {
+        case SelectionArticleType:
+        {
+            [self.articleVC.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+        }
+//            [self.articleVC.collectionView triggerPullToRefresh];
+            break;
+            
+        default:
+        {
+            [self.entityVC.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+//            [UIView animateWithDuration:0.5 animations:^{
+//
+//            } completion:^(BOOL finished) {
+//                [self.entityVC.collectionView triggerPullToRefresh];
+//            }];
+        }
             break;
     }
 }

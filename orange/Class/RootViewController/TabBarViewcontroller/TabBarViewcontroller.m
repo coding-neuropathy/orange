@@ -97,15 +97,50 @@
     [super didReceiveMemoryWarning];
 }
 
+/**
+ *  check tabbarItem double click
+ *
+ *  @param viewController
+ *
+ *  @return BOOL
+ */
+- (BOOL)checkIsDoubleClick:(UIViewController *)viewController
+{
+    static UIViewController *lastViewController = nil;
+    static NSTimeInterval lastClickTime = 0;
+    
+    if (lastViewController != viewController) {
+        lastViewController = viewController;
+        lastClickTime = [NSDate timeIntervalSinceReferenceDate];
+        
+        return NO;
+    }
+    
+    NSTimeInterval clickTime = [NSDate timeIntervalSinceReferenceDate];
+    if (clickTime - lastClickTime > 0.5 ) {
+        lastClickTime = clickTime;
+        return NO;
+    }
+    
+    lastClickTime = clickTime;
+    return YES;
+}
+
 #pragma mark - <UITabBarControllerDelegate>
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if ([((UINavigationController *)viewController).viewControllers.firstObject isKindOfClass:[NotifyController class]]) {
+    UIViewController * vc = ((UINavigationController *)viewController).viewControllers.firstObject;
+    if ([vc isKindOfClass:[NotifyController class]]) {
         if (!k_isLogin) {
-//            LoginView * view = [[LoginView alloc]init];
-//            [view show];
+
             [[OpenCenter sharedOpenCenter] openAuthPage];
             return NO;
+        }
+    }
+    
+    if ([vc isKindOfClass:[SelectionController class]]) {
+        if ([self checkIsDoubleClick:viewController]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDoubleClickTabItemNotification object:nil];
         }
     }
     return YES;
