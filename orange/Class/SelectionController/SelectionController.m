@@ -33,7 +33,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"" image:[[UIImage imageNamed:@"featured"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"featured_on"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle: @"" image:[[UIImage imageNamed:@"featured"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"featured_on"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         self.index = 0;
@@ -47,6 +47,7 @@
     if (!_segmentedControl) {
         _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 40, 32)];
     
+//        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"selection-nav-recommend", kLocalizedFile, nil), NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil),NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil)]];
         [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil),NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil)]];
         [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
@@ -65,7 +66,7 @@
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
         [_segmentedControl setSelectionIndicatorColor:[UIColor colorFromHexString:@"#212121"]];
         [_segmentedControl setSelectionIndicatorHeight:2];
-
+//        [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         __weak __typeof(&*self)weakSelf = self;
         [_segmentedControl setIndexChangeBlock:^(NSInteger index) {
             switch (index) {

@@ -68,18 +68,7 @@
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
         [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x212121)];
         [_segmentedControl setSelectionIndicatorHeight:2];
-        
-        __weak __typeof(&*self)weakSelf = self;
-        [_segmentedControl setIndexChangeBlock:^(NSInteger index) {
-            weakSelf.index = index;
-            
-            if (index == 1){
-                [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-                [weakSelf.thePageViewController setViewControllers:@[weakSelf.msgController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-            } else {
-                [weakSelf.thePageViewController setViewControllers:@[weakSelf.activeController] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
-            }
-        }];
+        [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         [_segmentedControl setTag:2];
 
     }
