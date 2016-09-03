@@ -217,13 +217,29 @@
 //        if ([self.app canOpenURL:url]) {
 //            [self.app openURL:url];
 //        }
-        if (self.article.creator.authorized_author)
-            [[OpenCenter sharedOpenCenter] openAuthUser:self.article.creator];
-        else
-            [[OpenCenter sharedOpenCenter] openUser:self.article.creator];
+        NSString *parten = @"^guoku://user/(\\d+)/?";
+        NSError * error;
+        NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:parten
+                                                                             options:NSRegularExpressionCaseInsensitive error:&error];
+        
+        NSTextCheckingResult *match = [reg firstMatchInString:navigationAction.request.URL.absoluteString options:0. range:NSMakeRange(0., [navigationAction.request.URL.absoluteString length])];
+        if (match) {
+        
+            NSRange firstHalfRange = [match rangeAtIndex:1];
+//            DDLogInfo(@"first %@", [self.text substringWithRange:firstHalfRange]);
+            NSString * userId = [navigationAction.request.URL.absoluteString substringWithRange:firstHalfRange];
+            if (self.article.creator.userId == [userId integerValue]) {
+                [[OpenCenter sharedOpenCenter] openAuthUser:self.article.creator];
+            } else {
+                [self.app openURL:navigationAction.request.URL];
+            }
+        }
     }
-    
-     else if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
+//    else if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku://article"]) {
+//        
+//    
+//    }
+    else if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku"]) {
         NSURL *url = navigationAction.request.URL;
         
         //        UIApplication *app = [UIApplication sharedApplication];

@@ -32,6 +32,7 @@
 		23F6130D1CDB4BF60074E8C8 /* UserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F6130C1CDB4BF60074E8C8 /* UserHeaderView.m */; };
 		23F7F0081C61AF100079A753 /* MoreArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F7F0071C61AF100079A753 /* MoreArticlesViewController.m */; };
 		23FA3BE51CB6611400B8F810 /* UserDigArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FA3BE41CB6611400B8F810 /* UserDigArticlesViewController.m */; };
+		251F78790EDF87A6C9177121 /* libPods-orange.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C333230B99607F713A40264A /* libPods-orange.a */; };
 		391F5F911B1705A000931533 /* JXFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F5F901B1705A000931533 /* JXFormCell.m */; };
 		394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */ = {isa = PBXBuildFile; fileRef = 394104131B294E4C00C40846 /* UIScrollView+Slogan.m */; };
 		399916CE1B11A9DB006826FD /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 399916CD1B11A9DB006826FD /* UIDevice-Hardware.m */; };
@@ -236,6 +237,7 @@
 		8AFB3B801D78607100E1D04A /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB3B7F1D78607100E1D04A /* OrderCell.m */; };
 		8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */; };
 		8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */; };
+		ACCE19A024718D74019A099A /* libPods-core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA50CCB8F38601E17195AA4 /* libPods-core.a */; };
 		B706868D1CF41E7D00C40825 /* TabBarViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = B706868C1CF41E7D00C40825 /* TabBarViewcontroller.m */; };
 		B70686931CF41ECA00C40825 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686901CF41ECA00C40825 /* BaseViewController.m */; };
 		B70686941CF41ECA00C40825 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686921CF41ECA00C40825 /* ListViewController.m */; };
@@ -368,6 +370,7 @@
 
 /* Begin PBXFileReference section */
 		08AA02EF865C28B0B7CE69E9 /* libPods-orange.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-orange.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CA50CCB8F38601E17195AA4 /* libPods-core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2309032C1C803B1500AD26D6 /* AuthUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthUserViewController.h; sourceTree = "<group>"; };
 		2309032D1C803B1500AD26D6 /* AuthUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthUserViewController.m; sourceTree = "<group>"; };
 		23568D1C1D349469003F2611 /* EntityResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityResultCell.h; sourceTree = "<group>"; };
@@ -796,7 +799,6 @@
 		B71E49561AC9240000D4DB6D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B71E495C1AC92AD600D4DB6D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/guoku.strings"; sourceTree = "<group>"; };
 		B72000B61B0849E50001F199 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
-		B72985F31BB8E727006E2518 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
 		B72ACCC01B66531E0020E841 /* DiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverController.h; sourceTree = "<group>"; };
 		B72ACCC11B66531E0020E841 /* DiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverController.m; sourceTree = "<group>"; };
 		B72ACCC61B666B8C0020E841 /* DiscoverBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverBannerView.h; sourceTree = "<group>"; };
@@ -915,6 +917,7 @@
 		B7F9EB0F1B28894B00887582 /* EntityLikerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityLikerController.m; sourceTree = "<group>"; };
 		B7FE2A091B2817FD001C2E33 /* SelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionCell.h; sourceTree = "<group>"; };
 		B7FE2A0A1B2817FD001C2E33 /* SelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionCell.m; sourceTree = "<group>"; };
+		C333230B99607F713A40264A /* libPods-orange.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-orange.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA35B3C11AFEE31200D66671 /* EmailEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailEditViewController.h; sourceTree = "<group>"; };
 		DA35B3C21AFEE31200D66671 /* EmailEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailEditViewController.m; sourceTree = "<group>"; };
 		DA35B3C41AFEE31200D66671 /* PasswordEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordEditViewController.h; sourceTree = "<group>"; };
@@ -928,6 +931,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B79ADC89DEC9B03289C8B0F8 /* libPods-core.a in Frameworks */,
+				ACCE19A024718D74019A099A /* libPods-core.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -979,6 +983,7 @@
 				8AEDCBBD1D62C5230010FDB4 /* YWHybridWebViewFMWK.framework in Frameworks */,
 				4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */,
 				1A4587A518C69A968932EB22 /* libPods-orange.a in Frameworks */,
+				251F78790EDF87A6C9177121 /* libPods-orange.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -995,6 +1000,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0902E2DEFE4689BB1B4C17A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CA50CCB8F38601E17195AA4 /* libPods-core.a */,
+				C333230B99607F713A40264A /* libPods-orange.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		239231AE1C7D967E00B49A88 /* RecommendationUserController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1403,9 +1417,9 @@
 				39B71FEB1B1F4C16008519E3 /* core */,
 				4E56DF1719D552C000263B17 /* orange */,
 				B7BFC9001ACC27C2009627CA /* today */,
-				B7BFC8FD1ACC27C2009627CA /* Frameworks */,
 				4E56DF1619D552C000263B17 /* Products */,
 				A72E4FB92C91BB3F9193D99C /* Pods */,
+				0902E2DEFE4689BB1B4C17A8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2232,39 +2246,6 @@
 				B7B6AD4F1D52F25800C9B8E0 /* GKDiscover.m */,
 			);
 			name = Discover;
-			sourceTree = "<group>";
-		};
-		B7BFC8FD1ACC27C2009627CA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8AD5D21C1D6E99A3000927C7 /* CoreMotion.framework */,
-				8A59017F1D643F3700780C74 /* StoreKit.framework */,
-				8AEDCB501D62BE010010FDB4 /* libc++.tbd */,
-				8A1905421D5471F300B72A79 /* CoreVideo.framework */,
-				8A1905401D5471EA00B72A79 /* CoreMedia.framework */,
-				B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */,
-				B7AAFA791AB7039600A2F20D /* Foundation.framework */,
-				B7AAFA751AB7033600A2F20D /* CFNetwork.framework */,
-				4E56DFCD19D5B84300263B17 /* QuartzCore.framework */,
-				4E56DFC919D5B83B00263B17 /* CoreFoundation.framework */,
-				4E56DFCA19D5B83B00263B17 /* CoreGraphics.framework */,
-				4E56DFC719D5B82900263B17 /* UIKit.framework */,
-				4E56DFC019D5AF1400263B17 /* MobileCoreServices.framework */,
-				4E56DFBE19D5AF0900263B17 /* Security.framework */,
-				8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */,
-				8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */,
-				8AC3F6861C05910A00CCD867 /* libicucore.tbd */,
-				8AC3F6841C0590A500CCD867 /* libz.tbd */,
-				8A7D91061D58827900D67458 /* libiconv.tbd */,
-				4E56DFC219D5AF1E00263B17 /* SystemConfiguration.framework */,
-				4E56DFB619D5AEED00263B17 /* CoreTelephony.framework */,
-				B72985F31BB8E727006E2518 /* CoreSpotlight.framework */,
-				4EAF9D0A1B4AC82100558D44 /* MessageUI.framework */,
-				B7BFC8FE1ACC27C2009627CA /* NotificationCenter.framework */,
-				08AA02EF865C28B0B7CE69E9 /* libPods-orange.a */,
-				8A4958D2884254DBD9E947FA /* libPods-core.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		B7BFC9001ACC27C2009627CA /* today */ = {

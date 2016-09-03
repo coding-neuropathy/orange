@@ -55,20 +55,6 @@
     self.textLabel.text = self.entity.title;
     self.detailTextLabel.text = note.text;
     
-
-
-    [self setNeedsLayout];
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    self.entityImageView.frame = CGRectMake(self.contentView.frame.size.width - 84., 9., 76., 76.);
-    self.textLabel.frame = CGRectMake(10, 10., self.contentView.frame.size.width - 100., 20.);
-    self.detailTextLabel.frame = CGRectMake(10., 40., self.contentView.frame.size.width - 100., 40.);
-
-    
     NSData * imageData = [ImageCache readImageWithURL:self.entity.imageURL_240x240];
     
     if (imageData) {
@@ -83,6 +69,20 @@
             });
         });
     }
+
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.entityImageView.frame = CGRectMake(self.contentView.frame.size.width - 84., 9., 76., 76.);
+    self.textLabel.frame = CGRectMake(10, 10., self.contentView.frame.size.width - 100., 20.);
+    self.detailTextLabel.frame = CGRectMake(10., 40., self.contentView.frame.size.width - 100., 40.);
+
+    
+
 //    self.detailTextLabel.frame
 }
 
