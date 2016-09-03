@@ -147,6 +147,7 @@
 		4EF508811B49042000C92618 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF508801B49042000C92618 /* ShareView.m */; };
 		8A0176221D5B9429004E7A81 /* ForgetPasswdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0176211D5B9429004E7A81 /* ForgetPasswdController.m */; };
 		8A0345AA1BA15F4A0037BC32 /* HomeArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */; };
+		8A0838551D7A8AD6006057F3 /* ArticlePreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0838541D7A8AD6006057F3 /* ArticlePreView.m */; };
 		8A0B16E21BABFDED00469DD6 /* ArticleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B16E11BABFDED00469DD6 /* ArticleListCell.m */; };
 		8A1905221D54378B00B72A79 /* AuthUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1905211D54378B00B72A79 /* AuthUserHeaderView.m */; };
 		8A1905411D5471EA00B72A79 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1905401D5471EA00B72A79 /* CoreMedia.framework */; };
@@ -578,6 +579,8 @@
 		8A0176211D5B9429004E7A81 /* ForgetPasswdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgetPasswdController.m; path = ForgetPassowrdController/ForgetPasswdController.m; sourceTree = "<group>"; };
 		8A0345A81BA15F4A0037BC32 /* HomeArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeArticleCell.h; sourceTree = "<group>"; };
 		8A0345A91BA15F4A0037BC32 /* HomeArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeArticleCell.m; sourceTree = "<group>"; };
+		8A0838531D7A8AD6006057F3 /* ArticlePreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticlePreView.h; path = PreViewControllers/ArticlePreView.h; sourceTree = "<group>"; };
+		8A0838541D7A8AD6006057F3 /* ArticlePreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticlePreView.m; path = PreViewControllers/ArticlePreView.m; sourceTree = "<group>"; };
 		8A0B16E01BABFDED00469DD6 /* ArticleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListCell.h; sourceTree = "<group>"; };
 		8A0B16E11BABFDED00469DD6 /* ArticleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListCell.m; sourceTree = "<group>"; };
 		8A1905201D54378B00B72A79 /* AuthUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthUserHeaderView.h; sourceTree = "<group>"; };
@@ -1915,6 +1918,8 @@
 				8A418C791C04481000CE01B5 /* EntityPreView.m */,
 				8A44F5971C7C066500D1DC19 /* ArticlePreViewController.h */,
 				8A44F5981C7C066500D1DC19 /* ArticlePreViewController.m */,
+				8A0838531D7A8AD6006057F3 /* ArticlePreView.h */,
+				8A0838541D7A8AD6006057F3 /* ArticlePreView.m */,
 			);
 			name = PreViewControllers;
 			sourceTree = "<group>";
@@ -2836,6 +2841,7 @@
 				23F7F0081C61AF100079A753 /* MoreArticlesViewController.m in Sources */,
 				B7174DD91BD4A83D00DEDBDA /* UserViewController.m in Sources */,
 				23F000221C97B5750033BAA4 /* ArticleWebViewController.m in Sources */,
+				8A0838551D7A8AD6006057F3 /* ArticlePreView.m in Sources */,
 				8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */,
 				DA35B3C61AFEE31200D66671 /* EmailEditViewController.m in Sources */,
 				4E66C1DD1A7C8B2500F31A90 /* SettingViewController.m in Sources */,
