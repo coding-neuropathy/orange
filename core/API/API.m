@@ -335,175 +335,6 @@
     }];
 }
 
-/**
- *  获取商品 sku
- * 
- *  @param  entity_hash
- *
- *  @param success    成功block
- *  @param failure    失败block
- */
-+ (void)getEntitySKUWithHash:(NSString *)entity_hash
-                     Success:(void (^)(GKEntity * entity))success
-                     Failure:(void (^)(NSInteger stateCode, NSError * error))failure
-{
-    NSParameterAssert(entity_hash);
-    NSString *path = [NSString stringWithFormat:@"entity/sku/%@/", entity_hash];
-    
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
-//        NSLog(@"%@", responseObject);
-        
-        GKEntity * entity = [GKEntity modelFromDictionary:responseObject];
-        if (success) {
-            success(entity);
-        }
-        
-    } failure:^(NSInteger stateCode, NSError *error) {
-        if (failure) {
-            failure(stateCode, error);
-        }
-    }];
-
-}
-
-/**
- *  商品加入购物车
- *
- *  @param sid      sku id
- *  @param volume   商品数量
- *  @param success  成功block
- *  @param failure  失败block
- */
-+ (void)addEntitySKUToCartWithSKUId:(NSInteger)sku_id Volume:(NSInteger)volume
-                            Success:(void (^)(BOOL is_success))success
-                            Failure:(void (^)(NSInteger stateCode, NSError * error))failure
-{
-    NSParameterAssert(sku_id);
-    NSMutableDictionary *paraDict   = [NSMutableDictionary dictionary];
-    [paraDict setValue:@(sku_id) forKey:@"sid"];
-    volume == 0 ? [paraDict setValue:@(1) forKey:@"volume"] : [paraDict setValue:@(volume) forKey:@"volume"];
-    
-    NSString * path                 = @"cart/add/";
-    
-    
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
-        
-        if (success) {
-            success(YES);
-        }
-        
-    } failure:^(NSInteger stateCode, NSError *error) {
-        if (failure) {
-            failure(stateCode, error);
-        }
-    }];
-}
-
-/**
- *  获取购物车内商品列表
- *
- *  @param success    成功block
- *  @param failure    失败block
- */
-+ (void)getCartItemListWithSuccess:(void (^)(NSArray * shoppingCartArray))success
-                                            Failure:(void (^)(NSInteger stateCode, NSError * error))failure
-{
-    NSString *path                  = @"cart/";
-    
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
-        
-        NSMutableArray * cartItems  = [NSMutableArray arrayWithCapacity:0];
-        for (NSDictionary * row in responseObject) {
-            ShoppingCart * cartItem = [ShoppingCart modelFromDictionary:row];
-            [cartItems addObject:cartItem];
-        }
-        if (success) {
-            success([NSArray arrayWithArray:cartItems]);
-        }
-        
-    } failure:^(NSInteger stateCode, NSError *error) {
-        if (failure) {
-            failure(stateCode, error);
-        }
-    }];
-}
-
-/**
- *  incr shopping cart item
- *
- *  @param sid      sku_id
- *  @param success  成功block
- *  @param failure  失败block
- */
-+ (void)incrShoppingCartItemWithSKUId:(NSInteger)sku_id Success:(void (^)(NSInteger volume))success
-                              Failure:(void (^)(NSInteger stateCode, NSError * error))failure
-{
-    NSString *path      = @"cart/incr/";
-    NSParameterAssert(sku_id);
-    
-    NSMutableDictionary *paraDict   = [NSMutableDictionary dictionary];
-    [paraDict setValue:@(sku_id) forKey:@"sid"];
-
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSInteger volume = [[responseObject objectForKey:@"volume"] integerValue];
-        if (success) {
-            success(volume);
-        }
-    } failure:^(NSInteger stateCode, NSError *error) {
-        if (failure) {
-            failure(stateCode, error);
-        }
-    }];
-}
-
-/**
- *  desc shopping cart item
- *
- *  @param sid      sku_id
- *  @param success  成功block
- *  @param failure  失败block
- */
-+ (void)descShoppingCartItemWithSKUId:(NSInteger)sku_id Success:(void (^)(NSInteger volume))success
-                              Failure:(void (^)(NSInteger stateCode, NSError * error))failure
-{
-    NSString *path      = @"cart/desc/";
-    NSParameterAssert(sku_id);
-    
-    NSMutableDictionary *paraDict   = [NSMutableDictionary dictionary];
-    [paraDict setValue:@(sku_id) forKey:@"sid"];
-    
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSInteger volume = [[responseObject objectForKey:@"volume"] integerValue];
-        if (success) {
-            success(volume);
-        }
-    } failure:^(NSInteger stateCode, NSError *error) {
-        if (failure) {
-            failure(stateCode, error);
-        }
-    }];
-}
-
-/**
- *  clear Shopping Cart
- *
- *  @param success    成功block
- *  @param failure    失败block
- */
-+ (void)clearCartWithSuccess:(void (^)(BOOL isClear))success
-                     Failure:(void (^)(NSInteger stateCode, NSError * error))failure
-{
-    NSString * path     = @"cart/clear/";
-    
-    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
-        
-    } failure:^(NSInteger stateCode, NSError *error) {
-        if (failure) {
-            failure(stateCode, error);
-        }
-    }];
-}
-
 
 /**
  *  获取随机商品
@@ -595,6 +426,206 @@
         }
     }];
 }
+
+#pragma mark - order 
+/**
+ *  获取商品 sku
+ *
+ *  @param  entity_hash
+ *
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getEntitySKUWithHash:(NSString *)entity_hash
+                     Success:(void (^)(GKEntity * entity))success
+                     Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSParameterAssert(entity_hash);
+    NSString *path = [NSString stringWithFormat:@"entity/sku/%@/", entity_hash];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+        //        NSLog(@"%@", responseObject);
+        
+        GKEntity * entity = [GKEntity modelFromDictionary:responseObject];
+        if (success) {
+            success(entity);
+        }
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+    
+}
+
+/**
+ *  商品加入购物车
+ *
+ *  @param sid      sku id
+ *  @param volume   商品数量
+ *  @param success  成功block
+ *  @param failure  失败block
+ */
++ (void)addEntitySKUToCartWithSKUId:(NSInteger)sku_id Volume:(NSInteger)volume
+                            Success:(void (^)(BOOL is_success))success
+                            Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSParameterAssert(sku_id);
+    NSMutableDictionary *paraDict   = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(sku_id) forKey:@"sid"];
+    volume == 0 ? [paraDict setValue:@(1) forKey:@"volume"] : [paraDict setValue:@(volume) forKey:@"volume"];
+    
+    NSString * path                 = @"cart/add/";
+    
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+
+/**
+ *  获取购物车内商品列表
+ *
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getCartItemListWithSuccess:(void (^)(NSArray * shoppingCartArray))success
+                           Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString *path                  = @"cart/";
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        NSMutableArray * cartItems  = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject) {
+            ShoppingCart * cartItem = [ShoppingCart modelFromDictionary:row];
+            [cartItems addObject:cartItem];
+        }
+        if (success) {
+            success([NSArray arrayWithArray:cartItems]);
+        }
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+
+/**
+ *  incr shopping cart item
+ *
+ *  @param sid      sku_id
+ *  @param success  成功block
+ *  @param failure  失败block
+ */
++ (void)incrShoppingCartItemWithSKUId:(NSInteger)sku_id Success:(void (^)(NSInteger volume))success
+                              Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString *path      = @"cart/incr/";
+    NSParameterAssert(sku_id);
+    
+    NSMutableDictionary *paraDict   = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(sku_id) forKey:@"sid"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSInteger volume = [[responseObject objectForKey:@"volume"] integerValue];
+        if (success) {
+            success(volume);
+        }
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+
+/**
+ *  desc shopping cart item
+ *
+ *  @param sid      sku_id
+ *  @param success  成功block
+ *  @param failure  失败block
+ */
++ (void)descShoppingCartItemWithSKUId:(NSInteger)sku_id Success:(void (^)(NSInteger volume))success
+                              Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString *path      = @"cart/desc/";
+    NSParameterAssert(sku_id);
+    
+    NSMutableDictionary *paraDict   = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(sku_id) forKey:@"sid"];
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSInteger volume = [[responseObject objectForKey:@"volume"] integerValue];
+        if (success) {
+            success(volume);
+        }
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+
+/**
+ *  clear Shopping Cart
+ *
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)clearCartWithSuccess:(void (^)(BOOL isClear))success
+                     Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString * path     = @"cart/clear/";
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+
+/**
+ *  get user order list
+ *
+ *  @param success    成功block
+ *  @param failure    失败block
+ *
+ */
++ (void)getOrderListWithSuccess:(void (^)(NSArray *OrderArray))success
+                            Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString *path      = @"order/";
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+//        NSLog(@"data %@", responseObject);
+        NSMutableArray * orderArray = [NSMutableArray arrayWithCapacity:0];
+        for (id row in responseObject) {
+            GKOrder * order = [GKOrder modelFromDictionary:row];
+            [orderArray addObject:order];
+        }
+        if (success) {
+            success(orderArray);
+        }
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+
 
 #pragma mark - get Article data
 /**

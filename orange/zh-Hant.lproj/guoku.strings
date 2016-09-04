@@ -278,3 +278,5 @@
 "add-cart"                  = "加入購物袋";
 "submit-order"              = "提交訂單";
 "shopping-cart"             = "購物袋";
+
+"order-number"              = "訂單號:";

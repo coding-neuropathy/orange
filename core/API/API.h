@@ -110,6 +110,47 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                             failure:(void (^)(NSInteger stateCode))failure;
 
 /**
+ *  获取随机商品
+ *
+ *  @param categoryId 分类ID
+ *  @param count      请求的个数
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getRandomEntityListByCategoryId:(NSUInteger)categoryId
+                               entityId:(NSString *)entityId
+                                  count:(NSInteger)count
+                                success:(void (^)(NSArray *entityArray))success
+                                failure:(void (^)(NSInteger stateCode))failure;
+
+/**
+ *  获取商品喜爱用户
+ *
+ *  @param entity_id  商品ID
+ *  @param page       页码page
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
++ (void)getEntityLikerWithEntityId:(NSString *)entity_id
+                              Page:(NSInteger)page
+                           success:(void (^)(NSArray *dataArray, NSInteger page))success
+                           failure:(void (^)(NSInteger stateCode))failure;
+
+/**
+ *  对点评点赞
+ *
+ *  @param noteId  点评ID
+ *  @param state   想要设置的赞状态
+ *  @param success 成功block
+ *  @param failure 失败block
+ */
++ (void)pokeWithNoteId:(NSUInteger)noteId
+                 state:(BOOL)state
+               success:(void (^)(NSString *entityId, NSUInteger noteId, BOOL state))success
+               failure:(void (^)(NSInteger stateCode))failure;
+
+#pragma mark - order 
+/**
  *  获取商品 sku
  *
  *  @param  entity_hash
@@ -122,13 +163,13 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                      Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 /**
-*  商品加入购物车
-*
-*  sid     sku id
-*  volume  商品数量
-*  @param success    成功block
-*  @param failure    失败block
-*/
+ *  商品加入购物车
+ *
+ *  sid     sku id
+ *  volume  商品数量
+ *  @param success    成功block
+ *  @param failure    失败block
+ */
 + (void)addEntitySKUToCartWithSKUId:(NSInteger)sku_id Volume:(NSInteger)volume
                             Success:(void (^)(BOOL is_success))success
                             Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
@@ -172,45 +213,16 @@ typedef NS_ENUM(NSInteger, GKSNSType){
  */
 + (void)clearCartWithSuccess:(void (^)(BOOL isClear))success
                      Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
-/**
- *  获取随机商品
- *
- *  @param categoryId 分类ID
- *  @param count      请求的个数
- *  @param success    成功block
- *  @param failure    失败block
- */
-+ (void)getRandomEntityListByCategoryId:(NSUInteger)categoryId
-                               entityId:(NSString *)entityId
-                                  count:(NSInteger)count
-                                success:(void (^)(NSArray *entityArray))success
-                                failure:(void (^)(NSInteger stateCode))failure;
 
 /**
- *  获取商品喜爱用户
+ *  get user order list
  *
- *  @param entity_id  商品ID
- *  @param page       页码page
  *  @param success    成功block
  *  @param failure    失败block
- */
-+ (void)getEntityLikerWithEntityId:(NSString *)entity_id
-                              Page:(NSInteger)page
-                           success:(void (^)(NSArray *dataArray, NSInteger page))success
-                           failure:(void (^)(NSInteger stateCode))failure;
-
-/**
- *  对点评点赞
  *
- *  @param noteId  点评ID
- *  @param state   想要设置的赞状态
- *  @param success 成功block
- *  @param failure 失败block
  */
-+ (void)pokeWithNoteId:(NSUInteger)noteId
-                 state:(BOOL)state
-               success:(void (^)(NSString *entityId, NSUInteger noteId, BOOL state))success
-               failure:(void (^)(NSInteger stateCode))failure;
++ (void)getOrderListWithSuccess:(void (^)(NSArray *OrderArray))success
+                        Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 #pragma mark - get Article data
 /**

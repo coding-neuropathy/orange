@@ -28,7 +28,7 @@ static NSString * CellIdentifer = @"Cell";
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xf8f8f8);
+        _collectionView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
     }
     return _collectionView;
 }

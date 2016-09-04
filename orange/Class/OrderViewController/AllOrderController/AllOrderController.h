@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AllOrderController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface AllOrderController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @end

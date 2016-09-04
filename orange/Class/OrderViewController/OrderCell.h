@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OrderCell : UITableViewCell
+@interface OrderCell : UICollectionViewCell
+
+@property (weak, nonatomic) GKOrderItem   *orderItem;
 
 @end

@@ -41,6 +41,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - init view
 - (HMSegmentedControl *)segmentedControl
 {

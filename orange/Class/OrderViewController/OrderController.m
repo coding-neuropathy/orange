@@ -9,11 +9,21 @@
 #import "OrderController.h"
 #import <HMSegmentedControl/HMSegmentedControl.h>
 
+#import "AllOrderController.h"
+#import "PendingOrderController.h"
+#import "FinishedOrderController.h"
+
+
 @interface OrderController () 
 
-@property (strong, nonatomic) UIPageViewController * thePageViewController;
-@property (strong, nonatomic) HMSegmentedControl *segmentedControl;
-@property (assign, nonatomic) NSInteger index;
+@property (strong, nonatomic) UIPageViewController      *thePageViewController;
+@property (strong, nonatomic) HMSegmentedControl        *segmentedControl;
+@property (assign, nonatomic) NSInteger                 index;
+
+@property (strong, nonatomic) AllOrderController        *allOrderController;
+@property (strong, nonatomic) PendingOrderController    *pendingController;
+@property (strong, nonatomic) FinishedOrderController   *finishedOrderController;
+@property (strong, nonatomic) NSArray                   *controllers;
 
 @end
 
@@ -56,11 +66,47 @@
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
         [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x212121)];
         [_segmentedControl setSelectionIndicatorHeight:2];
-        [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-//        [_segmentedControl setTag:2];
+
+        [_segmentedControl setIndexChangeBlock:^(NSInteger index) {
+            
+        }];
         
     }
     return _segmentedControl;
+}
+
+#pragma mark - lazy load 
+- (AllOrderController *)allOrderController
+{
+    if (!_allOrderController) {
+        _allOrderController = [[AllOrderController alloc] init];
+    }
+    return _allOrderController;
+}
+
+- (PendingOrderController *)pendingController
+{
+    if (!_pendingController) {
+        _pendingController  = [[PendingOrderController alloc] init];
+    }
+    return _pendingController;
+}
+
+- (FinishedOrderController *)finishedOrderController
+{
+    if (!_finishedOrderController) {
+        _finishedOrderController    = [[FinishedOrderController alloc] init];
+    }
+    return _finishedOrderController;
+}
+
+- (NSArray *)controllers
+{
+    if (!_controllers) {
+        _controllers        = [NSArray arrayWithObjects:self.allOrderController,
+                               self.pendingController, self.finishedOrderController, nil];
+    }
+    return _controllers;
 }
 
 
@@ -72,9 +118,16 @@
     
     [self.view addSubview:self.segmentedControl];
     
+    
+    self.thePageViewController.view.frame = CGRectMake(0, self.segmentedControl.deFrameBottom, kScreenWidth,  kScreenHeight -
+                                                       self.segmentedControl.deFrameBottom);
     [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
     [self addChildViewController:self.thePageViewController];
     
+
+    [self.thePageViewController setViewControllers:@[self.allOrderController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:^(BOOL finished) {
+        
+    }];
 }
 
 #pragma mark - <UIPageViewControllerDataSource>
@@ -101,10 +154,10 @@
 
 #pragma mark - <UIPageViewControllerDelegate>
 
-#pragma mark - HMSegmentedControl ChangeValue
-- (void)segmentedControlChangedValue:(id)sender
-{
-
-}
+//#pragma mark - HMSegmentedControl ChangeValue
+//- (void)segmentedControlChangedValue:(id)sender
+//{
+//
+//}
 
 @end

@@ -275,3 +275,5 @@
 "add-cart"                  = "加入购物袋";
 "submit-order"              = "提交订单";
 "shopping-cart"             = "购物袋";
+
+"order-number"              = "订单号:";

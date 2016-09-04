@@ -29,3 +29,5 @@
 
 
 #import "ShoppingCart.h"
+#import "GKOrder.h"
+#import "GKOrderItem.h"

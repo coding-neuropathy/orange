@@ -10,6 +10,7 @@
 
 #define kDateFormat_mm_dd_HH_mm @"MM-dd HH:mm"
 #define kDateFormat_yyyy_mm_dd_HH_mm @"YYYY-MM-dd HH:mm"
+#define kDateFormat_yyyy_mm_dd_HH_mm_ss @"YYYY-MM-dd HH:mm:ss"
 #define kDateFormat_yyyy_mm_dd @"YYYY-MM-dd"
 #define kDateFormat_mm_dd @"MM-dd"
 #define kDateFormat_mm_dd_SimpleChinese @"MM月dd日"
