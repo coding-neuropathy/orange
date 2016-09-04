@@ -14,6 +14,7 @@
 {
     NSDictionary *keyDic = @{
                              @"entity_title"        : @"entityTitle",
+                             @"attr"                : @"skuAttr",
                              @"volume"              : @"volume",
                              @"entity_image"        : @"imageURL",
                              @"grand_total_price"   : @"totalPrice",

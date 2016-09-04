@@ -6,8 +6,8 @@
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AllOrderController.h"
 
-@interface FinishedOrderController : UIViewController
+@interface FinishedOrderController : AllOrderController
 
 @end

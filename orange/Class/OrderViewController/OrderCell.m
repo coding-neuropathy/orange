@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UIImageView   *imageView;
 @property (strong, nonatomic) UILabel       *titleLabel;
+@property (strong, nonatomic) UILabel       *skuAttrLabel;
 @property (strong, nonatomic) UILabel       *priceLabel;
 @property (strong, nonatomic) UILabel       *volumeLable;
 
@@ -57,6 +58,22 @@
     return _titleLabel;
 }
 
+- (UILabel *)skuAttrLabel
+{
+    if (!_skuAttrLabel) {
+        _skuAttrLabel               = [[UILabel alloc] initWithFrame:CGRectZero];
+        _skuAttrLabel.deFrameSize   = CGSizeMake(176., 20.);
+        _skuAttrLabel.font          = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _skuAttrLabel.textColor     = [UIColor colorFromHexString:@"#757575"];
+        _skuAttrLabel.textAlignment = NSTextAlignmentLeft;
+        _skuAttrLabel.numberOfLines = 1.;
+//        _skuAttrLabel
+        
+        [self.contentView addSubview:_skuAttrLabel];
+    }
+    return _skuAttrLabel;
+}
+
 - (UILabel *)priceLabel
 {
     if (!_priceLabel) {
@@ -92,7 +109,8 @@
                       placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.imageView.deFrameSize]
                                options:SDWebImageRetryFailed];
 //
-    self.titleLabel.text            = _orderItem.entityTitle;    
+    self.titleLabel.text            = _orderItem.entityTitle;
+    self.skuAttrLabel.text          = _orderItem.skuAttr;
     self.volumeLable.text           = [NSString stringWithFormat:@"x %ld", _orderItem.volume];
     self.priceLabel.text            = [NSString stringWithFormat:@"¥ %.2f", _orderItem.promoTotalPrice];
     
@@ -109,6 +127,9 @@
 //    self.textLabel.deFrameSize      = CGSizeMake(176., 20.);
     self.titleLabel.deFrameTop      = 12.;
     self.titleLabel.deFrameLeft     = self.imageView.deFrameRight + 14.;
+    
+    self.skuAttrLabel.center        = self.titleLabel.center;
+    self.skuAttrLabel.deFrameTop    = self.titleLabel.deFrameBottom + 4.;
     
     self.priceLabel.deFrameTop      = self.titleLabel.deFrameTop;
     self.priceLabel.deFrameRight    = self.contentView.deFrameWidth - 16.;

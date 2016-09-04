@@ -215,14 +215,17 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                      Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 /**
- *  get user order list
+ *  获取订单列表
  *
- *  @param success    成功block
- *  @param failure    失败block
- *
+ *  @param status  订单状态
+ *  @param page     页码
+ *  @param size    每页数量
+ *  @param success 成功block
+ *  @param failure 失败block
  */
-+ (void)getOrderListWithSuccess:(void (^)(NSArray *OrderArray))success
-                        Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
++ (void)getOrderListWithWithStatus:(NSInteger)status Page:(NSInteger)page Size:(NSInteger)size
+                           Success:(void (^)(NSArray *OrderArray))success
+                           Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 #pragma mark - get Article data
 /**

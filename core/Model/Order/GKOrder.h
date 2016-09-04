@@ -8,11 +8,20 @@
 
 #import "GKBaseModel.h"
 
+/**
+ *  用户状态
+ */
+typedef NS_ENUM(NSInteger, GKOrderState) {
+    AddressUnBind,
+    WaitingForPayment,
+    Paid,
+};
+
 @interface GKOrder : GKBaseModel
 
 @property (assign, nonatomic) NSInteger         orderId;
 @property (strong, nonatomic) NSString          *orderNumber;
-@property (assign, nonatomic) NSInteger         status;
+@property (assign, nonatomic) GKOrderState      status;
 @property (strong, nonatomic) NSArray           *orderItems;
 @property (strong, nonatomic) NSDate            *createdDateTime;
 @property (strong, nonatomic) NSDate            *updatedDateTime;

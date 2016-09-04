@@ -12,6 +12,7 @@
 
 @property (assign, nonatomic) NSInteger volume;
 @property (strong, nonatomic) NSString  *entityTitle;
+@property (strong, nonatomic) NSString  *skuAttr;
 @property (strong, nonatomic) NSURL     *imageURL;
 @property (assign, nonatomic) float     totalPrice;
 @property (assign, nonatomic) float     promoTotalPrice;

@@ -149,7 +149,6 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 //}
 
 #pragma mark - DZNEmptyDataSetDelegate Methods
-
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
 {
     return YES;
@@ -167,7 +166,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
 
 - (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view
 {
-    NSLog(@"%s",__FUNCTION__);
+    DDLogInfo(@"%s",__FUNCTION__);
 }
 
 - (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button

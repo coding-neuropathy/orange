@@ -280,7 +280,10 @@
 "submit-order"              = "Submit";
 "shopping-cart"             = "Shopping Cart";
 
-"order-number"              = "Order Number:";
+"order-number"              = "Order No.";
+"order-status"              = "State";
+"wait-for-payment"          = "Wait for Payment";
+"paid"                      = "Paid";
 
 
 

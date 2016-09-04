@@ -706,7 +706,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (void)TapReviewOrder:(id)sender
 {
     OrderController *vc = [[OrderController alloc] init];
-    
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -769,7 +769,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 //    }
     if (self.user.userId == [Passport sharedInstance].user.userId) {
         if ([keyPath isEqualToString:@"nickname"]) {
-            DDLogInfo(@"nickname kvo %@", [Passport sharedInstance].user.nickname);
+//            DDLogInfo(@"nickname kvo %@", [Passport sharedInstance].user.nickname);
             self.user = [Passport sharedInstance].user;
             self.navigationItem.title = self.user.nick;
             self.headerView.user = self.user;

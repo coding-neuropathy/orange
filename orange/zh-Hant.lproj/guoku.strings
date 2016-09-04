@@ -280,3 +280,7 @@
 "shopping-cart"             = "購物袋";
 
 "order-number"              = "訂單號:";
+"order-status"              = "訂單狀態:";
+"wait-for-payment"          = "待付款";
+"paid"                      = "交易完成";
+//"close"                     = "d"

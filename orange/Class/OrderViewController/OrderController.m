@@ -67,8 +67,14 @@
         [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x212121)];
         [_segmentedControl setSelectionIndicatorHeight:2];
 
+        __weak __typeof(&*self)weakSelf = self;
         [_segmentedControl setIndexChangeBlock:^(NSInteger index) {
-            
+            UIViewController * controller = [weakSelf.controllers objectAtIndex:index];
+            [weakSelf.thePageViewController setViewControllers:@[controller]
+                                                     direction:UIPageViewControllerNavigationDirectionForward
+                                                      animated:NO completion:^(BOOL finished) {
+                                                          weakSelf.index = index;
+                                                      }];
         }];
         
     }
@@ -114,46 +120,60 @@
 {
     [super viewDidLoad];
     
-    self.title          = NSLocalizedStringFromTable(@"order", kLocalizedFile, nil);
+    self.title              = NSLocalizedStringFromTable(@"order", kLocalizedFile, nil);
+    self.view.backgroundColor   = [UIColor colorFromHexString:@"#ffffff"];
     
     [self.view addSubview:self.segmentedControl];
-    
     
     self.thePageViewController.view.frame = CGRectMake(0, self.segmentedControl.deFrameBottom, kScreenWidth,  kScreenHeight -
                                                        self.segmentedControl.deFrameBottom);
     [self.view insertSubview:self.thePageViewController.view belowSubview:self.segmentedControl];
     [self addChildViewController:self.thePageViewController];
     
-
+    __weak __typeof(&*self)weakSelf = self;
     [self.thePageViewController setViewControllers:@[self.allOrderController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:^(BOOL finished) {
-        
+        if (finished) {
+            weakSelf.index = 0;
+        }
     }];
 }
 
 #pragma mark - <UIPageViewControllerDataSource>
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-    return 3;
+    return self.controllers.count;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-//    if ([viewController isKindOfClass:[MessageController class]]) {
-//        return self.activeController;
-//    }
+    self.index = [self.controllers indexOfObject:viewController];
+    if (self.index > 0) {
+//        self.index = self.beforeIndex;
+        DDLogInfo(@"before %ld", self.index);
+        return [self.controllers objectAtIndex:self.index - 1];
+    }
     return nil;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-//    if ([viewController isKindOfClass:[ActiveController class]]) {
-//        return self.msgController;
-//    }
+    self.index = [self.controllers indexOfObject:viewController];
+    if (self.index < [self.controllers count] - 1) {
+        DDLogInfo(@"after %ld", self.index);
+        return [self.controllers objectAtIndex:self.index + 1];
+    }
     return nil;
 }
 
 #pragma mark - <UIPageViewControllerDelegate>
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    NSInteger currentIndex = [self.controllers indexOfObject:pageViewController.viewControllers.firstObject];
+    if (completed) {
 
+        [self.segmentedControl setSelectedSegmentIndex:currentIndex animated:YES];
+    }
+}
 //#pragma mark - HMSegmentedControl ChangeValue
 //- (void)segmentedControlChangedValue:(id)sender
 //{

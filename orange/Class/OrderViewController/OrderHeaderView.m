@@ -67,9 +67,7 @@
         _orderNumberLabel               = [[UILabel alloc] initWithFrame:CGRectZero];
         _orderNumberLabel.font          = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
         _orderNumberLabel.textColor     = [UIColor colorFromHexString:@"#757575"];
-//        _orderNumberLabel.text          = NSLocalizedStringFromTable(@"order-number", kLocalizedFile, nil);
-//        _orderNumberLabel.deFrameSize   = CGSizeMake([_orderNumberLabel.text widthWithLineWidth:0. Font:_orderNumberLabel.font], 20.);
-        
+
         [self addSubview:_orderNumberLabel];
     }
     return _orderNumberLabel;
@@ -83,7 +81,7 @@
         _statusTipsLabel.textColor      = [UIColor colorFromHexString:@"#212121"];
         _statusTipsLabel.textAlignment  = NSTextAlignmentLeft;
         _statusTipsLabel.text           = NSLocalizedStringFromTable(@"order-status", kLocalizedFile, nil);
-        _statusTipsLabel.deFrameSize    = CGSizeMake([_orderNumberLabel.text widthWithLineWidth:0. Font:_orderNumberLabel.font], 20.);
+        _statusTipsLabel.deFrameSize    = CGSizeMake([_statusTipsLabel.text widthWithLineWidth:0. Font:_orderNumberLabel.font], 20.);
         
         [self addSubview:_statusTipsLabel];
         
@@ -97,8 +95,7 @@
         _statusLabel                    = [[UILabel alloc] initWithFrame:CGRectZero];
         _statusLabel.font               = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
         _statusLabel.textColor          = [UIColor colorFromHexString:@"#757575"];
-//        _statusLabel.text               = NSLocalizedStringFromTable(@"order-status", kLocalizedFile, nil);
-//        _statusLabel.deFrameSize        = CGSizeMake([_orderNumberLabel.text widthWithLineWidth:0. Font:_orderNumberLabel.font], 20.);
+        _statusLabel.textAlignment      = NSTextAlignmentLeft;
         
         [self addSubview:_statusLabel];
     }
@@ -115,8 +112,23 @@
     self.createOrderLabel.text          = [NSString stringWithFormat:@"%@",
                                            [_order.createdDateTime stringWithFormat:kDateFormat_yyyy_mm_dd_HH_mm_ss]];
     
-    self.orderNumberLabel.text          = [NSString stringWithFormat:@"%@", _order.orderNumber];
-    self.orderNumberLabel.deFrameSize   = CGSizeMake([_order.orderNumber widthWithLineWidth:0. Font:self.orderNumberLabel.font], 20.);
+    self.orderNumberLabel.text          = [NSString stringWithFormat:@"%@", self.order.orderNumber];
+    self.orderNumberLabel.deFrameSize   = CGSizeMake([self.order.orderNumber widthWithLineWidth:0. Font:self.orderNumberLabel.font], 20.);
+    
+//    DDLogInfo(@"status %ld", order.status);
+    switch (order.status) {
+        case WaitingForPayment:
+            self.statusLabel.text       = NSLocalizedStringFromTable(@"wait-for-payment", kLocalizedFile, nil);
+            self.statusLabel.textColor  = [UIColor redColor];
+            break;
+        case Paid:
+            self.statusLabel.text       = NSLocalizedStringFromTable(@"paid", kLocalizedFile, nil);
+            self.statusLabel.textColor  = [UIColor colorFromHexString:@"#757575"];
+            break;
+        default:
+            break;
+    }
+    self.statusLabel.deFrameSize        = CGSizeMake([self.statusLabel.text widthWithLineWidth:0. Font:self.statusLabel.font], 20.);
     
     [self setNeedsLayout];
 }
@@ -136,6 +148,9 @@
     
     self.statusTipsLabel.deFrameTop     = self.orderTipsLabel.deFrameBottom + 4.;
     self.statusTipsLabel.deFrameLeft    = self.orderTipsLabel.deFrameLeft;
+    
+    self.statusLabel.deFrameTop         = self.statusTipsLabel.deFrameTop;
+    self.statusLabel.deFrameLeft        = self.statusTipsLabel.deFrameRight + 10.;
     
 }
 

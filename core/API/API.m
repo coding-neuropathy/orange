@@ -598,18 +598,28 @@
 }
 
 /**
- *  get user order list
+ *  获取订单列表
  *
- *  @param success    成功block
- *  @param failure    失败block
- *
+ *  @param status  订单状态
+ *  @param page     页码
+ *  @param size    每页数量
+ *  @param success 成功block
+ *  @param failure 失败block
  */
-+ (void)getOrderListWithSuccess:(void (^)(NSArray *OrderArray))success
++ (void)getOrderListWithWithStatus:(NSInteger)status Page:(NSInteger)page Size:(NSInteger)size
+                           Success:(void (^)(NSArray *OrderArray))success
                             Failure:(void (^)(NSInteger stateCode, NSError * error))failure
 {
     NSString *path      = @"order/";
     
-    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+    NSMutableDictionary *paraDict   = [NSMutableDictionary dictionary];
+    [paraDict setValue:@(page) forKey:@"page"];
+    [paraDict setValue:@(size) forKey:@"size"];
+    if (status) {
+        [paraDict setValue:@(status) forKey:@"status"];
+    }
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:paraDict success:^(NSURLSessionDataTask *operation, id responseObject) {
 //        NSLog(@"data %@", responseObject);
         NSMutableArray * orderArray = [NSMutableArray arrayWithCapacity:0];
         for (id row in responseObject) {

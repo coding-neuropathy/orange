@@ -11,10 +11,13 @@
 #import "OrderHeaderView.h"
 #import "OrderFooterView.h"
 
-@interface AllOrderController ()
+@interface AllOrderController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
-@property (strong, nonatomic) UICollectionView  *collectionView;
-@property (strong, nonatomic) NSMutableArray    *orderArray;
+//@property (strong, nonatomic) UICollectionView  *collectionView;
+//@property (strong, nonatomic) NSMutableArray    *orderArray;
+//
+//@property (assign, nonatomic) NSInteger page;
+//@property (assign, nonatomic) NSInteger size;
 
 @end
 
@@ -24,6 +27,15 @@ static NSString *CellIdentifier     = @"OrderCell";
 static NSString *HeaderIdentifier   = @"OrderHeader";
 static NSString *FooterIdentifier   = @"OrderFooter";
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.page   = 1;
+        self.size   = 10;
+    }
+    return self;
+}
 
 #pragma mark - init collction view
 - (UICollectionView *)collectionView
@@ -42,38 +54,43 @@ static NSString *FooterIdentifier   = @"OrderFooter";
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
+        
+        _collectionView.emptyDataSetSource = self;
+//        _collectionView.emptyDataSetVisible = NO;
     }
     return _collectionView;
 }
-//- (UITableView *)tableView
-//{
-//    if (!_tableView) {
-//        _tableView                      = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-//        _tableView.deFrameSize          = CGSizeMake(kScreenWidth, kScreenHeight - 47.);
-////        _tableView.deFrameTop           = 47.;
-////        _tableView.backgroundColor      = [UIColor colorFromHexString:@"#ffffff"];
-//        _tableView.rowHeight            = 100.;
-//        _tableView.sectionHeaderHeight  = 100.;
-//        _tableView.sectionFooterHeight  = 40.;
-//        _tableView.delegate             = self;
-//        _tableView.dataSource           = self;
-//        
-//    }
-//    return _tableView;
-//}
+
 
 #pragma mark - get order list 
 - (void)refresh
 {
-    [API getOrderListWithSuccess:^(NSArray *OrderArray) {
+    [API getOrderListWithWithStatus:0 Page:self.page Size:self.size Success:^(NSArray *OrderArray) {
 //        DDLogInfo(@"order list %@", OrderArray);
         self.orderArray = (NSMutableArray *)OrderArray;
-        
+        self.page       += 1;
         [self.collectionView.pullToRefreshView stopAnimating];
         [UIView setAnimationsEnabled:NO];
         [self.collectionView reloadData];
         [UIView setAnimationsEnabled:YES];
         
+    } Failure:^(NSInteger stateCode, NSError *error) {
+        DDLogError(@"error %@", error.localizedDescription);
+        [self.collectionView.pullToRefreshView stopAnimating];
+    }];
+}
+
+- (void)load
+{
+    [API getOrderListWithWithStatus:0 Page:self.page Size:self.size Success:^(NSArray *OrderArray) {
+        //        DDLogInfo(@"order list %@", OrderArray);
+//        self.orderArray = (NSMutableArray *)OrderArray;
+        self.page       += 1;
+        [self.orderArray addObjectsFromArray:OrderArray];
+        [self.collectionView.pullToRefreshView stopAnimating];
+        [UIView setAnimationsEnabled:NO];
+        [self.collectionView reloadData];
+        [UIView setAnimationsEnabled:YES];
     } Failure:^(NSInteger stateCode, NSError *error) {
         DDLogError(@"error %@", error.localizedDescription);
         [self.collectionView.pullToRefreshView stopAnimating];
@@ -102,9 +119,9 @@ static NSString *FooterIdentifier   = @"OrderFooter";
         
     }];
     
-//    [self.tableView addInfiniteScrollingWithActionHandler:^{
-//        [weakSelf.entityList loadWithCategoryId:weakSelf.cateId];
-//    }];
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf load];
+    }];
     
     if (self.orderArray.count == 0)
     {
@@ -152,7 +169,53 @@ static NSString *FooterIdentifier   = @"OrderFooter";
         footerView.order    = order;
         return footerView;
     }
+}
 
+
+#pragma mark - <DZNEmptyDataSetSource>
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = NSLocalizedStringFromTable(@"no-order", kLocalizedFile, nil);;
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:20.0f],
+                                 NSForegroundColorAttributeName: [UIColor colorWithRed:0. green:0. blue:0. alpha:0.27],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -100.0;
+}
+
+#pragma mark - <DZNEmptyDataSetDelegate>
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
+{
+    return NO;
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view
+{
+    DDLogInfo(@"%s",__FUNCTION__);
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button
+{
+    
 }
 
 @end
