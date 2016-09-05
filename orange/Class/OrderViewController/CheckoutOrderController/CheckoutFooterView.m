@@ -13,6 +13,10 @@
 @property (strong, nonatomic) UILabel   *orderPricelabel;
 @property (strong, nonatomic) UILabel   *payTipsLabel;
 
+@property (strong, nonatomic) UIButton  *alipayBtn;
+@property (strong, nonatomic) UIButton  *wechatPayBtn;
+@property (strong, nonatomic) UIButton  *storePayBtn;
+
 @end
 
 @implementation CheckoutFooterView
@@ -55,6 +59,73 @@
     return _payTipsLabel;
 }
 
+- (UIButton *)alipayBtn
+{
+    if (!_alipayBtn) {
+        _alipayBtn                      = [UIButton buttonWithType:UIButtonTypeCustom];
+        _alipayBtn.deFrameSize          = CGSizeMake((kScreenWidth - 46) / 3., 116.);
+        _alipayBtn.titleLabel.font      = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _alipayBtn.layer.cornerRadius   = 4.;
+        _alipayBtn.layer.masksToBounds  = YES;
+        _alipayBtn.backgroundColor      = [UIColor colorFromHexString:@"#f8f8f8"];
+        _alipayBtn.imageEdgeInsets      = UIEdgeInsetsMake(0., 34., 30., 15.);
+        _alipayBtn.titleEdgeInsets      = UIEdgeInsetsMake(55., -15., 0., 15.);
+        
+        [_alipayBtn setImage:[UIImage imageNamed:@"AliPay"] forState:UIControlStateNormal];
+        [_alipayBtn setTitle:NSLocalizedStringFromTable(@"alipay", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_alipayBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
+        [_alipayBtn addTarget:self action:@selector(alipayBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_alipayBtn];
+    }
+    return _alipayBtn;
+}
+
+- (UIButton *)wechatPayBtn
+{
+    if (!_wechatPayBtn) {
+        _wechatPayBtn                       = [UIButton buttonWithType:UIButtonTypeCustom];
+        _wechatPayBtn.deFrameSize           = CGSizeMake((kScreenWidth - 46) / 3., 116.);
+        _wechatPayBtn.titleLabel.font       = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _wechatPayBtn.layer.cornerRadius    = 4.;
+        _wechatPayBtn.layer.masksToBounds   = YES;
+        _wechatPayBtn.backgroundColor       = [UIColor colorFromHexString:@"#f8f8f8"];
+        _wechatPayBtn.imageEdgeInsets       = UIEdgeInsetsMake(0., 34., 30., 0.);
+        _wechatPayBtn.titleEdgeInsets       = UIEdgeInsetsMake(55., -15., 0., 15.);
+        
+        [_wechatPayBtn setTitle:NSLocalizedStringFromTable(@"wechat-pay", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_wechatPayBtn setImage:[UIImage imageNamed:@"WechatPay"] forState:UIControlStateNormal];
+        [_wechatPayBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
+        [_wechatPayBtn addTarget:self action:@selector(wechatPayBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_wechatPayBtn];
+    }
+    return _wechatPayBtn;
+}
+
+- (UIButton *)storePayBtn
+{
+    if (!_storePayBtn) {
+        _storePayBtn                       = [UIButton buttonWithType:UIButtonTypeCustom];
+        _storePayBtn.deFrameSize           = CGSizeMake((kScreenWidth - 46) / 3., 116.);
+        _storePayBtn.titleLabel.font       = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        _storePayBtn.titleLabel.textAlignment       = NSTextAlignmentCenter;
+        _storePayBtn.layer.cornerRadius    = 4.;
+        _storePayBtn.layer.masksToBounds   = YES;
+        _storePayBtn.backgroundColor       = [UIColor colorFromHexString:@"#f8f8f8"];
+        _storePayBtn.imageEdgeInsets       = UIEdgeInsetsMake(0., 34., 30., 15.);
+        _storePayBtn.titleEdgeInsets       = UIEdgeInsetsMake(55., -15, 0., 15.);
+        
+        [_storePayBtn setTitle:NSLocalizedStringFromTable(@"credit-pay", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_storePayBtn setImage:[UIImage imageNamed:@"Credit Card"] forState:UIControlStateNormal];
+        [_storePayBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
+        [_storePayBtn addTarget:self action:@selector(storePayBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_storePayBtn];
+    }
+    return _storePayBtn;
+}
+
 - (void)setOrder:(GKOrder *)order
 {
     _order  = order;
@@ -73,6 +144,15 @@
     
     self.payTipsLabel.deFrameTop        = self.orderPricelabel.deFrameBottom + 34.;
     self.payTipsLabel.deFrameLeft       = 16.;
+    
+    self.alipayBtn.deFrameTop           = self.payTipsLabel.deFrameBottom + 10.;
+    self.alipayBtn.deFrameLeft          = self.payTipsLabel.deFrameLeft;
+    
+    self.wechatPayBtn.deFrameTop        = self.alipayBtn.deFrameTop;
+    self.wechatPayBtn.deFrameLeft       = self.alipayBtn.deFrameRight + 10.;
+    
+    self.storePayBtn.deFrameTop         = self.wechatPayBtn.deFrameTop;
+    self.storePayBtn.deFrameLeft        = self.wechatPayBtn.deFrameRight + 10.;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -89,4 +169,31 @@
     
     [super drawRect:rect];
 }
+
+
+#pragma mark - button action
+- (void)alipayBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapAlipayBtn:)]) {
+    
+        [_delegate tapAlipayBtn:sender];
+    }
+}
+
+- (void)wechatPayBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapWeCahtBtn:)]) {
+        
+        [_delegate tapWeCahtBtn:sender];
+    }
+}
+
+- (void)storePayBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapStorePayBtn:)])
+    {
+        [_delegate tapStorePayBtn:sender];
+    }
+}
+
 @end

@@ -280,3 +280,7 @@
 "order-status"              = "订单状态:";
 "wait-for-payment"          = "待付款";
 "paid"                      = "交易完成";
+
+"alipay"                    = "支付宝";
+"wechat-pay"                = "微信";
+"credit-pay"                = "收银台";

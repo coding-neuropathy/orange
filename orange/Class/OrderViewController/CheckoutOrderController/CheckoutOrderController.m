@@ -45,14 +45,14 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
         layout.scrollDirection              = UICollectionViewScrollDirectionVertical;
         layout.itemSize                     = CGSizeMake(kScreenWidth, 100.);
         layout.headerReferenceSize          = CGSizeMake(kScreenWidth, 100.);
-        layout.footerReferenceSize          = CGSizeMake(kScreenWidth, 210.);
+        layout.footerReferenceSize          = CGSizeMake(kScreenWidth, 220.);
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.deFrameSize = CGSizeMake(kScreenWidth, kScreenHeight - 47.);
-        
+        _collectionView.deFrameSize = CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
+        _collectionView.alwaysBounceVertical    = YES;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
+        _collectionView.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         
 //        _collectionView.emptyDataSetSource = self;
         //        _collectionView.emptyDataSetVisible = NO;
@@ -113,7 +113,7 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
         CheckoutFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                                          withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
 //
-//        footerView.order    = order;
+        footerView.order    = order;
         return footerView;
     }
 }

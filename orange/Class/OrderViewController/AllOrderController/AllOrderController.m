@@ -10,14 +10,10 @@
 #import "OrderCell.h"
 #import "OrderHeaderView.h"
 #import "OrderFooterView.h"
+#import "CheckoutOrderController.h"
 
 @interface AllOrderController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
-//@property (strong, nonatomic) UICollectionView  *collectionView;
-//@property (strong, nonatomic) NSMutableArray    *orderArray;
-//
-//@property (assign, nonatomic) NSInteger page;
-//@property (assign, nonatomic) NSInteger size;
 
 @end
 
@@ -170,6 +166,15 @@ static NSString *FooterIdentifier   = @"OrderFooter";
         footerView.order    = order;
         return footerView;
     }
+}
+
+#pragma mark - <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    GKOrder * order = [self.orderArray objectAtIndex:indexPath.section];
+    
+    CheckoutOrderController * vc = [[CheckoutOrderController alloc] initWithOrder:order];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

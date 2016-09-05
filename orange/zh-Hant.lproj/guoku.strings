@@ -284,3 +284,7 @@
 "wait-for-payment"          = "待付款";
 "paid"                      = "交易完成";
 //"close"                     = "d"
+
+"alipay"                    = "支付寶";
+"wechat-pay"                = "微信";
+"credit-pay"                = "收銀台";

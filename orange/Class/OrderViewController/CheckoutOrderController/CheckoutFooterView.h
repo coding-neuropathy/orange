@@ -8,8 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CheckoutFooterViewDelegate;
+
+
 @interface CheckoutFooterView : UICollectionReusableView
 
 @property (strong, nonatomic) GKOrder   *order;
+@property (weak, nonatomic) id<CheckoutFooterViewDelegate> delegate;
+
+@end
+
+@protocol CheckoutFooterViewDelegate <NSObject>
+
+@optional
+- (void)tapAlipayBtn:(id)sender;
+- (void)tapWeCahtBtn:(id)sender;
+- (void)tapStorePayBtn:(id)sender;
 
 @end
