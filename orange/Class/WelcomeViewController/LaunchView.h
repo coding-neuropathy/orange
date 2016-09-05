@@ -12,6 +12,9 @@
 
 - (void)handleActionBtn:(id)sender;
 
+@optional
+- (void)tapCloseBtn:(id)sender;
+
 @end
 
 @interface LaunchView : UIView

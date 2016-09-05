@@ -149,22 +149,6 @@ static int lastContentOffset;
     }
 }
 
-////获取更新数
-//- (void)getUpdateNumber
-//{
-//    [API getUnreadCountWithSuccess:^(NSDictionary *dictionary) {
-//        self.updateNum = [[dictionary objectForKey:@"unread_selection_count"] integerValue];
-//        if (self.updateNum == 0) {
-//            [self.updateView removeFromSuperview];
-//        }
-//        else
-//        {
-//           self.updateLabel.text = [NSString stringWithFormat:@"查看 %ld 个更新",self.updateNum];
-//        }
-//    } failure:^(NSInteger stateCode) {
-//        
-//    }];
-//}
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
@@ -246,25 +230,6 @@ static int lastContentOffset;
     //    }
     return UIEdgeInsetsMake(0., 0., 0., 0.);
 }
-
-
-//- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-//{
-//    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-//}
-
-
-//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-//{
-//    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
-//     {
-//        [self.collectionView performBatchUpdates:nil completion:nil];
-//     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
-//     {
-//         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-//     }];
-//    
-//}
 
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-//#import "WXApi.h"
 #import <libWeChatSDK/WXApi.h>
 #import "TabBarViewController.h"
 #import "iPadRootViewController.h"
@@ -20,7 +19,7 @@
 #import "Appirater.h"
 
 #if DEBUG
-#import "FLEXManager.h"
+#import <FLEX/FLEXManager.h>
 #endif
 
 
@@ -239,10 +238,10 @@ int ddLogLevel;
     
     [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
 //        DDLogInfo(@"OKOK %@", launch.urlMD5);
-        NSString * launch_url_md5 = [[NSUserDefaults standardUserDefaults] objectForKey:@"launchVersion"];
-        if ([launch_url_md5 isEqualToString:launch.urlMD5]) {
-            return ;
-        }
+//        NSString * launch_url_md5 = [[NSUserDefaults standardUserDefaults] objectForKey:@"launchVersion"];
+//        if ([launch_url_md5 isEqualToString:launch.urlMD5]) {
+//            return ;
+//        }
         
         LaunchController * vc = [[LaunchController alloc] initWithLaunch:launch];
     
@@ -252,8 +251,8 @@ int ddLogLevel;
             [weakVC removeFromParentViewController];
             [self openLocalURL:launch.actionURL];
             
-            [[NSUserDefaults standardUserDefaults] setObject:launch.urlMD5 forKey:@"launchVersion"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [[NSUserDefaults standardUserDefaults] setObject:launch.urlMD5 forKey:@"launchVersion"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
         };
         
         vc.closeAction = ^(void) {

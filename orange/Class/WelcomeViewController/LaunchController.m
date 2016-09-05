@@ -45,33 +45,20 @@
 - (LaunchView *)launchView
 {
     if (!_launchView) {
-//        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 290.) / 2, -425., 290., 425.)];
-//        _launchView = [[LaunchView alloc] initWithFrame:CGRectMake((kScreenWidth - 300.) / 2, -425., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3)];
         _launchView = [[LaunchView alloc] initWithFrame:CGRectZero];
-        
-        _launchView.frame = CGRectMake(0., 0., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3);
-        _launchView.deFrameTop = - (_launchView.deFrameHeight);
-        _launchView.deFrameLeft = (kScreenWidth - _launchView.deFrameWidth) / 2.;
+                _launchView.frame = CGRectMake(0., 0., kScreenWidth, kScreenHeight);
+
+//        _launchView.deFrameTop = - (_launchView.deFrameHeight);
+//        _launchView.deFrameLeft = (kScreenWidth - _launchView.deFrameWidth) / 2.;
         
         if (IS_IPAD) {
             _launchView.frame = CGRectMake(0., 0., 360., 480.);
             _launchView.deFrameTop = - ((kScreenHeight - _launchView.deFrameHeight) / 2. + _launchView.deFrameHeight);
             
             _launchView.deFrameLeft = (kScreenWidth - _launchView.deFrameWidth) / 2.;
+                    _launchView.layer.cornerRadius = 4.;
         }
-//        if (IS_IPAD) {
-//            
-////            _launchView.center = CGPointMake(kScreenWidth / 2. , kScreenHeight / 2.);
-////            _launchView.deFrameTop = (kScreenHeight - _launchView.deFrameHeight) / 2.;
-//            _launchView.deFrameTop = - (_launchView.deFrameHeight);
-//            _launchView.deFrameLeft = (kScreenWidth - _launchView.deFrameWidth) / 2.;
-//        } else {
-        
-
-//            _launchView.frame = CGRectMake((kScreenWidth - 300.) / 2, -425., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3);
-//        }
         _launchView.backgroundColor = UIColorFromRGB(0xffffff);
-        _launchView.layer.cornerRadius = 4.;
         _launchView.delegate = self;
     }
     return _launchView;
@@ -97,10 +84,24 @@
     [self.view addSubview:self.launchView];
     
     
-    self.closeBtn.deFrameRight =  CGRectGetMaxX(self.launchView.frame) + 12.;
-    self.closeBtn.deFrameTop = CGRectGetMinY(self.launchView.frame) - 12.;
+    if (IS_IPAD) {
+        self.closeBtn.deFrameRight =  CGRectGetMaxX(self.launchView.frame) + 12.;
+        self.closeBtn.deFrameTop = CGRectGetMinY(self.launchView.frame) - 12.;
     
-    [self.view insertSubview:self.closeBtn aboveSubview:self.launchView];
+        [self.view insertSubview:self.closeBtn aboveSubview:self.launchView];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:@"LaunchView"];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [MobClick endLogPageView:@"LaunchView"];
+    [super viewWillDisappear:animated];
 }
 
 - (void)show
@@ -131,7 +132,6 @@
     } completion:^(BOOL finished) {
         if (finished){
             action();
-
         }
 
     }];
@@ -172,6 +172,16 @@
         if (self.finished) {
             [self.view removeFromSuperview];
             self.finished();
+        }
+    }];
+}
+
+- (void)tapCloseBtn:(id)sender
+{
+    [self fadeOutWithAction:^{
+        if (self.finished) {
+            [self.view removeFromSuperview];
+            self.closeAction();
         }
     }];
 }

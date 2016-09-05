@@ -11,6 +11,11 @@
 "guide to better living" = "Guide to Better Living";
 
 /**
+ *  launch
+ */
+"skip"      = "Skip";
+
+/**
  *  3d - touch
  */
 "articles"  = "Articles";
@@ -150,8 +155,8 @@
 "followers"         = "Followers";
 
 "follow"            = "Follow";
+"follow-success"    = "Follow Success";
 "unfollow"          = "Unfollow";
-
 "unfollow-failure"  = "Unfollow Failure";
 
 "me like" = "Like";

@@ -11,6 +11,12 @@
 "guide to better living"    = "精英消费者指南";
 
 /**
+ *  launch
+ */
+"skip"      = "跳过";
+
+
+/**
  *  3d - touch
  */
 "articles"  = "文章";
@@ -147,6 +153,7 @@
 "followers"         = "粉丝";
 
 "follow"            = "关注";
+"follow-success"    = "关注成功";
 "unfollow"          = "取消关注";
 "unfollow-failure"  = "取消关注失败";
 

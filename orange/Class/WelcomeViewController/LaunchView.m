@@ -10,11 +10,13 @@
 
 @interface LaunchView ()
 
-@property (strong, nonatomic) UIImageView * launchImage;
-@property (strong, nonatomic) UILabel * titleLabel;
-@property (strong, nonatomic) UILabel * detailLabel;
-@property (strong, nonatomic) UIButton * actionBtn;
-@property (strong, nonatomic) UIButton * closeBtn;
+@property (strong, nonatomic) UIImageView *launchImage;
+@property (strong, nonatomic) UIImageView *logoImageView;
+
+//@property (strong, nonatomic) UILabel * titleLabel;
+//@property (strong, nonatomic) UILabel * detailLabel;
+//@property (strong, nonatomic) UIButton * actionBtn;
+@property (strong, nonatomic) UIButton *closeBtn;
 
 @end
 
@@ -24,98 +26,79 @@
 {
     if (!_launchImage) {
         _launchImage = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _launchImage.contentMode = UIViewContentModeScaleAspectFit;
+        _launchImage.deFrameSize    = IS_IPAD ? self.deFrameSize : CGSizeMake(kScreenWidth, (540. / 667.) * kScreenHeight);
+        _launchImage.contentMode = UIViewContentModeScaleAspectFill;
         _launchImage.layer.cornerRadius = 4.;
         _launchImage.layer.masksToBounds = YES;
         _launchImage.userInteractionEnabled = YES;
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TapActionBtn:)];
         [self.launchImage addGestureRecognizer:tap];
-//        _launchImage.backgroundColor = UIColorFromRGB(0xf1f1f1);
-//        _launchImage.layer.cornerRadius = 4.;
         [self addSubview:_launchImage];
     }
     return _launchImage;
 }
 
-//- (UILabel *)titleLabel
-//{
-//    if (!_titleLabel) {
-//        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//        _titleLabel.font = [UIFont systemFontOfSize:20.];
-//        _titleLabel.textColor = UIColorFromRGB(0x414243);
-//        _titleLabel.textAlignment = NSTextAlignmentCenter;
-//        [self addSubview:_titleLabel];
-//    }
-//    return _titleLabel;
-//}
+- (UIButton *)closeBtn
+{
+    if (!_closeBtn) {
+        _closeBtn                       = [UIButton buttonWithType:UIButtonTypeCustom];
+        _closeBtn.deFrameSize           = CGSizeMake(54., 30.);
+        _closeBtn.backgroundColor       = [UIColor colorFromHexString:@"#f4f4f4"];
+        _closeBtn.layer.cornerRadius    = _closeBtn.deFrameHeight / 2.;
+        _closeBtn.layer.masksToBounds   = YES;
+        
+        _closeBtn.titleLabel.font       = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        
+        [_closeBtn setTitle:NSLocalizedStringFromTable(@"skip", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_closeBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
+        
+        [_closeBtn addTarget:self action:@selector(closeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _closeBtn;
+}
 
-//- (UILabel *)detailLabel
-//{
-//    if (!_detailLabel) {
-//        _detailLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//        _detailLabel.font = [UIFont systemFontOfSize:14.];
-//        _detailLabel.textColor = UIColorFromRGB(0x9d9e9f);
-//        _detailLabel.textAlignment = NSTextAlignmentCenter;
-//        _detailLabel.numberOfLines = 2;
-//        
-//        [self addSubview:_detailLabel];
-//    }
-//    return _detailLabel;
-//}
+- (UIImageView *)logoImageView
+{
+    if (!_logoImageView) {
+        _logoImageView                  = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _logoImageView.image            = [UIImage imageNamed:@"splash_logo"];
+        _logoImageView.deFrameSize      = CGSizeMake(86., 64.);
+        _logoImageView.contentMode      = UIViewContentModeScaleAspectFit;
+        _logoImageView.backgroundColor  = [UIColor clearColor];
+        
+        [self addSubview:_logoImageView];
+    }
+    return _logoImageView;
+}
 
-//- (UIButton *)actionBtn
-//{
-//    if (!_actionBtn) {
-//        _actionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [_actionBtn setBackgroundColor:UIColorFromRGB(0x6eaaf0)];
-//        _actionBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
-//
-//        [_actionBtn addTarget:self action:@selector(TapActionBtn:) forControlEvents:UIControlEventTouchUpInside];
-//        [self addSubview:_actionBtn];
-//    }
-//    return _actionBtn;
-//}
 
 - (void)setLaunch:(GKLaunch *)launch
 {
     _launch = launch;
     
     [self.launchImage sd_setImageWithURL:_launch.launchImageURL_580];
-//    self.titleLabel.text = _launch.title;
-//    self.detailLabel.text = _launch.desc;
-//    
-//    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.detailLabel.text];
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//    [paragraphStyle setLineSpacing:7.];
-//    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self.detailLabel.text length])];
-//    self.detailLabel.attributedText = attributedString;
-//    
-//    [self.actionBtn setTitle:[NSString stringWithFormat:@"%@ %@", _launch.action_title, [NSString fontAwesomeIconStringForEnum:FAArrowCircleORight]] forState:UIControlStateNormal];
+    
+    if (IS_IPHONE) {
+        DDLogInfo(@"%@", self.closeBtn);
+        [self insertSubview:self.closeBtn aboveSubview:self.launchImage];
+//        [self addSubview:self.closeBtn];
+    }
     
     [self setNeedsLayout];
 }
 
 - (void)layoutSubviews
 {
-    
-    
-//    self.launchImage.frame = CGRectMake(0., 0., 290, 240.);
-    
-//    self.titleLabel.frame = CGRectMake(0., 0., self.deFrameWidth, 24.);
-//    self.titleLabel.deFrameTop = 50;
-//    
-//    self.detailLabel.frame = CGRectMake(25., 0., self.deFrameWidth - 50., 60);
-//    self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10.;
-    
 
-    
-//    self.actionBtn.frame = CGRectMake(0., 0., self.deFrameWidth, 50.);
-//    self.actionBtn.deFrameTop = self.deFrameHeight - 50.;
-    
-//    self.launchImage.frame = CGRectMake(0., 0., kScreenWidth * 0.8, kScreenWidth * 0.8 * 4 / 3);
-//    self.launchImage.deFrameBottom = self.actionBtn.deFrameTop;
-    self.launchImage.frame = CGRectMake(0., 0., self.deFrameWidth, self.deFrameHeight);
+    if (IS_IPHONE) {
+        self.closeBtn.deFrameTop        = 24.;
+        self.closeBtn.deFrameRight      = self.deFrameWidth - 24.;
+        
+        self.logoImageView.center           = self.launchImage.center;
+        self.logoImageView.deFrameBottom    = self.deFrameBottom - 32.;
+    }
     
     [super layoutSubviews];
     
@@ -126,6 +109,13 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(handleActionBtn:)]) {
         [_delegate handleActionBtn:sender];
+    }
+}
+
+- (void)closeBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapCloseBtn:)]) {
+        [_delegate tapCloseBtn:sender];
     }
 }
 
