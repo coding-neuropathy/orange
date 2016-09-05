@@ -10,32 +10,32 @@
 
 @interface CartToolBar ()
 
-@property (strong, nonatomic) UIButton  *orderBtn;
+@property (strong, nonatomic) UIButton  *checkOutBtn;
 @property (strong, nonatomic) UILabel   *priceLabel;
 
 @end
 
 @implementation CartToolBar
 
-- (UIButton *)orderBtn
+- (UIButton *)checkOutBtn
 {
-    if (!_orderBtn) {
-        _orderBtn                               = [UIButton buttonWithType:UIButtonTypeCustom];
-        _orderBtn.backgroundColor               = UIColorFromRGB(0x6192ff);
-        _orderBtn.deFrameSize                   = CGSizeMake(128., self.deFrameHeight);
-        _orderBtn.titleLabel.font               = [UIFont fontWithName:@"PingFangSC-Medium" size:16.];
-        _orderBtn.titleLabel.textAlignment      = NSTextAlignmentCenter;
+    if (!_checkOutBtn) {
+        _checkOutBtn                               = [UIButton buttonWithType:UIButtonTypeCustom];
+        _checkOutBtn.backgroundColor               = UIColorFromRGB(0x6192ff);
+        _checkOutBtn.deFrameSize                   = CGSizeMake(128., self.deFrameHeight);
+        _checkOutBtn.titleLabel.font               = [UIFont fontWithName:@"PingFangSC-Medium" size:16.];
+        _checkOutBtn.titleLabel.textAlignment      = NSTextAlignmentCenter;
 //        _orderBtn.enabled                       = NO;
         
-        [_orderBtn setTitle:NSLocalizedStringFromTable(@"submit-order", kLocalizedFile, nil) forState:UIControlStateNormal];
-        [_orderBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [_orderBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor] andSize:_orderBtn.deFrameSize] forState:UIControlStateDisabled];
+        [_checkOutBtn setTitle:NSLocalizedStringFromTable(@"submit-order", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_checkOutBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [_checkOutBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor] andSize:_checkOutBtn.deFrameSize] forState:UIControlStateDisabled];
         
-        [_orderBtn addTarget:self action:@selector(orderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_checkOutBtn addTarget:self action:@selector(checkOutBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        [self addSubview:_orderBtn];
+        [self addSubview:_checkOutBtn];
     }
-    return _orderBtn;
+    return _checkOutBtn;
 }
 
 - (UILabel *)priceLabel
@@ -63,7 +63,7 @@
 {
     [super layoutSubviews];
     
-    self.orderBtn.deFrameRight                  = self.deFrameRight;
+    self.checkOutBtn.deFrameRight               = self.deFrameRight;
     self.priceLabel.deFrameTop                  = 16.;
     self.priceLabel.deFrameLeft                 = 16.;
 }
@@ -86,10 +86,10 @@
 }
 
 #pragma mark - button action
-- (void)orderBtnAction:(id)sender
+- (void)checkOutBtnAction:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(tapOrderBtn:)]) {
-        [_delegate tapOrderBtn:sender];
+    if (_delegate && [_delegate respondsToSelector:@selector(tapCheckOutBtn:)]) {
+        [_delegate tapCheckOutBtn:sender];
     }
 }
 

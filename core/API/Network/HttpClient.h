@@ -56,5 +56,5 @@
 /**
  *  取消所有网络请求
  */
-+ (void)cancelAllHTTPOperations;
+- (void)cancelAllHTTPOperations;
 @end

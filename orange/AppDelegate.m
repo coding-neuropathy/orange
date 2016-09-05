@@ -196,7 +196,7 @@ int ddLogLevel;
     [self customizeAppearance];
     
 #if DEBUG
-[[FLEXManager sharedManager] showExplorer];
+    [[FLEXManager sharedManager] showExplorer];
     DDLogInfo(@"session id %@", [Passport sharedInstance].session);
 #endif
     // Override point for customization after application launch.

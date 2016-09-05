@@ -598,6 +598,30 @@
 }
 
 /**
+ *  生成订单
+ *
+ *  @param success  成功block
+ *  @param failure  失败block
+ */
++ (void)checkoutShoppingCartWithSuccess:(void (^)(GKOrder *order))success
+                                Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSString *path      = @"cart/checkout/";
+    
+    [[HttpClient sharedClient] requestPath:path method:@"POST" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+        GKOrder * order = [GKOrder modelFromDictionary:responseObject];
+        if (success) {
+            success(order);
+        }
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+/**
  *  获取订单列表
  *
  *  @param status  订单状态
@@ -3153,8 +3177,6 @@
         for (NSDictionary *objectDict in objectArray) {
             GKEntity * entity = [GKEntity modelFromDictionary:objectDict[@"content"][@"entity"]];
             GKNote * note = [GKNote modelFromDictionary:objectDict[@"content"][@"note"]];
-            //            GKEntity *entity = [GKEntity modelFromDictionary:objectDict[@"entity"]];
-            //            [entityArray addObject:entity];
             [dataArray addObject:@{
                                    @"entity":entity,
                                    @"note":note
@@ -3166,10 +3188,6 @@
         }
     } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            //            NSLog(@"%@", [[error userInfo] allKeys]);
-            //            NSLog(@"url %@", [[error userInfo] valueForKey:@"NSErrorFailingURLKey"]);
-            
-//            NSInteger stateCode = operation.response.statusCode;
             failure(stateCode);
         }
     }];
@@ -3181,7 +3199,7 @@
  */
 + (void)cancelAllHTTPOperations
 {
-    [HttpClient cancelAllHTTPOperations];
+    [[HttpClient sharedClient] cancelAllHTTPOperations];
 }
 
 @end

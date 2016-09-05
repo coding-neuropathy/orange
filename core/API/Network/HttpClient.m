@@ -135,9 +135,9 @@
     }];
 }
 
-+ (void)cancelAllHTTPOperations
+- (void)cancelAllHTTPOperations
 {
-    [[HttpClient sharedClient].operationQueue cancelAllOperations];
+    [self.operationQueue cancelAllOperations];
 }
 
 @end

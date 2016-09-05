@@ -10,7 +10,7 @@
 
 @protocol CartToolbarDelegate <NSObject>
 
-- (void)tapOrderBtn:(id)sender;
+- (void)tapCheckOutBtn:(id)sender;
 
 @end
 

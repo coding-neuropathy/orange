@@ -9,6 +9,7 @@
 #import "CartController.h"
 #import "CartCell.h"
 #import "CartToolBar.h"
+#import "CheckoutOrderController.h"
 
 
 @interface CartController () <CartToolbarDelegate>
@@ -151,9 +152,25 @@ static NSString * CellIndetifier = @"CartCell";
 }
 
 #pragma mark - <CartToolbarDelegate>
-- (void)tapOrderBtn:(id)sender
+- (void)tapCheckOutBtn:(id)sender
 {
-    
+    [SVProgressHUD showInfoWithStatus:NSLocalizedStringFromTable(@"checkout", kLocalizedFile, nil)];
+    [API checkoutShoppingCartWithSuccess:^(GKOrder *order) {
+        
+        DDLogInfo(@"order %@", order);
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"checkout-success", kLocalizedFile, nil)];
+        
+        [self.cartItemArray removeAllObjects];
+        [self.tableView reloadData];
+
+        CheckoutOrderController * checkoutOrderVC = [[CheckoutOrderController alloc] initWithOrder:order];
+        [self.navigationController pushViewController:checkoutOrderVC animated:YES];
+        
+        
+    } Failure:^(NSInteger stateCode, NSError *error) {
+        DDLogError(@"error: %@", error.localizedDescription);
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
 }
 
 @end

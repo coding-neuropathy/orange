@@ -15,6 +15,7 @@
 #pragma mark - get order list
 - (void)refresh
 {
+    self.page = 1;
     [API getOrderListWithWithStatus:WaitingForPayment Page:self.page Size:self.size Success:^(NSArray *OrderArray) {
         self.orderArray = (NSMutableArray *)OrderArray;
         self.page       += 1;

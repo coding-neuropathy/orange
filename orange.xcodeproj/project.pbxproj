@@ -156,6 +156,8 @@
 		8A1B63301D5AFA93009CF222 /* AuthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B632F1D5AFA93009CF222 /* AuthView.m */; };
 		8A1B63331D5B2551009CF222 /* SignInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B63321D5B2551009CF222 /* SignInView.m */; };
 		8A1B63361D5B255E009CF222 /* SignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B63351D5B255E009CF222 /* SignUpView.m */; };
+		8A242AFE1D7D0B3500A15669 /* CheckoutOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A242AFD1D7D0B3500A15669 /* CheckoutOrderController.m */; };
+		8A242B011D7D18C200A15669 /* CheckoutFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A242B001D7D18C200A15669 /* CheckoutFooterView.m */; };
 		8A3249381D5A57CA00354602 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A3249371D5A57CA00354602 /* beep.mp3 */; };
 		8A3911D71D598A680029E529 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3911D61D598A680029E529 /* libzbar.a */; };
 		8A3CBBA81C7D870E0002AAE8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */; };
@@ -600,6 +602,10 @@
 		8A1B63321D5B2551009CF222 /* SignInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInView.m; sourceTree = "<group>"; };
 		8A1B63341D5B255E009CF222 /* SignUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpView.h; sourceTree = "<group>"; };
 		8A1B63351D5B255E009CF222 /* SignUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpView.m; sourceTree = "<group>"; };
+		8A242AFC1D7D0B3500A15669 /* CheckoutOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckoutOrderController.h; path = OrderViewController/CheckoutOrderController/CheckoutOrderController.h; sourceTree = "<group>"; };
+		8A242AFD1D7D0B3500A15669 /* CheckoutOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckoutOrderController.m; path = OrderViewController/CheckoutOrderController/CheckoutOrderController.m; sourceTree = "<group>"; };
+		8A242AFF1D7D18C200A15669 /* CheckoutFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckoutFooterView.h; path = OrderViewController/CheckoutOrderController/CheckoutFooterView.h; sourceTree = "<group>"; };
+		8A242B001D7D18C200A15669 /* CheckoutFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckoutFooterView.m; path = OrderViewController/CheckoutOrderController/CheckoutFooterView.m; sourceTree = "<group>"; };
 		8A3249371D5A57CA00354602 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		8A3911D61D598A680029E529 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -1795,6 +1801,17 @@
 			name = AuthUserController;
 			sourceTree = "<group>";
 		};
+		8A242AFB1D7D0B0500A15669 /* CheckoutOrderController */ = {
+			isa = PBXGroup;
+			children = (
+				8A242AFC1D7D0B3500A15669 /* CheckoutOrderController.h */,
+				8A242AFD1D7D0B3500A15669 /* CheckoutOrderController.m */,
+				8A242AFF1D7D18C200A15669 /* CheckoutFooterView.h */,
+				8A242B001D7D18C200A15669 /* CheckoutFooterView.m */,
+			);
+			name = CheckoutOrderController;
+			sourceTree = "<group>";
+		};
 		8A5045391D58713E00D66F8A /* QRCodeViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1941,7 +1958,8 @@
 		8ABB833F1D7742BC00268884 /* OrderViewController */ = {
 			isa = PBXGroup;
 			children = (
-				8AFB3B7A1D78602700E1D04A /* FinishedOrderControoler */,
+				8A242AFB1D7D0B0500A15669 /* CheckoutOrderController */,
+				8AFB3B7A1D78602700E1D04A /* FinishedOrderController */,
 				8AFB3B761D785FEC00E1D04A /* PendingOrderController */,
 				8AFB3B721D785FB500E1D04A /* AllOrderController */,
 				8ABB83401D7742E700268884 /* OrderController.h */,
@@ -2029,13 +2047,13 @@
 			name = PendingOrderController;
 			sourceTree = "<group>";
 		};
-		8AFB3B7A1D78602700E1D04A /* FinishedOrderControoler */ = {
+		8AFB3B7A1D78602700E1D04A /* FinishedOrderController */ = {
 			isa = PBXGroup;
 			children = (
 				8AFB3B7B1D78604E00E1D04A /* FinishedOrderController.h */,
 				8AFB3B7C1D78604E00E1D04A /* FinishedOrderController.m */,
 			);
-			name = FinishedOrderControoler;
+			name = FinishedOrderController;
 			sourceTree = "<group>";
 		};
 		8AFB3B811D7897AB00E1D04A /* Order */ = {
@@ -2762,6 +2780,7 @@
 				8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */,
 				4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */,
 				8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */,
+				8A242AFE1D7D0B3500A15669 /* CheckoutOrderController.m in Sources */,
 				8AD5D2181D6D89B7000927C7 /* SKUToolbar.m in Sources */,
 				B772BE941BD50605005C1540 /* UserHeaderSectionView.m in Sources */,
 				B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */,
@@ -2808,6 +2827,7 @@
 				B70686B11CF42C4000C40825 /* BaseNavigationController.m in Sources */,
 				8A0345AA1BA15F4A0037BC32 /* HomeArticleCell.m in Sources */,
 				4ECCD0E01A7349CF009D5A42 /* EntityViewController.m in Sources */,
+				8A242B011D7D18C200A15669 /* CheckoutFooterView.m in Sources */,
 				8A1B63361D5B255E009CF222 /* SignUpView.m in Sources */,
 				2309032E1C803B1500AD26D6 /* AuthUserViewController.m in Sources */,
 				8A59017A1D643F1100780C74 /* Appirater.m in Sources */,

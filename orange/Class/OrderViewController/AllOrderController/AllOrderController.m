@@ -65,9 +65,10 @@ static NSString *FooterIdentifier   = @"OrderFooter";
 #pragma mark - get order list 
 - (void)refresh
 {
+    self.page = 1;
     [API getOrderListWithWithStatus:0 Page:self.page Size:self.size Success:^(NSArray *OrderArray) {
-//        DDLogInfo(@"order list %@", OrderArray);
-        self.orderArray = (NSMutableArray *)OrderArray;
+        DDLogInfo(@"order list %@", OrderArray);
+        self.orderArray = [NSMutableArray arrayWithArray:OrderArray];
         self.page       += 1;
         [self.collectionView.pullToRefreshView stopAnimating];
         [UIView setAnimationsEnabled:NO];

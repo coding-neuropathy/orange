@@ -215,6 +215,15 @@ typedef NS_ENUM(NSInteger, GKSNSType){
                      Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 /**
+ *  生成订单
+ *
+ *  @param success  成功block
+ *  @param failure  失败block
+ */
++ (void)checkoutShoppingCartWithSuccess:(void (^)(GKOrder *order))success
+                                Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
+
+/**
  *  获取订单列表
  *
  *  @param status  订单状态
