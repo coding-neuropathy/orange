@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WXApi.h"
+#import <libWeChatSDK/WXApi.h>
 #import "ReportViewController.h"
 
 @interface ShareView : UIView

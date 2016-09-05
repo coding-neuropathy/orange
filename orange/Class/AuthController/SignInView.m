@@ -7,7 +7,7 @@
 //
 
 #import "SignInView.h"
-#import "WXApi.h"
+#import <libWeChatSDK/WXApi.h>
 
 @interface SignInView () <UITextFieldDelegate>
 

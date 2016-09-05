@@ -10,6 +10,7 @@ target 'orange' do
     pod 'CocoaLumberjack', '2.2'
     pod 'HMSegmentedControl'
     pod 'WeiboSDK', :git => 'https://github.com/sinaweibosdk/weibo_ios_sdk.git'
+    pod 'libWeChatSDK'
     pod 'FDFullscreenPopGesture', '1.1'
     pod 'FontAwesome'
     pod 'GTScrollNavigationBar'

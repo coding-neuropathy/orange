@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "WXApi.h"
+//#import "WXApi.h"
+#import <libWeChatSDK/WXApi.h>
 #import "TabBarViewController.h"
 #import "iPadRootViewController.h"
 

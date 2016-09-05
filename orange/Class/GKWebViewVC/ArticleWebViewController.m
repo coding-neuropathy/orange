@@ -7,7 +7,7 @@
 //
 
 #import "ArticleWebViewController.h"
-#import "WXApi.h"
+#import <libWeChatSDK/WXApi.h>
 
 #import <WebKit/WebKit.h>
 #import "WebViewProgressView.h"

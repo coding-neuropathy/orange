@@ -66,9 +66,6 @@
                    placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.avatar.deFrameSize]];
     self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
     
-    
-    
-    
     if(!self.label) {
         _label = [[RTLabel alloc] initWithFrame:IS_IPHONE ? CGRectMake(60, 15, kScreenWidth - 70, 20) : CGRectMake(60, 15, kScreenWidth - kTabBarWidth - 70, 20)];
         self.label.paragraphReplacement = @"";

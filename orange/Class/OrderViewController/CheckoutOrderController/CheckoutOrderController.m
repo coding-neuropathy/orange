@@ -11,7 +11,9 @@
 #import "OrderHeaderView.h"
 #import "CheckoutFooterView.h"
 
-@interface CheckoutOrderController ()
+#import "WXApi.h"
+
+@interface CheckoutOrderController () <CheckoutFooterViewDelegate>
 
 //@property (strong, nonatomic) GKOrder           *order;
 @property (strong, nonatomic) UICollectionView  *collectionView;
@@ -110,12 +112,18 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
         return headerView;
         
     } else {
-        CheckoutFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+        CheckoutFooterView *footerView  = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                                          withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
-//
-        footerView.order    = order;
+        footerView.delegate             = self;
+        footerView.order                = order;
         return footerView;
     }
+}
+
+#pragma mark - <CheckoutFooterViewDelegate>
+- (void)tapWeCahtBtn:(id)sender
+{
+
 }
 
 

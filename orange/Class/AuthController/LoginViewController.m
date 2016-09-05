@@ -10,7 +10,7 @@
 #import "Passport.h"
 //#import "AppDelegate.h"
 #import "API.h"
-#import "WXApi.h"
+#import <libWeChatSDK/WXApi.h>
 #import "WeiboUser.h"
 
 #import "SignInView.h"

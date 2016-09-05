@@ -7,8 +7,9 @@
 //
 
 #import "ShareView.h"
-//#import "LoginView.h"
 #import <MessageUI/MFMailComposeViewController.h>
+
+
 @interface ShareView () <UIGestureRecognizerDelegate,MFMailComposeViewControllerDelegate>
 @property(nonatomic, strong) UIView * mask;
 @property(nonatomic, strong) UIView * board;

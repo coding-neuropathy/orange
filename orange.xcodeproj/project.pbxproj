@@ -161,7 +161,6 @@
 		8A3249381D5A57CA00354602 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A3249371D5A57CA00354602 /* beep.mp3 */; };
 		8A3911D71D598A680029E529 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3911D61D598A680029E529 /* libzbar.a */; };
 		8A3CBBA81C7D870E0002AAE8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */; };
-		8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
 		8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A418C791C04481000CE01B5 /* EntityPreView.m */; };
 		8A44F5991C7C066500D1DC19 /* ArticlePreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A44F5981C7C066500D1DC19 /* ArticlePreViewController.m */; };
@@ -190,7 +189,6 @@
 		8AB731DA1C1BBDAD0076BACC /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */; };
 		8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D91C1BBDAD0076BACC /* SettingsViewCell.m */; };
 		8ABB83421D7742E700268884 /* OrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB83411D7742E700268884 /* OrderController.m */; };
-		8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */; };
 		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
 		8ACB1FB71D6AD83000D3AEF3 /* GKEntitySKU.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ACB1FB51D6AD83000D3AEF3 /* GKEntitySKU.h */; };
@@ -609,8 +607,6 @@
 		8A3249371D5A57CA00354602 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		8A3911D61D598A680029E529 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		8A3EAD281BD7C23400E1E447 /* EntityThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityThreeGridCell.h; sourceTree = "<group>"; };
-		8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityThreeGridCell.m; sourceTree = "<group>"; };
 		8A402CC51B69F57A00E54FFF /* CategoryImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryImageView.h; sourceTree = "<group>"; };
 		8A402CC61B69F57A00E54FFF /* CategoryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryImageView.m; sourceTree = "<group>"; };
 		8A418C781C04481000CE01B5 /* EntityPreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityPreView.h; path = PreViewControllers/EntityPreView.h; sourceTree = "<group>"; };
@@ -710,10 +706,6 @@
 		8AB731D91C1BBDAD0076BACC /* SettingsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewCell.m; sourceTree = "<group>"; };
 		8ABB83401D7742E700268884 /* OrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderController.h; path = OrderViewController/OrderController.h; sourceTree = "<group>"; };
 		8ABB83411D7742E700268884 /* OrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderController.m; path = OrderViewController/OrderController.m; sourceTree = "<group>"; };
-		8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		8ABC7DDF1C056B6000A15147 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		8ABC7DE01C056B6000A15147 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		8ABC7DE11C056B6000A15147 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		8AC3F6841C0590A500CCD867 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8AC3F6861C05910A00CCD867 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		8ACB1FB51D6AD83000D3AEF3 /* GKEntitySKU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKEntitySKU.h; path = Entity/GKEntitySKU.h; sourceTree = "<group>"; };
@@ -993,7 +985,6 @@
 				8AEDCBAD1D62C5230010FDB4 /* ALBBLoginSDK.framework in Frameworks */,
 				8A195F0B1CF3FD3A00F2A954 /* UMMobClick.framework in Frameworks */,
 				4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */,
-				8ABC7DE21C056B6000A15147 /* libWeChatSDK.a in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
 				8AEDCBB61D62C5230010FDB4 /* TBAppLinkSDK.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
@@ -1283,8 +1274,6 @@
 				B76676371AB8058A002F294C /* NotificationView */,
 				B79270921AB3D8E800FD7371 /* DiscoverView */,
 				B749632B1AB28A4700C340FB /* CommentView */,
-				8A3EAD281BD7C23400E1E447 /* EntityThreeGridCell.h */,
-				8A3EAD291BD7C23400E1E447 /* EntityThreeGridCell.m */,
 				4E2D6D491A697B82009E4A17 /* EntitySingleListCell.h */,
 				4E2D6D4A1A697B82009E4A17 /* EntitySingleListCell.m */,
 				4EC9F7951A7928C70057D736 /* UserSingleListCell.h */,
@@ -1503,7 +1492,6 @@
 				4E2D6D531A6BFD77009E4A17 /* RTLabel */,
 				4E2D6D391A69601F009E4A17 /* SVPullToRefresh */,
 				4E8D6AB41A3B66F900156C17 /* MCPHandler */,
-				4E8D6A9E1A3B3E2200156C17 /* WeChat */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -1587,17 +1575,6 @@
 				8A1B632F1D5AFA93009CF222 /* AuthView.m */,
 			);
 			path = AuthController;
-			sourceTree = "<group>";
-		};
-		4E8D6A9E1A3B3E2200156C17 /* WeChat */ = {
-			isa = PBXGroup;
-			children = (
-				8ABC7DDE1C056B6000A15147 /* libWeChatSDK.a */,
-				8ABC7DDF1C056B6000A15147 /* WechatAuthSDK.h */,
-				8ABC7DE01C056B6000A15147 /* WXApi.h */,
-				8ABC7DE11C056B6000A15147 /* WXApiObject.h */,
-			);
-			path = WeChat;
 			sourceTree = "<group>";
 		};
 		4E8D6AB41A3B66F900156C17 /* MCPHandler */ = {
@@ -2814,7 +2791,6 @@
 				8AD5D21B1D6D8FE8000927C7 /* EntitySKUView.m in Sources */,
 				8AAA2D0C1C02BC6700B27E49 /* LaunchView.m in Sources */,
 				8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */,
-				8A3EAD2A1BD7C23400E1E447 /* EntityThreeGridCell.m in Sources */,
 				B7C684801ABBC45800A122E8 /* EmptyView.m in Sources */,
 				8A50453C1D58717B00D66F8A /* EmbedReaderViewController.m in Sources */,
 				23B316501CD9E4C800A83CDB /* EditHeaderView.m in Sources */,

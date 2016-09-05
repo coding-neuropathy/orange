@@ -8,8 +8,7 @@
 
 #import "ArticlePreViewController.h"
 #import <WebKit/WebKit.h>
-
-#import "WXApi.h"
+#import <libWeChatSDK/WXApi.h>
 
 @interface ArticlePreViewController () <WKNavigationDelegate, WKUIDelegate>
 
