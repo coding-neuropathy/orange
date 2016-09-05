@@ -33,9 +33,6 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    [self.view addSubview:self.tableView];
-    
-//    [self.tableView registerClass:[ArticleListCell class] forCellReuseIdentifier:ArticleCellIdentifier];
     [self.collectionView registerClass:[MoreArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
 }
 
@@ -54,8 +51,6 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
     [self.collectionView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
-    
-    
     
     if (self.dataSource == 0) {
         [self.collectionView triggerPullToRefresh];
@@ -135,12 +130,6 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 {
     return UIEdgeInsetsMake(0., 0., 0., 0.);
 }
-
-
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-//{
-//    return UIEdgeInsetsMake(0., 0., 5, 0.);
-//}
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {

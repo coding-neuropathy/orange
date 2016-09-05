@@ -31,6 +31,8 @@
     if (!_categoryImageView) {
         _categoryImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _categoryImageView.contentMode = UIViewContentModeScaleAspectFit;
+//        _categoryImageView.tintColor    = [UIColor colorFromHexString:@""];
+        _categoryImageView.alpha        = 0.5;
         [self addSubview:_categoryImageView];
     
     }

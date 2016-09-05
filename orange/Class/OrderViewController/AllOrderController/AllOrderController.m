@@ -45,7 +45,7 @@ static NSString *FooterIdentifier   = @"OrderFooter";
         layout.footerReferenceSize          = CGSizeMake(kScreenWidth, 50.);
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.deFrameSize = CGSizeMake(kScreenWidth, kScreenHeight - 47.);
+        _collectionView.deFrameSize = CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kNavigationBarHeight);
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -84,13 +84,13 @@ static NSString *FooterIdentifier   = @"OrderFooter";
 //        self.orderArray = (NSMutableArray *)OrderArray;
         self.page       += 1;
         [self.orderArray addObjectsFromArray:OrderArray];
-        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView.infiniteScrollingView stopAnimating];
         [UIView setAnimationsEnabled:NO];
         [self.collectionView reloadData];
         [UIView setAnimationsEnabled:YES];
     } Failure:^(NSInteger stateCode, NSError *error) {
         DDLogError(@"error %@", error.localizedDescription);
-        [self.collectionView.pullToRefreshView stopAnimating];
+        [self.collectionView.infiniteScrollingView stopAnimating];
     }];
 }
 
@@ -166,6 +166,12 @@ static NSString *FooterIdentifier   = @"OrderFooter";
         footerView.order    = order;
         return footerView;
     }
+}
+
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0.;
 }
 
 #pragma mark - <UICollectionViewDelegate>

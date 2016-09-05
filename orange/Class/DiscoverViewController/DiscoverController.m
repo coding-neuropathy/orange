@@ -87,45 +87,6 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     EntitySection,
 };
 
-//#pragma mark - search log
-//- (void)addSearchLog:(NSString *)text
-//{
-//    if (text.length == 0) {
-//        return;
-//    }
-//    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-//    if (!array) {
-//        array = [NSMutableArray array];
-//    }
-//    if (![array containsObject:text]) {
-//        [array insertObject:text atIndex:0];
-//        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
-//}
-//
-//- (void)removeSearchLog:(NSString *)text
-//{
-//    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-//    if (!array) {
-//        return;
-//    }
-//    if ([array containsObject:text]) {
-//        [array removeObject:text];
-//        [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"SearchLogs"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
-//}
-//
-//- (NSMutableArray *)getSearchLog
-//{
-//    NSMutableArray * array= [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SearchLogs"]];
-//    if (!array) {
-//        array = [NSMutableArray array];
-//    }
-//    return array;
-//}
-
 - (void)clearSearchLogButtonAciton
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SearchLogs"];
@@ -210,6 +171,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         } else {
             _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
         }
+        _collectionView.alwaysBounceVertical    = YES;
         _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
