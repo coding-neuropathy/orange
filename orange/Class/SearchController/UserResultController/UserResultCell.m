@@ -153,10 +153,10 @@
     self.nickLabel.text = _user.nickname;
     
     self.followingTip.text = [NSString stringWithFormat:@"%@ %ld",
-                             NSLocalizedStringFromTable(@"following", kLocalizedFile, nil), _user.followingCount];
+                             NSLocalizedStringFromTable(@"following", kLocalizedFile, nil), (long)_user.followingCount];
     
     self.fansTip.text = [NSString stringWithFormat:@"%@ %ld",
-                         NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil), _user.fanCount];
+                         NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil), (long)_user.fanCount];
     
     
     [self setNeedsLayout];

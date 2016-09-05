@@ -57,6 +57,8 @@
             
             _launchView.deFrameLeft = (kScreenWidth - _launchView.deFrameWidth) / 2.;
                     _launchView.layer.cornerRadius = 4.;
+        } else {
+            _launchView.alpha       = 0.;
         }
         _launchView.backgroundColor = UIColorFromRGB(0xffffff);
         _launchView.delegate = self;
@@ -114,11 +116,13 @@
 - (void)fadeIn
 {
     [UIView animateWithDuration:0.35 animations:^{
-
-        self.launchView.deFrameTop = (kScreenHeight - self.launchView.deFrameHeight) / 2.;
-            
-        self.closeBtn.deFrameRight =  CGRectGetMaxX(self.launchView.frame) + 12.;
-        self.closeBtn.deFrameTop = CGRectGetMinY(self.launchView.frame) - 12.;
+        if (IS_IPAD) {
+            self.launchView.deFrameTop = (kScreenHeight - self.launchView.deFrameHeight) / 2.;
+            self.closeBtn.deFrameRight =  CGRectGetMaxX(self.launchView.frame) + 12.;
+            self.closeBtn.deFrameTop = CGRectGetMinY(self.launchView.frame) - 12.;
+        } else  {
+            self.launchView.alpha = 1;
+        }
     } completion:^(BOOL finished) {
         
     }];
@@ -127,8 +131,12 @@
 - (void)fadeOutWithAction:(void (^)(void))action
 {
     [UIView animateWithDuration:0.35 animations:^{
-        self.launchView.transform = CGAffineTransformMakeTranslation(self.launchView.transform.tx, self.launchView.transform.ty + 600.);
-        self.closeBtn.transform = CGAffineTransformMakeTranslation(self.closeBtn.transform.tx, self.closeBtn.transform.ty + 600.);
+        if (IS_IPAD) {
+            self.launchView.transform = CGAffineTransformMakeTranslation(self.launchView.transform.tx, self.launchView.transform.ty + 600.);
+            self.closeBtn.transform = CGAffineTransformMakeTranslation(self.closeBtn.transform.tx, self.closeBtn.transform.ty + 600.);
+        } else {
+            self.launchView.alpha = 0.;
+        }
     } completion:^(BOOL finished) {
         if (finished){
             action();
