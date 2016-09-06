@@ -278,10 +278,14 @@
 "pending"                   = "待付款";
 "finished"                  = "交易完成";
 "scanner"                   = "扫描二维码";
+
+"item-sku"                  = "商品属性";
 "continue-add"              = "继续添加";
 "add-cart"                  = "加入购物袋";
 "submit-order"              = "提交订单";
 "shopping-cart"             = "购物袋";
+"order-detail"              = "订单详情";
+"no-order"                  = "暂无相关订单";
 
 "order-number"              = "订单号:";
 "order-status"              = "订单状态:";

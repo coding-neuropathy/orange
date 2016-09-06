@@ -68,7 +68,7 @@
         _alipayBtn.layer.cornerRadius   = 4.;
         _alipayBtn.layer.masksToBounds  = YES;
         _alipayBtn.backgroundColor      = [UIColor colorFromHexString:@"#f8f8f8"];
-        _alipayBtn.imageEdgeInsets      = UIEdgeInsetsMake(0., 34., 30., 15.);
+        _alipayBtn.imageEdgeInsets      = UIEdgeInsetsMake(0., 20., 30., 0.);
         _alipayBtn.titleEdgeInsets      = UIEdgeInsetsMake(55., -15., 0., 15.);
         
         [_alipayBtn setImage:[UIImage imageNamed:@"AliPay"] forState:UIControlStateNormal];
@@ -90,7 +90,7 @@
         _wechatPayBtn.layer.cornerRadius    = 4.;
         _wechatPayBtn.layer.masksToBounds   = YES;
         _wechatPayBtn.backgroundColor       = [UIColor colorFromHexString:@"#f8f8f8"];
-        _wechatPayBtn.imageEdgeInsets       = UIEdgeInsetsMake(0., 34., 30., 0.);
+        _wechatPayBtn.imageEdgeInsets       = UIEdgeInsetsMake(0., 20., 30., -5.);
         _wechatPayBtn.titleEdgeInsets       = UIEdgeInsetsMake(55., -15., 0., 15.);
         
         [_wechatPayBtn setTitle:NSLocalizedStringFromTable(@"wechat-pay", kLocalizedFile, nil) forState:UIControlStateNormal];
@@ -113,7 +113,7 @@
         _storePayBtn.layer.cornerRadius    = 4.;
         _storePayBtn.layer.masksToBounds   = YES;
         _storePayBtn.backgroundColor       = [UIColor colorFromHexString:@"#f8f8f8"];
-        _storePayBtn.imageEdgeInsets       = UIEdgeInsetsMake(0., 34., 30., 15.);
+        _storePayBtn.imageEdgeInsets       = UIEdgeInsetsMake(0., 20., 30., 0.);
         _storePayBtn.titleEdgeInsets       = UIEdgeInsetsMake(55., -15, 0., 15.);
         
         [_storePayBtn setTitle:NSLocalizedStringFromTable(@"credit-pay", kLocalizedFile, nil) forState:UIControlStateNormal];

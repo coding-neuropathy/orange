@@ -50,7 +50,7 @@ static NSString *FooterIdentifier   = @"OrderFooter";
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
-        
+        _collectionView.alwaysBounceVertical    = YES;
         _collectionView.emptyDataSetSource = self;
 //        _collectionView.emptyDataSetVisible = NO;
     }

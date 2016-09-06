@@ -151,8 +151,8 @@
     self.priceLabel.deFrameTop          = self.titleLabel.deFrameBottom + 20.;
     self.priceLabel.deFrameLeft         = self.titleLabel.deFrameLeft;
     
-    self.cartBtn.center                 = self.priceLabel.center;
-    self.cartBtn.deFrameRight           = self.deFrameRight - 24.;
+//    self.cartBtn.center                 = self.priceLabel.center;
+//    self.cartBtn.deFrameRight           = self.deFrameRight - 24.;
 
     self.skuInfoLabel.deFrameTop        = self.priceLabel.deFrameBottom + 38.;
     self.skuInfoLabel.deFrameLeft       = self.priceLabel.deFrameLeft;
@@ -235,12 +235,12 @@
 }
 
 #pragma mark - button action
-- (void)cartBtnAction:(id)sender
-{
-    if (_SKUDelegate && [_SKUDelegate respondsToSelector:@selector(TapAddCartWithSKU:)]) {
-        [_SKUDelegate TapAddCartWithSKU:self.selectedSKU];
-    }
-}
+//- (void)cartBtnAction:(id)sender
+//{
+//    if (_SKUDelegate && [_SKUDelegate respondsToSelector:@selector(TapAddCartWithSKU:)]) {
+//        [_SKUDelegate TapAddCartWithSKU:self.selectedSKU];
+//    }
+//}
 
 - (void)skuBtnAction:(id)sender
 {

@@ -27,7 +27,8 @@
         _orderBtn.titleLabel.textAlignment      = NSTextAlignmentCenter;
         _orderBtn.enabled                       = NO;
         
-        [_orderBtn setTitle:NSLocalizedStringFromTable(@"submit-order", kLocalizedFile, nil) forState:UIControlStateNormal];
+//        [_orderBtn setTitle:NSLocalizedStringFromTable(@"submit-order", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_orderBtn setTitle:NSLocalizedStringFromTable(@"add-cart", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_orderBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [_orderBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor] andSize:_orderBtn.deFrameSize] forState:UIControlStateDisabled];
         

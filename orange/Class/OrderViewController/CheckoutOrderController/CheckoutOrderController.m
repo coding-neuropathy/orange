@@ -128,9 +128,15 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
     if ([sender isKindOfClass:[GKOrder class]]) {
         GKOrder *order  = (GKOrder *)sender;
 
-        PaymentCodeController * paymengVC = [[PaymentCodeController alloc] initWithQString:order.wxPaymentURL];
-        
-        [self presentViewController:paymengVC animated:YES completion:nil];
+        PaymentCodeController * paymengVC   = [[PaymentCodeController alloc] initWithQString:order.wxPaymentURL];
+        __weak __typeof(&*paymengVC)weakVC = paymengVC;
+        paymengVC.closeAction               = ^(void){
+            [weakVC removeFromParentViewController];
+        };
+
+        [[UIApplication sharedApplication].keyWindow addSubview:paymengVC.view];
+        [self addChildViewController:paymengVC];
+        [paymengVC fadeIn];
     }
 }
 

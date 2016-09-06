@@ -26,9 +26,12 @@
         _checkOutBtn.titleLabel.font               = [UIFont fontWithName:@"PingFangSC-Medium" size:16.];
         _checkOutBtn.titleLabel.textAlignment      = NSTextAlignmentCenter;
 //        _orderBtn.enabled                       = NO;
+        _checkOutBtn.enabled                        = NO;
         
         [_checkOutBtn setTitle:NSLocalizedStringFromTable(@"submit-order", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_checkOutBtn setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [_checkOutBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor] andSize:_checkOutBtn.deFrameSize]
+                                forState:UIControlStateDisabled];
         [_checkOutBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor] andSize:_checkOutBtn.deFrameSize] forState:UIControlStateDisabled];
         
         [_checkOutBtn addTarget:self action:@selector(checkOutBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -55,7 +58,9 @@
 - (void)setPrice:(CGFloat)price
 {
     _price      = price;
-    
+    if (_price > 0) {
+        self.checkOutBtn.enabled            = YES;
+    }
     [super setNeedsLayout];
 }
 

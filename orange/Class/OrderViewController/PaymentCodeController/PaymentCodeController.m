@@ -7,6 +7,7 @@
 //
 
 #import "PaymentCodeController.h"
+#import "UIImage+QRCode.h"
 
 @interface PaymentCodeController ()
 
@@ -32,30 +33,56 @@
     if (!_QRCodeImageView) {
         _QRCodeImageView                    = [[UIImageView alloc] initWithFrame:CGRectZero];
         _QRCodeImageView.deFrameSize        = CGSizeMake(200., 200.);
-        _QRCodeImageView.backgroundColor    = [UIColor redColor];
+//        _QRCodeImageView.transform          = CGAffineTransformMakeScale(0.3, 0.3);
+//        _QRCodeImageView.backgroundColor    = [UIColor redColor];
         _QRCodeImageView.contentMode        = UIViewContentModeScaleAspectFit;
     }
     return _QRCodeImageView;
 }
 
-- (CIImage *)createQRForString:(NSString *)qrString {
-    NSData *stringData = [qrString dataUsingEncoding: NSISOLatin1StringEncoding];
-    
-    CIFilter *qrFilter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
-    [qrFilter setValue:stringData forKey:@"inputMessage"];
-    
-    return qrFilter.outputImage;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.view.backgroundColor   = [UIColor colorWithWhite:0. alpha:.45];
     [self.view addSubview:self.QRCodeImageView];
     
-    UIImage *qr_image           = [UIImage imageWithCGImage:(__bridge CGImageRef _Nonnull)([self createQRForString:self.qString])];
-    self.QRCodeImageView.image  = qr_image;
+    self.QRCodeImageView.image  = [UIImage generatorQRCodeImageWithQString:self.qString Width:self.QRCodeImageView.deFrameWidth];
     self.QRCodeImageView.center = self.view.center;
 }
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if (self.closeAction)
+        [self fadeOutWithAction:self.closeAction];
+    else
+        [self fadeOutWithAction:nil];
+//    if (self.closeAction) {
+//        self.closeAction();
+//    }
+}
+
+- (void)fadeIn
+{
+    self.QRCodeImageView.transform = CGAffineTransformMakeScale(1. * 0.5, 1. * 0.5);
+    [UIView animateWithDuration:0.3 animations:^{
+        self.QRCodeImageView.transform = CGAffineTransformMakeScale(1., 1.);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)fadeOutWithAction:(void (^)(void))action
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.QRCodeImageView.transform = CGAffineTransformMakeScale(1. * 0.1, 1. * 0.1);
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.view removeFromSuperview];
+            self.closeAction();
+        }
+    }];
+}
+
 
 @end

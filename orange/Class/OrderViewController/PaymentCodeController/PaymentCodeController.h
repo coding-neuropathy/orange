@@ -10,6 +10,9 @@
 
 @interface PaymentCodeController : UIViewController
 
+@property (nonatomic, copy) void (^closeAction)();
+
 - (instancetype)initWithQString:(NSString *)q_string;
+- (void)fadeIn;
 
 @end

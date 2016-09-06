@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, SKUSectionType) {
 
 @property (strong, nonatomic) NSString          *entity_hash;
 @property (strong, nonatomic) GKEntity          *entity;
+@property (weak, nonatomic) GKEntitySKU         *entity_sku;
 
 @property (strong, nonatomic) UIButton          *continueAddBtn;
 @property (strong, nonatomic) UIButton          *backBtn;
@@ -267,6 +268,7 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 - (void)TapSKUTagWithSKU:(GKEntitySKU *)sku
 {
     DDLogInfo(@"sku_id %ld", sku.skuId);
+    self.entity_sku = sku;
     [self.toolbar updatePriceWithprice:sku.promoPrice];
 }
 
@@ -289,7 +291,18 @@ static NSString * SKUHeaderIdentifier               = @"SKUHeader";
 #pragma mark - <SKUToolbarDelegate>
 - (void)tapOrderBtn:(id)sender
 {
-    
+    [SVProgressHUD showInfoWithStatus:@"add-to-cart"];
+    [API addEntitySKUToCartWithSKUId:self.entity_sku.skuId Volume:1 Success:^(BOOL is_success) {
+        
+        if (is_success) {
+            self.cartVolume += 1;
+            [_cartListBtn showBadgeWithStyle:WBadgeStyleNumber value:self.cartVolume animationType:WBadgeAnimTypeNone];
+            [SVProgressHUD showSuccessWithStatus:@"success"];
+        }
+    } Failure:^(NSInteger stateCode, NSError *error) {
+        DDLogError(@"error: %@", error.localizedDescription);
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
 }
 
 
