@@ -188,6 +188,7 @@
 		8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */; };
 		8AB731DA1C1BBDAD0076BACC /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */; };
 		8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D91C1BBDAD0076BACC /* SettingsViewCell.m */; };
+		8ABB6F741D7EA870003EDD49 /* PaymentCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB6F731D7EA870003EDD49 /* PaymentCodeController.m */; };
 		8ABB83421D7742E700268884 /* OrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB83411D7742E700268884 /* OrderController.m */; };
 		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
@@ -702,6 +703,8 @@
 		8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsFooterView.m; sourceTree = "<group>"; };
 		8AB731D81C1BBDAD0076BACC /* SettingsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewCell.h; sourceTree = "<group>"; };
 		8AB731D91C1BBDAD0076BACC /* SettingsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewCell.m; sourceTree = "<group>"; };
+		8ABB6F721D7EA870003EDD49 /* PaymentCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaymentCodeController.h; path = OrderViewController/PaymentCodeController/PaymentCodeController.h; sourceTree = "<group>"; };
+		8ABB6F731D7EA870003EDD49 /* PaymentCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaymentCodeController.m; path = OrderViewController/PaymentCodeController/PaymentCodeController.m; sourceTree = "<group>"; };
 		8ABB83401D7742E700268884 /* OrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderController.h; path = OrderViewController/OrderController.h; sourceTree = "<group>"; };
 		8ABB83411D7742E700268884 /* OrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderController.m; path = OrderViewController/OrderController.m; sourceTree = "<group>"; };
 		8AC3F6841C0590A500CCD867 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -1925,9 +1928,19 @@
 			name = PreViewControllers;
 			sourceTree = "<group>";
 		};
+		8ABB6F711D7EA855003EDD49 /* PaymentCodeController */ = {
+			isa = PBXGroup;
+			children = (
+				8ABB6F721D7EA870003EDD49 /* PaymentCodeController.h */,
+				8ABB6F731D7EA870003EDD49 /* PaymentCodeController.m */,
+			);
+			name = PaymentCodeController;
+			sourceTree = "<group>";
+		};
 		8ABB833F1D7742BC00268884 /* OrderViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8ABB6F711D7EA855003EDD49 /* PaymentCodeController */,
 				8A242AFB1D7D0B0500A15669 /* CheckoutOrderController */,
 				8AFB3B7A1D78602700E1D04A /* FinishedOrderController */,
 				8AFB3B761D785FEC00E1D04A /* PendingOrderController */,
@@ -2788,6 +2801,7 @@
 				2309032E1C803B1500AD26D6 /* AuthUserViewController.m in Sources */,
 				8A59017A1D643F1100780C74 /* Appirater.m in Sources */,
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
+				8ABB6F741D7EA870003EDD49 /* PaymentCodeController.m in Sources */,
 				B766763A1AB805B5002F294C /* NoMessageView.m in Sources */,
 				4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */,
 				B737F4101C1C027100286596 /* VerifyEmailViewController.m in Sources */,

@@ -10,6 +10,7 @@
 #import "OrderCell.h"
 #import "OrderHeaderView.h"
 #import "CheckoutFooterView.h"
+#import "PaymentCodeController.h"
 
 #import "WXApi.h"
 
@@ -124,8 +125,15 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
 #pragma mark - <CheckoutFooterViewDelegate>
 - (void)tapWeCahtBtn:(id)sender
 {
+    if ([sender isKindOfClass:[GKOrder class]]) {
+        GKOrder *order  = (GKOrder *)sender;
 
+        PaymentCodeController * paymengVC = [[PaymentCodeController alloc] initWithQString:order.wxPaymentURL];
+        
+        [self presentViewController:paymengVC animated:YES completion:nil];
+    }
 }
+
 
 
 @end

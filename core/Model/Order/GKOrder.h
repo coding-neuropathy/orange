@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, GKOrderState) {
 @property (strong, nonatomic) NSDate            *createdDateTime;
 @property (strong, nonatomic) NSDate            *updatedDateTime;
 
+@property (strong, nonatomic) NSString          *wxPaymentURL;
+
 @property (assign, getter=orderVolume, nonatomic) NSInteger orderVolume;
 @property (assign, getter=orderPrice, nonatomic) float orderPrice;
 

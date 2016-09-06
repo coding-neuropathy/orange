@@ -176,7 +176,7 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(tapAlipayBtn:)]) {
     
-        [_delegate tapAlipayBtn:sender];
+        [_delegate tapAlipayBtn:self.order];
     }
 }
 
@@ -184,7 +184,7 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(tapWeCahtBtn:)]) {
         
-        [_delegate tapWeCahtBtn:sender];
+        [_delegate tapWeCahtBtn:self.order];
     }
 }
 
@@ -192,7 +192,7 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(tapStorePayBtn:)])
     {
-        [_delegate tapStorePayBtn:sender];
+        [_delegate tapStorePayBtn:self.order];
     }
 }
 
