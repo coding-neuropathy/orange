@@ -108,7 +108,8 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         OrderHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                                                                          withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
-        headerView.order    = order;
+        headerView.paymentEnable    = NO;
+        headerView.order            = order;
         return headerView;
         
     } else {

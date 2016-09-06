@@ -11,11 +11,12 @@
 
 @interface OrderHeaderView ()
 
-@property (strong, nonatomic) UILabel   *createOrderLabel;
-@property (strong, nonatomic) UILabel   *orderTipsLabel;
-@property (strong, nonatomic) UILabel   *orderNumberLabel;
-@property (strong, nonatomic) UILabel   *statusTipsLabel;
-@property (strong, nonatomic) UILabel   *statusLabel;
+//@property (strong, nonatomic) UILabel   *createOrderLabel;
+//@property (strong, nonatomic) UILabel   *orderTipsLabel;
+//@property (strong, nonatomic) UILabel   *orderNumberLabel;
+//@property (strong, nonatomic) UILabel   *statusTipsLabel;
+//@property (strong, nonatomic) UILabel   *statusLabel;
+//@property (strong, nonatomic) UIButton  *paymentBtn;
 
 @end
 
@@ -26,6 +27,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor    = [UIColor colorFromHexString:@"#ffffff"];
+        self.paymentEnable      = YES;
     }
     return self;
 }
@@ -102,7 +104,25 @@
     return _statusLabel;
 }
 
-
+- (UIButton *)paymentBtn
+{
+    if (!_paymentBtn) {
+        _paymentBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
+        _paymentBtn.deFrameSize         = CGSizeMake(74., 32.);
+        _paymentBtn.hidden              = YES;
+        _paymentBtn.layer.cornerRadius  = 4.;
+        _paymentBtn.layer.borderWidth   = 1.;
+        _paymentBtn.layer.borderColor   = [UIColor colorFromHexString:@"#6192ff"].CGColor;
+        _paymentBtn.titleLabel.font     = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+        
+        [_paymentBtn setTitle:NSLocalizedStringFromTable(@"payment", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_paymentBtn setTitleColor:[UIColor colorFromHexString:@"6192ff"] forState:UIControlStateNormal];
+        [_paymentBtn addTarget:self action:@selector(paymentBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_paymentBtn];
+    }
+    return _paymentBtn;
+}
 
 - (void)setOrder:(GKOrder *)order
 {
@@ -116,17 +136,22 @@
     self.orderNumberLabel.deFrameSize   = CGSizeMake([self.order.orderNumber widthWithLineWidth:0. Font:self.orderNumberLabel.font], 20.);
     
 //    DDLogInfo(@"status %ld", order.status);
-    switch (order.status) {
-        case WaitingForPayment:
-            self.statusLabel.text       = NSLocalizedStringFromTable(@"wait-for-payment", kLocalizedFile, nil);
-            self.statusLabel.textColor  = [UIColor redColor];
-            break;
-        case Paid:
-            self.statusLabel.text       = NSLocalizedStringFromTable(@"paid", kLocalizedFile, nil);
-            self.statusLabel.textColor  = [UIColor colorFromHexString:@"#757575"];
-            break;
-        default:
-            break;
+    if (self.paymentEnable) {
+        switch (_order.status) {
+            case WaitingForPayment:
+                self.statusLabel.text       = NSLocalizedStringFromTable(@"wait-for-payment", kLocalizedFile, nil);
+                self.statusLabel.textColor  = [UIColor redColor];
+                self.paymentBtn.hidden      = NO;
+                break;
+            case Paid:
+                self.statusLabel.text       = NSLocalizedStringFromTable(@"paid", kLocalizedFile, nil);
+                self.statusLabel.textColor  = [UIColor colorFromHexString:@"#757575"];
+                self.paymentBtn.hidden      = YES;
+                break;
+            default:
+//            self.paymentBtn.hidden      = YES;
+                break;
+        }
     }
     self.statusLabel.deFrameSize        = CGSizeMake([self.statusLabel.text widthWithLineWidth:0. Font:self.statusLabel.font], 20.);
     
@@ -152,6 +177,11 @@
     self.statusLabel.deFrameTop         = self.statusTipsLabel.deFrameTop;
     self.statusLabel.deFrameLeft        = self.statusTipsLabel.deFrameRight + 10.;
     
+    if (self.order.status == WaitingForPayment) {
+//        self.paymentBtn.hidden          = NO;
+        self.paymentBtn.deFrameRight    = self.deFrameWidth - 16.;
+        self.paymentBtn.deFrameBottom   = self.deFrameHeight - 16.;
+    } 
 }
 
 
@@ -169,6 +199,14 @@
     CGContextStrokePath(context);
     
     [super drawRect:rect];
+}
+
+#pragma mark - button action
+- (void)paymentBtnAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tapPaymentBtnAction:)]) {
+        [_delegate tapPaymentBtnAction:self.order];
+    }
 }
 
 @end

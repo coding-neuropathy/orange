@@ -150,12 +150,12 @@
     [super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-//    [self.navigationController setToolbarHidden:NO animated:YES];
-}
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    
+////    [self.navigationController setToolbarHidden:NO animated:YES];
+//}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -241,6 +241,7 @@
 //        NSLog(@"%@",self.shareTitle);
     }];
 }
+
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
     

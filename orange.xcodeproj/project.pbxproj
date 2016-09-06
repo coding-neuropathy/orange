@@ -264,7 +264,6 @@
 		B72FD82F1AEF5B3A00354248 /* IconInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72FD82E1AEF5B3A00354248 /* IconInfoView.m */; };
 		B736FF2A1BD65D6E000668E4 /* UserTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B736FF291BD65D6E000668E4 /* UserTagsViewController.m */; };
 		B737F4101C1C027100286596 /* VerifyEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B737F40F1C1C027100286596 /* VerifyEmailViewController.m */; };
-		B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */; };
 		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
 		B758E84C1D17DB7C00DD01C7 /* UserArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B758E84B1D17DB7C00DD01C7 /* UserArticleCell.m */; };
 		B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */; };
@@ -292,7 +291,6 @@
 		B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B783F6641B9AF26C004DF1CB /* ArticleCell.m */; };
 		B78C4E0E1B676ED5006620F7 /* GKCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = B78C4E0C1B676ED5006620F7 /* GKCategory.h */; };
 		B78C4E0F1B676ED5006620F7 /* GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B78C4E0D1B676ED5006620F7 /* GKCategory.m */; };
-		B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */; };
 		B7930F961CA8D8CF009FDD9F /* GKSelectionEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = B7930F941CA8D8CF009FDD9F /* GKSelectionEntity.h */; };
 		B7930F971CA8D8CF009FDD9F /* GKSelectionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = B7930F951CA8D8CF009FDD9F /* GKSelectionEntity.m */; };
 		B796C0881BC17D8E006F4DE1 /* ImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B796C0861BC17D8E006F4DE1 /* ImageCache.h */; };
@@ -824,8 +822,6 @@
 		B736FF291BD65D6E000668E4 /* UserTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTagsViewController.m; sourceTree = "<group>"; };
 		B737F40E1C1C027100286596 /* VerifyEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyEmailViewController.h; sourceTree = "<group>"; };
 		B737F40F1C1C027100286596 /* VerifyEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyEmailViewController.m; sourceTree = "<group>"; };
-		B74266DB1AB3DFE10064A010 /* UIScrollView+AutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+AutoScroll.h"; sourceTree = "<group>"; };
-		B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+AutoScroll.m"; sourceTree = "<group>"; };
 		B749632C1AB28A6C00C340FB /* CommentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentHeaderView.h; path = CommentView/CommentHeaderView.h; sourceTree = "<group>"; };
 		B749632D1AB28A6C00C340FB /* CommentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentHeaderView.m; path = CommentView/CommentHeaderView.m; sourceTree = "<group>"; };
 		B758E84A1D17DB7C00DD01C7 /* UserArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserArticleCell.h; path = UserArticleViewController/UserArticleCell.h; sourceTree = "<group>"; };
@@ -872,8 +868,6 @@
 		B783F6641B9AF26C004DF1CB /* ArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCell.m; sourceTree = "<group>"; };
 		B78C4E0C1B676ED5006620F7 /* GKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKCategory.h; sourceTree = "<group>"; };
 		B78C4E0D1B676ED5006620F7 /* GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKCategory.m; sourceTree = "<group>"; };
-		B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoverHeaderView.h; path = DiscoverView/DiscoverHeaderView.h; sourceTree = "<group>"; };
-		B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoverHeaderView.m; path = DiscoverView/DiscoverHeaderView.m; sourceTree = "<group>"; };
 		B7930F941CA8D8CF009FDD9F /* GKSelectionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKSelectionEntity.h; path = SelectionEntity/GKSelectionEntity.h; sourceTree = "<group>"; };
 		B7930F951CA8D8CF009FDD9F /* GKSelectionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKSelectionEntity.m; path = SelectionEntity/GKSelectionEntity.m; sourceTree = "<group>"; };
 		B796C0861BC17D8E006F4DE1 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
@@ -1371,7 +1365,6 @@
 				8AD5D2121D6D725E000927C7 /* BannerCarousel */,
 				B7AAFA601AB69DD200A2F20D /* UIPlaceHolderTextView */,
 				B7AAFA5C1AB67E2300A2F20D /* RadioButton */,
-				B74266DA1AB3DFE10064A010 /* AutoScroll */,
 				4E3A23811A52EC9600037F9C /* SettingManager.h */,
 				4E3A23821A52EC9600037F9C /* SettingManager.m */,
 			);
@@ -2115,15 +2108,6 @@
 			path = JPush;
 			sourceTree = "<group>";
 		};
-		B74266DA1AB3DFE10064A010 /* AutoScroll */ = {
-			isa = PBXGroup;
-			children = (
-				B74266DB1AB3DFE10064A010 /* UIScrollView+AutoScroll.h */,
-				B74266DC1AB3DFE10064A010 /* UIScrollView+AutoScroll.m */,
-			);
-			path = AutoScroll;
-			sourceTree = "<group>";
-		};
 		B749632B1AB28A4700C340FB /* CommentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2215,8 +2199,6 @@
 		B79270921AB3D8E800FD7371 /* DiscoverView */ = {
 			isa = PBXGroup;
 			children = (
-				B79270931AB3D92500FD7371 /* DiscoverHeaderView.h */,
-				B79270941AB3D92500FD7371 /* DiscoverHeaderView.m */,
 				B7C684811ABBC63C00A122E8 /* NoSearchResultView.h */,
 				B7C684821ABBC63C00A122E8 /* NoSearchResultView.m */,
 			);
@@ -2763,7 +2745,6 @@
 				B76FAE961B67B5FA002AC4C7 /* DiscoverCategoryView.m in Sources */,
 				B706868D1CF41E7D00C40825 /* TabBarViewcontroller.m in Sources */,
 				8AF3D6AD1D7671C0007E8C2E /* UserResultCell.m in Sources */,
-				B74266DD1AB3DFE10064A010 /* UIScrollView+AutoScroll.m in Sources */,
 				8AF7C7571D73EE0600C71499 /* CartController.m in Sources */,
 				B7BE3E301BA9B98C004AD422 /* SubCategoryGroupController.m in Sources */,
 				8AF3D6B31D7671CC007E8C2E /* ArticleResultCell.m in Sources */,
@@ -2778,7 +2759,6 @@
 				8A0B16E21BABFDED00469DD6 /* ArticleListCell.m in Sources */,
 				8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */,
 				B70686AB1CF425AE00C40825 /* MenuCell.m in Sources */,
-				B79270951AB3D92500FD7371 /* DiscoverHeaderView.m in Sources */,
 				B7F5AA0B1B08D3320033BB2D /* WebViewProgressView.m in Sources */,
 				B772BE9A1BD53CFA005C1540 /* NoteCell.m in Sources */,
 				B77E00A91B8988DC008BCA55 /* EntityPopView.m in Sources */,

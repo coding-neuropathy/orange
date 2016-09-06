@@ -7,7 +7,7 @@
 //
 
 #import "DiscoverBannerView.h"
-#import "UIScrollView+AutoScroll.h"
+//#import "UIScrollView+AutoScroll.h"
 //#import "iCarousel.h"
 #import "BannerCarousel.h"
 

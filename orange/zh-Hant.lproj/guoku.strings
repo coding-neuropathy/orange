@@ -77,7 +77,7 @@
 /*
  * Search Page
  */
-"history-search"                = "歷史搜索";
+"history-search"                = "最近搜索";
 "popular-search"                = "熱門搜索";
 "users"                         = "用戶";
 "entitie"                       = "商品";
@@ -288,6 +288,7 @@
 
 "order-number"              = "訂單號:";
 "order-status"              = "訂單狀態:";
+"payment"                   = "去收款";
 "wait-for-payment"          = "待付款";
 "paid"                      = "交易完成";
 //"close"                     = "d"

@@ -12,7 +12,7 @@
 #import "OrderFooterView.h"
 #import "CheckoutOrderController.h"
 
-@interface AllOrderController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface AllOrderController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, OrderHeaderViewDelegate>
 
 
 @end
@@ -107,6 +107,18 @@ static NSString *FooterIdentifier   = @"OrderFooter";
             forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:FooterIdentifier];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.collectionView.scrollsToTop    = YES;
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.collectionView.scrollsToTop    = NO;
+    [super viewWillDisappear:animated];
+}
+
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -136,7 +148,7 @@ static NSString *FooterIdentifier   = @"OrderFooter";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     GKOrder * order  = [self.orderArray objectAtIndex:section];
-    DDLogInfo(@"orderItems %ld", (unsigned long)order.orderItems.count);
+    DDLogInfo(@"order status %ld", (unsigned long)order.status);
     return order.orderItems.count;
 }
 
@@ -154,14 +166,17 @@ static NSString *FooterIdentifier   = @"OrderFooter";
 {
     GKOrder * order     = [self.orderArray objectAtIndex:indexPath.section];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        OrderHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                                          withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
-        headerView.order    = order;
+        OrderHeaderView *headerView = [collectionView
+                                       dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                        withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
+        headerView.order            = order;
+        headerView.delegate         = self;
         return headerView;
     
     } else {
-        OrderFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                                                                         withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
+        OrderFooterView *footerView = [collectionView
+                                       dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                                        withReuseIdentifier:FooterIdentifier forIndexPath:indexPath];
         
         footerView.order    = order;
         return footerView;
@@ -174,14 +189,14 @@ static NSString *FooterIdentifier   = @"OrderFooter";
     return 0.;
 }
 
-#pragma mark - <UICollectionViewDelegate>
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    GKOrder * order = [self.orderArray objectAtIndex:indexPath.section];
-    
-    CheckoutOrderController * vc = [[CheckoutOrderController alloc] initWithOrder:order];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//#pragma mark - <UICollectionViewDelegate>
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    GKOrder * order = [self.orderArray objectAtIndex:indexPath.section];
+//    
+//    CheckoutOrderController * vc = [[CheckoutOrderController alloc] initWithOrder:order];
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 
 #pragma mark - <DZNEmptyDataSetSource>
@@ -228,6 +243,15 @@ static NSString *FooterIdentifier   = @"OrderFooter";
 - (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button
 {
     
+}
+
+#pragma mark - <OrderHeaderViewDelegate>
+- (void)tapPaymentBtnAction:(GKOrder *)order
+{
+//    GKOrder * order = [self.orderArray objectAtIndex:ind];
+    
+    CheckoutOrderController * vc = [[CheckoutOrderController alloc] initWithOrder:order];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

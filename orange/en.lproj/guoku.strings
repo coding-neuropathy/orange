@@ -287,8 +287,10 @@
 
 "order-number"              = "Order No.";
 "order-status"              = "State";
+"payment"                   = "Payment";
 "wait-for-payment"          = "Wait for Payment";
 "paid"                      = "Paid";
+
 
 "alipay"                    = "AliPay";
 "wechat-pay"                = "WeChat";
