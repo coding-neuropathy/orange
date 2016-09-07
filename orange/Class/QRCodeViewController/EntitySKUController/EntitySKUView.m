@@ -235,12 +235,12 @@
 }
 
 #pragma mark - button action
-//- (void)cartBtnAction:(id)sender
-//{
-//    if (_SKUDelegate && [_SKUDelegate respondsToSelector:@selector(TapAddCartWithSKU:)]) {
-//        [_SKUDelegate TapAddCartWithSKU:self.selectedSKU];
-//    }
-//}
+- (void)cartBtnAction:(id)sender
+{
+    if (_SKUDelegate && [_SKUDelegate respondsToSelector:@selector(TapAddCartWithSKU:)]) {
+        [_SKUDelegate TapAddCartWithSKU:self.selectedSKU];
+    }
+}
 
 - (void)skuBtnAction:(id)sender
 {
@@ -257,11 +257,11 @@
         }
     }
     btn.selected                = YES;
-    btn.backgroundColor         = UIColorFromRGB(0xe6ecff);
+    btn.backgroundColor         = [UIColor colorFromHexString:@"#e6ecff"];
     btn.layer.borderWidth       = 1.;
-    btn.layer.borderColor       = UIColorFromRGB(0x3f6ff0).CGColor;
+    btn.layer.borderColor       = [UIColor colorFromHexString:@"#3f6ff0"].CGColor;
     
-    self.cartBtn.enabled        = YES;
+//    self.cartBtn.enabled        = YES;
     self.selectedSKU            = [self.entity.skuArray objectAtIndex:btn.tag];
     
     self.priceLabel.text        = [NSString stringWithFormat:@"￥ %.2f", self.selectedSKU.promoPrice];

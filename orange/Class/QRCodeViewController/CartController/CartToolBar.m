@@ -102,7 +102,7 @@
 - (void)updatePriceWithprice:(float)price
 {
     self.priceLabel.text    = [NSString stringWithFormat:@"¥ %.2f", price];
-//    self.orderBtn.enabled   = YES;
+    if (price > 0) self.checkOutBtn.enabled   = YES;
 }
 
 @end

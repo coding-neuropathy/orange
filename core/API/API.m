@@ -660,6 +660,56 @@
     }];
 }
 
+/**
+ *  获取微信支付链接
+ *
+ *  @param order_id     订单 ID
+ *  @param type         支付方式
+ *  @param success      成功block
+ *  @param failure      成功block
+ */
++ (void)getPaymentURLWithOrderId:(NSInteger)order_id PaymentType:(GKPaymentType)type
+                               Success:(void (^)(NSString  *payment_url))success
+                               Failure:(void (^)(NSInteger stateCode, NSError * error))failure
+{
+    NSParameterAssert(order_id);
+    NSString    *path;
+    switch (type) {
+        case WechatPaymentType:
+            path   = [NSString stringWithFormat:@"order/payment/weixin/%ld/", order_id];
+            break;
+        case AlipayPaymentType:
+            path   = [NSString stringWithFormat:@"order/payment/alipay/%ld/", order_id];
+            break;
+        default:
+            break;
+    }
+    
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSString * payment_url;
+        
+        switch (type) {
+            case WechatPaymentType:
+                payment_url  = responseObject[@"wx_payment_url"];
+                break;
+            case AlipayPaymentType:
+                payment_url  = responseObject[@"alipay_payment_url"];
+                break;
+            default:
+                break;
+        }
+        
+        if (success) {
+            success(payment_url);
+        }
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+
+}
 
 #pragma mark - get Article data
 /**
@@ -668,7 +718,7 @@
  *  @param  page    页数
  *  @param  size    每页数量
  *  @param  success   成功block
- *  @param  failure   失败block
+ *  @param  failure    成功blockblock
  */
 + (void)getArticlesWithTagName:(NSString *)name
                           Page:(NSInteger)page

@@ -13,7 +13,7 @@
 @property (nonatomic, copy) void (^finished)();
 @property (nonatomic, copy) void (^closeAction)();
 
-- (instancetype)initWithLaunch:(GKLaunch *)launch;
+- (instancetype)initWithLaunch:(GKLaunch *)launch SkipSeconds:(NSInteger)seconds;
 
 - (void)show;
 

@@ -243,7 +243,7 @@ int ddLogLevel;
 //            return ;
 //        }
         
-        LaunchController * vc = [[LaunchController alloc] initWithLaunch:launch];
+        LaunchController * vc = [[LaunchController alloc] initWithLaunch:launch SkipSeconds:3];
     
         [self.window.rootViewController addChildViewController:vc];
         __weak __typeof(&*vc)weakVC = vc;

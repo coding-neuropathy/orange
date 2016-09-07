@@ -27,7 +27,7 @@
                                 @"created_datetime"     : @"createdTimestamp",
                                 @"updated_dateTime"     : @"updatedTimestamp",
                                 @"order_items"          : @"orderItems",
-                                @"wx_payment_qrcode_url": @"wxPaymentURL",
+//                                @"wx_payment_qrcode_url": @"wxPaymentURL",
                              };
     
     return keyDic;

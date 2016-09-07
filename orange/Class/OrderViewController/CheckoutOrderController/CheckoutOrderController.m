@@ -128,7 +128,7 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
     if ([sender isKindOfClass:[GKOrder class]]) {
         GKOrder *order  = (GKOrder *)sender;
 
-        PaymentCodeController * paymengVC   = [[PaymentCodeController alloc] initWithQString:order.wxPaymentURL];
+        PaymentCodeController * paymengVC   = [[PaymentCodeController alloc] initWithOrder:order];
         __weak __typeof(&*paymengVC)weakVC = paymengVC;
         paymengVC.closeAction               = ^(void){
             [weakVC removeFromParentViewController];
@@ -136,7 +136,23 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
 
         [[UIApplication sharedApplication].keyWindow addSubview:paymengVC.view];
         [self addChildViewController:paymengVC];
-        [paymengVC fadeIn];
+//        [paymengVC fadeIn];
+    }
+}
+
+- (void)tapAlipayBtn:(id)sender
+{
+
+    if ([sender isKindOfClass:[GKOrder class]]) {
+        GKOrder *order  = (GKOrder *)sender;
+        
+        [API getPaymentURLWithOrderId:order.orderId PaymentType:AlipayPaymentType Success:^(NSString *payment_url) {
+//            DDLogInfo(@"payment %@", payment_url);
+            [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:payment_url]];
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:payment_url]];
+        } Failure:^(NSInteger stateCode, NSError *error) {
+            
+        }];
     }
 }
 

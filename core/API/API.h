@@ -20,8 +20,12 @@ typedef NS_ENUM(NSInteger, GKSNSType){
     GKSinaWeibo = 1,
     /// 淘宝
     GKTaobao,
-    
 } ;
+
+typedef NS_ENUM(NSInteger, GKPaymentType) {
+    WechatPaymentType   = 1,
+    AlipayPaymentType,
+};
 
 /*
  *  更新 JPush Register ID
@@ -235,6 +239,19 @@ typedef NS_ENUM(NSInteger, GKSNSType){
 + (void)getOrderListWithWithStatus:(NSInteger)status Page:(NSInteger)page Size:(NSInteger)size
                            Success:(void (^)(NSArray *OrderArray))success
                            Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
+
+
+/**
+ *  获取微信支付链接
+ *
+ *  @param order_id     订单 ID
+ *  @param type         支付方式
+ *  @param success      成功block
+ *  @param failure      成功block
+ */
++ (void)getPaymentURLWithOrderId:(NSInteger)order_id PaymentType:(GKPaymentType)type
+                        Success:(void (^)(NSString  *payment_url))success
+                        Failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 #pragma mark - get Article data
 /**

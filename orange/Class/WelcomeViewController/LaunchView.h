@@ -22,4 +22,9 @@
 @property (strong, nonatomic) GKLaunch * launch;
 @property (weak, nonatomic) id<LaunchViewDelegate> delegate;
 
+/**
+ *  skip button
+ */
+@property (strong, nonatomic) UIButton *closeBtn;
+
 @end

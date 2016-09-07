@@ -12,7 +12,7 @@
 
 @property (nonatomic, copy) void (^closeAction)();
 
-- (instancetype)initWithQString:(NSString *)q_string;
+- (instancetype)initWithOrder:(GKOrder *)order;
 - (void)fadeIn;
 
 @end

@@ -12,17 +12,26 @@
 @interface PaymentCodeController ()
 
 @property (strong, nonatomic) UIImageView   *QRCodeImageView;
-@property (strong, nonatomic) NSString      *qString;
+//@property (strong, nonatomic) NSString      *qString;
+@property (strong, nonatomic) GKOrder       *order;
 
 @end
 
 @implementation PaymentCodeController
 
-- (instancetype)initWithQString:(NSString *)q_string
+//- (instancetype)initWithQString:(NSString *)q_string
+//{
+//    self = [super init];
+//    if (self) {
+//        self.qString    = q_string;
+//    }
+//    return self;
+//}
+- (instancetype)initWithOrder:(GKOrder *)order
 {
-    self = [super init];
+    self    = [super init];
     if (self) {
-        self.qString    = q_string;
+        self.order  = order;
     }
     return self;
 }
@@ -47,9 +56,22 @@
     self.view.backgroundColor   = [UIColor colorWithWhite:0. alpha:.45];
     [self.view addSubview:self.QRCodeImageView];
     
-    self.QRCodeImageView.image  = [UIImage generatorQRCodeImageWithQString:self.qString Width:self.QRCodeImageView.deFrameWidth];
     self.QRCodeImageView.center = self.view.center;
+    
+    [SVProgressHUD showWithStatus:NSLocalizedStringFromTable(@"loading", kLocalizedFile, nil)];
+    [API getPaymentURLWithOrderId:self.order.orderId PaymentType:WechatPaymentType Success:^(NSString *payment_url) {
+        self.QRCodeImageView.image  = [UIImage generatorQRCodeImageWithQString:payment_url Width:self.QRCodeImageView.deFrameWidth];
+        self.QRCodeImageView.transform = CGAffineTransformMakeScale(1. * 0, 1. * 0);
+        [SVProgressHUD dismissWithCompletion:^{
+            [self fadeIn];
+        }];
+    } Failure:^(NSInteger stateCode, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        [self fadeOutWithAction:self.closeAction];
+    }];
 }
+
+
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -57,14 +79,11 @@
         [self fadeOutWithAction:self.closeAction];
     else
         [self fadeOutWithAction:nil];
-//    if (self.closeAction) {
-//        self.closeAction();
-//    }
 }
 
 - (void)fadeIn
 {
-    self.QRCodeImageView.transform = CGAffineTransformMakeScale(1. * 0.5, 1. * 0.5);
+//    self.QRCodeImageView.transform = CGAffineTransformMakeScale(1. * 0.5, 1. * 0.5);
     [UIView animateWithDuration:0.3 animations:^{
         self.QRCodeImageView.transform = CGAffineTransformMakeScale(1., 1.);
     } completion:^(BOOL finished) {

@@ -14,7 +14,10 @@
 @property (strong, nonatomic) GKLaunch * launch;
 @property (strong, nonatomic) LaunchView * launchView;
 @property (strong, nonatomic) UIButton * closeBtn;
-@property (weak, nonatomic) UIApplication * app;
+@property (weak, nonatomic)   UIApplication * app;
+@property (weak, nonatomic)   NSTimer   *timer;
+@property (assign, nonatomic) NSInteger count;
+@property (assign, nonatomic) NSInteger skipSeconds;
 
 @end
 
@@ -28,14 +31,21 @@
     return _app;
 }
 
-- (instancetype)initWithLaunch:(GKLaunch *)launch
+- (NSTimer *)timer
+{
+    if (!_timer) {
+        _timer  = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(skipAction:) userInfo:nil repeats:YES];
+    }
+    return _timer;
+}
+
+- (instancetype)initWithLaunch:(GKLaunch *)launch SkipSeconds:(NSInteger)seconds
 {
     self = [super init];
     if (self) {
-        self.launch = launch;
-        
+        self.launch         = launch;
+        self.skipSeconds    = seconds;
         self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.32];
-//        self.view.backgroundColor = [UIColor redColor];
     }
     
     return self;
@@ -124,7 +134,10 @@
             self.launchView.alpha = 1;
         }
     } completion:^(BOOL finished) {
-        
+        if (IS_IPHONE) {
+            self.count = 0;
+            [self.timer fire];
+        }
     }];
 }
 
@@ -171,6 +184,17 @@
             self.closeAction();
         }
     }];
+}
+
+#pragma mark - time
+- (void)skipAction:(id)sender
+{
+//    DDLogInfo(@"cccc");
+    if (self.count >= self.skipSeconds) {
+        [self.timer invalidate];
+        [self tapCloseBtn:nil];
+    }
+    [self.launchView.closeBtn setTitle:[NSString stringWithFormat:@"%ld %@",++self.count, NSLocalizedStringFromTable(@"skip", kLocalizedFile, nil)] forState:UIControlStateNormal];
 }
 
 #pragma mark - <LaunchViewDelegate>

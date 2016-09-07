@@ -16,7 +16,7 @@
 //@property (strong, nonatomic) UILabel * titleLabel;
 //@property (strong, nonatomic) UILabel * detailLabel;
 //@property (strong, nonatomic) UIButton * actionBtn;
-@property (strong, nonatomic) UIButton *closeBtn;
+//@property (strong, nonatomic) UIButton *closeBtn;
 
 @end
 
