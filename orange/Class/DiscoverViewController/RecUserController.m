@@ -41,11 +41,20 @@ static NSString * CellIdentifier = @"UserSingleListCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) : CGRectMake(0.f, 0.f, kScreenWidth - kTabBarWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
-        _tableView.backgroundColor = UIColorFromRGB(0xffffff);
+//        _tableView = [[UITableView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) : CGRectMake(0.f, 0.f, kScreenWidth - kTabBarWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+        
+        _tableView              = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.deFrameSize  = IS_IPAD ? CGSizeMake(kPadScreenWitdh, kScreenHeight)
+                                        : CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
+        
+        if ([UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeRight
+            || [UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeLeft)
+            _tableView.center = CGPointMake((kScreenWidth - kTabBarWidth) / 2, kScreenHeight / 2);
+        _tableView.dataSource   = self;
+        _tableView.delegate     = self;
+        _tableView.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        self.tableView.sep
         self.tableView.showsVerticalScrollIndicator = YES;
         
     }
@@ -54,7 +63,9 @@ static NSString * CellIdentifier = @"UserSingleListCell";
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
     self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
     self.title = NSLocalizedStringFromTable(@"recommendation user", kLocalizedFile, nil);
     [self.view addSubview:self.tableView];
@@ -132,7 +143,12 @@ static NSString * CellIdentifier = @"UserSingleListCell";
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
          
-         self.tableView.frame = CGRectMake(0., 0., size.width - kTabBarWidth, size.height);
+//         self.tableView.frame = CGRectMake(0., 0., size.width - kTabBarWidth, size.height);
+         if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight
+             || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft)
+             self.tableView.frame = CGRectMake(128., 0., kPadScreenWitdh, kScreenHeight);
+         else
+             self.tableView.frame = CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight);
          
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {

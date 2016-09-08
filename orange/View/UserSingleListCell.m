@@ -119,13 +119,15 @@
     
     if (!self.avatar) {
         _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 19.f, 36.f, 36.f)];
-        [self.contentView addSubview:self.avatar];
+        
         self.avatar.userInteractionEnabled = YES;
-        self.avatar.layer.cornerRadius = 18;
+        self.avatar.layer.cornerRadius = _avatar.deFrameHeight / 2.;
         self.avatar.layer.masksToBounds = YES;
+        [self.contentView addSubview:_avatar];
     }
     
-    [self.avatar sd_setImageWithURL:self.user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(60, 60)]];
+    [self.avatar sd_setImageWithURL:self.user.avatarURL
+                   placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.avatar.deFrameSize]];
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self action:@selector(avatarButtonAction)];
@@ -158,7 +160,7 @@
     self.staffImageView.deFrameTop = self.avatar.deFrameBottom - 10.;
     self.staffImageView.deFrameLeft = self.avatar.deFrameRight - 10.;
     if(!self.contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 27, kScreenWidth - 70, 20)];
+        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 27, self.contentView.deFrameWidth - 70, 20)];
         self.contentLabel.paragraphReplacement = @"";
         self.contentLabel.lineSpacing = 4.0;
         self.contentLabel.delegate = self;
@@ -184,15 +186,17 @@
 //        self.followButton = button;
 //    }
     if (self.user.user_state == GKUserBlockState) {
-        self.blockBtn.frame = CGRectMake(0., 0., 40., 24.);
-        self.blockBtn.center = IS_IPHONE?CGPointMake(kScreenWidth - 40, 37):CGPointMake(kScreenWidth - kTabBarWidth - 40, 37);
+        self.blockBtn.frame     = CGRectMake(0., 0., 40., 24.);
+        self.blockBtn.center    = CGPointMake(self.contentView.deFrameWidth - 40., 37.);
+//        self.blockBtn.center = IS_IPHONE ? CGPointMake(kScreenWidth - 40, 37) : CGPointMake(kScreenWidth - kTabBarWidth - 40, 37);
     } else {
-        self.followButton.frame = CGRectMake(0., 0., 24., 24.);
-        self.followButton.center = IS_IPHONE?CGPointMake(kScreenWidth - 40, 37):CGPointMake(kScreenWidth - kTabBarWidth - 40, 37);
+        self.followButton.frame     = CGRectMake(0., 0., 24., 24.);
+        self.followButton.center    = CGPointMake(self.contentView.deFrameWidth - 40., 37.);
+//        self.followButton.center = IS_IPHONE?CGPointMake(kScreenWidth - 40, 37) : CGPointMake(kScreenWidth - kTabBarWidth - 40, 37);
         [self configFollowButton];
     }
     [self bringSubviewToFront:self.H];
-    _H.deFrameBottom = self.frame.size.height;
+    _H.deFrameBottom = self.contentView.deFrameBottom;
 }
 
 -(void)configFollowButton

@@ -78,7 +78,7 @@
 {
     if (!_userCarousel) {
         _userCarousel               = [[iCarousel alloc] initWithFrame:CGRectZero];
-        _userCarousel.deFrameSize   = CGSizeMake(self.deFrameWidth, 80.);
+//        _userCarousel.deFrameSize   = CGSizeMake(self.deFrameWidth, 80.);
         _userCarousel.type          = iCarouselTypeLinear;
         _userCarousel.dataSource    = self;
         _userCarousel.delegate      = self;
@@ -116,43 +116,11 @@
     
     self.userLabel.text = NSLocalizedStringFromTable(@"recommendation user", kLocalizedFile, nil);
     
-//    self.userScrollView.contentSize = CGSizeMake(50 * _users.count + 18 * (_users.count - 1), 50.);
-//    
-//    for (UIView * view in self.userScrollView.subviews) {
-//        [view removeFromSuperview];
-//    }
-//    
-//    for (int i = 0; i < _users.count; i ++) {
-//        GKUser * user = _users[i];
-//        UserImageView * imageView = [[UserImageView alloc]initWithFrame:CGRectMake(i * 50.+ i * 18, 0, 50., 50.)];
-//        [imageView sd_setImageWithURL:user.avatarURL
-//                     placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:imageView.deFrameSize]];
-//        imageView.user = user;
-//        UserNameLabel * label = [[UserNameLabel alloc]initWithFrame:CGRectMake(i * 50.+ i * 18, 58., 50., 10.)];
-//        label.user = user;
-//        label.text = user.nickname;
-//        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userBtnAction:)];
-//        [imageView addGestureRecognizer:tap];
-//        
-//        [self.userScrollView addSubview:imageView];
-//        [self.userScrollView addSubview:label];
-//    }
-//    self.userCarousel.
-    [self.userCarousel reloadData];
+        [self.userCarousel reloadData];
     
     [self setNeedsLayout];
 }
 
-#pragma mark --------- button action ------------
-
-//- (void)userBtnAction:(id)sender
-//{
-//    UITapGestureRecognizer * tap = (UITapGestureRecognizer *)sender;
-//    UserImageView * imageView = (UserImageView *)tap.view;
-//    if (self.tapUserBlock) {
-//        self.tapUserBlock(imageView.user);
-//    }
-//}
 
 - (void)layoutSubviews
 {
@@ -160,32 +128,17 @@
     
     self.userLabel.frame = CGRectMake(10., 5., kScreenWidth - 20., 30.);
     
-//    self.userScrollView.frame = IS_IPHONE?CGRectMake(10., 45., kScreenWidth - 20., 80.):CGRectMake(10., 45., kScreenWidth  - kTabBarWidth - 20., 80.);
-//    self.userScrollView.layer.cornerRadius = 4;
-//    self.userScrollView.layer.masksToBounds = YES;
     
     self.moreBtn.frame = CGRectMake(0., 0., 40., 30.);
     self.moreBtn.center  = self.userLabel.center;
     self.moreBtn.deFrameRight = self.deFrameRight - 10.;
     
     
+    self.userCarousel.deFrameSize   = CGSizeMake(self.deFrameWidth, 80.);
     self.userCarousel.deFrameTop = self.userLabel.deFrameBottom + 10.;
 //    self.moreBtn.deFrameRight = self.userScrollView.deFrameRight;
 }
 
-//- (void)drawRect:(CGRect)rect
-//{
-//    [super drawRect:rect];
-//    
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    
-//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-//    CGContextSetLineWidth(context, kSeparateLineWidth);
-//    CGContextMoveToPoint(context, 0., self.deFrameHeight);
-//    CGContextAddLineToPoint(context, kScreenWidth, self.deFrameHeight);
-//    CGContextStrokePath(context);
-//    
-//}
 #pragma mark - <iCarouselDataSource>
 - (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
@@ -194,12 +147,6 @@
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
-//    if (!view) {
-//        UserReuserView * cell = [[UserReuserView alloc] initWithFrame:CGRectMake(0., 0., 68., 80.)];
-////        GKUser * user =
-//    }  else {
-//        UserReuserView * cell  = (UserReuserView *)view;
-//    }
     UserReuserView * cell  = (UserReuserView *)view;
     if (!cell) {
         cell = [[UserReuserView alloc] initWithFrame:CGRectZero];

@@ -248,8 +248,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-         
-         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+         if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight
+             || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft)
              self.tableView.frame = CGRectMake(128., 0., kPadScreenWitdh, kScreenHeight);
          else
              self.tableView.frame = CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight);
