@@ -255,10 +255,12 @@ static NSString * ArticleIdentifier = @"ArticleCell";
         if( ![[change valueForKeyPath:@"new"] integerValue])
         {
             if (!self.articles.error) {
+                [self.collectionView.pullToRefreshView stopAnimating];
                 [UIView setAnimationsEnabled:NO];
                 [self.collectionView reloadData];
-                [self.collectionView.pullToRefreshView stopAnimating];
                 [UIView setAnimationsEnabled:YES];
+            } else {
+                [self.collectionView.pullToRefreshView stopAnimating];
             }
         }
     }
@@ -268,7 +270,8 @@ static NSString * ArticleIdentifier = @"ArticleCell";
             if (!self.articles.error) {
                 [self.collectionView reloadData];
                 [self.collectionView.infiniteScrollingView stopAnimating];
-
+            } else {
+                [self.collectionView.infiniteScrollingView stopAnimating];
             }
         }
     }

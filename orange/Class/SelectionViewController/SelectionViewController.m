@@ -351,11 +351,13 @@ static int lastContentOffset;
         if( ![[change valueForKeyPath:@"new"] integerValue])
         {
             if (!self.entityList.error) {
+                [self.collectionView.pullToRefreshView stopAnimating];
                 [UIView setAnimationsEnabled:NO];
                 [self.collectionView reloadData];
-                [self.collectionView.pullToRefreshView stopAnimating];
                 [UIView setAnimationsEnabled:YES];
                 [self save];
+            } else {
+                [self.collectionView.pullToRefreshView stopAnimating];
             }
         }
     }
@@ -364,6 +366,8 @@ static int lastContentOffset;
         {
             if (!self.entityList.error) {
                 [self.collectionView reloadData];
+                [self.collectionView.infiniteScrollingView stopAnimating];
+            } else {
                 [self.collectionView.infiniteScrollingView stopAnimating];
             }
         }
