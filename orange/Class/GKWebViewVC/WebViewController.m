@@ -21,14 +21,10 @@
     UIBarButtonItem *_more;
     UIBarButtonItem *_flex;
 }
-@property (strong, nonatomic) WebViewProgressView * progressView;
-@property (strong, nonatomic) UIImage * image;
-@property (strong, nonatomic) NSString * shareTitle;
-@property (strong, nonatomic) UIButton * moreBtn;
-
-//@property (strong, nonatomic) UIApplication * app;
-
-
+@property (strong, nonatomic) WebViewProgressView   *progressView;
+@property (strong, nonatomic) UIImage               *image;
+@property (strong, nonatomic) NSString              *shareTitle;
+@property (strong, nonatomic) UIButton              *moreBtn;
 
 @end
 
@@ -150,19 +146,11 @@
     [super viewWillAppear:animated];
 }
 
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    
-////    [self.navigationController setToolbarHidden:NO animated:YES];
-//}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     
     [self.progressView removeFromSuperview];
-    
-//    [self.navigationController setToolbarHidden:YES animated:YES];
     
     [MobClick endLogPageView:@"webView"];
     [super viewWillDisappear:animated];
@@ -179,7 +167,8 @@
     /**
      *  disable wkwebview zoom  
      */
-    NSString *javascript = @"var meta = document.createElement('meta');meta.setAttribute('name', 'viewport');meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');document.getElementsByTagName('head')[0].appendChild(meta);";
+//    NSString *javascript = @"var meta = document.createElement('meta');meta.setAttribute('name', 'viewport');meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');document.getElementsByTagName('head')[0].appendChild(meta);";
+    NSString *javascript = @"var meta = document.createElement('meta');meta.setAttribute('name', 'viewport');meta.setAttribute('content', 'width=device-width, user-scalable=no');document.getElementsByTagName('head')[0].appendChild(meta);";
     
     [webView evaluateJavaScript:javascript completionHandler:nil];
 }
@@ -234,11 +223,8 @@
     
 
     [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
-
         self.shareTitle = [result length] > 0 ? result : @"果库 - 精英消费指南";
-        
         self.title = self.shareTitle;
-//        NSLog(@"%@",self.shareTitle);
     }];
 }
 

@@ -130,7 +130,7 @@
 {
     _order  = order;
     self.orderPricelabel.text           = [NSString stringWithFormat:@"共 %ld 件 总金额 %.2f",
-                                           _order.orderVolume, _order.orderPrice];
+                                           (long)_order.orderVolume, _order.orderPrice];
     self.payTipsLabel.text              = NSLocalizedStringFromTable(@"payment", kLocalizedFile, nil);
     [self setNeedsLayout];
 }

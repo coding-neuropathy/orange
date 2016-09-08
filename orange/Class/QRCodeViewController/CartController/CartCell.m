@@ -100,7 +100,7 @@
     self.textLabel.text         = _cartItem.entity.entityName;
     self.detailTextLabel.text   = _cartItem.sku.attr_string;
     self.priceLabel.text        = [NSString stringWithFormat:@"¥ %.2f", _cartItem.sku.promoPrice];
-    self.volumeLabel.text       = [NSString stringWithFormat:@"%ld", _cartItem.volume];
+    self.volumeLabel.text       = [NSString stringWithFormat:@"%ld", (long)_cartItem.volume];
     
     [self.imageView sd_setImageWithURL:_cartItem.entity.imageURL_310x310 placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.imageView.deFrameSize] options:SDWebImageRetryFailed];
     

@@ -149,7 +149,7 @@
     self.index = [self.controllers indexOfObject:viewController];
     if (self.index > 0) {
 //        self.index = self.beforeIndex;
-        DDLogInfo(@"before %ld", self.index);
+//        DDLogInfo(@"before %ld", self.index);
         return [self.controllers objectAtIndex:self.index - 1];
     }
     return nil;
@@ -159,7 +159,7 @@
 {
     self.index = [self.controllers indexOfObject:viewController];
     if (self.index < [self.controllers count] - 1) {
-        DDLogInfo(@"after %ld", self.index);
+        DDLogInfo(@"after %ld", (long)self.index);
         return [self.controllers objectAtIndex:self.index + 1];
     }
     return nil;
