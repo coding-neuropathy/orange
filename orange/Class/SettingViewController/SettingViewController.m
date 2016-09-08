@@ -103,17 +103,15 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         
-        _tableView.frame = IS_IPAD ? CGRectMake(0., 0., 684, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight);
+        _tableView.frame = IS_IPAD ? CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight) : CGRectMake(0., 0., kScreenWidth, kScreenHeight);
         
 //        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-        if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight
-            || self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft)
+        if ([UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeRight
+            || [UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeLeft)
             _tableView.center = CGPointMake((kScreenWidth - kTabBarWidth) / 2, kScreenHeight / 2);
             
         _tableView.delegate = self;
         _tableView.dataSource = self;
-//        _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//        _tableView.autoresizesSubviews = YES;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.separatorColor = UIColorFromRGB(0xebebeb);
     }
