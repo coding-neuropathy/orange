@@ -310,7 +310,6 @@
     [super layoutSubviews];
     
     self.avatarImageView.deFrameLeft    = (self.deFrameWidth - self.avatarImageView.deFrameWidth) / 2.;
-    
     self.nameLabel.center               = self.avatarImageView.center;
     self.nameLabel.deFrameTop           = self.avatarImageView.deFrameBottom + 8.;
     
