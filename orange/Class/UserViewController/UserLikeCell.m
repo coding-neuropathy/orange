@@ -57,14 +57,12 @@
     UIImageView * entityImageView = (UIImageView *)view;
     if (!entityImageView) {
         entityImageView                     = [[UIImageView alloc] initWithFrame:CGRectZero];
-//        entityImageView.deFrameSize         = IS_IPAD
-        entityImageView.contentMode         = UIViewContentModeScaleAspectFill;
+        entityImageView.backgroundColor     = [UIColor colorFromHexString:@"#ffffff"];
+        entityImageView.contentMode         = UIViewContentModeScaleAspectFit;
         
         entityImageView.layer.borderColor   = [UIColor colorFromHexString:@"#ebebeb"].CGColor;
         entityImageView.layer.borderWidth   = 0.5;
         entityImageView.layer.masksToBounds = YES;
-        
-        entityImageView.backgroundColor = [UIColor redColor];
     }
     
     if (IS_IPAD) {
