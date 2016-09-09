@@ -73,7 +73,7 @@
             CSSearchableItemAttributeSet *attributedSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"article"];
             GKArticle * article = (GKArticle *)row;
             attributedSet.title = article.title;
-            attributedSet.contentDescription = article.content;
+            attributedSet.contentDescription = article.digest;
             attributedSet.identifier = @"article";
             
             /**
