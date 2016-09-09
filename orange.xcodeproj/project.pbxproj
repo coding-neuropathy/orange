@@ -201,6 +201,7 @@
 		8AD5D2181D6D89B7000927C7 /* SKUToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D2171D6D89B7000927C7 /* SKUToolbar.m */; };
 		8AD5D21B1D6D8FE8000927C7 /* EntitySKUView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D21A1D6D8FE8000927C7 /* EntitySKUView.m */; };
 		8AD5D21D1D6E99A3000927C7 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD5D21C1D6E99A3000927C7 /* CoreMotion.framework */; };
+		8AD622391D82642A006DE0A2 /* UserLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD622381D82642A006DE0A2 /* UserLikeCell.m */; };
 		8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */; };
 		8ADEA30E1D5A223B00D522A2 /* DiscoverCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
@@ -725,6 +726,8 @@
 		8AD5D2191D6D8FE8000927C7 /* EntitySKUView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUView.h; path = QRCodeViewController/EntitySKUController/EntitySKUView.h; sourceTree = "<group>"; };
 		8AD5D21A1D6D8FE8000927C7 /* EntitySKUView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntitySKUView.m; path = QRCodeViewController/EntitySKUController/EntitySKUView.m; sourceTree = "<group>"; };
 		8AD5D21C1D6E99A3000927C7 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		8AD622371D82642A006DE0A2 /* UserLikeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLikeCell.h; sourceTree = "<group>"; };
+		8AD622381D82642A006DE0A2 /* UserLikeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLikeCell.m; sourceTree = "<group>"; };
 		8ADEA3091D59CB9200D522A2 /* MainCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCategoryView.h; sourceTree = "<group>"; };
 		8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCategoryView.m; sourceTree = "<group>"; };
 		8ADEA30C1D5A223B00D522A2 /* DiscoverCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverCategoryCell.h; sourceTree = "<group>"; };
@@ -1693,6 +1696,8 @@
 				23FA3BE41CB6611400B8F810 /* UserDigArticlesViewController.m */,
 				8A53D9241BD948F6006EF0D1 /* UserEntityCategoryController.h */,
 				8A53D9251BD948F6006EF0D1 /* UserEntityCategoryController.m */,
+				8AD622371D82642A006DE0A2 /* UserLikeCell.h */,
+				8AD622381D82642A006DE0A2 /* UserLikeCell.m */,
 			);
 			path = UserViewController;
 			sourceTree = "<group>";
@@ -2872,6 +2877,7 @@
 				B7174DD91BD4A83D00DEDBDA /* UserViewController.m in Sources */,
 				23F000221C97B5750033BAA4 /* ArticleWebViewController.m in Sources */,
 				8A0838551D7A8AD6006057F3 /* ArticlePreView.m in Sources */,
+				8AD622391D82642A006DE0A2 /* UserLikeCell.m in Sources */,
 				8A418C7A1C04481000CE01B5 /* EntityPreView.m in Sources */,
 				DA35B3C61AFEE31200D66671 /* EmailEditViewController.m in Sources */,
 				4E66C1DD1A7C8B2500F31A90 /* SettingViewController.m in Sources */,

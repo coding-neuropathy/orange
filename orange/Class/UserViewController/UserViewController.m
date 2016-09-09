@@ -11,7 +11,7 @@
 #import "UserHeaderView.h"
 #import "UserHeaderSectionView.h"
 #import "UserFooterSectionView.h"
-#import "EntityCell.h"
+//#import "EntityCell.h"
 #import "NoteCell.h"
 #import "CategoryArticleCell.h"
 
@@ -33,16 +33,16 @@
 #import "EmbedReaderViewController.h"
 #import "OrderController.h"
 
+#import "UserLikeCell.h"
 
 //#import "DataStructure.h"
 
-@interface UserViewController () <EntityCellDelegate, UserHeaderSectionViewDelegate, UserHeaderViewDelegate>
+@interface UserViewController () <UserHeaderSectionViewDelegate, UserHeaderViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray * likedataArray;
 @property (strong, nonatomic) NSMutableArray * notedataArray;
 @property (strong, nonatomic) NSMutableArray * articledataArray;
 
-//@property (strong, nonatomic) UserHeaderView * headerView;
 @property (strong, nonatomic) UICollectionView * collectionView;
 
 @property (strong, nonatomic) UserHeaderView * headerView;
@@ -116,8 +116,9 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         if (IS_IPHONE)
             _collectionView.frame = CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight);
         else {
-            _collectionView.frame = CGRectMake(0., 0., 684., kScreenHeight);
-            if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft || self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight)
+            _collectionView.frame = CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight);
+            if ([UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeLeft
+                || [UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeRight)
                 _collectionView.center = CGPointMake((kScreenWidth - kTabBarWidth) / 2, kScreenHeight / 2);
         }
             
@@ -178,7 +179,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     
     [self.collectionView registerClass:[UserFooterSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UserFooterSectionIdentifer];
     
-    [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:UserLikeEntityIdentifer];
+    [self.collectionView registerClass:[UserLikeCell class] forCellWithReuseIdentifier:UserLikeEntityIdentifer];
     [self.collectionView registerClass:[NoteCell class] forCellWithReuseIdentifier:UserNoteIdentifier];
     [self.collectionView registerClass:[CategoryArticleCell class] forCellWithReuseIdentifier:UserArticleIdentifier];
     
@@ -297,10 +298,11 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     switch (section) {
         case 1:
         {
-            if (IS_IPAD) {
-                count = self.likedataArray.count > 6 ? 6 : self.likedataArray.count;
-            } else
-                count = self.likedataArray.count > 4 ? 4 : self.likedataArray.count;
+            count = 1;
+//            if (IS_IPAD) {
+//                count = self.likedataArray.count > 6 ? 6 : self.likedataArray.count;
+//            } else
+//                count = self.likedataArray.count > 4 ? 4 : self.likedataArray.count;
         }
             break;
         case 2:
@@ -382,34 +384,33 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         }
     } else {
         UserFooterSectionView * footerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UserFooterSectionIdentifer forIndexPath:indexPath];
-        //footerSection.title = NSLocalizedStringFromTable(@"more", kLocalizedFile, nil);
-            footerSection.alpha = 0;
+            footerSection.hidden = YES;
             switch (indexPath.section) {
                 case 0:
-                    footerSection.alpha = 1;
+                    footerSection.hidden = NO;
                     break;
                 case 1:
                     if (self.likedataArray.count > 0)
-                        footerSection.alpha = 1;
+                        footerSection.hidden = NO;
                     break;
                     
                 case 2:
                     if (self.articledataArray.count > 0)
-                        footerSection.alpha = 1;
+                        footerSection.hidden = NO;
                     break;
                     
                 case 3:
                     if (self.user.noteCount > 0)
-                        footerSection.alpha = 1;
+                        footerSection.hidden = NO;
                     break;
                     
                 case 4:
                     if (self.user.tagCount > 0)
-                        footerSection.alpha = 1;
+                        footerSection.hidden = NO;
                     break;
                 case 5:
                     if (self.user.digCount > 0)
-                        footerSection.alpha = 1;
+                        footerSection.hidden = NO;
                     break;
             }
         
@@ -423,20 +424,12 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-//    switch (indexPath.section) {
-//        default:
-//        {
-            EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
-            cell.imageView.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
-            cell.imageView.layer.borderWidth = 0.5;
-            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-            cell.imageView.clipsToBounds = YES;
-            cell.entity = [self.likedataArray objectAtIndex:indexPath.row];
-            cell.delegate = self;
-            return cell;
-//        }
-//            break;
-//    }
+    UserLikeCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
+    cell.entityArray    = self.likedataArray;
+    cell.tapEntityImageBlock = ^(GKEntity * entity) {
+        [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+    };
+    return cell;
 }
 
 #pragma mark <UICollectionViewDelegateFlowLayout>
@@ -446,11 +439,11 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     switch (indexPath.section) {
         case 1:
             if (IS_IPAD) {
-                itemSize = CGSizeMake(100., 100.);
+                itemSize = CGSizeMake(kScreenWidth, 100.);
             } else {
-                itemSize = IS_IPHONE_6P || IS_IPHONE_6 ? CGSizeMake(80., 80.) : CGSizeMake(64., 64.);
+                itemSize = IS_IPHONE_6P || IS_IPHONE_6 ? CGSizeMake(kScreenWidth, 80.) : CGSizeMake(kScreenWidth, 64.);
 //                if (IS_IPHONE_6P || IS_IPHONE_6)
-//                    itemSize = CGSizeMake(80., 80.);
+//                itemSize = CGSizeMake(kScreenWidth, 80.);
 //                else
 //                    itemSize = CGSizeMake(64., 64.);
             }
@@ -756,11 +749,11 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 }
 
 
-#pragma mark - <EntityCellDelegate>
-- (void)TapImageWithEntity:(GKEntity *)entity
-{
-    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-}
+//#pragma mark - <EntityCellDelegate>
+//- (void)TapImageWithEntity:(GKEntity *)entity
+//{
+//    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+//}
 
 #pragma mark - UserModel KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

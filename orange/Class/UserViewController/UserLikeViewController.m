@@ -8,7 +8,7 @@
 
 #import "UserLikeViewController.h"
 #import "EntityCell.h"
-#import "CSStickyHeaderFlowLayout.h"
+//#import "CSStickyHeaderFlowLayout.h"
 #import "UserEntityCategoryController.h"
 
 
@@ -77,13 +77,12 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
-        UICollectionViewFlowLayout * layout = [[CSStickyHeaderFlowLayout alloc] init];
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-//        _collectionView = [[UICollectionView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kTabBarHeight) collectionViewLayout:layout];
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         
         _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight)
-                                        : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight- kStatusBarHeight);
+                                        : CGRectMake(0., 0., kScreenWidth, kScreenHeight - 44. -  kNavigationBarHeight- kStatusBarHeight);
         
         _collectionView.alwaysBounceVertical = YES;
         _collectionView.delegate = self;
@@ -156,9 +155,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     [super loadView];
     
     if (IS_IPHONE) {
-//        UserLikeHeaderSectionView * v = [[UserLikeHeaderSectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44) ];
-//        v.category = self.category;
-//        v.delegate = self;
     
         [self.view addSubview:self.headerSectionView];
         self.collectionView.deFrameTop = 44;

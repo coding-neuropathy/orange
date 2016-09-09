@@ -308,7 +308,8 @@ static CGFloat bioLabelHeight;
 {
     [super layoutSubviews];
     
-    self.avatarView.center = CGPointMake(self.frame.size.width / 2, 55.);
+    self.avatarView.center = IS_IPAD    ? CGPointMake(self.deFrameWidth / 2., 80.)
+                                        : CGPointMake(self.deFrameWidth / 2, 55.);
     
     self.nicknameLabel.frame = CGRectMake(0., 0.,self.nicknameLabel.optimumSize.width + 20., 30.);
     self.nicknameLabel.center = self.avatarView.center;
@@ -326,7 +327,8 @@ static CGFloat bioLabelHeight;
     self.bioLabel.deFrameTop = self.nicknameLabel.deFrameBottom;
     
     
-    self.friendBtn.frame = IS_IPHONE ? CGRectMake((kScreenWidth) / 2 - 130., 0., 130., 20.) : CGRectMake((kScreenWidth - kTabBarWidth) / 2 - 130., 0., 130., 20.);
+    self.friendBtn.frame = IS_IPHONE ? CGRectMake((kScreenWidth) / 2 - 130., 0., 130., 20.)
+                                        : CGRectMake((kScreenWidth - kTabBarWidth) / 2 - 130., 0., 130., 20.);
     self.friendBtn.deFrameTop = self.bioLabel.deFrameBottom + 20.;
     
     self.fansBtn.frame = CGRectMake(0., 0., 130., 20.);
