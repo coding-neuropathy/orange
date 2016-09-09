@@ -180,8 +180,6 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     return _collectionView;
 }
 
-
-
 - (UISearchController *)searchVC
 {
     if (!_searchVC) {
@@ -204,7 +202,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         _searchVC.searchBar.keyboardType                    = UIKeyboardTypeDefault;
         _searchVC.searchBar.delegate                        = self;
     
-        self.searchVC.searchBar.autoresizingMask            = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+        _searchVC.searchBar.autoresizingMask                = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
         
         [_searchVC.searchBar sizeToFit];
     
@@ -696,6 +694,8 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 
         DDLogInfo(@"error %@", error.localizedDescription);
     }];
+    if (IS_IPHONE) self.tabBarController.tabBar.hidden = YES;
+
 }
 
 
@@ -709,12 +709,14 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 //    [[self.searchVC.view viewWithTag:999] removeFromSuperview];
 //    [self.searchTipsVC.view removeFromSuperview];
 //    [self.searchTipsVC removeFromParentViewController];
+    if (IS_IPHONE) self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)didDismissSearchController:(UISearchController *)searchController
 {
     [self.searchTipsVC.view removeFromSuperview];
     [self.searchTipsVC removeFromParentViewController];
+    
 }
 
 - (void)cancelSearch:(UIView *)view
@@ -863,7 +865,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
     }
     return self;
 }
@@ -873,9 +875,8 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     if (!_textLabel)
     {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//        _textLabel.font = [UIFont systemFontOfSize:14.];
         _textLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
-        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textColor = [UIColor colorFromHexString:@"#414243"];
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_textLabel];
