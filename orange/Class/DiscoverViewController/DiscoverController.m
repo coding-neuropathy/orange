@@ -32,7 +32,7 @@
 #import "SubCategoryEntityController.h"
 #import "SearchTipsController.h"
 
-#import <GTScrollNavigationBar/GTScrollNavigationBar.h>
+//#import <GTScrollNavigationBar/GTScrollNavigationBar.h>
 
 
 @interface DiscoverHeaderSection : UICollectionReusableView
@@ -292,10 +292,10 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if([self.navigationController.scrollNavigationBar respondsToSelector:@selector(setScrollView:)])
-    {
-        self.navigationController.scrollNavigationBar.scrollView = nil;
-    }
+//    if([self.navigationController.scrollNavigationBar respondsToSelector:@selector(setScrollView:)])
+//    {
+//        self.navigationController.scrollNavigationBar.scrollView = nil;
+//    }
     
     [self.navigationController.navigationBar setTranslucent:NO];
     self.collectionView.scrollsToTop = YES;

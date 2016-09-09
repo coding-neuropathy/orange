@@ -20,7 +20,8 @@
 {
     if(!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.layer.masksToBounds = YES;
 //        _imageView.backgroundColor = UIColorFromRGB(0xffffff);
         _imageView.userInteractionEnabled = YES;
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]

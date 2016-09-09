@@ -189,7 +189,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.frame = IS_IPAD ? CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight)
-                                        : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight - kNavigationBarHeight);
+                                        : CGRectMake(0., 0., kScreenWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight);
         
         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight ||
             self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
