@@ -56,6 +56,16 @@
     }
 }
 
+- (NSString *)strip_tags_content
+{
+    if (!_strip_tags_content) {
+        NSError * error = nil;
+        NSRegularExpression *image_regex = [NSRegularExpression regularExpressionWithPattern:@"<[^>]+>" options:NSRegularExpressionCaseInsensitive error:&error];
+        _strip_tags_content = [image_regex stringByReplacingMatchesInString:self.content options:0 range:NSMakeRange(0, [self.content length]) withTemplate:@""];
+    }
+    return [_strip_tags_content trimed];
+}
+
 - (NSURL *)coverURL
 {
     NSString * url_stirng = [NSString stringWithFormat:@"%@%@", KImageHost, self.cover];

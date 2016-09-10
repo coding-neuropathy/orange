@@ -76,17 +76,6 @@
     return _detailLabel;
 }
 
-//- (RTLabel *)tagsLabel
-//{
-//    if (!_tagsLabel) {
-//        _tagsLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
-//        _tagsLabel.paragraphReplacement = @"";
-//        _tagsLabel.lineSpacing = 7.;
-//        _tagsLabel.delegate = self;
-//        [self.contentView addSubview:_tagsLabel];
-//    }
-//    return _tagsLabel;
-//}
 
 - (UILabel *)timeLabel
 {
@@ -179,10 +168,6 @@
         self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth -32, 45);
         self.detailLabel.center = self.titleLabel.center;
         self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
-    
-//    self.tagsLabel.frame = CGRectMake(0., 0., 200., 20.);
-//    self.tagsLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
-//    self.tagsLabel.deFrameLeft = self.contentView.deFrameLeft + 16.;
     
         self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
         self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;

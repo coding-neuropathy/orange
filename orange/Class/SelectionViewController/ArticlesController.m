@@ -8,7 +8,8 @@
 
 #import "ArticlesController.h"
 #import "ArticleCell.h"
-//#import "PreviewArticleController.h"
+
+#import "ArticlePreViewController.h"
 
 
 //static int lastContentOffset;
@@ -25,17 +26,13 @@
 
 static NSString * ArticleIdentifier = @"ArticleCell";
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-//        self.page = 1;
-//        self.size = 20;
-//        self.timestamp = [[NSDate date] timeIntervalSince1970];
-//        self.articles = [[GKSelectionArticle alloc] init];
-    }
-    return self;
-}
+//- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+//{
+//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+//    if (self) {
+//    }
+//    return self;
+//}
 
 - (void)dealloc
 {
@@ -63,6 +60,8 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     [self.collectionView registerClass:[ArticleCell class] forCellWithReuseIdentifier:ArticleIdentifier];
     
 //    [self registerPreview];
+    if (iOS9)
+        [self registerPreview];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -83,6 +82,18 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+/**
+ *  register 3d-touch
+ */
+- (void)registerPreview{
+    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+        [self registerForPreviewingWithDelegate:self sourceView:self.collectionView];
+    }
+    else {
+        DDLogInfo(@"该设备不支持3D-Touch");
+    }
 }
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
@@ -202,51 +213,27 @@ static NSString * ArticleIdentifier = @"ArticleCell";
     [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
 
-//#pragma mark - <UIViewControllerPreviewingDelegate>
-//- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
-//{
-//    NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
-//    
-//    UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-//    
-//    if (!cell) {
-//        return nil;
-//    }
-//    
-//    PreviewArticleController * vc = [[PreviewArticleController alloc] initWIthArticle:[self.articleArray objectAtIndex:indexPath.row]];
-//    vc.preferredContentSize = CGSizeMake(0, 0);
-//    previewingContext.sourceRect = cell.frame;
-//    return vc;
-//}
-//
-//- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
-//{
-//    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
-//}
+#pragma mark - <UIViewControllerPreviewingDelegate>
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    NSIndexPath * indexPath =[self.collectionView indexPathForItemAtPoint:location];
+    
+    UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    
+    if (!cell) {
+        return nil;
+    }
+    
+    ArticlePreViewController * vc = [[ArticlePreViewController alloc] initWithArticle:[self.articles objectAtIndex:indexPath.row]];
+    vc.preferredContentSize = CGSizeMake(0, 0);
+    previewingContext.sourceRect = cell.frame;
+    return vc;
+}
 
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-//{
-//    lastContentOffset = scrollView.contentOffset.y;
-//}
-//
-//
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    [[NSUserDefaults standardUserDefaults] setObject:@(scrollView.contentOffset.y) forKey:@"selection-offset-y"];
-//    
-//    if (scrollView.contentOffset.y < lastContentOffset)
-//    {
-//        
-//        //        [self.delegate hideSegmentControl];
-//        
-//    }
-//    else if (scrollView.contentOffset.y > lastContentOffset)
-//    {
-//        
-//        //        [self.delegate showSegmentControl];
-//        
-//    }
-//    
-//}
+- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
+}
 
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

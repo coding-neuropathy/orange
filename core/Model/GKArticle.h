@@ -26,6 +26,8 @@
  */
 @property (strong, nonatomic) NSString * content;
 
+@property (getter=strip_tags_content, nonatomic) NSString * strip_tags_content;
+
 /**
  *  作者
  *

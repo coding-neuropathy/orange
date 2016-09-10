@@ -26,6 +26,12 @@
     self = [super init];
     if (self) {
         self.article = article;
+        
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.article.coverURL options:SDWebImageDownloaderUseNSURLCache progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            
+        } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+            self.image = image;
+        }];
     }
     return self;
 }
@@ -34,7 +40,7 @@
 {
     if (!_articlePreView) {
         _articlePreView             = [[ArticlePreView alloc] initWithFrame:CGRectZero];
-        _articlePreView.deFrameSize = CGSizeMake(self.view.deFrameWidth, self.view.deFrameHeight);
+//        _articlePreView.deFrameSize = CGSizeMake(self.view.deFrameWidth, self.view.deFrameHeight);
         _articlePreView.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         
     }
@@ -43,14 +49,19 @@
 
 - (void)loadView
 {
-    self.view                   = self.articlePreView;
+//    self.view                   = self.articlePreView;
 //    self.view.backgroundColor   = [UIColor colorFromHexString:@"#ffffff"];
+    [super loadView];
+    
+    [self.view addSubview:self.articlePreView];
+    self.articlePreView.deFrameSize = CGSizeMake(self.view.deFrameWidth, self.view.deFrameHeight);
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 //    [self.webView loadRequest:[NSURLRequest requestWithURL:self.article.articleURL]];
+    self.articlePreView.article = self.article;
 }
 
 - (NSArray <id <UIPreviewActionItem>> *)previewActionItems

@@ -130,7 +130,6 @@
 		4E73E6801C1936D400B604B5 /* AuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E73E67F1C1936D400B604B5 /* AuthController.m */; };
 		4E7869691BA70C5A00586BD9 /* EntityHeaderBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */; };
 		4E8A34361BB060D700DF3841 /* tipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A34351BB060D700DF3841 /* tipView.m */; };
-		4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D6AB61A3B66F900156C17 /* MCPHandler.m */; };
 		4EA0C4491A7F03DE0025EC2E /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */; };
 		4EA0C44F1A805CBD0025EC2E /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44B1A805CBD0025EC2E /* pinyin.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0C44E1A805CBD0025EC2E /* PinyinTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
@@ -552,8 +551,6 @@
 		4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderBuyView.m; sourceTree = "<group>"; };
 		4E8A34341BB060D700DF3841 /* tipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tipView.h; sourceTree = "<group>"; };
 		4E8A34351BB060D700DF3841 /* tipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tipView.m; sourceTree = "<group>"; };
-		4E8D6AB51A3B66F900156C17 /* MCPHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPHandler.h; sourceTree = "<group>"; };
-		4E8D6AB61A3B66F900156C17 /* MCPHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPHandler.m; sourceTree = "<group>"; };
 		4EA0C4471A7F03DE0025EC2E /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
 		4EA0C4481A7F03DE0025EC2E /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
 		4EA0C44B1A805CBD0025EC2E /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
@@ -1494,7 +1491,6 @@
 				4EA0C44A1A805CBD0025EC2E /* pinyinTools */,
 				4E2D6D531A6BFD77009E4A17 /* RTLabel */,
 				4E2D6D391A69601F009E4A17 /* SVPullToRefresh */,
-				4E8D6AB41A3B66F900156C17 /* MCPHandler */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -1578,15 +1574,6 @@
 				8A1B632F1D5AFA93009CF222 /* AuthView.m */,
 			);
 			path = AuthController;
-			sourceTree = "<group>";
-		};
-		4E8D6AB41A3B66F900156C17 /* MCPHandler */ = {
-			isa = PBXGroup;
-			children = (
-				4E8D6AB51A3B66F900156C17 /* MCPHandler.h */,
-				4E8D6AB61A3B66F900156C17 /* MCPHandler.m */,
-			);
-			path = MCPHandler;
 			sourceTree = "<group>";
 		};
 		4E934DA51A9AE9FB00374B05 /* GroupViewController */ = {
@@ -2768,7 +2755,6 @@
 				4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */,
 				B76EE0821B3D86C3009D8763 /* NotifyController.m in Sources */,
 				8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */,
-				4E8D6AB71A3B66F900156C17 /* MCPHandler.m in Sources */,
 				8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */,
 				8A242AFE1D7D0B3500A15669 /* CheckoutOrderController.m in Sources */,
 				8AD5D2181D6D89B7000927C7 /* SKUToolbar.m in Sources */,
@@ -3231,6 +3217,7 @@
 					"$(PROJECT_DIR)/orange",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = orange/config.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/orange/Info.plist";
@@ -3287,6 +3274,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREFIX_HEADER = today/config.pch;
 				INFOPLIST_FILE = today/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
