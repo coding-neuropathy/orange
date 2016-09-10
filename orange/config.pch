@@ -75,6 +75,7 @@
 #import "BaseViewController.h"
 
 #import "OpenCenter.h"
+#import "GKHandler.h"
 #import "UIDevice-Hardware.h"
 
 

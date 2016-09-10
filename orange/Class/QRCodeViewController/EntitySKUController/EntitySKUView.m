@@ -14,7 +14,7 @@
 @property (strong, nonatomic) iCarousel     *imagesView;
 @property (strong, nonatomic) UILabel       *titleLabel;
 @property (strong, nonatomic) UILabel       *priceLabel;
-@property (strong, nonatomic) UIButton      *cartBtn;
+//@property (strong, nonatomic) UIButton      *cartBtn;
 
 @property (strong, nonatomic) UILabel       *skuInfoLabel;
 
@@ -80,27 +80,27 @@
     return _priceLabel;
 }
 
-- (UIButton *)cartBtn
-{
-    if (!_cartBtn) {
-        _cartBtn                        = [UIButton buttonWithType:UIButtonTypeCustom];
-        _cartBtn.deFrameSize            = CGSizeMake(128., 32.);
-        _cartBtn.backgroundColor        = [UIColor colorFromHexString:@"#6192ff"];
-        _cartBtn.layer.cornerRadius     = _cartBtn.deFrameHeight / 2.;
-        _cartBtn.layer.masksToBounds    = YES;
-        
-        _cartBtn.titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
-        _cartBtn.enabled                = NO;
-        [_cartBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor] andSize:_cartBtn.deFrameSize] forState:UIControlStateDisabled];
-        [_cartBtn setTitleColor:[UIColor colorFromHexString:@"#ffffff"] forState:UIControlStateNormal];
-        [_cartBtn setTitle:NSLocalizedStringFromTable(@"add-cart", kLocalizedFile, nil) forState:UIControlStateNormal];
-        
-        [_cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self addSubview:_cartBtn];
-    }
-    return _cartBtn;
-}
+//- (UIButton *)cartBtn
+//{
+//    if (!_cartBtn) {
+//        _cartBtn                        = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _cartBtn.deFrameSize            = CGSizeMake(128., 32.);
+//        _cartBtn.backgroundColor        = [UIColor colorFromHexString:@"#6192ff"];
+//        _cartBtn.layer.cornerRadius     = _cartBtn.deFrameHeight / 2.;
+//        _cartBtn.layer.masksToBounds    = YES;
+//        
+//        _cartBtn.titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
+//        _cartBtn.enabled                = NO;
+//        [_cartBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor] andSize:_cartBtn.deFrameSize] forState:UIControlStateDisabled];
+//        [_cartBtn setTitleColor:[UIColor colorFromHexString:@"#ffffff"] forState:UIControlStateNormal];
+//        [_cartBtn setTitle:NSLocalizedStringFromTable(@"add-cart", kLocalizedFile, nil) forState:UIControlStateNormal];
+//        
+//        [_cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        [self addSubview:_cartBtn];
+//    }
+//    return _cartBtn;
+//}
 
 - (UILabel *)skuInfoLabel
 {
@@ -168,11 +168,11 @@
 #pragma mark - setup entity sku
 - (void)setupSKU
 {
-    for (UIView * view in self.subviews) {
-        if ([view isKindOfClass:[UIButton class]] && view != self.cartBtn) {
-            [view removeFromSuperview];
-        }
-    }
+//    for (UIView * view in self.subviews) {
+//        if ([view isKindOfClass:[UIButton class]] && view != self.cartBtn) {
+//            [view removeFromSuperview];
+//        }
+//    }
     CGFloat maxWidth                = self.deFrameWidth - 48.;
     CGFloat xOffset                 = 0.;
     CGFloat yOffset                 = self.skuInfoLabel.deFrameBottom + 16.;
@@ -235,27 +235,27 @@
 }
 
 #pragma mark - button action
-- (void)cartBtnAction:(id)sender
-{
-    if (_SKUDelegate && [_SKUDelegate respondsToSelector:@selector(TapAddCartWithSKU:)]) {
-        [_SKUDelegate TapAddCartWithSKU:self.selectedSKU];
-    }
-}
+//- (void)cartBtnAction:(id)sender
+//{
+//    if (_SKUDelegate && [_SKUDelegate respondsToSelector:@selector(TapAddCartWithSKU:)]) {
+//        [_SKUDelegate TapAddCartWithSKU:self.selectedSKU];
+//    }
+//}
 
 - (void)skuBtnAction:(id)sender
 {
     UIButton * btn = (UIButton *)sender;
     
-    for (UIView * view in self.subviews) {
-        if ([view isKindOfClass:[UIButton class]] && view != self.cartBtn) {
-//            [view removeFromSuperview];
-            UIButton * subBtn           = (UIButton *)view;
-            subBtn.selected             = NO;
-            subBtn.backgroundColor      = UIColorFromRGB(0xf1f1f1);
-            subBtn.layer.borderWidth    = 1.;
-            subBtn.layer.borderColor    = UIColorFromRGB(0xf1f1f1).CGColor;
-        }
-    }
+//    for (UIView * view in self.subviews) {
+//        if ([view isKindOfClass:[UIButton class]] && view != self.cartBtn) {
+////            [view removeFromSuperview];
+//            UIButton * subBtn           = (UIButton *)view;
+//            subBtn.selected             = NO;
+//            subBtn.backgroundColor      = UIColorFromRGB(0xf1f1f1);
+//            subBtn.layer.borderWidth    = 1.;
+//            subBtn.layer.borderColor    = UIColorFromRGB(0xf1f1f1).CGColor;
+//        }
+//    }
     btn.selected                = YES;
     btn.backgroundColor         = [UIColor colorFromHexString:@"#e6ecff"];
     btn.layer.borderWidth       = 1.;

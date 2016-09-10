@@ -6,11 +6,9 @@
 //  Copyright (c) 2013年 GuoKu. All rights reserved.
 //
 
-@protocol SelectionCellDelegate <NSObject>
+#import <UIKit/UIKit.h>
+#import "GKViewDelegate.h"
 
-- (void)TapEntityImage:(GKEntity *)entity;
-
-@end
 
 @interface SelectionCell : UICollectionViewCell
 
@@ -20,7 +18,7 @@
 
 @property (nonatomic, strong) UIImageView *image;
 
-@property (assign, nonatomic) id<SelectionCellDelegate> delegate;
+@property (assign, nonatomic) id<GKViewDelegate> delegate;
 
 + (CGFloat)height:(GKNote *)note;
 

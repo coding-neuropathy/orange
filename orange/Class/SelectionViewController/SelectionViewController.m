@@ -11,6 +11,7 @@
 #import "GTScrollNavigationBar.h"
 #import "EntityViewController.h"
 
+#import "GKHandler.h"
 /**
  *  3d-touch
  */
@@ -22,7 +23,7 @@ static NSString *CellIdentifier = @"SelectionCell";
 
 static int lastContentOffset;
 
-@interface SelectionViewController ()<SelectionCellDelegate, UIViewControllerPreviewingDelegate>
+@interface SelectionViewController ()<UIViewControllerPreviewingDelegate>
 
 
 @property(nonatomic, assign) NSInteger index;
@@ -191,7 +192,7 @@ static int lastContentOffset;
 {
     SelectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.dict = [self.entityList objectAtIndex:indexPath.row];
-    cell.delegate = self;
+    cell.delegate = [GKHandler sharedGKHandler];
     return cell;
 }
 
@@ -375,11 +376,11 @@ static int lastContentOffset;
 
 }
 
-#pragma mark <SelectionViewCellDelegate>
-- (void)TapEntityImage:(GKEntity *)entity
-{
-    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-}
+//#pragma mark <SelectionViewCellDelegate>
+//- (void)TapEntityImage:(GKEntity *)entity
+//{
+//    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+//}
 
 
 #pragma mark - <UIViewControllerPreviewingDelegate>

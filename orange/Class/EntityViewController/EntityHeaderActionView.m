@@ -120,25 +120,26 @@
 #pragma mark - button action
 - (void)likeButtonAction:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(tapLikeBtn:)])
+    if (_delegate && [_delegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)])
     {
-        [_delegate tapLikeBtn:sender];
+//        [_delegate tapLikeBtn:sender];
+        [_delegate TapLikeButtonWithEntity:self.entity Button:sender];
     }
 }
 
 - (void)noteButtonAction:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(tapPostNoteBtn:)])
+    if (_headerDelegate && [_headerDelegate respondsToSelector:@selector(tapPostNoteBtn:)])
     {
-        [_delegate tapPostNoteBtn:sender];
+        [_headerDelegate tapPostNoteBtn:sender];
     }
 }
 
 - (void)moreButtonAction:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(tapMoreBtn:)])
+    if (_headerDelegate && [_headerDelegate respondsToSelector:@selector(tapMoreBtn:)])
     {
-        [_delegate tapMoreBtn:sender];
+        [_headerDelegate tapMoreBtn:sender];
     }
 }
 

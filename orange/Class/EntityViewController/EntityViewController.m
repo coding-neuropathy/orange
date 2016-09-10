@@ -39,8 +39,8 @@
 
 
 @interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate,
-                                    EntityCellDelegate, EntityNoteCellDelegate,
-                                    EntityHeaderActionViewDelegate, EntityHeaderBuyViewDelegate>
+                                    EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,
+                                     EntityHeaderBuyViewDelegate>
 
 @property (nonatomic, strong) GKNote *note;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -363,18 +363,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
-//    if (IS_IPHONE) {
-//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:0. green:0. blue:0. alpha:0.] andSize:CGSizeMake(kScreenWidth, 48.)] forBarMetrics:UIBarMetricsDefault];
-////
-//        self.navigationController.navigationBar.barStyle   = UIBarStyleBlackTranslucent;
-//        self.navigationController.navigationBar.shadowImage = [UIImage new];
-//        self.navigationController.navigationBar.translucent = YES;
-////        self.navigationController.navigationBar.hidden      = YES;
-////        [UIApplication sharedApplication].statusBarStyle    = UIStatusBarStyleDefault;
-//        
-//    }
-
     [MobClick beginLogPageView:@"EntityView"];
     [super viewWillAppear:animated];
 }
@@ -382,15 +370,7 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    if (IS_IPHONE) {
-//        [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
-//        [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
-//        self.navigationController.navigationBar.translucent = NO;
-        //        self.navigationController.navigationBar.hidden      = YES;
-        //        [UIApplication sharedApplication].statusBarStyle    = UIStatusBarStyleDefault;
-        
-//    }
-//    [AVAnalytics endLogPageView:@"EntityView"];
+
     [MobClick endLogPageView:@"EntityView"];
     [super viewWillDisappear:animated];
 }
@@ -515,7 +495,8 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
                 actionView.entity = self.entity;
                 actionView.note = self.note;
                 self.likeButton = actionView.likeButton;
-                actionView.delegate = self;
+                actionView.delegate = [GKHandler sharedGKHandler];
+                actionView.headerDelegate = self;
                 self.actionView = actionView;
                 return actionView;
             }
@@ -888,46 +869,47 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 #pragma mark - action
 - (void)likeAction
 {
-    [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
-        
-        self.likeButton.selected = liked;
-        self.entity.liked = liked;
-        
-        DDLogInfo(@"entity view %d", self.likeButton.selected);
-        
-        if (liked) {
-            self.entity.likeCount += 1;
-            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
-            image.frame = self.likeButton.imageView.frame;
-            [self.likeButton addSubview:image];
-            
-            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
-                image.deFrameTop = image.deFrameTop - 10;
-                image.alpha = 0.1;
-            }completion:^(BOOL finished) {
-                [image removeFromSuperview];
-            }];
-            
-            if ([Passport sharedInstance].user) {
-                [self.dataArrayForlikeUser insertObject:[Passport sharedInstance].user atIndex:0];
-            }
-            [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
-            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
-        } else {
-            [self.dataArrayForlikeUser removeObject:[Passport sharedInstance].user];
-            self.entity.likeCount -= 1;
-            [MobClick event:@"unlike_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.unlikeCount];
-            [SVProgressHUD dismiss];
-        }
-        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:4]];
-        self.likeButton.selected = self.entity.liked;
-        //        [self.likeButton setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount]
-        //                         forState:UIControlStateNormal];
-        [self setNavBarButton:self.flag];
-    } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
-    }];
+    [[GKHandler sharedGKHandler] TapLikeButtonWithEntity:self.entity Button:self.likeButton];
+//    [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
+//        
+//        self.likeButton.selected = liked;
+//        self.entity.liked = liked;
+//        
+//        DDLogInfo(@"entity view %d", self.likeButton.selected);
+//        
+//        if (liked) {
+//            self.entity.likeCount += 1;
+//            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
+//            image.frame = self.likeButton.imageView.frame;
+//            [self.likeButton addSubview:image];
+//            
+//            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
+//                image.deFrameTop = image.deFrameTop - 10;
+//                image.alpha = 0.1;
+//            }completion:^(BOOL finished) {
+//                [image removeFromSuperview];
+//            }];
+//            
+//            if ([Passport sharedInstance].user) {
+//                [self.dataArrayForlikeUser insertObject:[Passport sharedInstance].user atIndex:0];
+//            }
+//            [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
+//            ////[SVProgressHUD showImage:nil status:@"\U0001F603喜爱成功"];
+//        } else {
+//            [self.dataArrayForlikeUser removeObject:[Passport sharedInstance].user];
+//            self.entity.likeCount -= 1;
+//            [MobClick event:@"unlike_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.unlikeCount];
+//            [SVProgressHUD dismiss];
+//        }
+//        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:4]];
+//        self.likeButton.selected = self.entity.liked;
+//        //        [self.likeButton setTitle:[NSString stringWithFormat:@"%ld", self.entity.likeCount]
+//        //                         forState:UIControlStateNormal];
+//        [self setNavBarButton:self.flag];
+//    } failure:^(NSInteger stateCode) {
+//        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
+//    }];
 }
 
 - (void)openEntityNote
@@ -1123,10 +1105,10 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 }
 
 #pragma mark - <EntityHeaderActionViewDelegate>
-- (void)tapLikeBtn:(id)sender
-{
-    [self likeButtonActionWithBtn:sender];
-}
+//- (void)tapLikeBtn:(id)sender
+//{
+//    [self likeButtonActionWithBtn:sender];
+//}
 
 - (void)tapPostNoteBtn:(id)sender
 {
@@ -1191,11 +1173,6 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 }
 
 
-//- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-//{
-//    [self.collectionView performBatchUpdates:nil completion:nil];
-//}
-
 #pragma mark -
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
@@ -1203,10 +1180,11 @@ static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
      {
          [self.collectionView performBatchUpdates:nil completion:nil];
 //         self.collectionView.deFrameLeft = 128.;
-         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
-             self.collectionView.frame = CGRectMake(128., 0., 684., kScreenHeight);
+         if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight
+             || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft)
+             self.collectionView.frame = CGRectMake(128., 0., kPadScreenWitdh, kScreenHeight);
          else
-             self.collectionView.frame = CGRectMake(0., 0., 684., kScreenHeight);
+             self.collectionView.frame = CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight);
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
          [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];

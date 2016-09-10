@@ -192,6 +192,7 @@
 		8ABB83421D7742E700268884 /* OrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB83411D7742E700268884 /* OrderController.m */; };
 		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
+		8AC7149F1D83FE800098A706 /* GKHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC7149E1D83FE800098A706 /* GKHandler.m */; };
 		8ACB1FB71D6AD83000D3AEF3 /* GKEntitySKU.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ACB1FB51D6AD83000D3AEF3 /* GKEntitySKU.h */; };
 		8ACB1FB81D6AD83000D3AEF3 /* GKEntitySKU.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB1FB61D6AD83000D3AEF3 /* GKEntitySKU.m */; };
 		8ACB9E481D61AB1C00C81500 /* EntitySKUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */; };
@@ -710,6 +711,9 @@
 		8ABB83411D7742E700268884 /* OrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderController.m; path = OrderViewController/OrderController.m; sourceTree = "<group>"; };
 		8AC3F6841C0590A500CCD867 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8AC3F6861C05910A00CCD867 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		8AC7149D1D83FE800098A706 /* GKHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKHandler.h; path = GKHandler/GKHandler.h; sourceTree = "<group>"; };
+		8AC7149E1D83FE800098A706 /* GKHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKHandler.m; path = GKHandler/GKHandler.m; sourceTree = "<group>"; };
+		8AC714A01D8401750098A706 /* GKViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKViewDelegate.h; sourceTree = "<group>"; };
 		8ACB1FB51D6AD83000D3AEF3 /* GKEntitySKU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKEntitySKU.h; path = Entity/GKEntitySKU.h; sourceTree = "<group>"; };
 		8ACB1FB61D6AD83000D3AEF3 /* GKEntitySKU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKEntitySKU.m; path = Entity/GKEntitySKU.m; sourceTree = "<group>"; };
 		8ACB9E461D61AB1C00C81500 /* EntitySKUController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUController.h; path = QRCodeViewController/EntitySKUController/EntitySKUController.h; sourceTree = "<group>"; };
@@ -1361,6 +1365,9 @@
 				4E3A23791A52EC9600037F9C /* Util */,
 				B7ED32B61B25C662009BAF5A /* OpenCenter.h */,
 				B7ED32B71B25C662009BAF5A /* OpenCenter.m */,
+				8AC7149D1D83FE800098A706 /* GKHandler.h */,
+				8AC7149E1D83FE800098A706 /* GKHandler.m */,
+				8AC714A01D8401750098A706 /* GKViewDelegate.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2853,6 +2860,7 @@
 				4E05AAA91B634C2D007596E6 /* EarthLoadingView.m in Sources */,
 				B76676411AB81758002F294C /* NoDataView.m in Sources */,
 				B72ACCC81B666B8C0020E841 /* DiscoverBannerView.m in Sources */,
+				8AC7149F1D83FE800098A706 /* GKHandler.m in Sources */,
 				4E66C1E51A7DBA0F00F31A90 /* NoteViewController.m in Sources */,
 				8AF7C75A1D74025400C71499 /* CartCell.m in Sources */,
 				8A9256011D50D1A500E6481F /* NoResultView.m in Sources */,

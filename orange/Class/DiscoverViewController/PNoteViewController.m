@@ -8,6 +8,8 @@
 
 #import "PNoteViewController.h"
 #import "API.h"
+
+
 @interface PNoteViewController ()<UITextViewDelegate>
 
 //评论视窗
@@ -178,7 +180,7 @@
     self.tipLabel.backgroundColor = [UIColor clearColor];
     //设置字体样式与大小
     [self.tipLabel setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
-    self.tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
+    self.tipLabel.textColor = [UIColor colorFromHexString:@"#9d9e9f"];
     self.tipLabel.text = @"撰写真实、有用、有趣的商品点评";
     
     [self.textView addSubview:self.tipLabel];

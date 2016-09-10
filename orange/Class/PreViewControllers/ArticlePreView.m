@@ -74,7 +74,7 @@
     _article                = article;
     self.titleLable.text    = _article.title;
 //    DDLogInfo(@"content %@", _article.strip_tags_content);
-    [self.CoverImageView sd_setImageWithURL:_article.coverURL_300
+    [self.CoverImageView sd_setImageWithURL:_article.coverURL
                            placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.CoverImageView.deFrameSize] options:SDWebImageRetryFailed];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]

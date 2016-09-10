@@ -347,50 +347,12 @@
 
 - (void)likeAction
 {
-    [API likeEntityWithEntityId:self.entity.entityId isLike:!self.likeButton.selected success:^(BOOL liked) {
-        if (liked == self.likeButton.selected) {
-            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
-            image.frame = self.likeButton.imageView.frame;
-            [self.likeButton addSubview:image];
-            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
-                image.deFrameTop = image.deFrameTop - 10;
-                image.alpha = 0.1;
-            }completion:^(BOOL finished) {
-                [image removeFromSuperview];
-            }];
-            
-        }
-        self.likeButton.selected = liked;
-        self.entity.liked = liked;
-        
-        if (liked) {
-            
-            UIImageView * image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liked"]];
-            image.frame = self.likeButton.imageView.frame;
-            [self.likeButton addSubview:image];
-            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                image.transform = CGAffineTransformScale(image.transform, 1.5, 1.5);
-                image.deFrameTop = image.deFrameTop - 10;
-                image.alpha = 0.1;
-            }completion:^(BOOL finished) {
-                [image removeFromSuperview];
-            }];
-            self.entity.likeCount = self.entity.likeCount + 1;
-            [MobClick event:@"like_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.likeCount];
-        } else {
-            self.entity.likeCount = self.entity.likeCount - 1;
-            [MobClick event:@"unlike_click" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.unlikeCount];
-            [SVProgressHUD dismiss];
-        }
-        
-    } failure:^(NSInteger stateCode) {
-        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"like failure", kLocalizedFile, nil)];
-        
-    }];
+    if (_delegate && [_delegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)]) {
+        [_delegate TapLikeButtonWithEntity:self.entity Button:self.likeButton];
+    }
 }
 
-#pragma mark - Action
+#pragma mark - button action
 - (void)likeButtonAction
 {    
     if(!k_isLogin)
@@ -403,7 +365,6 @@
     }
 }
 
-#pragma mark - button action
 - (void)imageViewButtonAction
 {
     if (_delegate && [_delegate respondsToSelector:@selector(TapEntityImage:)]) {
