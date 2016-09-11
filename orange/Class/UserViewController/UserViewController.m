@@ -671,7 +671,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             user.relation = relation;
             //            [self configFollowButton];
             view.user = user;
-            [SVProgressHUD showImage:nil status:@"取消关注成功"];
+            [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"unfollow-success", kLocalizedFile, nil)];
             //            [self.tableView reloadData];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:@"取消关注失败"];

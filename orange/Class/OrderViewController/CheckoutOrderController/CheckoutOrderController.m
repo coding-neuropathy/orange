@@ -136,7 +136,6 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
 
         [[UIApplication sharedApplication].keyWindow addSubview:paymengVC.view];
         [self addChildViewController:paymengVC];
-//        [paymengVC fadeIn];
     }
 }
 
@@ -146,12 +145,15 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
     if ([sender isKindOfClass:[GKOrder class]]) {
         GKOrder *order  = (GKOrder *)sender;
         
+        [SVProgressHUD showWithStatus:NSLocalizedStringFromTable(@"loading", kLocalizedFile, nil)];
         [API getPaymentURLWithOrderId:order.orderId PaymentType:AlipayPaymentType Success:^(NSString *payment_url) {
 //            DDLogInfo(@"payment %@", payment_url);
             [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:payment_url]];
 //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:payment_url]];
-        } Failure:^(NSInteger stateCode, NSError *error) {
             
+            [SVProgressHUD dismissWithDelay:2];
+        } Failure:^(NSInteger stateCode, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
     }
 }

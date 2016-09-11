@@ -32,7 +32,7 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.navigationItem.title   = NSLocalizedStringFromTable(@"my-articles", kLocalizedFile, nil);
     [self.collectionView registerClass:[MoreArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
 }
 

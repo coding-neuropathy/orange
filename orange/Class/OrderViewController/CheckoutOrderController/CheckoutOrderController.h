@@ -6,9 +6,10 @@
 //  Copyright © 2016年 guoku.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface CheckoutOrderController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface CheckoutOrderController : BaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 
 - (instancetype)initWithOrder:(GKOrder *)order;
