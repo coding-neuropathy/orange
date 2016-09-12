@@ -159,17 +159,19 @@
 "unfollow"          = "Unfollow";
 "unfollow-failure"  = "Unfollow Failure";
 
-"me like" = "Like";
-"me note" = "Note";
-"me article" = "Article";
-"me tag" = "Tag";
-"me poke" = "Article Poked";
+"me like"           = "Like";
+"me note"           = "Note";
+"me article"        = "Article";
+"me tag"            = "Tag";
+"me poke"           = "Article Poked";
+//"my-articles"
 
 "user like" = "Like";
 "user note" = "Note";
 "user article" = "Article";
 "user tag" = "Tag";
 "user poke" = "Article Poked";
+
 
 /*
   personal settings

@@ -19,6 +19,12 @@
  */
 - (void)TapEntityImage:(GKEntity *)entity;
 
+/**
+ *  handle user like action
+ *
+ *  @param entity GKEntity object
+ *  @param button like button
+ */
 - (void)TapLikeButtonWithEntity:(GKEntity *)entity Button:(UIButton *)button;
 
 @end

@@ -11,6 +11,6 @@
 
 @interface UserArticleViewController : ListViewController
 
-@property (nonatomic , assign)NSInteger Uid;
+- (instancetype)initWithUser:(GKUser *)user;
 
 @end

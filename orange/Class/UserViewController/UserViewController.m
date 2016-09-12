@@ -716,8 +716,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             break;
         case UserArticleType:
         {
-            UserArticleViewController * vc = [[UserArticleViewController alloc] init];
-            vc.Uid = self.user.userId;
+            UserArticleViewController * vc = [[UserArticleViewController alloc] initWithUser:self.user];
+//            vc.Uid = self.user.userId;
             if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }

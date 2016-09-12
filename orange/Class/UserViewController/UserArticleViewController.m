@@ -11,8 +11,11 @@
 
 @interface UserArticleViewController ()
 
+@property (weak, nonatomic) GKUser * user;
+
 /** 用户图文数据源数组 */
 @property (nonatomic , strong) NSMutableArray * dataSource;
+//@property (strong, no)
 
 //@property (nonatomic , strong) UITableView * tableView;
 //@property (nonatomic, strong) UICollectionView * collectionView;
@@ -29,10 +32,23 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 //    self.view = self.collectionView;
 //}
 
+- (instancetype)initWithUser:(GKUser *)user
+{
+    self = [super init];
+    if (self) {
+        self.user   = user;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title   = NSLocalizedStringFromTable(@"my-articles", kLocalizedFile, nil);
+    if (self.user.userId == [Passport sharedInstance].user.userId) {
+        self.navigationItem.title   = NSLocalizedStringFromTable(@"me article", kLocalizedFile, nil);
+    } else {
+        self.navigationItem.title   = NSLocalizedStringFromTable(@"user article", kLocalizedFile, nil);
+    }
     [self.collectionView registerClass:[MoreArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
 }
 
@@ -61,7 +77,7 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 {
     self.page = 1;
     
-    [API getUserArticlesWithUserId:self.Uid Page:self.page Size:15 success:^(NSArray *articles, NSInteger page, NSInteger count) {
+    [API getUserArticlesWithUserId:self.user.userId Page:self.page Size:15 success:^(NSArray *articles, NSInteger page, NSInteger count) {
         self.dataSource = [NSMutableArray arrayWithArray:articles];
         self.page += 1;
         [self.collectionView.pullToRefreshView stopAnimating];
@@ -74,7 +90,7 @@ static NSString * ArticleCellIdentifier = @"UserArticleCell";
 
 - (void)loadMore
 {
-    [API getUserArticlesWithUserId:self.Uid Page:self.page Size:15 success:^(NSArray *articles, NSInteger page, NSInteger count) {
+    [API getUserArticlesWithUserId:self.user.userId Page:self.page Size:15 success:^(NSArray *articles, NSInteger page, NSInteger count) {
         [self.dataSource addObjectsFromArray:articles];
         self.page += 1;
         [self.collectionView.infiniteScrollingView stopAnimating];
