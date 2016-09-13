@@ -13,7 +13,8 @@ target 'orange' do
     pod 'libWeChatSDK'
     pod 'FDFullscreenPopGesture', '1.1'
     pod 'FontAwesome'
-    pod 'DZNEmptyDataSet' 
+    pod 'DZNEmptyDataSet'
+#    pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentifier.git'
 #    pod "GKFadeNavigationController", :git => 'https://github.com/gklka/GKFadeNavigationController.git'
     pod 'FLEX', '~> 2.0', :configurations => ['Debug'] #An in-app debugging and exploration tool for iOS
 end

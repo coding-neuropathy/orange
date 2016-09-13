@@ -36,9 +36,11 @@
 //    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
     self.tableView.rowHeight = 94.;
     self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
-    ;
+    
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
-//    self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
+    
+    if (iOS10)
+        self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -111,6 +111,10 @@
 #define k_isLogin ([Passport sharedInstance].user && [Passport sharedInstance].session)
 #endif
 
+#ifndef iOS10
+#define iOS10 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
+#endif
+
 #ifndef iOS9
 #define iOS9 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0)
 #endif
