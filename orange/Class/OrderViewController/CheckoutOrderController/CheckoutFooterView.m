@@ -146,13 +146,15 @@
     self.payTipsLabel.deFrameLeft       = 16.;
     
     self.alipayBtn.deFrameTop           = self.payTipsLabel.deFrameBottom + 10.;
-    self.alipayBtn.deFrameLeft          = self.payTipsLabel.deFrameLeft;
+//    self.alipayBtn.deFrameLeft          = self.payTipsLabel.deFrameLeft;
+    self.alipayBtn.deFrameLeft          = self.deFrameLeft + 40.;
     
     self.wechatPayBtn.deFrameTop        = self.alipayBtn.deFrameTop;
-    self.wechatPayBtn.deFrameLeft       = self.alipayBtn.deFrameRight + 10.;
+//    self.wechatPayBtn.deFrameLeft       = self.alipayBtn.deFrameRight + 10.;
+    self.wechatPayBtn.deFrameRight      = self.deFrameRight - 40.;
     
-    self.storePayBtn.deFrameTop         = self.wechatPayBtn.deFrameTop;
-    self.storePayBtn.deFrameLeft        = self.wechatPayBtn.deFrameRight + 10.;
+//    self.storePayBtn.deFrameTop         = self.wechatPayBtn.deFrameTop;
+//    self.storePayBtn.deFrameLeft        = self.wechatPayBtn.deFrameRight + 10.;
 }
 
 - (void)drawRect:(CGRect)rect

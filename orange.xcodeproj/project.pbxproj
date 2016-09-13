@@ -270,7 +270,6 @@
 		B749632E1AB28A6C00C340FB /* CommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B749632D1AB28A6C00C340FB /* CommentHeaderView.m */; };
 		B758E84C1D17DB7C00DD01C7 /* UserArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B758E84B1D17DB7C00DD01C7 /* UserArticleCell.m */; };
 		B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */; };
-		B766763A1AB805B5002F294C /* NoMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676391AB805B5002F294C /* NoMessageView.m */; };
 		B76676411AB81758002F294C /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = B76676401AB81758002F294C /* NoDataView.m */; };
 		B76818C81D34D05B009870C2 /* GKArticleComment.h in Headers */ = {isa = PBXBuildFile; fileRef = B76818C61D34D05B009870C2 /* GKArticleComment.h */; };
 		B76818C91D34D05B009870C2 /* GKArticleComment.m in Sources */ = {isa = PBXBuildFile; fileRef = B76818C71D34D05B009870C2 /* GKArticleComment.m */; };
@@ -837,8 +836,6 @@
 		B758E84A1D17DB7C00DD01C7 /* UserArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserArticleCell.h; path = UserArticleViewController/UserArticleCell.h; sourceTree = "<group>"; };
 		B758E84B1D17DB7C00DD01C7 /* UserArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserArticleCell.m; path = UserArticleViewController/UserArticleCell.m; sourceTree = "<group>"; };
 		B7662ACD1AC3ADFD00C82B4B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		B76676381AB805B5002F294C /* NoMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoMessageView.h; path = NotificationView/NoMessageView.h; sourceTree = "<group>"; };
-		B76676391AB805B5002F294C /* NoMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoMessageView.m; path = NotificationView/NoMessageView.m; sourceTree = "<group>"; };
 		B766763F1AB81758002F294C /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoDataView.h; path = UserView/NoDataView.h; sourceTree = "<group>"; };
 		B76676401AB81758002F294C /* NoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoDataView.m; path = UserView/NoDataView.m; sourceTree = "<group>"; };
 		B76818C61D34D05B009870C2 /* GKArticleComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKArticleComment.h; path = Article/GKArticleComment.h; sourceTree = "<group>"; };
@@ -1275,7 +1272,6 @@
 			children = (
 				B7C6847D1ABBC3F500A122E8 /* Components */,
 				B766763E1AB8173B002F294C /* UserView */,
-				B76676371AB8058A002F294C /* NotificationView */,
 				B79270921AB3D8E800FD7371 /* DiscoverView */,
 				B749632B1AB28A4700C340FB /* CommentView */,
 				4E2D6D491A697B82009E4A17 /* EntitySingleListCell.h */,
@@ -2153,15 +2149,6 @@
 			name = UserArticleViewController;
 			sourceTree = "<group>";
 		};
-		B76676371AB8058A002F294C /* NotificationView */ = {
-			isa = PBXGroup;
-			children = (
-				B76676381AB805B5002F294C /* NoMessageView.h */,
-				B76676391AB805B5002F294C /* NoMessageView.m */,
-			);
-			name = NotificationView;
-			sourceTree = "<group>";
-		};
 		B766763E1AB8173B002F294C /* UserView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2813,7 +2800,6 @@
 				8A59017A1D643F1100780C74 /* Appirater.m in Sources */,
 				4ECCD0DC1A7297A7009D5A42 /* FeedCell.m in Sources */,
 				8ABB6F741D7EA870003EDD49 /* PaymentCodeController.m in Sources */,
-				B766763A1AB805B5002F294C /* NoMessageView.m in Sources */,
 				4EA0C4501A805CBD0025EC2E /* PinyinTools.m in Sources */,
 				B737F4101C1C027100286596 /* VerifyEmailViewController.m in Sources */,
 				B76EE07F1B3D86AE009D8763 /* MessageController.m in Sources */,

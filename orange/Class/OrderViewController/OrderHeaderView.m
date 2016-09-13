@@ -135,9 +135,14 @@
     self.orderNumberLabel.text          = [NSString stringWithFormat:@"%@", self.order.orderNumber];
     self.orderNumberLabel.deFrameSize   = CGSizeMake([self.order.orderNumber widthWithLineWidth:0. Font:self.orderNumberLabel.font], 20.);
     
-//    DDLogInfo(@"status %ld", order.status);
+    DDLogInfo(@"status %ld", order.status);
     if (self.paymentEnable) {
         switch (_order.status) {
+            case Expired:
+                self.statusLabel.text       = NSLocalizedStringFromTable(@"expired", kLocalizedFile, nil);
+                self.statusLabel.textColor  = [UIColor lightGrayColor];
+                self.paymentBtn.hidden      = NO;
+                break;
             case WaitingForPayment:
                 self.statusLabel.text       = NSLocalizedStringFromTable(@"wait-for-payment", kLocalizedFile, nil);
                 self.statusLabel.textColor  = [UIColor redColor];
@@ -146,7 +151,7 @@
             case Paid:
                 self.statusLabel.text       = NSLocalizedStringFromTable(@"paid", kLocalizedFile, nil);
                 self.statusLabel.textColor  = [UIColor colorFromHexString:@"#757575"];
-                self.paymentBtn.hidden      = YES;
+                self.paymentBtn.hidden      = NO;
                 break;
             default:
 //            self.paymentBtn.hidden      = YES;
@@ -177,11 +182,19 @@
     self.statusLabel.deFrameTop         = self.statusTipsLabel.deFrameTop;
     self.statusLabel.deFrameLeft        = self.statusTipsLabel.deFrameRight + 10.;
     
-    if (self.order.status == WaitingForPayment) {
-//        self.paymentBtn.hidden          = NO;
-        self.paymentBtn.deFrameRight    = self.deFrameWidth - 16.;
-        self.paymentBtn.deFrameBottom   = self.deFrameHeight - 16.;
-    } 
+
+    switch (self.order.status) {
+        case WaitingForPayment:
+        {
+            self.paymentBtn.deFrameRight    = self.deFrameWidth - 16.;
+            self.paymentBtn.deFrameBottom   = self.deFrameHeight - 16.;
+        }
+            break;
+
+        default:
+            self.paymentBtn.hidden      = YES;
+            break;
+    }
 }
 
 

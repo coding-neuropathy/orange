@@ -8,13 +8,13 @@
 
 #import "ActiveController.h"
 #import "FeedCell.h"
-#import "NoMessageView.h"
+//#import "NoMessageView.h"
 
-@interface ActiveController () <UITableViewDataSource, UITableViewDelegate>
+@interface ActiveController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray * dataArrayForFeed;
-@property (nonatomic, strong) NoMessageView * noMessageView;
+//@property (nonatomic, strong) NoMessageView * noMessageView;
 
 @end
 
@@ -25,7 +25,6 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-//        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.deFrameSize = IS_IPAD    ? CGSizeMake(kPadScreenWitdh, kScreenHeight)
                                             : CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight - kTabBarHeight);
@@ -39,19 +38,22 @@ static NSString *FeedCellIdentifier = @"FeedCell";
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = YES;
+        
+        _tableView.emptyDataSetDelegate         = self;
+        _tableView.emptyDataSetSource           = self;
     }
     return _tableView;
 }
 
-- (NoMessageView *)noMessageView
-{
-    if (!_noMessageView) {
-        _noMessageView = [[NoMessageView alloc] initWithFrame: IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200)
-                                                                        : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - 200)];
-        //        _noMessageView.backgroundColor = [UIColor redColor];
-    }
-    return _noMessageView;
-}
+//- (NoMessageView *)noMessageView
+//{
+//    if (!_noMessageView) {
+//        _noMessageView = [[NoMessageView alloc] initWithFrame: IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200)
+//                                                                        : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - 200)];
+//        //        _noMessageView.backgroundColor = [UIColor redColor];
+//    }
+//    return _noMessageView;
+//}
 
 - (void)loadView
 {
@@ -117,14 +119,15 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 {
     [API getFeedWithTimestamp:[[NSDate date] timeIntervalSince1970] type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
         self.dataArrayForFeed = [NSMutableArray arrayWithArray:feedArray];
-        if (self.dataArrayForFeed.count == 0) {
-            self.tableView.tableFooterView = self.noMessageView;
-            self.noMessageView.type = NoFeedType;
-        } else {
-            self.tableView.tableFooterView = nil;
-        }
-        [self.tableView reloadData];
+//        if (self.dataArrayForFeed.count == 0) {
+////            self.tableView.tableFooterView = self.noMessageView;
+////            self.noMessageView.type = NoFeedType;
+//        } else {
+//            self.tableView.tableFooterView = nil;
+//        }
+        
         [self.tableView.pullToRefreshView stopAnimating];
+        [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
         [self.tableView.pullToRefreshView stopAnimating];
     }];
@@ -178,6 +181,72 @@ static NSString *FeedCellIdentifier = @"FeedCell";
      {
          [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
      }];
+    
+}
+
+#pragma mark - <DZNEmptyDataSetSource>
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+//    NSString *text = NSLocalizedStringFromTable(@"no-order", kLocalizedFile, nil);
+    NSString * text = @"没有任何动态";
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:kFontAwesomeFamilyName size:14.],
+                                 NSForegroundColorAttributeName: [UIColor colorFromHexString:@"#9d9e9f"],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"关注活跃用户，TA 们的动态将出现在这里";
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor colorFromHexString:@"#9d9e9f"],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"empty_act.png"];
+}
+
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -30.;
+}
+
+#pragma mark - <DZNEmptyDataSetDelegate>
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
+{
+    return NO;
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view
+{
+    DDLogInfo(@"%s",__FUNCTION__);
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button
+{
     
 }
 

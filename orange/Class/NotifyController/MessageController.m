@@ -8,13 +8,13 @@
 
 #import "MessageController.h"
 #import "MessageCell.h"
-#import "NoMessageView.h"
+//#import "NoMessageView.h"
 
-@interface MessageController ()<UITableViewDataSource, UITableViewDelegate>
+@interface MessageController () <DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray * dataArrayForMessage;
-@property (nonatomic, strong) NoMessageView * noMessageView;
+//@property (nonatomic, strong) NoMessageView * noMessageView;
 
 @end
 
@@ -35,22 +35,24 @@ static NSString *MessageCellIdentifier = @"MessageCell";
             _tableView.deFrameLeft = 128.;
         }
         
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.dataSource                   = self;
+        _tableView.delegate                     = self;
+        _tableView.separatorStyle               = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = YES;
+        _tableView.emptyDataSetSource           = self;
+        _tableView.emptyDataSetDelegate         = self;
     }
     return _tableView;
 }
 
-- (NoMessageView *)noMessageView
-{
-    if (!_noMessageView) {
-        _noMessageView = [[NoMessageView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - 200)];
-        //        _noMessageView.backgroundColor = [UIColor redColor];
-    }
-    return _noMessageView;
-}
+//- (NoMessageView *)noMessageView
+//{
+//    if (!_noMessageView) {
+//        _noMessageView = [[NoMessageView alloc] initWithFrame:IS_IPHONE?CGRectMake(0., 0., kScreenWidth, kScreenHeight - 200):CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - 200)];
+//        //        _noMessageView.backgroundColor = [UIColor redColor];
+//    }
+//    return _noMessageView;
+//}
 
 - (void)loadView
 {
@@ -116,12 +118,7 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 {
         [API getMessageListWithTimestamp:[[NSDate date] timeIntervalSince1970]  count:30 success:^(NSArray *messageArray) {
             self.dataArrayForMessage = [NSMutableArray arrayWithArray:messageArray];
-            if (self.dataArrayForMessage.count == 0) {
-                self.tableView.tableFooterView = self.noMessageView;
-                self.noMessageView.type = NoMessageType;
-            } else {
-                self.tableView.tableFooterView = nil;
-            }
+
             [[NSNotificationCenter defaultCenter] postNotificationName:@"HideBadge" object:nil userInfo:nil];
             [self.tableView reloadData];
             
@@ -181,6 +178,72 @@ static NSString *MessageCellIdentifier = @"MessageCell";
      {
          [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
      }];
+    
+}
+
+#pragma mark - <DZNEmptyDataSetSource>
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    //    NSString *text = NSLocalizedStringFromTable(@"no-order", kLocalizedFile, nil);
+    NSString * text = @"没有任何消息";
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:kFontAwesomeFamilyName size:14.],
+                                 NSForegroundColorAttributeName: [UIColor colorFromHexString:@"#9d9e9f"],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"当有人关注你、点评你添加的商品或发生任何与你相关的事件时，会在这里通知你";;
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor colorFromHexString:@"#9d9e9f"],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"empty_notifaction.png"];
+}
+
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -30.;
+}
+
+#pragma mark - <DZNEmptyDataSetDelegate>
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
+{
+    return NO;
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view
+{
+    DDLogInfo(@"%s",__FUNCTION__);
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button
+{
     
 }
 

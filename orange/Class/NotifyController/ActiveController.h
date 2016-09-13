@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ActiveController : BaseViewController
+@interface ActiveController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

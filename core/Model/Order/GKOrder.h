@@ -12,6 +12,7 @@
  *  用户状态
  */
 typedef NS_ENUM(NSInteger, GKOrderState) {
+    Expired,
     AddressUnBind,
     WaitingForPayment,
     Paid,

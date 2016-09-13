@@ -47,12 +47,13 @@ static NSString *FooterIdentifier   = @"OrderFooter";
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.deFrameSize = CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kNavigationBarHeight);
         
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
+        _collectionView.delegate                = self;
+        _collectionView.dataSource              = self;
+        _collectionView.backgroundColor         = [UIColor colorFromHexString:@"#f8f8f8"];
         _collectionView.alwaysBounceVertical    = YES;
-        _collectionView.emptyDataSetSource = self;
-//        _collectionView.emptyDataSetVisible = NO;
+        _collectionView.emptyDataSetSource      = self;
+        _collectionView.emptyDataSetDelegate    = self;
+
     }
     return _collectionView;
 }
@@ -64,11 +65,17 @@ static NSString *FooterIdentifier   = @"OrderFooter";
     self.page = 1;
     [API getOrderListWithWithStatus:0 Page:self.page Size:self.size Success:^(NSArray *OrderArray) {
         DDLogInfo(@"order list %@", OrderArray);
-        self.orderArray = [NSMutableArray arrayWithArray:OrderArray];
-        self.page       += 1;
+        
         [self.collectionView.pullToRefreshView stopAnimating];
+        
         [UIView setAnimationsEnabled:NO];
-        [self.collectionView reloadData];
+        if (OrderArray.count > 0) {
+            self.orderArray = [NSMutableArray arrayWithArray:OrderArray];
+            self.page       += 1;
+            [self.collectionView reloadData];
+        } else {
+            [self.collectionView reloadData];
+        }
         [UIView setAnimationsEnabled:YES];
         
     } Failure:^(NSInteger stateCode, NSError *error) {
@@ -158,7 +165,6 @@ static NSString *FooterIdentifier   = @"OrderFooter";
     
     GKOrder * order     = [self.orderArray objectAtIndex:indexPath.section];
     cell.orderItem      = [order.orderItems objectAtIndex:indexPath.row];
-    
     return cell;
 }
 
@@ -216,7 +222,7 @@ static NSString *FooterIdentifier   = @"OrderFooter";
 
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return -100.0;
+    return -100.;
 }
 
 #pragma mark - <DZNEmptyDataSetDelegate>
