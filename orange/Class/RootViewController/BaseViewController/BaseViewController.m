@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 //#import "GTScrollNavigationBar.h"
-#import <GTScrollNavigationBar/GTScrollNavigationBar.h>
+//#import <GTScrollNavigationBar/GTScrollNavigationBar.h>
 
 @interface BaseViewController ()<UIGestureRecognizerDelegate>
 
@@ -52,10 +52,10 @@
 {
     
     
-    if([self.navigationController.scrollNavigationBar respondsToSelector:@selector(setScrollView:)])
-    {
-        self.navigationController.scrollNavigationBar.scrollView = nil;
-    }
+//    if([self.navigationController.scrollNavigationBar respondsToSelector:@selector(setScrollView:)])
+//    {
+//        self.navigationController.scrollNavigationBar.scrollView = nil;
+//    }
     [super viewWillAppear:animated];
 }
 

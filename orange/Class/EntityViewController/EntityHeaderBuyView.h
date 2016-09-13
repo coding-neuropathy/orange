@@ -10,7 +10,7 @@
 
 @protocol EntityHeaderBuyViewDelegate <NSObject>
 
-- (void)tapLikeBtn:(id)sender;
+//- (void)tapLikeBtn:(id)sender;
 - (void)tapPostNoteBtn:(id)sender;
 - (void)tapBuyBtn:(id)sender;
 

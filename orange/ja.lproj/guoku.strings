@@ -1,0 +1,298 @@
+/* 
+  File.strings
+  orange
+
+  Created by 谢家欣 on 15/3/30.
+  Copyright (c) 2015年 guoku.com. All rights reserved.
+*/
+
+
+"guoku" = "果庫";
+"guide to better living"    = "精英消费者指南";
+
+/**
+ *  launch
+ */
+"skip"      = "スキップ";
+
+
+/**
+ *  3d - touch
+ */
+"articles"  = "文章";
+"goods"     = "商品";
+
+/*
+ * Base Infomation
+ */
+"you"       = "你";
+
+"cancel"    = "キャンセル";
+"confirm"   = "確認";
+
+"selected"  = "精选";
+"discover"  = "发现";
+"notify"    = "通知";
+"settings"  = "设置";
+"me"        = "我";
+
+"like"      = "喜爱";
+"note"      = "点评";
+"tags"      = "标签";
+
+"popular"   = "热门商品";
+"category"  = "推荐品类";
+
+"activity"  = "动态";
+"message"   = "消息";
+
+/**
+ *  share
+ */
+"share to weibo"    = "分享到微博";
+"share to wechat"   = "分享到微信";
+"share to moment"   = "分享到朋友圈";
+"open in safari"    = "在 Safari 中打开";
+"share-success"     = "分享成功";
+
+"more"              = "更多";
+
+/*
+ * Selection Page
+ */
+"selection-nav-recommend" = "推荐";
+"selection-nav-entity" = "商品";
+"selection-nav-article" = "图文";
+
+
+/*
+ * Discover Page
+ */
+"search"                    = "搜索商品，图文";
+"entities"                  = "商品";
+"recommendation category"   = "推荐品类";
+"popular articles"          = "热门图文";
+"recommendation user"       = "推荐用户";
+
+/*
+ * Search Page
+ */
+"history-search"                = "最近搜索";
+"popular-search"                = "热门搜索";
+"users"                         = "用户";
+"entitie"                       = "商品";
+"articles"                      = "图文";
+"category"                      = "品类";
+"click to view all results"     = "查看全部结果";
+"no-results"                    = "无相关搜索结果";
+/*
+ * entity page
+ */
+"from"              = "来自";
+"recommendation"    = "相似推荐";
+"item"              = "商品";
+"post note"         = "写点评";
+"update note"       = "修改点评";
+"comment"           = "评论";
+"buy"               = "购买";
+//"sold out"          = "已下架";
+
+/*
+ * article page
+ */
+"article"            = "图文";
+"poke"               = "赞";
+"comment"            = "评论";
+"load"               = "正在加载...";
+/*
+ *  activity page
+ */
+//"commented on a product"    = "点评了 1 件商品";
+
+"started following" = "开始关注";
+"liked 1 item" = "喜爱了1件商品";
+"bumped 1 item" = "赞了1篇图文";
+"noted 1 item:" = "点评了1件商品：";
+"commented" = "评论了";
+"'s note:" = "的点评";
+"bumped" = "赞了";
+
+/*
+ * message page
+ */
+/*
+"replied your comment"                                                  = "回复了你的评论";
+"commented on your"                                                     = "评论了你对";
+"followed you"                                                          = "关注了你";
+"commented on a product of your recommendation"                         = "点评了你推荐的商品";
+"liked a product of your recommendation"                                = "喜爱了你推荐的商品";
+"a product of your recommendation is marked as exceptional choice"    = "你添加的商品被收录精选";
+"liked a product"                                                       = "喜爱了 1 件商品";
+*/
+
+"started following you" = "关注了你";
+"commented your note" = "评论了你撰写的点评";
+"bumped your note" = "赞了你撰写的点评";
+"bumped your article" = "赞了你撰写的图文";
+"noted 1 item your added" = "点评了你添加的商品";
+"liked 1 item your added" = "喜爱了你添加的商品";
+"reply to your comment:" = "回复了你的评论：";
+"The item you added have been selected" = "你添加的商品被收录精选";
+
+
+/*
+  form page
+ */
+"email"     = "邮箱";
+"password"  = "密码";
+
+/**
+ *  personal page
+ */
+"following"         = "关注";
+"followers"         = "粉丝";
+
+"follow"            = "关注";
+"follow-success"    = "关注成功";
+"unfollow"          = "取消关注";
+"unfollow-failure"  = "取消关注失败";
+
+/*
+ personal settings
+ */
+"edit your profile" = "编辑个人资料";
+"profile Photo" = "头像";
+"nickname"  = "昵称";
+"gender"    = "性别";
+"bio"       = "简介";
+"location"  = "所在地";
+
+"me like" = "我的喜爱";
+"me note" = "我的点评";
+"me article" = "我的图文";
+"me tag" = "我参与过的标签";
+"me poke" = "我赞过的图文";
+
+"user like" = "TA 的喜爱";
+"user note" = "TA 的点评";
+"user article" = "TA 的图文";
+"user tag" = "TA 参与过的标签";
+"user poke" = "TA 赞过的图文";
+
+
+/*
+ setting page
+ */
+"weibo"     = "微博";
+"taobao"    = "淘宝";
+"wechat"    = "微信";
+"share application to wechat" = "微信分享";
+"share application to weibo" = "分享应用到微博";
+"app store review" = "App Store 评分";
+"about"     = "关于我们";
+"agreement" = "用户协议";
+"clear image cache" = "清除图片缓存";
+"feedback"  = "意见反馈";
+"version"   = "版本";
+
+"sign in"   = "登录";
+"sign up"   = "注册";
+"sign out"  = "退出登录";
+
+/*
+ *  account page
+ */
+"mail"                  = "邮箱";
+"forget-password"       = "忘记密码";
+"found-password"        = "找回密码";
+"what's-your-email"     = "电邮 (example@guoku.com)";
+"what's-your-passowrd"  = "密码";
+"you-want-sign-out"     = "退出登录?";
+"signout-success"       = "登出成功";
+
+/**
+ *  seller
+ */
+"create-order"          = "创建订单";
+"review-order"          = "查看订单";
+
+/**
+ *  verify  mail page
+ */
+"verify mail"                       = "验证邮箱";
+"reset password"                    = "重设密码";
+"verified"                          = "已验证";
+"send mail for verify"              = "发送验证邮件";
+"update email"                      = "修改邮箱";
+"Sent to the current email"         = "发送至当前邮箱";
+/*
+ * datetime
+ */
+"seconds"    = "秒前";
+"hours"      = "小时前";
+"minutes"    = "分钟前";
+"days"       = "天前";
+"weeks"      = "周前";
+
+
+/*
+ *  category
+ */
+"all"           = "所有";
+"women's"       = "女装";
+"men's"         = "男装";
+"kids"          = "孩童";
+"accessories"   = "配饰";
+"beauty"        = "美容";
+"tech"          = "科技";
+"living"        = "居家";
+"outdoors"      = "户外";
+"culture"       = "文化";
+"food"          = "美食";
+"fun"           = "玩乐";
+"health"        = "健康";
+
+"items"         = "件商品";
+
+/*
+ * error info
+ */
+"like failure"          = "喜爱失败";
+"load failure"          = "加载失败";
+"password error"        = "密码错误";
+"duplicate email"       = "邮箱被占用";
+
+/*
+ * tip off information
+ */
+"tip off"                   = "举报";
+"sold out"                  = "已下架";
+"miss category"             = "分类错误";
+"meaningless information"   = "垃圾或诈骗信息";
+"malicious information"     = "不良信息";
+
+/**
+ *  order
+ */
+"order"                     = "订单";
+"pending"                   = "待付款";
+"finished"                  = "交易完成";
+"scanner"                   = "扫描二维码";
+
+"item-sku"                  = "商品属性";
+"continue-add"              = "继续添加";
+"add-cart"                  = "加入购物袋";
+"submit-order"              = "提交订单";
+"shopping-cart"             = "购物袋";
+"order-detail"              = "订单详情";
+"no-order"                  = "暂无相关订单";
+
+"order-number"              = "订单号:";
+"order-status"              = "订单状态:";
+"payment"                   = "去收款";
+"wait-for-payment"          = "待付款";
+"paid"                      = "交易完成";
+
+"alipay"                    = "支付宝";
+"wechat-pay"                = "微信";
+"credit-pay"                = "收银台";

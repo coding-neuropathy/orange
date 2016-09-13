@@ -8,7 +8,7 @@
 
 #import "SelectionViewController.h"
 #import "SelectionCell.h"
-#import "GTScrollNavigationBar.h"
+//#import "GTScrollNavigationBar.h"
 #import "EntityViewController.h"
 
 #import "GKHandler.h"
@@ -287,10 +287,10 @@ static int lastContentOffset;
     [[NSUserDefaults standardUserDefaults] setObject:@(self.collectionView.contentOffset.y) forKey:@"selection-offset-y"];
 }
 
-- (void)tapStatusBar:(id)sender
-{
-    [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
-}
+//- (void)tapStatusBar:(id)sender
+//{
+//    [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
+//}
 
 - (void)tipForTapStatusBar
 {

@@ -52,26 +52,27 @@
     if (!_segmentedControl) {
         _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 40, 32)];
     
-//        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"selection-nav-recommend", kLocalizedFile, nil), NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil),NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil)]];
-        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil),NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil)]];
+        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"selection-nav-entity", kLocalizedFile, nil),
+                                              NSLocalizedStringFromTable(@"selection-nav-article", kLocalizedFile, nil)]];
+        
         [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
+        [_segmentedControl setType:HMSegmentedControlTypeText];
         [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
 
         NSDictionary *dict2 = [NSDictionary dictionaryWithObject:[UIColor colorFromHexString:@"#212121"] forKey:NSForegroundColorAttributeName];
         [_segmentedControl setSelectedTitleTextAttributes:dict2];
-        UIFont *font = [UIFont boldSystemFontOfSize:17.];
-//        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-//                                                               forKey:NSFontAttributeName];
+
+
         NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
-        [attributes setValue:font forKey:NSFontAttributeName];
+        [attributes setValue:[UIFont boldSystemFontOfSize:17.] forKey:NSFontAttributeName];
         [attributes setValue:[UIColor colorFromHexString:@"#757575"] forKey:NSForegroundColorAttributeName];
         [_segmentedControl setTitleTextAttributes:attributes];
     
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
         [_segmentedControl setSelectionIndicatorColor:[UIColor colorFromHexString:@"#212121"]];
         [_segmentedControl setSelectionIndicatorHeight:2];
-//        [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+        
         __weak __typeof(&*self)weakSelf = self;
         [_segmentedControl setIndexChangeBlock:^(NSInteger index) {
             switch (index) {
@@ -87,9 +88,8 @@
             }
         }];
         
-        [_segmentedControl setTag:2];
+//        [_segmentedControl setTag:2];
         
-//        _segmentedControl.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
     }
     return _segmentedControl;
 }

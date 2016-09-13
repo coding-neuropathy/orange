@@ -131,10 +131,14 @@
 {
     UIViewController * vc = ((UINavigationController *)viewController).viewControllers.firstObject;
     if ([vc isKindOfClass:[NotifyController class]]) {
-        if (!k_isLogin) {
-
+        
+        if (!(k_isLogin)) {
+            DDLogInfo(@"need login");
             [[OpenCenter sharedOpenCenter] openAuthPage];
             return NO;
+            //return NO;
+        } else {
+
         }
     }
     

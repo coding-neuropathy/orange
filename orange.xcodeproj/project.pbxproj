@@ -48,7 +48,7 @@
 		39B7203A1B1F4C16008519E3 /* NSObject+App.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B71FF81B1F4C16008519E3 /* NSObject+App.m */; };
 		39B7203B1B1F4C16008519E3 /* NSString+App.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B71FF91B1F4C16008519E3 /* NSString+App.h */; };
 		39B7203C1B1F4C16008519E3 /* NSString+App.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B71FFA1B1F4C16008519E3 /* NSString+App.m */; };
-		39B7203D1B1F4C16008519E3 /* UIImage+App.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B71FFB1B1F4C16008519E3 /* UIImage+App.h */; };
+		39B7203D1B1F4C16008519E3 /* UIImage+App.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B71FFB1B1F4C16008519E3 /* UIImage+App.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		39B7203E1B1F4C16008519E3 /* UIImage+App.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B71FFC1B1F4C16008519E3 /* UIImage+App.m */; };
 		39B7203F1B1F4C16008519E3 /* UIView+DEFrameAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B71FFD1B1F4C16008519E3 /* UIView+DEFrameAdditions.h */; };
 		39B720401B1F4C16008519E3 /* UIView+DEFrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B71FFE1B1F4C16008519E3 /* UIView+DEFrameAdditions.m */; };
@@ -771,6 +771,7 @@
 		8AF7C7591D74025400C71499 /* CartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CartCell.m; path = QRCodeViewController/CartController/CartCell.m; sourceTree = "<group>"; };
 		8AF7C75C1D7409D500C71499 /* ShoppingCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoppingCart.h; path = ShoppingCart/ShoppingCart.h; sourceTree = "<group>"; };
 		8AF7C75D1D7409D500C71499 /* ShoppingCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoppingCart.m; path = ShoppingCart/ShoppingCart.m; sourceTree = "<group>"; };
+		8AF8AD541D87AA86000EAFF5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/guoku.strings; sourceTree = "<group>"; };
 		8AFB2C111D7BD5EC009A0C7F /* GKOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKOrder.h; path = Order/GKOrder.h; sourceTree = "<group>"; };
 		8AFB2C121D7BD5EC009A0C7F /* GKOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKOrder.m; path = Order/GKOrder.m; sourceTree = "<group>"; };
 		8AFB2C151D7BDCAD009A0C7F /* GKOrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKOrderItem.h; path = Order/GKOrderItem.h; sourceTree = "<group>"; };
@@ -2362,6 +2363,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39B7203D1B1F4C16008519E3 /* UIImage+App.h in Headers */,
 				8A9255FB1D50A0A800E6481F /* GKSearchData.h in Headers */,
 				39B720331B1F4C16008519E3 /* BaseHttpClient.h in Headers */,
 				39B7204A1B1F4C16008519E3 /* GKEntityCategory.h in Headers */,
@@ -2389,7 +2391,6 @@
 				B76818C81D34D05B009870C2 /* GKArticleComment.h in Headers */,
 				39B720581B1F4C16008519E3 /* NSString+Helper.h in Headers */,
 				39B720421B1F4C16008519E3 /* core.h in Headers */,
-				39B7203D1B1F4C16008519E3 /* UIImage+App.h in Headers */,
 				8AFB2C131D7BD5EC009A0C7F /* GKOrder.h in Headers */,
 				39B720481B1F4C16008519E3 /* GKEntity.h in Headers */,
 				39B7203F1B1F4C16008519E3 /* UIView+DEFrameAdditions.h in Headers */,
@@ -2474,7 +2475,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = guoku.com;
 				TargetAttributes = {
 					39B8688D1ACD0CF600A2115D = {
@@ -2975,6 +2976,7 @@
 				B71E494E1AC9208100D4DB6D /* zh-Hans */,
 				B71E494F1AC920BA00D4DB6D /* en */,
 				B71E495C1AC92AD600D4DB6D /* zh-Hant */,
+				8AF8AD541D87AA86000EAFF5 /* ja */,
 			);
 			name = guoku.strings;
 			sourceTree = "<group>";
@@ -3008,7 +3010,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -3040,7 +3042,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -3067,6 +3069,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3076,8 +3079,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3089,6 +3094,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -3112,6 +3118,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3121,8 +3128,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3133,6 +3142,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

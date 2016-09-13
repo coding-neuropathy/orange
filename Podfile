@@ -8,13 +8,13 @@ target 'orange' do
     pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
     pod 'SDWebImage'
     pod 'CocoaLumberjack', '2.2'
-    pod 'HMSegmentedControl'
+    pod 'HMSegmentedControl', :git => 'https://github.com/HeshamMegid/HMSegmentedControl.git'
     pod 'WeiboSDK', :git => 'https://github.com/sinaweibosdk/weibo_ios_sdk.git'
     pod 'libWeChatSDK'
     pod 'FDFullscreenPopGesture', '1.1'
     pod 'FontAwesome'
-    pod 'GTScrollNavigationBar'
     pod 'DZNEmptyDataSet' 
+#    pod "GKFadeNavigationController", :git => 'https://github.com/gklka/GKFadeNavigationController.git'
     pod 'FLEX', '~> 2.0', :configurations => ['Debug'] #An in-app debugging and exploration tool for iOS
 end
 

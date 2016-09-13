@@ -676,10 +676,10 @@
     NSString    *path;
     switch (type) {
         case WechatPaymentType:
-            path   = [NSString stringWithFormat:@"order/payment/weixin/%ld/", order_id];
+            path   = [NSString stringWithFormat:@"order/payment/weixin/%ld/", (long)order_id];
             break;
         case AlipayPaymentType:
-            path   = [NSString stringWithFormat:@"order/payment/alipay/%ld/", order_id];
+            path   = [NSString stringWithFormat:@"order/payment/alipay/%ld/", (long)order_id];
             break;
         default:
             break;

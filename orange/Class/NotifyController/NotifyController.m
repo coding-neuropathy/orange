@@ -46,31 +46,43 @@
 - (HMSegmentedControl *)segmentedControl
 {
     if (!_segmentedControl) {
-        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-40, 32)];
+        _segmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 40., 32.)];
         
-        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"activity", kLocalizedFile, nil), NSLocalizedStringFromTable(@"message", kLocalizedFile, nil)]];
+        [_segmentedControl setSectionTitles:@[NSLocalizedStringFromTable(@"activity", kLocalizedFile, nil),
+                                              NSLocalizedStringFromTable(@"message", kLocalizedFile, nil)]];
         [_segmentedControl setSelectedSegmentIndex:0 animated:NO];
         [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleTextWidthStripe];
 //        [_segmentedControl setSelectionStyle:HMSegmentedControlSelectionStyleFullWidthStripe];
         [_segmentedControl setSelectionIndicatorLocation:HMSegmentedControlSelectionIndicatorLocationDown];
 //        NSDictionary *dict = [NSDictionary dictionaryWithObject:UIColorFromRGB(0x9d9e9f) forKey:NSForegroundColorAttributeName];
 //        [_segmentedControl setTitleTextAttributes:dict];
-        NSDictionary *dict2 = [NSDictionary dictionaryWithObject:UIColorFromRGB(0x212121) forKey:NSForegroundColorAttributeName];
-        [_segmentedControl setSelectedTitleTextAttributes:dict2];
-        UIFont *font = [UIFont boldSystemFontOfSize:17.];
-//        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-//                                                               forKey:NSFontAttributeName];
+
         
         NSMutableDictionary * attributes = [NSMutableDictionary dictionary];
-        [attributes setValue:font forKey:NSFontAttributeName];
-        [attributes setValue:UIColorFromRGB(0x757575) forKey:NSForegroundColorAttributeName];
+        [attributes setValue:[UIFont boldSystemFontOfSize:17.] forKey:NSFontAttributeName];
+        [attributes setValue:[UIColor colorFromHexString:@"#757575"] forKey:NSForegroundColorAttributeName];
         [_segmentedControl setTitleTextAttributes:attributes];
+        
+        NSDictionary *selectionTitleAttr = [NSDictionary dictionaryWithObject:[UIColor colorFromHexString:@"#212121"]
+                                                                       forKey:NSForegroundColorAttributeName];
+        [_segmentedControl setSelectedTitleTextAttributes:selectionTitleAttr];
+        
         [_segmentedControl setBackgroundColor:[UIColor clearColor]];
-        [_segmentedControl setSelectionIndicatorColor:UIColorFromRGB(0x212121)];
+        [_segmentedControl setSelectionIndicatorColor:[UIColor colorFromHexString:@"#212121"]];
         [_segmentedControl setSelectionIndicatorHeight:2];
-        [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        [_segmentedControl setTag:2];
-
+//        [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+//        [_segmentedControl setTag:2];
+        __weak __typeof(&*self)weakSelf = self;
+        [_segmentedControl setIndexChangeBlock:^(NSInteger index) {
+            weakSelf.index = index;
+            
+            if (index == 1){
+                [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+                [weakSelf.thePageViewController setViewControllers:@[weakSelf.msgController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+            } else {
+                [weakSelf.thePageViewController setViewControllers:@[weakSelf.activeController] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+            }
+        }];
     }
     return _segmentedControl;
 }
@@ -112,11 +124,7 @@
     [super viewDidLoad];
     
     
-    //self.title = NSLocalizedStringFromTable(@"notify", kLocalizedFile, nil);
-    
     self.navigationItem.titleView = self.segmentedControl;
-
-    
     
     self.thePageViewController.view.deFrameSize = CGSizeMake(kScreenWidth, kScreenHeight);
 

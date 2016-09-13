@@ -41,6 +41,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
 }
 
 - (UIButton *)blockBtn

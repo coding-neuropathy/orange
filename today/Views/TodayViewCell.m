@@ -24,10 +24,10 @@
     
     if (self) {
         self.textLabel.textColor = UIColorFromRGB(0xffffff);
-        self.textLabel.font = [UIFont systemFontOfSize:19.];
+        self.textLabel.font = [UIFont boldSystemFontOfSize:19.];
         self.textLabel.numberOfLines = 1;
         
-        self.detailTextLabel.textColor = UIColorFromRGB(0x9c9c9c);
+        self.detailTextLabel.textColor = UIColorFromRGB(0xebebeb);
         self.detailTextLabel.font = [UIFont systemFontOfSize:14.];
         self.detailTextLabel.numberOfLines = 2;
     }

@@ -38,10 +38,7 @@
     self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
     ;
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
-    
-//    if (self.dataArray.count == 0) {
-//    
-//    }
+//    self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,6 +68,14 @@
 //        NSLog(@"%@", self.dataArray);
         completionHandler(NCUpdateResultNoData);
     }];
+}
+
+- (void)widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode withMaximumSize:(CGSize)maxSize {
+    if (activeDisplayMode == NCWidgetDisplayModeExpanded) {
+        self.preferredContentSize = CGSizeMake(0.0, self.tableView.rowHeight * 3.);
+    } else if (activeDisplayMode == NCWidgetDisplayModeCompact) {
+        self.preferredContentSize = maxSize;
+    }
 }
 
 
@@ -142,13 +147,10 @@
 
 - (void)save
 {
-//    [self.dataArray]
-    
     NSUserDefaults * shared = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.guoku.iphone"];
     [shared setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dataArray] forKey:@"TodayArray"];
     [shared synchronize];
-//    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dataArray] forKey:@"TodayArray"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
 
 

@@ -108,8 +108,7 @@
 #endif
 
 #ifndef k_isLogin
-#define k_isLogin [Passport sharedInstance].user && [Passport sharedInstance].session
-
+#define k_isLogin ([Passport sharedInstance].user && [Passport sharedInstance].session)
 #endif
 
 #ifndef iOS9
