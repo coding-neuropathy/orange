@@ -7,16 +7,18 @@
 //
 
 #import "AuthView.h"
-#import "RTLabel.h"
+//#import "RTLabel.h"
+#import <TTTAttributedLabel/TTTAttributedLabel.h>
 
-@interface AuthView () <RTLabelDelegate, UIScrollViewDelegate>
+@interface AuthView () <TTTAttributedLabelDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIButton * dismissBtn;
 @property (strong, nonatomic) UIScrollView * scrollView;
 @property (strong, nonatomic) UIPageControl * pageCtl;
 @property (strong, nonatomic) UIButton * signInBtn;
 @property (strong, nonatomic) UIButton * signUpBtn;
-@property (strong, nonatomic) RTLabel * agreementLabel;
+//@property (strong, nonatomic) RTLabel * agreementLabel;
+@property (strong, nonatomic) TTTAttributedLabel * agreementLabel;
 
 @end
 
@@ -127,17 +129,33 @@
     return _signUpBtn;
 }
 
-- (RTLabel *)agreementLabel
+- (TTTAttributedLabel *)agreementLabel
 {
     if (!_agreementLabel) {
-        _agreementLabel                 = [[RTLabel alloc] initWithFrame:CGRectZero];
-        _agreementLabel.deFrameSize     = CGSizeMake(230. * kScreeenScale, 20.);
-        _agreementLabel.font            = [UIFont fontWithName:@"PingFangSC-Medium" size:12.];
-        _agreementLabel.textColor       = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.54];
-        _agreementLabel.text            = @"使用果库，表示你已同意 <a href='http://www.guoku.com/agreement/'><u color='^5192ff'><font color='^5192ff'>使用协议</font></u></a>";
-        _agreementLabel.textAlignment   = kCTCenterTextAlignment;
-        _agreementLabel.delegate        = self;
-//        _agreementLabel
+        _agreementLabel                             = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+        _agreementLabel.enabledTextCheckingTypes    = NSTextCheckingTypeLink;
+        _agreementLabel.delegate                    = self;
+        _agreementLabel.deFrameSize                 = CGSizeMake(230. * kScreeenScale, 20.);
+        _agreementLabel.font                        = [UIFont fontWithName:@"PingFangSC-Medium" size:12.];
+        _agreementLabel.textColor                   = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.54];
+        _agreementLabel.textAlignment               = NSTextAlignmentCenter;
+
+        NSString *agreement_text = @"使用果库，表示你已同意 使用协议";
+        _agreementLabel.text = agreement_text;
+/**
+ *  custom link color  fixed 
+ *  http://stackoverflow.com/questions/28411834/link-tap-color-for-tttattributedlabel
+ */
+        NSDictionary *link_attr = @{
+                                   NSForegroundColorAttributeName: [UIColor colorFromHexString:@"#5192ff"],
+                                   NSUnderlineStyleAttributeName: @(YES),
+                                   };
+        _agreementLabel.linkAttributes = link_attr;
+        
+        NSRange range = [agreement_text rangeOfString:@"使用协议"];
+        
+        [_agreementLabel addLinkToURL:[NSURL URLWithString:@"http://www.guoku.com/agreement/"] withRange:range];
+        
         [self addSubview:_agreementLabel];
     }
     
@@ -255,11 +273,19 @@
     }
 }
 
-#pragma mark - <RTLabelDelegate>
-- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
+//#pragma mark - <RTLabelDelegate>
+//- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
+//{
+//    DDLogInfo(@"url %@", url.absoluteString);
+////    if (_de)
+//    if (_delegate && [_delegate respondsToSelector:@selector(gotoAgreementWithURL:)]) {
+//        [_delegate gotoAgreementWithURL:url];
+//    }
+//}
+#pragma mark - <TTTAttributedLabelDelegate>
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
     DDLogInfo(@"url %@", url.absoluteString);
-//    if (_de)
     if (_delegate && [_delegate respondsToSelector:@selector(gotoAgreementWithURL:)]) {
         [_delegate gotoAgreementWithURL:url];
     }

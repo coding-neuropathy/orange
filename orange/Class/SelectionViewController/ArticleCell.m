@@ -8,12 +8,11 @@
 
 #import "ArticleCell.h"
 
-@interface ArticleCell () <RTLabelDelegate>
+@interface ArticleCell ()
 
 @property (strong, nonatomic) UIImageView * coverImageView;
 @property (strong, nonatomic) UILabel * titleLabel;
 @property (strong, nonatomic) UILabel * detailLabel;
-//@property (strong, nonatomic) RTLabel * tagsLabel;
 @property (strong, nonatomic) UILabel * timeLabel;
 @property (strong, nonatomic) UIView * H;
 
@@ -177,12 +176,6 @@
     }
     
 } 
-
-#pragma mark - <RTLabelDelegate>
-- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
-{
-    [[OpenCenter sharedOpenCenter] openArticleTagWithName:url.absoluteString];
-}
 
 
 #pragma mark - class method

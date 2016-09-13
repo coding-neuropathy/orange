@@ -14,6 +14,7 @@ target 'orange' do
     pod 'FDFullscreenPopGesture', '1.1'
     pod 'FontAwesome'
     pod 'DZNEmptyDataSet'
+    pod 'TTTAttributedLabel'
 #    pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentifier.git'
 #    pod "GKFadeNavigationController", :git => 'https://github.com/gklka/GKFadeNavigationController.git'
     pod 'FLEX', '~> 2.0', :configurations => ['Debug'] #An in-app debugging and exploration tool for iOS
