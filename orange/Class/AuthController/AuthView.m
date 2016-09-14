@@ -7,7 +7,6 @@
 //
 
 #import "AuthView.h"
-//#import "RTLabel.h"
 #import <TTTAttributedLabel/TTTAttributedLabel.h>
 
 @interface AuthView () <TTTAttributedLabelDelegate, UIScrollViewDelegate>
@@ -273,15 +272,6 @@
     }
 }
 
-//#pragma mark - <RTLabelDelegate>
-//- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
-//{
-//    DDLogInfo(@"url %@", url.absoluteString);
-////    if (_de)
-//    if (_delegate && [_delegate respondsToSelector:@selector(gotoAgreementWithURL:)]) {
-//        [_delegate gotoAgreementWithURL:url];
-//    }
-//}
 #pragma mark - <TTTAttributedLabelDelegate>
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
