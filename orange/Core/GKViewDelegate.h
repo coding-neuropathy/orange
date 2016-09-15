@@ -27,6 +27,11 @@
  */
 - (void)TapLikeButtonWithEntity:(GKEntity *)entity Button:(UIButton *)button;
 
+/**
+ *
+ */
+- (void)TapBuyButtonActionWithEntity:(GKEntity *)entity;
+
 @end
 
 #endif /* GKViewDelegate_h */

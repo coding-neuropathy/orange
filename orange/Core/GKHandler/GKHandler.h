@@ -16,4 +16,6 @@ DEFINE_SINGLETON_FOR_HEADER(GKHandler);
 
 - (void)TapLikeButtonWithEntity:(GKEntity *)entity Button:(UIButton *)button;
 
+- (void)TapBuyButtonActionWithEntity:(GKEntity *)entity;
+
 @end

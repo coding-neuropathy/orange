@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "wechat.png"
+      "filename" : "more white.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "wechat@2x.png"
+      "filename" : "more white@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "wechat@3x.png"
+      "filename" : "more white@3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

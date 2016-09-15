@@ -344,24 +344,19 @@
     }
     
 }
-
-- (void)likeAction
-{
-    if (_delegate && [_delegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)]) {
-        [_delegate TapLikeButtonWithEntity:self.entity Button:self.likeButton];
-    }
-}
+//
+//- (void)likeAction
+//{
+//    if (_delegate && [_delegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)]) {
+//        [_delegate TapLikeButtonWithEntity:self.entity Button:self.likeButton];
+//    }
+//}
 
 #pragma mark - button action
 - (void)likeButtonAction
 {    
-    if(!k_isLogin)
-    {
-        [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
-            [self likeAction];
-        }];
-    } else {
-        [self likeAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)]) {
+        [_delegate TapLikeButtonWithEntity:self.entity Button:self.likeButton];
     }
 }
 

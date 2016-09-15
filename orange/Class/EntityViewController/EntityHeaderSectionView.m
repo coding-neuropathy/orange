@@ -44,9 +44,9 @@
 {
     if (!_textLabel) {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _textLabel.font = [UIFont systemFontOfSize:14.];
+        _textLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
         _textLabel.textAlignment = NSTextAlignmentLeft;
-        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textColor = UIColorFromRGB(0x212121);
         [self addSubview:_textLabel];
     }
     return _textLabel;

@@ -292,10 +292,6 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    if([self.navigationController.scrollNavigationBar respondsToSelector:@selector(setScrollView:)])
-//    {
-//        self.navigationController.scrollNavigationBar.scrollView = nil;
-//    }
     
     [self.navigationController.navigationBar setTranslucent:NO];
     self.collectionView.scrollsToTop = YES;
@@ -308,7 +304,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     [super viewWillDisappear:animated];
     
     self.collectionView.scrollsToTop = NO;
-    
+    self.navigationController.navigationBar.translucent = YES;
     [MobClick endLogPageView:@"DiscoverView"];
 }
 

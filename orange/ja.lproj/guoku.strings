@@ -8,7 +8,7 @@
 
 
 "guoku" = "果庫";
-"guide to better living"    = "精英消费者指南";
+"guide to better living"    = "エリート消費ガイド";
 
 /**
  *  launch
@@ -25,97 +25,97 @@
 /*
  * Base Infomation
  */
-"you"       = "你";
+"you"       = "あなた";
 
 "cancel"    = "キャンセル";
 "confirm"   = "確認";
 
-"selected"  = "精选";
-"discover"  = "发现";
+"selected"  = "ベスト　チョイス";
+"discover"  = "発見";
 "notify"    = "通知";
-"settings"  = "设置";
-"me"        = "我";
+"settings"  = "設置";
+"me"        = "私";
 
-"like"      = "喜爱";
-"note"      = "点评";
-"tags"      = "标签";
+"like"      = "好き";
+"note"      = "コメントする";
+"tags"      = "タグ";
 
-"popular"   = "热门商品";
-"category"  = "推荐品类";
+"popular"   = "人気商品";
+"category"  = "オススメアイテム";
 
-"activity"  = "动态";
-"message"   = "消息";
+"activity"  = "新着情報";
+"message"   = "メッセージ";
 
 /**
  *  share
  */
-"share to weibo"    = "分享到微博";
-"share to wechat"   = "分享到微信";
-"share to moment"   = "分享到朋友圈";
-"open in safari"    = "在 Safari 中打开";
-"share-success"     = "分享成功";
+"share to weibo"    = "ブログへシェア";
+"share to wechat"   = "WECHATへシェア";
+"share to moment"   = "シェア";
+"open in safari"    = "SAFARIより開く";
+"share-success"     = "シェア済";
 
-"more"              = "更多";
+"more"              = "その他";
 
 /*
  * Selection Page
  */
-"selection-nav-recommend" = "推荐";
+"selection-nav-recommend" = "オススメ";
 "selection-nav-entity" = "商品";
-"selection-nav-article" = "图文";
+"selection-nav-article" = "写真";
 
 
 /*
  * Discover Page
  */
-"search"                    = "搜索商品，图文";
+"search"                    = "検索写真、文章";
 "entities"                  = "商品";
-"recommendation category"   = "推荐品类";
-"popular articles"          = "热门图文";
-"recommendation user"       = "推荐用户";
+"recommendation category"   = "オススメ";
+"popular articles"          = "人気写真";
+"recommendation user"       = "オススメ　ユーザ";
 
 /*
  * Search Page
  */
-"history-search"                = "最近搜索";
-"popular-search"                = "热门搜索";
-"users"                         = "用户";
+"history-search"                = "最近検索";
+"popular-search"                = "ホット検索";
+"users"                         = "ユーザー";
 "entitie"                       = "商品";
-"articles"                      = "图文";
-"category"                      = "品类";
-"click to view all results"     = "查看全部结果";
-"no-results"                    = "无相关搜索结果";
+"articles"                      = "写真";
+"category"                      = "アイテム";
+"click to view all results"     = "全ての結果を見る";
+"no-results"                    = "当該する検索結果がありません";
 /*
  * entity page
  */
-"from"              = "来自";
-"recommendation"    = "相似推荐";
+"from"              = "から";
+"recommendation"    = "類似オススメ";
 "item"              = "商品";
-"post note"         = "写点评";
-"update note"       = "修改点评";
-"comment"           = "评论";
-"buy"               = "购买";
-//"sold out"          = "已下架";
+"post note"         = "コメントを書く";
+"update note"       = "コメントを修正する";
+"comment"           = "コメント";
+"buy"               = "購入";
+//"sold out"          = "販売終了";
 
 /*
  * article page
  */
 "article"            = "图文";
-"poke"               = "赞";
-"comment"            = "评论";
-"load"               = "正在加载...";
+"poke"               = "いいね";
+"comment"            = "コメント";
+"load"               = "ダンロード中";
 /*
  *  activity page
  */
-//"commented on a product"    = "点评了 1 件商品";
+//"commented on a product"    = "コメントした商品";
 
-"started following" = "开始关注";
-"liked 1 item" = "喜爱了1件商品";
-"bumped 1 item" = "赞了1篇图文";
-"noted 1 item:" = "点评了1件商品：";
-"commented" = "评论了";
-"'s note:" = "的点评";
-"bumped" = "赞了";
+"started following" = "フォロー開始";
+"liked 1 item" = "お気に入りリストに追加しました";
+"bumped 1 item" = "いいねと押すのは一つ";
+"noted 1 item:" = "コメントした商品";
+"commented" = "コメント済み";
+"'s note:" = "のコメント";
+"bumped" = "いいねしました";
 
 /*
  * message page
@@ -130,54 +130,54 @@
 "liked a product"                                                       = "喜爱了 1 件商品";
 */
 
-"started following you" = "关注了你";
-"commented your note" = "评论了你撰写的点评";
-"bumped your note" = "赞了你撰写的点评";
-"bumped your article" = "赞了你撰写的图文";
-"noted 1 item your added" = "点评了你添加的商品";
-"liked 1 item your added" = "喜爱了你添加的商品";
-"reply to your comment:" = "回复了你的评论：";
-"The item you added have been selected" = "你添加的商品被收录精选";
+"started following you" = "あなたをフォローする";
+"commented your note" = "あなたのコメントに返信しました";
+"bumped your note" = "あなたのコメントをいいねしました";
+"bumped your article" = "あなたの写真をいいねしました";
+"noted 1 item your added" = "追加商品にコメントしました";
+"liked 1 item your added" = "追加商品にいいねしました";
+"reply to your comment:" = "あなたのコメントへの返信しました";
+"The item you added have been selected" = "あなたの追加した商品が人気商品になりました";
 
 
 /*
   form page
  */
-"email"     = "邮箱";
-"password"  = "密码";
+"email"     = "メール";
+"password"  = "パスワード";
 
 /**
  *  personal page
  */
-"following"         = "关注";
-"followers"         = "粉丝";
+"following"         = "フォロー";
+"followers"         = "フォロワー";
 
-"follow"            = "关注";
-"follow-success"    = "关注成功";
-"unfollow"          = "取消关注";
-"unfollow-failure"  = "取消关注失败";
+"follow"            = "フォロー";
+"follow-success"    = "フォロー済";
+"unfollow"          = "フォロー取消";
+"unfollow-failure"  = "フォロー取消が失敗しました";
 
 /*
  personal settings
  */
-"edit your profile" = "编辑个人资料";
-"profile Photo" = "头像";
-"nickname"  = "昵称";
-"gender"    = "性别";
-"bio"       = "简介";
-"location"  = "所在地";
+"edit your profile" = "個人情報編集";
+"profile Photo"     = "アイコン";
+"nickname"          = "ニックネーム";
+"gender"            = "性别";
+"bio"               = "紹介";
+"location"          = "所在地";
 
-"me like" = "我的喜爱";
-"me note" = "我的点评";
-"me article" = "我的图文";
-"me tag" = "我参与过的标签";
-"me poke" = "我赞过的图文";
+"me like"           = "私のお気に入り";
+"me note"           = "私のコメント";
+"me article"        = "私の写真";
+"me tag"            = "私が参加したタグ";
+"me poke"           = "私がいいねした写真";
 
-"user like" = "TA 的喜爱";
-"user note" = "TA 的点评";
-"user article" = "TA 的图文";
-"user tag" = "TA 参与过的标签";
-"user poke" = "TA 赞过的图文";
+"user like" = "お客さんのお気に入り";
+"user note" = "お客さんのコメント";
+"user article" = "お客さんの写真";
+"user tag" = "お客さんが参加したタグ";
+"user poke" = "お客さんがいいねした写真";
 
 
 /*
@@ -186,113 +186,113 @@
 "weibo"     = "微博";
 "taobao"    = "淘宝";
 "wechat"    = "微信";
-"share application to wechat" = "微信分享";
-"share application to weibo" = "分享应用到微博";
-"app store review" = "App Store 评分";
-"about"     = "关于我们";
-"agreement" = "用户协议";
-"clear image cache" = "清除图片缓存";
-"feedback"  = "意见反馈";
-"version"   = "版本";
+"share application to wechat" = "WeChatシェア";
+"share application to weibo" = "WeiBoシェア";
+"app store review" = "App Store レビュー";
+"about"     = "私達について";
+"agreement" = "ユーザーポリシー";
+"clear image cache" = "画像一時保存削除";
+"feedback"  = "フィードバック";
+"version"   = "バージョン";
 
-"sign in"   = "登录";
-"sign up"   = "注册";
-"sign out"  = "退出登录";
+"sign in"   = "サインイン";
+"sign up"   = "新規登録";
+"sign out"  = "ログアウト";
 
 /*
  *  account page
  */
-"mail"                  = "邮箱";
-"forget-password"       = "忘记密码";
-"found-password"        = "找回密码";
-"what's-your-email"     = "电邮 (example@guoku.com)";
-"what's-your-passowrd"  = "密码";
-"you-want-sign-out"     = "退出登录?";
-"signout-success"       = "登出成功";
+"mail"                  = "メール";
+"forget-password"       = "パスワードを忘れた";
+"found-password"        = "パスワードを取り戻す";
+"what's-your-email"     = "メール (example@guoku.com)";
+"what's-your-passowrd"  = "パスワード";
+"you-want-sign-out"     = "ログアウトしますか？";
+"signout-success"       = "ログアウトしました";
 
 /**
  *  seller
  */
-"create-order"          = "创建订单";
-"review-order"          = "查看订单";
+"create-order"          = "オーダー作成";
+"review-order"          = "オーダー確認";
 
 /**
  *  verify  mail page
  */
-"verify mail"                       = "验证邮箱";
-"reset password"                    = "重设密码";
-"verified"                          = "已验证";
-"send mail for verify"              = "发送验证邮件";
-"update email"                      = "修改邮箱";
-"Sent to the current email"         = "发送至当前邮箱";
+"verify mail"                       = "メールボックス認証";
+"reset password"                    = "パスワードリセット";
+"verified"                          = "認証しました";
+"send mail for verify"              = "認証メールを送信する";
+"update email"                      = "メールアドレスを修正する";
+"Sent to the current email"         = "現在のメールアドレスに送信する";
 /*
  * datetime
  */
-"seconds"    = "秒前";
-"hours"      = "小时前";
-"minutes"    = "分钟前";
-"days"       = "天前";
-"weeks"      = "周前";
+"seconds"    = "秒";
+"hours"      = "時間";
+"minutes"    = "分";
+"days"       = "天";
+"weeks"      = "週間";
 
 
 /*
  *  category
  */
-"all"           = "所有";
-"women's"       = "女装";
-"men's"         = "男装";
-"kids"          = "孩童";
-"accessories"   = "配饰";
-"beauty"        = "美容";
-"tech"          = "科技";
-"living"        = "居家";
-"outdoors"      = "户外";
+"all"           = "すべて";
+"women's"       = "レディスファッション";
+"men's"         = "メンズファッション";
+"kids"          = "子供";
+"accessories"   = "アクセサリー";
+"beauty"        = "エステ";
+"tech"          = "技術";
+"living"        = "アットホーム";
+"outdoors"      = "アウトドア";
 "culture"       = "文化";
-"food"          = "美食";
-"fun"           = "玩乐";
+"food"          = "グルメ";
+"fun"           = "娯楽";
 "health"        = "健康";
 
-"items"         = "件商品";
+"items"         = "点商品";
 
 /*
  * error info
  */
-"like failure"          = "喜爱失败";
-"load failure"          = "加载失败";
-"password error"        = "密码错误";
-"duplicate email"       = "邮箱被占用";
+"like failure"          = "ライク失敗";
+"load failure"          = "ロード失敗";
+"password error"        = "パスワードが正しくありません";
+"duplicate email"       = "メールが重複してます";
 
 /*
  * tip off information
  */
-"tip off"                   = "举报";
-"sold out"                  = "已下架";
-"miss category"             = "分类错误";
-"meaningless information"   = "垃圾或诈骗信息";
-"malicious information"     = "不良信息";
+"tip off"                   = "摘発";
+"sold out"                  = "販売終了";
+"miss category"             = "分類失敗";
+"meaningless information"   = "迷惑情報";
+"malicious information"     = "有害情報";
 
 /**
  *  order
  */
-"order"                     = "订单";
-"pending"                   = "待付款";
-"finished"                  = "交易完成";
-"scanner"                   = "扫描二维码";
+"order"                     = "オーダー";
+"pending"                   = "支払い待ち";
+"finished"                  = "支払い完";
+"scanner"                   = "QRコードスキャン";
 
 "item-sku"                  = "商品属性";
-"continue-add"              = "继续添加";
-"add-cart"                  = "加入购物袋";
-"submit-order"              = "提交订单";
-"shopping-cart"             = "购物袋";
-"order-detail"              = "订单详情";
-"no-order"                  = "暂无相关订单";
+"continue-add"              = "買い物続きます";
+"add-cart"                  = "カートに追加する";
+"submit-order"              = "オーダー提出";
+"shopping-cart"             = "カート";
+"order-detail"              = "オーダー内容";
+"no-order"                  = "オーダーがありません";
 
-"order-number"              = "订单号:";
-"order-status"              = "订单状态:";
-"payment"                   = "去收款";
-"wait-for-payment"          = "待付款";
-"paid"                      = "交易完成";
+"order-number"              = "オーダーNO";
+"order-status"              = "オーダー状態";
+"payment"                   = "レジへ";
+"wait-for-payment"          = "支払い待ち";
+"paid"                      = "支払い完了";
 
 "alipay"                    = "支付宝";
 "wechat-pay"                = "微信";
-"credit-pay"                = "收银台";
+"credit-pay"                = "クレジットカード支払い";

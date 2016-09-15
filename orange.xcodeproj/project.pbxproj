@@ -157,6 +157,8 @@
 		8A1B63361D5B255E009CF222 /* SignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B63351D5B255E009CF222 /* SignUpView.m */; };
 		8A242AFE1D7D0B3500A15669 /* CheckoutOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A242AFD1D7D0B3500A15669 /* CheckoutOrderController.m */; };
 		8A242B011D7D18C200A15669 /* CheckoutFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A242B001D7D18C200A15669 /* CheckoutFooterView.m */; };
+		8A293A6F1D8A705C000B7227 /* EntityHeaderSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A293A6E1D8A705C000B7227 /* EntityHeaderSectionView.m */; };
+		8A293A721D8ABA4F000B7227 /* EntityNoteFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A293A711D8ABA4F000B7227 /* EntityNoteFooterView.m */; };
 		8A3249381D5A57CA00354602 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A3249371D5A57CA00354602 /* beep.mp3 */; };
 		8A3911D71D598A680029E529 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3911D61D598A680029E529 /* libzbar.a */; };
 		8A3CBBA81C7D870E0002AAE8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */; };
@@ -324,7 +326,6 @@
 		B7ED32B21B257EFF009BAF5A /* EntityNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32B11B257EFF009BAF5A /* EntityNoteCell.m */; };
 		B7ED32B51B257F5B009BAF5A /* EntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32B41B257F5B009BAF5A /* EntityCell.m */; };
 		B7ED32B81B25C662009BAF5A /* OpenCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32B71B25C662009BAF5A /* OpenCenter.m */; };
-		B7ED32BB1B25C8D8009BAF5A /* EntityHeaderSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7ED32BA1B25C8D8009BAF5A /* EntityHeaderSectionView.m */; };
 		B7F5AA011B08C75A0033BB2D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F5AA001B08C75A0033BB2D /* WebViewController.m */; };
 		B7F5AA0B1B08D3320033BB2D /* WebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F5AA0A1B08D3320033BB2D /* WebViewProgressView.m */; };
 		B7F9EB101B28894B00887582 /* EntityLikerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9EB0F1B28894B00887582 /* EntityLikerController.m */; };
@@ -587,6 +588,7 @@
 		8A0838541D7A8AD6006057F3 /* ArticlePreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticlePreView.m; path = PreViewControllers/ArticlePreView.m; sourceTree = "<group>"; };
 		8A0B16E01BABFDED00469DD6 /* ArticleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListCell.h; sourceTree = "<group>"; };
 		8A0B16E11BABFDED00469DD6 /* ArticleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListCell.m; sourceTree = "<group>"; };
+		8A18ED651D8926760007F2BD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/guoku.strings; sourceTree = "<group>"; };
 		8A1905201D54378B00B72A79 /* AuthUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthUserHeaderView.h; sourceTree = "<group>"; };
 		8A1905211D54378B00B72A79 /* AuthUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthUserHeaderView.m; sourceTree = "<group>"; };
 		8A1905401D5471EA00B72A79 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -602,6 +604,11 @@
 		8A242AFD1D7D0B3500A15669 /* CheckoutOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckoutOrderController.m; path = OrderViewController/CheckoutOrderController/CheckoutOrderController.m; sourceTree = "<group>"; };
 		8A242AFF1D7D18C200A15669 /* CheckoutFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckoutFooterView.h; path = OrderViewController/CheckoutOrderController/CheckoutFooterView.h; sourceTree = "<group>"; };
 		8A242B001D7D18C200A15669 /* CheckoutFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckoutFooterView.m; path = OrderViewController/CheckoutOrderController/CheckoutFooterView.m; sourceTree = "<group>"; };
+		8A293A6C1D8A4ABA000B7227 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8A293A6D1D8A705C000B7227 /* EntityHeaderSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHeaderSectionView.h; sourceTree = "<group>"; };
+		8A293A6E1D8A705C000B7227 /* EntityHeaderSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderSectionView.m; sourceTree = "<group>"; };
+		8A293A701D8ABA4F000B7227 /* EntityNoteFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityNoteFooterView.h; sourceTree = "<group>"; };
+		8A293A711D8ABA4F000B7227 /* EntityNoteFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityNoteFooterView.m; sourceTree = "<group>"; };
 		8A3249371D5A57CA00354602 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		8A3911D61D598A680029E529 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -771,7 +778,6 @@
 		8AF7C7591D74025400C71499 /* CartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CartCell.m; path = QRCodeViewController/CartController/CartCell.m; sourceTree = "<group>"; };
 		8AF7C75C1D7409D500C71499 /* ShoppingCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoppingCart.h; path = ShoppingCart/ShoppingCart.h; sourceTree = "<group>"; };
 		8AF7C75D1D7409D500C71499 /* ShoppingCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoppingCart.m; path = ShoppingCart/ShoppingCart.m; sourceTree = "<group>"; };
-		8AF8AD541D87AA86000EAFF5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/guoku.strings; sourceTree = "<group>"; };
 		8AFB2C111D7BD5EC009A0C7F /* GKOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKOrder.h; path = Order/GKOrder.h; sourceTree = "<group>"; };
 		8AFB2C121D7BD5EC009A0C7F /* GKOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKOrder.m; path = Order/GKOrder.m; sourceTree = "<group>"; };
 		8AFB2C151D7BDCAD009A0C7F /* GKOrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKOrderItem.h; path = Order/GKOrderItem.h; sourceTree = "<group>"; };
@@ -924,8 +930,6 @@
 		B7ED32B41B257F5B009BAF5A /* EntityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityCell.m; sourceTree = "<group>"; };
 		B7ED32B61B25C662009BAF5A /* OpenCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenCenter.h; path = OpenCenter/OpenCenter.h; sourceTree = "<group>"; };
 		B7ED32B71B25C662009BAF5A /* OpenCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenCenter.m; path = OpenCenter/OpenCenter.m; sourceTree = "<group>"; };
-		B7ED32B91B25C8D8009BAF5A /* EntityHeaderSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHeaderSectionView.h; sourceTree = "<group>"; };
-		B7ED32BA1B25C8D8009BAF5A /* EntityHeaderSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderSectionView.m; sourceTree = "<group>"; };
 		B7F5A9FF1B08C75A0033BB2D /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		B7F5AA001B08C75A0033BB2D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		B7F5AA091B08D3320033BB2D /* WebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewProgressView.h; sourceTree = "<group>"; };
@@ -1708,6 +1712,8 @@
 			isa = PBXGroup;
 			children = (
 				23F1DD971C28046100A71827 /* PNoteViewController */,
+				8A293A6D1D8A705C000B7227 /* EntityHeaderSectionView.h */,
+				8A293A6E1D8A705C000B7227 /* EntityHeaderSectionView.m */,
 				4E7869671BA70C5A00586BD9 /* EntityHeaderBuyView.h */,
 				4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */,
 				B7DA97B91B25E46200C9BC25 /* EntityHeaderView.h */,
@@ -1716,8 +1722,6 @@
 				4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */,
 				B7ED32B01B257EFF009BAF5A /* EntityNoteCell.h */,
 				B7ED32B11B257EFF009BAF5A /* EntityNoteCell.m */,
-				B7ED32B91B25C8D8009BAF5A /* EntityHeaderSectionView.h */,
-				B7ED32BA1B25C8D8009BAF5A /* EntityHeaderSectionView.m */,
 				B7DA97BF1B270BE900C9BC25 /* EntityLikeUserCell.h */,
 				B7DA97C01B270BE900C9BC25 /* EntityLikeUserCell.m */,
 				B7F9EB0E1B28894B00887582 /* EntityLikerController.h */,
@@ -1728,6 +1732,8 @@
 				B7E668741B77A62100E177E5 /* EntityStickyHeaderFlowLayout.m */,
 				B77E00A71B8988DC008BCA55 /* EntityPopView.h */,
 				B77E00A81B8988DC008BCA55 /* EntityPopView.m */,
+				8A293A701D8ABA4F000B7227 /* EntityNoteFooterView.h */,
+				8A293A711D8ABA4F000B7227 /* EntityNoteFooterView.m */,
 			);
 			path = EntityViewController;
 			sourceTree = "<group>";
@@ -2485,6 +2491,7 @@
 					4E56DF1419D552C000263B17 = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = BKXKS4HPNG;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2497,6 +2504,7 @@
 					B7BFC8FB1ACC27C1009627CA = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = BKXKS4HPNG;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2764,7 +2772,6 @@
 				B7E668721B779DE900E177E5 /* EntityHeaderActionView.m in Sources */,
 				B7180EA41B9D380A004AD9AD /* HomeController.m in Sources */,
 				394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */,
-				B7ED32BB1B25C8D8009BAF5A /* EntityHeaderSectionView.m in Sources */,
 				B783F6621B9AEC46004DF1CB /* ArticlesController.m in Sources */,
 				B76C69D31BBB981E00BD22E5 /* TagArticlesController.m in Sources */,
 				B70686AE1CF42A9500C40825 /* MainController.m in Sources */,
@@ -2888,6 +2895,7 @@
 				8AFB3B801D78607100E1D04A /* OrderCell.m in Sources */,
 				4E2D6D421A69601F009E4A17 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */,
+				8A293A6F1D8A705C000B7227 /* EntityHeaderSectionView.m in Sources */,
 				B783F6651B9AF26C004DF1CB /* ArticleCell.m in Sources */,
 				23F612FA1CDAEF120074E8C8 /* NicknameViewController.m in Sources */,
 				8AAA2D141C04444800B27E49 /* EntityPreViewController.m in Sources */,
@@ -2896,6 +2904,7 @@
 				B70686A51CF422F100C40825 /* MenuController.m in Sources */,
 				4E2D6D431A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				4EF508811B49042000C92618 /* ShareView.m in Sources */,
+				8A293A721D8ABA4F000B7227 /* EntityNoteFooterView.m in Sources */,
 				4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */,
 				B7BE3E2D1BA9A17A004AD422 /* CategroyGroupController.m in Sources */,
 				4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */,
@@ -2976,7 +2985,7 @@
 				B71E494E1AC9208100D4DB6D /* zh-Hans */,
 				B71E494F1AC920BA00D4DB6D /* en */,
 				B71E495C1AC92AD600D4DB6D /* zh-Hant */,
-				8AF8AD541D87AA86000EAFF5 /* ja */,
+				8A18ED651D8926760007F2BD /* ja */,
 			);
 			name = guoku.strings;
 			sourceTree = "<group>";
@@ -2987,6 +2996,7 @@
 				B71E49531AC923FB00D4DB6D /* en */,
 				B71E49551AC923FE00D4DB6D /* zh-Hans */,
 				B71E49561AC9240000D4DB6D /* zh-Hant */,
+				8A293A6C1D8A4ABA000B7227 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -3010,9 +3020,10 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = BKXKS4HPNG;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3042,7 +3053,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -3167,6 +3178,7 @@
 				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3196,6 +3208,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3211,7 +3224,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3243,6 +3257,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -3253,7 +3268,7 @@
 				CODE_SIGN_ENTITLEMENTS = today/today.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = today/config.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3266,6 +3281,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.guoku.iphone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3276,9 +3292,9 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = today/today.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREFIX_HEADER = today/config.pch;
@@ -3288,6 +3304,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.guoku.iphone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) GKEntity *entity;
 @property (weak, nonatomic) id<EntityHeaderViewDelegate> delegate;
+@property (weak, nonatomic) id<GKViewDelegate> actionDelegate;
 
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity;
+
 @end

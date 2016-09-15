@@ -157,7 +157,7 @@
 {
     [API incrShoppingCartItemWithSKUId:self.cartItem.sku.skuId Success:^(NSInteger volume) {
         self.cartItem.volume    = volume;
-        self.volumeLabel.text   = [NSString stringWithFormat:@"%ld", volume];
+        self.volumeLabel.text   = [NSString stringWithFormat:@"%ld", (long)volume];
         if (self.updateOrderPrice) {
             self.updateOrderPrice();
         }
@@ -170,7 +170,7 @@
 {
     [API descShoppingCartItemWithSKUId:self.cartItem.sku.skuId Success:^(NSInteger volume) {
         self.cartItem.volume    = volume;
-        self.volumeLabel.text   = [NSString stringWithFormat:@"%ld", volume];
+        self.volumeLabel.text   = [NSString stringWithFormat:@"%ld", (long)volume];
         if (self.updateOrderPrice) {
             self.updateOrderPrice();
         }

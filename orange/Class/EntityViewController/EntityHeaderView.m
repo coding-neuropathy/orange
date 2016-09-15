@@ -12,11 +12,15 @@
 
 @interface EntityHeaderView () <iCarouselDelegate, iCarouselDataSource>
 
-@property (strong, nonatomic) UILabel * titleLabel;
-//@property (strong, nonatomic) UIScrollView * scrollView;
-@property (strong, nonatomic) UIPageControl * pageCtr;
-@property (strong, nonatomic) iCarousel * imagesView;
-@property (strong, nonatomic) NSMutableArray * imageURLArray;
+@property (strong, nonatomic) UILabel           *brandLabel;
+@property (strong, nonatomic) UILabel           *titleLabel;
+@property (strong, nonatomic) UIButton          *buyBtn;
+@property (strong, nonatomic) UIButton          *likeBtn;
+@property (strong, nonatomic) UIPageControl     *pageCtr;
+@property (strong, nonatomic) iCarousel         *imagesView;
+
+
+@property (strong, nonatomic) NSMutableArray    *imageURLArray;
 @property (assign, nonatomic) BOOL warp;
 
 @end
@@ -37,32 +41,72 @@ static CGFloat kEntityViewMarginLeft = 16.;
     return self;
 }
 
+- (UILabel *)brandLabel
+{
+    if (!_brandLabel) {
+        _brandLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
+        _brandLabel.deFrameSize     = CGSizeMake(kScreenWidth - 32., 22.);
+        _brandLabel.numberOfLines   = 1;
+        _brandLabel.font            = [UIFont fontWithName:@"PingFangSC-Semibold" size:17.];
+        _brandLabel.textAlignment   = NSTextAlignmentCenter;
+        _brandLabel.textColor       = [UIColor colorFromHexString:@"#212121"];
+        [self addSubview:_brandLabel];
+    }
+    return _brandLabel;
+}
+
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.numberOfLines = 2;
-        _titleLabel.font = [UIFont systemFontOfSize:16.f];
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.textColor = UIColorFromRGB(0x414243);
+        _titleLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
+        _titleLabel.deFrameSize     = CGSizeMake(kScreenWidth - 32., 22.);
+        _titleLabel.numberOfLines   = 2;
+        _titleLabel.font            = [UIFont systemFontOfSize:17.f];
+        _titleLabel.textAlignment   = NSTextAlignmentCenter;
+        _titleLabel.textColor       = [UIColor colorFromHexString:@"#212121"];
         [self addSubview:_titleLabel];
     }
     return _titleLabel;
 }
 
-//- (UIScrollView *)scrollView
-//{
-//    if (!_scrollView) {
-//        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
-//        _scrollView.scrollsToTop = NO;
-//        _scrollView.pagingEnabled = YES;
-//        _scrollView.showsHorizontalScrollIndicator = NO;
-//        _scrollView.delegate = self;
-//        [self addSubview:_scrollView];
-//
-//    }
-//    return _scrollView;
-//}
+- (UIButton *)buyBtn
+{
+    if (!_buyBtn) {
+        _buyBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
+        _buyBtn.deFrameSize         = CGSizeMake(200., 50.);
+        _buyBtn.layer.cornerRadius  = _buyBtn.deFrameHeight / 2.;
+        _buyBtn.layer.masksToBounds = YES;
+        
+        _buyBtn.titleLabel.font     = [UIFont fontWithName:@"PingFangSC-Semibold" size:17.];
+        [_buyBtn setTitleColor:[UIColor colorFromHexString:@"#ffffff"] forState:UIControlStateNormal];
+        [_buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#6192ff"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
+        [_buyBtn addTarget:self action:@selector(buyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_buyBtn];
+    }
+    return _buyBtn;
+}
+
+- (UIButton *)likeBtn
+{
+    if (!_likeBtn) {
+        _likeBtn                        = [[UIButton alloc] initWithFrame:CGRectZero];
+        _likeBtn.deFrameSize            = CGSizeMake(50., 50.);
+        _likeBtn.layer.cornerRadius     = _likeBtn.deFrameHeight / 2.;
+        _likeBtn.layer.masksToBounds    = YES;
+        _likeBtn.layer.borderWidth      = 1.;
+        _likeBtn.layer.borderColor      = [UIColor colorFromHexString:@"#e6e6e6"].CGColor;
+        
+        [_likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        [_likeBtn setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
+        
+        [_likeBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f8f8f8"] andSize:_likeBtn.deFrameSize] forState:UIControlStateNormal];
+        [_likeBtn addTarget:self action:@selector(likeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_likeBtn];
+    }
+    return _likeBtn;
+}
 
 - (iCarousel *)imagesView
 {
@@ -94,6 +138,8 @@ static CGFloat kEntityViewMarginLeft = 16.;
     return _pageCtr;
 }
 
+//- ()
+
 //- (void)dealloc
 //{
 //    self.imagesView.delegate = nil;
@@ -103,68 +149,60 @@ static CGFloat kEntityViewMarginLeft = 16.;
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
-//    NSLog(@"images %@", _entity.imageURLArray);
+
+//    self.titleLabel.text = IS_IPAD ? _entity.entityName : _entity.title;
     
-//    if (IS_IPHONE) {
-//        if((![_entity.brand isEqual:[NSNull null]])&&(![_entity.brand isEqualToString:@""])&&(_entity.brand))
-//        {
-//            self.titleLabel.text = [NSString stringWithFormat:@"%@ - %@", _entity.brand, _entity.title];
-//        }
-//        else if((![_entity.title isEqual:[NSNull null]])&&(_entity.title))
-//        {
-//            self.titleLabel.text = _entity.title;
-//        }
-    
+    if (IS_IPAD) {
+        self.titleLabel.text    = _entity.entityName;
+    } else {
+        self.brandLabel.text    = _entity.brand;
+        self.titleLabel.text    = _entity.title;
         
-//        self.scrollView.contentSize = CGSizeMake((kScreenWidth - 32) * ([_entity.imageURLArray count] + 1), kScreenWidth - 32);
-//        
-//        NSMutableArray * imageArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
-//        
-//        if (_entity.imageURL)
-//            [imageArray insertObject:_entity.imageURL atIndex:0];
-//        
-//        //    NSLog(@"images %@", imageArray);
-//        [imageArray enumerateObjectsUsingBlock:^(NSURL *imageURL, NSUInteger idx, BOOL *stop) {
-//            UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0. + (kScreenWidth - 32) * idx, 0., kScreenWidth - 32, kScreenWidth - 32)];
-//            imageView.contentMode = UIViewContentModeScaleAspectFit;
-//            imageView.tag = idx;
-//            imageView.userInteractionEnabled = YES;
-//            
-//            NSURL * imageURL_640;
-//            if ([imageURL.absoluteString hasPrefix:@"http://imgcdn.guoku.com/"]) {
-//                imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString imageURLWithSize:640]];
-//            } else {
-//                imageURL_640 = [NSURL URLWithString:[imageURL.absoluteString stringByAppendingString:@"_640x640.jpg"]];
-//            }
-//            
-//            [imageView sd_setImageWithURL:imageURL_640 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(kScreenWidth -32, kScreenWidth -32)] options:SDWebImageRetryFailed  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL*imageURL) {}];
-//            
-//            //        }
-//            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-//            
-//            [imageView addGestureRecognizer:tap];
-//            [self.scrollView addSubview:imageView];
-//        }];
-//    }
-//    else
-//    {
-        self.titleLabel.text = _entity.entityName;
-        
-        self.imageURLArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
-        if (_entity.imageURL)
-            [self.imageURLArray insertObject:_entity.imageURL atIndex:0];
-        
-        if (self.imageURLArray.count > 1) {
-            
-            self.imagesView.scrollEnabled = YES;
-        } else {
-            self.imagesView.scrollEnabled = NO;
+        if (_entity.isLiked) {
+            self.likeBtn.selected = YES;
         }
         
-        [self.imagesView reloadData];
-//    }
-    
-    
+        if (_entity.purchaseArray.count > 0) {
+            GKPurchase * purchase = self.entity.purchaseArray[0];
+            switch (purchase.status) {
+                case GKBuyREMOVE:
+                {
+                    [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                    [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
+                    [self.buyBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+                    self.buyBtn.backgroundColor = [UIColor clearColor];
+                    self.buyBtn.enabled = NO;
+                }
+                    break;
+                case GKBuySOLDOUT:
+                {
+                    self.buyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                    [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                    [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
+                }
+                    break;
+                default:
+                {
+                    [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                    [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f 去购买", self.entity.lowestPrice] forState:UIControlStateNormal];
+                }
+                    break;
+            }
+        }
+    }
+        
+    self.imageURLArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
+    if (_entity.imageURL)
+        [self.imageURLArray insertObject:_entity.imageURL atIndex:0];
+        
+    if (self.imageURLArray.count > 1) {
+        self.imagesView.scrollEnabled = YES;
+    } else {
+        self.imagesView.scrollEnabled = NO;
+    }
+        
+    [self.imagesView reloadData];
+
     [self setNeedsLayout];
 }
 
@@ -173,16 +211,27 @@ static CGFloat kEntityViewMarginLeft = 16.;
     [super layoutSubviews];
     DDLogInfo(@"header view width %f", self.deFrameWidth);
     if (IS_IPHONE) {
-        CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:self.titleLabel.font LineHeight:7];
+        CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - 32 Font:self.titleLabel.font LineHeight:5];
         
-//        self.scrollView.frame = CGRectMake(0., 0., kScreenWidth - 32., kScreenWidth - 32.);
-//        self.scrollView.deFrameLeft = 16.;
-//        self.scrollView.deFrameTop =  16.;
-        self.imagesView.deFrameSize     = CGSizeMake(kScreenWidth - 32., kScreenWidth - 32.);
-        self.imagesView.deFrameLeft     = 16.;
-        self.imagesView.deFrameTop      = 16.;
-//        self.titleLabel.frame           = CGRectMake(kEntityViewMarginLeft, 16. + self.scrollView.deFrameBottom, kScreenWidth - kEntityViewMarginLeft * 2., titleHeight);
-        self.titleLabel.frame           = CGRectMake(16., 16. + self.imagesView.deFrameBottom, self.imagesView.deFrameWidth, titleHeight);
+
+        self.imagesView.deFrameSize     = CGSizeMake(kScreenWidth, kScreenWidth);
+        
+        self.brandLabel.deFrameTop      = 24. + self.imagesView.deFrameBottom;
+        self.brandLabel.deFrameLeft     = 16.;
+        
+        self.titleLabel.center          = self.brandLabel.center;
+        self.titleLabel.deFrameHeight   = titleHeight;
+        self.titleLabel.deFrameTop      = self.brandLabel.deFrameBottom + 8.;
+        
+//        self.buyBtn.deFrameLeft         = 59.;
+        self.buyBtn.deFrameLeft         = (self.deFrameWidth - self.buyBtn.deFrameWidth - self.likeBtn.deFrameWidth) / 2.;
+        self.buyBtn.deFrameTop          = self.titleLabel.deFrameBottom + 24.;
+        
+        self.likeBtn.center             = self.buyBtn.center;
+        self.likeBtn.deFrameLeft        = self.buyBtn.deFrameRight + 8.;
+        
+//        self.buyBtn.deFrameLeft         = (self.deFrameWidth - self.likeBtn.deFrameRight) / 2.;
+        
         
         if ([_entity.imageURLArray count] > 0) {
             self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
@@ -211,7 +260,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
     if (!view) {
         view = [[UIImageView alloc] initWithFrame:CGRectZero];
         
-        view.deFrameSize    = IS_IPAD ? CGSizeMake(460., 460.) : CGSizeMake(kScreenWidth - 32, kScreenWidth - 32);
+        view.deFrameSize    = IS_IPAD ? CGSizeMake(460., 460.) : CGSizeMake(kScreenWidth, kScreenWidth);
         view.contentMode    = UIViewContentModeScaleAspectFit;
     }
     NSURL * imageURL_800;
@@ -289,31 +338,26 @@ static CGFloat kEntityViewMarginLeft = 16.;
 }
 
 - (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel
-//- (void)carouselDidEndDecelerating:(iCarousel *)carousel
 {
-    DDLogInfo(@"offset %f", carousel.scrollOffset);
     NSInteger index = fabs(carousel.scrollOffset);
-//    self.pageCtr.currentPage = index;
-    
     [self.pageCtr setCurrentPage:index];
 }
 
-//#pragma mark - button action
-//- (void)tapAction:(id)sender
-//{
-//    if (_delegate && [_delegate respondsToSelector:@selector(handelTapImageWithIndex:)])
-//    {
-//        [_delegate handelTapImageWithIndex:[(UIGestureRecognizer *)sender view].tag];
-//    }
-//}
-//
-//
-//#pragma mark - scroll view delegate
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-//{
-//    NSInteger index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
-//    self.pageCtr.currentPage = index;
-//}
+#pragma mark - button action
+- (void)buyBtnAction:(id)sender
+{
+    if (_actionDelegate && [_actionDelegate respondsToSelector:@selector(TapBuyButtonActionWithEntity:)]) {
+        [_actionDelegate TapBuyButtonActionWithEntity:self.entity];
+    }
+}
+
+- (void)likeBtnAction:(id)sender
+{
+    if (_actionDelegate && [_actionDelegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)]) {
+        [_actionDelegate TapLikeButtonWithEntity:self.entity Button:self.likeBtn];
+    }
+}
+
 
 #pragma mark - class method
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity
@@ -322,7 +366,8 @@ static CGFloat kEntityViewMarginLeft = 16.;
     if (titleHeight == 0 ) {
         titleHeight = 16.;
     }
-    return kScreenWidth + titleHeight + 16.;
+//    return kScreenWidth + titleHeight + 16.;
+    return kScreenWidth + 175.;
 }
 
 @end

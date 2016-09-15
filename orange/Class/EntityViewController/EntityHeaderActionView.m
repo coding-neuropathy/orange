@@ -29,7 +29,8 @@
 - (UIButton *)likeButton
 {
     if (!_likeButton) {
-        _likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _likeButton                 = [UIButton buttonWithType:UIButtonTypeCustom];
+        _likeButton.deFrameSize     = CGSizeMake(80., 44.);
         [_likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
         _likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -62,6 +63,7 @@
 {
     if (!_moreButton) {
         _moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _moreButton.deFrameSize = CGSizeMake(80., 44.);
         _moreButton.layer.masksToBounds = YES;
         _moreButton.layer.cornerRadius = 4;
         [_moreButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
@@ -77,12 +79,12 @@
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
-    self.likeButton.frame = CGRectMake(0, 3., 80., 44.);
+//    self.likeButton.frame = CGRectMake(0, 3., 80., 44.);
     if (_entity.isLiked) {
         self.likeButton.selected = YES;
     }
     self.postBtn.frame = CGRectMake(0., 3.,  80., 44.);
-    self.moreButton.frame = CGRectMake(0., 3., 80., 44.);
+//    self.moreButton.frame = CGRectMake(0., 3., 80., 44.);
     [self setNeedsLayout];
 }
 
@@ -97,10 +99,8 @@
     }
     else
     {
-        
-        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-        
-        if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
+        if ([UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeRight
+            || [UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeLeft)
         {
             self.likeButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6-80 - (kScreenWidth - kScreenHeight)/2, self.deFrameHeight/2);
             self.postBtn.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6 - (kScreenWidth - kScreenHeight)/2, self.deFrameHeight/2);
@@ -116,14 +116,21 @@
     }
     self.H.deFrameBottom = self.deFrameHeight;
 }
+//
+//- (void)likeAction
+//{
+//    if (_delegate && [_delegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)])
+//    {
+//        [_delegate TapLikeButtonWithEntity:self.entity Button:self.likeButton];
+//    }
+//}
 
 #pragma mark - button action
 - (void)likeButtonAction:(id)sender
 {
     if (_delegate && [_delegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)])
     {
-//        [_delegate tapLikeBtn:sender];
-        [_delegate TapLikeButtonWithEntity:self.entity Button:sender];
+        [_delegate TapLikeButtonWithEntity:self.entity Button:self.likeButton];
     }
 }
 

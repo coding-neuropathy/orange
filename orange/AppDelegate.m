@@ -91,6 +91,7 @@ int ddLogLevel;
 -(void)customizeAppearance
 {
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance ] setBackgroundColor:[UIColor colorFromHexString:@"#ffffff"]];
 
     [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
     

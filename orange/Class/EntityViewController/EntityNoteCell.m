@@ -88,13 +88,14 @@ static inline NSRegularExpression * UrlRegularExpression() {
 - (UIImageView *)avatarImageView
 {
     if (!_avatarImageView) {
-        _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _avatarImageView                        = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _avatarImageView.deFrameSize            = CGSizeMake(36., 36.);
+        _avatarImageView.contentMode            = UIViewContentModeScaleAspectFit;
         _avatarImageView.userInteractionEnabled = YES;
-        _avatarImageView.layer.cornerRadius = 18.;
-        _avatarImageView.layer.masksToBounds = YES;
+        _avatarImageView.layer.cornerRadius     = 18.;
+        _avatarImageView.layer.masksToBounds    = YES;
         //        _avatarImageView.backgroundColor = [UIColor redColor];
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+        UITapGestureRecognizer* tap             = [[UITapGestureRecognizer alloc]
                                        initWithTarget:self action:@selector(avatarBtnAction:)];
         [_avatarImageView addGestureRecognizer:tap];
         
@@ -138,7 +139,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         _starLabel.textAlignment = NSTextAlignmentRight;
         //        _starLabel.hidden = YES;
         _starLabel.backgroundColor = [UIColor clearColor];
-        _starLabel.textColor = UIColorFromRGB(0xFF9600);
+        _starLabel.textColor = [UIColor colorFromHexString:@"#ff9600"];
         _starLabel.text = [NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FAStar]];
         [self.contentView addSubview:_starLabel];
     }
@@ -185,7 +186,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _timeLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-        _timeLabel.textColor = UIColorFromRGB(0x9d9e9f);
+        _timeLabel.textColor = [UIColor colorFromHexString:@"#9d9e9f"];
         _timeLabel.textAlignment = NSTextAlignmentRight;
         
         [self.contentView addSubview:_timeLabel];
@@ -214,9 +215,10 @@ static inline NSRegularExpression * UrlRegularExpression() {
     [self addObserver];
     //    DDLogVerbose(@"cell note creator %@", _note.creator.nickname);
     
-    [self.avatarImageView sd_setImageWithURL:_note.creator.avatarURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:CGSizeMake(36., 36.)]];
+    [self.avatarImageView sd_setImageWithURL:_note.creator.avatarURL
+                            placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.avatarImageView.deFrameSize]];
     
-    self.nameLabel.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", (unsigned long)_note.creator.userId, _note.creator.nickname];
+    self.nameLabel.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", (unsigned long)_note.creator.userId, _note.creator.nick];
     
     if(_note.text != nil)
     {
@@ -303,7 +305,10 @@ static inline NSRegularExpression * UrlRegularExpression() {
     self.editBtn.frame = CGRectMake(0., 0., 80., self.deFrameHeight);
     self.editBtn.deFrameRight = self.deFrameRight;
     
-    self.avatarImageView.frame = CGRectMake(20., 16., 36., 36.);
+//    self.avatarImageView.frame = CGRectMake(20., 16., 36., 36.);
+    self.avatarImageView.deFrameTop = 16.;
+    self.avatarImageView.deFrameLeft = 20.;
+    
     self.nameLabel.frame = CGRectMake(0., 0., 200., 20.);
     self.nameLabel.deFrameTop = self.avatarImageView.deFrameTop;
     self.nameLabel.deFrameLeft = self.avatarImageView.deFrameRight + 10;
@@ -328,7 +333,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     self.timeLabel.frame = CGRectMake(0, 0, 160, 20);
     self.timeLabel.center = self.commentBtn.center;
     self.timeLabel.deFrameRight = kScreenWidth - 16.;
-    self.separateLine.frame = CGRectMake(0, self.contentView.deFrameHeight - kSeparateLineWidth, kScreenWidth, kSeparateLineWidth);
+//    self.separateLine.frame = CGRectMake(0, self.contentView.deFrameHeight - kSeparateLineWidth, kScreenWidth, kSeparateLineWidth);
 }
 
 - (void)layoutIpad
@@ -336,16 +341,8 @@ static inline NSRegularExpression * UrlRegularExpression() {
     self.editBtn.frame = CGRectMake(0., 0., 80., self.deFrameHeight);
     self.editBtn.deFrameRight = self.contentView.deFrameRight;
     
-//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-//    
-//    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-//    {
-//        self.avatarImageView.frame = CGRectMake(20 + (kScreenWidth - kScreenHeight)/2, 16., 36., 36.);
-//
-//    }
-//    else
-//    {
-        self.avatarImageView.frame = CGRectMake(20., 16., 36., 36.);
+    self.avatarImageView.deFrameTop = 16.;
+    self.avatarImageView.deFrameLeft = 20.;
 
 //    }
     self.nameLabel.frame = CGRectMake(0., 0., 200., 20.);
@@ -354,19 +351,10 @@ static inline NSRegularExpression * UrlRegularExpression() {
     
     self.starLabel.frame = CGRectMake(0., 0., 160., 20.);
     self.starLabel.center = self.nameLabel.center;
-//    self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
-//    if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
-//    {
-//        self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. - (kScreenWidth - kScreenHeight)/2 ;
-//        
-//    }
-//    else
-//    {
-    self.starLabel.deFrameRight = kScreenWidth - kTabBarWidth - 16. ;
+
+    self.starLabel.deFrameRight = self.contentView.deFrameRight - 16. ;
         
-//    }
-    
-    
+
     self.contentLabel.frame = CGRectMake(0, 0., 593, 20);
     
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
@@ -393,15 +381,17 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     [super drawRect:rect];
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
+    if (IS_IPAD) {
+        CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-    CGContextSetLineWidth(context, kSeparateLineWidth);
+        CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+        CGContextSetLineWidth(context, kSeparateLineWidth);
     
-    CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
-    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+        CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
+        CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
     
-    CGContextStrokePath(context);
+        CGContextStrokePath(context);
+    }
 }
 
 + (CGFloat)height:(GKNote *)note

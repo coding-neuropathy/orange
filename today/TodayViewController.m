@@ -34,13 +34,20 @@
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
 //    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
+    
+    
     self.tableView.rowHeight = 94.;
-    self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
     
     self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
     
-    if (iOS10)
+    self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
+
+    if (iOS10) {
+//        self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
         self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
+//        self.tableView.backgroundColor = [UIColor clearColor];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,10 +80,10 @@
 }
 
 - (void)widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode withMaximumSize:(CGSize)maxSize {
-    if (activeDisplayMode == NCWidgetDisplayModeExpanded) {
-        self.preferredContentSize = CGSizeMake(0.0, self.tableView.rowHeight * 3.);
-    } else if (activeDisplayMode == NCWidgetDisplayModeCompact) {
-        self.preferredContentSize = maxSize;
+    if (activeDisplayMode == NCWidgetDisplayModeCompact) {
+        self.preferredContentSize = CGSizeMake(0., 94.);
+    } else {
+        self.preferredContentSize = CGSizeMake(0., 94 * 3.);
     }
 }
 

@@ -30,6 +30,8 @@
         self.detailTextLabel.textColor = UIColorFromRGB(0xebebeb);
         self.detailTextLabel.font = [UIFont systemFontOfSize:14.];
         self.detailTextLabel.numberOfLines = 2;
+        
+        self.contentView.backgroundColor    = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.4];
     }
     return self;
 }

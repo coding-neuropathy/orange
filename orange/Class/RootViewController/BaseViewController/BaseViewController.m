@@ -12,11 +12,23 @@
 
 @interface BaseViewController ()<UIGestureRecognizerDelegate>
 
+@property (strong, nonatomic) UIButton * backBtn;
 
 @end
 
 @implementation BaseViewController
+#pragma mark - public method
+- (void)setDefaultBackBtn
+{
+    [self.backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+}
 
+- (void)setWhiteBackBtn
+{
+    [self.backBtn setImage:[UIImage imageNamed:@"back_white"] forState:UIControlStateNormal];
+}
+
+#pragma mark -
 - (UIApplication *)app
 {
     if (!_app) {
@@ -25,16 +37,24 @@
     return _app;
 }
 
+- (UIButton *)backBtn
+{
+    if (!_backBtn) {
+        _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+        [_backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+        _backBtn.frame = CGRectMake(0., 0., 32., 32.);
+    }
+    return _backBtn;
+}
 
+
+#pragma mark -
 - (void)viewDidLoad {
     [super viewDidLoad];
         
     if (self.navigationItem && self.navigationController.viewControllers.count > 1) {
-        UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-        [backBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-        backBtn.frame = CGRectMake(0., 0., 32., 44.);
-        UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+        UIBarButtonItem * backBarItem = [[UIBarButtonItem alloc] initWithCustomView:self.backBtn];
         self.navigationItem.leftBarButtonItem = backBarItem;
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
     }

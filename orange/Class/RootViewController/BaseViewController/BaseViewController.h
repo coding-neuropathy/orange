@@ -12,4 +12,7 @@
 
 @property (weak, nonatomic) UIApplication * app;
 
+- (void)setWhiteBackBtn;
+- (void)setDefaultBackBtn;
+
 @end

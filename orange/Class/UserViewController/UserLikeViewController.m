@@ -127,7 +127,8 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 {
     [API getUserLikeEntityListWithUserId:self.user.userId categoryId:self.category.groupId
                                timestamp:[[NSDate date] timeIntervalSince1970] count:30 success:^(NSTimeInterval timestamp, NSArray *entityArray) {
-        self.likeEntities = [NSMutableArray arrayWithArray:entityArray];
+//        self.likeEntities = [NSMutableArray arrayWithArray:entityArray];
+        self.likeEntities = (NSMutableArray *)entityArray;
         self.likeTimestamp = timestamp;
         [self.collectionView.pullToRefreshView stopAnimating];
         [self.collectionView reloadData];
@@ -341,9 +342,11 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         self.categoryController = [[UserEntityCategoryController alloc] init];
         self.categoryController.currentIndex = self.category.groupId;
         
-        AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
-        [appdelegate.window.rootViewController addChildViewController:self.categoryController];
-        [appdelegate.window.rootViewController.view addSubview:self.categoryController.view];
+//        AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
+//        [appdelegate.window.rootViewController addChildViewController:self.categoryController];
+//        [appdelegate.window.rootViewController.view addSubview:self.categoryController.view];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.categoryController.view];
+        [[UIApplication sharedApplication].keyWindow.rootViewController addChildViewController:self.categoryController];
         self.categoryController.view.alpha = 0;
         //self.categoryController.view.deFrameBottom = 0;
         
