@@ -10,7 +10,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 
 
-@interface ShareView () <UIGestureRecognizerDelegate,MFMailComposeViewControllerDelegate>
+@interface ShareView () <UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
 @property(nonatomic, strong) UIView * mask;
 @property(nonatomic, strong) UIView * board;
 @property(nonatomic, strong) UIButton * cancel;

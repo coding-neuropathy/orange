@@ -19,7 +19,6 @@
 @property (strong, nonatomic) UIPageControl     *pageCtr;
 @property (strong, nonatomic) iCarousel         *imagesView;
 
-
 @property (strong, nonatomic) NSMutableArray    *imageURLArray;
 @property (assign, nonatomic) BOOL warp;
 
@@ -36,7 +35,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
     self = [super initWithFrame:frame];
     if (self) {
         self.warp = NO;
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
     }
     return self;
 }
@@ -81,7 +80,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
         [_buyBtn setTitleColor:[UIColor colorFromHexString:@"#ffffff"] forState:UIControlStateNormal];
         [_buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#6192ff"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
         [_buyBtn addTarget:self action:@selector(buyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        
+
         [self addSubview:_buyBtn];
     }
     return _buyBtn;
@@ -129,8 +128,8 @@ static CGFloat kEntityViewMarginLeft = 16.;
         _pageCtr.hidden = YES;
         _pageCtr.currentPage = 0;
         _pageCtr.backgroundColor = [UIColor clearColor];
-        _pageCtr.pageIndicatorTintColor = UIColorFromRGB(0xe6e6e6);
-        _pageCtr.currentPageIndicatorTintColor = UIColorFromRGB(0x5ba9ff);
+        _pageCtr.pageIndicatorTintColor = [UIColor colorFromHexString:@"#e6e6e6"];
+        _pageCtr.currentPageIndicatorTintColor = [UIColor colorFromHexString:@"#5ba9ff"];
         _pageCtr.layer.cornerRadius = 16.0;
         [self addSubview:_pageCtr];
     }
@@ -149,8 +148,6 @@ static CGFloat kEntityViewMarginLeft = 16.;
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
-
-//    self.titleLabel.text = IS_IPAD ? _entity.entityName : _entity.title;
     
     if (IS_IPAD) {
         self.titleLabel.text    = _entity.entityName;
@@ -362,12 +359,18 @@ static CGFloat kEntityViewMarginLeft = 16.;
 #pragma mark - class method
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity
 {
-    CGFloat titleHeight = [entity.entityName heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:[UIFont systemFontOfSize:16.f] LineHeight:7];
+    CGFloat titleHeight = [entity.title heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.f] LineHeight:5];
     if (titleHeight == 0 ) {
         titleHeight = 16.;
     }
+    
+    CGFloat brandHeight = [entity.brand heightWithLineWidth:kScreenWidth - 32. Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.] LineHeight:5];
+    if (brandHeight != 0) {
+        brandHeight += 8;
+    }
+    
 //    return kScreenWidth + titleHeight + 16.;
-    return kScreenWidth + 175.;
+    return kScreenWidth + 123. + titleHeight + brandHeight;
 }
 
 @end
