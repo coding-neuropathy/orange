@@ -67,7 +67,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4232</string>
+	<string>4235</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -89,8 +89,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSA</key>
-	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -115,8 +113,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>change your avatar</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>启动位置服务</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>change your avatar</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FultonsHand Regular.TTF</string>
