@@ -11,7 +11,7 @@
 //#import "AppDelegate.h"
 #import "API.h"
 #import <libWeChatSDK/WXApi.h>
-#import "WeiboUser.h"
+#import <WeiboSDK/WeiboUser.h>
 
 #import "SignInView.h"
 #import "ForgetPasswdController.h"
@@ -192,12 +192,11 @@
     
     NSDictionary * WBUserInfo = [notification valueForKey:@"object"];
     NSString * access_token = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
-//    DDLogError(@"user info %@", WBUserInfo);
+    DDLogError(@"user info %@", WBUserInfo);
     [WBHttpRequest requestForUserProfile:[WBUserInfo valueForKey:@"uid"] withAccessToken:access_token andOtherProperties:nil queue:nil withCompletionHandler:^(WBHttpRequest *httpRequest, id result, NSError *error) {
 
         if (!error) {
             WeiboUser * wb_user = (WeiboUser *)result;
-//            DDLogError(@"weibo user id %@", result);
             [API loginWithSinaUserId:wb_user.userID sinaToken:access_token ScreenName:wb_user.screenName success:^(GKUser *user, NSString *session) {
                 [MobClick event:@"sign in from weibo" label:@"success"];
                 if (IS_IPAD) {
@@ -217,7 +216,7 @@
                 [MobClick event:@"sign in from weibo" label:@"failure"];
             }];
         } else {
-            DDLogError(@"%@", [[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            DDLogError(@"weibo error %@", [[error userInfo] objectForKey:@"NSLocalizedRecoverySuggestion"]);
             [MobClick event:@"sign in from weibo" label:@"failure"];
             [SVProgressHUD showErrorWithStatus:[[error userInfo] valueForKey:@"NSLocalizedRecoverySuggestion"]];
         }

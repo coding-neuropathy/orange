@@ -167,13 +167,15 @@ static CGFloat kEntityViewMarginLeft = 16.;
                     [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     [self.buyBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
-                    self.buyBtn.backgroundColor = [UIColor clearColor];
+//                    self.buyBtn.backgroundColor = [UIColor clearColor];
+                    [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
                     self.buyBtn.enabled = NO;
                 }
                     break;
                 case GKBuySOLDOUT:
                 {
-                    self.buyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
+//                    self.buyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                    [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#9d9e9f"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
                     [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                 }

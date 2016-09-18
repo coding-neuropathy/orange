@@ -15,15 +15,11 @@
 #import <ALBBTradeSDK/ALBBTradeSDK.h>
 
 
-// AFNetworking
-//#import <SystemConfiguration/SystemConfiguration.h>
-//#import <MobileCoreServices/MobileCoreServices.h>
-
-
 /**
  *  weibo sdk
  */
 #import <WeiboSDK/WeiboSDK.h>
+
 
 // Umeng
 #import <UMMobClick/MobClick.h>

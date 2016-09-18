@@ -17,6 +17,7 @@
 #import "JPUSHService.h"
 #import "GKNotificationHUB.h"
 #import "Appirater.h"
+#import "ThreePartHandler.h"
 
 #if DEBUG
 #import <FLEX/FLEXManager.h>
@@ -335,9 +336,9 @@ int ddLogLevel;
 {
     if([[url absoluteString]hasPrefix:@"wx"])
     {
-        return [WXApi handleOpenURL:url delegate:self];
+        return [WXApi handleOpenURL:url delegate:[ThreePartHandler sharedThreePartHandler]];
     }
-    return [WeiboSDK handleOpenURL:url delegate:self ];
+    return [WeiboSDK handleOpenURL:url delegate:self];
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -442,11 +443,11 @@ int ddLogLevel;
 {
     if([[url absoluteString] hasPrefix:@"wx"])
     {
-        return [WXApi handleOpenURL:url delegate:self];
+        return [WXApi handleOpenURL:url delegate:[ThreePartHandler sharedThreePartHandler]];
     }
     if([[url absoluteString] hasPrefix:@"wb1459383851"])
     {
-        return [WeiboSDK handleOpenURL:url delegate:self];
+        return [WeiboSDK handleOpenURL:url delegate:[ThreePartHandler sharedThreePartHandler]];
     }
     
     if ([[url absoluteString] hasPrefix:@"tbopen23093827"]) {
@@ -456,12 +457,12 @@ int ddLogLevel;
     if ([sourceApplication isEqualToString:@"com.guoku.iphone"]) {
          [self openLocalURL:url];
     }
-    else
-    {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self openLocalURL:url];
-        });
-    }
+//    else
+//    {
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self openLocalURL:url];
+//        });
+//    }
     return YES;
 }
 

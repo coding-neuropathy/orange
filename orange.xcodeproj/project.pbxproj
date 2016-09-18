@@ -160,6 +160,7 @@
 		8A293A6F1D8A705C000B7227 /* EntityHeaderSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A293A6E1D8A705C000B7227 /* EntityHeaderSectionView.m */; };
 		8A293A721D8ABA4F000B7227 /* EntityNoteFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A293A711D8ABA4F000B7227 /* EntityNoteFooterView.m */; };
 		8A3249381D5A57CA00354602 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A3249371D5A57CA00354602 /* beep.mp3 */; };
+		8A37BBB41D8E74BA0007E407 /* ThreePartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A37BBB31D8E74BA0007E407 /* ThreePartHandler.m */; };
 		8A3911D71D598A680029E529 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3911D61D598A680029E529 /* libzbar.a */; };
 		8A3CBBA81C7D870E0002AAE8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */; };
 		8A402CC71B69F57A00E54FFF /* CategoryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A402CC61B69F57A00E54FFF /* CategoryImageView.m */; };
@@ -610,6 +611,8 @@
 		8A293A701D8ABA4F000B7227 /* EntityNoteFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityNoteFooterView.h; sourceTree = "<group>"; };
 		8A293A711D8ABA4F000B7227 /* EntityNoteFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityNoteFooterView.m; sourceTree = "<group>"; };
 		8A3249371D5A57CA00354602 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
+		8A37BBB21D8E74BA0007E407 /* ThreePartHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThreePartHandler.h; path = GKHandler/ThreePartHandler.h; sourceTree = "<group>"; };
+		8A37BBB31D8E74BA0007E407 /* ThreePartHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreePartHandler.m; path = GKHandler/ThreePartHandler.m; sourceTree = "<group>"; };
 		8A3911D61D598A680029E529 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		8A3CBBA71C7D870E0002AAE8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		8A402CC51B69F57A00E54FFF /* CategoryImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryImageView.h; sourceTree = "<group>"; };
@@ -1363,11 +1366,10 @@
 		4E3A232B1A51A7C500037F9C /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				8A37BBB51D8E74BF0007E407 /* GKHandler */,
 				4E3A23791A52EC9600037F9C /* Util */,
 				B7ED32B61B25C662009BAF5A /* OpenCenter.h */,
 				B7ED32B71B25C662009BAF5A /* OpenCenter.m */,
-				8AC7149D1D83FE800098A706 /* GKHandler.h */,
-				8AC7149E1D83FE800098A706 /* GKHandler.m */,
 				8AC714A01D8401750098A706 /* GKViewDelegate.h */,
 			);
 			path = Core;
@@ -1789,6 +1791,17 @@
 				8A242B001D7D18C200A15669 /* CheckoutFooterView.m */,
 			);
 			name = CheckoutOrderController;
+			sourceTree = "<group>";
+		};
+		8A37BBB51D8E74BF0007E407 /* GKHandler */ = {
+			isa = PBXGroup;
+			children = (
+				8AC7149D1D83FE800098A706 /* GKHandler.h */,
+				8AC7149E1D83FE800098A706 /* GKHandler.m */,
+				8A37BBB21D8E74BA0007E407 /* ThreePartHandler.h */,
+				8A37BBB31D8E74BA0007E407 /* ThreePartHandler.m */,
+			);
+			name = GKHandler;
 			sourceTree = "<group>";
 		};
 		8A5045391D58713E00D66F8A /* QRCodeViewController */ = {
@@ -2491,7 +2504,7 @@
 					4E56DF1419D552C000263B17 = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = BKXKS4HPNG;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2507,7 +2520,7 @@
 					B7BFC8FB1ACC27C1009627CA = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = BKXKS4HPNG;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2773,6 +2786,7 @@
 				8AF3D6B31D7671CC007E8C2E /* ArticleResultCell.m in Sources */,
 				399916CE1B11A9DB006826FD /* UIDevice-Hardware.m in Sources */,
 				B7E668721B779DE900E177E5 /* EntityHeaderActionView.m in Sources */,
+				8A37BBB41D8E74BA0007E407 /* ThreePartHandler.m in Sources */,
 				B7180EA41B9D380A004AD9AD /* HomeController.m in Sources */,
 				394104141B294E4C00C40846 /* UIScrollView+Slogan.m in Sources */,
 				B783F6621B9AEC46004DF1CB /* ArticlesController.m in Sources */,
@@ -3181,8 +3195,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3211,8 +3225,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "78745864-37c6-4cc9-975a-c099af95f737";
-				PROVISIONING_PROFILE_SPECIFIER = ios;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3228,8 +3242,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3260,8 +3274,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "78745864-37c6-4cc9-975a-c099af95f737";
-				PROVISIONING_PROFILE_SPECIFIER = ios;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -3271,8 +3285,8 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = today/today.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = today/config.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3284,8 +3298,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.guoku.iphone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "328479ef-cc68-4e17-b129-1ff29af1173b";
-				PROVISIONING_PROFILE_SPECIFIER = today;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3296,9 +3310,9 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = today/today.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREFIX_HEADER = today/config.pch;
@@ -3307,8 +3321,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.guoku.iphone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "328479ef-cc68-4e17-b129-1ff29af1173b";
-				PROVISIONING_PROFILE_SPECIFIER = today;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
