@@ -286,13 +286,9 @@
     [self.avatarView sd_setImageWithURL:_user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(self.avatarView.deFrameWidth, self.deFrameWidth)]];
     
     if ([_user.gender isEqualToString:@"M"]) {
-        //        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>   %@</b> <font face='FontAwesome' color='^8cb4ff'>%@</font>", _user.nickname, [NSString fontAwesom             eIconStringForEnum:FAmars]];
         self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
-//        self.staffImage.image = [UIImage imageNamed:@"user_icon_male"];
     } else if ([_user.gender isEqualToString:@"F"]) {
-        //        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>   %@</b> <font face='FontAwesome' color='^ffb9c1'>%@</font>", _user.nickname, [NSString fontAwesomeIconStringForEnum:FAvenus]];
         self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
-//        self.staffImage.image = [UIImage imageNamed:@"user_icon_famale"];
     }
     else {
         self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>%@</b>", _user.nick];
@@ -422,7 +418,7 @@
     self.bioBackView.deFrameLeft = self.deFrameLeft;
     self.bioBackView.deFrameBottom = self.deFrameBottom;
     
-//    if (IS_IPHONE && self.user.userId == [Passport sharedInstance].user.userId) [self layoutOrderButton];
+    if (IS_IPHONE && self.user.userId == [Passport sharedInstance].user.userId) [self layoutOrderButton];
     
     self.friendBtn.deFrameLeft          = self.nicknameLabel.deFrameLeft;
     self.fansBtn.deFrameLeft            = self.friendBtn.deFrameRight + 43;
@@ -431,24 +427,18 @@
         self.editBtn.frame = CGRectMake(0., 0., 130., 30.);
         self.editBtn.deFrameLeft = self.avatarView.deFrameRight + 24.;
         self.editBtn.deFrameTop = self.nicknameLabel.deFrameBottom + 5.;
-        //        self.v.frame = CGRectMake(0., 0., 1, 15.);
-        //        self.v.center = CGPointMake(self.editBtn.center.x, self.editBtn.center.y + 40.);
         self.friendBtn.deFrameTop = self.editBtn.deFrameBottom + 16.;
         self.fansBtn.deFrameTop   = self.editBtn.deFrameBottom + 16.;
     } else if (_user.user_state == GKUserBlockState) {
         self.blockBtn.frame = CGRectMake(0., 0., 130., 30.);
         self.blockBtn.deFrameLeft = self.avatarView.deFrameRight + 24.;
         self.blockBtn.deFrameTop = self.nicknameLabel.deFrameBottom + 5.;
-        //        self.v.frame = CGRectMake(0., 0., 1, 15.);
-        //        self.v.center = CGPointMake(self.blockBtn.center.x, self.blockBtn.center.y + 40.);
         self.fansBtn.deFrameTop   = self.blockBtn.deFrameBottom + 16.;
         self.friendBtn.deFrameTop = self.blockBtn.deFrameBottom + 16.;
     } else {
         self.relationBtn.frame = CGRectMake(0., 0., 130., 30.);
         self.relationBtn.deFrameLeft = self.avatarView.deFrameRight + 24.;
         self.relationBtn.deFrameTop = self.nicknameLabel.deFrameBottom + 5.;
-        //        self.v.frame = CGRectMake(0., 0., 1, 15.);
-        //        self.v.center = CGPointMake(self.relationBtn.center.x, self.relationBtn.center.y + 40.);
         self.fansBtn.deFrameTop   = self.relationBtn.deFrameBottom + 16.;
         self.friendBtn.deFrameTop = self.relationBtn.deFrameBottom + 16.;
     }
@@ -477,19 +467,19 @@
 {
     [super drawRect:rect];
     
-//    if (IS_IPHONE && self.user.userId == [Passport sharedInstance].user.userId) {
-//        CGContextRef context = UIGraphicsGetCurrentContext();
-//    
-//        CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-//        CGContextSetLineWidth(context, kSeparateLineWidth);
-//        CGContextMoveToPoint(context, 0., self.createOrderBtn.deFrameTop);
-//        CGContextAddLineToPoint(context, self.deFrameWidth, self.createOrderBtn.deFrameTop);
-//    
-//        CGContextMoveToPoint(context, self.createOrderBtn.deFrameRight, self.createOrderBtn.deFrameTop);
-//        CGContextAddLineToPoint(context, self.createOrderBtn.deFrameRight, self.createOrderBtn.deFrameBottom);
-//
-//        CGContextStrokePath(context);
-//    }
+    if (IS_IPHONE && self.user.userId == [Passport sharedInstance].user.userId) {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+    
+        CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+        CGContextSetLineWidth(context, kSeparateLineWidth);
+        CGContextMoveToPoint(context, 0., self.createOrderBtn.deFrameTop);
+        CGContextAddLineToPoint(context, self.deFrameWidth, self.createOrderBtn.deFrameTop);
+    
+        CGContextMoveToPoint(context, self.createOrderBtn.deFrameRight, self.createOrderBtn.deFrameTop);
+        CGContextAddLineToPoint(context, self.createOrderBtn.deFrameRight, self.createOrderBtn.deFrameBottom);
+
+        CGContextStrokePath(context);
+    }
 }
 
 #pragma mark button action
