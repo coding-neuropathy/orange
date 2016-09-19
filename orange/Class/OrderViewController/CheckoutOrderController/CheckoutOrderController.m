@@ -88,7 +88,7 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     GKOrder * order  = [self.orderArray objectAtIndex:section];
-    DDLogInfo(@"orderItems %ld", order.orderItems.count);
+    DDLogInfo(@"orderItems %ld", (unsigned long)order.orderItems.count);
     return order.orderItems.count;
 }
 

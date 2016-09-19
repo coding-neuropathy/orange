@@ -135,7 +135,7 @@
     self.orderNumberLabel.text          = [NSString stringWithFormat:@"%@", self.order.orderNumber];
     self.orderNumberLabel.deFrameSize   = CGSizeMake([self.order.orderNumber widthWithLineWidth:0. Font:self.orderNumberLabel.font], 20.);
     
-    DDLogInfo(@"status %ld", order.status);
+    DDLogInfo(@"status %ld", (long)order.status);
     if (self.paymentEnable) {
         switch (_order.status) {
             case Expired:

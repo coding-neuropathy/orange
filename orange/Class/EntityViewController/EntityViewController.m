@@ -31,7 +31,8 @@
 //#import "LoginView.h"
 
 #import "WebViewController.h"
-#import "ShareView.h"
+//#import "ShareView.h"
+#import "ShareController.h"
 #import "PNoteViewController.h"
 
 
@@ -347,10 +348,10 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             }
             
         }
-
+        [SVProgressHUD dismiss];
         [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
-        
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -1092,18 +1093,31 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 //点击分享按钮
 - (void)shareButtonAction
 {
-        ShareView * view = [[ShareView alloc]initWithTitle:self.entity.entityName SubTitle:@"" Image:self.image.image URL:[NSString stringWithFormat:@"%@%@/",kGK_WeixinShareURL,self.entity.entityHash]];
-        view.type = @"entity";
-        view.entity = self.entity;
-        __weak __typeof(&*self)weakSelf = self;
-        
-        view.tapRefreshButtonBlock = ^(){
-            [SVProgressHUD showSuccessWithStatus:@"刷新成功"];
-            [weakSelf.collectionView setContentOffset:CGPointMake(0., -self.header.deFrameHeight) animated:YES];
-            [weakSelf refresh];
-            [weakSelf refreshRandom];
-        };
-        [view show];
+    ShareController * shareVC   = [[ShareController alloc] initWithTitle:self.entity.entityName URLString:[NSString stringWithFormat:@"%@%@/",kGK_WeixinShareURL, self.entity.entityHash] Image:self.image.image];
+    
+    __weak __typeof(&*self)weakSelf = self;
+    shareVC.refreshBlock        = ^(){
+        [SVProgressHUD showWithStatus:NSLocalizedStringFromTable(@"refreshing", kLocalizedFile, nil)];
+//        CGPointMake(scrollView.contentOffset.x, 0.)
+        [weakSelf.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x, 0.) animated:YES];
+        [weakSelf refresh];
+        [weakSelf refreshRandom];
+    };
+    [shareVC show];
+//    [[UIApplication sharedApplication].keyWindow addSubview:shareVC.view];
+//    [[UIApplication sharedApplication].keyWindow.rootViewController addChildViewController:shareVC];
+//        ShareView * view = [[ShareView alloc]initWithTitle:self.entity.entityName SubTitle:@"" Image:self.image.image URL:[NSString stringWithFormat:@"%@%@/",kGK_WeixinShareURL,self.entity.entityHash]];
+//        view.type = @"entity";
+//        view.entity = self.entity;
+//        __weak __typeof(&*self)weakSelf = self;
+//        
+//        view.tapRefreshButtonBlock = ^(){
+//            [SVProgressHUD showSuccessWithStatus:@"刷新成功"];
+//            [weakSelf.collectionView setContentOffset:CGPointMake(0., -self.header.deFrameHeight) animated:YES];
+//            [weakSelf refresh];
+//            [weakSelf refreshRandom];
+//        };
+//        [view show];
 }
 
 - (void)buyButtonAction

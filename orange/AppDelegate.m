@@ -26,7 +26,7 @@
 
 int ddLogLevel;
 
-@interface AppDelegate ()<WXApiDelegate, WeiboSDKDelegate>
+@interface AppDelegate ()
 
 @property (strong, nonatomic) TabBarViewcontroller * tabbarViewController;
 

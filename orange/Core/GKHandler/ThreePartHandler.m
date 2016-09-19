@@ -82,4 +82,77 @@ DEFINE_SINGLETON_FOR_CLASS(ThreePartHandler);
     
 }
 
+#pragma mark - share to wechat
+- (void)wxShare:(int)scene ShareImage:(UIImage *)shareImage Title:(NSString *)title URL:(NSString *)urlStriing
+{
+    WXMediaMessage *message = [WXMediaMessage message];
+    
+    UIImage *image = [shareImage imageWithSize:CGSizeMake(220.f, 220.f)];
+    NSData *oldData = UIImageJPEGRepresentation(image, 1.0);
+    CGFloat size = oldData.length / 1024;
+    if (size > 25.0f) {
+        CGFloat f = 25.0f / size;
+        NSData *datas = UIImageJPEGRepresentation(image, f);
+        //            float s = datas.length / 1024;
+        //            GKLog(@"s---%f",s);
+        UIImage *smallImage = [UIImage imageWithData:datas];
+        [message setThumbImage:smallImage];
+    }
+    else{
+        [message setThumbImage:image];
+    }
+    
+    WXWebpageObject *webPage = [WXWebpageObject object];
+    webPage.webpageUrl = [urlStriing stringByAppendingString:@"?from=wechat"];
+    message.mediaObject = webPage;
+    if(scene == 1)
+    {
+        message.title = title;
+        message.description = @"";
+    }
+    else
+    {
+        message.title = @"果库 - 精英消费指南";
+        message.description = title;
+    }
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene =scene;
+    
+    if ([WXApi sendReq:req]) {
+        if (scene == 1) {
+            [MobClick event:@"share entity to moments" attributes:@{@"entity":title}];
+        } else {
+            [MobClick event:@"share entity to wechat" attributes:@{@"entity":title}];
+        }
+    }
+    else{
+        [SVProgressHUD showImage:nil status:@"分享失败"];
+    }
+}
+
+#pragma mark - share to weibo
+- (void)weiboShareWithTitle:(NSString *)title ShareImage:(UIImage *)shareImage URLString:(NSString *)urlString
+{
+    WBMessageObject *message = [WBMessageObject message];
+    //    message.text = self.title;
+    WBImageObject *image = [WBImageObject object];
+    message.text = [NSString stringWithFormat:@"%@ %@?from=weibo", title, urlString];
+    image.imageData = UIImageJPEGRepresentation(shareImage, 1.0);
+    message.imageObject = image;
+    
+    
+    NSString * wbtoken = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
+    
+    WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
+    authRequest.redirectURI = kGK_WeiboRedirectURL;
+    authRequest.scope = @"all";
+    
+    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:wbtoken];
+    request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",};
+    [WeiboSDK sendRequest:request];
+}
+
+
 @end

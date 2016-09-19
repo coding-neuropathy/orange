@@ -13,4 +13,10 @@
 
 DEFINE_SINGLETON_FOR_HEADER(ThreePartHandler);
 
+
+- (void)wxShare:(int)scene ShareImage:(UIImage *)shareImage Title:(NSString *)title URL:(NSString *)urlStriing;
+
+#pragma mark - share to weibo
+- (void)weiboShareWithTitle:(NSString *)title ShareImage:(UIImage *)shareImage URLString:(NSString *)urlString;
+
 @end
