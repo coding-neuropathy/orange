@@ -10,4 +10,11 @@
 
 @interface ShareViewCell : UIView
 
+//@property (assign, nonatomic) NSInteger cellIndex;
+
+//@property (copy, nonatomic) void (^tapCellAction)(NSInteger index);
+
+- (void)setIconWithImage:(UIImage *)image Title:(NSString *)title;
+//- (void)setTitleWithString:(NSString *)ttitle;
+
 @end

@@ -7,15 +7,34 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <libWeChatSDK/WXApi.h>
+//#import <libWeChatSDK/WXApi.h>
 //#import "ReportViewController.h"
 #import "DataStructure.h"
+
+
+@protocol ShareViewDelegate;
+@protocol ShareViewDataSource;
+
+@interface ShareView : UIView
+
+@property (assign, nonatomic)   ShareType         type;
+
+@property (weak, nonatomic)     id<ShareViewDataSource> datasource;
+@property (weak, nonatomic)     id<ShareViewDelegate>   delegate;
+
+- (void)registerClass:(nullable Class)cellClass;
+- (UIView *)dequeueItemViewIndex:(NSInteger)index;
+
+- (void)reloadData;
+
+@end
 
 @protocol ShareViewDelegate <NSObject>
 
 - (void)handleCancelBtnAction:(id)sender;
-
 @optional
+- (void)ShareView:(ShareView *)shareview didSelectItemAtIndex:(NSInteger)index;
+
 - (void)handleShareOnMomentsAction:(id)sender;
 - (void)handleShareToWeChat:(id)sender;
 - (void)handleShareToWeibo:(id)sender;
@@ -28,21 +47,15 @@
 @end
 
 
+@protocol ShareViewDataSource <NSObject>
 
+- (NSInteger)numberOfcellInShareView:(ShareView *)shareview;
+- (CGFloat)itemSpaceInShareView;
+- (CGFloat)shareViewMargin;
+- (CGSize)shareView:(ShareView *)shareview sizeForItemAtIndex:(NSInteger)index;
 
-
-@interface ShareView : UIView
-//@property (nonatomic, strong) GKEntity * entity;
-//@property (nonatomic, strong) NSString * type;
-@property (assign, nonatomic) ShareType type;
-@property (strong, nonatomic) id<ShareViewDelegate> delegate;
-
-//@property (nonatomic, copy) void (^tapRefreshButtonBlock)();
-
-
-//- (instancetype)initWithTitle:(NSString *)title SubTitle:(NSString *)subTitle Image:(UIImage *)image URL:(NSString *)url;
-//- (void)show;
-//- (void)dismiss;
-
+- (UIView *)shareView:(ShareView *)shareview viewForItemAtIndex:(NSInteger)index reusingView:(nullable UIView *)view;
 
 @end
+
+

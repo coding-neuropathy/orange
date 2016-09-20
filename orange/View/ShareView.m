@@ -12,13 +12,25 @@
 @interface ShareView ()
 
 @property (strong, nonatomic) UILabel   *titleLabel;
-@property(nonatomic, strong) UIButton   *cancel;
+@property (strong, nonatomic) UIButton  *cancel;
 
+@property (nonatomic, strong) NSMutableSet *itemViewPool;
+@property (nonatomic, strong) Class cellClass;
 
+@property (assign, nonatomic) NSInteger numberOfItems;
 
 @end
 
 @implementation ShareView
+
+//- (instancetype)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        [self reloadData];
+//    }
+//    return self;
+//}
 
 
 - (UIButton *)cancel
@@ -57,6 +69,76 @@
     return _titleLabel;
 }
 
+- (void)setDatasource:(id<ShareViewDataSource>)datasource
+{
+    _datasource = datasource;
+    if (_datasource) {
+        [self reloadData];
+    }
+}
+
+- (void)registerClass:(nullable Class)cellClass
+{
+//    Class = cellClass;
+    self.cellClass  = cellClass;
+}
+
+#pragma mark -
+#pragma mark View queing
+
+- (void)queueItemView:(UIView *)view
+{
+    if (view)
+    {
+        [_itemViewPool addObject:view];
+    }
+}
+
+- (UIView *)dequeueItemView
+{
+    UIView *view = [_itemViewPool anyObject];
+    if (view)
+    {
+        [_itemViewPool removeObject:view];
+    }
+    return view;
+}
+
+- (UIView *)dequeueItemViewIndex:(NSInteger)index
+{
+    UIView * view       = [[self.cellClass alloc] init];
+    view.deFrameSize    = [self.datasource shareView:self sizeForItemAtIndex:index];
+    [self queueItemView:view];
+    return view;
+}
+
+- (void)loadCellViews
+{
+    CGFloat itemSpace       = [self.datasource itemSpaceInShareView];
+    CGFloat margin          = [self.datasource shareViewMargin];
+//    CGSize  itemSize    = [self.datasource sha]
+//    NSInteger lineNumber            = 0;
+    NSInteger cellNumberInLine      = 5;
+    
+    for (NSInteger index = 0; index < self.numberOfItems; index++) {
+        
+        UIView *view        = [_datasource shareView:self viewForItemAtIndex:index reusingView:[self dequeueItemView]];
+
+        view.deFrameLeft    = margin + (view.deFrameWidth + itemSpace) * (index % cellNumberInLine);
+
+        view.deFrameTop     = self.titleLabel.deFrameBottom + 15. + (view.deFrameHeight + 30.) * (index / cellNumberInLine);
+//        view.tag            = index;
+        [self addSubview:view];
+    }
+}
+
+#pragma mark - 
+- (void)reloadData
+{
+    self.numberOfItems  = [self.datasource numberOfcellInShareView:self];
+    [self setNeedsLayout];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -64,209 +146,206 @@
     self.titleLabel.center      = self.center;
     self.titleLabel.deFrameTop  = 15.;
     
+    [self loadCellViews];
     
-    {
-    
-        NSInteger width = (kScreenWidth -30 - 12*4)/5;
-        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-        [icon setImage:[UIImage imageNamed:@"share_moment.png"] forState:UIControlStateNormal];
-        [icon addTarget:self action:@selector(ShareActionForMoment:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:icon];
-        
-        icon.center = CGPointMake(15+ width/2, width/2+62);
-        
-        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
-        title.text = NSLocalizedStringFromTable(@"wechat-moments", kLocalizedFile, nil);
-        title.font = [UIFont systemFontOfSize:10];
-        title.numberOfLines = 0;
-        title.textColor = UIColorFromRGB(0x000000);
-        title.textAlignment = NSTextAlignmentCenter;
-        title.backgroundColor = [UIColor clearColor];
-        [title sizeToFit];
-        [self addSubview:title];
-        
-        title.center = icon.center;
-        title.deFrameTop = icon.deFrameBottom + 10;
-    }
-    
-    {
-        
-        NSInteger width = (kScreenWidth -30 - 12*4)/5;
-        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-        [icon setImage:[UIImage imageNamed:@"share_wechat.png"] forState:UIControlStateNormal];
-        [icon addTarget:self action:@selector(ShareActionForWechat:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:icon];
-        
-        icon.center = CGPointMake(15+ width*3/2+12, width/2+62);
-        
-        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
-        title.text = NSLocalizedStringFromTable(@"wechat", kLocalizedFile, nil);
-        title.font = [UIFont systemFontOfSize:10];
-        title.numberOfLines = 0;
-        title.textColor = UIColorFromRGB(0x000000);
-        title.textAlignment = NSTextAlignmentCenter;
-        title.backgroundColor = [UIColor clearColor];
-        [title sizeToFit];
-        [self addSubview:title];
-        
-        title.center = icon.center;
-        title.deFrameTop = icon.deFrameBottom + 10;
-    }
-    
-    {
-        
-        NSInteger width = (kScreenWidth -30 - 12*4)/5;
-        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-        [icon setImage:[UIImage imageNamed:@"share_weibo.png"] forState:UIControlStateNormal];
-        [icon addTarget:self action:@selector(ShareActionForWeibo:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:icon];
-        
-        icon.center = CGPointMake(15+ width*5/2+12*2, width/2+62);
-        
-        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
-        title.text = NSLocalizedStringFromTable(@"weibo", kLocalizedFile, nil);
-        title.font = [UIFont systemFontOfSize:10];
-        title.numberOfLines = 0;
-        title.textColor = UIColorFromRGB(0x000000);
-        title.textAlignment = NSTextAlignmentCenter;
-        title.backgroundColor = [UIColor clearColor];
-        [title sizeToFit];
-        [self addSubview:title];
-        
-        title.center = icon.center;
-        title.deFrameTop = icon.deFrameBottom + 10;
-    }
-    
-    {
-        
-        NSInteger width = (kScreenWidth -30 - 12*4)/5;
-        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-        [icon setImage:[UIImage imageNamed:@"share_safari.png"] forState:UIControlStateNormal];
-        [icon addTarget:self action:@selector(ShareActionForSafari:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:icon];
-        
-        icon.center = CGPointMake(15+ width*7/2+12*3, width/2+62);
-        
-        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
-        title.text = @"在 Safari 中打开";
-        title.font = [UIFont systemFontOfSize:10];
-        title.numberOfLines = 0;
-        title.textColor = UIColorFromRGB(0x000000);
-        title.textAlignment = NSTextAlignmentCenter;
-        title.backgroundColor = [UIColor clearColor];
-        [title sizeToFit];
-        [self addSubview:title];
-        
-        title.center = icon.center;
-        title.deFrameTop = icon.deFrameBottom + 10;
-    }
-    
-    {
-        
-        NSInteger width = (kScreenWidth -30 - 12*4)/5;
-        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-        [icon setImage:[UIImage imageNamed:@"share_mail.png"] forState:UIControlStateNormal];
-        [icon addTarget:self action:@selector(ShareActionForMail:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:icon];
-        
-        icon.center = CGPointMake(15+ width*9/2+12*4, width/2+62);
-        
-        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
-        title.text = NSLocalizedStringFromTable(@"mail", kLocalizedFile, nil);
-        title.font = [UIFont systemFontOfSize:10];
-        title.numberOfLines = 0;
-        title.textColor = [UIColor colorFromHexString:@"#212121"];
-        title.textAlignment = NSTextAlignmentCenter;
-        title.backgroundColor = [UIColor clearColor];
-        [title sizeToFit];
-        [self addSubview:title];
-        
-        title.center = icon.center;
-        title.deFrameTop = icon.deFrameBottom + 10;
-    }
     
 //    {
-//        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15,  178, kScreenWidth - 30, 0.5)];
-//        line.backgroundColor = UIColorFromRGB(0xe6e6e6);
-//        [self.board addSubview:line];
+//    
+//        NSInteger width = (kScreenWidth -30 - 12*4)/5;
+//        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+//        [icon setImage:[UIImage imageNamed:@"share_moment.png"] forState:UIControlStateNormal];
+//        [icon addTarget:self action:@selector(ShareActionForMoment:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:icon];
+//        
+//        icon.center = CGPointMake(15+ width/2, width/2+62);
+//        
+//        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
+//        title.text = NSLocalizedStringFromTable(@"wechat-moments", kLocalizedFile, nil);
+//        title.font = [UIFont systemFontOfSize:10];
+//        title.numberOfLines = 0;
+//        title.textColor = UIColorFromRGB(0x000000);
+//        title.textAlignment = NSTextAlignmentCenter;
+//        title.backgroundColor = [UIColor clearColor];
+//        [title sizeToFit];
+//        [self addSubview:title];
+//        
+//        title.center = icon.center;
+//        title.deFrameTop = icon.deFrameBottom + 10;
 //    }
-    
-    {
-        NSInteger width = (kScreenWidth -30 - 12*4)/5;
-        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-        [icon setImage:[UIImage imageNamed:@"share_refresh.png"] forState:UIControlStateNormal];
-        [icon addTarget:self action:@selector(ShareActionForRefresh:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:icon];
-        
-        icon.center = CGPointMake(15+ width/2, width/2+202);
-        
-        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
-        title.text = NSLocalizedStringFromTable(@"refresh", kLocalizedFile, nil);
-        title.font = [UIFont systemFontOfSize:10];
-        title.numberOfLines = 0;
-        title.textColor = UIColorFromRGB(0x000000);
-        title.textAlignment = NSTextAlignmentCenter;
-        title.backgroundColor = [UIColor clearColor];
-        [title sizeToFit];
-        [self addSubview:title];
-        
-        title.center = icon.center;
-        title.deFrameTop = icon.deFrameBottom + 10;
-    }
-    
-    {
-        
-        NSInteger width = (kScreenWidth -30 - 12*4)/5;
-        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-        [icon setImage:[UIImage imageNamed:@"share_copy.png"] forState:UIControlStateNormal];
-        [icon addTarget:self action:@selector(ShareActionForCopy:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:icon];
-        
-        icon.center = CGPointMake(15+ width*3/2+12, width/2+202);
-        
-        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, width, 30)];
-        title.text = @"复制链接";
-        title.font = [UIFont systemFontOfSize:10];
-        title.numberOfLines = 0;
-        title.textColor = [UIColor colorFromHexString:@"#212121"];
-        title.textAlignment = NSTextAlignmentCenter;
-        title.backgroundColor = [UIColor clearColor];
-        [title sizeToFit];
-        [self addSubview:title];
-        
-        title.center = icon.center;
-        title.deFrameTop = icon.deFrameBottom + 10;
-    }
-    
-//    if(![self.type isEqualToString:@"url"]){
-    if (self.type == EntityType) {
-        NSInteger width = (kScreenWidth -30 - 12*4)/5;
-        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-        [icon setImage:[UIImage imageNamed:@"share_report.png"] forState:UIControlStateNormal];
-        [icon addTarget:self action:@selector(ShareActionForReport:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:icon];
-        
-        icon.center = CGPointMake(15+ width*5/2+12*2, width/2+202);
-        
-        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
-        title.text = NSLocalizedStringFromTable(@"tipoff", kLocalizedFile, nil);
-        title.font = [UIFont systemFontOfSize:10];
-        title.numberOfLines = 0;
-        title.textColor = UIColorFromRGB(0x000000);
-        title.textAlignment = NSTextAlignmentCenter;
-        title.backgroundColor = [UIColor clearColor];
-        [title sizeToFit];
-        [self addSubview:title];
-        
-        title.center = icon.center;
-        title.deFrameTop = icon.deFrameBottom + 10;
-    }
-    
+//    
 //    {
-//        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, self.board.deFrameHeight - 52.5, kScreenWidth, 0.5)];
-//        line.backgroundColor = UIColorFromRGB(0xe6e6e6);
-//        [self.board addSubview:line];
+//        
+//        NSInteger width = (kScreenWidth -30 - 12*4)/5;
+//        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+//        [icon setImage:[UIImage imageNamed:@"share_wechat.png"] forState:UIControlStateNormal];
+//        [icon addTarget:self action:@selector(ShareActionForWechat:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:icon];
+//        
+//        icon.center = CGPointMake(15+ width*3/2+12, width/2+62);
+//        
+//        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
+//        title.text = NSLocalizedStringFromTable(@"wechat", kLocalizedFile, nil);
+//        title.font = [UIFont systemFontOfSize:10];
+//        title.numberOfLines = 0;
+//        title.textColor = UIColorFromRGB(0x000000);
+//        title.textAlignment = NSTextAlignmentCenter;
+//        title.backgroundColor = [UIColor clearColor];
+//        [title sizeToFit];
+//        [self addSubview:title];
+//        
+//        title.center = icon.center;
+//        title.deFrameTop = icon.deFrameBottom + 10;
 //    }
+//    
+//    {
+//        
+//        NSInteger width = (kScreenWidth -30 - 12*4)/5;
+//        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+//        [icon setImage:[UIImage imageNamed:@"share_weibo.png"] forState:UIControlStateNormal];
+//        [icon addTarget:self action:@selector(ShareActionForWeibo:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:icon];
+//        
+//        icon.center = CGPointMake(15+ width*5/2+12*2, width/2+62);
+//        
+//        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
+//        title.text = NSLocalizedStringFromTable(@"weibo", kLocalizedFile, nil);
+//        title.font = [UIFont systemFontOfSize:10];
+//        title.numberOfLines = 0;
+//        title.textColor = UIColorFromRGB(0x000000);
+//        title.textAlignment = NSTextAlignmentCenter;
+//        title.backgroundColor = [UIColor clearColor];
+//        [title sizeToFit];
+//        [self addSubview:title];
+//        
+//        title.center = icon.center;
+//        title.deFrameTop = icon.deFrameBottom + 10;
+//    }
+//    
+//    {
+//        
+//        NSInteger width = (kScreenWidth -30 - 12*4)/5;
+//        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+//        [icon setImage:[UIImage imageNamed:@"share_safari.png"] forState:UIControlStateNormal];
+//        [icon addTarget:self action:@selector(ShareActionForSafari:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:icon];
+//        
+//        icon.center = CGPointMake(15+ width*7/2+12*3, width/2+62);
+//        
+//        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
+//        title.text = @"在 Safari 中打开";
+//        title.font = [UIFont systemFontOfSize:10];
+//        title.numberOfLines = 0;
+//        title.textColor = UIColorFromRGB(0x000000);
+//        title.textAlignment = NSTextAlignmentCenter;
+//        title.backgroundColor = [UIColor clearColor];
+//        [title sizeToFit];
+//        [self addSubview:title];
+//        
+//        title.center = icon.center;
+//        title.deFrameTop = icon.deFrameBottom + 10;
+//    }
+//    
+//    {
+//        
+//        NSInteger width = (kScreenWidth -30 - 12*4)/5;
+//        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+//        [icon setImage:[UIImage imageNamed:@"share_mail.png"] forState:UIControlStateNormal];
+//        [icon addTarget:self action:@selector(ShareActionForMail:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:icon];
+//        
+//        icon.center = CGPointMake(15+ width*9/2+12*4, width/2+62);
+//        
+//        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
+//        title.text = NSLocalizedStringFromTable(@"mail", kLocalizedFile, nil);
+//        title.font = [UIFont systemFontOfSize:10];
+//        title.numberOfLines = 0;
+//        title.textColor = [UIColor colorFromHexString:@"#212121"];
+//        title.textAlignment = NSTextAlignmentCenter;
+//        title.backgroundColor = [UIColor clearColor];
+//        [title sizeToFit];
+//        [self addSubview:title];
+//        
+//        title.center = icon.center;
+//        title.deFrameTop = icon.deFrameBottom + 10;
+//    }
+//    
+////    {
+////        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15,  178, kScreenWidth - 30, 0.5)];
+////        line.backgroundColor = UIColorFromRGB(0xe6e6e6);
+////        [self.board addSubview:line];
+////    }
+//    
+//    {
+//        NSInteger width = (kScreenWidth -30 - 12*4)/5;
+//        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+//        [icon setImage:[UIImage imageNamed:@"share_refresh.png"] forState:UIControlStateNormal];
+//        [icon addTarget:self action:@selector(ShareActionForRefresh:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:icon];
+//        
+//        icon.center = CGPointMake(15+ width/2, width/2+202);
+//        
+//        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
+//        title.text = NSLocalizedStringFromTable(@"refresh", kLocalizedFile, nil);
+//        title.font = [UIFont systemFontOfSize:10];
+//        title.numberOfLines = 0;
+//        title.textColor = UIColorFromRGB(0x000000);
+//        title.textAlignment = NSTextAlignmentCenter;
+//        title.backgroundColor = [UIColor clearColor];
+//        [title sizeToFit];
+//        [self addSubview:title];
+//        
+//        title.center = icon.center;
+//        title.deFrameTop = icon.deFrameBottom + 10;
+//    }
+//    
+//    {
+//        
+//        NSInteger width = (kScreenWidth -30 - 12*4)/5;
+//        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+//        [icon setImage:[UIImage imageNamed:@"share_copy.png"] forState:UIControlStateNormal];
+//        [icon addTarget:self action:@selector(ShareActionForCopy:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:icon];
+//        
+//        icon.center = CGPointMake(15+ width*3/2+12, width/2+202);
+//        
+//        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, width, 30)];
+//        title.text = @"复制链接";
+//        title.font = [UIFont systemFontOfSize:10];
+//        title.numberOfLines = 0;
+//        title.textColor = [UIColor colorFromHexString:@"#212121"];
+//        title.textAlignment = NSTextAlignmentCenter;
+//        title.backgroundColor = [UIColor clearColor];
+//        [title sizeToFit];
+//        [self addSubview:title];
+//        
+//        title.center = icon.center;
+//        title.deFrameTop = icon.deFrameBottom + 10;
+//    }
+//    
+////    if(![self.type isEqualToString:@"url"]){
+//    if (self.type == EntityType) {
+//        NSInteger width = (kScreenWidth -30 - 12*4)/5;
+//        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+//        [icon setImage:[UIImage imageNamed:@"share_report.png"] forState:UIControlStateNormal];
+//        [icon addTarget:self action:@selector(ShareActionForReport:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:icon];
+//        
+//        icon.center = CGPointMake(15+ width*5/2+12*2, width/2+202);
+//        
+//        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
+//        title.text = NSLocalizedStringFromTable(@"tipoff", kLocalizedFile, nil);
+//        title.font = [UIFont systemFontOfSize:10];
+//        title.numberOfLines = 0;
+//        title.textColor = UIColorFromRGB(0x000000);
+//        title.textAlignment = NSTextAlignmentCenter;
+//        title.backgroundColor = [UIColor clearColor];
+//        [title sizeToFit];
+//        [self addSubview:title];
+//        
+//        title.center = icon.center;
+//        title.deFrameTop = icon.deFrameBottom + 10;
+//    }
+
     
     self.cancel.deFrameBottom = self.deFrameHeight;
 }

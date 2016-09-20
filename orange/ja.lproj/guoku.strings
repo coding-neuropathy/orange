@@ -49,6 +49,7 @@
 /**
  *  share
  */
+"share"             = "シェア";
 "share to weibo"    = "ブログへシェア";
 "share to wechat"   = "WECHATへシェア";
 "share to moment"   = "シェア";

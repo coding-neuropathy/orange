@@ -8,17 +8,20 @@
 
 #import "ShareController.h"
 #import "ShareView.h"
-//#import <libWeChatSDK/WXApi.h>
+#import "ShareViewCell.h"
+
 #import "ThreePartHandler.h"
 #import "ReportViewController.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 
-@interface ShareController () <ShareViewDelegate, MFMailComposeViewControllerDelegate>
+@interface ShareController () <ShareViewDelegate, ShareViewDataSource, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) NSString                      *shareTitle;
 @property (strong, nonatomic) UIImage                       *shareImage;
 @property (strong, nonatomic) NSString                      *urlString;
+
+@property (strong, nonatomic) NSMutableArray                *dataArray;
 
 @property (strong, nonatomic) MFMailComposeViewController   *composer;
 
@@ -41,6 +44,54 @@
     return self;
 }
 
+- (NSMutableArray *)dataArray
+{
+    if (!_dataArray) {
+        _dataArray  = [[NSMutableArray alloc] initWithCapacity:0];
+        
+        [_dataArray addObject:@{
+                                @"title"    : NSLocalizedStringFromTable(@"share to moment", kLocalizedFile, nil),
+                                @"image"    : @"share_moment",
+                                }];
+        
+        [_dataArray addObject:@{
+                                @"title"    : NSLocalizedStringFromTable(@"share to wechat", kLocalizedFile, nil),
+                                @"image"    : @"share_wechat",
+                                }];
+        
+        [_dataArray addObject:@{
+                                @"title"    : NSLocalizedStringFromTable(@"weibo", kLocalizedFile, nil),
+                                @"image"    : @"share_weibo",
+                                }];
+        
+        [_dataArray addObject:@{
+                                @"title"    : NSLocalizedStringFromTable(@"open in safari", kLocalizedFile, nil),
+                                @"image"    : @"share_safari",
+                                }];
+        
+        [_dataArray addObject:@{
+                                @"title"    : NSLocalizedStringFromTable(@"mail", kLocalizedFile, nil),
+                                @"image"    : @"share_mail",
+                                }];
+        
+        [_dataArray addObject:@{
+                                @"title"    : NSLocalizedStringFromTable(@"refresh", kLocalizedFile, nil),
+                                @"image"    : @"share_refresh",
+                                }];
+    
+        [_dataArray addObject:@{
+                                @"title"    : NSLocalizedStringFromTable(@"copy-link", kLocalizedFile, nil),
+                                @"image"    : @"share_copy",
+                                }];
+        
+        [_dataArray addObject:@{
+                                @"title"    : NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil),
+                                @"image"    : @"share_report",
+                                }];
+    }
+    return _dataArray;
+}
+
 #pragma mark - lazy load 
 - (UIVisualEffectView *)effectview
 {
@@ -61,7 +112,12 @@
         _shareView.backgroundColor  = [UIColor colorFromHexString:@"#f4f4f4"];
         _shareView.deFrameSize      = CGSizeMake(kScreenWidth, 358);
         _shareView.deFrameTop       = kScreenHeight;
+        
         _shareView.delegate         = self;
+        _shareView.datasource       = self;
+
+        
+//        [_shareView reloadData];
     }
     return _shareView;
 }
@@ -73,6 +129,8 @@
     
     [self.view addSubview:self.effectview];
     [self.view addSubview:self.shareView];
+    
+    [self.shareView registerClass:[ShareViewCell class]];
 }
 
 - (void)viewDidLoad {
@@ -153,8 +211,8 @@
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-         [self.shareView layoutSubviews];
-         //         [self.collectionView.collectionViewLayout invalidateLayout];
+         self.shareView.deFrameWidth    = size.width;
+         self.shareView.deFrameBottom   = self.view.deFrameBottom;
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
          [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
@@ -162,6 +220,41 @@
     
 }
 
+#pragma mark - <ShareViewDataSource>
+- (NSInteger)numberOfcellInShareView:(UIView *)shareview
+{
+    return self.dataArray.count;
+}
+
+- (CGFloat)shareViewMargin
+{
+    return 15.;
+}
+
+- (CGFloat)itemSpaceInShareView
+{
+    return 12.;
+}
+
+- (CGSize)shareView:(ShareView *)shareview sizeForItemAtIndex:(NSInteger)index
+{
+    return CGSizeMake(60., 90.);
+}
+
+- (UIView *)shareView:(ShareView *)shareview viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+{
+
+    ShareViewCell * cell = (ShareViewCell *)view;
+    if (!cell) {
+        cell = (ShareViewCell *)[shareview dequeueItemViewIndex:index];
+    }
+   
+    NSDictionary * row = [self.dataArray objectAtIndex:index];
+    [cell setIconWithImage:[UIImage imageNamed:[row objectForKey:@"image"]]
+                     Title:[row objectForKey:@"title"]];
+
+    return cell;
+}
 
 #pragma mark - <ShareViewDelegate>
 - (void)handleCancelBtnAction:(id)sender
