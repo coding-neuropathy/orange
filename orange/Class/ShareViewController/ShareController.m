@@ -84,10 +84,12 @@
                                 @"image"    : @"share_copy",
                                 }];
         
-        [_dataArray addObject:@{
+        if (self.type == EntityShareType) {
+            [_dataArray addObject:@{
                                 @"title"    : NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil),
                                 @"image"    : @"share_report",
                                 }];
+        }
     }
     return _dataArray;
 }
@@ -238,7 +240,7 @@
 
 - (CGSize)shareView:(ShareView *)shareview sizeForItemAtIndex:(NSInteger)index
 {
-    return CGSizeMake(60., 90.);
+    return CGSizeMake((kScreenWidth -30 - 12*4)/5, 90.);
 }
 
 - (UIView *)shareView:(ShareView *)shareview viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
@@ -262,6 +264,39 @@
     [self dismiss];
 }
 
+- (void)ShareView:(ShareView *)shareview didSelectItemAtIndex:(NSInteger)index
+{
+    switch (index) {
+        case 0:
+            [self handleShareOnMomentsAction:nil];
+            break;
+        case 1:
+            [self handleShareToWeChat:nil];
+            break;
+        case 2:
+            [self handleShareToWeibo:nil];
+            break;
+        case 3:
+            [self handleOpenInSafari:nil];
+            break;
+        case 4:
+            [self handleSendMail:nil];
+            break;
+        case 5:
+            [self handlePageRefreshRequest:nil];
+            break;
+        case 6:
+            [self handleCopyURL:nil];
+            break;
+        case 7:
+            [self handleTipOff:nil];
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - handle action
 - (void)handleShareOnMomentsAction:(id)sender
 {
     [self dismissWithCompletion:^{
@@ -341,7 +376,7 @@
     }
 }
 
-- (void)handlerCopyURL:(id)sender
+- (void)handleCopyURL:(id)sender
 {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = self.urlString;
@@ -349,7 +384,7 @@
     [self dismiss];
 }
 
-- (void)handlerTipOff:(id)sender
+- (void)handleTipOff:(id)sender
 {
     [self dismissWithCompletion:^{
         ReportViewController * VC = [[ReportViewController alloc] init];

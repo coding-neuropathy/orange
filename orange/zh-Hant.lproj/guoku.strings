@@ -50,6 +50,7 @@
 /**
  *  share
  */
+"share"             = "分享";
 "share to weibo"    = "分享到微博";
 "share to wechat"   = "分享到微信";
 "share to moment"   = "分享到朋友圈";

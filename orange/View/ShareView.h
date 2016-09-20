@@ -12,8 +12,7 @@
 #import "DataStructure.h"
 
 
-@protocol ShareViewDelegate;
-@protocol ShareViewDataSource;
+@protocol ShareViewDelegate, ShareViewDataSource;
 
 @interface ShareView : UIView
 
@@ -34,16 +33,6 @@
 - (void)handleCancelBtnAction:(id)sender;
 @optional
 - (void)ShareView:(ShareView *)shareview didSelectItemAtIndex:(NSInteger)index;
-
-- (void)handleShareOnMomentsAction:(id)sender;
-- (void)handleShareToWeChat:(id)sender;
-- (void)handleShareToWeibo:(id)sender;
-- (void)handleOpenInSafari:(id)sender;
-- (void)handleSendMail:(id)sender;
-- (void)handlePageRefreshRequest:(id)sender;
-- (void)handlerCopyURL:(id)sender;
-- (void)handlerTipOff:(id)sender;
-
 @end
 
 

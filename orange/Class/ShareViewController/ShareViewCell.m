@@ -32,7 +32,7 @@
 {
     if (!_imageView) {
         _imageView                  = [[UIImageView alloc] initWithFrame:CGRectZero];
-//        _imageView.contentMode      = UIViewContentModeScaleToFill;
+        _imageView.contentMode      = UIViewContentModeScaleAspectFit;
         _imageView.backgroundColor  = [UIColor clearColor];
         [self addSubview:_imageView];
     }
@@ -59,7 +59,11 @@
 - (void)setIconWithImage:(UIImage *)image Title:(NSString *)title
 {
     self.imageView.image        = image;
-    self.imageView.deFrameSize  = image.size;
+    if (self.deFrameWidth > image.size.width) {
+        self.imageView.deFrameSize  = image.size;
+    } else {
+        self.imageView.deFrameSize  = CGSizeMake(self.deFrameWidth, self.deFrameWidth);
+    }
     self.textLabel.text         = title;
     
     [self setNeedsLayout];
