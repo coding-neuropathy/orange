@@ -1094,7 +1094,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 - (void)shareButtonAction
 {
     ShareController * shareVC   = [[ShareController alloc] initWithTitle:self.entity.entityName URLString:[NSString stringWithFormat:@"%@%@/",kGK_WeixinShareURL, self.entity.entityHash] Image:self.image.image];
-    
+    shareVC.type    = EntityType;
     __weak __typeof(&*self)weakSelf = self;
     shareVC.refreshBlock        = ^(){
         [SVProgressHUD showWithStatus:NSLocalizedStringFromTable(@"refreshing", kLocalizedFile, nil)];

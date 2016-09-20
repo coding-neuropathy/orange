@@ -10,6 +10,7 @@
 #import "ShareView.h"
 //#import <libWeChatSDK/WXApi.h>
 #import "ThreePartHandler.h"
+#import "ReportViewController.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 
@@ -147,6 +148,20 @@
     [self dismissWithCompletion:nil];
 }
 
+#pragma mark - 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [self.shareView layoutSubviews];
+         //         [self.collectionView.collectionViewLayout invalidateLayout];
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+     }];
+    
+}
+
 
 #pragma mark - <ShareViewDelegate>
 - (void)handleCancelBtnAction:(id)sender
@@ -196,7 +211,11 @@
             self.composer = [[MFMailComposeViewController alloc] init];
             self.composer.mailComposeDelegate = self;
             [self.composer setSubject:@"果库 - 精英消费指南"];
-            [self.composer setMessageBody:[self.shareTitle stringByAppendingString:[NSString stringWithFormat:@"<br><a href='%@' target='_blank'>购买链接</a>", self.urlString]] isHTML:YES];
+            if (self.type == ArticleType) {
+                [self.composer setMessageBody:self.article.content isHTML:YES];
+            } else {
+                [self.composer setMessageBody:[self.shareTitle stringByAppendingString:[NSString stringWithFormat:@"<br><a href='%@' target='_blank'>购买链接</a>", self.urlString]] isHTML:YES];
+            }
             /*
             if (self.image) {
                 UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
@@ -268,6 +287,7 @@
             break;
         case MFMailComposeResultSent:
             [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"send-success", kLocalizedFile, nil)];
+            
             break;
         case MFMailComposeResultFailed:
             [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"send-failure", kLocalizedFile, nil)];
@@ -275,16 +295,11 @@
         default:
             break;
     }
-    
-//    [UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-////        self.alpha = 1;
-//    } completion:^(BOOL finished) {
-//        
-//    }];
     self.view.hidden    = NO;
     [controller dismissViewControllerAnimated:YES completion:^{
-//        self.view.hidden = NO;
-        
+        if (result == MFMailComposeResultSent) {
+            [self dismiss];
+        }
     }];
 }
 

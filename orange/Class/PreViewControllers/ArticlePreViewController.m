@@ -7,9 +7,8 @@
 //
 
 #import "ArticlePreViewController.h"
-//#import <WebKit/WebKit.h>
-#import <libWeChatSDK/WXApi.h>
 #import "ArticlePreView.h"
+#import "ThreePartHandler.h"
 
 @interface ArticlePreViewController ()
 
@@ -67,70 +66,23 @@
 - (NSArray <id <UIPreviewActionItem>> *)previewActionItems
 {
     UIPreviewAction *action = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"share to wechat", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        [self wxShare:0];
+//        [self wxShare:0];
+        [[ThreePartHandler sharedThreePartHandler] wxShare:0 ShareImage:self.image Title:self.article.title URL:[self.article.articleURL absoluteString]];
     }];
     
     UIPreviewAction *action2 = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"share to moment", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        [self wxShare:1];
+//        [self wxShare:1];
+        [[ThreePartHandler sharedThreePartHandler] wxShare:1 ShareImage:self.image Title:self.article.title URL:[self.article.articleURL absoluteString]];
     }];
 
     UIPreviewAction *action3 = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"share to weibo", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        [self weiboShare];
+//        [self weiboShare];
+//        NSString *shareText =  [NSString stringWithFormat:@"%@ %@?from=weibo", self.article.title, self.article.articleURL];
+        [[ThreePartHandler sharedThreePartHandler] weiboShareWithTitle:self.article.title ShareImage:self.image URLString:self.article.articleURL.absoluteString];
     }];
     
     return @[action, action2, action3];
 }
 
-
-#pragma mark - share to sns
--(void)weiboShare
-{
-    WBMessageObject *message = [WBMessageObject message];
-    //    message.text = self.title;
-    WBImageObject *image = [WBImageObject object];
-    message.text = [NSString stringWithFormat:@"%@ %@?from=weibo", self.article.title, self.article.articleURL];
-    image.imageData = UIImageJPEGRepresentation(self.image, 1.0);
-    message.imageObject = image;
-    
-    
-    
-    NSString * wbtoken = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
-    
-    WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
-    authRequest.redirectURI = kGK_WeiboRedirectURL;
-    authRequest.scope = @"all";
-    
-    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:wbtoken];
-    request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",};
-    //    request.shouldOpenWeiboAppInstallPageIfNotInstalled = NO;
-    [WeiboSDK sendRequest:request];
-
-}
-
--(void)wxShare:(int)scene
-{
-    WXMediaMessage *message = [WXMediaMessage message];
-    message.title = self.article.title;
-    message.description= @"";
-    if (self.image) {
-        [message setThumbImage:[UIImage imageWithData:[self.image imageDataLessThan_10K]]];
-    }
-    else
-    {
-        [message setThumbImage:[UIImage imageNamed:@"wxshare"]];
-    }
-
-
-    WXAppExtendObject *ext = [WXAppExtendObject object];
-    ext.url = [self.article.articleURL absoluteString];
-
-    message.mediaObject = ext;
-    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-    req.bText = NO;
-    req.message = message;
-    req.scene = scene;
-
-    [WXApi sendReq:req];
-}
 
 @end

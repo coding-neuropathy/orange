@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <libWeChatSDK/WXApi.h>
-#import "ReportViewController.h"
+//#import "ReportViewController.h"
+#import "DataStructure.h"
 
 @protocol ShareViewDelegate <NSObject>
 
@@ -28,17 +29,20 @@
 
 
 
+
+
 @interface ShareView : UIView
-@property (nonatomic, strong) GKEntity * entity;
-@property (nonatomic, strong) NSString * type;
+//@property (nonatomic, strong) GKEntity * entity;
+//@property (nonatomic, strong) NSString * type;
+@property (assign, nonatomic) ShareType type;
 @property (strong, nonatomic) id<ShareViewDelegate> delegate;
 
-@property (nonatomic, copy) void (^tapRefreshButtonBlock)();
+//@property (nonatomic, copy) void (^tapRefreshButtonBlock)();
 
 
-- (instancetype)initWithTitle:(NSString *)title SubTitle:(NSString *)subTitle Image:(UIImage *)image URL:(NSString *)url;
-- (void)show;
-- (void)dismiss;
+//- (instancetype)initWithTitle:(NSString *)title SubTitle:(NSString *)subTitle Image:(UIImage *)image URL:(NSString *)url;
+//- (void)show;
+//- (void)dismiss;
 
 
 @end

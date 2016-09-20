@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataStructure.h"
 
 @interface ShareController : UIViewController
 
-@property (weak, nonatomic) GKEntity    *entity;
+@property (assign, nonatomic)   ShareType   type;
+@property (weak, nonatomic)     GKEntity    *entity;
+@property (weak, nonatomic)     GKArticle   *article;
 
-@property (nonatomic, copy) void (^refreshBlock)();
+@property (copy, nonatomic) void (^refreshBlock)();
+
+
 
 
 - (instancetype)initWithTitle:(NSString *)title URLString:(NSString *)urlString Image:(UIImage *)image;

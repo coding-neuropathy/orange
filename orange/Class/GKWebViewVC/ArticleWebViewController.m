@@ -13,7 +13,8 @@
 #import "WebViewProgressView.h"
 //#import "SDWebImageDownloader.h"
 //#import <SDWebImage/SDWebImageDownloader.h>
-#import "ShareView.h"
+//#import "ShareView.h"
+#import "ShareController.h"
 
 #import "ArticleCommentController.h"
 
@@ -382,12 +383,19 @@
     }
     
     
-    ShareView * view = [[ShareView alloc]initWithTitle:self.article.title SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
-    view.type = @"url";
-    view.tapRefreshButtonBlock = ^(){
+//    ShareView * view = [[ShareView alloc]initWithTitle:self.article.title SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
+//    view.type = @"url";
+//    view.tapRefreshButtonBlock = ^(){
+//        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+//    };
+//    [view show];
+    ShareController *shareVC = [[ShareController alloc] initWithTitle:self.article.title URLString:self.webView.URL.absoluteString Image:image];
+    shareVC.type    = ArticleType;
+    shareVC.article = self.article;
+    shareVC.refreshBlock    = ^(){
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     };
-    [view show];
+    [shareVC show];
 }
 
 - (void)commentButtonAction:(id)sender

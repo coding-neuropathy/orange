@@ -85,7 +85,7 @@
 {
     _text = text;
     switch (self.headertype) {
-        case CategoryType:
+        case CategoryHeaderType:
         {
             self.textLabel.text = [NSString stringWithFormat:@"%@「%@」",NSLocalizedStringFromTable(@"from", kLocalizedFile, nil), [_text componentsSeparatedByString:@"-"][0]];
             self.indicatorLable.hidden = NO;

@@ -7,40 +7,19 @@
 //
 
 #import "ShareView.h"
-#import <MessageUI/MFMailComposeViewController.h>
 
 
-@interface ShareView () <UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
-//@property(nonatomic, strong) UIView * mask;
-@property(nonatomic, strong) UIView * board;
+@interface ShareView ()
+
 @property (strong, nonatomic) UILabel   *titleLabel;
 @property(nonatomic, strong) UIButton   *cancel;
 
-@property(nonatomic, strong) UIImage * image;
-@property(nonatomic, strong) NSString * title;
-@property(nonatomic, strong) NSString * subTitle;
-@property(nonatomic, strong) NSString * url;
-@property(nonatomic, strong) MFMailComposeViewController *composer;
 
 
 @end
 
 @implementation ShareView
 
-
-
-- (instancetype)initWithTitle:(NSString *)title SubTitle:(NSString *)subTitle Image:(UIImage *)image URL:(NSString *)url
-{
-    self = [self initWithFrame:CGRectZero];
-    if (self) {
-//        self.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-        self.title = title;
-        self.subTitle = subTitle;
-        self.image = image;
-        self.url = url;
-    }
-    return self;
-}
 
 - (UIButton *)cancel
 {
@@ -206,14 +185,13 @@
         title.deFrameTop = icon.deFrameBottom + 10;
     }
     
-    {
+//    {
 //        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(15,  178, kScreenWidth - 30, 0.5)];
 //        line.backgroundColor = UIColorFromRGB(0xe6e6e6);
 //        [self.board addSubview:line];
-    }
+//    }
     
     {
-        
         NSInteger width = (kScreenWidth -30 - 12*4)/5;
         UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
         [icon setImage:[UIImage imageNamed:@"share_refresh.png"] forState:UIControlStateNormal];
@@ -223,7 +201,7 @@
         icon.center = CGPointMake(15+ width/2, width/2+202);
         
         UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
-        title.text = @"刷新";
+        title.text = NSLocalizedStringFromTable(@"refresh", kLocalizedFile, nil);
         title.font = [UIFont systemFontOfSize:10];
         title.numberOfLines = 0;
         title.textColor = UIColorFromRGB(0x000000);
@@ -260,8 +238,8 @@
         title.deFrameTop = icon.deFrameBottom + 10;
     }
     
-    if(![self.type isEqualToString:@"url"]){
-        
+//    if(![self.type isEqualToString:@"url"]){
+    if (self.type == EntityType) {
         NSInteger width = (kScreenWidth -30 - 12*4)/5;
         UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, width)];
         [icon setImage:[UIImage imageNamed:@"share_report.png"] forState:UIControlStateNormal];
@@ -271,7 +249,7 @@
         icon.center = CGPointMake(15+ width*5/2+12*2, width/2+202);
         
         UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, 60, 30)];
-        title.text = @"举报";
+        title.text = NSLocalizedStringFromTable(@"tipoff", kLocalizedFile, nil);
         title.font = [UIFont systemFontOfSize:10];
         title.numberOfLines = 0;
         title.textColor = UIColorFromRGB(0x000000);
@@ -284,16 +262,13 @@
         title.deFrameTop = icon.deFrameBottom + 10;
     }
     
-    {
-        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, self.board.deFrameHeight - 52.5, kScreenWidth, 0.5)];
-        line.backgroundColor = UIColorFromRGB(0xe6e6e6);
-        [self.board addSubview:line];
-    }
+//    {
+//        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, self.board.deFrameHeight - 52.5, kScreenWidth, 0.5)];
+//        line.backgroundColor = UIColorFromRGB(0xe6e6e6);
+//        [self.board addSubview:line];
+//    }
     
     self.cancel.deFrameBottom = self.deFrameHeight;
-//    [self.board addSubview:self.cancel];
-    
-//    [self insertSubview:self.mask atIndex:0];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -315,104 +290,6 @@
     
 }
 
-- (void)show
-{
-//    [self setNeedsDisplay];
-//    self.alpha = 0;
-//    self.board.deFrameTop = kScreenHeight;
-//    [kAppDelegate.window.rootViewController.view addSubview:self];
-//    
-//    [UIView animateWithDuration:0.35 animations:^{
-//        self.alpha = 1;
-//        self.board.deFrameBottom = kScreenHeight;
-//    } completion:^(BOOL finished) {
-//        
-//    }];
-}
-- (void)dismiss
-{
-//    
-//    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-//        self.alpha = 0;
-//        self.board.deFrameTop = kScreenHeight;
-//    } completion:^(BOOL finished) {
-//        [self removeFromSuperview];
-//    }];
-    
-}
-
-//- (void)wxShare:(int)scene
-//{
-//    WXMediaMessage *message = [WXMediaMessage message];
-//    
-//    UIImage *image = [self.image  imageWithSize:CGSizeMake(220.f, 220.f)];
-//    NSData *oldData = UIImageJPEGRepresentation(image, 1.0);
-//    CGFloat size = oldData.length / 1024;
-//    if (size > 25.0f) {
-//        CGFloat f = 25.0f / size;
-//        NSData *datas = UIImageJPEGRepresentation(image, f);
-//        //            float s = datas.length / 1024;
-//        //            GKLog(@"s---%f",s);
-//        UIImage *smallImage = [UIImage imageWithData:datas];
-//        [message setThumbImage:smallImage];
-//    }
-//    else{
-//        [message setThumbImage:image];
-//    }
-//    
-//    WXWebpageObject *webPage = [WXWebpageObject object];
-//    webPage.webpageUrl = [self.url stringByAppendingString:@"?from=wechat"];
-//    message.mediaObject = webPage;
-//    if(scene == 1)
-//    {
-//        message.title = self.title;
-//        message.description = @"";
-//    }
-//    else
-//    {
-//        message.title = @"果库 - 精英消费指南";
-//        message.description = self.title;
-//    }
-//    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-//    req.bText = NO;
-//    req.message = message;
-//    req.scene =scene;
-//    
-//    if ([WXApi sendReq:req]) {
-//        if (scene == 1) {
-////            [AVAnalytics event:@"share entity to moments" attributes:@{@"entity":self.title}];
-//            [MobClick event:@"share entity to moments" attributes:@{@"entity":self.title}];
-//        } else {
-////            [AVAnalytics event:@"share entity to wechat" attributes:@{@"entity":self.title}];
-//            [MobClick event:@"share entity to wechat" attributes:@{@"entity":self.title}];
-//        }
-//    }
-//    else{
-//        [SVProgressHUD showImage:nil status:@"分享失败"];
-//    }
-//}
-//
-//- (void)weiboShare
-//{
-//    WBMessageObject *message = [WBMessageObject message];
-////    message.text = self.title;
-//    WBImageObject *image = [WBImageObject object];
-//    message.text = [NSString stringWithFormat:@"%@ %@?from=weibo", self.title, self.url];
-//    image.imageData = UIImageJPEGRepresentation(self.image, 1.0);
-//    message.imageObject = image;
-//    
-//    
-//    NSString * wbtoken = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
-//    
-//    WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
-//    authRequest.redirectURI = kGK_WeiboRedirectURL;
-//    authRequest.scope = @"all";
-//    
-//    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:wbtoken];
-//    request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",};
-//    //    request.shouldOpenWeiboAppInstallPageIfNotInstalled = NO;
-//    [WeiboSDK sendRequest:request];
-//}
 
 #pragma mark - button action
 

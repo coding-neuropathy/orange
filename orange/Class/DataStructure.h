@@ -62,3 +62,12 @@ typedef NS_ENUM(NSInteger, SettingCellType) {
     AboutType,
 };
 
+/**
+ *  分享类型
+ */
+typedef NS_ENUM(NSInteger, ShareType) {
+    EntityShareType,
+    ArticleShareType,
+    URLShareType,
+};
+

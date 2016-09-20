@@ -197,6 +197,7 @@
 		8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6841C0590A500CCD867 /* libz.tbd */; };
 		8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3F6861C05910A00CCD867 /* libicucore.tbd */; };
 		8AC7149F1D83FE800098A706 /* GKHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC7149E1D83FE800098A706 /* GKHandler.m */; };
+		8AC75DC81D90E4F900DDDFD2 /* ShareViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC75DC71D90E4F900DDDFD2 /* ShareViewCell.m */; };
 		8ACB1FB71D6AD83000D3AEF3 /* GKEntitySKU.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ACB1FB51D6AD83000D3AEF3 /* GKEntitySKU.h */; };
 		8ACB1FB81D6AD83000D3AEF3 /* GKEntitySKU.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB1FB61D6AD83000D3AEF3 /* GKEntitySKU.m */; };
 		8ACB9E481D61AB1C00C81500 /* EntitySKUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */; };
@@ -726,6 +727,8 @@
 		8AC7149D1D83FE800098A706 /* GKHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKHandler.h; path = GKHandler/GKHandler.h; sourceTree = "<group>"; };
 		8AC7149E1D83FE800098A706 /* GKHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKHandler.m; path = GKHandler/GKHandler.m; sourceTree = "<group>"; };
 		8AC714A01D8401750098A706 /* GKViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKViewDelegate.h; sourceTree = "<group>"; };
+		8AC75DC61D90E4F900DDDFD2 /* ShareViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareViewCell.h; path = ShareViewController/ShareViewCell.h; sourceTree = "<group>"; };
+		8AC75DC71D90E4F900DDDFD2 /* ShareViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareViewCell.m; path = ShareViewController/ShareViewCell.m; sourceTree = "<group>"; };
 		8ACB1FB51D6AD83000D3AEF3 /* GKEntitySKU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKEntitySKU.h; path = Entity/GKEntitySKU.h; sourceTree = "<group>"; };
 		8ACB1FB61D6AD83000D3AEF3 /* GKEntitySKU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKEntitySKU.m; path = Entity/GKEntitySKU.m; sourceTree = "<group>"; };
 		8ACB9E461D61AB1C00C81500 /* EntitySKUController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUController.h; path = QRCodeViewController/EntitySKUController/EntitySKUController.h; sourceTree = "<group>"; };
@@ -1941,6 +1944,8 @@
 				4EF508801B49042000C92618 /* ShareView.m */,
 				8AA0AC921D8E8CBA00746A84 /* ShareController.h */,
 				8AA0AC931D8E8CBA00746A84 /* ShareController.m */,
+				8AC75DC61D90E4F900DDDFD2 /* ShareViewCell.h */,
+				8AC75DC71D90E4F900DDDFD2 /* ShareViewCell.m */,
 			);
 			name = ShareViewController;
 			sourceTree = "<group>";
@@ -2938,6 +2943,7 @@
 				8A293A721D8ABA4F000B7227 /* EntityNoteFooterView.m in Sources */,
 				4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */,
 				B7BE3E2D1BA9A17A004AD422 /* CategroyGroupController.m in Sources */,
+				8AC75DC81D90E4F900DDDFD2 /* ShareViewCell.m in Sources */,
 				4E2D6D521A6BF8E0009E4A17 /* MessageCell.m in Sources */,
 				4E8A34361BB060D700DF3841 /* tipView.m in Sources */,
 				235A2FE01D127D8600109000 /* MoreArticleCell.m in Sources */,

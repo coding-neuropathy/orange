@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, EntitySectionType) {
-    CategoryType = 0,
+    CategoryHeaderType = 0,
     LikeType,
     NoteType,
     RecommendType,
