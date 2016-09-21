@@ -685,6 +685,7 @@
 		8A5901771D643F1100780C74 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
 		8A5901781D643F1100780C74 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
 		8A59017F1D643F3700780C74 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		8A5F321D1D9259C200860C50 /* tv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A74DFEF1D767D6C0027D36B /* SearchTipsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTipsController.h; sourceTree = "<group>"; };
 		8A74DFF01D767D6C0027D36B /* SearchTipsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTipsController.m; sourceTree = "<group>"; };
 		8A7B791F1BAAB9310089FFD6 /* DataStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructure.h; sourceTree = "<group>"; };
@@ -1013,6 +1014,13 @@
 				4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */,
 				1A4587A518C69A968932EB22 /* libPods-orange.a in Frameworks */,
 				251F78790EDF87A6C9177121 /* libPods-orange.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A5F321A1D9259C200860C50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1455,6 +1463,7 @@
 				4E56DF1519D552C000263B17 /* orange.app */,
 				B7BFC8FC1ACC27C1009627CA /* today.appex */,
 				39B8688E1ACD0CF600A2115D /* core.framework */,
+				8A5F321D1D9259C200860C50 /* tv.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2488,6 +2497,23 @@
 			productReference = 4E56DF1519D552C000263B17 /* orange.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8A5F321C1D9259C200860C50 /* tv */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A5F322E1D9259C300860C50 /* Build configuration list for PBXNativeTarget "tv" */;
+			buildPhases = (
+				8A5F32191D9259C200860C50 /* Sources */,
+				8A5F321A1D9259C200860C50 /* Frameworks */,
+				8A5F321B1D9259C200860C50 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tv;
+			productName = tv;
+			productReference = 8A5F321D1D9259C200860C50 /* tv.app */;
+			productType = "com.apple.product-type.application";
+		};
 		B7BFC8FB1ACC27C1009627CA /* today */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B7BFC90B1ACC27C2009627CA /* Build configuration list for PBXNativeTarget "today" */;
@@ -2534,6 +2560,11 @@
 								enabled = 1;
 							};
 						};
+					};
+					8A5F321C1D9259C200860C50 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = BKXKS4HPNG;
+						ProvisioningStyle = Automatic;
 					};
 					B7BFC8FB1ACC27C1009627CA = {
 						CreatedOnToolsVersion = 6.2;
@@ -2594,6 +2625,7 @@
 				4E56DF1419D552C000263B17 /* orange */,
 				B7BFC8FB1ACC27C1009627CA /* today */,
 				39B8688D1ACD0CF600A2115D /* core */,
+				8A5F321C1D9259C200860C50 /* tv */,
 			);
 		};
 /* End PBXProject section */
@@ -2643,6 +2675,13 @@
 				4E4F27F91B6F4699003A63C5 /* 5.png in Resources */,
 				4E4F27D81B6F438E003A63C5 /* loading-image.png in Resources */,
 				4E4F27FB1B6F4699003A63C5 /* 7.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A5F321B1D9259C200860C50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2949,6 +2988,13 @@
 				235A2FE01D127D8600109000 /* MoreArticleCell.m in Sources */,
 				B736FF2A1BD65D6E000668E4 /* UserTagsViewController.m in Sources */,
 				8A44F5991C7C066500D1DC19 /* ArticlePreViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A5F32191D9259C200860C50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3300,6 +3346,46 @@
 			};
 			name = Release;
 		};
+		8A5F322F1D9259C300860C50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				INFOPLIST_FILE = tv/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.tv;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		8A5F32301D9259C300860C50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				INFOPLIST_FILE = tv/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.tv;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		B7BFC90C1ACC27C2009627CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3374,6 +3460,15 @@
 			buildConfigurations = (
 				4E56DF3919D552C000263B17 /* Debug */,
 				4E56DF3A19D552C000263B17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A5F322E1D9259C300860C50 /* Build configuration list for PBXNativeTarget "tv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A5F322F1D9259C300860C50 /* Debug */,
+				8A5F32301D9259C300860C50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
