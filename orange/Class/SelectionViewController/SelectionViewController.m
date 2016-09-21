@@ -389,6 +389,17 @@ static int lastContentOffset;
     NSIndexPath * indexPath             = [self.collectionView indexPathForItemAtPoint:location];
     SelectionCell * cell                = (SelectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     
+    [MobClick event:@"3d-touch" attributes:@{
+                                             @"entity"  : cell.entity.title,
+                                             @"from"    : @"selection-page-recommend",
+                                             }];
+    if (iOS10) {
+        EntityViewController * vc = [[EntityViewController alloc] initWithEntity:cell.entity];
+        vc.preferredContentSize = CGSizeMake(0., 0.);
+        previewingContext.sourceRect = cell.frame;
+        vc.hidesBottomBarWhenPushed = YES;
+        return vc;
+    } else {
     EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.image.image];
     vc.preferredContentSize = CGSizeMake(0., 0.);
     previewingContext.sourceRect = cell.frame;
@@ -412,11 +423,11 @@ static int lastContentOffset;
         [self.navigationController pushViewController:vc1 animated:YES];
     }];
             
-    [MobClick event:@"3d-touch" attributes:@{
-                                            @"entity"  : cell.entity.title,
-                                            @"from"    : @"selection-page-recommend",
-                                    }];
+
     return vc;
+    }
+    
+    
 }
 
 - (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit

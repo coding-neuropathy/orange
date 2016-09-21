@@ -11,14 +11,16 @@
 
 @interface EntitySKUView () <iCarouselDelegate, iCarouselDataSource>
 
-@property (strong, nonatomic) iCarousel     *imagesView;
-@property (strong, nonatomic) UILabel       *titleLabel;
-@property (strong, nonatomic) UILabel       *priceLabel;
+@property (strong, nonatomic) iCarousel         *imagesView;
+@property (strong, nonatomic) UILabel           *titleLabel;
+@property (strong, nonatomic) UILabel           *priceLabel;
 //@property (strong, nonatomic) UIButton      *cartBtn;
+@property (strong, nonatomic) NSMutableDictionary       *skuBtnItems;
 
-@property (strong, nonatomic) UILabel       *skuInfoLabel;
+@property (strong, nonatomic) UILabel           *skuInfoLabel;
 
-@property (strong, nonatomic) GKEntitySKU   *selectedSKU;
+@property (strong, nonatomic) GKEntitySKU       *selectedSKU;
+@property (strong, nonatomic) NSMutableArray    *imageURLArray;
 
 @property (assign, nonatomic) BOOL          warp;
 
@@ -30,9 +32,18 @@
 {
     self    = [super initWithFrame:frame];
     if (self) {
-        self.warp       = NO;
+        self.warp           = NO;
+        
     }
     return self;
+}
+
+- (NSMutableArray *)imageURLArray
+{
+    if (!_imageURLArray) {
+        _imageURLArray      = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    return _imageURLArray;
 }
 
 #pragma mark - lazy load view
@@ -80,28 +91,6 @@
     return _priceLabel;
 }
 
-//- (UIButton *)cartBtn
-//{
-//    if (!_cartBtn) {
-//        _cartBtn                        = [UIButton buttonWithType:UIButtonTypeCustom];
-//        _cartBtn.deFrameSize            = CGSizeMake(128., 32.);
-//        _cartBtn.backgroundColor        = [UIColor colorFromHexString:@"#6192ff"];
-//        _cartBtn.layer.cornerRadius     = _cartBtn.deFrameHeight / 2.;
-//        _cartBtn.layer.masksToBounds    = YES;
-//        
-//        _cartBtn.titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
-//        _cartBtn.enabled                = NO;
-//        [_cartBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor] andSize:_cartBtn.deFrameSize] forState:UIControlStateDisabled];
-//        [_cartBtn setTitleColor:[UIColor colorFromHexString:@"#ffffff"] forState:UIControlStateNormal];
-//        [_cartBtn setTitle:NSLocalizedStringFromTable(@"add-cart", kLocalizedFile, nil) forState:UIControlStateNormal];
-//        
-//        [_cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        [self addSubview:_cartBtn];
-//    }
-//    return _cartBtn;
-//}
-
 - (UILabel *)skuInfoLabel
 {
     if (!_skuInfoLabel) {
@@ -123,8 +112,13 @@
 - (void)setEntity:(GKEntity *)entity
 {
     _entity                     = entity;
+//    [self.imageURLArray insertObject:_entity.imageURL atIndex:0];
+    [self.imageURLArray addObject:_entity.imageURL];
+    [self.imageURLArray addObjectsFromArray:_entity.imageURLArray];
     
-    if (self.entity.imageURLArray.count > 1) {
+    DDLogInfo(@"image url %@", self.imageURLArray);
+    
+    if (self.imageURLArray.count > 1) {
         self.imagesView.scrollEnabled = YES;
     } else {
         self.imagesView.scrollEnabled = NO;
@@ -173,6 +167,8 @@
 //            [view removeFromSuperview];
 //        }
 //    }
+    self.skuBtnItems    = [NSMutableDictionary dictionaryWithCapacity:0];
+    
     CGFloat maxWidth                = self.deFrameWidth - 48.;
     CGFloat xOffset                 = 0.;
     CGFloat yOffset                 = self.skuInfoLabel.deFrameBottom + 16.;
@@ -180,13 +176,6 @@
 //    for (GKEntitySKU * sku in self.entity.skuArray)
     for (NSInteger i = 0; i < self.entity.skuArray.count; i++ ) {
         GKEntitySKU * sku = [self.entity.skuArray objectAtIndex:i];
-//        DDLogInfo(@"sku sku %@", sku);
-//        
-//        NSMutableString * skuInfo   = [NSMutableString stringWithCapacity:0];
-//        
-//        for (NSString * key in sku.attrs) {
-//            [skuInfo appendString:[NSString stringWithFormat:@"%@ / %@; ", key, sku.attrs[key]]];
-//        }
         
         if ([sku.attr_string length] == 0) continue;
         
@@ -226,9 +215,8 @@
             xOffset                 = skuBtn.deFrameRight;
         }
         
-        
         DDLogInfo(@"width %f btn %@", xOffset, skuBtn);
-        
+        [self.skuBtnItems setObject:skuBtn forKey:@(i)];
         [self addSubview:skuBtn];
     }
     
@@ -244,18 +232,15 @@
 
 - (void)skuBtnAction:(id)sender
 {
+    for (UIButton * button in self.skuBtnItems.allValues) {
+        button.selected             = NO;
+        button.backgroundColor      = UIColorFromRGB(0xf1f1f1);
+        button.layer.borderWidth    = 0.;
+    }
+    
+    
     UIButton * btn = (UIButton *)sender;
     
-//    for (UIView * view in self.subviews) {
-//        if ([view isKindOfClass:[UIButton class]] && view != self.cartBtn) {
-////            [view removeFromSuperview];
-//            UIButton * subBtn           = (UIButton *)view;
-//            subBtn.selected             = NO;
-//            subBtn.backgroundColor      = UIColorFromRGB(0xf1f1f1);
-//            subBtn.layer.borderWidth    = 1.;
-//            subBtn.layer.borderColor    = UIColorFromRGB(0xf1f1f1).CGColor;
-//        }
-//    }
     btn.selected                = YES;
     btn.backgroundColor         = [UIColor colorFromHexString:@"#e6ecff"];
     btn.layer.borderWidth       = 1.;
@@ -275,7 +260,7 @@
 #pragma mark - <iCarouselDataSource>
 - (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
-    return self.entity.imageURLArray.count;
+    return self.imageURLArray.count;
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
@@ -285,7 +270,7 @@
         view.contentMode = UIViewContentModeScaleAspectFit;
     }
     NSURL * imageURL_800;
-    NSURL * url = [self.entity.imageURLArray objectAtIndex:index];
+    NSURL * url = [self.imageURLArray objectAtIndex:index];
     
     if ([url.absoluteString hasPrefix:@"http://imgcdn.guoku.com/images/"]) {
         imageURL_800 = [NSURL URLWithString:[url.absoluteString imageURLWithSize:310]];
@@ -293,7 +278,6 @@
         //        imageURL_800 = [NSURL URLWithString:[url.absoluteString stringByAppendingString:@"_800x800.jpg"]];
         imageURL_800 = [NSURL URLWithString:url.absoluteString];
     }
-    DDLogInfo(@"url %lu %@ ", (long)index, imageURL_800);
     [(UIImageView *)view sd_setImageWithURL:imageURL_800 placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:view.deFrameSize]];
     
     return view;

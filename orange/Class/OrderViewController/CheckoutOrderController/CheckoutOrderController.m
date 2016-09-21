@@ -57,8 +57,6 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         
-//        _collectionView.emptyDataSetSource = self;
-        //        _collectionView.emptyDataSetVisible = NO;
     }
     return _collectionView;
 }

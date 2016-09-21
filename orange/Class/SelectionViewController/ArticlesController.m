@@ -10,6 +10,7 @@
 #import "ArticleCell.h"
 
 #import "ArticlePreViewController.h"
+#import "ArticleWebViewController.h"
 
 
 //static int lastContentOffset;
@@ -224,15 +225,27 @@ static NSString * ArticleIdentifier = @"ArticleCell";
         return nil;
     }
     
-    ArticlePreViewController * vc = [[ArticlePreViewController alloc] initWithArticle:[self.articles objectAtIndex:indexPath.row]];
-    vc.preferredContentSize = CGSizeMake(0, 0);
-    previewingContext.sourceRect = cell.frame;
-    return vc;
+    if (iOS10) {
+//        Articlevi
+        ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithArticle:[self.articles objectAtIndex:indexPath.row]];
+        vc.preferredContentSize         = CGSizeMake(0, 0);
+        previewingContext.sourceRect    = cell.frame;
+        vc.hidesBottomBarWhenPushed     = YES;
+        vc.forceTouch                   = YES;
+        return vc;
+    } else {
+    
+        ArticlePreViewController * vc = [[ArticlePreViewController alloc] initWithArticle:[self.articles objectAtIndex:indexPath.row]];
+        vc.preferredContentSize = CGSizeMake(0, 0);
+        previewingContext.sourceRect = cell.frame;
+        return vc;
+    }
 }
 
 - (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
 {
     [self.navigationController pushViewController:viewControllerToCommit animated:NO];
+//    [self presentViewController:viewControllerToCommit animated:YES completion:nil];
 }
 
 #pragma mark - kvo

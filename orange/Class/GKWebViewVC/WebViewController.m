@@ -95,8 +95,8 @@
         [_webView sizeToFit];
     
 //        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-        if (self.app.statusBarOrientation == UIInterfaceOrientationLandscapeRight ||
-            self.app.statusBarOrientation == UIInterfaceOrientationLandscapeLeft)
+        if ([UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeRight ||
+            [UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeLeft)
             _webView.center = CGPointMake((kScreenWidth - kTabBarWidth) / 2, kScreenHeight / 2);
         
     }
@@ -142,7 +142,6 @@
     
     [self.navigationController.navigationBar addSubview:self.progressView];
     
-
     [MobClick beginLogPageView:@"webView"];
     [super viewWillAppear:animated];
 }
@@ -182,8 +181,8 @@
         NSURL *url = navigationAction.request.URL;
         
 //        UIApplication *app = [UIApplication sharedApplication];
-        if ([self.app canOpenURL:url]) {
-            [self.app openURL:url];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
         }
     }
     //this is a 'new window action' (aka target="_blank") > open this URL externally. If we´re doing nothing here, WKWebView will also just do nothing. Maybe this will change in a later stage of the iOS 8 Beta
@@ -244,7 +243,8 @@
      {
          
 //         self.webView.frame = CGRectMake((self.view.deFrameWidth - self.webView.deFrameWidth) /2, 0., 684., self.view.deFrameHeight);
-         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+         if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight
+             || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft)
              self.webView.frame = CGRectMake(128., 0., 684., kScreenHeight);
          else
              self.webView.frame = CGRectMake(0., 0., 684., kScreenHeight);
@@ -260,12 +260,7 @@
     if (self.image) {
         image = [UIImage imageWithData:[self.image imageDataLessThan_10K]];
     }
-//    ShareView * view = [[ShareView alloc] initWithTitle:self.shareTitle SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
-//    view.type = @"url";
-//    view.tapRefreshButtonBlock = ^(){
-//        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-//    };
-//    [view show];
+    
     ShareController * shareVC = [[ShareController alloc] initWithTitle:self.shareTitle URLString:self.webView.URL.absoluteString Image:image];
     shareVC.type    = URLShareType;
     shareVC.refreshBlock    = ^(){
@@ -290,7 +285,11 @@
 
 - (void)dismissBtnAction:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.forceTouch) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - webview kvo

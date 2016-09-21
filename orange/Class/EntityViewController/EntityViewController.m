@@ -1103,72 +1103,27 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         [weakSelf refresh];
         [weakSelf refreshRandom];
     };
+    
+    
+    shareVC.tipOffBlock         = ^() {
+        ReportViewController * VC = [[ReportViewController alloc] init];
+        VC.entity = self.entity;
+        if(!k_isLogin)
+        {
+            [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+                [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+            }];
+        } else {
+            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+        }
+    };
     [shareVC show];
-//    [[UIApplication sharedApplication].keyWindow addSubview:shareVC.view];
-//    [[UIApplication sharedApplication].keyWindow.rootViewController addChildViewController:shareVC];
-//        ShareView * view = [[ShareView alloc]initWithTitle:self.entity.entityName SubTitle:@"" Image:self.image.image URL:[NSString stringWithFormat:@"%@%@/",kGK_WeixinShareURL,self.entity.entityHash]];
-//        view.type = @"entity";
-//        view.entity = self.entity;
-//        __weak __typeof(&*self)weakSelf = self;
-//        
-//        view.tapRefreshButtonBlock = ^(){
-//            [SVProgressHUD showSuccessWithStatus:@"刷新成功"];
-//            [weakSelf.collectionView setContentOffset:CGPointMake(0., -self.header.deFrameHeight) animated:YES];
-//            [weakSelf refresh];
-//            [weakSelf refreshRandom];
-//        };
-//        [view show];
 }
 
 - (void)buyButtonAction
 {
     [[GKHandler sharedGKHandler] TapBuyButtonActionWithEntity:self.entity];
-//    
-//    if (self.entity.purchaseArray.count >0) {
-//        GKPurchase * purchase = self.entity.purchaseArray[0];
-//        if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"])
-//        {
-//
-//            NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-//            ALBBTradeTaokeParams *taoKeParams = [[ALBBTradeTaokeParams alloc] init];
-//            taoKeParams.pid = kGK_TaobaoKe_PID;
-//            [_itemService showTaoKeItemDetailByItemId:self
-//                                           isNeedPush:YES
-//                                    webViewUISettings:nil
-//                                               itemId:_itemId
-//                                             itemType:1
-//                                               params:nil
-//                                          taoKeParams:taoKeParams
-//                          tradeProcessSuccessCallback:_tradeProcessSuccessCallback
-//                           tradeProcessFailedCallback:_tradeProcessFailedCallback];
-//        } else
-//            [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
-//        
-//        [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
-//    }
 }
-
-//- (void)showWebViewWithTaobaoUrl:(NSString *)taobao_url
-//{
-//    
-//    [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:NO];
-//    NSString * TTID = [NSString stringWithFormat:@"%@_%@",kTTID_IPHONE,[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-//    NSString *sid = @"";
-//    taobao_url = [taobao_url stringByReplacingOccurrencesOfString:@"&type=mobile" withString:@""];
-//    NSString *url = [NSString stringWithFormat:@"%@&sche=com.guoku.iphone&ttid=%@&sid=%@&type=mobile&outer_code=IPE",taobao_url, TTID,sid];
-//    GKUser *user = [Passport sharedInstance].user;
-//    if(user)
-//    {
-//        url = [NSString stringWithFormat:@"%@%lu",url,(unsigned long)user.userId];
-//    }
-//
-////    GKWebVC * VC = [GKWebVC linksWebViewControllerWithURL:[NSURL URLWithString:url]];
-//    WebViewController *VC =[[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
-//    VC.title = @"宝贝详情";
-//    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:VC animated:YES];
-//    
-//}
 
 - (void)categoryButtonAction
 {

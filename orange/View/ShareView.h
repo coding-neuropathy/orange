@@ -22,7 +22,7 @@
 @property (weak, nonatomic)     id<ShareViewDelegate>   delegate;
 
 - (void)registerClass:(nullable Class)cellClass;
-- (UIView *)dequeueItemViewIndex:(NSInteger)index;
+- ( UIView * _Nullable )dequeueItemViewIndex:(NSInteger)index;
 
 - (void)reloadData;
 
@@ -30,20 +30,20 @@
 
 @protocol ShareViewDelegate <NSObject>
 
-- (void)handleCancelBtnAction:(id)sender;
+- (void)handleCancelBtnAction:(__nonnull id)sender;
 @optional
-- (void)ShareView:(ShareView *)shareview didSelectItemAtIndex:(NSInteger)index;
+- (void)ShareView:(ShareView * _Nullable)shareview didSelectItemAtIndex:(NSInteger)index;
 @end
 
 
 @protocol ShareViewDataSource <NSObject>
 
-- (NSInteger)numberOfcellInShareView:(ShareView *)shareview;
+- (NSInteger)numberOfcellInShareView:(ShareView * _Nullable)shareview;
 - (CGFloat)itemSpaceInShareView;
 - (CGFloat)shareViewMargin;
-- (CGSize)shareView:(ShareView *)shareview sizeForItemAtIndex:(NSInteger)index;
+- (CGSize)shareView:(ShareView * _Nullable)shareview sizeForItemAtIndex:(NSInteger)index;
 
-- (UIView *)shareView:(ShareView *)shareview viewForItemAtIndex:(NSInteger)index reusingView:(nullable UIView *)view;
+- (UIView * _Nullable)shareView:(ShareView * _Nullable)shareview viewForItemAtIndex:(NSInteger)index reusingView:(nullable UIView *)view;
 
 @end
 

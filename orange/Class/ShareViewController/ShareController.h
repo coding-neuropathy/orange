@@ -16,6 +16,7 @@
 @property (weak, nonatomic)     GKArticle   *article;
 
 @property (copy, nonatomic) void (^refreshBlock)();
+@property (copy, nonatomic) void (^tipOffBlock)();
 
 
 

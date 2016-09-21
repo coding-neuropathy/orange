@@ -79,9 +79,6 @@
     }
 }
 
-
-
-
 - (void)setImageURL:(NSURL *)imageURL
 {
     if ([imageURL isKindOfClass:[NSURL class]]) {
@@ -98,20 +95,18 @@
     if ([obj isKindOfClass:[NSURL class]]) {
         _imageURLArray = imageURLArray;
     } else if ([obj isKindOfClass:[NSString class]]) {
-        NSMutableArray *urlArray = [[NSMutableArray alloc] init];
+        NSMutableArray *urlArray = [NSMutableArray arrayWithCapacity:0];
         for (NSString *urlString in imageURLArray) {
             if (![urlString isEqual:[NSNull null]]) {
                 NSURL *imageURL = [NSURL URLWithString:urlString];
                 [urlArray addObject:imageURL];
             }
-//            else
-//            {
-//
-//            }
         }
+//        [urlArray insertObject:self.imageURL atIndex:0];
         _imageURLArray = urlArray;
     }
 }
+
 
 - (void)setPurchaseArray:(NSArray *)purchaseArray
 {

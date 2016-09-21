@@ -11,7 +11,6 @@
 #import "ShareViewCell.h"
 
 #import "ThreePartHandler.h"
-#import "ReportViewController.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 
@@ -387,15 +386,8 @@
 - (void)handleTipOff:(id)sender
 {
     [self dismissWithCompletion:^{
-        ReportViewController * VC = [[ReportViewController alloc] init];
-        VC.entity = self.entity;
-        if(!k_isLogin)
-        {
-            [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
-                [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-            }];
-        } else {
-            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+        if (self.tipOffBlock) {
+            self.tipOffBlock();
         }
     }];
 }

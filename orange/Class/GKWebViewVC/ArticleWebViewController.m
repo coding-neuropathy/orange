@@ -7,13 +7,8 @@
 //
 
 #import "ArticleWebViewController.h"
-#import <libWeChatSDK/WXApi.h>
-
 #import <WebKit/WebKit.h>
 #import "WebViewProgressView.h"
-//#import "SDWebImageDownloader.h"
-//#import <SDWebImage/SDWebImageDownloader.h>
-//#import "ShareView.h"
 #import "ShareController.h"
 
 #import "ArticleCommentController.h"
@@ -53,7 +48,7 @@
         self.article = article;
         self.url = self.article.articleURL;
         
-        DDLogInfo(@"creator %@", self.article.creator);
+//        DDLogInfo(@"creator %@", self.article.creator);
     }
     return self;
 }
@@ -146,8 +141,6 @@
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     
     self.navigationItem.rightBarButtonItem = nil;
-    
-//    self.title = @"正在加载...";
 }
 
 
@@ -212,12 +205,7 @@
 {
     
     if ([navigationAction.request.URL.absoluteString hasPrefix:@"guoku://user/"]) {
-//        NSURL *url = navigationAction.request.URL;
         
-        //        UIApplication *app = [UIApplication sharedApplication];
-//        if ([self.app canOpenURL:url]) {
-//            [self.app openURL:url];
-//        }
         NSString *parten = @"^guoku://user/(\\d+)/?";
         NSError * error;
         NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:parten
@@ -232,7 +220,7 @@
             if (self.article.creator.userId == [userId integerValue]) {
                 [[OpenCenter sharedOpenCenter] openAuthUser:self.article.creator];
             } else {
-                [self.app openURL:navigationAction.request.URL];
+                [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
             }
         }
     }
@@ -244,8 +232,8 @@
         NSURL *url = navigationAction.request.URL;
         
         //        UIApplication *app = [UIApplication sharedApplication];
-        if ([self.app canOpenURL:url]) {
-            [self.app openURL:url];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
         }
     }
     
@@ -255,8 +243,6 @@
     }
     decisionHandler(WKNavigationActionPolicyAllow);
 }
-
-
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
