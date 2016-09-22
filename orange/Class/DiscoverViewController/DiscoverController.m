@@ -20,8 +20,9 @@
 #import "DiscoverUsersView.h"
 #import "RecUserController.h"
 
-//#import "GTScrollNavigationBar.h"
-//#import "GroupViewController.h"
+
+#import "EntityViewController.h"
+#import "ArticleWebViewController.h"
 #import "CategroyGroupController.h"
 #import "UserViewController.h"
 #import "EntityPreViewController.h"
@@ -702,9 +703,6 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 
 - (void)willDismissSearchController:(UISearchController *)searchController
 {
-//    [[self.searchVC.view viewWithTag:999] removeFromSuperview];
-//    [self.searchTipsVC.view removeFromSuperview];
-//    [self.searchTipsVC removeFromParentViewController];
     if (IS_IPHONE) self.tabBarController.tabBar.hidden = NO;
 }
 
@@ -738,25 +736,42 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     switch (indexPath.section) {
         case 2:
         {
-            ArticlePreViewController * vc = [[ArticlePreViewController alloc]
+            if (iOS10) {
+                ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithArticle:[self.discoverData.articles objectAtIndex:indexPath.row]];
+                vc.preferredContentSize         = CGSizeMake(0, 0);
+                previewingContext.sourceRect    = cell.frame;
+                vc.hidesBottomBarWhenPushed     = YES;
+                //        vc.forceTouch                   = YES;
+                UINavigationController *nav     = [[UINavigationController alloc] initWithRootViewController:vc];
+                return nav;
+            } else {
+                ArticlePreViewController * vc = [[ArticlePreViewController alloc]
                                                  initWithArticle:[self.discoverData.articles objectAtIndex:indexPath.row]];
-            vc.preferredContentSize = CGSizeMake(0, 0);
-            previewingContext.sourceRect = cell.frame;
-            return vc;
+                vc.preferredContentSize = CGSizeMake(0, 0);
+                previewingContext.sourceRect = cell.frame;
+                return vc;
+            }
         }
             break;
         case 4:
         {
-            EntityPreViewController * vc = [[EntityPreViewController alloc]
+            if (iOS10) {
+                EntityViewController * vc = [[EntityViewController alloc] initWithEntity:[self.discoverData.entities objectAtIndex:indexPath.row]];
+                vc.preferredContentSize = CGSizeMake(0., 0.);
+                previewingContext.sourceRect = cell.frame;
+                vc.hidesBottomBarWhenPushed = YES;
+                return vc;
+            } else {
+                EntityPreViewController * vc = [[EntityPreViewController alloc]
                                             initWithEntity:[self.discoverData.entities objectAtIndex:indexPath.row]];
-            vc.preferredContentSize = CGSizeMake(0., 0.);
-            previewingContext.sourceRect = cell.frame;
+                vc.preferredContentSize = CGSizeMake(0., 0.);
+                previewingContext.sourceRect = cell.frame;
             
-            vc.baichuanblock = ^(GKPurchase * purchase) {
-                NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-                ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
-                taoKeParams.pid = kGK_TaobaoKe_PID;
-                [self.itemService showTaoKeItemDetailByItemId:self
+                vc.baichuanblock = ^(GKPurchase * purchase) {
+                    NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
+                    ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
+                    taoKeParams.pid = kGK_TaobaoKe_PID;
+                    [self.itemService showTaoKeItemDetailByItemId:self
                                                    isNeedPush:YES
                                             webViewUISettings:nil
                                                        itemId:_itemId
@@ -765,13 +780,14 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
                                                   taoKeParams:taoKeParams
                                   tradeProcessSuccessCallback:_tradeProcessSuccessCallback
                                    tradeProcessFailedCallback:_tradeProcessFailedCallback];
-            };
+                };
             
-            [vc setBackblock:^(UIViewController * vc1){
-                [self.navigationController pushViewController:vc1 animated:YES];
-            }];
+                [vc setBackblock:^(UIViewController * vc1){
+                    [self.navigationController pushViewController:vc1 animated:YES];
+                }];
+                return vc;
+            }
             
-            return vc;
         }
             break;
             
@@ -784,7 +800,11 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 
 - (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
 {
-    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
+    if ([viewControllerToCommit isKindOfClass:[UINavigationController class]]) {
+        [self presentViewController:viewControllerToCommit animated:NO completion:nil];
+    } else {
+        [self.navigationController pushViewController:viewControllerToCommit animated:NO];
+    }
 }
 
 #pragma mark - <EntityCellDelegate>

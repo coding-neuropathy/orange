@@ -285,11 +285,7 @@
 
 - (void)dismissBtnAction:(id)sender
 {
-    if (self.forceTouch) {
-        [self.navigationController popViewControllerAnimated:YES];
-    } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - webview kvo

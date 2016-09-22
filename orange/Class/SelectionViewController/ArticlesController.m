@@ -231,8 +231,9 @@ static NSString * ArticleIdentifier = @"ArticleCell";
         vc.preferredContentSize         = CGSizeMake(0, 0);
         previewingContext.sourceRect    = cell.frame;
         vc.hidesBottomBarWhenPushed     = YES;
-        vc.forceTouch                   = YES;
-        return vc;
+//        vc.forceTouch                   = YES;
+        UINavigationController *nav     = [[UINavigationController alloc] initWithRootViewController:vc];
+        return nav;
     } else {
     
         ArticlePreViewController * vc = [[ArticlePreViewController alloc] initWithArticle:[self.articles objectAtIndex:indexPath.row]];
@@ -244,8 +245,12 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 
 - (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
 {
-    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
-//    [self presentViewController:viewControllerToCommit animated:YES completion:nil];
+    if (iOS10) {
+        [self presentViewController:viewControllerToCommit animated:YES completion:nil];
+    } else {
+        [self.navigationController pushViewController:viewControllerToCommit animated:NO];
+    }
+
 }
 
 #pragma mark - kvo

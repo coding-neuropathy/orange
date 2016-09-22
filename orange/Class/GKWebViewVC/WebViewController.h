@@ -14,7 +14,7 @@
 @property (strong, nonatomic) WKWebView * webView;
 @property (strong, nonatomic) NSURL * url;
 
-@property (assign, nonatomic) BOOL forceTouch;
+//@property (assign, nonatomic) BOOL forceTouch;
 
 
 - (instancetype)initWithURL:(NSURL *)url;
