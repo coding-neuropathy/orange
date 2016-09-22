@@ -34,9 +34,9 @@
 - (void)setEntityArray:(NSArray *)entityArray
 {
     _entityArray = entityArray;
-    if (_entityArray.count <= 1) {
-        self.userLikeCarousel.scrollEnabled = NO;
-    }
+//    if (_entityArray.count <= 1) {
+    self.userLikeCarousel.scrollEnabled = _entityArray.count <= 1 ? NO : YES;
+//    }
     [self.userLikeCarousel reloadData];
     [self setNeedsLayout];
 }
