@@ -194,7 +194,8 @@
         [self.timer invalidate];
         [self tapCloseBtn:nil];
     }
-    [self.launchView.closeBtn setTitle:[NSString stringWithFormat:@"%ld %@",++self.count, NSLocalizedStringFromTable(@"skip", kLocalizedFile, nil)] forState:UIControlStateNormal];
+    [self.launchView.closeBtn setTitle:[NSString stringWithFormat:@"%ld %@", self.skipSeconds--, NSLocalizedStringFromTable(@"skip", kLocalizedFile, nil)] forState:UIControlStateNormal];
+    self.count++;
 }
 
 #pragma mark - <LaunchViewDelegate>

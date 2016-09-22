@@ -851,15 +851,22 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         {
 
 //            GKEntity * entity               = [self.dataArrayForRecommend objectAtIndex:indexPath.row];
-            EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.imageView.image];
-            vc.preferredContentSize = CGSizeMake(0., 0.);
-            previewingContext.sourceRect = cell.frame;
+            if (iOS10) {
+                EntityViewController * vc = [[EntityViewController alloc] initWithEntity:cell.entity];
+                vc.preferredContentSize = CGSizeMake(0., 0.);
+                previewingContext.sourceRect = cell.frame;
+                vc.hidesBottomBarWhenPushed = YES;
+                return vc;
+            } else {
+                EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.imageView.image];
+                vc.preferredContentSize = CGSizeMake(0., 0.);
+                previewingContext.sourceRect = cell.frame;
             
-            vc.baichuanblock = ^(GKPurchase * purchase) {
-                NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-                ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
-                taoKeParams.pid = kGK_TaobaoKe_PID;
-                [self.itemService showTaoKeItemDetailByItemId:self
+                vc.baichuanblock = ^(GKPurchase * purchase) {
+                    NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
+                    ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
+                    taoKeParams.pid = kGK_TaobaoKe_PID;
+                    [self.itemService showTaoKeItemDetailByItemId:self
                                                    isNeedPush:YES
                                             webViewUISettings:nil
                                                        itemId:_itemId
@@ -868,17 +875,18 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                                                   taoKeParams:taoKeParams
                                   tradeProcessSuccessCallback:_tradeProcessSuccessCallback
                                    tradeProcessFailedCallback:_tradeProcessFailedCallback];
-            };
+                };
             
-            [vc setBackblock:^(UIViewController * vc1) {
-                [self.navigationController pushViewController:vc1 animated:YES];
-            }];
+                [vc setBackblock:^(UIViewController * vc1) {
+                    [self.navigationController pushViewController:vc1 animated:YES];
+                }];
             
-            [MobClick event:@"3d-touch" attributes:@{
+                [MobClick event:@"3d-touch" attributes:@{
                                                      @"entity"  : cell.entity.title,
                                                      @"from"    : @"detail-page-recommend",
                                                          }];
-            return vc;
+                return vc;
+            }
         }
             break;
             

@@ -400,11 +400,11 @@ static int lastContentOffset;
         vc.hidesBottomBarWhenPushed = YES;
         return vc;
     } else {
-    EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.image.image];
-    vc.preferredContentSize = CGSizeMake(0., 0.);
-    previewingContext.sourceRect = cell.frame;
+        EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.image.image];
+        vc.preferredContentSize = CGSizeMake(0., 0.);
+        previewingContext.sourceRect = cell.frame;
             
-    vc.baichuanblock = ^(GKPurchase * purchase) {
+        vc.baichuanblock = ^(GKPurchase * purchase) {
         NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
         ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
         taoKeParams.pid = kGK_TaobaoKe_PID;
@@ -417,14 +417,12 @@ static int lastContentOffset;
                                                   taoKeParams:taoKeParams
                                   tradeProcessSuccessCallback:_tradeProcessSuccessCallback
                                    tradeProcessFailedCallback:_tradeProcessFailedCallback];
-    };
+        };
             
-    [vc setBackblock:^(UIViewController * vc1) {
-        [self.navigationController pushViewController:vc1 animated:YES];
-    }];
-            
-
-    return vc;
+        [vc setBackblock:^(UIViewController * vc1) {
+            [self.navigationController pushViewController:vc1 animated:YES];
+        }];
+        return vc;
     }
     
     
