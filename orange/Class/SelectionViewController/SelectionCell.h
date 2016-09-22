@@ -12,10 +12,8 @@
 
 @interface SelectionCell : UICollectionViewCell
 
-
 @property (nonatomic, strong) GKEntity *entity;
 @property (nonatomic, strong) NSDictionary * dict;
-
 @property (nonatomic, strong) UIImageView *image;
 
 @property (assign, nonatomic) id<GKViewDelegate> delegate;
