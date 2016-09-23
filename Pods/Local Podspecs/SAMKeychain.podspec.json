@@ -1,6 +1,6 @@
 {
   "name": "SAMKeychain",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Simple Cocoa wrapper for the keychain that works on OS X, iOS, tvOS, and watchOS.",
   "summary": "Simple Cocoa wrapper for the keychain.",
   "homepage": "https://github.com/soffes/samkeychain",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/soffes/samkeychain.git",
-    "tag": "v1.5.0"
+    "tag": "v1.5.1"
   },
   "license": {
     "type": "MIT",

@@ -7,6 +7,7 @@
 //
 
 #import "GKBaseData.h"
+//#import <MMWormhole/MMWormhole.h>
 
 @implementation GKBaseData
 
@@ -40,14 +41,14 @@
     return [self.dataArray count];
 }
 
-- (MMWormhole *)wormhole
-{
-    if (!_wormhole) {
-        _wormhole   = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.com.guoku.iphone"
-                                                           optionalDirectory:@"wormhole"];
-    }
-    return _wormhole;
-}
+//- (MMWormhole *)wormhole
+//{
+//    if (!_wormhole) {
+//        _wormhole   = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.com.guoku.iphone"
+//                                                           optionalDirectory:@"wormhole"];
+//    }
+//    return _wormhole;
+//}
 
 
 #pragma mark - data operation

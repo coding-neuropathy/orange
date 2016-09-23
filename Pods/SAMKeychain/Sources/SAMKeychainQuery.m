@@ -106,7 +106,7 @@
 }
 
 
-- (NSArray *)fetchAll:(NSError *__autoreleasing *)error {
+- (nullable NSArray *)fetchAll:(NSError *__autoreleasing *)error {
 	NSMutableDictionary *query = [self query];
 	[query setObject:@YES forKey:(__bridge id)kSecReturnAttributes];
 	[query setObject:(__bridge id)kSecMatchLimitAll forKey:(__bridge id)kSecMatchLimit];
@@ -251,7 +251,7 @@
 	static dispatch_once_t onceToken;
 	static NSBundle *resourcesBundle = nil;
 	dispatch_once(&onceToken, ^{
-		NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"SAMKeychain" withExtension:@"bundle"];
+		NSURL *url = [[NSBundle bundleForClass:[SAMKeychainQuery class]] URLForResource:@"SAMKeychain" withExtension:@"bundle"];
 		resourcesBundle = [NSBundle bundleWithURL:url];
 	});
 	

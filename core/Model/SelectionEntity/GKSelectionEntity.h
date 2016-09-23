@@ -12,7 +12,7 @@
 
 @property (assign, nonatomic) NSInteger categoryId;
 
-- (void)getDataFromWomhole;
+//- (void)getDataFromWomhole;
 
 - (void)refreshWithCategoryId:(NSInteger)cateId;
 - (void)loadWithCategoryId:(NSInteger)cateId;

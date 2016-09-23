@@ -9,13 +9,13 @@
 #import "GKSelectionArticle.h"
 #import "API.h"
 #import "ImageCache.h"
-//#import <MMWormhole/MMWormhole.h>
+#import <MMWormhole/MMWormhole.h>
 
 @import CoreSpotlight;
 
 @interface GKSelectionArticle ()
 
-//@property (strong, nonatomic) MMWormhole    *wormhole;
+@property (strong, nonatomic) MMWormhole    *wormhole;
 
 @end
 
@@ -30,14 +30,14 @@
     return self;
 }
 
-//- (MMWormhole *)wormhole
-//{
-//    if (!_wormhole) {
-//        _wormhole   = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.com.guoku.iphone"
-//                                                           optionalDirectory:@"wormhole"];
-//    }
-//    return _wormhole;
-//}
+- (MMWormhole *)wormhole
+{
+    if (!_wormhole) {
+        _wormhole   = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.com.guoku.iphone"
+                                                           optionalDirectory:@"wormhole"];
+    }
+    return _wormhole;
+}
 
 - (void)refresh
 {

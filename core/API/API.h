@@ -566,7 +566,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
  *
  *  @param noteId    点评ID
  *  @param commentId 回复的评论ID
- *  @param commentId 回复的评论的创建者ID
+ *  @param commentCreatorId 回复的评论的创建者ID
  *  @param content   评论内容
  *  @param success   成功block
  *  @param failure   失败block
@@ -776,8 +776,8 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 
 /**
  *  新浪用户绑定果库账号
- *  @param userId           果库用户ID
- *  @param sinaUserId       新浪用户ID
+ *  @param user_id          果库用户ID
+ *  @param sina_user_id     新浪用户ID
  *  @param sinaScreenname   新浪用户名
  *  @param sinaToken        新浪token
  *  @param expires_in       token过期时间

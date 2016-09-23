@@ -26,11 +26,11 @@ target 'core' do
     pod 'MMWormhole', '~> 2.0.0'
 end
 
-target 'today' do
-    pod 'SDWebImage'
+#target 'today' do
+#    pod 'SDWebImage'
 #    pod 'MMWormhole', '~> 2.0.0'
-    pod 'Colours'
-end
+#    pod 'Colours'
+#end
 
 target 'imessage' do
     pod 'SDWebImage'

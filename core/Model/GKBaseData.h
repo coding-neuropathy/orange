@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MMWormhole/MMWormhole.h>
+
 
 @interface GKBaseData : NSObject {
     BOOL isLoading;
@@ -17,7 +17,7 @@
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (readonly, getter=count) NSInteger count;
-@property (strong, nonatomic) MMWormhole    *wormhole;
+
 
 @property (assign, nonatomic) NSInteger page;
 @property (assign, nonatomic) NSInteger size;

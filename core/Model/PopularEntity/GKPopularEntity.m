@@ -9,6 +9,14 @@
 #import "GKPopularEntity.h"
 #import "API.h"
 
+#import <MMWormhole/MMWormhole.h>
+
+@interface GKPopularEntity ()
+
+@property (strong, nonatomic) MMWormhole    *wormhole;
+
+@end
+
 @implementation GKPopularEntity
 
 
@@ -40,11 +48,11 @@
     
     float expire = self.timestamp - cachetime;
     
-    if (self.dataArray.count == 0 || expire > 43200) {
-        NSLog(@"cache miss");
+    if (self.dataArray.count == 0 || expire > 21600.) {
+//        NSLog(@"cache miss");
         [self refresh];
     } else {
-        NSLog(@"cache hit hit %f", expire);
+//        NSLog(@"cache hit hit %f", expire);
     }
 }
 

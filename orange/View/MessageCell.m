@@ -220,7 +220,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser * user = replying_comment.creator;
             
             [self.avatar sd_setImageWithURL:user.avatarURL];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nick,NSLocalizedStringFromTable(@"reply to your comment:", kLocalizedFile, nil),replying_comment.text,time];
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", (unsigned long)user.userId, user.nick,NSLocalizedStringFromTable(@"reply to your comment:", kLocalizedFile, nil),replying_comment.text,time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
             break;
@@ -234,7 +234,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             
             [self.avatar sd_setImageWithURL:user.avatarURL];
             self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
-                               user.userId,
+                               (unsigned long)user.userId,
                                user.nick,
                                NSLocalizedStringFromTable(@"commented your note", kLocalizedFile, nil),
                                time];

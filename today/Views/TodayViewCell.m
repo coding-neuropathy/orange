@@ -7,7 +7,7 @@
 //
 
 #import "TodayViewCell.h"
-#import "core.h"
+//#import "core.h"
 
 @interface TodayViewCell ()
 
@@ -23,11 +23,11 @@
     self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        self.textLabel.textColor = [UIColor colorFromHexString:@"#ffffff"];
+        self.textLabel.textColor = UIColorFromRGB(0xffffff);
         self.textLabel.font = [UIFont boldSystemFontOfSize:17.];
         self.textLabel.numberOfLines = 1;
         
-        self.detailTextLabel.textColor = [UIColor colorFromHexString:@"#ebebeb"];
+        self.detailTextLabel.textColor = UIColorFromRGB(0xebebeb);
         self.detailTextLabel.font = [UIFont systemFontOfSize:14.];
         self.detailTextLabel.numberOfLines = 2;
         
@@ -59,9 +59,26 @@
     self.textLabel.text = self.entity.title;
     self.detailTextLabel.text = note.text;
     
-    [self.entityImageView sd_setImageWithURL:self.entity.imageURL_240x240
-                            placeholderImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f1f1f1"]
-                                                             andSize:self.entityImageView.deFrameSize] options:SDWebImageRetryFailed];
+    
+    
+//    [self.entityImageView sd_setImageWithURL:self.entity.imageURL_240x240
+//                            placeholderImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f1f1f1"]
+//                                                             andSize:self.entityImageView.deFrameSize] options:SDWebImageRetryFailed];
+    
+    NSData * imageData = [ImageCache readImageWithURL:self.entity.imageURL_240x240];
+    
+    if (imageData) {
+        self.entityImageView.image = [UIImage imageWithData:imageData];
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSData *data = [NSData dataWithContentsOfURL:self.entity.imageURL_240x240];
+            UIImage *placeholder = [UIImage imageWithData:data];
+            [ImageCache saveImageWhthData:data URL:self.entity.imageURL_240x240];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.entityImageView setImage:placeholder];
+            });
+        });
+    }
     
     [self setNeedsLayout];
 }
