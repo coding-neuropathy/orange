@@ -189,6 +189,13 @@
 		8AAA2D141C04444800B27E49 /* EntityPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D131C04444800B27E49 /* EntityPreViewController.m */; };
 		8AAA50891BD67614005384CD /* UserTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA50881BD67614005384CD /* UserTagCell.m */; };
 		8AB369171BA2FF73009F6572 /* HomeCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */; };
+		8AB508461D93B1260048D2CC /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB508451D93B1260048D2CC /* Messages.framework */; };
+		8AB5084A1D93B1260048D2CC /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB508491D93B1260048D2CC /* MessagesViewController.m */; };
+		8AB5084D1D93B1260048D2CC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AB5084B1D93B1260048D2CC /* MainInterface.storyboard */; };
+		8AB5084F1D93B1260048D2CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AB5084E1D93B1260048D2CC /* Assets.xcassets */; };
+		8AB508531D93B1260048D2CC /* imessage.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8AB508441D93B1260048D2CC /* imessage.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8AB508591D93B4830048D2CC /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB508581D93B4830048D2CC /* MessageCell.m */; };
+		8AB5085B1D93CECC0048D2CC /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
 		8AB731DA1C1BBDAD0076BACC /* SettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */; };
 		8AB731DB1C1BBDAD0076BACC /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB731D91C1BBDAD0076BACC /* SettingsViewCell.m */; };
 		8ABB6F741D7EA870003EDD49 /* PaymentCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB6F731D7EA870003EDD49 /* PaymentCodeController.m */; };
@@ -253,6 +260,7 @@
 		8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CA91BA9C980005FD5CB /* SubCategoryEntityController.m */; };
 		8AFF0CAD1BAA6C25005FD5CB /* EntityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF0CAC1BAA6C25005FD5CB /* EntityListCell.m */; };
 		ACCE19A024718D74019A099A /* libPods-core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA50CCB8F38601E17195AA4 /* libPods-core.a */; };
+		B69C8E446821EBB5289D62A7 /* libPods-imessage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F91C59D68F5B39564744ADB /* libPods-imessage.a */; };
 		B706868D1CF41E7D00C40825 /* TabBarViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = B706868C1CF41E7D00C40825 /* TabBarViewcontroller.m */; };
 		B70686931CF41ECA00C40825 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686901CF41ECA00C40825 /* BaseViewController.m */; };
 		B70686941CF41ECA00C40825 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70686921CF41ECA00C40825 /* ListViewController.m */; };
@@ -345,6 +353,13 @@
 			remoteGlobalIDString = 39B8688D1ACD0CF600A2115D;
 			remoteInfo = core;
 		};
+		8AB508511D93B1260048D2CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E56DF0D19D552C000263B17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8AB508431D93B1260048D2CC;
+			remoteInfo = imessage;
+		};
 		B7BFC9081ACC27C2009627CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4E56DF0D19D552C000263B17 /* Project object */;
@@ -372,6 +387,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				8AB508531D93B1260048D2CC /* imessage.appex in Embed App Extensions */,
 				B7BFC90A1ACC27C2009627CA /* today.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -381,6 +397,7 @@
 
 /* Begin PBXFileReference section */
 		08AA02EF865C28B0B7CE69E9 /* libPods-orange.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-orange.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AFF99569519CDA49A488A0A /* Pods-imessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-imessage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-imessage/Pods-imessage.debug.xcconfig"; sourceTree = "<group>"; };
 		0CA50CCB8F38601E17195AA4 /* libPods-core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2309032C1C803B1500AD26D6 /* AuthUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthUserViewController.h; sourceTree = "<group>"; };
 		2309032D1C803B1500AD26D6 /* AuthUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthUserViewController.m; sourceTree = "<group>"; };
@@ -583,6 +600,7 @@
 		4EF508801B49042000C92618 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareView.m; path = ../View/ShareView.m; sourceTree = "<group>"; };
 		7D6CCE10915EF5898145372B /* Pods-core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-core.debug.xcconfig"; path = "Pods/Target Support Files/Pods-core/Pods-core.debug.xcconfig"; sourceTree = "<group>"; };
 		7D766D9EEA5285EEAF80E892 /* Pods-core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-core.release.xcconfig"; path = "Pods/Target Support Files/Pods-core/Pods-core.release.xcconfig"; sourceTree = "<group>"; };
+		7F91C59D68F5B39564744ADB /* libPods-imessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-imessage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A0176201D5B9429004E7A81 /* ForgetPasswdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgetPasswdController.h; path = ForgetPassowrdController/ForgetPasswdController.h; sourceTree = "<group>"; };
 		8A0176211D5B9429004E7A81 /* ForgetPasswdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgetPasswdController.m; path = ForgetPassowrdController/ForgetPasswdController.m; sourceTree = "<group>"; };
 		8A0345A81BA15F4A0037BC32 /* HomeArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeArticleCell.h; sourceTree = "<group>"; };
@@ -712,6 +730,17 @@
 		8AAA50881BD67614005384CD /* UserTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTagCell.m; sourceTree = "<group>"; };
 		8AB369151BA2FF73009F6572 /* HomeCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCategoryCell.h; sourceTree = "<group>"; };
 		8AB369161BA2FF73009F6572 /* HomeCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCategoryCell.m; sourceTree = "<group>"; };
+		8AB508441D93B1260048D2CC /* imessage.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = imessage.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AB508451D93B1260048D2CC /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		8AB508481D93B1260048D2CC /* MessagesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
+		8AB508491D93B1260048D2CC /* MessagesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
+		8AB5084C1D93B1260048D2CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		8AB5084E1D93B1260048D2CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8AB508501D93B1260048D2CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AB508571D93B4830048D2CC /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		8AB508581D93B4830048D2CC /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		8AB5085A1D93BB810048D2CC /* config.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.pch; sourceTree = "<group>"; };
+		8AB5085C1D94D1BC0048D2CC /* imessage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = imessage.entitlements; sourceTree = "<group>"; };
 		8AB731D61C1BBDAD0076BACC /* SettingsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsFooterView.h; sourceTree = "<group>"; };
 		8AB731D71C1BBDAD0076BACC /* SettingsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsFooterView.m; sourceTree = "<group>"; };
 		8AB731D81C1BBDAD0076BACC /* SettingsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewCell.h; sourceTree = "<group>"; };
@@ -948,6 +977,7 @@
 		B7FE2A091B2817FD001C2E33 /* SelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionCell.h; sourceTree = "<group>"; };
 		B7FE2A0A1B2817FD001C2E33 /* SelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionCell.m; sourceTree = "<group>"; };
 		C333230B99607F713A40264A /* libPods-orange.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-orange.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3B5A25A93D9D79E58E817D0 /* Pods-imessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-imessage.release.xcconfig"; path = "Pods/Target Support Files/Pods-imessage/Pods-imessage.release.xcconfig"; sourceTree = "<group>"; };
 		DA35B3C11AFEE31200D66671 /* EmailEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailEditViewController.h; sourceTree = "<group>"; };
 		DA35B3C21AFEE31200D66671 /* EmailEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailEditViewController.m; sourceTree = "<group>"; };
 		DA35B3C41AFEE31200D66671 /* PasswordEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordEditViewController.h; sourceTree = "<group>"; };
@@ -1016,6 +1046,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8AB508411D93B1260048D2CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AB5085B1D93CECC0048D2CC /* core.framework in Frameworks */,
+				8AB508461D93B1260048D2CC /* Messages.framework in Frameworks */,
+				B69C8E446821EBB5289D62A7 /* libPods-imessage.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7BFC8F91ACC27C1009627CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1034,6 +1074,8 @@
 			children = (
 				0CA50CCB8F38601E17195AA4 /* libPods-core.a */,
 				C333230B99607F713A40264A /* libPods-orange.a */,
+				8AB508451D93B1260048D2CC /* Messages.framework */,
+				7F91C59D68F5B39564744ADB /* libPods-imessage.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1443,6 +1485,7 @@
 				39B71FEB1B1F4C16008519E3 /* core */,
 				4E56DF1719D552C000263B17 /* orange */,
 				B7BFC9001ACC27C2009627CA /* today */,
+				8AB508471D93B1260048D2CC /* imessage */,
 				4E56DF1619D552C000263B17 /* Products */,
 				A72E4FB92C91BB3F9193D99C /* Pods */,
 				0902E2DEFE4689BB1B4C17A8 /* Frameworks */,
@@ -1455,6 +1498,7 @@
 				4E56DF1519D552C000263B17 /* orange.app */,
 				B7BFC8FC1ACC27C1009627CA /* today.appex */,
 				39B8688E1ACD0CF600A2115D /* core.framework */,
+				8AB508441D93B1260048D2CC /* imessage.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1965,6 +2009,22 @@
 			name = PreViewControllers;
 			sourceTree = "<group>";
 		};
+		8AB508471D93B1260048D2CC /* imessage */ = {
+			isa = PBXGroup;
+			children = (
+				8AB5085C1D94D1BC0048D2CC /* imessage.entitlements */,
+				8AB508481D93B1260048D2CC /* MessagesViewController.h */,
+				8AB508491D93B1260048D2CC /* MessagesViewController.m */,
+				8AB5084B1D93B1260048D2CC /* MainInterface.storyboard */,
+				8AB5084E1D93B1260048D2CC /* Assets.xcassets */,
+				8AB508501D93B1260048D2CC /* Info.plist */,
+				8AB508571D93B4830048D2CC /* MessageCell.h */,
+				8AB508581D93B4830048D2CC /* MessageCell.m */,
+				8AB5085A1D93BB810048D2CC /* config.pch */,
+			);
+			path = imessage;
+			sourceTree = "<group>";
+		};
 		8ABB6F711D7EA855003EDD49 /* PaymentCodeController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2103,6 +2163,8 @@
 				EF13750BAFCA6F85BA711F8F /* Pods-orange.release.xcconfig */,
 				7D6CCE10915EF5898145372B /* Pods-core.debug.xcconfig */,
 				7D766D9EEA5285EEAF80E892 /* Pods-core.release.xcconfig */,
+				0AFF99569519CDA49A488A0A /* Pods-imessage.debug.xcconfig */,
+				D3B5A25A93D9D79E58E817D0 /* Pods-imessage.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2482,11 +2544,31 @@
 			dependencies = (
 				B7BFC9091ACC27C2009627CA /* PBXTargetDependency */,
 				39B868A41ACD0CF700A2115D /* PBXTargetDependency */,
+				8AB508521D93B1260048D2CC /* PBXTargetDependency */,
 			);
 			name = orange;
 			productName = card;
 			productReference = 4E56DF1519D552C000263B17 /* orange.app */;
 			productType = "com.apple.product-type.application";
+		};
+		8AB508431D93B1260048D2CC /* imessage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8AB508561D93B1270048D2CC /* Build configuration list for PBXNativeTarget "imessage" */;
+			buildPhases = (
+				645CBF66E55AA0ACCDAA9019 /* [CP] Check Pods Manifest.lock */,
+				8AB508401D93B1260048D2CC /* Sources */,
+				8AB508411D93B1260048D2CC /* Frameworks */,
+				8AB508421D93B1260048D2CC /* Resources */,
+				135A601EE13965A9839BF2A5 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = imessage;
+			productName = imessage;
+			productReference = 8AB508441D93B1260048D2CC /* imessage.appex */;
+			productType = "com.apple.product-type.app-extension.messages";
 		};
 		B7BFC8FB1ACC27C1009627CA /* today */ = {
 			isa = PBXNativeTarget;
@@ -2531,6 +2613,16 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					8AB508431D93B1260048D2CC = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = BKXKS4HPNG;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
 						};
@@ -2594,6 +2686,7 @@
 				4E56DF1419D552C000263B17 /* orange */,
 				B7BFC8FB1ACC27C1009627CA /* today */,
 				39B8688D1ACD0CF600A2115D /* core */,
+				8AB508431D93B1260048D2CC /* imessage */,
 			);
 		};
 /* End PBXProject section */
@@ -2646,6 +2739,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8AB508421D93B1260048D2CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AB5084F1D93B1260048D2CC /* Assets.xcassets in Resources */,
+				8AB5084D1D93B1260048D2CC /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7BFC8FA1ACC27C1009627CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2672,6 +2774,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		135A601EE13965A9839BF2A5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-imessage/Pods-imessage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		31B311A1DECE084EB285EEC1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2685,6 +2802,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-orange/Pods-orange-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		645CBF66E55AA0ACCDAA9019 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9D125EABDC702319BC9DD679 /* [CP] Copy Pods Resources */ = {
@@ -2952,6 +3084,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8AB508401D93B1260048D2CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AB5084A1D93B1260048D2CC /* MessagesViewController.m in Sources */,
+				8AB508591D93B4830048D2CC /* MessageCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7BFC8F81ACC27C1009627CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2968,6 +3109,11 @@
 			isa = PBXTargetDependency;
 			target = 39B8688D1ACD0CF600A2115D /* core */;
 			targetProxy = 39B868A31ACD0CF700A2115D /* PBXContainerItemProxy */;
+		};
+		8AB508521D93B1260048D2CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8AB508431D93B1260048D2CC /* imessage */;
+			targetProxy = 8AB508511D93B1260048D2CC /* PBXContainerItemProxy */;
 		};
 		B7BFC9091ACC27C2009627CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3014,6 +3160,14 @@
 				8A5901781D643F1100780C74 /* zh-Hant */,
 			);
 			name = AppiraterLocalizable.strings;
+			sourceTree = "<group>";
+		};
+		8AB5084B1D93B1260048D2CC /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8AB5084C1D93B1260048D2CC /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 		B71E494C1AC9207B00D4DB6D /* guoku.strings */ = {
@@ -3300,6 +3454,54 @@
 			};
 			name = Release;
 		};
+		8AB508541D93B1270048D2CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AFF99569519CDA49A488A0A /* Pods-imessage.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = imessage/imessage.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				GCC_PREFIX_HEADER = imessage/config.pch;
+				INFOPLIST_FILE = imessage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone.imessage;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8AB508551D93B1270048D2CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3B5A25A93D9D79E58E817D0 /* Pods-imessage.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = imessage/imessage.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				GCC_PREFIX_HEADER = imessage/config.pch;
+				INFOPLIST_FILE = imessage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone.imessage;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		B7BFC90C1ACC27C2009627CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3374,6 +3576,15 @@
 			buildConfigurations = (
 				4E56DF3919D552C000263B17 /* Debug */,
 				4E56DF3A19D552C000263B17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8AB508561D93B1270048D2CC /* Build configuration list for PBXNativeTarget "imessage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8AB508541D93B1270048D2CC /* Debug */,
+				8AB508551D93B1270048D2CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

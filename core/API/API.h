@@ -157,7 +157,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  获取商品 sku
  *
- *  @param  entity_hash
+ *  @param entity_hash 商品 hash 码
  *
  *  @param success    成功block
  *  @param failure    失败block
@@ -466,7 +466,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  喜欢商品
  *
- *  @param entityHash 商品Hash
+ *  @param entityId   商品 Id
  *  @param isLike     想要设置的喜爱状态
  *  @param success    成功block
  *  @param failure    失败block
@@ -849,8 +849,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  更新当前用户邮箱
  *
- *  @param email     邮箱
- *  @param password  密码
+ *  @param parameters  密码
  *  @param success   成功block
  *  @param failure   失败block
  */
@@ -861,8 +860,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  更新当前用户邮箱
  *
- *  @param email     邮箱
- *  @param password  密码
+ *  @param parameters     邮箱
  *  @param success   成功block
  *  @param failure   失败block
  */
@@ -873,9 +871,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  更新当前用户密码
  *
- *  @param password         密码
- *  @param new_passowrd     新密码
- *  @param confirm_password 确认密码
+ *  @param parameters         密码
  *  @param success          成功block
  *  @param failure          失败block
  */
@@ -947,7 +943,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
  *  @param  string      搜索关键词
  *  @param  page        翻页
  *  @param  size        长度
- *  @param  succes      成功block
+ *  @param  success      成功block
  *  @param  failure     失败block
  */
 + (void)searchArticlesWithString:(NSString *)string
@@ -983,16 +979,16 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 #pragma mark - get wechat open_uid
 /**
  *  获取微信用户 OPEN ID
- *  @param weixin app key
- *  @param weixin app secret
- *  @param
+ *  @param appkey app key
+ *  @param secret app secret
+ *  @param code
  */
 + (NSDictionary *)getWeChatAuthWithAppKey:(NSString *)appkey Secret:(NSString *)secret Code:(NSString *)code;
 
 /**
  *  获取微信用户信息
  *
- *  @param accesstoken
+ *  @param access_token
  *  @param open_id
  */
 + (NSDictionary *)getWeChatUserInfoWithAccessToken:(NSString *)access_token OpenID:(NSString *)open_id;

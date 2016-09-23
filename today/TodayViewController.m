@@ -31,6 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+    self.view.backgroundColor   = [UIColor clearColor];
+    
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
 //    NSLog(@"width %f", self.preferredContentSize.width);
 //    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
@@ -38,7 +40,11 @@
     
     self.tableView.rowHeight = 94.;
     
-    self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
+//    self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
+    
+    UIVisualEffectView *blur = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+    self.tableView.backgroundView   = blur;
+    self.tableView.separatorEffect  = [UIVibrancyEffect effectForBlurEffect:(UIBlurEffect*)blur.effect];
     
     self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
 

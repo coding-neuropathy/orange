@@ -824,8 +824,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             UserViewController * VC = [[UserViewController alloc]init];
             VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:VC animated:YES];
-            
-
             [MobClick event:@"entity_forward_user"];
         }
             break;
@@ -849,8 +847,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     switch (indexPath.section) {
         case 6:
         {
-
-//            GKEntity * entity               = [self.dataArrayForRecommend objectAtIndex:indexPath.row];
             if (iOS10) {
                 EntityViewController * vc = [[EntityViewController alloc] initWithEntity:cell.entity];
                 vc.preferredContentSize = CGSizeMake(0., 0.);

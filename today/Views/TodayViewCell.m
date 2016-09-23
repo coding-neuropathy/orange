@@ -24,7 +24,7 @@
     
     if (self) {
         self.textLabel.textColor = UIColorFromRGB(0xffffff);
-        self.textLabel.font = [UIFont boldSystemFontOfSize:19.];
+        self.textLabel.font = [UIFont boldSystemFontOfSize:17.];
         self.textLabel.numberOfLines = 1;
         
         self.detailTextLabel.textColor = UIColorFromRGB(0xebebeb);
@@ -82,8 +82,6 @@
     self.entityImageView.frame = CGRectMake(self.contentView.frame.size.width - 84., 9., 76., 76.);
     self.textLabel.frame = CGRectMake(10, 10., self.contentView.frame.size.width - 100., 20.);
     self.detailTextLabel.frame = CGRectMake(10., 40., self.contentView.frame.size.width - 100., 40.);
-
-    
 
 //    self.detailTextLabel.frame
 }

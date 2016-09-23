@@ -9,8 +9,15 @@
 #import "GKSelectionArticle.h"
 #import "API.h"
 #import "ImageCache.h"
+#import <MMWormhole/MMWormhole.h>
 
 @import CoreSpotlight;
+
+@interface GKSelectionArticle ()
+
+@property (strong, nonatomic) MMWormhole    *wormhole;
+
+@end
 
 @implementation GKSelectionArticle
 
@@ -21,6 +28,15 @@
         self.size = 20;
     }
     return self;
+}
+
+- (MMWormhole *)wormhole
+{
+    if (!_wormhole) {
+        _wormhole   = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.com.guoku.iphone"
+                                                           optionalDirectory:@"wormhole"];
+    }
+    return _wormhole;
 }
 
 - (void)refresh
@@ -36,6 +52,7 @@
         
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
         [self saveEntityToIndexWithData:articles];
+        [self.wormhole passMessageObject:self.dataArray identifier:@"articles"];
     } failure:^(NSInteger stateCode, NSError * error) {
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
         self.error = error;
