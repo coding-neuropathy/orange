@@ -7,7 +7,7 @@
 //
 
 #import "TodayViewCell.h"
-//#import "core.h"
+#import "core.h"
 
 @interface TodayViewCell ()
 
@@ -60,11 +60,6 @@
     self.detailTextLabel.text = note.text;
     
     
-    
-//    [self.entityImageView sd_setImageWithURL:self.entity.imageURL_240x240
-//                            placeholderImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f1f1f1"]
-//                                                             andSize:self.entityImageView.deFrameSize] options:SDWebImageRetryFailed];
-    
     NSData * imageData = [ImageCache readImageWithURL:self.entity.imageURL_240x240];
     
     if (imageData) {
@@ -93,8 +88,6 @@
     
     self.textLabel.frame = CGRectMake(10, 10., self.contentView.frame.size.width - 100., 20.);
     self.detailTextLabel.frame = CGRectMake(10., 40., self.contentView.frame.size.width - 100., 40.);
-
-//    self.detailTextLabel.frame
 }
 
 

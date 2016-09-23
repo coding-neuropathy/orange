@@ -243,9 +243,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-//         [self.collectionView performBatchUpdates:nil completion:nil];
-         //         self.collectionView.deFrameLeft = 128.;
-         if (self.app.statusBarOrientation == UIDeviceOrientationLandscapeRight || self.app.statusBarOrientation == UIDeviceOrientationLandscapeLeft)
+         if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight
+             || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft)
              self.collectionView.frame = CGRectMake(128., 0., kPadScreenWitdh, kScreenHeight);
          else
              self.collectionView.frame = CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight);
@@ -470,10 +469,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                 CGFloat userHeaderHeight = self.user.bio.length == 0 ? 144. : 204.;
                 userHeaderHeight += IS_IPAD ? 20. : 0.;
 #warning todo create order
-                if (self.user.userId == [Passport sharedInstance].user.userId) {
-                    userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
-                    userHeaderHeight += IS_IPHONE ? 49. : 0;
-                }
+//                if (self.user.userId == [Passport sharedInstance].user.userId) {
+//                    userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
+//                    userHeaderHeight += IS_IPHONE ? 49. : 0;
+//                }
                 size = CGSizeMake(self.collectionView.deFrameWidth, userHeaderHeight);
             
             }

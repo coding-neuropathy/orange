@@ -19,9 +19,11 @@
 	<key>CFBundleShortVersionString</key>
 	<string>4.2.4</string>
 	<key>CFBundleVersion</key>
-	<string>4238</string>
+	<string>4239</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -34,7 +36,5 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.message-payload-provider</string>
 	</dict>
-	<key>LSHasLocalizedDisplayName</key>
-	<true/>
 </dict>
 </plist>
