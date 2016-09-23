@@ -28,7 +28,8 @@ end
 
 target 'today' do
     pod 'SDWebImage'
-    #    pod 'MMWormhole', '~> 2.0.0'
+#    pod 'MMWormhole', '~> 2.0.0'
+    pod 'Colours'
 end
 
 target 'imessage' do

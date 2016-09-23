@@ -43,10 +43,11 @@
         
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
         
+        [self.wormhole passMessageObject:dataArray identifier:@"entities"];
         
         [self saveEntityToIndexWithData:dataArray];
         
-        [self.wormhole passMessageObject:dataArray identifier:@"entities"];
+
 //        缓存
 //        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.dataArray];
 //        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"selection.entity.data"];
@@ -86,13 +87,20 @@
         [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
        
     }];
-    
 }
 
 - (void)loadWithCategoryId:(NSInteger)cateId
 {
     self.categoryId = cateId;
     [self load];
+}
+
+- (void)getDataFromWomhole
+{
+    self.dataArray  = [self.wormhole messageWithIdentifier:@"entities"];
+    if (self.dataArray.count == 0) {
+        [self refresh];
+    }
 }
 
 //- (BOOL)loadFromCache

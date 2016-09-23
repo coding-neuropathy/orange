@@ -168,15 +168,18 @@
     self.dismissBtn.deFrameTop = 16.;
     self.dismissBtn.deFrameRight = self.deFrameWidth - 16.;
 
-    self.scrollView.deFrameTop = 64.;
+    self.scrollView.deFrameTop = IS_IPHONE_4_OR_LESS ? 40 : 64.;
     
     self.pageCtl.bounds = CGRectMake(0.0, 0.0, 8 * (self.pageCtl.numberOfPages - 1) + 8, 8);
-    self.pageCtl.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom + 18.);
-    
+    if (IS_IPHONE_4_OR_LESS) {
+        self.pageCtl.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom - 18.);
+    } else {
+        self.pageCtl.center = CGPointMake(kScreenWidth / 2., self.scrollView.deFrameBottom + 18.);
+    }
     
     self.signInBtn.frame = CGRectMake(0., 0., 230. * kScreeenScale, 44. * kScreeenScale);
     self.signInBtn.layer.cornerRadius = self.signInBtn.deFrameHeight / 2.;
-    self.signInBtn.deFrameTop = self.scrollView.deFrameBottom + 44.;
+    self.signInBtn.deFrameTop = IS_IPHONE_4_OR_LESS ? self.scrollView.deFrameBottom + 10. : self.scrollView.deFrameBottom + 44.;
     self.signInBtn.deFrameLeft = (self.deFrameWidth - self.signInBtn.deFrameWidth) / 2.;
     
     self.signUpBtn.frame = CGRectMake(0., 0., 230. * kScreeenScale, 44. * kScreeenScale);
@@ -186,7 +189,7 @@
     
     
     self.agreementLabel.center = self.signUpBtn.center;
-    self.agreementLabel.deFrameBottom = self.deFrameBottom - 20.;
+    self.agreementLabel.deFrameBottom = IS_IPHONE_4_OR_LESS ? self.deFrameBottom - 10. : self.deFrameBottom - 20.;
 }
 
 - (void)layoutiPadSubviews
@@ -236,7 +239,7 @@
         self.signUpBtn.deFrameTop = self.signInBtn.deFrameBottom + 8.;
     
         self.agreementLabel.center = self.signUpBtn.center;
-        self.agreementLabel.deFrameBottom = self.deFrameBottom - 80.;
+        self.agreementLabel.deFrameBottom = self.deFrameHeight - 80.;
     }
 }
 

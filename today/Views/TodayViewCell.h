@@ -10,6 +10,7 @@
 
 @interface TodayViewCell : UITableViewCell
 
-@property (nonatomic, strong) NSDictionary *data;
+@property (strong, nonatomic) NSDictionary  *data;
+@property (strong, nonatomic) GKEntity      *entity;
 
 @end

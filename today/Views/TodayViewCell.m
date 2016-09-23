@@ -12,7 +12,7 @@
 @interface TodayViewCell ()
 
 @property (strong, nonatomic) UIImageView * entityImageView;
-@property (strong, nonatomic) GKEntity * entity;
+
 
 @end
 
@@ -23,15 +23,16 @@
     self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        self.textLabel.textColor = UIColorFromRGB(0xffffff);
+        self.textLabel.textColor = [UIColor colorFromHexString:@"#ffffff"];
         self.textLabel.font = [UIFont boldSystemFontOfSize:17.];
         self.textLabel.numberOfLines = 1;
         
-        self.detailTextLabel.textColor = UIColorFromRGB(0xebebeb);
+        self.detailTextLabel.textColor = [UIColor colorFromHexString:@"#ebebeb"];
         self.detailTextLabel.font = [UIFont systemFontOfSize:14.];
         self.detailTextLabel.numberOfLines = 2;
         
-        self.contentView.backgroundColor    = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.4];
+//        self.contentView.backgroundColor    = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.4];
+        self.contentView.backgroundColor    = [UIColor clearColor];
     }
     return self;
 }
@@ -58,7 +59,9 @@
     self.textLabel.text = self.entity.title;
     self.detailTextLabel.text = note.text;
     
-    [self.entityImageView sd_setImageWithURL:self.entity.imageURL_240x240 placeholderImage:[UIImage imageWithColor:[UIColor redColor] andSize:self.entityImageView.deFrameSize] options:SDWebImageRetryFailed];
+    [self.entityImageView sd_setImageWithURL:self.entity.imageURL_240x240
+                            placeholderImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f1f1f1"]
+                                                             andSize:self.entityImageView.deFrameSize] options:SDWebImageRetryFailed];
     
     [self setNeedsLayout];
 }

@@ -99,6 +99,7 @@ static NSString *MessageIdentified    = @"messageCell";
     MSMessageTemplateLayout *layout     = [[MSMessageTemplateLayout alloc] init];
 //    layout.image                            
     layout.imageTitle   = cell.article.title;
+    layout.trailingCaption  = cell.article.digest;
 //    layout.caption      = [NSString stringWithFormat:@"guoku://article/%ld", cell.article.articleId];
     layout.image    = cell.coverImage;
     message.layout  = layout;
@@ -108,7 +109,6 @@ static NSString *MessageIdentified    = @"messageCell";
     
 }
 
-#pragma mark - kvo
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

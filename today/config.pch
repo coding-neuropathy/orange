@@ -37,6 +37,7 @@
 #import "UIView+DEFrameAdditions.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <Colours/Colours.h>
 //#import <MMWormhole/MMWormhole.h>
 
 #endif

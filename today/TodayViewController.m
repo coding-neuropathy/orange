@@ -14,28 +14,21 @@
 
 @interface TodayViewController () <NCWidgetProviding>
 
-@property (strong, nonatomic) NSMutableArray    *dataArray;
-@property (strong, nonatomic) MMWormhole        *wormhole;
+@property (strong, nonatomic) GKSelectionEntity     *dataArray;
 
 @end
 
 @implementation TodayViewController
 
-
-- (MMWormhole *)wormhole
+- (void)dealloc
 {
-    if (!_wormhole) {
-        _wormhole   = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.com.guoku.iphone"
-                                                           optionalDirectory:@"wormhole"];
-    }
-    return _wormhole;
+    [self.dataArray removeTheObserverWithObject:self];
 }
-
-- (void)loadView
-{
-    [super loadView];
-//    NSLog(@"%@", self.dataArray);
-}
+//
+//- (void)loadView
+//{
+//    [super loadView];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,10 +37,7 @@
     self.view.backgroundColor   = [UIColor clearColor];
     
     [self.tableView registerClass:[TodayViewCell class] forCellReuseIdentifier:@"TodayCell"];
-//    NSLog(@"width %f", self.preferredContentSize.width);
-//    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width,  160.);
-    
-    
+
     self.tableView.rowHeight = 94.;
     
 //    self.tableView.separatorColor = UIColorFromRGB(0xebebeb);
@@ -58,6 +48,7 @@
     
     self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
     
+    
     if (iOS10) {
 //        self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
         self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
@@ -67,6 +58,9 @@
 }
 
 - (void)didReceiveMemoryWarning {
+    
+    [[SDImageCache sharedImageCache] clearMemory];
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -81,17 +75,9 @@
     
     
     if (self.dataArray.count == 0) {
-        [API getTopTenEntityCount:3 success:^(NSArray *array) {
-            self.dataArray = [NSMutableArray arrayWithArray:array];
-            [self.tableView reloadData];
-//            [self save];
-            completionHandler(NCUpdateResultNewData);
-        } failure:^(NSInteger stateCode) {
-            completionHandler(NCUpdateResultFailed);
-        }];
-    } else {
-        completionHandler(NCUpdateResultNoData);
+        [self.dataArray refresh];
     }
+    completionHandler(NCUpdateResultNewData);
 }
 
 - (void)widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode withMaximumSize:(CGSize)maxSize {
@@ -123,14 +109,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return self.dataArray.count > 3 ? 3 : self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TodayViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TodayCell" forIndexPath:indexPath];
     NSDictionary * row = [self.dataArray objectAtIndex:indexPath.row];
-    cell.data = row;
+    cell.data = row[@"content"];
     return cell;
 }
 
@@ -139,21 +125,48 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary * row = [self.dataArray objectAtIndex:indexPath.row];
-    GKEntity * entity = row[@"entity"];
-//    NSString * entity_id = row[@"content"][@"entity"][@"entity_id"];
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", entity.entityId]];
+    TodayViewCell * cell    = [tableView cellForRowAtIndexPath:indexPath];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", cell.entity.entityId]];
     
     [self.extensionContext openURL:url completionHandler:nil];
 }
 
 #pragma mark - cache 
-- (NSMutableArray *)dataArray
+- (GKSelectionEntity *)dataArray
 {
     if (!_dataArray) {
-        _dataArray = [NSMutableArray arrayWithCapacity:3];
+        _dataArray = [[GKSelectionEntity alloc] init];
+        
+        [_dataArray getDataFromWomhole];
+        [_dataArray addTheObserverWithObject:self];
     }
     return _dataArray;
+}
+
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"isRefreshing"]) {
+        if( ![[change valueForKeyPath:@"new"] integerValue])
+        {
+            if (!self.dataArray.error) {
+                [self.tableView reloadData];
+            } else {
+                
+            }
+        }
+    }
+    if ([keyPath isEqualToString:@"isLoading"]) {
+        if( ![[change valueForKeyPath:@"new"] integerValue])
+        {
+            if (!self.dataArray.error) {
+                [self.tableView reloadData];
+            } else {
+                
+            }
+        }
+    }
+    
 }
 
 
