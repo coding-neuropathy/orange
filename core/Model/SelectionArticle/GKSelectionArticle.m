@@ -9,13 +9,13 @@
 #import "GKSelectionArticle.h"
 #import "API.h"
 #import "ImageCache.h"
-#import <MMWormhole/MMWormhole.h>
+//#import <MMWormhole/MMWormhole.h>
 
 @import CoreSpotlight;
 
 @interface GKSelectionArticle ()
 
-@property (strong, nonatomic) MMWormhole    *wormhole;
+//@property (strong, nonatomic) MMWormhole    *wormhole;
 
 @end
 
@@ -30,14 +30,14 @@
     return self;
 }
 
-- (MMWormhole *)wormhole
-{
-    if (!_wormhole) {
-        _wormhole   = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.com.guoku.iphone"
-                                                           optionalDirectory:@"wormhole"];
-    }
-    return _wormhole;
-}
+//- (MMWormhole *)wormhole
+//{
+//    if (!_wormhole) {
+//        _wormhole   = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.com.guoku.iphone"
+//                                                           optionalDirectory:@"wormhole"];
+//    }
+//    return _wormhole;
+//}
 
 - (void)refresh
 {
@@ -66,15 +66,20 @@
         [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
             self.page += 1;
             [self.dataArray addObjectsFromArray:articles];
-//            [self.collectionView.infiniteScrollingView stopAnimating];
-//            [self.collectionView reloadData];
             [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
             [self saveEntityToIndexWithData:articles];
         } failure:^(NSInteger stateCode, NSError * error) {
             self.error = error;
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
             [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
         }];
+}
+
+- (void)getDataFromWomhole
+{
+    self.dataArray  = [self.wormhole messageWithIdentifier:@"articles"];
+    if (self.dataArray.count == 0) {
+        [self refresh];
+    }
 }
 
 #pragma mark - save to index

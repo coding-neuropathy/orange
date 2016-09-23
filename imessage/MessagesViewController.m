@@ -9,19 +9,32 @@
 #import "MessagesViewController.h"
 #import "MessageCell.h"
 #import "GKSelectionArticle.h"
-#import <MMWormhole/MMWormhole.h>
 
 @interface MessagesViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView  *tableView;
 @property (strong, nonatomic) GKSelectionArticle    *articles;
-@property (strong, nonatomic) MMWormhole            *wormhole;
+@property (strong, nonatomic) UIRefreshControl      *rfControl;
 
 @end
 
 @implementation MessagesViewController
 
 static NSString *MessageIdentified    = @"messageCell";
+
+- (void)dealloc
+{
+    [self.articles removeTheObserverWithObject:self];
+}
+
+- (GKSelectionArticle *)articles
+{
+    if (!_articles) {
+        _articles   = [[GKSelectionArticle alloc] init];
+        [_articles addTheObserverWithObject:self];
+    }
+    return _articles;
+}
 
 #pragma mark - lazy load view
 - (UITableView *)tableView
@@ -30,25 +43,14 @@ static NSString *MessageIdentified    = @"messageCell";
         _tableView                  = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.frame            = CGRectMake(0., 0., kScreenWidth, kScreenHeight);
         _tableView.rowHeight        = 120.;
-//        _tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource       = self;
         _tableView.delegate         = self;
-        UIVisualEffectView *blur = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-        _tableView.separatorEffect  = [UIVibrancyEffect effectForBlurEffect:(UIBlurEffect*)blur.effect];
+//        UIVisualEffectView *blur = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+//        _tableView.separatorEffect  = [UIVibrancyEffect effectForBlurEffect:(UIBlurEffect*)blur.effect];
         _tableView.separatorColor   = [UIColor colorFromHexString:@"#e6e6e6"];
-//        _tableView.separatorEffect  = UIVibrancyEffect(forBlurEffect: blurredBackgroundView.blurView.effect as UIBlurEffect)
     }
     return _tableView;
 }
-
-//- (MMWormhole *)wormhole
-//{
-//    if (!_wormhole) {
-//        _wormhole       = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.com.guoku.iphone" optionalDirectory:@"wormhole"];
-//    }
-//    return _wormhole;
-//}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,13 +60,7 @@ static NSString *MessageIdentified    = @"messageCell";
     
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier:MessageIdentified];
     
-//    NSLog(@"view view %@", self.view);
-//    [self.articles refresh];
-    
-//    id messageObject = [self.wormhole messageWithIdentifier:@"articles"];
-//    
-//    NSLog(@"data data %@", messageObject);
-    
+    [self.articles getDataFromWomhole];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,9 +105,34 @@ static NSString *MessageIdentified    = @"messageCell";
     [self.activeConversation insertMessage:message completionHandler:^(NSError * _Nullable error) {
 
     }];
-//        }
-//    }];
+    
+}
 
+#pragma mark - kvo
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"isRefreshing"]) {
+        if( ![[change valueForKeyPath:@"new"] integerValue])
+        {
+            if (!self.articles.error) {
+                [self.tableView reloadData];
+            } else {
+   
+            }
+        }
+    }
+    if ([keyPath isEqualToString:@"isLoading"]) {
+        if( ![[change valueForKeyPath:@"new"] integerValue])
+        {
+            if (!self.articles.error) {
+                [self.tableView reloadData];
+            } else {
+
+            }
+        }
+    }
+    
 }
 
 #pragma mark - Conversation Handling

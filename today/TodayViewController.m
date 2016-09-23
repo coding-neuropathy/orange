@@ -8,18 +8,28 @@
 
 #import "TodayViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
-#import "core.h"
 #import "TodayViewCell.h"
 //#import "UIImageView+AFNetworking.h"
 
 
 @interface TodayViewController () <NCWidgetProviding>
 
-@property (strong, nonatomic) NSMutableArray * dataArray;
+@property (strong, nonatomic) NSMutableArray    *dataArray;
+@property (strong, nonatomic) MMWormhole        *wormhole;
 
 @end
 
 @implementation TodayViewController
+
+
+- (MMWormhole *)wormhole
+{
+    if (!_wormhole) {
+        _wormhole   = [[MMWormhole alloc] initWithApplicationGroupIdentifier:@"group.com.guoku.iphone"
+                                                           optionalDirectory:@"wormhole"];
+    }
+    return _wormhole;
+}
 
 - (void)loadView
 {
@@ -47,7 +57,7 @@
     self.tableView.separatorEffect  = [UIVibrancyEffect effectForBlurEffect:(UIBlurEffect*)blur.effect];
     
     self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
-
+    
     if (iOS10) {
 //        self.preferredContentSize = CGSizeMake(0., self.tableView.rowHeight * 3);
         self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
@@ -69,20 +79,19 @@
     // If there's no update required, use NCUpdateResultNoData
     // If there's an update, use NCUpdateResultNewData
     
-    completionHandler(NCUpdateResultNewData);
     
-    [API getTopTenEntityCount:3 success:^(NSArray *array) {
-//        NSLog(@"array %@", array);
-        self.dataArray = [NSMutableArray arrayWithArray:array];
-        [self.tableView reloadData];
-        [self save];
-        completionHandler(NCUpdateResultNewData);
-    } failure:^(NSInteger stateCode) {
-        self.dataArray = [self getCache];
-        [self.tableView reloadData];
-//        NSLog(@"%@", self.dataArray);
+    if (self.dataArray.count == 0) {
+        [API getTopTenEntityCount:3 success:^(NSArray *array) {
+            self.dataArray = [NSMutableArray arrayWithArray:array];
+            [self.tableView reloadData];
+//            [self save];
+            completionHandler(NCUpdateResultNewData);
+        } failure:^(NSInteger stateCode) {
+            completionHandler(NCUpdateResultFailed);
+        }];
+    } else {
         completionHandler(NCUpdateResultNoData);
-    }];
+    }
 }
 
 - (void)widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode withMaximumSize:(CGSize)maxSize {
@@ -146,28 +155,6 @@
     }
     return _dataArray;
 }
-
-- (NSMutableArray *)getCache
-{
-//    NSData * archivedData = [[NSUserDefaults standardUserDefaults] objectForKey:@"TodayArray"];
-//    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
-    NSUserDefaults * shared = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.guoku.iphone"];
-    NSData * archivedData = [shared objectForKey:@"TodayArray"];
-    if (archivedData) {
-        return [NSMutableArray array];
-    }
-    id obj = [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
-    return obj;
-}
-
-- (void)save
-{
-    NSUserDefaults * shared = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.guoku.iphone"];
-    [shared setObject:[NSKeyedArchiver archivedDataWithRootObject:self.dataArray] forKey:@"TodayArray"];
-    [shared synchronize];
-
-}
-
 
 
 @end

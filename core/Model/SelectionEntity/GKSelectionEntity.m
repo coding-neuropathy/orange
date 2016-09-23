@@ -43,8 +43,10 @@
         
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
         
+        
         [self saveEntityToIndexWithData:dataArray];
         
+        [self.wormhole passMessageObject:dataArray identifier:@"entities"];
 //        缓存
 //        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.dataArray];
 //        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"selection.entity.data"];

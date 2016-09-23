@@ -31,5 +31,13 @@
 #define iOS10 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
 #endif
 
+
+#import "core.h"
+#import "UIImage+App.h"
+#import "UIView+DEFrameAdditions.h"
+
+#import <SDWebImage/UIImageView+WebCache.h>
+//#import <MMWormhole/MMWormhole.h>
+
 #endif
 

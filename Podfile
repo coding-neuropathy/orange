@@ -17,7 +17,6 @@ target 'orange' do
     pod 'TTTAttributedLabel'
 #    pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentifier.git'
 #    pod "GKFadeNavigationController", :git => 'https://github.com/gklka/GKFadeNavigationController.git'
-    pod 'MMWormhole', '~> 2.0.0'
     pod 'FLEX', '~> 2.0', :configurations => ['Debug'] #An in-app debugging and exploration tool for iOS
 end
 
@@ -25,6 +24,11 @@ target 'core' do
     pod 'AFNetworking'
     pod 'SAMKeychain', :git => 'https://github.com/soffes/SAMKeychain.git'
     pod 'MMWormhole', '~> 2.0.0'
+end
+
+target 'today' do
+    pod 'SDWebImage'
+    #    pod 'MMWormhole', '~> 2.0.0'
 end
 
 target 'imessage' do

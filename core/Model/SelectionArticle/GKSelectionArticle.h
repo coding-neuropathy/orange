@@ -10,4 +10,10 @@
 
 @interface GKSelectionArticle : GKBaseData
 
+
+/**
+ *  share article data
+ */
+- (void)getDataFromWomhole;
+
 @end
