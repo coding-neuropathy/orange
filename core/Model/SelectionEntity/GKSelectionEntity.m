@@ -43,16 +43,10 @@
         
         [self setValue:[NSNumber numberWithBool:NO] forKey:@"isRefreshing"];
         
-        [self.wormhole passMessageObject:dataArray identifier:@"entities"];
+        // share data
+//        [self.wormhole passMessageObject:dataArray identifier:@"entities"];
         
         [self saveEntityToIndexWithData:dataArray];
-        
-
-//        缓存
-//        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.dataArray];
-//        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"selection.entity.data"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-        
         
     } failure:^(NSInteger stateCode, NSError * error) {
         self.error = error;
@@ -95,28 +89,13 @@
     [self load];
 }
 
-- (void)getDataFromWomhole
-{
-    self.dataArray  = [self.wormhole messageWithIdentifier:@"entities"];
-    if (self.dataArray.count == 0) {
-        [self refresh];
-    }
-}
-
-//- (BOOL)loadFromCache
+//- (void)getDataFromWomhole
 //{
-//    
-//    NSData * data = [[NSUserDefaults standardUserDefaults] objectForKey:@"selection.entity.data"];
-//    if (data) {
-//        self.dataArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//        return YES;
-//    }
-//    else
-//    {
-//        return NO;
+//    self.dataArray  = [self.wormhole messageWithIdentifier:@"entities"];
+//    if (self.dataArray.count == 0) {
+//        [self refresh];
 //    }
 //}
-
 
 
 #pragma mark - save to index

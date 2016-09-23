@@ -191,7 +191,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  incr shopping cart item
  *
- *  @param sid      sku_id
+ *  @param sku_id   sku_id
  *  @param success  成功block
  *  @param failure  失败block
  */
@@ -201,7 +201,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  desc shopping cart item
  *
- *  @param sid      sku_id
+ *  @param sku_id   sku_id
  *  @param success  成功block
  *  @param failure  失败block
  */
@@ -271,7 +271,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  图文点赞
  *  @param  article_id  图文 ID
- *  @param  isDig       图文状态
+ *  @param  isdig       图文状态
  *  @param  success     成功block
  *  @param  failure     失败block
  */
@@ -793,7 +793,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 
 /**
  *  果库账号解除SNS綁定
- *  @param userId           果库用户ID
+ *  @param user_id          果库用户ID
  *  @param SNSUserId        SNS用户名
  *  @param platform         SNS平台
  *  @param success          成功block
@@ -981,15 +981,15 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
  *  获取微信用户 OPEN ID
  *  @param appkey app key
  *  @param secret app secret
- *  @param code
+ *  @param code     wechat_auth_code
  */
 + (NSDictionary *)getWeChatAuthWithAppKey:(NSString *)appkey Secret:(NSString *)secret Code:(NSString *)code;
 
 /**
  *  获取微信用户信息
  *
- *  @param access_token
- *  @param open_id
+ *  @param access_token wechat access token
+ *  @param open_id      wechat open id
  */
 + (NSDictionary *)getWeChatUserInfoWithAccessToken:(NSString *)access_token OpenID:(NSString *)open_id;
 
@@ -1003,8 +1003,8 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
  *  @param failure 失败block
  */
 + (void)getTopTenEntityCount:(NSInteger)count
-                     success:(void (^)(NSArray * array))success
-                     failure:(void (^)(NSInteger stateCode))failure;
+                     success:(void (^)(NSArray *array))success
+                     failure:(void (^)(NSInteger stateCode, NSError *error))failure;
 
 
 /**

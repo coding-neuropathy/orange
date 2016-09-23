@@ -194,7 +194,7 @@
         [self.timer invalidate];
         [self tapCloseBtn:nil];
     }
-    [self.launchView.closeBtn setTitle:[NSString stringWithFormat:@"%ld %@", self.skipSeconds--, NSLocalizedStringFromTable(@"skip", kLocalizedFile, nil)] forState:UIControlStateNormal];
+    [self.launchView.closeBtn setTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"skip", kLocalizedFile, nil), (long)self.skipSeconds--] forState:UIControlStateNormal];
     self.count++;
 }
 

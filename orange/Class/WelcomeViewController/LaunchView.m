@@ -64,7 +64,7 @@
     if (!_logoImageView) {
         _logoImageView                  = [[UIImageView alloc] initWithFrame:CGRectZero];
         _logoImageView.image            = [UIImage imageNamed:@"splash_logo"];
-        _logoImageView.deFrameSize      = CGSizeMake(86., 64.);
+        _logoImageView.deFrameSize      = IS_IPHONE_4_OR_LESS ?  CGSizeMake(86. / 1.2, 64. / 1.2) : CGSizeMake(86., 64.);
         _logoImageView.contentMode      = UIViewContentModeScaleAspectFit;
         _logoImageView.backgroundColor  = [UIColor clearColor];
         
@@ -97,7 +97,7 @@
         self.closeBtn.deFrameRight      = self.deFrameWidth - 24.;
         
         self.logoImageView.center           = self.launchImage.center;
-        self.logoImageView.deFrameBottom    = self.deFrameBottom - 32.;
+        self.logoImageView.deFrameBottom    = IS_IPHONE_4_OR_LESS ? self.deFrameBottom - 20. : self.deFrameBottom - 32.;
     }
     
     [super layoutSubviews];

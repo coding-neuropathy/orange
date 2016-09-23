@@ -3213,8 +3213,8 @@
  *  @param failure 失败block
  */
 + (void)getTopTenEntityCount:(NSInteger)count
-                     success:(void (^)(NSArray * array))success
-                     failure:(void (^)(NSInteger stateCode))failure
+                     success:(void (^)(NSArray *array))success
+                     failure:(void (^)(NSInteger stateCode, NSError *error))failure
 {
     NSString *path = @"toppopular/";
     NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
@@ -3238,7 +3238,7 @@
         }
     } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
-            failure(stateCode);
+            failure(stateCode, error);
         }
     }];
 }

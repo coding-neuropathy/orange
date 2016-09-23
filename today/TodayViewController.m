@@ -14,7 +14,7 @@
 
 @interface TodayViewController () <NCWidgetProviding>
 
-@property (strong, nonatomic) GKSelectionEntity     *dataArray;
+@property (strong, nonatomic) GKPopularEntity     *dataArray;
 
 @end
 
@@ -116,7 +116,7 @@
 {
     TodayViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TodayCell" forIndexPath:indexPath];
     NSDictionary * row = [self.dataArray objectAtIndex:indexPath.row];
-    cell.data = row[@"content"];
+    cell.data = row;
     return cell;
 }
 
@@ -125,17 +125,17 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    TodayViewCell * cell    = [tableView cellForRowAtIndexPath:indexPath];
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", cell.entity.entityId]];
+    TodayViewCell *cell    = [tableView cellForRowAtIndexPath:indexPath];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"guoku://entity/%@", cell.entity.entityId]];
     
     [self.extensionContext openURL:url completionHandler:nil];
 }
 
 #pragma mark - cache 
-- (GKSelectionEntity *)dataArray
+- (GKPopularEntity *)dataArray
 {
     if (!_dataArray) {
-        _dataArray = [[GKSelectionEntity alloc] init];
+        _dataArray = [[GKPopularEntity alloc] init];
         
         [_dataArray getDataFromWomhole];
         [_dataArray addTheObserverWithObject:self];
