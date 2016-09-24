@@ -46,6 +46,9 @@
 "activity"  = "动态";
 "message"   = "消息";
 
+"refresh"   = "刷新";
+"copy-link" = "复制链接";
+
 /**
  *  share
  */

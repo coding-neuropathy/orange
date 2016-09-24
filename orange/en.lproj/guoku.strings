@@ -46,6 +46,9 @@
 "activity"  = "Following";
 "message"   = "You";
 
+"refresh"   = "Refresh";
+"copy-link" = "Copy Link";
+
 /**
  *  share
  */

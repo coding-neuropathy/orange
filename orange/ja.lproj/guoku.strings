@@ -46,6 +46,9 @@
 "activity"  = "新着情報";
 "message"   = "メッセージ";
 
+"refresh"   = "更新";
+"copy-link" = "レプリケーション接続";
+
 /**
  *  share
  */

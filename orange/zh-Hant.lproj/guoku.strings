@@ -47,6 +47,9 @@
 "activity"  = "動態";
 "message"   = "消息";
 
+"refresh"   = "刷新";
+"copy-link" = "複製連接";
+
 /**
  *  share
  */
