@@ -751,7 +751,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  百川登录
  *
- *  @param taobaoUserId 淘宝用户ID
+ *  @param uid          淘宝用户ID
  *  @param nick         淘宝用户昵称
  *  @param success      成功block
  *  @param failure      失败block
@@ -778,8 +778,8 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
  *  新浪用户绑定果库账号
  *  @param user_id          果库用户ID
  *  @param sina_user_id     新浪用户ID
- *  @param sinaScreenname   新浪用户名
- *  @param sinaToken        新浪token
+ *  @param screen_name      新浪用户名
+ *  @param access_token     新浪token
  *  @param expires_in       token过期时间
  *  @param success          成功block
  *  @param failure          失败block

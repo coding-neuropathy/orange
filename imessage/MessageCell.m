@@ -95,8 +95,10 @@
     self.textLabel.deFrameTop   = 10.;
     self.textLabel.deFrameLeft  = self.coverImageView.deFrameRight + 10.;
     
-    self.detailTextLabel.center     = self.textLabel.center;
+//    self.detailTextLabel.center     = self.textLabel.center;
     self.detailTextLabel.deFrameTop = self.textLabel.deFrameBottom + 5.;
+    self.detailTextLabel.deFrameLeft  = self.coverImageView.deFrameRight + 10.;
+
     
 //    self.imageView
 //    self.imageView.frame    = CGRectMake(5., 5., self.contentView.frame.size.height - 10, self.contentView.frame.size.height - 10);

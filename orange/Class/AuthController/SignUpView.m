@@ -273,7 +273,7 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(tapSignUpBtnWithNickname:Email:Passwd:)]) {
         [_delegate tapSignUpBtnWithNickname:self.nicknameTextField.text
-                                    Email:self.emailLabel.text
+                                    Email:self.emailTextField.text
                                     Passwd:self.passwordTextField.text];
     }
 }

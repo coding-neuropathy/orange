@@ -139,7 +139,7 @@
     }
     
     if (passwd.length < 8) {
-        [SVProgressHUD showImage:nil status:@"密码至少6位"];
+        [SVProgressHUD showImage:nil status:@"密码至少8位"];
         return NO;
     }
     
@@ -156,11 +156,13 @@
 
 - (void)tapSignUpBtnWithNickname:(NSString *)nickname Email:(NSString *)email Passwd:(NSString *)passwd
 {
+//    DDLogInfo(@"account %@ %@ %@", nickname, email, passwd);
 #warning TODO signup
     if (![self checkInfoWithNickname:nickname Email:email Password:passwd])
         return;
     
-//    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithStatus:NSLocalizedStringFromTable(@"loading", kLocalizedFile, nil)];
     [API registerWithEmail:email password:passwd nickname:nickname imageData:nil sinaUserId:[Passport sharedInstance].sinaUserID sinaToken:[Passport sharedInstance].sinaToken                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    taobaoUserId:[Passport sharedInstance].taobaoId taobaoToken:[Passport sharedInstance].taobaoToken screenName:[Passport sharedInstance].screenName success:^(GKUser *user, NSString *session) {
 
         
