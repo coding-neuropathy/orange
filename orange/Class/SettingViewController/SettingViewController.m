@@ -576,6 +576,9 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         [SVProgressHUD showSuccessWithStatus:NSLocalizedStringFromTable(@"signout-success", kLocalizedFile, nil)];
         [self.tableView reloadData];
         self.footerView.is_login = k_isLogin;
+        
+        [MobClick profileSignOff];
+        
     } failure:^(NSInteger stateCode) {
         if(stateCode == 500) {
         
@@ -584,7 +587,10 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             [self.loginService logout];
             [WeiboSDK logOutWithToken:wbtoken delegate:self withTag:@"wb_sign_out"];
             [Passport logout];
+            [MobClick profileSignOff];
         }
+        
+        
     }];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"wbtoken"];
     [[NSUserDefaults standardUserDefaults] synchronize];

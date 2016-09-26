@@ -833,12 +833,11 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  更新当前用户信息
  *
- *  @param nickname  昵称
- *  @param bio       简介
- *  @param gender    性别
- *  @param imageData 头像
- *  @param success   成功block
- *  @param failure   失败block
+
+ *  @param parameters    性别
+ *  @param imageData    头像
+ *  @param success      成功block
+ *  @param failure      失败block
  */
 
 + (void)updateUserProfileWithParameters:(NSDictionary *)parameters

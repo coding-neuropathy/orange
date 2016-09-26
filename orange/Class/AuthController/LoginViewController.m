@@ -129,7 +129,9 @@
 //        if (self.signInSuccessBlock) {
 //            self.signInSuccessBlock(YES);
 //        }
-        [MobClick event:@"sign in from taobao" label:@"success"];
+//        [MobClick event:@"sign in from taobao" label:@"success"];
+        NSString *uidString = [NSString stringWithFormat:@"%ld", [Passport sharedInstance].user.userId];
+        [MobClick profileSignInWithPUID:uidString provider:@"taobao"];
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
 //        [self dismiss];
         if (IS_IPAD) {
@@ -164,7 +166,9 @@
     NSDictionary * userInfo = [API getWeChatUserInfoWithAccessToken:[json valueForKey:@"access_token"] OpenID:[json valueForKey:@"openid"]];
     
     [API loginWithWeChatWithUnionid:[userInfo valueForKey:@"unionid"] Nickname:[userInfo valueForKey:@"nickname"] HeaderImgURL:[userInfo valueForKey:@"headimgurl"] success:^(GKUser *user, NSString *session) {
-        [MobClick event:@"sign in from wechat" label:@"success"];
+//        [MobClick event:@"sign in from wechat" label:@"success"];
+        NSString *uidString = [NSString stringWithFormat:@"%ld", [Passport sharedInstance].user.userId];
+        [MobClick profileSignInWithPUID:uidString provider:@"wechat"];
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@", smile, @"登录成功"]];
 //        [self dismiss];
         if (IS_IPAD) {
@@ -198,7 +202,9 @@
         if (!error) {
             WeiboUser * wb_user = (WeiboUser *)result;
             [API loginWithSinaUserId:wb_user.userID sinaToken:access_token ScreenName:wb_user.screenName success:^(GKUser *user, NSString *session) {
-                [MobClick event:@"sign in from weibo" label:@"success"];
+//                [MobClick event:@"sign in from weibo" label:@"success"];
+                NSString *uidString = [NSString stringWithFormat:@"%ld", [Passport sharedInstance].user.userId];
+                [MobClick profileSignInWithPUID:uidString provider:@"weibo"];
                 if (IS_IPAD) {
                     [self dismissViewControllerAnimated:YES completion:^{
                         if (self.signInSuccessBlock) {
@@ -249,7 +255,10 @@
 //        if (self.signInSuccessBlock) {
 //            self.signInSuccessBlock(YES);
 //        }
-        [MobClick event:@"sign in" label:@"success"];
+//        [MobClick event:@"sign in" label:@"success"];
+        NSString *uidString = [NSString stringWithFormat:@"%ld", [Passport sharedInstance].user.userId];
+        [MobClick profileSignInWithPUID:uidString];
+        
         [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
         if (IS_IPAD) {
             [self dismissViewControllerAnimated:YES completion:^{

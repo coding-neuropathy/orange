@@ -45,6 +45,7 @@ int ddLogLevel;
     [MobClick setLogEnabled:NO];
 #endif
     UMConfigInstance.appKey = UMENG_APPKEY;
+    
     [MobClick startWithConfigure:UMConfigInstance];
 
 }
@@ -54,15 +55,19 @@ int ddLogLevel;
  */
 - (void)configBaiChuan
 {
-        [[ALBBSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
-        [[ALBBSDK sharedInstance] setAppVersion:XcodeAppVersion];
-        [[ALBBSDK sharedInstance] setDebugLogOpen:NO];
+    [[ALBBSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
+    [[ALBBSDK sharedInstance] setAppVersion:XcodeAppVersion];
+#if DEBUG
+    [[ALBBSDK sharedInstance] setDebugLogOpen:YES];
+#else
+    [[ALBBSDK sharedInstance] setDebugLogOpen:NO];
+#endif
     
-        [[ALBBSDK sharedInstance] asyncInit:^{
-            DDLogInfo(@"初始化成功");
-        } failedCallback:^(NSError *error) {
-            DDLogError(@"初始化失败:%@", error);
-        }];
+    [[ALBBSDK sharedInstance] asyncInit:^{
+        DDLogInfo(@"初始化成功");
+    } failedCallback:^(NSError *error) {
+        DDLogError(@"初始化失败:%@", error);
+    }];
 }
 
 /**

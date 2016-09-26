@@ -169,6 +169,9 @@
         // analytics
         [MobClick event:@"sign up" label:@"success"];
         
+        NSString *uidString = [NSString stringWithFormat:@"%ld", user.userId];
+        [MobClick profileSignInWithPUID:uidString];
+        
         if (IS_IPAD) {
             [self dismissViewControllerAnimated:YES completion:^{
                 if (self.signUpSuccessBlock) {
