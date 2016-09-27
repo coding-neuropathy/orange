@@ -247,6 +247,7 @@
         return;
     }
     
+    [SVProgressHUD showWithStatus:NSLocalizedStringFromTable(@"login...", kLocalizedFile, nil)];
     [API loginWithEmail:email password:password success:^(GKUser *user, NSString *session) {
 //        if (self.signInSuccessBlock) {
 //            self.signInSuccessBlock(YES);
@@ -355,6 +356,8 @@
         }
         self.signView.emailTextField.text       = loginDictionary[AppExtensionUsernameKey];
         self.signView.passwordTextField.text    = loginDictionary[AppExtensionPasswordKey];
+        
+        [self tapSignBtnWithEmail:loginDictionary[AppExtensionUsernameKey] Password:loginDictionary[AppExtensionPasswordKey]];
     }];
 }
 

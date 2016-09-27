@@ -178,7 +178,7 @@
         _onePasswordBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
         _onePasswordBtn.deFrameSize         = CGSizeMake(28., 28.);
 //        _onePasswordBtn.backgroundColor     = [UIColor redColor];
-        [_onePasswordBtn setImage:[UIImage imageNamed:@"onepassword-button"] forState:UIControlStateNormal];
+        [_onePasswordBtn setImage:[UIImage imageNamed:@"1password-button"] forState:UIControlStateNormal];
         [_onePasswordBtn addTarget:self action:@selector(onePasswordAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_onePasswordBtn];
     }
@@ -292,8 +292,8 @@
     
     
     if ([[OnePasswordExtension sharedExtension] isAppExtensionAvailable]) {
-        self.passwordTextField.rightView        = self.onePasswordBtn;
-        self.passwordTextField.rightViewMode    = UITextFieldViewModeAlways;
+        self.emailTextField.rightView        = self.onePasswordBtn;
+        self.emailTextField.rightViewMode    = UITextFieldViewModeAlways;
     }
     
     [self configSNS];
