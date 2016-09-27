@@ -794,7 +794,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  果库账号解除SNS綁定
  *  @param user_id          果库用户ID
- *  @param SNSUserId        SNS用户名
+ *  @param sns_user_name    SNS用户名
  *  @param platform         SNS平台
  *  @param success          成功block
  *  @param failure          失败block

@@ -15,6 +15,7 @@
 
 #import "SignInView.h"
 #import "ForgetPasswdController.h"
+#import <1PasswordExtension/OnePasswordExtension.h>
 
 @interface LoginViewController ()<UIAlertViewDelegate, SignInViewDelegate>
 
@@ -124,12 +125,7 @@
     [Passport sharedInstance].screenName = [session getUser].nick;
     [SVProgressHUD show];
     [API loginWithBaichuanUid:[session getUser].userId nick:[session getUser].nick  success:^(GKUser *user, NSString *session) {
-//        [kAppDelegate.window makeKeyAndVisible];
-//        kAppDelegate.alertWindow.hidden = YES;
-//        if (self.signInSuccessBlock) {
-//            self.signInSuccessBlock(YES);
-//        }
-//        [MobClick event:@"sign in from taobao" label:@"success"];
+
         NSString *uidString = [NSString stringWithFormat:@"%ld", [Passport sharedInstance].user.userId];
         [MobClick profileSignInWithPUID:uidString provider:@"taobao"];
         [SVProgressHUD showImage:nil status:[NSString stringWithFormat: @"%@%@",smile,@"登录成功"]];
@@ -346,6 +342,20 @@
     } else {
         
     }
+}
+
+- (void)handleTapOnePassword:(id)sender
+{
+    [[OnePasswordExtension sharedExtension] findLoginForURLString:@"http://guoku.com" forViewController:self sender:sender completion:^(NSDictionary * _Nullable loginDictionary, NSError * _Nullable error) {
+        if (loginDictionary.count == 0) {
+            if (error.code != AppExtensionErrorCodeCancelledByUser) {
+                NSLog(@"Error invoking 1Password App Extension for find login: %@", error);
+            }
+            return;
+        }
+        self.signView.emailTextField.text       = loginDictionary[AppExtensionUsernameKey];
+        self.signView.passwordTextField.text    = loginDictionary[AppExtensionPasswordKey];
+    }];
 }
 
 @end

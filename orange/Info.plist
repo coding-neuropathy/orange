@@ -86,6 +86,7 @@
 		<string>sinaweibosso</string>
 		<string>weibosdk</string>
 		<string>weibosdk2.5</string>
+		<string>org-appextension-feature-password-management</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

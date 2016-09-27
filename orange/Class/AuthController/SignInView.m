@@ -8,22 +8,25 @@
 
 #import "SignInView.h"
 #import <libWeChatSDK/WXApi.h>
+#import <1PasswordExtension/OnePasswordExtension.h>
 
 @interface SignInView () <UITextFieldDelegate>
 
-@property (strong, nonatomic) UILabel       * emailLabel;
-@property (strong, nonatomic) UITextField   * emailTextField;
-@property (strong, nonatomic) UILabel       * passwordLabel;
-@property (strong, nonatomic) UITextField   * passwordTextField;
+@property (strong, nonatomic) UILabel       *emailLabel;
+//@property (strong, nonatomic) UITextField   *emailTextField;
+@property (strong, nonatomic) UILabel       *passwordLabel;
+//@property (strong, nonatomic) UITextField   *passwordTextField;
 
-@property (strong, nonatomic) UIButton      * signBtn;
-@property (strong, nonatomic) UIButton      * forgetBtn;
+@property (strong, nonatomic) UIButton      *signBtn;
+@property (strong, nonatomic) UIButton      *forgetBtn;
 
-@property (strong, nonatomic) UILabel       * infoLabel;
+@property (strong, nonatomic) UILabel       *infoLabel;
 
-@property (strong, nonatomic) UIButton      * sinaWeiboBtn;
-@property (strong, nonatomic) UIButton      * taobaoBtn;
-@property (strong, nonatomic) UIButton      * weixinBtn;
+@property (strong, nonatomic) UIButton      *sinaWeiboBtn;
+@property (strong, nonatomic) UIButton      *taobaoBtn;
+@property (strong, nonatomic) UIButton      *weixinBtn;
+
+@property (strong, nonatomic) UIButton      *onePasswordBtn;
 
 @end
 
@@ -169,6 +172,18 @@
     return _infoLabel;
 }
 
+- (UIButton *)onePasswordBtn
+{
+    if (!_onePasswordBtn) {
+        _onePasswordBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
+        _onePasswordBtn.deFrameSize         = CGSizeMake(28., 28.);
+//        _onePasswordBtn.backgroundColor     = [UIColor redColor];
+        [_onePasswordBtn setImage:[UIImage imageNamed:@"onepassword-button"] forState:UIControlStateNormal];
+        [_onePasswordBtn addTarget:self action:@selector(onePasswordAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_onePasswordBtn];
+    }
+    return _onePasswordBtn;
+}
 
 - (UIButton *)sinaWeiboBtn
 {
@@ -275,6 +290,12 @@
     self.infoLabel.center               = self.forgetBtn.center;
     self.infoLabel.deFrameTop           = self.forgetBtn.deFrameBottom + 75.;
     
+    
+    if ([[OnePasswordExtension sharedExtension] isAppExtensionAvailable]) {
+        self.passwordTextField.rightView        = self.onePasswordBtn;
+        self.passwordTextField.rightViewMode    = UITextFieldViewModeAlways;
+    }
+    
     [self configSNS];
 }
 
@@ -300,6 +321,7 @@
     self.infoLabel.center               = self.forgetBtn.center;
     self.infoLabel.deFrameTop           = self.forgetBtn.deFrameBottom + 75.;
     
+
     [self configSNS];
 }
 
@@ -386,6 +408,13 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(tapWeChatBtn:)]) {
         [_delegate tapWeChatBtn:sender];
+    }
+}
+
+- (void)onePasswordAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(handleTapOnePassword:)]) {
+        [_delegate handleTapOnePassword:sender];
     }
 }
 

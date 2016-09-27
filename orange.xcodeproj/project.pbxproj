@@ -173,6 +173,7 @@
 		8A69286A1D9547FF00E3C5D4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A69286C1D9547FF00E3C5D4 /* InfoPlist.strings */; };
 		8A6928721D95802000E3C5D4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6928711D95802000E3C5D4 /* StoreKit.framework */; };
 		8A6928731D95804000E3C5D4 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
+		8A71B9AB1D9A561500EC7F7F /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A71B9AA1D9A561500EC7F7F /* 1Password.xcassets */; };
 		8A74DFF11D767D6C0027D36B /* SearchTipsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A74DFF01D767D6C0027D36B /* SearchTipsController.m */; };
 		8A7D91071D58827900D67458 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7D91061D58827900D67458 /* libiconv.tbd */; };
 		8A8418AC1C06FDB900F55FE9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */; };
@@ -704,6 +705,7 @@
 		8A69286F1D95481E00E3C5D4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		8A6928701D95482100E3C5D4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8A6928711D95802000E3C5D4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		8A71B9AA1D9A561500EC7F7F /* 1Password.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = 1Password.xcassets; sourceTree = "<group>"; };
 		8A74DFEF1D767D6C0027D36B /* SearchTipsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTipsController.h; sourceTree = "<group>"; };
 		8A74DFF01D767D6C0027D36B /* SearchTipsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTipsController.m; sourceTree = "<group>"; };
 		8A7B791F1BAAB9310089FFD6 /* DataStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructure.h; sourceTree = "<group>"; };
@@ -1521,6 +1523,7 @@
 				4E56DF1C19D552C000263B17 /* AppDelegate.h */,
 				4E56DF1D19D552C000263B17 /* AppDelegate.m */,
 				4E56DF2519D552C000263B17 /* Images.xcassets */,
+				8A71B9AA1D9A561500EC7F7F /* 1Password.xcassets */,
 				4E56DF3E19D56EF500263B17 /* ThirdParty */,
 				4E56DF1819D552C000263B17 /* Supporting Files */,
 			);
@@ -2748,6 +2751,7 @@
 				B72000B71B0849E50001F199 /* PushConfig.plist in Resources */,
 				4E4F27F21B6F4699003A63C5 /* 14.png in Resources */,
 				4E4F27D91B6F438E003A63C5 /* loading-image@2x.png in Resources */,
+				8A71B9AB1D9A561500EC7F7F /* 1Password.xcassets in Resources */,
 				4E4F27FD1B6F4699003A63C5 /* 9.png in Resources */,
 				B71E494A1AC9207B00D4DB6D /* guoku.strings in Resources */,
 				4E4F27F91B6F4699003A63C5 /* 5.png in Resources */,

@@ -18,9 +18,14 @@
 - (void)tapTaobaoBtn:(id)sender;
 - (void)tapWeChatBtn:(id)sender;
 
+- (void)handleTapOnePassword:(id)sender;
+
 @end
 
 @interface SignInView : UIView
+
+@property (strong, nonatomic) UITextField   *emailTextField;
+@property (strong, nonatomic) UITextField   *passwordTextField;
 
 @property (weak, nonatomic) id<SignInViewDelegate> delegate;
 

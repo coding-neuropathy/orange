@@ -80,11 +80,13 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "$PODS_CONFIGURATION_BUILD_DIR/1PasswordExtension/OnePasswordExtensionResources.bundle"
   install_resource "FontAwesome/Resources/FontAwesome.ttf"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
   install_resource "WeiboSDK/libWeiboSDK/WeiboSDK.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "$PODS_CONFIGURATION_BUILD_DIR/1PasswordExtension/OnePasswordExtensionResources.bundle"
   install_resource "FontAwesome/Resources/FontAwesome.ttf"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
   install_resource "WeiboSDK/libWeiboSDK/WeiboSDK.bundle"
