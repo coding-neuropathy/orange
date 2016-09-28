@@ -330,8 +330,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     [self presentViewController:altervc animated:YES completion:nil];
 }
 
-
-
 #pragma mark - UserModel KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

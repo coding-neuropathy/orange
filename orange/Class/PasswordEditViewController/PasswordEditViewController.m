@@ -7,27 +7,40 @@
 //
 
 #import "PasswordEditViewController.h"
-#import "API.h"
+#import <1PasswordExtension/OnePasswordExtension.h>
+//#import "API.h"
 //static CGFloat NormalKeyboardHeight = 216.0f;
 
 @interface PasswordEditViewController ()<UITextFieldDelegate>
-@property (nonatomic, strong) UITextField *passwordTextField;
-@property (nonatomic, strong) UITextField *passwordTextFieldForNew;
-@property (nonatomic, strong) UITextField *passwordTextFieldForSecond;
+
+@property (nonatomic, strong) UITextField   *passwordTextField;
+@property (nonatomic, strong) UITextField   *passwordTextFieldForNew;
+@property (nonatomic, strong) UITextField   *passwordTextFieldForSecond;
+@property (nonatomic, strong) UIButton      *onePasswordBtn;
+
 @end
 
 @implementation PasswordEditViewController
 
-
-
-
 #pragma mark - Life Cycle
+
+- (UIButton *)onePasswordBtn
+{
+    if (!_onePasswordBtn) {
+        _onePasswordBtn                 = [UIButton buttonWithType:UIButtonTypeCustom];
+        _onePasswordBtn.deFrameSize     = CGSizeMake(32., 32.);
+        [_onePasswordBtn setImage:[UIImage imageNamed:@"1password-button"] forState:UIControlStateNormal];
+        [_onePasswordBtn addTarget:self action:@selector(tapOnePasswordBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _onePasswordBtn;
+}
 
 
 - (void)loadView
 {
     [super loadView];
-    self.view.backgroundColor = UIColorFromRGB(0xffffff);
+    self.view.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         
     _passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(40.f,30, kScreenWidth - 80, 45.f)];
     self.passwordTextField.delegate = self;
@@ -136,6 +149,13 @@
     [self.view addSubview:self.passwordTextFieldForSecond];
     
     
+    if ([[OnePasswordExtension sharedExtension] isAppExtensionAvailable]) {
+        self.onePasswordBtn.center          = self.passwordTextField.center;
+        self.onePasswordBtn.deFrameLeft     = self.passwordTextField.deFrameRight + 5.;
+        
+        [self.view addSubview:self.onePasswordBtn];
+    }
+    
 }
 - (void)viewDidLoad
 {
@@ -219,15 +239,72 @@
                 [SVProgressHUD showErrorWithStatus:NSLocalizedStringFromTable(errorMsg, kLocalizedFile, nil)];
             }
         }];
-//        [API updateaccountWithParameters:dict success:^(GKUser *user) {
-//            [SVProgressHUD showImage:nil status:[NSString stringWithFormat:@"\U0001F603 修改成功"]];
-//        } failure:^(NSInteger stateCode) {
-//            [SVProgressHUD showImage:nil status:@"修改失败"];
-//        }];
     }
 
 }
 
+- (void)tapOnePasswordBtn:(id)sender
+{
+    NSString *changedPassword = self.passwordTextFieldForNew.text ? : @"";
+    NSString *oldPassword = self.passwordTextField.text ? : @"";
+    NSString *confirmationPassword = self.passwordTextFieldForSecond.text ? : @"";
+    
+    NSDictionary *loginDetails = @{
+                                   AppExtensionTitleKey: @"Guoku", // Optional, used for the third schenario only
+                                   AppExtensionUsernameKey: [Passport sharedInstance].user.email, // Optional, used for the third schenario only
+                                   AppExtensionPasswordKey: changedPassword,
+                                   AppExtensionOldPasswordKey: oldPassword,
+                                   AppExtensionNotesKey: @"Saved with the Guoku app", // Optional, used for the third schenario only
+                                   };
+    
+    // Validate that the new password and the old password are not the same.
+    if (oldPassword.length > 0 && [oldPassword isEqualToString:changedPassword]) {
+//        [self showChangePasswordFailedAlertWithMessage:@"The old and the new password must not be the same"];
+        return;
+    }
+    
+    // Validate that the new and confirmation passwords match.
+    if (NO == [changedPassword isEqualToString:confirmationPassword]) {
+//        [self showChangePasswordFailedAlertWithMessage:@"The new passwords and the confirmation password must match"];
+        return;
+    }
+    // The password generation options are optional, but are very handy in case you have strict rules about password lengths, symbols and digits.
+    NSDictionary *passwordGenerationOptions = @{
+                                                // The minimum password length can be 4 or more.
+                                                AppExtensionGeneratedPasswordMinLengthKey: @(8),
+                                                
+                                                // The maximum password length can be 50 or less.
+                                                AppExtensionGeneratedPasswordMaxLengthKey: @(30),
+                                                
+                                                // If YES, the 1Password will guarantee that the generated password will contain at least one digit (number between 0 and 9). Passing NO will not exclude digits from the generated password.
+                                                AppExtensionGeneratedPasswordRequireDigitsKey: @(YES),
+                                                
+                                                // If YES, the 1Password will guarantee that the generated password will contain at least one symbol (See the list bellow). Passing NO with will exclude symbols from the generated password.
+                                                AppExtensionGeneratedPasswordRequireSymbolsKey: @(YES),
+                                                
+                                                // Here are all the symbols available in the the 1Password Password Generator:
+                                                // !@#$%^&*()_-+=|[]{}'\";.,>?/~`
+                                                // The string for AppExtensionGeneratedPasswordForbiddenCharactersKey should contain the symbols and characters that you wish 1Password to exclude from the generated password.
+                                                AppExtensionGeneratedPasswordForbiddenCharactersKey: @"!@#$%/0lIO"
+                                                };
+    
+    
+    [[OnePasswordExtension sharedExtension] changePasswordForLoginForURLString:@"http://guoku.com" loginDetails:loginDetails passwordGenerationOptions:passwordGenerationOptions forViewController:self sender:sender completion:^(NSDictionary *loginDictionary, NSError *error) {
+        if (loginDictionary.count == 0) {
+            if (error.code != AppExtensionErrorCodeCancelledByUser) {
+                DDLogError(@"Error invoking 1Password App Extension for find login: %@", error);
+            }
+            return;
+        }
+        
+        self.passwordTextField.text = loginDictionary[AppExtensionOldPasswordKey];
+        self.passwordTextFieldForNew.text = loginDictionary[AppExtensionPasswordKey];
+        self.passwordTextFieldForSecond.text = loginDictionary[AppExtensionPasswordKey];
+    }];
+}
+
+
+#pragma mark -
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if ([string isEqualToString:@"\n"]) {
