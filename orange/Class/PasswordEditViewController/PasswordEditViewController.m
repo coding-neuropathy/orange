@@ -8,10 +8,13 @@
 
 #import "PasswordEditViewController.h"
 #import <1PasswordExtension/OnePasswordExtension.h>
+#import "UpdatePasswordView.h"
 //#import "API.h"
 //static CGFloat NormalKeyboardHeight = 216.0f;
 
 @interface PasswordEditViewController ()<UITextFieldDelegate>
+
+@property (strong, nonatomic) UpdatePasswordView    *passworView;
 
 @property (nonatomic, strong) UITextField   *passwordTextField;
 @property (nonatomic, strong) UITextField   *passwordTextFieldForNew;
@@ -23,6 +26,15 @@
 @implementation PasswordEditViewController
 
 #pragma mark - Life Cycle
+- (UpdatePasswordView *)passworView
+{
+    if (!_passworView) {
+        _passworView                    = [[UpdatePasswordView alloc] initWithFrame:CGRectZero];
+        _passworView.deFrameSize        = CGSizeMake(kScreenWidth, kScreenHeight);
+        _passworView.backgroundColor    = [UIColor colorFromHexString:@"#ffffff"];
+    }
+    return _passworView;
+}
 
 - (UIButton *)onePasswordBtn
 {
@@ -39,124 +51,118 @@
 
 - (void)loadView
 {
-    [super loadView];
-    self.view.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
-        
-    _passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(40.f,30, kScreenWidth - 80, 45.f)];
-    self.passwordTextField.delegate = self;
-    self.passwordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    self.passwordTextField.borderStyle = UITextBorderStyleNone;
-    self.passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.passwordTextField.secureTextEntry = YES;
-//    if (iOS7) {
-//        [self.passwordTextField setTintColor:UIColorFromRGB(0x414243)];
+    self.view   = self.passworView;
+//    [super loadView];
+//    self.view.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
+//        
+//    _passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(40.f,30, kScreenWidth - 80, 45.f)];
+//    self.passwordTextField.delegate = self;
+//    self.passwordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+//    self.passwordTextField.borderStyle = UITextBorderStyleNone;
+//    self.passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+//    self.passwordTextField.secureTextEntry = YES;
+//
+//    {
+//        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
+//        label.textColor = UIColorFromRGB(0x9d9e9f);
+//        label.textAlignment = NSTextAlignmentLeft;
+//        label.font = [UIFont systemFontOfSize:14];
+//        label.text = @"原密码";
+//        label.adjustsFontSizeToFitWidth = YES;
+//        self.passwordTextField.leftView = label;
 //    }
-    {
-        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
-        label.textColor = UIColorFromRGB(0x9d9e9f);
-        label.textAlignment = NSTextAlignmentLeft;
-        label.font = [UIFont systemFontOfSize:14];
-        label.text = @"原密码";
-        label.adjustsFontSizeToFitWidth = YES;
-        self.passwordTextField.leftView = label;
-    }
-    self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
-    self.passwordTextField.rightViewMode = UITextFieldViewModeAlways;
-    self.passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.passwordTextField.placeholder = @"";
-    self.passwordTextField.font = [UIFont systemFontOfSize:14];
-    self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.passwordTextField.returnKeyType = UIReturnKeyGo;
-    [self.passwordTextField setTextColor:UIColorFromRGB(0x414243)];
-    self.passwordTextField.backgroundColor = [UIColor clearColor];
-    {
-        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextField.deFrameWidth,0.5)];
-        H.backgroundColor = UIColorFromRGB(0xebebeb);
-        H.center = CGPointMake(self.passwordTextField.deFrameWidth/2, self.passwordTextField.deFrameHeight);
-        [self.passwordTextField addSubview:H];
-    }
-    [self.view addSubview:self.passwordTextField];
-    
-    
-    _passwordTextFieldForNew = [[UITextField alloc] initWithFrame:CGRectMake(40.f,80, kScreenWidth - 80, 45.f)];
-    self.passwordTextFieldForNew.delegate = self;
-    self.passwordTextFieldForNew.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    self.passwordTextFieldForNew.borderStyle = UITextBorderStyleNone;
-    self.passwordTextFieldForNew.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.passwordTextFieldForNew.secureTextEntry = YES;
-//    if (iOS7) {
-//        [self.passwordTextFieldForNew setTintColor:UIColorFromRGB(0x414243)];
+//    self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
+//    self.passwordTextField.rightViewMode = UITextFieldViewModeAlways;
+//    self.passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+//    self.passwordTextField.placeholder = @"";
+//    self.passwordTextField.font = [UIFont systemFontOfSize:14];
+//    self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    self.passwordTextField.returnKeyType = UIReturnKeyGo;
+//    [self.passwordTextField setTextColor:UIColorFromRGB(0x414243)];
+//    self.passwordTextField.backgroundColor = [UIColor clearColor];
+//    {
+//        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextField.deFrameWidth,0.5)];
+//        H.backgroundColor = UIColorFromRGB(0xebebeb);
+//        H.center = CGPointMake(self.passwordTextField.deFrameWidth/2, self.passwordTextField.deFrameHeight);
+//        [self.passwordTextField addSubview:H];
 //    }
-    {
-        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
-        label.textColor = UIColorFromRGB(0x9d9e9f);
-        label.textAlignment = NSTextAlignmentLeft;
-        label.font = [UIFont systemFontOfSize:14];
-        label.text = @"新密码";
-        label.adjustsFontSizeToFitWidth = YES;
-        self.passwordTextFieldForNew.leftView = label;
-    }
-    self.passwordTextFieldForNew.leftViewMode = UITextFieldViewModeAlways;
-    self.passwordTextFieldForNew.rightViewMode = UITextFieldViewModeAlways;
-    self.passwordTextFieldForNew.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.passwordTextFieldForNew.placeholder = @"";
-    self.passwordTextFieldForNew.font = [UIFont systemFontOfSize:14];
-    self.passwordTextFieldForNew.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.passwordTextFieldForNew.returnKeyType = UIReturnKeyGo;
-    [self.passwordTextFieldForNew setTextColor:UIColorFromRGB(0x414243)];
-    self.passwordTextFieldForNew.backgroundColor = [UIColor clearColor];
-    {
-        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextFieldForNew.deFrameWidth,0.5)];
-        H.backgroundColor = UIColorFromRGB(0xebebeb);
-        H.center = CGPointMake(self.passwordTextFieldForNew.deFrameWidth/2, self.passwordTextFieldForNew.deFrameHeight);
-        [self.passwordTextFieldForNew addSubview:H];
-    }
-    [self.view addSubview:self.passwordTextFieldForNew];
-    
-    _passwordTextFieldForSecond = [[UITextField alloc] initWithFrame:CGRectMake(40.f,130, kScreenWidth - 80, 45.f)];
-    self.passwordTextFieldForSecond.delegate = self;
-    self.passwordTextFieldForSecond.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    self.passwordTextFieldForSecond.borderStyle = UITextBorderStyleNone;
-    self.passwordTextFieldForSecond.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.passwordTextFieldForSecond.secureTextEntry = YES;
-//    if (iOS7) {
-//        [self.passwordTextFieldForSecond setTintColor:UIColorFromRGB(0x414243)];
+//    [self.view addSubview:self.passwordTextField];
+//    
+//    
+//    _passwordTextFieldForNew = [[UITextField alloc] initWithFrame:CGRectMake(40.f,80, kScreenWidth - 80, 45.f)];
+//    self.passwordTextFieldForNew.delegate = self;
+//    self.passwordTextFieldForNew.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+//    self.passwordTextFieldForNew.borderStyle = UITextBorderStyleNone;
+//    self.passwordTextFieldForNew.autocapitalizationType = UITextAutocapitalizationTypeNone;
+//    self.passwordTextFieldForNew.secureTextEntry = YES;
+////    if (iOS7) {
+////        [self.passwordTextFieldForNew setTintColor:UIColorFromRGB(0x414243)];
+////    }
+//    {
+//        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
+//        label.textColor = UIColorFromRGB(0x9d9e9f);
+//        label.textAlignment = NSTextAlignmentLeft;
+//        label.font = [UIFont systemFontOfSize:14];
+//        label.text = @"新密码";
+//        label.adjustsFontSizeToFitWidth = YES;
+//        self.passwordTextFieldForNew.leftView = label;
 //    }
-    {
-        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
-        label.textColor = UIColorFromRGB(0x9d9e9f);
-        label.textAlignment = NSTextAlignmentLeft;
-        label.font = [UIFont systemFontOfSize:14];
-        label.text = @"确认密码";
-        label.adjustsFontSizeToFitWidth = YES;
-        self.passwordTextFieldForSecond.leftView = label;
-    }
-    self.passwordTextFieldForSecond.leftViewMode = UITextFieldViewModeAlways;
-    self.passwordTextFieldForSecond.rightViewMode = UITextFieldViewModeAlways;
-    self.passwordTextFieldForSecond.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.passwordTextFieldForSecond.placeholder = @"";
-    self.passwordTextFieldForSecond.font = [UIFont systemFontOfSize:14];
-    self.passwordTextFieldForSecond.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.passwordTextFieldForSecond.returnKeyType = UIReturnKeyGo;
-    [self.passwordTextFieldForSecond setTextColor:UIColorFromRGB(0x414243)];
-    self.passwordTextFieldForSecond.backgroundColor = [UIColor clearColor];
-    {
-        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextFieldForSecond.deFrameWidth,0.5)];
-        H.backgroundColor = UIColorFromRGB(0xebebeb);
-        H.center = CGPointMake(self.passwordTextFieldForSecond.deFrameWidth/2, self.passwordTextFieldForSecond.deFrameHeight);
-        [self.passwordTextFieldForSecond addSubview:H];
-    }
-    [self.view addSubview:self.passwordTextFieldForSecond];
+//    self.passwordTextFieldForNew.leftViewMode = UITextFieldViewModeAlways;
+//    self.passwordTextFieldForNew.rightViewMode = UITextFieldViewModeAlways;
+//    self.passwordTextFieldForNew.autocorrectionType = UITextAutocorrectionTypeNo;
+//    self.passwordTextFieldForNew.placeholder = @"";
+//    self.passwordTextFieldForNew.font = [UIFont systemFontOfSize:14];
+//    self.passwordTextFieldForNew.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    self.passwordTextFieldForNew.returnKeyType = UIReturnKeyGo;
+//    [self.passwordTextFieldForNew setTextColor:UIColorFromRGB(0x414243)];
+//    self.passwordTextFieldForNew.backgroundColor = [UIColor clearColor];
+//    {
+//        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextFieldForNew.deFrameWidth,0.5)];
+//        H.backgroundColor = UIColorFromRGB(0xebebeb);
+//        H.center = CGPointMake(self.passwordTextFieldForNew.deFrameWidth/2, self.passwordTextFieldForNew.deFrameHeight);
+//        [self.passwordTextFieldForNew addSubview:H];
+//    }
+//    [self.view addSubview:self.passwordTextFieldForNew];
+//    
+//    _passwordTextFieldForSecond = [[UITextField alloc] initWithFrame:CGRectMake(40.f,130, kScreenWidth - 80, 45.f)];
+//    self.passwordTextFieldForSecond.delegate = self;
+//    self.passwordTextFieldForSecond.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+//    self.passwordTextFieldForSecond.borderStyle = UITextBorderStyleNone;
+//    self.passwordTextFieldForSecond.autocapitalizationType = UITextAutocapitalizationTypeNone;
+//    self.passwordTextFieldForSecond.secureTextEntry = YES;
+////    if (iOS7) {
+////        [self.passwordTextFieldForSecond setTintColor:UIColorFromRGB(0x414243)];
+////    }
+//    {
+//        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
+//        label.textColor = UIColorFromRGB(0x9d9e9f);
+//        label.textAlignment = NSTextAlignmentLeft;
+//        label.font = [UIFont systemFontOfSize:14];
+//        label.text = @"确认密码";
+//        label.adjustsFontSizeToFitWidth = YES;
+//        self.passwordTextFieldForSecond.leftView = label;
+//    }
+//    self.passwordTextFieldForSecond.leftViewMode = UITextFieldViewModeAlways;
+//    self.passwordTextFieldForSecond.rightViewMode = UITextFieldViewModeAlways;
+//    self.passwordTextFieldForSecond.autocorrectionType = UITextAutocorrectionTypeNo;
+//    self.passwordTextFieldForSecond.placeholder = @"";
+//    self.passwordTextFieldForSecond.font = [UIFont systemFontOfSize:14];
+//    self.passwordTextFieldForSecond.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    self.passwordTextFieldForSecond.returnKeyType = UIReturnKeyGo;
+//    [self.passwordTextFieldForSecond setTextColor:UIColorFromRGB(0x414243)];
+//    self.passwordTextFieldForSecond.backgroundColor = [UIColor clearColor];
+//    {
+//        UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextFieldForSecond.deFrameWidth,0.5)];
+//        H.backgroundColor = UIColorFromRGB(0xebebeb);
+//        H.center = CGPointMake(self.passwordTextFieldForSecond.deFrameWidth/2, self.passwordTextFieldForSecond.deFrameHeight);
+//        [self.passwordTextFieldForSecond addSubview:H];
+//    }
+//    [self.view addSubview:self.passwordTextFieldForSecond];
     
-    
-    if ([[OnePasswordExtension sharedExtension] isAppExtensionAvailable]) {
-        self.onePasswordBtn.center          = self.passwordTextField.center;
-        self.onePasswordBtn.deFrameLeft     = self.passwordTextField.deFrameRight + 5.;
-        
-        [self.view addSubview:self.onePasswordBtn];
-    }
-    
+
 }
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -175,6 +181,10 @@
         [array addObject:item];
     }
     self.navigationItem.rightBarButtonItems = array;
+    
+    
+
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -206,7 +216,7 @@
     NSString *passwordsecond = self.passwordTextFieldForSecond.text;
     
     if (!password || password.length == 0) {
-        [SVProgressHUD showImage:nil status:@"请输入密码"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"please-enter-password", kLocalizedFile, nil)];
         return;
     }
     
@@ -222,7 +232,7 @@
     
     if (![passwordsecond isEqualToString:passwordnew])
     {
-        [SVProgressHUD showImage:nil status:@"两次密码不一致"];
+        [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"password-must-match", kLocalizedFile, nil)];
         return;
     }
     

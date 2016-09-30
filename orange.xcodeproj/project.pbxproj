@@ -173,6 +173,7 @@
 		8A69286A1D9547FF00E3C5D4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A69286C1D9547FF00E3C5D4 /* InfoPlist.strings */; };
 		8A6928721D95802000E3C5D4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6928711D95802000E3C5D4 /* StoreKit.framework */; };
 		8A6928731D95804000E3C5D4 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
+		8A71B9AE1D9B890B00EC7F7F /* UpdatePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A71B9AD1D9B890B00EC7F7F /* UpdatePasswordView.m */; };
 		8A74DFF11D767D6C0027D36B /* SearchTipsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A74DFF01D767D6C0027D36B /* SearchTipsController.m */; };
 		8A7D91071D58827900D67458 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7D91061D58827900D67458 /* libiconv.tbd */; };
 		8A8418AC1C06FDB900F55FE9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8418AB1C06FDB900F55FE9 /* libsqlite3.tbd */; };
@@ -704,6 +705,8 @@
 		8A69286F1D95481E00E3C5D4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		8A6928701D95482100E3C5D4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8A6928711D95802000E3C5D4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		8A71B9AC1D9B890B00EC7F7F /* UpdatePasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordView.h; sourceTree = "<group>"; };
+		8A71B9AD1D9B890B00EC7F7F /* UpdatePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordView.m; sourceTree = "<group>"; };
 		8A74DFEF1D767D6C0027D36B /* SearchTipsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTipsController.h; sourceTree = "<group>"; };
 		8A74DFF01D767D6C0027D36B /* SearchTipsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTipsController.m; sourceTree = "<group>"; };
 		8A7B791F1BAAB9310089FFD6 /* DataStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataStructure.h; sourceTree = "<group>"; };
@@ -2465,6 +2468,8 @@
 			children = (
 				DA35B3C41AFEE31200D66671 /* PasswordEditViewController.h */,
 				DA35B3C51AFEE31200D66671 /* PasswordEditViewController.m */,
+				8A71B9AC1D9B890B00EC7F7F /* UpdatePasswordView.h */,
+				8A71B9AD1D9B890B00EC7F7F /* UpdatePasswordView.m */,
 			);
 			name = PasswordEditViewController;
 			path = ../PasswordEditViewController;
@@ -3087,6 +3092,7 @@
 				23F612FA1CDAEF120074E8C8 /* NicknameViewController.m in Sources */,
 				8AAA2D141C04444800B27E49 /* EntityPreViewController.m in Sources */,
 				4E7869691BA70C5A00586BD9 /* EntityHeaderBuyView.m in Sources */,
+				8A71B9AE1D9B890B00EC7F7F /* UpdatePasswordView.m in Sources */,
 				B7F9EB101B28894B00887582 /* EntityLikerController.m in Sources */,
 				B70686A51CF422F100C40825 /* MenuController.m in Sources */,
 				4E2D6D431A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m in Sources */,

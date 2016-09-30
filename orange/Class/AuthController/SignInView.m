@@ -27,6 +27,7 @@
 @property (strong, nonatomic) UIButton      *weixinBtn;
 
 @property (strong, nonatomic) UIButton      *onePasswordBtn;
+@property (strong, nonatomic) UIButton      *eyePasswordBtn;
 
 @end
 
@@ -185,6 +186,21 @@
     return _onePasswordBtn;
 }
 
+- (UIButton *)eyePasswordBtn
+{
+    if (!_eyePasswordBtn) {
+        _eyePasswordBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
+        _eyePasswordBtn.deFrameSize         = CGSizeMake(28., 28.);
+        [_eyePasswordBtn setImage:[UIImage imageNamed:@"Visible"] forState:UIControlStateNormal];
+        [_eyePasswordBtn setImage:[UIImage imageNamed:@"Invisible Filled"] forState:UIControlStateSelected];
+        [_eyePasswordBtn addTarget:self action:@selector(eyePasswordAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:_eyePasswordBtn];
+    }
+    return _eyePasswordBtn;
+}
+
+
 - (UIButton *)sinaWeiboBtn
 {
     if (!_sinaWeiboBtn) {
@@ -294,6 +310,9 @@
     if ([[OnePasswordExtension sharedExtension] isAppExtensionAvailable]) {
         self.emailTextField.rightView        = self.onePasswordBtn;
         self.emailTextField.rightViewMode    = UITextFieldViewModeAlways;
+    } else {
+        self.passwordTextField.rightView     = self.eyePasswordBtn;
+        self.passwordTextField.rightViewMode = UITextFieldViewModeAlways;
     }
     
     [self configSNS];
@@ -415,6 +434,18 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(handleTapOnePassword:)]) {
         [_delegate handleTapOnePassword:sender];
+    }
+}
+
+- (void)eyePasswordAction:(id)sender
+{
+    
+    if (self.eyePasswordBtn.selected) {
+        self.passwordTextField.secureTextEntry  = YES;
+        self.eyePasswordBtn.selected            = NO;
+    } else {
+        self.passwordTextField.secureTextEntry  = NO;
+        self.eyePasswordBtn.selected            = YES;
     }
 }
 
