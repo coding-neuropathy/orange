@@ -124,7 +124,7 @@
 {
     if (!_emailTextField) {
         _emailTextField                             = [[UITextField alloc] initWithFrame:CGRectZero];
-        _emailTextField.textColor                   = UIColorFromRGB(0xbdbdbd);
+        _emailTextField.textColor                   = [UIColor colorFromHexString:@"#212121"];
         _emailTextField.font                        = [UIFont fontWithName:@"PingFangSC-Regular" size:14.];
         _emailTextField.adjustsFontSizeToFitWidth   = YES;
         _emailTextField.leftView                    = self.emailLabel;
