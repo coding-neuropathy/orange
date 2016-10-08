@@ -49,6 +49,8 @@
 "refresh"   = "Refresh";
 "copy-link" = "Copy Link";
 
+"save"      = "Save";
+
 /**
  *  share
  */
@@ -226,12 +228,21 @@
 /**
  *  verify mail page
  */
-"verify mail"          = "Verify Mail";
-"reset password"       = "Reset Password";
-"verified"             = "Verified";
-"send mail for verify" = "Send Mail For Verify";
-"update email"         = "Update Email";
+"verify mail"           = "Verify Mail";
+"reset password"        = "Reset Password";
+"send mail for verify"  = "Send Mail For Verify";
+"update email"          = "Update Email";
+"verified"              = "Verified";
 "Sent to the current email"         = "Sent To The Current Email";
+
+/**
+ *  update password page
+ */
+"update-password"       = "Update Password";
+"current-password"      = "Current Password";
+"refresh-password"      = "New Password";
+"confirm-password"      = "Confirm Password";
+
 
 /*
  * datetime

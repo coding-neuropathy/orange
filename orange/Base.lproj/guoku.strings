@@ -49,6 +49,8 @@
 "refresh"   = "刷新";
 "copy-link" = "复制链接";
 
+"save"      = "保存";
+
 /**
  *  share
  */
@@ -213,6 +215,14 @@
 "what's-your-passowrd"  = "密码";
 "you-want-sign-out"     = "退出登录?";
 "signout-success"       = "登出成功";
+
+/**
+ *  update password page
+ */
+"update-password"       = "修改密码";
+"current-password"      = "当前密码";
+"refresh-password"      = "新密码";
+"confirm-password"      = "确认密码";
 
 /**
  *  seller

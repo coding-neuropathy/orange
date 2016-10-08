@@ -232,6 +232,16 @@
 "update email"                      = "修改郵箱";
 "Sent to the current email"         = "發送至當前郵箱";
 
+
+/**
+ *  update password page
+ */
+"update-password"       = "修改密碼";
+"current-password"      = "當前密碼";
+"refresh-password"      = "新密碼";
+"confirm-password"      = "確認密碼";
+
+
 /*
  * datetime
  */

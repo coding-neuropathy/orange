@@ -257,10 +257,11 @@ static CGFloat kEntityViewMarginLeft = 16.;
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
     if (!view) {
-        view = [[UIImageView alloc] initWithFrame:CGRectZero];
-        
-        view.deFrameSize    = IS_IPAD ? CGSizeMake(460., 460.) : CGSizeMake(kScreenWidth, kScreenWidth);
-        view.contentMode    = UIViewContentModeScaleAspectFit;
+        view                        = [[UIImageView alloc] initWithFrame:CGRectZero];
+
+        view.deFrameSize            = IS_IPAD ? CGSizeMake(460., 460.) : CGSizeMake(kScreenWidth, kScreenWidth);
+        view.contentMode            = IS_IPAD ? UIViewContentModeScaleAspectFit : UIViewContentModeScaleAspectFill;
+        view.layer.masksToBounds    = YES;
     }
     NSURL * imageURL_800;
     NSURL * url = [self.imageURLArray objectAtIndex:index];
@@ -273,6 +274,8 @@ static CGFloat kEntityViewMarginLeft = 16.;
         //        imageURL_800 = [NSURL URLWithString:[url.absoluteString stringByAppendingString:@"_800x800.jpg"]];
         imageURL_800 = [NSURL URLWithString:url.absoluteString];
     }
+//    view.contentMode            = UIViewContentModeScaleAspectFill;
+
     DDLogInfo(@"url %lu %@ ", (long)index, imageURL_800);
     [(UIImageView *)view sd_setImageWithURL:imageURL_800
                            placeholderImage:[UIImage imageWithColor:kPlaceHolderColor
