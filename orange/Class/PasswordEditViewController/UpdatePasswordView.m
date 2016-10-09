@@ -173,8 +173,9 @@
         }
         else {
 //            [self postButtonAction];
-        
-            
+            if (_delegate && [_delegate respondsToSelector:@selector(handleKeyboardSend:)]) {
+                [_delegate handleKeyboardSend:textField];
+            }
         }
     }
     return YES;

@@ -192,23 +192,9 @@
     }];
 }
 
-
-#pragma mark -
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (void)handleKeyboardSend:(id)sender
 {
-    if ([string isEqualToString:@"\n"]) {
-        if (textField == self.passwordTextField) {
-            [self.passwordTextFieldForNew becomeFirstResponder];
-        }
-        else if (textField == self.passwordTextFieldForNew) {
-            [self.passwordTextFieldForSecond becomeFirstResponder];
-        }
-        else {
-            [self postButtonAction];
-        }
-    }
-    return YES;
+    [self postButtonAction];
 }
-
 
 @end

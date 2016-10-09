@@ -11,6 +11,7 @@
 @protocol UpdatePasswordViewDelegate <NSObject>
 
 - (void)handleOnePassword:(id)sender;
+- (void)handleKeyboardSend:(id)sender;
 
 @end
 
