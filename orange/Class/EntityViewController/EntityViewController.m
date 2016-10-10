@@ -191,9 +191,9 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 //        [_collectionView setContentOffset:CGPointMake(0., 64.)];
 //        [_collectionView.collectionViewLayout collectionViewContentSize];
 
-        _collectionView.delegate        = self;
-        _collectionView.dataSource      = self;
-        _collectionView.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
+        _collectionView.delegate                = self;
+        _collectionView.dataSource              = self;
+        _collectionView.backgroundColor         = [UIColor colorFromHexString:@"#ffffff"];
         _collectionView.alwaysBounceVertical    = YES;
         /**
          *  适配横屏启动
@@ -213,7 +213,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         _likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _likeButton.frame = CGRectMake(0, 0, kScreenWidth / 3, 44.);
         UIImage * like = [[UIImage imageNamed:@"like"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _likeButton.tintColor = UIColorFromRGB(0xffffff);
+        _likeButton.tintColor = [UIColor colorFromHexString:@"#ffffff"];
         [_likeButton setImage:like forState:UIControlStateNormal];
         [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
         [_likeButton setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
@@ -233,7 +233,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         _postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _postBtn.frame = CGRectMake(0., 0.,  kScreenWidth/3, 44.);
         UIImage * image = [[UIImage imageNamed:@"post note"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _postBtn.tintColor = UIColorFromRGB(0xffffff);
+        _postBtn.tintColor = [UIColor colorFromHexString:@"#ffffff"];
         [_postBtn setImage:image forState:UIControlStateNormal];
         //[_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
         _postBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -623,7 +623,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             {
                 EntityHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier forIndexPath:indexPath];
                 GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
-                headerSection.headertype = CategoryType;
+                headerSection.headertype = CategoryHeaderType;
                 if (category.categoryName) {
                     headerSection.text = category.categoryName;
                 } else {
@@ -957,7 +957,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     EntityHeaderSectionView * header = (EntityHeaderSectionView *)sender;
     
     switch (header.headertype) {
-        case CategoryType:
+        case CategoryHeaderType:
         {
             GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId" : @(self.entity.categoryId)}];
             [[OpenCenter sharedOpenCenter] openCategory:category];

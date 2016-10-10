@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key> UIWhitePointAdaptivityStyle</key>
+	<string>UIWhitePointAdaptivityStyleReading</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleExecutable</key>
@@ -20,7 +22,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.2.4</string>
+	<string>4.2.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -67,7 +69,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4242</string>
+	<string>4243</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -195,7 +197,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key> UIWhitePointAdaptivityStyle</key>
-	<string>UIWhitePointAdaptivityStyleReading</string>
 </dict>
 </plist>
