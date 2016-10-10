@@ -373,6 +373,7 @@ static CGFloat kEntityViewMarginLeft = 16.;
     if (brandHeight != 0) {
         brandHeight += 8;
     }
+    
     return kScreenWidth + 123. + titleHeight + brandHeight;
 }
 
