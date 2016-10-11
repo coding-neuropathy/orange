@@ -54,7 +54,7 @@
         _userLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 //        _userLabel.font = [UIFont systemFontOfSize:14.];
         _userLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
-        _userLabel.textColor = UIColorFromRGB(0x414243);
+        _userLabel.textColor = UIColorFromRGB(0x212121);
         _userLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_userLabel];
     }
@@ -232,7 +232,7 @@
         _nameLabel                          = [[UILabel alloc] initWithFrame:CGRectZero];
         _nameLabel.deFrameSize              = CGSizeMake(50., 10.);
         _nameLabel.font                     = [UIFont boldSystemFontOfSize:10.];
-        _nameLabel.textColor                = [UIColor colorFromHexString:@"#414243"];
+        _nameLabel.textColor                = [UIColor colorFromHexString:@"#212121"];
         _nameLabel.lineBreakMode            = NSLineBreakByWordWrapping;
         _nameLabel.textAlignment            = NSTextAlignmentCenter;
         

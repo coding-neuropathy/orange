@@ -101,8 +101,8 @@ int ddLogLevel;
 
     [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorFromHexString:@"#414243"]];
-    [[UINavigationBar appearance] setTintColor:[UIColor colorFromHexString:@"#414243"]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorFromHexString:@"#212121"]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorFromHexString:@"#212121"]];
 //    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
     UIFont* font = [UIFont fontWithName:@"PingFangSC-Semibold" size:17];
     [[UINavigationBar appearance] setTitleTextAttributes:@{ NSFontAttributeName:font,

@@ -30,7 +30,7 @@
         _cancel = [UIButton buttonWithType:UIButtonTypeCustom];
         _cancel.backgroundColor = [UIColor colorFromHexString:@"#f0f0f0"];
         [_cancel setTitle:NSLocalizedStringFromTable(@"cancel", kLocalizedFile, nil) forState:UIControlStateNormal];
-        [_cancel setTitleColor:[UIColor colorFromHexString:@"#414243"] forState:UIControlStateNormal];
+        [_cancel setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
         
         [_cancel addTarget:self action:@selector(TapCancelBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 

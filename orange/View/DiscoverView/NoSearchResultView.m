@@ -32,7 +32,7 @@
     
     self.titleLabel.frame = CGRectMake(0., 0., kScreenWidth, 20.);
     self.titleLabel.font = [UIFont systemFontOfSize:16.];
-    self.titleLabel.textColor = UIColorFromRGB(0x414243);;
+    self.titleLabel.textColor = UIColorFromRGB(0x212121);;
     self.titleLabel.deFrameTop = self.noticImageView.frame.origin.y + self.noticImageView.frame.size.height + 40.;
     
     self.detailLabel.frame = CGRectMake(0., 40., kScreenWidth, 40.);

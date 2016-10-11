@@ -84,7 +84,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
     label.text = self.subcategory.categoryName;
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Helvetica" size:17];
-    label.textColor = UIColorFromRGB(0x414243);
+    label.textColor = UIColorFromRGB(0x212121);
     label.adjustsFontSizeToFitWidth = YES;
     label.backgroundColor = [UIColor clearColor];
     [label sizeToFit];
@@ -501,7 +501,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
     {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _textLabel.font = [UIFont systemFontOfSize:14.];
-        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textColor = UIColorFromRGB(0x212121);
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_textLabel];
@@ -568,7 +568,7 @@ static NSString *  EntityHeaderIdentifier = @"CategoryHeaderCell2";
     {
         _textLabel2 = [[UILabel alloc] initWithFrame:CGRectZero];
         _textLabel2.font = [UIFont systemFontOfSize:14.];
-        _textLabel2.textColor = UIColorFromRGB(0x414243);
+        _textLabel2.textColor = UIColorFromRGB(0x212121);
         _textLabel2.textAlignment = NSTextAlignmentLeft;
         _textLabel2.backgroundColor = [UIColor clearColor];
         [self addSubview:_textLabel2];

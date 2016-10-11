@@ -220,7 +220,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser * user = replying_comment.creator;
             
             [self.avatar sd_setImageWithURL:user.avatarURL];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", (unsigned long)user.userId, user.nick,NSLocalizedStringFromTable(@"reply to your comment:", kLocalizedFile, nil),replying_comment.text,time];
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", (unsigned long)user.userId, user.nick,NSLocalizedStringFromTable(@"reply to your comment:", kLocalizedFile, nil),replying_comment.text,time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
             
             break;
@@ -233,7 +233,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser * user = comment.creator;
             
             [self.avatar sd_setImageWithURL:user.avatarURL];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                (unsigned long)user.userId,
                                user.nick,
                                NSLocalizedStringFromTable(@"commented your note", kLocalizedFile, nil),
@@ -262,7 +262,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             [self.avatar sd_setImageWithURL:user.avatarURL];
 //            self.imageView.hidden = YES;
             self.image.hidden = YES;
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
                                user.nick,
                                NSLocalizedStringFromTable(@"started following you", kLocalizedFile, nil),
@@ -278,7 +278,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser * user = message[@"content"][@"user"];
             
             [self.avatar sd_setImageWithURL:user.avatarURL];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
                                user.nick,
                                NSLocalizedStringFromTable(@"bumped your note", kLocalizedFile, nil),
@@ -307,7 +307,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKArticle * article = message[@"content"][@"article"];
             GKUser * user = message[@"content"][@"user"];
             [self.avatar sd_setImageWithURL:user.avatarURL];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
                                user.nick,
                                NSLocalizedStringFromTable(@"bumped your article", kLocalizedFile, nil),
@@ -335,7 +335,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser   *user   = note.creator;
             
             [self.avatar sd_setImageWithURL:user.avatarURL];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
                                user.nick,
                                NSLocalizedStringFromTable(@"noted 1 item your added", kLocalizedFile, nil),
@@ -368,7 +368,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             GKUser   *user   = self.message[@"content"][@"user"];
             
             [self.avatar sd_setImageWithURL:user.avatarURL];
-            self.label.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            self.label.text = [NSString stringWithFormat:@"<a href='user:%lu'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                user.userId,
                                user.nick,
                                NSLocalizedStringFromTable(@"liked 1 item your added", kLocalizedFile, nil),
@@ -403,7 +403,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             self.avatar.layer.borderWidth = 0.5;
             self.avatar.userInteractionEnabled = NO;
             self.avatar.contentMode = UIViewContentModeCenter;
-            self.label.text = [NSString stringWithFormat:@"<font face=\'Helvetica\' color=\'^414243\' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            self.label.text = [NSString stringWithFormat:@"<font face=\'Helvetica\' color=\'^212121\' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                                NSLocalizedStringFromTable(@"The item you added have been selected", kLocalizedFile, nil),
                                time];
             self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
@@ -510,13 +510,13 @@ typedef NS_ENUM(NSInteger, MessageType) {
         {
             GKComment *replying_comment = message[@"content"][@"replying_comment"];
             GKUser * user = replying_comment.creator;
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nick,NSLocalizedStringFromTable(@"reply to your comment:", kLocalizedFile, nil),replying_comment.text,time];
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>", user.userId, user.nick,NSLocalizedStringFromTable(@"reply to your comment:", kLocalizedFile, nil),replying_comment.text,time];
             CGFloat y = label.optimumSize.height + 5.f;
             /*
             RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
             label.paragraphReplacement = @"";
             label.lineSpacing = 4.0;
-            label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>“ %@ ”</font>", replying_comment.text];
+            label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^212121' size=14>“ %@ ”</font>", replying_comment.text];
             y = label.optimumSize.height + 5.f + y;
             */
             
@@ -532,7 +532,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
 //            GKNote *note = message[@"content"][@"note"];
             GKComment *comment = message[@"content"][@"comment"];
             GKUser * user = comment.creator;
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,
                           user.nick,
                           NSLocalizedStringFromTable(@"commented your note", kLocalizedFile, nil),
@@ -543,7 +543,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
             RTLabel *label = [[RTLabel alloc] initWithFrame:CGRectMake(60, 15, kScreenWidth -70, 20)];
             label.paragraphReplacement = @"";
             label.lineSpacing = 4.0;
-            label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>“ %@ ”</font>", comment.text];
+            label.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^212121' size=14>“ %@ ”</font>", comment.text];
             y = label.optimumSize.height + 5.f + y;
              */
             
@@ -564,7 +564,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         {
 //            GKNote *note = message[@"content"][@"note"];
             GKUser * user = message[@"content"][@"user"];
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,
                           user.nick,
                           NSLocalizedStringFromTable(@"bumped your note", kLocalizedFile, nil),
@@ -580,7 +580,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         case MessageArticlePoke:
         {
             GKUser * user = message[@"content"][@"user"];
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,
                           user.nick,
                           NSLocalizedStringFromTable(@"bumped your article", kLocalizedFile, nil),
@@ -598,7 +598,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         {
             GKNote *note = message[@"content"][@"note"];
             GKUser *user   = note.creator;
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@</font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,
                           user.nick,
                           NSLocalizedStringFromTable(@"noted 1 item your added", kLocalizedFile, nil),
@@ -614,7 +614,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
         case MessageEntityLike:
         {
             GKUser * user = message[@"content"][@"user"];
-            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^414243' size=14>%@ </font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
+            label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a><font face='Helvetica' color='^212121' size=14>%@ </font><font face='Helvetica' color='^9d9e9f' size=14>  %@</font>",
                           user.userId,
                           user.nick,
                           NSLocalizedStringFromTable(@"liked 1 item your added", kLocalizedFile, nil),

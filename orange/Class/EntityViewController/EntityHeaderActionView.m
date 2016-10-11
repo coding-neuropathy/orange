@@ -48,7 +48,7 @@
         _postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
         [_postBtn setImage:[UIImage imageNamed:@"note"] forState:UIControlStateNormal];
-        [_postBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_postBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         _postBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_postBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 10.)];
         [_postBtn addTarget:self action:@selector(noteButtonAction:) forControlEvents:UIControlEventTouchUpInside];

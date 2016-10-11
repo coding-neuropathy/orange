@@ -125,7 +125,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
         
         _contentLabel.delegate = self;
         [_contentLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
-        _contentLabel.textColor = UIColorFromRGB(0x414243);
+        _contentLabel.textColor = UIColorFromRGB(0x212121);
         [self.contentView addSubview:_contentLabel];
     }
     return _contentLabel;

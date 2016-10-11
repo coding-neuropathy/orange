@@ -156,7 +156,7 @@
     _sendBtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth - 10 - 32, 0, 32, 44)];
     _sendBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
     _sendBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [_sendBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+    [_sendBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
     [_sendBtn setTitle:[NSString fontAwesomeIconStringForEnum:FApaperPlane] forState:UIControlStateNormal];
         [_sendBtn addTarget:self action:@selector(postButtonAction) forControlEvents:UIControlEventTouchUpInside];
     _sendBtn.backgroundColor = [UIColor clearColor];

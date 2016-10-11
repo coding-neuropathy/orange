@@ -93,7 +93,7 @@
 //        _nicknameLabel.backgroundColor = [UIColor yellowColor];
         _nicknameLabel.paragraphReplacement = @"";
         _nicknameLabel.lineSpacing = 7.;
-        //        _nicknameLabel.textColor = UIColorFromRGB(0x414243);
+        //        _nicknameLabel.textColor = UIColorFromRGB(0x212121);
         _nicknameLabel.font             = [UIFont fontWithName:kFontAwesomeFamilyName size:18.];
         //        _nicknameLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_nicknameLabel];
@@ -155,7 +155,7 @@
         _friendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //        _friendBtn.backgroundColor = [UIColor redColor];
         _friendBtn.titleLabel.font = [UIFont systemFontOfSize:15.];
-        [_friendBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_friendBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         [_friendBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 //        [_friendBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 20.)];
         [_friendBtn addTarget:self action:@selector(friendBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -171,7 +171,7 @@
         _fansBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //        _fansBtn.backgroundColor = [UIColor greenColor];
         _fansBtn.titleLabel.font = [UIFont systemFontOfSize:15.];
-        [_fansBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_fansBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         [_fansBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 //        [_fansBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 20., 0., 0.)];
         [_fansBtn addTarget:self action:@selector(fansBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -291,7 +291,7 @@
         self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
     }
     else {
-        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>%@</b>", _user.nick];
+        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^212121'>%@</b>", _user.nick];
     }
     if (_user.authorized_author == YES) {
         self.nicknameLabel.text = [NSString stringWithFormat:@"%@", _user.nick];

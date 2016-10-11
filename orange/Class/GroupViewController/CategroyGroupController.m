@@ -557,7 +557,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
         UIButton * categoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         GKEntityCategory * sc = [self.categoryArray objectAtIndex:i];
         [categoryBtn setTitle:sc.categoryName forState:UIControlStateNormal];
-        [categoryBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [categoryBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         categoryBtn.layer.cornerRadius = 12.;
         categoryBtn.backgroundColor = UIColorFromRGB(0xf8f8f8);
         categoryBtn.layer.masksToBounds = YES;
@@ -619,7 +619,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _textLabel.font = [UIFont systemFontOfSize:14.];
-        _textLabel.textColor = UIColorFromRGB(0x414243);
+        _textLabel.textColor = UIColorFromRGB(0x212121);
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_textLabel];
@@ -687,7 +687,7 @@ static NSString * CategoryHeaderSectionIdentifier2 = @"CategoryHeaderCell2";
     {
         _textLabel2 = [[UILabel alloc] initWithFrame:CGRectZero];
         _textLabel2.font = [UIFont systemFontOfSize:14.];
-        _textLabel2.textColor = UIColorFromRGB(0x414243);
+        _textLabel2.textColor = UIColorFromRGB(0x212121);
         _textLabel2.textAlignment = NSTextAlignmentLeft;
         _textLabel2.backgroundColor = [UIColor clearColor];
         [self addSubview:_textLabel2];

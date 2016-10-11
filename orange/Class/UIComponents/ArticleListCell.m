@@ -44,7 +44,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:16.];
-        _titleLabel.textColor = UIColorFromRGB(0x414243);
+        _titleLabel.textColor = UIColorFromRGB(0x212121);
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.numberOfLines = 2;
         [self.contentView addSubview:_titleLabel];

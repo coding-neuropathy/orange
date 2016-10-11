@@ -32,7 +32,7 @@
     if (!_tagLabel) {
         _tagLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _tagLabel.font = [UIFont systemFontOfSize:14.];
-        _tagLabel.textColor = UIColorFromRGB(0x414243);
+        _tagLabel.textColor = UIColorFromRGB(0x212121);
         _tagLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:_tagLabel];
     }

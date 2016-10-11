@@ -38,7 +38,7 @@
         _titleLable                 = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLable.deFrameSize     = CGSizeMake(self.deFrameWidth - 20, 30.);
         _titleLable.font            = [UIFont fontWithName:@"PingFangSC-Bold" size:20.];
-        _titleLable.textColor       = [UIColor colorFromHexString:@"#414243"];
+        _titleLable.textColor       = [UIColor colorFromHexString:@"#212121"];
         _titleLable.textAlignment   = NSTextAlignmentCenter;
         
         [self addSubview:_titleLable];

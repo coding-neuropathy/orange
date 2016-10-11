@@ -35,7 +35,7 @@
     {
         _categoryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _categoryLabel.font = [UIFont systemFontOfSize:14.];
-        _categoryLabel.textColor = UIColorFromRGB(0x414243);
+        _categoryLabel.textColor = UIColorFromRGB(0x212121);
         _categoryLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_categoryLabel];
     }

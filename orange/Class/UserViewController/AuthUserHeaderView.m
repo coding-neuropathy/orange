@@ -77,7 +77,7 @@ static CGFloat bioLabelHeight;
         _nicknameLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
         _nicknameLabel.paragraphReplacement = @"";
         _nicknameLabel.lineSpacing = 7.;
-//        _nicknameLabel.textColor = UIColorFromRGB(0x414243);
+//        _nicknameLabel.textColor = UIColorFromRGB(0x212121);
         _nicknameLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18.];
 //        _nicknameLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_nicknameLabel];
@@ -117,7 +117,7 @@ static CGFloat bioLabelHeight;
     if (!_friendBtn) {
         _friendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _friendBtn.titleLabel.font = [UIFont systemFontOfSize:15.];
-        [_friendBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_friendBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         [_friendBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         //        _friendBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
         [_friendBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 20.)];
@@ -133,7 +133,7 @@ static CGFloat bioLabelHeight;
     if (!_fansBtn) {
         _fansBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _fansBtn.titleLabel.font = [UIFont systemFontOfSize:15.];
-        [_fansBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_fansBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         [_fansBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [_fansBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 10., 0., 0.)];
         //        _fansBtn.titleLabel.textAlignment = NSTextAlignmentRight;
@@ -202,16 +202,16 @@ static CGFloat bioLabelHeight;
                        placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.avatarView.deFrameSize]];
     
     if ([_user.gender isEqualToString:@"M"]) {
-//        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>   %@</b> <font face='FontAwesome' color='^8cb4ff'>%@</font>", _user.nickname, [NSString fontAwesom             eIconStringForEnum:FAmars]];
+//        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^212121'>   %@</b> <font face='FontAwesome' color='^8cb4ff'>%@</font>", _user.nickname, [NSString fontAwesom             eIconStringForEnum:FAmars]];
         self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
         self.staffImage.image = [UIImage imageNamed:@"user_icon_male"];
     } else if ([_user.gender isEqualToString:@"F"]) {
-//        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>   %@</b> <font face='FontAwesome' color='^ffb9c1'>%@</font>", _user.nickname, [NSString fontAwesomeIconStringForEnum:FAvenus]];
+//        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^212121'>   %@</b> <font face='FontAwesome' color='^ffb9c1'>%@</font>", _user.nickname, [NSString fontAwesomeIconStringForEnum:FAvenus]];
         self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];
         self.staffImage.image = [UIImage imageNamed:@"user_icon_famale"];
     }
     else {
-        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^414243'>%@</b>", _user.nick];
+        self.nicknameLabel.text = [NSString stringWithFormat:@"<b size='18' color='^212121'>%@</b>", _user.nick];
     }
     if (_user.authorized_author == YES) {
         self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nickname];

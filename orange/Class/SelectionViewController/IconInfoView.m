@@ -55,7 +55,7 @@
 {
     if (!_infoLabel) {
         _infoLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _infoLabel.textColor = UIColorFromRGB(0x414243);
+        _infoLabel.textColor = UIColorFromRGB(0x212121);
         _infoLabel.font = [UIFont boldSystemFontOfSize:17.];
         _infoLabel.textAlignment = NSTextAlignmentCenter;
         _infoLabel.backgroundColor = [UIColor clearColor];

@@ -158,7 +158,7 @@
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _tipLabel.font = [UIFont systemFontOfSize:14.];
-        _tipLabel.textColor = UIColorFromRGB(0x414243);
+        _tipLabel.textColor = UIColorFromRGB(0x212121);
         _tipLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_tipLabel];
     }

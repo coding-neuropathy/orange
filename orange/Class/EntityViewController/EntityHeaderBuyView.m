@@ -63,7 +63,7 @@
 //                {
 //                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
 //                    [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-//                    [_buyButton setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+//                    [_buyButton setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
 //                    _buyButton.backgroundColor = [UIColor clearColor];
 //                    _buyButton.enabled = NO;
 //                }
@@ -100,7 +100,7 @@
             {
                 [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                 [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-                [self.buyButton setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+                [self.buyButton setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
                 self.buyButton.backgroundColor = [UIColor clearColor];
                 self.buyButton.enabled = NO;
             }

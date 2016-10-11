@@ -113,7 +113,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         _categoryBtn.frame = CGRectMake(0., 0., 50., 20.);
         _categoryBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:17.];
         //        _categoryBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
-        [_categoryBtn setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+        [_categoryBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         [_categoryBtn setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedStringFromTable(@"all", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FASortAsc]] forState:UIControlStateNormal];
         //        [_categoryBtn setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedStringFromTable(@"all", kLocalizedFile, nil), [NSString fontAwesomeIconStringForEnum:FASortDesc]] forState:UIControlStateHighlighted];
         [_categoryBtn addTarget:self action:@selector(categoryBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -498,7 +498,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont systemFontOfSize:14.];
         _titleLabel.textAlignment = NSTextAlignmentLeft;
-        _titleLabel.textColor = UIColorFromRGB(0x414243);
+        _titleLabel.textColor = UIColorFromRGB(0x212121);
         [self addSubview:_titleLabel];
     }
     return _titleLabel;

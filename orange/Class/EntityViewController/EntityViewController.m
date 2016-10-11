@@ -28,10 +28,6 @@
 #import "UIScrollView+Slogan.h"
 
 #import "ReportViewController.h"
-//#import "LoginView.h"
-
-#import "WebViewController.h"
-//#import "ShareView.h"
 #import "ShareController.h"
 #import "PNoteViewController.h"
 
@@ -148,8 +144,12 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (void)setSpecialNavigationBarWithAlpha:(CGFloat)alpha
 {
-    
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageWithColor:[UIColor colorWithRed:1. green:1. blue:1. alpha:alpha] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+    if (alpha <=0 ) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
+    }
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"top bar ggradient"] stretchableImageWithLeftCapWidth:1 topCapHeight:64] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageWithColor:[UIColor colorWithRed:1. green:1. blue:1. alpha:alpha] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage     = [UIImage new];
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSForegroundColorAttributeName:[UIColor colorWithRed:33. / 255. green:33. / 255. blue:33. / 255. alpha:alpha]
@@ -163,6 +163,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (void)setDefaultNavigationBar
 {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{
@@ -269,7 +270,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                 {
                     [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-                    [_buyButton setTitleColor:UIColorFromRGB(0x414243) forState:UIControlStateNormal];
+                    [_buyButton setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
                     _buyButton.backgroundColor = [UIColor clearColor];
                     _buyButton.enabled = NO;
                 }
@@ -332,7 +333,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                     self.buyButton.enabled = NO;
 //                    self.buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
                     self.buyButton.backgroundColor = [UIColor clearColor];
-                    [self.buyButton setTitleColor:[UIColor colorFromHexString:@"#414243"] forState:UIControlStateNormal];
+                    [self.buyButton setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
                      [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     break;

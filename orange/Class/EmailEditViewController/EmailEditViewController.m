@@ -28,7 +28,7 @@
     
     {
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(40, 20, kScreenWidth-40, 20)];
-        label.textColor = UIColorFromRGB(0x414243);
+        label.textColor = UIColorFromRGB(0x212121);
         label.textAlignment = NSTextAlignmentLeft;
         label.font = [UIFont systemFontOfSize:14];
         label.text = @"当前邮箱：";
@@ -58,7 +58,7 @@
     self.emailTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
 //    if (iOS7) {
-//        [self.emailTextField setTintColor:UIColorFromRGB(0x414243)];
+//        [self.emailTextField setTintColor:UIColorFromRGB(0x212121)];
 //    }
     self.emailTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 16., 45.)];
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -78,7 +78,7 @@
     self.emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.emailTextField.returnKeyType = UIReturnKeyNext;
     self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
-    self.emailTextField.textColor = UIColorFromRGB(0x414243);
+    self.emailTextField.textColor = UIColorFromRGB(0x212121);
     self.emailTextField.backgroundColor = [UIColor clearColor];
     
     
@@ -93,7 +93,7 @@
     
     {
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(40, self.emailTextField.deFrameBottom + 20, kScreenWidth-40, 20)];
-        label.textColor = UIColorFromRGB(0x414243);
+        label.textColor = UIColorFromRGB(0x212121);
         label.textAlignment = NSTextAlignmentLeft;
         label.font = [UIFont systemFontOfSize:14];
         label.text = @"为保证帐号安全，请输入密码：";
@@ -109,7 +109,7 @@
     self.passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.passwordTextField.secureTextEntry = YES;
 //    if (iOS7) {
-//        [self.passwordTextField setTintColor:UIColorFromRGB(0x414243)];
+//        [self.passwordTextField setTintColor:UIColorFromRGB(0x212121)];
 //    }
     {
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 44)];
@@ -127,7 +127,7 @@
     self.passwordTextField.font = [UIFont systemFontOfSize:14];
     self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.passwordTextField.returnKeyType = UIReturnKeyGo;
-    [self.passwordTextField setTextColor:UIColorFromRGB(0x414243)];
+    [self.passwordTextField setTextColor:UIColorFromRGB(0x212121)];
     self.passwordTextField.backgroundColor = [UIColor clearColor];
     {
         UIView * H = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.passwordTextField.deFrameWidth,0.5)];

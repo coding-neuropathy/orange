@@ -103,7 +103,7 @@
     if (!_contentLabel) {
         _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, kScreenWidth, kScreenWidth - 32, 20)];
         _contentLabel.font = [UIFont fontWithName:@"Helvetica" size:14.];
-        _contentLabel.textColor = [UIColor colorFromHexString:@"#414243"];
+        _contentLabel.textColor = [UIColor colorFromHexString:@"#212121"];
         _contentLabel.textAlignment = NSTextAlignmentLeft;
         _contentLabel.numberOfLines = 3;
         _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -185,7 +185,7 @@
 //    DDLogInfo(@"like count %@", self.likeCounterButton.titleLabel.text);
     
     self.note = dict[@"content"][@"note"];
-//    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
+//    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^212121' size=14>%@</font>", self.note.text];
     self.contentLabel.text = self.note.text;
     NSTimeInterval timestamp = [dict[@"time"] doubleValue];
     self.date = [NSDate dateWithTimeIntervalSince1970:timestamp];

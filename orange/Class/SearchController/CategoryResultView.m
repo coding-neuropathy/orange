@@ -52,7 +52,7 @@
     if (!_cateLabel) {
         _cateLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         _cateLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
-        _cateLabel.textColor = UIColorFromRGB(0x414243);
+        _cateLabel.textColor = UIColorFromRGB(0x212121);
         _cateLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_cateLabel];
     }
@@ -152,7 +152,7 @@
         _categoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(0., 0., 50., 25.)];
         _categoryLabel.font = [UIFont systemFontOfSize:14.];
         _categoryLabel.lineBreakMode = NSLineBreakByCharWrapping;
-        _categoryLabel.textColor = UIColorFromRGB(0x414243);
+        _categoryLabel.textColor = UIColorFromRGB(0x212121);
         [self addSubview:_categoryLabel];
     }
     return _categoryLabel;

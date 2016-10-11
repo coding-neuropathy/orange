@@ -717,7 +717,7 @@ static NSString * FooterIdentifier = @"SearchFooterSection";
     {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _textLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
-        _textLabel.textColor = [UIColor colorFromHexString:@"#414243"];
+        _textLabel.textColor = [UIColor colorFromHexString:@"#212121"];
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_textLabel];

@@ -46,7 +46,7 @@
     if (!_noteLabel) {
         _noteLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _noteLabel.font = [UIFont systemFontOfSize:14.];
-        _noteLabel.textColor = UIColorFromRGB(0x414243);
+        _noteLabel.textColor = UIColorFromRGB(0x212121);
         _noteLabel.numberOfLines = 3;
         _noteLabel.textAlignment = NSTextAlignmentLeft;
         _noteLabel.lineBreakMode = NSLineBreakByTruncatingTail;

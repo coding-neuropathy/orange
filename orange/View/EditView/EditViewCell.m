@@ -18,9 +18,9 @@
         
         self.textLabel.backgroundColor = [UIColor clearColor];
         self.textLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
-        //UIColorFromRGB(0x414243);
+        //UIColorFromRGB(0x212121);
         self.textLabel.textColor = [UIColor blackColor];
-        self.textLabel.highlightedTextColor = UIColorFromRGB(0x414243);
+        self.textLabel.highlightedTextColor = UIColorFromRGB(0x212121);
         self.textLabel.textAlignment = NSTextAlignmentLeft;
         
         self.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0f];

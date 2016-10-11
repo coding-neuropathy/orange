@@ -49,7 +49,7 @@
     if (!_titleLabel) {
         _titleLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font            = [UIFont boldSystemFontOfSize:17.];
-        _titleLabel.textColor       = UIColorFromRGB(0x414243);
+        _titleLabel.textColor       = UIColorFromRGB(0x212121);
         _titleLabel.textAlignment   = NSTextAlignmentLeft;
         _titleLabel.numberOfLines   = 2;
         

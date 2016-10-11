@@ -133,7 +133,7 @@
     
     self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^427ec0' size=14>%@ </font></a>", (unsigned long)self.note.creator.userId, self.note.creator.nickname];
     
-    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^414243' size=14>%@</font>", self.note.text];
+    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^212121' size=14>%@</font>", self.note.text];
     
     self.pokeButton.selected = self.note.poked;
     [self.pokeButton setTitle:[NSString stringWithFormat:@"%@ %lu",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],(unsigned long)self.note.pokeCount] forState:UIControlStateNormal];
