@@ -23,6 +23,8 @@
 @property (weak, nonatomic) id<EntityHeaderViewDelegate> delegate;
 @property (weak, nonatomic) id<GKViewDelegate> actionDelegate;
 
+- (void)setEntity:(GKEntity *)entity WithLikeUser:(NSArray *)likeUsers;
+
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity;
 
 @end

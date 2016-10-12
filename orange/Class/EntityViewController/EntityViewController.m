@@ -571,7 +571,11 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             case EntityHeaderType:
             {
                 EntityHeaderView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderIdentifier forIndexPath:indexPath];
-                headerView.entity = self.entity;
+                if ( IS_IPAD)
+                    headerView.entity = self.entity;
+                else
+                    [headerView setEntity:self.entity WithLikeUser:self.dataArrayForlikeUser];
+                
                 headerView.delegate = self;
                 headerView.actionDelegate   = [GKHandler sharedGKHandler];
                 return headerView;
@@ -655,7 +659,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     CGSize cellsize = CGSizeMake(0., 0.);
     switch (indexPath.section) {
         case EntityHeaderLikeType:
-            cellsize = CGSizeMake(36., 36.);
+            cellsize = IS_IPAD ? CGSizeMake(36., 36.) : CGSizeMake(0., 0.);
             break;
         case EntityHeaderNoteType:
         {
@@ -681,13 +685,8 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     switch (section) {
         case EntityHeaderLikeType:
         {
-            if (self.dataArrayForlikeUser.count != 0) {
-                
-//                if (IS_IPHONE)
+            if (self.dataArrayForlikeUser.count != 0 && IS_IPAD) {
                 edge = UIEdgeInsetsMake(0., 16., 16., 16.);
-//                else {
-//                    edge = UIEdgeInsetsMake(0., 16., 16., 16.);
-//                }
             }
         }
             break;
@@ -721,13 +720,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             break;
         case 6:
         {
-            if (IS_IPAD)
-            {
-                itemSpacing = 16.;
-            }else
-            {
-            itemSpacing = 3;
-            }
+            itemSpacing = IS_IPAD ? 16. : 3.;
         }
             break;
         default:
@@ -780,7 +773,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             break;
         case EntityHeaderLikeType:
         {
-            if (self.dataArrayForlikeUser.count != 0 || IS_IPAD) {
+            if (self.dataArrayForlikeUser.count != 0 && IS_IPAD) {
                 size =  CGSizeMake(kScreenWidth, 48.);
             }
         }
@@ -949,6 +942,12 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     [popView showInWindowWithAnimated:YES];
     
     [MobClick event:@"click entity image view"];
+}
+
+- (void)handleGotoEntityLikeListBtn:(id)sender
+{
+    EntityLikerController * vc = [[EntityLikerController alloc] initWithEntity:self.entity];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - <EntityHeaderSectionViewDelegate>
@@ -1148,6 +1147,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     [self buyButtonAction];
 }
 
+#pragma mark -
 - (void)tapMoreBtn:(id)sender
 {
     self.moreBtn = (UIButton *)sender;
