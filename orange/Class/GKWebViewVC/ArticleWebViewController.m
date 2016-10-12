@@ -111,7 +111,7 @@
     if (!_more) {
         _more = [UIButton buttonWithType:UIButtonTypeCustom];
         _more.frame = CGRectMake(0., 0., 32., 44.);
-        [_more setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
+        [_more setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
         _more.titleLabel.textAlignment = NSTextAlignmentCenter;
         [_more addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         _more.backgroundColor = [UIColor clearColor];

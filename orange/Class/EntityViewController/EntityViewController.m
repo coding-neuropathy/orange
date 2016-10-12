@@ -149,7 +149,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
     }
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"top bar ggradient"] stretchableImageWithLeftCapWidth:1 topCapHeight:64] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageWithColor:[UIColor colorWithRed:1. green:1. blue:1. alpha:alpha] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage     = [UIImage new];
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSForegroundColorAttributeName:[UIColor colorWithRed:33. / 255. green:33. / 255. blue:33. / 255. alpha:alpha]
@@ -825,6 +824,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             UserViewController * VC = [[UserViewController alloc]init];
             VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:VC animated:YES];
+            [self setDefaultNavigationBar];
             [MobClick event:@"entity_forward_user"];
         }
             break;

@@ -52,38 +52,7 @@
         [_buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
         [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
         [_buyButton addTarget:self action:@selector(buyButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-                  //商品购买链接数组
-//        if (self.entity.purchaseArray.count > 0) {
-//            //购买链接
-//            GKPurchase * purchase = self.entity.purchaseArray[0];
-//                       //上下架状态
-//            switch (purchase.status) {
-//                     //
-//                case GKBuyREMOVE:
-//                {
-//                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-//                    [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-//                    [_buyButton setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
-//                    _buyButton.backgroundColor = [UIColor clearColor];
-//                    _buyButton.enabled = NO;
-//                }
-//                    break;
-//                case GKBuySOLDOUT:
-//                {
-//                    _buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
-//                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-//                    [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-//                }
-//                    break;
-//                default:
-//                {
-//                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-//                    [_buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f 去购买", self.entity.lowestPrice] forState:UIControlStateNormal];
-//                }
-//                    break;
-//            }
-//            
-//        }
+
         [self addSubview:_buyButton];
     }
     return _buyButton;
@@ -100,7 +69,7 @@
             {
                 [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                 [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-                [self.buyButton setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
+                [self.buyButton setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
                 self.buyButton.backgroundColor = [UIColor clearColor];
                 self.buyButton.enabled = NO;
             }

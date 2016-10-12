@@ -24,11 +24,12 @@
 
 @end
 
-static CGFloat kEntityViewMarginLeft = 16.;
+static CGFloat kEntityViewMarginLeft    = 16.;
+
 
 @implementation EntityHeaderView
 
-@synthesize delegate = _delegate;
+//@synthesize delegate = _delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -72,11 +73,12 @@ static CGFloat kEntityViewMarginLeft = 16.;
 {
     if (!_buyBtn) {
         _buyBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
-        _buyBtn.deFrameSize         = CGSizeMake(200., 50.);
-        _buyBtn.layer.cornerRadius  = _buyBtn.deFrameHeight / 2.;
+        _buyBtn.deFrameSize         = CGSizeMake( (kScreenWidth - 44.) / 2., 40.);
+//        _buyBtn.layer.cornerRadius  = _buyBtn.deFrameHeight / 2.;
+        _buyBtn.layer.cornerRadius  = 4.;
         _buyBtn.layer.masksToBounds = YES;
+        _buyBtn.titleLabel.font     = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
         
-        _buyBtn.titleLabel.font     = [UIFont fontWithName:@"PingFangSC-Semibold" size:17.];
         [_buyBtn setTitleColor:[UIColor colorFromHexString:@"#ffffff"] forState:UIControlStateNormal];
         [_buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#6192ff"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
         [_buyBtn addTarget:self action:@selector(buyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -90,14 +92,19 @@ static CGFloat kEntityViewMarginLeft = 16.;
 {
     if (!_likeBtn) {
         _likeBtn                        = [[UIButton alloc] initWithFrame:CGRectZero];
-        _likeBtn.deFrameSize            = CGSizeMake(50., 50.);
-        _likeBtn.layer.cornerRadius     = _likeBtn.deFrameHeight / 2.;
+        _likeBtn.deFrameSize            = CGSizeMake( (kScreenWidth - 44.) / 2., 40.);
+//        _likeBtn.layer.cornerRadius     = _likeBtn.deFrameHeight / 2.;
+        _likeBtn.layer.cornerRadius     = 4.;
         _likeBtn.layer.masksToBounds    = YES;
         _likeBtn.layer.borderWidth      = 1.;
         _likeBtn.layer.borderColor      = [UIColor colorFromHexString:@"#e6e6e6"].CGColor;
+        _likeBtn.titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
+        [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0, 0., -10.)];
         
         [_likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         [_likeBtn setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
+        [_likeBtn setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_likeBtn setTitleColor:[UIColor colorFromHexString:@"#757575"] forState:UIControlStateNormal];
         
         [_likeBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f8f8f8"] andSize:_likeBtn.deFrameSize] forState:UIControlStateNormal];
         [_likeBtn addTarget:self action:@selector(likeBtnAction:) forControlEvents:UIControlEventTouchUpInside];

@@ -41,7 +41,7 @@
         _moreBtn.deFrameSize                = CGSizeMake(32., 44.);
         _moreBtn.titleLabel.textAlignment   = NSTextAlignmentCenter;
         
-        [_moreBtn setImage:[UIImage imageNamed:@"more-1"] forState:UIControlStateNormal];
+        [_moreBtn setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
         [_moreBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         _moreBtn.backgroundColor = [UIColor clearColor];
         
@@ -268,8 +268,6 @@
     };
     [shareVC show];
 }
-
-
 
 
 #pragma mark - button action
