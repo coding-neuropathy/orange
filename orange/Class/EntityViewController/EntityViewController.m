@@ -22,7 +22,7 @@
 #import "EntityHeaderBuyView.h"
 #import "EntityPopView.h"
 
-#import "EntityNoteFooterView.h"
+//#import "EntityNoteFooterView.h"
 
 #import "EntityLikerController.h"
 #import "UIScrollView+Slogan.h"
@@ -146,7 +146,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 {
     if (alpha <=0 ) {
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-
     }
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"top bar ggradient"] stretchableImageWithLeftCapWidth:1 topCapHeight:64] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage     = [UIImage new];
@@ -396,7 +395,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     [self.collectionView registerClass:[EntityHeaderBuyView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderBuyIdentifier];
     [self.collectionView registerClass:[EntityHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier];
     
-    [self.collectionView registerClass:[EntityNoteFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:EntityReuseFooterNoteIdenetifier];
+//    [self.collectionView registerClass:[EntityNoteFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:EntityReuseFooterNoteIdenetifier];
 
     [self refresh];
     [self refreshRandom];
@@ -422,9 +421,9 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 - (void)viewWillAppear:(BOOL)animated
 {
     if (IS_IPHONE) {
-        [self setSpecialNavigationBarWithAlpha:0.];
+//        [self setSpecialNavigationBarWithAlpha:0.];
         //        if (self.collectionView.contentOffset.y == 0) {
-        self.collectionView.contentOffset = CGPointMake(self.collectionView.contentOffset.x, 0);
+//        self.collectionView.contentOffset = CGPointMake(self.collectionView.contentOffset.x, 0);
         //        }
     }
     [MobClick beginLogPageView:@"EntityView"];
@@ -440,7 +439,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 - (void)viewWillDisappear:(BOOL)animated
 {
     if (IS_IPHONE) {
-        [self setDefaultNavigationBar];
+//        [self setDefaultNavigationBar];
     }
     [MobClick endLogPageView:@"EntityView"];
     [super viewWillDisappear:animated];
@@ -565,7 +564,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionReusableView *reusableview = nil;
+    UICollectionReusableView *reusableview = [UICollectionReusableView new];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
 
         switch (indexPath.section) {
@@ -641,11 +640,11 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                 break;
         }
     } else {
-        EntityNoteFooterView * footerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:EntityReuseFooterNoteIdenetifier forIndexPath:indexPath];
-        footerSection.openPostNote = ^(){
-            [self noteButtonAction];
-        };
-        return footerSection;
+//        EntityNoteFooterView * footerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:EntityReuseFooterNoteIdenetifier forIndexPath:indexPath];
+//        footerSection.openPostNote = ^(){
+//            [self noteButtonAction];
+//        };
+//        return footerSection;
     }
     return reusableview;
 }
@@ -781,7 +780,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             break;
         case EntityHeaderLikeType:
         {
-            if (self.dataArrayForlikeUser.count != 0) {
+            if (self.dataArrayForlikeUser.count != 0 || IS_IPAD) {
                 size =  CGSizeMake(kScreenWidth, 48.);
             }
         }
@@ -800,20 +799,20 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     return size;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
-    CGSize size = CGSizeMake(0., 0.);
-    switch (section) {
-        case EntityHeaderNoteType:
-            if (IS_IPHONE) size = CGSizeMake(kScreenWidth, 88.);
-            break;
-            
-        default:
-            break;
-    }
-    
-    return size;
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+//{
+//    CGSize size = CGSizeMake(0., 0.);
+//    switch (section) {
+//        case EntityHeaderNoteType:
+//            if (IS_IPHONE) size = CGSizeMake(kScreenWidth, 88.);
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//    
+//    return size;
+//}
 
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -1090,9 +1089,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         [self openEntityNote];
     }
 
-#pragma mark ------------ PNoteView ------------------------------
-    
-
+//#pragma mark ------------ PNoteView ------------------------------
 }
 
 //点击分享按钮

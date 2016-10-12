@@ -13,6 +13,7 @@
 
 #import "UserViewController.h"
 #import "SettingViewController.h"
+#import "BaseNavigationController.h"
 //#import "GTScrollNavigationBar.h"
 
 #import <WZLBadge/WZLBadgeImport.h>
@@ -54,11 +55,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login) name:@"Login" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:@"Logout" object:nil];
     
-    UINavigationController * first = [[UINavigationController alloc] init];
+    BaseNavigationController * first = [[BaseNavigationController alloc] init];
     self.selectionController = [[SelectionController alloc] init];
     [first setViewControllers:@[self.selectionController] animated:NO];
     
-    UINavigationController * second = [[UINavigationController alloc] init];
+    BaseNavigationController * second = [[BaseNavigationController alloc] init];
     [second setViewControllers:@[[[DiscoverController alloc] init]] animated:NO];
     
     UINavigationController * third = [[UINavigationController alloc] init];

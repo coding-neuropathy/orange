@@ -144,14 +144,6 @@ static CGFloat kEntityViewMarginLeft    = 16.;
     return _pageCtr;
 }
 
-//- ()
-
-//- (void)dealloc
-//{
-//    self.imagesView.delegate = nil;
-//    self.imagesView.dataSource = nil;
-//}
-
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;

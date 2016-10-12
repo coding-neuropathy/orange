@@ -157,7 +157,6 @@
 		8A242AFE1D7D0B3500A15669 /* CheckoutOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A242AFD1D7D0B3500A15669 /* CheckoutOrderController.m */; };
 		8A242B011D7D18C200A15669 /* CheckoutFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A242B001D7D18C200A15669 /* CheckoutFooterView.m */; };
 		8A293A6F1D8A705C000B7227 /* EntityHeaderSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A293A6E1D8A705C000B7227 /* EntityHeaderSectionView.m */; };
-		8A293A721D8ABA4F000B7227 /* EntityNoteFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A293A711D8ABA4F000B7227 /* EntityNoteFooterView.m */; };
 		8A3249381D5A57CA00354602 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8A3249371D5A57CA00354602 /* beep.mp3 */; };
 		8A37BBB41D8E74BA0007E407 /* ThreePartHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A37BBB31D8E74BA0007E407 /* ThreePartHandler.m */; };
 		8A3911D71D598A680029E529 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3911D61D598A680029E529 /* libzbar.a */; };
@@ -625,8 +624,6 @@
 		8A293A6C1D8A4ABA000B7227 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8A293A6D1D8A705C000B7227 /* EntityHeaderSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHeaderSectionView.h; sourceTree = "<group>"; };
 		8A293A6E1D8A705C000B7227 /* EntityHeaderSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHeaderSectionView.m; sourceTree = "<group>"; };
-		8A293A701D8ABA4F000B7227 /* EntityNoteFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityNoteFooterView.h; sourceTree = "<group>"; };
-		8A293A711D8ABA4F000B7227 /* EntityNoteFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityNoteFooterView.m; sourceTree = "<group>"; };
 		8A3249371D5A57CA00354602 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		8A37BBB21D8E74BA0007E407 /* ThreePartHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThreePartHandler.h; path = GKHandler/ThreePartHandler.h; sourceTree = "<group>"; };
 		8A37BBB31D8E74BA0007E407 /* ThreePartHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreePartHandler.m; path = GKHandler/ThreePartHandler.m; sourceTree = "<group>"; };
@@ -1791,8 +1788,6 @@
 				B7E668741B77A62100E177E5 /* EntityStickyHeaderFlowLayout.m */,
 				B77E00A71B8988DC008BCA55 /* EntityPopView.h */,
 				B77E00A81B8988DC008BCA55 /* EntityPopView.m */,
-				8A293A701D8ABA4F000B7227 /* EntityNoteFooterView.h */,
-				8A293A711D8ABA4F000B7227 /* EntityNoteFooterView.m */,
 			);
 			path = EntityViewController;
 			sourceTree = "<group>";
@@ -3097,7 +3092,6 @@
 				B70686A51CF422F100C40825 /* MenuController.m in Sources */,
 				4E2D6D431A69601F009E4A17 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				4EF508811B49042000C92618 /* ShareView.m in Sources */,
-				8A293A721D8ABA4F000B7227 /* EntityNoteFooterView.m in Sources */,
 				4E66C1E81A7DBAB400F31A90 /* CommentCell.m in Sources */,
 				B7BE3E2D1BA9A17A004AD422 /* CategroyGroupController.m in Sources */,
 				8AC75DC81D90E4F900DDDFD2 /* ShareViewCell.m in Sources */,
