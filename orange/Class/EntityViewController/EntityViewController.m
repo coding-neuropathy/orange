@@ -1022,10 +1022,8 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         }
         note.poked = poked;
         
-        //        [AVAnalytics event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} durations:(int)note.pokeCount];
         [MobClick event:@"poke note" attributes:@{@"note": @(note.noteId), @"status":@"success"} counter:(int)note.pokeCount];
     } failure:^(NSInteger stateCode) {
-        //        [AVAnalytics event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
         [MobClick event:@"poke note" attributes:@{@"note":@(note.noteId), @"status":@"failure"}];
     }];
 }
@@ -1059,11 +1057,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         [self pokeNoteWithPokeBtn:pokeBtn Note:note];
     }
 }
-
-
-//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return NSLocalizedStringFromTable(@"tip off", kLocalizedFile, nil);
-//}
 
 #pragma mark - Button Action
 - (void)likeButtonActionWithBtn:(UIButton *)btn
@@ -1105,7 +1098,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         [weakSelf refresh];
         [weakSelf refreshRandom];
     };
-    
     
     shareVC.tipOffBlock         = ^() {
         ReportViewController * VC = [[ReportViewController alloc] init];

@@ -19,6 +19,8 @@
 @property (strong, nonatomic) UIPageControl     *pageCtr;
 @property (strong, nonatomic) iCarousel         *imagesView;
 
+@property (strong, nonatomic) UIButton          *gotoEntityLikeListBtn;
+
 @property (strong, nonatomic) NSMutableArray    *imageURLArray;
 @property (assign, nonatomic) BOOL warp;
 

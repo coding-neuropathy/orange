@@ -12,6 +12,9 @@
 
 - (void)handelTapImageWithIndex:(NSUInteger)idx;
 
+@optional
+- (void)handleGotoEntityLikeListBtn:(id)sender;
+
 @end
 
 @interface EntityHeaderView : UICollectionReusableView
