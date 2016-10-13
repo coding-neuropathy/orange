@@ -75,12 +75,14 @@
         _postNoteBtn                        = [UIButton buttonWithType:UIButtonTypeCustom];
         _postNoteBtn.deFrameSize            = CGSizeMake(80., 32.);
         _postNoteBtn.hidden                 = YES;
+        _postNoteBtn.titleLabel.font        = [UIFont fontWithName:@"HelveticaNeue" size:12.];
         
         _postNoteBtn.layer.masksToBounds    = YES;
         _postNoteBtn.layer.cornerRadius     = 4.;
         _postNoteBtn.layer.borderWidth      = 1.;
         _postNoteBtn.layer.borderColor      = [UIColor colorFromHexString:@"#6192ff"].CGColor;
         
+        [_postNoteBtn setTitleColor:[UIColor colorFromHexString:@"#6192ff"] forState:UIControlStateNormal];
         [_postNoteBtn setTitle:NSLocalizedStringFromTable(@"post note", kLocalizedFile, nil) forState:UIControlStateNormal];
         
         [self addSubview:_postNoteBtn];
