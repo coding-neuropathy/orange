@@ -781,7 +781,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         case EntityHeaderNoteType:
         {
             if (self.dataArrayForNote.count != 0) {
-                size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 30) : CGSizeMake(kScreenWidth, 30);
+                size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 30) : CGSizeMake(kScreenWidth, 48);
             }
         }
             break;

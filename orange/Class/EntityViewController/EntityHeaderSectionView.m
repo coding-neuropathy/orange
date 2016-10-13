@@ -10,8 +10,9 @@
 
 @interface EntityHeaderSectionView ()
 
-@property (strong, nonatomic) UILabel * textLabel;
-@property (strong, nonatomic) UILabel * indicatorLable;
+@property (strong, nonatomic) UILabel   *textLabel;
+@property (strong, nonatomic) UILabel   *indicatorLable;
+@property (strong, nonatomic) UIButton  *postNoteBtn;
 
 @property (nonatomic, strong, nonnull) UIView * H;
 
@@ -19,16 +20,16 @@
 
 @implementation EntityHeaderSectionView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-//        self.backgroundColor = UIColorFromRGB(0xf8f8f8);
-//        self.backgroundColor = UIColorFromRGB(0xffffff);
-        
-    }
-    return self;
-}
+//- (instancetype)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+////        self.backgroundColor = UIColorFromRGB(0xf8f8f8);
+////        self.backgroundColor = UIColorFromRGB(0xffffff);
+//        
+//    }
+//    return self;
+//}
 
 - (UIView *)H
 {
@@ -68,6 +69,25 @@
     return _indicatorLable;
 }
 
+- (UIButton *)postNoteBtn
+{
+    if (!_postNoteBtn) {
+        _postNoteBtn                        = [UIButton buttonWithType:UIButtonTypeCustom];
+        _postNoteBtn.deFrameSize            = CGSizeMake(80., 32.);
+        _postNoteBtn.hidden                 = YES;
+        
+        _postNoteBtn.layer.masksToBounds    = YES;
+        _postNoteBtn.layer.cornerRadius     = 4.;
+        _postNoteBtn.layer.borderWidth      = 1.;
+        _postNoteBtn.layer.borderColor      = [UIColor colorFromHexString:@"#6192ff"].CGColor;
+        
+        [_postNoteBtn setTitle:NSLocalizedStringFromTable(@"post note", kLocalizedFile, nil) forState:UIControlStateNormal];
+        
+        [self addSubview:_postNoteBtn];
+    }
+    return _postNoteBtn;
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (_delegate && [_delegate respondsToSelector:@selector(TapHeaderView:)]) {
@@ -94,16 +114,17 @@
             break;
         case LikeType:
         {
-            self.textLabel.text = [NSString stringWithFormat:@"%@ 人喜爱", text];
+            self.textLabel.text         = [NSString stringWithFormat:@"%@ 人喜爱", text];
 //            self.textLabel.backgroundColor = [UIColor clearColor];
-            self.indicatorLable.hidden = NO;
+            self.indicatorLable.hidden  = NO;
             self.userInteractionEnabled = YES;
         }
             break;
         case NoteType:
         {
-            self.textLabel.text = [NSString stringWithFormat:@"%@ 人点评", text];
-            self.indicatorLable.hidden = YES;
+            self.textLabel.text         = [NSString stringWithFormat:@"%@ 人点评", text];
+            self.postNoteBtn.hidden     = NO;
+            self.indicatorLable.hidden  = YES;
             self.userInteractionEnabled = NO;
         }
             break;
@@ -136,21 +157,25 @@
     switch (self.headertype) {
         case LikeType:
         {
-            self.backgroundColor = UIColorFromRGB(0xffffff);
-            self.textLabel.frame = CGRectMake(16., 9., 200., 30.);
-            self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
-            self.indicatorLable.center = self.textLabel.center;
-            self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
-            self.H.frame = CGRectMake(0., 0., kScreenWidth, 1.);
+            self.backgroundColor                = UIColorFromRGB(0xffffff);
+            self.textLabel.frame                = CGRectMake(16., 9., 200., 30.);
+            self.indicatorLable.frame           = CGRectMake(0., 0., 20., 30.);
+            self.indicatorLable.center          = self.textLabel.center;
+            self.indicatorLable.deFrameRight    = self.deFrameRight - 10.;
+            self.H.frame                        = CGRectMake(0., 0., kScreenWidth, 1.);
         }
             break;
         case NoteType:
         {
-            self.backgroundColor = UIColorFromRGB(0xffffff);
-            self.textLabel.frame = CGRectMake(16., 9., 200., 30.);
-            self.indicatorLable.frame = CGRectMake(0., 0., 20., 30.);
-            self.indicatorLable.center = self.textLabel.center;
-            self.indicatorLable.deFrameRight = self.deFrameRight - 10.;
+            self.backgroundColor                = [UIColor colorFromHexString:@"#ffffff"];
+            self.textLabel.frame                = CGRectMake(16., 9., 200., 30.);
+            self.indicatorLable.frame           = CGRectMake(0., 0., 20., 30.);
+            self.indicatorLable.center          = self.textLabel.center;
+            self.indicatorLable.deFrameRight    = self.deFrameRight - 10.;
+            
+            self.postNoteBtn.center             = self.textLabel.center;
+            self.postNoteBtn.deFrameRight       = self.deFrameWidth - 16.;
+            
         }
             break;
         case ShopType:

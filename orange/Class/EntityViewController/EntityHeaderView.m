@@ -99,7 +99,7 @@ static CGFloat kEntityViewMarginLeft    = 16.;
         _likeBtn.layer.cornerRadius     = 4.;
         _likeBtn.layer.masksToBounds    = YES;
         _likeBtn.layer.borderWidth      = 1.;
-        _likeBtn.layer.borderColor      = [UIColor colorFromHexString:@"#e6e6e6"].CGColor;
+        _likeBtn.layer.borderColor      = [UIColor colorFromHexString:@"#f1f2f6"].CGColor;
         _likeBtn.titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
         [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0, 0., -10.)];
         
@@ -152,7 +152,8 @@ static CGFloat kEntityViewMarginLeft    = 16.;
         _gotoEntityLikeListBtn                  = [UIButton buttonWithType:UIButtonTypeCustom];
         _gotoEntityLikeListBtn.deFrameSize      = CGSizeMake(140., 20.);
         _gotoEntityLikeListBtn.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.];
-        _gotoEntityLikeListBtn.titleLabel.textAlignment = NSTextAlignmentRight;
+//        _gotoEntityLikeListBtn.titleLabel.textAlignment = NSTextAlignmentRight;
+        
         [_gotoEntityLikeListBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
         [_gotoEntityLikeListBtn addTarget:self action:@selector(gotaoEntityLikeListAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_gotoEntityLikeListBtn];
