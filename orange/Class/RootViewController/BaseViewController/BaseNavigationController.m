@@ -28,27 +28,38 @@
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
+
+
+
+    UIViewController * vc =  [super popViewControllerAnimated:animated];
+    
+//    if (![vc isKindOfClass:[NSClassFromString(@"EntityViewController") class]]) {
+    DDLogInfo(@"nav controller %@ %@", vc, self.viewControllers.lastObject);
+    
+    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     [self.navigationBar setBackgroundImage:[[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
     [self.navigationBar setTitleTextAttributes:@{
-                                            NSForegroundColorAttributeName:[UIColor colorWithRed:33. / 255. green:33. / 255. blue:33. / 255. alpha:1]
-                                    }];
-
-
-    return [super popViewControllerAnimated:animated];
+                                                 NSForegroundColorAttributeName:[UIColor colorWithRed:33. / 255. green:33. / 255. blue:33. / 255. alpha:1]
+                                                 }];
+//    }
+    
+    return vc;
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+    
+    [super pushViewController:viewController animated:animated];
     if ([viewController isKindOfClass:[NSClassFromString(@"EntityViewController") class]]) {
         [self.navigationBar setBackgroundImage:[[UIImage imageNamed:@"top bar ggradient"] stretchableImageWithLeftCapWidth:1 topCapHeight:64] forBarMetrics:UIBarMetricsDefault];
         self.navigationBar.shadowImage     = [UIImage new];
         [self.navigationBar setTitleTextAttributes:@{
-                                                                          NSForegroundColorAttributeName:[UIColor colorWithRed:33. / 255. green:33. / 255. blue:33. / 255. alpha:0.]
-                                                                          }];
+                                                NSForegroundColorAttributeName:[UIColor colorWithRed:33. / 255. green:33. / 255. blue:33. / 255. alpha:0.]
+                                        }];
     }
-    [super pushViewController:viewController animated:animated];
+    
 //    self.backGesture.enabled = NO;
 }
 
