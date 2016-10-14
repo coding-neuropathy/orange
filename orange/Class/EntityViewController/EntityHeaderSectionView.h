@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, EntitySectionType) {
 
 @optional
 - (void)TapHeaderView:(id)sender;
+//- (void)handlePostNoteBtn:(id)sender;
 
 @end
 
@@ -28,5 +29,7 @@ typedef NS_ENUM(NSInteger, EntitySectionType) {
 @property (strong, nonatomic) NSString * text;
 @property (assign, nonatomic) EntitySectionType headertype;
 @property (weak, nonatomic) id<EntityHeaderSectionViewDelegate> delegate;
+
+@property (copy, nonatomic) void (^postNoteBlock)();
 
 @end

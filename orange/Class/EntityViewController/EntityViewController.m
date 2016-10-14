@@ -475,6 +475,8 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 
 #pragma mark - <UIScrollViewDelegate>
+
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 //    [self configConfigNavigationItem];
@@ -619,6 +621,9 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                 EntityHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier forIndexPath:indexPath];
                 headerSection.headertype = NoteType;
                 headerSection.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.dataArrayForNote.count];
+                headerSection.postNoteBlock = ^(){
+                    [self noteButtonAction];
+                };
                 return headerSection;
             }
                 break;
@@ -816,7 +821,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             UserViewController * VC = [[UserViewController alloc]init];
             VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:VC animated:YES];
-            [self setDefaultNavigationBar];
+//            [self setDefaultNavigationBar];
             [MobClick event:@"entity_forward_user"];
         }
             break;

@@ -45,6 +45,7 @@
 {
     if (!_textLabel) {
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _textLabel.deFrameSize      = CGSizeMake(200., 30.);
         _textLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.textColor = UIColorFromRGB(0x212121);
@@ -83,7 +84,8 @@
         _postNoteBtn.layer.borderColor      = [UIColor colorFromHexString:@"#6192ff"].CGColor;
         
         [_postNoteBtn setTitleColor:[UIColor colorFromHexString:@"#6192ff"] forState:UIControlStateNormal];
-        [_postNoteBtn setTitle:NSLocalizedStringFromTable(@"post note", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_postNoteBtn setTitle:[NSString stringWithFormat:@"+ %@", NSLocalizedStringFromTable(@"post note", kLocalizedFile, nil)] forState:UIControlStateNormal];
+        [_postNoteBtn addTarget:self action:@selector(tapPostNoteBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:_postNoteBtn];
     }
@@ -109,9 +111,10 @@
     switch (self.headertype) {
         case CategoryHeaderType:
         {
-            self.textLabel.text = [NSString stringWithFormat:@"%@「%@」",NSLocalizedStringFromTable(@"from", kLocalizedFile, nil), [_text componentsSeparatedByString:@"-"][0]];
-            self.indicatorLable.hidden = NO;
+            self.textLabel.text         = [NSString stringWithFormat:@"%@「%@」",NSLocalizedStringFromTable(@"from", kLocalizedFile, nil), [_text componentsSeparatedByString:@"-"][0]];
+            self.indicatorLable.hidden  = NO;
             self.userInteractionEnabled = YES;
+            self.postNoteBtn.hidden     = YES;
         }
             break;
         case LikeType:
@@ -120,21 +123,25 @@
 //            self.textLabel.backgroundColor = [UIColor clearColor];
             self.indicatorLable.hidden  = NO;
             self.userInteractionEnabled = YES;
+            self.postNoteBtn.hidden     = YES;
         }
             break;
         case NoteType:
         {
             self.textLabel.text         = [NSString stringWithFormat:@"%@ 人点评", text];
             self.postNoteBtn.hidden     = NO;
+            
             self.indicatorLable.hidden  = YES;
-            self.userInteractionEnabled = NO;
+//            self.userInteractionEnabled = NO;
+//            self.postNoteBtn.userInteractionEnabled = YES;
         }
             break;
         case RecommendType:
         {
-            self.textLabel.text = NSLocalizedStringFromTable(_text, kLocalizedFile, nil);
-            self.indicatorLable.hidden = YES;
+            self.textLabel.text         = NSLocalizedStringFromTable(_text, kLocalizedFile, nil);
+            self.indicatorLable.hidden  = YES;
             self.userInteractionEnabled = NO;
+            self.postNoteBtn.hidden     = YES;
         }
             break;
         case ShopType:
@@ -170,10 +177,15 @@
         case NoteType:
         {
             self.backgroundColor                = [UIColor colorFromHexString:@"#ffffff"];
-            self.textLabel.frame                = CGRectMake(16., 9., 200., 30.);
-            self.indicatorLable.frame           = CGRectMake(0., 0., 20., 30.);
-            self.indicatorLable.center          = self.textLabel.center;
-            self.indicatorLable.deFrameRight    = self.deFrameRight - 10.;
+            self.textLabel.deFrameLeft          = 16.;
+            self.textLabel.deFrameTop           = 9.;
+//            self.textLabel.frame                = CGRectMake(16., 9., 200., 30.);
+//            self.indicatorLable.frame           = CGRectMake(0., 0., 20., 30.);
+//            self.indicatorLable.center          = self.textLabel.center;
+//            self.indicatorLable.deFrameRight    = self.deFrameRight - 10.;
+//            self.textLabel.deFrameSize          = CGSizeMake(200., 30.);
+//            self.textLabel.center               = self.center;
+//            self.textLabel.deFrameLeft          = 16.;
             
             self.postNoteBtn.center             = self.textLabel.center;
             self.postNoteBtn.deFrameRight       = self.deFrameWidth - 16.;
@@ -234,5 +246,13 @@
     }
 }
 
+#pragma mark - button action 
+- (void)tapPostNoteBtnAction:(id)sender
+{
+    DDLogInfo(@"post post note note");
+    if (self.postNoteBlock) {
+        self.postNoteBlock();
+    }
+}
 
 @end

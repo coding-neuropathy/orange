@@ -233,8 +233,11 @@ static CGFloat kEntityViewMarginLeft    = 16.;
     self.titleLabel.text    = _entity.title;
     
     if (_entity.likeCount > 0 )
-        [self.gotoEntityLikeListBtn setTitle:[NSString stringWithFormat:@"%ld 人喜爱", _entity.likeCount] forState:UIControlStateNormal];
+        [self.gotoEntityLikeListBtn setTitle:[NSString stringWithFormat:@"%ld 人喜爱 >", _entity.likeCount] forState:UIControlStateNormal];
     //        self.gotoEntityLikeListBtn.backgroundColor = [UIColor redColor];
+        CGFloat width = [self.gotoEntityLikeListBtn.titleLabel.text widthWithLineWidth:0. Font:self.gotoEntityLikeListBtn.titleLabel.font];
+        self.gotoEntityLikeListBtn.deFrameSize  = CGSizeMake(width, 20.);
+    
     if (_entity.isLiked) {
         self.likeBtn.selected = YES;
     }
@@ -265,7 +268,7 @@ static CGFloat kEntityViewMarginLeft    = 16.;
             {
                 [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                 [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-                [self.buyBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
+                [self.buyBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
                 //                    self.buyBtn.backgroundColor = [UIColor clearColor];
                 [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
                 self.buyBtn.enabled = NO;
@@ -307,7 +310,7 @@ static CGFloat kEntityViewMarginLeft    = 16.;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    DDLogInfo(@"header view width %f", self.deFrameWidth);
+//    DDLogInfo(@"header view width %f", self.deFrameWidth);
     if (IS_IPHONE) {
         CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - 32 Font:self.titleLabel.font LineHeight:5];
         
