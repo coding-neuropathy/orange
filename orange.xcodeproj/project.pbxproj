@@ -220,6 +220,8 @@
 		8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */; };
 		8ADEA30E1D5A223B00D522A2 /* DiscoverCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
+		8AE30F9B1DB0ADD7005A9171 /* GAdvertise.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AE30F991DB0ADD7005A9171 /* GAdvertise.h */; };
+		8AE30F9C1DB0ADD7005A9171 /* GAdvertise.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE30F9A1DB0ADD7005A9171 /* GAdvertise.m */; };
 		8AE652A21D7570C300FF7530 /* CartToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE652A11D7570C300FF7530 /* CartToolBar.m */; };
 		8AEDCB511D62BE010010FDB4 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCB501D62BE010010FDB4 /* libc++.tbd */; };
 		8AEDCBAB1D62C5230010FDB4 /* ALBBFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCB971D62C5230010FDB4 /* ALBBFeedback.framework */; };
@@ -784,6 +786,8 @@
 		8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverCategoryCell.m; sourceTree = "<group>"; };
 		8AE19DCD1B9DE26C007C2872 /* HomeEntityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeEntityCell.h; sourceTree = "<group>"; };
 		8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeEntityCell.m; sourceTree = "<group>"; };
+		8AE30F991DB0ADD7005A9171 /* GAdvertise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAdvertise.h; path = AD/GAdvertise.h; sourceTree = "<group>"; };
+		8AE30F9A1DB0ADD7005A9171 /* GAdvertise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GAdvertise.m; path = AD/GAdvertise.m; sourceTree = "<group>"; };
 		8AE652A01D7570C300FF7530 /* CartToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CartToolBar.h; path = QRCodeViewController/CartController/CartToolBar.h; sourceTree = "<group>"; };
 		8AE652A11D7570C300FF7530 /* CartToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CartToolBar.m; path = QRCodeViewController/CartController/CartToolBar.m; sourceTree = "<group>"; };
 		8AEDCB501D62BE010010FDB4 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -1250,6 +1254,7 @@
 		39B720021B1F4C16008519E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8AE30F981DB0AD74005A9171 /* AD */,
 				8ABAEEBC1D951EC100E7473B /* PopularEntity */,
 				8AFB3B811D7897AB00E1D04A /* Order */,
 				8AF7C75B1D7409A500C71499 /* ShoppingCart */,
@@ -2122,6 +2127,15 @@
 			name = BannerCarousel;
 			sourceTree = "<group>";
 		};
+		8AE30F981DB0AD74005A9171 /* AD */ = {
+			isa = PBXGroup;
+			children = (
+				8AE30F991DB0ADD7005A9171 /* GAdvertise.h */,
+				8AE30F9A1DB0ADD7005A9171 /* GAdvertise.m */,
+			);
+			name = AD;
+			sourceTree = "<group>";
+		};
 		8AF7C7541D73EDE000C71499 /* CartController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2477,6 +2491,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AE30F9B1DB0ADD7005A9171 /* GAdvertise.h in Headers */,
 				39B7203D1B1F4C16008519E3 /* UIImage+App.h in Headers */,
 				39B7203F1B1F4C16008519E3 /* UIView+DEFrameAdditions.h in Headers */,
 				8A9255FB1D50A0A800E6481F /* GKSearchData.h in Headers */,
@@ -2922,6 +2937,7 @@
 				8AFB2C181D7BDCAD009A0C7F /* GKOrderItem.m in Sources */,
 				8A9255FC1D50A0A800E6481F /* GKSearchData.m in Sources */,
 				39B720341B1F4C16008519E3 /* BaseHttpClient.m in Sources */,
+				8AE30F9C1DB0ADD7005A9171 /* GAdvertise.m in Sources */,
 				B796C0891BC17D8E006F4DE1 /* ImageCache.m in Sources */,
 				39B7203E1B1F4C16008519E3 /* UIImage+App.m in Sources */,
 			);
