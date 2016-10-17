@@ -14,7 +14,7 @@
 @property (strong, nonatomic) UILabel   *indicatorLable;
 @property (strong, nonatomic) UIButton  *postNoteBtn;
 
-@property (nonatomic, strong, nonnull) UIView * H;
+//@property (nonatomic, strong, nonnull) UIView * H;
 
 @end
 
@@ -31,15 +31,15 @@
 //    return self;
 //}
 
-- (UIView *)H
-{
-    if (!_H) {
-        _H = [[UIView alloc]initWithFrame:CGRectZero];
-        _H.backgroundColor = UIColorFromRGB(0xf1f1f1);
-        [self addSubview:_H];
-    }
-    return _H;
-}
+//- (UIView *)H
+//{
+//    if (!_H) {
+//        _H = [[UIView alloc]initWithFrame:CGRectZero];
+//        _H.backgroundColor = UIColorFromRGB(0xf1f1f1);
+//        [self addSubview:_H];
+//    }
+//    return _H;
+//}
 
 - (UILabel *)textLabel
 {
@@ -171,7 +171,7 @@
             self.indicatorLable.frame           = CGRectMake(0., 0., 20., 30.);
             self.indicatorLable.center          = self.textLabel.center;
             self.indicatorLable.deFrameRight    = self.deFrameRight - 10.;
-            self.H.frame                        = CGRectMake(0., 0., kScreenWidth, 1.);
+//            self.H.frame                        = CGRectMake(0., 0., kScreenWidth, 1.);
         }
             break;
         case NoteType:

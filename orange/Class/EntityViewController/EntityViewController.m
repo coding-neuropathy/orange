@@ -473,7 +473,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 //    [self configConfigNavigationItem];
-//    DDLogInfo(@"y offset %f", scrollView.contentOffset.y);
     if (IS_IPHONE) {
         if (scrollView.contentOffset.y < 0.) {
             scrollView.contentOffset = CGPointMake(scrollView.contentOffset.x, 0.);
@@ -487,7 +486,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             [self setDefaultNavigationBar];
         }
     } else {
-        [self configConfigNavigationItem];
+//        [self configConfigNavigationItem];
     }
 
 }
@@ -713,10 +712,10 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     switch (section) {
         case EntityHeaderType:
             break;
-        case 4:
+        case EntityHeaderLikeType:
             itemSpacing = 3.;
             break;
-        case 6:
+        case EntityHeaderCategoryType:
         {
             itemSpacing = IS_IPAD ? 16. : 3.;
         }
@@ -732,7 +731,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 {
     CGFloat spacing = 0;
     switch (section) {
-        case 6:
+        case EntityHeaderCategoryType:
         {
             if (IS_IPHONE) {
                 spacing = 3.;
@@ -1044,7 +1043,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (void)tapPokeNoteBtn:(id)sender Note:(GKNote *)note
 {
-    
     UIButton * pokeBtn = (UIButton *)sender;
     if(!k_isLogin) {
         [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
@@ -1122,7 +1120,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     SubCategoryEntityController * VC = [[SubCategoryEntityController alloc] initWithSubCategory:category];
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
     
-//    [AVAnalytics event:@"entity_forward_categoty"];
     [MobClick event:@"entity_forward_categoty"];
 }
 
@@ -1218,27 +1215,27 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 #pragma mark - ConfigNavigationItem
 -(void)configConfigNavigationItem
 {
-    CGRect a =  [self.actionView.superview convertRect:self.actionView.frame toView:kAppDelegate.window];
-    
-    if (a.origin.y <= 30) {
-        if (self.flag == YES) {
-            return;
-        }
-        else
-        {
-            self.flag = YES;
-        }
-    }
-    else
-    {
-        if (self.flag == NO) {
-            return;
-        }
-        else{
-            self.flag = NO;
-        }
-    }
-    [self setNavBarButton:self.flag];
+//    CGRect a =  [self.actionView.superview convertRect:self.actionView.frame toView:kAppDelegate.window];
+//    
+//    if (a.origin.y <= 30) {
+//        if (self.flag == YES) {
+//            return;
+//        }
+//        else
+//        {
+//            self.flag = YES;
+//        }
+//    }
+//    else
+//    {
+//        if (self.flag == NO) {
+//            return;
+//        }
+//        else{
+//            self.flag = NO;
+//        }
+//    }
+//    [self setNavBarButton:self.flag];
 }
 
 

@@ -434,7 +434,7 @@ static CGFloat kEntityViewMarginLeft    = 16.;
 {
     if (IS_IPHONE) {
         if (_delegate && [_delegate respondsToSelector:@selector(handelTapImageWithIndex:)]) {
-            DDLogInfo(@"select item index %ld", index);
+//            DDLogInfo(@"select item index %ld", index);
             [_delegate handelTapImageWithIndex:index];
         }
     }
