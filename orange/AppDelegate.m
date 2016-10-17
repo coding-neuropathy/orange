@@ -264,8 +264,15 @@ int ddLogLevel;
     } failure:^(NSInteger stateCode) {
         
     }];
-
-
+    
+    [API getAdvertiseWithSuccess:^(NSArray *array) {
+//        DDLogInfo(@"adv %@", array);
+        self.adDataArray = array;
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (error) {
+            DDLogError(@"Error: %@", error.localizedDescription);
+        }
+    }];
     
     self.alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.alertWindow.windowLevel = 100;
@@ -565,11 +572,6 @@ int ddLogLevel;
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowBadge" object:nil userInfo:nil];
                 }
             }
-//            NSInteger selection_count = [dictionary[@"unread_selection_count"] unsignedIntegerValue];
-//            if (selection_count > 0) {
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowSelectedBadge" object:nil userInfo:nil];
-//            }
-            
         } failure:^(NSInteger stateCode) {
             DDLogError(@"error");
         }];

@@ -169,6 +169,7 @@
 		8A59017A1D643F1100780C74 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5901531D643F1100780C74 /* Appirater.m */; };
 		8A59017B1D643F1100780C74 /* Appirater.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A5901541D643F1100780C74 /* Appirater.podspec.json */; };
 		8A59017C1D643F1100780C74 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A5901561D643F1100780C74 /* AppiraterLocalizable.strings */; };
+		8A5DE0E71DB487B400731568 /* GADView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5DE0E61DB487B400731568 /* GADView.m */; };
 		8A69286A1D9547FF00E3C5D4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A69286C1D9547FF00E3C5D4 /* InfoPlist.strings */; };
 		8A6928721D95802000E3C5D4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6928711D95802000E3C5D4 /* StoreKit.framework */; };
 		8A6928731D95804000E3C5D4 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
@@ -698,6 +699,8 @@
 		8A5901771D643F1100780C74 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
 		8A5901781D643F1100780C74 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
 		8A5905221D9536AA007B1C64 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A5DE0E51DB487B400731568 /* GADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADView.h; path = adView/GADView.h; sourceTree = "<group>"; };
+		8A5DE0E61DB487B400731568 /* GADView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GADView.m; path = adView/GADView.m; sourceTree = "<group>"; };
 		8A69286B1D9547FF00E3C5D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8A69286D1D95480000E3C5D4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8A69286E1D95481C00E3C5D4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -1379,6 +1382,7 @@
 		4E1D701C1A5ADB890032719E /* SelectionViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8A5DE0E41DB4878B00731568 /* adView */,
 				4EB8E2251B9F398B002C7F6F /* SelectionController */,
 				B7B065C91BF98C4B001AA30F /* ArticlesViewController */,
 				B7FE2A091B2817FD001C2E33 /* SelectionCell.h */,
@@ -1949,6 +1953,15 @@
 				8A5901561D643F1100780C74 /* AppiraterLocalizable.strings */,
 			);
 			path = appirater;
+			sourceTree = "<group>";
+		};
+		8A5DE0E41DB4878B00731568 /* adView */ = {
+			isa = PBXGroup;
+			children = (
+				8A5DE0E51DB487B400731568 /* GADView.h */,
+				8A5DE0E61DB487B400731568 /* GADView.m */,
+			);
+			name = adView;
 			sourceTree = "<group>";
 		};
 		8A9255EE1D508B3300E6481F /* Base */ = {
@@ -2956,6 +2969,7 @@
 				8AE652A21D7570C300FF7530 /* CartToolBar.m in Sources */,
 				8AAA2D091C02B61400B27E49 /* LaunchController.m in Sources */,
 				B7DA97C11B270BE900C9BC25 /* EntityLikeUserCell.m in Sources */,
+				8A5DE0E71DB487B400731568 /* GADView.m in Sources */,
 				4EC9F7941A79286A0057D736 /* FriendViewController.m in Sources */,
 				B76EE0821B3D86C3009D8763 /* NotifyController.m in Sources */,
 				8AFF0CAA1BA9C980005FD5CB /* SubCategoryEntityController.m in Sources */,

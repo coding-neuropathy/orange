@@ -54,31 +54,29 @@
     
 //    if (![vc isKindOfClass:[NSClassFromString(@"EntityViewController") class]]) {
 //    DDLogInfo(@"nav controller %@ %@", vc, self.viewControllers.lastObject);
-    
-    if ([self.viewControllers.lastObject isKindOfClass:[NSClassFromString(@"EntityViewController") class]]) {
-        [self setEffectNavBar];
-    } else {
-        [self setDefaultNavBar];
+    if (IS_IPHONE) {
+        if ([self.viewControllers.lastObject isKindOfClass:[NSClassFromString(@"EntityViewController") class]]) {
+            [self setEffectNavBar];
+        } else {
+            [self setDefaultNavBar];
+        }
     }
-    
-
-//    }
-    
     return vc;
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     
-    DDLogInfo(@"push nav controller %@ %@", viewController, self.viewControllers.lastObject);
+//    DDLogInfo(@"push nav controller %@ %@", viewController, self.viewControllers.lastObject);
     [super pushViewController:viewController animated:animated];
-    if ([viewController isKindOfClass:[NSClassFromString(@"EntityViewController") class]]) {
-        [self setEffectNavBar];
-    } else {
+    if (IS_IPHONE) {
+        if ([viewController isKindOfClass:[NSClassFromString(@"EntityViewController") class]]) {
+            [self setEffectNavBar];
+        } else {
 //        DDLogInfo(@"OKOKOKOKOKOKOKO");
-        [self setDefaultNavBar];
+            [self setDefaultNavBar];
+        }
     }
-    
 //    self.backGesture.enabled = NO;
 }
 

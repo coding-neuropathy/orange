@@ -34,11 +34,11 @@ static int lastContentOffset;
 @property (nonatomic, assign) NSInteger cateId;
 
 
-@property (nonatomic ,strong)UIView * updateView;
-@property (nonatomic ,strong)UILabel * updateLabel;
+@property (nonatomic ,strong) UIView * updateView;
+@property (nonatomic ,strong) UILabel * updateLabel;
 //更新数
-@property (nonatomic , assign)NSInteger updateNum;
-@property (nonatomic , strong)UIButton * closeBtn;
+@property (nonatomic , assign) NSInteger updateNum;
+@property (nonatomic , strong) UIButton * closeBtn;
 
 
 @property(nonatomic, strong) id<ALBBItemService> itemService;
@@ -154,8 +154,6 @@ static int lastContentOffset;
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
-    
-    
     __weak __typeof(&*self)weakSelf = self;
     [self.collectionView addPullToRefreshWithActionHandler:^{
         

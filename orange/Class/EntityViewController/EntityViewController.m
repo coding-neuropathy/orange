@@ -177,13 +177,13 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
-        EntityStickyHeaderFlowLayout *entityLayout = [[EntityStickyHeaderFlowLayout alloc] init];
-        entityLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+//        EntityStickyHeaderFlowLayout *entityLayout = [[EntityStickyHeaderFlowLayout alloc] init];
+//        entityLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         
         UICollectionViewFlowLayout *layout      = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection                  = UICollectionViewScrollDirectionVertical;
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:IS_IPAD ? entityLayout : layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.deFrameSize = IS_IPAD   ? CGSizeMake(kPadScreenWitdh, kScreenHeight - kStatusBarHeight)
                                                 : CGSizeMake(kScreenWidth, kScreenHeight);
         
@@ -405,7 +405,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 }
 
-
 /**
  *  3D-Touch
  */
@@ -420,12 +419,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (IS_IPHONE) {
-//        [self setSpecialNavigationBarWithAlpha:0.];
-        //        if (self.collectionView.contentOffset.y == 0) {
-//        self.collectionView.contentOffset = CGPointMake(self.collectionView.contentOffset.x, 0);
-        //        }
-    }
     [MobClick beginLogPageView:@"EntityView"];
     [super viewWillAppear:animated];
 }
@@ -765,13 +758,14 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     CGSize size = CGSizeMake(0., 0.);
     switch (section) {
         case EntityHeaderType:
-            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 550.) : CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
+            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 656)
+                            : CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
             break;
         case 1:
-            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 50.) : CGSizeMake(kScreenWidth, 0.);
+//            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 50.) : CGSizeMake(kScreenWidth, 0.);
             break;
         case 2:
-            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 80) :  CGSizeMake(kScreenWidth, 0);
+//            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 80) :  CGSizeMake(kScreenWidth, 0);
             break;
         case 3:
             size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 0.) : CGSizeMake(kScreenWidth, 0);
@@ -821,7 +815,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             UserViewController * VC = [[UserViewController alloc]init];
             VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:VC animated:YES];
-//            [self setDefaultNavigationBar];
             [MobClick event:@"entity_forward_user"];
         }
             break;

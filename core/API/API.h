@@ -1006,6 +1006,11 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
                      failure:(void (^)(NSInteger stateCode, NSError *error))failure;
 
 
+#pragma mark - Advertise
++ (void)getAdvertiseWithSuccess:(void (^)(NSArray *array))success
+                        failure:(void (^)(NSInteger stateCode, NSError *error))failure;
+
+
 /**
  *  取消所有网络请求
  */

@@ -21,6 +21,7 @@
 #import "GKArticleComment.h"
 
 #import "GKLaunch.h"
+#import "GAdvertise.h"
 
 #import "GKSelectionEntity.h"
 #import "GKSelectionArticle.h"

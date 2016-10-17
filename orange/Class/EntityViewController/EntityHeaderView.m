@@ -47,9 +47,9 @@ static CGFloat kEntityViewMarginLeft    = 16.;
 {
     if (!_brandLabel) {
         _brandLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
-        _brandLabel.deFrameSize     = CGSizeMake(kScreenWidth - 32., 22.);
+        _brandLabel.deFrameSize     = CGSizeMake(self.deFrameWidth - 32., 22.);
         _brandLabel.numberOfLines   = 1;
-        _brandLabel.font            = [UIFont fontWithName:@"PingFangSC-Semibold" size:17.];
+        _brandLabel.font            = [UIFont fontWithName:@"PingFangSC-Semibold" size:16.];
         _brandLabel.textAlignment   = NSTextAlignmentCenter;
         _brandLabel.textColor       = [UIColor colorFromHexString:@"#212121"];
         [self addSubview:_brandLabel];
@@ -61,9 +61,9 @@ static CGFloat kEntityViewMarginLeft    = 16.;
 {
     if (!_titleLabel) {
         _titleLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.deFrameSize     = CGSizeMake(kScreenWidth - 32., 22.);
+        _titleLabel.deFrameSize     = CGSizeMake(self.deFrameWidth - 32., 22.);
         _titleLabel.numberOfLines   = 2;
-        _titleLabel.font            = [UIFont systemFontOfSize:17.f];
+        _titleLabel.font            =  [UIFont fontWithName:@"PingFangSC-Semibold" size:16.];
         _titleLabel.textAlignment   = NSTextAlignmentCenter;
         _titleLabel.textColor       = [UIColor colorFromHexString:@"#212121"];
         [self addSubview:_titleLabel];
@@ -75,7 +75,7 @@ static CGFloat kEntityViewMarginLeft    = 16.;
 {
     if (!_buyBtn) {
         _buyBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
-        _buyBtn.deFrameSize         = CGSizeMake( (kScreenWidth - 44.) / 2., 40.);
+        _buyBtn.deFrameSize         = IS_IPAD ? CGSizeMake(200., 40.) :   CGSizeMake( (kScreenWidth - 44.) / 2., 40.);
 //        _buyBtn.layer.cornerRadius  = _buyBtn.deFrameHeight / 2.;
         _buyBtn.layer.cornerRadius  = 4.;
         _buyBtn.layer.masksToBounds = YES;
@@ -94,7 +94,7 @@ static CGFloat kEntityViewMarginLeft    = 16.;
 {
     if (!_likeBtn) {
         _likeBtn                        = [[UIButton alloc] initWithFrame:CGRectZero];
-        _likeBtn.deFrameSize            = CGSizeMake( (kScreenWidth - 44.) / 2., 40.);
+        _likeBtn.deFrameSize            = IS_IPAD ? CGSizeMake(200., 40.) : CGSizeMake( (kScreenWidth - 44.) / 2., 40.);
 //        _likeBtn.layer.cornerRadius     = _likeBtn.deFrameHeight / 2.;
         _likeBtn.layer.cornerRadius     = 4.;
         _likeBtn.layer.masksToBounds    = YES;
@@ -167,49 +167,8 @@ static CGFloat kEntityViewMarginLeft    = 16.;
 {
     _entity = entity;
     
-//    if (IS_IPAD) {
-        self.titleLabel.text    = _entity.entityName;
-//    } else {
-//        self.brandLabel.text    = _entity.brand;
-//        self.titleLabel.text    = _entity.title;
-//        
-//        if (_entity.likeCount > 0 )
-//            [self.gotoEntityLikeListBtn setTitle:[NSString stringWithFormat:@"%ld 人喜爱", _entity.likeCount] forState:UIControlStateNormal];
-////        self.gotoEntityLikeListBtn.backgroundColor = [UIColor redColor];
-//        if (_entity.isLiked) {
-//            self.likeBtn.selected = YES;
-//        }
-//        
-//        if (_entity.purchaseArray.count > 0) {
-//            GKPurchase * purchase = self.entity.purchaseArray[0];
-//            switch (purchase.status) {
-//                case GKBuyREMOVE:
-//                {
-//                    [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-//                    [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-//                    [self.buyBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
-////                    self.buyBtn.backgroundColor = [UIColor clearColor];
-//                    [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
-//                    self.buyBtn.enabled = NO;
-//                }
-//                    break;
-//                case GKBuySOLDOUT:
-//                {
-////                    self.buyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
-//                    [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#9d9e9f"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
-//                    [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-//                    [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-//                }
-//                    break;
-//                default:
-//                {
-//                    [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-//                    [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f 去购买", self.entity.lowestPrice] forState:UIControlStateNormal];
-//                }
-//                    break;
-//            }
-//        }
-//    }
+    self.brandLabel.text    = _entity.brand;
+    self.titleLabel.text    = _entity.title;
         
     self.imageURLArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
     if (_entity.imageURL)
@@ -220,7 +179,37 @@ static CGFloat kEntityViewMarginLeft    = 16.;
     } else {
         self.imagesView.scrollEnabled = NO;
     }
-        
+    
+    if (_entity.purchaseArray.count > 0) {
+        GKPurchase * purchase = self.entity.purchaseArray[0];
+        switch (purchase.status) {
+            case GKBuyREMOVE:
+            {
+                [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
+                [self.buyBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
+                //                    self.buyBtn.backgroundColor = [UIColor clearColor];
+                [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
+                self.buyBtn.enabled = NO;
+            }
+                break;
+            case GKBuySOLDOUT:
+            {
+                //                    self.buyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#9d9e9f"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
+                [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
+            }
+                break;
+            default:
+            {
+                [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f 去购买", self.entity.lowestPrice] forState:UIControlStateNormal];
+            }
+                break;
+        }
+    }
+    
     [self.imagesView reloadData];
 
     [self setNeedsLayout];
@@ -314,25 +303,20 @@ static CGFloat kEntityViewMarginLeft    = 16.;
     if (IS_IPHONE) {
         CGFloat titleHeight = [self.titleLabel.text heightWithLineWidth:kScreenWidth - 32 Font:self.titleLabel.font LineHeight:5];
         
-
         self.imagesView.deFrameSize     = CGSizeMake(kScreenWidth, kScreenWidth);
-        
+
         self.brandLabel.deFrameTop      = 24. + self.imagesView.deFrameBottom;
         self.brandLabel.deFrameLeft     = 16.;
         
         self.titleLabel.center          = self.brandLabel.center;
         self.titleLabel.deFrameHeight   = titleHeight;
         self.titleLabel.deFrameTop      = self.brandLabel.deFrameBottom + 8.;
-        
-//        self.buyBtn.deFrameLeft         = 59.;
+
         self.buyBtn.deFrameLeft         = (self.deFrameWidth - self.buyBtn.deFrameWidth - self.likeBtn.deFrameWidth) / 2.;
         self.buyBtn.deFrameTop          = self.titleLabel.deFrameBottom + 24.;
         
         self.likeBtn.center             = self.buyBtn.center;
         self.likeBtn.deFrameLeft        = self.buyBtn.deFrameRight + 8.;
-        
-//        self.buyBtn.deFrameLeft         = (self.deFrameWidth - self.likeBtn.deFrameRight) / 2.;
-        
         
         if ([_entity.imageURLArray count] > 0) {
             self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
@@ -346,10 +330,22 @@ static CGFloat kEntityViewMarginLeft    = 16.;
     }
     else
     {
-        self.imagesView.frame = CGRectMake(0., 20., self.deFrameWidth, 460.);
-        self.titleLabel.frame = CGRectMake(0., 0., self.deFrameWidth - 40., 20);
-        self.titleLabel.deFrameLeft = 20.;
-        self.titleLabel.deFrameTop = self.imagesView.deFrameBottom + 31.;
+        self.imagesView.frame           = CGRectMake(0., 20., self.deFrameWidth, 460.);
+        
+        self.brandLabel.center          = self.imagesView.center;
+        self.brandLabel.deFrameTop      = 20. + self.imagesView.deFrameBottom;
+        
+        
+//        self.titleLabel.frame = CGRectMake(0., 0., self.deFrameWidth - 40., 20);
+        self.titleLabel.center          = self.brandLabel.center;
+//        self.titleLabel.deFrameLeft = 20.;
+        self.titleLabel.deFrameTop      = self.brandLabel.deFrameBottom + 5.;
+        
+        self.buyBtn.deFrameLeft         = 136.;
+        self.buyBtn.deFrameTop          = self.titleLabel.deFrameBottom + 32.;
+//        
+        self.likeBtn.center             = self.buyBtn.center;
+        self.likeBtn.deFrameRight       = self.deFrameWidth - 136.;
     }
 }
 

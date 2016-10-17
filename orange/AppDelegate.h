@@ -17,6 +17,8 @@
 @property (strong, nonatomic) UIWindow *alertWindow;
 @property (assign, nonatomic) NSUInteger messageCount;
 
+@property (strong, nonatomic) NSArray   *adDataArray;
+
 
 @end
 

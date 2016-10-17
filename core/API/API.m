@@ -3243,6 +3243,30 @@
     }];
 }
 
+#pragma mark - Advertise
++ (void)getAdvertiseWithSuccess:(void (^)(NSArray *array))success failure:(void (^)(NSInteger stateCode, NSError *error))failure
+{
+    NSString * path = @"ad/";
+    
+    [[HttpClient sharedClient] requestPath:path method:@"GET" parameters:[NSDictionary dictionary] success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        NSMutableArray *dataArray   = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject) {
+            GAdvertise * ad = [GAdvertise modelFromDictionary:row];
+            [dataArray addObject:ad];
+        }
+        
+        if (success) {
+            success([NSArray arrayWithArray:dataArray]);
+        }
+        
+    } failure:^(NSInteger stateCode, NSError *error) {
+        if (failure) {
+            failure(stateCode, error);
+        }
+    }];
+}
+
 #pragma mark - cancel all requet
 /**
  *  取消所有网络请求
