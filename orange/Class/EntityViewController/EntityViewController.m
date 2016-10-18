@@ -564,7 +564,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         switch (indexPath.section) {
             case EntityHeaderType:
             {
-                EntityHeaderView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderIdentifier forIndexPath:indexPath];
+                EntityHeaderView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:EntityReuseHeaderIdentifier forIndexPath:indexPath];
                 if ( IS_IPAD)
                     headerView.entity = self.entity;
                 else

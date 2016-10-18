@@ -62,13 +62,13 @@
     BaseNavigationController * second = [[BaseNavigationController alloc] init];
     [second setViewControllers:@[[[DiscoverController alloc] init]] animated:NO];
     
-    UINavigationController * third = [[UINavigationController alloc] init];
+    BaseNavigationController * third = [[BaseNavigationController alloc] init];
     [third setViewControllers:@[[[NotifyController alloc] init]] animated:NO];
 //    third.tabBarItem.t
 //    third.tabBarItem.badgeCenterOffset = CGPointMake(0, 0);
 //    [third.tabBarItem showBadgeWithStyle:WBadgeStyleNew value:0 animationType:WBadgeAnimTypeShake];
     
-    UINavigationController * fourth = [[UINavigationController alloc] init];
+    BaseNavigationController * fourth = [[BaseNavigationController alloc] init];
     if(k_isLogin)
     {
         [fourth setViewControllers:@[[[UserViewController alloc] initWithUser:[Passport sharedInstance].user]] animated:NO];

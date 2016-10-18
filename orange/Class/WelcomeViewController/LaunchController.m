@@ -58,19 +58,17 @@
         _launchView = [[LaunchView alloc] initWithFrame:CGRectZero];
                 _launchView.frame = CGRectMake(0., 0., kScreenWidth, kScreenHeight);
 
-//        _launchView.deFrameTop = - (_launchView.deFrameHeight);
-//        _launchView.deFrameLeft = (kScreenWidth - _launchView.deFrameWidth) / 2.;
         
         if (IS_IPAD) {
             _launchView.frame = CGRectMake(0., 0., 360., 480.);
             _launchView.deFrameTop = - ((kScreenHeight - _launchView.deFrameHeight) / 2. + _launchView.deFrameHeight);
             
             _launchView.deFrameLeft = (kScreenWidth - _launchView.deFrameWidth) / 2.;
-                    _launchView.layer.cornerRadius = 4.;
+            _launchView.layer.cornerRadius = 4.;
         } else {
             _launchView.alpha       = 0.;
         }
-        _launchView.backgroundColor = UIColorFromRGB(0xffffff);
+        _launchView.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         _launchView.delegate = self;
     }
     return _launchView;
@@ -194,7 +192,7 @@
         [self.timer invalidate];
         [self tapCloseBtn:nil];
     }
-    [self.launchView.closeBtn setTitle:[NSString stringWithFormat:@"%@ %ld", NSLocalizedStringFromTable(@"skip", kLocalizedFile, nil), (long)self.skipSeconds--] forState:UIControlStateNormal];
+    [self.launchView.closeBtn setTitle:NSLocalizedStringFromTable(@"skip", kLocalizedFile, nil) forState:UIControlStateNormal];
     self.count++;
 }
 

@@ -8,17 +8,28 @@
 
 #import "GAdvertise.h"
 
+@interface GAdvertise ()
+
+@property (strong, nonatomic) NSString  *clickURLString;
+
+@end
+
 @implementation GAdvertise
 
 + (NSDictionary *)dictionaryForServerAndClientKeys
 {
     NSDictionary *keyDic = @{
                              @"id"              : @"AdvertiseId",
-                             @"click_url"       : @"clickURL",
+                             @"click_url"       : @"clickURLString",
                              @"image_url"       : @"imageURL",
                              };
     
     return keyDic;
+}
+
+- (NSURL *)clickURL
+{
+    return [NSURL URLWithString:self.clickURLString];
 }
 
 

@@ -10,6 +10,7 @@
 #import "SelectionCell.h"
 //#import "GTScrollNavigationBar.h"
 #import "EntityViewController.h"
+#import "GADView.h"
 
 #import "GKHandler.h"
 /**
@@ -18,10 +19,10 @@
 #import "EntityPreViewController.h"
 
 
+static NSString *HeaderIdentifier   = @"ADHeader";
+static NSString *CellIdentifier     = @"SelectionCell";
 
-static NSString *CellIdentifier = @"SelectionCell";
-
-static int lastContentOffset;
+//static int lastContentOffset;
 
 @interface SelectionViewController ()<UIViewControllerPreviewingDelegate>
 
@@ -81,6 +82,11 @@ static int lastContentOffset;
         self.itemService    = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
         
     }
+    
+    [self.collectionView registerClass:[GADView class]
+            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier];
+    [self.collectionView registerClass:[SelectionCell class] forCellWithReuseIdentifier:CellIdentifier];
+    
     return self;
 }
 
@@ -91,10 +97,8 @@ static int lastContentOffset;
 
 #pragma mark - init view
 - (void)viewDidLoad {
+
     [super viewDidLoad];
-    
-    [self.collectionView registerClass:[SelectionCell class] forCellWithReuseIdentifier:CellIdentifier];
-    
     self.collectionView.alwaysBounceVertical = YES;
     
     if (iOS9)
@@ -158,7 +162,6 @@ static int lastContentOffset;
     [self.collectionView addPullToRefreshWithActionHandler:^{
         
         [weakSelf.entityList refreshWithCategoryId:weakSelf.cateId];
-        
     }];
     
     [self.collectionView addInfiniteScrollingWithActionHandler:^{
@@ -176,7 +179,6 @@ static int lastContentOffset;
 }
 
 #pragma mark - <UICollectionViewDataSource>
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -223,50 +225,64 @@ static int lastContentOffset;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    //    if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight)
-    //    {
-    //        return UIEdgeInsetsMake(0., 128., 0., 128.);
-    //    }
     return UIEdgeInsetsMake(0., 0., 0., 0.);
 }
 
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    lastContentOffset = scrollView.contentOffset.y;
-}
 
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [[NSUserDefaults standardUserDefaults] setObject:@(scrollView.contentOffset.y) forKey:@"selection-offset-y"];
-    
-    if (scrollView.contentOffset.y < lastContentOffset)
-    {
-        [UIView animateWithDuration:1 animations:^{
-            self.updateView.frame = CGRectMake(0.,0., kScreenWidth, 49);
-            
-        }];
-        
-//        [self.delegate hideSegmentControl];
-        
-    }
-    else if (scrollView.contentOffset.y > lastContentOffset)
-    {
-        [UIView animateWithDuration:1 animations:^{
-            self.updateView.frame = CGRectMake(0., -49., kScreenWidth, 49);
-        }];
-        
-//        [self.delegate showSegmentControl];
-    }
+    GADView *adHeader       = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
+//    [[UIApplication sharedApplication] delegate]
+    adHeader.adDataArray    = kAppDelegate.adDataArray;
+    adHeader.touchADBlock   = ^(NSURL *adURL){
+//        DDLogInfo(@"ad url %@", adURL.absoluteString);
+        [[OpenCenter sharedOpenCenter] openWebWithURL:adURL];
+    };
+    return adHeader;
 
 }
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-        if (scrollView.contentOffset.y>20000) {
-            [self tipForTapStatusBar];
-        }
+    CGSize  size    = CGSizeMake(0., 0.);
+    if (kAppDelegate.adDataArray.count > 0 && IS_IPHONE) {
+        size        = CGSizeMake(kScreenWidth, 48.);
+    }
+    return size;
 }
+
+
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+//{
+//    lastContentOffset = scrollView.contentOffset.y;
+//}
+//
+//
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    [[NSUserDefaults standardUserDefaults] setObject:@(scrollView.contentOffset.y) forKey:@"selection-offset-y"];
+//    
+//    if (scrollView.contentOffset.y < lastContentOffset)
+//    {
+//        [UIView animateWithDuration:1 animations:^{
+//            self.updateView.frame = CGRectMake(0.,0., kScreenWidth, 49);
+//            
+//        }];
+//    }
+//    else if (scrollView.contentOffset.y > lastContentOffset)
+//    {
+//        [UIView animateWithDuration:1 animations:^{
+//            self.updateView.frame = CGRectMake(0., -49., kScreenWidth, 49);
+//        }];
+//    }
+//
+//}
+//
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//        if (scrollView.contentOffset.y>20000) {
+//            [self tipForTapStatusBar];
+//        }
+//}
 
 
 
@@ -289,57 +305,57 @@ static int lastContentOffset;
 //{
 //    [self.navigationController.scrollNavigationBar resetToDefaultPositionWithAnimation:YES];
 //}
+//
+//- (void)tipForTapStatusBar
+//{
+//    if([[NSUserDefaults standardUserDefaults] boolForKey:@"everShowTipStatusBar"])
+//    {
+//        return;
+//    }
+//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everShowTipStatusBar"];
+//    
+//    if ([kAppDelegate.window viewWithTag:30001] ) {
+//        return;
+//    }
+//    UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight)];
+//    button.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+//    button.tag = 30001;
+//    [button addTarget:self action:@selector(dismissTip) forControlEvents:UIControlEventTouchUpInside];
+//    [kAppDelegate.window addSubview:button];
+//    
+//    
+//    UILabel * tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 19, kScreenWidth, 34)];
+//    tip.backgroundColor = UIColorFromRGB(0x343434);
+//    tip.textColor = UIColorFromRGB(0xffffff);
+//    tip.textAlignment = NSTextAlignmentCenter;
+//    tip.text = @"点击状态栏，瞬间回到顶部";
+//    tip.font = [UIFont systemFontOfSize:14];
+//    tip.layer.masksToBounds = YES;
+//    tip.layer.cornerRadius = 17;
+//    [tip sizeToFit];
+//    tip.frame = CGRectMake(0, 0, tip.deFrameWidth + 48, 34);
+//    tip.center = CGPointMake(kScreenWidth/2, 0);
+//    tip.deFrameTop = 19;
+//    [button addSubview:tip];
+//    
+//    UIImageView * icon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_ triangle"]];
+//    icon.center =CGPointMake(kScreenWidth/2, 0);
+//    icon.deFrameTop = 11.5;
+//    [button addSubview:icon];
+//}
 
-- (void)tipForTapStatusBar
-{
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"everShowTipStatusBar"])
-    {
-        return;
-    }
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everShowTipStatusBar"];
-    
-    if ([kAppDelegate.window viewWithTag:30001] ) {
-        return;
-    }
-    UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight)];
-    button.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    button.tag = 30001;
-    [button addTarget:self action:@selector(dismissTip) forControlEvents:UIControlEventTouchUpInside];
-    [kAppDelegate.window addSubview:button];
-    
-    
-    UILabel * tip = [[UILabel alloc]initWithFrame:CGRectMake(0, 19, kScreenWidth, 34)];
-    tip.backgroundColor = UIColorFromRGB(0x343434);
-    tip.textColor = UIColorFromRGB(0xffffff);
-    tip.textAlignment = NSTextAlignmentCenter;
-    tip.text = @"点击状态栏，瞬间回到顶部";
-    tip.font = [UIFont systemFontOfSize:14];
-    tip.layer.masksToBounds = YES;
-    tip.layer.cornerRadius = 17;
-    [tip sizeToFit];
-    tip.frame = CGRectMake(0, 0, tip.deFrameWidth + 48, 34);
-    tip.center = CGPointMake(kScreenWidth/2, 0);
-    tip.deFrameTop = 19;
-    [button addSubview:tip];
-    
-    UIImageView * icon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tip_ triangle"]];
-    icon.center =CGPointMake(kScreenWidth/2, 0);
-    icon.deFrameTop = 11.5;
-    [button addSubview:icon];
-}
-
-- (void)dismissTip
-{
-    UIView * view =[kAppDelegate.window viewWithTag:30001];
-    if (view) {
-        [UIView animateWithDuration:0.3 animations:^{
-            view.alpha = 0;
-        } completion:^(BOOL finished) {
-            [[kAppDelegate.window viewWithTag:30001] removeFromSuperview];
-        }];
-    }
-
-}
+//- (void)dismissTip
+//{
+//    UIView * view =[kAppDelegate.window viewWithTag:30001];
+//    if (view) {
+//        [UIView animateWithDuration:0.3 animations:^{
+//            view.alpha = 0;
+//        } completion:^(BOOL finished) {
+//            [[kAppDelegate.window viewWithTag:30001] removeFromSuperview];
+//        }];
+//    }
+//
+//}
 
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

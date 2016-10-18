@@ -103,8 +103,8 @@ static CGFloat kEntityViewMarginLeft    = 16.;
         _likeBtn.titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
         [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0, 0., -10.)];
         
-        [_likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-        [_likeBtn setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
+        [_likeBtn setImage:[UIImage imageNamed:@"heart"] forState:UIControlStateNormal];
+        [_likeBtn setImage:[UIImage imageNamed:@"hearted"] forState:UIControlStateSelected];
         [_likeBtn setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_likeBtn setTitleColor:[UIColor colorFromHexString:@"#757575"] forState:UIControlStateNormal];
         

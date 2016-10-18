@@ -166,7 +166,7 @@
     switch (self.headertype) {
         case LikeType:
         {
-            self.backgroundColor                = UIColorFromRGB(0xffffff);
+            self.backgroundColor                = [UIColor colorFromHexString:@"#ffffff"];
             self.textLabel.frame                = CGRectMake(16., 9., 200., 30.);
             self.indicatorLable.frame           = CGRectMake(0., 0., 20., 30.);
             self.indicatorLable.center          = self.textLabel.center;
@@ -179,13 +179,6 @@
             self.backgroundColor                = [UIColor colorFromHexString:@"#ffffff"];
             self.textLabel.deFrameLeft          = 16.;
             self.textLabel.deFrameTop           = 9.;
-//            self.textLabel.frame                = CGRectMake(16., 9., 200., 30.);
-//            self.indicatorLable.frame           = CGRectMake(0., 0., 20., 30.);
-//            self.indicatorLable.center          = self.textLabel.center;
-//            self.indicatorLable.deFrameRight    = self.deFrameRight - 10.;
-//            self.textLabel.deFrameSize          = CGSizeMake(200., 30.);
-//            self.textLabel.center               = self.center;
-//            self.textLabel.deFrameLeft          = 16.;
             
             self.postNoteBtn.center             = self.textLabel.center;
             self.postNoteBtn.deFrameRight       = self.deFrameWidth - 16.;

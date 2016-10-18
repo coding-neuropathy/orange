@@ -244,9 +244,7 @@ int ddLogLevel;
 //        application.applicationIconBadgeNumber = 0;
     
     [API getLaunchImageWithSuccess:^(GKLaunch *launch) {
-        
-        LaunchController * vc = [[LaunchController alloc] initWithLaunch:launch SkipSeconds:3];
-    
+        LaunchController * vc = [[LaunchController alloc] initWithLaunch:launch SkipSeconds:5];
         [self.window.rootViewController addChildViewController:vc];
         __weak __typeof(&*vc)weakVC = vc;
         vc.finished = ^(void) {
@@ -266,8 +264,16 @@ int ddLogLevel;
     }];
     
     [API getAdvertiseWithSuccess:^(NSArray *array) {
-//        DDLogInfo(@"adv %@", array);
+        DDLogInfo(@"adv %@", array);
         self.adDataArray = array;
+        
+//        if (self.adDataArray.count > 0) {
+//            [[NSUserDefaults standardUserDefaults] setObject:self.adDataArray forKey:@"guoku-ad"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//        } else {
+//            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"guoku-ad"];
+//        }
+        
     } failure:^(NSInteger stateCode, NSError *error) {
         if (error) {
             DDLogError(@"Error: %@", error.localizedDescription);
