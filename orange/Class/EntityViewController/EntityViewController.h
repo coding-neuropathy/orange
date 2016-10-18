@@ -15,7 +15,9 @@
                                                         UICollectionViewDelegateFlowLayout, UIViewControllerPreviewingDelegate,
                                                         UITextViewDelegate, UIActionSheetDelegate>
 //@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) GKEntity *entity;
+@property (strong, nonatomic) GKEntity  *entity;
+@property (assign, nonatomic) BOOL      navBarEffect;
+
 
 - (instancetype)initWithEntity:(GKEntity *)entity;
 

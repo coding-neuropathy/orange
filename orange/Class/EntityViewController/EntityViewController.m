@@ -419,13 +419,13 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.navBarEffect   = YES;
     [MobClick beginLogPageView:@"EntityView"];
     [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-
     [super viewDidAppear:animated];
 }
 
@@ -433,6 +433,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 {
     if (IS_IPHONE) {
 //        [self setDefaultNavigationBar];
+        self.navBarEffect   = NO;
     }
     [MobClick endLogPageView:@"EntityView"];
     [super viewWillDisappear:animated];
@@ -473,7 +474,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 //    [self configConfigNavigationItem];
-    if (IS_IPHONE) {
+    if (IS_IPHONE && self.navBarEffect) {
         if (scrollView.contentOffset.y < 0.) {
             scrollView.contentOffset = CGPointMake(scrollView.contentOffset.x, 0.);
         }

@@ -67,16 +67,18 @@
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     
-//    DDLogInfo(@"push nav controller %@ %@", viewController, self.viewControllers.lastObject);
+    DDLogInfo(@"push nav controller %@", self.viewControllers.lastObject);
+    
     [super pushViewController:viewController animated:animated];
     if (IS_IPHONE) {
         if ([viewController isKindOfClass:[NSClassFromString(@"EntityViewController") class]]) {
             [self setEffectNavBar];
         } else {
-//        DDLogInfo(@"OKOKOKOKOKOKOKO");
             [self setDefaultNavBar];
         }
     }
+    
+    
 //    self.backGesture.enabled = NO;
 }
 
