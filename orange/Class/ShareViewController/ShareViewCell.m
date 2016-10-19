@@ -17,16 +17,6 @@
 
 @implementation ShareViewCell
 
-//- (instancetype)initWithFrame:(CGRect)frame
-//{
-//    self    = [super initWithFrame:frame];
-//    if (self) {
-//        UITapGestureRecognizer  *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCell:)];
-//        
-//        [self addGestureRecognizer:tap];
-//    }
-//    return self;
-//}
 
 - (UIImageView *)imageView
 {
@@ -74,10 +64,15 @@
     [super layoutSubviews];
     
 //    self.imageView.deFrameSize      = CGSizeMake(self.deFrameWidth, self.deFrameWidth);
-    self.imageView.deFrameTop       = (self.deFrameWidth - self.imageView.deFrameWidth) / 2.;
-    self.imageView.deFrameLeft      = (self.deFrameWidth - self.imageView.deFrameWidth) / 2.;
+    if (IS_IPHONE) {
+        self.imageView.deFrameTop       = (self.deFrameWidth - self.imageView.deFrameWidth) / 2.;
+        self.imageView.deFrameLeft      = (self.deFrameWidth - self.imageView.deFrameWidth) / 2.;
+    } else {
+        self.imageView.deFrameTop       = 10.;
+        self.imageView.deFrameLeft      = (self.deFrameWidth - self.imageView.deFrameWidth) / 2.;
+    }
     
-    self.textLabel.deFrameSize      = CGSizeMake(self.deFrameWidth, 30.);
+    self.textLabel.deFrameSize      = CGSizeMake(self.deFrameWidth, 20.);
     self.textLabel.deFrameBottom    = self.deFrameHeight;
 }
 

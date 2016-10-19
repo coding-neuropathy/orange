@@ -140,8 +140,8 @@
     [_sendBtn setTitle:@"发布" forState:UIControlStateDisabled];
     [_sendBtn setTitle:@"发布" forState:UIControlStateNormal];
     _sendBtn.titleLabel.font = [UIFont systemFontOfSize:17.];
-    [_sendBtn setTitleColor:UIColorFromRGB(0x5976c1) forState:UIControlStateNormal];
-    [_sendBtn setTitleColor:UIColorFromRGB(0x9BADDA) forState:UIControlStateDisabled];
+    [_sendBtn setTitleColor:[UIColor colorFromHexString:@"#5976c1"] forState:UIControlStateNormal];
+    [_sendBtn setTitleColor:[UIColor colorFromHexString:@"#9BADDA"] forState:UIControlStateDisabled];
 //    _sendBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:17];
     _sendBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
 //    [_sendBtn setTitle:[NSString fontAwesomeIconStringForEnum:FApaperPlane] forState:UIControlStateNormal];

@@ -147,6 +147,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     if (alpha <=0 ) {
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     }
+    self.navigationController.navigationBar.translucent     = YES;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"top bar ggradient"] stretchableImageWithLeftCapWidth:1 topCapHeight:64] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage     = [UIImage new];
     [self.navigationController.navigationBar setTitleTextAttributes:@{
@@ -397,6 +398,12 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     
 //    [self.collectionView registerClass:[EntityNoteFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:EntityReuseFooterNoteIdenetifier];
 
+    
+    if (IS_IPAD) {
+        [self.moreBtn setImage:[UIImage imageNamed:@"more dark"] forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithCustomView:self.moreBtn];
+    }
+    
     [self refresh];
     [self refreshRandom];
     

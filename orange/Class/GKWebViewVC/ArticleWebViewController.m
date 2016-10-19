@@ -62,11 +62,17 @@
 //        _digBtn.frame                       = CGRectMake(0., 0., 64., 32.);
         _digBtn.deFrameSize                 = CGSizeMake(64., 32.);
         _digBtn.tintColor = UIColorFromRGB(0xffffff);
+        
+
         [_digBtn setImage:[UIImage imageNamed:@"Poke"] forState:UIControlStateNormal];
         [_digBtn setImage:[UIImage imageNamed:@"Poked"] forState:UIControlStateSelected];
         
-        [_digBtn setTitle:NSLocalizedStringFromTable(@"poke", kLocalizedFile, nil) forState:UIControlStateNormal];
-        [_digBtn setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
+        if (self.article.dig_count > 0) {
+            [_digBtn setTitle:[NSString stringWithFormat:@"%ld", self.article.dig_count] forState:UIControlStateNormal];
+        }else {
+            [_digBtn setTitle:NSLocalizedStringFromTable(@"poke", kLocalizedFile, nil) forState:UIControlStateNormal];
+        }
+        [_digBtn setTitleColor:[UIColor colorFromHexString:@"#757575"] forState:UIControlStateNormal];
         _digBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
         
         [_digBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 10)];
@@ -89,10 +95,15 @@
         _commentBtn                         = [UIButton buttonWithType:UIButtonTypeCustom];
 //        _commentBtn.frame = CGRectMake(0., 0., 104., 44.);
         _commentBtn.deFrameSize             = CGSizeMake(104., 44.);
+        if (self.article.commentCount > 0) {
+            [_commentBtn setTitle:[NSString stringWithFormat:@"%ld", self.article.dig_count] forState:UIControlStateNormal];
+        } else {
+            [_commentBtn setTitle:NSLocalizedStringFromTable(@"comment", kLocalizedFile, nil) forState:UIControlStateNormal];
+        }
+        
         [_commentBtn setImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
 //        [_commentBtn setImageEdgeInsets:UIEdgeInsetsMake(0., -15, 0., 0.)];
-        [_commentBtn setTitle:NSLocalizedStringFromTable(@"comment", kLocalizedFile, nil) forState:UIControlStateNormal];
-        [_commentBtn setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
+                [_commentBtn setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
         _commentBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
         
         [_commentBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 10)];
@@ -310,6 +321,12 @@
         self.digBtn.selected = IsDig;
         self.article.IsDig = IsDig;
         
+        if (self.article.dig_count > 0) {
+            [_digBtn setTitle:[NSString stringWithFormat:@"%ld", self.article.dig_count] forState:UIControlStateNormal];
+        }else {
+            [_digBtn setTitle:NSLocalizedStringFromTable(@"poke", kLocalizedFile, nil) forState:UIControlStateNormal];
+        }
+        
     } failure:^(NSInteger stateCode) {
         [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"dig-failure", kLocalizedFile, nil)];
     }];
@@ -323,17 +340,6 @@
     
     vc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
     vc.modalPresentationStyle = UIModalPresentationFullScreen;
-//    vc.commentSuccessBlock = ^(GKArticleComment * comment) {
-//        self.comment = comment;
-//        [self.webView reload];
-//    };
-//    [vc setCommentSuccessBlock:^(GKArticleComment *comment) {
-//        
-//        self.comment = comment;
-//        
-//        [self.webView reload];
-//        
-//    }];
     
     [vc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     
@@ -368,13 +374,6 @@
         image = [UIImage imageWithData:[self.image imageDataLessThan_10K]];
     }
     
-    
-//    ShareView * view = [[ShareView alloc]initWithTitle:self.article.title SubTitle:@"" Image:image URL:[self.webView.URL absoluteString]];
-//    view.type = @"url";
-//    view.tapRefreshButtonBlock = ^(){
-//        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-//    };
-//    [view show];
     ShareController *shareVC = [[ShareController alloc] initWithTitle:self.article.title URLString:self.webView.URL.absoluteString Image:image];
     shareVC.type    = ArticleType;
     shareVC.article = self.article;
