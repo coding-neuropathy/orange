@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
                                entityId:(NSString *)entityId
                                   count:(NSInteger)count
                                 success:(void (^)(NSArray *entityArray))success
-                                failure:(void (^)(NSInteger stateCode))failure;
+                                failure:(void (^)(NSInteger stateCode, NSError *error))failure;
 
 /**
  *  获取商品喜爱用户

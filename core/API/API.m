@@ -348,7 +348,7 @@
                                entityId:(NSString *)entityId
                                   count:(NSInteger)count
                                 success:(void (^)(NSArray *entityArray))success
-                                failure:(void (^)(NSInteger stateCode))failure
+                                failure:(void (^)(NSInteger stateCode, NSError * error))failure
 {
     NSParameterAssert(categoryId >= 0);
     //    NSParameterAssert(entityId > 0);
@@ -378,7 +378,7 @@
     } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {
 //            NSInteger stateCode = operation.response.statusCode;
-            failure(stateCode);
+            failure(stateCode, error);
         }
     }];
 }

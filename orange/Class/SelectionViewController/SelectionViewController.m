@@ -172,10 +172,6 @@ static NSString *CellIdentifier     = @"SelectionCell";
     {
         [self.collectionView triggerPullToRefresh];
     }
-//    BOOL isCache = [weakSelf.entityList loadFromCache];
-//    if (!isCache) {
-//        [self.tableView triggerPullToRefresh];
-//    }
 }
 
 #pragma mark - <UICollectionViewDataSource>

@@ -221,17 +221,27 @@ static CGFloat kEntityViewMarginLeft    = 16.;
     self.brandLabel.text    = _entity.brand;
     self.titleLabel.text    = _entity.title;
     
-    if (_entity.likeCount > 0 )
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UIImageView class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    if (_entity.likeCount > 0 ) {
         [self.gotoEntityLikeListBtn setTitle:[NSString stringWithFormat:@"%ld 人喜爱 >", _entity.likeCount] forState:UIControlStateNormal];
     //        self.gotoEntityLikeListBtn.backgroundColor = [UIColor redColor];
         CGFloat width = [self.gotoEntityLikeListBtn.titleLabel.text widthWithLineWidth:0. Font:self.gotoEntityLikeListBtn.titleLabel.font];
         self.gotoEntityLikeListBtn.deFrameSize  = CGSizeMake(width, 20.);
+    }
     
     if (_entity.isLiked) {
         self.likeBtn.selected = YES;
     }
     
-    NSInteger count = likeUsers.count > 4 ? 4 : likeUsers.count;
+    NSInteger count = _entity.likeCount > 4 ? 4 : _entity.likeCount;
+    DDLogInfo(@"avatar %@", likeUsers);
+    
+
     
     for (int i = 0; i < count; i ++) {
         UIImageView * avatarImage       = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -240,6 +250,7 @@ static CGFloat kEntityViewMarginLeft    = 16.;
         avatarImage.layer.borderWidth   = 2.;
         avatarImage.layer.borderColor   = [UIColor colorFromHexString:@"#ffffff"].CGColor;
         avatarImage.layer.masksToBounds = YES;
+        avatarImage.tag                 = i;
         GKUser * user = [likeUsers objectAtIndex:i];
         
         [avatarImage sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:avatarImage.deFrameSize] options:SDWebImageRetryFailed];
@@ -247,6 +258,7 @@ static CGFloat kEntityViewMarginLeft    = 16.;
         avatarImage.deFrameLeft         = 16. + i * 24.;
         avatarImage.deFrameBottom       = self.deFrameHeight - 16.;
         
+//        [avatarImage in self.su]
         [self insertSubview:avatarImage atIndex:count - i];
     }
     

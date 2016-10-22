@@ -458,9 +458,6 @@ static inline NSRegularExpression * UrlRegularExpression() {
     if([array[0] isEqualToString:@"http"])
     {
         [[OpenCenter sharedOpenCenter] openWebWithURL:url];
-        //        GKWebVC * vc =  [GKWebVC linksWebViewControllerWithURL:url];
-//        WebViewController * vc = [[WebViewController alloc] initWithURL:url];
-//        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
     }
     if([array[0] isEqualToString:@"tag"])
     {

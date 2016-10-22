@@ -51,38 +51,37 @@ typedef NS_ENUM(NSInteger, EntityDisplayCellType) {
                                     EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,
                                      EntityHeaderBuyViewDelegate>
 
-@property (nonatomic, strong) GKNote *note;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIImageView *image;
-@property (nonatomic, strong) UIButton *likeButton;
-@property (nonatomic, strong) UIButton *buyButton;
-@property (nonatomic, strong) UIButton *noteButton;
-@property (nonatomic, strong) UIButton *moreBtn;
+@property (nonatomic, strong) GKNote        *note;
+@property (nonatomic, strong) UILabel       *titleLabel;
+@property (nonatomic, strong) UIImageView   *image;
+@property (nonatomic, strong) UIButton      *likeButton;
+@property (nonatomic, strong) UIButton      *buyButton;
+@property (nonatomic, strong) UIButton      *noteButton;
+@property (nonatomic, strong) UIButton      *moreBtn;
 
-@property (nonatomic, strong) UICollectionView * collectionView;
-@property (nonatomic, strong) EntityHeaderView * header;
-@property (nonatomic, strong) EntityHeaderActionView * actionView;
-@property (nonatomic, strong) EntityHeaderBuyView * buyView;
+@property (nonatomic, strong) UICollectionView          *collectionView;
+@property (nonatomic, strong) EntityHeaderView          *header;
+@property (nonatomic, strong) EntityHeaderActionView    *actionView;
+@property (nonatomic, strong) EntityHeaderBuyView       *buyView;
 //@property (nonatomic, strong) UIButton *categoryButton;
-@property (nonatomic, strong) UIView *likeUserView;
-@property (nonatomic, strong) UIView * noteContentView;
+//@property (nonatomic, strong) UIView                    *likeUserView;
+@property (nonatomic, strong) UIView                    *noteContentView;
 @property (nonatomic, assign) BOOL flag;
 
 
-@property (nonatomic, strong) UIButton *postBtn;
+@property (nonatomic, strong) UIButton              *postBtn;
+@property (nonatomic, strong) NSMutableArray        *dataArrayForlikeUser;
+@property (nonatomic, strong) NSMutableArray        *dataArrayForNote;
+@property (nonatomic, strong) NSMutableArray        *dataArrayForRecommend;
 
-@property (nonatomic, strong) NSMutableArray *dataArrayForlikeUser;
-@property (nonatomic, strong) NSMutableArray *dataArrayForNote;
-@property (nonatomic, strong) NSMutableArray *dataArrayForRecommend;
+@property (nonatomic, strong) id<ALBBItemService>   itemService;
 
-@property(nonatomic, strong) id<ALBBItemService> itemService;
-
-@property (strong, nonatomic) UIActionSheet * actionSheet;
+//@property (strong, nonatomic) UIActionSheet         *actionSheet;
 
 /**
  * 店家id （仅限淘宝，天猫）
  */
-@property (strong, nonatomic) NSString * seller_id;
+@property (strong, nonatomic) NSString              *seller_id;
 
 
 //@property (strong, nonatomic) SloppySwiper *swiper;
@@ -316,7 +315,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         [self.image sd_setImageWithURL:self.entity.imageURL_640x640];
         self.entity = entity;
 //        self.header.entity = entity;
-        
+//        DDLogInfo(@"like avatar %@", likeUserArray);
         self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
         self.dataArrayForNote = [NSMutableArray arrayWithArray:noteArray];
         for (GKNote *note in self.dataArrayForNote) {
@@ -348,10 +347,10 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             }
             
         }
-        [SVProgressHUD dismiss];
+//        [SVProgressHUD dismiss];
         [self.collectionView reloadData];
     } failure:^(NSInteger stateCode) {
-        [SVProgressHUD dismiss];
+//        [SVProgressHUD dismiss];
     }];
 }
 
@@ -362,9 +361,9 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                                 entityId:self.entity.entityId
                                    count:9 success:^(NSArray *entityArray) {
                                        self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
-                                       [self.collectionView reloadData];
-                                   } failure:^(NSInteger stateCode) {
-                                       
+//                                       [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:EntityHeaderCategoryType]];
+                                   } failure:^(NSInteger stateCode, NSError *error) {
+                                       DDLogError(@"recommend entity Error %@", error.localizedDescription);
                                    }];
 }
 
@@ -373,7 +372,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 {
     [super loadView];
     self.view.backgroundColor = [UIColor colorFromHexString:@"#fafafa"];
-    
 }
 
 - (void)viewDidLoad {
@@ -404,12 +402,11 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithCustomView:self.moreBtn];
     }
     
-    [self refresh];
-    [self refreshRandom];
-    
     if (iOS9)
         [self registerPreview];
-
+    
+    [self refresh];
+    [self refreshRandom];
 }
 
 /**
@@ -476,8 +473,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 
 #pragma mark - <UIScrollViewDelegate>
-
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 //    [self configConfigNavigationItem];
@@ -573,7 +568,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             case EntityHeaderType:
             {
                 EntityHeaderView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:EntityReuseHeaderIdentifier forIndexPath:indexPath];
-                if ( IS_IPAD)
+                if (IS_IPAD)
                     headerView.entity = self.entity;
                 else
                     [headerView setEntity:self.entity WithLikeUser:self.dataArrayForlikeUser];
@@ -587,12 +582,12 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             case EntityHeaderActionType:
             {
                 EntityHeaderActionView * actionView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderActionIdentifier forIndexPath:indexPath];
-                actionView.entity = self.entity;
-                actionView.note = self.note;
-                self.likeButton = actionView.likeButton;
-                actionView.delegate = [GKHandler sharedGKHandler];
-                actionView.headerDelegate = self;
-                self.actionView = actionView;
+                actionView.entity           = self.entity;
+                actionView.note             = self.note;
+                self.likeButton             = actionView.likeButton;
+                actionView.delegate         = [GKHandler sharedGKHandler];
+                actionView.headerDelegate   = self;
+                self.actionView             = actionView;
                 return actionView;
             }
                 break;
@@ -768,15 +763,15 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 656)
                             : CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
             break;
-        case 1:
+//        case 1:
 //            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 50.) : CGSizeMake(kScreenWidth, 0.);
-            break;
-        case 2:
+//            break;
+//        case 2:
 //            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 80) :  CGSizeMake(kScreenWidth, 0);
-            break;
-        case 3:
-            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 0.) : CGSizeMake(kScreenWidth, 0);
-            break;
+//            break;
+//        case 3:
+//            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 0.) : CGSizeMake(kScreenWidth, 0);
+//            break;
         case EntityHeaderLikeType:
         {
             if (self.dataArrayForlikeUser.count != 0 && IS_IPAD) {
@@ -791,27 +786,16 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             }
         }
             break;
+        case EntityHeaderCategoryType:
+                size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 50.) : CGSizeMake(kScreenWidth, 48.);
+            break;
         default:
-            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 50.) : CGSizeMake(kScreenWidth, 48.);
+//            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 50.) : CGSizeMake(kScreenWidth, 48.);
             break;
     }
     return size;
 }
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-//{
-//    CGSize size = CGSizeMake(0., 0.);
-//    switch (section) {
-//        case EntityHeaderNoteType:
-//            if (IS_IPHONE) size = CGSizeMake(kScreenWidth, 88.);
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//    return size;
-//}
 
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -1221,8 +1205,8 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 }
 
 #pragma mark - ConfigNavigationItem
--(void)configConfigNavigationItem
-{
+//-(void)configConfigNavigationItem
+//{
 //    CGRect a =  [self.actionView.superview convertRect:self.actionView.frame toView:kAppDelegate.window];
 //    
 //    if (a.origin.y <= 30) {
@@ -1244,7 +1228,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 //        }
 //    }
 //    [self setNavBarButton:self.flag];
-}
+//}
 
 
 @end
