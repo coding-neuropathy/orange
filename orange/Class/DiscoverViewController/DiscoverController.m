@@ -343,7 +343,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     NSInteger count = 0;
     switch (section) {
         case CategorySection:
-            if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS))
+            if ( !(kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS) )
                 count = self.discoverData.categoryCount;
             break;
         case ArticleSection:

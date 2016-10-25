@@ -88,8 +88,6 @@
     CGRect keyboardRect = [aValue CGRectValue];
     _height = keyboardRect.size.height;
     
-//    NSLog(@"键盘高度是  %ld",_height);
-    
     [UIView animateWithDuration:0.25 animations:^{
         _PostNotebackgroundview.frame = CGRectMake(0, kScreenHeight - 200 - _height, kScreenWidth, 200);
     }];
@@ -112,7 +110,7 @@
 {
     
     //后背景
-    _PostNotebackgroundview = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, 200)];
+    _PostNotebackgroundview = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenHeight, self.view.deFrameWidth, 200)];
     
     _PostNotebackgroundview.backgroundColor = [UIColor whiteColor];
     
