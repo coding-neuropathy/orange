@@ -240,9 +240,10 @@ static CGFloat kEntityViewMarginLeft    = 16.;
         self.likeBtn.selected = YES;
     }
     
-    NSInteger count = _entity.likeCount > 4 ? 4 : _entity.likeCount;
+    NSInteger count = likeUsers.count > 4 ? 4 : likeUsers.count;
 //    DDLogInfo(@"avatar %@", likeUsers);
     
+//    if (likeUsers.count)
     for (int i = 0; i < count; i ++) {
         UIImageView * avatarImage       = [[UIImageView alloc] initWithFrame:CGRectZero];
         avatarImage.deFrameSize         = CGSizeMake(32., 32.);

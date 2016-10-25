@@ -235,8 +235,7 @@ int ddLogLevel;
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     NSString * url = [userInfo valueForKey:@"url"];
     if (url) {
-            [self openLocalURL:[NSURL URLWithString:url]];
-        
+        [self openLocalURL:[NSURL URLWithString:url]];
         application.applicationIconBadgeNumber = 0;
         [JPUSHService handleRemoteNotification:userInfo];
     }
@@ -266,13 +265,6 @@ int ddLogLevel;
     [API getAdvertiseWithSuccess:^(NSArray *array) {
         DDLogInfo(@"adv %@", array);
         self.adDataArray = array;
-        
-//        if (self.adDataArray.count > 0) {
-//            [[NSUserDefaults standardUserDefaults] setObject:self.adDataArray forKey:@"guoku-ad"];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-//        } else {
-//            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"guoku-ad"];
-//        }
         
     } failure:^(NSInteger stateCode, NSError *error) {
         if (error) {
