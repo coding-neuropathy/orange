@@ -26,9 +26,22 @@
 @property (nonatomic,strong)UIButton *sendBtn;
 //标题
 @property (nonatomic,strong)UILabel * LbTitle;
+
+//点评
+@property (strong, nonatomic)GKNote * note;
+
 @end
 
 @implementation PNoteViewController
+
+- (instancetype)initWithEntityNote:(GKNote *)note
+{
+    self            = [super init];
+    if (self) {
+        self.note   = note;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -122,9 +135,9 @@
     
     _textView.contentSize = CGSizeMake(kScreenWidth - 20, _textView.deFrameSize.height - 20);
     
-    _textView.backgroundColor = UIColorFromRGB(0xf6f6f6);
+    _textView.backgroundColor = [UIColor colorFromHexString:@"#f6f6f6"];
     
-    _textView.textColor = UIColorFromRGB(0x666666);
+    _textView.textColor = [UIColor colorFromHexString:@"#666666"];
     
     _textView.font = [UIFont systemFontOfSize:17];
     
@@ -137,6 +150,7 @@
     _textView.autocorrectionType = UITextAutocapitalizationTypeNone;
     
     _textView.autocapitalizationType = UITextAutocorrectionTypeNo;
+    
     
     [_textView becomeFirstResponder];
     
@@ -173,7 +187,7 @@
     
     
     //占位label
-    _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, kScreenWidth, 15)];
+    _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, self.view.deFrameWidth, 15)];
     //左距中
     self.tipLabel.textAlignment = NSTextAlignmentLeft;
     //背景色透明
@@ -181,18 +195,23 @@
     //设置字体样式与大小
     [self.tipLabel setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
     self.tipLabel.textColor = [UIColor colorFromHexString:@"#9d9e9f"];
-    self.tipLabel.text = @"撰写真实、有用、有趣的商品点评";
+    
     
     [self.textView addSubview:self.tipLabel];
+    
+    if (self.note) {
+        _textView.text  = self.note.text;
+    } else {
+//        self.tipLabel.text = @"";
+        self.tipLabel.text = @"撰写真实、有用、有趣的商品点评";
+    }
     
     
 }
 
 - (void)closeBtnClick:(UIButton *)button
 {
-    
     [_textView resignFirstResponder];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -230,6 +249,7 @@
     
     if (self.note) {
         //修改点评
+        [SVProgressHUD showWithStatus:NSLocalizedStringFromTable(@"loading", kLocalizedFile, nil)];
         [API updateNoteWithNoteId:self.note.noteId content:content score:score imageData:nil success:^(GKNote *note) {
             
           [self dismissViewControllerAnimated:YES completion:nil];
@@ -243,12 +263,10 @@
              *
              *  稳定实时的数据统计分析服务，从用户量，用户行为，渠道效果，自定义事件等多个维度，帮助您更清楚的了解用户习惯，提高用户黏性和活跃度
              */               //event:自定义的事件Id   label:分类标签。不同的标签会分别进行统计，方便同一事件的不同标签的对比,为nil或空字符串时后台会生成和eventId同名的标签.
-//            [AVAnalytics event:@"update note" label:@"success"];
             [MobClick event:@"update note" label:@"success"];
         } failure:^(NSInteger stateCode) {
             
             [SVProgressHUD showErrorWithStatus:@"修改失败"];
-//            [AVAnalytics event:@"update note" label:@"failure"];
             [MobClick event:@"update note" label:@"failure"];
         }];
     } else {

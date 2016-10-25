@@ -360,7 +360,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                                 entityId:self.entity.entityId
                                    count:9 success:^(NSArray *entityArray) {
                                        self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
-//                                       [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:EntityHeaderCategoryType]];
+                                       [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:EntityHeaderCategoryType]];
                                    } failure:^(NSInteger stateCode, NSError *error) {
                                        DDLogError(@"recommend entity Error %@", error.localizedDescription);
                                    }];
@@ -970,10 +970,9 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (void)openEntityNote
 {
-    PNoteViewController * pnvc = [[PNoteViewController alloc] init];
+    PNoteViewController * pnvc = [[PNoteViewController alloc] initWithEntityNote:self.note];
     
     pnvc.entity = self.entity;
-    pnvc.note = self.note;
     
     pnvc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
     
@@ -985,7 +984,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         }
         
         self.note = note;
-        [self.collectionView reloadData];
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:EntityHeaderNoteType]];
         
     };
     
@@ -1109,7 +1108,8 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 {
     GKEntityCategory * category = [GKEntityCategory modelFromDictionary:@{@"categoryId": @(self.entity.categoryId)}];
     SubCategoryEntityController * VC = [[SubCategoryEntityController alloc] initWithSubCategory:category];
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+//    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    [self.navigationController pushViewController:VC animated:YES];
     
     [MobClick event:@"entity_forward_categoty"];
 }
@@ -1141,47 +1141,47 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 }
 
 
-- (void)setNavBarButton:(BOOL)flag
-{
-    if (flag) {
-        NSMutableArray * array = [NSMutableArray array];
-        {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-            [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(shareButtonAction) forControlEvents:UIControlEventTouchUpInside];
-            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-            button.backgroundColor = [UIColor clearColor];
-            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-            [array addObject:item];
-        }
-        {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-            [button setImage:[UIImage imageNamed:@"note"] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
-            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-            button.backgroundColor = [UIColor clearColor];
-            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-            [array addObject:item];
-        }
-        {
-            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-            [button setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
-            [button addTarget:self action:@selector(tapLikeBtn:) forControlEvents:UIControlEventTouchUpInside];
-            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-            button.backgroundColor = [UIColor clearColor];
-            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-            [array addObject:item];
-        
-            button.selected = self.entity.liked;
-        }
-        [self.navigationItem setRightBarButtonItems:array animated:YES];
-    }
-    else
-    {
-        [self.navigationItem setRightBarButtonItems:nil animated:NO];
-    }
-}
+//- (void)setNavBarButton:(BOOL)flag
+//{
+//    if (flag) {
+//        NSMutableArray * array = [NSMutableArray array];
+//        {
+//            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+//            [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+//            [button addTarget:self action:@selector(shareButtonAction) forControlEvents:UIControlEventTouchUpInside];
+//            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+//            button.backgroundColor = [UIColor clearColor];
+//            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+//            [array addObject:item];
+//        }
+//        {
+//            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+//            [button setImage:[UIImage imageNamed:@"note"] forState:UIControlStateNormal];
+//            [button addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
+//            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+//            button.backgroundColor = [UIColor clearColor];
+//            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+//            [array addObject:item];
+//        }
+//        {
+//            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
+//            [button setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+//            [button setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
+//            [button addTarget:self action:@selector(tapLikeBtn:) forControlEvents:UIControlEventTouchUpInside];
+//            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+//            button.backgroundColor = [UIColor clearColor];
+//            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
+//            [array addObject:item];
+//        
+//            button.selected = self.entity.liked;
+//        }
+//        [self.navigationItem setRightBarButtonItems:array animated:YES];
+//    }
+//    else
+//    {
+//        [self.navigationItem setRightBarButtonItems:nil animated:NO];
+//    }
+//}
 
 
 #pragma mark -

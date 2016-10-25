@@ -10,11 +10,11 @@
 
 @interface PNoteViewController : UIViewController
 
-//点评
-@property (strong, nonatomic)GKNote * note;
 //商品
 @property (strong, nonatomic)GKEntity * entity;
 //点评成功的回调
 @property (nonatomic, copy) void (^successBlock)(GKNote *);
+
+- (instancetype)initWithEntityNote:(GKNote *)note;
 
 @end
