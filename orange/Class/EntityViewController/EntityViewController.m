@@ -193,7 +193,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         _collectionView.delegate                = self;
         _collectionView.dataSource              = self;
         _collectionView.backgroundColor         = [UIColor colorFromHexString:@"#ffffff"];
-        _collectionView.alwaysBounceVertical    = YES;
+//        _collectionView.alwaysBounceVertical    = YES;
         /**
          *  适配横屏启动
          */
@@ -314,8 +314,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     [API getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray) {
         [self.image sd_setImageWithURL:self.entity.imageURL_640x640];
         self.entity = entity;
-//        self.header.entity = entity;
-//        DDLogInfo(@"like avatar %@", likeUserArray);
+
         self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
         self.dataArrayForNote = [NSMutableArray arrayWithArray:noteArray];
         for (GKNote *note in self.dataArrayForNote) {
@@ -533,14 +532,14 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 4:
+        case EntityHeaderLikeType:
         {
             EntityLikeUserCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:LikeUserIdentifier forIndexPath:indexPath];
             cell.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
             return cell;
         }
             break;
-        case 5:
+        case EntityHeaderNoteType:
         {
             EntityNoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NoteCellIdentifier forIndexPath:indexPath];
             cell.note = [self.dataArrayForNote objectAtIndex:indexPath.row];

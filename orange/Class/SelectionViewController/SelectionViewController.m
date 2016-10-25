@@ -231,9 +231,14 @@ static NSString *CellIdentifier     = @"SelectionCell";
 //    [[UIApplication sharedApplication] delegate]
     adHeader.adDataArray    = kAppDelegate.adDataArray;
     adHeader.touchADBlock   = ^(NSURL *adURL){
-//        DDLogInfo(@"ad url %@", adURL.absoluteString);
         [[OpenCenter sharedOpenCenter] openWebWithURL:adURL];
     };
+    
+    adHeader.closeADBlock = ^(){
+        kAppDelegate.adDataArray    = nil;
+        [self.collectionView reloadData];
+    };
+    
     return adHeader;
 
 }

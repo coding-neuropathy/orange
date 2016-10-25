@@ -39,11 +39,11 @@ int ddLogLevel;
  */
 - (void)umengTrack {
     [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
-#if DEBUG
-    [MobClick setLogEnabled:YES];
-#else
+//#if DEBUG
+//    [MobClick setLogEnabled:YES];
+//#else
     [MobClick setLogEnabled:NO];
-#endif
+//#endif
     UMConfigInstance.appKey = UMENG_APPKEY;
     
     [MobClick startWithConfigure:UMConfigInstance];
@@ -57,16 +57,16 @@ int ddLogLevel;
 {
     [[ALBBSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
     [[ALBBSDK sharedInstance] setAppVersion:XcodeAppVersion];
-#if DEBUG
-    [[ALBBSDK sharedInstance] setDebugLogOpen:YES];
-#else
+//#if DEBUG
+//    [[ALBBSDK sharedInstance] setDebugLogOpen:YES];
+//#else
     [[ALBBSDK sharedInstance] setDebugLogOpen:NO];
-#endif
+//#endif
     
     [[ALBBSDK sharedInstance] asyncInit:^{
-        DDLogInfo(@"初始化成功");
+        DDLogInfo(@"init success");
     } failedCallback:^(NSError *error) {
-        DDLogError(@"初始化失败:%@", error);
+        DDLogError(@"init failed: %@", error);
     }];
 }
 

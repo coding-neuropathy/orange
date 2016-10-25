@@ -34,6 +34,19 @@
     return _imageView;
 }
 
+- (UIButton *)closeBtn
+{
+    if (!_closeBtn) {
+        _closeBtn               = [UIButton buttonWithType:UIButtonTypeCustom];
+        _closeBtn.deFrameSize   = CGSizeMake(20., 20.);
+        [_closeBtn setImage:[UIImage imageNamed:@"close-ad"] forState:UIControlStateNormal];
+        [_closeBtn addTarget:self action:@selector(closeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:_closeBtn];
+        [self insertSubview:_closeBtn aboveSubview:self.imageView];
+    }
+    return _closeBtn;
+}
+
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
 //    DDLogInfo(@"touch touch ");
@@ -60,7 +73,18 @@
     
     self.imageView.deFrameTop   = 0.;
     self.imageView.deFrameLeft  = 0.;
+    
+    self.closeBtn.center        = self.imageView.center;
+    self.closeBtn.deFrameRight  = self.deFrameWidth - 10.;
 //    self.imageView
+}
+
+#pragma mark - button action
+- (void)closeBtnAction:(id)sender
+{
+    if (self.closeADBlock) {
+        self.closeADBlock();
+    }
 }
 
 @end

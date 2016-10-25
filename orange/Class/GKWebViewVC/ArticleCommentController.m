@@ -138,7 +138,7 @@
     _sendBtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth - 80, 10, 60, 44)];
     _sendBtn.enabled = NO;
     [_sendBtn setTitle:@"发布" forState:UIControlStateDisabled];
-    [_sendBtn setTitle:@"发布" forState:UIControlStateNormal];
+    [_sendBtn setTitle:NSLocalizedStringFromTable(@"post", kLocalizedFile, nil) forState:UIControlStateNormal];
     _sendBtn.titleLabel.font = [UIFont systemFontOfSize:17.];
     [_sendBtn setTitleColor:[UIColor colorFromHexString:@"#5976c1"] forState:UIControlStateNormal];
     [_sendBtn setTitleColor:[UIColor colorFromHexString:@"#9BADDA"] forState:UIControlStateDisabled];

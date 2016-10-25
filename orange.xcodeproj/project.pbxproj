@@ -170,6 +170,7 @@
 		8A59017B1D643F1100780C74 /* Appirater.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A5901541D643F1100780C74 /* Appirater.podspec.json */; };
 		8A59017C1D643F1100780C74 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A5901561D643F1100780C74 /* AppiraterLocalizable.strings */; };
 		8A5DE0E71DB487B400731568 /* GADView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5DE0E61DB487B400731568 /* GADView.m */; };
+		8A5FA1811DBDCC700019D9C7 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FA1801DBDCC700019D9C7 /* UIImage+Resize.m */; };
 		8A69286A1D9547FF00E3C5D4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A69286C1D9547FF00E3C5D4 /* InfoPlist.strings */; };
 		8A6928721D95802000E3C5D4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6928711D95802000E3C5D4 /* StoreKit.framework */; };
 		8A6928731D95804000E3C5D4 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B8688E1ACD0CF600A2115D /* core.framework */; };
@@ -701,6 +702,8 @@
 		8A5905221D9536AA007B1C64 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A5DE0E51DB487B400731568 /* GADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADView.h; path = adView/GADView.h; sourceTree = "<group>"; };
 		8A5DE0E61DB487B400731568 /* GADView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GADView.m; path = adView/GADView.m; sourceTree = "<group>"; };
+		8A5FA17F1DBDCC700019D9C7 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		8A5FA1801DBDCC700019D9C7 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		8A69286B1D9547FF00E3C5D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8A69286D1D95480000E3C5D4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8A69286E1D95481C00E3C5D4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -2081,6 +2084,8 @@
 		8ABB6F751D7EAD50003EDD49 /* UIImage+ */ = {
 			isa = PBXGroup;
 			children = (
+				8A5FA17F1DBDCC700019D9C7 /* UIImage+Resize.h */,
+				8A5FA1801DBDCC700019D9C7 /* UIImage+Resize.m */,
 				8ABB6F761D7EAD93003EDD49 /* UIImage+QRCode.h */,
 				8ABB6F771D7EAD93003EDD49 /* UIImage+QRCode.m */,
 			);
@@ -2965,6 +2970,7 @@
 				B7ED32B51B257F5B009BAF5A /* EntityCell.m in Sources */,
 				8AFB3B751D785FE600E1D04A /* AllOrderController.m in Sources */,
 				B7ED32AF1B25732E009BAF5A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
+				8A5FA1811DBDCC700019D9C7 /* UIImage+Resize.m in Sources */,
 				8AF3D6B21D7671CC007E8C2E /* AllArticleResultViewController.m in Sources */,
 				8AE652A21D7570C300FF7530 /* CartToolBar.m in Sources */,
 				8AAA2D091C02B61400B27E49 /* LaunchController.m in Sources */,

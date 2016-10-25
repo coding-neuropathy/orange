@@ -13,5 +13,6 @@
 @property (strong, nonatomic) NSArray   * adDataArray;
 
 @property (copy, nonatomic) void (^touchADBlock)(NSURL *adURL);
+@property (copy, nonatomic) void (^closeADBlock)();
 
 @end

@@ -8,6 +8,7 @@
 
 #import "EntityHeaderView.h"
 #import "NSString+Helper.h"
+#import "UIImage+Resize.h"
 #import <iCarousel/iCarousel.h>
 
 @interface EntityHeaderView () <iCarouselDelegate, iCarouselDataSource>
@@ -103,8 +104,9 @@ static CGFloat kEntityViewMarginLeft    = 16.;
         _likeBtn.titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
         [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0, 0., -10.)];
         
-        [_likeBtn setImage:[UIImage imageNamed:@"heart"] forState:UIControlStateNormal];
-        [_likeBtn setImage:[UIImage imageNamed:@"hearted"] forState:UIControlStateSelected];
+        
+        [_likeBtn setImage:[[UIImage imageNamed:@"heart"] resizedImageToSize:CGSizeMake(20., 20.)] forState:UIControlStateNormal];
+        [_likeBtn setImage:[[UIImage imageNamed:@"hearted"] resizedImageToSize:CGSizeMake(20., 20.)] forState:UIControlStateSelected];
         [_likeBtn setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_likeBtn setTitleColor:[UIColor colorFromHexString:@"#757575"] forState:UIControlStateNormal];
         
@@ -239,9 +241,7 @@ static CGFloat kEntityViewMarginLeft    = 16.;
     }
     
     NSInteger count = _entity.likeCount > 4 ? 4 : _entity.likeCount;
-    DDLogInfo(@"avatar %@", likeUsers);
-    
-
+//    DDLogInfo(@"avatar %@", likeUsers);
     
     for (int i = 0; i < count; i ++) {
         UIImageView * avatarImage       = [[UIImageView alloc] initWithFrame:CGRectZero];
