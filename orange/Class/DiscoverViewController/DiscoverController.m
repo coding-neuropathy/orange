@@ -12,6 +12,7 @@
 
 #import "DiscoverBannerView.h"
 #import "DiscoverCategoryView.h"
+#import "DiscoverStoreView.h"
 
 #import "DiscoverCategoryCell.h"
 #import "HomeArticleCell.h"
@@ -69,13 +70,16 @@
 }
 
 //static NSString * EntityCellIdentifier = @"EntityCell";
-static NSString * ArticleCellIdentifier = @"ArticleCell";
-static NSString * BannerIdentifier = @"BannerView";
-static NSString * CategoryIdentifier = @"CategoryView";
-static NSString * DiscoverCategoryIdentifier = @"DiscoverCategoryCell";
-static NSString * HeaderSectionIdentifier = @"HeaderSection";
-static NSString * UserIdentifier = @"UserView";
-static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
+static NSString * ArticleCellIdentifier         = @"ArticleCell";
+static NSString * BannerIdentifier              = @"BannerView";
+static NSString * CategoryIdentifier            = @"CategoryView";
+static NSString * CategoryCellIdentifier    = @"DiscoverCategoryCell";
+
+static NSString * StoreIdentifier               = @"StoreHeaderView";
+
+static NSString * HeaderSectionIdentifier       = @"HeaderSection";
+static NSString * UserIdentifier                = @"UserView";
+static NSString * EntityDetailCellIdentifier    = @"EntityDetailCell";
 
 /**
  *  collection section num
@@ -83,6 +87,7 @@ static NSString * EntityDetailCellIdentifier = @"EntityDetailCell";
 typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     BannerSection,
     CategorySection,
+    StoreSection,
     ArticleSection,
     UserSection,
     EntitySection,
@@ -254,7 +259,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     /**
      *  register cell
      */
-    [self.collectionView registerClass:[DiscoverCategoryCell class] forCellWithReuseIdentifier:DiscoverCategoryIdentifier];
+    [self.collectionView registerClass:[DiscoverCategoryCell class] forCellWithReuseIdentifier:CategoryCellIdentifier];
     [self.collectionView registerClass:[HomeArticleCell class] forCellWithReuseIdentifier:ArticleCellIdentifier];
     [self.collectionView registerClass:[EntityDetailCell class] forCellWithReuseIdentifier:EntityDetailCellIdentifier];
     
@@ -263,6 +268,8 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
      */
     [self.collectionView registerClass:[DiscoverBannerView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BannerIdentifier];
     [self.collectionView registerClass:[DiscoverCategoryView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:CategoryIdentifier];
+    [self.collectionView registerClass:[DiscoverStoreView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:StoreIdentifier];
+    
     
     [self.collectionView registerClass:[DiscoverHeaderSection class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier];
     
@@ -335,7 +342,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -365,7 +372,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     switch (indexPath.section) {
         case CategorySection:
         {
-            DiscoverCategoryCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:DiscoverCategoryIdentifier forIndexPath:indexPath];
+            DiscoverCategoryCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CategoryCellIdentifier forIndexPath:indexPath];
             cell.category = [self.discoverData.categories objectAtIndex:indexPath.row];
             return cell;
         }
@@ -415,6 +422,20 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
                     [self.navigationController pushViewController:groupVC animated:YES];
                 };
                 return categoryView;
+            }
+                break;
+                
+            case StoreSection:
+            {
+                DiscoverStoreView   *storeView  = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:StoreIdentifier forIndexPath:indexPath];
+                
+                storeView.stores                = self.discoverData.stores;
+                storeView.tapStoreImage         = ^(NSURL *storeLink) {
+                    DDLogInfo(@"url %@", storeLink);
+                    if (storeLink)
+                        [[OpenCenter sharedOpenCenter] openWebWithURL:storeLink];
+                };
+                return storeView;
             }
                 break;
             case ArticleSection:
@@ -603,6 +624,12 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             if (kScreenHeight <= 568. && !IS_ZOOMED_IPHONE_6 && !IS_ZOOMED_IPHONE_6_PLUS) {
                 headerSize = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 127.);
             }
+            break;
+        case StoreSection:
+            if (self.discoverData.stores > 0 && IS_IPHONE) {
+                headerSize  = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 120.);
+            }
+            
             break;
         case ArticleSection:
         {

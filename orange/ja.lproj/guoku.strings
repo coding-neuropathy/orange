@@ -276,6 +276,12 @@
 "malicious information"     = "有害情報";
 
 /**
+ *  offline store
+ */
+"guoku-shops"               = "果庫選品商店";
+
+
+/**
  *  order
  */
 "order"                     = "オーダー";

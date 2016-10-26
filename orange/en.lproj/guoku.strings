@@ -291,6 +291,11 @@
 "malicious information"     = "Maliciou Informaion";
 
 /**
+ *  offline store
+ */
+"guoku-shops"               = "Guoku Shops";
+
+/**
  *  order
  */
 "order"                     = "Order";

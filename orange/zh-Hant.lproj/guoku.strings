@@ -287,6 +287,10 @@
 "meaningless information"   = "垃圾或詐騙信息";
 "malicious information"     = "不良信息";
 
+/**
+ *  offline store
+ */
+"guoku-shops"               = "果庫選品商店";
 
 /**
  *  order

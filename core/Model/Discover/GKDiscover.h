@@ -10,11 +10,12 @@
 
 @interface GKDiscover : GKBaseData
 
-@property (strong, nonatomic) NSArray * banners;
-@property (strong, nonatomic) NSArray * categories;
-@property (strong, nonatomic) NSArray * articles;
-@property (strong, nonatomic) NSArray * entities;
-@property (strong, nonatomic) NSArray * users;
+@property (strong, nonatomic) NSArray   *banners;
+@property (strong, nonatomic) NSArray   *categories;
+@property (strong, nonatomic) NSArray   *stores;
+@property (strong, nonatomic) NSArray   *articles;
+@property (strong, nonatomic) NSArray   *entities;
+@property (strong, nonatomic) NSArray   *users;
 
 @property (readonly, getter=bannerCount) NSInteger bannerCount;
 @property (readonly, getter=categoryCount) NSInteger categoryCount;

@@ -285,6 +285,11 @@
 "malicious information"     = "不良信息";
 
 /**
+ *  offline store
+ */
+"guoku-shops"               = "果库选品商店";
+
+/**
  *  order
  */
 "order"                     = "订单";

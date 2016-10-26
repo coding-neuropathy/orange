@@ -219,6 +219,9 @@
 		8AD5D21B1D6D8FE8000927C7 /* EntitySKUView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D21A1D6D8FE8000927C7 /* EntitySKUView.m */; };
 		8AD5D21D1D6E99A3000927C7 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD5D21C1D6E99A3000927C7 /* CoreMotion.framework */; };
 		8AD622391D82642A006DE0A2 /* UserLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD622381D82642A006DE0A2 /* UserLikeCell.m */; };
+		8AD6390E1DC0769B009F5B79 /* GKOfflineStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AD6390C1DC0769B009F5B79 /* GKOfflineStore.h */; };
+		8AD6390F1DC0769B009F5B79 /* GKOfflineStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD6390D1DC0769B009F5B79 /* GKOfflineStore.m */; };
+		8AD639131DC07F5E009F5B79 /* DiscoverStoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD639121DC07F5E009F5B79 /* DiscoverStoreView.m */; };
 		8ADEA30B1D59CB9200D522A2 /* MainCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */; };
 		8ADEA30E1D5A223B00D522A2 /* DiscoverCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADEA30D1D5A223B00D522A2 /* DiscoverCategoryCell.m */; };
 		8AE19DCF1B9DE26C007C2872 /* HomeEntityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE19DCE1B9DE26C007C2872 /* HomeEntityCell.m */; };
@@ -786,6 +789,10 @@
 		8AD5D21C1D6E99A3000927C7 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		8AD622371D82642A006DE0A2 /* UserLikeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLikeCell.h; sourceTree = "<group>"; };
 		8AD622381D82642A006DE0A2 /* UserLikeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLikeCell.m; sourceTree = "<group>"; };
+		8AD6390C1DC0769B009F5B79 /* GKOfflineStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKOfflineStore.h; path = OfflineStore/GKOfflineStore.h; sourceTree = "<group>"; };
+		8AD6390D1DC0769B009F5B79 /* GKOfflineStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKOfflineStore.m; path = OfflineStore/GKOfflineStore.m; sourceTree = "<group>"; };
+		8AD639111DC07F5E009F5B79 /* DiscoverStoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverStoreView.h; sourceTree = "<group>"; };
+		8AD639121DC07F5E009F5B79 /* DiscoverStoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverStoreView.m; sourceTree = "<group>"; };
 		8ADEA3091D59CB9200D522A2 /* MainCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCategoryView.h; sourceTree = "<group>"; };
 		8ADEA30A1D59CB9200D522A2 /* MainCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCategoryView.m; sourceTree = "<group>"; };
 		8ADEA30C1D5A223B00D522A2 /* DiscoverCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverCategoryCell.h; sourceTree = "<group>"; };
@@ -1260,6 +1267,7 @@
 		39B720021B1F4C16008519E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8AD6390B1DC07665009F5B79 /* OfflineStore */,
 				8AE30F981DB0AD74005A9171 /* AD */,
 				8ABAEEBC1D951EC100E7473B /* PopularEntity */,
 				8AFB3B811D7897AB00E1D04A /* Order */,
@@ -1364,12 +1372,9 @@
 		4E1D70191A5ADB890032719E /* DiscoverViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8AD639101DC07F17009F5B79 /* DiscoverHeaderSection */,
 				B72ACCC01B66531E0020E841 /* DiscoverController.h */,
 				B72ACCC11B66531E0020E841 /* DiscoverController.m */,
-				B72ACCC61B666B8C0020E841 /* DiscoverBannerView.h */,
-				B72ACCC71B666B8C0020E841 /* DiscoverBannerView.m */,
-				B76FAE941B67B5FA002AC4C7 /* DiscoverCategoryView.h */,
-				B76FAE951B67B5FA002AC4C7 /* DiscoverCategoryView.m */,
 				8A402CC51B69F57A00E54FFF /* CategoryImageView.h */,
 				8A402CC61B69F57A00E54FFF /* CategoryImageView.m */,
 				23EEFFB71C7ABAFA0061F45F /* DiscoverUsersView.h */,
@@ -2145,6 +2150,28 @@
 			name = BannerCarousel;
 			sourceTree = "<group>";
 		};
+		8AD6390B1DC07665009F5B79 /* OfflineStore */ = {
+			isa = PBXGroup;
+			children = (
+				8AD6390C1DC0769B009F5B79 /* GKOfflineStore.h */,
+				8AD6390D1DC0769B009F5B79 /* GKOfflineStore.m */,
+			);
+			name = OfflineStore;
+			sourceTree = "<group>";
+		};
+		8AD639101DC07F17009F5B79 /* DiscoverHeaderSection */ = {
+			isa = PBXGroup;
+			children = (
+				B72ACCC61B666B8C0020E841 /* DiscoverBannerView.h */,
+				B72ACCC71B666B8C0020E841 /* DiscoverBannerView.m */,
+				B76FAE941B67B5FA002AC4C7 /* DiscoverCategoryView.h */,
+				B76FAE951B67B5FA002AC4C7 /* DiscoverCategoryView.m */,
+				8AD639111DC07F5E009F5B79 /* DiscoverStoreView.h */,
+				8AD639121DC07F5E009F5B79 /* DiscoverStoreView.m */,
+			);
+			name = DiscoverHeaderSection;
+			sourceTree = "<group>";
+		};
 		8AE30F981DB0AD74005A9171 /* AD */ = {
 			isa = PBXGroup;
 			children = (
@@ -2545,6 +2572,7 @@
 				39B7204C1B1F4C16008519E3 /* GKModel.h in Headers */,
 				B783F65E1B9AE5DB004DF1CB /* GKArticle.h in Headers */,
 				39B720351B1F4C16008519E3 /* HttpClient.h in Headers */,
+				8AD6390E1DC0769B009F5B79 /* GKOfflineStore.h in Headers */,
 				39B720411B1F4C16008519E3 /* config.pch in Headers */,
 				39B7207A1B1F50E0008519E3 /* Passport.h in Headers */,
 				8AF7C75E1D7409D500C71499 /* ShoppingCart.h in Headers */,
@@ -2945,6 +2973,7 @@
 				B783F65F1B9AE5DB004DF1CB /* GKArticle.m in Sources */,
 				39B7203C1B1F4C16008519E3 /* NSString+App.m in Sources */,
 				39B720571B1F4C16008519E3 /* NSDictionary+Sign.m in Sources */,
+				8AD6390F1DC0769B009F5B79 /* GKOfflineStore.m in Sources */,
 				B78C4E0F1B676ED5006620F7 /* GKCategory.m in Sources */,
 				39B720381B1F4C16008519E3 /* NSDate+App.m in Sources */,
 				39B720491B1F4C16008519E3 /* GKEntity.m in Sources */,
@@ -3062,6 +3091,7 @@
 				23F6130A1CDB1B310074E8C8 /* BioViewController.m in Sources */,
 				236EE02A1D3CA2D1003E97D6 /* AllEntityResultController.m in Sources */,
 				8A0176221D5B9429004E7A81 /* ForgetPasswdController.m in Sources */,
+				8AD639131DC07F5E009F5B79 /* DiscoverStoreView.m in Sources */,
 				B7ED32AE1B25732E009BAF5A /* CSStickyHeaderFlowLayout.m in Sources */,
 				239231B11C7D96FA00B49A88 /* RecUserController.m in Sources */,
 				23EEFFB91C7ABAFA0061F45F /* DiscoverUsersView.m in Sources */,

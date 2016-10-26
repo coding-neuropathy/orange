@@ -990,8 +990,8 @@
  *  @param success    成功block
  *  @param failure    失败block
  */
-+ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories,
-                                         NSArray * artilces, NSArray * users))success
++ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray *entities, NSArray *categories, NSArray *stores,
+                                         NSArray *artilces, NSArray *users))success
                        failure:(void (^)(NSInteger stateCode, NSError * error))failure
 {
     NSString * path = @"discover/";
@@ -1007,6 +1007,13 @@
             [categories addObject:category];
         }
         
+        NSMutableArray * stores = [NSMutableArray arrayWithCapacity:0];
+        for (NSDictionary * row in responseObject[@"stores"]) {
+            GKOfflineStore * store = [GKOfflineStore modelFromDictionary:row];
+            [stores addObject:store];
+        }
+        
+        
         NSMutableArray * entityArray = [NSMutableArray arrayWithCapacity:0];
         NSArray * content = responseObject[@"entities"];
         for (NSDictionary *objectDict in content) {
@@ -1021,15 +1028,17 @@
             [articles addObject:article];
         }
 
+        /**
+         *  discover page auth user
+         */
         NSMutableArray * users = [NSMutableArray arrayWithCapacity:0];
-        
         for (NSDictionary * row in responseObject[@"authorizeduser"]) {
             GKUser * user = [GKUser modelFromDictionary:row[@"user"]];
             [users addObject:user];
         }
         
         if (success) {
-            success(bannerArray, entityArray, categories, articles, users);
+            success(bannerArray, entityArray, categories, stores, articles, users);
         }
         
     } failure:^(NSInteger stateCode, NSError *error) {

@@ -331,7 +331,8 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
  *  @param success    成功block
  *  @param failure    失败block
  */
-+ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray * entities, NSArray * categories, NSArray * articles, NSArray * users))success
++ (void)getDiscoverWithsuccess:(void (^)(NSArray *banners, NSArray *entities, NSArray *categories,
+                                         NSArray *stores, NSArray *articles, NSArray *users))success
                        failure:(void (^)(NSInteger stateCode, NSError * error))failure;
 
 

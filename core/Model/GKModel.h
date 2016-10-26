@@ -22,6 +22,7 @@
 
 #import "GKLaunch.h"
 #import "GAdvertise.h"
+#import "GKOfflineStore.h"
 
 #import "GKSelectionEntity.h"
 #import "GKSelectionArticle.h"
