@@ -19,6 +19,15 @@
 
 @implementation DiscoverStoreView
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor    = [UIColor colorFromHexString:@"#ffffff"];
+    }
+    return self;
+}
+
 - (UILabel *)sectionLable
 {
     if (!_sectionLable) {
@@ -65,13 +74,32 @@
 {
     [super layoutSubviews];
     
-    self.sectionLable.deFrameTop    = 0.;
+    self.sectionLable.deFrameTop    = 10.;
     self.sectionLable.deFrameLeft   = 10.;
     
-    self.storeView.deFrameTop       = self.sectionLable.deFrameBottom;
+    self.storeView.deFrameTop       = self.sectionLable.deFrameBottom + 5.;
     self.storeView.deFrameLeft      = 0.;
 }
 
+- (void)drawRect:(CGRect)rect
+{
+    
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor colorFromHexString:@"#ebebeb"].CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    
+    CGContextMoveToPoint(context, 0., 0.);
+    CGContextAddLineToPoint(context, self.deFrameWidth, 0.);
+    
+//    CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
+//    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    
+    CGContextStrokePath(context);
+    
+}
 
 #pragma mark - <iCarouselDataSource>
 - (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel

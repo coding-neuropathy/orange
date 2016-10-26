@@ -627,7 +627,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             break;
         case StoreSection:
             if (self.discoverData.stores > 0 && IS_IPHONE) {
-                headerSize  = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 120.);
+                headerSize  = CGSizeMake(CGRectGetWidth(self.collectionView.frame), 140.);
             }
             
             break;
