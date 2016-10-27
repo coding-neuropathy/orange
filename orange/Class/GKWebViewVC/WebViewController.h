@@ -17,6 +17,8 @@
 //@property (assign, nonatomic) BOOL forceTouch;
 
 
+
 - (instancetype)initWithURL:(NSURL *)url;
+- (instancetype)initWithURL:(NSURL *)url showHTMLTitle:(BOOL)is_show;
 
 @end

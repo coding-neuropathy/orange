@@ -27,6 +27,8 @@
 @property (strong, nonatomic) NSString              *shareTitle;
 @property (strong, nonatomic) UIButton              *moreBtn;
 
+@property (assign, nonatomic) BOOL showHTMLTitle;
+
 @end
 
 @implementation WebViewController
@@ -52,8 +54,19 @@
 #pragma mark - init view
 - (instancetype)initWithURL:(NSURL *)url
 {
+    self    = [super init];
     if (self) {
-        self.url = url;
+        self.url        = url;
+        self.showHTMLTitle    = NO;
+    }
+    return self;
+}
+
+- (instancetype)initWithURL:(NSURL *)url showHTMLTitle:(BOOL)is_show
+{
+    self    = [self initWithURL:url];
+    if (self) {
+        self.showHTMLTitle    = is_show;
     }
     return self;
 }
@@ -109,6 +122,9 @@
     // Do any additional setup after loading the view.
     
 //    [self creatBottomBar];
+    if (self.showHTMLTitle) {
+        self.title  = NSLocalizedStringFromTable(@"guoku-shops", kLocalizedFile, nil);
+    }
     
     [self.view addSubview:self.webView];
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
@@ -159,7 +175,8 @@
 #pragma mark - <WKNavigationDelegate>
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
-    self.title = NSLocalizedStringFromTable(@"load", kLocalizedFile, nil);
+    if (!self.showHTMLTitle)
+        self.title = NSLocalizedStringFromTable(@"load", kLocalizedFile, nil);
 }
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
@@ -221,10 +238,10 @@
         
     }];
     
-
     [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString *result, NSError *error) {
         self.shareTitle = [result length] > 0 ? result : @"果库 - 精英消费指南";
-        self.title = self.shareTitle;
+        if (!self.showHTMLTitle)
+            self.title = self.shareTitle;
     }];
 }
 

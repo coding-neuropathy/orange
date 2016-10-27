@@ -74,10 +74,10 @@
 {
     [super layoutSubviews];
     
-    self.sectionLable.deFrameTop    = 10.;
+    self.sectionLable.deFrameTop    = 15.;
     self.sectionLable.deFrameLeft   = 10.;
     
-    self.storeView.deFrameTop       = self.sectionLable.deFrameBottom + 5.;
+    self.storeView.deFrameTop       = self.sectionLable.deFrameBottom;
     self.storeView.deFrameLeft      = 0.;
 }
 
@@ -93,9 +93,6 @@
     
     CGContextMoveToPoint(context, 0., 0.);
     CGContextAddLineToPoint(context, self.deFrameWidth, 0.);
-    
-//    CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
-//    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
     
     CGContextStrokePath(context);
     
@@ -148,6 +145,8 @@
     DDLogInfo(@"store image url %@", store.storeImageURL_300);
     [((UIImageView *)view) sd_setImageWithURL:store.storeImageURL_300
                              placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:view.frame.size]];
+//    view.deFrameTop = 0.;
+//    view.deFrameLeft = 0.;
     
     return view;
 }

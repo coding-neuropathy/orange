@@ -431,9 +431,9 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
                 
                 storeView.stores                = self.discoverData.stores;
                 storeView.tapStoreImage         = ^(NSURL *storeLink) {
-                    DDLogInfo(@"url %@", storeLink);
+//                    DDLogInfo(@"url %@", storeLink);
                     if (storeLink)
-                        [[OpenCenter sharedOpenCenter] openWebWithURL:storeLink];
+                        [[OpenCenter sharedOpenCenter] openStoreWithURL:storeLink];
                 };
                 return storeView;
             }
@@ -746,7 +746,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 }
 
 
-#pragma mark - <UISearchBarDelegate>
+//#pragma mark - <UISearchBarDelegate>
 //- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 //{
 //    searchBar.showsCancelButton = YES;
@@ -938,7 +938,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 {
     [super layoutSubviews];
     
-    self.textLabel.frame = CGRectMake(10., 12., self.deFrameWidth - 20., 20.);
+    self.textLabel.frame = CGRectMake(10., 20., self.deFrameWidth - 20., 20.);
 }
 
 @end

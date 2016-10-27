@@ -26,6 +26,10 @@ DEFINE_SINGLETON_FOR_HEADER(OpenCenter);
 - (void)openTagWithName:(NSString *)tname User:(GKUser *)user;
 - (void)openArticleTagWithName:(NSString *)name;
 
+/**
+ *  open webview with URL
+ */
+- (void)openStoreWithURL:(NSURL *)url;
 - (void)openWebWithURL:(NSURL *)url;
 
 - (void)openArticleWebWithArticle:(GKArticle *)article;

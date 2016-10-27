@@ -157,6 +157,13 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     }
 }
 
+- (void)openStoreWithURL:(NSURL *)url
+{
+    WebViewController   *vc = [[WebViewController alloc] initWithURL:url showHTMLTitle:YES];
+    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
+    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)openWebWithURL:(NSURL *)url
 {
     WebViewController * vc = [[WebViewController alloc] initWithURL:url];
