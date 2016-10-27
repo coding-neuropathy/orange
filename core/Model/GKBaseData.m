@@ -54,15 +54,16 @@
 #pragma mark - data operation
 - (void)refresh
 {
-    self.page = 1;
-    self.timestamp = [[NSDate date] timeIntervalSince1970];
+    self.page       = 1;
+    self.timestamp  = [[NSDate date] timeIntervalSince1970];
+    self.error      = nil;
     
     [self setValue:[NSNumber numberWithBool:YES] forKey:@"isRefreshing"];
 }
 
 - (void)load
 {
-
+    self.error      = nil;
 }
 
 #pragma mark - data array

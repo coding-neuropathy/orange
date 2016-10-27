@@ -65,6 +65,7 @@
 - (void)load
 {
     //    if (self.index == 0) {
+    [super load];
     [self setValue:[NSNumber numberWithBool:YES] forKeyPath:@"isLoading"];
     NSTimeInterval timestamp = (NSTimeInterval)[self.dataArray.lastObject[@"time"] doubleValue];
     [API getSelectionListWithTimestamp:timestamp cateId:self.categoryId count:30 success:^(NSArray *dataArray) {

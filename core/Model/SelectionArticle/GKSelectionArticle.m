@@ -62,16 +62,18 @@
 
 - (void)load
 {
+    [super load];
+    
     [self setValue:[NSNumber numberWithBool:YES] forKey:@"isLoading"];
-        [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
-            self.page += 1;
-            [self.dataArray addObjectsFromArray:articles];
-            [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
-            [self saveEntityToIndexWithData:articles];
-        } failure:^(NSInteger stateCode, NSError * error) {
-            self.error = error;
-            [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
-        }];
+    [API getArticlesWithTimestamp:self.timestamp Page:self.page Size:self.size success:^(NSArray *articles) {
+        self.page += 1;
+        [self.dataArray addObjectsFromArray:articles];
+        [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
+        [self saveEntityToIndexWithData:articles];
+    } failure:^(NSInteger stateCode, NSError * error) {
+        self.error = error;
+        [self setValue:[NSNumber numberWithBool:NO] forKeyPath:@"isLoading"];
+    }];
 }
 
 - (void)getDataFromWomhole
