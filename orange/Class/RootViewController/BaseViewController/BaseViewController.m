@@ -63,7 +63,9 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    kAppDelegate.activeVC = self;
+    if (self.navigationController.viewControllers.count <= 1)
+        kAppDelegate.activeVC = self;
+    
     if (IS_IPAD) self.tabBarController.tabBar.hidden = YES;
     [super viewDidAppear:animated];
 }

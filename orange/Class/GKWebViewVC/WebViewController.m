@@ -96,10 +96,10 @@
         WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
         configuration.userContentController = userContentController;
         
-        _webView = [[WKWebView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight - kStatusBarHeight) configuration:configuration];
+        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         
         _webView.deFrameSize = IS_IPAD  ? CGSizeMake(kScreenWidth - kTabBarWidth, kScreenHeight)
-                                        : CGSizeMake(kScreenWidth, kScreenHeight - kTabBarHeight - kStatusBarHeight);
+                                        : CGSizeMake(kScreenWidth, kScreenHeight);
 //        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.UIDelegate = self;
