@@ -617,7 +617,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     switch (section) {
         case BannerSection:
         {
-            headerSize = IS_IPAD ? headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 228) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth/320);
+            headerSize = IS_IPAD ? headerSize = CGSizeMake(kScreenWidth - kTabBarWidth, 228) : CGSizeMake(CGRectGetWidth(self.collectionView.frame), 150.f*kScreenWidth / 320);
         }
             break;
         case CategorySection:
