@@ -1141,47 +1141,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 }
 
 
-//- (void)setNavBarButton:(BOOL)flag
-//{
-//    if (flag) {
-//        NSMutableArray * array = [NSMutableArray array];
-//        {
-//            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-//            [button setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-//            [button addTarget:self action:@selector(shareButtonAction) forControlEvents:UIControlEventTouchUpInside];
-//            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-//            button.backgroundColor = [UIColor clearColor];
-//            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-//            [array addObject:item];
-//        }
-//        {
-//            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-//            [button setImage:[UIImage imageNamed:@"note"] forState:UIControlStateNormal];
-//            [button addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
-//            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-//            button.backgroundColor = [UIColor clearColor];
-//            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-//            [array addObject:item];
-//        }
-//        {
-//            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 32, 44)];
-//            [button setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-//            [button setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
-//            [button addTarget:self action:@selector(tapLikeBtn:) forControlEvents:UIControlEventTouchUpInside];
-//            [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-//            button.backgroundColor = [UIColor clearColor];
-//            UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:button];
-//            [array addObject:item];
-//        
-//            button.selected = self.entity.liked;
-//        }
-//        [self.navigationItem setRightBarButtonItems:array animated:YES];
-//    }
-//    else
-//    {
-//        [self.navigationItem setRightBarButtonItems:nil animated:NO];
-//    }
-//}
+
 
 
 #pragma mark -
@@ -1202,32 +1162,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
      }];
     
 }
-
-#pragma mark - ConfigNavigationItem
-//-(void)configConfigNavigationItem
-//{
-//    CGRect a =  [self.actionView.superview convertRect:self.actionView.frame toView:kAppDelegate.window];
-//    
-//    if (a.origin.y <= 30) {
-//        if (self.flag == YES) {
-//            return;
-//        }
-//        else
-//        {
-//            self.flag = YES;
-//        }
-//    }
-//    else
-//    {
-//        if (self.flag == NO) {
-//            return;
-//        }
-//        else{
-//            self.flag = NO;
-//        }
-//    }
-//    [self setNavBarButton:self.flag];
-//}
 
 
 @end
