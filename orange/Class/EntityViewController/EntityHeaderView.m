@@ -102,6 +102,7 @@
         _likeBtn.layer.borderWidth      = 1.;
         _likeBtn.layer.borderColor      = [UIColor colorFromHexString:@"#f1f2f6"].CGColor;
         _likeBtn.titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
+//        _likeBtn.titleLabel.font        = [UIFont fontWithName:kFontAwesomeFamilyName size:12.];
         [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0, 0., -10.)];
         
         
@@ -153,7 +154,7 @@
     if (!_gotoEntityLikeListBtn) {
         _gotoEntityLikeListBtn                  = [UIButton buttonWithType:UIButtonTypeCustom];
         _gotoEntityLikeListBtn.deFrameSize      = CGSizeMake(140., 20.);
-        _gotoEntityLikeListBtn.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.];
+        _gotoEntityLikeListBtn.titleLabel.font  = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
 //        _gotoEntityLikeListBtn.titleLabel.textAlignment = NSTextAlignmentRight;
         
         [_gotoEntityLikeListBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
@@ -230,7 +231,9 @@
     }
     
     if (_entity.likeCount > 0 ) {
-        [self.gotoEntityLikeListBtn setTitle:[NSString stringWithFormat:@"%ld 人喜爱 >", _entity.likeCount] forState:UIControlStateNormal];
+        [self.gotoEntityLikeListBtn setTitle:[NSString stringWithFormat:@"%ld 人喜爱 %@", _entity.likeCount,
+                                              [NSString fontAwesomeIconStringForEnum:FAAngleRight]]
+                                    forState:UIControlStateNormal];
     //        self.gotoEntityLikeListBtn.backgroundColor = [UIColor redColor];
         CGFloat width = [self.gotoEntityLikeListBtn.titleLabel.text widthWithLineWidth:0. Font:self.gotoEntityLikeListBtn.titleLabel.font];
         self.gotoEntityLikeListBtn.deFrameSize  = CGSizeMake(width, 20.);
@@ -338,7 +341,7 @@
             self.pageCtr.hidden = NO;
         }
         
-        self.gotoEntityLikeListBtn.deFrameRight     = self.deFrameWidth - 36.;
+        self.gotoEntityLikeListBtn.deFrameRight     = self.deFrameWidth - 16.;
         self.gotoEntityLikeListBtn.deFrameBottom    = self.deFrameHeight - 22.;
     }
     else
