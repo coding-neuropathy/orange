@@ -1784,13 +1784,10 @@
 		4ECCD0DD1A7348AF009D5A42 /* EntityViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8AA9DE571DC848A000033B83 /* EntityHeader */,
 				23F1DD971C28046100A71827 /* PNoteViewController */,
-				8A293A6D1D8A705C000B7227 /* EntityHeaderSectionView.h */,
-				8A293A6E1D8A705C000B7227 /* EntityHeaderSectionView.m */,
 				4E7869671BA70C5A00586BD9 /* EntityHeaderBuyView.h */,
 				4E7869681BA70C5A00586BD9 /* EntityHeaderBuyView.m */,
-				B7DA97B91B25E46200C9BC25 /* EntityHeaderView.h */,
-				B7DA97BA1B25E46200C9BC25 /* EntityHeaderView.m */,
 				4ECCD0DE1A7349CF009D5A42 /* EntityViewController.h */,
 				4ECCD0DF1A7349CF009D5A42 /* EntityViewController.m */,
 				B7ED32B01B257EFF009BAF5A /* EntityNoteCell.h */,
@@ -2034,6 +2031,17 @@
 				8AC75DC71D90E4F900DDDFD2 /* ShareViewCell.m */,
 			);
 			name = ShareViewController;
+			sourceTree = "<group>";
+		};
+		8AA9DE571DC848A000033B83 /* EntityHeader */ = {
+			isa = PBXGroup;
+			children = (
+				B7DA97B91B25E46200C9BC25 /* EntityHeaderView.h */,
+				B7DA97BA1B25E46200C9BC25 /* EntityHeaderView.m */,
+				8A293A6D1D8A705C000B7227 /* EntityHeaderSectionView.h */,
+				8A293A6E1D8A705C000B7227 /* EntityHeaderSectionView.m */,
+			);
+			name = EntityHeader;
 			sourceTree = "<group>";
 		};
 		8AAA2D111C04442400B27E49 /* PreViewControllers */ = {

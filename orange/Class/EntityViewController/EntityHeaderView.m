@@ -27,7 +27,7 @@
 
 @end
 
-static CGFloat kEntityViewMarginLeft    = 16.;
+//static CGFloat kEntityViewMarginLeft    = 16.;
 
 
 @implementation EntityHeaderView
@@ -485,7 +485,7 @@ static CGFloat kEntityViewMarginLeft    = 16.;
 #pragma mark - class method
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity
 {
-    CGFloat titleHeight = [entity.title heightWithLineWidth:kScreenWidth - kEntityViewMarginLeft * 2.  Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.f] LineHeight:5];
+    CGFloat titleHeight = [entity.title heightWithLineWidth:kScreenWidth - 32.  Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.f] LineHeight:5];
     if (titleHeight == 0 ) {
         titleHeight = 16.;
     }

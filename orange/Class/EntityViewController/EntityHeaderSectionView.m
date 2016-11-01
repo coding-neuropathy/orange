@@ -178,8 +178,7 @@
         {
             self.backgroundColor                = [UIColor colorFromHexString:@"#ffffff"];
             self.textLabel.deFrameLeft          = 16.;
-            self.textLabel.deFrameTop           = 9.;
-            
+            self.textLabel.deFrameTop           = 20.;
             self.postNoteBtn.center             = self.textLabel.center;
             self.postNoteBtn.deFrameRight       = self.deFrameWidth - 16.;
             
