@@ -130,7 +130,7 @@
         
 //        [(UIImageView *)view setImage:[UIImage imageWithColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.] andSize:view.deFrameSize]];
         UILabel *storelable         = [[UILabel alloc] initWithFrame:CGRectZero];
-        storelable.font             = [UIFont systemFontOfSize:14.];
+        storelable.font             = [UIFont boldSystemFontOfSize:14.];
         storelable.text             = store.storeName;
         storelable.textColor        = [UIColor colorFromHexString:@"#ffffff"];
         storelable.deFrameSize      = CGSizeMake(self.deFrameWidth / 2., 20.);
