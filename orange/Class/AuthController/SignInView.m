@@ -178,7 +178,6 @@
     if (!_onePasswordBtn) {
         _onePasswordBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
         _onePasswordBtn.deFrameSize         = CGSizeMake(28., 28.);
-//        _onePasswordBtn.backgroundColor     = [UIColor redColor];
         [_onePasswordBtn setImage:[UIImage imageNamed:@"1password-button"] forState:UIControlStateNormal];
         [_onePasswordBtn addTarget:self action:@selector(onePasswordAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_onePasswordBtn];
@@ -191,8 +190,11 @@
     if (!_eyePasswordBtn) {
         _eyePasswordBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
         _eyePasswordBtn.deFrameSize         = CGSizeMake(28., 28.);
-        [_eyePasswordBtn setImage:[UIImage imageNamed:@"Visible"] forState:UIControlStateNormal];
-        [_eyePasswordBtn setImage:[UIImage imageNamed:@"Invisible Filled"] forState:UIControlStateSelected];
+        _eyePasswordBtn.titleLabel.font     = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
+        [_eyePasswordBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
+        [_eyePasswordBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAEye] forState:UIControlStateNormal];
+        [_eyePasswordBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAEyeSlash] forState:UIControlStateSelected];
+        
         [_eyePasswordBtn addTarget:self action:@selector(eyePasswordAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:_eyePasswordBtn];

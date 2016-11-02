@@ -169,6 +169,7 @@ int ddLogLevel;
     NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
         // 有推送的消息，处理推送的消息
+//        DDLogInfo(@"user info %@", userInfo);
         NSString * url = [userInfo valueForKey:@"url"];
         if (url) {
             [self openLocalURL:[NSURL URLWithString:url]];
@@ -352,9 +353,7 @@ int ddLogLevel;
 {
     DDLogInfo(@"user info %@", userInfo);
     NSString * url = [userInfo valueForKey:@"url"];
-//    if (url && application.applicationState != UIApplicationStateActive) {
-//        [self openLocalURL:[NSURL URLWithString:url]];
-//    }
+
     if (url) {
         [self openLocalURL:[NSURL URLWithString:url]];
     }
