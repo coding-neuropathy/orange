@@ -348,6 +348,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         }
 //        [SVProgressHUD dismiss];
         [self.collectionView reloadData];
+//        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:EntityHeaderNoteType]];
     } failure:^(NSInteger stateCode) {
 //        [SVProgressHUD dismiss];
     }];
