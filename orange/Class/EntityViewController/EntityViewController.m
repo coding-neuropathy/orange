@@ -47,8 +47,7 @@ typedef NS_ENUM(NSInteger, EntityDisplayCellType) {
     EntityHeaderCategoryType,
 };
 
-@interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate,
-                                    EntityCellDelegate, EntityNoteCellDelegate, EntityLikeUserCellDelegate>
+@interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate, EntityNoteCellDelegate, EntityLikeUserCellDelegate, EntityCellDelegate>
 
 @property (nonatomic, strong) GKNote        *note;
 //@property (nonatomic, strong) UILabel       *titleLabel;
@@ -663,13 +662,22 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         case EntityHeaderLikeType:
         {
             if (IS_IPAD) {
-                UserViewController * VC = [[UserViewController alloc]init];
-                VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
-                [self.navigationController pushViewController:VC animated:YES];
+//                UserViewController * VC = [[UserViewController alloc]init];
+//                VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
+//                [self.navigationController pushViewController:VC animated:YES];
+                [[OpenCenter sharedOpenCenter] openWithController:self User:[self.dataArrayForlikeUser objectAtIndex:indexPath.row]];
                 [MobClick event:@"entity_forward_user"];
             }
         }
             break;
+//        case EntityHeaderCategoryType:
+//        {
+//            GKEntity *entity = [self.dataArrayForRecommend objectAtIndex:indexPath.row];
+//            
+//            EntityViewController    *vc = [[EntityViewController alloc] initWithEntity:entity];
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
+//            break;
 //        case EntityHeaderNoteType:
 //        {
 //            
@@ -760,7 +768,9 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
-    [[OpenCenter sharedOpenCenter] openEntity:entity];
+//    [[OpenCenter sharedOpenCenter] openEntity:entity];
+    EntityViewController    *vc = [[EntityViewController alloc] initWithEntity:entity];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - <EntityHeaderViewDelegate>

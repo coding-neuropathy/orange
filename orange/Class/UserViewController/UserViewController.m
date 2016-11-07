@@ -222,7 +222,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    kAppDelegate.activeVC = self;
+//    kAppDelegate.activeVC = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated

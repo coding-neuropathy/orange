@@ -2690,7 +2690,7 @@
 					4E56DF1419D552C000263B17 = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = BKXKS4HPNG;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2706,7 +2706,7 @@
 					8AB508431D93B1260048D2CC = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = BKXKS4HPNG;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2716,7 +2716,7 @@
 					B7BFC8FB1ACC27C1009627CA = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = BKXKS4HPNG;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3507,8 +3507,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "8cbc248e-5f61-490b-829a-cac87ac786d9";
+				PROVISIONING_PROFILE_SPECIFIER = iPhone_dev;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3524,7 +3524,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = BKXKS4HPNG;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3556,8 +3556,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "78745864-37c6-4cc9-975a-c099af95f737";
+				PROVISIONING_PROFILE_SPECIFIER = ios;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -3573,15 +3573,15 @@
 				CODE_SIGN_ENTITLEMENTS = imessage/imessage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BKXKS4HPNG;
 				GCC_PREFIX_HEADER = imessage/config.pch;
 				INFOPLIST_FILE = imessage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone.imessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "a5550b9d-860b-4450-8962-135429fb0b67";
+				PROVISIONING_PROFILE_SPECIFIER = iphone_dev_message;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3597,10 +3597,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_ENTITLEMENTS = imessage/imessage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BKXKS4HPNG;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREFIX_HEADER = imessage/config.pch;
 				INFOPLIST_FILE = imessage/Info.plist;
@@ -3608,8 +3608,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone.imessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1979edac-f3c3-4fa3-8fd8-2bbdfecd34df";
+				PROVISIONING_PROFILE_SPECIFIER = imessage;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3634,8 +3634,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.guoku.iphone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "db0754fc-4ee6-40bb-86b2-c5e56fd4f9b8";
+				PROVISIONING_PROFILE_SPECIFIER = iphone_today_dev;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3646,7 +3646,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = today/today.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = BKXKS4HPNG;
 				ENABLE_BITCODE = NO;
@@ -3658,8 +3658,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.guoku.iphone.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "58f08735-1008-426e-a9bf-1f53bdb49927";
+				PROVISIONING_PROFILE_SPECIFIER = today;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
