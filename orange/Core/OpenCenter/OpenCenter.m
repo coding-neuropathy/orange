@@ -85,6 +85,15 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 }
 
+
+- (void)openWithController:(UIViewController *)controller User:(GKUser *)user
+{
+    UserViewController * VC = [[UserViewController alloc]init];
+    VC.user = user;
+    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
+    [controller.navigationController pushViewController:VC animated:YES];
+}
+
 - (void)openUser:(GKUser *)user
 {
     if (!user.nickname)

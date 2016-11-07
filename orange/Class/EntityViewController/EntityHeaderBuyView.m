@@ -27,15 +27,15 @@
 }
 
 
-- (UIView *)H
-{
-    if (!_H) {
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.5)];
-        _H.backgroundColor = [UIColor colorWithWhite:230/255.0 alpha:0.95];
-        //[self addSubview:_H];
-    }
-    return _H;
-}
+//- (UIView *)H
+//{
+//    if (!_H) {
+//        _H = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.5)];
+//        _H.backgroundColor = [UIColor colorWithWhite:230/255.0 alpha:0.95];
+//        //[self addSubview:_H];
+//    }
+//    return _H;
+//}
 
 - (UIButton *)buyButton
 {

@@ -74,12 +74,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
-    
-//    if([self.navigationController.scrollNavigationBar respondsToSelector:@selector(setScrollView:)])
-//    {
-//        self.navigationController.scrollNavigationBar.scrollView = nil;
-//    }
+
     [super viewWillAppear:animated];
 }
 

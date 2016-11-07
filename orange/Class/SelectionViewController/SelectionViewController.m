@@ -194,7 +194,7 @@ static NSString *CellIdentifier     = @"SelectionCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSize = CGSizeMake(0., 0.);
+    CGSize cellSize;
     if (IS_IPAD) {
         cellSize = CGSizeMake(342., 465.);
         if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight) {

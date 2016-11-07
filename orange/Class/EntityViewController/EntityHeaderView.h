@@ -11,19 +11,18 @@
 @protocol EntityHeaderViewDelegate <NSObject>
 
 - (void)handelTapImageWithIndex:(NSUInteger)idx;
-
-@optional
-- (void)handleGotoEntityLikeListBtn:(id)sender;
+//@optional
+//- (void)handleGotoEntityLikeListBtn:(id)sender;
 
 @end
 
 @interface EntityHeaderView : UICollectionReusableView
 
-@property (nonatomic, strong) GKEntity *entity;
+@property (weak, nonatomic) GKEntity *entity;
 @property (weak, nonatomic) id<EntityHeaderViewDelegate> delegate;
-@property (weak, nonatomic) id<GKViewDelegate> actionDelegate;
+//@property (weak, nonatomic) id<GKViewDelegate> actionDelegate;
 
-- (void)setEntity:(GKEntity *)entity WithLikeUser:(NSArray *)likeUsers;
+//- (void)setEntity:(GKEntity *)entity WithLikeUser:(NSArray *)likeUsers;
 
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity;
 

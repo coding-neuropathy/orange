@@ -110,7 +110,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
  *  @param failure  失败block
  */
 + (void)getEntityDetailWithEntityId:(NSString *)entityId
-                            success:(void (^)(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray))success
+                            success:(void (^)(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray, NSArray *recommendation))success
                             failure:(void (^)(NSInteger stateCode))failure;
 
 /**
@@ -903,7 +903,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  搜索页面 API
  *
- *  @param  keyword
+ *  @param keyword
  *  @param success 成功block
  *  @param failure 失败block
  */

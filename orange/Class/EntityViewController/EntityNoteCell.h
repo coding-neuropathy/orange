@@ -19,8 +19,10 @@
 
 @interface EntityNoteCell : UICollectionViewCell
 
-@property (strong, nonatomic) GKNote * note;
+@property (weak, nonatomic) GKNote * note;
 @property (weak, nonatomic) id<EntityNoteCellDelegate> delegate;
+
+@property (copy, nonatomic) void (^tapAvatarBlock)(GKUser *user);
 
 + (CGFloat)height:(GKNote *)note;
 

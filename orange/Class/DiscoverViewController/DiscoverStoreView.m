@@ -47,12 +47,13 @@
     
     if (!_storeView) {
         _storeView                  = [[iCarousel alloc] initWithFrame:CGRectZero];
-        _storeView.deFrameSize      = CGSizeMake(self.deFrameWidth, self.deFrameHeight);
+        _storeView.deFrameSize      = CGSizeMake(self.deFrameWidth, 80.);
         _storeView.type             = iCarouselTypeLinear;
         _storeView.delegate         = self;
         _storeView.dataSource       = self;
         _storeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        _storeView.pagingEnabled    = IS_IPAD ? NO : YES;
+//        _storeView.backgroundColor  = [UIColor redColor];
+//        _storeView.pagingEnabled    = IS_IPAD ? NO : YES;
     //        _bannerView.autoscroll = IS_IPAD ? 0.0 : 0.3;
 //    if (IS_IPHONE) [_bannerView enableAutoscroll];
         [self addSubview:_storeView];
@@ -77,7 +78,7 @@
     self.sectionLable.deFrameTop    = 15.;
     self.sectionLable.deFrameLeft   = 10.;
     
-    self.storeView.deFrameTop       = self.sectionLable.deFrameBottom;
+    self.storeView.deFrameTop       = self.sectionLable.deFrameBottom + 16.;
     self.storeView.deFrameLeft      = 0.;
 }
 
@@ -110,21 +111,16 @@
     
     if (!view) {
         view                        = [[UIImageView alloc] initWithFrame:CGRectZero];
-        view.deFrameSize            = CGSizeMake(self.deFrameWidth / 2., 100.);
+        view.deFrameSize            = CGSizeMake(self.deFrameWidth / 2., 80.);
         view.backgroundColor        = [UIColor colorFromHexString:@"#f6f6f6"];
         view.contentMode            = UIViewContentModeScaleAspectFill;
-        
-//        CALayer *mask               = [CALayer layer];
-//        mask.contents               = (id)[[UIImage imageWithColor:[UIColor colorWithRed:17. /255. green:17. / 255. blue:17. / 255. alpha:0.5]
-//                                                           andSize:view.deFrameSize] CGImage];
-//        mask.frame                  = CGRectMake(0, 0, view.deFrameWidth, view.deFrameHeight);
-//        view.layer.mask             = mask;
+        view.layer.cornerRadius     = 4.;
+        view.layer.masksToBounds    = YES;
+
         UIImageView *maskView       = [[UIImageView alloc] initWithFrame:view.frame];
         maskView.image              = [UIImage imageWithColor:[UIColor colorFromHexString:@"#000000"]
                                                       andSize:maskView.deFrameSize];
         maskView.alpha              = 0.5;
-
-        view.layer.masksToBounds    = YES;
         
         [view addSubview:maskView];
         
@@ -145,7 +141,7 @@
     DDLogInfo(@"store image url %@", store.storeImageURL_300);
     [((UIImageView *)view) sd_setImageWithURL:store.storeImageURL_300
                              placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:view.frame.size]];
-//    view.deFrameTop = 0.;
+    view.deFrameTop = 0.;
 //    view.deFrameLeft = 0.;
     
     return view;
@@ -164,7 +160,7 @@
         case iCarouselOptionSpacing:
         {
             //add a bit of spacing between the item views
-            return value * 1.1;
+            return value * 1.05;
         }
         case iCarouselOptionFadeMax:
         {

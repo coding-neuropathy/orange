@@ -9,19 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "GKViewDelegate.h"
 
-@protocol EntityHeaderActionViewDelegate <NSObject>
-
-//- (void)tapLikeBtn:(id)sender;
-- (void)tapPostNoteBtn:(id)sender;
-- (void)tapMoreBtn:(id)sender;
-
-@end
-
 @interface EntityHeaderActionView : UICollectionReusableView
-@property (strong, nonatomic)   GKNote * note;
+//@property (strong, nonatomic)   GKNote * note;
 @property (strong, nonatomic)   GKEntity * entity;
-@property (strong, nonatomic)   UIButton *likeButton;
+//@property (strong, nonatomic)   UIButton *likeButton;
 @property (weak, nonatomic)     id<GKViewDelegate> delegate;
-@property (weak, nonatomic)     id<EntityHeaderActionViewDelegate> headerDelegate;
+//@property (weak, nonatomic)     id<EntityHeaderActionViewDelegate> headerDelegate;
 
 @end

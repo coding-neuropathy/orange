@@ -73,11 +73,11 @@
     
     NSInteger stateCode = httpResponse.statusCode;
     
-    NSString *urlString = [[error userInfo] valueForKey:@"NSErrorFailingURLKey"];
-    if (!urlString) {
-        urlString = operation.response.URL.absoluteString;
-    }
-    
+//    NSString *urlString = [[error userInfo] valueForKey:@"NSErrorFailingURLKey"];
+//    if (!urlString) {
+//        urlString = operation.response.URL.absoluteString;
+//    }
+//    
     if (stateCode == 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GKNetworkReachabilityStatusNotReachable" object:nil];
     }

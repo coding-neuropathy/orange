@@ -298,7 +298,7 @@
  *  @param failure  失败block
  */
 + (void)getEntityDetailWithEntityId:(NSString *)entityId
-                            success:(void (^)(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray))success
+                            success:(void (^)(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray, NSArray *recommendation))success
                             failure:(void (^)(NSInteger stateCode))failure
 {
     NSParameterAssert(entityId);
@@ -324,8 +324,15 @@
             [noteArray addObject:note];
         }
         
+        NSMutableArray  *recommendation = [[NSMutableArray alloc] initWithCapacity:0];
+        for (NSDictionary * row in objectDict[@"recommendation"]) {
+            GKEntity    *entity = [GKEntity modelFromDictionary:row];
+            [recommendation addObject:entity];
+        }
+        
+        
         if (success) {
-            success(entity, likeUserArray, noteArray);
+            success(entity, likeUserArray, noteArray, recommendation);
         }
     } failure:^(NSInteger stateCode, NSError *error) {
         if (failure) {

@@ -7,12 +7,16 @@
 //
 
 #import "EntityHeaderActionView.h"
+#import "UIImage+Resize.h"
 
 @interface EntityHeaderActionView ()
 
-@property (strong, nonatomic) UIButton *postBtn;
-@property (strong, nonatomic) UIButton *moreButton;
-@property (strong, nonatomic) UIView *H;
+//@property (strong, nonatomic) UIButton *postBtn;
+//@property (strong, nonatomic) UIButton *moreButton;
+//@property (strong, nonatomic) UIView *H;
+@property (strong, nonatomic) UIButton  *buyBtn;
+@property (strong, nonatomic) UIButton  *likeBtn;
+
 @end
 
 @implementation EntityHeaderActionView
@@ -21,70 +25,104 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.95];
+//        self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.95];
     }
     return self;
 }
 
-- (UIButton *)likeButton
+- (UIButton *)likeBtn
 {
-    if (!_likeButton) {
-        _likeButton                 = [UIButton buttonWithType:UIButtonTypeCustom];
-        _likeButton.deFrameSize     = CGSizeMake(80., 44.);
-        [_likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-        [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
-        _likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_likeButton setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 10.)];
-        [_likeButton addTarget:self action:@selector(likeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-
-        [self addSubview:_likeButton];
-    }
-    return _likeButton;
-}
-
-- (UIButton *)postBtn
-{
-    if (!_postBtn) {
-        _postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (!_likeBtn) {
+        _likeBtn                    = [UIButton buttonWithType:UIButtonTypeCustom];
+        _likeBtn.deFrameSize        = IS_IPAD ? CGSizeMake(200., 40.) : CGSizeMake((kScreenWidth - 44.) / 2., 40.);
+        _likeBtn.titleLabel.font    = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
+        _likeBtn.layer.cornerRadius = 4.;
+        _likeBtn.layer.borderWidth  = 1.;
+        _likeBtn.layer.borderColor  = [UIColor colorFromHexString:@"#f1f2f6"].CGColor;
+    
         
-        [_postBtn setImage:[UIImage imageNamed:@"note"] forState:UIControlStateNormal];
-        [_postBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
-        _postBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_postBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 10.)];
-        [_postBtn addTarget:self action:@selector(noteButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_likeBtn setImage:[[UIImage imageNamed:@"heart"] resizedImageToSize:CGSizeMake(20., 20.)] forState:UIControlStateNormal];
+        [_likeBtn setImage:[[UIImage imageNamed:@"hearted"] resizedImageToSize:CGSizeMake(20., 20.)] forState:UIControlStateSelected];
+        [_likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0, 0., 0.)];
         
-        [self addSubview:_postBtn];
+        [_likeBtn setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
+        [_likeBtn setTitleColor:[UIColor colorFromHexString:@"#757575"] forState:UIControlStateNormal];
+        [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0, 0., -10.)];
+        
+        [_likeBtn addTarget:self action:@selector(likeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_likeBtn setBackgroundColor:[UIColor colorFromHexString:@"#F5F6FA"]];
+        
+        
+        [self addSubview:_likeBtn];
     }
-    return _postBtn;
+    return _likeBtn;
 }
 
-
-- (UIButton *)moreButton
+- (UIButton *)buyBtn
 {
-    if (!_moreButton) {
-        _moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _moreButton.deFrameSize = CGSizeMake(80., 44.);
-        _moreButton.layer.masksToBounds = YES;
-        _moreButton.layer.cornerRadius = 4;
-        [_moreButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-        [_moreButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-        [_moreButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [_moreButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-        [_moreButton addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_moreButton];
+    if (!_buyBtn) {
+        _buyBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
+        _buyBtn.deFrameSize         = IS_IPAD ? CGSizeMake(200., 40.) : CGSizeMake((kScreenWidth - 44.) / 2., 40.);
+        _buyBtn.titleLabel.font     = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
+        _buyBtn.layer.cornerRadius  = 4.;
+        _buyBtn.layer.masksToBounds = YES;
+//        _likeBtn.layer.borderWidth  = 1.;
+//        _likeBtn.layer.borderColor  = [UIColor colorFromHexString:@"#f1f2f6"].CGColor;
+        [_buyBtn setTitleColor:[UIColor colorFromHexString:@"#ffffff"] forState:UIControlStateNormal];
+        [_buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#6192ff"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
+        [_buyBtn addTarget:self action:@selector(buyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_buyBtn setBackgroundColor:[UIColor colorFromHexString:@"#6192FF"]];
+        
+        [self addSubview:_buyBtn];
     }
-    return _moreButton;
+    return _buyBtn;
 }
+
+
 
 - (void)setEntity:(GKEntity *)entity
 {
     _entity = entity;
-//    self.likeButton.frame = CGRectMake(0, 3., 80., 44.);
     if (_entity.isLiked) {
-        self.likeButton.selected = YES;
+        self.likeBtn.selected = YES;
     }
-    self.postBtn.frame = CGRectMake(0., 3.,  80., 44.);
-//    self.moreButton.frame = CGRectMake(0., 3., 80., 44.);
+    
+    /**
+     *  set buy btn status
+     */
+        if (_entity.purchaseArray.count > 0) {
+            GKPurchase * purchase = self.entity.purchaseArray[0];
+            switch (purchase.status) {
+                case GKBuyREMOVE:
+                {
+                    [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                    [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
+                    [self.buyBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
+                    //                    self.buyBtn.backgroundColor = [UIColor clearColor];
+                    [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
+                    self.buyBtn.enabled = NO;
+                }
+                    break;
+                case GKBuySOLDOUT:
+                {
+                    //                    self.buyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                    [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#9d9e9f"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
+                    [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                    [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
+                }
+                    break;
+                default:
+                {
+                    [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                    [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f 去购买", self.entity.lowestPrice] forState:UIControlStateNormal];
+                }
+                    break;
+            }
+        }
+    
+    
     [self setNeedsLayout];
 }
 
@@ -92,63 +130,28 @@
 {
     [super layoutSubviews];
     
-    if (IS_IPHONE) {
-        self.likeButton.center = CGPointMake(kScreenWidth * 3/6-80, self.deFrameHeight/2);
-        self.postBtn.center = CGPointMake(kScreenWidth * 3/6, self.deFrameHeight/2);
-        self.moreButton.center = CGPointMake(kScreenWidth * 3/6+80, self.deFrameHeight/2);
-    }
-    else
-    {
-        if ([UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeRight
-            || [UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeLeft)
-        {
-            self.likeButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6-80 - (kScreenWidth - kScreenHeight)/2, self.deFrameHeight/2);
-            self.postBtn.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6 - (kScreenWidth - kScreenHeight)/2, self.deFrameHeight/2);
-            self.moreButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6+80 - (kScreenWidth - kScreenHeight)/2, self.deFrameHeight/2);
-        }
-        else
-        {
-            self.likeButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6-80, self.deFrameHeight/2);
-            self.postBtn.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6, self.deFrameHeight/2);
-            self.moreButton.center = CGPointMake((kScreenWidth - kTabBarWidth) * 3/6+80, self.deFrameHeight/2);
-        }
-        
-    }
-    self.H.deFrameBottom = self.deFrameHeight;
+    self.buyBtn.deFrameLeft     = IS_IPAD ? 136. : 16.;
+    self.buyBtn.deFrameBottom   = self.deFrameHeight - 20.;
+    
+    self.likeBtn.center         = self.buyBtn.center;
+    self.likeBtn.deFrameRight   = IS_IPAD ? self.deFrameWidth - 136. : self.deFrameWidth - 16.;
 }
-//
-//- (void)likeAction
-//{
-//    if (_delegate && [_delegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)])
-//    {
-//        [_delegate TapLikeButtonWithEntity:self.entity Button:self.likeButton];
-//    }
-//}
 
 #pragma mark - button action
-- (void)likeButtonAction:(id)sender
+- (void)likeBtnAction:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)])
-    {
-        [_delegate TapLikeButtonWithEntity:self.entity Button:self.likeButton];
+    if (_delegate && [_delegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)]) {
+        [_delegate TapLikeButtonWithEntity:self.entity Button:sender];
     }
 }
 
-- (void)noteButtonAction:(id)sender
+- (void)buyBtnAction:(id)sender
 {
-    if (_headerDelegate && [_headerDelegate respondsToSelector:@selector(tapPostNoteBtn:)])
-    {
-        [_headerDelegate tapPostNoteBtn:sender];
+    if (_delegate && [_delegate respondsToSelector:@selector(TapBuyButtonActionWithEntity:)]) {
+        [_delegate TapBuyButtonActionWithEntity:self.entity];
     }
 }
 
-- (void)moreButtonAction:(id)sender
-{
-    if (_headerDelegate && [_headerDelegate respondsToSelector:@selector(tapMoreBtn:)])
-    {
-        [_headerDelegate tapMoreBtn:sender];
-    }
-}
 
 
 @end

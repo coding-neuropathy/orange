@@ -122,7 +122,6 @@ static inline NSRegularExpression * UrlRegularExpression() {
         _contentLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
         _contentLabel.paragraphReplacement = @"";
         _contentLabel.lineSpacing = 7.0;
-        
         _contentLabel.delegate = self;
         [_contentLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
         _contentLabel.textColor = UIColorFromRGB(0x212121);
@@ -272,7 +271,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     if (self.note.pokeCount == 0) {
         [self.pokeBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]  forState:UIControlStateNormal];
     } else {
-        [self.pokeBtn setTitle:[NSString stringWithFormat:@"%@ %lu",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+        [self.pokeBtn setTitle:[NSString stringWithFormat:@"%@ %u",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp], self.note.pokeCount] forState:UIControlStateNormal];
     }
     
     if ([Passport sharedInstance].user.user_state == GKUserBlockState && k_isLogin) {
@@ -284,7 +283,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
     if(self.note.commentCount == 0) {
         [self.commentBtn setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACommentO]] forState:UIControlStateNormal];
     } else {
-        [self.commentBtn setTitle:[NSString stringWithFormat:@"%@ %ld",[NSString fontAwesomeIconStringForEnum:FACommentO],self.note.commentCount] forState:UIControlStateNormal];
+        [self.commentBtn setTitle:[NSString stringWithFormat:@"%@ %u",[NSString fontAwesomeIconStringForEnum:FACommentO], self.note.commentCount] forState:UIControlStateNormal];
     }
     
     self.timeLabel.text = [NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithFormat:@"yyyy-MM-dd"]];
@@ -417,9 +416,12 @@ static inline NSRegularExpression * UrlRegularExpression() {
 #pragma mark - button action
 - (void)avatarBtnAction:(id)sender
 {
-    DDLogInfo(@"avatar action");
+//    DDLogInfo(@"avatar action");
 //    [[OpenCenterController sharedOpenCenterController] openUser:self.note.creator];
-    [[OpenCenter sharedOpenCenter] openUser:self.note.creator];
+//    [[OpenCenter sharedOpenCenter] openUser:self.note.creator];
+    if (self.tapAvatarBlock) {
+        self.tapAvatarBlock(self.note.creator);
+    }
 }
 
 - (void)pokeBtnAction:(id)sender
@@ -443,18 +445,15 @@ static inline NSRegularExpression * UrlRegularExpression() {
     if (_delegate && [_delegate respondsToSelector:@selector(handleCellEditBtn:)]) {
         [_delegate handleCellEditBtn:self.note];
     }
-//    [UIView animateWithDuration:0.3 animations:^{
-    self.contentView.frame = CGRectMake(0., 0., self.contentView.deFrameWidth, self.contentView.deFrameHeight);
-//    } completion:^(BOOL finished) {
     
-//    }];
+    self.contentView.frame = CGRectMake(0., 0., self.contentView.deFrameWidth, self.contentView.deFrameHeight);
 }
 
 #pragma mark - <RTLabelDelegate>
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
 {
     //    DDLogInfo(@"tap %@", rtLabel);
-    NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
+    NSArray  *array= [[url absoluteString] componentsSeparatedByString:@":"];
     if([array[0] isEqualToString:@"http"])
     {
         [[OpenCenter sharedOpenCenter] openWebWithURL:url];
@@ -504,21 +503,6 @@ static inline NSRegularExpression * UrlRegularExpression() {
     }];
 }
 
-//- (void)panAction:(id)sender
-//{
-////    DDLogInfo(@"%@", sender);
-//    UIPanGestureRecognizer * recognizer = (UIPanGestureRecognizer *)sender;
-//    CGPoint translatedPoint = [recognizer translationInView:self.contentView];
-////    DDLogInfo(@"offset %f", recognizer.view.deFrameLeft);
-////    if (recognizer.view.deFrameLeft <= 0) {
-//        CGFloat x = recognizer.view.center.x + translatedPoint.x;
-//        recognizer.view.center = CGPointMake(x, recognizer.view.center.y);
-////    }
-////    CGFloat y = recognizer.view.center.y + translatedPoint.y;
-//    
-//    [recognizer setTranslation:CGPointMake(0, 0) inView:self.contentView];
-//}
-
 
 #pragma mark - Note model KVO
 - (void)addObserver
@@ -538,7 +522,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     if ([keyPath isEqualToString:@"pokeCount"]) {
         if (self.note.pokeCount > 0) {
-            [self.pokeBtn setTitle:[NSString stringWithFormat:@"%@ %lu",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp],self.note.pokeCount] forState:UIControlStateNormal];
+            [self.pokeBtn setTitle:[NSString stringWithFormat:@"%@ %u",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp], self.note.pokeCount] forState:UIControlStateNormal];
         }
         else
         {

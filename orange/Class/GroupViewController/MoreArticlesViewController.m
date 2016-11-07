@@ -132,7 +132,7 @@ static NSString * ArticleIdentifier = @"MoreArticleCell";
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellsize  = CGSizeMake(0., 0.);
+    CGSize cellsize;
     if (IS_IPAD) {
         cellsize = CGSizeMake(342., 360.);
         

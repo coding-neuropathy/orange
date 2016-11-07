@@ -15,12 +15,12 @@
 
 @property (strong, nonatomic) UILabel           *brandLabel;
 @property (strong, nonatomic) UILabel           *titleLabel;
-@property (strong, nonatomic) UIButton          *buyBtn;
-@property (strong, nonatomic) UIButton          *likeBtn;
+//@property (strong, nonatomic) UIButton          *buyBtn;
+//@property (strong, nonatomic) UIButton          *likeBtn;
 @property (strong, nonatomic) UIPageControl     *pageCtr;
 @property (strong, nonatomic) iCarousel         *imagesView;
 
-@property (strong, nonatomic) UIButton          *gotoEntityLikeListBtn;
+//@property (strong, nonatomic) UIButton          *gotoEntityLikeListBtn;
 
 @property (strong, nonatomic) NSMutableArray    *imageURLArray;
 @property (assign, nonatomic) BOOL warp;
@@ -28,8 +28,6 @@
 @end
 
 //static CGFloat kEntityViewMarginLeft    = 16.;
-
-
 @implementation EntityHeaderView
 
 //@synthesize delegate = _delegate;
@@ -72,52 +70,6 @@
     return _titleLabel;
 }
 
-- (UIButton *)buyBtn
-{
-    if (!_buyBtn) {
-        _buyBtn                     = [UIButton buttonWithType:UIButtonTypeCustom];
-        _buyBtn.deFrameSize         = IS_IPAD ? CGSizeMake(200., 40.) :   CGSizeMake( (kScreenWidth - 44.) / 2., 40.);
-//        _buyBtn.layer.cornerRadius  = _buyBtn.deFrameHeight / 2.;
-        _buyBtn.layer.cornerRadius  = 4.;
-        _buyBtn.layer.masksToBounds = YES;
-        _buyBtn.titleLabel.font     = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
-        
-        [_buyBtn setTitleColor:[UIColor colorFromHexString:@"#ffffff"] forState:UIControlStateNormal];
-        [_buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#6192ff"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
-        [_buyBtn addTarget:self action:@selector(buyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-
-        [self addSubview:_buyBtn];
-    }
-    return _buyBtn;
-}
-
-- (UIButton *)likeBtn
-{
-    if (!_likeBtn) {
-        _likeBtn                        = [[UIButton alloc] initWithFrame:CGRectZero];
-        _likeBtn.deFrameSize            = IS_IPAD ? CGSizeMake(200., 40.) : CGSizeMake( (kScreenWidth - 44.) / 2., 40.);
-//        _likeBtn.layer.cornerRadius     = _likeBtn.deFrameHeight / 2.;
-        _likeBtn.layer.cornerRadius     = 4.;
-        _likeBtn.layer.masksToBounds    = YES;
-        _likeBtn.layer.borderWidth      = 1.;
-        _likeBtn.layer.borderColor      = [UIColor colorFromHexString:@"#f1f2f6"].CGColor;
-        _likeBtn.titleLabel.font        = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
-//        _likeBtn.titleLabel.font        = [UIFont fontWithName:kFontAwesomeFamilyName size:12.];
-        [_likeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0, 0., -10.)];
-        
-        
-        [_likeBtn setImage:[[UIImage imageNamed:@"heart"] resizedImageToSize:CGSizeMake(20., 20.)] forState:UIControlStateNormal];
-        [_likeBtn setImage:[[UIImage imageNamed:@"hearted"] resizedImageToSize:CGSizeMake(20., 20.)] forState:UIControlStateSelected];
-        [_likeBtn setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
-        [_likeBtn setTitleColor:[UIColor colorFromHexString:@"#757575"] forState:UIControlStateNormal];
-        
-        [_likeBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#f8f8f8"] andSize:_likeBtn.deFrameSize] forState:UIControlStateNormal];
-        [_likeBtn addTarget:self action:@selector(likeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self addSubview:_likeBtn];
-    }
-    return _likeBtn;
-}
 
 - (iCarousel *)imagesView
 {
@@ -149,21 +101,6 @@
     return _pageCtr;
 }
 
-- (UIButton *)gotoEntityLikeListBtn
-{
-    if (!_gotoEntityLikeListBtn) {
-        _gotoEntityLikeListBtn                  = [UIButton buttonWithType:UIButtonTypeCustom];
-        _gotoEntityLikeListBtn.deFrameSize      = CGSizeMake(140., 20.);
-        _gotoEntityLikeListBtn.titleLabel.font  = [UIFont fontWithName:kFontAwesomeFamilyName size:14.];
-//        _gotoEntityLikeListBtn.titleLabel.textAlignment = NSTextAlignmentRight;
-        
-        [_gotoEntityLikeListBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
-        [_gotoEntityLikeListBtn addTarget:self action:@selector(gotaoEntityLikeListAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_gotoEntityLikeListBtn];
-    }
-    return _gotoEntityLikeListBtn;
-}
-
 
 #pragma mark - set Entity data
 - (void)setEntity:(GKEntity *)entity
@@ -183,134 +120,41 @@
         self.imagesView.scrollEnabled = NO;
     }
     
-    if (_entity.purchaseArray.count > 0) {
-        GKPurchase * purchase = self.entity.purchaseArray[0];
-        switch (purchase.status) {
-            case GKBuyREMOVE:
-            {
-                [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-                [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-                [self.buyBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
-                //                    self.buyBtn.backgroundColor = [UIColor clearColor];
-                [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
-                self.buyBtn.enabled = NO;
-            }
-                break;
-            case GKBuySOLDOUT:
-            {
-                //                    self.buyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
-                [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#9d9e9f"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
-                [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-                [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-            }
-                break;
-            default:
-            {
-                [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-                [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f 去购买", self.entity.lowestPrice] forState:UIControlStateNormal];
-            }
-                break;
-        }
-    }
-    
     [self.imagesView reloadData];
 
     [self setNeedsLayout];
 }
 
-- (void)setEntity:(GKEntity *)entity WithLikeUser:(NSArray *)likeUsers
-{
-    _entity = entity;
-    self.brandLabel.text    = _entity.brand;
-    self.titleLabel.text    = _entity.title;
-    
-    for (UIView * view in self.subviews) {
-        if ([view isKindOfClass:[UIImageView class]]) {
-            [view removeFromSuperview];
-        }
-    }
-    
-    if (_entity.likeCount > 0 ) {
-        [self.gotoEntityLikeListBtn setTitle:[NSString stringWithFormat:@"%ld 人喜爱 %@", _entity.likeCount,
-                                              [NSString fontAwesomeIconStringForEnum:FAAngleRight]]
-                                    forState:UIControlStateNormal];
-    //        self.gotoEntityLikeListBtn.backgroundColor = [UIColor redColor];
-        CGFloat width = [self.gotoEntityLikeListBtn.titleLabel.text widthWithLineWidth:0. Font:self.gotoEntityLikeListBtn.titleLabel.font];
-        self.gotoEntityLikeListBtn.deFrameSize  = CGSizeMake(width, 20.);
-    }
-    
-    if (_entity.isLiked) {
-        self.likeBtn.selected = YES;
-    }
-    
-    NSInteger count = likeUsers.count > 4 ? 4 : likeUsers.count;
-//    DDLogInfo(@"avatar %@", likeUsers);
-    
-//    if (likeUsers.count)
-    for (int i = 0; i < count; i ++) {
-        UIImageView * avatarImage       = [[UIImageView alloc] initWithFrame:CGRectZero];
-        avatarImage.deFrameSize         = CGSizeMake(32., 32.);
-        avatarImage.layer.cornerRadius  = avatarImage.deFrameHeight / 2.;
-        avatarImage.layer.borderWidth   = 2.;
-        avatarImage.layer.borderColor   = [UIColor colorFromHexString:@"#ffffff"].CGColor;
-        avatarImage.layer.masksToBounds = YES;
-        avatarImage.tag                 = i;
-        GKUser * user = [likeUsers objectAtIndex:i];
-        
-        [avatarImage sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:avatarImage.deFrameSize] options:SDWebImageRetryFailed];
-        
-        avatarImage.deFrameLeft         = 16. + i * 24.;
-        avatarImage.deFrameBottom       = self.deFrameHeight - 16.;
-        
-//        [avatarImage in self.su]
-        [self insertSubview:avatarImage atIndex:count - i];
-    }
-    
-    if (_entity.purchaseArray.count > 0) {
-        GKPurchase * purchase = self.entity.purchaseArray[0];
-        switch (purchase.status) {
-            case GKBuyREMOVE:
-            {
-                [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-                [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-                [self.buyBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
-                //                    self.buyBtn.backgroundColor = [UIColor clearColor];
-                [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
-                self.buyBtn.enabled = NO;
-            }
-                break;
-            case GKBuySOLDOUT:
-            {
-                //                    self.buyBtn.backgroundColor = UIColorFromRGB(0x9d9e9f);
-                [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#9d9e9f"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
-                [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-                [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-            }
-                break;
-            default:
-            {
-                [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-                [self.buyBtn setTitle:[NSString stringWithFormat:@"¥ %0.2f 去购买", self.entity.lowestPrice] forState:UIControlStateNormal];
-            }
-                break;
-        }
-    }
-    
-    
-    self.imageURLArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
-    if (_entity.imageURL)
-        [self.imageURLArray insertObject:_entity.imageURL atIndex:0];
-    
-    if (self.imageURLArray.count > 1) {
-        self.imagesView.scrollEnabled = YES;
-    } else {
-        self.imagesView.scrollEnabled = NO;
-    }
-    
-    [self.imagesView reloadData];
-    
-    [self setNeedsLayout];
-}
+//- (void)setEntity:(GKEntity *)entity WithLikeUser:(NSArray *)likeUsers
+//{
+//    _entity = entity;
+//    self.brandLabel.text    = _entity.brand;
+//    self.titleLabel.text    = _entity.title;
+//    
+//    for (UIView * view in self.subviews) {
+//        if ([view isKindOfClass:[UIImageView class]]) {
+//            [view removeFromSuperview];
+//        }
+//    }
+//    
+////    if (_entity.isLiked) {
+////        self.likeBtn.selected = YES;
+////    }
+//    
+//    self.imageURLArray = [[NSMutableArray alloc] initWithArray:_entity.imageURLArray copyItems:YES];
+//    if (_entity.imageURL)
+//        [self.imageURLArray insertObject:_entity.imageURL atIndex:0];
+//    
+//    if (self.imageURLArray.count > 1) {
+//        self.imagesView.scrollEnabled = YES;
+//    } else {
+//        self.imagesView.scrollEnabled = NO;
+//    }
+//    
+//    [self.imagesView reloadData];
+//    
+//    [self setNeedsLayout];
+//}
 
 - (void)layoutSubviews
 {
@@ -321,28 +165,26 @@
         
         self.imagesView.deFrameSize     = CGSizeMake(kScreenWidth, kScreenWidth);
 
-        self.brandLabel.deFrameTop      = 24. + self.imagesView.deFrameBottom;
-        self.brandLabel.deFrameLeft     = 16.;
+        if (self.entity.brand.length > 0) {
+            self.brandLabel.deFrameTop      = 24. + self.imagesView.deFrameBottom;
+            self.brandLabel.deFrameLeft     = 16.;
         
-        self.titleLabel.center          = self.brandLabel.center;
-        self.titleLabel.deFrameHeight   = titleHeight;
-        self.titleLabel.deFrameTop      = self.brandLabel.deFrameBottom + 8.;
+            self.titleLabel.center          = self.brandLabel.center;
+            self.titleLabel.deFrameHeight   = titleHeight;
+            self.titleLabel.deFrameTop      = self.brandLabel.deFrameBottom + 8.;
+        } else {
+            self.titleLabel.center          = self.imagesView.center;
+            self.titleLabel.deFrameHeight   = titleHeight;
+            self.titleLabel.deFrameTop      = 24. + self.imagesView.deFrameBottom;
+        }
 
-        self.buyBtn.deFrameLeft         = (self.deFrameWidth - self.buyBtn.deFrameWidth - self.likeBtn.deFrameWidth) / 2.;
-        self.buyBtn.deFrameTop          = self.titleLabel.deFrameBottom + 24.;
         
-        self.likeBtn.center             = self.buyBtn.center;
-        self.likeBtn.deFrameLeft        = self.buyBtn.deFrameRight + 8.;
-        
-        if ([_entity.imageURLArray count] > 0) {
+        if ([self.entity.imageURLArray count] > 0) {
             self.pageCtr.numberOfPages = [_entity.imageURLArray count] + 1;
             self.pageCtr.center = CGPointMake(kScreenWidth / 2., self.imagesView.deFrameBottom -10);
             self.pageCtr.bounds = CGRectMake(0., 0., 32. * (_pageCtr.numberOfPages - 1) + 32, 32);
             self.pageCtr.hidden = NO;
         }
-        
-        self.gotoEntityLikeListBtn.deFrameRight     = self.deFrameWidth - 16.;
-        self.gotoEntityLikeListBtn.deFrameBottom    = self.deFrameHeight - 22.;
     }
     else
     {
@@ -351,17 +193,10 @@
         self.brandLabel.center          = self.imagesView.center;
         self.brandLabel.deFrameTop      = 20. + self.imagesView.deFrameBottom;
         
-        
-//        self.titleLabel.frame = CGRectMake(0., 0., self.deFrameWidth - 40., 20);
         self.titleLabel.center          = self.brandLabel.center;
 //        self.titleLabel.deFrameLeft = 20.;
         self.titleLabel.deFrameTop      = self.brandLabel.deFrameBottom + 5.;
         
-        self.buyBtn.deFrameLeft         = 136.;
-        self.buyBtn.deFrameTop          = self.titleLabel.deFrameBottom + 32.;
-//        
-        self.likeBtn.center             = self.buyBtn.center;
-        self.likeBtn.deFrameRight       = self.deFrameWidth - 136.;
     }
 }
 
@@ -445,7 +280,6 @@
 }
 
 #pragma mark - <iCarouselDelegate>
-//- (void)ca
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
     if (IS_IPHONE) {
@@ -462,47 +296,27 @@
     [self.pageCtr setCurrentPage:index];
 }
 
-#pragma mark - button action
-- (void)buyBtnAction:(id)sender
-{
-    if (_actionDelegate && [_actionDelegate respondsToSelector:@selector(TapBuyButtonActionWithEntity:)]) {
-        [_actionDelegate TapBuyButtonActionWithEntity:self.entity];
-    }
-}
-
-- (void)likeBtnAction:(id)sender
-{
-    if (_actionDelegate && [_actionDelegate respondsToSelector:@selector(TapLikeButtonWithEntity:Button:)]) {
-        [_actionDelegate TapLikeButtonWithEntity:self.entity Button:self.likeBtn];
-    }
-}
-
-- (void)gotaoEntityLikeListAction:(id)sender
-{
-    if (_delegate && [_delegate respondsToSelector:@selector(handleGotoEntityLikeListBtn:)]) {
-        [_delegate handleGotoEntityLikeListBtn:sender];
-    }
-}
-
 
 #pragma mark - class method
 + (CGFloat)headerViewHightWithEntity:(GKEntity *)entity
 {
-    CGFloat titleHeight = [entity.title heightWithLineWidth:kScreenWidth - 32.  Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.f] LineHeight:5];
-    if (titleHeight == 0 ) {
-        titleHeight = 16.;
+    
+    CGFloat titleHeight = 0, brandHeight = 0;
+    
+    if (entity.title.length > 0) {
+        titleHeight = [entity.title heightWithLineWidth:kScreenWidth - 32.  Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.f]     LineHeight:5];
     }
     
-    CGFloat brandHeight = [entity.brand heightWithLineWidth:kScreenWidth - 32. Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.] LineHeight:5];
-    if (brandHeight != 0) {
-        brandHeight += 8;
+    titleHeight += 16.;
+    
+    if (entity.brand.length > 0) {
+        brandHeight = [entity.brand heightWithLineWidth:kScreenWidth - 32. Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.] LineHeight:5];
     }
-    DDLogInfo(@"entity header view height %f", kScreenWidth);
-    if (entity.likeCount > 0) {
-        return kScreenWidth + 123. + titleHeight + brandHeight + 64.;
-    } else {
-        return kScreenWidth + 123. + titleHeight + brandHeight;
-    }
+    brandHeight     += 8.;
+
+    
+    return kScreenWidth + titleHeight + brandHeight + 24.;
+//    }
 }
 
 @end

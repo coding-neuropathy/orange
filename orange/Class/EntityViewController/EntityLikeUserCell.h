@@ -8,8 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol EntityLikeUserCellDelegate <NSObject>
+
+@optional
+- (void)handleGotoEntityLikeListBtn:(id)sender;
+
+@end
+
+
 @interface EntityLikeUserCell : UICollectionViewCell
 
-@property (strong, nonatomic) GKUser * user;
+@property (strong, nonatomic) GKUser    *user;
+@property (strong, nonatomic) NSArray   *likeUsers;
+
+@property (weak, nonatomic) id<EntityLikeUserCellDelegate> delegate;
 
 @end

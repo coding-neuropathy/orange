@@ -15,6 +15,7 @@ DEFINE_SINGLETON_FOR_HEADER(OpenCenter);
 - (void)openAuthPage;
 - (void)openAuthPageWithSuccess:(void (^)())success;
 
+- (void)openWithController:(UIViewController *)controller User:(GKUser *)user;
 - (void)openUser:(GKUser *)user;
 - (void)openAuthUser:(GKUser *)user;
 

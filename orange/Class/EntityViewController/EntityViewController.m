@@ -41,18 +41,17 @@
 typedef NS_ENUM(NSInteger, EntityDisplayCellType) {
     EntityHeaderType,
     EntityHeaderActionType,
-    EntityHeaderBuyType,
-    EntityHeaderLikeType = 4,
+//    EntityHeaderBuyType,
+    EntityHeaderLikeType,
     EntityHeaderNoteType,
     EntityHeaderCategoryType,
 };
 
 @interface EntityViewController ()<EntityHeaderViewDelegate, EntityHeaderSectionViewDelegate,
-                                    EntityCellDelegate, EntityNoteCellDelegate, EntityHeaderActionViewDelegate,
-                                     EntityHeaderBuyViewDelegate>
+                                    EntityCellDelegate, EntityNoteCellDelegate, EntityLikeUserCellDelegate>
 
 @property (nonatomic, strong) GKNote        *note;
-@property (nonatomic, strong) UILabel       *titleLabel;
+//@property (nonatomic, strong) UILabel       *titleLabel;
 @property (nonatomic, strong) UIImageView   *image;
 @property (nonatomic, strong) UIButton      *likeButton;
 @property (nonatomic, strong) UIButton      *buyButton;
@@ -60,14 +59,8 @@ typedef NS_ENUM(NSInteger, EntityDisplayCellType) {
 @property (nonatomic, strong) UIButton      *moreBtn;
 
 @property (nonatomic, strong) UICollectionView          *collectionView;
-@property (nonatomic, strong) EntityHeaderView          *header;
 @property (nonatomic, strong) EntityHeaderActionView    *actionView;
-@property (nonatomic, strong) EntityHeaderBuyView       *buyView;
-//@property (nonatomic, strong) UIButton *categoryButton;
-//@property (nonatomic, strong) UIView                    *likeUserView;
-@property (nonatomic, strong) UIView                    *noteContentView;
-@property (nonatomic, assign) BOOL flag;
-
+//@property (nonatomic, assign) BOOL flag;
 
 @property (nonatomic, strong) UIButton              *postBtn;
 @property (nonatomic, strong) NSMutableArray        *dataArrayForlikeUser;
@@ -100,16 +93,19 @@ static NSString * EntityCellIdentifier = @"EntityCell";
 static NSString * const EntityReuseHeaderIdentifier = @"EntityHeader";
 static NSString * const EntityReuseHeaderSectionIdentifier = @"EntityHeaderSection";
 static NSString * const EntityReuseHeaderActionIdentifier = @"EntityHeaderAction";
-static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
+//static NSString * const EntityReuseHeaderBuyIdentifier = @"EntityHeaderBuy";
 static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (instancetype)init
 {
     if (self = [super init]) {
 //        self.itemType = OneSDKItemType_TAOBAO1;
-        self.flag           = false;
+//        self.flag           = false;
         self.image          = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.itemService    = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
+        
+        self.dataArrayForNote       = [[NSMutableArray alloc] initWithCapacity:0];
+        self.dataArrayForlikeUser   = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
 }
@@ -186,14 +182,12 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.deFrameSize = IS_IPAD   ? CGSizeMake(kPadScreenWitdh, kScreenHeight - kStatusBarHeight)
                                                 : CGSizeMake(kScreenWidth, kScreenHeight);
-        
-//        [_collectionView setContentOffset:CGPointMake(0., 64.)];
-//        [_collectionView.collectionViewLayout collectionViewContentSize];
-
+    
         _collectionView.delegate                = self;
         _collectionView.dataSource              = self;
         _collectionView.backgroundColor         = [UIColor colorFromHexString:@"#ffffff"];
-//        _collectionView.alwaysBounceVertical    = YES;
+//        _collectionView.backgroundColor         = [UIColor redColor];
+        _collectionView.alwaysBounceVertical    = YES;
         /**
          *  适配横屏启动
          */
@@ -202,96 +196,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             self.collectionView.deFrameLeft = (kScreenWidth - kTabBarWidth - self.collectionView.deFrameWidth ) / 2.;
     }
     return _collectionView;
-}
-
-
-- (UIButton *)likeButton
-{
-    if (!_likeButton) {
-//        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40., 35)];
-        _likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _likeButton.frame = CGRectMake(0, 0, kScreenWidth / 3, 44.);
-        UIImage * like = [[UIImage imageNamed:@"like"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _likeButton.tintColor = [UIColor colorFromHexString:@"#ffffff"];
-        [_likeButton setImage:like forState:UIControlStateNormal];
-        [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateSelected];
-        [_likeButton setTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) forState:UIControlStateNormal];
-        _likeButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_likeButton addTarget:self action:@selector(likeButtonActionWithBtn:) forControlEvents:UIControlEventTouchUpInside];
-        if (self.entity.isLiked) {
-            _likeButton.selected = YES;
-        }
-    }
-    return _likeButton;
-}
-
-//点评按钮
-- (UIButton *)postBtn
-{
-    if (!_postBtn) {
-        _postBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _postBtn.frame = CGRectMake(0., 0.,  kScreenWidth/3, 44.);
-        UIImage * image = [[UIImage imageNamed:@"post note"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _postBtn.tintColor = [UIColor colorFromHexString:@"#ffffff"];
-        [_postBtn setImage:image forState:UIControlStateNormal];
-        //[_postBtn setTitle:NSLocalizedStringFromTable(@"note", kLocalizedFile, nil) forState:UIControlStateNormal];
-        _postBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_postBtn addTarget:self action:@selector(noteButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _postBtn;
-}
-
-- (UIButton *)buyButton
-{
-    if (!_buyButton) {
-        _buyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        if (IS_IPHONE) {
-            _buyButton.frame = CGRectMake(0., 0., kScreenWidth/3, 44.);
-        }
-        else
-        {
-            _buyButton.frame = CGRectMake(0., 0., kScreenWidth - kTabBarWidth/3, 44.);
-        }
-        _buyButton.layer.masksToBounds = YES;
-        _buyButton.layer.cornerRadius = 0;
-        _buyButton.backgroundColor = UIColorFromRGB(0x2a5393);
-        _buyButton.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.f];
-        [_buyButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-        [_buyButton setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-        [_buyButton addTarget:self action:@selector(buyButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        
-        if (self.entity.purchaseArray.count > 0) {
-            GKPurchase * purchase = self.entity.purchaseArray[0];
-            switch (purchase.status) {
-                case GKBuyREMOVE:
-                {
-                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-                    [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-                    [_buyButton setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
-                    _buyButton.backgroundColor = [UIColor clearColor];
-                    _buyButton.enabled = NO;
-                }
-                    break;
-                case GKBuySOLDOUT:
-                {
-                    _buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
-                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-                    [_buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
-                }
-                    break;
-                default:
-                {
-                    [_buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
-                    [_buyButton setTitle:[NSString stringWithFormat:@"¥ %0.2f", self.entity.lowestPrice] forState:UIControlStateNormal];
-                }
-                    break;
-            }
-            
-        }
-
-    }
-    return _buyButton;
 }
 
 - (UIButton *)moreBtn
@@ -311,13 +215,17 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 #pragma mark - get entity data
 - (void)refresh
 {
-    [API getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray) {
+    [API getEntityDetailWithEntityId:self.entity.entityId success:^(GKEntity *entity, NSArray *likeUserArray, NSArray *noteArray, NSArray *recommendation) {
         [self.image sd_setImageWithURL:self.entity.imageURL_640x640];
         self.entity = entity;
 
-        self.dataArrayForlikeUser = [NSMutableArray arrayWithArray:likeUserArray];
-        self.dataArrayForNote = [NSMutableArray arrayWithArray:noteArray];
+        self.dataArrayForlikeUser   = [NSMutableArray arrayWithArray:likeUserArray];
+        self.dataArrayForNote       = [NSMutableArray arrayWithArray:noteArray];
+        self.dataArrayForRecommend  = [NSMutableArray arrayWithArray:recommendation];
+        
+//        DDLogInfo(@"section note %@", self.dataArrayForNote[0]);
         for (GKNote *note in self.dataArrayForNote) {
+            DDLogInfo(@"note %@", note.text);
             if (note.creator.userId == [Passport sharedInstance].user.userId) {
                 self.note = note;
                 break;
@@ -346,27 +254,13 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             }
             
         }
-//        [SVProgressHUD dismiss];
         [self.collectionView reloadData];
-//        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:EntityHeaderNoteType]];
+        
+        [SVProgressHUD dismiss];
     } failure:^(NSInteger stateCode) {
-//        [SVProgressHUD dismiss];
+        [SVProgressHUD dismiss];
     }];
 }
-
-- (void)refreshRandom
-{
-    
-    [API getRandomEntityListByCategoryId:self.entity.categoryId
-                                entityId:self.entity.entityId
-                                   count:9 success:^(NSArray *entityArray) {
-                                       self.dataArrayForRecommend = [NSMutableArray arrayWithArray:entityArray];
-                                       [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:EntityHeaderCategoryType]];
-                                   } failure:^(NSInteger stateCode, NSError *error) {
-                                       DDLogError(@"recommend entity Error %@", error.localizedDescription);
-                                   }];
-}
-
 
 - (void)loadView
 {
@@ -379,34 +273,33 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     
 //    if (IS_IPHONE) self.collectionView.deFrameTop = -64.;
     
-    [self.view addSubview:self.collectionView];
     
     self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
     
     [self.collectionView registerClass:[EntityLikeUserCell class] forCellWithReuseIdentifier:LikeUserIdentifier];
-    
     [self.collectionView registerClass:[EntityNoteCell class] forCellWithReuseIdentifier:NoteCellIdentifier];
-    
     [self.collectionView registerClass:[EntityCell class] forCellWithReuseIdentifier:EntityCellIdentifier];
     
     [self.collectionView registerClass:[EntityHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderIdentifier];
     [self.collectionView registerClass:[EntityHeaderActionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderActionIdentifier];
-    [self.collectionView registerClass:[EntityHeaderBuyView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderBuyIdentifier];
+//    [self.collectionView registerClass:[EntityHeaderBuyView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderBuyIdentifier];
     [self.collectionView registerClass:[EntityHeaderSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier];
     
-//    [self.collectionView registerClass:[EntityNoteFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:EntityReuseFooterNoteIdenetifier];
+    [self.view addSubview:self.collectionView];
 
     
     if (IS_IPAD) {
         [self.moreBtn setImage:[UIImage imageNamed:@"more dark"] forState:UIControlStateNormal];
         self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithCustomView:self.moreBtn];
     }
+
+    
+    [self refresh];
+//    [self refreshRandom];
+    
     
     if (iOS9)
         [self registerPreview];
-    
-    [self refresh];
-    [self refreshRandom];
 }
 
 /**
@@ -426,11 +319,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     self.navBarEffect   = YES;
     [MobClick beginLogPageView:@"EntityView"];
     [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -455,15 +343,14 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         [self removeObserver];
     }
     _entity = entity;
-//    self.title = entity.entityName;
     [self addObserver];
 }
-
-- (void)setNote:(GKNote *)note
-{
-    _note = note;
-    self.actionView.note = note;
-}
+//
+//- (void)setNote:(GKNote *)note
+//{
+//    _note = note;
+//    self.actionView.note = note;
+//}
 
 #pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
 - (void)didMoveToParentViewController:(UIViewController *)parent
@@ -488,40 +375,32 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         } else {
             [self setDefaultNavigationBar];
         }
-    } else {
-//        [self configConfigNavigationItem];
     }
-
 }
 
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 7;
+    return 5;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSInteger count = 0;
     switch (section) {
-        case 4:
-        {
-            count = self.dataArrayForlikeUser.count;
-            if ((IS_IPHONE_4_OR_LESS || IS_IPHONE_5) && count > 7) {
-                count = 7;
+        case EntityHeaderLikeType:
+//            count = IS_IPAD ? self.dataArrayForlikeUser.count : 1;
+            if (self.dataArrayForlikeUser.count > 0) {
+                count = IS_IPAD ? self.dataArrayForlikeUser.count : 1;
             }
-            if (IS_IPHONE_6 && count > 8) {
-                count = 8;
-            }
-            if (IS_IPHONE_6P && count > 9) {
-                count = 9;
-            }
-        }
+//            return count;
+            
             break;
-        case 5:
+        case EntityHeaderNoteType:
+//            DDLogInfo(@"section %ld num %ld", (long)section, (long)self.dataArrayForNote.count);
             count = self.dataArrayForNote.count;
             break;
-        case 6:
+        case EntityHeaderCategoryType:
             count = self.dataArrayForRecommend.count;
             break;
         default:
@@ -533,10 +412,17 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
+
         case EntityHeaderLikeType:
         {
             EntityLikeUserCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:LikeUserIdentifier forIndexPath:indexPath];
-            cell.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
+            if (IS_IPAD) {
+                cell.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
+            } else {
+                cell.likeUsers  = self.dataArrayForlikeUser;
+                cell.delegate   = self;
+            }
+            
             return cell;
         }
             break;
@@ -545,6 +431,9 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             EntityNoteCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NoteCellIdentifier forIndexPath:indexPath];
             cell.note = [self.dataArrayForNote objectAtIndex:indexPath.row];
             cell.delegate = self;
+            cell.tapAvatarBlock = ^(GKUser *user) {
+                [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+            };
             return cell;
         }
             break;
@@ -568,40 +457,24 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             case EntityHeaderType:
             {
                 EntityHeaderView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:EntityReuseHeaderIdentifier forIndexPath:indexPath];
-                if (IS_IPAD)
-                    headerView.entity = self.entity;
-                else
-                    [headerView setEntity:self.entity WithLikeUser:self.dataArrayForlikeUser];
-                
+//                if (IS_IPAD)
+                headerView.entity = self.entity;
+//                else
+//                    [headerView setEntity:self.entity WithLikeUser:self.dataArrayForlikeUser];//
                 headerView.delegate = self;
-                headerView.actionDelegate   = [GKHandler sharedGKHandler];
+//                headerView.actionDelegate   = [GKHandler sharedGKHandler];
                 return headerView;
             }
                 break;
-
+                
             case EntityHeaderActionType:
             {
-                EntityHeaderActionView * actionView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderActionIdentifier forIndexPath:indexPath];
-                actionView.entity           = self.entity;
-                actionView.note             = self.note;
-                self.likeButton             = actionView.likeButton;
-                actionView.delegate         = [GKHandler sharedGKHandler];
-                actionView.headerDelegate   = self;
-                self.actionView             = actionView;
+                EntityHeaderActionView * actionView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:EntityReuseHeaderActionIdentifier forIndexPath:indexPath];
+                actionView.entity   = self.entity;
+                actionView.delegate = [GKHandler sharedGKHandler];
                 return actionView;
             }
                 break;
-            case EntityHeaderBuyType:
-            {
-                EntityHeaderBuyView * buyView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderBuyIdentifier forIndexPath:indexPath];
-                buyView.entity = self.entity;
-                self.likeButton = buyView.likeButton;
-                buyView.delegate = self;
-                self.buyView = buyView;
-                return buyView;
-            }
-                break;
-
             case EntityHeaderLikeType:
             {
                 EntityHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier forIndexPath:indexPath];
@@ -637,34 +510,27 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             }
                 break;
             default:
-            {
-                EntityHeaderSectionView * headerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:EntityReuseHeaderSectionIdentifier forIndexPath:indexPath];
-                return headerSection;
-            }
                 break;
         }
-    } else {
-//        EntityNoteFooterView * footerSection = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:EntityReuseFooterNoteIdenetifier forIndexPath:indexPath];
-//        footerSection.openPostNote = ^(){
-//            [self noteButtonAction];
-//        };
-//        return footerSection;
     }
+    
     return reusableview;
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellsize = CGSizeMake(0., 0.);
+    CGSize cellsize;
     switch (indexPath.section) {
         case EntityHeaderLikeType:
-            cellsize = IS_IPAD ? CGSizeMake(36., 36.) : CGSizeMake(0., 0.);
+            cellsize = IS_IPAD ? CGSizeMake(36., 36.) : CGSizeMake(kScreenWidth, 64.);
             break;
         case EntityHeaderNoteType:
         {
-            GKNote * note = [self.dataArrayForNote objectAtIndex:indexPath.row];
-            cellsize = CGSizeMake(self.collectionView.deFrameWidth, [EntityNoteCell height:note]);
+            if (self.dataArrayForNote.count > 0) {
+                GKNote * note = [self.dataArrayForNote objectAtIndex:indexPath.row];
+                cellsize = CGSizeMake(self.collectionView.deFrameWidth, [EntityNoteCell height:note]);
+            }
         }
             break;
         case EntityHeaderCategoryType:
@@ -674,6 +540,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             break;
             
         default:
+            cellsize = CGSizeMake(0., 0.);
             break;
     }
     return cellsize;
@@ -681,7 +548,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0, 0.);
+    UIEdgeInsets edge;
     switch (section) {
         case EntityHeaderLikeType:
         {
@@ -703,6 +570,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             break;
         default:
 //            if (IS_IPAD) edge = UIEdgeInsetsMake(0., 128., 0, 128.);
+            edge = UIEdgeInsetsMake(0., 0., 0, 0.);
             break;
     }
     return edge;
@@ -711,7 +579,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    CGFloat itemSpacing = 0.;
+    CGFloat itemSpacing;
     switch (section) {
         case EntityHeaderType:
             break;
@@ -724,7 +592,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         }
             break;
         default:
-            //            itemSpacing = 0;
+            itemSpacing = 0.;
             break;
     }
     return itemSpacing;
@@ -732,18 +600,14 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    CGFloat spacing = 0;
+    CGFloat spacing;
     switch (section) {
         case EntityHeaderCategoryType:
         {
-            if (IS_IPHONE) {
+            if (IS_IPHONE)
                 spacing = 3.;
-            }
             else
-            {
                 spacing = 16.;
-            }
-             
         }
             break;
             
@@ -763,15 +627,9 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 656)
                             : CGSizeMake(kScreenWidth, [EntityHeaderView headerViewHightWithEntity:self.entity]);
             break;
-//        case 1:
-//            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 50.) : CGSizeMake(kScreenWidth, 0.);
-//            break;
-//        case 2:
-//            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 80) :  CGSizeMake(kScreenWidth, 0);
-//            break;
-//        case 3:
-//            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 0.) : CGSizeMake(kScreenWidth, 0);
-//            break;
+        case EntityHeaderActionType:
+            size    = CGSizeMake(kScreenWidth, 60.);
+            break;
         case EntityHeaderLikeType:
         {
             if (self.dataArrayForlikeUser.count != 0 && IS_IPAD) {
@@ -791,6 +649,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             break;
         default:
 //            size = IS_IPAD ? CGSizeMake(kPadScreenWitdh, 50.) : CGSizeMake(kScreenWidth, 48.);
+            size = CGSizeMake(0., 0.);
             break;
     }
     return size;
@@ -801,19 +660,21 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 4:
+        case EntityHeaderLikeType:
         {
-            UserViewController * VC = [[UserViewController alloc]init];
-            VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
-            [self.navigationController pushViewController:VC animated:YES];
-            [MobClick event:@"entity_forward_user"];
+            if (IS_IPAD) {
+                UserViewController * VC = [[UserViewController alloc]init];
+                VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
+                [self.navigationController pushViewController:VC animated:YES];
+                [MobClick event:@"entity_forward_user"];
+            }
         }
             break;
-        case 5:
-        {
-            
-        }
-            break;
+//        case EntityHeaderNoteType:
+//        {
+//            
+//        }
+//            break;
             
         default:
             break;
@@ -827,7 +688,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     
     EntityCell * cell = (EntityCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     switch (indexPath.section) {
-        case 6:
+        case EntityHeaderCategoryType:
         {
             if (iOS10) {
                 EntityViewController * vc = [[EntityViewController alloc] initWithEntity:cell.entity];
@@ -895,8 +756,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 {
     
 }
-
-
 
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
@@ -1082,7 +941,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 //        CGPointMake(scrollView.contentOffset.x, 0.)
         [weakSelf.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x, 0.) animated:YES];
         [weakSelf refresh];
-        [weakSelf refreshRandom];
+//        [weakSelf refreshRandom];
     };
     
     shareVC.tipOffBlock         = ^() {
