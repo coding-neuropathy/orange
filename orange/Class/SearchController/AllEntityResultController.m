@@ -30,7 +30,7 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight-kStatusBarHeight-kNavigationBarHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -47,7 +47,7 @@
     __weak __typeof(&*self)weakSelf = self;
     
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf reFresh];
+        [weakSelf refresh];
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -121,9 +121,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)reFresh
+
+#pragma mark - Data
+- (void)refresh
 {
-    //signing code
     [API searchEntityWithString:self.keyword type:@"all" offset:0 count:30 success:^(NSDictionary *stat, NSArray *entityArray) {
         if (entityArray.count == 0) {
             self.dataArray = [NSMutableArray arrayWithArray:entityArray];;
@@ -139,7 +140,6 @@
     }];
 }
 
-#pragma mark - Data
 - (void)loadMore
 {
     
@@ -151,7 +151,7 @@
         [self.tableView.infiniteScrollingView stopAnimating];
         [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {
-        DDLogError(@"code %ld", (long)stateCode);
+//        DDLogError(@"code %ld", (long)stateCode);
         [self.tableView.infiniteScrollingView stopAnimating];
     }];
 }
