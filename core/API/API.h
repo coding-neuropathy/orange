@@ -903,7 +903,7 @@ typedef NS_ENUM(NSInteger, GKPaymentType) {
 /**
  *  搜索页面 API
  *
- *  @param keyword
+ *  @param keyword 搜索关键词
  *  @param success 成功block
  *  @param failure 失败block
  */
