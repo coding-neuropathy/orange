@@ -271,7 +271,8 @@ static inline NSRegularExpression * UrlRegularExpression() {
     if (self.note.pokeCount == 0) {
         [self.pokeBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAThumbsOUp]  forState:UIControlStateNormal];
     } else {
-        [self.pokeBtn setTitle:[NSString stringWithFormat:@"%@ %u",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp], self.note.pokeCount] forState:UIControlStateNormal];
+        [self.pokeBtn setTitle:[NSString stringWithFormat:@"%@ %ld",
+                                [NSString fontAwesomeIconStringForEnum:FAThumbsOUp], (long)self.note.pokeCount] forState:UIControlStateNormal];
     }
     
     if ([Passport sharedInstance].user.user_state == GKUserBlockState && k_isLogin) {
@@ -281,12 +282,17 @@ static inline NSRegularExpression * UrlRegularExpression() {
     }
     
     if(self.note.commentCount == 0) {
-        [self.commentBtn setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACommentO]] forState:UIControlStateNormal];
+        [self.commentBtn setTitle:[NSString stringWithFormat:@"%@",[NSString fontAwesomeIconStringForEnum:FACommentO]]
+                         forState:UIControlStateNormal];
     } else {
-        [self.commentBtn setTitle:[NSString stringWithFormat:@"%@ %u",[NSString fontAwesomeIconStringForEnum:FACommentO], self.note.commentCount] forState:UIControlStateNormal];
+        [self.commentBtn setTitle:[NSString stringWithFormat:@"%@ %ld",
+                                   [NSString fontAwesomeIconStringForEnum:FACommentO],
+                                   (long)self.note.commentCount] forState:UIControlStateNormal];
     }
     
-    self.timeLabel.text = [NSString stringWithFormat:@"%@ %@",[NSString fontAwesomeIconStringForEnum:FAClockO],[self.note.createdDate stringWithFormat:@"yyyy-MM-dd"]];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ %@",
+                           [NSString fontAwesomeIconStringForEnum:FAClockO],
+                           [self.note.createdDate stringWithFormat:@"yyyy-MM-dd"]];
     
     [self setNeedsLayout];
 }
@@ -453,25 +459,28 @@ static inline NSRegularExpression * UrlRegularExpression() {
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
 {
     //    DDLogInfo(@"tap %@", rtLabel);
-    NSArray  *array= [[url absoluteString] componentsSeparatedByString:@":"];
-    if([array[0] isEqualToString:@"http"])
-    {
-        [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+    if (self.tapAvatarBlock) {
+        self.tapLinkBlock(url);
     }
-    if([array[0] isEqualToString:@"tag"])
-    {
-        [[OpenCenter sharedOpenCenter] openTagWithName:[array[1]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] User:self.note.creator];
-    }
-    if([array[0] isEqualToString:@"user"])
-    {
-        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
-        [[OpenCenter sharedOpenCenter] openUser:user];
-    }
-    if([array[0] isEqualToString:@"entity"])
-    {
-        GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
-        [[OpenCenter sharedOpenCenter] openEntity:entity];
-    }
+//    NSArray  *array= [[url absoluteString] componentsSeparatedByString:@":"];
+//    if([array[0] isEqualToString:@"http"])
+//    {
+//        [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+//    }
+//    if([array[0] isEqualToString:@"tag"])
+//    {
+//        [[OpenCenter sharedOpenCenter] openTagWithName:[array[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] User:self.note.creator];
+//    }
+//    if([array[0] isEqualToString:@"user"])
+//    {
+//        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
+//        [[OpenCenter sharedOpenCenter] openUser:user];
+//    }
+//    if([array[0] isEqualToString:@"entity"])
+//    {
+//        GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
+//        [[OpenCenter sharedOpenCenter] openEntity:entity];
+//    }
 }
 
 #pragma mark - Swip

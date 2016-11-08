@@ -23,6 +23,7 @@
 @property (weak, nonatomic) id<EntityNoteCellDelegate> delegate;
 
 @property (copy, nonatomic) void (^tapAvatarBlock)(GKUser *user);
+@property (copy, nonatomic) void (^tapLinkBlock)(NSURL *url);
 
 + (CGFloat)height:(GKNote *)note;
 

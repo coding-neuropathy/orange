@@ -433,6 +433,32 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             cell.tapAvatarBlock = ^(GKUser *user) {
                 [[OpenCenter sharedOpenCenter] openWithController:self User:user];
             };
+            cell.tapLinkBlock = ^(NSURL *url) {
+                NSArray  *array= [[url absoluteString] componentsSeparatedByString:@":"];
+                if([array[0] isEqualToString:@"http"])
+                {
+                    [[OpenCenter sharedOpenCenter] openWebWithURL:url];
+                }
+                
+                if([array[0] isEqualToString:@"tag"])
+                {
+                    [[OpenCenter sharedOpenCenter] openTagWithName:[array[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] User:self.note.creator];
+                }
+                if([array[0] isEqualToString:@"user"])
+                {
+                    GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
+//                        [[OpenCenter sharedOpenCenter] openUser:user];
+                    [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+                }
+                
+                if([array[0] isEqualToString:@"entity"])
+                {
+                    GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
+//                    [[OpenCenter sharedOpenCenter] openEntity:entity];
+                    EntityViewController *vc = [[EntityViewController alloc] initWithEntity:entity];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            };
             return cell;
         }
             break;
@@ -563,7 +589,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             }
             else
             {
-                edge = UIEdgeInsetsMake(0., 20., 0, 20.);
+                edge = UIEdgeInsetsMake(20., 20., 0, 20.);
             }
         }
             break;
