@@ -66,7 +66,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = UIColorFromRGB(0xffffff);
-        
     }
     return self;
 }
@@ -139,22 +138,22 @@
     return _bioBackView;
 }
 
-- (UIView *)v
-{
-    if (!_v) {
-        _v = [[UIView alloc] initWithFrame:CGRectZero];
-        _v.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self addSubview:_v];
-    }
-    return _v;
-}
+//- (UIView *)v
+//{
+//    if (!_v) {
+//        _v = [[UIView alloc] initWithFrame:CGRectZero];
+//        _v.backgroundColor = UIColorFromRGB(0xebebeb);
+//        [self addSubview:_v];
+//    }
+//    return _v;
+//}
 
 - (UIButton *)friendBtn
 {
     if (!_friendBtn) {
         _friendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //        _friendBtn.backgroundColor = [UIColor redColor];
-        _friendBtn.titleLabel.font = [UIFont systemFontOfSize:15.];
+        _friendBtn.titleLabel.font = IS_IPHONE_5 || IS_IPHONE_4_OR_LESS ? [UIFont systemFontOfSize:12.] : [UIFont systemFontOfSize:14.];
         [_friendBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         [_friendBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 //        [_friendBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 20.)];
@@ -170,7 +169,7 @@
     if (!_fansBtn) {
         _fansBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //        _fansBtn.backgroundColor = [UIColor greenColor];
-        _fansBtn.titleLabel.font = [UIFont systemFontOfSize:15.];
+        _fansBtn.titleLabel.font = IS_IPHONE_5 || IS_IPHONE_4_OR_LESS ? [UIFont systemFontOfSize:12.] : [UIFont systemFontOfSize:14.];
         [_fansBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
         [_fansBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 //        [_fansBtn setTitleEdgeInsets:UIEdgeInsetsMake(0., 20., 0., 0.)];
@@ -319,6 +318,7 @@
         NSMutableAttributedString *mutableStr = [[NSMutableAttributedString alloc]initWithString:str];
         NSRange positionRange = [str rangeOfString:[NSString stringWithFormat:@"%ld",(long)_user.followingCount]];
         [mutableStr addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x9d9e9f) range:positionRange];
+//        [mutableStr add]
         [self.friendBtn setAttributedTitle:mutableStr forState:UIControlStateNormal];
         [self.friendBtn sizeToFit];
     }
@@ -421,7 +421,7 @@
 //    if (IS_IPHONE && self.user.userId == [Passport sharedInstance].user.userId) [self layoutOrderButton];
     
     self.friendBtn.deFrameLeft          = self.nicknameLabel.deFrameLeft;
-    self.fansBtn.deFrameLeft            = self.friendBtn.deFrameRight + 43;
+    self.fansBtn.deFrameLeft           = self.friendBtn.deFrameRight + 30.;
     
     if (_user.userId == [Passport sharedInstance].user.userId) {
         self.editBtn.frame = CGRectMake(0., 0., 130., 30.);
@@ -448,7 +448,7 @@
 {
     [self layoutiPhoneSubViews];
     
-    self.v.frame = CGRectMake(CGRectGetMaxX(self.friendBtn.frame) + 20, self.friendBtn.frame.origin.y + 7, 1., 15.);
+//    self.v.frame = CGRectMake(CGRectGetMaxX(self.friendBtn.frame) + 20, self.friendBtn.frame.origin.y + 7, 1., 15.);
     
     [super layoutSubviews];
 
@@ -480,6 +480,16 @@
 //
 //        CGContextStrokePath(context);
 //    }
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    CGFloat xPoint = self.friendBtn.deFrameRight + (self.fansBtn.deFrameLeft - self.friendBtn.deFrameRight) / 2.;
+    
+    CGContextMoveToPoint(context, xPoint, self.friendBtn.deFrameTop + 3);
+    CGContextAddLineToPoint(context, xPoint, self.friendBtn.deFrameBottom - 3);
+
+    CGContextStrokePath(context);
 }
 
 #pragma mark button action

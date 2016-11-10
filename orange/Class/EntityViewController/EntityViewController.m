@@ -922,7 +922,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (void)handleCellEditBtn:(GKNote *)note
 {
-    ReportViewController * vc = [[ReportViewController alloc] init];
+    ReportViewController *vc    = [[ReportViewController alloc] init];
     vc.note = note;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
