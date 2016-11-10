@@ -426,7 +426,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     UserLikeCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
     cell.entityArray    = self.likedataArray;
     cell.tapEntityImageBlock = ^(GKEntity * entity) {
-        [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+//        [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+        [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
     };
     return cell;
 }
@@ -469,10 +470,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                 CGFloat userHeaderHeight = self.user.bio.length == 0 ? 144. : 204.;
                 userHeaderHeight += IS_IPAD ? 20. : 0.;
 #warning todo create order
-//                if (self.user.userId == [Passport sharedInstance].user.userId) {
-//                    userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
-//                    userHeaderHeight += IS_IPHONE ? 49. : 0;
-//                }
+                if (self.user.userId == [Passport sharedInstance].user.userId) {
+                    userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
+                    userHeaderHeight += IS_IPHONE ? 49. : 0;
+                }
                 size = CGSizeMake(self.collectionView.deFrameWidth, userHeaderHeight);
             
             }

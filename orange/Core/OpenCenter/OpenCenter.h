@@ -20,6 +20,7 @@ DEFINE_SINGLETON_FOR_HEADER(OpenCenter);
 - (void)openAuthUser:(GKUser *)user;
 
 - (void)openEntity:(GKEntity *)entity;
+- (void)openWithController:(UIViewController *)controller Entity:(GKEntity *)entity;
 - (void)openEntity:(GKEntity *)entity hideButtomBar:(BOOL)hide;
 
 - (void)openNoteComment:(GKNote *)note;
