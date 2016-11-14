@@ -69,7 +69,7 @@
 {
     if (!_brandLabel) {
         _brandLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
-        _brandLabel.deFrameSize     = CGSizeMake(CGRectGetWidth(self.frame) - 120., 20*2);
+        _brandLabel.deFrameSize     = CGSizeMake(CGRectGetWidth(self.frame) - 140., 20*2);
         _brandLabel.numberOfLines   = 2.;
         _brandLabel.textColor       = [UIColor colorFromHexString:@"#212121"];
         _brandLabel.font            = [UIFont systemFontOfSize:14.];
