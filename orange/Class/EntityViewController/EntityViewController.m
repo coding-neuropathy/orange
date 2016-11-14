@@ -986,10 +986,12 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
         if(!k_isLogin)
         {
             [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
-                [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+//                [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+                [self.navigationController pushViewController:VC animated:YES];
             }];
         } else {
-            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+            [self.navigationController pushViewController:VC animated:YES];
+//            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
         }
     };
     [shareVC show];

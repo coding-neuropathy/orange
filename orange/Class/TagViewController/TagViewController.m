@@ -157,7 +157,6 @@
 }
 
 #pragma mark - UITableViewDataSource
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.index == 0) {

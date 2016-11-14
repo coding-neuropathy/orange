@@ -54,6 +54,12 @@
  */
 @property (strong, nonatomic) NSURL * articleURL;
 
+
+/**
+ *  文章 阅读数
+ */
+@property (assign, nonatomic) NSInteger readCount;
+
 /**
  *  文章发布时间
  */
@@ -72,7 +78,7 @@
 /**
  *  图文副标题
  */
-@property (strong, nonatomic) NSString * digest;
+@property (strong, nonatomic) NSString *digest;
 
 /**
  *  图文评论数

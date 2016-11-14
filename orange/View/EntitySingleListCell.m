@@ -7,8 +7,8 @@
 //
 
 #import "EntitySingleListCell.h"
-#import <QuartzCore/QuartzCore.h>
-#import "API.h"
+//#import <QuartzCore/QuartzCore.h>
+//#import "API.h"
 #import "EntityViewController.h"
 //#import "LoginView.h"
 
@@ -53,6 +53,46 @@
     // Configure the view for the selected state
 }
 
+- (UIImageView *)image
+{
+    if (!_image) {
+        _image      = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _image.deFrameSize  = CGSizeMake(100., 100.);
+        _image.contentMode  = UIViewContentModeScaleAspectFit;
+        
+        [self.contentView addSubview:_image];
+    }
+    return _image;
+}
+
+- (UILabel *)brandLabel
+{
+    if (!_brandLabel) {
+        _brandLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
+        _brandLabel.deFrameSize     = CGSizeMake(CGRectGetWidth(self.frame) - 120., 20*2);
+        _brandLabel.numberOfLines   = 2.;
+        _brandLabel.textColor       = [UIColor colorFromHexString:@"#212121"];
+        _brandLabel.font            = [UIFont systemFontOfSize:14.];
+        
+        [self.contentView addSubview:_brandLabel];
+    }
+    return _brandLabel;
+}
+
+- (UILabel *)priceLabel
+{
+    if (!_priceLabel) {
+        _priceLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
+        _priceLabel.deFrameSize     = CGSizeMake(100., 20.);
+        _priceLabel.font            = [UIFont fontWithName:@"Georgia" size:16];
+        _priceLabel.textAlignment   = NSTextAlignmentLeft;
+        _priceLabel.textColor       = [UIColor colorFromHexString:@"#5e90c8"];
+//        [_priceLabel sizeToFit];
+        [self.contentView addSubview:_priceLabel];
+    }
+    return _priceLabel;
+}
+
 - (void)setEntity:(GKEntity *)entity
 {
     if (_entity) {
@@ -60,76 +100,49 @@
     }
     _entity = entity;
     [self addObserver];
+    
+    
+    [self.image sd_setImageWithURL:_entity.imageURL_310x310
+                  placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.image.deFrameSize]];
+    
+    self.brandLabel.text    = self.entity.entityName;
+    self.priceLabel.text    = [NSString stringWithFormat:@"￥%.2f", self.entity.lowestPrice];
+    
     [self setNeedsLayout];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.contentView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    if(!self.imageBG)
-    {
-        self.imageBG = [[UIView alloc]initWithFrame:CGRectMake(0, 1, 114, 113)];
-        self.imageBG.backgroundColor = UIColorFromRGB(0xf6f6f6);
-        //[self.contentView addSubview:self.imageBG];
-    }
-        
-    // 商品主图
-    if (!self.image) {
-        self.image = [[UIImageView alloc] initWithFrame:CGRectMake(7.f, 7.f, 100, 100)];
-        self.image.contentMode = UIViewContentModeScaleAspectFit;
-        self.image.backgroundColor = UIColorFromRGB(0xffffff);
-        [self.contentView addSubview:self.image];
-    }
+//    self.contentView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+//    if(!self.imageBG)
+//    {
+//        self.imageBG = [[UIView alloc]initWithFrame:CGRectMake(0, 1, 114, 113)];
+//        self.imageBG.backgroundColor = UIColorFromRGB(0xf6f6f6);
+//        //[self.contentView addSubview:self.imageBG];
+//    }
     
-    // 品牌
-    if (!self.brandLabel) {
-        _brandLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imageBG.deFrameRight+5,10, CGRectGetWidth(self.frame) - 190, 20*2)];
-        self.brandLabel.numberOfLines = 2;
-        self.brandLabel.font = [UIFont systemFontOfSize:14.f];
-        self.brandLabel.textAlignment = NSTextAlignmentLeft;
-        self.brandLabel.textColor = UIColorFromRGB(0x555555);
-        [self.contentView addSubview:self.brandLabel];
-    }
+    self.image.deFrameTop   = 7.;
+    self.image.deFrameLeft  = 7.;
     
-    // 标题
-    if (!self.titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.brandLabel.deFrameLeft, self.brandLabel.deFrameBottom, CGRectGetWidth(self.frame)-190, 15)];
-        self.titleLabel.numberOfLines = 1;
-        self.titleLabel.font = [UIFont systemFontOfSize:13.f];
-        self.titleLabel.textAlignment = NSTextAlignmentLeft;
-        self.titleLabel.textColor = UIColorFromRGB(0x666666);
-        //[self.contentView addSubview:self.titleLabel];
-    }
-    NSString * brand = @"";
-    NSString * title = @"";
-    if((![self.entity.brand isEqual:[NSNull null]])&&(![self.entity.brand isEqualToString:@""])&&(self.entity.brand))
-    {
-        brand = [NSString stringWithFormat:@"%@ - ",self.entity.brand];
-    }
-    if((![self.entity.title isEqual:[NSNull null]])&&(self.entity.title))
-    {
-        title = self.entity.title;
-    }
-    
-   self.brandLabel.text = [NSString stringWithFormat:@"%@%@",brand,title];
+    self.brandLabel.deFrameLeft = self.image.deFrameRight + 10;
+    self.brandLabel.deFrameTop  = 10.;
     
     
-    if(!self.priceLabel)
-    {
-        _priceLabel = [[UILabel alloc] initWithFrame: CGRectMake(self.brandLabel.deFrameLeft, 0, 100, 20)];
-        self.priceLabel.backgroundColor = [UIColor clearColor];
-        self.priceLabel.font = [UIFont fontWithName:@"Georgia" size:16];
-        self.priceLabel.textAlignment = NSTextAlignmentLeft;
-        self.priceLabel.textColor = UIColorFromRGB(0x5e90c8);
-        self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f", self.entity.lowestPrice];
-        
-        [self.contentView addSubview:self.priceLabel];
-    }
-    self.priceLabel.deFrameTop = self.brandLabel.deFrameBottom+10;
+//    if(!self.priceLabel)
+//    {
+//        _priceLabel = [[UILabel alloc] initWithFrame: CGRectMake(self.brandLabel.deFrameLeft, 0, 100, 20)];
+//        self.priceLabel.backgroundColor = [UIColor clearColor];
+//        self.priceLabel.font = [UIFont fontWithName:@"Georgia" size:16];
+//        self.priceLabel.textAlignment = NSTextAlignmentLeft;
+//        self.priceLabel.textColor = UIColorFromRGB(0x5e90c8);
+//        
+//        
+//        [self.contentView addSubview:self.priceLabel];
+//    }
+    self.priceLabel.deFrameTop = self.brandLabel.deFrameBottom + 10;
     self.priceLabel.deFrameLeft = self.brandLabel.deFrameLeft;
-    self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f", self.entity.lowestPrice];
-    [self.priceLabel sizeToFit];
+//    self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f", self.entity.lowestPrice];
     
     if(!self.tipLabel)
     {
@@ -144,36 +157,36 @@
     self.tipLabel.deFrameTop = self.frame.size.height - 20;
     self.tipLabel.deFrameRight = self.frame.size.width - 10;
     
-    if (!self.activityIndicator) {
-        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.activityIndicator.frame = CGRectMake(0, 0, 40, 40);
-        self.activityIndicator.center = self.image.center;
-        self.activityIndicator.hidesWhenStopped = YES;
-        self.activityIndicator.tag = 30325;
-        self.activityIndicator.color = UIColorFromRGB(0xbbbbbb);
-        [self.contentView insertSubview:self.activityIndicator aboveSubview:self.image];
-    }
+//    if (!self.activityIndicator) {
+//        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//        self.activityIndicator.frame = CGRectMake(0, 0, 40, 40);
+//        self.activityIndicator.center = self.image.center;
+//        self.activityIndicator.hidesWhenStopped = YES;
+//        self.activityIndicator.tag = 30325;
+//        self.activityIndicator.color = UIColorFromRGB(0xbbbbbb);
+//        [self.contentView insertSubview:self.activityIndicator aboveSubview:self.image];
+//    }
+//    
+//    [self.activityIndicator startAnimating];
     
-    [self.activityIndicator startAnimating];
-    
-    __weak __typeof(&*self)weakSelf = self;
-    [self.image sd_setImageWithURL:self.entity.imageURL_240x240 placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
-        if (!error) {
-            if (image && cacheType == SDImageCacheTypeNone) {
-                weakSelf.image.alpha = 0.0;
-                [UIView animateWithDuration:0.25 animations:^{
-                    weakSelf.image.alpha = 1.0;
-                }];
-            }
-        }
-        else
-        {
-            [weakSelf.image sd_setImageWithURL:weakSelf.entity.imageURL];
-        }
-        [weakSelf.activityIndicator stopAnimating];
-        weakSelf.activityIndicator.hidden = YES;
-
-    }];
+//    __weak __typeof(&*self)weakSelf = self;
+//    [self.image sd_setImageWithURL:self.entity.imageURL_240x240 placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
+//        if (!error) {
+//            if (image && cacheType == SDImageCacheTypeNone) {
+//                weakSelf.image.alpha = 0.0;
+//                [UIView animateWithDuration:0.25 animations:^{
+//                    weakSelf.image.alpha = 1.0;
+//                }];
+//            }
+//        }
+//        else
+//        {
+//            [weakSelf.image sd_setImageWithURL:weakSelf.entity.imageURL];
+//        }
+//        [weakSelf.activityIndicator stopAnimating];
+//        weakSelf.activityIndicator.hidden = YES;
+//
+//    }];
     
     if (!self.likeButton) {
         _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 40)];

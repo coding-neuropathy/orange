@@ -28,7 +28,7 @@
                             @"content"          :   @"content",
 //                            @"url"          :   @"url",
                             @"tags"             :   @"tags",
-                            @"read_count"       :   @"read_count",
+                            @"read_count"       :   @"readCount",
                             @"cover"            :   @"cover",
                             @"url"              :   @"url_string",
                             @"creator"          :   @"creator",

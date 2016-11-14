@@ -426,7 +426,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     UserLikeCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
     cell.entityArray    = self.likedataArray;
     cell.tapEntityImageBlock = ^(GKEntity * entity) {
-//        [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
         [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
     };
     return cell;
@@ -578,14 +577,15 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             
         }
             break;
-        case 3:
-        {
-            GKNote * note = [self.notedataArray objectAtIndex:indexPath.row];
-            GKEntity * entity = [GKEntity modelFromDictionary:@{@"entity_id": note.entityId}];
-            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-        }
-            break;
-            
+//        case 3:
+//        {
+//            GKNote * note = [self.notedataArray objectAtIndex:indexPath.row];
+//            GKEntity * entity = [GKEntity modelFromDictionary:@{@"entity_id": note.entityId}];
+////            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+//            [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+//        }
+//            break;
+//            
         default:
             break;
     }

@@ -191,7 +191,7 @@ static NSString * NoteIdentifier = @"NoteCell";
 {
     GKNote * note = [self.noteArray objectAtIndex:indexPath.row];
     GKEntity * entity = [GKEntity modelFromDictionary:@{@"entity_id": note.entityId}];
-    [[OpenCenter sharedOpenCenter] openEntity:entity];
+    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
 }
 
 @end

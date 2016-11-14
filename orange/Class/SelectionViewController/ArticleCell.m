@@ -10,11 +10,12 @@
 
 @interface ArticleCell ()
 
-@property (strong, nonatomic) UIImageView * coverImageView;
-@property (strong, nonatomic) UILabel * titleLabel;
-@property (strong, nonatomic) UILabel * detailLabel;
-@property (strong, nonatomic) UILabel * timeLabel;
-@property (strong, nonatomic) UIView * H;
+@property (strong, nonatomic) UIImageView   *coverImageView;
+@property (strong, nonatomic) UILabel       *titleLabel;
+@property (strong, nonatomic) UILabel       *detailLabel;
+@property (strong, nonatomic) UILabel       *timeLabel;
+@property (strong, nonatomic) UILabel       *readCountLabel;
+@property (strong, nonatomic) UIView        *H;
 
 @end
 
@@ -75,6 +76,19 @@
     return _detailLabel;
 }
 
+- (UILabel *)readCountLabel
+{
+    if (!_readCountLabel) {
+        _readCountLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
+        _readCountLabel.deFrameSize     = CGSizeMake(100., 20.);
+        _readCountLabel.font            = [UIFont fontWithName:kFontAwesomeFamilyName size:12.];
+        _readCountLabel.textColor       = [UIColor colorFromHexString:@"9d9e9f"];
+        _readCountLabel.textAlignment   = NSTextAlignmentLeft;
+        
+        [self.contentView addSubview:_readCountLabel];
+    }
+    return _readCountLabel;
+}
 
 - (UILabel *)timeLabel
 {
@@ -118,6 +132,11 @@
 //        [tagListString appendString:tagString];
 //    }
 //    self.tagsLabel.text = tagListString;
+    /**
+     *
+     */
+    self.readCountLabel.text = [NSString stringWithFormat:@"%@  %ld",
+                                [NSString fontAwesomeIconStringForEnum:FAEye], (long)_article.readCount];
     
     /**
      *  设置发布时间
@@ -167,10 +186,13 @@
         self.detailLabel.frame = CGRectMake(0., 0., kScreenWidth -32, 45);
         self.detailLabel.center = self.titleLabel.center;
         self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
+        
+        self.readCountLabel.deFrameLeft = 16.;
+        self.readCountLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
     
         self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
         self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
-        self.timeLabel.deFrameRight = self.contentView.deFrameRight - 10.;
+        self.timeLabel.deFrameRight = self.contentView.deFrameRight - 16.;
     
         self.H.deFrameBottom = self.deFrameHeight;
     }
