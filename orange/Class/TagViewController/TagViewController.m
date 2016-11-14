@@ -183,56 +183,14 @@ static NSString *EntityCellIdentifer = @"EntityCell";
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [EntitySingleListCell height];
+    return 114.;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    GKEntity * entity = [self.dataArrayForEntity objectAtIndex:indexPath.row];
     
+    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
 }
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 0.1;
-//}
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    return nil;
-//}
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    return 0.01f;
-//}
-
-//
-//#pragma mark - HMSegmentedControl
-//- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-//    NSUInteger index = segmentedControl.selectedSegmentIndex;
-//    self.index = index;
-//    [self.tableView reloadData];
-//    switch (index) {
-//        case 0:
-//        {
-//            if (self.dataArrayForEntity.count ==0) {
-//                [self refresh];
-//            }
-//        }
-//            break;
-//        case 1:
-//        {
-//            if (self.dataArrayForEntity.count ==0) {
-//                [self refresh];
-//            }
-//        }
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//}
-
 
 @end

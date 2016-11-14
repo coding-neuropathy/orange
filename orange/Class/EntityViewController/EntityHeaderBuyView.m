@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) UIButton *postBtn;
 @property (strong, nonatomic) UIButton *buyButton;
-@property (strong, nonatomic) UIView *H;
+//@property (strong, nonatomic) UIView *H;
 @end
 
 @implementation EntityHeaderBuyView
@@ -67,7 +67,7 @@
         switch (purchase.status) {
             case GKBuyREMOVE:
             {
-                [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
+                [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
                 [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                 [self.buyButton setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
                 self.buyButton.backgroundColor = [UIColor clearColor];
@@ -76,7 +76,7 @@
                 break;
             case GKBuySOLDOUT:
             {
-                self.buyButton.backgroundColor = UIColorFromRGB(0x9d9e9f);
+                self.buyButton.backgroundColor = [UIColor colorFromHexString:@"#9d9e9f"];
                 [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                 [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
             }
@@ -105,7 +105,6 @@
     self.buyButton.frame = IS_IPAD ? CGRectMake(0., 0., self.deFrameWidth - 40., 40.) : CGRectMake(0., 0., self.deFrameWidth -20., 40.);
     
     self.buyButton.center = CGPointMake(self.deFrameWidth * 3/6, self.deFrameHeight / 2);
-    self.H.deFrameBottom = self.deFrameHeight;
 }
 
 #pragma mark - button Buy

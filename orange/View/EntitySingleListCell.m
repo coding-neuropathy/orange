@@ -36,12 +36,12 @@
     if (self) {
 
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonAction)];
-        [self addGestureRecognizer:tap];
-    
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self.contentView addSubview:self.H];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonAction)];
+//        [self addGestureRecognizer:tap];
+//    
+//        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
+//        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
+//        [self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -69,7 +69,7 @@
 {
     if (!_brandLabel) {
         _brandLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
-        _brandLabel.deFrameSize     = CGSizeMake(CGRectGetWidth(self.frame) - 140., 20*2);
+        _brandLabel.deFrameSize     = CGSizeMake(CGRectGetWidth(self.frame) - 150., 20*2);
         _brandLabel.numberOfLines   = 2.;
         _brandLabel.textColor       = [UIColor colorFromHexString:@"#212121"];
         _brandLabel.font            = [UIFont systemFontOfSize:14.];
@@ -332,17 +332,17 @@
     }
 }
 
-- (void)buttonAction
-{
-    EntityViewController * VC = [[EntityViewController alloc]init];
-    VC.entity = self.entity;
-    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-}
+//- (void)buttonAction
+//{
+//    EntityViewController * VC = [[EntityViewController alloc]init];
+//    VC.entity = self.entity;
+//    if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
+//    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+//}
 
-+ (CGFloat)height
-{
-    return 114;
-}
+//+ (CGFloat)height
+//{
+//    return 114;
+//}
 
 @end
