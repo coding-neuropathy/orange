@@ -9,7 +9,7 @@
 #import "EntityViewController.h"
 //#import "API.h"
 
-#import "EntityStickyHeaderFlowLayout.h"
+//#import "EntityStickyHeaderFlowLayout.h"
 #import "UserViewController.h"
 #import "SubCategoryEntityController.h"
 
@@ -19,7 +19,7 @@
 #import "EntityCell.h"
 #import "EntityHeaderSectionView.h"
 #import "EntityHeaderActionView.h"
-#import "EntityHeaderBuyView.h"
+//#import "EntityHeaderBuyView.h"
 #import "EntityPopView.h"
 
 //#import "EntityNoteFooterView.h"

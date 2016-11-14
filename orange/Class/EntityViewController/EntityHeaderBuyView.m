@@ -70,7 +70,9 @@
                 [self.buyButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
                 [self.buyButton setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                 [self.buyButton setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
-                self.buyButton.backgroundColor = [UIColor clearColor];
+//                self.buyButton.backgroundColor = [UIColor clearColor];
+                self.buyButton.backgroundColor  = [UIColor clearColor];
+                [self.buyButton setBackgroundColor:[UIColor clearColor]];
                 self.buyButton.enabled = NO;
             }
                 break;
