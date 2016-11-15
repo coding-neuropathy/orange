@@ -12,6 +12,6 @@
 
 @property (nonatomic, strong) GKEntity *entity;
 
-//+ (CGFloat)height;
++ (CGFloat)height;
 
 @end

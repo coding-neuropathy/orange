@@ -34,8 +34,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor    = [UIColor colorFromHexString:@"#ffffff"];
+        self.selectionStyle     = UITableViewCellSelectionStyleNone;
 //        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonAction)];
 //        [self addGestureRecognizer:tap];
 //    
@@ -46,12 +46,12 @@
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
+//- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+//{
+//    [super setSelected:selected animated:animated];
+//    
+//    // Configure the view for the selected state
+//}
 
 - (UIImageView *)image
 {
@@ -258,10 +258,29 @@
         self.image.layer.borderWidth = 0;
     }
     
-    [self bringSubviewToFront:self.H];
-    _H.deFrameBottom = self.frame.size.height;
+//    [self bringSubviewToFront:self.H];
+//    _H.deFrameBottom = self.frame.size.height;
     
 
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor colorFromHexString:@"#ebebeb"].CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    
+    CGContextMoveToPoint(context, self.contentView.deFrameWidth, 0.);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    
+    CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    
+    CGContextStrokePath(context);
+    
+    
+    [super drawRect:rect];
 }
 
 #pragma mark - KVO
@@ -340,9 +359,9 @@
 //    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
 //}
 
-//+ (CGFloat)height
-//{
-//    return 114;
-//}
++ (CGFloat)height
+{
+    return 114.;
+}
 
 @end
