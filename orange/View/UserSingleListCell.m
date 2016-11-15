@@ -128,6 +128,7 @@
     return _contentLabel;
 }
 
+#pragma mark - set data
 - (void)setUser:(GKUser *)user
 {
     if (_user) {
@@ -140,7 +141,7 @@
     [self.avatar sd_setImageWithURL:self.user.avatarURL
                    placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.avatar.deFrameSize]];
     
-    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^212121' size=14>%@ </font></a>", (unsigned long)self.user.userId, self.user.nick];
+
     
     if (_user.user_state == GKUserBlockState) {
         self.followButton.hidden = YES;
@@ -151,25 +152,33 @@
     }
     
     if (_user.authorized_author == YES) {
-        self.label.text = [NSString stringWithFormat:@"%@",_user.nick];
+//        self.label.text = [NSString stringWithFormat:@"%@",_user.nick];
         self.staffImageView.image = [UIImage imageNamed:@"official"];
     }
     else
     {
-        self.label.text = [NSString stringWithFormat:@"%@",_user.nick];
-        self.staffImageView.image = [UIImage imageNamed:@""];
+        self.staffImageView.image = [UIImage new];
     }
+    
+    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^212121' size=14>%@ </font></a>",
+                       (long)self.user.userId, self.user.nick];
+    
+    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=12>%@ %ld   %@ %ld</font>",
+                              NSLocalizedStringFromTable(@"following", kLocalizedFile, nil),
+                              (long)self.user.followingCount,
+                              NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil),
+                              (long)self.user.fanCount];;
     
     
     [self setNeedsLayout];
 }
 
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
+//
+//- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+//    [super setSelected:selected animated:animated];
+//    
+//    // Configure the view for the selected state
+//}
 
 - (void)layoutSubviews
 {
@@ -193,11 +202,7 @@
     self.label.deFrameLeft = 60.;
     
     
-    self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=12>%@ %ld   %@ %ld</font>",
-                              NSLocalizedStringFromTable(@"following", kLocalizedFile, nil),
-                              (long)self.user.followingCount,
-                              NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil),
-                              (long)self.user.fanCount];;
+
     
     self.contentLabel.deFrameLeft   = 60.;
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
@@ -301,16 +306,6 @@
     }
 }
 
-
-- (void)avatarButtonAction:(id)sender
-{
-//     [[OpenCenter sharedOpenCenter] openUser:self.user];
-    if (self.TapAvatarAction) {
-        self.TapAvatarAction(self.user);
-    }
-}
-
-
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
@@ -325,6 +320,18 @@
     CGContextStrokePath(context);
 }
 
+
+#pragma mark - button action
+- (void)avatarButtonAction:(id)sender
+{
+    //     [[OpenCenter sharedOpenCenter] openUser:self.user];
+    if (self.TapAvatarAction) {
+        self.TapAvatarAction(self.user);
+    }
+}
+
+
+#pragma mark = <UIAlertViewDelegate>
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(alertView.tag ==20001)

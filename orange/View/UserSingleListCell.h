@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "RTLabel.h"
 
-@interface UserSingleListCell : UITableViewCell<RTLabelDelegate,UIAlertViewDelegate>
-@property(strong, nonatomic) GKUser * user;
+@interface UserSingleListCell : UITableViewCell<RTLabelDelegate, UIAlertViewDelegate>
 
+@property(strong, nonatomic) GKUser     *user;
 
 /** 认证用户标记 */
 @property (nonatomic, strong) UIImageView * staffImageView;

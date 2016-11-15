@@ -54,27 +54,6 @@ static NSString *CellIdentifier = @"UserSingleListCell";
 
 }
 
-#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
-- (void)didMoveToParentViewController:(UIViewController *)parent
-{
-    __weak __typeof(&*self)weakSelf = self;
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        
-//        [weakSelf.entityList refreshWithCategoryId:weakSelf.cateId];
-        [weakSelf refresh];
-    }];
-    
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-//        [weakSelf.entityList loadWithCategoryId:weakSelf.cateId];
-        [weakSelf loadMore];
-    }];
-    
-    if (self.dataArrayForUser.count == 0)
-    {
-        [self.tableView triggerPullToRefresh];
-    }
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -94,6 +73,27 @@ static NSString *CellIdentifier = @"UserSingleListCell";
     [super viewWillDisappear:animated];
 //    [AVAnalytics endLogPageView:@"friendView"];
     [MobClick endLogPageView:@"friendView"];
+}
+
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        
+        //        [weakSelf.entityList refreshWithCategoryId:weakSelf.cateId];
+        [weakSelf refresh];
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        //        [weakSelf.entityList loadWithCategoryId:weakSelf.cateId];
+        [weakSelf loadMore];
+    }];
+    
+    if (self.dataArrayForUser.count == 0)
+    {
+        [self.tableView triggerPullToRefresh];
+    }
 }
 
 /*

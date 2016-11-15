@@ -20,6 +20,8 @@
 
 @implementation FanViewController
 
+static NSString *CellIdentifier = @"UserSingleListCell";
+
 - (NoDataView *)noDataView
 {
     if (!_noDataView) {
@@ -47,21 +49,23 @@
     
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     
-    __weak __typeof(&*self)weakSelf = self;
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf refresh];
-    }];
+    [self.tableView registerClass:[UserSingleListCell class] forCellReuseIdentifier:CellIdentifier];
     
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        [weakSelf loadMore];
-    }];
-    
-    [self refresh];
-    
-    if (self.dataArrayForUser == 0)
-    {
-        [self.tableView.pullToRefreshView startAnimating];
-    }
+//    __weak __typeof(&*self)weakSelf = self;
+//    [self.tableView addPullToRefreshWithActionHandler:^{
+//        [weakSelf refresh];
+//    }];
+//    
+//    [self.tableView addInfiniteScrollingWithActionHandler:^{
+//        [weakSelf loadMore];
+//    }];
+//    
+//    [self refresh];
+//    
+//    if (self.dataArrayForUser == 0)
+//    {
+//        [self.tableView.pullToRefreshView startAnimating];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,6 +85,27 @@
     [super viewWillDisappear:animated];
 //    [AVAnalytics endLogPageView:@"fanView"];
     [MobClick endLogPageView:@"fanView"];
+}
+
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        
+        //        [weakSelf.entityList refreshWithCategoryId:weakSelf.cateId];
+        [weakSelf refresh];
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        //        [weakSelf.entityList loadWithCategoryId:weakSelf.cateId];
+        [weakSelf loadMore];
+    }];
+    
+    if (self.dataArrayForUser.count == 0)
+    {
+        [self.tableView triggerPullToRefresh];
+    }
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -158,12 +183,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *CellIdentifier = @"UserSingleListCell";
-    UserSingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UserSingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    cell.user = [self.dataArrayForUser objectAtIndex:indexPath.row];
+//    static NSString *CellIdentifier = @"UserSingleListCell";
+//    UserSingleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    if (!cell) {
+//        cell = [[UserSingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//    }
+    UserSingleListCell  *cell   = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.user                   = [self.dataArrayForUser objectAtIndex:indexPath.row];
+    cell.TapAvatarAction        = ^(GKUser *user) {
+        [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+    };
     
     return cell;
     

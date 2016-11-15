@@ -413,7 +413,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                     break;
             }
         
-        
         return footerSection;
     }
     
@@ -437,16 +436,14 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     CGSize itemSize = CGSizeMake(0, 0);
     switch (indexPath.section) {
         case 1:
-            if (IS_IPAD) {
-                itemSize = CGSizeMake(kScreenWidth, 100.);
-            } else {
-                itemSize = IS_IPHONE_6P || IS_IPHONE_6 ? CGSizeMake(kScreenWidth, 80.) : CGSizeMake(kScreenWidth, 64.);
-//                if (IS_IPHONE_6P || IS_IPHONE_6)
-//                itemSize = CGSizeMake(kScreenWidth, 80.);
-//                else
-//                    itemSize = CGSizeMake(64., 64.);
+            if (self.likedataArray.count > 0) {
+                if (IS_IPAD) {
+                    itemSize = CGSizeMake(kScreenWidth, 100.);
+                } else {
+                    itemSize = IS_IPHONE_6P || IS_IPHONE_6 ? CGSizeMake(kScreenWidth, 80.) : CGSizeMake(kScreenWidth, 64.);
+                    
+                }
             }
-
             break;
         case 2:
             itemSize = CGSizeMake(kScreenWidth, 110.);
