@@ -51,24 +51,30 @@ static NSString *CellIdentifier = @"UserSingleListCell";
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.tableView registerClass:[UserSingleListCell class] forCellReuseIdentifier:CellIdentifier];
-    
+
+}
+
+#pragma  mark - Fixed SVPullToRefresh in ios7 navigation bar translucent
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
     __weak __typeof(&*self)weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
+        
+//        [weakSelf.entityList refreshWithCategoryId:weakSelf.cateId];
         [weakSelf refresh];
     }];
     
-    
     [self.tableView addInfiniteScrollingWithActionHandler:^{
+//        [weakSelf.entityList loadWithCategoryId:weakSelf.cateId];
         [weakSelf loadMore];
     }];
     
-    [self refresh];
-    
-    if (self.dataArrayForUser == 0) {
+    if (self.dataArrayForUser.count == 0)
+    {
         [self.tableView triggerPullToRefresh];
     }
-    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -171,9 +177,11 @@ static NSString *CellIdentifier = @"UserSingleListCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserSingleListCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.user = [self.dataArrayForUser objectAtIndex:indexPath.row];
-    
+    UserSingleListCell *cell    = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.user                   = [self.dataArrayForUser objectAtIndex:indexPath.row];
+    cell.TapAvatarAction        = ^(GKUser *user) {
+        [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+    };
     return cell;
 }
 
@@ -189,10 +197,10 @@ static NSString *CellIdentifier = @"UserSingleListCell";
     return 0.f;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return [UIView new];
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    return [UIView new];
+//}
 
 
 @end

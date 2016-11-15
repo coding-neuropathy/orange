@@ -7,13 +7,20 @@
 //
 
 #import "UserSingleListCell.h"
-#import "UserViewController.h"
-#import "API.h"
+#import "RTLabel.h"
+//#import "UserViewController.h"
+//#import "API.h"
 //#import "LoginView.h"
 
 @interface UserSingleListCell ()
 
-@property (strong, nonatomic) UIButton * blockBtn;
+@property (strong, nonatomic) UIButton      *blockBtn;
+
+@property (nonatomic, strong) UIImageView   *avatar;
+@property (nonatomic, strong) RTLabel       *label;
+@property (nonatomic, strong) RTLabel       *contentLabel;
+@property (nonatomic, strong) UIButton      *followButton;
+//@property (nonatomic, strong) UIView *H;
 
 @end
 
@@ -32,9 +39,6 @@
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.clipsToBounds = YES;
-        _H = [[UIView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-1, kScreenWidth, 0.5)];
-        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
-        //[self.contentView addSubview:self.H];
     }
     return self;
 }
@@ -76,6 +80,54 @@
     return _followButton;
 }
 
+
+- (UIImageView *)avatar
+{
+    if (!_avatar) {
+        _avatar                         = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _avatar.deFrameSize             = CGSizeMake(36., 36.);
+        _avatar.userInteractionEnabled  = YES;
+        _avatar.layer.cornerRadius      = _avatar.deFrameHeight / 2.;
+        _avatar.layer.masksToBounds     = YES;
+        
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(avatarButtonAction:)];
+        [_avatar addGestureRecognizer:tap];
+        
+        [self.contentView addSubview:_avatar];
+    }
+    return _avatar;
+}
+
+- (RTLabel *)label
+{
+    if (!_label) {
+        _label                  = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _label.font             = [UIFont boldSystemFontOfSize:14.];
+        _label.lineBreakMode    = NSLineBreakByWordWrapping;
+        //        self.label.paragraphReplacement = @"";
+        _label.lineSpacing      = 1.;
+        _label.delegate         = self;
+        _label.textAlignment    = NSTextAlignmentLeft;
+        [self.contentView addSubview:_label];
+    }
+    return _label;
+}
+
+- (RTLabel *)contentLabel
+{
+    if (!_contentLabel) {
+        _contentLabel                       = [[RTLabel alloc] initWithFrame:CGRectZero];
+        _contentLabel.deFrameSize           = CGSizeMake(self.contentView.deFrameWidth - 70, 20);
+        _contentLabel.paragraphReplacement  = @"";
+        _contentLabel.lineSpacing           = 4.0;
+        _contentLabel.delegate              = self;
+        
+        [self.contentView addSubview:self.contentLabel];
+    }
+    return _contentLabel;
+}
+
 - (void)setUser:(GKUser *)user
 {
     if (_user) {
@@ -84,6 +136,11 @@
     _user = user;
     
     [self addObserver];
+    
+    [self.avatar sd_setImageWithURL:self.user.avatarURL
+                   placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.avatar.deFrameSize]];
+    
+    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^212121' size=14>%@ </font></a>", (unsigned long)self.user.userId, self.user.nick];
     
     if (_user.user_state == GKUserBlockState) {
         self.followButton.hidden = YES;
@@ -107,6 +164,7 @@
     [self setNeedsLayout];
 }
 
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
@@ -117,56 +175,23 @@
 {
     [super layoutSubviews];
     
+
+    self.avatar.deFrameTop  = 19.;
+    self.avatar.deFrameLeft = 10.;
     
-    if (!self.avatar) {
-        _avatar = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 19.f, 36.f, 36.f)];
-        
-        self.avatar.userInteractionEnabled = YES;
-        self.avatar.layer.cornerRadius = _avatar.deFrameHeight / 2.;
-        self.avatar.layer.masksToBounds = YES;
-        [self.contentView addSubview:_avatar];
-    }
-    
-    [self.avatar sd_setImageWithURL:self.user.avatarURL
-                   placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.avatar.deFrameSize]];
-    
-    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self action:@selector(avatarButtonAction)];
-    [self.avatar addGestureRecognizer:tap];
-    
-    
-//    self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
-    
-    if(!self.label) {
-        
-        _label = [[RTLabel alloc] initWithFrame:CGRectZero];
-        self.label.font = [UIFont boldSystemFontOfSize:14.];
-        self.label.lineBreakMode = NSLineBreakByWordWrapping;
-//        self.label.paragraphReplacement = @"";
-        self.label.lineSpacing = 1;
-        self.label.delegate = self;
-        self.label.textAlignment = NSTextAlignmentLeft;
-        [self.contentView addSubview:self.label];
-    }
-    self.label.text = [NSString stringWithFormat:@"<a href='user:%ld'><font face='Helvetica-Bold' color='^212121' size=14>%@ </font></a>", (unsigned long)self.user.userId, self.user.nick];
     if (!_staffImageView) {
         _staffImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0., 0., 15., 15.)];
         [self.contentView addSubview:_staffImageView];
     }
+    self.staffImageView.deFrameTop = self.avatar.deFrameBottom - 10.;
+    self.staffImageView.deFrameLeft = self.avatar.deFrameRight - 10.;
+    
+    self.label.deFrameHeight = self.label.optimumSize.height + 5.f;
+
     self.label.frame = CGRectMake(0., 0., kScreenWidth - 70, 20);
     self.label.deFrameTop = 19.;
     self.label.deFrameLeft = 60.;
     
-    
-    self.staffImageView.deFrameTop = self.avatar.deFrameBottom - 10.;
-    self.staffImageView.deFrameLeft = self.avatar.deFrameRight - 10.;
-    if(!self.contentLabel) {
-        _contentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(60, 27, self.contentView.deFrameWidth - 70, 20)];
-        self.contentLabel.paragraphReplacement = @"";
-        self.contentLabel.lineSpacing = 4.0;
-        self.contentLabel.delegate = self;
-        [self.contentView addSubview:self.contentLabel];
-    }
     
     self.contentLabel.text = [NSString stringWithFormat:@"<font face='Helvetica' color='^777777' size=12>%@ %ld   %@ %ld</font>",
                               NSLocalizedStringFromTable(@"following", kLocalizedFile, nil),
@@ -174,18 +199,10 @@
                               NSLocalizedStringFromTable(@"followers", kLocalizedFile, nil),
                               (long)self.user.fanCount];;
     
+    self.contentLabel.deFrameLeft   = 60.;
     self.contentLabel.deFrameHeight = self.contentLabel.optimumSize.height + 5.f;
-    self.contentLabel.deFrameTop = self.label.deFrameBottom;
-//    
-//    if (!self.followButton)
-//    {
-//        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 24)];
-//        button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];
-//        button.titleLabel.textAlignment = NSTextAlignmentCenter;
-//        button.center = CGPointMake(kScreenWidth - 40, 37);
-//        [self.contentView addSubview:button];
-//        self.followButton = button;
-//    }
+    self.contentLabel.deFrameTop    = self.label.deFrameBottom;
+
     if (self.user.user_state == GKUserBlockState) {
         self.blockBtn.frame     = CGRectMake(0., 0., 40., 24.);
         self.blockBtn.center    = CGPointMake(self.contentView.deFrameWidth - 40., 37.);
@@ -196,8 +213,7 @@
 //        self.followButton.center = IS_IPHONE?CGPointMake(kScreenWidth - 40, 37) : CGPointMake(kScreenWidth - kTabBarWidth - 40, 37);
         [self configFollowButton];
     }
-    [self bringSubviewToFront:self.H];
-    _H.deFrameBottom = self.contentView.deFrameBottom;
+
 }
 
 -(void)configFollowButton
@@ -279,7 +295,6 @@
         [API followUserId:self.user.userId state:NO success:^(GKUserRelationType relation) {
             self.user.relation = relation;
             [self configFollowButton];
-        //[SVProgressHUD showImage:nil status:@"取关成功"];
         } failure:^(NSInteger stateCode) {
             [SVProgressHUD showImage:nil status:NSLocalizedStringFromTable(@"unfollow-failure", kLocalizedFile, nil)];
         }];
@@ -287,9 +302,12 @@
 }
 
 
-- (void)avatarButtonAction
+- (void)avatarButtonAction:(id)sender
 {
-     [[OpenCenter sharedOpenCenter] openUser:self.user];
+//     [[OpenCenter sharedOpenCenter] openUser:self.user];
+    if (self.TapAvatarAction) {
+        self.TapAvatarAction(self.user);
+    }
 }
 
 

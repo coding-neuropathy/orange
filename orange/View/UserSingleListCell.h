@@ -11,13 +11,13 @@
 
 @interface UserSingleListCell : UITableViewCell<RTLabelDelegate,UIAlertViewDelegate>
 @property(strong, nonatomic) GKUser * user;
-@property (nonatomic, strong) UIImageView *avatar;
-@property (nonatomic, strong) RTLabel *label;
-@property (nonatomic, strong) RTLabel *contentLabel;
-@property (nonatomic, strong) UIButton *followButton;
-@property (nonatomic, strong) UIView *H;
+
+
 /** 认证用户标记 */
 @property (nonatomic, strong) UIImageView * staffImageView;
+@property (copy, nonatomic) void (^TapAvatarAction)(GKUser *user);
+
 
 + (CGFloat)height;
+
 @end
