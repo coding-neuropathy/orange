@@ -22,7 +22,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel * tipLabel;
 @property (nonatomic, strong) UILabel *priceLabel;
-@property (nonatomic, strong) UIView *H;
+//@property (nonatomic, strong) UIView *H;
 @property (nonatomic, strong) UIButton *likeButton;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UIImageView * entity_mark;
@@ -93,6 +93,56 @@
     return _priceLabel;
 }
 
+- (UIButton *)likeButton
+{
+    if (!_likeButton) {
+//        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 40)];
+        _likeButton                             = [UIButton buttonWithType:UIButtonTypeCustom];
+        _likeButton.deFrameSize                 = CGSizeMake(70., 40.);
+        _likeButton.layer.masksToBounds         = YES;
+//        _likeButton.layer.cornerRadius  = 2;
+        _likeButton.backgroundColor             = [UIColor clearColor];
+        _likeButton.titleLabel.font             = [UIFont fontWithName:kFontAwesomeFamilyName size:14];;
+        _likeButton.titleLabel.textAlignment    = NSTextAlignmentRight;
+        [_likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        /*
+         [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
+         [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
+         [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
+         [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
+         */
+        
+        [_likeButton setTitle:[NSString fontAwesomeIconStringForEnum:FAHeartO] forState:UIControlStateNormal];
+        [_likeButton setTitle:[NSString fontAwesomeIconStringForEnum:FAHeart] forState:UIControlStateSelected];
+        [_likeButton setTitleColor:UIColorFromRGB(0xFF1F77) forState:UIControlStateSelected];
+        [_likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+        
+        [_likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 10)];
+        
+        [_likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.contentView addSubview:_likeButton];
+    }
+    return _likeButton;
+}
+
+- (UILabel *)tipLabel
+{
+    if (!_tipLabel) {
+        _tipLabel                   = [[UILabel alloc]initWithFrame:CGRectMake(self.brandLabel.deFrameLeft, 0, 80, 10)];
+        _tipLabel.textAlignment     = NSTextAlignmentRight;
+        _tipLabel.font              = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+        _tipLabel.backgroundColor   = [UIColor clearColor];
+//        [_tipLabel setBackgroundColor:[UIColor clearColor]];
+        _tipLabel.textColor         = UIColorFromRGB(0x9d9e9f);
+        
+        [self.contentView addSubview:_tipLabel];
+    }
+    return _tipLabel;
+}
+
+
+#pragma mark - set data
 - (void)setEntity:(GKEntity *)entity
 {
     if (_entity) {
@@ -107,6 +157,13 @@
     
     self.brandLabel.text    = self.entity.entityName;
     self.priceLabel.text    = [NSString stringWithFormat:@"￥%.2f", self.entity.lowestPrice];
+    
+    self.likeButton.selected = self.entity.liked;
+    
+    [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",
+                            [NSString fontAwesomeIconStringForEnum:FAHeart],
+                            (long)self.entity.likeCount,[NSString fontAwesomeIconStringForEnum:FAComment],
+                            (long)self.entity.noteCount]];
     
     [self setNeedsLayout];
 }
@@ -144,16 +201,17 @@
     self.priceLabel.deFrameLeft = self.brandLabel.deFrameLeft;
 //    self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f", self.entity.lowestPrice];
     
-    if(!self.tipLabel)
-    {
-        _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.brandLabel.deFrameLeft, 0, 80, 10)];
-        self.tipLabel.textAlignment = NSTextAlignmentRight;
-        self.tipLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-        [self.tipLabel setBackgroundColor:[UIColor clearColor]];
-        self.tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
-       [self.contentView addSubview:self.tipLabel];
-    }
-    [self.tipLabel setText:[NSString stringWithFormat:@"%@ %ld  %@ %ld",[NSString fontAwesomeIconStringForEnum:FAHeart],(long)self.entity.likeCount,[NSString fontAwesomeIconStringForEnum:FAComment],(long)self.entity.noteCount]];
+//    if(!self.tipLabel)
+//    {
+//        _tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.brandLabel.deFrameLeft, 0, 80, 10)];
+//        self.tipLabel.textAlignment = NSTextAlignmentRight;
+//        self.tipLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
+//        [self.tipLabel setBackgroundColor:[UIColor clearColor]];
+//        self.tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
+//       [self.contentView addSubview:self.tipLabel];
+//    }
+
+    
     self.tipLabel.deFrameTop = self.frame.size.height - 20;
     self.tipLabel.deFrameRight = self.frame.size.width - 10;
     
@@ -188,32 +246,31 @@
 //
 //    }];
     
-    if (!self.likeButton) {
-        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 40)];
-        self.likeButton.layer.masksToBounds = YES;
-        self.likeButton.layer.cornerRadius = 2;
-        self.likeButton.backgroundColor = [UIColor clearColor];
-        self.likeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];;
-        self.likeButton.titleLabel.textAlignment = NSTextAlignmentRight;
-        [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-        /*
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
-        [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
-         */
-        
-        [self.likeButton setTitle:[NSString fontAwesomeIconStringForEnum:FAHeartO] forState:UIControlStateNormal];
-        [self.likeButton setTitle:[NSString fontAwesomeIconStringForEnum:FAHeart] forState:UIControlStateSelected];
-        [self.likeButton setTitleColor:UIColorFromRGB(0xFF1F77) forState:UIControlStateSelected];
-        [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
-        
-        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 10)];
-        [self.contentView addSubview:self.likeButton];
-    }
+//    if (!self.likeButton) {
+//        _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 40)];
+//        self.likeButton.layer.masksToBounds = YES;
+//        self.likeButton.layer.cornerRadius = 2;
+//        self.likeButton.backgroundColor = [UIColor clearColor];
+//        self.likeButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:14];;
+//        self.likeButton.titleLabel.textAlignment = NSTextAlignmentRight;
+//        [self.likeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+//        /*
+//        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
+//        [self.likeButton setImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateHighlighted|UIControlStateNormal];
+//        [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateSelected];
+//        [self.likeButton setImage:[UIImage imageNamed:@"icon_like_press"] forState:UIControlStateHighlighted|UIControlStateSelected];
+//         */
+//        
+//        [self.likeButton setTitle:[NSString fontAwesomeIconStringForEnum:FAHeartO] forState:UIControlStateNormal];
+//        [self.likeButton setTitle:[NSString fontAwesomeIconStringForEnum:FAHeart] forState:UIControlStateSelected];
+//        [self.likeButton setTitleColor:UIColorFromRGB(0xFF1F77) forState:UIControlStateSelected];
+//        [self.likeButton setTitleColor:UIColorFromRGB(0x9d9e9f) forState:UIControlStateNormal];
+//        
+//        [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 10)];
+//        [self.contentView addSubview:self.likeButton];
+//    }
 
-    self.likeButton.selected = self.entity.liked;
-    [self.likeButton addTarget:self action:@selector(likeButtonAction) forControlEvents:UIControlEventTouchUpInside];
+
     self.likeButton.deFrameRight = self.deFrameWidth;
     self.likeButton.deFrameTop = 0;
     
@@ -278,7 +335,6 @@
     CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
     
     CGContextStrokePath(context);
-    
     
     [super drawRect:rect];
 }

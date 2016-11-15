@@ -271,8 +271,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     [super viewDidLoad];
     
 //    if (IS_IPHONE) self.collectionView.deFrameTop = -64.;
-    
-    
     self.title = NSLocalizedStringFromTable(@"item", kLocalizedFile, nil);
     
     [self.collectionView registerClass:[EntityLikeUserCell class] forCellWithReuseIdentifier:LikeUserIdentifier];
