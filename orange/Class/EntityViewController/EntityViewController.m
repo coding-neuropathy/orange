@@ -480,12 +480,8 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             case EntityHeaderType:
             {
                 EntityHeaderView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:EntityReuseHeaderIdentifier forIndexPath:indexPath];
-//                if (IS_IPAD)
                 headerView.entity = self.entity;
-//                else
-//                    [headerView setEntity:self.entity WithLikeUser:self.dataArrayForlikeUser];//
                 headerView.delegate = self;
-//                headerView.actionDelegate   = [GKHandler sharedGKHandler];
                 return headerView;
             }
                 break;

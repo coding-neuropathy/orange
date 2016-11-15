@@ -178,13 +178,15 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
+
+#pragma mark - open webview
 - (void)openWebWithURL:(NSURL *)url
 {
     WebViewController * vc = [[WebViewController alloc] initWithURL:url];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-//    vc.hidesBottomBarWhenPushed = NO;
 }
+
 
 - (void)openArticleWebWithArticle:(GKArticle *)article
 {

@@ -7,6 +7,7 @@
 //
 
 #import "GKHandler.h"
+#import "WebViewController.h"
 
 @interface GKHandler ()
 
@@ -113,8 +114,9 @@ DEFINE_SINGLETON_FOR_CLASS(GKHandler);
                                           taoKeParams:taoKeParams
                           tradeProcessSuccessCallback:_tradeProcessSuccessCallback
                            tradeProcessFailedCallback:_tradeProcessFailedCallback];
-        } else
+        } else {
             [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
+        }
         
         [MobClick event:@"purchase" attributes:@{@"entity":entity.title} counter:(int)entity.lowestPrice];
     }
@@ -134,6 +136,12 @@ DEFINE_SINGLETON_FOR_CLASS(GKHandler);
         url = [NSString stringWithFormat:@"%@%lu",url,(unsigned long)user.userId];
     }
     
-    [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:url]];
+    
+    WebViewController *controller   = [[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
+    UINavigationController  *nav    = [[UINavigationController alloc] initWithRootViewController:controller];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    }];
+//    [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:url]];
 }
 @end

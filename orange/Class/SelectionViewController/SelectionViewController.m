@@ -409,15 +409,15 @@ static NSString *CellIdentifier     = @"SelectionCell";
                                              @"from"    : @"selection-page-recommend",
                                              }];
     if (iOS10) {
-        EntityViewController * vc = [[EntityViewController alloc] initWithEntity:cell.entity];
-        vc.preferredContentSize = CGSizeMake(0., 0.);
-        previewingContext.sourceRect = cell.frame;
-        vc.hidesBottomBarWhenPushed = YES;
+        EntityViewController *vc        = [[EntityViewController alloc] initWithEntity:cell.entity];
+        vc.preferredContentSize         = CGSizeMake(0., 0.);
+        previewingContext.sourceRect    = cell.frame;
+        vc.hidesBottomBarWhenPushed     = YES;
         return vc;
     } else {
-        EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.image.image];
-        vc.preferredContentSize = CGSizeMake(0., 0.);
-        previewingContext.sourceRect = cell.frame;
+        EntityPreViewController *vc     = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.image.image];
+        vc.preferredContentSize         = CGSizeMake(0., 0.);
+        previewingContext.sourceRect    = cell.frame;
             
         vc.baichuanblock = ^(GKPurchase * purchase) {
         NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
@@ -445,7 +445,11 @@ static NSString *CellIdentifier     = @"SelectionCell";
 
 - (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
 {
+    DDLogInfo(@"preview preview");
     [self.navigationController pushViewController:viewControllerToCommit animated:NO];
+//    kAppDelegate.activeVC   = viewControllerToCommit;
+    
+//    [self presentViewController:viewControllerToCommit animated:NO completion:nil];
 }
 
 @end
