@@ -99,7 +99,7 @@
         _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         
         _webView.deFrameSize = IS_IPAD  ? CGSizeMake(kScreenWidth - kTabBarWidth, kScreenHeight)
-                                        : CGSizeMake(kScreenWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight);
+                                        : CGSizeMake(kScreenWidth, kScreenHeight);
 //        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.UIDelegate = self;

@@ -26,17 +26,17 @@
 //是否是外链
 @property (nonatomic , assign) int linkCount;
 
-@property (nonatomic , strong) WebViewProgressView * progressView;
-@property (nonatomic , strong) UIImage * image;
-@property (nonatomic , strong) UIButton * digBtn;
-@property (nonatomic , strong) UIButton * more;
-@property (nonatomic , strong) UILabel * label;
-@property (nonatomic , strong) UIButton * commentBtn;
+@property (nonatomic , strong) WebViewProgressView  *progressView;
+@property (nonatomic , strong) UIImage              *image;
+@property (nonatomic , strong) UIButton             *digBtn;
+@property (nonatomic , strong) UIButton             *more;
+@property (nonatomic , strong) UILabel              *label;
+@property (nonatomic , strong) UIButton             *commentBtn;
 
-@property (nonatomic , strong) UIButton * digLabel;
-@property (nonatomic , strong) UIButton * commentLabel;
+@property (nonatomic , strong) UIButton             *digLabel;
+@property (nonatomic , strong) UIButton             *commentLabel;
 
-@property (nonatomic , strong) GKArticleComment * comment;
+@property (nonatomic , strong) GKArticleComment     *comment;
 
 @end
 
@@ -140,8 +140,9 @@
     [self creatBottomBar];
     
     [self.webView addSubview:self.label];
+    self.webView.deFrameSize    = IS_IPAD ? CGSizeMake(kScreenWidth, kScreenHeight)
+                                        : CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
     _linkCount = 1;
-    
     
     CGFloat progressBarHeight = 2.f;
     CGRect navigaitonBarBounds = self.navigationController.navigationBar.bounds;
