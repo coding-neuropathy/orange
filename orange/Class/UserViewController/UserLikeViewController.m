@@ -33,7 +33,7 @@
 @property (strong, nonatomic) GKUser * user;
 @property (strong, nonatomic) NSMutableArray * likeEntities;
 @property (strong, nonatomic) UICollectionView * collectionView;
-@property (nonatomic, assign) NSTimeInterval likeTimestamp;
+@property (assign, nonatomic) NSTimeInterval likeTimestamp;
 @property (assign, nonatomic) NSInteger pageSize;
 @property (strong, nonatomic) GKCategory * category;
 
@@ -240,23 +240,6 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     return self.likeEntities.count;
 }
 
-/*
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        UserLikeHeaderSectionView * section = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
-//        GKCategory * category = [GKCategory modelFromDictionary:@{@"id":@(0), @"title":NSLocalizedStringFromTable(@"all", kLocalizedFile, nil)}];
-        section.category = self.category;
-        section.delegate = self;
-        return section;
-    }
-
-    //return [UICollectionReusableView new];
-    return nil;
-}
-*/
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     EntityCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:EntityIdentifier forIndexPath:indexPath];
@@ -315,7 +298,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
-    [[OpenCenter sharedOpenCenter] openEntity:entity];
+    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
 }
 
 #pragma mark - <UserLikeHeaderSectionViewDelegate>
@@ -341,10 +324,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 
         self.categoryController = [[UserEntityCategoryController alloc] init];
         self.categoryController.currentIndex = self.category.groupId;
-        
-//        AppDelegate * appdelegate = [[UIApplication sharedApplication] delegate];
-//        [appdelegate.window.rootViewController addChildViewController:self.categoryController];
-//        [appdelegate.window.rootViewController.view addSubview:self.categoryController.view];
+    
         [[UIApplication sharedApplication].keyWindow addSubview:self.categoryController.view];
         [[UIApplication sharedApplication].keyWindow.rootViewController addChildViewController:self.categoryController];
         self.categoryController.view.alpha = 0;

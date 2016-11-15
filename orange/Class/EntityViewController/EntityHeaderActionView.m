@@ -100,9 +100,9 @@
                     [self.buyBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0, 0, 0)];
                     [self.buyBtn setTitle:NSLocalizedStringFromTable(@"sold out", kLocalizedFile, nil) forState:UIControlStateNormal];
                     [self.buyBtn setTitleColor:[UIColor colorFromHexString:@"#212121"] forState:UIControlStateNormal];
-                    //                    self.buyBtn.backgroundColor = [UIColor clearColor];
-//                    [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] andSize:_buyBtn.deFrameSize] forState:UIControlStateDisabled];
                     self.buyBtn.backgroundColor = [UIColor clearColor];
+                    [self.buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] andSize:self.buyBtn.deFrameSize]
+                                           forState:UIControlStateNormal];
                     self.buyBtn.enabled = NO;
                 }
                     break;
