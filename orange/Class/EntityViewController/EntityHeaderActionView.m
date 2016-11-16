@@ -40,7 +40,6 @@
         _likeBtn.layer.borderWidth  = 1.;
         _likeBtn.layer.borderColor  = [UIColor colorFromHexString:@"#f1f2f6"].CGColor;
     
-        
         [_likeBtn setImage:[[UIImage imageNamed:@"heart"] resizedImageToSize:CGSizeMake(20., 20.)] forState:UIControlStateNormal];
         [_likeBtn setImage:[[UIImage imageNamed:@"hearted"] resizedImageToSize:CGSizeMake(20., 20.)] forState:UIControlStateSelected];
         [_likeBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0, 0., 0.)];
@@ -70,17 +69,14 @@
 //        _likeBtn.layer.borderWidth  = 1.;
 //        _likeBtn.layer.borderColor  = [UIColor colorFromHexString:@"#f1f2f6"].CGColor;
         [_buyBtn setTitleColor:[UIColor colorFromHexString:@"#ffffff"] forState:UIControlStateNormal];
-        [_buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#6192ff"] andSize:_buyBtn.deFrameSize] forState:UIControlStateNormal];
+        [_buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#6192ff"] andSize:_buyBtn.deFrameSize]
+                           forState:UIControlStateNormal];
         [_buyBtn addTarget:self action:@selector(buyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-//        [_buyBtn setBackgroundColor:[UIColor colorFromHexString:@"#6192FF"]];
         
         [self addSubview:_buyBtn];
     }
     return _buyBtn;
 }
-
-
 
 - (void)setEntity:(GKEntity *)entity
 {
@@ -126,7 +122,6 @@
                     break;
             }
         }
-    
     
     [self setNeedsLayout];
 }
