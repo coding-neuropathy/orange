@@ -117,15 +117,18 @@ static NSString *CellIdentifier = @"UserCell";
     return self.dataArray.count;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return [UserSingleListCell height];
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [UserSingleListCell height];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UserSingleListCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.user = [self.dataArray objectAtIndex:indexPath.row];
+    cell.TapAvatarAction    = ^(GKUser *user) {
+        [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+    };
     return cell;
 }
 

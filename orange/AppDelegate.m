@@ -109,7 +109,6 @@ int ddLogLevel;
                                                             NSForegroundColorAttributeName:[UIColor colorFromHexString:@"#212121"]
                                                             }];
     [[UINavigationBar appearance] setAlpha:0.97];
-    
     [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back"]];
 //    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back"]];
 //    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, 0) forBarMetrics:UIBarMetricsDefault];
