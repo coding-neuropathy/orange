@@ -89,7 +89,8 @@
         avatarImage.deFrameLeft         = 16. + i * 24.;
         avatarImage.deFrameBottom       = self.deFrameHeight - 16.;
         
-        [self.contentView insertSubview:avatarImage atIndex:count - i];
+//        [self.contentView insertSubview:avatarImage atIndex:count - i];
+        [self.contentView addSubview:avatarImage];
     }
     
     [self setNeedsLayout];
