@@ -416,7 +416,8 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             if (IS_IPAD) {
                 cell.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
             } else {
-                cell.likeUsers  = self.dataArrayForlikeUser;
+//                cell.likeUsers  = self.dataArrayForlikeUser;
+                [cell setLikeUsers:self.dataArrayForlikeUser WithLikeCount:self.entity.likeCount];
                 cell.delegate   = self;
             }
             

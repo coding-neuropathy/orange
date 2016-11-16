@@ -53,11 +53,11 @@
     [self setNeedsLayout];
 }
 
-- (void)setLikeUsers:(NSArray *)likeUsers
+- (void)setLikeUsers:(NSArray *)likeUsers WithLikeCount:(NSInteger)likecount
 {
     _likeUsers  = likeUsers;
     
-    [self.gotoEntityLikeListBtn setTitle:[NSString stringWithFormat:@"%ld 人喜爱 %@", (long)_likeUsers.count,
+    [self.gotoEntityLikeListBtn setTitle:[NSString stringWithFormat:@"%ld 人喜爱 %@", (long)likecount,
                                                   [NSString fontAwesomeIconStringForEnum:FAAngleRight]]
                                         forState:UIControlStateNormal];
     CGFloat width = [self.gotoEntityLikeListBtn.titleLabel.text widthWithLineWidth:0. Font:self.gotoEntityLikeListBtn.titleLabel.font];

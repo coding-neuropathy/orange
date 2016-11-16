@@ -23,4 +23,6 @@
 
 @property (weak, nonatomic) id<EntityLikeUserCellDelegate> delegate;
 
+- (void)setLikeUsers:(NSArray *)likeUsers WithLikeCount:(NSInteger)likecount;
+
 @end
