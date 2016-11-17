@@ -28,8 +28,8 @@
         _launchImage = [[UIImageView alloc] initWithFrame:CGRectZero];
         _launchImage.deFrameSize    = IS_IPAD ? self.deFrameSize : CGSizeMake(kScreenWidth, (540. / 667.) * kScreenHeight);
         _launchImage.contentMode = UIViewContentModeScaleAspectFill;
-        _launchImage.layer.cornerRadius = 4.;
-        _launchImage.layer.masksToBounds = YES;
+//        _launchImage.layer.cornerRadius = 4.;
+//        _launchImage.layer.masksToBounds = YES;
         _launchImage.userInteractionEnabled = YES;
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TapActionBtn:)];
