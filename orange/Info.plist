@@ -170,7 +170,6 @@
 	<string>change your avatar</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>PingFang.ttc</string>
 		<string>FultonsHand Regular.TTF</string>
 		<string>FontAwesome.ttf</string>
 	</array>
