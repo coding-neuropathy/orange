@@ -432,6 +432,9 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             cell.tapAvatarBlock = ^(GKUser *user) {
                 [[OpenCenter sharedOpenCenter] openWithController:self User:user];
             };
+            
+            __weak __typeof(&*cell)weakCell = cell;
+
             cell.tapLinkBlock = ^(NSURL *url) {
                 NSArray  *array= [[url absoluteString] componentsSeparatedByString:@":"];
                 if([array[0] isEqualToString:@"http"])
@@ -441,7 +444,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                 
                 if([array[0] isEqualToString:@"tag"])
                 {
-                    [[OpenCenter sharedOpenCenter] openTagWithName:[array[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] User:self.note.creator];
+                    [[OpenCenter sharedOpenCenter] openTagWithName:[array[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] User:weakCell.note.creator Controller:self];
                 }
                 if([array[0] isEqualToString:@"user"])
                 {

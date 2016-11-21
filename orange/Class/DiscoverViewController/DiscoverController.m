@@ -431,9 +431,8 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
                 
                 storeView.stores                = self.discoverData.stores;
                 storeView.tapStoreImage         = ^(NSURL *storeLink) {
-//                    DDLogInfo(@"url %@", storeLink);
-                    if (storeLink)
-                        [[OpenCenter sharedOpenCenter] openStoreWithURL:storeLink];
+                if (storeLink)
+                    [[OpenCenter sharedOpenCenter] openStoreWithURL:storeLink];
                 };
                 return storeView;
             }
@@ -442,9 +441,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             {
                 DiscoverHeaderSection * header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderSectionIdentifier forIndexPath:indexPath];
                 header.text = NSLocalizedStringFromTable(@"popular articles", kLocalizedFile, nil);
-//                if (IS_IPAD) {
-//                    header.backgroundColor= UIColorFromRGB(0xf8f8f8);
-//                }
+
                 return header;
             }
                 break;
@@ -717,7 +714,9 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 
         DDLogInfo(@"error %@", error.localizedDescription);
     }];
-    if (IS_IPHONE) self.tabBarController.tabBar.hidden = YES;
+    if (IS_IPHONE)  {
+        self.tabBarController.tabBar.hidden         = YES;
+    }
 
 }
 

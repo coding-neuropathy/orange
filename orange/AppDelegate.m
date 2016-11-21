@@ -117,9 +117,10 @@ int ddLogLevel;
 //    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, 0) forBarMetrics:UIBarMetricsDefault];
     
     [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(kScreenWidth, 49)]];
-    [[UITabBar appearance]setSelectionIndicatorImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(kScreenWidth/4, 49)]];
+    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(kScreenWidth/4, 49)]];
     [[UITabBar appearance] setTintColor:[UIColor colorFromHexString:@"#ffffff"]];
     [[UITabBar appearance] setBarTintColor:[UIColor colorFromHexString:@"#ffffff"]];
+    [[UITabBar appearance] setTranslucent:YES];
     
     
 #pragma mark - status bar config
@@ -606,7 +607,7 @@ int ddLogLevel;
                                                localizedSubtitle:nil icon:icon2 userInfo:nil];
     UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]
                                                initWithType:@"com.guoku.iphone.discover"
-                                               localizedTitle:NSLocalizedStringFromTable(@"discover", kLocalizedFile, nil)
+                                               localizedTitle:NSLocalizedStringFromTable(@"discover actions", kLocalizedFile, nil)
                                                localizedSubtitle:nil icon:icon3 userInfo:nil];
     
     // add all items to an array

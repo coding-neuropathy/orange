@@ -153,11 +153,25 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 #pragma mark - tag viewcontroller
 - (void)openTagWithName:(NSString *)tname User:(GKUser *)user
 {
-    TagViewController * vc = [[TagViewController alloc]init];
-    vc.tagName = tname;
-    vc.user = user;
+//    TagViewController * vc = [[TagViewController alloc]init];
+//    vc.tagName = tname;
+//    vc.user = user;
 //    vc.user = self.note.creator;
-    if (kAppDelegate.activeVC.navigationController) {
+//    if (kAppDelegate.activeVC.navigationController) {
+//    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+//    }
+    [self openTagWithName:tname User:user Controller:nil];
+}
+
+- (void)openTagWithName:(NSString *)tname User:(GKUser *)user Controller:(UIViewController *)controller
+{
+    TagViewController * vc = [[TagViewController alloc] init];
+    vc.tagName = tname;
+    DDLogInfo(@"tag tag user %@", user);
+    vc.user = user;
+    if (controller) {
+        [controller.navigationController pushViewController:vc animated:YES];
+    } else {
         [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
     }
 }

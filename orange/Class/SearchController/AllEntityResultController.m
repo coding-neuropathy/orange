@@ -9,12 +9,13 @@
 #import "AllEntityResultController.h"
 #import "EntitySingleListCell.h"
 #import "NoSearchResultView.h"
+#import "EntityViewController.h"
 
 @interface AllEntityResultController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (strong, nonatomic)UITableView * tableView;
-@property (nonatomic, strong) NSMutableArray * dataArray;
-@property (nonatomic, strong) NoSearchResultView * noResultView;
+@property (strong, nonatomic) UITableView           *tableView;
+@property (nonatomic, strong) NSMutableArray        *dataArray;
+@property (nonatomic, strong) NoSearchResultView    *noResultView;
 
 @end
 
@@ -92,6 +93,7 @@
         cell = [[EntitySingleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.entity = [self.dataArray objectAtIndex:indexPath.row];
+//    cell
     return cell;
 }
 
@@ -118,6 +120,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    GKEntity *entity = [self.dataArray objectAtIndex:indexPath.row];
+    
+    EntityViewController *vc = [[EntityViewController alloc] initWithEntity:entity];
+    [self.navigationController pushViewController:vc animated:YES];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
