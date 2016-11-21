@@ -304,7 +304,7 @@
     CGFloat titleHeight = 0, brandHeight = 0;
     
     if (entity.title.length > 0) {
-        titleHeight = [entity.title heightWithLineWidth:kScreenWidth - 32.  Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.f]     LineHeight:5];
+        titleHeight = [entity.title heightWithLineWidth:kScreenWidth - 32.  Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.f] LineHeight:5];
     }
     
     titleHeight += 16.;

@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "weibo_share.jpg"
+      "filename" : "weibo_share.jpg",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
