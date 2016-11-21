@@ -17,12 +17,14 @@
 
 @implementation EntityLikeUserCell
 
+
 - (UIImageView *)avatarView
 {
     if (!_avatarView) {
         _avatarView                     = [[UIImageView alloc] initWithFrame:CGRectZero];
 //        _avatarView.layer.cornerRadius = 18.;
         _avatarView.deFrameSize         = self.contentView.deFrameSize;
+        _avatarView.layer.cornerRadius  = _avatarView.deFrameHeight / 2.;
         _avatarView.layer.masksToBounds = YES;
         
         [self.contentView addSubview:_avatarView];
@@ -87,7 +89,7 @@
         [avatarImage sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:avatarImage.deFrameSize] options:SDWebImageRetryFailed];
         
         avatarImage.deFrameLeft         = 16. + i * 24.;
-        avatarImage.deFrameBottom       = self.deFrameHeight - 16.;
+        avatarImage.deFrameBottom       = self.contentView.deFrameHeight - 16.;
         
 //        [self.contentView insertSubview:avatarImage atIndex:count - i];
         [self.contentView addSubview:avatarImage];
@@ -105,7 +107,7 @@
     } else {
         
         self.gotoEntityLikeListBtn.center           = self.contentView.center;
-        self.gotoEntityLikeListBtn.deFrameRight     = self.deFrameWidth - 16.;
+        self.gotoEntityLikeListBtn.deFrameRight     = self.contentView.deFrameWidth - 16.;
     }
 //    self.avatarView.frame = CGRectMake(0., 0., self.contentView., 36.);
 }

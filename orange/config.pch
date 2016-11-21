@@ -65,6 +65,7 @@
 #import "core.h"
 
 #import "Config.h"
+#import "GKFontConfig.h"
 
 #import "RTLabel.h"
 #import "AppDelegate.h"

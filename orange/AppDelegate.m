@@ -96,7 +96,7 @@ int ddLogLevel;
 #pragma mark - config appearance
 -(void)customizeAppearance
 {
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:kNavBackgroudColor forBarMetrics:UIBarMetricsDefault];
 //    [[UINavigationBar appearance ] setBackgroundColor:[UIColor colorFromHexString:@"#ffffff"]];
 
     [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
@@ -104,12 +104,12 @@ int ddLogLevel;
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorFromHexString:@"#212121"]];
     [[UINavigationBar appearance] setTintColor:[UIColor colorFromHexString:@"#212121"]];
 //    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back.png"]];
-    if (iOS9) {
-        UIFont* font = [UIFont fontWithName:@"PingFangSC-Semibold" size:17];
-        [[UINavigationBar appearance] setTitleTextAttributes:@{ NSFontAttributeName:font,
+//    if (iOS9) {
+//        UIFont* font = [UIFont fontWithName:@"PingFangSC-Semibold" size:17];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{ NSFontAttributeName:kNavTitleFont,
                                                             NSForegroundColorAttributeName:[UIColor colorFromHexString:@"#212121"]
                                                             }];
-    }
+//    }
     
     [[UINavigationBar appearance] setAlpha:0.97];
     [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back"]];

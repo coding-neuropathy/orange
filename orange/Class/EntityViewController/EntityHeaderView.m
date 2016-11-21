@@ -303,14 +303,15 @@
     
     CGFloat titleHeight = 0, brandHeight = 0;
     
+    
     if (entity.title.length > 0) {
-        titleHeight = [entity.title heightWithLineWidth:kScreenWidth - 32.  Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.f] LineHeight:5];
+        titleHeight = [entity.title heightWithLineWidth:kScreenWidth - 32.  Font:kEntityTitleFont LineHeight:5];
     }
     
     titleHeight += 16.;
     
     if (entity.brand.length > 0) {
-        brandHeight = [entity.brand heightWithLineWidth:kScreenWidth - 32. Font:[UIFont fontWithName:@"PingFangSC-Semibold" size:17.] LineHeight:5];
+        brandHeight = [entity.brand heightWithLineWidth:kScreenWidth - 32. Font:kEntityTitleFont LineHeight:5];
     }
     brandHeight     += 8.;
 

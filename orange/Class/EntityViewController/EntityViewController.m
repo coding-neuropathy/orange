@@ -568,7 +568,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    UIEdgeInsets edge;
+    UIEdgeInsets edge = UIEdgeInsetsMake(0., 0., 0., 0.);
     switch (section) {
         case EntityHeaderLikeType:
         {
