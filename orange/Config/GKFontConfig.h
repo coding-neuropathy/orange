@@ -7,6 +7,7 @@
 //
 
 #define kNavTitleFont       iOS9 ? [UIFont fontWithName:@"PingFangSC-Semibold" size:17.f] : [UIFont systemFontOfSize:17.]
-#define kNavBackgroudColor  [[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]
+#define kNavBackgroundColor  [[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]
 
 #define kEntityTitleFont    iOS9 ? [UIFont fontWithName:@"PingFangSC-Semibold" size:17.f] : [UIFont systemFontOfSize:17.]
+#define kEntityFontColor    [UIColor colorFromHexString:@"#212121"]

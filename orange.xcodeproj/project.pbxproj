@@ -805,6 +805,7 @@
 		8AE30F9A1DB0ADD7005A9171 /* GAdvertise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GAdvertise.m; path = AD/GAdvertise.m; sourceTree = "<group>"; };
 		8AE652A01D7570C300FF7530 /* CartToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CartToolBar.h; path = QRCodeViewController/CartController/CartToolBar.h; sourceTree = "<group>"; };
 		8AE652A11D7570C300FF7530 /* CartToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CartToolBar.m; path = QRCodeViewController/CartController/CartToolBar.m; sourceTree = "<group>"; };
+		8AEA09BF1DE3EBAD00723416 /* GKColorConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GKColorConfig.h; path = Config/GKColorConfig.h; sourceTree = "<group>"; };
 		8AEDCB501D62BE010010FDB4 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8AEDCB971D62C5230010FDB4 /* ALBBFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBFeedback.framework; sourceTree = "<group>"; };
 		8AEDCB981D62C5230010FDB4 /* ALBBFullSecurityGuard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBFullSecurityGuard.framework; sourceTree = "<group>"; };
@@ -2315,6 +2316,7 @@
 			children = (
 				4E56DF9119D570DA00263B17 /* Config.h */,
 				B72CBACD1DE297D2004E3A95 /* GKFontConfig.h */,
+				8AEA09BF1DE3EBAD00723416 /* GKColorConfig.h */,
 			);
 			name = Config;
 			sourceTree = "<group>";

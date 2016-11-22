@@ -106,7 +106,7 @@ static CGFloat bioLabelHeight;
 {
     if (!_v) {
         _v = [[UIView alloc] initWithFrame:CGRectZero];
-        _v.backgroundColor = UIColorFromRGB(0xebebeb);
+        _v.backgroundColor = kSeparateLineColor;
         [self addSubview:_v];
     }
     return _v;

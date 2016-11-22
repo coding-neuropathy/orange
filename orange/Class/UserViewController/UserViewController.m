@@ -98,7 +98,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (void)dealloc
 {
     if (self.user.userId == [Passport sharedInstance].user.userId) {
-    
         [self.user removeObserver:self forKeyPath:@"avatarURL"];
         [self.user removeObserver:self forKeyPath:@"nickname"];
     }
@@ -114,7 +113,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         
         if (IS_IPHONE)
-            _collectionView.frame = CGRectMake(0., 0., kScreenWidth, kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight);
+            _collectionView.frame = CGRectMake(0., 0., kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
         else {
             _collectionView.frame = CGRectMake(0., 0., kPadScreenWitdh, kScreenHeight);
             if ([UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeLeft
@@ -125,11 +124,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+        _collectionView.backgroundColor = kBackgroundColor;
     }
     return _collectionView;
 }
-
 
 
 #pragma mark - get data

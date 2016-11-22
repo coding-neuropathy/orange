@@ -96,10 +96,10 @@ int ddLogLevel;
 #pragma mark - config appearance
 -(void)customizeAppearance
 {
-    [[UINavigationBar appearance] setBackgroundImage:kNavBackgroudColor forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:kNavBackgroundColor forBarMetrics:UIBarMetricsDefault];
 //    [[UINavigationBar appearance ] setBackgroundColor:[UIColor colorFromHexString:@"#ffffff"]];
 
-    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
+    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:kSeparateLineColor andSize:CGSizeMake(kScreenWidth, 1)]];
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorFromHexString:@"#212121"]];
     [[UINavigationBar appearance] setTintColor:[UIColor colorFromHexString:@"#212121"]];

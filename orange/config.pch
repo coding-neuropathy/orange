@@ -66,6 +66,7 @@
 
 #import "Config.h"
 #import "GKFontConfig.h"
+#import "GKColorConfig.h"
 
 #import "RTLabel.h"
 #import "AppDelegate.h"

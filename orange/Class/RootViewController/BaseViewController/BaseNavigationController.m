@@ -33,7 +33,7 @@
     self.navigationBar.translucent                      = NO;
     
     [self.navigationBar setBackgroundImage:[[UIImage imageWithColor:[UIColor colorFromHexString:@"#ffffff"] andSize:CGSizeMake(10, 10)] stretchableImageWithLeftCapWidth:2 topCapHeight:2]forBarMetrics:UIBarMetricsDefault];
-    [self.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"#ebebeb"] andSize:CGSizeMake(kScreenWidth, 1)]];
+    [self.navigationBar setShadowImage:[UIImage imageWithColor:kSeparateLineColor andSize:CGSizeMake(kScreenWidth, 1)]];
     [self.navigationBar setTitleTextAttributes:@{
                                                  NSForegroundColorAttributeName:[UIColor colorWithRed:33. / 255. green:33. / 255. blue:33. / 255. alpha:1]
                                                  }];

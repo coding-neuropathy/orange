@@ -184,7 +184,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     
         _collectionView.delegate                = self;
         _collectionView.dataSource              = self;
-        _collectionView.backgroundColor         = [UIColor colorFromHexString:@"#ffffff"];
+        _collectionView.backgroundColor         = kBackgroundColor;
 //        _collectionView.backgroundColor         = [UIColor redColor];
         _collectionView.alwaysBounceVertical    = YES;
         /**

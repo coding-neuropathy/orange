@@ -141,7 +141,7 @@
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
         
-    CGContextSetStrokeColorWithColor(context, [UIColor colorFromHexString:@"#ebebeb"].CGColor);
+    CGContextSetStrokeColorWithColor(context, kSeparateLineColor.CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
     
     CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
