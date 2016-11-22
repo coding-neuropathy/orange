@@ -302,16 +302,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 //                count = self.likedataArray.count > 4 ? 4 : self.likedataArray.count;
         }
             break;
-        case 2:
-//        {
-//            count = self.articledataArray.count > 3 ? 3 : self.articledataArray.count;
-//        }
-            break;
-        case 3:
-//        {
-//            count = self.notedataArray.count > 3 ? 3 : self.notedataArray.count;
-//        }
-            break;
+//        case 2:
+//            break;
+//        case 3:
+//            break;
         default:
             break;
     }
@@ -464,10 +458,10 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
                 CGFloat userHeaderHeight = self.user.bio.length == 0 ? 144. : 204.;
                 userHeaderHeight += IS_IPAD ? 20. : 0.;
 #warning todo create order
-                if (self.user.userId == [Passport sharedInstance].user.userId) {
-                    userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
-                    userHeaderHeight += IS_IPHONE ? 49. : 0;
-                }
+//                if (self.user.userId == [Passport sharedInstance].user.userId) {
+//                    userHeaderHeight += self.user.authorized_seller && IS_IPHONE ? 49. : 0.;
+//                    userHeaderHeight += IS_IPHONE ? 49. : 0;
+//                }
                 size = CGSizeMake(self.collectionView.deFrameWidth, userHeaderHeight);
             
             }

@@ -123,20 +123,9 @@
      */
     [self.coverImageView sd_setImageWithURL:_article.coverURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.coverImageView.deFrameSize]];
     
-    /**
-     *  设置图文标签
-     */
-//    NSMutableString * tagListString = [NSMutableString string];
-//    for (NSString * row in self.article.tags) {
-//        NSString * tagString = [NSString stringWithFormat:@"<a href=%@><font color='^9d9e9f' size=12>#%@</font></a> ", [row encodedUrl], row];
-//        [tagListString appendString:tagString];
-//    }
-//    self.tagsLabel.text = tagListString;
-    /**
-     *
-     */
-    self.readCountLabel.text = [NSString stringWithFormat:@"%@  %ld",
-                                [NSString fontAwesomeIconStringForEnum:FAEye], (long)_article.readCount];
+
+//    self.readCountLabel.text = [NSString stringWithFormat:@"%@  %ld",
+//                                [NSString fontAwesomeIconStringForEnum:FAEye], (long)_article.readCount];
     
     /**
      *  设置发布时间
@@ -187,8 +176,8 @@
         self.detailLabel.center = self.titleLabel.center;
         self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
         
-        self.readCountLabel.deFrameLeft = 16.;
-        self.readCountLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
+//        self.readCountLabel.deFrameLeft = 16.;
+//        self.readCountLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
     
         self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
         self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
