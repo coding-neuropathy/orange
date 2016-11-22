@@ -119,13 +119,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 {
     [API getFeedWithTimestamp:[[NSDate date] timeIntervalSince1970] type:@"entity" scale:@"friend" success:^(NSArray *feedArray) {
         self.dataArrayForFeed = [NSMutableArray arrayWithArray:feedArray];
-//        if (self.dataArrayForFeed.count == 0) {
-////            self.tableView.tableFooterView = self.noMessageView;
-////            self.noMessageView.type = NoFeedType;
-//        } else {
-//            self.tableView.tableFooterView = nil;
-//        }
-        
+
         [self.tableView.pullToRefreshView stopAnimating];
         [self.tableView reloadData];
     } failure:^(NSInteger stateCode) {

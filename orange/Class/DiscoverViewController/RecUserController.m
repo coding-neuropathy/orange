@@ -7,21 +7,17 @@
 //
 
 #import "RecUserController.h"
-
 #import "UserSingleListCell.h"
-#import "NoDataView.h"
+//#import "NoDataView.h"
 
 
 
-@interface RecUserController ()<UITableViewDelegate , UITableViewDataSource>
+@interface RecUserController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
-@property (nonatomic , strong)UITableView * tableView;
-
-@property (nonatomic , strong)NSMutableArray * dataArrayForUser;
-
-@property (nonatomic , strong)NoDataView * noDataView;
-
-@property (nonatomic , assign)NSInteger page;
+@property (nonatomic ,strong)   UITableView     *tableView;
+@property (nonatomic ,strong)   NSMutableArray  *dataArrayForUser;
+//@property (nonatomic ,strong)   NoDataView      *noDataView;
+@property (nonatomic ,assign)   NSInteger       page;
 
 @end
 
@@ -29,19 +25,18 @@
 
 static NSString * CellIdentifier = @"UserSingleListCell";
 
-- (NoDataView *)noDataView
-{
-    if (!_noDataView) {
-        _noDataView = [[NoDataView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 44.)];
-        _noDataView.backgroundColor = [UIColor clearColor];
-    }
-    return _noDataView;
-}
+//- (NoDataView *)noDataView
+//{
+//    if (!_noDataView) {
+//        _noDataView = [[NoDataView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 44.)];
+//        _noDataView.backgroundColor = [UIColor clearColor];
+//    }
+//    return _noDataView;
+//}
 
 - (UITableView *)tableView
 {
     if (!_tableView) {
-//        _tableView = [[UITableView alloc]initWithFrame:IS_IPHONE ? CGRectMake(0.f, 0.f, kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) : CGRectMake(0.f, 0.f, kScreenWidth - kTabBarWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
         
         _tableView              = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.deFrameSize  = IS_IPAD ? CGSizeMake(kPadScreenWitdh, kScreenHeight)
@@ -50,12 +45,15 @@ static NSString * CellIdentifier = @"UserSingleListCell";
         if ([UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeRight
             || [UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeLeft)
             _tableView.center = CGPointMake((kScreenWidth - kTabBarWidth) / 2, kScreenHeight / 2);
-        _tableView.dataSource   = self;
-        _tableView.delegate     = self;
-        _tableView.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        self.tableView.sep
-        self.tableView.showsVerticalScrollIndicator = YES;
+        
+        _tableView.dataSource                   = self;
+        _tableView.delegate                     = self;
+        _tableView.backgroundColor              = [UIColor colorFromHexString:@"#ffffff"];
+        _tableView.separatorStyle               = UITableViewCellSeparatorStyleNone;
+        _tableView.showsVerticalScrollIndicator = YES;
+        
+        _tableView.emptyDataSetDelegate         = self;
+        _tableView.emptyDataSetSource           = self;
         
     }
     return _tableView;
@@ -65,12 +63,11 @@ static NSString * CellIdentifier = @"UserSingleListCell";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
+//    self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
     self.title = NSLocalizedStringFromTable(@"recommendation user", kLocalizedFile, nil);
     [self.view addSubview:self.tableView];
     
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+//    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
     [self.tableView registerClass:[UserSingleListCell class] forCellReuseIdentifier:CellIdentifier];
 
 }
@@ -86,7 +83,7 @@ static NSString * CellIdentifier = @"UserSingleListCell";
         [weakSelf loadMore];
     }];
     
-    [self refresh];
+//    [self refresh];
     if (self.dataArrayForUser == 0) {
         [self.tableView triggerPullToRefresh];
     }
@@ -101,14 +98,14 @@ static NSString * CellIdentifier = @"UserSingleListCell";
     [API getAuthorizedUserWithPage:self.page Size:30 success:^(NSArray *users, NSInteger page) {
         self.dataArrayForUser = [NSMutableArray arrayWithArray:users];
         self.page += 1;
-        if (self.dataArrayForUser.count == 0) {
-            self.tableView.tableFooterView = self.noDataView;
-            self.noDataView.text = @"暂无认证用户";
-        }
-        else
-        {
-            self.tableView.tableFooterView = nil;
-        }
+//        if (self.dataArrayForUser.count == 0) {
+////            self.tableView.tableFooterView = self.noDataView;
+////            self.noDataView.text = @"暂无认证用户";
+//        }
+//        else
+//        {
+//            self.tableView.tableFooterView = nil;
+//        }
         [self.tableView reloadData];
         [self.tableView.pullToRefreshView stopAnimating];
     } failure:^(NSInteger stateCode) {
@@ -176,12 +173,14 @@ static NSString * CellIdentifier = @"UserSingleListCell";
 {
     UserSingleListCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.user = [self.dataArrayForUser objectAtIndex:indexPath.row];
-    
+    cell.TapAvatarAction    =  ^(GKUser *user) {
+        [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+//        [self.navigationController pushViewController:<#(nonnull UIViewController *)#> animated:<#(BOOL)#>]
+    };
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [UserSingleListCell height];
@@ -192,10 +191,55 @@ static NSString * CellIdentifier = @"UserSingleListCell";
     return 0.f;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+
+#pragma mark - <DZNEmptyDataSetSource>
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return [UIView new];
+
+//    NSString * text = NSLocalizedStringFromTable(@"no-data", kLocalizedFile, nil);
+    NSString    *text = @"暂无认证用户";
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:kFontAwesomeFamilyName size:14.],
+                                 NSForegroundColorAttributeName: [UIColor colorFromHexString:@"#9d9e9f"],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -30.;
+}
+
+#pragma mark - <DZNEmptyDataSetDelegate>
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
+{
+    return NO;
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view
+{
+    DDLogInfo(@"%s",__FUNCTION__);
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button
+{
+    
+}
+
 
 
 @end

@@ -8,8 +8,8 @@
 
 #import "BaseViewController.h"
 
-@interface RecUserController : BaseViewController
+@interface RecUserController : BaseViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic , strong)GKUser * user;
+@property (nonatomic ,strong) GKUser    *user;
 
 @end

@@ -4,9 +4,15 @@
 <dict>
 	<key>aps-environment</key>
 	<string>development</string>
+	<key>com.apple.external-accessory.wireless-configuration</key>
+	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.com.guoku.iphone</string>
+	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.guoku.iphone</string>
 	</array>
 </dict>
 </plist>

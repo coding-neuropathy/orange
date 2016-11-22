@@ -73,7 +73,7 @@
 static NSString * ArticleCellIdentifier         = @"ArticleCell";
 static NSString * BannerIdentifier              = @"BannerView";
 static NSString * CategoryIdentifier            = @"CategoryView";
-static NSString * CategoryCellIdentifier    = @"DiscoverCategoryCell";
+static NSString * CategoryCellIdentifier        = @"DiscoverCategoryCell";
 
 static NSString * StoreIdentifier               = @"StoreHeaderView";
 
@@ -108,11 +108,8 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         __weak __typeof(&*self)weakSelf = self;
         
         [_searchTipsVC setTapRecordBtnBlock:^(NSString *keyword) {
-        
             [weakSelf.searchVC.searchBar setText:keyword];
-        
         }];
-
     }
     return _searchTipsVC;
 }
@@ -156,13 +153,13 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     return _discoverData;
 }
 
-- (UIApplication *)app
-{
-    if (!_app) {
-        _app = [UIApplication sharedApplication];
-    }
-    return _app;
-}
+//- (UIApplication *)app
+//{
+//    if (!_app) {
+//        _app = [UIApplication sharedApplication];
+//    }
+//    return _app;
+//}
 
 #pragma mark - init view
 - (UICollectionView *)collectionView
@@ -178,10 +175,10 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
         }
         _collectionView.alwaysBounceVertical    = YES;
-        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.backgroundColor = UIColorFromRGB(0xffffff);
+        _collectionView.contentInset            = UIEdgeInsetsMake(0, 0, 0, 0);
+        _collectionView.delegate                = self;
+        _collectionView.dataSource              = self;
+        _collectionView.backgroundColor         = kBackgroundColor;
     }
     return _collectionView;
 }
@@ -301,7 +298,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 {
     [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar setTranslucent:NO];
+//    [self.navigationController.navigationBar setTranslucent:NO];
     self.collectionView.scrollsToTop = YES;
     
     [MobClick beginLogPageView:@"DiscoverView"];
@@ -312,7 +309,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     [super viewWillDisappear:animated];
     
     self.collectionView.scrollsToTop = NO;
-    self.navigationController.navigationBar.translucent = YES;
+//    self.navigationController.navigationBar.translucent = YES;
     [MobClick endLogPageView:@"DiscoverView"];
 }
 

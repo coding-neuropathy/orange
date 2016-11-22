@@ -186,6 +186,7 @@
 		8A9256011D50D1A500E6481F /* NoResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9256001D50D1A500E6481F /* NoResultView.m */; };
 		8A943BBF1D58920A007C5F52 /* ScannerCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A943BBE1D58920A007C5F52 /* ScannerCropView.m */; };
 		8AA0AC941D8E8CBA00746A84 /* ShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA0AC931D8E8CBA00746A84 /* ShareController.m */; };
+		8AA31F141DE4752500862FE7 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA31F131DE4752500862FE7 /* ExternalAccessory.framework */; };
 		8AAA2D051C01EF1C00B27E49 /* GKLaunch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */; };
 		8AAA2D061C01EF1C00B27E49 /* GKLaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */; };
 		8AAA2D091C02B61400B27E49 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA2D081C02B61400B27E49 /* LaunchController.m */; };
@@ -732,6 +733,7 @@
 		8A943BBE1D58920A007C5F52 /* ScannerCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScannerCropView.m; path = QRCodeViewController/ScannerCropView.m; sourceTree = "<group>"; };
 		8AA0AC921D8E8CBA00746A84 /* ShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareController.h; path = ShareViewController/ShareController.h; sourceTree = "<group>"; };
 		8AA0AC931D8E8CBA00746A84 /* ShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareController.m; path = ShareViewController/ShareController.m; sourceTree = "<group>"; };
+		8AA31F131DE4752500862FE7 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		8AAA2D031C01EF1C00B27E49 /* GKLaunch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKLaunch.h; sourceTree = "<group>"; };
 		8AAA2D041C01EF1C00B27E49 /* GKLaunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKLaunch.m; sourceTree = "<group>"; };
 		8AAA2D071C02B61400B27E49 /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
@@ -1062,6 +1064,7 @@
 				8AEDCBAE1D62C5230010FDB4 /* ALBBSDK.framework in Frameworks */,
 				4E56DFC319D5AF1E00263B17 /* SystemConfiguration.framework in Frameworks */,
 				8AEDCBB11D62C5230010FDB4 /* AlipaySDK.framework in Frameworks */,
+				8AA31F141DE4752500862FE7 /* ExternalAccessory.framework in Frameworks */,
 				4E56DFC119D5AF1400263B17 /* MobileCoreServices.framework in Frameworks */,
 				8AEDCBBD1D62C5230010FDB4 /* YWHybridWebViewFMWK.framework in Frameworks */,
 				4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */,
@@ -1095,6 +1098,7 @@
 		0902E2DEFE4689BB1B4C17A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AA31F131DE4752500862FE7 /* ExternalAccessory.framework */,
 				8A6928711D95802000E3C5D4 /* StoreKit.framework */,
 				8AB508451D93B1260048D2CC /* Messages.framework */,
 				797C76FE6C72EB8685811369 /* libPods-core.a */,
@@ -2710,7 +2714,13 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.WAC = {
 								enabled = 1;
 							};
 						};
