@@ -23,13 +23,17 @@ static NSString * CellIdentifer = @"Cell";
 {
     if (!_collectionView) {
         
-        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
+        UICollectionViewFlowLayout * layout     = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection                  = UICollectionViewScrollDirectionVertical;
+        _collectionView                         = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        
+        _collectionView.deFrameSize = IS_IPAD   ? CGSizeMake(kScreenWidth - kTabBarWidth, kScreenHeight)
+                                                : CGSizeMake(kScreenWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight - kTabBarHeight);
         _collectionView.alwaysBounceVertical    = YES;
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
+        _collectionView.delegate                = self;
+        _collectionView.dataSource              = self;
+        _collectionView.backgroundColor         = kBackgroundColor;
+//        _collectionView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
     }
     return _collectionView;
 }

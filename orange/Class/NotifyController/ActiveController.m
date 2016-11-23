@@ -34,9 +34,9 @@ static NSString *FeedCellIdentifier = @"FeedCell";
             _tableView.deFrameLeft = 128.;
         }
         
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.dataSource                   = self;
+        _tableView.delegate                     = self;
+        _tableView.separatorStyle               = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = YES;
         
         _tableView.emptyDataSetDelegate         = self;
@@ -60,7 +60,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 //    self.view = self.tableView;
     [super loadView];
     
-    self.view.backgroundColor = UIColorFromRGB(0xfafafa);
+    self.view.backgroundColor = kBackgroundColor;
     [self.view addSubview:self.tableView];
 }
 
@@ -151,8 +151,54 @@ static NSString *FeedCellIdentifier = @"FeedCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FeedCell * cell = [tableView dequeueReusableCellWithIdentifier:FeedCellIdentifier forIndexPath:indexPath];
-    cell.feed = self.dataArrayForFeed[indexPath.row];
+    FeedCell * cell     = [tableView dequeueReusableCellWithIdentifier:FeedCellIdentifier forIndexPath:indexPath];
+    cell.feed           = self.dataArrayForFeed[indexPath.row];
+    
+    cell.tapLinkBlock   = ^(NSURL * url) {
+            NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
+            if([array[0] isEqualToString:@"user"])
+            {
+                GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
+                [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+            }
+            if([array[0] isEqualToString:@"entity"])
+            {
+                GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
+                [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+            }
+    };
+    
+    cell.tapImageBlock  = ^(FeedType type) {
+            switch (type) {
+                case FeedArticleDig:
+                {
+                    GKArticle * article = cell.feed[@"object"][@"article"];
+                    [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+                    
+                    [MobClick event:@"feed_forward_article"];
+                }
+                    break;
+                case FeedUserLike:
+                {
+                    GKEntity *entity = cell.feed[@"object"][@"entity"];
+//                    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+                    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+        
+                    [MobClick event:@"feed_forward_entity"];
+                }
+                    break;
+                case FeedEntityNote:
+                {
+                    GKEntity * entity = cell.feed[@"object"][@"entity"];
+//                    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+                    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                }
+                default:
+                    break;
+            }
+    };
+    
+    
     return cell;
 }
 

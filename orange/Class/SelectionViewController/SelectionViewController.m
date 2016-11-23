@@ -67,15 +67,17 @@ static NSString *CellIdentifier     = @"SelectionCell";
     
         self.cateId = 0;
         
-        if (IS_IPHONE) {
-            self.collectionView.frame = CGRectMake(0, 0, kScreenWidth ,
-                                                   kScreenHeight - kStatusBarHeight - kNavigationBarHeight - kTabBarHeight);
-        }
-        else
-        {
-            self.collectionView.frame = CGRectMake(0, 0, kScreenWidth - kTabBarWidth , kScreenHeight);
-        }
-        
+//        if (IS_IPHONE) {
+//            self.collectionView.frame = CGRectMake(0, 0, kScreenWidth ,
+//                                                   kScreenHeight - kStatusBarHeight - kNavigationBarHeight - kTabBarHeight);
+//        }
+//        else
+//        {
+//            self.collectionView.frame = CGRectMake(0, 0, kScreenWidth - kTabBarWidth , kScreenHeight);
+//        }
+//
+//        self.collectionView.deFrameSize = IS_IPAD   ? CGSizeMake(kScreenWidth - kTabBarWidth, kScreenHeight)
+//        : CGSizeMake(kScreenWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight - kTabBarHeight);
         self.entityList = [[GKSelectionEntity alloc] init];
         [self.entityList addTheObserverWithObject:self];
         
@@ -96,6 +98,16 @@ static NSString *CellIdentifier     = @"SelectionCell";
 }
 
 #pragma mark - init view
+- (void)loadView
+{
+    
+    [super loadView];
+    self.collectionView.deFrameSize = IS_IPAD   ? CGSizeMake(kScreenWidth - kTabBarWidth, kScreenHeight)
+    : CGSizeMake(kScreenWidth, kScreenHeight - kStatusBarHeight - kNavigationBarHeight - kTabBarHeight);
+    
+}
+
+
 - (void)viewDidLoad {
 
     [super viewDidLoad];

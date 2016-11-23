@@ -11,16 +11,7 @@
 #import "EntityViewController.h"
 #import "UserViewController.h"
 
-typedef NS_ENUM(NSInteger, FeedType) {
-    /**
-     *  默认类型
-     */
-    FeedTypeDefault = 0,
-    FeedEntityNote,
-    FeedUserFollower,
-    FeedUserLike,
-    FeedArticleDig,
-};
+
 
 @interface FeedCell()<RTLabelDelegate>
 @property (nonatomic, assign) FeedType type;
@@ -30,7 +21,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
 @property (nonatomic, strong) RTLabel *label;
 @property (nonatomic, strong) RTLabel *contentLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UIView *H;
+//@property (nonatomic, strong) UIView *H;
 @end
 
 @implementation FeedCell
@@ -45,7 +36,7 @@ typedef NS_ENUM(NSInteger, FeedType) {
         self.clipsToBounds = YES;
         
 //        self.backgroundColor = UIColorFromRGB(0xffffff);
-
+        self.backgroundColor    = kBackgroundColor;
     }
     return self;
 }
@@ -75,17 +66,17 @@ typedef NS_ENUM(NSInteger, FeedType) {
     
 }
 
-#pragma mark - init view
-- (UIView *)H
-{
-    if (!_H) {
-//        _H = [[UIView alloc] initWithFrame:CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth, 0.5)];
-        _H = [[UIView alloc] initWithFrame:CGRectZero];
-        _H.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self.contentView addSubview:_H];
-    }
-    return _H;
-}
+//#pragma mark - init view
+//- (UIView *)H
+//{
+//    if (!_H) {
+////        _H = [[UIView alloc] initWithFrame:CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth, 0.5)];
+//        _H = [[UIView alloc] initWithFrame:CGRectZero];
+//        _H.backgroundColor = UIColorFromRGB(0xebebeb);
+//        [self.contentView addSubview:_H];
+//    }
+//    return _H;
+//}
 
 - (UIImageView *)avatar
 {
@@ -202,13 +193,6 @@ typedef NS_ENUM(NSInteger, FeedType) {
     }
     [self configContent];
     
-    [self bringSubviewToFront:self.H];
-    
-    self.H.frame = CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth, 1);
-    
-    self.H.hidden = NO;
-//    _H.deFrameBottom = self.frame.size.height;
-//
 }
 //
 //- (void)drawRect:(CGRect)rect
@@ -329,13 +313,30 @@ typedef NS_ENUM(NSInteger, FeedType) {
             
             [self.image sd_setImageWithURL:article.coverURL_300 placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf1f1f1) andSize:CGSizeMake(100, 100)]];
             self.image.deFrameLeft = self.contentLabel.deFrameRight + 12.;
-            self.image.frame = IS_IPHONE?CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42):CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
+            self.image.frame = IS_IPHONE ? CGRectMake(kScreenWidth - 58, self.avatar.deFrameTop, 42, 42)
+                                        : CGRectMake(kScreenWidth - 58 - kTabBarWidth, self.avatar.deFrameTop, 42, 42);
         }
         default:
             break;
             
     }
 }
+
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, kSeparateLineColor.CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    
+    CGContextMoveToPoint(context, 60., self.contentView.deFrameHeight);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    
+    CGContextStrokePath(context);
+    
+    [super drawRect:rect];
+}
+
 
 + (CGFloat)height:(NSDictionary *)feed
 {
@@ -483,49 +484,40 @@ typedef NS_ENUM(NSInteger, FeedType) {
 #pragma mark - button action
 - (void)imageButtonAction
 {
-    
-    switch ([FeedCell typeFromFeed:self.feed]) {
-        case FeedArticleDig:
-        {
-            GKArticle * article = self.feed[@"object"][@"article"];
-            [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
-        }
-            break;
-        case FeedUserLike:
-        {
-            GKEntity *entity = self.feed[@"object"][@"entity"];
-            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-            
-            [MobClick event:@"feed_forward_entity"];
-        }
-            break;
-        case FeedEntityNote:
-        {
-            GKEntity * entity = self.feed[@"object"][@"entity"];
-            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-        }
-        default:
-            break;
+    if (self.tapImageBlock) {
+        self.tapImageBlock([FeedCell typeFromFeed:self.feed]);
     }
+//    switch ([FeedCell typeFromFeed:self.feed]) {
+//        case FeedArticleDig:
+//        {
+//            GKArticle * article = self.feed[@"object"][@"article"];
+//            [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
+//        }
+//            break;
+//        case FeedUserLike:
+//        {
+//            GKEntity *entity = self.feed[@"object"][@"entity"];
+//            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+//            
+//            [MobClick event:@"feed_forward_entity"];
+//        }
+//            break;
+//        case FeedEntityNote:
+//        {
+//            GKEntity * entity = self.feed[@"object"][@"entity"];
+//            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
+//        }
+//        default:
+//            break;
+//    }
     
 }
 
 #pragma mark - <RTLabelDelegate>
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url
 {
-    NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
-    if([array[0] isEqualToString:@"user"])
-    {
-        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
-        [[OpenCenter sharedOpenCenter] openUser:user];
-    }
-    if([array[0] isEqualToString:@"entity"])
-    {
-        GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
-        EntityViewController * VC = [[EntityViewController alloc]init];
-        if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
-        VC.entity = entity;
-        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    if (self.tapLinkBlock) {
+        self.tapLinkBlock(url);
     }
 }
 

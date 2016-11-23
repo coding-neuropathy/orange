@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) RTLabel *label;
-@property (nonatomic, strong) UIView *H;
+//@property (nonatomic, strong) UIView *H;
 
 @end
 
@@ -69,8 +69,10 @@ typedef NS_ENUM(NSInteger, MessageType) {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.clipsToBounds = YES;
+        self.selectionStyle     = UITableViewCellSelectionStyleNone;
+        self.clipsToBounds      = YES;
+        
+        self.backgroundColor    = kBackgroundColor;
 //        _H = [[UIView alloc] initWithFrame:CGRectMake(60,self.frame.size.height-1, kScreenWidth, 0.5)];
 //        self.H.backgroundColor = UIColorFromRGB(0xebebeb);
 //        [self.contentView addSubview:self.H];
@@ -79,15 +81,15 @@ typedef NS_ENUM(NSInteger, MessageType) {
 }
 
 #pragma mark - init view
-- (UIView *)H
-{
-    if (!_H) {
-        _H = [[UIView alloc] initWithFrame:CGRectZero];
-        _H.backgroundColor = UIColorFromRGB(0xebebeb);
-        [self.contentView addSubview:_H];
-    }
-    return _H;
-}
+//- (UIView *)H
+//{
+//    if (!_H) {
+//        _H = [[UIView alloc] initWithFrame:CGRectZero];
+//        _H.backgroundColor = UIColorFromRGB(0xebebeb);
+//        [self.contentView addSubview:_H];
+//    }
+//    return _H;
+//}
 
 
 - (UIImageView *)avatar
@@ -174,14 +176,6 @@ typedef NS_ENUM(NSInteger, MessageType) {
     [self setNeedsLayout];
 }
 
-//- (void)prepareForReuse
-//{
-//    [super prepareForReuse];
-//    
-//    for (UIView *subView in self.contentView.subviews) {
-//        subView.hidden = YES;
-//    }
-//}
 
 - (void)layoutSubviews
 {
@@ -196,13 +190,24 @@ typedef NS_ENUM(NSInteger, MessageType) {
     
     [self configContent];
     
-    [self bringSubviewToFront:self.H];
-    
-    self.H.frame = CGRectMake(60, self.contentView.deFrameHeight - 1, self.contentView.deFrameWidth - 60., 0.5);
-    self.H.hidden = NO;
-    _H.deFrameBottom = self.frame.size.height;
     
 }
+
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, kSeparateLineColor.CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    
+    CGContextMoveToPoint(context, 60., self.contentView.deFrameHeight);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    
+    CGContextStrokePath(context);
+    
+    [super drawRect:rect];
+}
+
 
 /**
  *
