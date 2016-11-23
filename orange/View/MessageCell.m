@@ -10,47 +10,6 @@
 #import "RTLabel.h"
 #import "UserViewController.h"
 #import "EntityViewController.h"
-/**
- *  消息类型
- */
-typedef NS_ENUM(NSInteger, MessageType) {
-    /**
-     *  默认类型
-     */
-    MessageTypeDefault = 0,
-    /**
-     *  评论被回复
-     */
-    MessageCommentReply,
-    /**
-     *  点评被评论
-     */
-    MessageNoteComment,
-    /**
-     *  被关注
-     */
-    MessageUserFollow,
-    /**
-     *  点评被赞
-     */
-    MessageNotePoke,
-    /**
-     *  商品被点评
-     */
-    MessageEntityNote,
-    /**
-     *  商品被喜爱
-     */
-    MessageEntityLike,
-    /**
-     *  点评入精选
-     */
-    MessageNoteSelection,
-    /**
-     *  图文被赞
-     */
-    MessageArticlePoke,
-};
 
 @interface MessageCell()<RTLabelDelegate>
 @property (nonatomic, assign) MessageType type;
@@ -184,12 +143,10 @@ typedef NS_ENUM(NSInteger, MessageType) {
     self.avatar.deFrameLeft = 12.;
     self.avatar.deFrameTop = 12.;
 
-    
     self.label.deFrameLeft = self.avatar.deFrameRight + 12.;
     self.label.deFrameTop = 15.;
     
     [self configContent];
-    
     
 }
 
@@ -448,27 +405,102 @@ typedef NS_ENUM(NSInteger, MessageType) {
     ((UIView *)object).hidden = NO;
 }
 
-#pragma mark - RTLabelDelegate
+#pragma mark - button action
+- (void)imageButtonAction
+{
+    if (self.tapImageBlock) {
+        self.tapImageBlock(self.type);
+    };
+}
+
+- (void)avatarButtonAction
+{
+    NSDictionary * message = self.message;
+    //    MessageType type = [MessageCell typeFromMessage:message];
+    UserViewController * VC = [[UserViewController alloc] init];
+    //    NSTimeInterval timestamp = [self.message[@"time"] doubleValue];
+    //    NSString *time = [[NSDate dateWithTimeIntervalSince1970:timestamp] stringWithDefaultFormat];
+    
+    switch (self.type) {
+        case MessageCommentReply:
+        {
+            GKComment *replying_comment = message[@"content"][@"replying_comment"];
+            GKUser * user = replying_comment.creator;
+            VC.user = user;
+        }
+            // 点评被评论
+        case MessageNoteComment:
+        {
+            //            GKNote *note = message[@"content"][@"note"];
+            GKComment *comment = message[@"content"][@"comment"];
+            GKUser * user = comment.creator;
+            VC.user = user;
+            
+            break;
+        }
+            
+        case MessageUserFollow:
+        {
+            GKUser *user = self.message[@"content"][@"user"];
+            VC.user = user;
+            break;
+        }
+            //赞
+        case MessageNotePoke:
+        {
+            //            GKNote *note = message[@"content"][@"note"];
+            GKUser * user = message[@"content"][@"user"];
+            VC.user = user;
+            
+            break;
+        }
+            //图文被点赞
+        case MessageArticlePoke:
+        {
+            GKUser * user = message[@"content"][@"user"];
+            VC.user = user;
+            
+        }
+            //商品被点评
+        case MessageEntityNote:
+        {
+            GKNote *note = message[@"content"][@"note"];
+            //            GKEntity * entity = message[@"content"][@"entity"];
+            GKUser   *user   = note.creator;
+            VC.user = user;
+            
+            break;
+        }
+            
+        case MessageEntityLike:
+        {
+            //            GKEntity *entity = self.message[@"content"][@"entity"];
+            GKUser   *user   = self.message[@"content"][@"user"];
+            VC.user = user;
+            
+            break;
+        }
+        default:
+            break;
+            //        case MessageNoteSelection:
+            //        {
+            //            return;
+            //        }
+    }
+    VC.hidesBottomBarWhenPushed = YES;
+    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    //    [AVAnalytics event:@"message_forward_user"];
+    [MobClick event:@"message_forward_user"];
+}
+
+#pragma mark - <RTLabelDelegate>
 
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url
 {
-    NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
-    if([array[0] isEqualToString:@"user"])
-    {
-        GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
-        UserViewController * VC = [[UserViewController alloc]init];
-        VC.user = user;
-        VC.hidesBottomBarWhenPushed = YES;
-        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-    }
-    if([array[0] isEqualToString:@"entity"])
-    {
-        GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
-        EntityViewController * VC = [[EntityViewController alloc]init];
-        VC.hidesBottomBarWhenPushed = YES;
-        VC.entity = entity;
-        [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-    }
+    if (self.tapLinkBlock) {
+        self.tapLinkBlock(url);
+    };
+
 }
 
 
@@ -647,117 +679,4 @@ typedef NS_ENUM(NSInteger, MessageType) {
     return height + 24.;
 }
 
-- (void)avatarButtonAction
-{
-    NSDictionary * message = self.message;
-//    MessageType type = [MessageCell typeFromMessage:message];
-    UserViewController * VC = [[UserViewController alloc] init];
-//    NSTimeInterval timestamp = [self.message[@"time"] doubleValue];
-//    NSString *time = [[NSDate dateWithTimeIntervalSince1970:timestamp] stringWithDefaultFormat];
-    
-    switch (self.type) {
-        case MessageCommentReply:
-        {
-            GKComment *replying_comment = message[@"content"][@"replying_comment"];
-            GKUser * user = replying_comment.creator;
-            VC.user = user;
-        }
-            // 点评被评论
-        case MessageNoteComment:
-        {
-//            GKNote *note = message[@"content"][@"note"];
-            GKComment *comment = message[@"content"][@"comment"];
-            GKUser * user = comment.creator;
-            VC.user = user;
-            
-            break;
-        }
-            
-        case MessageUserFollow:
-        {
-            GKUser *user = self.message[@"content"][@"user"];
-            VC.user = user;
-            break;
-        }
-            //赞
-        case MessageNotePoke:
-        {
-//            GKNote *note = message[@"content"][@"note"];
-            GKUser * user = message[@"content"][@"user"];
-            VC.user = user;
-            
-            break;
-        }
-            //图文被点赞
-        case MessageArticlePoke:
-        {
-            GKUser * user = message[@"content"][@"user"];
-            VC.user = user;
-
-        }
-            //商品被点评
-        case MessageEntityNote:
-        {
-            GKNote *note = message[@"content"][@"note"];
-//            GKEntity * entity = message[@"content"][@"entity"];
-            GKUser   *user   = note.creator;
-            VC.user = user;
-            
-            break;
-        }
-            
-        case MessageEntityLike:
-        {
-//            GKEntity *entity = self.message[@"content"][@"entity"];
-            GKUser   *user   = self.message[@"content"][@"user"];
-            VC.user = user;
-            
-            break;
-        }
-        default:
-            break;
-//        case MessageNoteSelection:
-//        {
-//            return;
-//        }
-    }
-    VC.hidesBottomBarWhenPushed = YES;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-//    [AVAnalytics event:@"message_forward_user"];
-    [MobClick event:@"message_forward_user"];
-}
-
-- (void)imageButtonAction
-{
-    NSDictionary * message = self.message;
-    switch (self.type) {
-        case MessageArticlePoke:
-        {
-            GKArticle * article = message[@"content"][@"article"];
-            [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
-        }
-            break;
-            
-        default:
-        {
-            GKNote *note = message[@"content"][@"note"];
-            GKEntity *entity = message[@"content"][@"entity"];
-            EntityViewController * VC = [[EntityViewController alloc]init];
-            VC.hidesBottomBarWhenPushed = YES;
-            if(entity)
-            {
-                VC.entity = entity;
-            }
-            else
-            {
-                VC.entity = [GKEntity modelFromDictionary:@{@"entityId":@([note.entityId integerValue])}];
-            }
-            [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
-            //    [AVAnalytics event:@"message_forward_entity"];
-            [MobClick event:@"message_forward_entity"];
-        }
-            break;
-    }
-    
-}
 @end

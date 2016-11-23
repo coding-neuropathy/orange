@@ -194,42 +194,23 @@
     [self configContent];
     
 }
-//
-//- (void)drawRect:(CGRect)rect
-//{
-//    [super drawRect:rect];
-//    
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    
-//    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
-//    CGContextSetLineWidth(context, kSeparateLineWidth);
-//    
-//    CGContextMoveToPoint(context, 60., 0.);
-//    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, 0.);
-//    
-////    CGContextMoveToPoint(context, 0., self.contentView.deFrameHeight);
-////    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
-//    
-//    CGContextStrokePath(context);
-//}
 
-+ (FeedType)typeFromFeed:(NSDictionary *)feedDict
+- (void)drawRect:(CGRect)rect
 {
-    FeedType type = FeedTypeDefault;
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
-    NSString *typeString = feedDict[@"type"];
-    if ([typeString isEqualToString:@"entity"]) {
-        type = FeedEntityNote;
-    } else if ([typeString isEqualToString:@"user_follow"]) {
-        type = FeedUserFollower;
-    } else if ([typeString isEqualToString:@"user_like"]) {
-        type = FeedUserLike;
-    } else if ([typeString isEqualToString:@"article_dig"]){
-        type = FeedArticleDig;
-    }
+    CGContextSetStrokeColorWithColor(context, kSeparateLineColor.CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
     
-    return type;
+    CGContextMoveToPoint(context, 60., self.contentView.deFrameHeight);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    
+    CGContextStrokePath(context);
+    
+    [super drawRect:rect];
 }
+
+
 
 - (void)configContent
 {
@@ -322,22 +303,7 @@
     }
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(context, kSeparateLineColor.CGColor);
-    CGContextSetLineWidth(context, kSeparateLineWidth);
-    
-    CGContextMoveToPoint(context, 60., self.contentView.deFrameHeight);
-    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
-    
-    CGContextStrokePath(context);
-    
-    [super drawRect:rect];
-}
-
-
+#pragma mark -  Class method
 + (CGFloat)height:(NSDictionary *)feed
 {
     CGFloat height = 0.;
@@ -434,17 +400,43 @@
     return height+24;
 }
 
++ (FeedType)typeFromFeed:(NSDictionary *)feedDict
+{
+    FeedType type = FeedTypeDefault;
+    
+    NSString *typeString = feedDict[@"type"];
+    if ([typeString isEqualToString:@"entity"]) {
+        type = FeedEntityNote;
+    } else if ([typeString isEqualToString:@"user_follow"]) {
+        type = FeedUserFollower;
+    } else if ([typeString isEqualToString:@"user_like"]) {
+        type = FeedUserLike;
+    } else if ([typeString isEqualToString:@"article_dig"]){
+        type = FeedArticleDig;
+    }
+    
+    return type;
+}
+
+
 #pragma mark - observe
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     ((UIView *)object).hidden = NO;
 }
 
+
+
+#pragma mark - button action
+- (void)imageButtonAction
+{
+    if (self.tapImageBlock) {
+        self.tapImageBlock([FeedCell typeFromFeed:self.feed]);
+    }
+}
+
 - (void)avatarButtonAction
 {
-
-//    NSDictionary * feed = self.feed;
-//    NSLog(@"feed %@", self.feed);
     GKUser * user;
     switch ([FeedCell typeFromFeed:self.feed]) {
         case FeedEntityNote:
@@ -456,7 +448,7 @@
         case FeedUserLike:
         {
             user = self.feed[@"object"][@"user"];
-
+            
         }
             break;
         case FeedUserFollower:
@@ -471,47 +463,15 @@
         default:
             break;
     }
-
+    
     if (user)
     {
         [[OpenCenter sharedOpenCenter] openUser:user];
     }
-
+    
     [MobClick event:@"feed_forward_user"];
 }
 
-
-#pragma mark - button action
-- (void)imageButtonAction
-{
-    if (self.tapImageBlock) {
-        self.tapImageBlock([FeedCell typeFromFeed:self.feed]);
-    }
-//    switch ([FeedCell typeFromFeed:self.feed]) {
-//        case FeedArticleDig:
-//        {
-//            GKArticle * article = self.feed[@"object"][@"article"];
-//            [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
-//        }
-//            break;
-//        case FeedUserLike:
-//        {
-//            GKEntity *entity = self.feed[@"object"][@"entity"];
-//            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-//            
-//            [MobClick event:@"feed_forward_entity"];
-//        }
-//            break;
-//        case FeedEntityNote:
-//        {
-//            GKEntity * entity = self.feed[@"object"][@"entity"];
-//            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-//        }
-//        default:
-//            break;
-//    }
-    
-}
 
 #pragma mark - <RTLabelDelegate>
 - (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL*)url

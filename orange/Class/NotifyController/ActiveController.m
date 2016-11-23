@@ -154,6 +154,8 @@ static NSString *FeedCellIdentifier = @"FeedCell";
     FeedCell * cell     = [tableView dequeueReusableCellWithIdentifier:FeedCellIdentifier forIndexPath:indexPath];
     cell.feed           = self.dataArrayForFeed[indexPath.row];
     
+    
+    __weak __typeof(&*cell)weakCell = cell;
     cell.tapLinkBlock   = ^(NSURL * url) {
             NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
             if([array[0] isEqualToString:@"user"])
@@ -172,7 +174,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
             switch (type) {
                 case FeedArticleDig:
                 {
-                    GKArticle * article = cell.feed[@"object"][@"article"];
+                    GKArticle * article = weakCell.feed[@"object"][@"article"];
                     [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
                     
                     [MobClick event:@"feed_forward_article"];
@@ -180,7 +182,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
                     break;
                 case FeedUserLike:
                 {
-                    GKEntity *entity = cell.feed[@"object"][@"entity"];
+                    GKEntity *entity = weakCell.feed[@"object"][@"entity"];
 //                    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
                     [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
         
@@ -189,7 +191,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
                     break;
                 case FeedEntityNote:
                 {
-                    GKEntity * entity = cell.feed[@"object"][@"entity"];
+                    GKEntity * entity = weakCell.feed[@"object"][@"entity"];
 //                    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
                     [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
                 }

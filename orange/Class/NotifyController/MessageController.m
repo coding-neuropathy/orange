@@ -153,8 +153,42 @@ static NSString *MessageCellIdentifier = @"MessageCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MessageCell * cell = [tableView dequeueReusableCellWithIdentifier:MessageCellIdentifier forIndexPath:indexPath];
-    
     cell.message = self.dataArrayForMessage[indexPath.row];
+    
+    cell.tapLinkBlock   = ^(NSURL   *url) {
+            NSArray  * array= [[url absoluteString] componentsSeparatedByString:@":"];
+            if([array[0] isEqualToString:@"user"])
+            {
+                GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
+                [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+            }
+            if([array[0] isEqualToString:@"entity"])
+            {
+                GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
+                [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+            }
+    };
+    
+    __weak __typeof(&*cell)weakCell = cell;
+    cell.tapImageBlock  = ^(MessageType type) {
+            switch (type) {
+                case MessageArticlePoke:
+                {
+                    GKArticle   *article    = weakCell.message[@"content"][@"article"];
+                }
+                    break;
+        
+                default:
+                {
+//                    GKNote *note = cell.message[@"content"][@"note"];
+                    GKEntity    *entity    = weakCell.message[@"content"][@"entity"];
+                    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                    [MobClick event:@"message_forward_entity"];
+                }
+                    break;
+            }
+        
+    };
     
     return cell;
 }
