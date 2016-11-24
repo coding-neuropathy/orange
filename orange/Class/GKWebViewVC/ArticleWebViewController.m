@@ -96,14 +96,14 @@
 //        _commentBtn.frame = CGRectMake(0., 0., 104., 44.);
         _commentBtn.deFrameSize             = CGSizeMake(104., 44.);
         if (self.article.commentCount > 0) {
-            [_commentBtn setTitle:[NSString stringWithFormat:@"%ld", self.article.dig_count] forState:UIControlStateNormal];
+            [_commentBtn setTitle:[NSString stringWithFormat:@"%ld", (long)self.article.commentCount] forState:UIControlStateNormal];
         } else {
             [_commentBtn setTitle:NSLocalizedStringFromTable(@"comment", kLocalizedFile, nil) forState:UIControlStateNormal];
         }
         
         [_commentBtn setImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
 //        [_commentBtn setImageEdgeInsets:UIEdgeInsetsMake(0., -15, 0., 0.)];
-                [_commentBtn setTitleColor:UIColorFromRGB(0x757575) forState:UIControlStateNormal];
+        [_commentBtn setTitleColor:[UIColor colorFromHexString:@"#757575"] forState:UIControlStateNormal];
         _commentBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12.];
         
         [_commentBtn setImageEdgeInsets:UIEdgeInsetsMake(0., 0., 0., 10)];
@@ -323,7 +323,7 @@
         self.article.IsDig = IsDig;
         
         if (self.article.dig_count > 0) {
-            [_digBtn setTitle:[NSString stringWithFormat:@"%ld", self.article.dig_count] forState:UIControlStateNormal];
+            [_digBtn setTitle:[NSString stringWithFormat:@"%ld", (long)self.article.dig_count] forState:UIControlStateNormal];
         }else {
             [_digBtn setTitle:NSLocalizedStringFromTable(@"poke", kLocalizedFile, nil) forState:UIControlStateNormal];
         }

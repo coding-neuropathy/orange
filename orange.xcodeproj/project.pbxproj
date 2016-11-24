@@ -3610,7 +3610,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone.imessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a5550b9d-860b-4450-8962-135429fb0b67";
+				PROVISIONING_PROFILE = "b867e961-2403-4cc2-b1bc-63626b12a4d5";
 				PROVISIONING_PROFILE_SPECIFIER = iphone_dev_message;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
