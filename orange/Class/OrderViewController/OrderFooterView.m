@@ -20,7 +20,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor    = [UIColor colorFromHexString:@"#ffffff"];
+        self.backgroundColor    = kBackgroundColor;
     }
     return self;
 }

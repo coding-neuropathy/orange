@@ -292,8 +292,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
     
     [self refresh];
-//    [self refreshRandom];
-    
     
     if (iOS9)
         [self registerPreview];

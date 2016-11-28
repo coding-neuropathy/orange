@@ -8,6 +8,7 @@
 
 #import "MessageController.h"
 #import "MessageCell.h"
+#import "ArticleWebViewController.h"
 //#import "NoMessageView.h"
 
 @interface MessageController () <DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
@@ -174,15 +175,30 @@ static NSString *MessageCellIdentifier = @"MessageCell";
             switch (type) {
                 case MessageArticlePoke:
                 {
-                    GKArticle   *article    = weakCell.message[@"content"][@"article"];
+                    GKArticle                   *article        = weakCell.message[@"content"][@"article"];
+                    ArticleWebViewController    *articleVC      = [[ArticleWebViewController alloc] initWithArticle:article];
+                    [self.navigationController pushViewController:articleVC animated:YES];
+                    
                 }
                     break;
         
                 default:
                 {
-//                    GKNote *note = cell.message[@"content"][@"note"];
-                    GKEntity    *entity    = weakCell.message[@"content"][@"entity"];
-                    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                    GKNote *note = weakCell.message[@"content"][@"note"];
+                    DDLogInfo(@"entity note %@", note.entityId);
+                    GKEntity *entity;
+                    
+                    if (!note) {
+                        entity    = weakCell.message[@"content"][@"entity"];
+                        [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                    } else {
+                    
+                        entity    = [GKEntity modelFromDictionary:@{@"entity_id":note.entityId}];
+                        [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                    }
+//                    GKEntity    *entity    = weakCell.message[@"content"][@"entity"];
+   
+//
                     [MobClick event:@"message_forward_entity"];
                 }
                     break;

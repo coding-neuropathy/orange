@@ -11,6 +11,7 @@
 #import "OrderHeaderView.h"
 #import "CheckoutFooterView.h"
 #import "PaymentCodeController.h"
+#import "WebViewController.h"
 
 #import "WXApi.h"
 
@@ -146,8 +147,12 @@ static NSString *FooterIdentifier   = @"CheckoutOrderFooter";
         [SVProgressHUD showWithStatus:NSLocalizedStringFromTable(@"loading", kLocalizedFile, nil)];
         [API getPaymentURLWithOrderId:order.orderId PaymentType:AlipayPaymentType Success:^(NSString *payment_url) {
 //            DDLogInfo(@"payment %@", payment_url);
-            [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:payment_url]];
+//            [[OpenCenter sharedOpenCenter] openWebWithURL:[NSURL URLWithString:payment_url]];
 //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:payment_url]];
+            
+            WebViewController   *webVC  = [[WebViewController alloc] initWithURL:[NSURL URLWithString:payment_url]];
+            
+            [self.navigationController pushViewController:webVC animated:YES];
             
             [SVProgressHUD dismissWithDelay:2];
         } Failure:^(NSInteger stateCode, NSError *error) {
