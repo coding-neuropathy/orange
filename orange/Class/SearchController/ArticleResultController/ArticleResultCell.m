@@ -23,7 +23,7 @@
     if (self)
     {
         
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         
     }
     return self;
@@ -45,7 +45,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:16.];
-        _titleLabel.textColor = UIColorFromRGB(0x212121);
+        _titleLabel.textColor = [UIColor colorFromHexString:@"#212121"];
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.numberOfLines = 2;
         [self.contentView addSubview:_titleLabel];

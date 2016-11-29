@@ -10,10 +10,10 @@
 
 @interface MoreArticleCell ()<RTLabelDelegate>
 
-@property (strong, nonatomic) UIImageView * coverImageView;
-@property (strong, nonatomic) UILabel * titleLabel;
-@property (strong, nonatomic) UILabel * detailLabel;
-@property (strong, nonatomic) RTLabel * tagsLabel;
+@property (strong, nonatomic) UIImageView   *coverImageView;
+@property (strong, nonatomic) UILabel       *titleLabel;
+@property (strong, nonatomic) UILabel       *detailLabel;
+//@property (strong, nonatomic) RTLabel       *tagsLabel;
 
 @end
 
@@ -73,17 +73,17 @@
     return _detailLabel;
 }
 
-- (RTLabel *)tagsLabel
-{
-    if (!_tagsLabel) {
-        _tagsLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
-        _tagsLabel.paragraphReplacement = @"";
-        _tagsLabel.lineSpacing = 7.;
-        _tagsLabel.delegate = self;
-        [self.contentView addSubview:_tagsLabel];
-    }
-    return _tagsLabel;
-}
+//- (RTLabel *)tagsLabel
+//{
+//    if (!_tagsLabel) {
+//        _tagsLabel = [[RTLabel alloc] initWithFrame:CGRectZero];
+//        _tagsLabel.paragraphReplacement = @"";
+//        _tagsLabel.lineSpacing = 7.;
+//        _tagsLabel.delegate = self;
+//        [self.contentView addSubview:_tagsLabel];
+//    }
+//    return _tagsLabel;
+//}
 
 
 - (void)setArticle:(GKArticle *)article
@@ -91,9 +91,7 @@
     _article = article;
     
     self.titleLabel.text = _article.title;
-    
-    self.detailLabel.text = _article.content;
-    self.detailLabel.text = [_article.content trimed];
+    self.detailLabel.text = [_article.digest trimed];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.detailLabel.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:7.];
@@ -147,10 +145,10 @@
     }
 }
 
-#pragma mark - <RTLabelDelegate>
-- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
-{
-    [[OpenCenter sharedOpenCenter] openArticleTagWithName:url.absoluteString];
-}
+//#pragma mark - <RTLabelDelegate>
+//- (void)rtLabel:(id)rtLabel didSelectLinkWithURL:(NSURL *)url
+//{
+//    [[OpenCenter sharedOpenCenter] openArticleTagWithName:url.absoluteString];
+//}
 
 @end

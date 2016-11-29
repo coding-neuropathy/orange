@@ -409,8 +409,8 @@
 		2309032D1C803B1500AD26D6 /* AuthUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthUserViewController.m; sourceTree = "<group>"; };
 		23568D1C1D349469003F2611 /* EntityResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityResultCell.h; sourceTree = "<group>"; };
 		23568D1D1D349469003F2611 /* EntityResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityResultCell.m; sourceTree = "<group>"; };
-		235A2FDE1D127D8600109000 /* MoreArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreArticleCell.h; sourceTree = "<group>"; };
-		235A2FDF1D127D8600109000 /* MoreArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreArticleCell.m; sourceTree = "<group>"; };
+		235A2FDE1D127D8600109000 /* MoreArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoreArticleCell.h; path = ../UIComponents/MoreArticleCell.h; sourceTree = "<group>"; };
+		235A2FDF1D127D8600109000 /* MoreArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoreArticleCell.m; path = ../UIComponents/MoreArticleCell.m; sourceTree = "<group>"; };
 		235A4FC41D37652B0039E1CB /* CategoryResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryResultView.h; sourceTree = "<group>"; };
 		235A4FC51D37652B0039E1CB /* CategoryResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryResultView.m; sourceTree = "<group>"; };
 		236EE0281D3CA2D1003E97D6 /* AllEntityResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllEntityResultController.h; sourceTree = "<group>"; };
@@ -1189,8 +1189,6 @@
 				238F77D91C521CF5002E0E65 /* EntityDetailCell.m */,
 				23F424021C59BFA7005E1318 /* CategoryArticleCell.h */,
 				23F424031C59BFA7005E1318 /* CategoryArticleCell.m */,
-				235A2FDE1D127D8600109000 /* MoreArticleCell.h */,
-				235A2FDF1D127D8600109000 /* MoreArticleCell.m */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -2009,6 +2007,8 @@
 				8AF3D6AF1D7671CC007E8C2E /* AllArticleResultViewController.m */,
 				8AF3D6B01D7671CC007E8C2E /* ArticleResultCell.h */,
 				8AF3D6B11D7671CC007E8C2E /* ArticleResultCell.m */,
+				235A2FDE1D127D8600109000 /* MoreArticleCell.h */,
+				235A2FDF1D127D8600109000 /* MoreArticleCell.m */,
 			);
 			name = ArticleResultController;
 			sourceTree = "<group>";
