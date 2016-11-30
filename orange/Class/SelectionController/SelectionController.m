@@ -131,7 +131,8 @@
     
     [self addChildViewController:self.thePageViewController];
     
-    self.thePageViewController.view.frame = CGRectMake(0, 0, kScreenWidth,  kScreenHeight);
+//    self.thePageViewController.view.frame = CGRectMake(0, 0, kScreenWidth,  kScreenHeight - kNavigationBarHeight);
+    self.thePageViewController.view.deFrameSize = CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight);
 
     if (self.segmentedControl.selectedSegmentIndex == SelectionEntityType) {
         [self.thePageViewController setViewControllers:@[self.entityVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
