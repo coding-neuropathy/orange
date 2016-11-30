@@ -36,7 +36,6 @@ static NSString * CellIndetifier = @"Cell";
         _tableView.deFrameSize      = IS_IPAD   ? CGSizeMake(kPadScreenWitdh, kScreenHeight)
                                                 : CGSizeMake(kScreenWidth, kScreenHeight - kNavigationBarHeight - kStatusBarHeight);
         
-//        if (IS_IPAD) _tableView.deFrameLeft = (kScreenWidth - kTabBarWidth - kPadScreenWitdh) / 2.;
         if ([UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeRight
             || [UIDevice currentDevice].orientation == UIInterfaceOrientationLandscapeLeft)
             _tableView.center = CGPointMake((kScreenWidth - kTabBarWidth) / 2, kScreenHeight / 2);

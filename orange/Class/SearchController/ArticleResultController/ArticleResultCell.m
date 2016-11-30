@@ -10,9 +10,9 @@
 
 @interface ArticleResultCell ()
 
-@property (strong, nonatomic) UIImageView * coverImageView;
-@property (strong, nonatomic) UILabel * titleLabel;
-@property (nonatomic, strong) UILabel * tipLabel;
+@property (strong, nonatomic) UIImageView   *coverImageView;
+@property (strong, nonatomic) UILabel       *titleLabel;
+@property (strong, nonatomic) UILabel       *tipLabel;
 @end
 
 @implementation ArticleResultCell
@@ -22,9 +22,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        
-        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
-        
+        self.backgroundColor                = [UIColor colorFromHexString:@"#ffffff"];
     }
     return self;
 }
@@ -32,9 +30,11 @@
 - (UIImageView *)coverImageView
 {
     if (!_coverImageView){
-        _coverImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _coverImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _coverImageView                     = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _coverImageView.deFrameSize         = CGSizeMake(90., 90.);
+        _coverImageView.contentMode         = UIViewContentModeScaleAspectFill;
         _coverImageView.layer.masksToBounds = YES;
+        
         [self.contentView addSubview:_coverImageView];
     }
     return _coverImageView;
@@ -43,11 +43,12 @@
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:16.];
-        _titleLabel.textColor = [UIColor colorFromHexString:@"#212121"];
-        _titleLabel.textAlignment = NSTextAlignmentLeft;
-        _titleLabel.numberOfLines = 2;
+        _titleLabel                         = [[UILabel alloc] initWithFrame:CGRectZero];
+        _titleLabel.font                    = [UIFont boldSystemFontOfSize:16.];
+        _titleLabel.textColor               = [UIColor colorFromHexString:@"#212121"];
+        _titleLabel.textAlignment           = NSTextAlignmentLeft;
+        _titleLabel.numberOfLines           = 2;
+        
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;
@@ -57,13 +58,13 @@
 {
     if(!_tipLabel)
     {
-        _tipLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        _tipLabel.textAlignment = NSTextAlignmentRight;
-        _tipLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12.];
+        _tipLabel                           = [[UILabel alloc]initWithFrame:CGRectZero];
+        _tipLabel.textAlignment             = NSTextAlignmentRight;
+        _tipLabel.font                      = [UIFont fontWithName:kFontAwesomeFamilyName size:12.];
 //        [_tipLabel setBackgroundColor:[UIColor clearColor]];
-        _tipLabel.backgroundColor = [UIColor clearColor];
+        _tipLabel.backgroundColor           = [UIColor clearColor];
 //        _tipLabel.textColor = UIColorFromRGB(0x9d9e9f);
-        _tipLabel.textColor = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.26];
+        _tipLabel.textColor                 = [UIColor colorWithRed:0. green:0. blue:0. alpha:0.26];
         [self.contentView addSubview:_tipLabel];
     }
     return _tipLabel;
@@ -94,7 +95,7 @@
     
 #pragma mark - layout iphone
     
-    self.coverImageView.frame = CGRectMake(0., 0., 90., 90.);
+//    self.coverImageView.frame = CGRectMake(0., 0., 90., 90.);
     self.coverImageView.deFrameTop = 12.;
     self.coverImageView.deFrameLeft = 12.;
 

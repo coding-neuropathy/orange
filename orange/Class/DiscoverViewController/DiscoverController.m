@@ -170,7 +170,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         if (IS_IPHONE) {
             _collectionView = [[UICollectionView alloc]
                                initWithFrame:CGRectMake(0., 0., kScreenWidth,
-                                kScreenHeight - kTabBarHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
+                                kScreenHeight - kNavigationBarHeight - kStatusBarHeight) collectionViewLayout:layout];
         } else {
             _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) collectionViewLayout:layout];
         }
@@ -903,7 +903,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
+        self.backgroundColor = kBackgroundColor;
     }
     return self;
 }
@@ -912,11 +912,11 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
 {
     if (!_textLabel)
     {
-        _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _textLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
-        _textLabel.textColor = [UIColor colorFromHexString:@"#212121"];
-        _textLabel.textAlignment = NSTextAlignmentLeft;
-        _textLabel.backgroundColor = [UIColor clearColor];
+        _textLabel                  = [[UILabel alloc] initWithFrame:CGRectZero];
+        _textLabel.font             = [UIFont fontWithName:@"PingFangSC-Semibold" size:14.];
+        _textLabel.textColor        = [UIColor colorFromHexString:@"#212121"];
+        _textLabel.textAlignment    = NSTextAlignmentLeft;
+        _textLabel.backgroundColor  = [UIColor clearColor];
         [self addSubview:_textLabel];
     }
     return _textLabel;

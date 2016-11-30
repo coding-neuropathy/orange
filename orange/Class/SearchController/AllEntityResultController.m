@@ -32,7 +32,7 @@
 {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:IS_IPHONE ? CGRectMake(0., 0., kScreenWidth, kScreenHeight) : CGRectMake(0., 0., kScreenWidth - kTabBarWidth, kScreenHeight) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
+//        _tableView.backgroundColor = [UIColor colorFromHexString:@"#f8f8f8"];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundView = nil;
@@ -99,7 +99,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 114.;
+    return [EntitySingleListCell height];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
