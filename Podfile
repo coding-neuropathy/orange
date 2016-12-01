@@ -5,7 +5,8 @@ target 'orange' do
     pod 'Colours'
     pod 'WZLBadge'
     pod 'iCarousel', '1.8.2'
-    pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
+#    pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
+    pod 'SVProgressHUD'
     pod 'SDWebImage'
     pod 'CocoaLumberjack', '2.2'
     pod 'HMSegmentedControl', :git => 'https://github.com/HeshamMegid/HMSegmentedControl.git'
@@ -15,6 +16,7 @@ target 'orange' do
     pod 'TTTAttributedLabel'
     
     pod 'UMengAnalytics-NO-IDFA'
+    pod 'JPush-iOS-SDK'
     pod 'WeiboSDK', :git => 'https://github.com/sinaweibosdk/weibo_ios_sdk.git'
     pod 'libWeChatSDK'
     pod '1PasswordExtension', '~> 1.8.3'
@@ -25,7 +27,7 @@ end
 
 target 'core' do
     pod 'AFNetworking'
-    pod 'SAMKeychain', :git => 'https://github.com/soffes/SAMKeychain.git'
+    pod 'SAMKeychain'
     pod 'MMWormhole', '~> 2.0.0'
 end
 

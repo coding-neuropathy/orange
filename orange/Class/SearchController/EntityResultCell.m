@@ -85,7 +85,7 @@
         _priceLabel.backgroundColor = [UIColor clearColor];
         _priceLabel.font = [UIFont fontWithName:@"Georgia" size:16.];
         _priceLabel.textAlignment = NSTextAlignmentLeft;
-        _priceLabel.textColor = UIColorFromRGB(0x5e90c8);
+        _priceLabel.textColor = [UIColor colorFromHexString:@"#5e90c8"];
         _priceLabel.text = [NSString stringWithFormat:@"￥%.2f", self.entity.lowestPrice];
         
         [self.contentView addSubview:_priceLabel];
