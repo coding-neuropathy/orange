@@ -282,7 +282,7 @@
 - (void)setUser:(GKUser *)user
 {
     _user = user;
-    [self.avatarView sd_setImageWithURL:_user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:CGSizeMake(self.avatarView.deFrameWidth, self.deFrameWidth)]];
+    [self.avatarView sd_setImageWithURL:_user.avatarURL placeholderImage:[UIImage imageWithColor:UIColorFromRGB(0xf7f7f7) andSize:self.avatarView.deFrameSize]];
     
     if ([_user.gender isEqualToString:@"M"]) {
         self.nicknameLabel.text = [NSString stringWithFormat:@"%@",_user.nick];

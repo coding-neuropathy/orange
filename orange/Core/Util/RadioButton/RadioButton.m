@@ -201,7 +201,7 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetStrokeColorWithColor(context, kSeparateLineColor.CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
     CGContextMoveToPoint(context, 30., self.frame.size.height - kSeparateLineWidth);
     CGContextAddLineToPoint(context, kScreenWidth, self.frame.size.height - kSeparateLineWidth);
