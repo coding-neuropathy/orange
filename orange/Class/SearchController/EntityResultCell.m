@@ -32,7 +32,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = kBackgroundColor;
     }
     return self;
 }
@@ -40,12 +40,11 @@
 - (UIActivityIndicatorView *)activityIndicator
 {
     if (!_activityIndicator) {
-        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        _activityIndicator.frame = CGRectMake(0, 0, 40, 40);
-        
+        _activityIndicator                  = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _activityIndicator.deFrameSize      = CGSizeMake(40., 40.);
         _activityIndicator.hidesWhenStopped = YES;
 //        self.activityIndicator.tag = 30325;
-        _activityIndicator.color = UIColorFromRGB(0xbbbbbb);
+        _activityIndicator.color            = [UIColor colorFromHexString:@"#bbbbbb"];
         [self.contentView insertSubview:_activityIndicator aboveSubview:self.imageView];
     
     }
@@ -56,9 +55,11 @@
 - (UIImageView *)imageView
 {
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _imageView.contentMode = UIViewContentModeScaleAspectFit;
-        _imageView.backgroundColor = UIColorFromRGB(0xffffff);
+        _imageView                  = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _imageView.deFrameSize      = CGSizeMake(90., 90.);
+        _imageView.contentMode      = UIViewContentModeScaleAspectFit;
+        _imageView.backgroundColor  = [UIColor colorFromHexString:@"#ffffff"];
+        
         [self.contentView addSubview:_imageView];
     }
     return _imageView;
@@ -71,7 +72,7 @@
         _titleLabel.numberOfLines = 2;
         _titleLabel.font = [UIFont boldSystemFontOfSize:16.f];
         _titleLabel.textAlignment = NSTextAlignmentLeft;
-        _titleLabel.textColor = UIColorFromRGB(0x212121);
+        _titleLabel.textColor = [UIColor colorFromHexString:@"#212121"];
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;
@@ -165,7 +166,7 @@
     [super layoutSubviews];
     
     // 商品主图
-    self.imageView.frame = CGRectMake(0., 0., 90., 90.);
+//    self.imageView.frame = CGRectMake(0., 0., 90., 90.);
     self.imageView.deFrameTop = 12.;
     self.imageView.deFrameLeft = 12.;
     
