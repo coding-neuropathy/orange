@@ -183,14 +183,13 @@ static NSString *EntityCellIdentifer = @"EntityCell";
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 114.;
+    return [EntitySingleListCell height];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GKEntity * entity = [self.dataArrayForEntity objectAtIndex:indexPath.row];
-    
-    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+    [[OpenCenter sharedOpenCenter] openEntity:entity];
 }
 
 @end

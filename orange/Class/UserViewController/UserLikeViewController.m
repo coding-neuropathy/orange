@@ -298,7 +298,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
-    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+    [[OpenCenter sharedOpenCenter] openEntity:entity];
 }
 
 #pragma mark - <UserLikeHeaderSectionViewDelegate>
@@ -537,7 +537,7 @@ static NSString * HeaderSectionIdentifier = @"HeaderSection";
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0xebebeb).CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorFromHexString:@"#ebebeb"].CGColor);
     CGContextSetLineWidth(context, kSeparateLineWidth);
     CGContextMoveToPoint(context, 0., 44);
     CGContextAddLineToPoint(context, kScreenWidth, 44);

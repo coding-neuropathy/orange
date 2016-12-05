@@ -428,7 +428,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
             cell.note = [self.dataArrayForNote objectAtIndex:indexPath.row];
             cell.delegate = self;
             cell.tapAvatarBlock = ^(GKUser *user) {
-                [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+                [[OpenCenter sharedOpenCenter] openUser:user];
             };
             
             __weak __typeof(&*cell)weakCell = cell;
@@ -448,15 +448,15 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                 {
                     GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
 //                        [[OpenCenter sharedOpenCenter] openUser:user];
-                    [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+                    [[OpenCenter sharedOpenCenter] openUser:user];
                 }
                 
                 if([array[0] isEqualToString:@"entity"])
                 {
                     GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
-//                    [[OpenCenter sharedOpenCenter] openEntity:entity];
-                    EntityViewController *vc = [[EntityViewController alloc] initWithEntity:entity];
-                    [self.navigationController pushViewController:vc animated:YES];
+                    [[OpenCenter sharedOpenCenter] openEntity:entity];
+//                    EntityViewController *vc = [[EntityViewController alloc] initWithEntity:entity];
+//                    [self.navigationController pushViewController:vc animated:YES];
                 }
             };
             return cell;

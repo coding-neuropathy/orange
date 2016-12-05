@@ -161,12 +161,12 @@ static NSString *FeedCellIdentifier = @"FeedCell";
             if([array[0] isEqualToString:@"user"])
             {
                 GKUser * user = [GKUser modelFromDictionary:@{@"userId":@([array[1] integerValue])}];
-                [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+                [[OpenCenter sharedOpenCenter] openUser:user];
             }
             if([array[0] isEqualToString:@"entity"])
             {
                 GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
-                [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                [[OpenCenter sharedOpenCenter] openEntity:entity];
             }
     };
     
@@ -184,7 +184,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
                 {
                     GKEntity *entity = weakCell.feed[@"object"][@"entity"];
 //                    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-                    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                    [[OpenCenter sharedOpenCenter] openEntity:entity];
         
                     [MobClick event:@"feed_forward_entity"];
                 }
@@ -193,7 +193,7 @@ static NSString *FeedCellIdentifier = @"FeedCell";
                 {
                     GKEntity * entity = weakCell.feed[@"object"][@"entity"];
 //                    [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-                    [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                    [[OpenCenter sharedOpenCenter] openEntity:entity];
                 }
                 default:
                     break;

@@ -417,7 +417,8 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     UserLikeCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:UserLikeEntityIdentifer forIndexPath:indexPath];
     cell.entityArray    = self.likedataArray;
     cell.tapEntityImageBlock = ^(GKEntity * entity) {
-        [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+//        [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+        [[OpenCenter sharedOpenCenter] openEntity:entity];
     };
     return cell;
 }
@@ -566,15 +567,6 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             
         }
             break;
-//        case 3:
-//        {
-//            GKNote * note = [self.notedataArray objectAtIndex:indexPath.row];
-//            GKEntity * entity = [GKEntity modelFromDictionary:@{@"entity_id": note.entityId}];
-////            [[OpenCenter sharedOpenCenter] openEntity:entity hideButtomBar:YES];
-//            [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
-//        }
-//            break;
-//            
         default:
             break;
     }
@@ -619,7 +611,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (void)TapFansBtnWithUser:(GKUser *)user
 {
-    FanViewController * VC = [[FanViewController alloc]init];
+    FanViewController   *VC = [[FanViewController alloc]init];
     VC.user = self.user;
     if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
@@ -627,7 +619,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (void)TapEditBtnWithUser:(GKUser *)user
 {
-    EditViewController * vc = [[EditViewController alloc] init];
+    EditViewController  *vc = [[EditViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

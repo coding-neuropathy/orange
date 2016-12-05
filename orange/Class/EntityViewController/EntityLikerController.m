@@ -127,7 +127,7 @@ static NSString *CellIdentifier = @"UserCell";
     UserSingleListCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.user = [self.dataArray objectAtIndex:indexPath.row];
     cell.TapAvatarAction    = ^(GKUser *user) {
-        [[OpenCenter sharedOpenCenter] openWithController:self User:user];
+        [[OpenCenter sharedOpenCenter] openUser:user];
     };
     return cell;
 }

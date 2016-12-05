@@ -8,15 +8,12 @@
 
 #import "RecUserController.h"
 #import "UserSingleListCell.h"
-//#import "NoDataView.h"
-
 
 
 @interface RecUserController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (nonatomic ,strong)   UITableView     *tableView;
 @property (nonatomic ,strong)   NSMutableArray  *dataArrayForUser;
-//@property (nonatomic ,strong)   NoDataView      *noDataView;
 @property (nonatomic ,assign)   NSInteger       page;
 
 @end
@@ -24,15 +21,6 @@
 @implementation RecUserController
 
 static NSString * CellIdentifier = @"UserSingleListCell";
-
-//- (NoDataView *)noDataView
-//{
-//    if (!_noDataView) {
-//        _noDataView = [[NoDataView alloc]initWithFrame:CGRectMake(0., 0., kScreenWidth, 44.)];
-//        _noDataView.backgroundColor = [UIColor clearColor];
-//    }
-//    return _noDataView;
-//}
 
 - (UITableView *)tableView
 {
@@ -48,7 +36,7 @@ static NSString * CellIdentifier = @"UserSingleListCell";
         
         _tableView.dataSource                   = self;
         _tableView.delegate                     = self;
-        _tableView.backgroundColor              = [UIColor colorFromHexString:@"#ffffff"];
+        _tableView.backgroundColor              = kBackgroundColor;
         _tableView.separatorStyle               = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = YES;
         
@@ -63,11 +51,10 @@ static NSString * CellIdentifier = @"UserSingleListCell";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-//    self.view.backgroundColor = UIColorFromRGB(0xf7f7f7);
-    self.title = NSLocalizedStringFromTable(@"recommendation user", kLocalizedFile, nil);
-    [self.view addSubview:self.tableView];
     
-//    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
+    self.title = NSLocalizedStringFromTable(@"recommendation user", kLocalizedFile, nil);
+    
+    [self.view addSubview:self.tableView];
     [self.tableView registerClass:[UserSingleListCell class] forCellReuseIdentifier:CellIdentifier];
 
 }
@@ -174,8 +161,7 @@ static NSString * CellIdentifier = @"UserSingleListCell";
     UserSingleListCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.user = [self.dataArrayForUser objectAtIndex:indexPath.row];
     cell.TapAvatarAction    =  ^(GKUser *user) {
-        [[OpenCenter sharedOpenCenter] openWithController:self User:user];
-//        [self.navigationController pushViewController:<#(nonnull UIViewController *)#> animated:<#(BOOL)#>]
+        [[OpenCenter sharedOpenCenter] openUser:user];
     };
     return cell;
 }
