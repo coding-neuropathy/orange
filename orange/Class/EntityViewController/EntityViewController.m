@@ -687,7 +687,8 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 //                UserViewController * VC = [[UserViewController alloc]init];
 //                VC.user = [self.dataArrayForlikeUser objectAtIndex:indexPath.row];
 //                [self.navigationController pushViewController:VC animated:YES];
-                [[OpenCenter sharedOpenCenter] openWithController:self User:[self.dataArrayForlikeUser objectAtIndex:indexPath.row]];
+//                [[OpenCenter sharedOpenCenter] openWithController:self User:[self.dataArrayForlikeUser objectAtIndex:indexPath.row]];
+                [[OpenCenter sharedOpenCenter] openAuthUser:[self.dataArrayForlikeUser objectAtIndex:indexPath.row]];
                 [MobClick event:@"entity_forward_user"];
             }
         }
@@ -790,9 +791,9 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 #pragma mark - <EntityCellDelegate>
 - (void)TapImageWithEntity:(GKEntity *)entity
 {
-//    [[OpenCenter sharedOpenCenter] openEntity:entity];
-    EntityViewController    *vc = [[EntityViewController alloc] initWithEntity:entity];
-    [self.navigationController pushViewController:vc animated:YES];
+    [[OpenCenter sharedOpenCenter] openEntity:entity];
+//    EntityViewController    *vc = [[EntityViewController alloc] initWithEntity:entity];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - <EntityHeaderViewDelegate>

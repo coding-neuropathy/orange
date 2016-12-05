@@ -17,7 +17,7 @@
 
 #import "WebViewController.h"
 #import "ArticleWebViewController.h"
-#import "AppDelegate.h"
+//#import "AppDelegate.h"
 
 #import "AuthController.h"
 
@@ -33,15 +33,6 @@
 @implementation OpenCenter
 
 DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
-
-//- (instancetype)init
-//{
-//    self = [super init];
-//    if (self) {
-//        _controller = [[UIApplication sharedApplication] keyWindow].rootViewController;
-//    }
-//    return self;
-//}
 
 - (UIViewController *)controller
 {
@@ -167,14 +158,14 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 //    vc.category = category;
     //    [controller.navigationController pushViewController:vc animated:YES];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
-    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    [self.topController.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)openNoteComment:(GKNote *)note
 {
     NoteViewController * VC = [[NoteViewController alloc] init];
     VC.note = note;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    [self.topController.navigationController pushViewController:VC animated:YES];
 }
 
 #pragma mark - tag viewcontroller
@@ -199,24 +190,24 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     if (controller) {
         [controller.navigationController pushViewController:vc animated:YES];
     } else {
-        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+        [self.topController.navigationController pushViewController:vc animated:YES];
     }
 }
 
 - (void)openArticleTagWithName:(NSString *)name
 {
     TagArticlesController * vc = [[TagArticlesController alloc] initWithTagName:name];
-    
-    if (kAppDelegate.activeVC.navigationController) {
-        [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-    }
+    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
+//    if (kAppDelegate.activeVC.navigationController) {
+    [self.topController.navigationController pushViewController:vc animated:YES];
+//    }
 }
 
 - (void)openStoreWithURL:(NSURL *)url
 {
     WebViewController   *vc = [[WebViewController alloc] initWithURL:url showHTMLTitle:YES];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
-    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    [self.topController.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -225,18 +216,15 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 {
     WebViewController * vc = [[WebViewController alloc] initWithURL:url];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
-    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    [self.topController.navigationController pushViewController:vc animated:YES];
 }
 
 
 - (void)openArticleWebWithArticle:(GKArticle *)article
 {
     ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithArticle:article];
-//    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
-    vc.hidesBottomBarWhenPushed = YES;
-    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-//    if (IS_IPAD) vc.tabBarController.tabBar.hidden = YES;
-//    vc.hidesBottomBarWhenPushed = NO;
+    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
+    [self.topController.navigationController pushViewController:vc animated:YES];
 }
 
 
