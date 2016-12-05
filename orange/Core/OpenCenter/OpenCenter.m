@@ -21,9 +21,12 @@
 
 #import "AuthController.h"
 
+#import "MainController.h"
+
 @interface OpenCenter ()
 
-@property (strong, nonatomic) UIViewController * controller;
+@property (strong, nonatomic) UIViewController  *controller;
+@property (strong, nonatomic) UIViewController  *topController;
 
 @end
 
@@ -46,6 +49,25 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
         _controller = [[UIApplication sharedApplication] keyWindow].rootViewController;
     }
     return _controller;
+}
+
+- (UIViewController *)topController
+{
+    DDLogInfo(@"controller %@", self.controller);
+    UITabBarController *tabbarController;
+    
+    if (IS_IPHONE) {
+        if ([self.controller isKindOfClass:[UITabBarController class]]) {
+            tabbarController    = (UITabBarController *)self.controller;
+            UINavigationController *nav = tabbarController.selectedViewController;
+            _topController  = nav.viewControllers.lastObject;
+        }
+    } else {
+        tabbarController    = (UITabBarController *)[self.controller.childViewControllers lastObject];
+        UINavigationController *nav = tabbarController.selectedViewController;
+        _topController  = nav.viewControllers.lastObject;
+    }
+    return _topController;
 }
 
 - (void)openAuthPage
@@ -74,7 +96,8 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     AuthUserViewController * vc = [[AuthUserViewController alloc] initWithUser:user];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     
-    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+//    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+    [self.topController.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)openNormalUser:(GKUser *)user
@@ -82,7 +105,7 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     UserViewController * VC = [[UserViewController alloc]init];
     VC.user = user;
     if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
-    [kAppDelegate.activeVC.navigationController pushViewController:VC animated:YES];
+    [self.topController.navigationController pushViewController:VC animated:YES];
 }
 
 
@@ -91,7 +114,8 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     UserViewController * VC = [[UserViewController alloc]init];
     VC.user = user;
     if (IS_IPHONE) VC.hidesBottomBarWhenPushed = YES;
-    [controller.navigationController pushViewController:VC animated:YES];
+//    [controller.navigationController pushViewController:VC animated:YES];
+    [self.topController.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)openUser:(GKUser *)user
@@ -131,7 +155,10 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
 //    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = hide;
-    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
+//    DDLogInfo(@"open open open");
+    [self.topController.navigationController pushViewController:vc animated:YES];
+    
+//    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)openCategory:(GKEntityCategory *)category
