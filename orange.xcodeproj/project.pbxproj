@@ -306,6 +306,7 @@
 		B772BE9A1BD53CFA005C1540 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B772BE991BD53CFA005C1540 /* NoteCell.m */; };
 		B772BE9D1BD55848005C1540 /* UserLikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B772BE9C1BD55848005C1540 /* UserLikeViewController.m */; };
 		B772BEA01BD55861005C1540 /* UserPostNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B772BE9F1BD55861005C1540 /* UserPostNoteViewController.m */; };
+		B7738EA21DFEC9CD002F024C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7738EA11DFEC9CD002F024C /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B776A0A91CA65FA40021FFAB /* GKBaseData.h in Headers */ = {isa = PBXBuildFile; fileRef = B776A0A71CA65FA40021FFAB /* GKBaseData.h */; };
 		B776A0AA1CA65FA40021FFAB /* GKBaseData.m in Sources */ = {isa = PBXBuildFile; fileRef = B776A0A81CA65FA40021FFAB /* GKBaseData.m */; };
 		B77E00A91B8988DC008BCA55 /* EntityPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77E00A81B8988DC008BCA55 /* EntityPopView.m */; };
@@ -935,6 +936,7 @@
 		B772BE9C1BD55848005C1540 /* UserLikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLikeViewController.m; sourceTree = "<group>"; };
 		B772BE9E1BD55861005C1540 /* UserPostNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPostNoteViewController.h; sourceTree = "<group>"; };
 		B772BE9F1BD55861005C1540 /* UserPostNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPostNoteViewController.m; sourceTree = "<group>"; };
+		B7738EA11DFEC9CD002F024C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		B776A0A71CA65FA40021FFAB /* GKBaseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKBaseData.h; sourceTree = "<group>"; };
 		B776A0A81CA65FA40021FFAB /* GKBaseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKBaseData.m; sourceTree = "<group>"; };
 		B77E00A71B8988DC008BCA55 /* EntityPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityPopView.h; sourceTree = "<group>"; };
@@ -1023,6 +1025,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7738EA21DFEC9CD002F024C /* UserNotifications.framework in Frameworks */,
 				8AD5D21D1D6E99A3000927C7 /* CoreMotion.framework in Frameworks */,
 				8AEDCBB81D62C5230010FDB4 /* UTMini.framework in Frameworks */,
 				8AEDCB511D62BE010010FDB4 /* libc++.tbd in Frameworks */,
@@ -1094,6 +1097,7 @@
 		0902E2DEFE4689BB1B4C17A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B7738EA11DFEC9CD002F024C /* UserNotifications.framework */,
 				8AA31F131DE4752500862FE7 /* ExternalAccessory.framework */,
 				8A6928711D95802000E3C5D4 /* StoreKit.framework */,
 				8AB508451D93B1260048D2CC /* Messages.framework */,
@@ -2681,7 +2685,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = guoku.com;
 				TargetAttributes = {
 					39B8688D1ACD0CF600A2115D = {
@@ -3327,7 +3331,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = BKXKS4HPNG;
@@ -3360,7 +3364,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
