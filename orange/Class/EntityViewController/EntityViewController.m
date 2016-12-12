@@ -1035,7 +1035,6 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
     [self shareButtonAction];
 }
 
-
 #pragma mark -
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
