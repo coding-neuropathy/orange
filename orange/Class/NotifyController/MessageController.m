@@ -166,7 +166,8 @@ static NSString *MessageCellIdentifier = @"MessageCell";
             if([array[0] isEqualToString:@"entity"])
             {
                 GKEntity * entity = [GKEntity modelFromDictionary:@{@"entityId":@([array[1] integerValue])}];
-                [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+//                [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                [[OpenCenter sharedOpenCenter] openEntity:entity];
             }
     };
     
@@ -190,14 +191,16 @@ static NSString *MessageCellIdentifier = @"MessageCell";
                     
                     if (!note) {
                         entity    = weakCell.message[@"content"][@"entity"];
-                        [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+//                        [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                        [[OpenCenter sharedOpenCenter] openEntity:entity];
                     } else {
                     
                         entity    = [GKEntity modelFromDictionary:@{@"entity_id":note.entityId}];
-                        [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+//                        [[OpenCenter sharedOpenCenter] openWithController:self Entity:entity];
+                        [[OpenCenter sharedOpenCenter] openEntity:entity];
+                        
                     }
 //                    GKEntity    *entity    = weakCell.message[@"content"][@"entity"];
-   
 //
                     [MobClick event:@"message_forward_entity"];
                 }

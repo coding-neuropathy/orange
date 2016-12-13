@@ -133,19 +133,19 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     [self openEntity:entity hideButtomBar:NO];
 }
 
-- (void)openWithController:(UIViewController *)controller Entity:(GKEntity *)entity
-{
-    EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
-    //    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
-    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
-    [controller.navigationController pushViewController:vc animated:YES];
-}
+//- (void)openWithController:(UIViewController *)controller Entity:(GKEntity *)entity
+//{
+//    EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
+//    //    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
+//    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
+//    [controller.navigationController pushViewController:vc animated:YES];
+//}
 
 - (void)openEntity:(GKEntity *)entity hideButtomBar:(BOOL)hide
 {
     EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
 //    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
-    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = hide;
+    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
 //    DDLogInfo(@"open open open");
     [self.topController.navigationController pushViewController:vc animated:YES];
     
