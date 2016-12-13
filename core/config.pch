@@ -20,7 +20,7 @@
 //#define kBaseURL    @"http://127.0.0.1:8000/mobile/v4/"
 //#define kBaseURL    @"http://test.guoku.com/mobile/v4/"
 
-#define KImageHost  @"http://imgcdn.guoku.com/"
+#define KImageHost  @"https://imgcdn.guoku.com/"
 #define KWapURL     @"http://m.guoku.com"
 
 
