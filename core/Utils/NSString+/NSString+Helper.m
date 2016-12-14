@@ -24,7 +24,12 @@
 
 - (NSString *)imageURLWithSize:(NSInteger)size
 {
-    NSString * uri_string = [self stringByReplacingOccurrencesOfString:@"http://imgcdn.guoku.com/" withString:@""];
+    NSString    *uri_string;
+    if ([self hasPrefix:@"https://imgcdn.guoku.com/"]) {
+        uri_string = [self stringByReplacingOccurrencesOfString:@"https://imgcdn.guoku.com/" withString:@""];
+    } else {
+        uri_string = [self stringByReplacingOccurrencesOfString:@"http://imgcdn.guoku.com/" withString:@""];
+    }
     
     NSMutableArray * array = [NSMutableArray arrayWithArray:[uri_string componentsSeparatedByString:@"/"]];
     

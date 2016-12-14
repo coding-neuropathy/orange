@@ -24,11 +24,11 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = UIColorFromRGB(0xffffff);
+        self.backgroundColor = kBackgroundColor;
         if (IS_IPAD) {
             self.layer.cornerRadius     = 4.;
             self.layer.borderWidth      = 0.5;
-            self.layer.borderColor      = UIColorFromRGB(0xe6e6e6).CGColor;
+            self.layer.borderColor      = [UIColor colorFromHexString:@"#e6e6e6"].CGColor;
             self.layer.masksToBounds    = YES;
         }
     }
@@ -136,6 +136,7 @@
     
 //    self.detailLabel.text = @"精选图文";
 //    self.detailLabel.text = @"<font face='Helvetica-Light' color='^9d9e9f' size=12>精选图文</font>";
+    DDLogInfo(@"article image %@", _article.coverURL_300);
     [self.coverImageView sd_setImageWithURL:_article.coverURL_300];
 //
 //    NSDate * date =  [NSDate dateWithTimeIntervalSince1970:_article.pub_time];
