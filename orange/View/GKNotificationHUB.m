@@ -23,7 +23,7 @@
         self.label.text = @"";
         self.label.backgroundColor = [UIColor clearColor];
         self.label.font = [UIFont fontWithName:kFontAwesomeFamilyName size:12];
-        self.label.textColor = UIColorFromRGB(0xffffff);
+        self.label.textColor = [UIColor colorFromHexString:@"#ffffff"];
         self.label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.label];
     }
