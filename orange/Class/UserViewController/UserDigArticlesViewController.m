@@ -10,11 +10,10 @@
 #import "MoreArticleCell.h"
 @interface UserDigArticlesViewController ()
 
-@property (strong , nonatomic)GKUser * user;
+@property (strong, nonatomic)   GKUser          *user;
 //@property (strong , nonatomic)UITableView * tableView;
-@property (strong , nonatomic)NSMutableArray * ArticleArray;
-
-@property (nonatomic ,assign)NSInteger page;
+@property (strong, nonatomic)   NSMutableArray  *ArticleArray;
+@property (assign, nonatomic)   NSInteger       page;
 
 
 @end

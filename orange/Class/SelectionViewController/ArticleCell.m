@@ -27,7 +27,7 @@
     if (self)
     {
 //        self.backgroundColor = UIColorFromRGB(0xffffff);
-        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
+        self.backgroundColor = kBackgroundColor;
         
         _H = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreenWidth, 0.5)];
         self.H.backgroundColor = UIColorFromRGB(0xe6e6e6);
@@ -123,9 +123,11 @@
      */
     [self.coverImageView sd_setImageWithURL:_article.coverURL placeholderImage:[UIImage imageWithColor:kPlaceHolderColor andSize:self.coverImageView.deFrameSize]];
     
-
-//    self.readCountLabel.text = [NSString stringWithFormat:@"%@  %ld",
-//                                [NSString fontAwesomeIconStringForEnum:FAEye], (long)_article.readCount];
+    /**
+     *  设置阅读数
+     */
+    self.readCountLabel.text = [NSString stringWithFormat:@"%@  %ld",
+                                [NSString fontAwesomeIconStringForEnum:FAEye], (long)_article.readCount];
     
     /**
      *  设置发布时间
@@ -176,8 +178,8 @@
         self.detailLabel.center = self.titleLabel.center;
         self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom + 10;
         
-//        self.readCountLabel.deFrameLeft = 16.;
-//        self.readCountLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
+        self.readCountLabel.deFrameLeft = 16.;
+        self.readCountLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;
     
         self.timeLabel.frame = CGRectMake(0., 0., 100., 20.);
         self.timeLabel.deFrameBottom = self.contentView.deFrameHeight - 12.;

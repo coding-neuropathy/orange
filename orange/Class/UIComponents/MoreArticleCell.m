@@ -24,9 +24,8 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        
-        self.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
-        
+        self.backgroundColor                = kBackgroundColor;
+//        self.contentView.backgroundColor    = [UIColor clearColor];
     }
     return self;
 }
@@ -49,7 +48,7 @@
     if (!_titleLabel) {
         _titleLabel                 = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font            = [UIFont boldSystemFontOfSize:17.];
-        _titleLabel.textColor       = UIColorFromRGB(0x212121);
+        _titleLabel.textColor       = [UIColor colorFromHexString:@"#212121"];
         _titleLabel.textAlignment   = NSTextAlignmentLeft;
         _titleLabel.numberOfLines   = 2;
         
@@ -106,7 +105,7 @@
     
     
     [self setNeedsLayout];
-    //    [self setNeedsDisplay];
+//    [self setNeedsDisplay];
 }
 
 - (void)layoutSubviews
@@ -143,6 +142,23 @@
         self.detailLabel.deFrameLeft = self.titleLabel.deFrameLeft;
         self.detailLabel.deFrameTop = self.titleLabel.deFrameBottom - 19.;
     }
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor colorFromHexString:@"#ebebeb"].CGColor);
+    CGContextSetLineWidth(context, kSeparateLineWidth);
+    
+//    CGContextMoveToPoint(context, self.contentView.deFrameWidth, 0.);
+//    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    
+    CGContextMoveToPoint(context, self.contentView.deFrameRight + 10., self.contentView.deFrameHeight);
+    CGContextAddLineToPoint(context, self.contentView.deFrameWidth, self.contentView.deFrameHeight);
+    
+    CGContextStrokePath(context);
+    [super drawRect:rect];
 }
 
 //#pragma mark - <RTLabelDelegate>
