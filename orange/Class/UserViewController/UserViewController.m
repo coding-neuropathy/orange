@@ -49,7 +49,7 @@
 
 @property (assign, nonatomic) UserPageType type;
 
-@property(nonatomic, strong) id<ALBBCartService> cartService;
+//@property(nonatomic, strong) id<ALBBCartService> cartService;
 @property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
 @property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
 
@@ -85,7 +85,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
             self.tabBarItem = item;
             
-            _cartService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBCartService)];
+//            _cartService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBCartService)];
         
             [self.user addObserver:self forKeyPath:@"avatarURL" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
             [self.user addObserver:self forKeyPath:@"nickname" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
@@ -198,18 +198,18 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             [array addObject:item];
         }
         
-        if ([[TaeSession sharedInstance] isLogin])
-        {
-            UIButton * cartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            cartBtn.frame = CGRectMake(0., 0., 32., 44.);
-            cartBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
-            [cartBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
-            [cartBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAShoppingCart] forState:UIControlStateNormal];
-            [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(8., 0., 0., 0.)];
-            [cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-            UIBarButtonItem * cartBtnItem = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
-            [array addObject:cartBtnItem];
-        }
+//        if ([[TaeSession sharedInstance] isLogin])
+//        {
+//            UIButton * cartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//            cartBtn.frame = CGRectMake(0., 0., 32., 44.);
+//            cartBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
+//            [cartBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
+//            [cartBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAShoppingCart] forState:UIControlStateNormal];
+//            [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(8., 0., 0., 0.)];
+//            [cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//            UIBarButtonItem * cartBtnItem = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
+//            [array addObject:cartBtnItem];
+//        }
         
         self.navigationItem.rightBarButtonItems = array;
     }
@@ -597,7 +597,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 
 - (void)cartBtnAction:(id)sender
 {
-    [_cartService showCart:self isNeedPush:YES webViewUISettings:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+//    [_cartService showCart:self isNeedPush:YES webViewUISettings:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
 }
 
 #pragma mark - <UserHeaderViewDelegate>

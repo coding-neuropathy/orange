@@ -55,19 +55,26 @@ int ddLogLevel;
  */
 - (void)configBaiChuan
 {
-    [[ALBBSDK sharedInstance] setTaeSDKEnvironment:TaeSDKEnvironmentRelease];
-    [[ALBBSDK sharedInstance] setAppVersion:XcodeAppVersion];
-//#if DEBUG
-//    [[ALBBSDK sharedInstance] setDebugLogOpen:YES];
-//#else
-    [[ALBBSDK sharedInstance] setDebugLogOpen:NO];
-//#endif
-    
-    [[ALBBSDK sharedInstance] asyncInit:^{
-        DDLogInfo(@"init success");
-    } failedCallback:^(NSError *error) {
-        DDLogError(@"init failed: %@", error);
+    // 百川平台基础SDK初始化，加载并初始化各个业务能力插件
+    [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{
+        
+    } failure:^(NSError *error) {
+        DDLogInfo(@"Init failed: %@", error.description);
     }];
+    
+    // 开发阶段打开日志开关，方便排查错误信息
+    //默认调试模式打开日志,release关闭,可以不调用下面的函数
+    [[AlibcTradeSDK sharedInstance] setDebugLogOpen:NO];
+    
+    AlibcTradeTaokeParams *taokeParams = [[AlibcTradeTaokeParams alloc] init];
+    taokeParams.pid = kGK_TaobaoKe_PID; //mm_XXXXX为你自己申请的阿里妈妈淘客pid
+    [[AlibcTradeSDK sharedInstance] setTaokeParams:taokeParams];
+    
+    
+    [[AlibcTradeSDK sharedInstance] setIsForceH5:NO];
+    [[AlibcTradeSDK sharedInstance] setEnv:ALiEnvironmentRelease];
+    [[AlibcTradeSDK sharedInstance] setIsvVersion:XcodeAppVersion];
+
 }
 
 /**
@@ -158,16 +165,17 @@ int ddLogLevel;
 
     
     //插件版登录状态监听
-    id<ALBBLoginService> loginService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBLoginService)];
-    [loginService setSessionStateChangedHandler:^(TaeSession *session) {
-        if([session isLogin]){//未登录变为已登录
-            DDLogInfo(@"【插件版监听：用户login】");
-        }else{//已登录变为未登录
-            DDLogInfo(@"【插件版监听：用户logout】");
-        }
-    }];
-    
-    
+//    id<ALBBLoginService> loginService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBLoginService)];
+//    [loginService setSessionStateChangedHandler:^(TaeSession *session) {
+//        if([session isLogin]){//未登录变为已登录
+//            DDLogInfo(@"【插件版监听：用户login】");
+//        }else{//已登录变为未登录
+//            DDLogInfo(@"【插件版监听：用户logout】");
+//        }
+//    }];
+//    
+    [[ALBBSDK sharedInstance] ALBBSDKInit];
+
     //  userInfo为收到远程通知的内容
     NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
@@ -180,9 +188,9 @@ int ddLogLevel;
         application.applicationIconBadgeNumber = 0;
     }
     
-#if DEBUG
+//#if DEBUG
 //    DDLogInfo(@"session %@", [Passport sharedInstance].session);
-#endif
+//#endif
     
     return YES;
 }
@@ -388,7 +396,7 @@ int ddLogLevel;
     }
     
     if ([[url absoluteString] hasPrefix:@"tbopen23093827"]) {
-        return [[ALBBSDK sharedInstance] handleOpenURL:url];
+        return [[AlibcTradeSDK sharedInstance] handleOpenURL:url];
     }
     
     if ([sourceApplication isEqualToString:@"com.guoku.iphone"]) {
@@ -396,9 +404,9 @@ int ddLogLevel;
     }
     else
     {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self openLocalURL:url];
-        });
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self openLocalURL:url];
+//        });
     }
     return YES;
 }

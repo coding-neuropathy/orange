@@ -40,6 +40,39 @@ SOFTWARE.</string>
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Alibaba-Inc copyright</string>
+			<key>Title</key>
+			<string>AlibabaAuthSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright</string>
+			<key>Title</key>
+			<string>AlibcTradeSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright</string>
+			<key>Title</key>
+			<string>AlipaySDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright
+</string>
+			<key>Title</key>
+			<string>BCUserTrack</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Software License Agreement (BSD License)
 
 Copyright (c) 2010-2015, Deusty, LLC
@@ -268,6 +301,33 @@ THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Alibaba-INC copyright
+</string>
+			<key>Title</key>
+			<string>SGMain</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright
+</string>
+			<key>Title</key>
+			<string>SGNoCaptcha</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright
+</string>
+			<key>Title</key>
+			<string>SGSecurityBody</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright (c) 2011-2016 Sam Vermette, Tobias Tiemerding and contributors.
 
 Permission is hereby granted, free of charge, to any person
@@ -297,6 +357,15 @@ respective headers for the terms of their individual licenses.
 </string>
 			<key>Title</key>
 			<string>SVProgressHUD</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright
+</string>
+			<key>Title</key>
+			<string>SecurityGuardSDK</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -333,6 +402,14 @@ THE SOFTWARE.
 </string>
 			<key>Title</key>
 			<string>UMengAnalytics-NO-IDFA</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>&#38463;&#37324;&#24735;&#31354; &#169; 2014. See http://m.laiwang.com/market/laiwang/wukong-serviceagreement.php</string>
+			<key>Title</key>
+			<string>UTDID</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -375,6 +452,14 @@ SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Alibaba-INC copyright</string>
+			<key>Title</key>
+			<string>YWFeedbackFMWK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>iCarousel
 
 Version 1.8.2, August 10th, 2015
@@ -409,6 +494,14 @@ freely, subject to the following restrictions:
 </string>
 			<key>Title</key>
 			<string>libWeChatSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-Inc copyright</string>
+			<key>Title</key>
+			<string>mtop</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

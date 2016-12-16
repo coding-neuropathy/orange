@@ -1,6 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
+
+#source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecsMirror.git'
+
 target 'orange' do
     pod 'Colours'
     pod 'WZLBadge'
@@ -23,6 +26,10 @@ target 'orange' do
 #    pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentifier.git'
 #    pod "GKFadeNavigationController", :git => 'https://github.com/gklka/GKFadeNavigationController.git'
     pod 'FLEX', '~> 2.0', :configurations => ['Debug'] #An in-app debugging and exploration tool for iOS
+    
+    source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'
+    pod 'YWFeedbackFMWK', '~> 2.0.3.1'
+    pod 'AlibcTradeSDK'
 end
 
 target 'core' do

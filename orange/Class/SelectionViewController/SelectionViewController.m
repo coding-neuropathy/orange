@@ -42,7 +42,7 @@ static NSString *CellIdentifier     = @"SelectionCell";
 @property (nonatomic , strong) UIButton * closeBtn;
 
 
-@property(nonatomic, strong) id<ALBBItemService> itemService;
+//@property(nonatomic, strong) id<ALBBItemService> itemService;
 //@property (nonatomic , assign)id<SelectionViewControllerDelegate>delegate;
 
 @end
@@ -81,7 +81,7 @@ static NSString *CellIdentifier     = @"SelectionCell";
         self.entityList = [[GKSelectionEntity alloc] init];
         [self.entityList addTheObserverWithObject:self];
         
-        self.itemService    = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
+//        self.itemService    = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
         
     }
     
@@ -430,22 +430,11 @@ static NSString *CellIdentifier     = @"SelectionCell";
         EntityPreViewController *vc     = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.image.image];
         vc.preferredContentSize         = CGSizeMake(0., 0.);
         previewingContext.sourceRect    = cell.frame;
-            
+        
         vc.baichuanblock = ^(GKPurchase * purchase) {
-        NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-        ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
-        taoKeParams.pid = kGK_TaobaoKe_PID;
-        [self.itemService showTaoKeItemDetailByItemId:self
-                                                   isNeedPush:YES
-                                            webViewUISettings:nil
-                                                       itemId:_itemId
-                                                     itemType:1
-                                                       params:nil
-                                                  taoKeParams:taoKeParams
-                                  tradeProcessSuccessCallback:_tradeProcessSuccessCallback
-                                   tradeProcessFailedCallback:_tradeProcessFailedCallback];
+            [[GKHandler sharedGKHandler] TapBuyButtonActionWithEntity:cell.entity];
         };
-            
+        
         [vc setBackblock:^(UIViewController * vc1) {
             [self.navigationController pushViewController:vc1 animated:YES];
         }];

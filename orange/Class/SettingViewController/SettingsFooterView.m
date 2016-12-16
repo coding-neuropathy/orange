@@ -10,9 +10,9 @@
 
 @interface SettingsFooterView ()
 
-@property (strong, nonatomic) UIButton * signInBtn;
-@property (strong, nonatomic) UIButton * signOutBtn;
-@property (strong, nonatomic) UILabel * versionLabel;
+@property (strong, nonatomic) UIButton  *signInBtn;
+@property (strong, nonatomic) UIButton  *signOutBtn;
+@property (strong, nonatomic) UILabel   *versionLabel;
 
 @end
 
@@ -23,8 +23,9 @@
 {
     if (!_signInBtn) {
         _signInBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _signInBtn.backgroundColor = UIColorFromRGB(0x6EAAF0);
-        _signInBtn.layer.cornerRadius = 5;
+//        _signInBtn.backgroundColor = UIColorFromRGB(0x6EAAF0);
+        _signInBtn.backgroundColor      = [UIColor colorFromHexString:@"#6eaaf0"];
+        _signInBtn.layer.cornerRadius   = 5.;
         [_signInBtn setTitle:NSLocalizedStringFromTable(@"sign in", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_signInBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_signInBtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
@@ -38,11 +39,11 @@
 {
     if (!_signOutBtn) {
         _signOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(-1, 0, self.deFrameWidth + 2, 44)];
-        _signOutBtn.backgroundColor = UIColorFromRGB(0xcd1841);
+//        _signOutBtn.backgroundColor = UIColorFromRGB(0xcd1841);
         _signOutBtn.layer.cornerRadius = 0;
-        _signOutBtn.layer.borderColor = UIColorFromRGB(0xe6e6e6).CGColor;
+        _signOutBtn.layer.borderColor = [UIColor colorFromHexString:@"#e6e6e6"].CGColor;
         _signOutBtn.layer.borderWidth = 0.5;
-        _signOutBtn.backgroundColor = UIColorFromRGB(0xffffff);
+        _signOutBtn.backgroundColor = [UIColor colorFromHexString:@"#ffffff"];
         [_signOutBtn setTitle:NSLocalizedStringFromTable(@"sign out", kLocalizedFile, nil) forState:UIControlStateNormal];
         [_signOutBtn setTitleColor:UIColorFromRGB(0x427EC0) forState:UIControlStateNormal];
         [_signOutBtn setImage:[UIImage imageNamed:@"logout_icon"] forState:UIControlStateNormal];

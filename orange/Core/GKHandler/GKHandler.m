@@ -11,7 +11,8 @@
 
 @interface GKHandler ()
 
-@property(nonatomic, strong) id<ALBBItemService> itemService;
+//@property(nonatomic, strong) id<ALBBItemService> itemService;
+//@property   (weak,  nonatomic)  id<AlibcTradeService>   tradeService;
 
 @end
 
@@ -27,7 +28,9 @@ DEFINE_SINGLETON_FOR_CLASS(GKHandler);
 {
     self = [super init];
     if (self) {
-        self.itemService    = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
+//        self.itemService    = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
+//        self.tradeService       = [[AlibcTradeSDK sharedInstance] get]
+//        self.tradeService       = [[AlibcTradeSDK ]
     }
     return self;
 }
@@ -102,18 +105,26 @@ DEFINE_SINGLETON_FOR_CLASS(GKHandler);
         if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"])
         {
             
-            NSNumber  *_itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-            ALBBTradeTaokeParams *taoKeParams = [[ALBBTradeTaokeParams alloc] init];
-            taoKeParams.pid = kGK_TaobaoKe_PID;
-            [_itemService showTaoKeItemDetailByItemId:[UIApplication sharedApplication].keyWindow.rootViewController
-                                           isNeedPush:YES
-                                    webViewUISettings:nil
-                                               itemId:_itemId
-                                             itemType:1
-                                               params:nil
-                                          taoKeParams:taoKeParams
-                          tradeProcessSuccessCallback:_tradeProcessSuccessCallback
-                           tradeProcessFailedCallback:_tradeProcessFailedCallback];
+            UIViewController    *controller     = [UIApplication sharedApplication].keyWindow.rootViewController;
+            id<AlibcTradePage>  page            = [AlibcTradePageFactory itemDetailPage:purchase.origin_id];
+            
+            AlibcTradeShowParams *showParams    = [[AlibcTradeShowParams alloc] init];
+            showParams.openType                 = ALiOpenTypeAuto;
+//            showParams.isNeedPush               = YES;
+            
+            AlibcTradeTaokeParams   *taoKeParams = [[AlibcTradeTaokeParams alloc] init];
+            taoKeParams.pid                     = kGK_TaobaoKe_PID;
+            
+            [UIApplication sharedApplication].statusBarStyle    = UIStatusBarStyleDefault;
+            
+            [[AlibcTradeSDK sharedInstance].tradeService show:controller
+                                                         page:page
+                                                   showParams:showParams
+                                                  taoKeParams:taoKeParams
+                                                   trackParam:nil
+                                  tradeProcessSuccessCallback:_tradeProcessSuccessCallback
+                                   tradeProcessFailedCallback:_tradeProcessFailedCallback];
+            
         } else {
             [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString]];
         }
@@ -135,7 +146,6 @@ DEFINE_SINGLETON_FOR_CLASS(GKHandler);
     {
         url = [NSString stringWithFormat:@"%@%lu",url,(unsigned long)user.userId];
     }
-    
     
     WebViewController *controller   = [[WebViewController alloc] initWithURL:[NSURL URLWithString:url]];
     UINavigationController  *nav    = [[UINavigationController alloc] initWithRootViewController:controller];

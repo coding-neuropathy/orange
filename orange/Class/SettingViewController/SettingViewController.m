@@ -22,7 +22,9 @@
 #import "VerifyEmailViewController.h"
 #import "PasswordEditViewController.h"
 
+//#import <YWFeedbackFMWK/YWFeedbackKit.h>
 #import <YWFeedbackFMWK/YWFeedbackKit.h>
+#import <YWFeedbackFMWK/YWFeedbackViewController.h>
 
 
 static NSString *SettingTableIdentifier = @"SettingCell";
@@ -38,11 +40,10 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 @property (nonatomic, strong) UISwitch * switch_assistant;
 @property (nonatomic, strong) SettingsFooterView * footerView;
 
-@property (nonatomic, strong) UILabel * versionLabel;
+@property (nonatomic, strong) UILabel               *versionLabel;
 
-@property (nonatomic, strong) id<ALBBLoginService> loginService;
-
-@property (nonatomic, strong) YWFeedbackKit * feedbackKit;
+//@property (nonatomic, strong) id<ALBBLoginService>  loginService;
+@property (nonatomic, strong) YWFeedbackKit         *feedbackKit;
 
 //@property (weak, nonatomic) UIApplication * app;
 
@@ -62,7 +63,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         
-        _loginService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBLoginService)];
+//        _loginService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBLoginService)];
     }
     return self;
 }
@@ -72,15 +73,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Login" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Logout" object:nil];
 }
-
-//#pragma mark - init view
-//- (UIApplication *)app
-//{
-//    if (!_app) {
-//        _app = [UIApplication sharedApplication];
-//    }
-//    return _app;
-//}
 
 - (SettingsFooterView *)footerView
 {
@@ -94,6 +86,14 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         _footerView.is_login = k_isLogin;
     }
     return _footerView;
+}
+    
+- (YWFeedbackKit *)feedbackKit
+{
+    if (!_feedbackKit) {
+        _feedbackKit    = [[YWFeedbackKit alloc] initWithAppKey:kGK_Taobao_BaiChuan_appkey];
+    }
+    return _feedbackKit;
 }
 
 
@@ -182,8 +182,6 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     /**
      *  账号安全
      */
-
-    
     
     [self.tableView registerClass:[SettingsViewCell class] forCellReuseIdentifier:SettingTableIdentifier];
     self.tableView.tableFooterView = self.footerView;
@@ -397,32 +395,47 @@ static NSString *SettingTableIdentifier = @"SettingCell";
             
             case 1:
             {
-                self.feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kGK_Taobao_BaiChuan_appkey];
+//                self.feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kGK_Taobao_BaiChuan_appkey];
+//                [self.feedbackKit makeFeedbackViewControllerWithCompletionBlock:^(BCFeedbackViewController *viewController, NSError *error) {
+                
+//                }];
+                self.feedbackKit.extInfo    = @{
+                                                @"loginTime":[[NSDate date] description],
+                                                
+                                                };
                 __weak typeof(self) weakSelf = self;
-                [self.feedbackKit makeFeedbackViewControllerWithCompletionBlock:^(YWLightFeedbackViewController *viewController, NSError *error) {
-                    if ( viewController != nil ) {
-                        viewController.title = NSLocalizedStringFromTable(@"feedback", kLocalizedFile, nil);
-                    
+                [self.feedbackKit makeFeedbackViewControllerWithCompletionBlock:^(YWFeedbackViewController *viewController, NSError *error) {
+                    if (viewController != nil) {
                         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
                         [weakSelf presentViewController:nav animated:YES completion:nil];
-                        
-                        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:weakSelf action:@selector(actionQuitFeedback)];
-                        
-                        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"清除缓存" style:UIBarButtonItemStylePlain
-                                                                                                          target:weakSelf action:@selector(actionCleanMemory:)];
-                        
-                        __weak typeof(nav) weakNav = nav;
-                        
-                        [viewController setOpenURLBlock:^(NSString *aURLString, UIViewController *aParentController) {
-                            UIViewController *webVC = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-                            UIWebView *webView = [[UIWebView alloc] initWithFrame:webVC.view.bounds];
-                            webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
                             
-                            [webVC.view addSubview:webView];
-                            [weakNav pushViewController:webVC animated:YES];
-                            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:aURLString]]];
+                        [viewController setCloseBlock:^(UIViewController *aParentController){
+                            [aParentController dismissViewControllerAnimated:YES completion:nil];
                         }];
                     }
+//                    if ( viewController != nil ) {
+//                        viewController.title = NSLocalizedStringFromTable(@"feedback", kLocalizedFile, nil);
+//                    
+//                        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+//                        [weakSelf presentViewController:nav animated:YES completion:nil];
+//                        
+//                        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:weakSelf action:@selector(actionQuitFeedback)];
+//                        
+//                        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"清除缓存" style:UIBarButtonItemStylePlain
+//                                                                                                          target:weakSelf action:@selector(actionCleanMemory:)];
+//                        
+//                        __weak typeof(nav) weakNav = nav;
+//
+//                        [viewController setOpenURLBlock:^(NSString *aURLString, UIViewController *aParentController) {
+//                            UIViewController *webVC = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+//                            UIWebView *webView = [[UIWebView alloc] initWithFrame:webVC.view.bounds];
+//                            webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+//                            
+//                            [webVC.view addSubview:webView];
+//                            [weakNav pushViewController:webVC animated:YES];
+//                            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:aURLString]]];
+//                        }];
+//                    }
                 }];
 //                [self presentViewController:[FeedBackViewController feedbackModalViewController] animated:YES completion:nil];
             }
@@ -568,7 +581,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
     NSString * wbtoken = [[NSUserDefaults standardUserDefaults] valueForKey:@"wbtoken"];
     [API logoutWithSuccess:^{
 //        [AVUser logOut];
-        [self.loginService logout];
+//        [self.loginService logout];
+        [[ALBBSDK sharedInstance] logout];
         [WeiboSDK logOutWithToken:wbtoken delegate:self withTag:@"wb_sign_out"];
         [Passport logout];
 
@@ -584,7 +598,8 @@ static NSString *SettingTableIdentifier = @"SettingCell";
         
         } else {
 //            [AVUser logOut];
-            [self.loginService logout];
+//            [self.loginService logout];
+            [[ALBBSDK sharedInstance] logout];
             [WeiboSDK logOutWithToken:wbtoken delegate:self withTag:@"wb_sign_out"];
             [Passport logout];
             [MobClick profileSignOff];
@@ -611,7 +626,7 @@ static NSString *SettingTableIdentifier = @"SettingCell";
 //将邮箱验证界面设为单例模式
 - (VerifyEmailViewController *)vc {
     if(!_vc){
-        _vc =[[VerifyEmailViewController alloc] init];
+        _vc = [[VerifyEmailViewController alloc] init];
     }
     return _vc;
 }

@@ -52,7 +52,7 @@
 
 //@property (strong, nonatomic) UITableView * searchLogTableView;
 
-@property (weak, nonatomic) id<ALBBItemService> itemService;
+//@property (weak, nonatomic) id<ALBBItemService> itemService;
 
 //@property (strong, nonatomic) SearchView * searchView;
 @property (strong, nonatomic) SearchTipsController *searchTipsVC;
@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
         item.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
         self.tabBarItem = item;
         
-        self.itemService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
+//        self.itemService = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
         //self.title = NSLocalizedStringFromTable(@"discover", kLocalizedFile, nil);
     }
     return self;
@@ -756,7 +756,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
     UICollectionViewCell * cell = [self.collectionView cellForItemAtIndexPath:indexPath];
 
     switch (indexPath.section) {
-        case 2:
+        case ArticleSection:
         {
             if (iOS10) {
                 ArticleWebViewController * vc = [[ArticleWebViewController alloc] initWithArticle:[self.discoverData.articles objectAtIndex:indexPath.row]];
@@ -775,7 +775,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             }
         }
             break;
-        case 4:
+        case EntitySection:
         {
             if (iOS10) {
                 EntityViewController * vc = [[EntityViewController alloc] initWithEntity:[self.discoverData.entities objectAtIndex:indexPath.row]];
@@ -790,18 +790,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
                 previewingContext.sourceRect = cell.frame;
             
                 vc.baichuanblock = ^(GKPurchase * purchase) {
-                    NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-                    ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
-                    taoKeParams.pid = kGK_TaobaoKe_PID;
-                    [self.itemService showTaoKeItemDetailByItemId:self
-                                                   isNeedPush:YES
-                                            webViewUISettings:nil
-                                                       itemId:_itemId
-                                                     itemType:1
-                                                       params:nil
-                                                  taoKeParams:taoKeParams
-                                  tradeProcessSuccessCallback:_tradeProcessSuccessCallback
-                                   tradeProcessFailedCallback:_tradeProcessFailedCallback];
+                    [[GKHandler sharedGKHandler] TapBuyButtonActionWithEntity:[self.discoverData.entities objectAtIndex:indexPath.row]];
                 };
             
                 [vc setBackblock:^(UIViewController * vc1){

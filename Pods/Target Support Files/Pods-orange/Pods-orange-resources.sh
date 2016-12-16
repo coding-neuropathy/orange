@@ -81,15 +81,29 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "$PODS_CONFIGURATION_BUILD_DIR/1PasswordExtension/OnePasswordExtensionResources.bundle"
+  install_resource "AlibabaAuthSDK/AlibabaAuthSDK.framework/Resources/AlibabaAuthSDK.bundle"
+  install_resource "AlibcTradeSDK/AlibcTradeSDK.framework/Resources/NBResource.bundle"
+  install_resource "AlipaySDK/alipay/AlipaySDK.bundle"
   install_resource "FontAwesome/Resources/FontAwesome.ttf"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
   install_resource "WeiboSDK/libWeiboSDK/WeiboSDK.bundle"
+  install_resource "YWFeedbackFMWK/YWFeedbackBundle.bundle"
+  install_resource "mtop/OpenMtopExt.framework/Resources/OpenMtopExt-Info.plist"
+  install_resource "mtop/OpenMtopExt.framework/Resources/OpenMtopSDK.podspec"
+  install_resource "mtop/OpenMtopSDK.framework/Resources/OpenMtopSDK.podspec"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "$PODS_CONFIGURATION_BUILD_DIR/1PasswordExtension/OnePasswordExtensionResources.bundle"
+  install_resource "AlibabaAuthSDK/AlibabaAuthSDK.framework/Resources/AlibabaAuthSDK.bundle"
+  install_resource "AlibcTradeSDK/AlibcTradeSDK.framework/Resources/NBResource.bundle"
+  install_resource "AlipaySDK/alipay/AlipaySDK.bundle"
   install_resource "FontAwesome/Resources/FontAwesome.ttf"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
   install_resource "WeiboSDK/libWeiboSDK/WeiboSDK.bundle"
+  install_resource "YWFeedbackFMWK/YWFeedbackBundle.bundle"
+  install_resource "mtop/OpenMtopExt.framework/Resources/OpenMtopExt-Info.plist"
+  install_resource "mtop/OpenMtopExt.framework/Resources/OpenMtopSDK.podspec"
+  install_resource "mtop/OpenMtopSDK.framework/Resources/OpenMtopSDK.podspec"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

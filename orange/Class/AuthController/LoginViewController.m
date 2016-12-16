@@ -22,9 +22,9 @@
 @property (strong, nonatomic) SignInView    * signView;
 @property (strong, nonatomic) UIButton      * dismissBtn;
 
-@property(nonatomic, strong) id<ALBBLoginService> loginService;
-@property(nonatomic, strong) loginSuccessCallback loginSuccessCallback;
-@property(nonatomic, strong) loginFailedCallback loginFailedCallback;
+//@property(nonatomic, strong) id<ALBBLoginService> loginService;
+//@property(nonatomic, strong) loginSuccessCallback loginSuccessCallback;
+//@property(nonatomic, strong) loginFailedCallback loginFailedCallback;
 
 @end
 
@@ -72,7 +72,7 @@
     }
     
 #pragma mark - login from sns
-    _loginService = [[ALBBSDK sharedInstance]getService:@protocol(ALBBLoginService)];
+//    _loginService = [[ALBBSDK sharedInstance]getService:@protocol(ALBBLoginService)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWeChatCode:) name:@"WechatAuthResp" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWBCode:) name:@"WBAuthResp" object:nil];
 
@@ -119,12 +119,12 @@
 }
 */
 
-- (void)finishedBaichuanWithSession:(TaeSession *)session
+- (void)finishedBaichuanWithSession:(ALBBSession *)session
 {
-    [Passport sharedInstance].taobaoId = [session getUser].userId;
+    [Passport sharedInstance].taobaoId = [session getUser].openId;
     [Passport sharedInstance].screenName = [session getUser].nick;
     [SVProgressHUD show];
-    [API loginWithBaichuanUid:[session getUser].userId nick:[session getUser].nick  success:^(GKUser *user, NSString *session) {
+    [API loginWithBaichuanUid:[session getUser].openId nick:[session getUser].nick  success:^(GKUser *user, NSString *session) {
 
         NSString *uidString = [NSString stringWithFormat:@"%ld", [Passport sharedInstance].user.userId];
         [MobClick profileSignInWithPUID:uidString provider:@"taobao"];
@@ -313,23 +313,34 @@
 
 - (void)tapTaobaoBtn:(id)sender
 {
-//    DDLogInfo(@"taobao taobao");
-    if (![[TaeSession sharedInstance] isLogin]){
-        __weak __typeof(&*self)weakSelf = self;
-        _loginSuccessCallback = ^(TaeSession * session) {
-            [weakSelf finishedBaichuanWithSession:session];
-        };
-        
-        _loginFailedCallback = ^(NSError * error) {
-            //            [self closeTaobaoView];
-//            [kAppDelegate.window makeKeyAndVisible];
-//            kAppDelegate.alertWindow.hidden = YES;
-        };
-        
-        [_loginService showLogin:self successCallback:_loginSuccessCallback failedCallback:_loginFailedCallback notUseTaobaoAppLogin:YES];
+////    DDLogInfo(@"taobao taobao");
+//    if (![[TaeSession sharedInstance] isLogin]){
+//        __weak __typeof(&*self)weakSelf = self;
+//        _loginSuccessCallback = ^(TaeSession * session) {
+//            [weakSelf finishedBaichuanWithSession:session];
+//        };
+//        
+//        _loginFailedCallback = ^(NSError * error) {
+//            //            [self closeTaobaoView];
+////            [kAppDelegate.window makeKeyAndVisible];
+////            kAppDelegate.alertWindow.hidden = YES;
+//        };
+//        
+//        [_loginService showLogin:self successCallback:_loginSuccessCallback failedCallback:_loginFailedCallback notUseTaobaoAppLogin:YES];
+//    } else {
+//        TaeSession *session = [TaeSession sharedInstance];
+//        [self finishedBaichuanWithSession:session];
+//    }
+    
+    if ([ALBBSession sharedInstance].isLogin) {
+//        ALBBSession *session    = [ALBBSession sharedInstance];
+        [self finishedBaichuanWithSession:[ALBBSession sharedInstance]];
     } else {
-        TaeSession *session = [TaeSession sharedInstance];
-        [self finishedBaichuanWithSession:session];
+        [[ALBBSDK sharedInstance] auth:self successCallback:^(ALBBSession *session) {
+            [self finishedBaichuanWithSession:session];
+        } failureCallback:^(ALBBSession *session, NSError *error) {
+        
+        }];
     }
 }
 

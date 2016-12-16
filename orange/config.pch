@@ -8,11 +8,14 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-// baichuan
-//#import <TAESDK/TaeSDK.h>
-#import <ALBBSDK/TaeSDK.h>
-#import <ALBBLoginSDK/TaeSDK+ALBBLogin.h>
-#import <ALBBTradeSDK/ALBBTradeSDK.h>
+/**
+ *  baichuan
+ */
+//#import <ALBBSDK/TaeSDK.h>
+//#import <ALBBLoginSDK/TaeSDK+ALBBLogin.h>
+//#import <ALBBTradeSDK/ALBBTradeSDK.h>
+#import <AlibcTradeSDK/AlibcTradeSDK.h>
+#import <AlibabaAuthSDK/ALBBSDK.h>
 
 
 /**

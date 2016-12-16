@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, EntityDisplayCellType) {
 @property (nonatomic, strong) NSMutableArray        *dataArrayForNote;
 @property (nonatomic, strong) NSMutableArray        *dataArrayForRecommend;
 
-@property (nonatomic, strong) id<ALBBItemService>   itemService;
+//@property (nonatomic, strong) id<ALBBItemService>   itemService;
 
 //@property (strong, nonatomic) UIActionSheet         *actionSheet;
 
@@ -101,7 +101,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 //        self.itemType = OneSDKItemType_TAOBAO1;
 //        self.flag           = false;
         self.image          = [[UIImageView alloc] initWithFrame:CGRectZero];
-        self.itemService    = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
+//        self.itemService    = [[ALBBSDK sharedInstance] getService:@protocol(ALBBItemService)];
         
         self.dataArrayForNote       = [[NSMutableArray alloc] initWithCapacity:0];
         self.dataArrayForlikeUser   = [[NSMutableArray alloc] initWithCapacity:0];
@@ -733,18 +733,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                 previewingContext.sourceRect = cell.frame;
             
                 vc.baichuanblock = ^(GKPurchase * purchase) {
-                    NSNumber * _itemId = [[[NSNumberFormatter alloc] init] numberFromString:purchase.origin_id];
-                    ALBBTradeTaokeParams * taoKeParams = [[ALBBTradeTaokeParams alloc]init];
-                    taoKeParams.pid = kGK_TaobaoKe_PID;
-                    [self.itemService showTaoKeItemDetailByItemId:self
-                                                   isNeedPush:YES
-                                            webViewUISettings:nil
-                                                       itemId:_itemId
-                                                     itemType:1
-                                                       params:nil
-                                                  taoKeParams:taoKeParams
-                                  tradeProcessSuccessCallback:_tradeProcessSuccessCallback
-                                   tradeProcessFailedCallback:_tradeProcessFailedCallback];
+                    [[GKHandler sharedGKHandler] TapBuyButtonActionWithEntity:cell.entity];
                 };
             
                 [vc setBackblock:^(UIViewController * vc1) {

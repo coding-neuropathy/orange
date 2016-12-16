@@ -215,6 +215,7 @@
 		8ACB1FB71D6AD83000D3AEF3 /* GKEntitySKU.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ACB1FB51D6AD83000D3AEF3 /* GKEntitySKU.h */; };
 		8ACB1FB81D6AD83000D3AEF3 /* GKEntitySKU.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB1FB61D6AD83000D3AEF3 /* GKEntitySKU.m */; };
 		8ACB9E481D61AB1C00C81500 /* EntitySKUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */; };
+		8ACC017A1E02CAE50017EBA1 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8ACC01791E02CAE50017EBA1 /* yw_1222.jpg */; };
 		8AD5D2151D6D72AC000927C7 /* BannerCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D2141D6D72AC000927C7 /* BannerCarousel.m */; };
 		8AD5D2181D6D89B7000927C7 /* SKUToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D2171D6D89B7000927C7 /* SKUToolbar.m */; };
 		8AD5D21B1D6D8FE8000927C7 /* EntitySKUView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD5D21A1D6D8FE8000927C7 /* EntitySKUView.m */; };
@@ -230,26 +231,6 @@
 		8AE30F9C1DB0ADD7005A9171 /* GAdvertise.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE30F9A1DB0ADD7005A9171 /* GAdvertise.m */; };
 		8AE652A21D7570C300FF7530 /* CartToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE652A11D7570C300FF7530 /* CartToolBar.m */; };
 		8AEDCB511D62BE010010FDB4 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCB501D62BE010010FDB4 /* libc++.tbd */; };
-		8AEDCBAB1D62C5230010FDB4 /* ALBBFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCB971D62C5230010FDB4 /* ALBBFeedback.framework */; };
-		8AEDCBAC1D62C5230010FDB4 /* ALBBFullSecurityGuard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCB981D62C5230010FDB4 /* ALBBFullSecurityGuard.framework */; };
-		8AEDCBAD1D62C5230010FDB4 /* ALBBLoginSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCB991D62C5230010FDB4 /* ALBBLoginSDK.framework */; };
-		8AEDCBAE1D62C5230010FDB4 /* ALBBSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCB9A1D62C5230010FDB4 /* ALBBSDK.framework */; };
-		8AEDCBAF1D62C5230010FDB4 /* ALBBTradeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCB9B1D62C5230010FDB4 /* ALBBTradeSDK.framework */; };
-		8AEDCBB01D62C5230010FDB4 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AEDCB9C1D62C5230010FDB4 /* AlipaySDK.bundle */; };
-		8AEDCBB11D62C5230010FDB4 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCB9D1D62C5230010FDB4 /* AlipaySDK.framework */; };
-		8AEDCBB21D62C5230010FDB4 /* AmrCodecFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCB9E1D62C5230010FDB4 /* AmrCodecFMWK.framework */; };
-		8AEDCBB31D62C5230010FDB4 /* baichuan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AEDCB9F1D62C5230010FDB4 /* baichuan.bundle */; };
-		8AEDCBB41D62C5230010FDB4 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA01D62C5230010FDB4 /* SecurityGuardSDK.framework */; };
-		8AEDCBB51D62C5230010FDB4 /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA11D62C5230010FDB4 /* SGMain.framework */; };
-		8AEDCBB61D62C5230010FDB4 /* TBAppLinkSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA21D62C5230010FDB4 /* TBAppLinkSDK.framework */; };
-		8AEDCBB71D62C5230010FDB4 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA31D62C5230010FDB4 /* UTDID.framework */; };
-		8AEDCBB81D62C5230010FDB4 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA41D62C5230010FDB4 /* UTMini.framework */; };
-		8AEDCBB91D62C5230010FDB4 /* WQConnectorBundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA51D62C5230010FDB4 /* WQConnectorBundle.framework */; };
-		8AEDCBBA1D62C5230010FDB4 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8AEDCBA61D62C5230010FDB4 /* yw_1222.jpg */; };
-		8AEDCBBB1D62C5230010FDB4 /* YWFeedbackAudioExtentionFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA71D62C5230010FDB4 /* YWFeedbackAudioExtentionFMWK.framework */; };
-		8AEDCBBC1D62C5230010FDB4 /* YWFeedbackFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA81D62C5230010FDB4 /* YWFeedbackFMWK.framework */; };
-		8AEDCBBD1D62C5230010FDB4 /* YWHybridWebViewFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBA91D62C5230010FDB4 /* YWHybridWebViewFMWK.framework */; };
-		8AEDCBBE1D62C5230010FDB4 /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDCBAA1D62C5230010FDB4 /* ZipArchive.framework */; };
 		8AF3D6AC1D7671C0007E8C2E /* AlluserResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF3D6A91D7671C0007E8C2E /* AlluserResultController.m */; };
 		8AF3D6AD1D7671C0007E8C2E /* UserResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF3D6AB1D7671C0007E8C2E /* UserResultCell.m */; };
 		8AF3D6B21D7671CC007E8C2E /* AllArticleResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF3D6AF1D7671CC007E8C2E /* AllArticleResultViewController.m */; };
@@ -782,6 +763,7 @@
 		8ACB1FB61D6AD83000D3AEF3 /* GKEntitySKU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKEntitySKU.m; path = Entity/GKEntitySKU.m; sourceTree = "<group>"; };
 		8ACB9E461D61AB1C00C81500 /* EntitySKUController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntitySKUController.h; path = QRCodeViewController/EntitySKUController/EntitySKUController.h; sourceTree = "<group>"; };
 		8ACB9E471D61AB1C00C81500 /* EntitySKUController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntitySKUController.m; path = QRCodeViewController/EntitySKUController/EntitySKUController.m; sourceTree = "<group>"; };
+		8ACC01791E02CAE50017EBA1 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		8AD5D2131D6D72AC000927C7 /* BannerCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BannerCarousel.h; path = BannerCarousel/BannerCarousel.h; sourceTree = "<group>"; };
 		8AD5D2141D6D72AC000927C7 /* BannerCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BannerCarousel.m; path = BannerCarousel/BannerCarousel.m; sourceTree = "<group>"; };
 		8AD5D2161D6D89B7000927C7 /* SKUToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKUToolbar.h; path = QRCodeViewController/EntitySKUController/SKUToolbar.h; sourceTree = "<group>"; };
@@ -807,26 +789,6 @@
 		8AE652A11D7570C300FF7530 /* CartToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CartToolBar.m; path = QRCodeViewController/CartController/CartToolBar.m; sourceTree = "<group>"; };
 		8AEA09BF1DE3EBAD00723416 /* GKColorConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GKColorConfig.h; path = Config/GKColorConfig.h; sourceTree = "<group>"; };
 		8AEDCB501D62BE010010FDB4 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		8AEDCB971D62C5230010FDB4 /* ALBBFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBFeedback.framework; sourceTree = "<group>"; };
-		8AEDCB981D62C5230010FDB4 /* ALBBFullSecurityGuard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBFullSecurityGuard.framework; sourceTree = "<group>"; };
-		8AEDCB991D62C5230010FDB4 /* ALBBLoginSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBLoginSDK.framework; sourceTree = "<group>"; };
-		8AEDCB9A1D62C5230010FDB4 /* ALBBSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBSDK.framework; sourceTree = "<group>"; };
-		8AEDCB9B1D62C5230010FDB4 /* ALBBTradeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ALBBTradeSDK.framework; sourceTree = "<group>"; };
-		8AEDCB9C1D62C5230010FDB4 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		8AEDCB9D1D62C5230010FDB4 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
-		8AEDCB9E1D62C5230010FDB4 /* AmrCodecFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AmrCodecFMWK.framework; sourceTree = "<group>"; };
-		8AEDCB9F1D62C5230010FDB4 /* baichuan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = baichuan.bundle; sourceTree = "<group>"; };
-		8AEDCBA01D62C5230010FDB4 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
-		8AEDCBA11D62C5230010FDB4 /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGMain.framework; sourceTree = "<group>"; };
-		8AEDCBA21D62C5230010FDB4 /* TBAppLinkSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TBAppLinkSDK.framework; sourceTree = "<group>"; };
-		8AEDCBA31D62C5230010FDB4 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
-		8AEDCBA41D62C5230010FDB4 /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
-		8AEDCBA51D62C5230010FDB4 /* WQConnectorBundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WQConnectorBundle.framework; sourceTree = "<group>"; };
-		8AEDCBA61D62C5230010FDB4 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
-		8AEDCBA71D62C5230010FDB4 /* YWFeedbackAudioExtentionFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YWFeedbackAudioExtentionFMWK.framework; sourceTree = "<group>"; };
-		8AEDCBA81D62C5230010FDB4 /* YWFeedbackFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YWFeedbackFMWK.framework; sourceTree = "<group>"; };
-		8AEDCBA91D62C5230010FDB4 /* YWHybridWebViewFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YWHybridWebViewFMWK.framework; sourceTree = "<group>"; };
-		8AEDCBAA1D62C5230010FDB4 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZipArchive.framework; sourceTree = "<group>"; };
 		8AF3D6A81D7671C0007E8C2E /* AlluserResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlluserResultController.h; path = UserResultController/AlluserResultController.h; sourceTree = "<group>"; };
 		8AF3D6A91D7671C0007E8C2E /* AlluserResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlluserResultController.m; path = UserResultController/AlluserResultController.m; sourceTree = "<group>"; };
 		8AF3D6AA1D7671C0007E8C2E /* UserResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserResultCell.h; path = UserResultController/UserResultCell.h; sourceTree = "<group>"; };
@@ -1027,45 +989,28 @@
 			files = (
 				B7738EA21DFEC9CD002F024C /* UserNotifications.framework in Frameworks */,
 				8AD5D21D1D6E99A3000927C7 /* CoreMotion.framework in Frameworks */,
-				8AEDCBB81D62C5230010FDB4 /* UTMini.framework in Frameworks */,
 				8AEDCB511D62BE010010FDB4 /* libc++.tbd in Frameworks */,
 				8A7D91071D58827900D67458 /* libiconv.tbd in Frameworks */,
-				8AEDCBB21D62C5230010FDB4 /* AmrCodecFMWK.framework in Frameworks */,
 				8A1905431D5471F400B72A79 /* CoreVideo.framework in Frameworks */,
-				8AEDCBB71D62C5230010FDB4 /* UTDID.framework in Frameworks */,
 				8A1905411D5471EA00B72A79 /* CoreMedia.framework in Frameworks */,
 				B7662ACE1AC3ADFD00C82B4B /* AVFoundation.framework in Frameworks */,
-				8AEDCBBB1D62C5230010FDB4 /* YWFeedbackAudioExtentionFMWK.framework in Frameworks */,
-				8AEDCBBC1D62C5230010FDB4 /* YWFeedbackFMWK.framework in Frameworks */,
 				4E56DFCE19D5B84300263B17 /* QuartzCore.framework in Frameworks */,
-				8AEDCBAC1D62C5230010FDB4 /* ALBBFullSecurityGuard.framework in Frameworks */,
-				8AEDCBB91D62C5230010FDB4 /* WQConnectorBundle.framework in Frameworks */,
-				8AEDCBAF1D62C5230010FDB4 /* ALBBTradeSDK.framework in Frameworks */,
-				8AEDCBAB1D62C5230010FDB4 /* ALBBFeedback.framework in Frameworks */,
 				4E56DFC819D5B82900263B17 /* UIKit.framework in Frameworks */,
 				8A3911D71D598A680029E529 /* libzbar.a in Frameworks */,
 				4E56DFCC19D5B83B00263B17 /* CoreGraphics.framework in Frameworks */,
-				8AEDCBB41D62C5230010FDB4 /* SecurityGuardSDK.framework in Frameworks */,
-				8AEDCBBE1D62C5230010FDB4 /* ZipArchive.framework in Frameworks */,
 				4E56DFBF19D5AF0900263B17 /* Security.framework in Frameworks */,
 				8A3CBBA81C7D870E0002AAE8 /* CoreText.framework in Frameworks */,
 				8A8418AC1C06FDB900F55FE9 /* libsqlite3.tbd in Frameworks */,
-				8AEDCBB51D62C5230010FDB4 /* SGMain.framework in Frameworks */,
 				8AC3F6871C05910A00CCD867 /* libicucore.tbd in Frameworks */,
 				8AC3F6851C0590A500CCD867 /* libz.tbd in Frameworks */,
-				8AEDCBAD1D62C5230010FDB4 /* ALBBLoginSDK.framework in Frameworks */,
 				4EAF9D0B1B4AC82100558D44 /* MessageUI.framework in Frameworks */,
 				B7C80D141AEDE387003AE031 /* core.framework in Frameworks */,
-				8AEDCBB61D62C5230010FDB4 /* TBAppLinkSDK.framework in Frameworks */,
 				B7AAFA7A1AB7039600A2F20D /* Foundation.framework in Frameworks */,
 				B7AAFA761AB7033600A2F20D /* CFNetwork.framework in Frameworks */,
 				4E56DFCB19D5B83B00263B17 /* CoreFoundation.framework in Frameworks */,
-				8AEDCBAE1D62C5230010FDB4 /* ALBBSDK.framework in Frameworks */,
 				4E56DFC319D5AF1E00263B17 /* SystemConfiguration.framework in Frameworks */,
-				8AEDCBB11D62C5230010FDB4 /* AlipaySDK.framework in Frameworks */,
 				8AA31F141DE4752500862FE7 /* ExternalAccessory.framework in Frameworks */,
 				4E56DFC119D5AF1400263B17 /* MobileCoreServices.framework in Frameworks */,
-				8AEDCBBD1D62C5230010FDB4 /* YWHybridWebViewFMWK.framework in Frameworks */,
 				4E56DFB719D5AEED00263B17 /* CoreTelephony.framework in Frameworks */,
 				FA939E479BAE759C7BE5F096 /* libPods-orange.a in Frameworks */,
 			);
@@ -1564,12 +1509,12 @@
 		4E56DF3E19D56EF500263B17 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				8ACC01791E02CAE50017EBA1 /* yw_1222.jpg */,
 				8A5901501D643F1100780C74 /* appirater */,
 				8A5045561D5873CA00D66F8A /* ZBarSDK */,
 				4E4F27D01B6F438D003A63C5 /* ImageLoadingView */,
 				4E05AA931B634C2D007596E6 /* EarthLoadingView */,
 				399916CB1B11A9DB006826FD /* UIDevice */,
-				B7F18B7C1ADF39A400B9AFDD /* TaeSDK */,
 				4E117B5A1ABC6E3D00844935 /* FultonsHand Regular.TTF */,
 				4EA0C44A1A805CBD0025EC2E /* pinyinTools */,
 				4E2D6D531A6BFD77009E4A17 /* RTLabel */,
@@ -2492,33 +2437,6 @@
 			path = CSStickyHeaderFlowLayout;
 			sourceTree = "<group>";
 		};
-		B7F18B7C1ADF39A400B9AFDD /* TaeSDK */ = {
-			isa = PBXGroup;
-			children = (
-				8AEDCB971D62C5230010FDB4 /* ALBBFeedback.framework */,
-				8AEDCB981D62C5230010FDB4 /* ALBBFullSecurityGuard.framework */,
-				8AEDCB991D62C5230010FDB4 /* ALBBLoginSDK.framework */,
-				8AEDCB9A1D62C5230010FDB4 /* ALBBSDK.framework */,
-				8AEDCB9B1D62C5230010FDB4 /* ALBBTradeSDK.framework */,
-				8AEDCB9C1D62C5230010FDB4 /* AlipaySDK.bundle */,
-				8AEDCB9D1D62C5230010FDB4 /* AlipaySDK.framework */,
-				8AEDCB9E1D62C5230010FDB4 /* AmrCodecFMWK.framework */,
-				8AEDCB9F1D62C5230010FDB4 /* baichuan.bundle */,
-				8AEDCBA01D62C5230010FDB4 /* SecurityGuardSDK.framework */,
-				8AEDCBA11D62C5230010FDB4 /* SGMain.framework */,
-				8AEDCBA21D62C5230010FDB4 /* TBAppLinkSDK.framework */,
-				8AEDCBA31D62C5230010FDB4 /* UTDID.framework */,
-				8AEDCBA41D62C5230010FDB4 /* UTMini.framework */,
-				8AEDCBA51D62C5230010FDB4 /* WQConnectorBundle.framework */,
-				8AEDCBA61D62C5230010FDB4 /* yw_1222.jpg */,
-				8AEDCBA71D62C5230010FDB4 /* YWFeedbackAudioExtentionFMWK.framework */,
-				8AEDCBA81D62C5230010FDB4 /* YWFeedbackFMWK.framework */,
-				8AEDCBA91D62C5230010FDB4 /* YWHybridWebViewFMWK.framework */,
-				8AEDCBAA1D62C5230010FDB4 /* ZipArchive.framework */,
-			);
-			path = TaeSDK;
-			sourceTree = "<group>";
-		};
 		DA35B3C01AFEE31200D66671 /* EmailEditViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2803,17 +2721,15 @@
 			files = (
 				4E4F27F61B6F4699003A63C5 /* 2.png in Resources */,
 				4E4F27EE1B6F4699003A63C5 /* 10.png in Resources */,
+				8ACC017A1E02CAE50017EBA1 /* yw_1222.jpg in Resources */,
 				4E4F27F51B6F4699003A63C5 /* 17.png in Resources */,
 				8A59017B1D643F1100780C74 /* Appirater.podspec.json in Resources */,
-				8AEDCBBA1D62C5230010FDB4 /* yw_1222.jpg in Resources */,
 				4E4F27F71B6F4699003A63C5 /* 3.png in Resources */,
 				23F613011CDB0E0A0074E8C8 /* Address.plist in Resources */,
 				4E117B5F1ABC7A7300844935 /* FultonsHand Regular.TTF in Resources */,
 				4E4F27F01B6F4699003A63C5 /* 12.png in Resources */,
-				8AEDCBB01D62C5230010FDB4 /* AlipaySDK.bundle in Resources */,
 				4E56DF2619D552C000263B17 /* Images.xcassets in Resources */,
 				4E4F27F81B6F4699003A63C5 /* 4.png in Resources */,
-				8AEDCBB31D62C5230010FDB4 /* baichuan.bundle in Resources */,
 				8A59017C1D643F1100780C74 /* AppiraterLocalizable.strings in Resources */,
 				4E4F27FC1B6F4699003A63C5 /* 8.png in Resources */,
 				4E4F27FA1B6F4699003A63C5 /* 6.png in Resources */,

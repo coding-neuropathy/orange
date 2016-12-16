@@ -197,7 +197,7 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     if (!_separateLine) {
         _separateLine = [[UIView alloc] initWithFrame:CGRectZero];
-        _separateLine.backgroundColor = UIColorFromRGB(0xebebeb);
+        _separateLine.backgroundColor = [UIColor colorFromHexString:@"#ebebeb"];
         
         [self.contentView addSubview:_separateLine];
     }
@@ -531,7 +531,9 @@ static inline NSRegularExpression * UrlRegularExpression() {
 {
     if ([keyPath isEqualToString:@"pokeCount"]) {
         if (self.note.pokeCount > 0) {
-            [self.pokeBtn setTitle:[NSString stringWithFormat:@"%@ %u",[NSString fontAwesomeIconStringForEnum:FAThumbsOUp], self.note.pokeCount] forState:UIControlStateNormal];
+            [self.pokeBtn setTitle:[NSString stringWithFormat:@"%@ %lu",
+                                    [NSString fontAwesomeIconStringForEnum:FAThumbsOUp],
+                                    (unsigned long)self.note.pokeCount] forState:UIControlStateNormal];
         }
         else
         {
