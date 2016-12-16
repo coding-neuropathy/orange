@@ -198,18 +198,18 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
             [array addObject:item];
         }
         
-//        if ([[TaeSession sharedInstance] isLogin])
-//        {
-//            UIButton * cartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//            cartBtn.frame = CGRectMake(0., 0., 32., 44.);
-//            cartBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
-//            [cartBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
-//            [cartBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAShoppingCart] forState:UIControlStateNormal];
-//            [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(8., 0., 0., 0.)];
-//            [cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//            UIBarButtonItem * cartBtnItem = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
-//            [array addObject:cartBtnItem];
-//        }
+        if ([[ALBBSession sharedInstance] isLogin])
+        {
+            UIButton * cartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            cartBtn.frame = CGRectMake(0., 0., 32., 44.);
+            cartBtn.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20.];
+            [cartBtn setTitleColor:UIColorFromRGB(0x212121) forState:UIControlStateNormal];
+            [cartBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAShoppingCart] forState:UIControlStateNormal];
+            [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(8., 0., 0., 0.)];
+            [cartBtn addTarget:self action:@selector(cartBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            UIBarButtonItem * cartBtnItem = [[UIBarButtonItem alloc] initWithCustomView:cartBtn];
+            [array addObject:cartBtnItem];
+        }
         
         self.navigationItem.rightBarButtonItems = array;
     }
@@ -598,6 +598,23 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
 - (void)cartBtnAction:(id)sender
 {
 //    [_cartService showCart:self isNeedPush:YES webViewUISettings:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+//    [[AlibcTradeSDK sharedInstance] ]
+    id<AlibcTradePage> page = [AlibcTradePageFactory myCartsPage];
+    
+    AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
+    showParam.openType = ALiOpenTypeAuto;
+    
+    [[AlibcTradeSDK sharedInstance].tradeService show:self
+                                                 page:page
+                                           showParams:showParam
+                                          taoKeParams:nil
+                                           trackParam:nil
+                          tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable result) {
+                                               
+                                           }
+                           tradeProcessFailedCallback:^(NSError * _Nullable error) {
+                                               
+                                           } ];
 }
 
 #pragma mark - <UserHeaderViewDelegate>
