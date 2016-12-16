@@ -133,30 +133,16 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
     [self openEntity:entity hideButtomBar:NO];
 }
 
-//- (void)openWithController:(UIViewController *)controller Entity:(GKEntity *)entity
-//{
-//    EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
-//    //    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
-//    if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
-//    [controller.navigationController pushViewController:vc animated:YES];
-//}
-
 - (void)openEntity:(GKEntity *)entity hideButtomBar:(BOOL)hide
 {
     EntityViewController * vc = [[EntityViewController alloc] initWithEntity:entity];
-//    vc.title = NSLocalizedStringFromTable(@"entity", kLocalizedFile, nil);
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
-//    DDLogInfo(@"open open open");
     [self.topController.navigationController pushViewController:vc animated:YES];
-    
-//    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)openCategory:(GKEntityCategory *)category
 {
     SubCategoryEntityController *vc = [[SubCategoryEntityController alloc] initWithSubCategory:category];
-//    vc.category = category;
-    //    [controller.navigationController pushViewController:vc animated:YES];
     if (IS_IPHONE) vc.hidesBottomBarWhenPushed = YES;
     [self.topController.navigationController pushViewController:vc animated:YES];
 }
@@ -171,13 +157,6 @@ DEFINE_SINGLETON_FOR_CLASS(OpenCenter);
 #pragma mark - tag viewcontroller
 - (void)openTagWithName:(NSString *)tname User:(GKUser *)user
 {
-//    TagViewController * vc = [[TagViewController alloc]init];
-//    vc.tagName = tname;
-//    vc.user = user;
-//    vc.user = self.note.creator;
-//    if (kAppDelegate.activeVC.navigationController) {
-//    [kAppDelegate.activeVC.navigationController pushViewController:vc animated:YES];
-//    }
     [self openTagWithName:tname User:user Controller:nil];
 }
 
