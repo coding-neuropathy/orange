@@ -133,6 +133,41 @@ DEFINE_SINGLETON_FOR_CLASS(GKHandler);
     }
 }
 
+- (void)tapStoreButtonWithEntity:(GKEntity *)entity
+{
+    if (entity.purchaseArray.count >0) {
+        GKPurchase * purchase = entity.purchaseArray[0];
+        if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"])
+        {
+            
+            UIViewController    *controller         = [UIApplication sharedApplication].keyWindow.rootViewController;
+//            id<AlibcTradePage>  page            = [AlibcTradePageFactory itemDetailPage:purchase.origin_id];
+            
+            DDLogInfo(@"store id %@", purchase.seller);
+            id<AlibcTradePage>  page                = [AlibcTradePageFactory shopPage:purchase.seller];
+            
+            AlibcTradeShowParams *showParams        = [[AlibcTradeShowParams alloc] init];
+            showParams.openType                     = ALiOpenTypeAuto;
+            //            showParams.isNeedPush               = YES;
+            
+            AlibcTradeTaokeParams   *taoKeParams    = [[AlibcTradeTaokeParams alloc] init];
+            taoKeParams.pid                         = kGK_TaobaoKe_PID;
+            
+            [UIApplication sharedApplication].statusBarStyle    = UIStatusBarStyleDefault;
+            
+            [[AlibcTradeSDK sharedInstance].tradeService show:controller
+                                                         page:page
+                                                   showParams:showParams
+                                                  taoKeParams:taoKeParams
+                                                   trackParam:nil
+                                  tradeProcessSuccessCallback:_tradeProcessSuccessCallback
+                                   tradeProcessFailedCallback:_tradeProcessFailedCallback];
+            
+//            [MobClick event:@"purchase" attributes:@{@"store":purchase.seller}];
+        }
+    }
+}
+
 - (void)showWebViewWithTaobaoUrl:(NSString *)taobao_url
 {
     

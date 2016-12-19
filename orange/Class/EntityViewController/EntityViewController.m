@@ -725,7 +725,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
                 EntityViewController * vc = [[EntityViewController alloc] initWithEntity:cell.entity];
                 vc.preferredContentSize = CGSizeMake(0., 0.);
                 previewingContext.sourceRect = cell.frame;
-                vc.hidesBottomBarWhenPushed = YES;
+//                vc.hidesBottomBarWhenPushed = YES;
                 return vc;
             } else {
                 EntityPreViewController * vc    = [[EntityPreViewController alloc] initWithEntity:cell.entity PreImage:cell.imageView.image];
@@ -758,6 +758,7 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
 
 - (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
 {
+    if (IS_IPHONE) viewControllerToCommit.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewControllerToCommit animated:NO];
 }
 
@@ -1041,6 +1042,53 @@ static NSString * const EntityReuseFooterNoteIdenetifier = @"EntityNoteFooter";
          [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
      }];
     
+}
+
+#pragma mark - 3d-touch PreviewAction
+- (NSArray <id <UIPreviewActionItem>> *)previewActionItems
+{
+//    UIPreviewAction *action = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"like", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+//        if (!k_isLogin)
+//        {
+//            [[OpenCenter sharedOpenCenter] openAuthPageWithSuccess:^{
+//                [self likeAction];
+//                //                [[GKHandler sharedGKHandler] li]
+//            }];
+//        } else {
+//            [self likeAction];
+//        }
+//        
+//        //        [AVAnalytics event:@"like_click" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.likeCount];
+//        
+//    }];
+    
+    
+#pragma mark --------------- 点击跳转至购买页 ---------------------
+    UIPreviewAction *buyAction = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"buy", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        //code signing
+        
+        if (self.entity.purchaseArray.count > 0) {
+            [[GKHandler sharedGKHandler] TapBuyButtonActionWithEntity:self.entity];
+//            [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
+        }
+        
+    }];
+    
+    UIPreviewAction *storeAction = [UIPreviewAction actionWithTitle:NSLocalizedStringFromTable(@"store", kLocalizedFile, nil) style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        //code signing
+        if (self.entity.purchaseArray.count > 0) {
+            [[GKHandler sharedGKHandler] tapStoreButtonWithEntity:self.entity];
+        }
+        
+    }];
+    
+    GKPurchase  *purchase   = self.entity.purchaseArray[0];
+    if ([purchase.source isEqualToString:@"taobao.com"] || [purchase.source isEqualToString:@"tmall.com"])
+    {
+        return @[buyAction, storeAction];
+    } else {
+        return @[buyAction];
+    }
 }
 
 

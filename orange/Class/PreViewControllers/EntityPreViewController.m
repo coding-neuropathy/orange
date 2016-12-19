@@ -57,7 +57,7 @@
         _preView = [[EntityPreView alloc] initWithFrame:CGRectMake(0., 0., kScreenWidth, kScreenHeight)];
         _preView.preImage           = self.preImage;
         _preView.entity             = self.entity;
-        _preView.backgroundColor    = UIColorFromRGB(0xf1f1f1);
+        _preView.backgroundColor    = [UIColor colorFromHexString:@"#f1f1f1"];
     }
     return _preView;
 }
@@ -113,7 +113,7 @@
                 [self showWebViewWithTaobaoUrl:[purchase.buyLink absoluteString] ];
             }
 //            [AVAnalytics event:@"buy action" attributes:@{@"entity":self.entity.title} durations:(int)self.entity.lowestPrice];
-            [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
+//            [MobClick event:@"purchase" attributes:@{@"entity":self.entity.title} counter:(int)self.entity.lowestPrice];
 
         }
         

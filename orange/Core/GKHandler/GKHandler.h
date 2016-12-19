@@ -18,4 +18,6 @@ DEFINE_SINGLETON_FOR_HEADER(GKHandler);
 
 - (void)TapBuyButtonActionWithEntity:(GKEntity *)entity;
 
+- (void)tapStoreButtonWithEntity:(GKEntity *)entity;
+
 @end
