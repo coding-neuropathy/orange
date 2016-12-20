@@ -103,13 +103,13 @@
     NSRange range =[[_avatarURL_s absoluteString] rangeOfString:@"avatar/default"];
     if (range.location != NSNotFound) {
         if ([_gender isEqualToString:@"M"]) {
-            return [NSURL URLWithString:@"http://imgcdn.guoku.com/avatar/large_241168_e55b9a0dca05d994949759833e904256.png"];
+            return [NSURL URLWithString:@"https://imgcdn.guoku.com/avatar/large_241168_e55b9a0dca05d994949759833e904256.png"];
         }
         if ([_gender isEqualToString:@"F"]) {
-            return [NSURL URLWithString:@"http://imgcdn.guoku.com/avatar/large_241169_92feeb8dc546542a8577e1edb0f80af2.png"];
+            return [NSURL URLWithString:@"https://imgcdn.guoku.com/avatar/large_241169_92feeb8dc546542a8577e1edb0f80af2.png"];
         }
         if ([_gender isEqualToString:@"O"]) {
-            return [NSURL URLWithString:@"http://imgcdn.guoku.com/avatar/large_241170_637c2ee4729634de9fc848f9754c263b.png"];
+            return [NSURL URLWithString:@"https://imgcdn.guoku.com/avatar/large_241170_637c2ee4729634de9fc848f9754c263b.png"];
         }
     }
     return _avatarURL_s;
@@ -121,13 +121,13 @@
     NSRange range =[[_avatarURL absoluteString] rangeOfString:@"avatar/default"];
     if (range.location != NSNotFound) {
         if ([_gender isEqualToString:@"M"]) {
-            return [NSURL URLWithString:@"http://imgcdn.guoku.com/avatar/large_241168_e55b9a0dca05d994949759833e904256.png"];
+            return [NSURL URLWithString:@"https://imgcdn.guoku.com/avatar/large_241168_e55b9a0dca05d994949759833e904256.png"];
         }
         if ([_gender isEqualToString:@"F"]) {
-            return [NSURL URLWithString:@"http://imgcdn.guoku.com/avatar/large_241169_92feeb8dc546542a8577e1edb0f80af2.png"];
+            return [NSURL URLWithString:@"https://imgcdn.guoku.com/avatar/large_241169_92feeb8dc546542a8577e1edb0f80af2.png"];
         }
         if ([_gender isEqualToString:@"O"]) {
-            return [NSURL URLWithString:@"http://imgcdn.guoku.com/avatar/large_241170_637c2ee4729634de9fc848f9754c263b.png"];
+            return [NSURL URLWithString:@"https://imgcdn.guoku.com/avatar/large_241170_637c2ee4729634de9fc848f9754c263b.png"];
         }
     }
     return _avatarURL;

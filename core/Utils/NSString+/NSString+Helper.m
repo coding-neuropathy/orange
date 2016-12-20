@@ -36,7 +36,7 @@
     [array insertObject:[NSNumber numberWithInteger:size] atIndex:1];
     NSString * image_uri_string = [[array valueForKey:@"description"] componentsJoinedByString:@"/"];
     
-    return [NSString stringWithFormat:@"http://imgcdn.guoku.com/%@", image_uri_string];
+    return [NSString stringWithFormat:@"%@%@",KImageHost, image_uri_string];
 }
 
 - (CGFloat)heightWithLineWidth:(CGFloat)width Font:(UIFont *)font LineHeight:(CGFloat)lineHeight
