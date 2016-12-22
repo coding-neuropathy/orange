@@ -18,6 +18,8 @@ target 'orange' do
     pod 'DZNEmptyDataSet'
     pod 'TTTAttributedLabel'
     
+#    pod 'MJRefresh'
+    
     pod 'UMengAnalytics-NO-IDFA'
     pod 'JPush-iOS-SDK'
     pod 'WeiboSDK', :git => 'https://github.com/sinaweibosdk/weibo_ios_sdk.git'

@@ -15,6 +15,13 @@
 @protocol ShareViewDelegate, ShareViewDataSource;
 
 @interface ShareView : UIView
+/**
+ *  fixed pointer is miss type
+ *
+ *  http://stackoverflow.com/questions/32539285/pointer-is-missing-a-nullability-type-specifier
+ */
+
+NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic)   ShareType         type;
 
@@ -25,6 +32,8 @@
 - ( UIView * _Nullable )dequeueItemViewIndex:(NSInteger)index;
 
 - (void)reloadData;
+
+NS_ASSUME_NONNULL_END
 
 @end
 

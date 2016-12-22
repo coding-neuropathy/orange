@@ -79,6 +79,8 @@
 #import "GKHandler.h"
 #import "UIDevice-Hardware.h"
 
+#import <MJRefresh/MJRefresh.h>
+
 
 // Log
 #import <CocoaLumberjack/CocoaLumberjack.h>
