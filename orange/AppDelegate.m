@@ -72,7 +72,7 @@ int ddLogLevel;
     
     
     [[AlibcTradeSDK sharedInstance] setIsForceH5:NO];
-    [[AlibcTradeSDK sharedInstance] setEnv:ALiEnvironmentRelease];
+    [[AlibcTradeSDK sharedInstance] setEnv:AlibcEnvironmentRelease];
     [[AlibcTradeSDK sharedInstance] setIsvVersion:XcodeAppVersion];
 
 }
@@ -396,7 +396,7 @@ int ddLogLevel;
     }
     
     if ([[url absoluteString] hasPrefix:@"tbopen23093827"]) {
-        return [[AlibcTradeSDK sharedInstance] handleOpenURL:url];
+        return [[AlibcTradeSDK sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
     }
     
     if ([sourceApplication isEqualToString:@"com.guoku.iphone"]) {

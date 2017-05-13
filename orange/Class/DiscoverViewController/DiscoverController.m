@@ -65,8 +65,8 @@
 
 @implementation DiscoverController
 {
-    tradeProcessSuccessCallback _tradeProcessSuccessCallback;
-    tradeProcessFailedCallback _tradeProcessFailedCallback;
+    AlibcTradeProcessSuccessCallback _tradeProcessSuccessCallback;
+    AlibcTradeProcessFailedCallback _tradeProcessFailedCallback;
 }
 
 //static NSString * EntityCellIdentifier = @"EntityCell";

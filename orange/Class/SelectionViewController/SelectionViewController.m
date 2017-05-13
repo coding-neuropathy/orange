@@ -49,8 +49,8 @@ static NSString *CellIdentifier     = @"SelectionCell";
 
 @implementation SelectionViewController
 {
-    tradeProcessSuccessCallback _tradeProcessSuccessCallback;
-    tradeProcessFailedCallback _tradeProcessFailedCallback;
+    AlibcTradeProcessSuccessCallback _tradeProcessSuccessCallback;
+    AlibcTradeProcessFailedCallback _tradeProcessFailedCallback;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

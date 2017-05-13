@@ -82,8 +82,8 @@ typedef NS_ENUM(NSInteger, EntityDisplayCellType) {
 
 @implementation EntityViewController
 {
-    tradeProcessSuccessCallback _tradeProcessSuccessCallback;
-    tradeProcessFailedCallback _tradeProcessFailedCallback;
+    AlibcTradeProcessSuccessCallback _tradeProcessSuccessCallback;
+    AlibcTradeProcessFailedCallback _tradeProcessFailedCallback;
 }
 
 static NSString * LikeUserIdentifier = @"LikeUserCell";
