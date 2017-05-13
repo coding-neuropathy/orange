@@ -676,6 +676,7 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             [MobClick event:@"rec_article" attributes:@{
                                                         @"articleid" : @(article.articleId),
                                                         @"articletitle" : article.title}];
+            [MobClick event:@"discover_selected_article" attributes:@{@"position": @(indexPath.row)}];
         }
             break;
             
