@@ -2614,7 +2614,7 @@
 					4E56DF1419D552C000263B17 = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = BKXKS4HPNG;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3410,7 +3410,7 @@
 				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				DEVELOPMENT_TEAM = "";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3440,8 +3440,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "8cbc248e-5f61-490b-829a-cac87ac786d9";
-				PROVISIONING_PROFILE_SPECIFIER = iPhone_dev;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3459,8 +3459,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = orange/orange.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = BKXKS4HPNG;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3492,8 +3492,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guoku.iphone;
 				PRODUCT_NAME = orange;
-				PROVISIONING_PROFILE = "78745864-37c6-4cc9-975a-c099af95f737";
-				PROVISIONING_PROFILE_SPECIFIER = ios;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
