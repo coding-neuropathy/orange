@@ -50,8 +50,8 @@
 @property (assign, nonatomic) UserPageType type;
 
 //@property(nonatomic, strong) id<ALBBCartService> cartService;
-@property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
-@property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
+@property(nonatomic, strong) AlibcTradeProcessSuccessCallback tradeProcessSuccessCallback;
+@property(nonatomic, strong) AlibcTradeProcessFailedCallback tradeProcessFailedCallback;
 
 @property (weak, nonatomic) UIApplication * app;
 
@@ -602,7 +602,7 @@ static NSString * UserArticleIdentifier = @"ArticleCell";
     id<AlibcTradePage> page = [AlibcTradePageFactory myCartsPage];
     
     AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
-    showParam.openType = ALiOpenTypeAuto;
+    showParam.openType = AlibcOpenTypeAuto;
     
     [[AlibcTradeSDK sharedInstance].tradeService show:self
                                                  page:page

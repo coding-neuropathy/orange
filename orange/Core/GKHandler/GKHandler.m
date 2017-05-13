@@ -18,8 +18,8 @@
 
 @implementation GKHandler
 {
-    tradeProcessSuccessCallback _tradeProcessSuccessCallback;
-    tradeProcessFailedCallback _tradeProcessFailedCallback;
+    AlibcTradeProcessSuccessCallback _tradeProcessSuccessCallback;
+    AlibcTradeProcessFailedCallback _tradeProcessFailedCallback;
 }
 
 DEFINE_SINGLETON_FOR_CLASS(GKHandler);
@@ -109,7 +109,7 @@ DEFINE_SINGLETON_FOR_CLASS(GKHandler);
             id<AlibcTradePage>  page            = [AlibcTradePageFactory itemDetailPage:purchase.origin_id];
             
             AlibcTradeShowParams *showParams    = [[AlibcTradeShowParams alloc] init];
-            showParams.openType                 = ALiOpenTypeAuto;
+            showParams.openType                 = AlibcOpenTypeAuto;
 //            showParams.isNeedPush               = YES;
             
             AlibcTradeTaokeParams   *taoKeParams = [[AlibcTradeTaokeParams alloc] init];
@@ -147,7 +147,7 @@ DEFINE_SINGLETON_FOR_CLASS(GKHandler);
             id<AlibcTradePage>  page                = [AlibcTradePageFactory shopPage:purchase.seller];
             
             AlibcTradeShowParams *showParams        = [[AlibcTradeShowParams alloc] init];
-            showParams.openType                     = ALiOpenTypeAuto;
+            showParams.openType                     = AlibcOpenTypeAuto;
             //            showParams.isNeedPush               = YES;
             
             AlibcTradeTaokeParams   *taoKeParams    = [[AlibcTradeTaokeParams alloc] init];

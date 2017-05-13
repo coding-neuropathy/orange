@@ -382,8 +382,9 @@ static NSString *SettingTableIdentifier = @"SettingCell";
                 
                 }];
                 UIAlertAction * confirm = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"confirm", kLocalizedFile, nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                    // TODO: 新的缓存清除代码
 //                    [[SDImageCache sharedImageCache] clearMemory];
-                    [[SDImageCache sharedImageCache] clearDisk];
+//                    [[SDImageCache sharedImageCache] clearDisk];
                     [self performSelectorOnMainThread:@selector(showClearPicCacheFinish) withObject:nil waitUntilDone:YES];
                 }];
                 
