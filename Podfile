@@ -22,7 +22,7 @@ target 'orange' do
     
     pod 'UMengAnalytics-NO-IDFA'
     pod 'JPush-iOS-SDK'
-    pod 'WeiboSDK', :git => 'https://github.com/sinaweibosdk/weibo_ios_sdk.git'
+    pod 'WeiboSDK', :git => 'https://github.com/sinaweibosdk/weibo_ios_sdk.git', :tag=> '3.1.4'
     pod 'libWeChatSDK'
     pod '1PasswordExtension', '~> 1.8.3'
 #    pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentifier.git'
