@@ -3,8 +3,8 @@
  *
  * 阿里百川电商
  * 项目名称：阿里巴巴电商 AlibcTradeSDK 
- * 版本号：3.1.1.14
- * 发布时间：2016-12-04
+ * 版本号：3.1.1.96
+ * 发布时间：2017-03-24
  * 开发团队：阿里巴巴百川商业化团队
  * 阿里巴巴电商SDK答疑群号：1229144682(阿里旺旺)
  * Copyright (c) 2016-2019 阿里巴巴-移动事业群-百川. All rights reserved.
@@ -12,19 +12,9 @@
 
 #import <Foundation/Foundation.h>
 #import "AlibcTradeResult.h"
-#import "AlibcTradeTaokeParams.h"
 #import "AlibcTradePageFactory.h"
 #import "AlibcTradeShowParams.h"
-
-/*
- * trackParam 参数key说明
- */
-#define track_scm @"scm" 
-#define track_pvid @"pvid"
-#define track_isv_code @"isv_code"
-
-typedef void (^tradeProcessSuccessCallback)(AlibcTradeResult * __nullable result);
-typedef void (^tradeProcessFailedCallback)(NSError * __nullable error);
+#import "AlibcTradeSDKDefines.h"
 
 @class UIViewController;
 @class UIWebView;
@@ -45,13 +35,13 @@ typedef void (^tradeProcessFailedCallback)(NSError * __nullable error);
  *
  * @return 0标识跳转到手淘打开了,1标识用h5打开,-1标识出错
  */
-- (NSInteger)           show:(UIViewController * __nonnull)parentController
-                        page:(id<AlibcTradePage> __nonnull)page
-                  showParams:(nullable AlibcTradeShowParams*)showParams
-                 taoKeParams:(nullable AlibcTradeTaokeParams *)taoKeParams
-                  trackParam:(nullable NSDictionary*)trackParam
- tradeProcessSuccessCallback:(nullable void (^)(AlibcTradeResult * __nullable result))onSuccess
-  tradeProcessFailedCallback:(nullable void (^)(NSError * __nullable error))onFailure;
+- (NSInteger)          show:(UIViewController *__nonnull)parentController
+                       page:(id <AlibcTradePage> __nonnull)page
+                 showParams:(nullable AlibcTradeShowParams *)showParams
+                taoKeParams:(nullable AlibcTradeTaokeParams *)taoKeParams
+                 trackParam:(nullable NSDictionary *)trackParam
+tradeProcessSuccessCallback:(nullable void (^)(AlibcTradeResult *__nullable result))onSuccess
+ tradeProcessFailedCallback:(nullable void (^)(NSError *__nullable error))onFailure;
 
 /**
  * 使用isv自己的webview打开page，可以实现淘宝账号免登以及电商交易支付流程
@@ -69,13 +59,13 @@ typedef void (^tradeProcessFailedCallback)(NSError * __nullable error);
             1:  标识用h5打开
            -1:  标识出错
  */
-- (NSInteger)           show:(UIViewController * __nonnull)parentController
-                     webView:(nullable UIWebView*)webView
-                        page:(id<AlibcTradePage> __nonnull)page
-                  showParams:(nullable AlibcTradeShowParams*)showParams
-                 taoKeParams:(nullable AlibcTradeTaokeParams *)taoKeParams
-                  trackParam:(nullable NSDictionary*)trackParam
- tradeProcessSuccessCallback:(nullable void (^)(AlibcTradeResult * __nullable result))onSuccess
-  tradeProcessFailedCallback:(nullable void (^)(NSError * __nullable error))onFailure;
+- (NSInteger)          show:(UIViewController *__nonnull)parentController
+                    webView:(nullable UIWebView *)webView
+                       page:(id <AlibcTradePage> __nonnull)page
+                 showParams:(nullable AlibcTradeShowParams *)showParams
+                taoKeParams:(nullable AlibcTradeTaokeParams *)taoKeParams
+                 trackParam:(nullable NSDictionary *)trackParam
+tradeProcessSuccessCallback:(nullable void (^)(AlibcTradeResult *__nullable result))onSuccess
+ tradeProcessFailedCallback:(nullable void (^)(NSError *__nullable error))onFailure;
 
 @end

@@ -18,8 +18,9 @@
 @property (nonatomic, copy, readonly) NSString *openId;
 @property (nonatomic, copy, readonly) NSString *openSid;
 @property (nonatomic, copy, readonly) NSString *topAccessToken;
+@property (nonatomic, copy, readonly) NSString *topAuthCode;
 
-- (instancetype)initWithNick:(NSString *)nick avatarUrl:(NSString *)avatarUrl openId:(NSString *)openId openSid:(NSString *)openSid topAccessToken:(NSString *)topAccessToken;
+- (instancetype)initWithNick:(NSString *)nick avatarUrl:(NSString *)avatarUrl openId:(NSString *)openId openSid:(NSString *)openSid topAccessToken:(NSString *)topAccessToken topAuthCode:(NSString*)authCode;
 
 - (NSString *)ALBBUserDescription;
 

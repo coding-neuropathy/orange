@@ -27,6 +27,10 @@ SOFTWARE.
 
 Alibaba-Inc copyright
 
+## AlibcLinkPartnerSDK
+
+Alibaba-INC copyright
+
 ## AlibcTradeSDK
 
 Alibaba-INC copyright

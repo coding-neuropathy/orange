@@ -1,1 +1,0 @@
-../../../../AlibcTradeSDK/TBAppLinkSDK.framework/Headers/TBAuthParam.h

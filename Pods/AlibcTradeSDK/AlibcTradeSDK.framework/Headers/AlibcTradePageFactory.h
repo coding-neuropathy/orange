@@ -3,8 +3,8 @@
  *
  * 阿里百川电商
  * 项目名称：阿里巴巴电商 AlibcTradeSDK 
- * 版本号：3.1.1.14
- * 发布时间：2016-12-04
+ * 版本号：3.1.1.96
+ * 发布时间：2017-03-24
  * 开发团队：阿里巴巴百川商业化团队
  * 阿里巴巴电商SDK答疑群号：1229144682(阿里旺旺)
  * Copyright (c) 2016-2019 阿里巴巴-移动事业群-百川. All rights reserved.
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @return URL指定页面
  */
-+ (id<AlibcTradePage>)page:(NSString *)url;
++ (id <AlibcTradePage>)page:(NSString *)url;
 
 /**
  * 创建商品真实ID或者混淆(open)ID对应的详情页面
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @return 详情页面
  */
-+ (id<AlibcTradePage>)itemDetailPage:(NSString *)itemId;
++ (id <AlibcTradePage>)itemDetailPage:(NSString *)itemId;
 
 /**
  * 创建商品真实ID或者混淆(open)ID对应的迷你详情页面
@@ -48,14 +48,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @return 详情页面
  */
-+ (id<AlibcTradePage>)itemMiniDetailPage:(NSString *)itemId;
++ (id <AlibcTradePage>)itemMiniDetailPage:(NSString *)itemId;
 
 /**
  * 创建我的购物车页面
  *
  * @return 我的购物车页面
  */
-+ (id<AlibcTradePage>)myCartsPage;
++ (id <AlibcTradePage>)myCartsPage;
 
 /**
  * 创建我的订单列表页面
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @return 我的订单列表页面
  */
-+ (id<AlibcTradePage>)myOrdersPage:(NSInteger)status isAllOrder:(BOOL)isAllOrder;
++ (id <AlibcTradePage>)myOrdersPage:(NSInteger)status isAllOrder:(BOOL)isAllOrder;
 
 /**
  * 创建店铺页面
@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @return 店铺页面
  */
-+ (id<AlibcTradePage>)shopPage:(NSString *)shopId ;
++ (id <AlibcTradePage>)shopPage:(NSString *)shopId;
 
 /**
  * 创建添加到购物车页面
@@ -91,16 +91,16 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @return 店铺页面
  */
-+ (id<AlibcTradePage>)addCartPage:(NSString *)itemId;
++ (id <AlibcTradePage>)addCartPage:(NSString *)itemId;
 
 /**
  * 通过request加载指定页面,可以在里面自己附加header等
  *
- * @param url     地址
+ * @param request  请求
  *
  * @return URL指定页面
  */
-+ (id<AlibcTradePage>)requestPage:(NSMutableURLRequest *)request;
++ (id <AlibcTradePage>)requestPage:(NSMutableURLRequest *)request;
 
 @end
 
