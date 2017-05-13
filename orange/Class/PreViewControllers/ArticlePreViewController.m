@@ -26,7 +26,7 @@
     if (self) {
         self.article = article;
         
-        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.article.coverURL options:SDWebImageDownloaderUseNSURLCache progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.article.coverURL options:SDWebImageDownloaderUseNSURLCache progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL* url) {
             
         } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
             self.image = image;
