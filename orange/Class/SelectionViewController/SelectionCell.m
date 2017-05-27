@@ -362,6 +362,7 @@
 
 - (void)imageViewButtonAction
 {
+    [MobClick event:@"selection_entity_click"];
     if (_delegate && [_delegate respondsToSelector:@selector(TapEntityImage:)]) {
         [_delegate TapEntityImage:self.entity];
     }

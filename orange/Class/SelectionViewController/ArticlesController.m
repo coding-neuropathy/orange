@@ -210,6 +210,7 @@ static NSString * ArticleIdentifier = @"ArticleCell";
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [MobClick event:@"selection_article_click" attributes:@{@"position": @(indexPath.row)}];
     GKArticle * article = [self.articles objectAtIndex:indexPath.row];
     [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
 }
