@@ -205,6 +205,7 @@
     GKUser * user = [self.users objectAtIndex:index];
     
     if (self.tapUserBlock) {
+        [MobClick event:@"discover_trending_user_click" attributes:@{@"position": @(index)}];
         self.tapUserBlock(user);
     }
 }

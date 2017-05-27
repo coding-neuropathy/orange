@@ -124,7 +124,7 @@
     NSDictionary * dict = [self.bannerArray objectAtIndex:index];
     NSString *urlString = [dict valueForKey:@"url"];
     
-    [MobClick event:@"banner" attributes:@{@"url": urlString, @"position": @(index)}];
+    [MobClick event:@"discover_banner_click" attributes:@{@"position": @(index)}];
     
     if ([dict objectForKey:@"article"]) {
         GKArticle * article = [GKArticle modelFromDictionary:dict[@"article"]];

@@ -192,7 +192,8 @@
 #pragma mark - button action
 - (void)tapImageAction:(id)sender
 {
-    
+    // TODO: 记录记录来源的信息
+    [MobClick event:@"entity_list_item_click"];
     [[OpenCenter sharedOpenCenter] openEntity:self.entity hideButtomBar:YES];
 }
 

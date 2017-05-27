@@ -663,20 +663,14 @@ typedef NS_ENUM(NSInteger, DiscoverSectionType) {
             groupVC.title = category.title;
             if (IS_IPHONE) groupVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:groupVC animated:YES];
-            [MobClick event:@"discover to category" attributes:@{
-                                                                 @"categoryId": @(category.groupId),
-                                                                 @"categoryTitle": category.title_cn,
-                                                                 }];
+            [MobClick event:@"discover_category_click" attributes:@{@"position": @(indexPath.row)}];
         }
             break;
         case ArticleSection:
         {
             GKArticle * article = [self.discoverData.articles objectAtIndex:indexPath.row];
             [[OpenCenter sharedOpenCenter] openArticleWebWithArticle:article];
-            [MobClick event:@"rec_article" attributes:@{
-                                                        @"articleid" : @(article.articleId),
-                                                        @"articletitle" : article.title}];
-            [MobClick event:@"discover_selected_article" attributes:@{@"position": @(indexPath.row)}];
+            [MobClick event:@"discover_selected_article_click" attributes:@{@"position": @(indexPath.row)}];
         }
             break;
             
